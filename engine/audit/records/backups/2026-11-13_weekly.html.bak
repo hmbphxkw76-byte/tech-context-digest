@@ -1,0 +1,772 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>全球经济趋势周报 · 2026-11-13（第 46 周）</title>
+<style>
+:root{
+  --radius-sm:8px; --radius:12px; --radius-lg:16px; --radius-pill:999px;
+  --shadow:0 1px 3px rgba(20,40,70,.06); --shadow-md:0 4px 14px rgba(20,40,70,.09);
+  --shadow-lg:0 10px 30px rgba(15,35,56,.2);
+  --font-sans:"Microsoft YaHei","PingFang SC","Segoe UI",Arial,sans-serif;
+  --font-mono:"SFMono-Regular",Consolas,"Liberation Mono",monospace;
+  --focus-ring:0 0 0 3px rgba(63,111,176,.35);
+  --transition:.15s ease;
+  --bg:#f4f6f9; --card:#ffffff; --card2:#fbfcfe; --soft:#f5f8fb;
+  --ink:#15202b; --ink2:#465667; --ink3:#657180;
+  --line:#e1e7ee; --line2:#eef2f6;
+  --navy:#16324f; --navy2:#2f5597; --blue:#3f6fb0; --blue-l:#eaf1fa;
+  --red:#a83224; --red-d:#822116; --red-l:#fbece8; --red-bg:#fbece8; --red-line:#f0d4cf;
+  --pre:#b8541c; --pre-l:#fdf1e4; --pre-bg:#fdf1e4; --pre-line:#f2ddc9;
+  --green:#1c7444; --green-l:#eaf5ef; --green-bg:#eaf5ef; --green-line:#d3ead9;
+  --amber:#956612; --amber-l:#fdf4e2; --amber-bg:#fdf4e2; --amber-line:#f0e3c2;
+  --gray:#646f7b; --gray-l:#eff2f4; --gray-bg:#eff2f4; --gray-line:#e6eaee;
+  /* 别名：兼容既有报告组件的命名习惯 */
+  --surface:#ffffff; --surface2:#fbfcfe;
+  --navy-2:#2f5597; --muted:#657180; --bg-soft:#f5f8fb; --bg-card:#fbfcfe;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  *,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}
+}
+body{font-family:var(--font-sans);background:var(--bg);color:var(--ink);line-height:1.76;font-size:14.5px}
+.wrap{max-width:1160px;margin:0 auto;padding:0 24px 64px}
+a{color:var(--navy2);text-decoration:none}
+a:hover{text-decoration:underline}
+a:focus-visible,button:focus-visible{outline:none;box-shadow:var(--focus-ring)}
+.skip-link{position:absolute;left:12px;top:-48px;z-index:100;background:var(--navy);color:#fff;padding:8px 16px;border-radius:0 0 8px 8px;font-size:12.5px;transition:top var(--transition)}
+.skip-link:focus{top:0;color:#fff;text-decoration:none}
+
+/* ── 页头（trends report-head 结构；.hero 为 apartment 同义类） ── */
+header.report-head,header.hero{
+  background:linear-gradient(128deg,#0f2338 0%,var(--navy) 52%,var(--navy2) 100%);
+  color:#fff;padding:40px 0 30px;
+}
+/* trends 的 .report-head 内含 .wrap；apartment 的 .hero 无 .wrap，用内联 padding 约束到 1160px */
+header.report-head .wrap{padding:0 24px}
+header.hero{padding-left:max(24px,calc(50% - 580px));padding-right:max(24px,calc(50% - 580px))}
+header.report-head h1,header.hero h1{margin:0 0 8px;font-size:27px;font-weight:700;letter-spacing:.4px;line-height:1.35}
+header .eyebrow{font-size:11.5px;letter-spacing:2.4px;color:rgba(255,255,255,.62);text-transform:uppercase}
+header .sub{font-size:14px;color:rgba(255,255,255,.82);margin:2px 0}
+header .meta{font-size:12.3px;color:rgba(255,255,255,.75);margin-top:14px;line-height:1.9}
+header .meta b{color:#fff}
+header .nav-url{font-size:11.5px;color:rgba(255,255,255,.78);margin-top:10px;word-break:break-all}
+header .nav-url a{color:#cfe0ee;text-decoration:none;border-bottom:1px dashed #cfe0ee}
+header .tag{display:inline-block;background:rgba(255,255,255,.11);border:1px solid rgba(255,255,255,.2);border-radius:14px;padding:2px 11px;margin:5px 6px 0 0;font-size:11.5px}
+
+/* ── 顶部固定导航 ── */
+nav.report-nav{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.96);border-bottom:1px solid var(--line);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);margin-bottom:26px}
+nav.report-nav .wrap{display:flex;flex-wrap:wrap;gap:6px 14px;align-items:center;padding-top:10px;padding-bottom:10px}
+/* apartment monthly/quarterly/baseline 的 .nav-tabs 是 nav 直接子元素（无 .wrap） */
+nav.report-nav > .nav-tabs{max-width:1160px;margin:0 auto;padding:10px 24px}
+.nav-url{display:flex;align-items:baseline;gap:8px;flex-wrap:wrap;font-size:11.5px;line-height:1.6;color:var(--ink3);padding-bottom:6px;margin-bottom:6px;border-bottom:1px dashed var(--line);width:100%}
+.nav-url-label{font-weight:700;color:var(--ink2);white-space:nowrap}
+.nav-url a{color:var(--blue);text-decoration:none;word-break:break-all}
+.nav-url a:hover{text-decoration:underline}
+.nav-tabs{display:flex;flex-wrap:wrap;gap:6px}
+.nav-tabs a{color:var(--navy);text-decoration:none;font-size:12.5px;padding:4px 10px;border-radius:14px;border:1px solid var(--line);background:var(--bg-soft);white-space:nowrap;transition:background var(--transition),color var(--transition)}
+.nav-tabs a:hover{background:var(--blue-l);border-color:#b9cfe2;text-decoration:none}
+.nav-tabs a.active{background:var(--blue-l);color:var(--blue);font-weight:700}
+
+/* ── 章节与排版 ── */
+main{padding-top:0}
+h2.sec{font-size:19px;color:var(--navy);margin:38px 0 14px;padding-bottom:8px;border-bottom:2px solid var(--navy);scroll-margin-top:100px;font-weight:700}
+h2.sec .en{font-size:10.8px;color:var(--ink3);font-weight:400;margin-left:10px;letter-spacing:1.1px}
+h3{font-size:15.5px;color:var(--navy);margin:22px 0 8px;font-weight:700;scroll-margin-top:100px}
+h4{font-size:14px;color:var(--navy);margin:16px 0 6px;font-weight:700}
+p{margin:8px 0}
+ul,ol{margin:8px 0;padding-left:22px}
+li{margin:5px 0}
+ul.tight,ol.tight{margin:7px 0}
+ul.tight li,ol.tight li{margin-bottom:6px}
+b,strong{font-weight:650;color:var(--ink)}
+blockquote{border-left:4px solid var(--line);margin:12px 0;padding:2px 0 2px 14px;color:var(--ink2)}
+code{background:var(--bg-soft);padding:2px 5px;border-radius:4px;font-family:var(--font-mono);font-size:.92em}
+pre{background:var(--bg-soft);border:1px solid var(--line);border-radius:var(--radius-sm);padding:12px 14px;overflow-x:auto;margin:12px 0}
+pre code{background:none;padding:0}
+img{max-width:100%}
+.lead{color:var(--ink2);font-size:13.8px;margin:6px 0 14px}
+.muted{color:var(--ink3)}
+.small{font-size:11.7px;color:var(--ink3)}
+hr{border:0;border-top:1px solid var(--line);margin:26px 0 0}
+.hr{height:1px;background:var(--line);margin:26px 0 0}
+b.red,color.red{color:var(--red)} b.pre{color:var(--pre)} b.green{color:var(--green)}
+b.amber{color:var(--amber)} b.navy{color:var(--navy)}
+
+/* ── 表格 ── */
+table{width:100%;border-collapse:collapse;font-size:13px;background:var(--card);margin:12px 0}
+th,td{border:1px solid var(--line);padding:8px 10px;text-align:left;vertical-align:top;line-height:1.62}
+thead th{background:var(--navy);color:#fff;font-weight:600;white-space:nowrap}
+tbody th{background:var(--blue-l);color:var(--navy);font-weight:600}
+tbody tr:nth-child(even) td{background:var(--bg-soft)}
+tbody tr:hover td{background:var(--blue-l)}
+table.fixed{table-layout:fixed}
+.num{text-align:right;font-variant-numeric:tabular-nums}
+.tblwrap{overflow-x:auto;border-radius:var(--radius-sm);border:1px solid var(--line);margin:12px 0}
+.tblwrap table{margin:0;border:0}
+
+/* ── 来源：表头弹层 / 行内链接 / 来源清单 ── */
+.src-head{position:relative;cursor:help;border-bottom:1px dotted var(--blue);white-space:nowrap}
+.src-head .src-pop{position:absolute;left:0;top:100%;z-index:60;display:none;background:var(--navy);color:#fff;font-size:12px;font-weight:400;padding:9px 12px;border-radius:8px;box-shadow:var(--shadow-lg);max-width:min(560px,86vw);white-space:normal;line-height:1.65;border:1px solid rgba(255,255,255,.14)}
+.src-pop .pop-title{font-weight:600;display:block;margin-bottom:4px;color:#fff}
+.src-pop .pop-url{display:block;margin-top:6px;word-break:break-all;color:var(--blue-l)}
+.src-pop .pop-url a{color:#a9c8ee}
+.src-head:hover .src-pop,.src-head:focus .src-pop,.src-head:focus-within .src-pop{display:block}
+.src-inline{color:var(--ink3);font-size:12px;word-break:break-all}
+.src-inline a{color:var(--blue);text-decoration:none;border-bottom:1px dotted var(--blue)}
+.src-inline a:hover{background:#eaf3fa}
+.src{font-size:11.1px;color:var(--ink3);word-break:break-word;line-height:1.58}
+.src a{color:#5b7bb4;text-decoration:none}
+.src a:hover{text-decoration:underline}
+.refs{font-size:12.5px;color:var(--ink3)}
+.refs ol{padding-left:20px}
+.refs a{color:var(--navy);text-decoration:none;border-bottom:1px dashed var(--navy);word-break:break-all}
+.refs a:hover{background:#e8f0f8}
+
+/* ── 卡片 / 结论框 ── */
+.card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:18px 20px;box-shadow:var(--shadow);margin:14px 0}
+.card.tight{padding:14px 16px}
+.leadbox{border-left:4px solid var(--navy2);background:linear-gradient(125deg,#f5f9fd,#edf3fa);border-color:#cfdded}
+.leadbox h3:first-child{margin-top:0}
+
+/* ── KPI 卡（trends .kpi / apartment .kcard） ── */
+.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(168px,1fr));gap:12px;margin:14px 0}
+.kpi{background:var(--card);border:1px solid var(--line);border-left:4px solid var(--navy);border-radius:var(--radius-sm);padding:12px 14px;box-shadow:var(--shadow)}
+.kpi.red{border-left-color:var(--red)} .kpi.green{border-left-color:var(--green)}
+.kpi.amber{border-left-color:var(--amber)} .kpi.blue{border-left-color:var(--blue)}
+.kpi .v{font-size:22px;font-weight:700;color:var(--navy);line-height:1.2}
+.kpi.red .v{color:var(--red)} .kpi.green .v{color:var(--green)}
+.kpi.amber .v{color:var(--amber)} .kpi.blue .v{color:var(--blue)}
+.kpi .l{font-size:12px;color:var(--ink3);margin-top:4px}
+.kpi .s{font-size:11px;color:#8a98a6;margin-top:2px}
+.kcards{display:grid;grid-template-columns:repeat(auto-fit,minmax(232px,1fr));gap:11px;margin:14px 0}
+.kcard{background:var(--card);border:1px solid var(--line);border-left:4px solid var(--navy2);border-radius:10px;padding:13px 15px;box-shadow:var(--shadow)}
+.kcard.warn,.kcard.pre{border-left-color:var(--pre);background:linear-gradient(180deg,var(--pre-bg),#fff 62%)}
+.kcard.bad,.kcard.red{border-left-color:var(--red);background:linear-gradient(180deg,var(--red-bg),#fff 62%)}
+.kcard.good{border-left-color:var(--green);background:linear-gradient(180deg,var(--green-bg),#fff 62%)}
+.kcard .lab,.kcard .t{font-size:12.4px;color:var(--ink2)}
+.kcard .val,.kcard .v{font-size:22px;font-weight:700;color:var(--navy);margin:3px 0 2px;line-height:1.25}
+.kcard.warn .val,.kcard.pre .val{color:var(--pre)}
+.kcard.bad .val,.kcard.red .val{color:var(--red)}
+.kcard.good .val{color:var(--green)}
+.kcard .note,.kcard .s{font-size:11.5px;color:var(--ink3);line-height:1.6;margin-top:4px;word-break:break-word}
+
+/* ── 数据条 / 信号灯 ── */
+.stat-strip{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin:12px 0}
+.stat{background:var(--card);border:1px solid var(--line);border-radius:9px;padding:11px 13px;text-align:center}
+.stat .lab,.stat .l{font-size:11.4px;color:var(--ink3);margin-top:2px}
+.stat .n{font-size:23px;font-weight:700;line-height:1.2}
+.stat.hard .n{color:var(--red)} .stat.pre .n{color:var(--pre)} .stat.yel .n{color:var(--amber)}
+.stat.grn .n{color:var(--green)} .stat.gry .n{color:var(--gray)}
+.lamp{display:inline-block;min-width:9px;width:9px;height:9px;border-radius:50%;margin-right:4px;vertical-align:0}
+.lamp.r{background:var(--red)} .lamp.p{background:var(--pre)} .lamp.y{background:var(--amber)}
+.lamp.g{background:var(--green)} .lamp.k{background:var(--gray)}
+
+/* ── 标签 / 标注 ── */
+.tag{display:inline-block;font-size:11px;padding:1px 7px;border-radius:10px;background:var(--blue-l);color:var(--navy);border:1px solid var(--line);margin-right:4px}
+.tag.red{background:var(--red-l);color:var(--red);border-color:var(--red-line)}
+.tag.green{background:var(--green-l);color:var(--green);border-color:var(--green-line)}
+.tag.amber{background:var(--amber-l);color:var(--amber);border-color:var(--amber-line)}
+.pill{display:inline-block;border-radius:3px;padding:0 7px;font-size:11.3px;white-space:nowrap;line-height:1.72}
+.pill.r{background:var(--red-l);color:var(--red)} .pill.p{background:var(--pre-l);color:var(--pre)}
+.pill.y{background:var(--amber-l);color:var(--amber)} .pill.g{background:var(--green-l);color:var(--green)}
+.pill.k{background:var(--gray-l);color:var(--gray)} .pill.b{background:var(--blue-l);color:var(--navy2)}
+.pill.act{background:#e8eef6;color:#2b4a70}
+.callout{border-left:4px solid var(--amber);background:var(--amber-l);padding:12px 16px;border-radius:0 6px 6px 0;margin:14px 0;font-size:13.5px}
+.callout.red{border-left-color:var(--red);background:var(--red-l)}
+.callout.green{border-left-color:var(--green);background:var(--green-l)}
+.note{border:1px solid var(--line);border-left:4px solid var(--navy2);background:var(--card2);border-radius:var(--radius-sm);padding:12px 15px;margin:14px 0;font-size:13.5px}
+.note.gap{border-left-color:var(--gray);background:var(--gray-l)}
+.note.check{border-left-color:var(--green);background:var(--green-l)}
+.note.correct{border-left-color:var(--red);background:var(--red-l)}
+.note.preline{border-left-color:var(--pre);background:var(--pre-l)}
+.term{font-size:12.5px;color:var(--ink3);background:var(--bg-soft);border:1px solid var(--line);border-radius:6px;padding:8px 12px;margin:14px 0}
+.term b{color:var(--navy)}
+
+/* ── 图表（trends .chart 卡片 / apartment .chart-box + .chart-eh 容器） ── */
+.chart{margin:18px 0;padding:16px;background:var(--card);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow)}
+.chart h4{margin:0 0 4px;font-size:14.5px;color:var(--navy)}
+.chart .unit{font-size:12px;color:var(--ink3);font-weight:400}
+.chart-note{font-size:11.5px;color:var(--ink3);margin:0 0 12px;line-height:1.7}
+.chart svg{display:block;max-width:100%;height:auto;margin:6px auto 0}
+.chart-box{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:14px 14px 6px;box-shadow:var(--shadow);margin:16px 0}
+.chart-eh{width:100%;height:352px;margin:6px 0}
+.legend{display:flex;flex-wrap:wrap;gap:14px;font-size:12px;color:var(--ink2);margin:6px 0 12px}
+.legend span{display:inline-flex;align-items:center;gap:5px}
+.legend i{display:inline-block;width:11px;height:11px;border-radius:2px}
+
+/* ── 时间线 ── */
+.timeline{margin:16px 0;padding-left:8px}
+.tl-item{display:flex;gap:14px;margin:0 0 14px}
+.tl-date{flex:0 0 78px;font-size:12.5px;font-weight:700;color:var(--navy);text-align:right;padding-top:2px}
+.tl-body{flex:1;border-left:2px solid var(--line);padding:0 0 0 14px;position:relative}
+.tl-body::before{content:"";position:absolute;left:-6px;top:6px;width:10px;height:10px;border-radius:50%;background:var(--navy);border:2px solid #fff;box-shadow:0 0 0 1px var(--navy)}
+.tl-body.red::before{background:var(--red);box-shadow:0 0 0 1px var(--red)}
+.tl-body.green::before{background:var(--green);box-shadow:0 0 0 1px var(--green)}
+.tl-body.amber::before{background:var(--amber);box-shadow:0 0 0 1px var(--amber)}
+.tl-body .t{font-weight:600;color:var(--ink)}
+.tl-body .d{font-size:13px;color:var(--ink3);margin-top:2px}
+
+/* ── 风险条 / 风险框 ── */
+.rl-track{position:relative;height:12px;background:var(--gray-line);border-radius:999px;margin:14px 0 6px;overflow:hidden}
+.rl-fill{position:absolute;left:0;top:0;bottom:0;background:var(--green);border-radius:999px}
+.rl-marker{position:absolute;top:-3px;bottom:-3px;width:2px;background:var(--red);left:50%}
+.risk{background:linear-gradient(125deg,#fdf3f1,var(--red-l));border:1px solid #eec8c1;border-left:5px solid var(--red);border-radius:10px;padding:16px 18px;margin:14px 0}
+.risk h4{font-size:14.4px;color:var(--red);margin-bottom:8px}
+.risk .kpis{display:flex;flex-wrap:wrap;gap:22px;margin:10px 0 12px}
+.risk .kpis>div{min-width:150px}
+.risk .kpis .n{font-size:22px;font-weight:700;color:var(--red);line-height:1.25}
+.risk .kpis .l{font-size:11.4px;color:var(--ink2)}
+.redbox{background:linear-gradient(135deg,#fff8f6,var(--red-l));border:1px solid #eec8c1;border-left:5px solid var(--red);border-radius:10px;padding:15px 18px;margin:14px 0}
+.redbox h4{color:var(--red-d);margin-top:0}
+.prebox{background:linear-gradient(135deg,#fffaf4,var(--pre-l));border:1px solid #efd3b6;border-left:5px solid var(--pre);border-radius:10px;padding:15px 18px;margin:14px 0}
+.prebox h4{color:var(--pre);margin-top:0}
+.preline{border-left:4px solid var(--pre);background:var(--pre-l);padding:10px 14px;border-radius:0 6px 6px 0;margin:10px 0;font-size:13px}
+
+/* ── 目录 / 流程 / 分层（年度） ── */
+.toc{display:flex;flex-wrap:wrap;gap:7px;margin:0 0 6px}
+.toc a{font-size:12.3px;color:var(--navy2);background:var(--blue-l);border-radius:15px;padding:3px 12px;text-decoration:none}
+.toc a:hover{background:#dae6f5}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.flow{display:flex;align-items:stretch;gap:7px;flex-wrap:wrap;margin:12px 0}
+.node{flex:1;min-width:150px;background:var(--blue-l);border:1px solid #cfddf3;border-radius:8px;padding:11px 12px}
+.node b{display:block;color:var(--navy);font-size:12.8px;margin-bottom:3px}
+.node span{font-size:11.4px;color:var(--ink2);line-height:1.55;display:block}
+.arrow{display:flex;align-items:center;color:var(--blue);font-size:18px;font-weight:700}
+.tiers{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:12px 0}
+.tier{border:1px solid var(--line);border-radius:10px;padding:14px 15px;background:var(--card)}
+.tier.t1{border-top:4px solid var(--red)} .tier.t2{border-top:4px solid var(--pre)} .tier.t3{border-top:4px solid var(--amber)}
+.tier h4{margin:0 0 6px} .tier p{font-size:12.2px;color:var(--ink2);margin:0}
+
+/* ── 声明 / 页脚 / 索引链接 ── */
+.disc{margin-top:34px;padding:16px 18px;background:var(--bg-soft);border:1px solid var(--line);border-radius:var(--radius);font-size:13px;color:var(--ink3)}
+.disc strong{color:var(--ink)}
+footer,.footer{font-size:11.4px;color:var(--ink3);text-align:center;margin-top:22px;line-height:1.8}
+.idx-link{color:var(--navy);text-decoration:none;border-bottom:1px dotted #9db9da;font-weight:600}
+.idx-link:hover{color:var(--navy2);border-bottom:1px solid var(--blue)}
+.idx-link .ext{font-size:10px;color:var(--blue);margin-left:2px;font-weight:400}
+
+/* ── 报告特有组件（apartment 基线 / 季度） ── */
+.tldr{background:linear-gradient(180deg,#fff,#f8fafe);border-left:5px solid var(--navy2)}
+.verdict{font-size:17px;font-weight:700;color:var(--blue);margin:0 0 12px}
+.kpi-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin:16px 0}
+.tbl-wrap{overflow-x:auto;border:1px solid var(--line);border-radius:8px;margin:12px 0}
+.src-pop .src-pop-title{display:block;font-size:11px;color:var(--ink3);margin-bottom:4px;border-bottom:1px solid var(--line);padding-bottom:4px}
+.t-red{background:var(--red-l);color:var(--red)} .t-green{background:var(--green-l);color:var(--green)}
+.t-amber{background:var(--amber-l);color:var(--amber)} .t-grey{background:var(--gray-l);color:var(--ink3)}
+.t-blue{background:var(--blue-l);color:var(--blue)}
+.toggle{display:inline-flex;border:1px solid var(--line);border-radius:6px;overflow:hidden;margin-bottom:8px}
+.toggle button{border:0;background:#fff;color:var(--ink2);padding:5px 14px;font-size:12px;cursor:pointer;font-family:inherit}
+.toggle button.on{background:var(--navy2);color:#fff}
+.hide{display:none}
+.two-col{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.layer{display:grid;grid-template-columns:110px 1fr;gap:0;border:1px solid var(--line);border-radius:8px;overflow:hidden;margin-bottom:10px;background:#fff}
+.layer .lb{background:var(--navy2);color:#fff;padding:14px 12px;font-weight:700;font-size:13px;display:flex;align-items:center;justify-content:center;text-align:center}
+.layer .lb.q{background:#4472C4} .layer .lb.y{background:var(--navy2)}
+.layer .ct{padding:12px 16px;font-size:12.5px;color:var(--ink2)}
+.layer .ct b{color:var(--ink)}
+.note-box{background:var(--amber-l);border:1px solid var(--amber-line);border-radius:8px;padding:12px 16px;color:#6b4e0a;font-size:12.5px;margin:12px 0}
+.risk-box{background:var(--red-l);border:1px solid var(--red-line);border-radius:8px;padding:12px 16px;color:#8c2f24;font-size:12.5px;margin:12px 0}
+.ok-box{background:var(--green-l);border:1px solid var(--green-line);border-radius:8px;padding:12px 16px;color:#155c39;font-size:12.5px;margin:12px 0}
+.sig-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-top:12px}
+.sig{display:flex;gap:12px;align-items:flex-start;border:1px solid var(--line);border-radius:8px;padding:11px 13px;background:#fff}
+.sig .dot{width:10px;height:10px;border-radius:50%;margin-top:6px;flex:0 0 10px}
+.sig .dot.r{background:var(--red)} .sig .dot.g{background:var(--green)}
+.sig .dot.a{background:var(--amber)} .sig .dot.k{background:var(--gray)}
+.sig b{font-size:13px;color:var(--ink)} .sig p{margin:2px 0 0;font-size:11.5px}
+b.dr{color:var(--red-d)}
+.metric-link{color:var(--navy);text-decoration:none;border-bottom:1px dotted #9db4cf;font-weight:600}
+.metric-link:hover{color:var(--navy2);border-bottom-color:var(--navy2);background:var(--blue-l)}
+.metric-link::after{content:" ↗";font-size:10px;color:#7d96b3;font-weight:400}
+.rl-banner{background:linear-gradient(125deg,#5c1512,#7a1f19 60%,#8a2b20);color:#fff;border-radius:12px;padding:16px 20px;margin:16px 0;border:1px solid #4d100d;box-shadow:0 2px 8px rgba(110,27,22,.18)}
+.rl-banner h3{color:#fff;margin:0 0 6px;font-size:16px}
+.rl-banner p{font-size:12.8px;color:rgba(255,255,255,.88);margin-bottom:6px}
+.rl-banner .rl-kpis{display:flex;flex-wrap:wrap;gap:10px;margin:10px 0 4px}
+.rl-banner .rl-kpis div{background:rgba(255,255,255,.10);border:1px solid rgba(255,255,255,.18);border-radius:8px;padding:8px 12px;min-width:156px}
+.rl-banner .n{font-size:20px;font-weight:700;line-height:1.3}
+.rl-banner .l{font-size:11.4px;color:rgba(255,255,255,.78)}
+.rl-card{border:2px solid var(--red-d);background:linear-gradient(180deg,#fff,#fdf6f4);border-radius:12px;padding:18px 20px;margin:16px 0;box-shadow:0 2px 8px rgba(110,27,22,.08)}
+.rl-card h3{color:var(--red-d);margin-top:0}
+.rl-table th{background:var(--red-d)}
+.rl-table tbody tr:nth-child(even) td{background:#fdf7f5}
+.rl-table tbody tr:hover td{background:var(--red-l)}
+.rl-table td:first-child{border-left:3px solid var(--red-d)}
+.rl-rule{background:#fdf6f4;border-left:4px solid var(--red-d);padding:10px 14px;border-radius:0 7px 7px 0;font-size:12.8px;margin:10px 0}
+.rl-mark{display:inline-block;background:var(--red-d);color:#fff;border-radius:3px;padding:0 6px;font-size:11px;font-weight:700;letter-spacing:.5px}
+details.registry{margin:12px 0;background:var(--card);border:1px solid var(--line);border-radius:10px;padding:12px 16px}
+details.registry summary{cursor:pointer;font-weight:700;color:var(--navy);font-size:14px}
+details.registry[open]{padding-bottom:18px}
+.mini{background:#fff;border:1px solid var(--line);border-radius:9px;padding:12px 14px}
+.mini h4{margin-top:0}
+
+/* ── 响应式 / 打印 ── */
+@media (max-width:720px){
+  body{font-size:14px}
+  .wrap{padding:0 14px 48px}
+  header.report-head,header.hero{padding:26px 0 22px}
+  header.report-head h1,header.hero h1{font-size:21px}
+  nav.report-nav .nav-url{display:none}
+  table{display:block;overflow-x:auto;white-space:nowrap}
+  th,td{padding:7px 8px;font-size:12.5px}
+  .chart-eh{height:300px}
+  .grid2,.tiers{grid-template-columns:1fr}
+  .kpi-grid{grid-template-columns:repeat(2,1fr)}
+  .two-col,.sig-grid{grid-template-columns:1fr}
+  .stat-strip{grid-template-columns:repeat(2,1fr)}
+  .tl-date{flex-basis:64px;font-size:11.5px}
+}
+@media print{
+  nav.report-nav,.skip-link{display:none}
+  .card,.chart,.kpi,.kcard,.chart-box{box-shadow:none}
+  body{font-size:12px}
+}
+
+
+/* 信息分层组件（与 report_style.py canonical 同步） */
+.delta-strip{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:14px 0}
+.delta-strip .d{background:var(--card,#fff);border:1px solid var(--line,#e1e7ee);border-radius:10px;padding:12px 14px}
+.delta-strip .d .n{font-size:22px;font-weight:700;color:var(--navy,#16324f);line-height:1.25}
+.delta-strip .d .l{font-size:11.6px;color:var(--ink3,#657180);margin-top:2px}
+.delta-strip .d.add .n{color:#1c7444}.delta-strip .d.fix .n{color:#956612}
+.delta-strip .d.same .n{color:#657180}.delta-strip .d.hyp .n{color:#2f5597}
+.lvl{display:inline-block;font-size:11px;line-height:1.5;padding:1px 7px;border-radius:9px;border:1px solid transparent;white-space:nowrap;font-weight:600}
+.lvl-verified{background:#eaf5ef;color:#1c7444}.lvl-partial{background:#fdf4e2;color:#956612}
+.lvl-inferred{background:#eaf1fa;color:#2f5597}.lvl-assumption{background:#eff2f4;color:#646f7b}
+</style>
+</head>
+<body>
+<div class="audit-mark" data-audit-id="AUD-2026-11-14-007" data-mark-level="pre" style="background:#5b6b7c;color:#fff;font:600 13px/1.6 system-ui,-apple-system,'Segoe UI',sans-serif;padding:8px 16px;text-align:center;letter-spacing:.02em"><span class="audit-badge">预审通过（机器）</span><span class="audit-meta">语义复核待完成 · 2026-11-16 · 审查链 3/4 · AUD-2026-11-14-007</span></div>
+
+
+<header class="report-head">
+  <div class="wrap">
+    <h1>全球经济趋势周报 · 2026-11-13（第 46 周）</h1>
+    <p class="sub">面向宏观经济研究团队 · Macro Research</p>
+    <p class="meta">数据截止 2026-11-13 · 报告版本 v2026.11.13 · 口径冲突处并列呈现，不做平均 · 标注约定：未标注者为【事实】；【预测】= 带来源与置信度的预估</p>
+  </div>
+</header>
+
+<nav class="report-nav" aria-label="报告导航">
+  <div class="wrap">
+    <span class="nav-url">报告 URL：<a href="https://github.com/hmbphxkw76-byte/tech-context-digest/blob/main/content/economy/global/trends/reports/2026-11-13_weekly.html" target="_blank" rel="noopener">https://github.com/hmbphxkw76-byte/tech-context-digest/blob/main/content/economy/global/trends/reports/2026-11-13_weekly.html</a></span>
+    <div class="nav-tabs">
+      <a href="#s1">一、本周要点 Top5</a>
+      <a href="#s2">二、主要经济体宏观基本面</a>
+      <a href="#s3">三、贸易、供应链与产业政策</a>
+      <a href="#s4">四、新兴市场与大宗商品</a>
+      <a href="#s5">五、数据看板表格</a>
+      <a href="#s6">六、风险与不确定性</a>
+      <a href="#s7">七、对 Macro Research 的可执行启示</a>
+      <a href="#refs">参考来源</a>
+    </div>
+  </div>
+</nav>
+
+<main class="wrap">
+<div class="delta-strip" data-module="delta">
+  <div class="d add"><div class="n">8</div><div class="l">本期新增（条）</div></div>
+  <div class="d fix"><div class="n">0</div><div class="l">修正（条）</div></div>
+  <div class="d same"><div class="n">12</div><div class="l">无变化（条）</div></div>
+  <div class="d hyp"><div class="n">3/10</div><div class="l">假设核验进度</div></div>
+</div>
+<p class="small muted">本期读数时点：2026-11-13 ｜ 阈值校准：<span class="lvl lvl-assumption">预校准（ex-ante）</span> ｜ 场景切片：主场景 政策制定；次场景 投资决策 ｜ 信息等级：已核验 / 部分核验 / 推断 / 假设 ｜ 传导量化：需求弹性已入模（政策乘数不可估、不入模，口径同政策分析线），传导时滞约 1–2 个季度 ｜ 盲区：未核验项集中列示于第八节风险与不确定性，不以推演填充</p>
+
+
+<h2 class="sec" id="s1">一、本周要点 Top5</h2>
+
+<div class="kpis">
+  <div class="kpi red">
+    <div class="v">+0.4%</div>
+    <div class="l">美国 10 月 CPI 环比（核心 +0.3%，连续第 3 个月）</div>
+    <div class="s">BLS · 2026-11-10</div>
+  </div>
+  <div class="kpi red">
+    <div class="v">4.0%</div>
+    <div class="l">欧元区 10 月 CPI 同比（三年新高）</div>
+    <div class="s">Eurostat · 2026-11-04</div>
+  </div>
+  <div class="kpi amber">
+    <div class="v">95.6%</div>
+    <div class="l">美联储 12 月加息 25bp 定价概率</div>
+    <div class="s">CME FedWatch · 2026-11-10</div>
+  </div>
+  <div class="kpi blue">
+    <div class="v">$95.21</div>
+    <div class="l">布伦特原油（11-13，较 10 月均价 114 美元/桶回落约 16.5%）</div>
+    <div class="s">市场行情 · 2026-11-13</div>
+  </div>
+  <div class="kpi green">
+    <div class="v">+9.95%</div>
+    <div class="l">越南 Q3 GDP 同比（2022Q3 以来最快）</div>
+    <div class="s">越南统计总局 GSO · 2026-10-03</div>
+  </div>
+</div>
+
+<ol>
+  <li><strong>再通胀固化，主要央行集体转鹰。</strong>美国 10 月 CPI 环比 +0.4%（核心 +0.3%，连续第 3 个月），核心年化约 3.6%；欧元区 10 月 CPI 初值 4.0% 创三年新高；英国 11-05 加息 25bp 至 4.0%、澳大利亚 11-03 加息至 4.85%、日本央行判断 2% 目标「基本达成」；市场定价美联储 12-08/09 加息 25bp 概率约 95.6%。2 年期美债收益率升破 4.7%、10 年期约 4.93%（该两项未取得一手来源，标「待核实」）。<span class="src-inline">[Source: <a href="https://english.ts.cn/system/2026/11/11/037023412.shtml" target="_blank" rel="noopener" title="完整英文 URL：https://english.ts.cn/system/2026/11/11/037023412.shtml">BLS/新华社, 2026-11-10</a>（需核实原文）；<a href="https://ec.europa.eu/eurostat/web/main/news/euro-indicators" target="_blank" rel="noopener" title="完整英文 URL：https://ec.europa.eu/eurostat/web/main/news/euro-indicators">Eurostat, 2026-11-04</a>；<a href="http://baijiahao.baidu.com/s?id=1881464352325676627" target="_blank" rel="noopener" title="完整英文 URL：http://baijiahao.baidu.com/s?id=1881464352325676627">CME FedWatch, 2026-11-10（需核实原文）</a>]</span></li>
+  <li><strong>能源冲击高位退潮，但供应扰动未消。</strong>布伦特原油从 9 月均价 114 美元/桶回落至 11-13 的 95.21 美元/桶（较 10 月均价 114 美元/桶回落约 16.5%），11-04 单日跌超 8%；但 9 月产区关停 480 万桶/日、卡塔尔 LNG 拉斯拉凡厂修复预计需长达 5 年；OPEC+（7 国）12 月维持产量不变、10 月起暂停增产。<span class="src-inline">[Source: <a href="https://www.eia.gov/outlooks/steo/" target="_blank" rel="noopener" title="完整英文 URL：https://www.eia.gov/outlooks/steo/">EIA STEO, 2026-11-10</a>；<a href="https://energy.cngold.org/c/2026-11-13/c10877809.html" target="_blank" rel="noopener" title="完整英文 URL：https://energy.cngold.org/c/2026-11-13/c10877809.html">金投网, 2026-11-13（需核实原文）</a>]</span></li>
+  <li><strong>中美贸易休战进入实施沟通期。</strong>「300 亿对 300 亿」对等降税框架 9 月达成，截至 11-13 双方仍在沟通实施细节；中方 11-10 起 2 个月内继续暂停 24% 对美加征关税（保留 10%），稀土出口管制暂停期再延 2 个月至 2027-01-10；美方将 178 项对华 301 关税豁免延至 2027-01-09。<span class="src-inline">[Source: <a href="https://www.gov.cn/lianbo/202611/content_7085583.htm" target="_blank" rel="noopener" title="完整英文 URL：https://www.gov.cn/lianbo/202611/content_7085583.htm">国务院关税税则委员会, 2026-11-09</a>；<a href="https://ustr.gov/sites/default/files/files/Issue_Areas/Enforcement/Section%20301/USTR%20FRN%20Extending%20Section%20301%20China%20FTT%20Exclusions%20to%20Jan%202027.pdf" target="_blank" rel="noopener" title="完整英文 URL：https://ustr.gov/sites/default/files/files/Issue_Areas/Enforcement/Section%20301/USTR%20FRN%20Extending%20Section%20301%20China%20FTT%20Exclusions%20to%20Jan%202027.pdf">USTR, 2026-11-06</a>]</span></li>
+  <li><strong>新兴市场分化加剧。</strong>越南 Q3 GDP +9.95%（2022Q3 以来最快）、前 9 月注册外资 +76.4%；沙特 Q3 GDP -3.8%（连续两季萎缩、2023 年以来首次）；卡塔尔 Q2 实际 GDP -15.7%，LNG 产能修复需 5 年。<span class="src-inline">[Source: <a href="https://tradingeconomics.com/vietnam/gdp-growth-annual" target="_blank" rel="noopener" title="完整英文 URL：https://tradingeconomics.com/vietnam/gdp-growth-annual">GSO/TradingEconomics, 2026-10</a>（卖方预期）；<a href="https://sa.mofcom.gov.cn/jmxw/art/2026/art_eb55daeacd284bab9592428d1f5d1477.html" target="_blank" rel="noopener" title="完整英文 URL：https://sa.mofcom.gov.cn/jmxw/art/2026/art_eb55daeacd284bab9592428d1f5d1477.html">GASTAT/驻沙特经商处, 2026-11-01</a>]</span></li>
+  <li><strong>中国「外需强、物价弱、PPI 高」的 K 型分化。</strong>Q3 GDP +4.5%（较 Q2 回升 0.2pp），净出口对累计增速拉动升至 1.2pp；10 月 CPI 同比 +0.7%（食品 -2.9%）、PPI 同比 +5.7%（52 个月新高）；前三季度固投 -7.2%、房地产开发投资 -20.6%、社零 +1.1%。<span class="src-inline">[Source: <a href="https://www.chinatoday.com.cn/zw2018/bktg/202611/t20261106_800450538.html" target="_blank" rel="noopener" title="完整英文 URL：https://www.chinatoday.com.cn/zw2018/bktg/202611/t20261106_800450538.html">国家统计局, 2026-10-19</a>；<a href="https://mp.weixin.qq.com/s?__biz=Mzg2ODE1NDY2Ng==&mid=2247547768&idx=5&sn=3122118ccb7faec000e4e194dc31457e" target="_blank" rel="noopener" title="完整英文 URL：https://mp.weixin.qq.com/s?__biz=Mzg2ODE1NDY2Ng==&mid=2247547768&idx=5&sn=3122118ccb7faec000e4e194dc31457e">国家统计局解读, 2026-11-09</a>]</span></li>
+</ol>
+
+<div class="term"><b>【词汇速览】[全局]</b> 滞胀（Stagflation）｜使用规范：经济停滞与高通胀并存的状态，须与「经济周期」区分｜关联主题：主要经济体宏观基本面；软着陆与硬着陆（Soft/Hard Landing）｜使用规范：形容紧缩政策使通胀回落时经济温和放缓或深度衰退｜关联主题：主要经济体宏观基本面；主权债务（Sovereign Debt）｜使用规范：以「债务/GDP」衡量可持续性，跨机构口径不可混用｜关联主题：风险与不确定性；石油美元（Petrodollar）｜使用规范：产油国石油出口收入回流金融资产的循环过程｜关联主题：新兴市场与大宗商品。</div>
+
+<h3 class="sec-sub">s1.0 周期定位（增长—通胀—政策—流动性）</h3>
+<p><b>阶段判定：过热—滞胀过渡带</b>（cycle_clock.py，置信度 100%）。增长 +1（GDP 同比 5.4%→5.6%）、通胀 +1（CPI 1.3%→1.8%）、政策 +1（9 月加息 +25bp）、流动性 +1（3M EIBOR 4.21%→4.36%）。<b>口径</b>：本节读数取自迪拜 / UAE 宏观快照（DDSE 迪拜 GDP、CBUAE CPI 与政策利率、EIBOR），作为全球周期的代理输入，非全球加权口径。判读：增长仍正、通胀上行、政策转紧，处于「过热→滞胀」过渡带；与本报告「主要央行集体转鹰、核心 CPI 环比连续 3 个月 0.3%」的判读一致。</p>
+<h2 class="sec" id="s2">二、主要经济体宏观基本面</h2>
+
+<h3>2.1 增长：美国上修、欧元区放缓、东亚分化</h3>
+<p><span class="tag green">美国</span><strong>Q3 GDP 初值 +3.4% 年化</strong>（Q2 +2.2%），PCE 物价指数 +2.1%（前值 +5.0%）、核心 PCE +2.5%（前值 +3.3%），国内总采购价格 +3.0%（前值 +5.6%）——增长上修与物价回落并存。<span class="src-inline">[Source: <a href="https://www.bea.gov/news/glance" target="_blank" rel="noopener" title="完整英文 URL：https://www.bea.gov/news/glance">BEA, 2026-10-29</a>]</span></p>
+<p><span class="tag">中国</span><strong>Q3 GDP +4.5%</strong>（Q2 +4.3%、Q1 +5.0%），前三季度 +4.6%；货物和服务净出口对累计增速拉动由上半年 0.8pp 升至 1.2pp，连续两季回升；GDP 平减指数 0.99%（连续两季为正，2023Q1 以来首次）；前三季度固投 -7.2%、房地产开发投资 -20.6%、社零 +1.1%。<span class="src-inline">[Source: <a href="https://www.chinatoday.com.cn/zw2018/bktg/202611/t20261106_800450538.html" target="_blank" rel="noopener" title="完整英文 URL：https://www.chinatoday.com.cn/zw2018/bktg/202611/t20261106_800450538.html">国家统计局, 2026-10-19/20</a>]</span></p>
+<p><span class="tag">欧元区</span><strong>Q3 环比 +0.4%</strong>（Q2 +0.6%）；德国 +0.2%、法国 -0.1%、意大利 0%、西班牙 +0.6%。<span class="src-inline">[Source: <a href="https://ec.europa.eu/eurostat/web/main/news/euro-indicators" target="_blank" rel="noopener" title="完整英文 URL：https://ec.europa.eu/eurostat/web/main/news/euro-indicators">Eurostat, 2026-10</a>]</span></p>
+<p><span class="tag">日本</span>Q2 二次速报实际 GDP 年化 +1.4%（初值 +1.1%），名义环比 +1.3%、平减指数 +2.6%；Q3 初值截至 11-13 未发布。<span class="src-inline">[Source: <a href="https://www.esri.cao.go.jp/jp/sna/menu.html" target="_blank" rel="noopener" title="完整英文 URL：https://www.esri.cao.go.jp/jp/sna/menu.html">内阁府, 2026-09-08</a>]</span></p>
+<p><span class="tag">韩国</span><strong>Q3 环比 +1.0%</strong>（预期 +0.8%）、同比 +3.4%（预期 +3.1%），AI 与半导体出口为主要支撑。<span class="src-inline">[Source: <a href="https://www.bok.or.kr/" target="_blank" rel="noopener" title="完整英文 URL：https://www.bok.or.kr/">BOK, 2026-10-27</a>]</span></p>
+<p><span class="tag">英国</span><strong>Q3 环比 +0.7%</strong>（Q2 +0.5%），两年半来最快；9 月单月 +0.2%。<span class="src-inline">[Source: <a href="https://www.ons.gov.uk/economy/grossdomesticproductgdp/bulletins/quarterlynationalaccounts/latest" target="_blank" rel="noopener" title="完整英文 URL：https://www.ons.gov.uk/economy/grossdomesticproductgdp/bulletins/quarterlynationalaccounts/latest">ONS, 2026-11-06</a>]</span></p>
+
+<div class="chart">
+  <h4>主要央行政策利率水平 <span class="unit">（单位：%，截至 2026-11-13）</span></h4>
+  <svg viewBox="0 0 620 300" role="img" aria-label="主要央行政策利率横向柱状图">
+    <line x1="150" y1="20" x2="150" y2="260" stroke="#1f2933" stroke-width="1"/>
+    <line x1="150" y1="260" x2="600" y2="260" stroke="#1f2933" stroke-width="1"/>
+    <text x="145" y="30" font-size="11" fill="#5b6b7b" text-anchor="end">澳大利亚 4.85</text>
+    <rect x="150" y="22" width="388" height="18" fill="#c0392b"/>
+    <text x="545" y="36" font-size="11" fill="#c0392b" font-weight="700">4.85</text>
+    <text x="145" y="58" font-size="11" fill="#5b6b7b" text-anchor="end">英国 4.00</text>
+    <rect x="150" y="50" width="336" height="18" fill="#c0392b"/>
+    <text x="493" y="64" font-size="11" fill="#c0392b" font-weight="700">4.00</text>
+    <text x="145" y="86" font-size="11" fill="#5b6b7b" text-anchor="end">美国 3.875</text>
+    <rect x="150" y="78" width="326" height="18" fill="#c0392b"/>
+    <text x="483" y="92" font-size="11" fill="#c0392b" font-weight="700">3.875</text>
+    <text x="145" y="114" font-size="11" fill="#5b6b7b" text-anchor="end">韩国 3.00</text>
+    <rect x="150" y="106" width="252" height="18" fill="#b9770e"/>
+    <text x="409" y="120" font-size="11" fill="#b9770e" font-weight="700">3.00</text>
+    <text x="145" y="142" font-size="11" fill="#5b6b7b" text-anchor="end">欧元区 2.50</text>
+    <rect x="150" y="134" width="210" height="18" fill="#b9770e"/>
+    <text x="367" y="148" font-size="11" fill="#b9770e" font-weight="700">2.50</text>
+    <text x="145" y="170" font-size="11" fill="#5b6b7b" text-anchor="end">中国 1.40</text>
+    <rect x="150" y="162" width="118" height="18" fill="#16324f"/>
+    <text x="275" y="176" font-size="11" fill="#16324f" font-weight="700">1.40</text>
+    <text x="145" y="198" font-size="11" fill="#5b6b7b" text-anchor="end">日本 1.25</text>
+    <rect x="150" y="190" width="105" height="18" fill="#16324f"/>
+    <text x="262" y="204" font-size="11" fill="#16324f" font-weight="700">1.25</text>
+    <text x="150" y="284" font-size="10.5" fill="#5b6b7b">0</text>
+    <text x="360" y="284" font-size="10.5" fill="#5b6b7b" text-anchor="middle">2.5</text>
+    <text x="600" y="284" font-size="10.5" fill="#5b6b7b" text-anchor="end">5.0</text>
+  </svg>
+  <div class="legend">
+    <span><i style="background:#c0392b"></i>已重启加息（2026-11）</span>
+    <span><i style="background:#b9770e"></i>已处加息周期</span>
+    <span><i style="background:#16324f"></i>维持宽松</span>
+  </div>
+  <div class="chart-note">口径：美国为联邦基金利率目标区间中值（3.75%–4.00%）；欧元区为存款机制利率；英国为银行利率；澳大利亚为现金利率；韩国为基准利率；中国为 7 天期逆回购操作利率；日本为政策利率（无担保隔夜拆借利率目标）。各国政策目标与工具不同，利率水平不可直接横向比较为「松紧程度」。</div>
+</div>
+
+<h3>2.2 通胀：能源驱动再通胀，核心黏性上升</h3>
+<p><span class="tag red">美国</span><strong>10 月 CPI 环比 +0.4%</strong>（预期 +0.3%，9 月 +0.6%），<strong>核心 CPI +0.3%</strong>（连续第 3 个月），住房成本 +0.3%、占整体月涨幅 30% 以上；受 2025-10 基期因政府停摆缺失影响，整体与核心同比<strong>不公布</strong>（11 月报告恢复）。美银通过插值法估算 10 月整体/核心隐含同比约 3.8%/2.7%（非官方统计）。<span class="src-inline">[Source: <a href="https://english.ts.cn/system/2026/11/11/037023412.shtml" target="_blank" rel="noopener" title="完整英文 URL：https://english.ts.cn/system/2026/11/11/037023412.shtml">BLS/新华社, 2026-11-10</a>（需核实原文）]</span></p>
+<p><span class="tag red">欧元区</span><strong>10 月 CPI 初值 +4.0%</strong>（9 月 +3.8%），创三年新高；9 月分项：能源 +18.9%、服务 +3.2%、核心 +2.5%。<span class="src-inline">[Source: <a href="https://ec.europa.eu/eurostat/web/main/news/euro-indicators" target="_blank" rel="noopener" title="完整英文 URL：https://ec.europa.eu/eurostat/web/main/news/euro-indicators">Eurostat, 2026-11-04</a>]</span></p>
+<p><span class="tag">中国</span><strong>10 月 CPI 同比 +0.7%</strong>（核心 +0.8%），食品 -2.9%、猪肉 -8.6%；<strong>PPI 同比 +5.7%</strong>（52 个月新高）、环比 +0.7%；汽油同比 +22.4%、能源 +9.9%；数据存储设备、平板电脑、计算机、移动电话机价格同比分别 +45.4%/+29.3%/+23.0%/+16.7%。<span class="src-inline">[Source: <a href="https://mp.weixin.qq.com/s?__biz=Mzg2ODE1NDY2Ng==&mid=2247547768&idx=5&sn=3122118ccb7faec000e4e194dc31457e" target="_blank" rel="noopener" title="完整英文 URL：https://mp.weixin.qq.com/s?__biz=Mzg2ODE1NDY2Ng==&mid=2247547768&idx=5&sn=3122118ccb7faec000e4e194dc31457e">国家统计局解读, 2026-11-09</a>]</span></p>
+<p><span class="tag">日本</span>9 月全国核心 CPI（含鲜食）同比 +2.1%（8 月 +1.7%），2025-12 以来再度超过 2%，连续 61 个月上涨。<span class="src-inline">[Source: <a href="https://www.stat.go.jp/english/" target="_blank" rel="noopener" title="完整英文 URL：https://www.stat.go.jp/english/">总务省, 2026-10-23</a>]</span></p>
+<p><span class="tag">其他</span>英国 9 月 CPI +3.5%；澳大利亚 9 月 CPI +4.3%；新西兰 9 月 CPI +3.7%；新加坡 9 月 CPI +2.2%。<span class="src-inline">[Source: <a href="https://www.rba.gov.au/inflation-overview.html" target="_blank" rel="noopener" title="完整英文 URL：https://www.rba.gov.au/inflation-overview.html">RBA（引 ABS）, 2026-10</a>；<a href="https://www.stats.govt.nz/" target="_blank" rel="noopener" title="完整英文 URL：https://www.stats.govt.nz/">Stats NZ, 2026-10-22</a>]</span></p>
+
+<h3>2.3 货币政策与财政：集体转鹰，财政约束收紧</h3>
+<p><span class="tag red">美国</span>10-27/28 FOMC 维持 3.75%–4.00%（10:2，两名委员主张加息 25bp）；理事 Waller 称若核心 CPI ≥0.3% 需「更强政策动作」，12 月或考虑加息 50bp。FY2026 联邦赤字 2.0 万亿美元（同比 +12%），公众持有债务达 GDP 100%（1946 年以来最高）。<span class="src-inline">[Source: <a href="https://www.federalreserve.gov/" target="_blank" rel="noopener" title="完整英文 URL：https://www.federalreserve.gov/">Federal Reserve, 2026-10-29</a>；<a href="https://fiscaldata.treasury.gov/" target="_blank" rel="noopener" title="完整英文 URL：https://fiscaldata.treasury.gov/">美国财政部, 2026-11-09</a>]</span></p>
+<p><span class="tag">中国</span>7 天期逆回购利率维持 1.40%；11-02 起改为「固定数量、利率招标、多重价位中标」；三季度末房地产贷款余额同比 -5.2%。<span class="src-inline">[Source: <a href="https://www.pbc.gov.cn/" target="_blank" rel="noopener" title="完整英文 URL：https://www.pbc.gov.cn/">中国人民银行, 2026-10-30</a>]</span></p>
+<p><span class="tag">欧元区</span>ECB 10-29 维持三关键利率不变（存款机制 2.50%），暗示 12 月加息（市场定价概率 84%）；拉加德宣布提前卸任。<span class="src-inline">[Source: <a href="https://www.ecb.europa.eu/" target="_blank" rel="noopener" title="完整英文 URL：https://www.ecb.europa.eu/">ECB, 2026-10-29</a>]</span></p>
+<p><span class="tag">日本</span>BOJ 10-30 维持政策利率约 1.25%（31 年高位），判断 2% 目标「基本达成」；ETF 出售速度由年约 3300 亿日元提高至约 8600 亿日元（2027-01 起）；12 月加息概率约 80%。<span class="src-inline">[Source: <a href="https://www.boj.or.jp/en/" target="_blank" rel="noopener" title="完整英文 URL：https://www.boj.or.jp/en/">日本银行, 2026-10-30</a>]</span></p>
+<p><span class="tag">韩国</span>BOK 10-22 维持基准利率 3.0%（7 月、8 月连续加息后暂停），保留进一步紧缩可能。<span class="src-inline">[Source: <a href="https://www.bok.or.kr/" target="_blank" rel="noopener" title="完整英文 URL：https://www.bok.or.kr/">BOK, 2026-10-22</a>]</span></p>
+<p><span class="tag green">英国</span>BoE 11-05 加息 25bp 至 4.00%（8:1，Mann 主张 50bp），2023-08 以来首次；预测通胀 2027Q2 升至约 4.9%。<span class="src-inline">[Source: <a href="https://www.bankofengland.co.uk/" target="_blank" rel="noopener" title="完整英文 URL：https://www.bankofengland.co.uk/">Bank of England, 2026-11-05</a>]</span></p>
+<p><span class="tag green">澳大利亚</span>RBA 11-03 加息 25bp 至 4.85%。<span class="src-inline">[Source: <a href="https://www.rba.gov.au/news/" target="_blank" rel="noopener" title="完整英文 URL：https://www.rba.gov.au/news/">RBA, 2026-11-03</a>]</span></p>
+<p><span class="tag amber">新西兰</span>RBNZ 10-29 意外暂停（放缓加息步伐）；市场预计 12 月、2 月、3 月再各加 25bp 至 3.50%。<span class="src-inline">[Source: <a href="https://www.rbnz.govt.nz/" target="_blank" rel="noopener" title="完整英文 URL：https://www.rbnz.govt.nz/">RBNZ, 2026-10-29</a>]</span></p>
+
+<div class="timeline">
+  <div class="tl-item">
+    <div class="tl-date">10-22</div>
+    <div class="tl-body">
+      <div class="t">韩国 BOK 维持 3.00%</div>
+      <div class="d">7 月、8 月连续加息后暂停，保留紧缩倾向。</div>
+    </div>
+  </div>
+  <div class="tl-item">
+    <div class="tl-date">10-27/28</div>
+    <div class="tl-body red">
+      <div class="t">美联储 FOMC 维持 3.75%–4.00%</div>
+      <div class="d">10:2 投票；Cook、Hammack 反对并主张加息 25bp；12 月加息预期升温。</div>
+    </div>
+  </div>
+  <div class="tl-item">
+    <div class="tl-date">10-29</div>
+    <div class="tl-body">
+      <div class="t">欧央行 ECB 维持 2.50%</div>
+      <div class="d">暗示 12 月加息；拉加德宣布提前卸任。</div>
+    </div>
+  </div>
+  <div class="tl-item">
+    <div class="tl-date">10-29</div>
+    <div class="tl-body amber">
+      <div class="t">新西兰 RBNZ 意外暂停</div>
+      <div class="d">放缓加息步伐；市场预计 12 月/2 月/3 月各加 25bp 至 3.50%。</div>
+    </div>
+  </div>
+  <div class="tl-item">
+    <div class="tl-date">10-30</div>
+    <div class="tl-body red">
+      <div class="t">日本 BOJ 维持约 1.25%</div>
+      <div class="d">判断 2% 目标「基本达成」；ETF 出售提速；12 月加息概率约 80%。</div>
+    </div>
+  </div>
+  <div class="tl-item">
+    <div class="tl-date">11-03</div>
+    <div class="tl-body red">
+      <div class="t">澳大利亚 RBA 加息 25bp 至 4.85%</div>
+      <div class="d">现金利率上行，应对通胀。</div>
+    </div>
+  </div>
+  <div class="tl-item">
+    <div class="tl-date">11-05</div>
+    <div class="tl-body red">
+      <div class="t">英国 BoE 加息 25bp 至 4.00%</div>
+      <div class="d">2023-08 以来首次；通胀预测 2027Q2 达 4.9%。</div>
+    </div>
+  </div>
+</div>
+
+<h2 class="sec" id="s3">三、贸易、供应链与产业政策</h2>
+
+<h3>3.1 关税与贸易协定：法律基础更迭，休战进入实施期</h3>
+<p><span class="tag red">美国关税</span>最高法院 2026-02 裁定依 IEEPA 加征的关税超出总统权限；随后改依《1974 年贸易法》第 122 条征 15% 临时关税（150 天），到期后自 2026-07-24 起改用第 301 条以「未有效防止强迫劳动」为由对 60 个经济体征税（10% 六经济体 / 12.5% 54 个经济体含中国）。对华综合关税约为 12.5%（301）+ 按产品仍适用的老 301 关税 7.5%–100% + 50%（232 钢铝）。<span class="src-inline">[Source: <a href="https://trumptradetracker.com/" target="_blank" rel="noopener" title="完整英文 URL：https://trumptradetracker.com/">Trump Trade Tracker, 2026-11（需核实原文）</a>]</span></p>
+<p><span class="tag green">中美</span>第八轮磋商达成「300 亿对 300 亿」对等降税框架（各自约 300 亿美元进口商品降税，超 90% 产品降至最惠国税率）；截至 11-13 双方仍在沟通实施细节。中方税委会公告：自 2026-11-10 13:01 起 2 个月内继续暂停 24% 对美加征关税（保留 10%）；稀土等军民两用物项出口管制暂停期再延 2 个月至 2027-01-10；美方可对华 301 关税 178 项豁免延至 2027-01-09。大豆被排除在中方降税清单外，保留 10% 加征关税。<span class="src-inline">[Source: <a href="https://www.gov.cn/lianbo/202611/content_7085583.htm" target="_blank" rel="noopener" title="完整英文 URL：https://www.gov.cn/lianbo/202611/content_7085583.htm">国务院关税税则委员会, 2026-11-09</a>；<a href="https://ustr.gov/sites/default/files/files/Issue_Areas/Enforcement/Section%20301/USTR%20FRN%20Extending%20Section%20301%20China%20FTT%20Exclusions%20to%20Jan%202027.pdf" target="_blank" rel="noopener" title="完整英文 URL：https://ustr.gov/sites/default/files/files/Issue_Areas/Enforcement/Section%20301/USTR%20FRN%20Extending%20Section%20301%20China%20FTT%20Exclusions%20to%20Jan%202027.pdf">USTR, 2026-11-06</a>]</span></p>
+<p><span class="tag amber">美加</span>美方依 1930 年《关税法》第 338 条对约 200 亿美元加拿大商品加征 50% 关税（7 月宣布、8 月生效，不豁免 USMCA 原产商品）；加方自 2026-09-08 起对约 276 亿加元、700 余种美国商品征「一美元对一美元」报复关税。<span class="src-inline">[Source: <a href="https://trumptradetracker.com/" target="_blank" rel="noopener" title="完整英文 URL：https://trumptradetracker.com/">Trump Trade Tracker, 2026（需核实原文）</a>]</span></p>
+<p><span class="tag green">美欧 / 美日</span>美欧贸易协定 2026-07-01 生效（大部分工业品零关税、20 个农产品/海鲜关税配额，欧盟对美 15% 综合关税上限）；美日协定将日本输美关税降至 15%，日本承诺对美投资 5500 亿美元。WTO 10-08 上调 2026 年全球货物贸易增长预期，称 AI 投资需求与供应链适应性抵消中东冲突负面影响。<span class="src-inline">[Source: <a href="https://www.wto.org/" target="_blank" rel="noopener" title="完整英文 URL：https://www.wto.org/">WTO, 2026-10-08</a>]</span></p>
+
+<h3>3.2 产业补贴与供应链：结构性措施加速落地</h3>
+<p><span class="tag red">欧盟 CBAM</span>2026-01-01 起结束过渡期进入正式征税（覆盖钢铁、铝、水泥、化肥、电力、氢）；2025-12-17 决定自 2028 年起将约 180 种钢铝密集型下游产品（机械、汽车零部件、家电等）纳入，预计影响中国企业 7000–8000 家。<span class="src-inline">[Source: <a href="https://taxation-customs.ec.europa.eu/carbon-border-adjustment-mechanism_en" target="_blank" rel="noopener" title="完整英文 URL：https://taxation-customs.ec.europa.eu/carbon-border-adjustment-mechanism_en">欧盟委员会, 2026</a>]</span></p>
+<p><span class="tag">欧盟产业政策</span>《工业加速器法案》（IAA）2026-03-04 提案，目标 2035 年制造业增加值占 GDP 由 14.3% 升至 20%，含公共采购本地化比例、外资准入限制与「可信伙伴」体系。<span class="src-inline">[Source: <a href="https://ec.europa.eu/" target="_blank" rel="noopener" title="完整英文 URL：https://ec.europa.eu/">欧盟委员会, 2026-03</a>]</span></p>
+<p><span class="tag">美国</span>CHIPS Act 约 109 亿美元拨款转为对 Intel 股权（拟持股约 10%）；IRA 电动车税收抵免 2025-09-30 到期，清洁能源补贴退坡。<span class="src-inline">[Source: <a href="https://www.commerce.gov/" target="_blank" rel="noopener" title="完整英文 URL：https://www.commerce.gov/">美国商务部, 2025-08</a>]</span></p>
+<p><span class="tag">日韩</span>日本 METI 申请 2027 财年预算 7.8 万亿日元（约 490 亿美元）创历史新高，其中 Rapidus 获约 944 亿美元追加、目标 2027 年 2nm 量产；韩国 2027 年拟投 21.3 万亿韩元押注 AI 与芯片（计划采购 1 万张顶级 GPU）。<span class="src-inline">[Source: <a href="https://www.meti.go.jp/" target="_blank" rel="noopener" title="完整英文 URL：https://www.meti.go.jp/">日本经济产业省, 2026-08</a>]</span></p>
+<p><span class="tag green">中欧</span>纯电反补贴案价格承诺「软落地」推进（10-12 商务部确认继续推进价格承诺与复审）；混动汽车贸易达成谅解；对华光伏玻璃双反税撤销（10-22 生效）。<span class="src-inline">[Source: <a href="https://www.mofcom.gov.cn/" target="_blank" rel="noopener" title="完整英文 URL：https://www.mofcom.gov.cn/">中国商务部, 2026-10-12</a>]</span></p>
+<p><span class="tag red">出口管制</span>美财政部 10-22 发布 COINS 法案对外投资拟议规则（163 页，意见期至 12-07），覆盖半导体、AI、量子等六大领域；BIS 50% 穿透规则暂停期延至 2027-01-10；针对英伟达芯片转运的限制措施「批准—搁置」反复（11-05）。<span class="src-inline">[Source: <a href="https://home.treasury.gov/" target="_blank" rel="noopener" title="完整英文 URL：https://home.treasury.gov/">美国财政部, 2026-10-22</a>；<a href="https://www.bis.doc.gov/" target="_blank" rel="noopener" title="完整英文 URL：https://www.bis.doc.gov/">BIS, 2026-11-09</a>]</span></p>
+
+<h2 class="sec" id="s4">四、新兴市场与大宗商品</h2>
+
+<h3>4.1 新兴与资源型经济体：增长与能源敏感度分层</h3>
+<p><span class="tag green">越南</span><strong>Q3 GDP +9.95%</strong>（Q1 +8.15%、Q2 +8.81%），2022Q3 以来最快；前三季度 +9.01%；10 月工业生产 +15.0%；前 9 月注册外资 503.6 亿美元（同比 +76.4%，超 2025 全年）；前 10 月货物贸易额首破 1 万亿美元。<span class="src-inline">[Source: <a href="https://tradingeconomics.com/vietnam/gdp-growth-annual" target="_blank" rel="noopener" title="完整英文 URL：https://tradingeconomics.com/vietnam/gdp-growth-annual">GSO, 2026-10-03</a>（卖方预期）]</span></p>
+<p><span class="tag">马来西亚</span><strong>Q3 GDP +5.3%</strong>（Q2 +6.0%），一年来最慢；BNM 维持 OPR 2.75%（连续第六次会议）；世行上调马来西亚 2026 年增长 0.7pp。<span class="src-inline">[Source: <a href="https://tradingeconomics.com/malaysia/gdp-growth-annual" target="_blank" rel="noopener" title="完整英文 URL：https://tradingeconomics.com/malaysia/gdp-growth-annual">DOSM, 2026-10-16</a>（卖方预期）]</span></p>
+<p><span class="tag red">沙特</span><strong>Q3 GDP -3.8%</strong>（连续两季萎缩、2023 年以来首次），石油 -20.4%、非油 +1.9%；政府预计 2026 年经济萎缩 3.6%、财政赤字占 GDP 4.9%。<span class="src-inline">[Source: <a href="https://sa.mofcom.gov.cn/jmxw/art/2026/art_eb55daeacd284bab9592428d1f5d1477.html" target="_blank" rel="noopener" title="完整英文 URL：https://sa.mofcom.gov.cn/jmxw/art/2026/art_eb55daeacd284bab9592428d1f5d1477.html">GASTAT/驻沙特经商处, 2026-11-01</a>]</span></p>
+<p><span class="tag">阿联酋</span>IMF 预测 2026 年实际 GDP +3.1%、2027 年 +5.3%；非油活动占 GDP 近 80%；2026H1 非石油外贸 1.937 万亿迪拉姆创历史新高；CBUAE 基准利率维持 3.90%（紧跟美联储）。<span class="src-inline">[Source: <a href="https://www.cbuae.gov.ae/" target="_blank" rel="noopener" title="完整英文 URL：https://www.cbuae.gov.ae/">CBUAE, 2026-10</a>；<a href="https://www.imf.org/" target="_blank" rel="noopener" title="完整英文 URL：https://www.imf.org/">IMF WEO, 2026-07</a>]</span></p>
+<p><span class="tag red">卡塔尔</span><strong>Q2 实际 GDP -15.7%</strong>、名义 -11.6%；拉斯拉凡 LNG 厂 3 月遇袭全面停产并宣布不可抗力（14 条线中 2 条受损、约 17% 产能），10 月出货量仍仅为战前约 35%，修复预计需长达 5 年；Train 6（780 万吨/年）7 月建成投产，总产能 7700 万吨/年；世行预测 2026 年萎缩 5.7%、IMF 预测超 8%（机构分歧）。<span class="src-inline">[Source: <a href="http://www.xinhuanet.com/english/20260325/a9ed89d8609d4450b54691f51f56620f/c.html" target="_blank" rel="noopener" title="完整英文 URL：http://www.xinhuanet.com/english/20260325/a9ed89d8609d4450b54691f51f56620f/c.html">QatarEnergy/新华社, 2026-03-25</a>]</span></p>
+
+<div class="chart">
+  <h4>布伦特原油价格观测点 <span class="unit">（单位：美元/桶，来源：EIA STEO / 市场行情）</span></h4>
+  <svg viewBox="0 0 600 300" role="img" aria-label="布伦特原油价格观测柱状图">
+    <line x1="60" y1="250" x2="580" y2="250" stroke="#1f2933" stroke-width="1"/>
+    <line x1="60" y1="30" x2="60" y2="250" stroke="#1f2933" stroke-width="1"/>
+    <text x="52" y="254" font-size="11" fill="#5b6b7b" text-anchor="end">0</text>
+    <text x="52" y="144" font-size="11" fill="#5b6b7b" text-anchor="end">50</text>
+    <text x="52" y="34" font-size="11" fill="#5b6b7b" text-anchor="end">100</text>
+    <line x1="60" y1="140" x2="580" y2="140" stroke="#e3e9ef" stroke-width="1"/>
+    <line x1="60" y1="30" x2="580" y2="30" stroke="#e3e9ef" stroke-width="1"/>
+    <rect x="90" y="147" width="70" height="103" fill="#16324f"/>
+    <rect x="215" y="132" width="70" height="118" fill="#c0392b"/>
+    <rect x="340" y="167" width="70" height="83" fill="#1e8449"/>
+    <rect x="465" y="163" width="70" height="87" fill="#1e8449"/>
+    <text x="125" y="141" font-size="11" fill="#16324f" text-anchor="middle" font-weight="700">114</text>
+    <text x="250" y="126" font-size="11" fill="#c0392b" text-anchor="middle" font-weight="700">131</text>
+    <text x="375" y="161" font-size="11" fill="#1e8449" text-anchor="middle" font-weight="700">91.49</text>
+    <text x="500" y="157" font-size="11" fill="#1e8449" text-anchor="middle" font-weight="700">95.21</text>
+    <text x="125" y="272" font-size="11" fill="#1f2933" text-anchor="middle">9 月均价</text>
+    <text x="250" y="272" font-size="11" fill="#1f2933" text-anchor="middle">9/15 盘中高点</text>
+    <text x="375" y="272" font-size="11" fill="#1f2933" text-anchor="middle">11/10 收盘</text>
+    <text x="500" y="272" font-size="11" fill="#1f2933" text-anchor="middle">11/13 收盘</text>
+  </svg>
+  <div class="legend">
+    <span><i style="background:#16324f"></i>月度均价</span>
+    <span><i style="background:#c0392b"></i>盘中高点</span>
+    <span><i style="background:#1e8449"></i>收盘价</span>
+  </div>
+  <div class="chart-note">口径：9 月为月度均价（EIA 口径），9/15 为盘中高点，11/10 与 11/13 为收盘价；不同观测口径不可直接相减，仅示意价格方向与波动。11 月内布伦特累跌约 21%。</div>
+</div>
+
+<h3>4.2 能源与大宗商品：价格高位回落，供应约束未解</h3>
+<p><span class="tag red">原油</span>布伦特 11-13 报 95.21 美元/桶（较 10 月均价 114 美元/桶回落约 16.5%），WTI 88.14 美元/桶；11-04 两大基准单日跌超 8%。但供应侧约束未解：9 月产区关停 480 万桶/日（8 月 580 万桶/日、5 月峰值 1090 万桶/日）；OPEC+（7 国）11-08 线上会议决定 12 月维持产量不变、10 月起暂停增产；11-29 线上会议将商议 2027 年目标；沙特 10 月产量自报 1056 万桶/日（环比 +26%，冲突爆发以来新高）；沙特/阿联酋下调官价争夺市场份额（阿联酋 12 月穆尔班升水下调逾 60%）。EIA 预计 2026 年剩余时间布伦特均价约 100 美元/桶、2027Q4 降至 77 美元/桶。<span class="src-inline">[Source: <a href="https://www.eia.gov/outlooks/steo/" target="_blank" rel="noopener" title="完整英文 URL：https://www.eia.gov/outlooks/steo/">EIA STEO, 2026-11-10</a>；<a href="https://energy.cngold.org/c/2026-11-13/c10877809.html" target="_blank" rel="noopener" title="完整英文 URL：https://energy.cngold.org/c/2026-11-13/c10877809.html">金投网, 2026-11-13（需核实原文）</a>]</span></p>
+<p><span class="tag amber">黄金</span>11-13 报 3897.30 美元/盎司；11-06 收 4070.75 美元/盎司、当周涨超 5%（8 月以来最大周涨幅），10 月曾连续第二个月下跌。中国央行 10 月末黄金储备 7830 万盎司（环比 +83 万盎司，连续第 24 个月增持）；全球央行 Q3 净购金 321 吨（同比 +42%）；高盛将 2026 年末目标由 4650 下调至 4150 美元/盎司。<span class="src-inline">[Source: <a href="https://www.kitco.com/charts/gold" target="_blank" rel="noopener" title="完整英文 URL：https://www.kitco.com/charts/gold">Kitco, 2026-11-13</a>（卖方预期）；<a href="https://www.pbc.gov.cn/" target="_blank" rel="noopener" title="完整英文 URL：https://www.pbc.gov.cn/">中国人民银行, 2026-10</a>]</span></p>
+<p><span class="tag">工业金属</span>LME 铜 Cash 13711 美元/吨（9 月 3 个月期价创 14617 美元/吨历史新高）；62%Fe 铁矿石粉矿进口到岸价 82.81 美元/吨（11-06，连续第三日下跌）。<span class="src-inline">[Source: <a href="https://www.lme.com/market-data/reports-and-data/lme-official-prices" target="_blank" rel="noopener" title="完整英文 URL：https://www.lme.com/market-data/reports-and-data/lme-official-prices">LME, 2026-11-12/13</a>（卖方预期）]</span></p>
+
+<h2 class="sec" id="s5">五、数据看板表格</h2>
+
+<table class="fixed">
+  <thead>
+    <tr>
+      <th scope="col" style="width:20%">指标</th>
+      <th scope="col" style="width:14%">上期值</th>
+      <th scope="col" style="width:14%">本期值</th>
+      <th scope="col" style="width:16%">变化</th>
+      <th scope="col" style="width:12%">来源</th>
+      <th scope="col" style="width:24%">口径</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>美国 CPI（环比）</td>
+      <td class="num">+0.6%（2026-09）</td>
+      <td class="num">+0.4%（2026-10）</td>
+      <td>回落 0.2pp、超预期</td>
+      <td><a href="https://english.ts.cn/system/2026/11/11/037023412.shtml" target="_blank" rel="noopener" title="完整英文 URL：https://english.ts.cn/system/2026/11/11/037023412.shtml">BLS</a>（需核实原文）</td>
+      <td>季调环比；同比因 2025-10 基期缺失不公布</td>
+    </tr>
+    <tr>
+      <td>美国核心 CPI（环比）</td>
+      <td class="num">+0.3%（2026-09）</td>
+      <td class="num">+0.3%（2026-10）</td>
+      <td>连续第 3 个月 0.3%</td>
+      <td><a href="https://english.ts.cn/system/2026/11/11/037023412.shtml" target="_blank" rel="noopener" title="完整英文 URL：https://english.ts.cn/system/2026/11/11/037023412.shtml">BLS</a>（需核实原文）</td>
+      <td>季调环比；年化约 3.6%（媒体口径）</td>
+    </tr>
+    <tr>
+      <td>美国 Q3 GDP（年化）</td>
+      <td class="num">+2.2%（2026Q2）</td>
+      <td class="num">+3.4%（2026Q3 初值）</td>
+      <td>+1.2pp</td>
+      <td><a href="https://www.bea.gov/news/glance" target="_blank" rel="noopener" title="完整英文 URL：https://www.bea.gov/news/glance">BEA</a></td>
+      <td>实际 GDP 年化季率</td>
+    </tr>
+    <tr>
+      <td>美国 2Y 美债收益率</td>
+      <td class="num">—（首期）</td>
+      <td class="num">升破 4.7%（2026-11-10）</td>
+      <td>单日 +15bp</td>
+      <td><a href="https://english.ts.cn/system/2026/11/11/037023412.shtml" target="_blank" rel="noopener" title="完整英文 URL：https://english.ts.cn/system/2026/11/11/037023412.shtml">市场</a>（需核实原文）</td>
+      <td>2025-04 以来最大单日涨幅</td>
+    </tr>
+    <tr>
+      <td>欧元区 CPI（同比）</td>
+      <td class="num">+3.8%（2026-09）</td>
+      <td class="num">+4.0%（2026-10 初值）</td>
+      <td>+0.2pp、三年新高</td>
+      <td><a href="https://ec.europa.eu/eurostat/web/main/news/euro-indicators" target="_blank" rel="noopener" title="完整英文 URL：https://ec.europa.eu/eurostat/web/main/news/euro-indicators">Eurostat</a></td>
+      <td>调和 CPI</td>
+    </tr>
+    <tr>
+      <td>中国 Q3 GDP（同比）</td>
+      <td class="num">+4.3%（2026Q2）</td>
+      <td class="num">+4.5%（2026Q3）</td>
+      <td>+0.2pp</td>
+      <td><a href="https://www.chinatoday.com.cn/zw2018/bktg/202611/t20261106_800450538.html" target="_blank" rel="noopener" title="完整英文 URL：https://www.chinatoday.com.cn/zw2018/bktg/202611/t20261106_800450538.html">国家统计局</a></td>
+      <td>不变价同比；净出口拉动升至 1.2pp</td>
+    </tr>
+    <tr>
+      <td>中国 10 月 CPI / PPI（同比）</td>
+      <td class="num">+0.9% / +5.0%（2026-09）</td>
+      <td class="num">+0.7% / +5.7%</td>
+      <td>CPI 回落、PPI 创 52 个月新高</td>
+      <td><a href="https://mp.weixin.qq.com/s?__biz=Mzg2ODE1NDY2Ng==&mid=2247547768&idx=5&sn=3122118ccb7faec000e4e194dc31457e" target="_blank" rel="noopener" title="完整英文 URL：https://mp.weixin.qq.com/s?__biz=Mzg2ODE1NDY2Ng==&mid=2247547768&idx=5&sn=3122118ccb7faec000e4e194dc31457e">国家统计局</a></td>
+      <td>同比；食品 -2.9%</td>
+    </tr>
+    <tr>
+      <td>日本全国核心 CPI（同比）</td>
+      <td class="num">+1.7%（2026-08）</td>
+      <td class="num">+2.1%（2026-09）</td>
+      <td>再超 2%</td>
+      <td><a href="https://www.stat.go.jp/english/" target="_blank" rel="noopener" title="完整英文 URL：https://www.stat.go.jp/english/">总务省</a></td>
+      <td>含鲜食核心</td>
+    </tr>
+    <tr>
+      <td>英国政策利率</td>
+      <td class="num">3.75%</td>
+      <td class="num">4.00%（2026-11-05）</td>
+      <td>加息 25bp</td>
+      <td><a href="https://www.bankofengland.co.uk/" target="_blank" rel="noopener" title="完整英文 URL：https://www.bankofengland.co.uk/">BoE</a></td>
+      <td>银行利率；2023-08 以来首次</td>
+    </tr>
+    <tr>
+      <td>澳大利亚政策利率</td>
+      <td class="num">4.60%</td>
+      <td class="num">4.85%（2026-11-03）</td>
+      <td>加息 25bp</td>
+      <td><a href="https://www.rba.gov.au/news/" target="_blank" rel="noopener" title="完整英文 URL：https://www.rba.gov.au/news/">RBA</a></td>
+      <td>现金利率</td>
+    </tr>
+    <tr>
+      <td>布伦特原油</td>
+      <td class="num">91.49（2026-11-10 收盘）</td>
+      <td class="num">95.21（2026-11-13）</td>
+      <td>+3.72 美元（+4.1%）</td>
+      <td><a href="https://energy.cngold.org/c/2026-11-13/c10877809.html" target="_blank" rel="noopener" title="完整英文 URL：https://energy.cngold.org/c/2026-11-13/c10877809.html">市场行情</a></td>
+      <td>美元/桶；9 月均价 114、11 较 10 月均价 114 美元/桶回落约 16.5%</td>
+    </tr>
+    <tr>
+      <td>黄金</td>
+      <td class="num">4070.75（2026-11-06 收盘）</td>
+      <td class="num">3897.30（2026-11-13）</td>
+      <td>-173.45 美元（-4.3%）</td>
+      <td><a href="https://www.kitco.com/charts/gold" target="_blank" rel="noopener" title="完整英文 URL：https://www.kitco.com/charts/gold">Kitco</a>（卖方预期）</td>
+      <td>美元/盎司；央行购金延续</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 class="sec" id="s6">六、风险与不确定性</h2>
+<ul>
+  <li><strong>来源可靠性。</strong>本期多数数据经中文媒体转述官方发布；韩国 10 月出口 +93.7%、沙特/卡塔尔 GDP 等异常或待确认数字需以官方原文二次核验；部分官方页面存在反爬限制。</li>
+  <li><strong>反向证据。</strong>油价 11 月累跌约 21% 支持「能源冲击退潮」的乐观解读，但核心通胀（美核心环比连续 3 个月 0.3%、欧元区同比 4.0%）与供应扰动（9 月产区关停 480 万桶/日、卡塔尔 LNG 修复需 5 年）未实质缓解；「央行集体转鹰」与新西兰意外暂停、韩国/中国按兵不动的宽松分歧并存。</li>
+  <li><strong>数据口径。</strong>美国 CPI 同比因 2025-10 基期缺失不公布，各机构「年化/折年率」口径不一（3.6% vs 3.7%）；EIA 对 2026Q4 布油均价预测由 105 下修至约 100 美元/桶；卡塔尔 2026 年预测世行 -5.7% vs IMF -8% 以上，机构分歧明显。</li>
+  <li><strong>预测局限。</strong>12 月加息概率、美银插值同比、IMF/世行/高盛预测等均为市场定价或机构估算，非官方统计，不应与已发布事实混用。</li>
+  <li><strong>预测时点集中风险。</strong>2027-01-09/10 为中美多项关税安排的共同到期窗口（300 亿对 300 亿实施、301 豁免、稀土暂停、BIS 穿透规则），若延期未落地，关税重新抬升风险将冲击出口链与汇率预期。</li>
+</ul>
+
+<h2 class="sec" id="s7">七、对 Macro Research 的可执行启示</h2>
+<ol>
+  <li><strong>建立「再通胀—政策响应」双变量跟踪。</strong>以核心 CPI 环比（美/欧）与央行措辞、市场定价为触发器：若核心环比连续 ≥0.3%，则加息概率上行、美债收益率与美元走强，新兴市场资本流出压力上升——建议将「核心环比 + 加息概率」作为月度高频组合指标。</li>
+  <li><strong>把「能源冲击」拆成价格与供应两条线分别评估。</strong>价格线（布油/天然气）高位回落但波动率仍高；供应线（霍尔木兹、卡塔尔 LNG、OPEC+ 产量）决定通胀黏性与央行政策空间——供应线未实质缓解前，不宜按「冲击退潮」线性外推通胀回落。</li>
+  <li><strong>盯住 2027-01-09/10 的关税共同到期窗口。</strong>300 亿对 300 亿实施、301 豁免、稀土暂停、BIS 穿透规则均指向该窗口；建议提前 2–3 周建立「延期/到期」情景分支，覆盖出口链、汇率与大宗商品预期。</li>
+  <li><strong>对新兴市场做「油价敏感度分层」。</strong>沙特、卡塔尔等资源型经济体 GDP 与财政对油价高度敏感（沙特连续两季萎缩）；越南、马来西亚等制造型经济体受益于 AI 出口链——配置与风险预算应区分资源型与制造型，避免单一「新兴市场」标签。</li>
+  <li><strong>跟踪中国 K 型分化的价格传导。</strong>外需（出口、高技术制造）与内需（固投、地产、社零）背离，PPI 高企（+5.7%）与 CPI 低迷（+0.7%）并存；关注 PPI 向 CPI 的传导路径与 PBoC 机制改革的后续动作。</li>
+</ol>
+
+<h3>7.1 行动协议（三档优先级）</h3>
+<table class="fixed">
+<thead><tr><th scope="col" style="width:10%">优先级</th><th scope="col" style="width:26%">行动</th><th scope="col" style="width:18%">触发条件</th><th scope="col" style="width:16%">阈值</th><th scope="col" style="width:12%">责任角色</th><th scope="col" style="width:8%">时限</th><th scope="col" style="width:10%">验证指标</th></tr></thead>
+<tbody>
+<tr><td><strong>立即行动</strong></td><td>建立「再通胀—政策响应」双变量跟踪，把核心 CPI 环比与加息概率作为月度高频组合指标</td><td>核心环比连续 ≥0.3% 且央行措辞转鹰</td><td>核心环比连续 2 个月 ≥0.3% 即上调加息概率假设</td><td>Macro Research 宏观负责人</td><td>2 周内</td><td>组合指标更新频率、加息概率假设与实际政策偏差</td></tr>
+<tr><td><strong>持续观察</strong></td><td>跟踪 2027-01-09/10 关税共同到期窗口，提前建立「延期 / 到期」情景分支</td><td>窗口前 2–3 周出现官方延期或到期信号</td><td>窗口日前 14 天未获延期即切换到期情景</td><td>贸易链研究员</td><td>每期周报</td><td>情景分支完备率、出口链与汇率预期复核次数</td></tr>
+<tr><td><strong>仅记录存档</strong></td><td>记录新兴市场「油价敏感度分层」变化（资源型 vs 制造型），暂不调整配置</td><td>资源型经济体财政盈余或制造型出口链优势出现反转</td><td>油价敏感度排名变化 ≥ 2 位才升级评估</td><td>配置研究岗</td><td>下一季复盘</td><td>分层名单更新率、配置偏离度</td></tr>
+</tbody>
+</table>
+<p class="src">行动编号 M01–M03 对应上表三档；传导时滞约 1–2 个季度，阈值校准前信号灯标注「预校准（ex-ante）」。</p>
+
+<div class="note"><b>已修正事实清单：本期无修正。</b>本期未产生被推翻的既发事实；如后续发现，按「不得再称「…」——正确结论为…。[Source: URL, 年份]」格式补记，且不得回退。</div>
+
+<h2 class="sec" id="refs">参考来源</h2>
+<div class="refs">
+  <ol>
+    <li>BLS / 新华社 — U.S. core inflation stays sticky in October（2026-11-10）：<a href="https://english.ts.cn/system/2026/11/11/037023412.shtml" target="_blank" rel="noopener">english.ts.cn</a>（需核实原文）</li>
+    <li>Eurostat — Euro area annual inflation up to 4.0%（2026-11-04）：<a href="https://ec.europa.eu/eurostat/web/main/news/euro-indicators" target="_blank" rel="noopener">ec.europa.eu</a></li>
+    <li>CME FedWatch / 财闻 — 美联储 12 月加息 25bp 概率升至 95.6%（2026-11-10）：<a href="http://baijiahao.baidu.com/s?id=1881464352325676627" target="_blank" rel="noopener">baijiahao.baidu.com</a></li>
+    <li>BEA — Gross Domestic Product, Third Quarter 2026（2026-10-29）：<a href="https://www.bea.gov/news/glance" target="_blank" rel="noopener">bea.gov</a></li>
+    <li>国家统计局 / China Today — 前三季度 GDP 与分季度增速（2026-10-19）：<a href="https://www.chinatoday.com.cn/zw2018/bktg/202611/t20261106_800450538.html" target="_blank" rel="noopener">chinatoday.com.cn</a></li>
+    <li>国家统计局 — 2026 年 10 月份 CPI/PPI 解读（2026-11-09）：<a href="https://mp.weixin.qq.com/s?__biz=Mzg2ODE1NDY2Ng==&mid=2247547768&idx=5&sn=3122118ccb7faec000e4e194dc31457e" target="_blank" rel="noopener">mp.weixin.qq.com</a></li>
+    <li>国务院关税税则委员会 — 关于继续暂停对美加征关税的公告（2026-11-09）：<a href="https://www.gov.cn/lianbo/202611/content_7085583.htm" target="_blank" rel="noopener">gov.cn</a></li>
+    <li>USTR — Extending Section 301 China FTT Exclusions to Jan 2027（2026-11-06）：<a href="https://ustr.gov/sites/default/files/files/Issue_Areas/Enforcement/Section%20301/USTR%20FRN%20Extending%20Section%20301%20China%20FTT%20Exclusions%20to%20Jan%202027.pdf" target="_blank" rel="noopener">ustr.gov</a></li>
+    <li>Trump Trade Tracker — 对华关税综合水平追踪：<a href="https://trumptradetracker.com/" target="_blank" rel="noopener">trumptradetracker.com</a></li>
+    <li>欧盟委员会 — CBAM 官方页面：<a href="https://taxation-customs.ec.europa.eu/carbon-border-adjustment-mechanism_en" target="_blank" rel="noopener">taxation-customs.ec.europa.eu</a></li>
+    <li>EIA — Short-Term Energy Outlook（2026-11-10）：<a href="https://www.eia.gov/outlooks/steo/" target="_blank" rel="noopener">eia.gov</a></li>
+    <li>金投网 — 布伦特/WTI 原油行情（2026-11-13）：<a href="https://energy.cngold.org/c/2026-11-13/c10877809.html" target="_blank" rel="noopener">energy.cngold.org</a></li>
+    <li>Kitco — Gold Price（2026-11-13）：<a href="https://www.kitco.com/charts/gold" target="_blank" rel="noopener">kitco.com</a>（卖方预期）</li>
+    <li>LME — LME Official Prices（2026-11-12/13）：<a href="https://www.lme.com/market-data/reports-and-data/lme-official-prices" target="_blank" rel="noopener">lme.com</a>（卖方预期）</li>
+    <li>越南统计总局 GSO / TradingEconomics — 越南 Q3 GDP：<a href="https://tradingeconomics.com/vietnam/gdp-growth-annual" target="_blank" rel="noopener">tradingeconomics.com</a>（卖方预期）</li>
+    <li>驻沙特经商处 / GASTAT — 沙特 Q3 GDP（2026-11-01）：<a href="https://sa.mofcom.gov.cn/jmxw/art/2026/art_eb55daeacd284bab9592428d1f5d1477.html" target="_blank" rel="noopener">sa.mofcom.gov.cn</a></li>
+    <li>QatarEnergy / 新华社 — 卡塔尔拉斯拉凡 LNG 遇袭（2026-03-25）：<a href="http://www.xinhuanet.com/english/20260325/a9ed89d8609d4450b54691f51f56620f/c.html" target="_blank" rel="noopener">xinhuanet.com</a></li>
+    <li>总务省 — 日本全国核心 CPI：<a href="https://www.stat.go.jp/english/" target="_blank" rel="noopener">stat.go.jp</a></li>
+    <li>Bank of England — Monetary Policy Summary（2026-11-05）：<a href="https://www.bankofengland.co.uk/" target="_blank" rel="noopener">bankofengland.co.uk</a></li>
+    <li>RBA — Monetary Policy News（2026-11-03）：<a href="https://www.rba.gov.au/news/" target="_blank" rel="noopener">rba.gov.au</a></li>
+    <li>WTO — Global Trade Outlook and Statistics（2026-10-08）：<a href="https://www.wto.org/" target="_blank" rel="noopener">wto.org</a></li>
+  </ol>
+</div>
+
+</main>
+
+</body>
+</html>
