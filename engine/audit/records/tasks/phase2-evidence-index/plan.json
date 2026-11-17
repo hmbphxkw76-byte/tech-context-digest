@@ -69,6 +69,10 @@
       "note": "CI 工作流 + 告警"
     }
   ],
+  "reports": [
+    "engine/report-audits/mainline-adoption-assessment-2026-11-17.md",
+    "engine/report-audits/mainline-adoption-coverage-matrix.md"
+  ],
   "reuse": {
     "audit": "engine/audit/scripts/audit_tool.py",
     "commit": "engine/tools/repo_sync.py",

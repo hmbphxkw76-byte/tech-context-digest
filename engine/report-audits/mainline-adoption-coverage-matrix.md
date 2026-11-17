@@ -18,7 +18,7 @@
 | P-04 | 声明与实现落差（pipeline_runner / repo_sync 工作流零调用） | Phase 0.4 方案 A：`ci.yml` 增 `pipeline_runner validate` | `python engine/tools/pipeline_runner.py validate` | 已实施 |
 | P-05 | 任务级闭环工件缺失 | Phase 1.1 / 1.2：`task_plan.py` + `local_mainline.py` | `task_plan.py --check`（置于 `engine/tools/`） | 已实施 |
 | P-06 | 门禁清单 / 类型注册多点手工同步 | 未列入 Phase 0–3 | — | 显式延后（需另立「注册结构化」专项，重构 `optimization_gate.CHECKS` / `template-registry.md` / `compliance-rules.json` / `_common.TEMPLATE_TYPE_DIRS` / `build_hub.TYPE_SHORT` 五处对齐；本轮聚焦吸收式融合，避免范围蔓延） |
-| P-07 | 规范复述漂移 | Phase 3.3：AGENTS.md 上位-下位收敛，复述点清零 | `python engine/tools/check_links.py` + 人工核查 | 已实施 |
+| P-07 | 规范复述漂移 | Phase 3.3：AGENTS.md 上位-下位收敛，复述点清零；本轮收口门禁数量 21→23 一致性 | `python engine/tools/check_links.py` + `test_pipeline_system_doc` 门禁数量一致性 | 已实施 |
 | P-08 | 无静态检查 | Phase 3.1：ruff / mypy 纳入 `optimization_gate` | `python engine/tools/optimization_gate.py --only ruff,mypy` | 已实施 |
 | P-09 | 多会话并发写同一工作树 | 未列入 Phase 0–3 | — | 显式延后（文件编辑锁需平台级 / 编辑器级支持；现有「共享检出锁 + PR 串行合并 + 分支隔离」已覆盖 git 层竞态，文件编辑层留待平台能力就绪后实施） |
 | P-10 | 审计文档累积无轮转 | Phase 3.2：`report-audits` 轮转归档（保留最近 12 个月） | `python engine/tools/archive_reports.py --audit-docs` | 已实施 |
@@ -29,7 +29,7 @@
 |---|---|---|---|---|
 | ① | 任务计划工件（plan/tasks/risks + 任务启动文件） | Phase 1.1：`task_plan.py`（置于 `engine/tools/`）→ `engine/audit/records/` 下的 `tasks/<slug>/` 子目录 | `task_plan.py --help`（置于 `engine/tools/`） | 已实施 |
 | ② | 本地 mainline 编排脚本 | Phase 1.2：`local_mainline.py`（置于 `engine/tools/`；薄封装，复用 `repo_sync` / `optimization_gate`） | `local_mainline.py --help`（置于 `engine/tools/`） | 已实施 |
-| ③ | 完成前审计证据索引 | Phase 2.1：`audit_tool` evidence index + `audit_registry.evidence` | `python engine/audit/scripts/audit_tool.py evidence <report>` | 已实施 |
+| ③ | 完成前审计证据索引 | Phase 2.1：`audit_tool` evidence index + `audit_registry.evidence`；本轮收口 `plan.reports` 关联汇聚（修复 31/31 恒空） | `python engine/audit/scripts/audit_tool.py evidence <report>` | 已实施 |
 | ④ | 分支登记册语义对齐 | 既有 `branch_registry.json` + BRANCH-NAMING-SPEC v1.0 | `python engine/tools/repo_sync.py branches` | 已复用 |
 
 ## 三、Phase 任务 0.1 .. 3.3
@@ -77,12 +77,12 @@
 |---|---|---|---|
 | R1 | 任务工件沦为形式主义 | 「工件即门禁输入」+ 任务启动文件强制 | 已实施 |
 | R2 | 双入口漂移 | `local_mainline.py` 只编排；测试锁定复用关系 | 已实施 |
-| R3 | L3 瓶颈不解决 | SLA（每两周）+ 批量复核 | 已实施 |
+| R3 | L3 瓶颈不解决 | SLA（每两周）+ 批量复核 + `audit_tool l3-status` 接线维护流水线 | 已实施 |
 | R4 | 规范复杂度再增 | 「新增即删旧」；版本治理 | 已实施 |
 | R5 | 多会话并发写 | 文件编辑锁 / 会话协调 | 显式延后（见 P-09） |
 | R6 | 吸收式融合被误读为全量替换 | 本矩阵 + AGENTS.md 明确「主体保留、增量吸收」 | 已实施 |
 
-## 七、量化指标 8 项（实测结果见§九）
+## 七、量化指标 10 项（实测结果见§九）
 
 | # | 指标 | 现状 | 目标 | 验证方式 | 状态 |
 |---|---|---|---|---|---|
@@ -91,9 +91,11 @@
 | M3 | 本地一次任务闭环操作数 | ~6 条 | 1 条 | `local_mainline.py` | 已实施 |
 | M4 | strict 审计性能护栏 | 无阈值 | p95 ≤180s 有阈值 | `perf_monitor check` | 已实施 |
 | M5 | 门禁噪声（validate 警告） | 0 | 保持 0 | `validate.py` | 已复用 |
-| M6 | 规范复述点 | 多处残留 | 0 | `check_links` + 人工核查 | 已实施 |
+| M6 | 规范复述点 | 多处残留 | 0 | `check_links` + `test_pipeline_system_doc` 门禁数量一致性 | 已实施 |
 | M7 | 统一门禁错误项 | 0 | 保持 0 | `optimization_gate --probe` | 已复用 |
-| M8 | 单测 | 448 通过 | 保持全绿 | `unittest` | 已复用 |
+| M8 | 单测 | 494 通过 | 保持全绿 | `unittest` | 已复用 |
+| M9 | evidence.plans 关联 | 31/31 恒空 | 关联报告非空 | `audit_tool.py evidence <report>` | 已实施 |
+| M10 | L3 SLA 接线 | 未接线 | 维护流水线告警 | `audit_tool.py l3-status` | 已实施 |
 
 ## 八、Phase 门禁记录
 
@@ -107,8 +109,8 @@
 
 ## 九、量化指标实测结果
 
-> 实测时点：2026-11-17（Phase 0–3 全部合并后，最新 `main`）。
-> 实测分支：`task/final-self-audit-cd95c5fa`。
+> 实测时点：2026-11-17（Phase 0–3 全部合并后，mainline 吸收式融合收口轮）。
+> 实测分支：`task/fix-alignment-b30cfd92`。
 
 | # | 指标 | 命令 | 实测输出 | 判定 |
 |---|---|---|---|---|
@@ -119,13 +121,15 @@
 | M5 | 门禁噪声（validate 警告） | `python engine/tools/validate.py` | `结构与规范校验通过`（0 警告） | 达标（保持 0） |
 | M6 | 规范复述点 | `python engine/tools/check_links.py` + `grep -c "validate、validate_layout、lint、compliance" AGENTS.md` | 链接校验通过；复述计数 `0` | 达标（0） |
 | M7 | 统一门禁错误项 | `python engine/tools/optimization_gate.py --gate-period 2026-12 --source-gate-period 2027-01 --probe` | `优化流程门禁：3 项警告（不阻断）`，退出码 2，`[E]` 计数 0 | 达标（保持 0） |
-| M8 | 单测 | `python -m unittest discover -s engine/tests -p "test_*.py"` | `Ran 494 tests ... OK (skipped=1)` | 达标（全绿） |
+| M8 | 单测 | `python -m unittest discover -s engine/tests -p "test_*.py"` | `Ran 510 tests ... OK (skipped=1)` | 达标（全绿） |
+| M9 | evidence.plans 关联 | `python engine/audit/scripts/audit_tool.py evidence engine/report-audits/mainline-adoption-coverage-matrix.md` | `plans` 非空，含 `fix-alignment`（`plan.reports` 真实关联） | 达标 |
+| M10 | L3 SLA 接线 | `python engine/audit/scripts/audit_tool.py l3-status` | 退出码 0（10/10 已审，无超期）；步骤已接入 `scheduled-maintenance.yml` | 达标 |
 
-**未达标项**：无。8/8 达标。
+**未达标项**：无。10/10 达标。
 
 **透明说明**：
 - M2 的「已审计」为**依据既有 2026-11-16 L3 记录的回溯补录**（非本轮重新全文复核），已在 Phase 2 PR 与覆盖矩阵登记；后续按 L3 SLA（每两周）由 Agent 定期复核。
-- M7 的 3 项警告为：来源登记历史死链（宽限期内）+ ruff（88）+ mypy（41），均默认 `[W]` 不阻断。
+- M7 的 3 项警告为：来源登记历史死链（宽限期内）+ ruff（88）+ mypy（40），均默认 `[W]` 不阻断。
 
 ## 十、规范分层删改记录（Phase 3.3，「新增即删旧」）
 
@@ -137,6 +141,7 @@
 | 删除信息分层的决策卡五字段 / 行动协议五要素全文 | `engine/templates/information-layering-spec.md`、`decision-delivery-spec.md` | 规范正文为准，AGENTS.md 留约束 |
 | 删除多会话 Git 的 v1.5 钩子细节 / 分支命名细则 | `engine/docs/multi-session-git-protocol.md`、`branch-naming-and-lifecycle.md` | 协议文档为准 |
 | 删除工作区清理覆盖范围逐项列表 | `engine/tools/workspace_cleanup.py --help`、`engine/docs/structure-and-naming-spec.md` | 工具与规范为准 |
+| 澄清「禁止 changelog」为 mainline 阶段 8 的 tag / 发布 changelog 流程 / `RELEASES.md` | 既有根文档 `CHANGELOG.md` 不在此列（见 AGENTS.md） | 消除与仓库既有 `CHANGELOG.md` 的字面冲突 |
 
 **保留**：四门禁脚本名（`info_density_check.py` / `fact_card_check.py` / `decision_hub_check.py` / `blind_spot_check.py`）、「信息分层与决策交付（硬性约束」、全部硬性约束与指针；由 `test_process_gates.py::test_spec_layering_declared` 锁定。
 
@@ -145,3 +150,4 @@
 | 版本 | 日期 | 变更 |
 |---|---|---|
 | v0.1 | 2026-11-17 | 初始覆盖矩阵：P-01..P-10 / 吸收项①..④ / Phase 0.1..3.3 / CI 改造 / 治理标准 / 风险 / 量化指标全量映射 |
+| v0.2 | 2026-11-17 | 收口轮：吸收项③ `plan.reports` 关联汇聚（修 31/31 恒空）；P-07 / M6 门禁数量 21→23 一致性（新增 `test_pipeline_system_doc` 扫描）；R3 / M10 `l3-status` 接线维护流水线；§九 实测更新（unittest 510、evidence.plans 非空、L3 SLA 接线）；§十 增记 AGENTS.md「禁止 changelog」措辞澄清 |

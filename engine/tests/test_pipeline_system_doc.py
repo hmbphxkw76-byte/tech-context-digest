@@ -21,6 +21,36 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[2]
 DOC = ROOT / "engine" / "docs" / "report-pipeline-system.md"
 
+# 现行（非历史时点）文件：门禁数量口径必须为 23 项（Phase 3.1 起）。
+# 历史时点报告（report-audits/*-2026-11-15/16.md）与 engine/quality/** 的
+# 「21 项量化指标」为另一套口径，不在扫描范围。
+GATE_COUNT_FILES = [
+    ROOT / "AGENTS.md",
+    ROOT / "engine" / "audit" / "verification.md",
+    ROOT / "engine" / "tools" / "pipeline_runner.py",
+    ROOT / "engine" / "tools" / "README.md",
+    ROOT / "engine" / "tests" / "test_pipeline_runner.py",
+]
+GATE_COUNT_FILES += sorted((ROOT / "engine" / "docs").glob("*.md"))
+GATE_COUNT_FILES += sorted((ROOT / "engine" / "report-audits").glob("mainline-adoption-*.md"))
+
+# 声明门禁数量的现行文件（这些必须显式写「23 项」）。
+GATE_COUNT_DECLARING = [
+    ROOT / "AGENTS.md",
+    ROOT / "engine" / "audit" / "verification.md",
+    ROOT / "engine" / "tools" / "pipeline_runner.py",
+    ROOT / "engine" / "tools" / "README.md",
+    ROOT / "engine" / "tests" / "test_pipeline_runner.py",
+    ROOT / "engine" / "docs" / "report-pipeline-system.md",
+    ROOT / "engine" / "docs" / "architecture-and-pipeline-design.md",
+    ROOT / "engine" / "docs" / "architecture-development-standard.md",
+    ROOT / "engine" / "docs" / "end-to-end-coverage.md",
+    ROOT / "engine" / "docs" / "page-build-governance.md",
+    ROOT / "engine" / "docs" / "process-vs-infrastructure-governance.md",
+    ROOT / "engine" / "docs" / "report-pipeline-implementation-plan.md",
+    ROOT / "engine" / "report-audits" / "mainline-adoption-assessment-2026-11-17.md",
+]
+
 
 def _load_gate_module():
     spec = importlib.util.spec_from_file_location(
@@ -74,6 +104,38 @@ class TestPipelineSystemDoc(unittest.TestCase):
         self.assertIn("flowchart TD", main)
         self.assertLess(main.index("G5"), main.index("N6"),
                         "G0–G5 应左移到 N6 之前（门禁左移）")
+
+
+class TestGateCountConsistency(unittest.TestCase):
+    """P-07 / M6：现行文档/代码不得残留「21 项」门禁口径（Phase 3.1 起为 23 项）。"""
+
+    FORBIDDEN = re.compile(
+        r"optimization_gate[^。；\n]{0,60}21 项"
+        r"|21 项[^。；\n]{0,30}optimization_gate"
+        r"|全量\s*21\s*项"
+        r"|统一门禁\s*21\s*项"
+        r"|门禁\s*21\s*项"
+        r"|21\s*项单一入口"
+        r"|21\s*项确定性"
+        r"|21\s*项\s*0E"
+        r"|21\s*项门禁"
+    )
+
+    def test_no_stale_gate_count_in_current_docs(self):
+        offenders = {}
+        for f in GATE_COUNT_FILES:
+            text = f.read_text(encoding="utf-8")
+            m = self.FORBIDDEN.search(text)
+            if m:
+                offenders[str(f.relative_to(ROOT))] = m.group(0)
+        self.assertEqual(offenders, {}, f"现行文件残留 21 项门禁口径：{offenders}")
+
+    def test_gate_count_declarations_are_23(self):
+        mod = _load_gate_module()
+        self.assertEqual(len(mod.CHECKS), 23)
+        for f in GATE_COUNT_DECLARING:
+            text = f.read_text(encoding="utf-8")
+            self.assertIn("23 项", text, f"{f.relative_to(ROOT)} 未声明 23 项门禁")
 
 
 class TestGatePeriodWiring(unittest.TestCase):

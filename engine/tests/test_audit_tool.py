@@ -7,6 +7,8 @@ import contextlib
 import importlib.util
 import io
 import json
+import re
+import tempfile
 import unittest
 from pathlib import Path
 
@@ -113,6 +115,85 @@ class TestEvidenceIndex(unittest.TestCase):
         self.assertEqual(audit_tool.cmd_index(None), 0)
         after = json.dumps(audit_tool.load_registry()["reports"], sort_keys=True, ensure_ascii=False)
         self.assertEqual(before, after)
+
+    def test_plans_linked_via_report_reports_field(self):
+        """吸收项 ③：plan.reports 显式关联 → evidence.plans 非空（真实工件驱动，非硬编码）。"""
+        rel = "engine/report-audits/mainline-adoption-coverage-matrix.md"
+        entry = audit_tool.load_registry()["reports"].get(rel, {})
+        ev = audit_tool.build_evidence(rel, entry)
+        slugs = [p["slug"] for p in ev["plans"]]
+        self.assertIn("fix-alignment", slugs)
+        for p in ev["plans"]:
+            self.assertIn(rel, p["reports"])
+
+
+class TestL3Overdue(unittest.TestCase):
+    """R3 / L3 SLA：超期检测纯函数（确定性，today 显式注入）。"""
+
+    REL = "content/economy/dubai/apartment/reports/2026-11_monthly.html"
+
+    @staticmethod
+    def _write_review(d, rel, reviews):
+        slug = re.sub(r"[^A-Za-z0-9]+", "-", rel).strip("-") + ".json"
+        (Path(d) / slug).write_text(
+            json.dumps({"report": rel, "reviews": reviews}, ensure_ascii=False), encoding="utf-8")
+
+    def test_no_agent_review_and_old_first_seen_is_overdue(self):
+        with tempfile.TemporaryDirectory() as d:
+            reports = {self.REL: {"category": "report", "first_seen_at": "2026-01-01"}}
+            out = audit_tool.l3_overdue(reports, Path(d), today="2026-11-17")
+            self.assertEqual(len(out), 1)
+            self.assertEqual(out[0]["report"], self.REL)
+            self.assertEqual(out[0]["basis"], "first_seen_at")
+
+    def test_recent_agent_review_not_overdue(self):
+        with tempfile.TemporaryDirectory() as d:
+            self._write_review(d, self.REL, [
+                {"stage": "second", "reviewer": "agent", "decision": "pass",
+                 "timestamp": "2026-11-10T12:00:00+00:00"},
+            ])
+            reports = {self.REL: {"category": "report", "first_seen_at": "2026-01-01"}}
+            self.assertEqual(audit_tool.l3_overdue(reports, Path(d), today="2026-11-17"), [])
+
+    def test_final_stage_agent_review_counts(self):
+        with tempfile.TemporaryDirectory() as d:
+            self._write_review(d, self.REL, [
+                {"stage": "final", "reviewer": "agent", "decision": "pass",
+                 "timestamp": "2026-11-01T12:00:00+00:00"},
+            ])
+            reports = {self.REL: {"category": "report", "first_seen_at": "2026-01-01"}}
+            self.assertEqual(audit_tool.l3_overdue(reports, Path(d), today="2026-11-15"), [])
+            out = audit_tool.l3_overdue(reports, Path(d), today="2026-11-16")
+            self.assertEqual(len(out), 1)
+            self.assertEqual(out[0]["basis"], "review")
+
+    def test_ci_bot_review_ignored(self):
+        with tempfile.TemporaryDirectory() as d:
+            self._write_review(d, self.REL, [
+                {"stage": "second", "reviewer": "ci-bot", "decision": "pass",
+                 "timestamp": "2026-11-10T12:00:00+00:00"},
+            ])
+            reports = {self.REL: {"category": "report", "first_seen_at": "2026-01-01"}}
+            out = audit_tool.l3_overdue(reports, Path(d), today="2026-11-17")
+            self.assertEqual(len(out), 1)
+            self.assertEqual(out[0]["basis"], "first_seen_at")
+
+    def test_non_report_category_skipped(self):
+        with tempfile.TemporaryDirectory() as d:
+            reports = {self.REL: {"category": "audit-doc", "first_seen_at": "2026-01-01"}}
+            self.assertEqual(audit_tool.l3_overdue(reports, Path(d), today="2026-11-17"), [])
+
+    def test_last_appended_agent_review_wins(self):
+        # reviews 按时间序追加，最后一条 Agent pass 为基准。
+        with tempfile.TemporaryDirectory() as d:
+            self._write_review(d, self.REL, [
+                {"stage": "final", "reviewer": "agent", "decision": "pass",
+                 "timestamp": "2026-11-01T12:00:00+00:00"},
+                {"stage": "second", "reviewer": "agent", "decision": "pass",
+                 "timestamp": "2026-11-16T12:00:00+00:00"},
+            ])
+            reports = {self.REL: {"category": "report", "first_seen_at": "2026-01-01"}}
+            self.assertEqual(audit_tool.l3_overdue(reports, Path(d), today="2026-11-17"), [])
 
 
 if __name__ == "__main__":

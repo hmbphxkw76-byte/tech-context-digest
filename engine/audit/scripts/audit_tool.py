@@ -14,6 +14,7 @@
   status [report]           输出登记状态
   sample [--ratio R] [--seed N]   生成定期抽检清单
   accept                    项目级合规率汇总
+  l3-status                 L3 SLA 超期检测（每两周覆盖全部正式报告；有超期返回 2 告警）
 
 退出码：0 通过；1 存在不合规；2 用法错误。
 """
@@ -153,8 +154,13 @@ def build_evidence(rel: str, entry: dict | None = None) -> dict:
                 risks = json.loads(risks_fp.read_text(encoding="utf-8")) if risks_fp.exists() else []
             except (OSError, json.JSONDecodeError):
                 continue
-            plan_blob = json.dumps([plan, tasks], ensure_ascii=False)
-            matched = rel in json.dumps([plan, tasks, risks], ensure_ascii=False) \
+            # 兜底文本排除 reports 字段，保持「原有语义」：否则业务线前缀会命中同线全部报告。
+            plan_blob = json.dumps([{k: v for k, v in plan.items() if k != "reports"}, tasks],
+                                   ensure_ascii=False)
+            # 主判据：plan.reports 显式关联（task_plan init --report 写入，确定性）。
+            # 兜底：既有 plan/tasks/risks 文本包含 rel 或业务线（兼容历史工件）。
+            matched = rel in plan.get("reports", []) \
+                or rel in json.dumps([plan, tasks, risks], ensure_ascii=False) \
                 or (bool(bl) and bl in plan_blob)
             if matched:
                 plans.append({
@@ -162,6 +168,7 @@ def build_evidence(rel: str, entry: dict | None = None) -> dict:
                     "plan": _rel_or_empty(plan_fp),
                     "tasks": _rel_or_empty(tasks_fp),
                     "risks": _rel_or_empty(risks_fp),
+                    "reports": plan.get("reports", []),
                     "task_count": len(tasks),
                     "risk_count": len(risks),
                 })
@@ -659,6 +666,86 @@ def _semantic_final(rel: str) -> tuple[bool, str]:
     return False, "无 Agent second 复核记录（仅机器留痕）"
 
 
+# ---------------------------------------------------------------- L3 SLA 超期检测
+
+def _review_fp(reviews_dir: Path, rel: str) -> Path:
+    slug = re.sub(r"[^A-Za-z0-9]+", "-", rel).strip("-") + ".json"
+    return Path(reviews_dir) / slug
+
+
+def _last_agent_semantic_date(rel: str, reviews_dir: Path) -> _dt.date | None:
+    """最后一条 Agent（非 ci-bot）second/final pass 记录的日期；无则 None。"""
+    fp = _review_fp(reviews_dir, rel)
+    if not fp.exists():
+        return None
+    try:
+        data = json.loads(fp.read_text(encoding="utf-8"))
+    except (OSError, json.JSONDecodeError):
+        return None
+    ts = ""
+    for r in data.get("reviews", []):
+        if (r.get("stage") in SEMANTIC_STAGES
+                and r.get("reviewer") not in ("ci-bot", "")
+                and r.get("decision") == "pass"
+                and r.get("timestamp")):
+            ts = r["timestamp"]
+    if not ts:
+        return None
+    try:
+        return _dt.datetime.fromisoformat(ts).date()
+    except ValueError:
+        return None
+
+
+def l3_overdue(reports: dict, reviews_dir: Path,
+               today: _dt.date | str | None = None) -> list[dict]:
+    """L3 SLA 超期检测（R3）：正式报告中距上次 Agent 语义终审超过 L3_GRACE_DAYS 的清单。
+
+    基准：records/reviews/<slug>.json 中最后一条 Agent（非 ci-bot）second/final pass
+    的 timestamp；缺失时回退登记的 first_seen_at。纯读、幂等、不写盘、无时间戳。
+    """
+    if today is None:
+        today_d = _dt.date.today()
+    elif isinstance(today, str):
+        today_d = _dt.date.fromisoformat(today)
+    else:
+        today_d = today
+    out: list[dict] = []
+    for rel, entry in sorted(reports.items()):
+        if entry.get("category") != "report":
+            continue
+        last = _last_agent_semantic_date(rel, reviews_dir)
+        if last is not None:
+            basis, base, last_iso = "review", last, last.isoformat()
+        else:
+            fs = str(entry.get("first_seen_at", "") or "")
+            if not fs:
+                continue
+            try:
+                base = _dt.date.fromisoformat(fs[:10])
+            except ValueError:
+                continue
+            basis, last_iso = "first_seen_at", None
+        days = (today_d - base).days
+        if days > L3_GRACE_DAYS:
+            out.append({"report": rel, "basis": basis,
+                        "last_agent_review": last_iso, "days": days})
+    return out
+
+
+def cmd_l3_status(_args) -> int:
+    """打印 L3 SLA 超期清单与计数；有超期返回 2（告警），无则 0。"""
+    reg = load_registry()["reports"]
+    overdue = l3_overdue(reg, REVIEWS)
+    print(f"L3 SLA 超期检测：{len(overdue)} 份超期（阈值 {L3_GRACE_DAYS} 天）")
+    for o in overdue:
+        print(f"  [OVERDUE] {o['report']}  基准 {o['basis']}  距上次 Agent 语义终审 {o['days']} 天")
+    if overdue:
+        return 2
+    print("无超期：全部正式报告均在 L3 SLA 内")
+    return 0
+
+
 def cmd_run(args) -> int:
     """确定性执行四环节（CI 用）。
 
@@ -841,6 +928,7 @@ def main() -> int:
     p = sub.add_parser("status"); p.add_argument("report", nargs="?")
     p = sub.add_parser("sample"); p.add_argument("--ratio", type=float, default=0.2); p.add_argument("--seed", type=int, default=20261114)
     sub.add_parser("accept")
+    sub.add_parser("l3-status", help="L3 SLA 超期检测（每两周覆盖全部正式报告）")
     p = sub.add_parser("run"); p.add_argument("--dry-run", action="store_true"); p.add_argument("--strict", action="store_true")
     p.add_argument("--no-gate", action="store_true",
                    help="严格模式下不内部重跑统一门禁（由调用方统一执行，避免重复）")
@@ -851,6 +939,7 @@ def main() -> int:
         "structure": cmd_structure, "verify": cmd_verify,
         "review": cmd_review, "mark": cmd_mark, "unmark": cmd_unmark, "status": cmd_status,
         "sample": cmd_sample, "accept": cmd_accept, "run": cmd_run,
+        "l3-status": cmd_l3_status,
     }[args.cmd](args)
 
 

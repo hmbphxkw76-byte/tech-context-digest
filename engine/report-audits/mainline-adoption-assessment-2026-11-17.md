@@ -32,7 +32,7 @@
 | N3 | 信息分类 | G3 分类·归位·断链 | `classify` / `validate_layout` / `check_links` |
 | N4 | 内容生成 | G4 内容四门禁 + 研究内核 | `research_kernel` / `info_density` / `fact_card` / `decision_hub` / `blind_spot` |
 | N5 | 渲染与交付 | G5 页面·合规·性能 | `page_build_check` / `lint` / `compliance` / `perf_monitor` |
-| N6 | 质量校验与审计（兜底） | G6 统一门禁 + 审计 | **统一门禁 21 项** + 审计四环节（L1/L2/L3 + A1–A8） |
+| N6 | 质量校验与审计（兜底） | G6 统一门禁 + 审计 | **统一门禁 23 项**（基线 21 项，Phase 3.1 起 23 项）+ 审计四环节（L1/L2/L3 + A1–A8） |
 | N7 | 发布 / 索引 / 归档 | G7 产物确定性 | `build_hub --check` / 发布指纹 / 归档 |
 | N8 | 运维与监控 | G8 运维·告警 | 6 工作流 + 活跃度 + 告警 |
 
@@ -250,3 +250,4 @@
 |---|---|---|
 | v1.0 | 2026-11-17 | 初始评估：现有流程梳理、11 阶段对照、五维评估、结论（不整体融合 + 吸收式融合）、四阶段路线图、风险与量化收益 |
 | v1.1 | 2026-11-17 | 实施回写：Phase 0–3 全部落地（吸收式融合，**主体 N0–N8 保留**）。Phase 0.4 选**方案 A**（`ci.yml` 增 `pipeline_runner validate`）；Phase 2.2 L3 采用「依据 2026-11-16 L3 记录批量补审 + 每两周 SLA」；P-06（注册结构化）/ P-09（并发写）**显式延后**（理由与归属见覆盖矩阵）。逐项状态与实测见 [覆盖矩阵](./mainline-adoption-coverage-matrix.md)。 |
+| v1.2 | 2026-11-17 | 核心事实修正：§1.2 统一门禁数量由 21 项更正为 **23 项**（基线 21 项，Phase 3.1 起 23 项）；收口轮修复证据索引 `plan.reports` 关联、L3 SLA 接线、任务启动文件四件套强制与门禁数量复述漂移，见 [覆盖矩阵](./mainline-adoption-coverage-matrix.md) v0.2。 |

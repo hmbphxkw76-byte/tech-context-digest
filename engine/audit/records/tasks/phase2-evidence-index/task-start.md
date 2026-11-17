@@ -43,3 +43,8 @@
 - R-01 批量补审形式主义（缓解：依据既有 L3 记录 + evidence 字段可追溯）
 - R-02 标识与正文不一致（缓解：mark full 注入 navy 标识 + 指纹重采）
 - R-03 维护流水线重复检测（缓解：stale 检测复用 audit_tool，不另写）
+
+## 关联报告
+
+- `engine/report-audits/mainline-adoption-assessment-2026-11-17.md`
+- `engine/report-audits/mainline-adoption-coverage-matrix.md`

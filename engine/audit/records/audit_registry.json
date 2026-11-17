@@ -1092,7 +1092,32 @@
       "evidence": {
         "report": "engine/report-audits/mainline-adoption-assessment-2026-11-17.md",
         "business_line": "engine/report-audits",
-        "plans": [],
+        "plans": [
+          {
+            "slug": "fix-alignment",
+            "plan": "engine/audit/records/tasks/fix-alignment/plan.json",
+            "tasks": "engine/audit/records/tasks/fix-alignment/tasks.json",
+            "risks": "engine/audit/records/tasks/fix-alignment/risks.json",
+            "reports": [
+              "engine/report-audits/mainline-adoption-assessment-2026-11-17.md",
+              "engine/report-audits/mainline-adoption-coverage-matrix.md"
+            ],
+            "task_count": 8,
+            "risk_count": 0
+          },
+          {
+            "slug": "phase2-evidence-index",
+            "plan": "engine/audit/records/tasks/phase2-evidence-index/plan.json",
+            "tasks": "engine/audit/records/tasks/phase2-evidence-index/tasks.json",
+            "risks": "engine/audit/records/tasks/phase2-evidence-index/risks.json",
+            "reports": [
+              "engine/report-audits/mainline-adoption-assessment-2026-11-17.md",
+              "engine/report-audits/mainline-adoption-coverage-matrix.md"
+            ],
+            "task_count": 5,
+            "risk_count": 3
+          }
+        ],
         "gate": {
           "entry": "engine/tools/optimization_gate.py",
           "probe": true
@@ -1128,7 +1153,32 @@
       "evidence": {
         "report": "engine/report-audits/mainline-adoption-coverage-matrix.md",
         "business_line": "engine/report-audits",
-        "plans": [],
+        "plans": [
+          {
+            "slug": "fix-alignment",
+            "plan": "engine/audit/records/tasks/fix-alignment/plan.json",
+            "tasks": "engine/audit/records/tasks/fix-alignment/tasks.json",
+            "risks": "engine/audit/records/tasks/fix-alignment/risks.json",
+            "reports": [
+              "engine/report-audits/mainline-adoption-assessment-2026-11-17.md",
+              "engine/report-audits/mainline-adoption-coverage-matrix.md"
+            ],
+            "task_count": 8,
+            "risk_count": 0
+          },
+          {
+            "slug": "phase2-evidence-index",
+            "plan": "engine/audit/records/tasks/phase2-evidence-index/plan.json",
+            "tasks": "engine/audit/records/tasks/phase2-evidence-index/tasks.json",
+            "risks": "engine/audit/records/tasks/phase2-evidence-index/risks.json",
+            "reports": [
+              "engine/report-audits/mainline-adoption-assessment-2026-11-17.md",
+              "engine/report-audits/mainline-adoption-coverage-matrix.md"
+            ],
+            "task_count": 5,
+            "risk_count": 3
+          }
+        ],
         "gate": {
           "entry": "engine/tools/optimization_gate.py",
           "probe": true

@@ -21,6 +21,13 @@
       "slug": "final-self-audit",
       "task": "final-self-audit"
     },
+    "task/fix-alignment-b30cfd92": {
+      "note": "source=env:CATPAW_CONVERSATION_ID",
+      "session": "b30cfd924f944c0fad06a39803b63ab9",
+      "session_short": "b30cfd92",
+      "slug": "fix-alignment",
+      "task": "fix-alignment"
+    },
     "task/fix-matrix-status-cd95c5fa": {
       "note": "source=env:CATPAW_CONVERSATION_ID",
       "session": "cd95c5fad1b94ba18de3bbc3b62eea99",

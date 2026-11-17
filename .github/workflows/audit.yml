@@ -50,8 +50,8 @@ jobs:
         run: pip install -r requirements.txt
 
       # 确定性执行四环节；对不达标报告回退（fix），不注入标识。
-      # 审计阶段经 audit_tool._run_gate() 内部调用优化流程统一门禁（optimization_gate --probe），
-      # 与 ci.yml 同口径；此处不重复分项扫描（P1-2 去重）。
+      # 审计阶段经 audit_tool._run_gate() 内部 import 同一入口 optimization_gate.py --probe，
+      # 与 ci.yml 同口径；此处不重复扫描（P1-2 去重），不得另加一次 optimization_gate.py 调用。
       # --strict：final 由 machine_final（统一门禁真实退出码）+ semantic_final（Agent L3 证据）判定，
       # 未做 L3 的报告只能注入「预审通过」标识，不得显示「已审计」。
       # P0-2：语义环节以 Agent 记录为权威，ci-bot 不得覆盖 Agent 的 second 复核。

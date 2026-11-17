@@ -3,7 +3,8 @@
 
 锁定：
 - `init` 生成 plan.json / tasks.json / risks.json / task-start.md 四件套；
-- schema 固定（schema_version / slug / title / nodes / gates / artifacts / reuse）；
+- schema 固定（schema_version / slug / title / nodes / gates / artifacts / reuse / reports）；
+- `reports` 关联报告 rel 去重 + 字典序，写入 plan.json 与 task-start.md「## 关联报告」；
 - 确定性：重复生成字节一致，`check` 可重放；
 - N0.5「任务计划」子节点映射存在，主体 N0–N8 保留。
 """
@@ -100,6 +101,42 @@ class TestTaskPlan(unittest.TestCase):
     def test_slug_validation(self):
         self.assertFalse(tp.validate_slug("Bad_Slug")[0])
         self.assertTrue(tp.validate_slug("phase1-task-loop")[0])
+
+    def test_plan_has_reports_field(self):
+        self.assertEqual(tp.build_plan("demo-task", "示例任务")["reports"], [])
+
+    def test_normalize_reports_sorted_unique(self):
+        self.assertEqual(tp.normalize_reports(["b/x.md", "a/y.md", "b/x.md"]),
+                         ["a/y.md", "b/x.md"])
+        self.assertEqual(tp.normalize_reports(None), [])
+        self.assertEqual(tp.normalize_reports(["  ", "a/y.md"]), ["a/y.md"])
+
+    def test_init_writes_reports_and_start_section(self):
+        plan = tp.build_plan("demo-task", "示例任务")
+        plan["reports"] = tp.normalize_reports(["b/x.md", "a/y.md"])
+        tp.write_artifacts("demo-task", plan, tp.parse_tasks([]), tp.parse_risks([]))
+        loaded, _, _ = tp.load_artifacts("demo-task")
+        self.assertEqual(loaded["reports"], ["a/y.md", "b/x.md"])
+        start = (tp.plan_dir("demo-task") / "task-start.md").read_text(encoding="utf-8")
+        self.assertIn("## 关联报告", start)
+        self.assertIn("- `a/y.md`", start)
+        self.assertIn("- `b/x.md`", start)
+        self.assertEqual(tp.check("demo-task"), [])
+
+    def test_start_md_empty_reports_fixed_text(self):
+        tp.write_artifacts("demo-task", tp.build_plan("demo-task", "示例任务"),
+                           tp.parse_tasks([]), tp.parse_risks([]))
+        start = (tp.plan_dir("demo-task") / "task-start.md").read_text(encoding="utf-8")
+        self.assertIn("- 无（手工/工具类任务）", start)
+
+    def test_validate_reports_rejects_dup_non_string_and_non_list(self):
+        plan = tp.build_plan("demo-task", "示例任务")
+        plan["reports"] = ["a", "a"]
+        self.assertTrue(any("重复" in x for x in tp.validate_artifacts("demo-task", plan, [], [])))
+        plan["reports"] = ["a", 3]
+        self.assertTrue(any("非字符串" in x for x in tp.validate_artifacts("demo-task", plan, [], [])))
+        plan["reports"] = "not-a-list"
+        self.assertTrue(any("列表" in x for x in tp.validate_artifacts("demo-task", plan, [], [])))
 
 
 if __name__ == "__main__":

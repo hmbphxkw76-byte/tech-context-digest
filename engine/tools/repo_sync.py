@@ -47,6 +47,9 @@ GATE_SCRIPT = "engine/tools/optimization_gate.py"
 GATE_PERIOD = "2026-12"          # 内容门禁（研究内核/信息分层/事实卡片/决策交付）
 SOURCE_GATE_PERIOD = "2027-01"   # 来源登记门禁（source_check）
 
+# 任务计划四件套（与 task_plan.ARTIFACT_NAMES 同口径）：工件即门禁输入。
+TASK_ARTIFACTS = ("plan.json", "tasks.json", "risks.json", "task-start.md")
+
 
 class SyncError(Exception):
     pass
@@ -75,10 +78,10 @@ def divergence(base: str = BASE_BRANCH) -> tuple[int, int]:
 
 
 def require_task_plan(branch: str | None = None, root: Path | None = None) -> tuple[bool, str]:
-    """治理标准 1「工件即门禁输入」：受管 task/* 分支 `run --gate` 前必须存在计划。
+    """治理标准 1「工件即门禁输入」：受管 task/* 分支 `run --gate` 前必须四件套齐备。
 
-    非受管分支（main / ci/* / 其它）不强制；计划路径为
-    `engine/audit/records/tasks/<slug>/plan.json`（由 task_plan.py 生成）。
+    非受管分支（main / ci/* / 其它）不强制；工件目录为
+    `engine/audit/records/tasks/<slug>/`（由 task_plan.py 生成，与 task_plan.check 同口径）。
     """
     root = ROOT if root is None else root
     br = current_branch() if branch is None else branch
@@ -86,12 +89,14 @@ def require_task_plan(branch: str | None = None, root: Path | None = None) -> tu
     if parsed is None:
         return True, f"非受管分支 {br}，不强制任务计划"
     slug = parsed["slug"]
-    plan = root / "engine" / "audit" / "records" / "tasks" / slug / "plan.json"
-    if not plan.exists():
-        return False, (f"受管分支 {br} 缺任务计划 {plan.relative_to(root)}；"
+    d = root / "engine" / "audit" / "records" / "tasks" / slug
+    missing = [name for name in TASK_ARTIFACTS if not (d / name).exists()]
+    if missing:
+        return False, (f"受管分支 {br} 缺任务计划工件 {d.relative_to(root)}："
+                       f"{', '.join(missing)}；"
                        f"先执行 `python engine/tools/task_plan.py init --slug {slug} --title ...`"
                        f"（或显式 --allow-no-plan 跳过）")
-    return True, f"任务计划就绪：{plan.relative_to(root)}"
+    return True, f"任务计划就绪：{d.relative_to(root)}（四件套齐备）"
 
 
 # ---------------------------------------------------------------- 锁
@@ -240,8 +245,9 @@ def run(paths: list[str], message: str, allow_main: bool = False,
     （与协议文档的标准用法矛盾）。sync 失败时提交已保留在本地，修复后可重试 push。
     `gate` 默认 True：先运行优化流程统一门禁（optimization_gate.py，含 source_check），
     [E] 直接拒绝提交；[E] 才拒绝（退出码 2=警告放行）。--no-gate 可显式跳过。
-    治理标准 1：受管 task/* 分支在 `--gate` 下必须先有任务计划（plan.json），
-    否则拒绝；`--allow-no-plan` 仅用于应急并需人工确认。
+    治理标准 1：受管 task/* 分支在 `--gate` 下必须先有任务计划四件套
+    （plan.json / tasks.json / risks.json / task-start.md），否则拒绝；
+    `--allow-no-plan` 仅用于应急并需人工确认。
     """
     with locked(holder="run"):
         if gate:
