@@ -97,6 +97,12 @@ jobs:
           fi
           exit 0
 
+      # 端到端编排一致性（《方案》Phase 0.4 方案 A）：
+      # 流程图落地为声明式清单，CI 直接校验 9 节点 / 9 门禁 / 2 闭环结构，
+      # 收口「声明-实现」落差（pipeline_runner 不再是零调用）。
+      - name: 端到端编排校验（pipeline_runner validate）
+        run: python engine/tools/pipeline_runner.py validate
+
       - name: 上报 commit status
         if: always()
         uses: actions/github-script@f28e40c7f34bde8b3046d885e986cb6290c5673b  # v7

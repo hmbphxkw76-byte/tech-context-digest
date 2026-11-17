@@ -128,6 +128,11 @@ class TestOptimizationGateReuse(unittest.TestCase):
                            cwd=ROOT, capture_output=True, text=True)
         self.assertEqual(r.returncode, 1)
 
+    def test_ci_runs_pipeline_runner_validate(self):
+        """Phase 0.4 方案 A：ci.yml 必须执行端到端编排校验（声明-实现一致）。"""
+        text = (WF / "ci.yml").read_text(encoding="utf-8")
+        self.assertIn("pipeline_runner.py validate", text)
+
     def test_repo_sync_exposes_gate(self):
         text = (ROOT / "engine" / "tools" / "repo_sync.py").read_text(encoding="utf-8")
         self.assertIn("--gate", text)

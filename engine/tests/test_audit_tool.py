@@ -55,5 +55,25 @@ class TestRegistry(unittest.TestCase):
         self.assertEqual(len(ids), len(set(ids)))
 
 
+class TestStaleDetection(unittest.TestCase):
+    """P-01：登记路径不存在 = 失效条目（stale）。"""
+
+    def test_stale_paths_detects_missing(self):
+        existing = "engine/report-audits/release-calendar.md"
+        self.assertTrue((ROOT / existing).exists())
+        reps = {existing: {}, "content/does-not-exist.html": {}}
+        self.assertEqual(audit_tool.stale_paths(reps), ["content/does-not-exist.html"])
+
+    def test_registry_has_no_stale_after_prune(self):
+        reg = audit_tool.load_registry()["reports"]
+        self.assertEqual(audit_tool.stale_paths(reg), [])
+
+    def test_prune_is_idempotent(self):
+        before = len(audit_tool.load_registry()["reports"])
+        self.assertEqual(audit_tool.cmd_prune(None), 0)
+        self.assertEqual(audit_tool.cmd_prune(None), 0)
+        self.assertEqual(len(audit_tool.load_registry()["reports"]), before)
+
+
 if __name__ == "__main__":
     unittest.main()

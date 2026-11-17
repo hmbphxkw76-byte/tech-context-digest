@@ -286,7 +286,7 @@ def run_node(manifest: dict, node_id: str, command: str | None = None,
 def run_pipeline(manifest: dict, from_node: str = "N0", to_node: str = "N8",
                  gate_period: str = DEFAULT_GATE_PERIOD,
                  source_gate_period: str = DEFAULT_SOURCE_GATE_PERIOD,
-                 audit=True) -> PipelineRun:
+                 audit=True, probe: bool | None = None) -> PipelineRun:
     """按流程图串行执行：节点 → 门禁 → 通过则下一节点 / 不通过则精准退回。"""
     import pipeline_audit  # noqa: PLW0406（同目录模块）
 
@@ -313,7 +313,7 @@ def run_pipeline(manifest: dict, from_node: str = "N0", to_node: str = "N8",
         gate = gate_after(manifest, node_id)
         if gate is None:
             continue
-        g = run_gate(manifest, gate["id"], gate_period, source_gate_period)
+        g = run_gate(manifest, gate["id"], gate_period, source_gate_period, probe=probe)
         gates.append(g)
         if audit:
             pipeline_audit.append({"run_id": run_id, "kind": "gate", **asdict(g)})
@@ -358,7 +358,8 @@ def main() -> int:
     g.add_argument("gate_id")
     g.add_argument("--gate-period", default=DEFAULT_GATE_PERIOD)
     g.add_argument("--source-gate-period", default=DEFAULT_SOURCE_GATE_PERIOD)
-    g.add_argument("--probe", action="store_true")
+    g.add_argument("--probe", action=argparse.BooleanOptionalAction, default=None,
+                   help="source_check 是否启用 URL 探测；缺省（不传）尊重清单 gate.probe 字段")
 
     r = sub.add_parser("run", help="按流程图串行执行")
     r.add_argument("--from", dest="from_node", default="N0")
@@ -366,6 +367,8 @@ def main() -> int:
     r.add_argument("--gate-period", default=DEFAULT_GATE_PERIOD)
     r.add_argument("--source-gate-period", default=DEFAULT_SOURCE_GATE_PERIOD)
     r.add_argument("--no-audit", action="store_true")
+    r.add_argument("--probe", action=argparse.BooleanOptionalAction, default=None,
+                   help="覆盖清单 probe 语义；缺省（不传）尊重清单 gate.probe 字段")
 
     a = sub.add_parser("audit", help="查询审计留痕")
     a.add_argument("--run", dest="run_id")
@@ -397,7 +400,7 @@ def main() -> int:
     if args.cmd == "run":
         run = run_pipeline(manifest, args.from_node, args.to_node,
                            args.gate_period, args.source_gate_period,
-                           audit=not args.no_audit)
+                           audit=not args.no_audit, probe=args.probe)
         print(json.dumps({k: v for k, v in asdict(run).items() if k != "audit_path"},
                          ensure_ascii=False, indent=2, default=str))
         print(f"[audit] {run.audit_path}（run_id={run.run_id}）")

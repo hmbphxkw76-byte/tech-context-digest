@@ -17,13 +17,14 @@ spec.loader.exec_module(pm)
 
 
 class TestThresholds(unittest.TestCase):
-    def _payload(self, p95=2546.0, single=247.0, err=0.0):
+    def _payload(self, p95=2546.0, single=247.0, err=0.0, strict_p95=81521.0):
         return {
             "thresholds": {"l0_l1_full_p95_ms": 60000.0, "single_report_l1_avg_ms": 2000.0,
-                           "error_rate_max": 0.0},
+                           "audit_strict_p95_ms": 180000.0, "error_rate_max": 0.0},
             "scenarios": [
                 {"id": "l0_l1_full", "wall_ms": {"p95": p95}, "error_rate": err},
                 {"id": "single_report_l1", "wall_ms": {"avg": single}, "error_rate": 0.0},
+                {"id": "audit_run_strict", "wall_ms": {"p95": strict_p95}, "error_rate": 0.0},
             ],
         }
 
@@ -37,6 +38,18 @@ class TestThresholds(unittest.TestCase):
     def test_error_rate_exceeds(self):
         f = pm.check_thresholds(self._payload(err=0.02))
         self.assertTrue(any("错误率" in x["message"] for x in f))
+
+    def test_audit_strict_p95_exceeds(self):
+        """P-03：strict 审计 P95 超阈值 → P0。"""
+        f = pm.check_thresholds(self._payload(strict_p95=181000.0))
+        self.assertTrue(any("strict 审计" in x["message"] and x["level"] == "P0" for x in f), f)
+
+    def test_audit_strict_threshold_declared_in_status(self):
+        """perf-status.json 必须声明 audit_strict_p95_ms 阈值。"""
+        import json
+        th = json.loads((ROOT / "perf-status.json").read_text(encoding="utf-8"))["thresholds"]
+        self.assertIn("audit_strict_p95_ms", th)
+        self.assertLessEqual(th["audit_strict_p95_ms"], 180000.0)
 
 
 class TestUpdateAndCache(unittest.TestCase):

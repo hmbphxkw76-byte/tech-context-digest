@@ -74,6 +74,10 @@ def check_thresholds(payload: dict | None = None) -> list[dict]:
     single = scenarios.get("single_report_l1")
     if single and single.get("wall_ms", {}).get("avg", 0) > th.get("single_report_l1_avg_ms", 2000):
         add("P1", f"单报告 L1 平均 {single['wall_ms']['avg']}ms 超阈值 {th.get('single_report_l1_avg_ms')}ms")
+    # P-03：strict 审计四环节（audit.yml 关键路径）性能护栏，默认 ≤180000ms。
+    strict = scenarios.get("audit_run_strict")
+    if strict and strict.get("wall_ms", {}).get("p95", 0) > th.get("audit_strict_p95_ms", 180000):
+        add("P0", f"strict 审计 P95 {strict['wall_ms']['p95']}ms 超阈值 {th.get('audit_strict_p95_ms')}ms")
     for s in payload.get("scenarios", []):
         if s.get("error_rate", 0) > th.get("error_rate_max", 0):
             add("P0", f"场景 {s['id']} 错误率 {s['error_rate']:.1%} 超阈值")

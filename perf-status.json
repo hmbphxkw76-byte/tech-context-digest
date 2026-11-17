@@ -171,6 +171,7 @@
     "ci_total_increase_pct": 10.0,
     "l0_l1_full_p95_ms": 60000.0,
     "single_report_l1_avg_ms": 2000.0,
+    "audit_strict_p95_ms": 180000.0,
     "error_rate_max": 0.0
   }
 }
