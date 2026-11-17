@@ -1,0 +1,14 @@
+[
+  {
+    "description": "指标实测口径漂移",
+    "id": "R-01",
+    "mitigation": "全部按《方案》§八 命令原样执行",
+    "owner": ""
+  },
+  {
+    "description": "回写引入偏差",
+    "id": "R-02",
+    "mitigation": "仅追加版本行，不改结论",
+    "owner": ""
+  }
+]

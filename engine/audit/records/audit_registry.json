@@ -1074,6 +1074,78 @@
           "audit_id": ""
         }
       }
+    },
+    "engine/report-audits/mainline-adoption-assessment-2026-11-17.md": {
+      "title": "mainline 规范适配性评估（MAINLINE-ADOPTION-ASSESSMENT 2026-11-17）",
+      "kind": "audit",
+      "category": "audit-doc",
+      "business_line": "engine/report-audits",
+      "status": "draft",
+      "stages": {
+        "draft": false,
+        "initial": false,
+        "second": false,
+        "final": false
+      },
+      "mark": false,
+      "first_seen_at": "2026-11-17",
+      "evidence": {
+        "report": "engine/report-audits/mainline-adoption-assessment-2026-11-17.md",
+        "business_line": "engine/report-audits",
+        "plans": [],
+        "gate": {
+          "entry": "engine/tools/optimization_gate.py",
+          "probe": true
+        },
+        "audit": {
+          "review": "",
+          "status": "draft",
+          "stages": {
+            "draft": false,
+            "initial": false,
+            "second": false,
+            "final": false
+          },
+          "mark_level": "none",
+          "audit_id": ""
+        }
+      }
+    },
+    "engine/report-audits/mainline-adoption-coverage-matrix.md": {
+      "title": "mainline 吸收式融合 · 覆盖矩阵（MAINLINE-ADOPTION-COVERAGE-MATRIX）",
+      "kind": "audit",
+      "category": "audit-doc",
+      "business_line": "engine/report-audits",
+      "status": "draft",
+      "stages": {
+        "draft": false,
+        "initial": false,
+        "second": false,
+        "final": false
+      },
+      "mark": false,
+      "first_seen_at": "2026-11-17",
+      "evidence": {
+        "report": "engine/report-audits/mainline-adoption-coverage-matrix.md",
+        "business_line": "engine/report-audits",
+        "plans": [],
+        "gate": {
+          "entry": "engine/tools/optimization_gate.py",
+          "probe": true
+        },
+        "audit": {
+          "review": "",
+          "status": "draft",
+          "stages": {
+            "draft": false,
+            "initial": false,
+            "second": false,
+            "final": false
+          },
+          "mark_level": "none",
+          "audit_id": ""
+        }
+      }
     }
   }
 }
