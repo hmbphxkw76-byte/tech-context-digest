@@ -8,6 +8,7 @@ from __future__ import annotations
 
 import importlib.util
 import json
+import os
 import subprocess
 import sys
 import tempfile
@@ -278,15 +279,27 @@ class TestHookFiles(unittest.TestCase):
 
 
 class TestCLI(unittest.TestCase):
-    def _run(self, *args: str, stdin: str | None = None) -> subprocess.CompletedProcess:
+    def _run(self, *args: str, stdin: str | None = None,
+             extra_env: dict | None = None) -> subprocess.CompletedProcess:
+        env = None
+        if extra_env:
+            env = {**os.environ, **extra_env}
         return subprocess.run([sys.executable, "engine/tools/repo_sync.py", *args],
-                              cwd=ROOT, capture_output=True, text=True, input=stdin)
+                              cwd=ROOT, capture_output=True, text=True, input=stdin, env=env)
 
     def test_session_cli(self):
-        r = self._run("session")
+        # CI / 新克隆可能无会话环境变量 → 显式注入，保证测试环境无关
+        r = self._run("session", extra_env={"TECH_CTX_SESSION_ID": UUID})
         self.assertEqual(r.returncode, 0)
         self.assertIn("会话标识：", r.stdout)
-        self.assertIn("来源：", r.stdout)
+        self.assertIn("来源：env:TECH_CTX_SESSION_ID", r.stdout)
+
+    def test_session_cli_refuses_when_unresolvable(self):
+        # 四类来源全空 → 拒绝（退出码 1），不得生成不可追溯分支
+        env = {k: "" for k in bn.SESSION_ENV_KEYS}
+        r = self._run("session", extra_env=env)
+        self.assertEqual(r.returncode, 1)
+        self.assertIn("未解析到会话标识", r.stdout)
 
     def test_branch_audit_cli_ok(self):
         r = self._run("branch-audit")
@@ -294,9 +307,10 @@ class TestCLI(unittest.TestCase):
         self.assertIn("受管合规", r.stdout)
 
     def test_branches_cli(self):
+        # CI 检出可能是 detached HEAD 且无本地分支 → 只断言命令可用且有输出
         r = self._run("branches")
         self.assertEqual(r.returncode, 0)
-        self.assertIn("main", r.stdout)
+        self.assertTrue(r.stdout.strip())
 
     def test_guard_commit_stage_cli(self):
         r = self._run("guard", "--stage", "commit")
