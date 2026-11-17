@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-"""流程复用一致性测试（PROCESS-REUSE-MANIFEST v1.0）。
+"""流程复用一致性测试（PROCESS-REUSE-MANIFEST v1.3）。
 
 确认「信息分层与决策交付」优化流程被后续每个阶段一致复用：
   - 四门禁接入 ci / html-sync / content-update / scheduled-maintenance；

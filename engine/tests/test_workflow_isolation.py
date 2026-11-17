@@ -47,6 +47,20 @@ class TestCIUsesPRs(unittest.TestCase):
             text = (WF / name).read_text(encoding="utf-8")
             self.assertIn("secrets.CI_PR_TOKEN", text, f"{name} 未传入 CI_PR_TOKEN")
 
+    def test_checkout_workflows_have_contents_permission(self):
+        # 声明 permissions 块后，未列出的 scope 一律降为 none：缺 contents 会让
+        # actions/checkout 在私有仓库上 fetch 失败（remote: Repository not found）。
+        for path in sorted(WF.glob("*.yml")):
+            text = path.read_text(encoding="utf-8")
+            if "actions/checkout@" not in text:
+                continue
+            perms = (yaml.safe_load(text).get("permissions") or {})
+            self.assertIn(
+                "contents",
+                perms,
+                f"{path.name} 使用 actions/checkout，但 permissions 缺 contents（read/write 均可）",
+            )
+
 
 if __name__ == "__main__":
     unittest.main()

@@ -7,6 +7,8 @@ on:
     branches: [main]
 
 permissions:
+  contents: read    # actions/checkout 必需；缺失会导致私有仓库 GITHUB_TOKEN 降级为 contents:none，
+                    # git fetch 报 "Repository not found"（其余工作流均为 contents: write）
   issues: write     # 闭环修正工单（门禁 [E] / 活跃度超阈值）建 Issue
   statuses: write   # 「上报 commit status」步骤需要
 
