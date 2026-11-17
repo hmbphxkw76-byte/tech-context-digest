@@ -380,7 +380,7 @@
       "first_seen_at": "2026-11-15"
     },
     "engine/report-audits/tech-debt-ledger.md": {
-      "title": "遗留任务台账（TECH-DEBT-LEDGER v1.0）",
+      "title": "遗留任务台账（TECH-DEBT-LEDGER v1.3）",
       "kind": "audit",
       "category": "audit-doc",
       "business_line": "engine/report-audits",
@@ -428,7 +428,7 @@
       "mark_level": "pre"
     },
     "engine/report-audits/pipeline-integration-review-2026-11-15.md": {
-      "title": "报告全流程架构与执行逻辑集成审查确认报告（INTEGRATION-REVIEW v1.0）",
+      "title": "报告全流程架构与执行逻辑集成审查确认报告（INTEGRATION-REVIEW v1.1）",
       "kind": "audit",
       "category": "audit-doc",
       "business_line": "engine/report-audits",

@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-"""体系说明文档与两级 gate-period 一致性测试（REPORT-PIPELINE-SYSTEM v1.1）。
+"""体系说明文档与两级 gate-period 一致性测试（REPORT-PIPELINE-SYSTEM v1.2）。
 
 锁定内容与代码事实源一致：
 - `engine/docs/report-pipeline-system.md` 存在、含完整 Mermaid 流程图、覆盖 N0–N8 全链路节点；
