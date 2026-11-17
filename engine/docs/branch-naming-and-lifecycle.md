@@ -71,6 +71,9 @@ task/<slug>-<session8>
 `session`（完整标识）/ `session_short` / `slug` / `task` / `note`。
 从会话反查分支：`branch_naming.session_ledger()`；CLI 见 §3.3。
 
+**条目保留策略**：分支合并 / 删除后其条目**保留**，作为历史台账支撑事后追溯；
+`branch-audit` 只检查当前存在的分支，不会因历史条目报错。
+
 ---
 
 ## 三、标准操作流程
