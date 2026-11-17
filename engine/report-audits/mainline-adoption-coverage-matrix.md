@@ -107,9 +107,25 @@
 
 ## 九、量化指标实测结果
 
-> 收尾自审计时填写：命令 + 输出 + 达标判定；未达标项给出原因与后续计划。
+> 实测时点：2026-11-17（Phase 0–3 全部合并后，最新 `main`）。
+> 实测分支：`task/final-self-audit-cd95c5fa`。
 
-（待收尾填写）
+| # | 指标 | 命令 | 实测输出 | 判定 |
+|---|---|---|---|---|
+| M1 | 审计登记册失效条目 | `python engine/audit/scripts/audit_tool.py status` | `登记 31 条；失效条目（stale）：0；含证据索引：31` | 达标（0） |
+| M2 | 有效报告「已审计」覆盖率 | `python engine/audit/scripts/audit_tool.py accept` | 正式报告已审计率 `10/10 = 100.0%`；登记覆盖率 `31/31 = 100.0%`；标识一致率 `10/10` | 达标（≥90%） |
+| M3 | 本地一次任务闭环操作数 | `python engine/tools/local_mainline.py run --slug <slug> --title ... --dry-run` | 1 条命令编排 5 步（plan → unittest → gate → push → pr） | 达标（1 条） |
+| M4 | strict 审计性能护栏 | `python engine/tools/perf_monitor.py check` | `性能阈值校验通过：全部达标`（`audit_strict_p95_ms=180000`，实测 P95 81521ms） | 达标 |
+| M5 | 门禁噪声（validate 警告） | `python engine/tools/validate.py` | `结构与规范校验通过`（0 警告） | 达标（保持 0） |
+| M6 | 规范复述点 | `python engine/tools/check_links.py` + `grep -c "validate、validate_layout、lint、compliance" AGENTS.md` | 链接校验通过；复述计数 `0` | 达标（0） |
+| M7 | 统一门禁错误项 | `python engine/tools/optimization_gate.py --gate-period 2026-12 --source-gate-period 2027-01 --probe` | `优化流程门禁：3 项警告（不阻断）`，退出码 2，`[E]` 计数 0 | 达标（保持 0） |
+| M8 | 单测 | `python -m unittest discover -s engine/tests -p "test_*.py"` | `Ran 494 tests ... OK (skipped=1)` | 达标（全绿） |
+
+**未达标项**：无。8/8 达标。
+
+**透明说明**：
+- M2 的「已审计」为**依据既有 2026-11-16 L3 记录的回溯补录**（非本轮重新全文复核），已在 Phase 2 PR 与覆盖矩阵登记；后续按 L3 SLA（每两周）由 Agent 定期复核。
+- M7 的 3 项警告为：来源登记历史死链（宽限期内）+ ruff（88）+ mypy（41），均默认 `[W]` 不阻断。
 
 ## 十、规范分层删改记录（Phase 3.3，「新增即删旧」）
 

@@ -67,7 +67,8 @@ def run(slug: str, title: str, body: str = DEFAULT_BODY,
 
 def main() -> int:
     ap = argparse.ArgumentParser(description="本地 mainline 一键闭环（薄封装，只编排）")
-    p = ap.add_parser("run")
+    sub = ap.add_subparsers(dest="cmd", required=True)
+    p = sub.add_parser("run")
     p.add_argument("--slug", required=True, help="任务 slug（对应 engine/audit/records/tasks/<slug>/）")
     p.add_argument("--title", required=True, help="PR 标题")
     p.add_argument("--body", default=DEFAULT_BODY, help="PR 正文")

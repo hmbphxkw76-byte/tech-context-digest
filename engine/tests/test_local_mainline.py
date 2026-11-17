@@ -69,6 +69,15 @@ class TestRun(unittest.TestCase):
         self.assertEqual(rc, 0)
         r.assert_not_called()
 
+    def test_main_cli_dry_run(self):
+        # 回归：main() 必须用 add_subparsers（曾误用 add_parser 导致 CLI 崩溃）。
+        with mock.patch.object(lm.subprocess, "run") as r, \
+             mock.patch.object(sys, "argv", ["local_mainline.py", "run", "--slug", "demo",
+                                           "--title", "标题", "--dry-run"]):
+            rc = lm.main()
+        self.assertEqual(rc, 0)
+        r.assert_not_called()
+
 
 if __name__ == "__main__":
     unittest.main()
