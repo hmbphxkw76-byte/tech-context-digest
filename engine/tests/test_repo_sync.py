@@ -62,7 +62,7 @@ class TestGuard(unittest.TestCase):
         orig = rs.sync
         rs.sync = lambda *a, **k: (True, "mock")
         try:
-            ok, msg = rs._push(allow_main=False, branch="task/x", acquire=False)
+            ok, msg = rs._push(allow_main=False, branch="task/x-5f37e90d", acquire=False)
         finally:
             rs.sync = orig
         self.assertNotIn("拒绝直接推送", msg)
@@ -100,8 +100,14 @@ class TestGuard(unittest.TestCase):
         self.assertFalse(blocked)
 
     def test_guard_push_allows_task_branch(self):
-        blocked, _ = rs.guard_push(f"refs/heads/task/x {'a' * 40} refs/heads/task/x {'0' * 40}")
+        blocked, _ = rs.guard_push(f"refs/heads/task/x-5f37e90d {'a' * 40} refs/heads/task/x-5f37e90d {'0' * 40}")
         self.assertFalse(blocked)
+
+    def test_guard_push_blocks_malformed_task_branch(self):
+        # 受管分支缺会话标识 → 推送阻断（BRANCH-NAMING-SPEC）
+        blocked, why = rs.guard_push(f"refs/heads/task/x {'a' * 40} refs/heads/task/x {'0' * 40}")
+        self.assertTrue(blocked)
+        self.assertIn("命名不合规", why)
 
     def test_guard_push_fallback_to_current_branch(self):
         # 无 refspec 上下文（手动调用）→ 回退当前分支判定
@@ -139,7 +145,7 @@ class TestGuard(unittest.TestCase):
         # 在 main 上删除远端分支不应被守卫误拦
         r = subprocess.run([sys.executable, "engine/tools/repo_sync.py", "guard"],
                            cwd=ROOT, capture_output=True, text=True,
-                           input=f"(delete) {'0' * 40} refs/heads/task/x {'b' * 40}\n")
+                           input=f"(delete) {'0' * 40} refs/heads/task/x-5f37e90d {'b' * 40}\n")
         self.assertEqual(r.returncode, 0)
 
     def test_status_cli_ok(self):

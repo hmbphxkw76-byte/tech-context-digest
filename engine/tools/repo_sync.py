@@ -37,6 +37,7 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 
 from _common import ROOT  # noqa: E402
+import branch_naming  # noqa: E402
 
 BASE_BRANCH = "main"
 MAIN_REF = f"refs/heads/{BASE_BRANCH}"
@@ -165,6 +166,10 @@ def _push(allow_main: bool = False, branch: str | None = None,
     if br == BASE_BRANCH and not allow_main:
         return False, (f"拒绝直接推送 {BASE_BRANCH}（会与其他会话/CI 竞争）。"
                        f"请改用 task 分支 + PR；如确需直推，显式加 --allow-main。")
+    ok, why = branch_naming.validate_managed(br)
+    if not ok:
+        return False, (f"分支命名不符合 {branch_naming.SPEC_ID}：{why}\n"
+                       f"        改名：python engine/tools/repo_sync.py branch-rename {br} <新名>")
     if acquire:
         with locked(holder=f"push:{br}"):
             return _push(allow_main=allow_main, branch=br, acquire=False)
@@ -295,11 +300,170 @@ def guard_push(text: str | None = None) -> tuple[bool, str]:
         for local_ref, _local_sha, remote_ref, _remote_sha in refs:
             if remote_ref == MAIN_REF and local_ref != "(delete)":
                 return True, f"本次推送包含 {MAIN_REF}（来自 {local_ref}）"
-        return False, f"{len(refs)} 条 refspec，均非 {MAIN_REF} 直推"
+        for local_ref, _local_sha, remote_ref, _remote_sha in refs:
+            if local_ref == "(delete)":
+                continue
+            name = (remote_ref[len("refs/heads/"):]
+                    if remote_ref.startswith("refs/heads/") else remote_ref)
+            ok, why = branch_naming.validate_managed(name)
+            if not ok:
+                return True, f"受管分支 {name} 命名不合规：{why}"
+        return False, f"{len(refs)} 条 refspec，均非 {MAIN_REF} 直推且命名合规"
     br = current_branch()
     if br == BASE_BRANCH:
         return True, f"当前检出在 {BASE_BRANCH}，且无 refspec 上下文"
     return False, f"当前分支 {br}，且无 refspec 上下文"
+
+
+def guard_commit() -> tuple[bool, str]:
+    """pre-commit 阶段：当前检出若为受管分支，命名不合规则阻断提交。"""
+    br = current_branch()
+    if branch_naming.is_managed(br):
+        ok, why = branch_naming.validate_managed(br)
+        if not ok:
+            return True, f"当前受管分支 {br} 命名不合规：{why}"
+    return False, f"当前分支 {br}（非受管或命名合规）"
+
+
+# ---------------------------------------------------------------- 分支命名子命令
+
+HOOKS_DIR = ROOT / ".githooks"
+HOOK_FILES = ("pre-push", "pre-commit")
+
+
+def cmd_session() -> tuple[bool, str]:
+    """解析并打印当前会话标识（含来源），供建分支与排查使用。"""
+    try:
+        full, src = branch_naming.resolve_session()
+    except branch_naming.BranchNamingError as e:
+        return False, str(e)
+    return True, (f"会话标识：{full}\n短码：{branch_naming.session_short(full)}"
+                  f"\n来源：{src}\n规范：{branch_naming.SPEC_ID}")
+
+
+def cmd_branch(slug: str, from_ref: str) -> tuple[bool, str]:
+    """按规范自动追加会话标识建分支：task/<slug>-<session8>（从 from_ref 出发）。"""
+    try:
+        full, src = branch_naming.resolve_session()
+        name = branch_naming.build_branch(slug, full)
+    except branch_naming.BranchNamingError as e:
+        return False, str(e)
+    if _git("rev-parse", "--verify", "--quiet", f"refs/heads/{name}").returncode == 0:
+        return False, f"分支已存在：{name}"
+    r = _git("switch", "-c", name, from_ref)
+    if r.returncode != 0:
+        return False, f"建分支失败：{r.stderr.strip()}"
+    reg = branch_naming.load_registry()
+    branch_naming.register_branch(reg, name, full, task=slug, note=f"source={src}")
+    branch_naming.save_registry(reg)
+    return True, (f"已创建 {name}\n会话短码：{branch_naming.session_short(full)}（来源 {src}）\n"
+                  f"已登记到 {branch_naming.REGISTRY_PATH.relative_to(ROOT)}")
+
+
+def cmd_branches() -> tuple[bool, str]:
+    """列出手头分支及其登记信息（含合规标记）。"""
+    reg = branch_naming.load_registry()
+    names = branch_naming.scan_branches()
+    if not names:
+        return True, "无可见分支"
+    lines = []
+    for b in names:
+        rec = branch_naming.entry_for(reg, b)
+        if branch_naming.is_managed(b):
+            ok, _ = branch_naming.validate_managed(b)
+            mark = "受管OK" if ok else "受管BAD"
+            extra = f"{rec['session']} / {rec['task']}" if rec else "未登记"
+        elif b == BASE_BRANCH:
+            mark, extra = "基座  ", "-"
+        else:
+            mark, extra = "豁免  ", "系统分支"
+        lines.append(f"[{mark}] {b:<46} {extra}")
+    return True, "\n".join(lines)
+
+
+def cmd_branch_audit() -> tuple[bool, str]:
+    """扫描存量分支，列出「受管但缺会话标识」的违规项。"""
+    ok_list, bad, exempt = branch_naming.audit_branches()
+    lines = [f"受管合规 {len(ok_list)} / 违规 {len(bad)} / 豁免 {len(exempt)}"]
+    for b in ok_list:
+        lines.append(f"  [合规] {b}")
+    for b in bad:
+        _, why = branch_naming.validate_managed(b)
+        lines.append(f"  [违规] {b}：{why}")
+    if bad:
+        lines.append("整改：python engine/tools/repo_sync.py branch-rename <旧名> <新名>")
+        return False, "\n".join(lines)
+    return True, "\n".join(lines)
+
+
+def cmd_branch_rename(old: str, new: str, remote: bool = False) -> tuple[bool, str]:
+    """分支改名并同步登记册；--remote 时连同远端旧分支一起迁移。"""
+    ok, why = branch_naming.validate_managed(new)
+    if not ok:
+        return False, f"新分支名不合规：{why}"
+    if old == BASE_BRANCH:
+        return False, f"不得对 {BASE_BRANCH} 改名"
+    if _git("rev-parse", "--verify", "--quiet", f"refs/heads/{old}").returncode != 0:
+        if _git("rev-parse", "--verify", "--quiet", f"refs/remotes/origin/{old}").returncode != 0:
+            return False, f"分支不存在：{old}"
+        c = _git("branch", old, f"origin/{old}")
+        if c.returncode != 0:
+            return False, f"从远端取回本地失败：{c.stderr.strip()}"
+    reg = branch_naming.load_registry()
+    rec = branch_naming.entry_for(reg, old)
+    if rec:
+        session_full = rec["session"]
+    else:
+        try:
+            session_full, _ = branch_naming.resolve_session()
+        except branch_naming.BranchNamingError as e:
+            return False, f"{old} 未登记且 {e}"
+    if old == current_branch():
+        r = _git("branch", "-m", new)
+    else:
+        r = _git("branch", "-m", old, new)
+    if r.returncode != 0:
+        return False, f"改名失败：{r.stderr.strip()}"
+    branch_naming.unregister_branch(reg, old)
+    branch_naming.register_branch(reg, new, session_full,
+                                  task=(rec or {}).get("task") or branch_naming.parse_branch(new)["slug"],
+                                  note=(rec or {}).get("note", ""))
+    branch_naming.save_registry(reg)
+    msg = f"已改名 {old} → {new}（登记册已更新）"
+    if remote:
+        p = _git("push", "origin", new)
+        if p.returncode != 0:
+            return False, f"{msg}；但推送新分支失败：{p.stderr.strip()}"
+        d = _git("push", "origin", "--delete", old)
+        if d.returncode != 0:
+            return False, f"{msg}；但删除远端旧分支失败：{d.stderr.strip()}"
+        msg += "；远端已同步"
+    return True, msg
+
+
+def cmd_hook_install() -> tuple[bool, str]:
+    """安装本克隆的钩子：git config core.hooksPath .githooks。"""
+    missing = [h for h in HOOK_FILES if not (HOOKS_DIR / h).exists()]
+    if missing:
+        return False, f"钩子文件缺失：{', '.join(missing)}（仓库应内置 .githooks/）"
+    if os.name != "nt":
+        for h in HOOK_FILES:
+            try:
+                os.chmod(HOOKS_DIR / h, 0o755)
+            except OSError:
+                pass
+    r = _git("config", "core.hooksPath", ".githooks")
+    if r.returncode != 0:
+        return False, f"写入 core.hooksPath 失败：{r.stderr.strip()}"
+    return True, (f"已安装钩子：core.hooksPath=.githooks（{' / '.join(HOOK_FILES)}）\n"
+                  f"卸载：python engine/tools/repo_sync.py hook-uninstall")
+
+
+def cmd_hook_uninstall() -> tuple[bool, str]:
+    r = _git("config", "--unset", "core.hooksPath")
+    if r.returncode != 0:
+        return False, f"卸载失败（可能本未安装）：{r.stderr.strip()}"
+    return True, "已卸载钩子（core.hooksPath 已清除）"
 
 
 # ---------------------------------------------------------------- CLI
@@ -318,7 +482,18 @@ def main() -> int:
     p.add_argument("--gate", action=argparse.BooleanOptionalAction, default=True,
                    help="提交前运行优化流程统一门禁（默认开启；--no-gate 跳过）")
     p.add_argument("--checks", nargs="*", help="追加自定义校验命令（每项为 shell 字符串）")
-    sub.add_parser("guard")
+    sub.add_parser("session", help="解析并打印当前会话标识（含来源）")
+    p = sub.add_parser("branch", help="按规范自动追加会话标识建分支")
+    p.add_argument("slug"); p.add_argument("--from", dest="from_ref", default=f"origin/{BASE_BRANCH}")
+    sub.add_parser("branches", help="列出手头分支与登记信息")
+    sub.add_parser("branch-audit", help="扫描存量分支，列出受管但命名违规项")
+    p = sub.add_parser("branch-rename", help="改名并同步登记册")
+    p.add_argument("old"); p.add_argument("new")
+    p.add_argument("--remote", action="store_true", help="连同远端旧分支一起迁移")
+    sub.add_parser("hook-install", help="安装 .githooks（core.hooksPath）")
+    sub.add_parser("hook-uninstall", help="卸载 .githooks")
+    g = sub.add_parser("guard"); g.add_argument("--stage", choices=["push", "commit"], default="push",
+                                     help="push=pre-push 判定；commit=pre-commit 判定")
     args = ap.parse_args()
 
     try:
@@ -347,6 +522,22 @@ def main() -> int:
             ok, msg = run(args.paths, args.message, allow_main=args.allow_main,
                           checks=checks, gate=args.gate)
             print(("[OK] " if ok else "[FAIL] ") + msg); return 0 if ok else 1
+        if args.cmd == "session":
+            ok, msg = cmd_session(); print(("[OK] " if ok else "[FAIL] ") + msg); return 0 if ok else 1
+        if args.cmd == "branch":
+            ok, msg = cmd_branch(args.slug, args.from_ref)
+            print(("[OK] " if ok else "[FAIL] ") + msg); return 0 if ok else 1
+        if args.cmd == "branches":
+            ok, msg = cmd_branches(); print(msg); return 0
+        if args.cmd == "branch-audit":
+            ok, msg = cmd_branch_audit(); print(("[OK] " if ok else "[违规] ") + msg); return 0 if ok else 1
+        if args.cmd == "branch-rename":
+            ok, msg = cmd_branch_rename(args.old, args.new, remote=args.remote)
+            print(("[OK] " if ok else "[FAIL] ") + msg); return 0 if ok else 1
+        if args.cmd == "hook-install":
+            ok, msg = cmd_hook_install(); print(("[OK] " if ok else "[FAIL] ") + msg); return 0 if ok else 1
+        if args.cmd == "hook-uninstall":
+            ok, msg = cmd_hook_uninstall(); print(("[OK] " if ok else "[FAIL] ") + msg); return 0 if ok else 1
         if args.cmd == "guard":
             gl_blocked, gl_why = gitlab_remote_blocked()
             if gl_blocked:
@@ -355,14 +546,15 @@ def main() -> int:
                       f"        请改用 GitHub（origin）或移除该远端后重试。",
                       file=sys.stderr)
                 return 1
-            blocked, why = guard_push()
+            blocked, why = guard_commit() if args.stage == "commit" else guard_push()
             if blocked:
-                print(f"[拒绝] 禁止直接推送 {BASE_BRANCH}：会与其他会话/CI 竞争。\n"
-                      f"        请改用 task 分支 + PR（见 engine/docs/multi-session-git-protocol.md）。\n"
+                print(f"[拒绝] {'提交' if args.stage == 'commit' else '推送'}被阻断：\n"
+                      f"        请按 {branch_naming.SPEC_ID} 整改后重试"
+                      f"（见 engine/docs/branch-naming-and-lifecycle.md）。\n"
                       f"        依据：{why}",
                       file=sys.stderr)
                 return 1
-            print(f"[放行] {why}（非 {BASE_BRANCH}）")
+            print(f"[放行] {why}")
             return 0
     except SyncError as e:
         print(f"[FAIL] {e}", file=sys.stderr)

@@ -1,0 +1,5 @@
+# 换行策略
+#
+# Git 钩子（sh）必须以 LF 存储与检出：Windows 上 core.autocrlf=true 会在工作区
+# 生成 CRLF，使 `#!/bin/sh` 变成 `#!/bin/sh\r`，导致「bad interpreter」而无法执行。
+.githooks/** text eol=lf

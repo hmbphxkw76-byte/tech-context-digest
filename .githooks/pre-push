@@ -1,0 +1,23 @@
+#!/bin/sh
+# pre-push：推送前门禁（本仓库强制，见 engine/docs/branch-naming-and-lifecycle.md）
+#
+# 1) 工作区清理（容错，失败不阻断）——复用单一入口 workspace_cleanup.py
+# 2) 直推 main / GitLab 远端 / 受管分支命名不合规 → 阻断
+#
+# 判定基于 pre-push stdin 的 refspec，而非当前分支：站在 task/* 上显式
+# `git push origin main` 同样会被阻断。手动安装：
+#   python engine/tools/repo_sync.py hook-install
+
+set -u
+
+ROOT=$(git rev-parse --show-toplevel 2>/dev/null) || exit 0
+[ -n "$ROOT" ] || exit 0
+cd "$ROOT" || exit 0
+
+PY=python
+command -v python >/dev/null 2>&1 || PY=python3
+
+# 清理仅删未跟踪的缓存 / 临时 / 构建产物，失败不影响推送
+"$PY" engine/tools/workspace_cleanup.py >/dev/null 2>&1 || true
+
+exec "$PY" engine/tools/repo_sync.py guard

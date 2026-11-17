@@ -64,6 +64,8 @@ python -m unittest discover -s engine/tests -v   # 单元测试（全量）
 | update_planner.py | 编排 | content-update「生成任务清单」 |
 | automation_status.py | 编排 | content-update / scheduled-maintenance「状态记录与活跃度」 |
 | workspace_cleanup.py | 维护 | ci / html-sync / content-update / scheduled-maintenance / audit 各阶段「预清理 + 收尾清理」；`submit-pr` 提交前清理；`pre-push` 钩子 |
+| branch_naming.py | 规范+登记 | 分支命名规范（BRANCH-NAMING-SPEC v1.0）：`task/<slug>-<session8>` 生成与校验、会话标识解析链、`branch_registry.json` 登记册；由 `repo_sync.py` 与 `.githooks/` 复用 |
+| repo_sync.py | 网关 | 多会话统一提交网关：共享检出锁 / sync / push / pr / `run --gate` / 分支建改与审计 / 钩子安装；命名与直推守卫三重拦截 |
 
 ## 校验类
 
@@ -447,6 +449,34 @@ python engine/tools/workspace_cleanup.py --deep           # 连同 .venv/venv/en
   `scheduled-maintenance` 另执行 `pipeline_audit.py --rotate` 归档审计流水。
 - **说明**：`webhook-alert` 无工作区检出、不产生构建产物，不接入清理。
 
+## 分支命名与多会话网关（BRANCH-NAMING-SPEC v1.0）
+
+规范全文见 [engine/docs/branch-naming-and-lifecycle.md](../docs/branch-naming-and-lifecycle.md)，
+提交与合并协议见 [engine/docs/multi-session-git-protocol.md](../docs/multi-session-git-protocol.md)。
+
+```bash
+# 会话标识（建分支 / 排查用）
+python engine/tools/repo_sync.py session
+
+# 建任务分支（自动追加会话标识，从 origin/main 出发）
+python engine/tools/repo_sync.py branch <slug>          # → task/<slug>-<session8>
+
+# 存量梳理与整改
+python engine/tools/repo_sync.py branches               # 分支 + 登记 + 合规标记
+python engine/tools/repo_sync.py branch-audit           # 违规清单（有违规退出码 1）
+python engine/tools/repo_sync.py branch-rename <旧> <新> [--remote]
+
+# 钩子安装（每个克隆一次）
+python engine/tools/repo_sync.py hook-install
+python engine/tools/repo_sync.py hook-uninstall
+```
+
+- 受管分支仅 `task/*`，模板 `task/<slug>-<session8>`（8 位十六进制会话短码）；`main` 与 `ci/*` 豁免。
+- 会话标识解析链：`TECH_CTX_SESSION_ID` → `CATPAW_CONVERSATION_ID` → `X_AI_SESSIONID`
+  → `git config techctx.sessionId`；全部缺失即拒绝自动建分支。
+- 拦截三重：`.githooks/pre-push`、`.githooks/pre-commit`、`repo_sync` 网关（钩子未装也拦）。
+- 登记册 `engine/tools/branch_registry.json` 为分支 → 会话 / 任务的映射台账（工具读写，勿手改）。
+
 ## 常见场景速查
 
 | 场景 | 命令 |
@@ -460,6 +490,9 @@ python engine/tools/workspace_cleanup.py --deep           # 连同 .venv/venv/en
 | 新增业务线后首跑 | `ensure_region_topics.py` → 补 business-config.md → 首期基线报告 |
 | 手动补跑月度任务清单 | `update_planner.py --project content/economy/dubai/apartment --period 2026-12` |
 | 清理本地缓存/临时/构建残留 | `workspace_cleanup.py`（`--mode verify` 可先体检） |
+| 新建任务分支 | `repo_sync.py branch <slug>`（自动追加会话标识并登记） |
+| 分支名被钩子拦下 | `repo_sync.py branch-rename <旧> <新>`（见命名规范§六） |
+| 查分支属于哪个会话 | `repo_sync.py branches` 或读 `branch_registry.json` |
 
 ## 注意事项
 

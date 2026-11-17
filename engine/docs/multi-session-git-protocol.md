@@ -1,9 +1,10 @@
-# 多会话 Git 协作协议（MULTI-SESSION-GIT-PROTOCOL v1.4）
+# 多会话 Git 协作协议（MULTI-SESSION-GIT-PROTOCOL v1.5）
 
 > **状态**：现行规范
 > **定位**：当多个 Agent 会话与多个 GitHub Actions 共用同一仓库、同一 `main` 时，约定统一的提交与合并方式，保证**各任务独立提交互不覆盖**。
-> **单一事实源**：本文件 + `engine/tools/repo_sync.py`（统一提交网关）。
-> **最后更新**：2026-11-16
+> **单一事实源**：本文件 + `engine/tools/repo_sync.py`（统一提交网关）；分支命名另见
+> [branch-naming-and-lifecycle.md](branch-naming-and-lifecycle.md)（BRANCH-NAMING-SPEC v1.0）。
+> **最后更新**：2026-11-17
 
 ---
 
@@ -19,7 +20,7 @@
 
 | 层 | 机制 | 作用 |
 |---|---|---|
-| 分支隔离 | 任务在 `task/<slug>` 分支提交；禁止直推 `main` | 任务之间提交 / 文件互不干扰 |
+| 分支隔离 | 任务在 `task/<slug>-<session8>` 分支提交（会话标识内嵌，见 BRANCH-NAMING-SPEC v1.0）；禁止直推 `main` | 任务之间提交 / 文件互不干扰，且分支可回溯到会话 |
 | 串行合并 | 经 PR 合并到 `main`（GitHub **merge queue** / auto-merge） | 基于最新 main、一次一个，杜绝覆盖 |
 | 共享检出锁 | `.git/catpaw-sync.lock` 互斥 + 推送前 `fetch --rebase` | 多会话共用工作目录时防并发覆盖 |
 
@@ -28,8 +29,8 @@
 ## 三、标准工作流
 
 ```bash
-# 1) 建任务分支（从最新 main 出发）
-git fetch origin main && git switch -c task/<slug> origin/main
+# 1) 建任务分支（从最新 main 出发，自动追加会话标识）
+python engine/tools/repo_sync.py branch <slug>      # → task/<slug>-<session8>
 
 # 2) 统一网关提交（锁 → 优化流程门禁 --gate → sync → commit → push 当前分支）
 python engine/tools/repo_sync.py run --message "feat(x): ..." --paths <files...> --gate
@@ -53,25 +54,39 @@ python engine/tools/repo_sync.py pr --title "..." --body "..." --queue
 | `status` | 分支、与 `origin/main` 偏离、锁状态 |
 | `lock` / `unlock` | 显式获取 / 释放共享检出锁 |
 | `sync [base]` | `fetch + rebase`；冲突则 `rebase --abort` 并报告 |
-| `push [--allow-main]` | 默认拒绝推 `main`；推当前分支前自动 `sync` |
+| `push [--allow-main]` | 默认拒绝推 `main`；推当前分支前自动 `sync`；受管分支命名不符同样拒绝 |
 | `pr [--queue]` | 创建 PR；`--queue` 请求进入合并队列 |
 | `run --message M --paths ... [--gate] [--checks ...]` | 锁 →（`--gate`）优化流程统一门禁 → 校验（可选）→ commit → push；门禁 [E] 拒绝提交 |
-| `guard` | pre-push 钩子调用：按 refspec 判定，直推 `main`（非删除）时返回 1 |
+| `session` | 解析并打印当前会话标识（含来源），供建分支与排查 |
+| `branch <slug> [--from <ref>]` | 按 BRANCH-NAMING-SPEC 自动追加会话标识建分支，并登记台账 |
+| `branches` | 列出手头分支 + 登记信息 + 合规标记 |
+| `branch-audit` | 扫描存量分支，列出受管但命名违规项（有违规退出码 1） |
+| `branch-rename <旧> <新> [--remote]` | 改名并同步登记册；`--remote` 连同远端旧分支迁移 |
+| `hook-install` / `hook-uninstall` | 安装 / 卸载 `.githooks`（`core.hooksPath`） |
+| `guard [--stage push\|commit]` | 钩子调用：按 refspec（push）或当前分支（commit）判定；直推 `main`、GitLab 远端、受管分支命名不符时返回 1 |
 
 ---
 
-## 五、pre-push 钩子（本克隆强制）
+## 五、pre-push / pre-commit 钩子（本克隆强制）
 
 ```bash
-git config core.hooksPath .githooks   # 安装
-git config --unset core.hooksPath     # 卸载
+python engine/tools/repo_sync.py hook-install   # 内部即 git config core.hooksPath .githooks
+python engine/tools/repo_sync.py hook-uninstall  # 即 git config --unset core.hooksPath
 ```
 
-钩子在直推 `main` 时阻断并提示改用 `task/* + PR`。判定基于 **pre-push stdin 的 refspec**（`<local ref> <local sha> <remote ref> <remote sha>`），而非当前分支：
+**pre-push** 在门禁前调用 `workspace_cleanup.py`（容错），随后判定基于 **pre-push stdin 的
+refspec**（`<local ref> <local sha> <remote ref> <remote sha>`），而非当前分支：
 
 - 任一 remote ref 为 `refs/heads/main` 且非删除 → 阻断（**站在 `task/*` 上显式 `git push origin main` 也会被阻断**）；
-- 删除 `main`（`(delete)`）或推送 `task/*` / `ci/*` → 放行（因此可在 `main` 上清理远端已合并分支）；
+- 受管分支（`task/*`）命名不符合 BRANCH-NAMING-SPEC（缺 `-<session8>` 等）→ 阻断，提示用
+  `repo_sync.py branch-rename` 整改；
+- 删除 `main`（`(delete)`）或推送 `ci/*` 等豁免分支 → 放行（因此可在 `main` 上清理远端已合并分支）；
 - 无 stdin（手动执行 `repo_sync.py guard`）→ 回退为当前分支判定。
+
+**pre-commit**（`repo_sync.py guard --stage commit`）：当前检出为受管分支且命名不合规 → 阻断提交，
+避免「先提交、后改名」留下不可追溯的历史；`main` / `ci/*` 豁免。
+
+统一网关（`repo_sync.py push` / `run` / `pr`）复用同一套命名判定，**钩子未安装时同样拦截**。
 
 ### 5.1 远端约束：仅 GitHub，禁用 GitLab
 
@@ -116,3 +131,4 @@ GitHub 对由 `github-actions[bot]`（仓库 `GITHUB_TOKEN`）创建的 PR，其
 | v1.2 | 2026-11-15 | `guard` 改为按 pre-push refspec 判定：堵住「站在 task 分支显式推 main」的绕过，同时不再误拦远端分支删除 |
 | v1.3 | 2026-11-15 | `run --gate`：提交前强制复用优化流程统一门禁 `optimization_gate.py`（[E] 拒绝提交）；新增 `--checks` 自定义校验 |
 | v1.4 | 2026-11-16 | 新增远端约束：`guard` 扫描 `git remote -v`，任一远端含 `gitlab` 即阻断推送（本仓库仅允许 GitHub）；单测强制校验 |
+| v1.5 | 2026-11-17 | 分支命名纳入协议：任务分支统一 `task/<slug>-<session8>`（BRANCH-NAMING-SPEC v1.0）；新增 pre-commit 钩子与 `hook-install` / `branch` / `branch-rename` / `branch-audit` 子命令；网关复用命名校验 |
