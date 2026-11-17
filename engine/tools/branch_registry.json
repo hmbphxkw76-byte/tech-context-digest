@@ -13,6 +13,13 @@
       "session_short": "5f37e90d",
       "slug": "doc-ledger-retention",
       "task": "doc-ledger-retention"
+    },
+    "task/mainline-adoption-assess-8e70425f": {
+      "note": "source=env:CATPAW_CONVERSATION_ID",
+      "session": "8e70425f74ef40dfbbabc8e45ad4e542",
+      "session_short": "8e70425f",
+      "slug": "mainline-adoption-assess",
+      "task": "mainline-adoption-assess"
     }
   },
   "schema": 1,
