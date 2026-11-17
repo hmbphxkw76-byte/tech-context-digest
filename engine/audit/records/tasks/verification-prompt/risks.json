@@ -1,0 +1,14 @@
+[
+  {
+    "description": "提示词遗漏方案条目",
+    "id": "R-01",
+    "mitigation": "逐项对照覆盖矩阵 52 行",
+    "owner": ""
+  },
+  {
+    "description": "提示词预设结论",
+    "id": "R-02",
+    "mitigation": "只给命令与判据，不预设通过与否",
+    "owner": ""
+  }
+]

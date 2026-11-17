@@ -1,0 +1,18 @@
+[
+  {
+    "acceptance": "",
+    "depends_on": [],
+    "id": "T-01",
+    "phase": "",
+    "status": "pending",
+    "title": "以《方案》+覆盖矩阵为清单，编写可复用的全量验证提示词"
+  },
+  {
+    "acceptance": "",
+    "depends_on": [],
+    "id": "T-02",
+    "phase": "",
+    "status": "pending",
+    "title": "覆盖反虚假实现专项检查（门禁复用/占位桩/测试断言/数据真实性/可重放/绕过门禁）"
+  }
+]
