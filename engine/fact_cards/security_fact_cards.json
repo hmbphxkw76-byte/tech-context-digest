@@ -1,0 +1,139 @@
+{
+  "schema_version": "1.0",
+  "domain": "SEC",
+  "comment": "security（AI 网安就业）共享事实卡片。字段规范见 engine/fact_cards/README.md 与信息分层规范第五节。",
+  "cards": [
+    {
+      "card_id": "FC-SEC-001",
+      "fact": "阿联酋日均抵御约 20 万次网络攻击；2026 年以来确认事件 128 起；71.4% 的追踪威胁行为体为国家背景 APT（21 组中 15 组）。",
+      "source": "Khaleej Times（转引 UAE CSC 官方）https://khaleejtimes.com/uae/over-70-of-cyber-threats-targeting-uae-are-state-sponsored-authority-says, 2026",
+      "tier": 4,
+      "verify_status": "部分核验",
+      "level": "部分核验",
+      "updated": "2026-11-11",
+      "indicators": ["SEC-3"],
+      "used_by": ["security", "industry-research", "competitive-intelligence"]
+    },
+    {
+      "card_id": "FC-SEC-002",
+      "fact": "Gartner：2025 年中东与北非企业信息安全终端支出 33 亿美元，同比增长 14%；安全软件占比约 45%，安全服务为增速最快板块（+16.6%）。",
+      "source": "Gartner https://gartner.com/en/newsroom/press-releases/2025-04-08-gartner-forecasts-spending-on-information-security-in-mena-to-grow-14-percent-in-2025, 2025",
+      "tier": 2,
+      "verify_status": "已核验",
+      "level": "已核验事实",
+      "updated": "2026-11-11",
+      "indicators": ["SEC-1"],
+      "used_by": ["security", "industry-research", "competitive-intelligence"]
+    },
+    {
+      "card_id": "FC-SEC-003",
+      "fact": "阿联酋网安市场规模（多口径并列）：Mordor 2025 年 8.2 亿 → 2031 年 15.1 亿美元，CAGR 10.66%；Global Market Insights 2025 年约 34 亿美元、CAGR 12.29%（含硬件与服务）。差异源于终端支出与含服务总收入口径不同，不合并。",
+      "source": "Mordor Intelligence https://mordorintelligence.com/industry-reports/uae-cybersecurity-market, 2025；Global Market Insights https://gminsights.com/industry-analysis/cybersecurity-market, 2025",
+      "tier": 2,
+      "verify_status": "已核验",
+      "level": "已核验事实",
+      "updated": "2026-11-11",
+      "indicators": ["SEC-2"],
+      "used_by": ["security", "industry-research", "competitive-intelligence"]
+    },
+    {
+      "card_id": "FC-SEC-004",
+      "fact": "ISC2 2025 网络安全人力研究：AI 为最急需技能（41%），云安全次之（36%）；88% 受访者因技能短缺在过去一年遭遇至少一项安全后果，95% 团队存在技能需求。",
+      "source": "ISC2 https://isc2.org/Insights/2025/12/ISC2-Publishes-2025-Cybersecurity-Workforce-Study, 2025",
+      "tier": 2,
+      "verify_status": "已核验",
+      "level": "已核验事实",
+      "updated": "2026-11-11",
+      "indicators": ["SEC-4"],
+      "used_by": ["security", "industry-research", "competitive-intelligence"]
+    },
+    {
+      "card_id": "FC-SEC-005",
+      "fact": "人才供给严重不足：Mordor 指 87% 的阿联酋企业难以招募合格网络安全人员；最难填补为中级 SOC 分析师（L2/L3）、云安全工程师、OT 安全工程师，平均填补周期 3–6 个月，CISO 级 4–8 个月。",
+      "source": "Mordor Intelligence https://mordorintelligence.com/industry-reports/uae-cybersecurity-market, 2025；RFS https://rfsonshr.com/technology-recruitment-uae/cybersecurity-talent-acquisition, 2025",
+      "tier": 2,
+      "verify_status": "部分核验",
+      "level": "部分核验",
+      "updated": "2026-11-11",
+      "indicators": ["SEC-5"],
+      "used_by": ["security", "industry-research", "competitive-intelligence"]
+    },
+    {
+      "card_id": "FC-SEC-006",
+      "fact": "迪拜 AI 安全专项薪资（招聘机构抽样 2026）：初级 22,000–32,000、中级 35,000–55,000、资深 55,000–75,000、负责人 80,000–140,000 AED/月；资深 AI 安全工程师较通用安全工程师溢价约 15–30%。",
+      "source": "hiredeveloper.ae https://hiredeveloper.ae/employer-blog/how-to-hire-ai-security-engineers-dubai-after-meta-breach-7-steps, 2026（招聘机构抽样，非官方薪酬指南）",
+      "tier": 3,
+      "verify_status": "部分核验",
+      "level": "部分核验",
+      "updated": "2026-11-11",
+      "indicators": ["SEC-6"],
+      "used_by": ["security", "competitive-intelligence"]
+    },
+    {
+      "card_id": "FC-SEC-007",
+      "fact": "黄金签证技能类门槛：MOHRE 职业 1–2 级（IT 属 2 级）、本科、基本月薪 ≥30,000 AED（基本工资非总额）；AI、大数据、软件/计算机/电子工程在优先领域。2026-10 阿布扎比通函称技术人才路线收紧，联邦门户未见新增类别，待 ICP 最终确认。",
+      "source": "u.ae https://u.ae/en/information-and-services/visa-and-emirates-id/residence-visas/golden-visa, 2025；visahq.news, 2026（转述，待 ICP 复核）",
+      "tier": 1,
+      "verify_status": "部分核验",
+      "level": "部分核验",
+      "updated": "2026-11-11",
+      "indicators": ["SEC-8"],
+      "used_by": ["security"]
+    },
+    {
+      "card_id": "FC-SEC-008",
+      "fact": "阿联酋个税 0%、外籍社保 0%；唯一强制性薪资扣减为 ILOE 失业险：基本工资 ≤1.6 万 AED 者每月 AED 5、>1.6 万者每月 AED 10，另加 5% VAT；月薪净额约等于总额的 99.98%。",
+      "source": "u.ae https://u.ae/en/information-and-services/finance-and-investment/taxation/other-taxes；ILOE https://iloe.ae/pdf/Involuntary-Loss-of-Employment-Brochure-ILOE-V2.pdf, 2025",
+      "tier": 1,
+      "verify_status": "已核验",
+      "level": "已核验事实",
+      "updated": "2026-11-11",
+      "indicators": ["SEC-8"],
+      "used_by": ["security"]
+    },
+    {
+      "card_id": "FC-SEC-009",
+      "fact": "DESC 发布强制标准 ISR（信息安全条例 v3.1，含 13 个控制域），适用所有迪拜政府实体及处理政府数据的第三方供应商；《迪拜 AI 安全政策》（2024 年 9 月）覆盖生成式 AI 安全，为区域首创。",
+      "source": "DESC https://desc.gov.ae/hamdan-bin-mohammed-launches-second-cycle-of-dubai-cyber-security-strategy, 2023；Gulf Time https://gulftime.ae/dubai-electronic-security-centre-unveils-dubai-ai-security-policy, 2024",
+      "tier": 1,
+      "verify_status": "已核验",
+      "level": "已核验事实",
+      "updated": "2026-11-11",
+      "indicators": ["SEC-14"],
+      "used_by": ["security", "industry-research", "competitive-intelligence"]
+    },
+    {
+      "card_id": "FC-SEC-010",
+      "fact": "Stargate UAE：2025 年 5 月宣布、落地阿布扎比的 5GW AI 园区 / 1GW 算力集群（G42 建设、OpenAI 与 Oracle 运营、NVIDIA GB300、Cisco 零信任），首批 200MW 计划 2026 年上线，由 Khazna 承建；截至 2026 年仍在建设阶段，运营状态待官方确认。",
+      "source": "OpenAI https://openai.com/index/introducing-stargate-uae, 2025",
+      "tier": 1,
+      "verify_status": "部分核验",
+      "level": "部分核验",
+      "updated": "2026-11-11",
+      "indicators": ["SEC-9"],
+      "used_by": ["security", "industry-research", "competitive-intelligence"]
+    },
+    {
+      "card_id": "FC-SEC-011",
+      "fact": "微软–G42：15 亿美元为微软 2024 年 4 月对 G42 的已确认股权注资（Brad Smith 进入 G42 董事会），并配套 10 亿美元开发者基金承诺；中文媒体所称「152 亿美元对阿联酋投资计划」未获英文权威来源证实，已剔除。",
+      "source": "Microsoft https://blogs.microsoft.com/blog/2024/04/15/microsoft-and-g42-partner, 2024",
+      "tier": 1,
+      "verify_status": "已核验",
+      "level": "已核验事实",
+      "updated": "2026-11-11",
+      "indicators": ["SEC-11"],
+      "used_by": ["security", "industry-research", "competitive-intelligence"]
+    },
+    {
+      "card_id": "FC-SEC-012",
+      "fact": "证书与准入：CISSP、ISO 27001 主任审核员、OSCP 为阿联酋招聘最常点名要求；2025–2026 新发 AI 专项证（GIAC GAIPS/GASAE、CompTIA SecAI+、ISACA AAIA/AAIR、EC-Council COASP、ISC2 AI 认证试点）可作差异化，但抽样岗位中尚无一条将其列为硬性门槛。",
+      "source": "多源交叉（giac.org / isc2.org / certiguard.io / bestaicertifications.com 等），2025–2026",
+      "tier": 2,
+      "verify_status": "部分核验",
+      "level": "部分核验",
+      "updated": "2026-11-11",
+      "indicators": ["SEC-13"],
+      "used_by": ["security"]
+    }
+  ]
+}

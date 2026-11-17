@@ -1,0 +1,1025 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>迪拜（阿联酋）AI 网安竞争格局 · 基线报告（2026-12）</title>
+<style>
+:root{
+  --radius-sm:8px; --radius:12px; --radius-lg:16px; --radius-pill:999px;
+  --shadow:0 1px 3px rgba(20,40,70,.06); --shadow-md:0 4px 14px rgba(20,40,70,.09);
+  --shadow-lg:0 10px 30px rgba(15,35,56,.2);
+  --font-sans:"Microsoft YaHei","PingFang SC","Segoe UI",Arial,sans-serif;
+  --font-mono:"SFMono-Regular",Consolas,"Liberation Mono",monospace;
+  --focus-ring:0 0 0 3px rgba(63,111,176,.35);
+  --transition:.15s ease;
+  --bg:#f4f6f9; --card:#ffffff; --card2:#fbfcfe; --soft:#f5f8fb;
+  --ink:#15202b; --ink2:#465667; --ink3:#657180;
+  --line:#e1e7ee; --line2:#eef2f6;
+  --navy:#16324f; --navy2:#2f5597; --blue:#3f6fb0; --blue-l:#eaf1fa;
+  --red:#a83224; --red-d:#822116; --red-l:#fbece8; --red-bg:#fbece8; --red-line:#f0d4cf;
+  --pre:#b8541c; --pre-l:#fdf1e4; --pre-bg:#fdf1e4; --pre-line:#f2ddc9;
+  --green:#1c7444; --green-l:#eaf5ef; --green-bg:#eaf5ef; --green-line:#d3ead9;
+  --amber:#956612; --amber-l:#fdf4e2; --amber-bg:#fdf4e2; --amber-line:#f0e3c2;
+  --gray:#646f7b; --gray-l:#eff2f4; --gray-bg:#eff2f4; --gray-line:#e6eaee;
+  /* 别名：兼容既有报告组件的命名习惯 */
+  --surface:#ffffff; --surface2:#fbfcfe;
+  --navy-2:#2f5597; --muted:#657180; --bg-soft:#f5f8fb; --bg-card:#fbfcfe;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  *,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}
+}
+body{font-family:var(--font-sans);background:var(--bg);color:var(--ink);line-height:1.76;font-size:14.5px}
+.wrap{max-width:1160px;margin:0 auto;padding:0 24px 64px}
+a{color:var(--navy2);text-decoration:none}
+a:hover{text-decoration:underline}
+a:focus-visible,button:focus-visible{outline:none;box-shadow:var(--focus-ring)}
+.skip-link{position:absolute;left:12px;top:-48px;z-index:100;background:var(--navy);color:#fff;padding:8px 16px;border-radius:0 0 8px 8px;font-size:12.5px;transition:top var(--transition)}
+.skip-link:focus{top:0;color:#fff;text-decoration:none}
+
+/* ── 页头（trends report-head 结构；.hero 为 apartment 同义类） ── */
+header.report-head,header.hero{
+  background:linear-gradient(128deg,#0f2338 0%,var(--navy) 52%,var(--navy2) 100%);
+  color:#fff;padding:40px 0 30px;
+}
+header.report-head .wrap{padding:0 24px}
+header.hero{padding-left:max(24px,calc(50% - 580px));padding-right:max(24px,calc(50% - 580px))}
+header.report-head h1,header.hero h1{margin:0 0 8px;font-size:27px;font-weight:700;letter-spacing:.4px;line-height:1.35}
+header .eyebrow{font-size:11.5px;letter-spacing:2.4px;color:rgba(255,255,255,.62);text-transform:uppercase}
+header .sub{font-size:14px;color:rgba(255,255,255,.82);margin:2px 0}
+header .meta{font-size:12.3px;color:rgba(255,255,255,.75);margin-top:14px;line-height:1.9}
+header .meta b{color:#fff}
+header .nav-url{font-size:11.5px;color:rgba(255,255,255,.78);margin-top:10px;word-break:break-all}
+header .nav-url a{color:#cfe0ee;text-decoration:none;border-bottom:1px dashed #cfe0ee}
+header .tag{display:inline-block;background:rgba(255,255,255,.11);border:1px solid rgba(255,255,255,.2);border-radius:14px;padding:2px 11px;margin:5px 6px 0 0;font-size:11.5px}
+
+/* ── 顶部固定导航 ── */
+nav.report-nav{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.96);border-bottom:1px solid var(--line);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);margin-bottom:26px}
+nav.report-nav .wrap{display:flex;flex-wrap:wrap;gap:6px 14px;align-items:center;padding-top:10px;padding-bottom:10px}
+nav.report-nav > .nav-tabs{max-width:1160px;margin:0 auto;padding:10px 24px}
+.nav-url{display:flex;align-items:baseline;gap:8px;flex-wrap:wrap;font-size:11.5px;line-height:1.6;color:var(--ink3);padding-bottom:6px;margin-bottom:6px;border-bottom:1px dashed var(--line);width:100%}
+.nav-url-label{font-weight:700;color:var(--ink2);white-space:nowrap}
+.nav-url a{color:var(--blue);text-decoration:none;word-break:break-all}
+.nav-url a:hover{text-decoration:underline}
+.nav-tabs{display:flex;flex-wrap:wrap;gap:6px}
+.nav-tabs a{color:var(--navy);text-decoration:none;font-size:12.5px;padding:4px 10px;border-radius:14px;border:1px solid var(--line);background:var(--bg-soft);white-space:nowrap;transition:background var(--transition),color var(--transition)}
+.nav-tabs a:hover{background:var(--blue-l);border-color:#b9cfe2;text-decoration:none}
+.nav-tabs a.active{background:var(--blue-l);color:var(--blue);font-weight:700}
+
+/* ── 章节与排版 ── */
+main{padding-top:0}
+h2.sec{font-size:19px;color:var(--navy);margin:38px 0 14px;padding-bottom:8px;border-bottom:2px solid var(--navy);scroll-margin-top:100px;font-weight:700}
+h2.sec .en{font-size:10.8px;color:var(--ink3);font-weight:400;margin-left:10px;letter-spacing:1.1px}
+h3{font-size:15.5px;color:var(--navy);margin:22px 0 8px;font-weight:700;scroll-margin-top:100px}
+h4{font-size:14px;color:var(--navy);margin:16px 0 6px;font-weight:700}
+p{margin:8px 0}
+ul,ol{margin:8px 0;padding-left:22px}
+li{margin:5px 0}
+ul.tight,ol.tight{margin:7px 0}
+ul.tight li,ol.tight li{margin-bottom:6px}
+b,strong{font-weight:650;color:var(--ink)}
+blockquote{border-left:4px solid var(--line);margin:12px 0;padding:2px 0 2px 14px;color:var(--ink2)}
+code{background:var(--bg-soft);padding:2px 5px;border-radius:4px;font-family:var(--font-mono);font-size:.92em}
+pre{background:var(--bg-soft);border:1px solid var(--line);border-radius:var(--radius-sm);padding:12px 14px;overflow-x:auto;margin:12px 0}
+pre code{background:none;padding:0}
+img{max-width:100%}
+.lead{color:var(--ink2);font-size:13.8px;margin:6px 0 14px}
+.muted{color:var(--ink3)}
+.small{font-size:11.7px;color:var(--ink3)}
+hr{border:0;border-top:1px solid var(--line);margin:26px 0 0}
+.hr{height:1px;background:var(--line);margin:26px 0 0}
+b.red,color.red{color:var(--red)} b.pre{color:var(--pre)} b.green{color:var(--green)}
+b.amber{color:var(--amber)} b.navy{color:var(--navy)}
+
+/* ── 表格 ── */
+table{width:100%;border-collapse:collapse;font-size:13px;background:var(--card);margin:12px 0}
+th,td{border:1px solid var(--line);padding:8px 10px;text-align:left;vertical-align:top;line-height:1.62}
+thead th{background:var(--navy);color:#fff;font-weight:600;white-space:nowrap}
+tbody th{background:var(--blue-l);color:var(--navy);font-weight:600}
+tbody tr:nth-child(even) td{background:var(--bg-soft)}
+tbody tr:hover td{background:var(--blue-l)}
+table.fixed{table-layout:fixed}
+.num{text-align:right;font-variant-numeric:tabular-nums}
+.tblwrap{overflow-x:auto;border-radius:var(--radius-sm);border:1px solid var(--line);margin:12px 0}
+.tblwrap table{margin:0;border:0}
+
+/* ── 来源：表头弹层 / 行内链接 / 来源清单 ── */
+.src-head{position:relative;cursor:help;border-bottom:1px dotted var(--blue);white-space:nowrap}
+.src-head .src-pop{position:absolute;left:0;top:100%;z-index:60;display:none;background:var(--navy);color:#fff;font-size:12px;font-weight:400;padding:9px 12px;border-radius:8px;box-shadow:var(--shadow-lg);max-width:min(560px,86vw);white-space:normal;line-height:1.65;border:1px solid rgba(255,255,255,.14)}
+.src-pop .pop-title{font-weight:600;display:block;margin-bottom:4px;color:#fff}
+.src-pop .pop-url{display:block;margin-top:6px;word-break:break-all;color:var(--blue-l)}
+.src-pop .pop-url a{color:#a9c8ee}
+.src-head:hover .src-pop,.src-head:focus .src-pop,.src-head:focus-within .src-pop{display:block}
+.src-inline{color:var(--ink3);font-size:12px;word-break:break-all}
+.src-inline a{color:var(--blue);text-decoration:none;border-bottom:1px dotted var(--blue)}
+.src-inline a:hover{background:#eaf3fa}
+.src{font-size:11.1px;color:var(--ink3);word-break:break-word;line-height:1.58}
+.src a{color:#5b7bb4;text-decoration:none}
+.src a:hover{text-decoration:underline}
+.refs{font-size:12.5px;color:var(--ink3)}
+.refs ol{padding-left:20px}
+.refs a{color:var(--navy);text-decoration:none;border-bottom:1px dashed var(--navy);word-break:break-all}
+.refs a:hover{background:#e8f0f8}
+
+/* ── 卡片 / 结论框 ── */
+.card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:18px 20px;box-shadow:var(--shadow);margin:14px 0}
+.card.tight{padding:14px 16px}
+.leadbox{border-left:4px solid var(--navy2);background:linear-gradient(125deg,#f5f9fd,#edf3fa);border-color:#cfdded}
+.leadbox h3:first-child{margin-top:0}
+
+/* ── KPI 卡（trends .kpi / apartment .kcard） ── */
+.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(168px,1fr));gap:12px;margin:14px 0}
+.kpi{background:var(--card);border:1px solid var(--line);border-left:4px solid var(--navy);border-radius:var(--radius-sm);padding:12px 14px;box-shadow:var(--shadow)}
+.kpi.red{border-left-color:var(--red)} .kpi.green{border-left-color:var(--green)}
+.kpi.amber{border-left-color:var(--amber)} .kpi.blue{border-left-color:var(--blue)}
+.kpi .v{font-size:22px;font-weight:700;color:var(--navy);line-height:1.2}
+.kpi.red .v{color:var(--red)} .kpi.green .v{color:var(--green)}
+.kpi.amber .v{color:var(--amber)} .kpi.blue .v{color:var(--blue)}
+.kpi .l{font-size:12px;color:var(--ink3);margin-top:4px}
+.kpi .s{font-size:11px;color:#8a98a6;margin-top:2px}
+.kcards{display:grid;grid-template-columns:repeat(auto-fit,minmax(232px,1fr));gap:11px;margin:14px 0}
+.kcard{background:var(--card);border:1px solid var(--line);border-left:4px solid var(--navy2);border-radius:10px;padding:13px 15px;box-shadow:var(--shadow)}
+.kcard.warn,.kcard.pre{border-left-color:var(--pre);background:linear-gradient(180deg,var(--pre-bg),#fff 62%)}
+.kcard.bad,.kcard.red{border-left-color:var(--red);background:linear-gradient(180deg,var(--red-bg),#fff 62%)}
+.kcard.good{border-left-color:var(--green);background:linear-gradient(180deg,var(--green-bg),#fff 62%)}
+.kcard .lab,.kcard .t{font-size:12.4px;color:var(--ink2)}
+.kcard .val,.kcard .v{font-size:22px;font-weight:700;color:var(--navy);margin:3px 0 2px;line-height:1.25}
+.kcard.warn .val,.kcard.pre .val{color:var(--pre)}
+.kcard.bad .val,.kcard.red .val{color:var(--red)}
+.kcard.good .val{color:var(--green)}
+.kcard .note,.kcard .s{font-size:11.5px;color:var(--ink3);line-height:1.6;margin-top:4px;word-break:break-word}
+
+/* ── 数据条 / 信号灯 ── */
+.stat-strip{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin:12px 0}
+.stat{background:var(--card);border:1px solid var(--line);border-radius:9px;padding:11px 13px;text-align:center}
+.stat .lab,.stat .l{font-size:11.4px;color:var(--ink3);margin-top:2px}
+.stat .n{font-size:23px;font-weight:700;line-height:1.2}
+.stat.hard .n{color:var(--red)} .stat.pre .n{color:var(--pre)} .stat.yel .n{color:var(--amber)}
+.stat.grn .n{color:var(--green)} .stat.gry .n{color:var(--gray)}
+.lamp{display:inline-block;min-width:9px;width:9px;height:9px;border-radius:50%;margin-right:4px;vertical-align:0}
+.lamp.r{background:var(--red)} .lamp.p{background:var(--pre)} .lamp.y{background:var(--amber)}
+.lamp.g{background:var(--green)} .lamp.k{background:var(--gray)}
+
+/* ── 标签 / 标注 ── */
+.tag{display:inline-block;font-size:11px;padding:1px 7px;border-radius:10px;background:var(--blue-l);color:var(--navy);border:1px solid var(--line);margin-right:4px}
+.tag.red{background:var(--red-l);color:var(--red);border-color:var(--red-line)}
+.tag.green{background:var(--green-l);color:var(--green);border-color:var(--green-line)}
+.tag.amber{background:var(--amber-l);color:var(--amber);border-color:var(--amber-line)}
+.pill{display:inline-block;border-radius:3px;padding:0 7px;font-size:11.3px;white-space:nowrap;line-height:1.72}
+.pill.r{background:var(--red-l);color:var(--red)} .pill.p{background:var(--pre-l);color:var(--pre)}
+.pill.y{background:var(--amber-l);color:var(--amber)} .pill.g{background:var(--green-l);color:var(--green)}
+.pill.k{background:var(--gray-l);color:var(--gray)} .pill.b{background:var(--blue-l);color:var(--navy2)}
+.pill.act{background:#e8eef6;color:#2b4a70}
+.callout{border-left:4px solid var(--amber);background:var(--amber-l);padding:12px 16px;border-radius:0 6px 6px 0;margin:14px 0;font-size:13.5px}
+.callout.red{border-left-color:var(--red);background:var(--red-l)}
+.callout.green{border-left-color:var(--green);background:var(--green-l)}
+.note{border:1px solid var(--line);border-left:4px solid var(--navy2);background:var(--card2);border-radius:var(--radius-sm);padding:12px 15px;margin:14px 0;font-size:13.5px}
+.note.gap{border-left-color:var(--gray);background:var(--gray-l)}
+.note.check{border-left-color:var(--green);background:var(--green-l)}
+.note.correct{border-left-color:var(--red);background:var(--red-l)}
+.note.preline{border-left-color:var(--pre);background:var(--pre-l)}
+.term{font-size:12.5px;color:var(--ink3);background:var(--bg-soft);border:1px solid var(--line);border-radius:6px;padding:8px 12px;margin:14px 0}
+.term b{color:var(--navy)}
+
+/* ── 图表（trends .chart 卡片 / apartment .chart-box + .chart-eh 容器） ── */
+.chart{margin:18px 0;padding:16px;background:var(--card);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow)}
+.chart h4{margin:0 0 4px;font-size:14.5px;color:var(--navy)}
+.chart .unit{font-size:12px;color:var(--ink3);font-weight:400}
+.chart-note{font-size:11.5px;color:var(--ink3);margin:0 0 12px;line-height:1.7}
+.chart svg{display:block;max-width:100%;height:auto;margin:6px auto 0}
+.chart-box{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:14px 14px 6px;box-shadow:var(--shadow);margin:16px 0}
+.chart-eh{width:100%;height:352px;margin:6px 0}
+.legend{display:flex;flex-wrap:wrap;gap:14px;font-size:12px;color:var(--ink2);margin:6px 0 12px}
+.legend span{display:inline-flex;align-items:center;gap:5px}
+.legend i{display:inline-block;width:11px;height:11px;border-radius:2px}
+
+/* ── 时间线 ── */
+.timeline{margin:16px 0;padding-left:8px}
+.tl-item{display:flex;gap:14px;margin:0 0 14px}
+.tl-date{flex:0 0 78px;font-size:12.5px;font-weight:700;color:var(--navy);text-align:right;padding-top:2px}
+.tl-body{flex:1;border-left:2px solid var(--line);padding:0 0 0 14px;position:relative}
+.tl-body::before{content:"";position:absolute;left:-6px;top:6px;width:10px;height:10px;border-radius:50%;background:var(--navy);border:2px solid #fff;box-shadow:0 0 0 1px var(--navy)}
+.tl-body.red::before{background:var(--red);box-shadow:0 0 0 1px var(--red)}
+.tl-body.green::before{background:var(--green);box-shadow:0 0 0 1px var(--green)}
+.tl-body.amber::before{background:var(--amber);box-shadow:0 0 0 1px var(--amber)}
+.tl-body .t{font-weight:600;color:var(--ink)}
+.tl-body .d{font-size:13px;color:var(--ink3);margin-top:2px}
+
+/* ── 风险条 / 风险框 ── */
+.rl-track{position:relative;height:12px;background:var(--gray-line);border-radius:999px;margin:14px 0 6px;overflow:hidden}
+.rl-fill{position:absolute;left:0;top:0;bottom:0;background:var(--green);border-radius:999px}
+.rl-marker{position:absolute;top:-3px;bottom:-3px;width:2px;background:var(--red);left:50%}
+.risk{background:linear-gradient(125deg,#fdf3f1,var(--red-l));border:1px solid #eec8c1;border-left:5px solid var(--red);border-radius:10px;padding:16px 18px;margin:14px 0}
+.risk h4{font-size:14.4px;color:var(--red);margin-bottom:8px}
+.risk .kpis{display:flex;flex-wrap:wrap;gap:22px;margin:10px 0 12px}
+.risk .kpis>div{min-width:150px}
+.risk .kpis .n{font-size:22px;font-weight:700;color:var(--red);line-height:1.25}
+.risk .kpis .l{font-size:11.4px;color:var(--ink2)}
+.redbox{background:linear-gradient(135deg,#fff8f6,var(--red-l));border:1px solid #eec8c1;border-left:5px solid var(--red);border-radius:10px;padding:15px 18px;margin:14px 0}
+.redbox h4{color:var(--red-d);margin-top:0}
+.prebox{background:linear-gradient(135deg,#fffaf4,var(--pre-l));border:1px solid #efd3b6;border-left:5px solid var(--pre);border-radius:10px;padding:15px 18px;margin:14px 0}
+.prebox h4{color:var(--pre);margin-top:0}
+.preline{border-left:4px solid var(--pre);background:var(--pre-l);padding:10px 14px;border-radius:0 6px 6px 0;margin:10px 0;font-size:13px}
+
+/* ── 目录 / 流程 / 分层（年度） ── */
+.toc{display:flex;flex-wrap:wrap;gap:7px;margin:0 0 6px}
+.toc a{font-size:12.3px;color:var(--navy2);background:var(--blue-l);border-radius:15px;padding:3px 12px;text-decoration:none}
+.toc a:hover{background:#dae6f5}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.flow{display:flex;align-items:stretch;gap:7px;flex-wrap:wrap;margin:12px 0}
+.node{flex:1;min-width:150px;background:var(--blue-l);border:1px solid #cfddf3;border-radius:8px;padding:11px 12px}
+.node b{display:block;color:var(--navy);font-size:12.8px;margin-bottom:3px}
+.node span{font-size:11.4px;color:var(--ink2);line-height:1.55;display:block}
+.arrow{display:flex;align-items:center;color:var(--blue);font-size:18px;font-weight:700}
+.tiers{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:12px 0}
+.tier{border:1px solid var(--line);border-radius:10px;padding:14px 15px;background:var(--card)}
+.tier.t1{border-top:4px solid var(--red)} .tier.t2{border-top:4px solid var(--pre)} .tier.t3{border-top:4px solid var(--amber)}
+.tier h4{margin:0 0 6px} .tier p{font-size:12.2px;color:var(--ink2);margin:0}
+
+/* ── 标注 / 页脚 / 索引链接 ── */
+.disc{margin-top:34px;padding:16px 18px;background:var(--bg-soft);border:1px solid var(--line);border-radius:var(--radius);font-size:13px;color:var(--ink3)}
+.disc strong{color:var(--ink)}
+footer,.footer{font-size:11.4px;color:var(--ink3);text-align:center;margin-top:22px;line-height:1.8}
+.idx-link{color:var(--navy);text-decoration:none;border-bottom:1px dotted #9db9da;font-weight:600}
+.idx-link:hover{color:var(--navy2);border-bottom:1px solid var(--blue)}
+.idx-link .ext{font-size:10px;color:var(--blue);margin-left:2px;font-weight:400}
+
+/* ── 报告特有组件（apartment 基线 / 季度） ── */
+.tldr{background:linear-gradient(180deg,#fff,#f8fafe);border-left:5px solid var(--navy2)}
+.verdict{font-size:17px;font-weight:700;color:var(--blue);margin:0 0 12px}
+.kpi-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin:16px 0}
+.tbl-wrap{overflow-x:auto;border:1px solid var(--line);border-radius:8px;margin:12px 0}
+.src-pop .src-pop-title{display:block;font-size:11px;color:var(--ink3);margin-bottom:4px;border-bottom:1px solid var(--line);padding-bottom:4px}
+.t-red{background:var(--red-l);color:var(--red)} .t-green{background:var(--green-l);color:var(--green)}
+.t-amber{background:var(--amber-l);color:var(--amber)} .t-grey{background:var(--gray-l);color:var(--ink3)}
+.t-blue{background:var(--blue-l);color:var(--blue)}
+.toggle{display:inline-flex;border:1px solid var(--line);border-radius:6px;overflow:hidden;margin-bottom:8px}
+.toggle button{border:0;background:#fff;color:var(--ink2);padding:5px 14px;font-size:12px;cursor:pointer;font-family:inherit}
+.toggle button.on{background:var(--navy2);color:#fff}
+.hide{display:none}
+.two-col{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.layer{display:grid;grid-template-columns:110px 1fr;gap:0;border:1px solid var(--line);border-radius:8px;overflow:hidden;margin-bottom:10px;background:#fff}
+.layer .lb{background:var(--navy2);color:#fff;padding:14px 12px;font-weight:700;font-size:13px;display:flex;align-items:center;justify-content:center;text-align:center}
+.layer .lb.q{background:#4472C4} .layer .lb.y{background:var(--navy2)}
+.layer .ct{padding:12px 16px;font-size:12.5px;color:var(--ink2)}
+.layer .ct b{color:var(--ink)}
+.note-box{background:var(--amber-l);border:1px solid var(--amber-line);border-radius:8px;padding:12px 16px;color:#6b4e0a;font-size:12.5px;margin:12px 0}
+.risk-box{background:var(--red-l);border:1px solid var(--red-line);border-radius:8px;padding:12px 16px;color:#8c2f24;font-size:12.5px;margin:12px 0}
+.ok-box{background:var(--green-l);border:1px solid var(--green-line);border-radius:8px;padding:12px 16px;color:#155c39;font-size:12.5px;margin:12px 0}
+.sig-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-top:12px}
+.sig{display:flex;gap:12px;align-items:flex-start;border:1px solid var(--line);border-radius:8px;padding:11px 13px;background:#fff}
+.sig .dot{width:10px;height:10px;border-radius:50%;margin-top:6px;flex:0 0 10px}
+.sig .dot.r{background:var(--red)} .sig .dot.g{background:var(--green)}
+.sig .dot.a{background:var(--amber)} .sig .dot.k{background:var(--gray)}
+.sig b{font-size:13px;color:var(--ink)} .sig p{margin:2px 0 0;font-size:11.5px}
+b.dr{color:var(--red-d)}
+.metric-link{color:var(--navy);text-decoration:none;border-bottom:1px dotted #9db4cf;font-weight:600}
+.metric-link:hover{color:var(--navy2);border-bottom-color:var(--navy2);background:var(--blue-l)}
+.metric-link::after{content:" ↗";font-size:10px;color:#7d96b3;font-weight:400}
+.rl-banner{background:linear-gradient(125deg,#5c1512,#7a1f19 60%,#8a2b20);color:#fff;border-radius:12px;padding:16px 20px;margin:16px 0;border:1px solid #4d100d;box-shadow:0 2px 8px rgba(110,27,22,.18)}
+.rl-banner h3{color:#fff;margin:0 0 6px;font-size:16px}
+.rl-banner p{font-size:12.8px;color:rgba(255,255,255,.88);margin-bottom:6px}
+.rl-banner .rl-kpis{display:flex;flex-wrap:wrap;gap:10px;margin:10px 0 4px}
+.rl-banner .rl-kpis div{background:rgba(255,255,255,.10);border:1px solid rgba(255,255,255,.18);border-radius:8px;padding:8px 12px;min-width:156px}
+.rl-banner .n{font-size:20px;font-weight:700;line-height:1.3}
+.rl-banner .l{font-size:11.4px;color:rgba(255,255,255,.78)}
+.rl-card{border:2px solid var(--red-d);background:linear-gradient(180deg,#fff,#fdf6f4);border-radius:12px;padding:18px 20px;margin:16px 0;box-shadow:0 2px 8px rgba(110,27,22,.08)}
+.rl-card h3{color:var(--red-d);margin-top:0}
+.rl-table th{background:var(--red-d)}
+.rl-table tbody tr:nth-child(even) td{background:#fdf7f5}
+.rl-table tbody tr:hover td{background:var(--red-l)}
+.rl-table td:first-child{border-left:3px solid var(--red-d)}
+.rl-rule{background:#fdf6f4;border-left:4px solid var(--red-d);padding:10px 14px;border-radius:0 7px 7px 0;font-size:12.8px;margin:10px 0}
+.rl-mark{display:inline-block;background:var(--red-d);color:#fff;border-radius:3px;padding:0 6px;font-size:11px;font-weight:700;letter-spacing:.5px}
+details.registry{margin:12px 0;background:var(--card);border:1px solid var(--line);border-radius:10px;padding:12px 16px}
+details.registry summary{cursor:pointer;font-weight:700;color:var(--navy);font-size:14px}
+details.registry[open]{padding-bottom:18px}
+.mini{background:#fff;border:1px solid var(--line);border-radius:9px;padding:12px 14px}
+.mini h4{margin-top:0}
+
+/* ── 响应式 / 打印 ── */
+@media (max-width:720px){
+  body{font-size:14px}
+  .wrap{padding:0 14px 48px}
+  header.report-head,header.hero{padding:26px 0 22px}
+  header.report-head h1,header.hero h1{font-size:21px}
+  nav.report-nav .nav-url{display:none}
+  table{display:block;overflow-x:auto;white-space:nowrap}
+  th,td{padding:7px 8px;font-size:12.5px}
+  .chart-eh{height:300px}
+  .grid2,.tiers{grid-template-columns:1fr}
+  .kpi-grid{grid-template-columns:repeat(2,1fr)}
+  .two-col,.sig-grid{grid-template-columns:1fr}
+  .stat-strip{grid-template-columns:repeat(2,1fr)}
+  .tl-date{flex-basis:64px;font-size:11.5px}
+}
+@media print{
+  nav.report-nav,.skip-link{display:none}
+  .card,.chart,.kpi,.kcard,.chart-box{box-shadow:none}
+  body{font-size:12px}
+}
+
+/* 信息分层组件（与 report_style.py canonical 同步） */
+.delta-strip{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:14px 0}
+.delta-strip .d{background:var(--card,#fff);border:1px solid var(--line,#e1e7ee);border-radius:10px;padding:12px 14px}
+.delta-strip .d .n{font-size:22px;font-weight:700;color:var(--navy,#16324f);line-height:1.25}
+.delta-strip .d .l{font-size:11.6px;color:var(--ink3,#657180);margin-top:2px}
+.delta-strip .d.add .n{color:#1c7444}.delta-strip .d.fix .n{color:#956612}
+.delta-strip .d.same .n{color:#657180}.delta-strip .d.hyp .n{color:#2f5597}
+.lvl{display:inline-block;font-size:11px;line-height:1.5;padding:1px 7px;border-radius:9px;border:1px solid transparent;white-space:nowrap;font-weight:600}
+.lvl-verified{background:#eaf5ef;color:#1c7444}.lvl-partial{background:#fdf4e2;color:#956612}
+.lvl-inferred{background:#eaf1fa;color:#2f5597}.lvl-assumption{background:#eff2f4;color:#646f7b}
+.fact-ref{font-family:var(--font-mono,monospace);font-size:11.5px;color:#2f5597;background:#eaf1fa;border:1px solid #cdddf0;border-radius:5px;padding:0 5px;white-space:nowrap}
+</style>
+</head>
+<body>
+<div class="audit-mark" data-audit-id="AUD-2026-11-14-008" data-mark-level="pre" style="background:#5b6b7c;color:#fff;font:600 13px/1.6 system-ui,-apple-system,'Segoe UI',sans-serif;padding:8px 16px;text-align:center;letter-spacing:.02em"><span class="audit-badge">预审通过（机器）</span><span class="audit-meta">语义复核待完成 · 2026-11-16 · 审查链 3/4 · AUD-2026-11-14-008</span></div>
+
+<a class="skip-link" href="#main">跳到主要内容</a>
+<header class="report-head">
+  <div class="wrap">
+    <h1>迪拜（阿联酋）AI 网安竞争格局 · 基线报告</h1>
+    <p class="sub">竞争情报监测型 · 首期基线：玩家分层、竞品档案首建与信号规则</p>
+    <p class="meta"><b>数据截止</b>：2026-11-13（最新可得公开来源）｜<b>版本</b>：v1.0（2026-12 基线）｜<b>口径</b>：仅公开合法英文来源，多口径并列不合并｜<b>类型</b>：competitive-intelligence / baseline</p>
+  </div>
+</header>
+<nav class="report-nav" aria-label="报告导航">
+  <div class="wrap">
+    <div class="nav-tabs">
+      <a href="#s1">一、执行摘要</a>
+      <a href="#s2">二、监测机制设计</a>
+      <a href="#s3">三、竞争格局总览</a>
+      <a href="#s4">四、竞品档案首建</a>
+      <a href="#s5">五、动态矩阵与信号规则</a>
+      <a href="#s6">六、来源与核验治理</a>
+      <a href="#s7">七、风险与盲区</a>
+      <a href="#s8">八、交付物与后续运行方式</a>
+      <a href="#s9">九、参考来源清单</a>
+    </div>
+  </div>
+</nav>
+
+<main class="wrap" id="main">
+<div class="delta-strip" data-module="delta">
+  <div class="d add"><div class="n">9</div><div class="l">本期新增（条）</div></div>
+  <div class="d fix"><div class="n">0</div><div class="l">修正（条）</div></div>
+  <div class="d same"><div class="n">5</div><div class="l">无变化（条）</div></div>
+  <div class="d hyp"><div class="n">4/9</div><div class="l">假设核验进度</div></div>
+</div>
+<p class="small muted">本期读数时点：2026-11-13 ｜ 阈值校准：<span class="lvl lvl-assumption">预校准（ex-ante）</span> ｜ 场景切片：主场景 投资决策；次场景 政策制定 ｜ 信息等级：已核验 / 部分核验 / 推断 / 假设</p>
+
+
+<h2 class="sec" id="s1">一、执行摘要</h2>
+<blockquote>
+<p><strong>研究说明</strong>
+1. 本报告仅使用公开合法信息（官网 / 官方公告、财报与监管文件、招聘、应用商店、专利、公开社媒），全部为英文来源；关键数据点附完整 URL。
+2. 数据优先级：官方一手 ＞ 行业机构 / 第三方研究 ＞ 招聘 / 门户抽样 ＞ 媒体转述（媒体数值标「需核实原文」）。
+3. 数据截止 2026-11-13（最新可得公开来源）；「推断」字样表示合理推演，非直接引用数据。
+4. 本报告为竞争情报监测型基线：只做事实记录与影响提示，不做对手成败断言；威胁 / 机会提示标「判断 / 推断」。
+5. 本报告引用的事实底座为同仓库已文档化来源：security 业务线基线报告（2026-11）及其来源清单、trends 业务线周报（2026-11-13）、security 指标登记册。</p>
+</blockquote>
+<p class="lead"><strong>一句话定位</strong>：迪拜 AI 网安竞争格局由三股力量叠加而成——政策与合规（DESC / ISR / 国家网络安全战略）构成准入门槛，主权 AI 基建与资本（G42 系、Stargate UAE、微软–G42）构成纵向整合轴，全球厂商区域总部与本地 MSSP（e&amp; / Help AG、CPX、Cloud4C）构成交付层；模型层高度集中（Anthropic / OpenAI 合计占全球企业 LLM API 支出 86%）通过 API 与产品能力向本地传导。</p>
+<p><strong>关键数字卡</strong>（口径与来源见对应章节）</p>
+<table class="fixed">
+<thead>
+<tr>
+<th style="width:30%">指标</th>
+<th style="width:34%">数值</th>
+<th style="width:36%">口径·来源</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>MENA 信息安全终端支出（2025）</td>
+<td>33 亿美元，同比 +14%</td>
+<td>亿美元 / % [Gartner, 2025]</td>
+</tr>
+<tr>
+<td>阿联酋网安市场规模（2025→2031）</td>
+<td>8.2 亿 → 15.1 亿美元，CAGR 10.66%</td>
+<td>亿美元 / % [Mordor, 2025]；另一口径 34 亿、CAGR 12.29% [Global Market Insights, 2025]</td>
+</tr>
+<tr>
+<td>全球 AI in cybersecurity（2025→2033）</td>
+<td>315 亿 → 1829 亿美元，CAGR 24.7%</td>
+<td>亿美元 / % [Grand View Research, 2026]</td>
+</tr>
+<tr>
+<td>企业 LLM API 支出份额（全球）</td>
+<td>Anthropic 55% / OpenAI 31% / Google 9%</td>
+<td>% [Menlo Ventures, 2026-11]</td>
+</tr>
+<tr>
+<td>阿联酋日均抵御网络攻击</td>
+<td>约 20 万次/日；71.4% 国家背景</td>
+<td>次/日 / % [Khaleej Times, 2026]</td>
+</tr>
+</tbody>
+</table>
+<ol>
+<li><p><strong>政策是第一驱动力，监管构成准入壁垒（政策乘数）</strong>。迪拜 ISR v3.1（13 个控制域）为强制标准；DESC《迪拜 AI 安全政策》（2024-09）区域首创；国家网络认证计划（NCAP）限制未认证 MSSP 服务关键基础设施。合规能力因此成为产品准入与采购的放大器。[Source: <a href="https://mastcgroup.com/desc-isr-v3-1-compliance-guide-iso-27001-mapping-requirements" target="_blank" rel="noopener">mastcgroup.com, 2026</a>]；[Source: <a href="https://gulftime.ae/dubai-electronic-security-centre-unveils-dubai-ai-security-policy" target="_blank" rel="noopener">（需核实原文）gulftime.ae, 2024</a>]；[Source: <a href="https://practiceguides.chambers.com/cybersecurity-2026/uae" target="_blank" rel="noopener">Chambers, 2026</a>]</p></li>
+<li><p><strong>需求侧高景气，且 AI 安全是结构性增量主线</strong>。日均约 20 万次攻击、71.4% 国家背景威胁行为体；Gartner 预计 MENA 信息安全终端支出 2025 年达 33 亿美元（+14%），安全服务增速最快（+16.6%）。[Source: <a href="https://khaleejtimes.com/uae/over-70-of-cyber-threats-targeting-uae-are-state-sponsored-authority-says" target="_blank" rel="noopener">（需核实原文）Khaleej Times, 2026</a>]；[Source: <a href="https://gartner.com/en/newsroom/press-releases/2025-04-08-gartner-forecasts-spending-on-information-security-in-mena-to-grow-14-percent-in-2025" target="_blank" rel="noopener">Gartner, 2025</a>]</p></li>
+<li><p><strong>模型层高度集中，向本地交付层传导（推断）</strong>。Menlo Ventures 估算企业 LLM API 支出中 Anthropic 55%、OpenAI 31%、Google 9%，Anthropic + OpenAI 合计 86%；企业 AI 部署支出 5.4 倍增长（2025 年 330 亿 → 2026-09 1768 亿美元）。本地 AI 网安产品的模型选型与成本结构将受此集中态势约束。[Source: <a href="https://menlovc.com/perspective/2026-the-state-of-enterprise-ai/" target="_blank" rel="noopener">Menlo Ventures, 2026-11</a>]</p></li>
+<li><p><strong>主权玩家垂直整合，构成独立一极</strong>。G42 系覆盖算力（Khazna，承建 Stargate UAE）、主权云（Core42，映射 200+ 阿联酋控制项）、MSSP（CPX）；微软 2024-04 对 G42 股权投资 15 亿美元并配套 10 亿美元开发者基金。[Source: <a href="https://g42.ai" target="_blank" rel="noopener">g42.ai, 2026</a>]；[Source: <a href="https://core42.ai" target="_blank" rel="noopener">core42.ai, 2026</a>]；[Source: <a href="https://blogs.microsoft.com/blog/2024/04/15/microsoft-and-g42-partner" target="_blank" rel="noopener">Microsoft, 2024</a>]</p></li>
+<li><p><strong>人才是最稀缺资源，人才争夺是竞争关键维度（推断）</strong>。ISC2 2025 将 AI 列为最急需技能（41%）；Mordor 指 87% 的阿联酋企业难以招募合格网络安全人员；迪拜资深 AI 安全工程师月薪抽样 5.5–7.5 万 AED。[Source: <a href="https://isc2.org/Insights/2025/12/ISC2-Publishes-2025-Cybersecurity-Workforce-Study" target="_blank" rel="noopener">ISC2, 2025</a>]；[Source: <a href="https://mordorintelligence.com/industry-reports/uae-cybersecurity-market" target="_blank" rel="noopener">Mordor, 2025</a>]；[Source: <a href="https://hiredeveloper.ae/employer-blog/how-to-hire-ai-security-engineers-dubai-after-meta-breach-7-steps" target="_blank" rel="noopener">hiredeveloper.ae, 2026</a>]</p></li>
+</ol>
+<p><strong>本期动作热点</strong>（均为 2026-11 前已公开信息）：</p>
+<ul>
+<li>GISEC Global 2026（第 15 届，2026-09-16–18，迪拜世博城）：DESC 发布 SARAAB（开源阿拉伯语政府 AI 深度伪造检测模型）、迪拜网络安全技能框架与 ISR 审核员认证计划。[Source: <a href="https://desc.gov.ae/dubai-electronic-security-center-unveils-saraab-and-new-cybersecurity-initiatives-at-gisec-global-2026" target="_blank" rel="noopener">DESC, 2026</a>]</li>
+<li>Anthropic 同源双模型 Fable 5.2 / Mythos 5.2 发布（2026-11-09）：Mythos 仅向通过 Cyber / Life Sciences 验证计划的机构开放——「分级开放」直接影响网安能力可得性。[Source: <a href="https://www.anthropic.com/claude-fable-and-mythos-5-2" target="_blank" rel="noopener">Anthropic, 2026-11-09</a>]</li>
+<li>Anthropic 启动 IPO 路演（2026-11-10），拟发行 8.25 亿股，定价区间 70.00–78.00 美元/股。[Source: <a href="https://www.anthropic.com/news/roadshow-launch" target="_blank" rel="noopener">Anthropic, 2026-11-10</a>]</li>
+<li>GITEX Global 2026 档期 2026-12-07–11（迪拜世博城），设网络安全与数字主权专区。[Source: <a href="https://gitex.com" target="_blank" rel="noopener">gitex.com, 2026</a>]</li>
+</ul>
+<p><strong>共享事实卡片</strong>：本报告为共享事实域（CI），正文以指针复用 <span class="fact-ref">[FC-CI-001]</span>–<span class="fact-ref">[FC-CI-009]</span>（<code>engine/fact_cards/competitive_intelligence_fact_cards.json</code>），不复制卡片全文；新增事实须先登记卡片。</p>
+<p class="small">来源与时点：事实底座来自 security 业务线基线报告（2026-11-11 完稿，含五处关键事实更正）与 trends 业务线周报（2026-11-13）；本报告落款 2026-12，为竞争情报监测型首期基线。</p>
+
+<hr />
+<h2 class="sec" id="s2">二、监测机制设计</h2>
+<h3>2.1 数据流：来源层 → 档案库层 → 动态矩阵层 → 输出层</h3>
+<div class="flow">
+  <div class="node"><b>① 来源层</b><span>官方一手（官网 / 公告 / 财报 / 监管文件）；招聘 / 应用商店 / 专利；第三方研究；公开社媒。仅公开合法信息。</span></div>
+  <div class="arrow">→</div>
+  <div class="node"><b>② 档案库层</b><span>竞品档案卡逐家维护（定位 / 产品 / 定价 / 渠道 / 组织 / 近期动作），每格附 [来源, 日期]；活值存 data/processed/tech/competitive-intelligence/dubai/ai_cyber_competition_registry.md（运行期创建，基线可缺）。</span></div>
+  <div class="arrow">→</div>
+  <div class="node"><b>③ 动态矩阵层</b><span>维度 × 玩家矩阵 + 动作编号（编号 + 玩家 + 动作 + 日期 + 来源 URL）+ 信号规则命中状态。</span></div>
+  <div class="arrow">→</div>
+  <div class="node"><b>④ 输出层</b><span>基线报告（对比锚）；月度报告（主更新）；事件触发专项件；登记册回写与变更摘要。</span></div>
+</div>
+<h3>2.2 监测节拍：月度主更新 + 事件触发升级</h3>
+<ul>
+<li><strong>月度主更新</strong>：动态矩阵全量刷新 + 档案卡增量修订，输出九节更新版报告；无触发则降级为核验 / 收敛型轻运行，登记册标注「截至本次运行日期无更新」，不得虚构变化。</li>
+<li><strong>事件触发升级</strong>：命中业务配置 R1–R6 信号规则（定价重构 / 并购 / 换帅 / 新产品线 / 合规资质 / 资本动作）即当期核实并升级，不等待月度窗口。</li>
+<li><strong>对比锚</strong>：本基线报告为后续所有周期的对比锚；分层口径、档案卡结构与裁决规则被后续更新完整继承。</li>
+</ul>
+<h3>2.3 监测竞品清单与入选标准</h3>
+<p><strong>入选标准</strong>：在迪拜 / 阿联酋有 AI 网安产品或交付能力，或具主权资本 / 算力抓手，或正进入区域市场；每家均有可追溯公开来源。</p>
+<table class="fixed">
+<thead>
+<tr>
+<th style="width:12%">分层</th>
+<th style="width:38%">玩家</th>
+<th style="width:50%">入选依据</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>直接</td>
+<td>G42 集团（Core42、CPX、Khazna、M42）；e&amp; enterprise / Help AG；Moro Hub；Cloud4C；Microsoft（区域总部 + G42 投资）；Palo Alto Networks、Fortinet、Kaspersky、Cisco</td>
+<td>在迪拜 / 阿联酋有 AI 网安产品或交付能力；官方来源或权威第三方披露 [g42.ai, 2026]；[eand.com, 2026]；[security 基线报告, 2026]</td>
+</tr>
+<tr>
+<td>间接</td>
+<td>Hub71 生态；四大 / Accenture / EY；DarkMatter / Digital14</td>
+<td>生态、咨询与资本相邻；动态待核实 [hub71.com, 2026]；[security 基线报告, 2026]</td>
+</tr>
+<tr>
+<td>潜在进入者</td>
+<td>Presight；中国开源模型厂商（Kimi、DeepSeek、GLM、Qwen）</td>
+<td>有抓手但尚未在区域形成 AI 网安交付；以模型能力入模方式渗透（推断）[menlovc.com, 2026]</td>
+</tr>
+</tbody>
+</table>
+<h3>2.4 追踪表（监测竞品 × 优先信息渠道）</h3>
+<div class="tblwrap">
+<table class="fixed">
+<thead>
+<tr>
+<th style="width:26%">玩家</th>
+<th style="width:52%">优先信息渠道</th>
+<th style="width:22%">更新频率</th>
+</tr>
+</thead>
+<tbody>
+<tr><td>G42 集团</td><td>g42.ai / core42.ai / cpx.net 官网与官方博客；WAM 英文；官方合作披露</td><td>月度 + 事件触发</td></tr>
+<tr><td>e&amp; / Help AG</td><td>eand.com 新闻页；IDC MarketScape（第三方）；lumitech.co 转述</td><td>月度</td></tr>
+<tr><td>Moro Hub</td><td>brief.news / lumitech.co（聚合源）；Digital Dubai 复核</td><td>月度</td></tr>
+<tr><td>Cloud4C</td><td>cloud4c.com/uae；招聘页</td><td>月度</td></tr>
+<tr><td>Microsoft</td><td>blogs.microsoft.com；新闻室；SEC 文件</td><td>月度 + 事件触发</td></tr>
+<tr><td>Palo Alto / Fortinet / Kaspersky / Cisco</td><td>区域官网与新闻室；DIC / JLT 自由区公告</td><td>月度</td></tr>
+<tr><td>Hub71</td><td>hub71.com 官网与 FAQ；批次公告</td><td>月度</td></tr>
+<tr><td>咨询（四大 / Accenture / EY）</td><td>官网洞察页；招标与案例页</td><td>月度</td></tr>
+<tr><td>DarkMatter / Digital14</td><td>官网；第三方转述（需核实）</td><td>事件触发</td></tr>
+<tr><td>Presight</td><td>官网；G42 系公告</td><td>事件触发</td></tr>
+<tr><td>中国开源模型厂商</td><td>官方平台文档（platform.kimi.com 等）；Menlo 等第三方研究</td><td>月度</td></tr>
+</tbody>
+</table>
+</div>
+
+<hr />
+<h2 class="sec" id="s3">三、竞争格局总览</h2>
+<h3>3.1 玩家分层表（直接 / 间接 / 潜在进入者）</h3>
+<table class="fixed">
+<thead>
+<tr>
+<th style="width:12%">层级</th>
+<th style="width:34%">玩家</th>
+<th style="width:54%">判断依据</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>直接</td>
+<td>G42 集团（Core42 / CPX / Khazna / M42）</td>
+<td>算力—云—安全—应用垂直整合；23,000+ 员工、30 国；Core42 映射 200+ 阿联酋控制项 [g42.ai, 2026]</td>
+</tr>
+<tr>
+<td>直接</td>
+<td>e&amp; enterprise / Help AG</td>
+<td>本地 MSSP 头部，托管 SOC / MDR，200+ SOC 分析师，IDC MarketScape 领导者（MSS 2026 / MDR 2025）[eand.com, 2026]</td>
+</tr>
+<tr>
+<td>直接</td>
+<td>Moro Hub（DEWA 子公司）</td>
+<td>全栈主权 AI 平台；迪拜 AI Seal Tier S（2025-12，单一聚合源待复核）[brief.news, 2026]</td>
+</tr>
+<tr>
+<td>直接</td>
+<td>Cloud4C</td>
+<td>自由区托管 SOC / MSSP，双城运营 [security 基线报告, 2026]</td>
+</tr>
+<tr>
+<td>直接</td>
+<td>Microsoft（区域总部 + G42 投资）</td>
+<td>15 亿美元股权投资 + 10 亿美元开发者基金；参与 Stargate UAE 生态 [blogs.microsoft.com, 2024]</td>
+</tr>
+<tr>
+<td>直接</td>
+<td>Palo Alto Networks / Fortinet / Kaspersky / Cisco</td>
+<td>DIC / JLT 区域总部，产品组合覆盖 AI 网安；区域动作待核实 [security 基线报告, 2026]</td>
+</tr>
+<tr>
+<td>间接</td>
+<td>Hub71 生态</td>
+<td>AI 原生初创池：第 19 批（2026-10）90% AI 原生、40 家、累计融资 2.96 亿美元 [hub71.com, 2026]</td>
+</tr>
+<tr>
+<td>间接</td>
+<td>四大 / Accenture / EY</td>
+<td>AI 治理与合规咨询需求高 [security 基线报告, 2026]</td>
+</tr>
+<tr>
+<td>间接</td>
+<td>DarkMatter / Digital14</td>
+<td>历史玩家；与 CPX 的渊源未获官方证实 [security 基线报告, 2026]</td>
+</tr>
+<tr>
+<td>潜在</td>
+<td>Presight</td>
+<td>G42 系 AI 分析，安全延展待核实 [security 基线报告, 2026]</td>
+</tr>
+<tr>
+<td>潜在</td>
+<td>中国开源模型厂商（Kimi、DeepSeek、GLM、Qwen）</td>
+<td>占开源支出 89%（Kimi 61%、DeepSeek 15%、GLM 11%、Qwen 3%）；Meta Llama 7% [menlovc.com, 2026]</td>
+</tr>
+</tbody>
+</table>
+<h3>3.2 市场集中度与份额口径（多口径并列，不合并）</h3>
+<table class="fixed">
+<thead>
+<tr>
+<th style="width:24%">口径</th>
+<th style="width:30%">数值</th>
+<th style="width:16%">来源</th>
+<th style="width:30%">不可比说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>全球企业 LLM API 支出份额</td>
+<td>Anthropic 55% / OpenAI 31% / Google 9%；Anthropic + OpenAI 86%</td>
+<td>Menlo Ventures, 2026-11</td>
+<td>全球口径，非迪拜 / 阿联酋口径；不可外推为本地份额</td>
+</tr>
+<tr>
+<td>全球企业 AI 部署支出集中度</td>
+<td>Anthropic / OpenAI / Google 占 69%（1227 亿美元，上一年 50%）</td>
+<td>Menlo Ventures, 2026-11</td>
+<td>VC 机构自研估算，非官方统计</td>
+</tr>
+<tr>
+<td>全球编码应用市场</td>
+<td>340 亿美元中 Claude Code + Codex 占 240 亿美元（70%）</td>
+<td>Menlo Ventures, 2026-11</td>
+<td>编码应用口径，不直接等同网安市场</td>
+</tr>
+<tr>
+<td>阿联酋网安市场规模</td>
+<td>8.2 亿 → 15.1 亿美元（CAGR 10.66%）</td>
+<td>Mordor, 2025</td>
+<td>与 GMI 口径相差约 4 倍，并列呈现</td>
+</tr>
+<tr>
+<td>阿联酋网安市场规模（另一口径）</td>
+<td>34 亿美元，CAGR 12.29%</td>
+<td>Global Market Insights, 2025</td>
+<td>含硬件与服务，口径更宽</td>
+</tr>
+<tr>
+<td>MENA 信息安全终端支出</td>
+<td>33 亿美元，同比 +14%（2025）</td>
+<td>Gartner, 2025</td>
+<td>终端支出口径，不含服务总收入</td>
+</tr>
+<tr>
+<td>全球 AI in cybersecurity</td>
+<td>315 亿（2025）→ 1829 亿美元（2033），CAGR 24.7%</td>
+<td>Grand View Research, 2026</td>
+<td>单一机构预测，置信度中</td>
+</tr>
+</tbody>
+</table>
+<h3>3.3 周期定位与格局演变方向</h3>
+<p><strong>周期定位</strong>：当前处于「政策强监管 + 主权基建放量 + 模型层集中」的周期阶段——ISR v3.1 / NCAP / AI 安全政策构成合规门槛，Stargate UAE（5GW AI 园区 / 1GW 算力集群，首批 200MW 计划 2026 上线）与 G42 系垂直整合构成供给端主轴，模型层 86% 双寡头结构构成能力端约束。[Source: <a href="https://openai.com/index/introducing-stargate-uae" target="_blank" rel="noopener">OpenAI, 2025</a>]</p>
+<p><strong>格局演变方向（推断）</strong>：① 合规门槛抬升将挤出无资质的小型 MSSP，集中度上行；② 主权玩家（G42 系、Moro Hub）与全球厂商区域总部的边界趋于模糊，合资 / 生态绑定增多；③ 模型层集中通过 API 与分级开放（如 Mythos 5.2 仅向验证机构开放）向本地产品嵌入传导，本地化合规与数据主权成为差异化变量。以上均为推断，非事实。</p>
+
+<hr />
+<h2 class="sec" id="s4">四、竞品档案首建</h2>
+<p class="lead">以下档案卡为基线首建；每格附 [来源, 日期]，未能核实的字段注明「待核实」，不补值、不外推。</p>
+
+<div class="card">
+<h3>4.1 G42 集团（含 Core42、CPX、Khazna、M42）</h3>
+<table class="fixed">
+<thead>
+<tr><th style="width:16%">字段</th><th style="width:84%">内容</th></tr>
+</thead>
+<tbody>
+<tr><td>定位</td><td>阿布扎比 AI 控股集团，垂直整合算力—云—安全—应用 [g42.ai, 2026]</td></tr>
+<tr><td>产品矩阵</td><td>Core42 主权公有云（映射 200+ 阿联酋控制项）与 Greenshield；CPX 端到端网络与物理安全 MSSP（24/7 SOC、DFIR、IAM、OT）；Khazna 承建 Stargate UAE；集团层面推出 Assurance Compute Framework（安全美国 AI 芯片）与「数字大使馆」[core42.ai, 2026]；[cpx.net, 2026]；[g42.ai, 2026]</td></tr>
+<tr><td>定价</td><td>待核实（公开渠道无公开价目）</td></tr>
+<tr><td>渠道</td><td>政府与关键基础设施为主，通过 G42 系生态协同交付 [g42.ai, 2026]</td></tr>
+<tr><td>组织与人事</td><td>23,000+ 员工、30 国；微软 Brad Smith 进入 G42 董事会（2024-04）[g42.ai, 2026]；[blogs.microsoft.com, 2024]</td></tr>
+<tr><td>近期动作</td><td>2026-09 Core42 与 TII 在 HSM、机密计算、加密 AI 推理达成研发合作；2026-02 与阿联酋央行推主权金融云（SFCSI）；2026 年 CPX 与阿联酋网络安全委员会共建 UAE Cyber Factory [gecnewswire.com, 2026]；[cpx.net, 2026]</td></tr>
+</tbody>
+</table>
+</div>
+
+<div class="card">
+<h3>4.2 e&amp; enterprise / Help AG</h3>
+<table class="fixed">
+<thead>
+<tr><th style="width:16%">字段</th><th style="width:84%">内容</th></tr>
+</thead>
+<tbody>
+<tr><td>定位</td><td>迪拜 HQ + 阿布扎比，MSSP（托管 SOC / MDR）[eand.com, 2026]</td></tr>
+<tr><td>产品矩阵</td><td>托管 SOC / MDR；2026-01 为 Sergas 交付下一代 SOC [eand.com, 2026]</td></tr>
+<tr><td>定价</td><td>待核实</td></tr>
+<tr><td>渠道</td><td>企业托管服务；IDC MarketScape 领导者（MSS 2026、MDR 2025）[lumitech.co, 2026]（第三方转述，建议以 IDC 原文复核）</td></tr>
+<tr><td>组织与人事</td><td>200+ SOC 分析师 [lumitech.co, 2026]</td></tr>
+<tr><td>近期动作</td><td>2026-01 下一代 SOC 交付；持续招募 SOC / 渗透岗 [security 基线报告, 2026]</td></tr>
+</tbody>
+</table>
+</div>
+
+<div class="card">
+<h3>4.3 Moro Hub（DEWA 子公司）</h3>
+<table class="fixed">
+<thead>
+<tr><th style="width:16%">字段</th><th style="width:84%">内容</th></tr>
+</thead>
+<tbody>
+<tr><td>定位</td><td>全栈主权 AI 平台 [brief.news, 2026]</td></tr>
+<tr><td>产品矩阵</td><td>主权 AI 平台（产品细节待核实）</td></tr>
+<tr><td>定价</td><td>待核实</td></tr>
+<tr><td>渠道</td><td>DEWA / 政府与自由区（推断）</td></tr>
+<tr><td>组织与人事</td><td>待核实</td></tr>
+<tr><td>近期动作</td><td>获迪拜 AI Seal Tier S（最高级，2025-12；单一聚合源，建议以 Digital Dubai 复核）[brief.news, 2026]；[lumitech.co, 2026]</td></tr>
+</tbody>
+</table>
+</div>
+
+<div class="card">
+<h3>4.4 Hub71（阿布扎比）</h3>
+<table class="fixed">
+<thead>
+<tr><th style="width:16%">字段</th><th style="width:84%">内容</th></tr>
+</thead>
+<tbody>
+<tr><td>定位</td><td>自由区科技生态与 AI 原生初创池 [hub71.com, 2026]</td></tr>
+<tr><td>产品矩阵</td><td>初创产品池：第 19 批（2026-10）90% 为 AI 原生、40 家初创 [hub71.com, 2026]</td></tr>
+<tr><td>定价</td><td>待核实</td></tr>
+<tr><td>渠道</td><td>自由区入驻与激励计划（合计约 50 万 AED 现金 + 实物激励与签证支持）[hub71.com/faqs, 2026]</td></tr>
+<tr><td>组织与人事</td><td>待核实</td></tr>
+<tr><td>近期动作</td><td>第 19 批招募（2026-10）；累计融资 2.96 亿美元 [hub71.com, 2026]</td></tr>
+</tbody>
+</table>
+</div>
+
+<div class="card">
+<h3>4.5 全球厂商区域总部（Microsoft、Palo Alto Networks、Fortinet、Kaspersky、Cisco）</h3>
+<table class="fixed">
+<thead>
+<tr><th style="width:16%">字段</th><th style="width:84%">内容</th></tr>
+</thead>
+<tbody>
+<tr><td>定位</td><td>DIC / JLT 区域总部，区域销售 / 工程岗 [security 基线报告, 2026]</td></tr>
+<tr><td>产品矩阵</td><td>各厂商全球 AI 网安产品组合；区域具体产品动作待核实</td></tr>
+<tr><td>定价</td><td>待核实</td></tr>
+<tr><td>渠道</td><td>合作伙伴与分销（推断，待核实）</td></tr>
+<tr><td>组织与人事</td><td>待核实</td></tr>
+<tr><td>近期动作</td><td>Microsoft：2024-04 对 G42 股权投资 15 亿美元 + 10 亿美元开发者基金 [blogs.microsoft.com, 2024]；参与 Stargate UAE 生态（OpenAI 与 Oracle 运营、G42 建设、NVIDIA GB300、Cisco 零信任）[openai.com, 2025]。其余厂商区域动作待核实</td></tr>
+</tbody>
+</table>
+</div>
+
+<div class="card">
+<h3>4.6 咨询与托管服务商（四大 / Accenture / EY；Cloud4C；DarkMatter / Digital14）</h3>
+<table class="fixed">
+<thead>
+<tr><th style="width:16%">字段</th><th style="width:84%">内容</th></tr>
+</thead>
+<tbody>
+<tr><td>定位</td><td>AI 治理与合规咨询（四大 / Accenture / EY）；自由区托管 SOC / MSSP（Cloud4C）；历史玩家（DarkMatter / Digital14）[security 基线报告, 2026]</td></tr>
+<tr><td>产品矩阵</td><td>AI 治理咨询（待核实细节）；Cloud4C 托管 SOC（待核实细节）</td></tr>
+<tr><td>定价</td><td>待核实</td></tr>
+<tr><td>渠道</td><td>咨询以迪拜为主；Cloud4C 双城运营 [security 基线报告, 2026]</td></tr>
+<tr><td>组织与人事</td><td>待核实</td></tr>
+<tr><td>近期动作</td><td>DarkMatter / Digital14 动态待核实；注：CPX 与 DarkMatter 的渊源未获官方证实，不采用 [security 基线报告, 2026]</td></tr>
+</tbody>
+</table>
+</div>
+
+<div class="card">
+<h3>4.7 潜在进入者（Presight；中国开源模型厂商 Kimi、DeepSeek、GLM、Qwen）</h3>
+<table class="fixed">
+<thead>
+<tr><th style="width:16%">字段</th><th style="width:84%">内容</th></tr>
+</thead>
+<tbody>
+<tr><td>定位</td><td>Presight：G42 系 AI 分析，安全延展待核实；中国开源模型厂商：以模型能力入模方式渗透 [security 基线报告, 2026]</td></tr>
+<tr><td>产品矩阵</td><td>开源模型（Kimi、DeepSeek、GLM、Qwen）；占开源支出 89%（Kimi 61%、DeepSeek 15%、GLM 11%、Qwen 3%），Meta Llama 7% [menlovc.com, 2026]</td></tr>
+<tr><td>定价</td><td>开源模型平均 token 价格降至 0.13 美元/百万（同比 -3.3x）[menlovc.com, 2026]</td></tr>
+<tr><td>渠道</td><td>模型平台与开源社区（推断）</td></tr>
+<tr><td>组织与人事</td><td>待核实</td></tr>
+<tr><td>近期动作</td><td>开源占 token 19% 但仅占支出 4%；以 token 份额推断其商业影响须谨慎（判断）[menlovc.com, 2026]</td></tr>
+</tbody>
+</table>
+</div>
+
+<hr />
+<h2 class="sec" id="s5">五、动态矩阵与信号规则</h2>
+<h3>5.1 动态矩阵（维度 × 玩家）</h3>
+<div class="tblwrap">
+<table class="fixed">
+<thead>
+<tr>
+<th style="width:15%">维度</th>
+<th style="width:17%">G42 系</th>
+<th style="width:17%">e&amp; / Help AG</th>
+<th style="width:17%">Moro Hub</th>
+<th style="width:17%">Hub71</th>
+<th style="width:17%">全球厂商区域总部</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>定位</td>
+<td>算力—云—安全—应用垂直整合 [g42.ai, 2026]</td>
+<td>本地 MSSP（托管 SOC / MDR）[eand.com, 2026]</td>
+<td>全栈主权 AI 平台 [brief.news, 2026]</td>
+<td>自由区 AI 原生初创池 [hub71.com, 2026]</td>
+<td>DIC / JLT 区域总部 [security 基线报告, 2026]</td>
+</tr>
+<tr>
+<td>产品与模型</td>
+<td>Core42 主权云 + Greenshield；CPX SOC/DFIR/IAM/OT [core42.ai, 2026]</td>
+<td>托管 SOC / MDR；2026-01 下一代 SOC [eand.com, 2026]</td>
+<td>主权 AI 平台（细节待核实）</td>
+<td>初创产品池（90% AI 原生）[hub71.com, 2026]</td>
+<td>区域产品动作待核实</td>
+</tr>
+<tr>
+<td>定价</td>
+<td>待核实</td>
+<td>待核实</td>
+<td>待核实</td>
+<td>待核实</td>
+<td>待核实</td>
+</tr>
+<tr>
+<td>渠道</td>
+<td>政府与关键基础设施；生态协同 [g42.ai, 2026]</td>
+<td>企业托管服务 [eand.com, 2026]</td>
+<td>DEWA / 政府与自由区（推断）</td>
+<td>自由区激励计划 [hub71.com/faqs, 2026]</td>
+<td>合作伙伴与分销（推断，待核实）</td>
+</tr>
+<tr>
+<td>组织与人事</td>
+<td>23,000+ 员工、30 国；微软 Brad Smith 进入董事会 [g42.ai, 2026]</td>
+<td>200+ SOC 分析师 [lumitech.co, 2026]</td>
+<td>待核实</td>
+<td>待核实</td>
+<td>待核实</td>
+</tr>
+<tr>
+<td>合规资质</td>
+<td>映射 200+ 阿联酋控制项 [core42.ai, 2026]</td>
+<td>IDC MarketScape 领导者（MSS 2026 / MDR 2025）[lumitech.co, 2026]</td>
+<td>迪拜 AI Seal Tier S（2025-12，单一聚合源待复核）[brief.news, 2026]</td>
+<td>待核实</td>
+<td>NCAP 未认证 MSSP 限制为行业级约束 [chambers, 2026]</td>
+</tr>
+<tr>
+<td>近期动作</td>
+<td>2026-09 与 TII 合作；2026-02 SFCSI；CPX 共建 UAE Cyber Factory [gecnewswire.com, 2026]</td>
+<td>2026-01 交付 Sergas 下一代 SOC [eand.com, 2026]</td>
+<td>待核实</td>
+<td>2026-10 第 19 批次 [hub71.com, 2026]</td>
+<td>微软 2024-04 投 G42 15 亿美元 [blogs.microsoft.com, 2024]</td>
+</tr>
+<tr>
+<td>资本</td>
+<td>微软 15 亿美元股权 + 10 亿美元开发者基金 [blogs.microsoft.com, 2024]</td>
+<td>待核实</td>
+<td>DEWA 子公司 [security 基线报告, 2026]</td>
+<td>生态累计融资 2.96 亿美元 [hub71.com, 2026]</td>
+<td>Stargate UAE（5GW / 1GW，首批 200MW 计划 2026 上线）[openai.com, 2025]</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h3>5.2 信号规则表（R1–R6，编号与动态矩阵一致）</h3>
+<table class="fixed">
+<thead>
+<tr>
+<th style="width:7%">编号</th>
+<th style="width:16%">监测对象</th>
+<th style="width:29%">触发条件</th>
+<th style="width:22%">确认标准</th>
+<th style="width:26%">动作</th>
+</tr>
+</thead>
+<tbody>
+<tr><td>R1</td><td>全部直接玩家</td><td>公开调价 / 套餐重构</td><td>2 家独立来源</td><td>更新档案卡与矩阵；月度报告升级</td></tr>
+<tr><td>R2</td><td>全部监测玩家</td><td>并购 / 收购 / 合资公告</td><td>官方或监管披露</td><td>重估分层；事件触发专项</td></tr>
+<tr><td>R3</td><td>直接玩家</td><td>区域总经理 / CISO 级人事变动</td><td>官方或招聘信号交叉</td><td>更新档案卡组织栏</td></tr>
+<tr><td>R4</td><td>模型层与直接玩家</td><td>新模型 / 新产品线发布（含入模、分级开放）</td><td>官方发布页</td><td>矩阵登记；影响提示（标推断）</td></tr>
+<tr><td>R5</td><td>直接玩家</td><td>ISR / NCAP / AI Seal 等资质获取或吊销</td><td>官方名单 / 公告</td><td>更新合规栏；格局演变判断复核</td></tr>
+<tr><td>R6</td><td>全部监测玩家</td><td>融资 / 注资 / IPO / 大额合同</td><td>官方 / SEC / 交易所披露</td><td>资本维度登记；格局分层复核</td></tr>
+</tbody>
+</table>
+
+<hr />
+<h2 class="sec" id="s6">六、来源与核验治理</h2>
+<h3>6.1 来源分级表（通用基座第四节实例化）</h3>
+<table class="fixed">
+<thead>
+<tr>
+<th style="width:12%">层级</th>
+<th style="width:34%">范围</th>
+<th style="width:26%">采信规则</th>
+<th style="width:28%">本期实例</th>
+</tr>
+</thead>
+<tbody>
+<tr><td>① 官方一手</td><td>政府 / 主管部门 / 监管文件 / 官网与官方博客 / 财报</td><td>唯一可直接采信层，标「已核验」</td><td>desc.gov.ae、tdra.gov.ae、u.ae、mediaoffice.ae、ai.gov.ae、SEC EDGAR、g42.ai、core42.ai、cpx.net、eand.com、blogs.microsoft.com</td></tr>
+<tr><td>② 行业机构 / 第三方研究</td><td>权威研究机构研究页 / PDF / VC 研究</td><td>可采信；预测分歧并列</td><td>Gartner、Mordor、Global Market Insights、Grand View Research、Menlo Ventures、ISC2、IDC、MITRE、OWASP</td></tr>
+<tr><td>③ 招聘 / 门户抽样</td><td>招聘平台 / 门户挂牌</td><td>仅作市场信号，不替代①②</td><td>hiredeveloper.ae、Bayt、GulfTalent、LinkedIn、foundit Gulf</td></tr>
+<tr><td>④ 媒体转述</td><td>通讯社 / 媒体转载 / 聚合源</td><td>只用于发现线索；数值标「需核实原文」</td><td>Khaleej Times、The National、Gulf News、gulftime.ae、telecomreview、Zawya、searchinform、brief.news、lumitech.co</td></tr>
+</tbody>
+</table>
+<h3>6.2 口径优先级裁决规则</h3>
+<ol>
+<li>官方一手 ＞ 行业机构 / 第三方研究 ＞ 招聘 / 门户抽样 ＞ 媒体转述；冲突时按业务配置优先级链裁决，无法裁决时并列呈现并标注。</li>
+<li>同一指标多口径并列（如阿联酋网安市场：Mordor 8.2 亿 vs GMI 34 亿美元），不静默择一、不取均值；全球口径（Menlo）不外推为本地份额。</li>
+<li>媒体转述数值一律标「需核实原文」，须回官方 / 原始页校验后方可入档。</li>
+<li>中文源（CSDN、百度百科、博客园等）仅作发现线索，数值不入档；引用时标「需核实原文」。</li>
+</ol>
+<h3>6.3 首期核验审计（未核验项：项目 / 状态 / 处置）</h3>
+<table class="fixed">
+<thead>
+<tr>
+<th style="width:34%">项目</th>
+<th style="width:28%">状态</th>
+<th style="width:38%">处置</th>
+</tr>
+</thead>
+<tbody>
+<tr><td>Moro Hub 迪拜 AI Seal Tier S</td><td>未核验（单一聚合源）</td><td>以 Digital Dubai 复核后入档</td></tr>
+<tr><td>CPX 与 DarkMatter 的渊源</td><td>未核验（第三方说法）</td><td>不采用；仅记录为历史线索</td></tr>
+<tr><td>各直接玩家定价</td><td>未核验（无公开价目）</td><td>以招标 / 招聘间接信号跟踪，不补值</td></tr>
+<tr><td>Palo Alto / Fortinet / Kaspersky / Cisco 区域动作</td><td>未核验</td><td>以区域官网与自由区公告补采</td></tr>
+<tr><td>中文源线索（CSDN / 百度百科 / 博客园）</td><td>未核验（需核实原文）</td><td>仅作发现线索，数值不入档</td></tr>
+<tr><td>Menlo 份额的本地外推</td><td>未核验（全球口径）</td><td>仅作全球背景，不作迪拜份额结论</td></tr>
+</tbody>
+</table>
+
+<hr />
+<h2 class="sec" id="s7">七、风险与盲区</h2>
+<h3>7.1 情报盲区</h3>
+<ul>
+<li><strong>渠道覆盖缺口</strong>：自由区（DIFC / ADGM / DIC / JLT）内部公告与招标未全覆盖；部分玩家仅中文 / 聚合源可及，英文权威页缺失。</li>
+<li><strong>时滞</strong>：官方发布滞后于动作发生（资质、任命、合同）；媒体转述再滞后一层；本基线以 2026-11-13 为限，之后动作不在本期范围。</li>
+<li><strong>无法观测的私有动作</strong>：非公开合同、定价谈判、未公告的并购意向不在公开来源内，档案卡相应字段只能标「待核实」。</li>
+<li><strong>模型层—交付层传导时滞</strong>：模型版本发布到本地产品嵌入存在时滞，矩阵中的模型动作不等于本地交付动作，二者须分开登记。</li>
+</ul>
+<h3>7.2 玩家弹性差异（判断）</h3>
+<p>垂直整合型玩家（G42 系）对供应链与政策冲击的<strong>弹性</strong>较高——算力、云、安全、应用内部协同可对冲单一环节中断；单一渠道 / 单一区域代理商弹性较低，政策或渠道变动即放大风险。主权资本型玩家（Moro Hub、Hub71）对政策方向弹性高，但对商业化速度弹性低（判断）。</p>
+<h3>7.3 反向声音（对自身判断的复核）</h3>
+<div class="redbox">
+<h4>反向声音一：集中度结论对口径高度敏感</h4>
+<p>Mordor 与 Global Market Insights 对阿联酋网安市场规模给出 8.2 亿 vs 34 亿美元（相差约 4 倍）；Menlo 的 86% 双寡头份额为全球口径。任何「迪拜 AI 网安集中度」单一数字都可能误导，须始终并列口径。（判断）</p>
+</div>
+<div class="redbox">
+<h4>反向声音二：AI 自动化可能压缩入门级需求</h4>
+<p>Gartner 预计 2028 年 AI 将自动化部分 L1 SOC 工作；竞争焦点向价值链上移，而非总量线性扩张。若如此，以「人员缺口」推导的需求增量需打折。（判断 / 推断）[Source: <a href="https://isc2.org/Insights/2025/12/ISC2-Publishes-2025-Cybersecurity-Workforce-Study" target="_blank" rel="noopener">ISC2, 2025</a>]</p>
+</div>
+<div class="prebox">
+<h4>反向声音三：开源份额高 ≠ 商业影响大</h4>
+<p>开源模型占 token 19% 但仅占支出 4%；以 token 份额推断竞争格局会高估开源厂商的商业影响。（判断）[Source: <a href="https://menlovc.com/perspective/2026-the-state-of-enterprise-ai/" target="_blank" rel="noopener">Menlo Ventures, 2026-11</a>]</p>
+</div>
+<div class="note gap">
+<strong>关键限制</strong>：本期事实底座为已文档化的公开来源（security 基线报告、trends 周报、指标登记册），未做独立一手检索；档案卡中「待核实」字段在后续月度运行中逐项补齐。
+</div>
+
+<hr />
+<h2 class="sec" id="s8">八、交付物与后续运行方式</h2>
+<h3>8.1 交付物表</h3>
+<table class="fixed">
+<thead>
+<tr>
+<th style="width:24%">交付物</th>
+<th style="width:32%">路径形式</th>
+<th style="width:44%">内容</th>
+</tr>
+</thead>
+<tbody>
+<tr><td>首期基线报告</td><td>reports/2026-12_baseline_report.html（本报告）</td><td>九节基线：分层、档案卡、矩阵、信号规则、来源治理</td></tr>
+<tr><td>竞品档案库</td><td>data/processed/tech/competitive-intelligence/dubai/ai_cyber_competition_registry.md（md-table，运行期创建）</td><td>逐家档案卡活值 + 追踪表；运行后回写</td></tr>
+<tr><td>指标与动作登记</td><td>同上登记册</td><td>动作编号（编号 + 玩家 + 动作 + 日期 + 来源 URL）+ 信号规则状态</td></tr>
+<tr><td>月度报告</td><td>reports/YYYY-MM_monthly.html</td><td>九节更新版；无触发降级为核验型轻运行</td></tr>
+<tr><td>事件触发专项件</td><td>reports/YYYY-MM-DD-主题.html</td><td>命中 R1–R6 的当期升级更新</td></tr>
+</tbody>
+</table>
+<h3>8.2 后续运行方式</h3>
+<ol>
+<li><strong>月度主更新</strong>：读取本基线与上期报告 → 全量核验追踪表 → 刷新动态矩阵与档案卡 → 回写登记册 → 产出九节更新版报告。</li>
+<li><strong>事件触发升级</strong>：命中信号规则即当期核实（关键动作至少 2 家独立来源确认，单源标「单源待证」），不等待月度窗口。</li>
+<li><strong>无触发降级</strong>：登记册标注「截至本次运行日期无更新」，不得为制造变化而虚构变化。</li>
+<li><strong>锚定继承</strong>：本基线的九节结构、分层口径与裁决规则被后续周期完整继承；已修正事实清单从上期 / 基线继承并续写。</li>
+</ol>
+
+<hr />
+<h2 class="sec" id="s9">九、参考来源清单</h2>
+<p><strong>① 官方一手 / 政府与监管</strong></p>
+<ul>
+<li>UAE AI Strategy 2031：<a href="https://ai.gov.ae/strategy" target="_blank" rel="noopener">https://ai.gov.ae/strategy</a></li>
+<li>UAE 国家网络安全战略 2025–2031：<a href="https://cybersecuritydatabase.org/en/documents/ae-national-cybersecurity-strategy-2025-2031" target="_blank" rel="noopener">https://cybersecuritydatabase.org/en/documents/ae-national-cybersecurity-strategy-2025-2031</a></li>
+<li>DESC 迪拜网络安全战略（第二周期）与 ISR：<a href="https://desc.gov.ae/hamdan-bin-mohammed-launches-second-cycle-of-dubai-cyber-security-strategy" target="_blank" rel="noopener">https://desc.gov.ae/hamdan-bin-mohammed-launches-second-cycle-of-dubai-cyber-security-strategy</a></li>
+<li>DESC 在 GISEC 2026 发布 SARAAB 与 ISR 审核员计划：<a href="https://desc.gov.ae/dubai-electronic-security-center-unveils-saraab-and-new-cybersecurity-initiatives-at-gisec-global-2026" target="_blank" rel="noopener">https://desc.gov.ae/dubai-electronic-security-center-unveils-saraab-and-new-cybersecurity-initiatives-at-gisec-global-2026</a></li>
+<li>DESC《迪拜 AI 安全政策》：<a href="https://gulftime.ae/dubai-electronic-security-centre-unveils-dubai-ai-security-policy" target="_blank" rel="noopener">（需核实原文）https://gulftime.ae/dubai-electronic-security-centre-unveils-dubai-ai-security-policy</a></li>
+<li>TDRA / aeCERT：<a href="https://tdra.gov.ae/en/aecert/initiatives" target="_blank" rel="noopener">https://tdra.gov.ae/en/aecert/initiatives</a></li>
+<li>迪拜 D33 经济议程：<a href="https://mediaoffice.ae/en/news/2023/january/04-01/mohammed-bin-rashid-launches-dubai-economic-agenda-d33" target="_blank" rel="noopener">https://mediaoffice.ae/en/news/2023/january/04-01/mohammed-bin-rashid-launches-dubai-economic-agenda-d33</a></li>
+<li>UAE 2026 网络安全实务指引（NCAP / SBOM / PQC）：<a href="https://practiceguides.chambers.com/cybersecurity-2026/uae" target="_blank" rel="noopener">https://practiceguides.chambers.com/cybersecurity-2026/uae</a></li>
+<li>Stargate UAE：<a href="https://openai.com/index/introducing-stargate-uae" target="_blank" rel="noopener">https://openai.com/index/introducing-stargate-uae</a></li>
+<li>微软–G42 合作（15 亿美元股权注资）：<a href="https://blogs.microsoft.com/blog/2024/04/15/microsoft-and-g42-partner" target="_blank" rel="noopener">https://blogs.microsoft.com/blog/2024/04/15/microsoft-and-g42-partner</a></li>
+<li>SEC EDGAR：Anthropic S-1/A：<a href="https://www.sec.gov/Archives/edgar/data/2130357/000162828026072484/anthropicpbc-sx1ax2.htm" target="_blank" rel="noopener">https://www.sec.gov/Archives/edgar/data/2130357/000162828026072484/anthropicpbc-sx1ax2.htm</a></li>
+</ul>
+<p><strong>② 行业机构 / 第三方研究</strong></p>
+<ul>
+<li>Gartner：MENA 信息安全支出（2025-04-08）：<a href="https://gartner.com/en/newsroom/press-releases/2025-04-08-gartner-forecasts-spending-on-information-security-in-mena-to-grow-14-percent-in-2025" target="_blank" rel="noopener">https://gartner.com/en/newsroom/press-releases/2025-04-08-gartner-forecasts-spending-on-information-security-in-mena-to-grow-14-percent-in-2025</a></li>
+<li>Mordor Intelligence：阿联酋网络安全市场：<a href="https://mordorintelligence.com/industry-reports/uae-cybersecurity-market" target="_blank" rel="noopener">https://mordorintelligence.com/industry-reports/uae-cybersecurity-market</a></li>
+<li>Global Market Insights：网络安全市场：<a href="https://gminsights.com/industry-analysis/cybersecurity-market" target="_blank" rel="noopener">https://gminsights.com/industry-analysis/cybersecurity-market</a></li>
+<li>Grand View Research：AI in cybersecurity 市场报告：<a href="https://www.grandviewresearch.com/industry-analysis/ai-in-cybersecurity-market-report" target="_blank" rel="noopener">https://www.grandviewresearch.com/industry-analysis/ai-in-cybersecurity-market-report</a></li>
+<li>Menlo Ventures：2026 企业 AI 现状（份额与支出）：<a href="https://menlovc.com/perspective/2026-the-state-of-enterprise-ai/" target="_blank" rel="noopener">https://menlovc.com/perspective/2026-the-state-of-enterprise-ai/</a></li>
+<li>ISC2：2025 网络安全人力研究：<a href="https://isc2.org/Insights/2025/12/ISC2-Publishes-2025-Cybersecurity-Workforce-Study" target="_blank" rel="noopener">https://isc2.org/Insights/2025/12/ISC2-Publishes-2025-Cybersecurity-Workforce-Study</a></li>
+<li>OWASP LLM Top 10：<a href="https://genai.owasp.org/llm-top-10" target="_blank" rel="noopener">https://genai.owasp.org/llm-top-10</a>；MITRE ATLAS：<a href="https://atlas.mitre.org" target="_blank" rel="noopener">https://atlas.mitre.org</a></li>
+<li>Anthropic：Claude Fable 5.2 / Mythos 5.2：<a href="https://www.anthropic.com/claude-fable-and-mythos-5-2" target="_blank" rel="noopener">https://www.anthropic.com/claude-fable-and-mythos-5-2</a></li>
+<li>Anthropic：IPO 路演启动：<a href="https://www.anthropic.com/news/roadshow-launch" target="_blank" rel="noopener">https://www.anthropic.com/news/roadshow-launch</a></li>
+<li>Microsoft Security：沉睡特工（Sleeper Agents）研究：<a href="https://www.microsoft.com/en-us/security/blog/2026/11/10/detecting-sleeper-agents/" target="_blank" rel="noopener">https://www.microsoft.com/en-us/security/blog/2026/11/10/detecting-sleeper-agents/</a></li>
+</ul>
+<p><strong>③ 招聘 / 门户抽样</strong></p>
+<ul>
+<li>HireDeveloper：迪拜 AI 安全工程师招聘与薪资抽样：<a href="https://hiredeveloper.ae/employer-blog/how-to-hire-ai-security-engineers-dubai-after-meta-breach-7-steps" target="_blank" rel="noopener">https://hiredeveloper.ae/employer-blog/how-to-hire-ai-security-engineers-dubai-after-meta-breach-7-steps</a></li>
+<li>RFS HR：阿联酋网络安全人才招聘：<a href="https://rfsonshr.com/technology-recruitment-uae/cybersecurity-talent-acquisition" target="_blank" rel="noopener">https://rfsonshr.com/technology-recruitment-uae/cybersecurity-talent-acquisition</a></li>
+</ul>
+<p><strong>④ 媒体转述 / 聚合源（数值须回原文校验）</strong></p>
+<ul>
+<li>Khaleej Times：71.4% 国家背景威胁：<a href="https://khaleejtimes.com/uae/over-70-of-cyber-threats-targeting-uae-are-state-sponsored-authority-says" target="_blank" rel="noopener">（需核实原文）https://khaleejtimes.com/uae/over-70-of-cyber-threats-targeting-uae-are-state-sponsored-authority-says</a></li>
+<li>Khaleej Times：20 万次日均攻击：<a href="https://khaleejtimes.com/uae/uae-faces-200000-daily-cyberattacks" target="_blank" rel="noopener">（需核实原文）https://khaleejtimes.com/uae/uae-faces-200000-daily-cyberattacks</a></li>
+<li>The National：阿联酋网络安全角色标杆：<a href="https://thenationalnews.com/news/uae/2024/09/13/uae-ranked-as-role-model-for-cybersecurity-in-global-report" target="_blank" rel="noopener">（需核实原文）https://thenationalnews.com/news/uae/2024/09/13/uae-ranked-as-role-model-for-cybersecurity-in-global-report</a></li>
+<li>telecomreview：迪拜 AI 安全政策访谈：<a href="https://telecomreview.com/articles/exclusive-interviews/9074-cybersecurity-that-transcends-boundaries" target="_blank" rel="noopener">（需核实原文）https://telecomreview.com/articles/exclusive-interviews/9074-cybersecurity-that-transcends-boundaries</a></li>
+<li>Gulf News：迪拜警察 Oyoon AI 监控：<a href="https://gulfnews.com/uae/crime/ai-and-smart-data-ends-crime" target="_blank" rel="noopener">（需核实原文）https://gulfnews.com/uae/crime/ai-and-smart-data-ends-crime</a></li>
+<li>brief.news / lumitech.co（Moro Hub 聚合源）：<a href="https://brief.news" target="_blank" rel="noopener">（需核实原文）https://brief.news</a>；<a href="https://lumitech.co" target="_blank" rel="noopener">https://lumitech.co</a></li>
+<li>GEC Newswire（Core42 与 TII 合作）：<a href="https://gecnewswire.com" target="_blank" rel="noopener">（需核实原文）https://gecnewswire.com</a></li>
+<li>Zawya（GISEC 2026 报道）：<a href="https://zawya.com" target="_blank" rel="noopener">（需核实原文）https://zawya.com</a></li>
+<li>searchinform（国家网络安全战略解读）：<a href="https://searchinform.com/blog/2025/9/24" target="_blank" rel="noopener">（需核实原文）https://searchinform.com/blog/2025/9/24</a></li>
+<li>GISec / GITEX 官网：<a href="https://gisec.ae" target="_blank" rel="noopener">https://gisec.ae</a>；<a href="https://gitex.com" target="_blank" rel="noopener">https://gitex.com</a></li>
+</ul>
+<p><strong>⑤ 玩家官网 / 官方渠道</strong></p>
+<ul>
+<li>G42：<a href="https://g42.ai" target="_blank" rel="noopener">https://g42.ai</a>；Core42：<a href="https://core42.ai" target="_blank" rel="noopener">https://core42.ai</a>；CPX：<a href="https://cpx.net" target="_blank" rel="noopener">https://cpx.net</a></li>
+<li>e&amp; enterprise / Help AG：<a href="https://eand.com/en/news/13-jan-26-eand-enterprise-and-sergas-team-up.html" target="_blank" rel="noopener">https://eand.com/en/news/13-jan-26-eand-enterprise-and-sergas-team-up.html</a></li>
+<li>Hub71：<a href="https://hub71.com" target="_blank" rel="noopener">https://hub71.com</a>；FAQ：<a href="https://hub71.com/faqs" target="_blank" rel="noopener">https://hub71.com/faqs</a></li>
+<li>Inc. Arabia（CPX 收购 spiderSilk）：<a href="https://incarabia.com" target="_blank" rel="noopener">https://incarabia.com</a>；The Arabian Post：<a href="https://thearabianpost.com" target="_blank" rel="noopener">（需核实原文）https://thearabianpost.com</a></li>
+</ul>
+<p class="small">引用说明：本报告事实底座为同仓库已文档化来源（security 业务线基线报告及其来源清单、trends 业务线周报、security 指标登记册），未做独立一手检索；所有 URL 均来自上述已存档来源。报告完稿于 2026-12（v1.0 基线）。</p>
+
+<footer>迪拜（阿联酋）AI 网安竞争格局 · 基线报告 v1.0 ｜ 竞争情报监测型 ｜ 数据截止 2026-11-13 ｜ 来源仅公开合法信息</footer>
+</main>
+</body>
+</html>

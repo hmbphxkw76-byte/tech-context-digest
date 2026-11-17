@@ -1,0 +1,1200 @@
+{
+  "topic": "ai-agent",
+  "name": "AI Agent 与大模型",
+  "version": "v1.2",
+  "generated_at": "2026-11-13T19:10:17",
+  "count": 73,
+  "categories": {
+    "概念与评估": 12,
+    "模型与厂商": 19,
+    "Agent 技术与框架": 14,
+    "编码工具与 IDE": 13,
+    "应用与产品": 15
+  },
+  "terms": [
+    {
+      "id": "AAG-001",
+      "term": "大语言模型",
+      "aliases": [
+        "LLM",
+        "Large Language Model",
+        "大模型"
+      ],
+      "category": "概念与评估",
+      "tags": [
+        "模型",
+        "基础"
+      ],
+      "definition": "基于海量语料预训练的大规模语言模型，具备通用理解与生成能力，是 Agent 与 AI 应用的基座",
+      "source": "OpenAI / Anthropic（需核实原文）",
+      "first_added": "2026-11-13",
+      "last_updated": "2026-11-13"
+    },
+    {
+      "id": "AAG-002",
+      "term": "生成式 AI",
+      "aliases": [
+        "Generative AI",
+        "AIGC"
+      ],
+      "category": "概念与评估",
+      "tags": [
+        "概念"
+      ],
+      "definition": "能生成文本、图像、音频、视频等内容的人工智能技术总称",
+      "source": "行业通用惯例",
+      "first_added": "2026-11-13",
+      "last_updated": "2026-11-13"
+    },
+    {
+      "id": "AAG-003",
+      "term": "多模态模型",
+      "aliases": [
+        "Multimodal Model",
+        "多模态"
+      ],
+      "category": "模型与厂商",
+      "tags": [
+        "模型",
+        "能力"
+      ],
+      "definition": "同时处理文本、图像、音频、视频等多种模态输入与输出的模型",
+      "source": "OpenAI / Google（需核实原文）",
+      "first_added": "2026-11-13",
+      "last_updated": "2026-11-13"
+    },
+    {
+      "id": "AAG-004",
+      "term": "推理模型",
+      "aliases": [
+        "Reasoning Model",
+        "推理增强模型",
+        "思维链模型"
+      ],
+      "category": "模型与厂商",
+      "tags": [
+        "模型",
+        "推理"
+      ],
+      "definition": "通过长思维链强化学习训练、在数学、代码与科学推理任务上显著增强的模型",
+      "source": "OpenAI（需核实原文）",
+      "first_added": "2026-11-13",
+      "last_updated": "2026-11-13"
+    },
+    {
+      "id": "AAG-005",
+      "term": "开源权重模型",
+      "aliases": [
+        "Open-Weights Model",
+        "开放权重"
+      ],
+      "category": "概念与评估",
+      "tags": [
+        "模型",
+        "生态"
+      ],
+      "definition": "公开模型权重、允许本地部署与微调的模型发布形态（区别于闭源 API）",
+      "source": "Meta / Hugging Face（需核实原文）",
+      "first_added": "2026-11-13",
+      "last_updated": "2026-11-13"
+    },
+    {
+      "id": "AAG-006",
+      "term": "上下文窗口",
+      "aliases": [
+        "Context Window",
+        "上下文长度"
+      ],
+      "category": "概念与评估",
+      "tags": [
+        "机制",
+        "计量"
+      ],
+      "definition": "模型单次可处理的最大 token 数，决定长文档与长会话能力上限",
+      "source": "各厂商模型页",
+      "first_added": "2026-11-13",
+      "last_updated": "2026-11-13"
+    },
+    {
+      "id": "AAG-007",
+      "term": "Token",
+      "aliases": [
+        "词元"
+      ],
+      "category": "概念与评估",
+      "tags": [
+        "计量"
+      ],
+      "definition": "文本切分的最小处理单位，模型计费与上下文计量的基本粒度",
+      "source": "OpenAI（需核实原文）",
+      "first_added": "2026-11-13",
+      "last_updated": "2026-11-13"
+    },
+    {
+      "id": "AAG-008",
+      "term": "幻觉",
+      "aliases": [
+        "Hallucination",
+        "模型幻觉"
+      ],
+      "category": "概念与评估",
+      "tags": [
+        "风险"
+      ],
+      "definition": "模型生成看似合理但与事实不符内容的现象",
+      "source": "行业通用惯例",
+      "first_added": "2026-11-13",
+      "last_updated": "2026-11-13"
+    },
+    {
+      "id": "AAG-009",
+      "term": "微调",
+      "aliases": [
+        "Fine-tuning",
+        "SFT",
+        "监督微调"
+      ],
+      "category": "概念与评估",
+      "tags": [
+        "训练"
+      ],
+      "definition": "在预训练模型上用领域数据继续训练以适配特定任务的训练方法",
+      "source": "Hugging Face 文档（需核实原文）",
+      "first_added": "2026-11-13",
+      "last_updated": "2026-11-13"
+    },
+    {
+      "id": "AAG-010",
+      "term": "RLHF",
+      "aliases": [
+        "基于人类反馈的强化学习",
+        "Reinforcement Learning from Human Feedback"
+      ],
+      "category": "概念与评估",
+      "tags": [
+        "训练"
+      ],
+      "definition": "用人类偏好数据训练奖励模型并对齐模型行为的后训练方法",
+      "source": "OpenAI（需核实原文）",
+      "first_added": "2026-11-13",
+      "last_updated": "2026-11-13"
+    },
+    {
+      "id": "AAG-011",
+      "term": "蒸馏",
+      "aliases": [
+        "Distillation",
+        "模型蒸馏"
+      ],
+      "category": "概念与评估",
+      "tags": [
+        "训练",
+        "效率"
+      ],
+      "definition": "用大模型输出训练小模型以保留能力、降低推理成本的方法",
+      "source": "行业通用惯例",
+      "first_added": "2026-11-13",
+      "last_updated": "2026-11-13"
+    },
+    {
+      "id": "AAG-012",
+      "term": "Prompt 工程",
+      "aliases": [
+        "Prompt Engineering",
+        "提示词工程"
+      ],
+      "category": "概念与评估",
+      "tags": [
+        "方法"
+      ],
+      "definition": "通过设计与迭代输入提示词以稳定引导模型输出的方法论",
+      "source": "行业通用惯例",
+      "first_added": "2026-11-13",
+      "last_updated": "2026-11-13"
+    },
+    {
+      "id": "AAG-013",
+      "term": "SWE-bench",
+      "aliases": [
+        "SWE-bench Verified",
+        "SWE-bench 基准"
+      ],
+      "category": "概念与评估",
+      "tags": [
+        "基准",
+        "编码"
+      ],
+      "definition": "基于真实 GitHub issue 的代码修复基准，编码 Agent 能力的核心参考",
+      "source": "swebench.com（需核实原文）",
+      "first_added": "2026-11-13",
+      "last_updated": "2026-11-13"
+    },
+    {
+      "id": "AAG-014",
+      "term": "GAIA",
+      "aliases": [
+        "GAIA 基准"
+      ],
+      "category": "概念与评估",
+      "tags": [
+        "基准",
+        "Agent"
+      ],
+      "definition": "评估通用 Agent 完成真实世界任务能力的基准",
+      "source": "Meta / Hugging Face（需核实原文）",
+      "first_added": "2026-11-13",
+      "last_updated": "2026-11-13"
+    },
+    {
+      "id": "AAG-015",
+      "term": "OpenAI",
+      "aliases": [
+        "openai.com"
+      ],
+      "category": "模型与厂商",
+      "tags": [
+        "厂商"
+      ],
+      "definition": "GPT 系列模型与 ChatGPT 的开发公司，Agent 方向推出 Agents SDK 与 Codex",
+      "source": "openai.com",
+      "first_added": "2026-11-13",
+      "last_updated": "2026-11-13"
+    },
+    {
+      "id": "AAG-016",
+      "term": "Anthropic",
+      "aliases": [
+        "anthropic.com"
+      ],
+      "category": "模型与厂商",
+      "tags": [
+        "厂商"
+      ],
+      "definition": "Claude 系列模型开发公司，提出 MCP 协议并推出 Claude Code",
+      "source": "anthropic.com",
+      "first_added": "2026-11-13",
+      "last_updated": "2026-11-13"
+    },
+    {
+      "id": "AAG-017",
+      "term": "Google DeepMind",
+      "aliases": [
+        "谷歌deepmind",
+        "Google AI"
+      ],
+      "category": "模型与厂商",
+      "tags": [
+        "厂商"
+      ],
+      "definition": "Gemini 系列模型的开发方，Google AI 研究主体",
+      "source": "deepmind.google",
+      "first_added": "2026-11-13",
+      "last_updated": "2026-11-13"
+    },
+    {
+      "id": "AAG-018",
+      "term": "Meta AI",
+      "aliases": [
+        "Meta",
+        "Facebook AI"
+      ],
+      "category": "模型与厂商",
+      "tags": [
+        "厂商"
+      ],
+      "definition": "Llama 开源权重模型系列的发布方",
+      "source": "ai.meta.com",
+      "first_added": "2026-11-13",
+      "last_updated": "2026-11-13"
+    },
+    {
+      "id": "AAG-019",
+      "term": "xAI",
+      "aliases": [
+        "X.AI",
+        "xAI 公司"
+      ],
+      "category": "模型与厂商",
+      "tags": [
+        "厂商"
+      ],
+      "definition": "Grok 系列模型开发公司",
+      "source": "x.ai",
+      "first_added": "2026-11-13",
+      "last_updated": "2026-11-13"
+    },
+    {
+      "id": "AAG-020",
+      "term": "Mistral AI",
+      "aliases": [
+        "Mistral"
+      ],
+      "category": "模型与厂商",
+      "tags": [
+        "厂商"
+      ],
+      "definition": "欧洲开源权重模型厂商，Mistral 与 Mixtral 系列",
+      "source": "mistral.ai",
+      "first_added": "2026-11-13",
+      "last_updated": "2026-11-13"
+    },
+    {
+      "id": "AAG-021",
+      "term": "DeepSeek",
+      "aliases": [
+        "深度求索"
+      ],
+      "category": "模型与厂商",
+      "tags": [
+        "厂商"
+      ],
+      "definition": "中国模型厂商，DeepSeek-V3 与 R1 等开源权重模型",
+      "source": "deepseek.com",
+      "first_added": "2026-11-13",
+      "last_updated": "2026-11-13"
+    },
+    {
+      "id": "AAG-022",
+      "term": "阿里通义千问",
+      "aliases": [
+        "Qwen",
+        "通义千问"
+      ],
+      "category": "模型与厂商",
+      "tags": [
+        "厂商",
+        "模型"
+      ],
+      "definition": "阿里巴巴 Qwen 系列开源与商用模型",
+      "source": "qwen.ai",
+      "first_added": "2026-11-13",
+      "last_updated": "2026-11-13"
+    },
+    {
+      "id": "AAG-023",
+      "term": "智谱 GLM",
+      "aliases": [
+        "GLM",
+        "Zhipu AI",
+        "智谱AI"
+      ],
+      "category": "模型与厂商",
+      "tags": [
+        "厂商",
+        "模型"
+      ],
+      "definition": "智谱的 GLM 系列大模型",
+      "source": "zhipuai.cn",
+      "first_added": "2026-11-13",
+      "last_updated": "2026-11-13"
+    },
+    {
+      "id": "AAG-024",
+      "term": "月之暗面 Kimi",
+      "aliases": [
+        "Moonshot AI",
+        "Kimi"
+      ],
+      "category": "模型与厂商",
+      "tags": [
+        "厂商",
+        "模型"
+      ],
+      "definition": "Moonshot AI 的 Kimi 长上下文对话模型",
+      "source": "moonshot.cn",
+      "first_added": "2026-11-13",
+      "last_updated": "2026-11-13"
+    },
+    {
+      "id": "AAG-025",
+      "term": "字节豆包",
+      "aliases": [
+        "Doubao",
+        "豆包大模型"
+      ],
+      "category": "模型与厂商",
+      "tags": [
+        "厂商",
+        "模型"
+      ],
+      "definition": "字节跳动豆包系列模型及其 AI 应用",
+      "source": "volcengine.com",
+      "first_added": "2026-11-13",
+      "last_updated": "2026-11-13"
+    },
+    {
+      "id": "AAG-026",
+      "term": "百度文心",
+      "aliases": [
+        "ERNIE",
+        "文心一言"
+      ],
+      "category": "模型与厂商",
+      "tags": [
+        "厂商",
+        "模型"
+      ],
+      "definition": "百度文心系列大模型",
+      "source": "baidu.com",
+      "first_added": "2026-11-13",
+      "last_updated": "2026-11-13"
+    },
+    {
+      "id": "AAG-027",
+      "term": "GPT",
+      "aliases": [
+        "GPT 系列",
+        "GPT-4",
+        "GPT-5"
+      ],
+      "category": "模型与厂商",
+      "tags": [
+        "模型"
+      ],
+      "definition": "OpenAI 旗舰模型系列，ChatGPT 产品的基座模型",
+      "source": "openai.com",
+      "first_added": "2026-11-13",
+      "last_updated": "2026-11-13"
+    },
+    {
+      "id": "AAG-028",
+      "term": "Claude",
+      "aliases": [
+        "Claude 系列",
+        "Claude Sonnet",
+        "Claude Opus"
+      ],
+      "category": "模型与厂商",
+      "tags": [
+        "模型"
+      ],
+      "definition": "Anthropic 的模型系列，编码与 Agent 场景广泛使用",
+      "source": "anthropic.com",
+      "first_added": "2026-11-13",
+      "last_updated": "2026-11-13"
+    },
+    {
+      "id": "AAG-029",
+      "term": "Gemini",
+      "aliases": [
+        "Gemini 系列"
+      ],
+      "category": "模型与厂商",
+      "tags": [
+        "模型"
+      ],
+      "definition": "Google 的多模态模型系列",
+      "source": "deepmind.google",
+      "first_added": "2026-11-13",
+      "last_updated": "2026-11-13"
+    },
+    {
+      "id": "AAG-030",
+      "term": "Llama",
+      "aliases": [
+        "Llama 系列",
+        "Llama 开源"
+      ],
+      "category": "模型与厂商",
+      "tags": [
+        "模型"
+      ],
+      "definition": "Meta 发布的开源权重模型系列",
+      "source": "ai.meta.com",
+      "first_added": "2026-11-13",
+      "last_updated": "2026-11-13"
+    },
+    {
+      "id": "AAG-031",
+      "term": "Grok",
+      "aliases": [
+        "Grok 系列"
+      ],
+      "category": "模型与厂商",
+      "tags": [
+        "模型"
+      ],
+      "definition": "xAI 的模型系列，接入 X 平台实时信息",
+      "source": "x.ai",
+      "first_added": "2026-11-13",
+      "last_updated": "2026-11-13"
+    },
+    {
+      "id": "AAG-032",
+      "term": "AI Agent",
+      "aliases": [
+        "智能体",
+        "Agent"
+      ],
+      "category": "Agent 技术与框架",
+      "tags": [
+        "Agent",
+        "基础"
+      ],
+      "definition": "能感知环境、自主规划并调用工具以完成目标的 LLM 驱动系统",
+      "source": "行业通用惯例",
+      "first_added": "2026-11-13",
+      "last_updated": "2026-11-13"
+    },
+    {
+      "id": "AAG-033",
+      "term": "多智能体系统",
+      "aliases": [
+        "Multi-Agent System",
+        "MAS",
+        "多智能体协作"
+      ],
+      "category": "Agent 技术与框架",
+      "tags": [
+        "Agent",
+        "架构"
+      ],
+      "definition": "多个 Agent 分工协作完成任务编排的系统形态",
+      "source": "行业通用惯例",
+      "first_added": "2026-11-13",
+      "last_updated": "2026-11-13"
+    },
+    {
+      "id": "AAG-034",
+      "term": "工具调用",
+      "aliases": [
+        "Function Calling",
+        "Tool Use",
+        "函数调用"
+      ],
+      "category": "Agent 技术与框架",
+      "tags": [
+        "Agent",
+        "能力"
+      ],
+      "definition": "模型按 schema 生成结构化调用请求以使用外部工具与 API 的机制",
+      "source": "OpenAI（需核实原文）",
+      "first_added": "2026-11-13",
+      "last_updated": "2026-11-13"
+    },
+    {
+      "id": "AAG-035",
+      "term": "模型上下文协议",
+      "aliases": [
+        "MCP",
+        "Model Context Protocol"
+      ],
+      "category": "Agent 技术与框架",
+      "tags": [
+        "协议"
+      ],
+      "definition": "Anthropic 提出的模型与外部工具、数据源连接的开放协议",
+      "source": "modelcontextprotocol.io",
+      "first_added": "2026-11-13",
+      "last_updated": "2026-11-13"
+    },
+    {
+      "id": "AAG-036",
+      "term": "A2A",
+      "aliases": [
+        "Agent-to-Agent",
+        "Agent2Agent 协议"
+      ],
+      "category": "Agent 技术与框架",
+      "tags": [
+        "协议"
+      ],
+      "definition": "Agent 之间互操作通信的开放协议（Google 发起）",
+      "source": "Google（需核实原文）",
+      "first_added": "2026-11-13",
+      "last_updated": "2026-11-13"
+    },
+    {
+      "id": "AAG-037",
+      "term": "ReAct",
+      "aliases": [
+        "Reasoning and Acting"
+      ],
+      "category": "Agent 技术与框架",
+      "tags": [
+        "模式"
+      ],
+      "definition": "推理与行动交替进行的 Agent 经典范式",
+      "source": "论文（需核实原文）",
+      "first_added": "2026-11-13",
+      "last_updated": "2026-11-13"
+    },
+    {
+      "id": "AAG-038",
+      "term": "Agent 记忆",
+      "aliases": [
+        "Agent Memory",
+        "长期记忆"
+      ],
+      "category": "Agent 技术与框架",
+      "tags": [
+        "Agent",
+        "能力"
+      ],
+      "definition": "Agent 跨会话保存与检索状态的机制（向量或结构化存储）",
+      "source": "行业通用惯例",
+      "first_added": "2026-11-13",
+      "last_updated": "2026-11-13"
+    },
+    {
+      "id": "AAG-039",
+      "term": "Computer Use",
+      "aliases": [
+        "计算机使用",
+        "屏幕操作 Agent"
+      ],
+      "category": "Agent 技术与框架",
+      "tags": [
+        "Agent",
+        "能力"
+      ],
+      "definition": "Agent 直接操作图形界面（点击、输入）以完成任务的范式",
+      "source": "Anthropic（需核实原文）",
+      "first_added": "2026-11-13",
+      "last_updated": "2026-11-13"
+    },
+    {
+      "id": "AAG-040",
+      "term": "LangChain",
+      "aliases": [
+        "LangChain 框架"
+      ],
+      "category": "Agent 技术与框架",
+      "tags": [
+        "框架"
+      ],
+      "definition": "LLM 应用开发框架，组件化封装模型调用、检索与工具",
+      "source": "python.langchain.com",
+      "first_added": "2026-11-13",
+      "last_updated": "2026-11-13"
+    },
+    {
+      "id": "AAG-041",
+      "term": "LangGraph",
+      "aliases": [
+        "LangGraph 编排"
+      ],
+      "category": "Agent 技术与框架",
+      "tags": [
+        "框架"
+      ],
+      "definition": "基于图的 Agent 状态机编排库（LangChain 生态）",
+      "source": "langchain-ai.github.io",
+      "first_added": "2026-11-13",
+      "last_updated": "2026-11-13"
+    },
+    {
+      "id": "AAG-042",
+      "term": "LlamaIndex",
+      "aliases": [
+        "LlamaIndex 框架"
+      ],
+      "category": "Agent 技术与框架",
+      "tags": [
+        "框架"
+      ],
+      "definition": "面向数据接入与 RAG 应用的开发框架",
+      "source": "docs.llamaindex.ai",
+      "first_added": "2026-11-13",
+      "last_updated": "2026-11-13"
+    },
+    {
+      "id": "AAG-043",
+      "term": "AutoGen",
+      "aliases": [
+        "Microsoft AutoGen"
+      ],
+      "category": "Agent 技术与框架",
+      "tags": [
+        "框架"
+      ],
+      "definition": "微软开源的多智能体对话与编排框架",
+      "source": "microsoft.github.io",
+      "first_added": "2026-11-13",
+      "last_updated": "2026-11-13"
+    },
+    {
+      "id": "AAG-044",
+      "term": "CrewAI",
+      "aliases": [
+        "CrewAI 框架"
+      ],
+      "category": "Agent 技术与框架",
+      "tags": [
+        "框架"
+      ],
+      "definition": "角色化多智能体协作编排框架",
+      "source": "docs.crewai.com",
+      "first_added": "2026-11-13",
+      "last_updated": "2026-11-13"
+    },
+    {
+      "id": "AAG-045",
+      "term": "Dify",
+      "aliases": [
+        "Dify 平台"
+      ],
+      "category": "Agent 技术与框架",
+      "tags": [
+        "平台"
+      ],
+      "definition": "开源 LLM 应用开发平台，可视化编排、RAG 与 Agent 工作流",
+      "source": "dify.ai",
+      "first_added": "2026-11-13",
+      "last_updated": "2026-11-13"
+    },
+    {
+      "id": "AAG-046",
+      "term": "AI IDE",
+      "aliases": [
+        "AI 集成开发环境",
+        "AI-native IDE"
+      ],
+      "category": "编码工具与 IDE",
+      "tags": [
+        "工具",
+        "IDE"
+      ],
+      "definition": "以 AI 协作为核心能力的集成开发环境品类",
+      "source": "行业通用惯例",
+      "first_added": "2026-11-13",
+      "last_updated": "2026-11-13"
+    },
+    {
+      "id": "AAG-047",
+      "term": "AI 编码助手",
+      "aliases": [
+        "Coding Assistant",
+        "代码助手"
+      ],
+      "category": "编码工具与 IDE",
+      "tags": [
+        "品类"
+      ],
+      "definition": "在 IDE 或 CLI 中辅助代码补全、生成与审查的工具品类总称",
+      "source": "行业通用惯例",
+      "first_added": "2026-11-13",
+      "last_updated": "2026-11-13"
+    },
+    {
+      "id": "AAG-048",
+      "term": "Cursor",
+      "aliases": [
+        "Cursor IDE",
+        "Anysphere Cursor"
+      ],
+      "category": "编码工具与 IDE",
+      "tags": [
+        "工具",
+        "IDE"
+      ],
+      "definition": "Anysphere 的 AI-native 代码编辑器（VS Code 分支）",
+      "source": "cursor.com",
+      "first_added": "2026-11-13",
+      "last_updated": "2026-11-13"
+    },
+    {
+      "id": "AAG-049",
+      "term": "GitHub Copilot",
+      "aliases": [
+        "Copilot"
+      ],
+      "category": "编码工具与 IDE",
+      "tags": [
+        "工具",
+        "助手"
+      ],
+      "definition": "GitHub 与微软的 AI 编码助手，含 IDE 插件、CLI 与企业版",
+      "source": "github.com",
+      "first_added": "2026-11-13",
+      "last_updated": "2026-11-13"
+    },
+    {
+      "id": "AAG-050",
+      "term": "Windsurf",
+      "aliases": [
+        "Windsurf IDE",
+        "Codeium"
+      ],
+      "category": "编码工具与 IDE",
+      "tags": [
+        "工具",
+        "IDE"
+      ],
+      "definition": "Codeium（现 Windsurf）的 AI IDE 与编码助手",
+      "source": "windsurf.com",
+      "first_added": "2026-11-13",
+      "last_updated": "2026-11-13"
+    },
+    {
+      "id": "AAG-051",
+      "term": "Trae",
+      "aliases": [
+        "Trae IDE"
+      ],
+      "category": "编码工具与 IDE",
+      "tags": [
+        "工具",
+        "IDE"
+      ],
+      "definition": "字节跳动推出的 AI IDE",
+      "source": "traee.ai（需核实原文）",
+      "first_added": "2026-11-13",
+      "last_updated": "2026-11-13"
+    },
+    {
+      "id": "AAG-052",
+      "term": "Claude Code",
+      "aliases": [
+        "Claude Code CLI"
+      ],
+      "category": "编码工具与 IDE",
+      "tags": [
+        "工具",
+        "CLI"
+      ],
+      "definition": "Anthropic 的终端编码 Agent 工具",
+      "source": "anthropic.com",
+      "first_added": "2026-11-13",
+      "last_updated": "2026-11-13"
+    },
+    {
+      "id": "AAG-053",
+      "term": "Codex",
+      "aliases": [
+        "OpenAI Codex",
+        "Codex CLI"
+      ],
+      "category": "编码工具与 IDE",
+      "tags": [
+        "工具",
+        "CLI"
+      ],
+      "definition": "OpenAI 的编码模型与云端、CLI 编码 Agent",
+      "source": "openai.com",
+      "first_added": "2026-11-13",
+      "last_updated": "2026-11-13"
+    },
+    {
+      "id": "AAG-054",
+      "term": "Devin",
+      "aliases": [
+        "Devin AI"
+      ],
+      "category": "编码工具与 IDE",
+      "tags": [
+        "工具",
+        "Agent"
+      ],
+      "definition": "Cognition 推出的自主软件工程 Agent",
+      "source": "cognition.ai",
+      "first_added": "2026-11-13",
+      "last_updated": "2026-11-13"
+    },
+    {
+      "id": "AAG-055",
+      "term": "OpenHands",
+      "aliases": [
+        "OpenHands 框架",
+        "原 OpenDevin"
+      ],
+      "category": "编码工具与 IDE",
+      "tags": [
+        "工具",
+        "开源"
+      ],
+      "definition": "开源自主软件工程 Agent 框架",
+      "source": "github.com（需核实原文）",
+      "first_added": "2026-11-13",
+      "last_updated": "2026-11-13"
+    },
+    {
+      "id": "AAG-056",
+      "term": "Aider",
+      "aliases": [
+        "Aider CLI"
+      ],
+      "category": "编码工具与 IDE",
+      "tags": [
+        "工具",
+        "CLI"
+      ],
+      "definition": "开源命令行结对编程工具",
+      "source": "aider.chat",
+      "first_added": "2026-11-13",
+      "last_updated": "2026-11-13"
+    },
+    {
+      "id": "AAG-057",
+      "term": "Cline",
+      "aliases": [
+        "Cline 插件"
+      ],
+      "category": "编码工具与 IDE",
+      "tags": [
+        "工具",
+        "插件"
+      ],
+      "definition": "VS Code 开源自主编码 Agent 插件",
+      "source": "github.com（需核实原文）",
+      "first_added": "2026-11-13",
+      "last_updated": "2026-11-13"
+    },
+    {
+      "id": "AAG-058",
+      "term": "Vibe Coding",
+      "aliases": [
+        "氛围编程"
+      ],
+      "category": "编码工具与 IDE",
+      "tags": [
+        "概念",
+        "工作流"
+      ],
+      "definition": "以自然语言驱动 AI 生成与迭代代码、较少逐行手写的编程方式",
+      "source": "Karpathy（需核实原文）",
+      "first_added": "2026-11-13",
+      "last_updated": "2026-11-13"
+    },
+    {
+      "id": "AAG-059",
+      "term": "ChatGPT",
+      "aliases": [
+        "chatgpt.com"
+      ],
+      "category": "应用与产品",
+      "tags": [
+        "产品",
+        "对话"
+      ],
+      "definition": "OpenAI 的对话式 AI 产品，全球用户规模最大的 AI 应用",
+      "source": "openai.com",
+      "first_added": "2026-11-13",
+      "last_updated": "2026-11-13"
+    },
+    {
+      "id": "AAG-060",
+      "term": "Perplexity",
+      "aliases": [
+        "Perplexity AI"
+      ],
+      "category": "应用与产品",
+      "tags": [
+        "产品",
+        "搜索"
+      ],
+      "definition": "以生成式回答整合检索来源的 AI 搜索产品",
+      "source": "perplexity.ai",
+      "first_added": "2026-11-13",
+      "last_updated": "2026-11-13"
+    },
+    {
+      "id": "AAG-061",
+      "term": "NotebookLM",
+      "aliases": [
+        "NotebookLM 产品"
+      ],
+      "category": "应用与产品",
+      "tags": [
+        "产品",
+        "知识"
+      ],
+      "definition": "Google 的文档知识助手产品，支持音频概览等衍生形态",
+      "source": "notebooklm.google.com",
+      "first_added": "2026-11-13",
+      "last_updated": "2026-11-13"
+    },
+    {
+      "id": "AAG-062",
+      "term": "Microsoft 365 Copilot",
+      "aliases": [
+        "M365 Copilot",
+        "Office Copilot"
+      ],
+      "category": "应用与产品",
+      "tags": [
+        "产品",
+        "办公"
+      ],
+      "definition": "微软办公套件内嵌的 AI 助手产品",
+      "source": "microsoft.com",
+      "first_added": "2026-11-13",
+      "last_updated": "2026-11-13"
+    },
+    {
+      "id": "AAG-063",
+      "term": "Deep Research",
+      "aliases": [
+        "深度研究"
+      ],
+      "category": "应用与产品",
+      "tags": [
+        "品类"
+      ],
+      "definition": "Agent 自主多步检索并产出带引用研究报告的产品品类",
+      "source": "OpenAI / Google（需核实原文）",
+      "first_added": "2026-11-13",
+      "last_updated": "2026-11-13"
+    },
+    {
+      "id": "AAG-064",
+      "term": "AI 搜索",
+      "aliases": [
+        "AI Search",
+        "答案引擎"
+      ],
+      "category": "应用与产品",
+      "tags": [
+        "品类"
+      ],
+      "definition": "以生成式回答整合检索结果的新搜索品类总称",
+      "source": "行业通用惯例",
+      "first_added": "2026-11-13",
+      "last_updated": "2026-11-13"
+    },
+    {
+      "id": "AAG-065",
+      "term": "Midjourney",
+      "aliases": [
+        "MJ"
+      ],
+      "category": "应用与产品",
+      "tags": [
+        "产品",
+        "图像"
+      ],
+      "definition": "订阅制图像生成产品",
+      "source": "midjourney.com",
+      "first_added": "2026-11-13",
+      "last_updated": "2026-11-13"
+    },
+    {
+      "id": "AAG-066",
+      "term": "Sora",
+      "aliases": [
+        "OpenAI Sora"
+      ],
+      "category": "应用与产品",
+      "tags": [
+        "产品",
+        "视频"
+      ],
+      "definition": "OpenAI 的文生视频产品",
+      "source": "openai.com",
+      "first_added": "2026-11-13",
+      "last_updated": "2026-11-13"
+    },
+    {
+      "id": "AAG-067",
+      "term": "Suno",
+      "aliases": [
+        "Suno AI"
+      ],
+      "category": "应用与产品",
+      "tags": [
+        "产品",
+        "音频"
+      ],
+      "definition": "AI 音乐生成产品",
+      "source": "suno.com",
+      "first_added": "2026-11-13",
+      "last_updated": "2026-11-13"
+    },
+    {
+      "id": "AAG-068",
+      "term": "ElevenLabs",
+      "aliases": [
+        "ElevenLabs 语音"
+      ],
+      "category": "应用与产品",
+      "tags": [
+        "产品",
+        "音频"
+      ],
+      "definition": "AI 语音合成与克隆产品",
+      "source": "elevenlabs.io",
+      "first_added": "2026-11-13",
+      "last_updated": "2026-11-13"
+    },
+    {
+      "id": "AAG-069",
+      "term": "Lovable",
+      "aliases": [
+        "Lovable.dev"
+      ],
+      "category": "应用与产品",
+      "tags": [
+        "产品",
+        "构建"
+      ],
+      "definition": "AI 全栈应用生成平台",
+      "source": "lovable.dev",
+      "first_added": "2026-11-13",
+      "last_updated": "2026-11-13"
+    },
+    {
+      "id": "AAG-070",
+      "term": "Bolt.new",
+      "aliases": [
+        "Bolt"
+      ],
+      "category": "应用与产品",
+      "tags": [
+        "产品",
+        "构建"
+      ],
+      "definition": "StackBlitz 的浏览器内 AI 全栈应用生成平台",
+      "source": "bolt.new",
+      "first_added": "2026-11-13",
+      "last_updated": "2026-11-13"
+    },
+    {
+      "id": "AAG-071",
+      "term": "v0",
+      "aliases": [
+        "v0.dev"
+      ],
+      "category": "应用与产品",
+      "tags": [
+        "产品",
+        "前端"
+      ],
+      "definition": "Vercel 的 AI UI 与前端代码生成工具",
+      "source": "v0.dev",
+      "first_added": "2026-11-13",
+      "last_updated": "2026-11-13"
+    },
+    {
+      "id": "AAG-072",
+      "term": "Replit Agent",
+      "aliases": [
+        "Replit"
+      ],
+      "category": "应用与产品",
+      "tags": [
+        "产品",
+        "构建"
+      ],
+      "definition": "Replit 平台内的 AI 应用构建 Agent",
+      "source": "replit.com",
+      "first_added": "2026-11-13",
+      "last_updated": "2026-11-13"
+    },
+    {
+      "id": "AAG-073",
+      "term": "Manus",
+      "aliases": [
+        "Manus AI"
+      ],
+      "category": "应用与产品",
+      "tags": [
+        "产品",
+        "Agent"
+      ],
+      "definition": "面向通用任务执行的自主 Agent 产品",
+      "source": "manus.im（需核实原文）",
+      "first_added": "2026-11-13",
+      "last_updated": "2026-11-13"
+    }
+  ]
+}

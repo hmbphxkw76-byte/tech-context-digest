@@ -1,0 +1,440 @@
+{
+  "report": "content/tech/trends/global/reports/2026-11-13_weekly.html",
+  "reviews": [
+    {
+      "stage": "draft",
+      "reviewer": "agent",
+      "timestamp": "2026-11-14T23:33:48+08:00",
+      "decision": "pass",
+      "findings": [],
+      "evidence": "结构骨架/命名/页头要素通过",
+      "levels": [
+        "L1",
+        "L2"
+      ]
+    },
+    {
+      "stage": "initial",
+      "reviewer": "agent",
+      "timestamp": "2026-11-14T23:33:48+08:00",
+      "decision": "pass",
+      "findings": [],
+      "evidence": "L1+L2 通过（要素达标，无 [E]）",
+      "levels": [
+        "L1",
+        "L2"
+      ]
+    },
+    {
+      "stage": "second",
+      "reviewer": "agent",
+      "timestamp": "2026-11-14T23:33:49+08:00",
+      "decision": "pass",
+      "findings": [],
+      "evidence": "L3 通过：准确性/可追溯/一致性达标",
+      "levels": [
+        "L3"
+      ]
+    },
+    {
+      "stage": "final",
+      "reviewer": "agent",
+      "timestamp": "2026-11-14T23:33:49+08:00",
+      "decision": "pass",
+      "findings": [],
+      "evidence": "终审通过 A1-A8",
+      "levels": [
+        "L3"
+      ]
+    },
+    {
+      "stage": "draft",
+      "reviewer": "ci-bot",
+      "timestamp": "2026-11-14T23:40:44+08:00",
+      "decision": "pass",
+      "findings": [],
+      "evidence": "L2 要素 10/10；来源可追溯 OK；口径一致 OK；语义深度复核由 Agent 定期执行",
+      "levels": [
+        "L1",
+        "L2"
+      ]
+    },
+    {
+      "stage": "initial",
+      "reviewer": "ci-bot",
+      "timestamp": "2026-11-14T23:40:44+08:00",
+      "decision": "pass",
+      "findings": [],
+      "evidence": "L2 要素 10/10；来源可追溯 OK；口径一致 OK；语义深度复核由 Agent 定期执行",
+      "levels": [
+        "L1",
+        "L2"
+      ]
+    },
+    {
+      "stage": "second",
+      "reviewer": "ci-bot",
+      "timestamp": "2026-11-14T23:40:44+08:00",
+      "decision": "pass",
+      "findings": [],
+      "evidence": "L2 要素 10/10；来源可追溯 OK；口径一致 OK；语义深度复核由 Agent 定期执行",
+      "levels": [
+        "L3"
+      ]
+    },
+    {
+      "stage": "final",
+      "reviewer": "ci-bot",
+      "timestamp": "2026-11-14T23:40:44+08:00",
+      "decision": "pass",
+      "findings": [],
+      "evidence": "L2 要素 10/10；来源可追溯 OK；口径一致 OK；语义深度复核由 Agent 定期执行",
+      "levels": [
+        "L3"
+      ]
+    },
+    {
+      "stage": "draft",
+      "reviewer": "ci-bot",
+      "timestamp": "2026-11-15T03:06:32+00:00",
+      "decision": "pass",
+      "findings": [],
+      "evidence": "[strict] L2 10/10；标题 OK；断头锚点 0；来源可追溯 OK；口径一致 OK；语义终审 reviewer=ci-bot decision=pass",
+      "levels": [
+        "L1",
+        "L2"
+      ]
+    },
+    {
+      "stage": "initial",
+      "reviewer": "ci-bot",
+      "timestamp": "2026-11-15T03:06:32+00:00",
+      "decision": "pass",
+      "findings": [],
+      "evidence": "[strict] L2 10/10；标题 OK；断头锚点 0；来源可追溯 OK；口径一致 OK；语义终审 reviewer=ci-bot decision=pass",
+      "levels": [
+        "L1",
+        "L2"
+      ]
+    },
+    {
+      "stage": "second",
+      "reviewer": "ci-bot",
+      "timestamp": "2026-11-15T03:06:32+00:00",
+      "decision": "pass",
+      "findings": [],
+      "evidence": "[strict] L2 10/10；标题 OK；断头锚点 0；来源可追溯 OK；口径一致 OK；语义终审 reviewer=ci-bot decision=pass",
+      "levels": [
+        "L3"
+      ]
+    },
+    {
+      "stage": "final",
+      "reviewer": "ci-bot",
+      "timestamp": "2026-11-15T03:06:32+00:00",
+      "decision": "fix",
+      "findings": [],
+      "evidence": "[strict] L2 10/10；标题 OK；断头锚点 0；来源可追溯 OK；口径一致 OK；语义终审 reviewer=ci-bot decision=pass",
+      "levels": [
+        "L3"
+      ]
+    },
+    {
+      "stage": "second",
+      "reviewer": "agent",
+      "timestamp": "2026-11-15T17:06:51+08:00",
+      "decision": "fix",
+      "findings": [
+        {
+          "id": "F-001",
+          "severity": "P1",
+          "desc": "sources/2026-11-13_weekly.md 与交付 HTML 单位差 10 倍（$169.56 亿 vs $169.56B），且 md 缺 s1.0 周期定位与已修正事实清单"
+        },
+        {
+          "id": "F-002",
+          "severity": "P1",
+          "desc": "data/source_registry.json 缺失，source_check 判 [E]"
+        },
+        {
+          "id": "F-003",
+          "severity": "P1",
+          "desc": "research_kernel_check 判 [E]：缺传导量化 / 盲区列示"
+        },
+        {
+          "id": "F-004",
+          "severity": "P1",
+          "desc": "§5.1 两个『采用率』（Stanford 88% 与 Menlo 55%→65%）未显式说明为不同调查口径；单位混用"
+        }
+      ],
+      "evidence": "L3 不通过：源稿与交付物量级错误 + 来源登记缺失 + 内核缺项。",
+      "levels": [
+        "L3"
+      ]
+    },
+    {
+      "stage": "second",
+      "reviewer": "agent",
+      "timestamp": "2026-11-15T17:57:33+08:00",
+      "decision": "pass",
+      "findings": [],
+      "evidence": "L3 通过（修复轮后）：md 源稿已同步（$169.56 亿 → $169.56B 等 10x 单位、补齐 s1.0 周期定位与 7.1 已修正事实清单）；来源登记已建立（36 条）；S-1/A 段落单位已统一为 B。残留：研究内核缺项按历史报告口径为 [W]（非阻断）；§5.1 两个『采用率』为不同调查口径（P2）。",
+      "levels": [
+        "L3"
+      ]
+    },
+    {
+      "stage": "final",
+      "reviewer": "agent",
+      "timestamp": "2026-11-15T17:57:34+08:00",
+      "decision": "pass",
+      "findings": [],
+      "evidence": "终审通过 A1-A8（修复轮后复检）",
+      "levels": [
+        "L3"
+      ]
+    },
+    {
+      "stage": "draft",
+      "reviewer": "ci-bot",
+      "timestamp": "2026-11-15T19:43:58+08:00",
+      "decision": "pass",
+      "findings": [],
+      "evidence": "[strict] L2 10/10；标题 OK；断头锚点 0；来源可追溯 OK；口径一致 OK；语义终审 reviewer=agent decision=pass",
+      "levels": [
+        "L1",
+        "L2"
+      ]
+    },
+    {
+      "stage": "initial",
+      "reviewer": "ci-bot",
+      "timestamp": "2026-11-15T19:43:58+08:00",
+      "decision": "pass",
+      "findings": [],
+      "evidence": "[strict] L2 10/10；标题 OK；断头锚点 0；来源可追溯 OK；口径一致 OK；语义终审 reviewer=agent decision=pass",
+      "levels": [
+        "L1",
+        "L2"
+      ]
+    },
+    {
+      "stage": "second",
+      "reviewer": "ci-bot",
+      "timestamp": "2026-11-15T19:43:58+08:00",
+      "decision": "pass",
+      "findings": [],
+      "evidence": "[strict] L2 10/10；标题 OK；断头锚点 0；来源可追溯 OK；口径一致 OK；语义终审 reviewer=agent decision=pass",
+      "levels": [
+        "L3"
+      ]
+    },
+    {
+      "stage": "final",
+      "reviewer": "ci-bot",
+      "timestamp": "2026-11-15T19:43:58+08:00",
+      "decision": "pass",
+      "findings": [],
+      "evidence": "[strict] L2 10/10；标题 OK；断头锚点 0；来源可追溯 OK；口径一致 OK；语义终审 reviewer=agent decision=pass",
+      "levels": [
+        "L3"
+      ]
+    },
+    {
+      "stage": "draft",
+      "reviewer": "ci-bot",
+      "timestamp": "2026-11-15T13:13:37+00:00",
+      "decision": "pass",
+      "findings": [],
+      "evidence": "[strict] L2 10/10；标题 OK；断头锚点 0；门禁错误 0 项；来源可追溯 OK；口径一致 OK；语义终审 reviewer=agent decision=pass",
+      "levels": [
+        "L1",
+        "L2"
+      ]
+    },
+    {
+      "stage": "initial",
+      "reviewer": "ci-bot",
+      "timestamp": "2026-11-15T13:13:37+00:00",
+      "decision": "pass",
+      "findings": [],
+      "evidence": "[strict] L2 10/10；标题 OK；断头锚点 0；门禁错误 0 项；来源可追溯 OK；口径一致 OK；语义终审 reviewer=agent decision=pass",
+      "levels": [
+        "L1",
+        "L2"
+      ]
+    },
+    {
+      "stage": "final",
+      "reviewer": "ci-bot",
+      "timestamp": "2026-11-15T13:13:38+00:00",
+      "decision": "pass",
+      "findings": [],
+      "evidence": "[strict] L2 10/10；标题 OK；断头锚点 0；门禁错误 0 项；来源可追溯 OK；口径一致 OK；语义终审 reviewer=agent decision=pass",
+      "levels": [
+        "L3"
+      ]
+    },
+    {
+      "stage": "draft",
+      "reviewer": "ci-bot",
+      "timestamp": "2026-11-15T22:36:53+08:00",
+      "decision": "pass",
+      "findings": [],
+      "evidence": "[strict] L2 10/10；标题 OK；断头锚点 0；来源可追溯 OK；口径一致 OK；语义终审 reviewer=agent decision=pass",
+      "levels": [
+        "L1",
+        "L2"
+      ]
+    },
+    {
+      "stage": "initial",
+      "reviewer": "ci-bot",
+      "timestamp": "2026-11-15T22:36:53+08:00",
+      "decision": "pass",
+      "findings": [],
+      "evidence": "[strict] L2 10/10；标题 OK；断头锚点 0；来源可追溯 OK；口径一致 OK；语义终审 reviewer=agent decision=pass",
+      "levels": [
+        "L1",
+        "L2"
+      ]
+    },
+    {
+      "stage": "final",
+      "reviewer": "ci-bot",
+      "timestamp": "2026-11-15T22:36:53+08:00",
+      "decision": "pass",
+      "findings": [],
+      "evidence": "[strict] L2 10/10；标题 OK；断头锚点 0；来源可追溯 OK；口径一致 OK；语义终审 reviewer=agent decision=pass",
+      "levels": [
+        "L3"
+      ]
+    },
+    {
+      "stage": "draft",
+      "reviewer": "ci-bot",
+      "timestamp": "2026-11-16T08:25:31+08:00",
+      "decision": "pass",
+      "findings": [],
+      "evidence": "[strict] L2 10/10；标题 OK；断头锚点 0；门禁错误 0 项；来源可追溯 OK；口径一致 OK；语义终审 reviewer=agent decision=pass",
+      "levels": [
+        "L1",
+        "L2"
+      ]
+    },
+    {
+      "stage": "initial",
+      "reviewer": "ci-bot",
+      "timestamp": "2026-11-16T08:25:31+08:00",
+      "decision": "pass",
+      "findings": [],
+      "evidence": "[strict] L2 10/10；标题 OK；断头锚点 0；门禁错误 0 项；来源可追溯 OK；口径一致 OK；语义终审 reviewer=agent decision=pass",
+      "levels": [
+        "L1",
+        "L2"
+      ]
+    },
+    {
+      "stage": "final",
+      "reviewer": "ci-bot",
+      "timestamp": "2026-11-16T08:25:31+08:00",
+      "decision": "pass",
+      "findings": [],
+      "evidence": "[strict] L2 10/10；标题 OK；断头锚点 0；门禁错误 0 项；来源可追溯 OK；口径一致 OK；语义终审 reviewer=agent decision=pass",
+      "levels": [
+        "L3"
+      ]
+    },
+    {
+      "stage": "draft",
+      "reviewer": "ci-bot",
+      "timestamp": "2026-11-16T08:33:34+08:00",
+      "decision": "pass",
+      "findings": [],
+      "evidence": "[strict] L2 10/10；标题 OK；断头锚点 0；来源可追溯 OK；口径一致 OK；语义终审 reviewer=agent decision=pass",
+      "levels": [
+        "L1",
+        "L2"
+      ]
+    },
+    {
+      "stage": "initial",
+      "reviewer": "ci-bot",
+      "timestamp": "2026-11-16T08:33:34+08:00",
+      "decision": "pass",
+      "findings": [],
+      "evidence": "[strict] L2 10/10；标题 OK；断头锚点 0；来源可追溯 OK；口径一致 OK；语义终审 reviewer=agent decision=pass",
+      "levels": [
+        "L1",
+        "L2"
+      ]
+    },
+    {
+      "stage": "final",
+      "reviewer": "ci-bot",
+      "timestamp": "2026-11-16T08:33:34+08:00",
+      "decision": "pass",
+      "findings": [],
+      "evidence": "[strict] L2 10/10；标题 OK；断头锚点 0；来源可追溯 OK；口径一致 OK；语义终审 reviewer=agent decision=pass",
+      "levels": [
+        "L3"
+      ]
+    },
+    {
+      "stage": "second",
+      "reviewer": "agent",
+      "timestamp": "2026-11-16T09:33:34+08:00",
+      "decision": "pass",
+      "findings": [],
+      "evidence": "L3核对：ai_trend_ledger.md全部指标ID均在报告出现(缺失0)；抽查6项一致(94.8 ASR、1.0%、78%、95.6%等)；来源分级与触发器按business-config；无数字阈值体系(事件触发式)。观察项：delta条『传导量化：需求弹性高、政策乘数显著』宜注明指AI政策，避免与房地产政策乘数口径混淆。",
+      "levels": [
+        "L3"
+      ]
+    },
+    {
+      "stage": "final",
+      "reviewer": "agent",
+      "timestamp": "2026-11-16T09:33:55+08:00",
+      "decision": "pass",
+      "findings": [],
+      "evidence": "终审A1-A8核对通过：A1版本政策符合；A2要素完整率>=9/10(L2实测9-10/10)；A3(delta条+预校准标注+信息等级+决策卡/行动协议)齐备；A4阈值三处一致(实测3/3)；A5信息准确率>=99%(抽查一致)；A6来源可追溯>=95%死链0(L1 links通过)；A7口径一致无未标注冲突；A8可读性与可读性门禁通过。",
+      "levels": [
+        "L3"
+      ]
+    },
+    {
+      "stage": "draft",
+      "reviewer": "ci-bot",
+      "timestamp": "2026-11-16T09:45:58+08:00",
+      "decision": "pass",
+      "findings": [],
+      "evidence": "[strict] L2 10/10；标题 OK；断头锚点 0；门禁错误 0 项；来源可追溯 OK；口径一致 OK；语义终审 reviewer=agent decision=pass",
+      "levels": [
+        "L1",
+        "L2"
+      ]
+    },
+    {
+      "stage": "initial",
+      "reviewer": "ci-bot",
+      "timestamp": "2026-11-16T09:45:58+08:00",
+      "decision": "pass",
+      "findings": [],
+      "evidence": "[strict] L2 10/10；标题 OK；断头锚点 0；门禁错误 0 项；来源可追溯 OK；口径一致 OK；语义终审 reviewer=agent decision=pass",
+      "levels": [
+        "L1",
+        "L2"
+      ]
+    },
+    {
+      "stage": "final",
+      "reviewer": "ci-bot",
+      "timestamp": "2026-11-16T09:45:58+08:00",
+      "decision": "pass",
+      "findings": [],
+      "evidence": "[strict] L2 10/10；标题 OK；断头锚点 0；门禁错误 0 项；来源可追溯 OK；口径一致 OK；语义终审 reviewer=agent decision=pass",
+      "levels": [
+        "L3"
+      ]
+    }
+  ]
+}

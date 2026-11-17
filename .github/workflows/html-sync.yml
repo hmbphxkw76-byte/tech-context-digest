@@ -1,0 +1,120 @@
+name: HTML 同步
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "**/reports/*.md"
+      - "**/reports/*.html"
+      - "engine/tools/md2html.py"
+      - "engine/tools/build_hub.py"
+      - "requirements.txt"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  issues: write
+  pull-requests: write
+
+# 与 content-update / scheduled-maintenance 共用同一并发组：
+# 三者都会开 PR 并推送 CI 分支，串行执行可避免同一分支互相覆盖。
+# 也避免并发写 INDEX.md（其「最近生成」时间戳会让 rebase 冲突）。
+#
+# 平台行为注意：同一并发组只保留一个「排队中」的运行，新运行进入时
+# 会取消旧的排队运行。因此请勿在数秒内连续手动触发多个自动提交工作流；
+# 若某次运行被 cancel，重新触发即可。
+concurrency:
+  group: auto-commit-main
+  cancel-in-progress: false
+
+jobs:
+  sync-html:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09  # v5
+
+      - name: 工作区预清理（缓存/临时/构建产物）
+        uses: ./.github/actions/workspace-cleanup
+
+      - name: 设置 Python
+        uses: actions/setup-python@ece7cb06caefa5fff74198d8649806c4678c61a1  # v6
+        with:
+          python-version: "3.12"
+
+      - name: 安装依赖
+        run: pip install -r requirements.txt
+
+      - name: 重新生成 HTML
+        run: python engine/tools/md2html.py
+
+      - name: 重新生成汇总页（index.html / reader.html）
+        run: python engine/tools/build_hub.py
+
+      # 发布留痕：重新采集正式报告指纹（P1-7），随发布提交指纹库。
+      - name: 发布指纹采集
+        run: python engine/tools/publish_fingerprint.py --emit
+
+      # 全链路唯一门禁入口（P1-2 去重）：与 ci.yml 同口径（含 probe）。
+      - name: 优化流程一致性门禁（统一入口 · 含 probe）
+        run: |
+          set +e
+          python engine/tools/optimization_gate.py --gate-period 2026-12 --source-gate-period 2027-01 --probe
+          code=$?
+          if [ "$code" -eq 1 ]; then echo "::error::统一门禁失败：存在错误项"; exit 1
+          elif [ "$code" -eq 2 ]; then echo "::warning::统一门禁存在警告项（不阻断）"; fi
+          exit 0
+
+      - name: 提交并开 PR（自动合并）
+        uses: ./.github/actions/submit-pr
+        with:
+          branch: ci/html-sync
+          title: "chore: 自动同步 HTML（由 CI 生成）"
+          body: |
+            由 HTML 同步工作流自动生成（md2html + build_hub + 发布指纹）。
+            合并方式：必需检查通过后自动合并（合并队列）。
+          commit-message: "chore: 自动同步 HTML（由 CI 生成）"
+          token: ${{ secrets.CI_PR_TOKEN }}
+
+      - name: 失败告警
+        if: failure()
+        uses: actions/github-script@f28e40c7f34bde8b3046d885e986cb6290c5673b  # v7
+        with:
+          script: |
+            const runUrl = `${context.payload.repository.html_url}/actions/runs/${context.runId}`;
+            await github.rest.issues.create({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              title: `[automation-failure] HTML 同步失败 @ ${context.runId}`,
+              labels: ['automation-failure'],
+              body: [
+                'HTML 同步流水线执行失败，汇总页可能未刷新，请查看日志并手动补跑。',
+                '',
+                `- 运行链接：${runUrl}`,
+                `- 触发提交：${context.sha}`,
+                '',
+                '补跑方式：Actions → HTML 同步 → Run workflow。'
+              ].join('\n')
+            });
+
+      - name: 闭环修正工单（门禁 [E] / 活跃度超阈值）
+        if: always()
+        uses: ./.github/actions/remediation-ticket
+
+      - name: 工作区收尾清理（始终执行）
+        if: always()
+        uses: ./.github/actions/workspace-cleanup
+
+  webhook-alert:
+    name: Webhook 告警
+    needs: sync-html
+    if: failure()
+    uses: ./.github/workflows/webhook-alert.yml
+    with:
+      title: "[automation-failure] HTML 同步失败 @ ${{ github.run_id }}"
+      message: |
+        HTML 同步流水线执行失败，请查看日志并手动补跑。
+        运行链接：${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+      level: error
+      run_url: "${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"
+    secrets:
+      AUTOMATION_WEBHOOK_URL: ${{ secrets.AUTOMATION_WEBHOOK_URL }}

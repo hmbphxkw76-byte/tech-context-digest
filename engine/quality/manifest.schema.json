@@ -1,0 +1,134 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://github.com/hmbphxkw76-byte/tech-context-digest/engine/quality/manifest.schema.json",
+  "title": "QUALITY-AUDIT 结果清单（quality-manifest）",
+  "description": "内容质量评估与自动修复的结构化结果。由 prompts/05-verify.md 生成，供跨轮 diff、趋势追踪与人工复核消费。所有字段口径见 rubric.md 与 chaos-taxonomy.md。",
+  "type": "object",
+  "required": ["schema_version", "generated_at", "scope", "inventory", "findings", "repairs", "verification"],
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": { "type": "string", "const": "1.0" },
+    "generated_at": { "type": "string", "format": "date-time", "description": "生成时刻（仅用于留痕；确定性比对时归一化剔除）" },
+    "scope": {
+      "type": "object",
+      "required": ["business_lines", "templates", "vocab"],
+      "properties": {
+        "business_lines": { "type": "array", "items": { "type": "string" }, "description": "业务线相对路径，如 content/economy/dubai/apartment" },
+        "templates": { "type": "array", "items": { "type": "string" }, "description": "已注册类型 ID" },
+        "vocab": { "type": "array", "items": { "type": "string" }, "description": "已注册词汇主题 ID" }
+      }
+    },
+    "inventory": {
+      "type": "object",
+      "description": "阶段 1 全量盘点结果",
+      "required": ["reports", "prompts", "registries", "vocab_terms"],
+      "properties": {
+        "reports": { "type": "array", "items": { "$ref": "#/definitions/artifact" } },
+        "prompts": { "type": "array", "items": { "$ref": "#/definitions/artifact" } },
+        "registries": { "type": "array", "items": { "$ref": "#/definitions/artifact" } },
+        "vocab_terms": { "type": "array", "items": { "$ref": "#/definitions/artifact" } }
+      }
+    },
+    "findings": {
+      "type": "array",
+      "items": { "$ref": "#/definitions/finding" },
+      "description": "阶段 3-4 产出，按严重级与场景归类"
+    },
+    "repairs": {
+      "type": "array",
+      "items": { "$ref": "#/definitions/repair" }
+    },
+    "verification": {
+      "type": "object",
+      "required": ["tools", "semantic", "regression", "health", "gate"],
+      "properties": {
+        "tools": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["name", "exit_code", "errors", "warnings"],
+            "properties": {
+              "name": { "type": "string" },
+              "exit_code": { "type": "integer" },
+              "errors": { "type": "integer" },
+              "warnings": { "type": "integer" }
+            }
+          }
+        },
+        "semantic": {
+          "type": "object",
+          "required": ["residual_p0", "residual_p1", "residual_p2"],
+          "properties": {
+            "residual_p0": { "type": "integer" },
+            "residual_p1": { "type": "integer" },
+            "residual_p2": { "type": "integer" }
+          }
+        },
+        "regression": {
+          "type": "object",
+          "required": ["new_issues", "verdict"],
+          "properties": {
+            "new_issues": { "type": "integer" },
+            "verdict": { "type": "string", "enum": ["pass", "fail"] }
+          }
+        },
+        "health": {
+          "type": "object",
+          "required": ["completeness", "accuracy", "consistency", "relevance", "overall"],
+          "properties": {
+            "completeness": { "type": "number", "minimum": 0, "maximum": 100 },
+            "accuracy": { "type": "number", "minimum": 0, "maximum": 100 },
+            "consistency": { "type": "number", "minimum": 0, "maximum": 100 },
+            "relevance": { "type": "number", "minimum": 0, "maximum": 100 },
+            "overall": { "type": "number", "minimum": 0, "maximum": 100 }
+          }
+        },
+        "gate": { "type": "string", "enum": ["pass", "conditional-pass", "fail"] }
+      }
+    }
+  },
+  "definitions": {
+    "artifact": {
+      "type": "object",
+      "required": ["path", "type"],
+      "properties": {
+        "path": { "type": "string" },
+        "type": { "type": "string", "enum": ["report", "prompt", "registry", "vocab", "template"] },
+        "cycle": { "type": "string" },
+        "business_line": { "type": "string" }
+      }
+    },
+    "finding": {
+      "type": "object",
+      "required": ["id", "scenario", "severity", "dimension", "target", "description", "metric", "threshold", "detected_by"],
+      "properties": {
+        "id": { "type": "string" },
+        "scenario": { "type": "string", "pattern": "^C(0[1-9]|1[0-5])$" },
+        "severity": { "type": "string", "enum": ["P0", "P1", "P2"] },
+        "dimension": { "type": "string", "enum": ["completeness", "accuracy", "consistency", "relevance"] },
+        "target": { "type": "string" },
+        "description": { "type": "string" },
+        "evidence": { "type": "string" },
+        "metric": { "type": "string" },
+        "threshold": { "type": "string" },
+        "detected_by": { "type": "string", "enum": ["TOOL", "LLM", "MIXED"] }
+      }
+    },
+    "repair": {
+      "type": "object",
+      "required": ["id", "scenario", "sop", "severity", "target", "finding", "action", "verification", "status"],
+      "properties": {
+        "id": { "type": "string" },
+        "scenario": { "type": "string" },
+        "sop": { "type": "string", "pattern": "^SOP-(0[1-9]|1[0-5])$" },
+        "severity": { "type": "string", "enum": ["P0", "P1", "P2"] },
+        "target": { "type": "string" },
+        "finding": { "type": "string" },
+        "action": { "type": "string" },
+        "backup": { "type": "string" },
+        "verification": { "type": "string" },
+        "status": { "type": "string", "enum": ["fixed", "pending-human-review", "skipped"] }
+      }
+    }
+  }
+}

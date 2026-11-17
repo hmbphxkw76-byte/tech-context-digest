@@ -1,0 +1,87 @@
+name: 闭环修正工单
+description: >
+  门禁 [E] 或活跃度超阈值时，生成标准化修正 Issue（含失败项明细、责任归属周期、可直接执行的复跑命令）。
+  幂等：同标题 open 工单不重复创建。只建工单，不提交代码——提交仍走 task/<slug> + PR 协议。
+
+inputs:
+  gate-period:
+    description: 内容门禁周期下限（与 optimization_gate 一致）
+    required: false
+    default: "2026-12"
+  source-gate-period:
+    description: 来源登记门禁周期下限（与 optimization_gate 一致）
+    required: false
+    default: "2027-01"
+  activity-threshold:
+    description: 活跃度阈值（天），距上次自动化记录超过该值即触发
+    required: false
+    default: "45"
+  probe:
+    description: 是否启用外部 URL 探测（与 CI 门禁同口径）
+    required: false
+    default: "true"
+  label:
+    description: 工单标签
+    required: false
+    default: "automation-remediation"
+
+runs:
+  using: composite
+  steps:
+    - name: 准备目录
+      shell: bash
+      run: mkdir -p .automation-tmp
+
+    - name: 检测并生成工单内容
+      id: detect
+      shell: bash
+      env:
+        GATE_PERIOD: ${{ inputs.gate-period }}
+        SOURCE_GATE_PERIOD: ${{ inputs.source-gate-period }}
+        ACTIVITY_THRESHOLD: ${{ inputs.activity-threshold }}
+        PROBE: ${{ inputs.probe }}
+      run: |
+        set +e
+        probe_args=()
+        [ "$PROBE" = "true" ] && probe_args=(--probe)
+        python engine/tools/remediation_ticket.py detect \
+          --gate-period "$GATE_PERIOD" \
+          --source-gate-period "$SOURCE_GATE_PERIOD" \
+          --activity-threshold "$ACTIVITY_THRESHOLD" \
+          "${probe_args[@]}" \
+          --out .automation-tmp/remediation.json \
+          --body-out .automation-tmp/remediation.md
+        # 0 = 触发（需建工单）；2 = 未触发
+        echo "triggered=$?" >> "$GITHUB_OUTPUT"
+        exit 0
+
+    - name: 创建修正工单 Issue（幂等）
+      if: steps.detect.outputs.triggered == '0'
+      uses: actions/github-script@f28e40c7f34bde8b3046d885e986cb6290c5673b  # v7
+      env:
+        LABEL: ${{ inputs.label }}
+      with:
+        script: |
+          const fs = require('fs');
+          const label = process.env.LABEL;
+          const j = JSON.parse(fs.readFileSync('.automation-tmp/remediation.json', 'utf8'));
+          const body = fs.readFileSync('.automation-tmp/remediation.md', 'utf8');
+          const title = `[${label}] ${j.reasons.join(' / ')}（${j.period}）`;
+          const { data: issues } = await github.rest.issues.listForRepo({
+            owner: context.repo.owner,
+            repo: context.repo.repo,
+            state: 'open',
+            labels: label,
+          });
+          if (issues.some(i => i.title === title)) {
+            console.log(`已存在同标题工单（${title}），跳过创建`);
+            return;
+          }
+          const { data: issue } = await github.rest.issues.create({
+            owner: context.repo.owner,
+            repo: context.repo.repo,
+            title,
+            labels: [label],
+            body,
+          });
+          console.log(`已创建修正工单 ${issue.html_url}`);

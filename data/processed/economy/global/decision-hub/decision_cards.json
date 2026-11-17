@@ -1,0 +1,86 @@
+{
+  "schema_version": "1.0",
+  "comment": "决策卡台账（decision-hub 单一事实源）。字段规范见 decision-dashboard 类型模板第四节与决策交付规范第一节。读数时点 2026-11-15。",
+  "cards": [
+    {
+      "card_id": "DC-ECO-APT-01",
+      "line": "content/economy/dubai/apartment",
+      "conclusion": "迪拜公寓市场处于「高位钝化 → 供给延迟型再平衡」，信号结构未翻转；融资成本逼近硬红线是当前最主要边际约束。",
+      "evidence_strength": "中",
+      "trigger": "K01 3M EIBOR 破 4.50% 硬红线（当前距 10.56bp）；K07 价格同比连续 3 月 <−5%",
+      "counter_evidence": "成交量同比 −38% 存在基数与结构效应；新推盘 9M −64% 显示供给收缩，对价格形成支撑。",
+      "sufficiency": "需补充就业、收入、空置、竣工四类 P0 信息才可决策",
+      "missing": ["B02 就业/失业率", "B15 收入/薪资", "B01 空置率", "B03 竣工登记"],
+      "actions": [
+        {"priority": "立即行动", "action": "维持融资成本专题六件套监测", "threshold": "3M EIBOR 距 K01 硬红线 ≤25bp", "role": "研究负责人", "deadline": "2026-12-31", "verify": "K01 阈值距离（bp，方向：扩大为改善）"},
+        {"priority": "持续观察", "action": "P0 四类盲区取数消号", "threshold": "每月复盘会审", "role": "数据采集", "deadline": "2026-12-31", "verify": "盲区台账 closed 数"}
+      ]
+    },
+    {
+      "card_id": "DC-ECO-TRD-01",
+      "line": "content/economy/global/trends",
+      "conclusion": "全球宏观处于「过热—滞胀过渡带」，主要央行集体转鹰、再通胀固化。",
+      "evidence_strength": "中",
+      "trigger": "核心 CPI 环比连续 ≥0.3%；Fed 12 月加息概率 ≥95%；英/澳已加息",
+      "counter_evidence": "增长仍为正（美国 Q3 GDP +3.4% 年化），未进入衰退；能源冲击高位退潮（Brent 月内 −21%）。",
+      "sufficiency": "需补充 PMI、薪资增速、期限利差信息才可决策",
+      "missing": ["PMI", "薪资增速", "3M/6M/1Y 期限利差"],
+      "actions": [
+        {"priority": "持续观察", "action": "周报 s2.0 周期定位节滚动更新", "threshold": "每期周报", "role": "研究负责人", "deadline": "2026-12-31", "verify": "cycle_clock 阶段判定（四阶段 + 过渡带）"}
+      ]
+    },
+    {
+      "card_id": "DC-AI-SEC-01",
+      "line": "content/tech/security/dubai",
+      "conclusion": "AI 网安就业为卖方市场，AI 安全是结构性增量主线；人才供给是最紧约束。",
+      "evidence_strength": "强",
+      "trigger": "87% 企业招聘困难；平均填补周期 3–6 个月；AI 为最缺技能 41%",
+      "counter_evidence": "阿化（Emiratisation）配额影响私企招聘；Gartner 预计 2028 年 AI 自动化部分 L1 SOC 工作，需求向价值链上移。",
+      "sufficiency": "可直接决策",
+      "missing": [],
+      "actions": [
+        {"priority": "立即行动", "action": "按黄金签证门槛锁定目标（基本月薪 ≥30,000 AED）", "threshold": "基本月薪 ≥30,000 AED", "role": "研究负责人", "deadline": "2026-12-31", "verify": "offer 基本工资（AED/月）"},
+        {"priority": "持续观察", "action": "跟踪 2026 阿布扎比黄金签证通函的 ICP 最终确认", "threshold": "ICP 页面更新", "role": "数据采集", "deadline": "2027-01-31", "verify": "icp.gov.ae 条款页"}
+      ]
+    },
+    {
+      "card_id": "DC-AI-IND-01",
+      "line": "content/tech/industry-research/dubai",
+      "conclusion": "AI 网安行业由主权 AI 基建 + 强制合规 + 威胁国家化三重驱动，交付以托管安全服务与主权云安全为主。",
+      "evidence_strength": "中",
+      "trigger": "ISR v3.1 强制合规（13 控制域）；Stargate UAE 首批 200MW 上线",
+      "counter_evidence": "市场规模口径差异大（8.2 亿 vs 34 亿美元）；缺少可核实份额数值，集中度未知。",
+      "sufficiency": "需补充份额 / 价值链分布信息才可决策",
+      "missing": ["CR3/CR5 份额", "价值链利润池分布"],
+      "actions": [
+        {"priority": "持续观察", "action": "年度刷新时补份额与价值链数据", "threshold": "年度刷新", "role": "数据采集", "deadline": "2027-02-28", "verify": "财报 / Menlo / Gartner 份额序列"}
+      ]
+    },
+    {
+      "card_id": "DC-AI-CI-01",
+      "line": "content/tech/competitive-intelligence/dubai",
+      "conclusion": "模型层高度集中（Anthropic + OpenAI 合计 86% 企业 LLM API 支出），通过 API 与产品能力向本地交付层传导。",
+      "evidence_strength": "中",
+      "trigger": "Menlo 2026-11 份额估算；企业 AI 部署支出 5.4x",
+      "counter_evidence": "Mythos 5.2 分级开放可能限制网安能力可得性；开源模型（Kimi K3.1 等）提供替代路径。",
+      "sufficiency": "需补充本地模型选型与成本结构信息才可决策",
+      "missing": ["本地企业模型选型分布", "模型成本占交付成本比"],
+      "actions": [
+        {"priority": "仅记录存档", "action": "记录模型层集中度与分级开放动态", "threshold": "季度刷新", "role": "研究负责人", "deadline": "2026-12-31", "verify": "Menlo / 厂商公告"}
+      ]
+    },
+    {
+      "card_id": "DC-AI-TRD-01",
+      "line": "content/tech/trends/global",
+      "conclusion": "AI 安全攻击面持续扩张（投毒 ASR 78%、沉睡特工、Agent 工具链投毒），红队与 Agent 安全为技术主线。",
+      "evidence_strength": "强",
+      "trigger": "微软投毒研究（90 条样本 → 78% ASR）；OWASP Agentic Top 10 发布",
+      "counter_evidence": "移除推理链后 ASR 大幅衰减（94.8%→1.0%）；沉睡特工野外尚未观测到。",
+      "sufficiency": "可直接决策",
+      "missing": [],
+      "actions": [
+        {"priority": "立即行动", "action": "将投毒 / 推理链耦合纳入 RedTeam_AI 测试集", "threshold": "下期测试周期", "role": "模型负责人", "deadline": "2026-12-31", "verify": "PyRIT / garak 用例数与 ASR 复现"}
+      ]
+    }
+  ]
+}

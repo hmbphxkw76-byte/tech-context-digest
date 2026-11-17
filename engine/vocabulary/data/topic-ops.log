@@ -1,0 +1,19 @@
+[2026-11-13T17:04:03] [topic-add] topic=test-demo prefix=TD categories=甲/乙 dir_existed=False created=D:\文档\GitHub\tech-context-digest\vocabulary\data\test-demo\imports;D:\文档\GitHub\tech-context-digest\vocabulary\data\test-demo\exports;D:\文档\GitHub\tech-context-digest\vocabulary\data\test-demo\terms.md backup=topics.20261113_170403.json result=OK
+[2026-11-13T17:04:03] [topic-check] topics=3 errors=0 warnings=0 result=OK
+[2026-11-13T17:04:24] [topic-check] topics=3 errors=0 warnings=1 result=WARN
+[2026-11-13T17:04:25] [topic-add] topic=orphan-demo prefix=OD categories=— dir_existed=True created=D:\文档\GitHub\tech-context-digest\vocabulary\data\orphan-demo\imports;D:\文档\GitHub\tech-context-digest\vocabulary\data\orphan-demo\exports backup=topics.20261113_170425.json result=OK
+[2026-11-13T17:04:40] [topic-check] topics=4 errors=0 warnings=1 result=WARN
+[2026-11-13T17:04:58] [topic-remove] topic=orphan-demo terms=0 delete_data=True backup=topics.20261113_170458.json result=OK
+[2026-11-13T17:05:13] [topic-remove] topic=test-demo terms=0 delete_data=True backup=topics.20261113_170513.json result=OK
+[2026-11-13T17:05:14] [topic-check] topics=2 errors=0 warnings=0 result=OK
+[2026-11-13T17:07:49] [topic-add] topic=cybersecurity prefix=CYB categories=网络攻击技术/防御与安全运营/漏洞与漏洞管理/密码与身份认证/框架与合规/认证与岗位 dir_existed=False created=D:\文档\GitHub\tech-context-digest\vocabulary\data\cybersecurity\imports;D:\文档\GitHub\tech-context-digest\vocabulary\data\cybersecurity\exports;D:\文档\GitHub\tech-context-digest\vocabulary\data\cybersecurity\terms.md backup=topics.20261113_170749.json result=OK
+[2026-11-13T17:09:00] [topic-check] topics=3 errors=0 warnings=0 result=OK
+[2026-11-13T17:22:06] [topic-check] topics=3 errors=0 warnings=0 result=OK
+[2026-11-13T17:23:58] [topic-check] topics=3 errors=0 warnings=0 result=OK
+[2026-11-13T17:27:33] [topic-add] topic=economy prefix=ECO categories=经济体与国家/区域经济组织/经济概念 dir_existed=False created=D:\文档\GitHub\tech-context-digest\vocabulary\data\economy\imports;D:\文档\GitHub\tech-context-digest\vocabulary\data\economy\exports;D:\文档\GitHub\tech-context-digest\vocabulary\data\economy\terms.md backup=topics.20261113_172733.json result=OK
+[2026-11-13T17:28:22] [topic-check] topics=4 errors=0 warnings=0 result=OK
+[2026-11-13T17:30:46] [topic-check] topics=4 errors=0 warnings=0 result=OK
+[2026-11-13T17:34:57] [topic-check] topics=4 errors=0 warnings=0 result=OK
+[2026-11-13T19:08:09] [topic-add] topic=ai-agent prefix=AAG categories=模型与厂商/Agent 技术与框架/编码工具与 IDE/应用与产品/概念与评估 dir_existed=False created=D:\文档\GitHub\tech-context-digest\vocabulary\data\ai-agent\imports;D:\文档\GitHub\tech-context-digest\vocabulary\data\ai-agent\exports;D:\文档\GitHub\tech-context-digest\vocabulary\data\ai-agent\terms.md backup=topics.20261113_190809.json result=OK
+[2026-11-13T19:12:22] [topic-check] topics=5 errors=0 warnings=0 result=OK
+[2026-11-14T21:21:15] [topic-check] topics=5 errors=0 warnings=0 result=OK

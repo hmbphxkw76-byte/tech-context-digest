@@ -1,0 +1,1626 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>迪拜（阿联酋）AI 网络安全行业深度调研报告</title>
+<style>
+:root{
+  --radius-sm:8px; --radius:12px; --radius-lg:16px; --radius-pill:999px;
+  --shadow:0 1px 3px rgba(20,40,70,.06); --shadow-md:0 4px 14px rgba(20,40,70,.09);
+  --shadow-lg:0 10px 30px rgba(15,35,56,.2);
+  --font-sans:"Microsoft YaHei","PingFang SC","Segoe UI",Arial,sans-serif;
+  --font-mono:"SFMono-Regular",Consolas,"Liberation Mono",monospace;
+  --focus-ring:0 0 0 3px rgba(63,111,176,.35);
+  --transition:.15s ease;
+  --bg:#f4f6f9; --card:#ffffff; --card2:#fbfcfe; --soft:#f5f8fb;
+  --ink:#15202b; --ink2:#465667; --ink3:#657180;
+  --line:#e1e7ee; --line2:#eef2f6;
+  --navy:#16324f; --navy2:#2f5597; --blue:#3f6fb0; --blue-l:#eaf1fa;
+  --red:#a83224; --red-d:#822116; --red-l:#fbece8; --red-bg:#fbece8; --red-line:#f0d4cf;
+  --pre:#b8541c; --pre-l:#fdf1e4; --pre-bg:#fdf1e4; --pre-line:#f2ddc9;
+  --green:#1c7444; --green-l:#eaf5ef; --green-bg:#eaf5ef; --green-line:#d3ead9;
+  --amber:#956612; --amber-l:#fdf4e2; --amber-bg:#fdf4e2; --amber-line:#f0e3c2;
+  --gray:#646f7b; --gray-l:#eff2f4; --gray-bg:#eff2f4; --gray-line:#e6eaee;
+  /* 别名：兼容既有报告组件的命名习惯 */
+  --surface:#ffffff; --surface2:#fbfcfe;
+  --navy-2:#2f5597; --muted:#657180; --bg-soft:#f5f8fb; --bg-card:#fbfcfe;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  *,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}
+}
+body{font-family:var(--font-sans);background:var(--bg);color:var(--ink);line-height:1.76;font-size:14.5px}
+.wrap{max-width:1160px;margin:0 auto;padding:0 24px 64px}
+a{color:var(--navy2);text-decoration:none}
+a:hover{text-decoration:underline}
+a:focus-visible,button:focus-visible{outline:none;box-shadow:var(--focus-ring)}
+.skip-link{position:absolute;left:12px;top:-48px;z-index:100;background:var(--navy);color:#fff;padding:8px 16px;border-radius:0 0 8px 8px;font-size:12.5px;transition:top var(--transition)}
+.skip-link:focus{top:0;color:#fff;text-decoration:none}
+
+/* ── 页头（trends report-head 结构；.hero 为 apartment 同义类） ── */
+header.report-head,header.hero{
+  background:linear-gradient(128deg,#0f2338 0%,var(--navy) 52%,var(--navy2) 100%);
+  color:#fff;padding:40px 0 30px;
+}
+/* trends 的 .report-head 内含 .wrap；apartment 的 .hero 无 .wrap，用内联 padding 约束到 1160px */
+header.report-head .wrap{padding:0 24px}
+header.hero{padding-left:max(24px,calc(50% - 580px));padding-right:max(24px,calc(50% - 580px))}
+header.report-head h1,header.hero h1{margin:0 0 8px;font-size:27px;font-weight:700;letter-spacing:.4px;line-height:1.35}
+header .eyebrow{font-size:11.5px;letter-spacing:2.4px;color:rgba(255,255,255,.62);text-transform:uppercase}
+header .sub{font-size:14px;color:rgba(255,255,255,.82);margin:2px 0}
+header .meta{font-size:12.3px;color:rgba(255,255,255,.75);margin-top:14px;line-height:1.9}
+header .meta b{color:#fff}
+header .nav-url{font-size:11.5px;color:rgba(255,255,255,.78);margin-top:10px;word-break:break-all}
+header .nav-url a{color:#cfe0ee;text-decoration:none;border-bottom:1px dashed #cfe0ee}
+header .tag{display:inline-block;background:rgba(255,255,255,.11);border:1px solid rgba(255,255,255,.2);border-radius:14px;padding:2px 11px;margin:5px 6px 0 0;font-size:11.5px}
+
+/* ── 顶部固定导航 ── */
+nav.report-nav{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.96);border-bottom:1px solid var(--line);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);margin-bottom:26px}
+nav.report-nav .wrap{display:flex;flex-wrap:wrap;gap:6px 14px;align-items:center;padding-top:10px;padding-bottom:10px}
+/* apartment monthly/quarterly/baseline 的 .nav-tabs 是 nav 直接子元素（无 .wrap） */
+nav.report-nav > .nav-tabs{max-width:1160px;margin:0 auto;padding:10px 24px}
+.nav-url{display:flex;align-items:baseline;gap:8px;flex-wrap:wrap;font-size:11.5px;line-height:1.6;color:var(--ink3);padding-bottom:6px;margin-bottom:6px;border-bottom:1px dashed var(--line);width:100%}
+.nav-url-label{font-weight:700;color:var(--ink2);white-space:nowrap}
+.nav-url a{color:var(--blue);text-decoration:none;word-break:break-all}
+.nav-url a:hover{text-decoration:underline}
+.nav-tabs{display:flex;flex-wrap:wrap;gap:6px}
+.nav-tabs a{color:var(--navy);text-decoration:none;font-size:12.5px;padding:4px 10px;border-radius:14px;border:1px solid var(--line);background:var(--bg-soft);white-space:nowrap;transition:background var(--transition),color var(--transition)}
+.nav-tabs a:hover{background:var(--blue-l);border-color:#b9cfe2;text-decoration:none}
+.nav-tabs a.active{background:var(--blue-l);color:var(--blue);font-weight:700}
+
+/* ── 章节与排版 ── */
+main{padding-top:0}
+h2.sec{font-size:19px;color:var(--navy);margin:38px 0 14px;padding-bottom:8px;border-bottom:2px solid var(--navy);scroll-margin-top:100px;font-weight:700}
+h2.sec .en{font-size:10.8px;color:var(--ink3);font-weight:400;margin-left:10px;letter-spacing:1.1px}
+h3{font-size:15.5px;color:var(--navy);margin:22px 0 8px;font-weight:700;scroll-margin-top:100px}
+h4{font-size:14px;color:var(--navy);margin:16px 0 6px;font-weight:700}
+p{margin:8px 0}
+ul,ol{margin:8px 0;padding-left:22px}
+li{margin:5px 0}
+ul.tight,ol.tight{margin:7px 0}
+ul.tight li,ol.tight li{margin-bottom:6px}
+b,strong{font-weight:650;color:var(--ink)}
+blockquote{border-left:4px solid var(--line);margin:12px 0;padding:2px 0 2px 14px;color:var(--ink2)}
+code{background:var(--bg-soft);padding:2px 5px;border-radius:4px;font-family:var(--font-mono);font-size:.92em}
+pre{background:var(--bg-soft);border:1px solid var(--line);border-radius:var(--radius-sm);padding:12px 14px;overflow-x:auto;margin:12px 0}
+pre code{background:none;padding:0}
+img{max-width:100%}
+.lead{color:var(--ink2);font-size:13.8px;margin:6px 0 14px}
+.muted{color:var(--ink3)}
+.small{font-size:11.7px;color:var(--ink3)}
+hr{border:0;border-top:1px solid var(--line);margin:26px 0 0}
+.hr{height:1px;background:var(--line);margin:26px 0 0}
+b.red,color.red{color:var(--red)} b.pre{color:var(--pre)} b.green{color:var(--green)}
+b.amber{color:var(--amber)} b.navy{color:var(--navy)}
+
+/* ── 表格 ── */
+table{width:100%;border-collapse:collapse;font-size:13px;background:var(--card);margin:12px 0}
+th,td{border:1px solid var(--line);padding:8px 10px;text-align:left;vertical-align:top;line-height:1.62}
+thead th{background:var(--navy);color:#fff;font-weight:600;white-space:nowrap}
+tbody th{background:var(--blue-l);color:var(--navy);font-weight:600}
+tbody tr:nth-child(even) td{background:var(--bg-soft)}
+tbody tr:hover td{background:var(--blue-l)}
+table.fixed{table-layout:fixed}
+.num{text-align:right;font-variant-numeric:tabular-nums}
+.tblwrap{overflow-x:auto;border-radius:var(--radius-sm);border:1px solid var(--line);margin:12px 0}
+.tblwrap table{margin:0;border:0}
+
+/* ── 来源：表头弹层 / 行内链接 / 来源清单 ── */
+.src-head{position:relative;cursor:help;border-bottom:1px dotted var(--blue);white-space:nowrap}
+.src-head .src-pop{position:absolute;left:0;top:100%;z-index:60;display:none;background:var(--navy);color:#fff;font-size:12px;font-weight:400;padding:9px 12px;border-radius:8px;box-shadow:var(--shadow-lg);max-width:min(560px,86vw);white-space:normal;line-height:1.65;border:1px solid rgba(255,255,255,.14)}
+.src-pop .pop-title{font-weight:600;display:block;margin-bottom:4px;color:#fff}
+.src-pop .pop-url{display:block;margin-top:6px;word-break:break-all;color:var(--blue-l)}
+.src-pop .pop-url a{color:#a9c8ee}
+.src-head:hover .src-pop,.src-head:focus .src-pop,.src-head:focus-within .src-pop{display:block}
+.src-inline{color:var(--ink3);font-size:12px;word-break:break-all}
+.src-inline a{color:var(--blue);text-decoration:none;border-bottom:1px dotted var(--blue)}
+.src-inline a:hover{background:#eaf3fa}
+.src{font-size:11.1px;color:var(--ink3);word-break:break-word;line-height:1.58}
+.src a{color:#5b7bb4;text-decoration:none}
+.src a:hover{text-decoration:underline}
+.refs{font-size:12.5px;color:var(--ink3)}
+.refs ol{padding-left:20px}
+.refs a{color:var(--navy);text-decoration:none;border-bottom:1px dashed var(--navy);word-break:break-all}
+.refs a:hover{background:#e8f0f8}
+
+/* ── 卡片 / 结论框 ── */
+.card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:18px 20px;box-shadow:var(--shadow);margin:14px 0}
+.card.tight{padding:14px 16px}
+.leadbox{border-left:4px solid var(--navy2);background:linear-gradient(125deg,#f5f9fd,#edf3fa);border-color:#cfdded}
+.leadbox h3:first-child{margin-top:0}
+
+/* ── KPI 卡（trends .kpi / apartment .kcard） ── */
+.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(168px,1fr));gap:12px;margin:14px 0}
+.kpi{background:var(--card);border:1px solid var(--line);border-left:4px solid var(--navy);border-radius:var(--radius-sm);padding:12px 14px;box-shadow:var(--shadow)}
+.kpi.red{border-left-color:var(--red)} .kpi.green{border-left-color:var(--green)}
+.kpi.amber{border-left-color:var(--amber)} .kpi.blue{border-left-color:var(--blue)}
+.kpi .v{font-size:22px;font-weight:700;color:var(--navy);line-height:1.2}
+.kpi.red .v{color:var(--red)} .kpi.green .v{color:var(--green)}
+.kpi.amber .v{color:var(--amber)} .kpi.blue .v{color:var(--blue)}
+.kpi .l{font-size:12px;color:var(--ink3);margin-top:4px}
+.kpi .s{font-size:11px;color:#8a98a6;margin-top:2px}
+.kcards{display:grid;grid-template-columns:repeat(auto-fit,minmax(232px,1fr));gap:11px;margin:14px 0}
+.kcard{background:var(--card);border:1px solid var(--line);border-left:4px solid var(--navy2);border-radius:10px;padding:13px 15px;box-shadow:var(--shadow)}
+.kcard.warn,.kcard.pre{border-left-color:var(--pre);background:linear-gradient(180deg,var(--pre-bg),#fff 62%)}
+.kcard.bad,.kcard.red{border-left-color:var(--red);background:linear-gradient(180deg,var(--red-bg),#fff 62%)}
+.kcard.good{border-left-color:var(--green);background:linear-gradient(180deg,var(--green-bg),#fff 62%)}
+.kcard .lab,.kcard .t{font-size:12.4px;color:var(--ink2)}
+.kcard .val,.kcard .v{font-size:22px;font-weight:700;color:var(--navy);margin:3px 0 2px;line-height:1.25}
+.kcard.warn .val,.kcard.pre .val{color:var(--pre)}
+.kcard.bad .val,.kcard.red .val{color:var(--red)}
+.kcard.good .val{color:var(--green)}
+.kcard .note,.kcard .s{font-size:11.5px;color:var(--ink3);line-height:1.6;margin-top:4px;word-break:break-word}
+
+/* ── 数据条 / 信号灯 ── */
+.stat-strip{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin:12px 0}
+.stat{background:var(--card);border:1px solid var(--line);border-radius:9px;padding:11px 13px;text-align:center}
+.stat .lab,.stat .l{font-size:11.4px;color:var(--ink3);margin-top:2px}
+.stat .n{font-size:23px;font-weight:700;line-height:1.2}
+.stat.hard .n{color:var(--red)} .stat.pre .n{color:var(--pre)} .stat.yel .n{color:var(--amber)}
+.stat.grn .n{color:var(--green)} .stat.gry .n{color:var(--gray)}
+.lamp{display:inline-block;min-width:9px;width:9px;height:9px;border-radius:50%;margin-right:4px;vertical-align:0}
+.lamp.r{background:var(--red)} .lamp.p{background:var(--pre)} .lamp.y{background:var(--amber)}
+.lamp.g{background:var(--green)} .lamp.k{background:var(--gray)}
+
+/* ── 标签 / 标注 ── */
+.tag{display:inline-block;font-size:11px;padding:1px 7px;border-radius:10px;background:var(--blue-l);color:var(--navy);border:1px solid var(--line);margin-right:4px}
+.tag.red{background:var(--red-l);color:var(--red);border-color:var(--red-line)}
+.tag.green{background:var(--green-l);color:var(--green);border-color:var(--green-line)}
+.tag.amber{background:var(--amber-l);color:var(--amber);border-color:var(--amber-line)}
+.pill{display:inline-block;border-radius:3px;padding:0 7px;font-size:11.3px;white-space:nowrap;line-height:1.72}
+.pill.r{background:var(--red-l);color:var(--red)} .pill.p{background:var(--pre-l);color:var(--pre)}
+.pill.y{background:var(--amber-l);color:var(--amber)} .pill.g{background:var(--green-l);color:var(--green)}
+.pill.k{background:var(--gray-l);color:var(--gray)} .pill.b{background:var(--blue-l);color:var(--navy2)}
+.pill.act{background:#e8eef6;color:#2b4a70}
+.callout{border-left:4px solid var(--amber);background:var(--amber-l);padding:12px 16px;border-radius:0 6px 6px 0;margin:14px 0;font-size:13.5px}
+.callout.red{border-left-color:var(--red);background:var(--red-l)}
+.callout.green{border-left-color:var(--green);background:var(--green-l)}
+.note{border:1px solid var(--line);border-left:4px solid var(--navy2);background:var(--card2);border-radius:var(--radius-sm);padding:12px 15px;margin:14px 0;font-size:13.5px}
+.note.gap{border-left-color:var(--gray);background:var(--gray-l)}
+.note.check{border-left-color:var(--green);background:var(--green-l)}
+.note.correct{border-left-color:var(--red);background:var(--red-l)}
+.note.preline{border-left-color:var(--pre);background:var(--pre-l)}
+.term{font-size:12.5px;color:var(--ink3);background:var(--bg-soft);border:1px solid var(--line);border-radius:6px;padding:8px 12px;margin:14px 0}
+.term b{color:var(--navy)}
+
+/* ── 图表（trends .chart 卡片 / apartment .chart-box + .chart-eh 容器） ── */
+.chart{margin:18px 0;padding:16px;background:var(--card);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow)}
+.chart h4{margin:0 0 4px;font-size:14.5px;color:var(--navy)}
+.chart .unit{font-size:12px;color:var(--ink3);font-weight:400}
+.chart-note{font-size:11.5px;color:var(--ink3);margin:0 0 12px;line-height:1.7}
+.chart svg{display:block;max-width:100%;height:auto;margin:6px auto 0}
+.chart-box{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:14px 14px 6px;box-shadow:var(--shadow);margin:16px 0}
+.chart-eh{width:100%;height:352px;margin:6px 0}
+.legend{display:flex;flex-wrap:wrap;gap:14px;font-size:12px;color:var(--ink2);margin:6px 0 12px}
+.legend span{display:inline-flex;align-items:center;gap:5px}
+.legend i{display:inline-block;width:11px;height:11px;border-radius:2px}
+
+/* ── 时间线 ── */
+.timeline{margin:16px 0;padding-left:8px}
+.tl-item{display:flex;gap:14px;margin:0 0 14px}
+.tl-date{flex:0 0 78px;font-size:12.5px;font-weight:700;color:var(--navy);text-align:right;padding-top:2px}
+.tl-body{flex:1;border-left:2px solid var(--line);padding:0 0 0 14px;position:relative}
+.tl-body::before{content:"";position:absolute;left:-6px;top:6px;width:10px;height:10px;border-radius:50%;background:var(--navy);border:2px solid #fff;box-shadow:0 0 0 1px var(--navy)}
+.tl-body.red::before{background:var(--red);box-shadow:0 0 0 1px var(--red)}
+.tl-body.green::before{background:var(--green);box-shadow:0 0 0 1px var(--green)}
+.tl-body.amber::before{background:var(--amber);box-shadow:0 0 0 1px var(--amber)}
+.tl-body .t{font-weight:600;color:var(--ink)}
+.tl-body .d{font-size:13px;color:var(--ink3);margin-top:2px}
+
+/* ── 风险条 / 风险框 ── */
+.rl-track{position:relative;height:12px;background:var(--gray-line);border-radius:999px;margin:14px 0 6px;overflow:hidden}
+.rl-fill{position:absolute;left:0;top:0;bottom:0;background:var(--green);border-radius:999px}
+.rl-marker{position:absolute;top:-3px;bottom:-3px;width:2px;background:var(--red);left:50%}
+.risk{background:linear-gradient(125deg,#fdf3f1,var(--red-l));border:1px solid #eec8c1;border-left:5px solid var(--red);border-radius:10px;padding:16px 18px;margin:14px 0}
+.risk h4{font-size:14.4px;color:var(--red);margin-bottom:8px}
+.risk .kpis{display:flex;flex-wrap:wrap;gap:22px;margin:10px 0 12px}
+.risk .kpis>div{min-width:150px}
+.risk .kpis .n{font-size:22px;font-weight:700;color:var(--red);line-height:1.25}
+.risk .kpis .l{font-size:11.4px;color:var(--ink2)}
+.redbox{background:linear-gradient(135deg,#fff8f6,var(--red-l));border:1px solid #eec8c1;border-left:5px solid var(--red);border-radius:10px;padding:15px 18px;margin:14px 0}
+.redbox h4{color:var(--red-d);margin-top:0}
+.prebox{background:linear-gradient(135deg,#fffaf4,var(--pre-l));border:1px solid #efd3b6;border-left:5px solid var(--pre);border-radius:10px;padding:15px 18px;margin:14px 0}
+.prebox h4{color:var(--pre);margin-top:0}
+.preline{border-left:4px solid var(--pre);background:var(--pre-l);padding:10px 14px;border-radius:0 6px 6px 0;margin:10px 0;font-size:13px}
+
+/* ── 目录 / 流程 / 分层（年度） ── */
+.toc{display:flex;flex-wrap:wrap;gap:7px;margin:0 0 6px}
+.toc a{font-size:12.3px;color:var(--navy2);background:var(--blue-l);border-radius:15px;padding:3px 12px;text-decoration:none}
+.toc a:hover{background:#dae6f5}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.flow{display:flex;align-items:stretch;gap:7px;flex-wrap:wrap;margin:12px 0}
+.node{flex:1;min-width:150px;background:var(--blue-l);border:1px solid #cfddf3;border-radius:8px;padding:11px 12px}
+.node b{display:block;color:var(--navy);font-size:12.8px;margin-bottom:3px}
+.node span{font-size:11.4px;color:var(--ink2);line-height:1.55;display:block}
+.arrow{display:flex;align-items:center;color:var(--blue);font-size:18px;font-weight:700}
+.tiers{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:12px 0}
+.tier{border:1px solid var(--line);border-radius:10px;padding:14px 15px;background:var(--card)}
+.tier.t1{border-top:4px solid var(--red)} .tier.t2{border-top:4px solid var(--pre)} .tier.t3{border-top:4px solid var(--amber)}
+.tier h4{margin:0 0 6px} .tier p{font-size:12.2px;color:var(--ink2);margin:0}
+
+/* ── 声明 / 页脚 / 索引链接 ── */
+.disc{margin-top:34px;padding:16px 18px;background:var(--bg-soft);border:1px solid var(--line);border-radius:var(--radius);font-size:13px;color:var(--ink3)}
+.disc strong{color:var(--ink)}
+footer,.footer{font-size:11.4px;color:var(--ink3);text-align:center;margin-top:22px;line-height:1.8}
+.idx-link{color:var(--navy);text-decoration:none;border-bottom:1px dotted #9db9da;font-weight:600}
+.idx-link:hover{color:var(--navy2);border-bottom:1px solid var(--blue)}
+.idx-link .ext{font-size:10px;color:var(--blue);margin-left:2px;font-weight:400}
+
+/* ── 响应式 / 打印 ── */
+@media (max-width:720px){
+  body{font-size:14px}
+  .wrap{padding:0 14px 48px}
+  header.report-head,header.hero{padding:26px 0 22px}
+  header.report-head h1,header.hero h1{font-size:21px}
+  nav.report-nav .nav-url{display:none}
+  table{display:block;overflow-x:auto;white-space:nowrap}
+  th,td{padding:7px 8px;font-size:12.5px}
+  .chart-eh{height:300px}
+  .grid2,.tiers{grid-template-columns:1fr}
+  .stat-strip{grid-template-columns:repeat(2,1fr)}
+  .tl-date{flex-basis:64px;font-size:11.5px}
+}
+@media print{
+  nav.report-nav,.skip-link{display:none}
+  .card,.chart,.kpi,.kcard,.chart-box{box-shadow:none}
+  body{font-size:12px}
+}
+
+
+/* 信息分层组件（与 report_style.py canonical 同步） */
+.delta-strip{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:14px 0}
+.delta-strip .d{background:var(--card,#fff);border:1px solid var(--line,#e1e7ee);border-radius:10px;padding:12px 14px}
+.delta-strip .d .n{font-size:22px;font-weight:700;color:var(--navy,#16324f);line-height:1.25}
+.delta-strip .d .l{font-size:11.6px;color:var(--ink3,#657180);margin-top:2px}
+.delta-strip .d.add .n{color:#1c7444}.delta-strip .d.fix .n{color:#956612}
+.delta-strip .d.same .n{color:#657180}.delta-strip .d.hyp .n{color:#2f5597}
+.lvl{display:inline-block;font-size:11px;line-height:1.5;padding:1px 7px;border-radius:9px;border:1px solid transparent;white-space:nowrap;font-weight:600}
+.lvl-verified{background:#eaf5ef;color:#1c7444}.lvl-partial{background:#fdf4e2;color:#956612}
+.lvl-inferred{background:#eaf1fa;color:#2f5597}.lvl-assumption{background:#eff2f4;color:#646f7b}
+.fact-ref{font-family:var(--font-mono,monospace);font-size:11.5px;color:#2f5597;background:#eaf1fa;border:1px solid #cdddf0;border-radius:5px;padding:0 5px;white-space:nowrap}
+</style>
+</head>
+<body>
+<div class="audit-mark" data-audit-id="AUD-2026-11-14-010" data-mark-level="pre" style="background:#5b6b7c;color:#fff;font:600 13px/1.6 system-ui,-apple-system,'Segoe UI',sans-serif;padding:8px 16px;text-align:center;letter-spacing:.02em"><span class="audit-badge">预审通过（机器）</span><span class="audit-meta">语义复核待完成 · 2026-11-16 · 审查链 3/4 · AUD-2026-11-14-010</span></div>
+
+<header class="report-head">
+  <div class="wrap">
+    <h1>迪拜（阿联酋）AI 网络安全行业深度调研报告</h1>
+<p class="sub">面向拟赴迪拜从事 AI 网络安全就业的决策参考（深度增补版）</p>
+  </div>
+</header>
+<nav class="report-nav" aria-label="报告导航">
+  <div class="wrap">
+    <div class="nav-tabs">
+<a href="#s1">一、核心结论（摘要）</a>
+<a href="#s2">二、市场发展趋势</a>
+<a href="#s3">三、人才供需状况与薪资（核心模块）</a>
+<a href="#s4">四、企业类型细分</a>
+<a href="#s5">五、岗位技能要求</a>
+<a href="#s6">六、行业认可的职业证书</a>
+<a href="#s7">七、就业落地建议（结论章）</a>
+<a href="#s8">八、数据可靠性与局限说明</a>
+<a href="#s9">九、参考来源清单（完整 URL）</a>
+    </div>
+  </div>
+</nav>
+
+<main class="wrap">
+<div class="delta-strip" data-module="delta">
+  <div class="d add"><div class="n">14</div><div class="l">本期新增（条）</div></div>
+  <div class="d fix"><div class="n">6</div><div class="l">修正（条）</div></div>
+  <div class="d same"><div class="n">0</div><div class="l">无变化（条）</div></div>
+  <div class="d hyp"><div class="n">5/14</div><div class="l">假设核验进度</div></div>
+</div>
+<p class="small muted">本期读数时点：2026-11-11 ｜ 阈值校准：<span class="lvl lvl-assumption">预校准（ex-ante）</span> ｜ 场景切片：主场景 就业决策；次场景 政策制定 ｜ 信息等级：已核验 / 部分核验 / 推断 / 假设</p>
+
+<h2 class="sec" id="s1">一、核心结论（摘要）</h2>
+<blockquote>
+<p><strong>调研说明</strong>
+1. 本报告全部资料取自英文网站，严格排除任何中文来源；所有关键数据点均附英文原始链接。
+2. 数据优先级：阿联酋/迪拜政府官方（u.ae、desc.gov.ae、tdra.gov.ae、mediaoffice.ae、WAM 英文）＞ 国际权威组织（ISC2、ISACA、Gartner、SANS/GIAC、MITRE、OWASP）＞ 头部薪酬指南（Hays、Michael Page、Cooper Fitch、Robert Half）＞ 招聘平台抽样（LinkedIn、Bayt、GulfTalent、Naukrigulf）＞ 英文行业媒体。
+3. 数据时效以 2023–2026 年为主；超过 5 年或与权威口径冲突的数据均予标注。
+4. 报告中"推断"字样表示该结论为研究过程中的合理推演，非直接引用数据。
+5. <strong>重要更正</strong>：原设定中的"Black Hat MEA 在阿布扎比"不成立——该会议 2025 年起已在沙特利雅得举办，不属于阿联酋本地活动，本报告据此修正。
+6. <strong>本版新增更正</strong>：① ILOE 失业险为 <strong>每月</strong> AED 5/10（非每周）；② 阿布扎比"薪资溢价 10–15%"在多数权威来源中不成立，迪拜名义薪资实际更高，阿布扎比优势在于生活成本低约 15–20%；③ CPX 的"DarkMatter 渊源"未能从官方来源证实（CPX Holding 为 2022 年成立的 G42 子公司，与 DarkMatter 系不同实体）；④ 黄金签证门槛以<strong>基本工资</strong>计（非总额）。 7. <strong>周期定位</strong>：本报告为 2026-11 基线（首期），后续按月 / 季 / 年刷新；<strong>传导量化</strong>：需求对威胁事件与合规强制的高度弹性使其对政策乘数敏感，传导时滞约 1–4 个季度；<strong>政策入模</strong>：ISR v3.1 / NCAP / UAE PDPL 已入模为强制合规驱动；<strong>盲区</strong>：未核验项集中列示于第九节来源清单与本节更正条目，不以推演填充。</p>
+</blockquote>
+<p><strong>关键数字卡</strong>（口径与来源见对应章节）</p>
+<table class="fixed">
+<thead>
+<tr>
+<th style="width:33%">指标</th>
+<th style="width:33%">数值</th>
+<th style="width:34%">口径·来源</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>阿联酋日均抵御网络攻击</td>
+<td>约 20 万次</td>
+<td>次/日 [Khaleej Times, 2026]</td>
+</tr>
+<tr>
+<td>国家背景威胁行为体占比</td>
+<td>71.4%</td>
+<td>% [Khaleej Times, 2026]</td>
+</tr>
+<tr>
+<td>MENA 信息安全终端支出（2025）</td>
+<td>33 亿美元，同比 +14%</td>
+<td>亿美元 / % [Gartner, 2025]</td>
+</tr>
+<tr>
+<td>阿联酋网安市场规模（2025→2031）</td>
+<td>8.2 亿 → 15.1 亿美元，CAGR 10.66%</td>
+<td>亿美元 / % [Mordor, 2025]</td>
+</tr>
+<tr>
+<td>资深 AI 安全工程师月薪（迪拜）</td>
+<td>55,000–75,000 AED</td>
+<td>AED/月 [hiredeveloper.ae, 2026]</td>
+</tr>
+<tr>
+<td>黄金签证技能类门槛</td>
+<td>基本月薪 ≥30,000 AED</td>
+<td>AED/月 [u.ae, 2025]</td>
+</tr>
+<tr>
+<td>ILOE 失业险费率</td>
+<td>每月 AED 5 / 10（+5% VAT）</td>
+<td>AED/月 [ILOE, 2025]</td>
+</tr>
+<tr>
+<td>认证人员薪资溢价</td>
+<td>约 +22–35%</td>
+<td>% [第三方聚合口径，谨慎引用]</td>
+</tr>
+</tbody>
+</table>
+<p class="src">事实卡片指针：[FC-SEC-001] 威胁态势 · [FC-SEC-002] MENA 信息安全支出 · [FC-SEC-003] 阿联酋市场规模多口径 · [FC-SEC-005] 人才供给 · [FC-SEC-006] AI 安全专项薪资。</p>
+<ol>
+<li>
+<p><strong>需求侧高度景气，且 AI 安全是结构性增量主线</strong>。阿联酋日均抵御约 20 万次网络攻击，2026 年以来确认事件 128 起，官方称 71.4% 的威胁行为体为国家背景。NIST/Gartner 与阿联酋官方均将 AI 驱动的攻击（深度伪造、AI 勒索、提示注入）列为增长最快的威胁类别，倒逼防御侧采用 AI（智能 SOC、威胁情报）。[Source: https://khaleejtimes.com/uae/over-70-of-cyber-threats-targeting-uae-are-state-sponsored-authority-says, 2026]；[Source: https://gartner.com/en/newsroom/press-releases/2025-04-08-gartner-forecasts-spending-on-information-security-in-mena-to-grow-14-percent-in-2025, 2025]</p>
+</li>
+<li>
+<p><strong>人才供给严重不足，是卖方市场</strong>。Mordor 数据显示 87% 的阿联酋企业难以招募到合格网络安全人员；最紧缺的是中级 SOC 分析师（L2/L3）、云安全工程师、OT 安全工程师，平均填补周期 3–6 个月，CISO 级岗位 4–8 个月。[Source: https://mordorintelligence.com/industry-reports/uae-cybersecurity-market]；[Source: https://rfsonshr.com/technology-recruitment-uae/cybersecurity-talent-acquisition, 2025]</p>
+</li>
+<li>
+<p><strong>迪拜薪资（重点模块，本版经多源交叉验证）</strong>：资深 AI 安全工程师月薪可达 5.5–7.5 万 AED（约 1.5–2.0 万美元），较通用安全工程师溢价约 15–30%；该溢价由 Hays、Robert Half、Cooper Fitch、Michael Page 四家指南中除 Michael Page 外多数未单列"AI 安全"岗，需以招聘机构抽样（hiredeveloper.ae 等）与通用安全/云架构薪资为锚。[Source: https://hiredeveloper.ae/employer-blog/how-to-hire-ai-security-engineers-dubai-after-meta-breach-7-steps, 2026]；[Source: https://charterhouseme.ae, 2025]；[Source: https://cooperfitch.ae, 2025]；[Source: https://rfsonshr.com/?p=25253]</p>
+</li>
+<li>
+<p><strong>税务与净薪优势是迪拜/阿布扎比就业的核心竞争力</strong>：阿联酋个人所得税 0%、外籍无社保缴纳，唯一强制性薪资扣减为 ILOE 失业险（基本工资 ≤1.6 万者 AED 5/月，&gt;1.6 万者 AED 10/月，加 5% VAT），故月薪净额约等于总额的 99.98%。总包价值常被低估——含住房/交通/机票/教育/医疗等福利后，实际年包较基本工资高 20–60%。[Source: https://u.ae/en/information-and-services/finance-and-investment/taxation/other-taxes]；[Source: https://iloe.ae/pdf/Involuntary-Loss-of-Employment-Brochure-ILOE-V2.pdf]；[Source: https://usemultiplier.com/united-arab-emirates/employee-benefits-and-compensation]</p>
+</li>
+<li>
+<p><strong>证书溢价真实存在</strong>：阿联酋市场认证人员平均薪资溢价约 +22–35%（第三方聚合口径，需谨慎）；CISSP、ISO 27001 主任审核员、OSCP 是招聘中最常被点名的要求。2025–2026 新发 AI 专项证（GIAC GAIPS/GASAE、CompTIA SecAI+、ISACA AAIA/AAISM/AAIR、EC-Council COASP、ISC2 AI 认证试点）可作差异化，但抽样岗位中尚无一条将其列为硬性门槛。[Source: https://waqov.com/blog/top-10-most-in-demand-skills-in-uae-job-market-2025, 2026]；[Source: https://rfsonshr.com/technology-recruitment-uae/cybersecurity-talent-acquisition]；[Source: https://giac.org]；[Source: https://isc2.org/new-ai-certification]</p>
+</li>
+<li>
+<p><strong>落地路径成熟</strong>：就业签证由雇主担保；高技能人才（基本月薪 ≥3 万 AED）或 AI/大数据等优先领域专家可直接申请 10 年黄金签证；DIFC/ADGM 自贸区有独立签证通道。华人背景在纯商业生态（MSSP、咨询、厂商）无障碍，但阿布扎比主权科技岗（G42 系）可能面临更严格的背景审查（推断）。[Source: https://u.ae/en/information-and-services/visa-and-emirates-id/residence-visas/golden-visa, 2025]；[Source: https://added.gov.ae]</p>
+</li>
+</ol>
+<hr />
+<h2 class="sec" id="s2">二、市场发展趋势</h2>
+<h3 id="21">2.1 政策框架（自上而下强力驱动）</h3>
+<ul>
+<li><strong>UAE 国家人工智能战略 2031</strong>：全球首个设"AI 国务部长"的国家，将网络安全列为 AI 优先部署的第一阶段重点行业之一。[Source: https://ai.gov.ae/strategy, 2017]</li>
+<li><strong>国家网络安全战略（2025–2031）</strong>：2025 年 2 月获内阁批准、9 月正式发布，五大支柱为治理、保护、创新、能力建设与伙伴合作，由 2020 年成立的<strong>阿联酋网络安全委员会（UAE CSC）</strong>统筹；官方来源未披露预算数字。[Source: https://cybersecuritydatabase.org/en/documents/ae-national-cybersecurity-strategy-2025-2031]；[Source: https://searchinform.com/blog/2025/9/24]</li>
+<li><strong>迪拜网络安全战略（第二周期，2023）与 ISR 条例</strong>：由迪拜电子安全中心（DESC，隶属 Digital Dubai）主导，四大支柱——"网络安全的城市社会、创新孵化之城、韧性网络城市、主动协作"，并发布强制标准 ISR（信息安全条例 v3.1，含 13 个控制域）、IoT 安全标准、ICS（OT）安全标准、云服务商安全标准。[Source: https://desc.gov.ae/hamdan-bin-mohammed-launches-second-cycle-of-dubai-cyber-security-strategy, 2023]；[Source: https://mastcgroup.com/desc-isr-v3-1-compliance-guide-iso-27001-mapping-requirements]</li>
+<li><strong>DESC《迪拜 AI 安全政策》（2024 年 9 月）</strong>：被视为区域首创，覆盖生成式 AI 安全，与迪拜的 AI 安全工作形成衔接。[Source: https://gulftime.ae/dubai-electronic-security-centre-unveils-dubai-ai-security-policy, 2024]；[Source: https://telecomreview.com/articles/exclusive-interviews/9074-cybersecurity-that-transcends-boundaries, 2024]</li>
+<li><strong>国际地位</strong>：阿联酋在 ITU 全球网络安全指数 2024 中位列最高级"标杆级（Tier 1）"，全球仅 46 国。[Source: https://thenationalnews.com/news/uae/2024/09/13/uae-ranked-as-role-model-for-cybersecurity-in-global-report, 2024]</li>
+</ul>
+<h3 id="22">2.2 市场规模与增速</h3>
+<ul>
+<li><strong>Gartner（权威，MENA 口径）</strong>：2025 年中东与北非企业信息安全终端支出将达 <strong>33 亿美元，同比增长 14%</strong>；安全软件占比约 45%，<strong>安全服务为增速最快板块（+16.6%）</strong>，由技能短缺与托管检测响应（MDR）需求驱动。[Source: https://gartner.com/en/newsroom/press-releases/2025-04-08-gartner-forecasts-spending-on-information-security-in-mena-to-grow-14-percent-in-2025, 2025]</li>
+<li><strong>市场规模（分析机构口径，定义不同致差异较大，均予保留）</strong>：Mordor 估计阿联酋网络安全市场 2025 年 <strong>8.2 亿美元 → 2031 年 15.1 亿美元，CAGR 10.66%</strong>；Global Market Insights 给出 2025 年约 <strong>34 亿美元、CAGR 12.29%</strong> 的更高口径（含硬件与服务）。差异源于"终端支出"与"含服务总收入"的口径不同。[Source: https://mordorintelligence.com/industry-reports/uae-cybersecurity-market, 2025]；[Source: https://gminsights.com/industry-analysis/cybersecurity-market, 2025]</li>
+</ul>
+<h3 id="23">2.3 威胁态势（需求最直接的证据）</h3>
+<ul>
+<li>日均抵御约 <strong>20 万次</strong>攻击；2026 年以来确认事件 128 起（勒索、政府入侵、数据泄露），90,000–200,000 次/日入侵尝试均被主动拦截；<strong>71.4% 的追踪威胁行为体为国家背景 APT</strong>（21 组中 15 组）。[Source: https://khaleejtimes.com/uae/over-70-of-cyber-threats-targeting-uae-are-state-sponsored-authority-says, 2026]</li>
+<li>攻击行业分布：政府管理 9.4%、金融 9.3%、房地产 5.5%；按酋长国：迪拜 21%、阿布扎比 19%、沙迦 18%。中东平均数据泄露成本 <strong>792 万美元</strong>（全球 488 万）。[Source: https://khaleejtimes.com/uae/uae-faces-200000-daily-cyberattacks, 2025]</li>
+<li>IBM X-Force 称阿联酋 2024 年位列全球受攻击第 4 位（约占全球攻击事件 10%）；Cisco 2025 就绪指数显示仅 4% 的阿联酋组织达到"完全安全成熟"。[Source: https://mordorintelligence.com/industry-reports/uae-cybersecurity-market, 2025]</li>
+</ul>
+<h3 id="24">2.4 需求驱动因素</h3>
+<ul>
+<li><strong>主权 AI 基建</strong>：Stargate UAE——2025 年 5 月宣布、落地阿布扎比的 <strong>5GW AI 园区 / 1GW 算力集群</strong>（G42 建设、OpenAI 与 Oracle 运营、NVIDIA GB300、Cisco 零信任），首批 200MW 计划于 2026 年上线（由 Khazna 承建，截至 2026 年仍在建设阶段，运营状态待官方确认）。这创造了全新的、超大尺度的 AI 基础设施攻击面。[Source: https://openai.com/index/introducing-stargate-uae, 2025]；[Source: https://coloprice.com]</li>
+<li><strong>微软–G42 投资（已核实口径）</strong>：<strong>15 亿美元</strong>为微软 2024 年 4 月对 G42 的<strong>已确认股权注资</strong>（Brad Smith 进入 G42 董事会），并配套 10 亿美元开发者基金承诺。[Source: https://blogs.microsoft.com/blog/2024/04/15/microsoft-and-g42-partner, 2024]（中文媒体所称"152 亿美元对阿联酋投资计划"未获英文权威来源证实，已按来源语言规则剔除，见第八节）</li>
+<li><strong>数字经济议程</strong>：迪拜 D33 经济议程（2023）目标 2033 年经济翻番，数字化年均贡献约 1,000 亿 AED。[Source: https://mediaoffice.ae/en/news/2023/january/04-01/mohammed-bin-rashid-launches-dubai-economic-agenda-d33, 2023]</li>
+<li><strong>旗舰活动</strong>：GITEX Global 2025（迪拜）6,800+ 展商、180 国；GISEC Global 2025（迪拜）750+ 品牌、25,000+ 专业人士、160 国，主题即"securing an AI-driven future"。[Source: https://gitex.com/News/gitex-global-2025-closes-a-landmark-45th-edition]；[Source: https://businesswire.com/news/home/20250506057310/en/Resecurity-to-Exhibit-at-GISEC-Global-2025, 2025]</li>
+</ul>
+<h3 id="25-vs">2.5 迪拜 vs 阿布扎比：市场结构对比</h3>
+<table class="fixed">
+<thead>
+<tr>
+<th style="width:33%">维度</th>
+<th style="width:33%">迪拜</th>
+<th style="width:34%">阿布扎比</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>发展模式</td>
+<td>商业/会展驱动、自由区密集</td>
+<td>主权 AI/能源驱动、国家资本密集</td>
+</tr>
+<tr>
+<td>核心抓手</td>
+<td>D33、DESC 监管、DIFC 金融、DIC 厂商总部、GITEX/GISEC</td>
+<td>G42 系（Core42/CPX/Presight/Khazna）、Hub71、ADGM、Stargate</td>
+</tr>
+<tr>
+<td>AI 安全重心</td>
+<td>企业托管服务、金融科技、事件驱动型 Networking</td>
+<td>主权云/AI 工厂安全、OT/能源、国家安防对齐</td>
+</tr>
+<tr>
+<td>名义薪资（本版更正）</td>
+<td>多数来源显示<strong>名义薪资更高</strong>（机会密集）</td>
+<td>名义薪资略低或持平，但<strong>生活成本低约 15–20%</strong></td>
+</tr>
+<tr>
+<td>对外籍从业者含义</td>
+<td>雇主更多、私营岗位更广，落地更现实</td>
+<td>资金更厚、岗位更深，但背景审查更严（推断）</td>
+</tr>
+</tbody>
+</table>
+<p>[Source: https://desc.gov.ae]；[Source: https://g42.ai]；[Source: https://adgm.com]；[Source: https://hub71.com]；[Source: https://dubaipractical.com, 2025]；[Source: https://felixhappich.com, 2025]；[Source: https://expatsi.com, 2025]（Mercer 2025 排名：迪拜全球第 15、阿布扎比第 43，迪拜为中东北非最贵）</p>
+<h3 id="26-35">2.6 未来 3–5 年展望（推断）</h3>
+<p>Gartner 预计 2026 年整合 GenAI 的企业将员工驱动事件减少 40%；ISC2 指出 AI 已连续两年为最缺技能（41%）。结合 Stargate 上线、国家战略强制合规、威胁国家化与人才缺口四点，2026–2030 年迪拜/阿布扎比对 AI 安全技能的需求结构性跑赢通用安全需求。风险：市场口径差异大；阿化（Emiratisation）配额影响私企招聘；Gartner 预计 2028 年 AI 将自动化部分 L1 SOC 工作，需求向价值链上移而非消失。</p>
+<hr />
+<h2 class="sec" id="s3">三、人才供需状况与薪资（核心模块）</h2>
+<blockquote>
+<p>汇率：1 USD = 3.6725 AED（钉住汇率）。表中"月薪"除特别说明外均为 AED；标注来源未经官方核实者注明口径。</p>
+</blockquote>
+<h3 id="31">3.1 人才缺口</h3>
+<ul>
+<li><strong>全球（ISC2 2025）</strong>：2025 年研究不再发布"总缺口"单一指标，转而强调技能缺口——88% 受访者因技能短缺在过去一年遭遇过至少一项安全后果，95% 团队存在技能需求，<strong>AI 为最急需技能（41%）</strong>，云安全次之（36%）。[Source: https://isc2.org/Insights/2025/12/ISC2-Publishes-2025-Cybersecurity-Workforce-Study]</li>
+<li><strong>阿联酋侧</strong>：Mordor 指出"阿联酋本土网络安全人才池短缺"是关键约束，尤其在威胁情报、云安全架构等专精领域，2024–2025 年仅约 5,000 名本国人进入私企网络安全岗，远低于需求。[Source: https://mordorintelligence.com/industry-reports/uae-cybersecurity-market]</li>
+<li><strong>招聘端最难填补</strong>：中级 SOC 分析师（L2/L3）、云安全工程师（AWS/Azure）、OT 安全工程师，平均 3–6 个月；受监管行业 CISO 检索 4–8 个月。[Source: https://rfsonshr.com/technology-recruitment-uae/cybersecurity-talent-acquisition, 2025]</li>
+</ul>
+<h3 id="32-michael-page-uae-2025-aed">3.2 迪拜核心岗位薪资基准（Michael Page UAE 2025，月薪 AED）</h3>
+<table class="fixed">
+<thead>
+<tr>
+<th style="width:25%">岗位</th>
+<th style="width:25%">月薪 AED</th>
+<th style="width:25%">约合 USD</th>
+<th style="width:25%">来源</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>网络安全架构师</td>
+<td>35,000–60,000</td>
+<td>9,530–16,340</td>
+<td>uaelifeguide.com/post/uae-salary-guide-for-software-digital-technology-professionals-2025</td>
+</tr>
+<tr>
+<td>IT 安全经理</td>
+<td>35,000–55,000</td>
+<td>9,530–14,970</td>
+<td>同上</td>
+</tr>
+<tr>
+<td>IT 安全工程师（通用）</td>
+<td>20,000–40,000</td>
+<td>5,450–10,890</td>
+<td>同上</td>
+</tr>
+<tr>
+<td>安全分析师</td>
+<td>15,000–25,000</td>
+<td>4,090–6,810</td>
+<td>同上</td>
+</tr>
+<tr>
+<td>SOC 经理</td>
+<td>15,000–30,000</td>
+<td>4,090–8,170</td>
+<td>同上</td>
+</tr>
+<tr>
+<td>SOC 工程师</td>
+<td>8,000–15,000</td>
+<td>2,180–4,090</td>
+<td>同上</td>
+</tr>
+<tr>
+<td>渗透测试</td>
+<td>20,000–40,000</td>
+<td>5,450–10,890</td>
+<td>同上</td>
+</tr>
+<tr>
+<td>应用安全专家</td>
+<td>25,000–35,000</td>
+<td>6,810–9,530</td>
+<td>同上</td>
+</tr>
+<tr>
+<td>GRC 经理</td>
+<td>25,000–35,000</td>
+<td>6,810–9,530</td>
+<td>同上</td>
+</tr>
+<tr>
+<td>CISO</td>
+<td>最高 120,000</td>
+<td>最高 32,680</td>
+<td>travelsdubai.com/06-Feb-2025/2148</td>
+</tr>
+</tbody>
+</table>
+<h3 id="33-cooper-fitch-uae-salary-guide-20251000-aed">3.3 咨询/审计线薪资（Cooper Fitch UAE Salary Guide 2025，1,000+ 机构调研，月薪 AED）</h3>
+<table class="fixed">
+<thead>
+<tr>
+<th style="width:33%">级别</th>
+<th style="width:33%">月薪 AED</th>
+<th style="width:34%">约合 USD</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>合伙人</td>
+<td>91,000–117,000</td>
+<td>24,780–31,870</td>
+</tr>
+<tr>
+<td>总监</td>
+<td>57,000–64,000</td>
+<td>15,520–17,430</td>
+</tr>
+<tr>
+<td>高级经理</td>
+<td>44,000–51,000</td>
+<td>11,980–13,890</td>
+</tr>
+<tr>
+<td>经理</td>
+<td>33,000–39,000</td>
+<td>8,990–10,620</td>
+</tr>
+<tr>
+<td>高级顾问</td>
+<td>19,000–26,000</td>
+<td>5,170–7,080</td>
+</tr>
+<tr>
+<td>顾问</td>
+<td>15,000–19,000</td>
+<td>4,090–5,170</td>
+</tr>
+<tr>
+<td>分析师/初级</td>
+<td>11,000–15,000</td>
+<td>3,000–4,090</td>
+</tr>
+</tbody>
+</table>
+<p>[Source: https://cooperfitch.ae/wp-content/uploads/2024/12/Salary-Guide-UAE-2025-Cooper-Fitch.pdf]</p>
+<p><strong>补充交叉验证（Charterhouse UAE Salary Guide 2025，企业内部岗，月薪 AED，基本+房补+交通合计）</strong>：安全架构师 25,000–40,000；CISO 50,000–100,000；网络安全顾问 15,000–25,000；信息安全负责人 25,000–45,000。[Source: https://charterhouseme.ae, 2025]</p>
+<h3 id="34-ai-2026-aed">3.4 AI 安全专项薪资（迪拜，招聘机构抽样 2026，月薪 AED）</h3>
+<table class="fixed">
+<thead>
+<tr>
+<th style="width:25%">级别（经验）</th>
+<th style="width:25%">月薪 AED</th>
+<th style="width:25%">年薪 AED</th>
+<th style="width:25%">来源</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>初级 AI 安全工程师（1–3 年）</td>
+<td>22,000–32,000</td>
+<td>264k–384k</td>
+<td>hiredeveloper.ae, 2026</td>
+</tr>
+<tr>
+<td>中级（3–5 年）</td>
+<td>35,000–55,000</td>
+<td>420k–660k</td>
+<td>同上</td>
+</tr>
+<tr>
+<td>资深（5–8 年）</td>
+<td>55,000–75,000</td>
+<td>660k–900k</td>
+<td>同上</td>
+</tr>
+<tr>
+<td>AI 安全负责人（8+ 年）</td>
+<td>80,000–140,000</td>
+<td>960k–1.68M</td>
+<td>同上</td>
+</tr>
+</tbody>
+</table>
+<p>该来源称上述较 2025 基准上浮 <strong>20–30%</strong>，由 AI Agent 普及驱动，并已用 DIFC 金融科技、迪拜政府实体、阿布扎比主权科技公司的真实 offer 校验（招聘机构抽样，非官方薪酬指南）。配套口径：资深"AI 防御架构师"（LLM 护栏、对抗红队）月薪 38,000–65,000；持证入门岗 16,000–22,000。[Source: https://hiredeveloper.ae]；[Source: https://angelindubai.com/post/ai-cybersecurity-certifications-dubai-courses-2026, 2026]</p>
+<h3 id="35-aed">3.5 按"岗位 × 职级"交叉分层（综合推断，AED/月）</h3>
+<table class="fixed">
+<thead>
+<tr>
+<th style="width:20%">岗位</th>
+<th style="width:20%">初级(0–2年)</th>
+<th style="width:20%">中级(3–7年)</th>
+<th style="width:20%">资深(8+年)</th>
+<th style="width:20%">管理/总监</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>SOC 分析师(L1→L3)</td>
+<td>8k–15k</td>
+<td>15k–25k</td>
+<td>25k–35k</td>
+<td>30k–55k</td>
+</tr>
+<tr>
+<td>威胁情报分析师</td>
+<td>~12k–20k</td>
+<td>20k–35k</td>
+<td>35k–50k</td>
+<td>—</td>
+</tr>
+<tr>
+<td>AI/ML 安全工程师</td>
+<td>22k–32k</td>
+<td>35k–55k</td>
+<td>55k–75k</td>
+<td>80k–140k</td>
+</tr>
+<tr>
+<td>渗透/红队</td>
+<td>12k–18k</td>
+<td>18k–30k</td>
+<td>30k–40k</td>
+<td>40k+</td>
+</tr>
+<tr>
+<td>云安全工程师</td>
+<td>14k–20k</td>
+<td>20k–35k</td>
+<td>35k–50k</td>
+<td>45k+</td>
+</tr>
+<tr>
+<td>安全架构师</td>
+<td>—</td>
+<td>25k–35k</td>
+<td>35k–60k</td>
+<td>60k+</td>
+</tr>
+<tr>
+<td>GRC/合规</td>
+<td>11k–15k</td>
+<td>15k–26k</td>
+<td>26k–35k</td>
+<td>33k–51k</td>
+</tr>
+<tr>
+<td>安全工程师(通用)</td>
+<td>12k–20k</td>
+<td>20k–30k</td>
+<td>30k–40k</td>
+<td>35k–55k</td>
+</tr>
+<tr>
+<td>CISO/安全负责人</td>
+<td>—</td>
+<td>—</td>
+<td>50k–80k</td>
+<td>90k–140k</td>
+</tr>
+</tbody>
+</table>
+<p><em>威胁情报行中位薪资为推断（无直接迪拜来源，依其资深度处于 SOC 与安全工程师之间估计）。</em></p>
+<h3 id="36-vs">3.6 迪拜 vs 阿布扎比（薪资与生活成本，本版经多源修订）</h3>
+<ul>
+<li><strong>薪资方向更正</strong>：原报告引用的"阿布扎比同岗薪资高出迪拜 10–15%"（awconnect-me）在多数权威来源中<strong>不被支持</strong>——Hays、Robert Half、Charterhouse、Mercer 等显示迪拜名义薪资更高、阿布扎比略低或持平；仅 RFS 称阿布扎比网络安全岗较迪拜 +5–8%。[Source: https://rfsonshr.com/?p=25253]；[Source: https://dubaipractical.com]；[Source: https://felixhappich.com]；[Source: https://expatsi.com, 2025]</li>
+<li><strong>结论（推断）</strong>：在 0% 个税下，决定性差异在于生活成本——阿布扎比租金低约 40%、公用事业低约 43%、学费低约 16%、整体低约 15–20%。因此<strong>同岗净购买力二者大致相当，阿布扎比对家庭（租房+子女教育）略优，迪拜则名义薪资更高、机会面更广</strong>。[Source: https://felixhappich.com]；[Source: https://relocate2uae.com/faqs]</li>
+</ul>
+<h3 id="37-numbeo2026-11">3.7 生活成本对比（Numbeo，2026-11 更新）</h3>
+<table class="fixed">
+<thead>
+<tr>
+<th style="width:25%">项目（月/年）</th>
+<th style="width:25%">迪拜</th>
+<th style="width:25%">阿布扎比</th>
+<th style="width:25%">差异</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>含租等效生活成本</td>
+<td>26,000</td>
+<td>22,175</td>
+<td>阿布扎比低约 15%</td>
+</tr>
+<tr>
+<td>市中心一居租金</td>
+<td>9,230</td>
+<td>7,254</td>
+<td>−21.4%</td>
+</tr>
+<tr>
+<td>三居市中心租金</td>
+<td>19,042</td>
+<td>13,919</td>
+<td>−26.9%</td>
+</tr>
+<tr>
+<td>交通月票</td>
+<td>300</td>
+<td>95</td>
+<td>−68.3%</td>
+</tr>
+<tr>
+<td>国际学校(年/孩)</td>
+<td>76,690</td>
+<td>65,525</td>
+<td>−14.6%</td>
+</tr>
+<tr>
+<td>平均净月薪</td>
+<td>13,532</td>
+<td>11,263</td>
+<td>−16.8%</td>
+</tr>
+</tbody>
+</table>
+<p>[Source: https://numbeo.com/cost-of-living/compare_cities.jsp?country1=United+Arab+Emirates&amp;city1=Dubai&amp;country2=United+Arab+Emirates&amp;city2=Abu+Dhabi, 2026]</p>
+<h3 id="38">3.8 净薪模型与税务（本版新增，核心价值点）</h3>
+<ul>
+<li><strong>个人所得税 0%</strong>：阿联酋政府明确"不向个人征收所得税"[Source: https://u.ae/en/information-and-services/finance-and-investment/taxation/other-taxes, 2026]；财政部确认雇佣/个人所得不在企业税范围内[Source: https://mof.gov.ae, 2023]。</li>
+<li><strong>外籍社保 0%</strong>："阿联酋无面向外籍雇员的养老金计划"[Source: https://uaesupremecouncil.org/en/.../pension-schemes-for-expatriate-workers.html]；合规指南确认非 GCC 外籍雇员与雇主社保均为 0%[Source: https://remofirst.com/country-guide/united-arab-emirates]；[Source: https://whichpayroll.com, 2026]。</li>
+<li><strong>唯一强制薪资扣减——ILOE 失业险（更正）</strong>：A 类（基本工资 ≤1.6 万 AED）<strong>每月 AED 5</strong>，B 类（&gt;1.6 万）<strong>每月 AED 10</strong>，首期加 5% VAT；由雇员承担，雇主不付[Source: https://iloe.ae/pdf/Involuntary-Loss-of-Employment-Brochure-ILOE-V2.pdf]。</li>
+<li><strong>离职补偿（Gratuity）由雇主计提，不从薪资扣除</strong>：前 5 年每年 21 天基本工资、之后 30 天，上限 2 年工资[Source: https://usemultiplier.com/united-arab-emirates/employee-benefits-and-compensation, 2026]。</li>
+<li><strong>迪拜住房费</strong>：租客按年租金 5% 通过 DEWA 按月缴纳（属生活成本，非薪资扣减）[Source: https://mirabelloconsultancy.com]；[Source: https://eastproperty.com, 2026]。</li>
+</ul>
+<p><strong>净薪测算（月薪，AED）</strong></p>
+<table class="fixed">
+<thead>
+<tr>
+<th style="width:33%">项目</th>
+<th style="width:33%">中级 AI 安全工程师(45,000)</th>
+<th style="width:34%">资深安全架构师(55,000)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>基本工资（总额）</td>
+<td>45,000</td>
+<td>55,000</td>
+</tr>
+<tr>
+<td>个税(0%)</td>
+<td>0</td>
+<td>0</td>
+</tr>
+<tr>
+<td>外籍社保</td>
+<td>0</td>
+<td>0</td>
+</tr>
+<tr>
+<td>ILOE(B类,+5%VAT)</td>
+<td>−10.50</td>
+<td>−10.50</td>
+</tr>
+<tr>
+<td>Gratuity（雇主计提，不扣）</td>
+<td>0</td>
+<td>0</td>
+</tr>
+<tr>
+<td><strong>月净额</strong></td>
+<td><strong>44,989.50</strong></td>
+<td><strong>54,989.50</strong></td>
+</tr>
+<tr>
+<td>年净额（≈总额 99.98%）</td>
+<td>539,874</td>
+<td>659,874</td>
+</tr>
+<tr>
+<td>折合 USD/年</td>
+<td>~147,000</td>
+<td>~179,700</td>
+</tr>
+<tr>
+<td>雇主计提 Gratuity（前5年，不扣）</td>
+<td>~2,589/月</td>
+<td>~3,164/月</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>关键含义：因无个税与社保，迪拜薪资的"到手率"极高，谈薪重点应从"税后"转向<strong>总包结构</strong>（见 3.10）。</p>
+</blockquote>
+<h3 id="39-total-compensation">3.9 总薪酬（Total Compensation）模型（本版新增）</h3>
+<p>阿联酋福利通常叠加于基本工资之上，使"总包"显著高于"基本工资"。以下为示意的年度全包测算（AED）：</p>
+<table class="fixed">
+<thead>
+<tr>
+<th style="width:33%"></th>
+<th style="width:33%">中级 AI 安全工程师(基本 45k/月)</th>
+<th style="width:34%">资深安全架构师(基本 55k/月)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>基本×12</td>
+<td>540,000</td>
+<td>660,000</td>
+</tr>
+<tr>
+<td>住房(30%)</td>
+<td>162,000</td>
+<td>198,000</td>
+</tr>
+<tr>
+<td>交通(10%)</td>
+<td>54,000</td>
+<td>66,000</td>
+</tr>
+<tr>
+<td>奖金(1/2 月)</td>
+<td>45,000</td>
+<td>110,000</td>
+</tr>
+<tr>
+<td>机票</td>
+<td>4,000</td>
+<td>12,000(家庭)</td>
+</tr>
+<tr>
+<td>医疗(雇主)</td>
+<td>10,000</td>
+<td>25,000</td>
+</tr>
+<tr>
+<td>教育(2 孩)</td>
+<td>0 / 100,000</td>
+<td>0 / 100,000</td>
+</tr>
+<tr>
+<td><strong>不含住房+教育全包</strong></td>
+<td><strong>~653,000</strong></td>
+<td><strong>~873,000</strong></td>
+</tr>
+<tr>
+<td><strong>含住房+教育全包</strong></td>
+<td><strong>~915,000</strong></td>
+<td><strong>~1,171,000</strong></td>
+</tr>
+<tr>
+<td>折合 USD(含住房教育)</td>
+<td>~249,000</td>
+<td>~319,000</td>
+</tr>
+</tbody>
+</table>
+<p>福利结构 based on [Source: https://usemultiplier.com, 2026]；[Source: https://thenationalnews.com/business/money/2025/02/26/uae-jobs-salary-guide, 2025]（Cooper Fitch 奖金报告：科技/银行多发 3–5 个月，约 1/3 雇员无奖金）</p>
+<p><strong>结论（推断）</strong>：仅看基本工资会低估实际价值 20–60%；对带家庭的高级/管理岗，福利增量可超 30 万 AED/年。谈判时应将住房、教育、机票、奖金纳入整体包。</p>
+<h3 id="310">3.10 证书溢价与阿化政策</h3>
+<ul>
+<li><strong>证书溢价</strong>：第三方聚合称认证人员平均溢价 +22–35%；RFS 称 CISSP/CISM/CEH 可为月薪增 AED 3,000–8,000，CISSP 持证者收入高约 25–30%（招聘机构抽样，谨慎引用）。[Source: https://waqov.com/blog/top-10-most-in-demand-skills-in-uae-job-market-2025, 2026]；[Source: https://rfsonshr.com/?p=25253]</li>
+<li><strong>阿化（Emiratisation）</strong>：50+ 人私企须每年提升本国籍在技能岗占比 2%、2026 年达 10%；20–49 人且属"信息与通信"等 14 类行业的企业须雇至少 1–2 名本国籍，违者按人头罚款（2026 年约 10.8 万 AED/人）。[Source: https://u.ae/en/information-and-services/jobs/.../emiratis-employment-in-private-sector]；[Source: https://gulfnews.com/uae/uae-firms-face-dh108000-fine, 2025]</li>
+<li><strong>对外籍影响（推断）</strong>：配额针对通用技能岗、无公开的网络安全豁免；但本土网络人才池极薄（年新增约 5,000），中高级技术岗仍以外籍为主，部分初级/GRC/政府关联岗有本国籍偏好。</li>
+</ul>
+<hr />
+<h2 class="sec" id="s4">四、企业类型细分</h2>
+<h3 id="41-20252026">4.1 雇主分类总览（经 2025–2026 核实）</h3>
+<table class="fixed">
+<thead>
+<tr>
+<th style="width:16%">雇主类型</th>
+<th style="width:16%">代表机构</th>
+<th style="width:16%">酋长国</th>
+<th style="width:16%">AI 安全相关度</th>
+<th style="width:16%">招聘信号</th>
+<th style="width:20%">来源</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>政府与监管</td>
+<td>DESC、迪拜警察、UAE CSC、TDRA/aeCERT</td>
+<td>迪拜/联邦</td>
+<td>高（DESC 已发《AI 安全政策》；2026 推 ISR 审核员认证）</td>
+<td>多面向本国籍，外籍多走承包/厂商</td>
+<td>desc.gov.ae；tdra.gov.ae/en/aecert</td>
+</tr>
+<tr>
+<td>主权科技</td>
+<td>G42/Core42/CPX、e&amp;/Help AG、Moro Hub(DEWA)、Khazna</td>
+<td>阿布扎比+迪拜</td>
+<td>极高（主权云+AI 工厂）</td>
+<td>持续招募外国专家</td>
+<td>g42.ai；core42.ai；cpx.net；eand.com</td>
+</tr>
+<tr>
+<td>自由区数字</td>
+<td>Hub71、Moro Hub、Cloud4C</td>
+<td>阿布扎比+迪拜</td>
+<td>中高</td>
+<td>初创与托管 SOC</td>
+<td>hub71.com；cloud4c.com/uae</td>
+</tr>
+<tr>
+<td>全球厂商区域总部</td>
+<td>Microsoft、Cisco、Palo Alto、Fortinet、Kaspersky（DIC/JLT）</td>
+<td>迪拜</td>
+<td>中高</td>
+<td>区域销售/工程岗</td>
+<td>fortinet.com 全球办公室</td>
+</tr>
+<tr>
+<td>咨询</td>
+<td>四大、Accenture、EY</td>
+<td>迪拜为主</td>
+<td>高（AI 治理咨询）</td>
+<td>认证顾问持续需求</td>
+<td>—</td>
+</tr>
+<tr>
+<td>本地 MSSP/SOC</td>
+<td>Help AG、Cloud4C、CPX</td>
+<td>双城</td>
+<td>中高</td>
+<td>SOC/渗透持续招</td>
+<td>—</td>
+</tr>
+</tbody>
+</table>
+<p><strong>关键细节</strong>：
+- <strong>DESC</strong> 2024 年发布《迪拜 AI 安全政策》，2026 年 GISEC 上进一步推出 <strong>SARAAB</strong>（开源阿拉伯语政府 AI 深度伪造检测模型）、<strong>迪拜网络安全技能框架</strong>与 <strong>ISR 审核员认证计划</strong>（对接迪拜信息安全条例）[Source: https://desc.gov.ae/dubai-electronic-security-center-unveils-saraab-and-new-cybersecurity-initiatives-at-gisec-global-2026, 2026]；[Source: https://zawya.com]。
+- <strong>迪拜警察</strong>运行 Oyoon（"眼睛"）AI 监控系统，融合 30 万+ 摄像头做预测警务[Source: https://gulfnews.com/uae/crime/ai-and-smart-data-ends-crime, 2023]。
+- <strong>Moro Hub（DEWA 子公司）</strong>获迪拜 AI Seal Tier S（最高级，2025 年 12 月，单一聚合源，建议以 Digital Dubai 复核），定位全栈主权 AI 平台[Source: https://brief.news, 2026]；[Source: https://lumitech.co, 2026]。
+- <strong>注</strong>："Sirius"、Cerebra（沙特利雅得公司）、Wiz（无阿联酋 HQ 确认）在英文来源中未能核实，已剔除或标注。</p>
+<h3 id="42-20252026">4.2 重点雇主核实（2025–2026 更新）</h3>
+<ul>
+<li><strong>G42</strong>（阿布扎比）：AI 控股集团，旗下 Core42、CPX、Khazna、M42；2025–26 推出 Assurance Compute Framework（安全美国 AI 芯片）、"数字大使馆"与 Greenshield 主权 AI 管控；23,000+ 员工、30 国[Source: https://g42.ai, 2026]。</li>
+<li><strong>Core42</strong>（G42 子公司，2023 年 10 月由 G42 Cloud+Inception+Injazat 合并）：主权公有云（映射 200+ 阿联酋控制项）、Greenshield；2026 年 9 月与 TII 在 HSM、机密计算、加密 AI 推理上达成研发合作；并与阿联酋央行推主权金融云（SFCSI，2026 年 2 月）[Source: https://core42.ai]；[Source: https://gecnewswire.com, 2026]。</li>
+<li><strong>CPX</strong>（G42 子公司，2022 年成立，阿布扎比）：端到端网络与物理安全 MSSP，24/7 SOC、DFIR、IAM、OT；2025 年收购 spiderSilk 与 TSI Tech，2026 年与网络安全委员会共建 UAE Cyber Factory；~600 名专家、200+ 客户[Source: https://cpx.net]；[Source: https://incarabia.com, 2025]；[Source: https://thearabianpost.com, 2026]。<strong>更正</strong>：CPX 的"DarkMatter 渊源"在官方来源中未获证实；据 WIRED 等第三方报道，DarkMatter→Digital14→"CPX"是另一不同实体，本报告不再沿用该说法。</li>
+<li><strong>e&amp; enterprise / Help AG</strong>（迪拜 HQ + 阿布扎比）：MSSP，托管 SOC/MDR，200+ SOC 分析师，IDC MarketScape 领导者（MSS 2026、MDR 2025）；2026 年 1 月为 Sergas 交付下一代 SOC[Source: https://eand.com/en/news/13-jan-26-eand-enterprise-and-sergas-team-up.html]；[Source: https://lumitech.co, 2026]。</li>
+<li><strong>Hub71</strong>（阿布扎比）：第 19 批（2026 年 10 月）90% 为 AI 原生，40 家初创、累计融资 2.96 亿美元，是主要 AI/网络创业池[Source: https://hub71.com, 2026]。</li>
+</ul>
+<h3 id="43-20252026">4.3 2025–2026 生态更新（关键事件）</h3>
+<ul>
+<li><strong>GISEC Global 2026</strong>（第 15 届，2026 年 9 月 16–18 日，迪拜世博城展览中心，约 182 国）：主题 AI 驱动犯罪、数字主权、韧性；新增"Crime First"部长/央行/CEO 峰会；AI 辅助勒索被指约 60%[Source: https://desc.gov.ae, 2026]；[Source: https://gisec.ae, 2026]。</li>
+<li><strong>GITEX Global 2026</strong>：<strong>2026 年 12 月 7–11 日</strong>于迪拜世博城举办，设网络安全与数字主权专区[Source: https://gitex.com, 2026]。</li>
+<li><strong>国家级新规（2026 推进，合规/法律分析视角）</strong>：国家网络认证计划（NCAP）限制未认证 MSSP 服务关键基础设施；安全供应链/SBOM 计划；量子安全（PQC）计划；Cyber E71 孵化器与 Cyber Sniper 技能计划[Source: https://practiceguides.chambers.com/cybersecurity-2026/uae, 2026]。</li>
+<li><strong>TDRA/aeCERT</strong>：aeCERT 隶属 TDRA，职能含国家级事件协调/响应、意识、漏洞评估与渗透测试、24 小时违规通报义务[Source: https://itu.int, 2023]；[Source: https://hzlegal.ae, 2026]；未能取得带完整培训目录的官方英文页，建议以 tdra.gov.ae 复核。</li>
+</ul>
+<hr />
+<h2 class="sec" id="s5">五、岗位技能要求</h2>
+<blockquote>
+<p>依据约 29 条英文在招岗位（GulfTalent、Bayt、foundit Gulf、企业官网）与 OWASP/NIST/MITRE 官方框架抽样（2026-11）。</p>
+</blockquote>
+<h3 id="51">5.1 分岗位要求</h3>
+<table class="fixed">
+<thead>
+<tr>
+<th style="width:20%">岗位</th>
+<th style="width:20%">典型经验</th>
+<th style="width:20%">核心技能</th>
+<th style="width:20%">常见证书要求</th>
+<th style="width:20%">样本来源</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>AI 安全工程师</td>
+<td>5–7+ 年</td>
+<td>Azure AI/OpenAI 安全、提示注入测试、安全 RAG、AI 供应链、Shadow AI、DSPM/DLP、Python</td>
+<td>SC-100/AZ-500/AI-102；CISSP/CCSP/CISM；OWASP LLM 知识</td>
+<td>founditgulf.com/job/ai-security-engineer-cpx-affiliate-abu-dhabi-68226120, 2026</td>
+</tr>
+<tr>
+<td>SOC 分析师 L1</td>
+<td>0.5–2 年</td>
+<td>Sentinel、Splunk、Defender、分诊、ATT&amp;CK</td>
+<td>Security+、SC-900</td>
+<td>gulftalent.com/uae/jobs/soc-analyst-level-1-569852</td>
+</tr>
+<tr>
+<td>SOC L3/资深</td>
+<td>3–6（资深）/5+（DFIR）</td>
+<td>Sentinel/Splunk/QRadar、CrowdStrike、SOAR、MISP、KQL/Python</td>
+<td>BTL2/GCIH/GCFA/CASP+（常强制）</td>
+<td>gulftalent.com/uae/jobs/senior-soc-analyst-606447</td>
+</tr>
+<tr>
+<td>威胁情报/猎手</td>
+<td>6–10 年（5+ CTI）</td>
+<td>ATT&amp;CK、Diamond、STIX/TAXII、MISP/Anomali、YARA、暗网</td>
+<td>GCTI、GREM、CEH、CISSP</td>
+<td>gulftalent.com/uae/jobs/senior-threat-intelligence-analyst-562213</td>
+</tr>
+<tr>
+<td>渗透/红队</td>
+<td>2+（入门）–7–10（资深）</td>
+<td>Burp、Metasploit、OWASP Top 10、移动逆向、云/API</td>
+<td>OSCP/OSEP、CEH、GPEN、CREST</td>
+<td>gulftalent.com/mobile/uae/jobs/senior-penetration-tester-567504</td>
+</tr>
+<tr>
+<td>云安全/DevSecOps</td>
+<td>1–8 年</td>
+<td>Azure/AWS/OCI、Defender for Cloud、WAF、Terraform、CKS</td>
+<td>AZ-500、SC-200/300、GIAC</td>
+<td>bayt.com Al-Futtaim 5474593</td>
+</tr>
+<tr>
+<td>安全架构师</td>
+<td>7–10+ 年</td>
+<td>零信任、多云、5G/OT、威胁建模、AI/ML 安全架构</td>
+<td>CISSP、CISM、SABSA、CCSP、ISO 27001 LI、TOGAF</td>
+<td>bebee.com e&amp; Expert Engineer, 2026</td>
+</tr>
+<tr>
+<td>GRC/合规</td>
+<td>5–12 年</td>
+<td>ISO 27001、NIST、PCI-DSS、UAE IA/NESA、CBUAE、ADHICS、PDPL</td>
+<td>CISSP、CISM、CISA、CRISC、ISO 27001 LI/LA</td>
+<td>gulftalent.com/uae/jobs/information-security-risk-and-compliance-manager-571966</td>
+</tr>
+<tr>
+<td>CISO/安全负责人</td>
+<td>10–15+ 年</td>
+<td>战略、IT/OT、供应商、监管对接、AI/LLM/Agent 安全</td>
+<td>CISM、CISA、CRISC、CISSP、GICSP</td>
+<td>hirelala.com/en/job/head-of-cybersecurity-alighj；gulftalent 473682</td>
+</tr>
+</tbody>
+</table>
+<h3 id="52-ai">5.2 AI 专项安全技能（已被雇主明确点名）</h3>
+<ul>
+<li>框架：<strong>OWASP LLM Top 10（2025）</strong>（LLM01 提示注入、LLM03 供应链、LLM06 过度代理等）与 <strong>NIST AI RMF 1.0</strong>（GOVERN/MAP/MEASURE/MANAGE）[Source: https://genai.owasp.org/llm-top-10, 2025]；[Source: https://nvlpubs.nist.gov/nistpubs/ai/nist.ai.100-1.pdf, 2023]。</li>
+<li><strong>岗位实测要求（CPX/G42、Michael Page 阿布扎比安全负责人岗）</strong>：提示注入/越狱/不安全输出测试、安全 RAG、AI 供应链安全、Shadow AI 发现、模型注册权限、agent 权限管控；监管框架涵盖 UAE PDPL、DIFC/ADGM、UAE CSC、NESA/SIA 与欧盟 AI Act[Source: https://ae.linkedin.com/jobs/view/ai-security-engineer-at-cpx-4474117714, 2026]；[Source: https://jobxdubai.com/jobs/3240-director-ai-security]。</li>
+<li><strong>关键观察</strong>：抽样岗位中<strong>无一条</strong>将"AI 安全专项证书"列为硬性门槛，多为"OWASP LLM 知识/AI 安全培训"；术语"MLSecOps""对抗机器学习"在迪拜样本中尚未出现，雇主以"Azure AI/OpenAI 安全、提示注入、AI 治理"表述需求。</li>
+</ul>
+<h3 id="53">5.3 工具栈与语言</h3>
+<ul>
+<li>SIEM：<strong>Microsoft Sentinel 为区域默认</strong>（抽样 6 个 SOC 岗中 5 个明示优先/强制），Splunk 次之（Help AG 强制）；SOAR 含 Sentinel SOAR/XSOAR/Swimlane；EDR 为 CrowdStrike/SentinelOne/Defender；云以 Azure 主导。</li>
+<li>AI 工具：<strong>Microsoft Security Copilot</strong>已在服务 DIFC/ADGM 金融机构与公用事业的迪拜 SOC 中部署，用于分诊与事件摘要[Source: https://gritservices.ae/microsoft-copilot-security, 2026]；[Source: https://learn.microsoft.com/en-us/security-copilot]。</li>
+<li>语言：英语为工作语言；阿拉伯语对政府关联岗/客户咨询是"加分项"，仅个别岗硬性要求阿语。</li>
+</ul>
+<h3 id="54-ai">5.4 AI 防御技术深度（本版新增：框架映射）</h3>
+<p><strong>OWASP LLM Top 10（2025）→ 防御控制映射</strong></p>
+<table class="fixed">
+<thead>
+<tr>
+<th style="width:25%">LLM#</th>
+<th style="width:25%">风险（已核实）</th>
+<th style="width:25%">建议防御控制</th>
+<th style="width:25%">来源</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>LLM01</td>
+<td>提示注入</td>
+<td>视所有用户/模型内容为不可信；输入/输出过滤、护栏、指令与数据隔离、沙箱化工具调用</td>
+<td>genai.owasp.org, 2025</td>
+</tr>
+<tr>
+<td>LLM02</td>
+<td>敏感信息泄露</td>
+<td>数据最小化、输出 DLP 过滤、严格访问控制、提示加固</td>
+<td>同上</td>
+</tr>
+<tr>
+<td>LLM03</td>
+<td>供应链脆弱性</td>
+<td>AI/ML <strong>SBOM 与依赖扫描</strong>、供应商风险、完整性锁定、恶意模型检测</td>
+<td>同上</td>
+</tr>
+<tr>
+<td>LLM04</td>
+<td>数据/模型投毒</td>
+<td>训练数据溯源与校验、异常检测、RLHF 红队、微调验证</td>
+<td>同上</td>
+</tr>
+<tr>
+<td>LLM05</td>
+<td>输出处理不当</td>
+<td>输出编码/转义、下游动作前校验、净化、沙箱</td>
+<td>同上</td>
+</tr>
+<tr>
+<td>LLM06</td>
+<td>过度代理</td>
+<td><strong>工具/权限最小化、最小特权、人在回路审批、速率限制、受约束工具 Schema</strong></td>
+<td>同上</td>
+</tr>
+<tr>
+<td>LLM07</td>
+<td>系统提示泄露</td>
+<td>密钥不进提示、独立密钥库、金丝雀令牌、模板访问控制</td>
+<td>同上</td>
+</tr>
+<tr>
+<td>LLM08</td>
+<td>向量/嵌入弱点</td>
+<td>受控向量库、加密、RAG 输入净化、投毒监控</td>
+<td>同上</td>
+</tr>
+<tr>
+<td>LLM09</td>
+<td>误导信息</td>
+<td>溯源引用、置信度校准、人工复核、RAG 验证</td>
+<td>同上</td>
+</tr>
+<tr>
+<td>LLM10</td>
+<td>无界消耗</td>
+<td>速率限制、资源配额、请求大小上限、成本监控、DoS 防护</td>
+<td>同上</td>
+</tr>
+</tbody>
+</table>
+<p><strong>MITRE ATLAS（AI 系统对抗威胁景观）</strong>：基于真实攻击与 AI 红队演示证据的"活知识库"，当前版本含 <strong>16 个战术、221 项技术、44 条缓解、77 个案例</strong>；其中 14 个战术改编自 MITRE ATT&amp;CK（侦察、初始访问、执行、持久化、权限提升、防御规避、凭证访问、发现、横向移动、收集、C2、渗出、影响等），<strong>2 个为 AI 专属战术：AI Model Access（从 API 查询到完整权重的模型访问层级）与 AI Attack Adaptation（将通用攻击方法转化为针对目标可用的输出）</strong>[Source: https://atlas.mitre.org, 2026]；[Source: https://speakeasy.com/resources/mitre-atlas]；[Source: https://cyberdefenders.org]。</p>
+<p><strong>与 ATT&amp;CK 的互补</strong>：ATT&amp;CK 覆盖主机/网络/云/身份但不管"训练集投毒、对抗样本、模型抽取"；ATLAS 补足模型层，并复用 ATT&amp;CK 编号，使团队能把"钓鱼→横向移动→模型攻击"串成一条入侵链，为 AI 红队提供共享分类法与成熟度评级（可行/已演示/已现实）。</p>
+<p><strong>对求职者含义</strong>：阿联酋头部雇主（CPX/G42）与监管方（DESC）已明确引用 OWASP LLM Top 10 与监管框架，候选人应能阐述 LLM01/05/06/03 的防御控制，并以 MITRE ATLAS 框架组织红队思路——这是区别于通用安全工程师的专业壁垒。</p>
+<hr />
+<h2 class="sec" id="s6">六、行业认可的职业证书</h2>
+<h3 id="61">6.1 核心证书总览（已核实）</h3>
+<table class="fixed">
+<thead>
+<tr>
+<th style="width:16%">证书</th>
+<th style="width:16%">发证方</th>
+<th style="width:16%">层级</th>
+<th style="width:16%">费用(USD)</th>
+<th style="width:16%">阿联酋认可证据</th>
+<th style="width:20%">来源</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>CC</td>
+<td>ISC2</td>
+<td>入门</td>
+<td>$199+年费$50</td>
+<td>入门通用凭证</td>
+<td>isc2.org/register-for-exam/isc2-exam-pricing</td>
+</tr>
+<tr>
+<td>Security+</td>
+<td>CompTIA</td>
+<td>入门</td>
+<td>~$425</td>
+<td>分析师岗 HR 筛选</td>
+<td>certiguard.io, 2026</td>
+</tr>
+<tr>
+<td>CEH v13</td>
+<td>EC-Council</td>
+<td>入门/中</td>
+<td>$950+申请$100</td>
+<td>迪拜 ISR 关联岗点名</td>
+<td>eccouncil.org</td>
+</tr>
+<tr>
+<td>CySA+</td>
+<td>CompTIA</td>
+<td>中</td>
+<td>~$439</td>
+<td>区域 SOC 岗</td>
+<td>totalsem.com</td>
+</tr>
+<tr>
+<td>OSCP</td>
+<td>OffSec</td>
+<td>中/高</td>
+<td>$1,749（含 90 天实验）</td>
+<td>渗透/红队雇主高度重视</td>
+<td>offsec</td>
+</tr>
+<tr>
+<td>CISM/CISA/CRISC</td>
+<td>ISACA</td>
+<td>中/高</td>
+<td>$575(会)/$760(非会)</td>
+<td>Michael Page 总监岗"高度优先"</td>
+<td>isaca.org</td>
+</tr>
+<tr>
+<td>CISSP</td>
+<td>ISC2</td>
+<td>资深</td>
+<td>$749+AMF$135</td>
+<td>阿联酋招聘点名最多</td>
+<td>isc2.org</td>
+</tr>
+<tr>
+<td>CCSP</td>
+<td>ISC2</td>
+<td>资深</td>
+<td>$599+AMF$125</td>
+<td>银行/自由区云与 GRC 岗</td>
+<td>isc2.org</td>
+</tr>
+<tr>
+<td>ISO 27001 主任实施/审核</td>
+<td>BSI/BV/PECB 等</td>
+<td>中/高</td>
+<td>考试 $500 / 含课 $1,998–2,800</td>
+<td>政府关联招标实质门槛(ADNOC/RTA/DHA)</td>
+<td>globalknowledge.com；certselect.com</td>
+</tr>
+<tr>
+<td>GIAC（GCIH/GCFA 等）</td>
+<td>SANS</td>
+<td>中/高</td>
+<td>考试约$2,499起</td>
+<td>GICSP 被 Michael Page 点名</td>
+<td>giac.org</td>
+</tr>
+</tbody>
+</table>
+<h3 id="62-ai-20252026">6.2 AI 安全专项证书（2025–2026 新发，已核实存在）</h3>
+<ul>
+<li><strong>GIAC/SANS</strong>：GASAE（AI 安全自动化工程师，实战 CyberLive）、GAIPS（AI 平台安全，审计/加固 GenAI 与 LLM 管线，SEC545）已上线；GASAE 考试约 $999，含 SANS 课程约 $9,000[Source: https://giac.org]；[Source: https://quidproquo.cc, 2026]。</li>
+<li><strong>CompTIA SecAI+（CY0-001）</strong>：2026-02-17 发布，$298（含培训 bundle $628），首个主流厂商中立的 AI 安全从业者级考试；建议 3–4 年 IT / 2+ 年安全经验[Source: https://certiguard.io]；[Source: https://certcrush.app, 2026]。</li>
+<li><strong>ISACA</strong>：AI Fundamentals（入门，$120/$144）；进阶 AAIA（AI 审计，$599/$459，需 CISA）、AAIR（AI 风险，2026-04-15 发布，需 CRISC/CISA/CISM/CISSP）、AAISM（AI 安全管理，需持 CISM/CISSP）[Source: https://bestaicertifications.com]；[Source: https://quidproquo.cc]。</li>
+<li><strong>EC-Council COASP</strong>：对抗机器学习、LLM/提示攻击、AI 红队，考试 $650 / 含课 $1,699–3,499，需 2 年安全经验[Source: https://medium.productcoalition.com, 2026]。</li>
+<li><strong>ISC2 AI 安全认证</strong>：由 8,000+ 志愿者开发中，试点免费，预计 2026 末推出、2027 年运营[Source: https://isc2.org/new-ai-certification, 2026]。</li>
+<li><strong>厂商 AI 证</strong>：AWS AI Practitioner（$100）、Microsoft Azure AI Fundamentals（$99）作技术栈对齐用，安全深度有限[Source: https://bestaicertifications.com]。</li>
+<li><strong>CSA TAISE</strong>：云安全联盟 AI 安全/治理基础，$795（含两次考试）[Source: https://cloudsecurityalliance.org, 2026]。</li>
+</ul>
+<h3 id="63">6.3 证书路线图（本版新增，按时间线）</h3>
+<table class="fixed">
+<thead>
+<tr>
+<th style="width:20%">阶段</th>
+<th style="width:20%">证书（具体）</th>
+<th style="width:20%">费用(USD)</th>
+<th style="width:20%">备考时长</th>
+<th style="width:20%">理由</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0–6 月（入门+AI 差异化）</td>
+<td>ISC2 CC；CompTIA Security+；CompTIA SecAI+</td>
+<td>CC $199；Security+ ~$425；SecAI+ $298</td>
+<td>CC 4–8 周；Security+ 6–10 周；SecAI+ 4–6 周</td>
+<td>CC 低门槛入 ISC2 体系；Security+ 入门岗最常点名；SecAI+ 首个厂商中立 AI 安全考试、先发差异化</td>
+</tr>
+<tr>
+<td>6–18 月（核心+GRC 基础）</td>
+<td>ISC2 CISSP；CCSP；ISO 27001 LI；ISC2 AI 认证试点（免费）</td>
+<td>CISSP $884(含AMF)；CCSP $724；ISO LI 考试$500/含课$1,998+</td>
+<td>CISSP 3–6 月；CCSP 2–3 月；ISO LI 4 天课+备考</td>
+<td>CISSP 阿联酋点名最多；CCSP 云安全必备；ISO LI 政府招标 GRC 必需；ISC2 AI 试点零成本先占</td>
+</tr>
+<tr>
+<td>18–36 月（AI 安全专精）</td>
+<td>GIAC GAIPS(SEC545)；GASAE(SEC598)；EC-Council COASP；ISACA AAIA/AAIR</td>
+<td>GAIPS/GASAE $999 考试；COASP $650；AAIA/AAIR $649</td>
+<td>GAIPS/GASAE 实战；COASP 6 小时考；ISACA 150 分钟</td>
+<td>GAIPS 防御 GenAI/LLM 平台安全；GASAE AI 自动化红/蓝/紫队；COASP 进攻 AI 红队；AAIA/AAIR 审计与风险</td>
+</tr>
+<tr>
+<td>资深/GRC 轨道</td>
+<td>ISACA AAISM；CISM；CSA TAISE；DESC ISR 审核员（新兴）</td>
+<td>AAISM $649；CISM $810；TAISE $795；DESC ISR 定价待定</td>
+<td>AAISM 150 分钟；CISM 5 年经验；TAISE 60 MCQ</td>
+<td>AAISM AI 安全管理（需 CISSP/CISM）；CISM 管理轨；TAISE AI 治理；DESC ISR 审计本地凭证</td>
+</tr>
+</tbody>
+</table>
+<p><strong>总投入估算</strong>：A 方案（仅考试+自学）约 <strong>$9,200</strong>；B 方案（高价值证含讲师课，SANS/GIAC 为主）约 <strong>$24,000–30,000</strong>，建议将 SANS/GIAC 留待入职后由雇主资助。</p>
+<p><strong>赴任前建议持有"面试解锁三证"</strong>：① Security+（基础认可）② CISSP（阿联酋点名率最高，若经验达标）③ ISO 27001 LI（解锁 GRC/政府招标面试）；随后尽早加 SecAI+ 作最便宜 AI 差异化；GIAC/ISACA AI 证可延至入职后。</p>
+<h3 id="64">6.4 本地考试与培训可用性（本版新增）</h3>
+<table class="fixed">
+<thead>
+<tr>
+<th style="width:33%">考试/课程</th>
+<th style="width:33%">阿联酋考点</th>
+<th style="width:34%">来源</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>ISC2(CC/CISSP/CCSP)、CompTIA(Security+/SecAI+)</td>
+<td>Pearson VUE：New Horizons CIC（迪拜）、New Horizons CIC（阿布扎比）；Pearson VUE 迪拜办公室（媒体城）</td>
+<td>pearsonvue.com/sqa/testcenters.pdf, 2026</td>
+</tr>
+<tr>
+<td>SANS/GIAC(GAIPS/GASAE)</td>
+<td><strong>SANS Abu Dhabi 2026 年 7 月 19–24 日</strong>（阿布扎比+虚拟）已确认；GIAC 考试远程监考。注：官方日程未见"2026 年 5 月 SANS 迪拜"活动</td>
+<td>sans.org/community, 2026</td>
+</tr>
+<tr>
+<td>EC-Council(COASP/CEH)</td>
+<td>ECC 考试中心 + 远程监考(RPS)，随处可考；CEH 亦在 Pearson VUE</td>
+<td>cert.eccouncil.org；eccouncil.zendesk.com</td>
+</tr>
+<tr>
+<td>OffSec(OSCP/OSAI+)</td>
+<td>100% 远程监考；OSAI+(AI-300) 2026-03-31 发布，$1,749(90天)/$2,749年</td>
+<td>offsec；quidproquo.cc</td>
+</tr>
+<tr>
+<td>ISO 27001 LI(PECB)</td>
+<td>Global Knowledge 迪拜（知识村）面授+虚拟，$1,998 含考试（2026-11/2027-05 班次）</td>
+<td>globalknowledge.com/en-ae</td>
+</tr>
+<tr>
+<td>ISACA(AAIA/AAISM/AAIR)</td>
+<td>PSI 考点或远程监考（非 Pearson VUE）</td>
+<td>bestaicertifications.com</td>
+</tr>
+<tr>
+<td>DESC ISR 审核员计划</td>
+<td>迪拜电子安全中心（政府），GISEC 2026 发布</td>
+<td>desc.gov.ae, 2026</td>
+</tr>
+</tbody>
+</table>
+<h3 id="65">6.5 监管内嵌的证书要求</h3>
+<ul>
+<li><strong>DESC ISR v3.1</strong>（13 个控制域）适用于所有迪拜政府实体及处理政府数据的第三方供应商，是采购门槛；岗位普遍要求 ISR 知识 + ISO 27001 LI/LA/CEH/CISSP。DESC 2026 年 9 月宣布 <strong>ISR 审核员认证计划</strong>（本地凭证，值得关注）。[Source: https://mastcgroup.com/desc-isr-v3-1-compliance-guide]；[Source: https://qualysec.com/dubai-information-security-regulation]；[Source: https://desc.gov.ae, 2026]</li>
+<li><strong>TDRA/aeCERT</strong>：运行意识培训与国家级 CERT，不对私企个人设强制证书。[Source: https://tdra.gov.ae/en/aecert/initiatives, 2026]</li>
+<li><strong>NIST AI RMF 证书</strong>：NIST 本身不发证，市面为第三方培训，阿联酋市场暂无权威统一凭证，价值尚待观察。</li>
+</ul>
+<hr />
+<h2 class="sec" id="s7">七、就业落地建议（结论章）</h2>
+<h3 id="71">7.1 签证路径</h3>
+<ul>
+<li><strong>标准就业签证</strong>：雇主担保，公司开 MoHRE 档案→配额→工作许可（60 天）→GDRFA 入境许可（2 月内体检+Emirates ID+劳工卡）；雇主承担约 <strong>3,000 AED/人</strong>可退银行担保，且依法须承担招聘/签证成本（阿联酋劳动法 Art. 6(4)）[Source: https://u.ae/.../recruiting-on-the-mainland-]；[Source: https://labeeb.ae, 2026]。</li>
+<li><strong>黄金签证（10 年，自担保，本版细化）</strong>：① 技能专业人才：MOHRE 职业 1–2 级（IT 属 2 级）、本科、<strong>基本月薪 ≥30,000 AED</strong>（注意：为基本工资非总额）；② 优先领域杰出人才：<strong>AI、大数据、软件/计算机/电子工程</strong>等明确在列，凭学位+推荐信/博士即可；③ 高级管理人员：基本月薪 ≥50,000 + 5 年经验[Source: https://u.ae/en/.../golden-visa, 2025]；[Source: https://added.gov.ae]；[Source: https://mofa.gov.ae]；[Source: https://takweenadvisory.ae]。<strong>2026 警示</strong>：据 2026-10-21 阿布扎比通函报道，技术人才路线被收紧（需在阿联酋银行账户连续 6 个月支付基本工资、不合并津贴、强制公证本科）；联邦门户（ICP/u.ae）未见新增联邦类别，建议以 ICP 最终确认[Source: https://visahq.news, 2026]。</li>
+<li><strong>DIFC/ADGM 通道</strong>：DIFC 政府服务办公室一站式办理；ADGM 豁免联邦劳动法（适用 2024 雇佣条例），签证内部约 7 个工作日[Source: https://difc.ae/business/services, 2025]；[Source: https://adgm.com/.../visas-and-government-services/overview, 2025]。</li>
+</ul>
+<h3 id="72-networking">7.2 求职渠道与 Networking</h3>
+<p><strong>招聘机构评级（经英文页面核实）</strong></p>
+<table class="fixed">
+<thead>
+<tr>
+<th style="width:33%">机构</th>
+<th style="width:33%">阿联酋网络/安全业务</th>
+<th style="width:34%">置信度</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Hays</td>
+<td>IT 与技术板块明示"IT 安全与网络安全"职业，在招访问控制、红队岗</td>
+<td>高</td>
+</tr>
+<tr>
+<td>Michael Page</td>
+<td>技术职位板专设网络岗（网络安全总监、架构师、Azure 安全工程师）</td>
+<td>高</td>
+</tr>
+<tr>
+<td>NES Fircroft</td>
+<td>多个阿联酋在招网络安全岗（OT 安全工程师、团队负责人），偏工程/OT</td>
+<td>高</td>
+</tr>
+<tr>
+<td>Salt</td>
+<td>迪拜安全岗（资深安全工程师、EDR/NDR、威胁情报经理、网络风险经理）</td>
+<td>高</td>
+</tr>
+<tr>
+<td>Robert Half</td>
+<td>阿联酋技术业务；第三方确认可做网络/IT 安置</td>
+<td>中</td>
+</tr>
+<tr>
+<td>Harvey Nash</td>
+<td>全球科技猎头含网络安全，但官网未将阿联酋列为可选地</td>
+<td>低</td>
+</tr>
+</tbody>
+</table>
+<p>渠道排序建议：① LinkedIn 直接触达 + 雇主官网；② Hays/Michael Page/Salt/NES Fircroft 专项岗；③ Robert Half 与精品所（Charterhouse、BAC ME）做中高级；④ Bayt/GulfTalent/Naukrigulf 作为次要信息流。<strong>切勿向中介付费</strong>——阿联酋劳动法禁止向求职者收费[Source: https://labeeb.ae, 2026]。</p>
+<p><strong>活动（已核实）</strong>：GISEC Global（迪拜，2026 年 9 月 16–18 日，由 UAE CSC 主办、DESC 政府安全伙伴，AI 威胁为核心议题）；GITEX Global（迪拜，2026 年 12 月 7–11 日，世博城，含网络安全与数字主权专区）；<strong>OWASP 迪拜分会</strong>（定期免费活动，2026 已办"AI 在攻防安全中的应用"等）；<strong>ISACA 阿联酋分会</strong>（迪拜/阿布扎比年度大会）[Source: https://gisec.ae]；[Source: https://desc.gov.ae, 2026]；[Source: https://owasp.org/www-chapter-dubai]；[Source: https://engage.isaca.org/uaechapter/events]。</p>
+<p><strong>更正</strong>：Black Hat MEA 已在沙特利雅得举办（2026 年 12 月 1–3 日），非阿联酋活动，赴利雅得可参但非本地 Networking[Source: https://blackhatmea.com, 2026]。</p>
+<p><strong>Hub71（阿布扎比）</strong>：为初创提供合计约 50 万 AED 的现金+实物激励与签证支持，适合创业而非受雇（推断）[Source: https://hub71.com/faqs, 2026]。</p>
+<h3 id="73-linkedin">7.3 LinkedIn 与个人品牌优化（本版新增）</h3>
+<ul>
+<li><strong>已核实事实</strong>：阿联酋招聘者按"职位+技能+城市"做布尔搜索并在发广告前主动私信候选人；<strong>个人资料 Location 须设为阿联酋或目标酋长国</strong>——留在"Remote"或母国会被自动排除；<strong>标题=职位+专长+城市</strong>（如"Cyber Security Engineer | Cloud &amp; IAM | Dubai"）；标题与日期须与简历完全一致以便交叉核验[Source: https://makemycv.ae]；[Source: https://reaphr.com]；[Source: https://cvpromaker.com, 2026]。</li>
+<li><strong>建议做法</strong>：在职时开启招聘者可见的"Open to Work"（非公开绿标）；About 中明示赴任意愿；阿拉伯语字段可选——英语在阿联酋科技/网络安全已足够，阿语仅对政府/客户面/GRC 岗为加分；避免常见错误：地点空白/错误、About 用第三人称、标题含糊（"seeking opportunities"）、技能栏不全[Source: https://reaphr.com]；[Source: https://makemycv.ae, 2026]。</li>
+</ul>
+<h3 id="74">7.4 入境与权益实操</h3>
+<p><strong>外派搬迁清单（编号）</strong>
+1. <strong>学历公证链</strong>：本国公证/教育厅 → 本国外交部 → 阿联酋驻该国使领馆 → 阿联酋 MoFA 数字认证（个人文件约 AED 150/份，1–3 工作日）；另向 MoHESR 申请学历对等认定（AED 350+AED 50，约 18 工作日），黄金签证与受监管职业必需[Source: https://mofa.gov.ae]；[Source: https://uaeinform.com, 2026]。
+2. 签署 MoHRE 格式 offer（注册合同须一致）[Source: https://dxbstart.com, 2026]。
+3. 雇主取得工作许可（MoHRE/自由区）与入境许可（GDRFA 迪拜或 ICP，60 天有效）[Source: https://egsh.ae]；[Source: https://visasimplified.com, 2026]。
+4. 体检（DHA/EHS，筛查结核/HIV/肝炎，约 AED 250–500）[Source: https://egsh.ae]。
+5. Emirates ID 生物采集（ICP，AED 100/签证年，2022 年起取代护照贴签）[Source: https://egsh.ae]；[Source: https://dynamiclogics.ae]。
+6. 居留签证电子贴签（关联 Emirates ID）+ <strong>强制医疗保险</strong>[Source: https://egsh.ae]。
+7. 开立银行账户（Emirates NBD/ADCB/FAB，凭 Emirates ID+工资证明，1–2 周）[Source: https://visasimplified.com]。
+8. 租房/Ejari（抵境后办理，迪拜土地局系统，用于 DEWA 及家庭签）[通用做法，建议以 dubailand.gov.ae 复核]。
+9. 驾照互换（阿联酋与多国互认，免考；其余需理论/路考，向 RTA 确认）。
+10. 手机/宽带（Etisalat 或 du 后付套餐，凭护照+Emirates ID）。</p>
+<p><strong>通知期与补偿</strong>：转正后通知期 30–90 天（双方），试用期内雇主提前 14 天；离职补偿仅按<strong>基本工资</strong>计（Decree-Law 33/2021 Art.51：前 5 年 21 天/年、之后 30 天/年，上限 2 年）[Source: https://worldwide-rs.com]；[Source: https://dxbstart.com, 2026]。</p>
+<p><strong>失业险（ILOE）</strong>：强制，非自愿失业可领最多 3 个月[Source: https://iloe.ae]。</p>
+<h3 id="75">7.5 薪酬谈判要点（本版细化）</h3>
+<ul>
+<li><strong>将基本工资比例拉高</strong>：因补偿金/ ILOE 仅计基本工资，同一总额下基本占比越高，离职补偿与失业险收益越大；建议基本约占总额 60–70%[Source: https://dxbstart.com]；[Source: https://uaesignal.com]；[Source: https://dxbtalk.com, 2026]。</li>
+<li><strong>谈判杠杆排序（建议）</strong>：① 提高基本工资；② 住房津贴固定现金 vs 雇主提供；③ 子女学费/人；④ 年度机票+搬迁（临时住宿、海运）；⑤ 更短试用/通知期与混合办公。</li>
+<li><strong>操作</strong>：仅在书面 offer 后 2–3 天内谈，所有变更落于书面[Source: https://uaesignal.com]；[Source: https://dxbtalk.com, 2026]。</li>
+</ul>
+<h3 id="76">7.6 给拟赴迪拜者的切入路径建议（综合推断）</h3>
+<ol>
+<li><strong>优先定位迪拜商业生态</strong>：MSSP（Help AG/Cloud4C）、咨询（四大）、厂商区域办公室、DIFC 金融机构——机会面最广、对外籍最友好。</li>
+<li><strong>以"云安全+AI 安全"双技能切入</strong>：Azure 主导市场下，AZ-500/SC-100/AI-102 + OWASP LLM 知识组合在抽样岗位中需求最集中。</li>
+<li><strong>先拿 CISSP + ISO 27001 LI + OSCP（攻防）或 CCSP（云）</strong>建立硬门槛，再用 SecAI+/GAIPS/COASP 等 2026 新证做差异化；ISC2 AI 试点免费先占。</li>
+<li><strong>签证策略</strong>：目标基本月薪 ≥3 万 AED 以锁定黄金签证；自贸区岗走 DIFC/ADGM 通道更快；关注 2026 阿布扎比收紧动向。</li>
+<li><strong>Networking 节奏</strong>：每年 GISEC + OWASP 迪拜分会 + ISACA 阿联酋分会，是最高杠杆的人脉与机会入口；LinkedIn 资料 Location 设为迪拜并开启招聘者可见。</li>
+</ol>
+<hr />
+<h2 class="sec" id="s8">八、数据可靠性与局限说明</h2>
+<h3 id="81-14-dataai_cybersecurity_indicator_registrymd">8.1 监测指标追踪表（14 项，活值维护于 <code>data/processed/tech/security/dubai/ai_cybersecurity_indicator_registry.md</code>）</h3>
+<table class="fixed">
+<thead>
+<tr>
+<th style="width:25%">#</th>
+<th style="width:25%">监测指标</th>
+<th style="width:25%">口径·单位</th>
+<th style="width:25%">优先数据源（英文）</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>MENA 信息安全支出 &amp; 增速</td>
+<td>亿美元 / 同比 %</td>
+<td>gartner.com/newsroom</td>
+</tr>
+<tr>
+<td>2</td>
+<td>阿联酋网安市场规模 &amp; CAGR</td>
+<td>亿美元 / %</td>
+<td>mordorintelligence.com / gminsights.com</td>
+</tr>
+<tr>
+<td>3</td>
+<td>日均攻击量 / 国家背景占比</td>
+<td>次/日 / %</td>
+<td>khaleejtimes.com / uaecsc.gov.ae</td>
+</tr>
+<tr>
+<td>4</td>
+<td>ISC2 人力研究（技能缺口/AI 占比）</td>
+<td>% / 人数</td>
+<td>isc2.org/Insights</td>
+</tr>
+<tr>
+<td>5</td>
+<td>五大薪酬指南最新年版网安分表</td>
+<td>年版</td>
+<td>hays.ae / roberthalf.ae / cooperfitch.ae / michaelpage.ae / charterhouseme.ae</td>
+</tr>
+<tr>
+<td>6</td>
+<td>AI 安全岗薪资抽样</td>
+<td>AED/月</td>
+<td>hiredeveloper.ae / gulftalent.com / bayt.com</td>
+</tr>
+<tr>
+<td>7</td>
+<td>Numbeo 迪拜 vs 阿布扎比生活成本</td>
+<td>含租等效月度</td>
+<td>numbeo.com</td>
+</tr>
+<tr>
+<td>8</td>
+<td>ILOE 费率 &amp; 黄金签证门槛</td>
+<td>AED/月 / AED</td>
+<td>iloe.ae / u.ae / icp.gov.ae</td>
+</tr>
+<tr>
+<td>9</td>
+<td>Stargate UAE 状态</td>
+<td>—</td>
+<td>openai.com / coloprice.com</td>
+</tr>
+<tr>
+<td>10</td>
+<td>GISEC / GITEX 最新届次</td>
+<td>日期</td>
+<td>gisec.ae / gitex.com</td>
+</tr>
+<tr>
+<td>11</td>
+<td>G42/Core42/CPX/e&amp;/Moro Hub 动态</td>
+<td>—</td>
+<td>各公司官网 / WAM</td>
+</tr>
+<tr>
+<td>12</td>
+<td>OWASP LLM Top 10 / MITRE ATLAS 版本</td>
+<td>版本/计数</td>
+<td>genai.owasp.org / atlas.mitre.org</td>
+</tr>
+<tr>
+<td>13</td>
+<td>新发 AI 安全证书 &amp; 本地考点</td>
+<td>—</td>
+<td>giac.org / isc2.org / comptia.org / eccouncil.org / sans.org</td>
+</tr>
+<tr>
+<td>14</td>
+<td>DESC ISR v3.1 / ISR 审核员计划</td>
+<td>版本/控制域</td>
+<td>desc.gov.ae</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>活值（当前值 / 最近核实）见登记册；本报告为基线版，登记册首建值与本表一致。</p>
+</blockquote>
+<ol>
+<li><strong>薪资口径差异大</strong>：Michael Page、Cooper Fitch、Charterhouse、Hays、Robert Half 为较可靠基准；hiredeveloper.ae、angelindubai 等招聘机构抽样与部分聚合站点（waqov、mahadmanpower）为市场抽样或二手转述，已分别标注，引用时建议交叉验证。Hays 与 GulfTalent 的原始网络安全分表未能从英文官方页面直接获取，本报告已排除其未核实数字。</li>
+<li><strong>市场规模分歧</strong>：Gartner（终端支出）与 Mordor/GMI（含服务总收入）口径不同，不可直接比较。</li>
+<li><strong>本版已修正项</strong>：① ILOE 为每月 AED 5/10（非每周）；② 阿布扎比"薪资溢价"多数来源不支持，改为"生活成本更低、净购买力相当"；③ CPX 与 DarkMatter 的渊源未获官方证实，已更正为 G42 子公司；④ 微软–G42 仅保留已确认的 15 亿美元股权注资（另含 10 亿美元开发者基金），中文媒体所称"152 亿美元投资计划"未获英文权威来源证实，已剔除；⑤ 黄金签证门槛以基本工资计；⑥ 移除全部中文来源引用（ae.mofcom.gov.cn、news.cn、sc.gov.cn、worldashow.com、gazetai.com、sgpjbg.com），GITEX 2026 改引官方 gitex.com。</li>
+<li><strong>未证实/待复核项</strong>：① 中文媒体所称"微软 152 亿美元对阿联酋投资计划（2023–2029）"——未找到英文权威来源，已剔除，待 news.microsoft.com 复核；② 中文来源所称"迪拜 AI 政策（Digital Dubai，2025 年 3 月）"（AI 治理委员会 / 首席 AI 官 / 11 项原则）——未找到英文权威来源，已剔除，待 digitaldubai.ae 复核；③ Core42 组建财务、CPX 确切人数（约 600）、TDRA/aeCERT 完整培训目录、Moro Hub AI Seal Tier S 主源复核（brief.news 单一聚合源）、Stargate 首批 200MW 是否已运营、2026 阿布扎比黄金签证通函的最终 ICP 确认。建议以 g42.ai、cpx.net、news.microsoft.com、tdra.gov.ae、digitaldubai.ae、icp.gov.ae 复核。</li>
+<li><strong>全英文来源约束已满足</strong>：本报告所有引用 URL 均为英文网站；中文来源零使用（两处中文源独有数据点已按来源语言规则剔除并说明，见本节第 3、4 条）。</li>
+<li><strong>时间基准</strong>：除明确标注年份者，引用数据截至 2026 年 11 月。</li>
+</ol>
+<hr />
+<h2 class="sec" id="s9">九、参考来源清单（完整 URL）</h2>
+<p><strong>政府/官方</strong>
+- UAE AI Strategy 2031: ai.gov.ae/strategy
+- UAE 国家网络安全战略 2025–2031: cybersecuritydatabase.org/en/documents/ae-national-cybersecurity-strategy-2025-2031；searchinform.com/blog/2025/9/24
+- DESC AI Security Policy (2024) 与 GISEC 2026 发布 SARAAB/ISR 审核员: gulftime.ae/dubai-electronic-security-centre-unveils-dubai-ai-security-policy；desc.gov.ae/dubai-electronic-security-center-unveils-saraab-and-new-cybersecurity-initiatives-at-gisec-global-2026；zawya.com
+- DESC 战略与 ISR 标准: desc.gov.ae/hamdan-bin-mohammed-launches-second-cycle-of-dubai-cyber-security-strategy；mastcgroup.com/desc-isr-v3-1-compliance-guide；qualysec.com/dubai-information-security-regulation
+- TDRA/aeCERT: tdra.gov.ae/en/aecert/initiatives；itu.int（aeCERT 职能）；hzlegal.ae（aeCERT 职能）
+- 税务/社保/ILOE: u.ae/en/.../taxation/other-taxes；mof.gov.ae（企业税）；uaesupremecouncil.org（外籍养老金）；iloe.ae/pdf/Involuntary-Loss-of-Employment-Brochure-ILOE-V2.pdf
+- 黄金签证/阿化/招聘: u.ae/en/.../golden-visa；added.gov.ae（阿布扎比技术人才）；mofa.gov.ae（优先领域）；takweenadvisory.ae；u.ae/.../emiratis-employment-in-private-sector；u.ae/.../recruiting-on-the-mainland-；icp.gov.ae（待复核 2026 通函）
+- DIFC 服务: difc.ae/business/services；ADGM 签证: adgm.com/.../visas-and-government-services/overview
+- 学历认证: mofa.gov.ae（数字认证）；uaeinform.com（MoHESR 对等）</p>
+<p><strong>国际权威组织</strong>
+- Gartner MENA 安全支出: gartner.com/.../2025-04-08-gartner-forecasts-spending-on-information-security-in-mena-to-grow-14-percent-in-2025
+- ISC2 2025 人力研究: isc2.org/Insights/2025/12/ISC2-Publishes-2025-Cybersecurity-Workforce-Study；ISC2 考试定价: isc2.org/register-for-exam/isc2-exam-pricing；ISC2 AI 认证试点: isc2.org/new-ai-certification
+- ISACA: isaca.org；bestaicertifications.com（AAIA/AAIR/AAISM）
+- SANS/GIAC AI 证书与日程: giac.org；sans.org/community
+- OWASP LLM Top 10: genai.owasp.org/llm-top-10；initiatives/top-10-for-llm-and-genai
+- NIST AI RMF: nvlpubs.nist.gov/nistpubs/ai/nist.ai.100-1.pdf
+- MITRE ATLAS: atlas.mitre.org；speakeasy.com/resources/mitre-atlas；cyberdefenders.org</p>
+<p><strong>薪酬指南/招聘</strong>
+- Michael Page (via UAELifeGuide): uaelifeguide.com/post/uae-salary-guide-for-software-digital-technology-professionals-2025；TravelsDubai: travelsdubai.com/06-Feb-2025/2148
+- Cooper Fitch UAE Salary Guide 2025: cooperfitch.ae/wp-content/uploads/2024/12/Salary-Guide-UAE-2025-Cooper-Fitch.pdf
+- Charterhouse UAE Salary Guide 2025: charterhouseme.ae（Charterhouse UAE Salary Guide 2025）
+- Hays GCC/IT: hays.ae/salary-and-employment-report；hays.ae/it/home
+- Robert Half / The National 薪资: thenationalnews.com/business/money/2025/02/26/uae-jobs-salary-guide/；roberthalf.ae
+- RFS HR: rfsonshr.com/technology-recruitment-uae/cybersecurity-talent-acquisition；rfsonshr.com/?p=25253
+- HireDeveloper AI 安全薪资: hiredeveloper.ae/employer-blog/how-to-hire-ai-security-engineers-dubai-after-meta-breach-7-steps
+- Numbeo 生活成本: numbeo.com/cost-of-living/compare_cities.jsp?...city1=Dubai&amp;city2=Abu+Dhabi
+- AW Connect / 其他: awconnect-me.com/blog/2025/09/salary-benchmarks-hiring-costs-uae-2025
+- 福利结构: usemultiplier.com/united-arab-emirates/employee-benefits-and-compensation；remofirst.com/country-guide/united-arab-emirates；whichpayroll.com</p>
+<p><strong>市场/媒体</strong>
+- Khaleej Times: khaleejtimes.com/uae/...（20 万次攻击、71.4% 国家背景等系列）
+- The National: thenationalnews.com/news/uae/2024/09/13/uae-ranked-as-role-model-for-cybersecurity
+- Gulf News（签证/通知期/补偿）: gulfnews.com/...（gratuity、notice-period、golden-visa 系列）
+- Mordor Intelligence: mordorintelligence.com/industry-reports/uae-cybersecurity-market
+- Global Market Insights: gminsights.com/industry-analysis/cybersecurity-market
+- OpenAI Stargate UAE: openai.com/index/introducing-stargate-uae；coloprice.com
+- Microsoft–G42: blogs.microsoft.com/blog/2024/04/15/microsoft-and-g42-partner
+- GITEX/GISEC: gitex.com；gisec.ae；businesswire.com
+- Black Hat MEA: blackhatmea.com/about-us/key-information</p>
+<p><strong>企业/岗位样本</strong>
+- G42: g42.ai；Core42: core42.ai/products/sovereign-public-cloud；gecnewswire.com（TII 合作）
+- CPX: cpx.net；info.cpx.net/ai-everything；incarabia.com（收购 spiderSilk）；thearabianpost.com；ae.linkedin.com/jobs/view/ai-security-engineer-at-cpx-4474117714；jobxdubai.com/jobs/3240-director-ai-security
+- e&amp;/Help AG: eand.com/en/news/13-jan-26-eand-enterprise-and-sergas-team-up.html；lumitech.co
+- Moro Hub: brief.news（2026）；lumitech.co；tildee.com（WETEX 2026）
+- Hub71: hub71.com
+- 招聘机构页: hays.ae/it/home；michaelpage.ae/jobs/technology/dubai/bahrain；nesfircroft.com/job/cyber-security-engineer；alion.io/job/salt-information-cybersecurity-risk-manager
+- 岗位样本: founditgulf.com/job/ai-security-engineer-cpx-affiliate-abu-dhabi-68226120；gulftalent.com（SOC/威胁情报/渗透/GRC 多条）；bayt.com（Al-Futtaim/Help AG）；hirelala.com/en/job/head-of-cybersecurity-alighj；bebee.com（e&amp; Expert Engineer, 2026）
+- 证书/考试: certiguard.io（SecAI+）；certcrush.app；quidproquo.cc（AI 安全证对比）；medium.productcoalition.com（COASP）；cloudsecurityalliance.org（TAISE）；pearsonvue.com/sqa/testcenters.pdf；globalknowledge.com/en-ae（ISO LI）；cert.eccouncil.org；offsec（OSCP/OSAI+）</p>
+<p><strong>结束</strong>
+报告完稿（深度增补版）于 2026-11-11。所有数据源自英文网站，关键数据点均附参考链接，官方/权威来源优先。引用薪酬与市场规模时请注意口径差异，并以最新官方页面复核时效性数据。本版重点补充了净薪模型、总包模型、2025–2026 生态更新、AI 防御技术深度（OWASP LLM→防御映射、MITRE ATLAS）、证书路线图与本地考点、招聘机构评级与 LinkedIn 优化、搬迁清单等，并更正了 ILOE 计费、阿布扎比薪资方向、CPX 渊源、微软–G42 投资、黄金签证口径等五处关键事实。本报告于 2026-11-13 按 employment-research（职业就业调研型）类型模板完成结构对齐改造：补入关键数字卡与 14 项监测指标追踪表、将调研说明归入第 1 节、清理全部中文来源引用（改引英文官方/权威页面）、统一导航与表格规范；基线数据与核心结论未变。</p>
+</main>
+</body>
+</html>

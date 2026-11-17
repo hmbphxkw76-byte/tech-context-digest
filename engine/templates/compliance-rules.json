@@ -1,0 +1,173 @@
+{
+  "version": "v1.2",
+  "updated": "2026-11-16",
+  "comment": "报告模板合规校验规则（CI: compliance_check.py）。section_titles 为类型模板骨架的模块名参考（业务提示词可细化措辞，不得增删节、调整顺序）；校验口径：h2 节数缺失=错误（阻断）、超额=警告（业务固化锚需人工确认）。quarterly 第 11 节页脚为 footer 元素（可选 h2），故 h2 期望值为 10。weekly 命名日期 = 数据截止日。",
+  "common": {
+    "require_title": true,
+    "anchor_check": true,
+    "nav_required_cycles": ["monthly", "quarterly", "annual", "weekly"]
+  },
+  "business_overrides": {
+    "content/tech/trends/global": {
+      "weekly": {
+        "sections": 10,
+        "nav": true,
+        "section_titles": ["一、本周要点 Top5", "二、AI 安全与红队", "三、大模型与 Agent 技术演进", "四、AI 编码与开发工具", "五、AI 应用与商业化", "六、基准与评估可信度", "七、数据看板表格", "八、风险与不确定性", "九、可执行启示", "参考来源"],
+        "template": "prompt-weekly-monitor-template.md"
+      }
+    }
+  },
+  "types": {
+    "market-monitoring": {
+      "name": "市场指标监测型",
+      "template_dir": "engine/templates/market-monitoring/",
+      "cycles": {
+        "baseline": {
+          "sections": 10,
+          "nav": false,
+          "section_titles": ["执行摘要：结论先行", "持续监测机制设计", "多维指标体系与来源", "首期基线数据", "先行指标判读", "信号规则与决策框架", "月 / 季 / 年监测日历", "数据治理：来源分级、口径优先与核验状态", "风险、局限与监测盲区", "交付物与后续运行方式"],
+          "template": "prompt-baseline-setup-template.md"
+        },
+        "monthly": {
+          "sections": 8,
+          "nav": true,
+          "section_titles": ["结论先行", "关键数字卡", "月度指标逐项对比", "信号灯判定", "与首期基线的偏离", "数据缺口与未核验项", "下期观察清单", "台账更新编号与来源"],
+          "template": "prompt-monthly-monitor-template.md"
+        },
+        "quarterly": {
+          "sections": 10,
+          "nav": true,
+          "section_titles": ["结论先行", "关键数字卡", "多维全景", "先行指标传导分析", "信号矩阵与条件化决策框架", "升级复核", "供给情景重算", "与上期 / 首期基线对比", "数据治理与未核验清单", "下季度观察清单"],
+          "template": "prompt-quarterly-analysis-template.md"
+        },
+        "annual": {
+          "sections": 10,
+          "nav": true,
+          "section_titles": ["年度结论", "全年关键数字", "预测 vs 实际偏离", "多维年度全景", "官方先行指标年度基线", "多年供给情景与决策矩阵", "政策框架与未核验清单", "信号阈值回测与预警红线", "官方来源巡检", "台账修订说明"],
+          "template": "prompt-annual-review-template.md"
+        }
+      }
+    },
+    "employment-research": {
+      "name": "职业就业调研型",
+      "template_dir": "engine/templates/employment-research/",
+      "section_titles": ["核心结论（摘要）", "行业与政策发展趋势", "人才供需与薪酬（核心模块）", "雇主与企业类型细分", "岗位技能要求", "行业认可的职业资质与证书", "就业落地路径建议（结论章）", "数据可靠性与局限说明", "参考来源清单"],
+      "cycles": {
+        "baseline": { "sections": 9, "nav": false, "template": "prompt-baseline-setup-template.md" },
+        "monthly": { "sections": 9, "nav": true, "template": "prompt-update-template.md" },
+        "quarterly": { "sections": 9, "nav": true, "template": "prompt-update-template.md" },
+        "annual": { "sections": 9, "nav": true, "template": "prompt-update-template.md" }
+      }
+    },
+    "competitive-intelligence": {
+      "name": "竞争情报监测型",
+      "template_dir": "engine/templates/competitive-intelligence/",
+      "section_titles": ["执行摘要", "监测机制设计", "竞争格局总览", "竞品档案首建", "动态矩阵与信号规则", "来源与核验治理", "风险与盲区", "交付物与后续运行方式", "参考来源清单"],
+      "cycles": {
+        "baseline": { "sections": 9, "nav": false, "template": "prompt-baseline-setup-template.md" },
+        "monthly": { "sections": 9, "nav": true, "template": "prompt-monthly-update-template.md" }
+      }
+    },
+    "sentiment-monitoring": {
+      "name": "舆情传播监测型",
+      "template_dir": "engine/templates/sentiment-monitoring/",
+      "section_titles": ["执行摘要", "监测机制设计", "舆论场结构首描", "议题与基线声量", "情感与热度信号规则", "来源与研判治理", "风险与盲区", "交付物与后续运行方式", "参考来源清单"],
+      "cycles": {
+        "baseline": { "sections": 9, "nav": false, "template": "prompt-baseline-setup-template.md" },
+        "monthly": { "sections": 9, "nav": true, "template": "prompt-monthly-update-template.md" }
+      }
+    },
+    "consumer-research": {
+      "name": "消费者·用户调研型",
+      "template_dir": "engine/templates/consumer-research/",
+      "section_titles": ["执行摘要", "调研设计与方法论", "人群细分框架", "首期调研结果", "交叉分析与细分发现", "数据质量与局限", "后续调研日历与专题方向", "参考来源清单"],
+      "cycles": {
+        "baseline": { "sections": 8, "nav": false, "template": "prompt-baseline-setup-template.md" },
+        "study": { "sections": 8, "nav": false, "template": "prompt-study-template.md" }
+      }
+    },
+    "industry-research": {
+      "name": "行业深度研究型",
+      "template_dir": "engine/templates/industry-research/",
+      "section_titles": ["执行摘要", "研究范围与方法", "产业链图谱", "市场规模与格局", "头部玩家与竞争格局", "驱动因素与风险", "趋势判断（推断）", "数据治理与局限", "参考来源清单"],
+      "cycles": {
+        "baseline": { "sections": 9, "nav": false, "template": "prompt-baseline-setup-template.md" },
+        "annual": { "sections": 9, "nav": true, "template": "prompt-annual-refresh-template.md" }
+      }
+    },
+    "market-sizing": {
+      "name": "市场规模测算与预测型",
+      "template_dir": "engine/templates/market-sizing/",
+      "section_titles": ["执行摘要", "测算方法与模型结构", "口径与数据底座", "基准年规模测算", "分段预测与情景分析", "敏感性分析", "模型治理", "局限声明", "参考来源清单"],
+      "cycles": {
+        "baseline": { "sections": 9, "nav": false, "template": "prompt-baseline-setup-template.md" },
+        "annual": { "sections": 9, "nav": true, "template": "prompt-annual-refresh-template.md" }
+      }
+    },
+    "investment-research": {
+      "name": "投资分析与尽调型",
+      "template_dir": "engine/templates/investment-research/",
+      "section_titles": ["投资要点", "标的概况", "行业与市场输入", "财务分析与估值模型", "风险清单", "情景与敏感性", "合规与边界", "参考来源清单"],
+      "cycles": {
+        "baseline": { "sections": 8, "nav": false, "template": "prompt-baseline-setup-template.md" },
+        "target_update": { "sections": 8, "nav": true, "template": "prompt-target-update-template.md" },
+        "quarterly": { "sections": 8, "nav": true, "template": "prompt-target-update-template.md" },
+        "annual": { "sections": 8, "nav": true, "template": "prompt-target-update-template.md" }
+      }
+    },
+    "policy-analysis": {
+      "name": "政策法规解读型",
+      "template_dir": "engine/templates/policy-analysis/",
+      "section_titles": ["执行摘要", "政策台账与监测机制", "监管框架总览", "重点政策逐条解读", "影响对象矩阵", "合规应对建议（建议章）", "生效时间线", "数据治理与局限", "参考来源清单"],
+      "cycles": {
+        "baseline": { "sections": 9, "nav": false, "template": "prompt-baseline-setup-template.md" },
+        "review": { "sections": 9, "nav": false, "template": "prompt-policy-review-template.md" }
+      }
+    },
+    "feasibility-study": {
+      "name": "可行性与市场进入型",
+      "template_dir": "engine/templates/feasibility-study/",
+      "section_titles": ["执行摘要", "项目范围与评估框架", "市场可行性", "技术与运营可行性", "财务测算", "法规与合规路径", "风险与缓解", "结论与实施路线图", "参考来源清单"],
+      "cycles": {
+        "baseline": { "sections": 9, "nav": false, "template": "prompt-baseline-setup-template.md" },
+        "study": { "sections": 9, "nav": false, "template": "prompt-study-template.md" }
+      }
+    },
+    "flash-commentary": {
+      "name": "快评·事件点评型",
+      "template_dir": "engine/templates/flash-commentary/",
+      "section_titles": ["机制摘要", "事件监测日历", "预期台账首建", "快评框架模板", "信号与升级规则", "来源与时效治理", "交付物与运行方式", "参考来源清单"],
+      "cycles": {
+        "baseline": { "sections": 8, "nav": false, "template": "prompt-baseline-setup-template.md" },
+        "flash_note": { "sections": 4, "nav": false, "section_titles": ["事件摘要", "预期对比", "初步影响判断", "后续观察点"], "template": "prompt-flash-note-template.md" }
+      }
+    },
+    "whitepaper": {
+      "name": "白皮书·专题深度型",
+      "template_dir": "engine/templates/whitepaper/",
+      "section_titles": ["执行摘要", "问题定义与研究框架", "主题深度论证", "案例佐证", "观点与倡议", "品牌与合规审校记录", "数据治理与局限", "参考来源清单"],
+      "cycles": {
+        "baseline": { "sections": 8, "nav": false, "template": "prompt-baseline-setup-template.md" },
+        "topic_study": { "sections": 8, "nav": false, "template": "prompt-topic-study-template.md" }
+      }
+    },
+    "trend-weekly": {
+      "name": "行业趋势周报型",
+      "template_dir": "engine/templates/trend-weekly/",
+      "section_titles": ["本周要点 Top5", "主题板块一", "主题板块二", "主题板块三", "数据看板", "风险与不确定性", "可执行启示", "参考来源"],
+      "cycles": {
+        "baseline": { "sections": 9, "nav": false, "template": "prompt-baseline-setup-template.md" },
+        "weekly": { "sections": 8, "nav": true, "template": "prompt-weekly-monitor-template.md" }
+      }
+    },
+    "decision-dashboard": {
+      "name": "决策仪表盘型",
+      "template_dir": "engine/templates/decision-dashboard/",
+      "section_titles": ["决策摘要", "决策卡总表", "证据强度与反向证据", "触发条件与阈值距离", "信息充分度与缺失清单", "行动协议", "场景切片", "盲区与消号进度", "参考来源与读数时点"],
+      "cycles": {
+        "baseline": { "sections": 9, "nav": false, "template": "prompt-baseline-setup-template.md" },
+        "quarterly": { "sections": 9, "nav": true, "template": "prompt-baseline-setup-template.md" }
+      }
+    }
+  }
+}

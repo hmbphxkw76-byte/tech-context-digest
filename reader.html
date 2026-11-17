@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>宏观资讯报告 · 阅读器</title>
+<style>:root{
+  --radius-sm:8px; --radius:12px; --radius-lg:16px; --radius-pill:999px;
+  --shadow:0 1px 3px rgba(20,40,70,.06); --shadow-md:0 4px 14px rgba(20,40,70,.09);
+  --shadow-lg:0 10px 30px rgba(15,35,56,.2);
+  --space-1:4px; --space-2:8px; --space-3:12px; --space-4:16px; --space-5:24px; --space-6:32px;
+  --font-sans:"Microsoft YaHei","PingFang SC","Segoe UI",Arial,sans-serif;
+  --font-mono:"SFMono-Regular",Consolas,"Liberation Mono",monospace;
+  --focus-ring:0 0 0 3px rgba(63,111,176,.35);
+  --transition:.15s ease;
+  --bg:#f4f6f9; --card:#ffffff; --ink:#15202b; --ink2:#465667; --ink3:#657180;
+  --line:#e1e7ee; --line2:#eef2f6;
+  --navy:#16324f; --navy2:#2f5597; --blue:#3f6fb0; --blue-l:#eaf1fa;
+  --red:#a83224; --red-d:#822116; --red-l:#fbece8;
+  --pre:#b8541c; --pre-l:#fdf1e4;
+  --green:#1c7444; --green-l:#eaf5ef;
+  --amber:#956612; --amber-l:#fdf4e2;
+  --gray:#646f7b; --gray-l:#eff2f4;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+body{font-family:var(--font-sans);background:var(--bg);color:var(--ink);line-height:1.76;font-size:14.5px}
+a{color:var(--navy2);text-decoration:none}
+a:hover{text-decoration:underline}
+
+/* ── Hero：居中标题 + 四项统计 ── */
+.hero{background:linear-gradient(128deg,#0f2338 0%,#16324f 52%,#2f5597 100%);
+  color:#fff;padding:30px 40px 36px;text-align:center}
+.hero h1{font-size:45px;font-weight:700;letter-spacing:.5px;line-height:1.3}
+.hero .stats{display:flex;flex-wrap:wrap;justify-content:center;gap:14px;margin-top:28px}
+.hero .stat{background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.22);
+  border-radius:var(--radius);padding:14px 26px;min-width:128px;
+  font-size:13px;color:rgba(255,255,255,.85)}
+.hero .stat b{display:block;font-size:26px;font-weight:700;color:#fff;
+  letter-spacing:.5px;line-height:1.3}
+
+/* ── 筛选栏 ── */
+.filterbar{position:sticky;top:0;z-index:40;
+  background:rgba(244,246,249,.95);backdrop-filter:blur(6px);
+  border-bottom:1px solid var(--line);padding:12px 24px;
+  display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+.filterbar>input{flex:1;min-width:200px;max-width:360px;padding:8px 14px;
+  border:1px solid var(--line);border-radius:18px;font-size:13.5px;background:#fff;
+  outline:none;font-family:inherit;color:var(--ink)}
+.filterbar>input:focus{border-color:var(--blue);box-shadow:var(--focus-ring)}
+.chips{display:flex;gap:6px;flex-wrap:wrap;align-items:center}
+.chips .chips-label{font-size:12px;color:var(--ink3);margin-right:2px;white-space:nowrap}
+.chip{border:1px solid var(--line);background:#fff;border-radius:14px;padding:4px 12px;
+  font-size:12.5px;color:var(--ink2);cursor:pointer;user-select:none;font-family:inherit;
+  transition:background var(--transition),border-color var(--transition),color var(--transition)}
+.chip:hover{border-color:var(--blue)}
+.chip.on{background:var(--navy);border-color:var(--navy);color:#fff}
+.chips-type{flex-basis:100%;flex-wrap:wrap;gap:5px;min-width:0}
+.chips-type .chip{font-size:12px;padding:3px 10px}
+.filterbar .count{font-size:12px;color:var(--ink3);margin-left:auto;white-space:nowrap}
+
+/* ── 主区：地区 → 主题 → 报告 ── */
+.main{max-width:1240px;margin:0 auto;padding:8px 24px 50px}
+.region{margin-bottom:12px}
+.region-head{display:flex;align-items:baseline;gap:10px;margin:26px 0 4px}
+.region-head h2{font-size:20px;color:var(--navy)}
+.region-head .rcount{font-size:11.5px;color:var(--ink3)}
+.topic{margin:18px 0 6px;scroll-margin-top:64px}
+.topic-head{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap;
+  border-left:4px solid var(--navy2);padding:2px 0 2px 12px;margin:0 0 12px}
+.topic-head h3{font-size:17px;color:var(--navy)}
+.topic-head .badge{font-size:11px;border-radius:3px;padding:1px 7px;background:var(--blue-l);
+  color:var(--navy2);white-space:nowrap;font-weight:600}
+.topic-head .count{font-size:11.5px;color:var(--ink3);margin-left:auto;white-space:nowrap}
+.reports{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));
+  gap:14px;margin:0 0 6px}
+.rcard{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);
+  padding:14px 16px;display:flex;flex-direction:column;gap:6px;box-shadow:var(--shadow);
+  transition:border-color var(--transition),box-shadow var(--transition)}
+.rcard:hover{border-color:#c9d6e6;box-shadow:var(--shadow-md)}
+.rcard .row1{display:flex;align-items:center;gap:8px}
+.tag{display:inline-block;font-size:11px;padding:1px 7px;border-radius:10px;
+  background:#eef3f8;color:var(--navy);border:1px solid var(--line);white-space:nowrap}
+.rcard .period{font-size:12px;color:var(--ink3);font-variant-numeric:tabular-nums}
+.rcard h4{font-size:14.5px;color:var(--navy);line-height:1.5}
+.rcard h4 a{color:var(--navy)}
+.rcard .path{font-size:11px;color:var(--ink3);font-family:var(--font-mono);
+  overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.noresult{padding:44px 20px;text-align:center;color:var(--ink3);font-size:13.5px;
+  grid-column:1/-1}
+
+/* ── 页脚 / 回到顶部 ── */
+.footer{text-align:center;color:var(--ink3);font-size:11.5px;padding:26px 20px 36px;
+  line-height:1.9;border-top:1px solid var(--line)}
+.totop{position:fixed;right:22px;bottom:22px;width:40px;height:40px;border-radius:50%;
+  background:var(--navy);color:#fff;border:0;font-size:17px;cursor:pointer;
+  box-shadow:0 4px 14px rgba(15,35,56,.3);opacity:0;pointer-events:none;
+  transition:opacity var(--transition);z-index:70;font-family:inherit}
+.totop.show{opacity:1;pointer-events:auto}
+
+/* ── 跳转链接 / 打印 ── */
+.skip-link{position:absolute;left:12px;top:-48px;z-index:100;background:var(--navy);color:#fff;
+  padding:8px 16px;border-radius:0 0 8px 8px;font-size:12.5px;transition:top var(--transition)}
+.skip-link:focus{top:0;color:#fff;text-decoration:none}
+@media print{
+  .filterbar,.totop,.skip-link{display:none}
+  body{background:#fff}
+  .main{padding:0}
+}
+
+/* ── 响应式 ── */
+@media (max-width:960px){
+  .filterbar{padding:10px 14px}
+  .filterbar>input{max-width:none}
+  .hero{padding:26px 22px 28px}
+  .hero h1{font-size:36px}
+  .main{padding:6px 14px 40px}
+  .reports{grid-template-columns:1fr}
+  .totop{right:14px;bottom:14px}
+}
+@media (max-width:560px){
+  .hero{padding:20px 16px 20px}
+  .hero h1{font-size:31.5px}
+  .hero .stats{gap:10px;margin-top:22px}
+  .hero .stat{min-width:calc(50% - 5px);padding:12px 14px}
+  .topic-head h3{font-size:15.5px}
+  .filterbar .count{margin-left:0;width:100%}
+}
+
+/* ── 阅读器：头部 ── */
+body{display:flex;flex-direction:column;height:100vh;overflow:hidden}
+.reader-head{background:linear-gradient(128deg,#0f2338 0%,#16324f 52%,#2f5597 100%);
+  color:#fff;padding:14px 24px;flex:0 0 auto}
+.reader-head-inner{max-width:1240px;margin:0 auto;display:flex;align-items:center;
+  gap:12px;flex-wrap:wrap}
+.reader-brand{display:flex;align-items:baseline;gap:8px;font-size:17px;font-weight:700;
+  letter-spacing:.3px;min-width:0}
+.reader-brand .brand-link{color:#fff;white-space:nowrap}
+.reader-brand .brand-link:hover{text-decoration:underline}
+.reader-brand .brand-sep{opacity:.55;font-weight:400}
+.reader-brand .brand-sub{font-size:12.5px;font-weight:400;opacity:.85;white-space:nowrap}
+.reader-head-stats{margin-left:auto;font-size:12px;color:rgba(255,255,255,.88);
+  white-space:nowrap;font-variant-numeric:tabular-nums}
+.menu-btn{display:none;background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.28);
+  color:#fff;border-radius:var(--radius-sm);width:36px;height:32px;font-size:16px;
+  line-height:1;cursor:pointer;font-family:inherit}
+.menu-btn:hover{background:rgba(255,255,255,.24)}
+
+/* ── 阅读器：阅读区布局 ── */
+.reader-body{flex:1;min-height:0;display:grid;
+  grid-template-columns:300px 1fr;grid-template-rows:minmax(0,1fr)}
+.sidebar{background:var(--bg);border-right:1px solid var(--line);overflow-y:auto;
+  min-height:0;padding-bottom:20px}
+.sidebar-head{position:sticky;top:0;z-index:5;background:rgba(244,246,249,.95);
+  backdrop-filter:blur(6px);border-bottom:1px solid var(--line);padding:10px 16px;
+  font-size:13px;font-weight:600;color:var(--navy);display:flex;align-items:center;
+  justify-content:space-between;gap:8px}
+.sidebar-head .count{font-weight:400;color:var(--ink3)}
+.sidebar-nav{padding:2px 12px 0}
+.sidebar-nav .region{margin-bottom:4px}
+.sidebar-nav .region-head{margin:12px 0 2px}
+.sidebar-nav .region-head h2{font-size:14px}
+.sidebar-nav .topic{margin:6px 0 2px;scroll-margin-top:0}
+.sidebar-nav .topic-head{border-left-width:3px;padding:1px 0 1px 9px;margin:0 0 5px}
+.sidebar-nav .topic-head h3{font-size:13px}
+.sidebar-nav .topic-head .badge{font-size:10px;padding:0 5px}
+.sidebar-nav .topic-head .count{font-size:10.5px}
+.sidebar-nav .reports{display:block;margin:0}
+.sidebar-nav .rcard{padding:9px 11px;gap:4px;cursor:pointer}
+.sidebar-nav .rcard h4{font-size:13px;line-height:1.45}
+.sidebar-nav .rcard .path{font-size:10px}
+.sidebar-nav .rcard.active{border-color:var(--navy2);box-shadow:var(--shadow-md)}
+.sidebar-nav .noresult{padding:18px 8px;font-size:12.5px;text-align:center}
+.reader-main{position:relative;min-width:0;min-height:0;background:var(--bg)}
+.reader-main iframe{width:100%;height:100%;border:0;display:block;background:var(--card)}
+.empty{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;
+  justify-content:center;gap:6px;color:var(--ink3);text-align:center;padding:20px;
+  font-size:13.5px}
+.empty[hidden]{display:none}
+.empty-icon{font-size:34px;opacity:.5;line-height:1}
+.overlay{display:none}
+
+/* ── 阅读器：响应式（断点与主页一致） ── */
+@media (max-width:960px){
+  .reader-head{padding:12px 14px}
+  .reader-head-stats{display:none}
+  .menu-btn{display:block}
+  .reader-body{grid-template-columns:1fr}
+  .sidebar{position:fixed;top:0;left:0;bottom:0;width:300px;max-width:84vw;z-index:60;
+    transform:translateX(-102%);transition:transform var(--transition);
+    box-shadow:var(--shadow-lg);border-right:1px solid var(--line)}
+  .sidebar.open{transform:translateX(0)}
+  .overlay{display:block;position:fixed;inset:0;background:rgba(15,35,56,.45);z-index:55;
+    opacity:0;pointer-events:none;transition:opacity var(--transition)}
+  .overlay.show{opacity:1;pointer-events:auto}
+}
+@media (max-width:560px){
+  .reader-brand{font-size:15px}
+  .sidebar{width:280px}
+}
+@media print{
+  .reader-head,.sidebar,.overlay,.totop,.skip-link{display:none}
+  body{height:auto;overflow:visible}
+  .reader-body{display:block}
+}
+</style>
+</head>
+<body>
+<a class="skip-link" href="#main-content">跳到主要内容</a>
+<header class="reader-head">
+<div class="reader-head-inner">
+<div class="reader-brand">
+<a class="brand-link" href="index.html">宏观资讯报告</a>
+<span class="brand-sep">·</span><span class="brand-sub">阅读器</span>
+</div>
+<div class="reader-head-stats">3 区域 · 7 主题 · 10 报告 · 6 类型</div>
+<button class="menu-btn" id="menuBtn" aria-label="打开报告列表" aria-expanded="false" aria-controls="sidebar">☰</button>
+</div>
+</header>
+<div class="filterbar">
+<input id="reader-search" type="search" placeholder="搜索主题 / 报告标题…" aria-label="搜索主题或报告">
+<div class="chips" id="reader-chips-topic" role="group" aria-label="主题筛选">
+<span class="chips-label">主题</span>
+<button class="chip on" data-topic="all" aria-pressed="true">全部主题</button>
+<button class="chip" data-topic="content/economy/dubai/apartment" aria-pressed="false">公寓住宅市场</button>
+<button class="chip" data-topic="content/economy/global/decision-hub" aria-pressed="false">决策仪表盘</button>
+<button class="chip" data-topic="content/economy/global/trends" aria-pressed="false">全球宏观经济趋势（主要经济体视角）</button>
+<button class="chip" data-topic="content/tech/competitive-intelligence/dubai" aria-pressed="false">AI 网安竞争格局</button>
+<button class="chip" data-topic="content/tech/industry-research/dubai" aria-pressed="false">AI 网安行业</button>
+<button class="chip" data-topic="content/tech/security/dubai" aria-pressed="false">AI 网络安全</button>
+<button class="chip" data-topic="content/tech/trends/global" aria-pressed="false">AI 行业趋势（安全 × Agent 生态）</button>
+</div>
+<div class="chips chips-type" id="reader-chips-type" role="group" aria-label="类型筛选">
+<span class="chips-label">类型</span>
+<button class="chip on" data-type="all" aria-pressed="true">全部类型</button>
+<button class="chip" data-type="market-monitoring" aria-pressed="false" title="市场指标监测型">市场动态</button>
+<button class="chip" data-type="trend-weekly" aria-pressed="false" title="行业趋势周报型">行业趋势</button>
+<button class="chip" data-type="employment-research" aria-pressed="false" title="职业就业调研型">职业就业</button>
+<button class="chip" data-type="competitive-intelligence" aria-pressed="false" title="竞争情报监测型">竞争情报</button>
+<button class="chip" data-type="sentiment-monitoring" aria-pressed="false" title="舆情传播监测型">舆情监测</button>
+<button class="chip" data-type="consumer-research" aria-pressed="false" title="消费者·用户调研型">用户调研</button>
+<button class="chip" data-type="industry-research" aria-pressed="false" title="行业深度研究型">行业研究</button>
+<button class="chip" data-type="market-sizing" aria-pressed="false" title="市场规模测算与预测型">市场规模</button>
+<button class="chip" data-type="investment-research" aria-pressed="false" title="投资分析与尽调型">投资分析</button>
+<button class="chip" data-type="policy-analysis" aria-pressed="false" title="政策法规解读型">政策法规</button>
+<button class="chip" data-type="feasibility-study" aria-pressed="false" title="可行性与市场进入型">市场进入</button>
+<button class="chip" data-type="flash-commentary" aria-pressed="false" title="快评·事件点评型">快评点评</button>
+<button class="chip" data-type="whitepaper" aria-pressed="false" title="白皮书·专题深度型">白皮书</button>
+<button class="chip" data-type="decision-dashboard" aria-pressed="false" title="决策仪表盘型">决策仪表盘</button>
+</div>
+<span class="count" id="reader-count"></span>
+</div>
+<div class="reader-body">
+<aside class="sidebar" id="sidebar" aria-label="报告列表">
+<div class="sidebar-head"><span>报告列表</span><span class="count" id="sidebar-count"></span></div>
+<nav class="sidebar-nav" id="sidebar-nav">
+<section class="region" data-region="迪拜（阿联酋）">
+<div class="region-head"><h2>迪拜（阿联酋）</h2><span class="rcount js-region-count">4 个主题</span></div>
+<section class="topic" data-topic="content/economy/dubai/apartment" data-type="market-monitoring">
+<div class="topic-head"><h3>公寓住宅市场</h3><span class="badge">市场指标监测型</span><span class="count js-topic-count">4 份报告</span></div>
+<div class="reports">
+<article class="rcard" data-path="content/economy/dubai/apartment/reports/2026-Q3_quarterly.html" data-search="迪拜（阿联酋） 公寓住宅市场 市场指标监测型 content/economy/dubai/apartment 季度 2026-q3 迪拜公寓住宅市场季度分析 · 2026q3（含结构红线分级） content/economy/dubai/apartment/reports/2026-q3_quarterly.html"><div class="row1"><span class="tag">季度</span><span class="period">2026-Q3</span></div><h4><a href="?report=content/economy/dubai/apartment/reports/2026-Q3_quarterly.html" title="迪拜公寓住宅市场季度分析 · 2026Q3（含结构红线分级）">迪拜公寓住宅市场季度分析 · 2026Q3（含结构红线分级）</a></h4><div class="path">content/economy/dubai/apartment/reports/2026-Q3_quarterly.html</div></article>
+<article class="rcard" data-path="content/economy/dubai/apartment/reports/2026-11_baseline_report.html" data-search="迪拜（阿联酋） 公寓住宅市场 市场指标监测型 content/economy/dubai/apartment 基线 2026-11 迪拜公寓住宅市场持续监测情报分析报告 · 首期基线（2026年11月） content/economy/dubai/apartment/reports/2026-11_baseline_report.html"><div class="row1"><span class="tag">基线</span><span class="period">2026-11</span></div><h4><a href="?report=content/economy/dubai/apartment/reports/2026-11_baseline_report.html" title="迪拜公寓住宅市场持续监测情报分析报告 · 首期基线（2026年11月）">迪拜公寓住宅市场持续监测情报分析报告 · 首期基线（2026年11月）</a></h4><div class="path">content/economy/dubai/apartment/reports/2026-11_baseline_report.html</div></article>
+<article class="rcard" data-path="content/economy/dubai/apartment/reports/2026-11_monthly.html" data-search="迪拜（阿联酋） 公寓住宅市场 市场指标监测型 content/economy/dubai/apartment 月度 2026-11 迪拜公寓住宅市场月度监测简报 · 2026 年 11 月（v5） content/economy/dubai/apartment/reports/2026-11_monthly.html"><div class="row1"><span class="tag">月度</span><span class="period">2026-11</span></div><h4><a href="?report=content/economy/dubai/apartment/reports/2026-11_monthly.html" title="迪拜公寓住宅市场月度监测简报 · 2026 年 11 月（v5）">迪拜公寓住宅市场月度监测简报 · 2026 年 11 月（v5）</a></h4><div class="path">content/economy/dubai/apartment/reports/2026-11_monthly.html</div></article>
+<article class="rcard" data-path="content/economy/dubai/apartment/reports/2026_annual.html" data-search="迪拜（阿联酋） 公寓住宅市场 市场指标监测型 content/economy/dubai/apartment 年度 2026 迪拜公寓住宅市场 · 2026 年度策略复盘（v2.0） content/economy/dubai/apartment/reports/2026_annual.html"><div class="row1"><span class="tag">年度</span><span class="period">2026</span></div><h4><a href="?report=content/economy/dubai/apartment/reports/2026_annual.html" title="迪拜公寓住宅市场 · 2026 年度策略复盘（v2.0）">迪拜公寓住宅市场 · 2026 年度策略复盘（v2.0）</a></h4><div class="path">content/economy/dubai/apartment/reports/2026_annual.html</div></article>
+</div>
+</section>
+<section class="topic" data-topic="content/tech/competitive-intelligence/dubai" data-type="competitive-intelligence">
+<div class="topic-head"><h3>AI 网安竞争格局</h3><span class="badge">竞争情报监测型</span><span class="count js-topic-count">1 份报告</span></div>
+<div class="reports">
+<article class="rcard" data-path="content/tech/competitive-intelligence/dubai/reports/2026-12_baseline_report.html" data-search="迪拜（阿联酋） ai 网安竞争格局 竞争情报监测型 content/tech/competitive-intelligence/dubai 基线 2026-12 迪拜（阿联酋）ai 网安竞争格局 · 基线报告（2026-12） content/tech/competitive-intelligence/dubai/reports/2026-12_baseline_report.html"><div class="row1"><span class="tag">基线</span><span class="period">2026-12</span></div><h4><a href="?report=content/tech/competitive-intelligence/dubai/reports/2026-12_baseline_report.html" title="迪拜（阿联酋）AI 网安竞争格局 · 基线报告（2026-12）">迪拜（阿联酋）AI 网安竞争格局 · 基线报告（2026-12）</a></h4><div class="path">content/tech/competitive-intelligence/dubai/reports/2026-12_baseline_report.html</div></article>
+</div>
+</section>
+<section class="topic" data-topic="content/tech/industry-research/dubai" data-type="industry-research">
+<div class="topic-head"><h3>AI 网安行业</h3><span class="badge">行业深度研究型</span><span class="count js-topic-count">1 份报告</span></div>
+<div class="reports">
+<article class="rcard" data-path="content/tech/industry-research/dubai/reports/2026-12_baseline_report.html" data-search="迪拜（阿联酋） ai 网安行业 行业深度研究型 content/tech/industry-research/dubai 基线 2026-12 迪拜（阿联酋）ai 网安行业深度研究基线报告 content/tech/industry-research/dubai/reports/2026-12_baseline_report.html"><div class="row1"><span class="tag">基线</span><span class="period">2026-12</span></div><h4><a href="?report=content/tech/industry-research/dubai/reports/2026-12_baseline_report.html" title="迪拜（阿联酋）AI 网安行业深度研究基线报告">迪拜（阿联酋）AI 网安行业深度研究基线报告</a></h4><div class="path">content/tech/industry-research/dubai/reports/2026-12_baseline_report.html</div></article>
+</div>
+</section>
+<section class="topic" data-topic="content/tech/security/dubai" data-type="employment-research">
+<div class="topic-head"><h3>AI 网络安全</h3><span class="badge">职业就业调研型</span><span class="count js-topic-count">1 份报告</span></div>
+<div class="reports">
+<article class="rcard" data-path="content/tech/security/dubai/reports/2026-11_baseline_report.html" data-search="迪拜（阿联酋） ai 网络安全 职业就业调研型 content/tech/security/dubai 基线 2026-11 迪拜（阿联酋）ai 网络安全行业深度调研报告 content/tech/security/dubai/reports/2026-11_baseline_report.html"><div class="row1"><span class="tag">基线</span><span class="period">2026-11</span></div><h4><a href="?report=content/tech/security/dubai/reports/2026-11_baseline_report.html" title="迪拜（阿联酋）AI 网络安全行业深度调研报告">迪拜（阿联酋）AI 网络安全行业深度调研报告</a></h4><div class="path">content/tech/security/dubai/reports/2026-11_baseline_report.html</div></article>
+</div>
+</section>
+</section>
+<section class="region" data-region="跨研究线（全球 / 迪拜）">
+<div class="region-head"><h2>跨研究线（全球 / 迪拜）</h2><span class="rcount js-region-count">1 个主题</span></div>
+<section class="topic" data-topic="content/economy/global/decision-hub" data-type="decision-dashboard">
+<div class="topic-head"><h3>决策仪表盘</h3><span class="badge">决策仪表盘型</span><span class="count js-topic-count">1 份报告</span></div>
+<div class="reports">
+<article class="rcard" data-path="content/economy/global/decision-hub/reports/2026-12_baseline_report.html" data-search="跨研究线（全球 / 迪拜） 决策仪表盘 决策仪表盘型 content/economy/global/decision-hub 基线 2026-12 跨研究线决策仪表盘 · 2026-12 基线 content/economy/global/decision-hub/reports/2026-12_baseline_report.html"><div class="row1"><span class="tag">基线</span><span class="period">2026-12</span></div><h4><a href="?report=content/economy/global/decision-hub/reports/2026-12_baseline_report.html" title="跨研究线决策仪表盘 · 2026-12 基线">跨研究线决策仪表盘 · 2026-12 基线</a></h4><div class="path">content/economy/global/decision-hub/reports/2026-12_baseline_report.html</div></article>
+</div>
+</section>
+</section>
+<section class="region" data-region="全球">
+<div class="region-head"><h2>全球</h2><span class="rcount js-region-count">2 个主题</span></div>
+<section class="topic" data-topic="content/economy/global/trends" data-type="trend-weekly">
+<div class="topic-head"><h3>全球宏观经济趋势（主要经济体视角）</h3><span class="badge">行业趋势周报型</span><span class="count js-topic-count">1 份报告</span></div>
+<div class="reports">
+<article class="rcard" data-path="content/economy/global/trends/reports/2026-11-13_weekly.html" data-search="全球 全球宏观经济趋势（主要经济体视角） 行业趋势周报型 content/economy/global/trends 周报 2026-11-13 全球经济趋势周报 · 2026-11-13（第 46 周） content/economy/global/trends/reports/2026-11-13_weekly.html"><div class="row1"><span class="tag">周报</span><span class="period">2026-11-13</span></div><h4><a href="?report=content/economy/global/trends/reports/2026-11-13_weekly.html" title="全球经济趋势周报 · 2026-11-13（第 46 周）">全球经济趋势周报 · 2026-11-13（第 46 周）</a></h4><div class="path">content/economy/global/trends/reports/2026-11-13_weekly.html</div></article>
+</div>
+</section>
+<section class="topic" data-topic="content/tech/trends/global" data-type="trend-weekly">
+<div class="topic-head"><h3>AI 行业趋势（安全 × Agent 生态）</h3><span class="badge">行业趋势周报型</span><span class="count js-topic-count">1 份报告</span></div>
+<div class="reports">
+<article class="rcard" data-path="content/tech/trends/global/reports/2026-11-13_weekly.html" data-search="全球 ai 行业趋势（安全 × agent 生态） 行业趋势周报型 content/tech/trends/global 周报 2026-11-13 ai 趋势周报（安全 × agent 生态）· 2026-11-13（第 46 周 · 合并首期） content/tech/trends/global/reports/2026-11-13_weekly.html"><div class="row1"><span class="tag">周报</span><span class="period">2026-11-13</span></div><h4><a href="?report=content/tech/trends/global/reports/2026-11-13_weekly.html" title="AI 趋势周报（安全 × Agent 生态）· 2026-11-13（第 46 周 · 合并首期）">AI 趋势周报（安全 × Agent 生态）· 2026-11-13（第 46 周 · 合并首期）</a></h4><div class="path">content/tech/trends/global/reports/2026-11-13_weekly.html</div></article>
+</div>
+</section>
+</section>
+</nav>
+</aside>
+<div class="overlay" id="overlay"></div>
+<main class="reader-main" id="main-content">
+<iframe id="frame" title="报告内容"></iframe>
+<div class="empty" id="empty">
+<div class="empty-icon">📄</div>
+<p>请从左侧选择一份报告开始阅读</p>
+<p>使用搜索或筛选快速定位主题与类型</p>
+</div>
+</main>
+</div>
+<footer class="footer">
+<p>由 <code>engine/tools/build_hub.py</code> 自动生成 · 报告源文件见各业务线 <code>reports/</code> 目录</p>
+</footer>
+<button class="totop" id="totop" aria-label="回到顶部">↑</button>
+<script>(function () {
+  var qInput = document.getElementById('reader-search');
+  var countEl = document.getElementById('reader-count');
+  var sidebarCountEl = document.getElementById('sidebar-count');
+  var frame = document.getElementById('frame');
+  var emptyEl = document.getElementById('empty');
+  var sidebar = document.getElementById('sidebar');
+  var overlay = document.getElementById('overlay');
+  var menuBtn = document.getElementById('menuBtn');
+  var nav = document.getElementById('sidebar-nav');
+
+  var noResult = document.createElement('div');
+  noResult.className = 'noresult';
+  noResult.textContent = '未找到匹配的报告，请调整关键词或筛选条件。';
+  noResult.style.display = 'none';
+  nav.appendChild(noResult);
+
+  var state = { q: '', topic: 'all', type: 'all' };
+
+  function applyFilter() {
+    var visibleReports = 0;
+    var visibleTopics = 0;
+    nav.querySelectorAll('.topic').forEach(function (topicEl) {
+      var okTopic = state.topic === 'all' || topicEl.dataset.topic === state.topic;
+      var okType = state.type === 'all' || topicEl.dataset.type === state.type;
+      var shownInTopic = 0;
+      topicEl.querySelectorAll('.rcard').forEach(function (card) {
+        var okQ = !state.q || card.dataset.search.indexOf(state.q) >= 0;
+        var show = okTopic && okType && okQ;
+        card.style.display = show ? '' : 'none';
+        if (show) { shownInTopic++; visibleReports++; }
+      });
+      var topicVisible = shownInTopic > 0;
+      topicEl.style.display = topicVisible ? '' : 'none';
+      if (topicVisible) visibleTopics++;
+      var tc = topicEl.querySelector('.js-topic-count');
+      if (tc) tc.textContent = shownInTopic + ' 份报告';
+    });
+    nav.querySelectorAll('.region').forEach(function (reg) {
+      var shownInRegion = Array.prototype.filter.call(
+        reg.querySelectorAll('.topic'), function (t) { return t.style.display !== 'none'; }).length;
+      reg.style.display = shownInRegion ? '' : 'none';
+      var rc = reg.querySelector('.js-region-count');
+      if (rc) rc.textContent = shownInRegion + ' 个主题';
+    });
+    noResult.style.display = visibleReports ? 'none' : '';
+    countEl.textContent = '共 ' + visibleTopics + ' 个主题 · ' + visibleReports + ' 份报告';
+    if (sidebarCountEl) sidebarCountEl.textContent = visibleReports + ' 份报告';
+  }
+
+  var t;
+  qInput.addEventListener('input', function () {
+    clearTimeout(t);
+    t = setTimeout(function () {
+      state.q = qInput.value.trim().toLowerCase();
+      applyFilter();
+    }, 120);
+  });
+
+  function bindChips(wrapId, key) {
+    var wrap = document.getElementById(wrapId);
+    wrap.addEventListener('click', function (e) {
+      var btn = e.target.closest('.chip');
+      if (!btn) return;
+      wrap.querySelectorAll('.chip').forEach(function (c) {
+        c.classList.remove('on');
+        c.setAttribute('aria-pressed', 'false');
+      });
+      btn.classList.add('on');
+      btn.setAttribute('aria-pressed', 'true');
+      state[key] = btn.dataset[key];
+      applyFilter();
+    });
+  }
+  bindChips('reader-chips-topic', 'topic');
+  bindChips('reader-chips-type', 'type');
+
+  function closeDrawer() {
+    sidebar.classList.remove('open');
+    overlay.classList.remove('show');
+    menuBtn.setAttribute('aria-expanded', 'false');
+  }
+
+  function openDrawer() {
+    sidebar.classList.add('open');
+    overlay.classList.add('show');
+    menuBtn.setAttribute('aria-expanded', 'true');
+  }
+
+  menuBtn.addEventListener('click', function () {
+    if (sidebar.classList.contains('open')) { closeDrawer(); } else { openDrawer(); }
+  });
+  overlay.addEventListener('click', closeDrawer);
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape') { closeDrawer(); }
+  });
+
+  function selectReport(path, title) {
+    frame.src = path;
+    emptyEl.hidden = true;
+    nav.querySelectorAll('.rcard').forEach(function (c) {
+      c.classList.toggle('active', c.dataset.path === path);
+    });
+    if (history.replaceState) {
+      history.replaceState(null, '', '?report=' + encodeURIComponent(path));
+    }
+    if (title) { document.title = title + ' · 宏观资讯报告 · 阅读器'; }
+    closeDrawer();
+    var active = nav.querySelector('.rcard.active');
+    if (active && active.scrollIntoView) { active.scrollIntoView({ block: 'nearest' }); }
+  }
+
+  nav.addEventListener('click', function (e) {
+    var a = e.target.closest('a[href^="?report="]');
+    if (!a) return;
+    e.preventDefault();
+    var card = a.closest('.rcard');
+    if (!card) return;
+    selectReport(card.dataset.path, a.textContent.trim());
+  });
+
+  // 初始加载：?report=<路径>（仅接受列表内已知报告，避免任意 src 注入）
+  var p = new URLSearchParams(location.search).get('report');
+  if (p) {
+    var cards = nav.querySelectorAll('.rcard');
+    for (var i = 0; i < cards.length; i++) {
+      if (cards[i].dataset.path === p) {
+        var a = cards[i].querySelector('a');
+        selectReport(p, a ? a.textContent.trim() : '');
+        break;
+      }
+    }
+  }
+
+  // 阅读器为 app-shell（外层不滚动）：回顶按钮作用于侧栏与报告内容
+  var totop = document.getElementById('totop');
+  sidebar.addEventListener('scroll', function () {
+    totop.classList.toggle('show', sidebar.scrollTop > 400);
+  });
+  totop.addEventListener('click', function () {
+    sidebar.scrollTo({ top: 0, behavior: 'smooth' });
+    try { frame.contentWindow.scrollTo({ top: 0, behavior: 'smooth' }); } catch (e) {}
+  });
+
+  applyFilter();
+})();
+</script>
+</body>
+</html>

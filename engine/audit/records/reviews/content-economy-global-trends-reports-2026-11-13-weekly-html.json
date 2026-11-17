@@ -1,0 +1,75 @@
+{
+  "report": "content/economy/global/trends/reports/2026-11-13_weekly.html",
+  "reviews": [
+    {
+      "stage": "draft",
+      "reviewer": "ci-bot",
+      "timestamp": "2026-11-17T09:36:53+08:00",
+      "decision": "pass",
+      "findings": [],
+      "evidence": "[strict] L2 10/10；标题 OK；断头锚点 0；来源可追溯 OK；口径一致 OK；语义终审 无 second 复核记录",
+      "levels": [
+        "L1",
+        "L2"
+      ]
+    },
+    {
+      "stage": "initial",
+      "reviewer": "ci-bot",
+      "timestamp": "2026-11-17T09:36:53+08:00",
+      "decision": "pass",
+      "findings": [],
+      "evidence": "[strict] L2 10/10；标题 OK；断头锚点 0；来源可追溯 OK；口径一致 OK；语义终审 无 second 复核记录",
+      "levels": [
+        "L1",
+        "L2"
+      ]
+    },
+    {
+      "stage": "final",
+      "reviewer": "ci-bot",
+      "timestamp": "2026-11-17T09:36:53+08:00",
+      "decision": "fix",
+      "findings": [],
+      "evidence": "[strict] L2 10/10；标题 OK；断头锚点 0；来源可追溯 OK；口径一致 OK；语义终审 无 second 复核记录",
+      "levels": [
+        "L3"
+      ]
+    },
+    {
+      "stage": "draft",
+      "reviewer": "ci-bot",
+      "timestamp": "2026-11-17T09:38:29+08:00",
+      "decision": "pass",
+      "findings": [],
+      "evidence": "[strict] L2 10/10；标题 OK；断头锚点 0；来源可追溯 OK；口径一致 OK；语义终审 无 Agent second 复核记录（仅机器留痕）",
+      "levels": [
+        "L1",
+        "L2"
+      ]
+    },
+    {
+      "stage": "initial",
+      "reviewer": "ci-bot",
+      "timestamp": "2026-11-17T09:38:29+08:00",
+      "decision": "pass",
+      "findings": [],
+      "evidence": "[strict] L2 10/10；标题 OK；断头锚点 0；来源可追溯 OK；口径一致 OK；语义终审 无 Agent second 复核记录（仅机器留痕）",
+      "levels": [
+        "L1",
+        "L2"
+      ]
+    },
+    {
+      "stage": "final",
+      "reviewer": "ci-bot",
+      "timestamp": "2026-11-17T09:38:29+08:00",
+      "decision": "fix",
+      "findings": [],
+      "evidence": "[strict] L2 10/10；标题 OK；断头锚点 0；来源可追溯 OK；口径一致 OK；语义终审 无 Agent second 复核记录（仅机器留痕）",
+      "levels": [
+        "L3"
+      ]
+    }
+  ]
+}

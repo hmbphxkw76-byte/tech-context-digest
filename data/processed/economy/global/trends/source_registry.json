@@ -1,0 +1,559 @@
+{
+ "schema_version": "1.0",
+ "business_line": "content/economy/global/trends",
+ "path_rule": "business-config {{SOURCE_REGISTRY_PATH}} = data/source_registry.json",
+ "tier_legend": {
+  "1": "官方一手（政府 / 央行 / 统计机构 / 多边机构 / 官方发布）",
+  "2": "行业机构（研究 / 数据 / 咨询）",
+  "3": "挂牌门户（仅作卖方预期）",
+  "4": "媒体转述（须标『需核实原文』）"
+ },
+ "sources": [
+  {
+   "source_id": "S-001",
+   "tier": 1,
+   "publisher": "Tech Life Research（本仓库）",
+   "title": "https://github.com/hmbphxkw76-byte/tech-context-digest/blob/main/content/economy/global/trends/reports/2026-11-13_weekly.html",
+   "url": "https://github.com/hmbphxkw76-byte/tech-context-digest/blob/main/content/economy/global/trends/reports/2026-11-13_weekly.html",
+   "lang": "en",
+   "verify_status": "verified",
+   "in_synthesis": false,
+   "used_in": [
+    "reports/2026-11-13_weekly.html"
+   ]
+  },
+  {
+   "source_id": "S-002",
+   "tier": 4,
+   "publisher": "新华社英文网",
+   "title": "https://english.ts.cn/system/2026/11/11/037023412.shtml",
+   "url": "https://english.ts.cn/system/2026/11/11/037023412.shtml",
+   "lang": "en",
+   "verify_status": "media_unverified",
+   "in_synthesis": false,
+   "used_in": [
+    "reports/2026-11-13_weekly.html"
+   ]
+  },
+  {
+   "source_id": "S-003",
+   "tier": 1,
+   "publisher": "European Commission",
+   "title": "https://ec.europa.eu/eurostat/web/main/news/euro-indicators",
+   "url": "https://ec.europa.eu/eurostat/web/main/news/euro-indicators",
+   "lang": "en",
+   "verify_status": "verified",
+   "in_synthesis": false,
+   "used_in": [
+    "reports/2026-11-13_weekly.html"
+   ]
+  },
+  {
+   "source_id": "S-004",
+   "tier": 4,
+   "publisher": "百度百家号",
+   "title": "http://baijiahao.baidu.com/s?id=1881464352325676627",
+   "url": "http://baijiahao.baidu.com/s?id=1881464352325676627",
+   "lang": "en",
+   "verify_status": "media_unverified",
+   "in_synthesis": false,
+   "used_in": [
+    "reports/2026-11-13_weekly.html"
+   ]
+  },
+  {
+   "source_id": "S-005",
+   "tier": 1,
+   "publisher": "U.S. Energy Information Administration",
+   "title": "https://www.eia.gov/outlooks/steo/",
+   "url": "https://www.eia.gov/outlooks/steo/",
+   "lang": "en",
+   "verify_status": "verified",
+   "in_synthesis": false,
+   "used_in": [
+    "reports/2026-11-13_weekly.html"
+   ]
+  },
+  {
+   "source_id": "S-006",
+   "tier": 4,
+   "publisher": "金投网",
+   "title": "https://energy.cngold.org/c/2026-11-13/c10877809.html",
+   "url": "https://energy.cngold.org/c/2026-11-13/c10877809.html",
+   "lang": "en",
+   "verify_status": "media_unverified",
+   "in_synthesis": false,
+   "used_in": [
+    "reports/2026-11-13_weekly.html"
+   ]
+  },
+  {
+   "source_id": "S-007",
+   "tier": 1,
+   "publisher": "中国政府网",
+   "title": "https://www.gov.cn/lianbo/202611/content_7085583.htm",
+   "url": "https://www.gov.cn/lianbo/202611/content_7085583.htm",
+   "lang": "en",
+   "verify_status": "verified",
+   "in_synthesis": false,
+   "used_in": [
+    "reports/2026-11-13_weekly.html"
+   ]
+  },
+  {
+   "source_id": "S-008",
+   "tier": 1,
+   "publisher": "Office of the U.S. Trade Representative",
+   "title": "https://ustr.gov/sites/default/files/files/Issue_Areas/Enforcement/Section%20301/USTR%20FRN%20Extending%20Section%20301%20China%20FTT%20Exclusions%20to%20Jan%202027.pdf",
+   "url": "https://ustr.gov/sites/default/files/files/Issue_Areas/Enforcement/Section%20301/USTR%20FRN%20Extending%20Section%20301%20China%20FTT%20Exclusions%20to%20Jan%202027.pdf",
+   "lang": "en",
+   "verify_status": "verified",
+   "in_synthesis": false,
+   "used_in": [
+    "reports/2026-11-13_weekly.html"
+   ]
+  },
+  {
+   "source_id": "S-009",
+   "tier": 3,
+   "publisher": "Trading Economics",
+   "title": "https://tradingeconomics.com/vietnam/gdp-growth-annual",
+   "url": "https://tradingeconomics.com/vietnam/gdp-growth-annual",
+   "lang": "en",
+   "verify_status": "media_unverified",
+   "in_synthesis": false,
+   "used_in": [
+    "reports/2026-11-13_weekly.html"
+   ]
+  },
+  {
+   "source_id": "S-010",
+   "tier": 1,
+   "publisher": "中国商务部",
+   "title": "https://sa.mofcom.gov.cn/jmxw/art/2026/art_eb55daeacd284bab9592428d1f5d1477.html",
+   "url": "https://sa.mofcom.gov.cn/jmxw/art/2026/art_eb55daeacd284bab9592428d1f5d1477.html",
+   "lang": "en",
+   "verify_status": "verified",
+   "in_synthesis": false,
+   "used_in": [
+    "reports/2026-11-13_weekly.html"
+   ]
+  },
+  {
+   "source_id": "S-011",
+   "tier": 1,
+   "publisher": "China Today",
+   "title": "https://www.chinatoday.com.cn/zw2018/bktg/202611/t20261106_800450538.html",
+   "url": "https://www.chinatoday.com.cn/zw2018/bktg/202611/t20261106_800450538.html",
+   "lang": "en",
+   "verify_status": "verified",
+   "in_synthesis": false,
+   "used_in": [
+    "reports/2026-11-13_weekly.html"
+   ]
+  },
+  {
+   "source_id": "S-012",
+   "tier": 1,
+   "publisher": "中国国家统计局（官方微信号）",
+   "title": "https://mp.weixin.qq.com/s?__biz=Mzg2ODE1NDY2Ng==&mid=2247547768&idx=5&sn=3122118ccb7faec000e4e194dc31457e",
+   "url": "https://mp.weixin.qq.com/s?__biz=Mzg2ODE1NDY2Ng==&mid=2247547768&idx=5&sn=3122118ccb7faec000e4e194dc31457e",
+   "lang": "en",
+   "verify_status": "verified",
+   "in_synthesis": false,
+   "used_in": [
+    "reports/2026-11-13_weekly.html"
+   ]
+  },
+  {
+   "source_id": "S-013",
+   "tier": 1,
+   "publisher": "U.S. Bureau of Economic Analysis",
+   "title": "https://www.bea.gov/news/glance",
+   "url": "https://www.bea.gov/news/glance",
+   "lang": "en",
+   "verify_status": "verified",
+   "in_synthesis": false,
+   "used_in": [
+    "reports/2026-11-13_weekly.html"
+   ]
+  },
+  {
+   "source_id": "S-014",
+   "tier": 1,
+   "publisher": "日本内阁府经济社会综合研究所",
+   "title": "https://www.esri.cao.go.jp/jp/sna/menu.html",
+   "url": "https://www.esri.cao.go.jp/jp/sna/menu.html",
+   "lang": "en",
+   "verify_status": "verified",
+   "in_synthesis": false,
+   "used_in": [
+    "reports/2026-11-13_weekly.html"
+   ]
+  },
+  {
+   "source_id": "S-015",
+   "tier": 1,
+   "publisher": "韩国银行",
+   "title": "https://www.bok.or.kr/",
+   "url": "https://www.bok.or.kr/",
+   "lang": "en",
+   "verify_status": "verified",
+   "in_synthesis": false,
+   "used_in": [
+    "reports/2026-11-13_weekly.html"
+   ]
+  },
+  {
+   "source_id": "S-016",
+   "tier": 1,
+   "publisher": "UK Office for National Statistics",
+   "title": "https://www.ons.gov.uk/economy/grossdomesticproductgdp/bulletins/quarterlynationalaccounts/latest",
+   "url": "https://www.ons.gov.uk/economy/grossdomesticproductgdp/bulletins/quarterlynationalaccounts/latest",
+   "lang": "en",
+   "verify_status": "verified",
+   "in_synthesis": false,
+   "used_in": [
+    "reports/2026-11-13_weekly.html"
+   ]
+  },
+  {
+   "source_id": "S-017",
+   "tier": 1,
+   "publisher": "日本总务省统计局",
+   "title": "https://www.stat.go.jp/english/",
+   "url": "https://www.stat.go.jp/english/",
+   "lang": "en",
+   "verify_status": "verified",
+   "in_synthesis": false,
+   "used_in": [
+    "reports/2026-11-13_weekly.html"
+   ]
+  },
+  {
+   "source_id": "S-018",
+   "tier": 1,
+   "publisher": "澳大利亚储备银行",
+   "title": "https://www.rba.gov.au/inflation-overview.html",
+   "url": "https://www.rba.gov.au/inflation-overview.html",
+   "lang": "en",
+   "verify_status": "verified",
+   "in_synthesis": false,
+   "used_in": [
+    "reports/2026-11-13_weekly.html"
+   ]
+  },
+  {
+   "source_id": "S-019",
+   "tier": 1,
+   "publisher": "新西兰统计局",
+   "title": "https://www.stats.govt.nz/",
+   "url": "https://www.stats.govt.nz/",
+   "lang": "en",
+   "verify_status": "verified",
+   "in_synthesis": false,
+   "used_in": [
+    "reports/2026-11-13_weekly.html"
+   ]
+  },
+  {
+   "source_id": "S-020",
+   "tier": 1,
+   "publisher": "U.S. Federal Reserve",
+   "title": "https://www.federalreserve.gov/",
+   "url": "https://www.federalreserve.gov/",
+   "lang": "en",
+   "verify_status": "verified",
+   "in_synthesis": false,
+   "used_in": [
+    "reports/2026-11-13_weekly.html"
+   ]
+  },
+  {
+   "source_id": "S-021",
+   "tier": 1,
+   "publisher": "U.S. Fiscal Data",
+   "title": "https://fiscaldata.treasury.gov/",
+   "url": "https://fiscaldata.treasury.gov/",
+   "lang": "en",
+   "verify_status": "verified",
+   "in_synthesis": false,
+   "used_in": [
+    "reports/2026-11-13_weekly.html"
+   ]
+  },
+  {
+   "source_id": "S-022",
+   "tier": 1,
+   "publisher": "中国人民银行",
+   "title": "https://www.pbc.gov.cn/",
+   "url": "https://www.pbc.gov.cn/",
+   "lang": "en",
+   "verify_status": "verified",
+   "in_synthesis": false,
+   "used_in": [
+    "reports/2026-11-13_weekly.html"
+   ]
+  },
+  {
+   "source_id": "S-023",
+   "tier": 1,
+   "publisher": "European Central Bank",
+   "title": "https://www.ecb.europa.eu/",
+   "url": "https://www.ecb.europa.eu/",
+   "lang": "en",
+   "verify_status": "verified",
+   "in_synthesis": false,
+   "used_in": [
+    "reports/2026-11-13_weekly.html"
+   ]
+  },
+  {
+   "source_id": "S-024",
+   "tier": 1,
+   "publisher": "日本银行",
+   "title": "https://www.boj.or.jp/en/",
+   "url": "https://www.boj.or.jp/en/",
+   "lang": "en",
+   "verify_status": "verified",
+   "in_synthesis": false,
+   "used_in": [
+    "reports/2026-11-13_weekly.html"
+   ]
+  },
+  {
+   "source_id": "S-025",
+   "tier": 1,
+   "publisher": "Bank of England",
+   "title": "https://www.bankofengland.co.uk/",
+   "url": "https://www.bankofengland.co.uk/",
+   "lang": "en",
+   "verify_status": "verified",
+   "in_synthesis": false,
+   "used_in": [
+    "reports/2026-11-13_weekly.html"
+   ]
+  },
+  {
+   "source_id": "S-026",
+   "tier": 1,
+   "publisher": "澳大利亚储备银行",
+   "title": "https://www.rba.gov.au/news/",
+   "url": "https://www.rba.gov.au/news/",
+   "lang": "en",
+   "verify_status": "verified",
+   "in_synthesis": false,
+   "used_in": [
+    "reports/2026-11-13_weekly.html"
+   ]
+  },
+  {
+   "source_id": "S-027",
+   "tier": 1,
+   "publisher": "新西兰储备银行",
+   "title": "https://www.rbnz.govt.nz/",
+   "url": "https://www.rbnz.govt.nz/",
+   "lang": "en",
+   "verify_status": "verified",
+   "in_synthesis": false,
+   "used_in": [
+    "reports/2026-11-13_weekly.html"
+   ]
+  },
+  {
+   "source_id": "S-028",
+   "tier": 4,
+   "publisher": "Trump Trade Tracker",
+   "title": "https://trumptradetracker.com/",
+   "url": "https://trumptradetracker.com/",
+   "lang": "en",
+   "verify_status": "media_unverified",
+   "in_synthesis": false,
+   "used_in": [
+    "reports/2026-11-13_weekly.html"
+   ]
+  },
+  {
+   "source_id": "S-029",
+   "tier": 1,
+   "publisher": "World Trade Organization",
+   "title": "https://www.wto.org/",
+   "url": "https://www.wto.org/",
+   "lang": "en",
+   "verify_status": "verified",
+   "in_synthesis": false,
+   "used_in": [
+    "reports/2026-11-13_weekly.html"
+   ]
+  },
+  {
+   "source_id": "S-030",
+   "tier": 1,
+   "publisher": "European Commission",
+   "title": "https://taxation-customs.ec.europa.eu/carbon-border-adjustment-mechanism_en",
+   "url": "https://taxation-customs.ec.europa.eu/carbon-border-adjustment-mechanism_en",
+   "lang": "en",
+   "verify_status": "verified",
+   "in_synthesis": false,
+   "used_in": [
+    "reports/2026-11-13_weekly.html"
+   ]
+  },
+  {
+   "source_id": "S-031",
+   "tier": 1,
+   "publisher": "European Commission",
+   "title": "https://ec.europa.eu/",
+   "url": "https://ec.europa.eu/",
+   "lang": "en",
+   "verify_status": "verified",
+   "in_synthesis": false,
+   "used_in": [
+    "reports/2026-11-13_weekly.html"
+   ]
+  },
+  {
+   "source_id": "S-032",
+   "tier": 1,
+   "publisher": "U.S. Department of Commerce",
+   "title": "https://www.commerce.gov/",
+   "url": "https://www.commerce.gov/",
+   "lang": "en",
+   "verify_status": "verified",
+   "in_synthesis": false,
+   "used_in": [
+    "reports/2026-11-13_weekly.html"
+   ]
+  },
+  {
+   "source_id": "S-033",
+   "tier": 1,
+   "publisher": "日本经济产业省",
+   "title": "https://www.meti.go.jp/",
+   "url": "https://www.meti.go.jp/",
+   "lang": "en",
+   "verify_status": "verified",
+   "in_synthesis": false,
+   "used_in": [
+    "reports/2026-11-13_weekly.html"
+   ]
+  },
+  {
+   "source_id": "S-034",
+   "tier": 1,
+   "publisher": "中国商务部",
+   "title": "https://www.mofcom.gov.cn/",
+   "url": "https://www.mofcom.gov.cn/",
+   "lang": "en",
+   "verify_status": "verified",
+   "in_synthesis": false,
+   "used_in": [
+    "reports/2026-11-13_weekly.html"
+   ]
+  },
+  {
+   "source_id": "S-035",
+   "tier": 1,
+   "publisher": "U.S. Department of the Treasury",
+   "title": "https://home.treasury.gov/",
+   "url": "https://home.treasury.gov/",
+   "lang": "en",
+   "verify_status": "verified",
+   "in_synthesis": false,
+   "used_in": [
+    "reports/2026-11-13_weekly.html"
+   ]
+  },
+  {
+   "source_id": "S-036",
+   "tier": 1,
+   "publisher": "U.S. Bureau of Industry and Security",
+   "title": "https://www.bis.doc.gov/",
+   "url": "https://www.bis.doc.gov/",
+   "lang": "en",
+   "verify_status": "verified",
+   "in_synthesis": false,
+   "used_in": [
+    "reports/2026-11-13_weekly.html"
+   ]
+  },
+  {
+   "source_id": "S-037",
+   "tier": 3,
+   "publisher": "Trading Economics",
+   "title": "https://tradingeconomics.com/malaysia/gdp-growth-annual",
+   "url": "https://tradingeconomics.com/malaysia/gdp-growth-annual",
+   "lang": "en",
+   "verify_status": "media_unverified",
+   "in_synthesis": false,
+   "used_in": [
+    "reports/2026-11-13_weekly.html"
+   ]
+  },
+  {
+   "source_id": "S-038",
+   "tier": 1,
+   "publisher": "Central Bank of the UAE",
+   "title": "https://www.cbuae.gov.ae/",
+   "url": "https://www.cbuae.gov.ae/",
+   "lang": "en",
+   "verify_status": "verified",
+   "in_synthesis": false,
+   "used_in": [
+    "reports/2026-11-13_weekly.html"
+   ]
+  },
+  {
+   "source_id": "S-039",
+   "tier": 1,
+   "publisher": "International Monetary Fund (IMF)",
+   "title": "https://www.imf.org/",
+   "url": "https://www.imf.org/",
+   "lang": "en",
+   "verify_status": "verified",
+   "in_synthesis": false,
+   "used_in": [
+    "reports/2026-11-13_weekly.html"
+   ]
+  },
+  {
+   "source_id": "S-040",
+   "tier": 1,
+   "publisher": "新华网",
+   "title": "http://www.xinhuanet.com/english/20260325/a9ed89d8609d4450b54691f51f56620f/c.html",
+   "url": "http://www.xinhuanet.com/english/20260325/a9ed89d8609d4450b54691f51f56620f/c.html",
+   "lang": "en",
+   "verify_status": "verified",
+   "in_synthesis": false,
+   "used_in": [
+    "reports/2026-11-13_weekly.html"
+   ]
+  },
+  {
+   "source_id": "S-041",
+   "tier": 3,
+   "publisher": "Kitco",
+   "title": "https://www.kitco.com/charts/gold",
+   "url": "https://www.kitco.com/charts/gold",
+   "lang": "en",
+   "verify_status": "media_unverified",
+   "in_synthesis": false,
+   "used_in": [
+    "reports/2026-11-13_weekly.html"
+   ]
+  },
+  {
+   "source_id": "S-042",
+   "tier": 3,
+   "publisher": "London Metal Exchange",
+   "title": "https://www.lme.com/market-data/reports-and-data/lme-official-prices",
+   "url": "https://www.lme.com/market-data/reports-and-data/lme-official-prices",
+   "lang": "en",
+   "verify_status": "media_unverified",
+   "in_synthesis": false,
+   "used_in": [
+    "reports/2026-11-13_weekly.html"
+   ]
+  }
+ ]
+}

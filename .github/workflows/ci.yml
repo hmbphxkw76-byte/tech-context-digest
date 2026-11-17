@@ -1,0 +1,138 @@
+name: CI 校验
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+permissions:
+  issues: write     # 闭环修正工单（门禁 [E] / 活跃度超阈值）建 Issue
+  statuses: write   # 「上报 commit status」步骤需要
+
+jobs:
+  syntax:
+    name: Python 语法检查
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09  # v5
+
+      - name: 设置 Python
+        uses: actions/setup-python@ece7cb06caefa5fff74198d8649806c4678c61a1  # v6
+        with:
+          python-version: "3.12"
+
+      - name: 工作区预清理（缓存/临时/构建产物）
+        uses: ./.github/actions/workspace-cleanup
+
+      - name: 编译检查全部 Python 文件
+        run: |
+          python -m py_compile engine/tools/*.py engine/tests/*.py
+          find . -path ./.git -prune -o -name "*.py" -print0 | xargs -0 -r python -m py_compile
+          echo "✅ 语法检查通过"
+
+      - name: 工作区收尾清理（始终执行）
+        if: always()
+        uses: ./.github/actions/workspace-cleanup
+
+  test:
+    name: 单元测试
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09  # v5
+
+      - name: 设置 Python
+        uses: actions/setup-python@ece7cb06caefa5fff74198d8649806c4678c61a1  # v6
+        with:
+          python-version: "3.12"
+
+      - name: 安装依赖
+        run: pip install -r requirements.txt
+
+      - name: 工作区预清理（缓存/临时/构建产物）
+        uses: ./.github/actions/workspace-cleanup
+
+      - name: 运行单元测试
+        run: python -m unittest discover -s engine/tests -v
+
+      - name: 工作区收尾清理（始终执行）
+        if: always()
+        uses: ./.github/actions/workspace-cleanup
+
+  # 全链路唯一门禁入口（P1-2 去重）：结构 / 规范 / 合规 / 归位 / 链接 / 页面 /
+  # 来源登记(L0) / 研究内核 / 信息分层四门禁 / 指标字典 / 发布日历 / 发布指纹
+  # 全部收敛于 optimization_gate，各阶段不再分项重复扫描（T6）。
+  # --probe：R6 死链真阻断（明确 404/410/451 阻断；反爬/超时仅告警）。
+  validate:
+    # job 名必须与 main 分支保护的必需检查「结构与规范校验」一致；
+    # 内容为全链路统一入口 optimization_gate（P1-2 去重后不再分项）。
+    name: 结构与规范校验
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09  # v5
+
+      - name: 设置 Python
+        uses: actions/setup-python@ece7cb06caefa5fff74198d8649806c4678c61a1  # v6
+        with:
+          python-version: "3.12"
+
+      - name: 安装依赖
+        run: pip install -r requirements.txt
+
+      - name: 工作区预清理（缓存/临时/构建产物）
+        uses: ./.github/actions/workspace-cleanup
+
+      - name: 优化流程一致性门禁（统一入口 · 含 probe）
+        run: |
+          set +e
+          python engine/tools/optimization_gate.py --gate-period 2026-12 --source-gate-period 2027-01 --probe
+          code=$?
+          if [ "$code" -eq 1 ]; then
+            echo "::error::统一门禁失败：存在错误项（见上方输出）"
+            exit 1
+          elif [ "$code" -eq 2 ]; then
+            echo "::warning::统一门禁存在警告项（不阻断合并）"
+          fi
+          exit 0
+
+      - name: 上报 commit status
+        if: always()
+        uses: actions/github-script@f28e40c7f34bde8b3046d885e986cb6290c5673b  # v7
+        with:
+          script: |
+            const state = '${{ job.status }}' === 'success' ? 'success' : 'failure';
+            await github.rest.repos.createCommitStatus({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              sha: context.sha,
+              state: state,
+              context: 'ci/unified-gate',
+              description: state === 'success' ? '统一门禁通过' : '统一门禁失败',
+              target_url: `${context.payload.repository.html_url}/actions/runs/${context.runId}`
+            });
+
+      - name: 闭环修正工单（门禁 [E] / 活跃度超阈值）
+        if: always()
+        uses: ./.github/actions/remediation-ticket
+
+      - name: 工作区收尾清理（始终执行）
+        if: always()
+        uses: ./.github/actions/workspace-cleanup
+
+  # 失败时仅发 webhook（PR 检查失败由 GitHub 原生通知，不额外建 Issue 以免刷屏）。
+  webhook-alert:
+    name: Webhook 告警
+    # 覆盖 CI 全部作业：任一失败均告警（对齐 page-build-governance §2.2
+    # 「webhook-alert 由上述失败触发」，不再仅覆盖统一门禁）。
+    needs: [syntax, test, validate]
+    if: failure()
+    uses: ./.github/workflows/webhook-alert.yml
+    with:
+      title: "[automation-failure] CI 统一门禁失败 @ ${{ github.run_id }}"
+      message: |
+        CI 统一门禁失败，请查看日志并修复后重推。
+        运行链接：${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+      level: error
+      run_url: "${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"
+    secrets:
+      AUTOMATION_WEBHOOK_URL: ${{ secrets.AUTOMATION_WEBHOOK_URL }}

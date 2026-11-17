@@ -1,0 +1,939 @@
+{
+  "schema_version": "1.0",
+  "updated": "2026-11-16",
+  "comment": "机构级分级主数据（单一事实源）：机构 → 来源分级 tier（1 官方一手 / 2 行业机构 / 3 挂牌门户 / 4 媒体转述）。source_check R7 以此校验 source_registry 与 business-config 来源优先级的一致性；新增机构须先登记本表。",
+  "tiers": {
+    "1": "官方一手",
+    "2": "行业机构",
+    "3": "挂牌门户",
+    "4": "媒体转述"
+  },
+  "institutions": [
+    {
+      "name": "ADGM (Abu Dhabi Global Market)",
+      "tier": 1,
+      "aliases": []
+    },
+    {
+      "name": "Abu Dhabi Government Media Office",
+      "tier": 1,
+      "aliases": []
+    },
+    {
+      "name": "Anthropic",
+      "tier": 1,
+      "aliases": []
+    },
+    {
+      "name": "Bank of England",
+      "tier": 1,
+      "aliases": []
+    },
+    {
+      "name": "CPX",
+      "tier": 1,
+      "aliases": []
+    },
+    {
+      "name": "Central Bank of the UAE",
+      "tier": 1,
+      "aliases": []
+    },
+    {
+      "name": "Central Bank of the UAE (CBUAE)",
+      "tier": 1,
+      "aliases": [
+        "Central Bank of the UAE",
+        "CBUAE"
+      ]
+    },
+    {
+      "name": "China Today",
+      "tier": 1,
+      "aliases": []
+    },
+    {
+      "name": "Codeium",
+      "tier": 1,
+      "aliases": []
+    },
+    {
+      "name": "Core42",
+      "tier": 1,
+      "aliases": []
+    },
+    {
+      "name": "Cursor（Anysphere）",
+      "tier": 1,
+      "aliases": []
+    },
+    {
+      "name": "DIFC (Dubai International Financial Centre)",
+      "tier": 1,
+      "aliases": []
+    },
+    {
+      "name": "Digital Dubai / DDSE",
+      "tier": 1,
+      "aliases": [
+        "DDSE",
+        "Dubai LFS（DDSE）"
+      ]
+    },
+    {
+      "name": "Dubai Electronic Security Center (DESC)",
+      "tier": 1,
+      "aliases": []
+    },
+    {
+      "name": "Dubai Land Department (DLD)",
+      "tier": 1,
+      "aliases": [
+        "DLD"
+      ]
+    },
+    {
+      "name": "Dubai Municipality",
+      "tier": 1,
+      "aliases": []
+    },
+    {
+      "name": "Dubai Pulse / DLD Open Data",
+      "tier": 1,
+      "aliases": [
+        "Dubai Pulse",
+        "DLD Open Data"
+      ]
+    },
+    {
+      "name": "Dubai Statistics Centre (DSC)",
+      "tier": 1,
+      "aliases": [
+        "DSC"
+      ]
+    },
+    {
+      "name": "Dubai.ae Open Data",
+      "tier": 1,
+      "aliases": []
+    },
+    {
+      "name": "EUR-Lex（EU 官方）",
+      "tier": 1,
+      "aliases": []
+    },
+    {
+      "name": "Emirates News Agency (WAM)",
+      "tier": 1,
+      "aliases": [
+        "WAM"
+      ]
+    },
+    {
+      "name": "European Central Bank",
+      "tier": 1,
+      "aliases": []
+    },
+    {
+      "name": "European Commission",
+      "tier": 1,
+      "aliases": []
+    },
+    {
+      "name": "Federal Competitiveness and Statistics Centre",
+      "tier": 1,
+      "aliases": []
+    },
+    {
+      "name": "G42",
+      "tier": 1,
+      "aliases": []
+    },
+    {
+      "name": "GitHub Blog",
+      "tier": 1,
+      "aliases": []
+    },
+    {
+      "name": "Government of Dubai Media Office",
+      "tier": 1,
+      "aliases": []
+    },
+    {
+      "name": "Hub71",
+      "tier": 1,
+      "aliases": []
+    },
+    {
+      "name": "International Monetary Fund (IMF)",
+      "tier": 1,
+      "aliases": [
+        "IMF"
+      ]
+    },
+    {
+      "name": "International Telecommunication Union (ITU)",
+      "tier": 1,
+      "aliases": []
+    },
+    {
+      "name": "LumiTech",
+      "tier": 1,
+      "aliases": []
+    },
+    {
+      "name": "METR",
+      "tier": 1,
+      "aliases": []
+    },
+    {
+      "name": "MITRE ATLAS",
+      "tier": 1,
+      "aliases": []
+    },
+    {
+      "name": "Tech Life Research（本仓库）",
+      "tier": 1,
+      "aliases": []
+    },
+    {
+      "name": "Microsoft",
+      "tier": 1,
+      "aliases": []
+    },
+    {
+      "name": "Moonshot AI（Kimi）",
+      "tier": 1,
+      "aliases": []
+    },
+    {
+      "name": "Moro Hub (Digital Dubai)",
+      "tier": 1,
+      "aliases": []
+    },
+    {
+      "name": "Office of the U.S. Trade Representative",
+      "tier": 1,
+      "aliases": []
+    },
+    {
+      "name": "OpenAI",
+      "tier": 1,
+      "aliases": []
+    },
+    {
+      "name": "Stanford HAI",
+      "tier": 1,
+      "aliases": []
+    },
+    {
+      "name": "Telecommunications and Digital Government Regulatory Authority",
+      "tier": 1,
+      "aliases": []
+    },
+    {
+      "name": "U.S. Bureau of Economic Analysis",
+      "tier": 1,
+      "aliases": []
+    },
+    {
+      "name": "U.S. Bureau of Industry and Security",
+      "tier": 1,
+      "aliases": []
+    },
+    {
+      "name": "U.S. Department of Commerce",
+      "tier": 1,
+      "aliases": []
+    },
+    {
+      "name": "U.S. Department of the Treasury",
+      "tier": 1,
+      "aliases": []
+    },
+    {
+      "name": "U.S. Energy Information Administration",
+      "tier": 1,
+      "aliases": []
+    },
+    {
+      "name": "U.S. Federal Reserve",
+      "tier": 1,
+      "aliases": [
+        "Federal Reserve"
+      ]
+    },
+    {
+      "name": "U.S. Fiscal Data",
+      "tier": 1,
+      "aliases": []
+    },
+    {
+      "name": "U.S. SEC EDGAR",
+      "tier": 1,
+      "aliases": []
+    },
+    {
+      "name": "UAE Government",
+      "tier": 1,
+      "aliases": []
+    },
+    {
+      "name": "UAE Government AI",
+      "tier": 1,
+      "aliases": []
+    },
+    {
+      "name": "UAE Ministry of Finance",
+      "tier": 1,
+      "aliases": []
+    },
+    {
+      "name": "UAE Ministry of Foreign Affairs",
+      "tier": 1,
+      "aliases": []
+    },
+    {
+      "name": "UAE MoHRE (ILOE)",
+      "tier": 1,
+      "aliases": []
+    },
+    {
+      "name": "UAE Supreme Council",
+      "tier": 1,
+      "aliases": []
+    },
+    {
+      "name": "UK Office for National Statistics",
+      "tier": 1,
+      "aliases": []
+    },
+    {
+      "name": "UNCTAD",
+      "tier": 1,
+      "aliases": []
+    },
+    {
+      "name": "World Trade Organization",
+      "tier": 1,
+      "aliases": []
+    },
+    {
+      "name": "e&",
+      "tier": 1,
+      "aliases": []
+    },
+    {
+      "name": "中国人民银行",
+      "tier": 1,
+      "aliases": []
+    },
+    {
+      "name": "中国商务部",
+      "tier": 1,
+      "aliases": []
+    },
+    {
+      "name": "中国国家统计局（官方微信号）",
+      "tier": 1,
+      "aliases": []
+    },
+    {
+      "name": "中国政府网",
+      "tier": 1,
+      "aliases": []
+    },
+    {
+      "name": "新华网",
+      "tier": 1,
+      "aliases": []
+    },
+    {
+      "name": "新西兰储备银行",
+      "tier": 1,
+      "aliases": []
+    },
+    {
+      "name": "新西兰统计局",
+      "tier": 1,
+      "aliases": []
+    },
+    {
+      "name": "日本内阁府经济社会综合研究所",
+      "tier": 1,
+      "aliases": []
+    },
+    {
+      "name": "日本总务省统计局",
+      "tier": 1,
+      "aliases": []
+    },
+    {
+      "name": "日本经济产业省",
+      "tier": 1,
+      "aliases": []
+    },
+    {
+      "name": "日本银行",
+      "tier": 1,
+      "aliases": []
+    },
+    {
+      "name": "澳大利亚储备银行",
+      "tier": 1,
+      "aliases": []
+    },
+    {
+      "name": "韩国银行",
+      "tier": 1,
+      "aliases": []
+    },
+    {
+      "name": "(ISC)²",
+      "tier": 2,
+      "aliases": []
+    },
+    {
+      "name": "Black Hat MEA",
+      "tier": 2,
+      "aliases": []
+    },
+    {
+      "name": "CBRE",
+      "tier": 2,
+      "aliases": []
+    },
+    {
+      "name": "Cavendish Maxwell",
+      "tier": 2,
+      "aliases": []
+    },
+    {
+      "name": "Chambers and Partners",
+      "tier": 2,
+      "aliases": []
+    },
+    {
+      "name": "Cloud Security Alliance (CSA)",
+      "tier": 2,
+      "aliases": []
+    },
+    {
+      "name": "Colo Price",
+      "tier": 2,
+      "aliases": []
+    },
+    {
+      "name": "Crescore Real Estate",
+      "tier": 2,
+      "aliases": []
+    },
+    {
+      "name": "Cushman & Wakefield",
+      "tier": 2,
+      "aliases": [
+        "Cushman & Wakefield Core"
+      ]
+    },
+    {
+      "name": "CyberDefenders",
+      "tier": 2,
+      "aliases": []
+    },
+    {
+      "name": "Cybersecurity Database",
+      "tier": 2,
+      "aliases": []
+    },
+    {
+      "name": "DXBinteract",
+      "tier": 2,
+      "aliases": []
+    },
+    {
+      "name": "Dubai Real Estate Data",
+      "tier": 2,
+      "aliases": []
+    },
+    {
+      "name": "Dynamic Logics",
+      "tier": 2,
+      "aliases": []
+    },
+    {
+      "name": "EGSH",
+      "tier": 2,
+      "aliases": []
+    },
+    {
+      "name": "GISEC",
+      "tier": 2,
+      "aliases": []
+    },
+    {
+      "name": "GITEX GLOBAL",
+      "tier": 2,
+      "aliases": []
+    },
+    {
+      "name": "GRIT Services",
+      "tier": 2,
+      "aliases": []
+    },
+    {
+      "name": "Gartner",
+      "tier": 2,
+      "aliases": []
+    },
+    {
+      "name": "Global Market Insights",
+      "tier": 2,
+      "aliases": []
+    },
+    {
+      "name": "Grand View Research",
+      "tier": 2,
+      "aliases": []
+    },
+    {
+      "name": "HZ Legal",
+      "tier": 2,
+      "aliases": []
+    },
+    {
+      "name": "HireDeveloper",
+      "tier": 2,
+      "aliases": []
+    },
+    {
+      "name": "ISACA",
+      "tier": 2,
+      "aliases": []
+    },
+    {
+      "name": "Incorp Arabia",
+      "tier": 2,
+      "aliases": []
+    },
+    {
+      "name": "JLL",
+      "tier": 2,
+      "aliases": []
+    },
+    {
+      "name": "Knight Frank",
+      "tier": 2,
+      "aliases": []
+    },
+    {
+      "name": "Labeeb",
+      "tier": 2,
+      "aliases": []
+    },
+    {
+      "name": "MASTC Group",
+      "tier": 2,
+      "aliases": []
+    },
+    {
+      "name": "Menlo Ventures",
+      "tier": 2,
+      "aliases": []
+    },
+    {
+      "name": "Mordor Intelligence",
+      "tier": 2,
+      "aliases": []
+    },
+    {
+      "name": "Multiplier",
+      "tier": 2,
+      "aliases": []
+    },
+    {
+      "name": "NIST",
+      "tier": 2,
+      "aliases": []
+    },
+    {
+      "name": "OWASP",
+      "tier": 2,
+      "aliases": []
+    },
+    {
+      "name": "OWASP GenAI Security",
+      "tier": 2,
+      "aliases": []
+    },
+    {
+      "name": "Peak Trust",
+      "tier": 2,
+      "aliases": []
+    },
+    {
+      "name": "Property Monitor (Seven Century)",
+      "tier": 2,
+      "aliases": []
+    },
+    {
+      "name": "PropertyIndex.ae",
+      "tier": 2,
+      "aliases": []
+    },
+    {
+      "name": "QualySec",
+      "tier": 2,
+      "aliases": []
+    },
+    {
+      "name": "RFSons HR",
+      "tier": 2,
+      "aliases": []
+    },
+    {
+      "name": "Reidin",
+      "tier": 2,
+      "aliases": []
+    },
+    {
+      "name": "RemoFirst",
+      "tier": 2,
+      "aliases": []
+    },
+    {
+      "name": "SANS GIAC",
+      "tier": 2,
+      "aliases": []
+    },
+    {
+      "name": "SANS Institute",
+      "tier": 2,
+      "aliases": []
+    },
+    {
+      "name": "Savills Middle East",
+      "tier": 2,
+      "aliases": []
+    },
+    {
+      "name": "Speakeasy",
+      "tier": 2,
+      "aliases": []
+    },
+    {
+      "name": "Takween Advisory",
+      "tier": 2,
+      "aliases": []
+    },
+    {
+      "name": "ValuStrat",
+      "tier": 2,
+      "aliases": []
+    },
+    {
+      "name": "WhichPayroll",
+      "tier": 2,
+      "aliases": []
+    },
+    {
+      "name": "arXiv",
+      "tier": 2,
+      "aliases": []
+    },
+    {
+      "name": "Angel in Dubai",
+      "tier": 3,
+      "aliases": []
+    },
+    {
+      "name": "Best AI Certifications",
+      "tier": 3,
+      "aliases": []
+    },
+    {
+      "name": "CV Pro Maker",
+      "tier": 3,
+      "aliases": []
+    },
+    {
+      "name": "CertCrush",
+      "tier": 3,
+      "aliases": []
+    },
+    {
+      "name": "CertiGuard",
+      "tier": 3,
+      "aliases": []
+    },
+    {
+      "name": "Charterhouse ME",
+      "tier": 3,
+      "aliases": []
+    },
+    {
+      "name": "Cooper Fitch",
+      "tier": 3,
+      "aliases": []
+    },
+    {
+      "name": "DXB Start",
+      "tier": 3,
+      "aliases": []
+    },
+    {
+      "name": "DXB Talk",
+      "tier": 3,
+      "aliases": []
+    },
+    {
+      "name": "Dubai Practical",
+      "tier": 3,
+      "aliases": []
+    },
+    {
+      "name": "East Property",
+      "tier": 3,
+      "aliases": []
+    },
+    {
+      "name": "Expatsi",
+      "tier": 3,
+      "aliases": []
+    },
+    {
+      "name": "Felix Happich",
+      "tier": 3,
+      "aliases": []
+    },
+    {
+      "name": "JobsX Dubai",
+      "tier": 3,
+      "aliases": []
+    },
+    {
+      "name": "Kitco",
+      "tier": 3,
+      "aliases": []
+    },
+    {
+      "name": "LinkedIn",
+      "tier": 3,
+      "aliases": []
+    },
+    {
+      "name": "London Metal Exchange",
+      "tier": 3,
+      "aliases": []
+    },
+    {
+      "name": "MakeMyCV",
+      "tier": 3,
+      "aliases": []
+    },
+    {
+      "name": "Mirabello Consultancy",
+      "tier": 3,
+      "aliases": []
+    },
+    {
+      "name": "Numbeo",
+      "tier": 3,
+      "aliases": []
+    },
+    {
+      "name": "Quid Pro Quo",
+      "tier": 3,
+      "aliases": []
+    },
+    {
+      "name": "Reaphr",
+      "tier": 3,
+      "aliases": []
+    },
+    {
+      "name": "Relocate2UAE",
+      "tier": 3,
+      "aliases": []
+    },
+    {
+      "name": "Trading Economics",
+      "tier": 3,
+      "aliases": []
+    },
+    {
+      "name": "UAE Signal",
+      "tier": 3,
+      "aliases": []
+    },
+    {
+      "name": "Visa Simplified",
+      "tier": 3,
+      "aliases": []
+    },
+    {
+      "name": "VisaHQ",
+      "tier": 3,
+      "aliases": []
+    },
+    {
+      "name": "WAQOV",
+      "tier": 3,
+      "aliases": []
+    },
+    {
+      "name": "Worldwide Relocation Services",
+      "tier": 3,
+      "aliases": []
+    },
+    {
+      "name": "17173",
+      "tier": 4,
+      "aliases": []
+    },
+    {
+      "name": "36氪",
+      "tier": 4,
+      "aliases": []
+    },
+    {
+      "name": "Bloomberg",
+      "tier": 4,
+      "aliases": []
+    },
+    {
+      "name": "Brief News",
+      "tier": 4,
+      "aliases": []
+    },
+    {
+      "name": "Business Wire",
+      "tier": 4,
+      "aliases": []
+    },
+    {
+      "name": "CSDN",
+      "tier": 4,
+      "aliases": []
+    },
+    {
+      "name": "GEC Newswire",
+      "tier": 4,
+      "aliases": []
+    },
+    {
+      "name": "Gulf News",
+      "tier": 4,
+      "aliases": []
+    },
+    {
+      "name": "Gulf Time",
+      "tier": 4,
+      "aliases": []
+    },
+    {
+      "name": "Khaleej Times",
+      "tier": 4,
+      "aliases": []
+    },
+    {
+      "name": "OffPlan Insider",
+      "tier": 4,
+      "aliases": []
+    },
+    {
+      "name": "Product Coalition (Medium)",
+      "tier": 4,
+      "aliases": []
+    },
+    {
+      "name": "SearchInform",
+      "tier": 4,
+      "aliases": []
+    },
+    {
+      "name": "Telecom Review",
+      "tier": 4,
+      "aliases": []
+    },
+    {
+      "name": "The Arabian Post",
+      "tier": 4,
+      "aliases": []
+    },
+    {
+      "name": "The Gulf Pulse",
+      "tier": 4,
+      "aliases": []
+    },
+    {
+      "name": "The National",
+      "tier": 4,
+      "aliases": []
+    },
+    {
+      "name": "Trump Trade Tracker",
+      "tier": 4,
+      "aliases": []
+    },
+    {
+      "name": "UAE Inform",
+      "tier": 4,
+      "aliases": []
+    },
+    {
+      "name": "Zawya",
+      "tier": 4,
+      "aliases": []
+    },
+    {
+      "name": "博客园",
+      "tier": 4,
+      "aliases": []
+    },
+    {
+      "name": "央广网",
+      "tier": 4,
+      "aliases": []
+    },
+    {
+      "name": "新华社英文网",
+      "tier": 4,
+      "aliases": []
+    },
+    {
+      "name": "新浪财经",
+      "tier": 4,
+      "aliases": []
+    },
+    {
+      "name": "百度百家号",
+      "tier": 4,
+      "aliases": []
+    },
+    {
+      "name": "百度百科",
+      "tier": 4,
+      "aliases": []
+    },
+    {
+      "name": "网易",
+      "tier": 4,
+      "aliases": []
+    },
+    {
+      "name": "腾讯云社区",
+      "tier": 4,
+      "aliases": []
+    },
+    {
+      "name": "金投网",
+      "tier": 4,
+      "aliases": []
+    },
+    {
+      "name": "钛媒体",
+      "tier": 4,
+      "aliases": []
+    }
+  ]
+}

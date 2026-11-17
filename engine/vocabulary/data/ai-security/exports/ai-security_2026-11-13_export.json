@@ -1,0 +1,805 @@
+{
+  "topic": "ai-security",
+  "name": "AI 安全",
+  "version": "v1.1",
+  "generated_at": "2026-11-13T16:23:23",
+  "count": 47,
+  "categories": {
+    "组织与岗位": 5,
+    "防御与检测": 11,
+    "攻击技术": 11,
+    "工具与平台": 3,
+    "框架与标准": 7,
+    "认证与资质": 4,
+    "基准与评估": 6
+  },
+  "terms": [
+    {
+      "id": "AIS-001",
+      "term": "红队",
+      "aliases": [
+        "Red Team",
+        "攻击模拟队"
+      ],
+      "category": "组织与岗位",
+      "tags": [
+        "红队",
+        "安全测试"
+      ],
+      "definition": "模拟真实攻击者手法对系统实施对抗性测试的团队，用于验证防御有效性与检测响应能力",
+      "source": "NIST SP 800-115",
+      "first_added": "2026-11-13",
+      "last_updated": "2026-11-13"
+    },
+    {
+      "id": "AIS-002",
+      "term": "蓝队",
+      "aliases": [
+        "Blue Team",
+        "防御团队"
+      ],
+      "category": "组织与岗位",
+      "tags": [
+        "蓝队",
+        "防御运营"
+      ],
+      "definition": "负责识别、防护、检测、响应与恢复网络攻击的安全运营团队（含 SOC 与事件响应职能）",
+      "source": "NIST CSF",
+      "first_added": "2026-11-13",
+      "last_updated": "2026-11-13"
+    },
+    {
+      "id": "AIS-003",
+      "term": "紫队",
+      "aliases": [
+        "Purple Team"
+      ],
+      "category": "组织与岗位",
+      "tags": [
+        "红队",
+        "蓝队",
+        "协同机制"
+      ],
+      "definition": "红蓝队协同工作方式：红队攻击手法持续反馈蓝队，转化为检测规则与防御改进",
+      "source": "行业实践（需核实原文）",
+      "first_added": "2026-11-13",
+      "last_updated": "2026-11-13"
+    },
+    {
+      "id": "AIS-004",
+      "term": "AI 红队",
+      "aliases": [
+        "AI Red Team",
+        "LLM 红队",
+        "AI Red Teaming"
+      ],
+      "category": "组织与岗位",
+      "tags": [
+        "红队",
+        "AI 安全"
+      ],
+      "definition": "针对 AI/ML 系统的对抗性测试实践与团队职能，覆盖提示注入、越狱、投毒、Agent 滥用等 AI 特有攻击面",
+      "source": "Microsoft AI Red Team",
+      "first_added": "2026-11-13",
+      "last_updated": "2026-11-13"
+    },
+    {
+      "id": "AIS-005",
+      "term": "SOC",
+      "aliases": [
+        "Security Operations Center",
+        "安全运营中心"
+      ],
+      "category": "组织与岗位",
+      "tags": [
+        "蓝队",
+        "防御运营"
+      ],
+      "definition": "集中承担安全监控、告警分诊与事件响应的组织职能",
+      "source": "NIST CSF",
+      "first_added": "2026-11-13",
+      "last_updated": "2026-11-13"
+    },
+    {
+      "id": "AIS-006",
+      "term": "威胁情报",
+      "aliases": [
+        "Threat Intelligence",
+        "CTI"
+      ],
+      "category": "防御与检测",
+      "tags": [
+        "蓝队",
+        "情报"
+      ],
+      "definition": "收集、分析攻击者 TTP（战术、技术与流程）并转化为防御与检测决策的证据过程",
+      "source": "NIST（需核实原文）",
+      "first_added": "2026-11-13",
+      "last_updated": "2026-11-13"
+    },
+    {
+      "id": "AIS-007",
+      "term": "提示注入",
+      "aliases": [
+        "Prompt Injection",
+        "PI"
+      ],
+      "category": "攻击技术",
+      "tags": [
+        "LLM 攻击",
+        "红队"
+      ],
+      "definition": "通过构造输入覆盖或劫持 LLM 系统指令，使其偏离预期行为；OWASP LLM Top10 之 LLM01",
+      "source": "OWASP GenAI",
+      "first_added": "2026-11-13",
+      "last_updated": "2026-11-13"
+    },
+    {
+      "id": "AIS-008",
+      "term": "间接提示注入",
+      "aliases": [
+        "Indirect Prompt Injection",
+        "IPI"
+      ],
+      "category": "攻击技术",
+      "tags": [
+        "LLM 攻击",
+        "Agent"
+      ],
+      "definition": "恶意指令藏于模型检索的外部内容（网页、文档、邮件、工具输出）中间接触发注入",
+      "source": "OWASP GenAI",
+      "first_added": "2026-11-13",
+      "last_updated": "2026-11-13"
+    },
+    {
+      "id": "AIS-009",
+      "term": "越狱",
+      "aliases": [
+        "Jailbreak",
+        "LLM 越狱"
+      ],
+      "category": "攻击技术",
+      "tags": [
+        "LLM 攻击",
+        "红队"
+      ],
+      "definition": "绕过模型安全对齐与内容策略，诱导模型输出被禁止内容",
+      "source": "OWASP GenAI",
+      "first_added": "2026-11-13",
+      "last_updated": "2026-11-13"
+    },
+    {
+      "id": "AIS-010",
+      "term": "数据投毒",
+      "aliases": [
+        "Data Poisoning",
+        "训练数据投毒"
+      ],
+      "category": "攻击技术",
+      "tags": [
+        "投毒",
+        "供应链"
+      ],
+      "definition": "污染训练或微调数据以植入恶意行为、后门或偏见",
+      "source": "Microsoft Security Blog",
+      "first_added": "2026-11-13",
+      "last_updated": "2026-11-13"
+    },
+    {
+      "id": "AIS-011",
+      "term": "模型投毒",
+      "aliases": [
+        "Model Poisoning",
+        "权重投毒"
+      ],
+      "category": "攻击技术",
+      "tags": [
+        "投毒",
+        "供应链"
+      ],
+      "definition": "直接篡改模型权重或更新通道植入休眠后门，部署后由触发器激活",
+      "source": "Microsoft Security Blog（Trained to Betray / Sleeper Agents）",
+      "first_added": "2026-11-13",
+      "last_updated": "2026-11-13"
+    },
+    {
+      "id": "AIS-012",
+      "term": "后门攻击",
+      "aliases": [
+        "Backdoor Attack",
+        "木马化模型"
+      ],
+      "category": "攻击技术",
+      "tags": [
+        "投毒",
+        "检测对抗"
+      ],
+      "definition": "在模型中植入由特定触发器激活的隐藏恶意行为，常规评估难以发现",
+      "source": "行业综述（需核实原文）",
+      "first_added": "2026-11-13",
+      "last_updated": "2026-11-13"
+    },
+    {
+      "id": "AIS-013",
+      "term": "模型窃取",
+      "aliases": [
+        "Model Extraction",
+        "Model Theft",
+        "模型提取攻击"
+      ],
+      "category": "攻击技术",
+      "tags": [
+        "隐私",
+        "知识产权"
+      ],
+      "definition": "通过大量查询近似复制目标模型的能力或参数",
+      "source": "OWASP GenAI（需核实原文）",
+      "first_added": "2026-11-13",
+      "last_updated": "2026-11-13"
+    },
+    {
+      "id": "AIS-014",
+      "term": "训练数据提取",
+      "aliases": [
+        "Training Data Extraction",
+        "模型反演",
+        "Model Inversion"
+      ],
+      "category": "攻击技术",
+      "tags": [
+        "隐私"
+      ],
+      "definition": "从模型输出中还原训练数据或敏感属性",
+      "source": "行业综述（需核实原文）",
+      "first_added": "2026-11-13",
+      "last_updated": "2026-11-13"
+    },
+    {
+      "id": "AIS-015",
+      "term": "成员推断",
+      "aliases": [
+        "Membership Inference"
+      ],
+      "category": "攻击技术",
+      "tags": [
+        "隐私"
+      ],
+      "definition": "判定特定样本是否属于模型训练集的攻击，构成训练数据隐私风险",
+      "source": "行业综述（需核实原文）",
+      "first_added": "2026-11-13",
+      "last_updated": "2026-11-13"
+    },
+    {
+      "id": "AIS-016",
+      "term": "Agent 工具滥用",
+      "aliases": [
+        "Agent Tool Abuse",
+        "Confused Deputy",
+        "越权工具调用"
+      ],
+      "category": "攻击技术",
+      "tags": [
+        "Agent",
+        "权限治理"
+      ],
+      "definition": "诱导 AI Agent 滥用其工具与权限执行非授权操作（混淆代理人问题）",
+      "source": "OWASP Agentic Top 10",
+      "first_added": "2026-11-13",
+      "last_updated": "2026-11-13"
+    },
+    {
+      "id": "AIS-017",
+      "term": "多模态注入",
+      "aliases": [
+        "Multimodal Injection",
+        "跨模态注入"
+      ],
+      "category": "攻击技术",
+      "tags": [
+        "LLM 攻击",
+        "多模态"
+      ],
+      "definition": "经图像、音频、文档等非文本通道携带并触发恶意指令",
+      "source": "行业综述（需核实原文）",
+      "first_added": "2026-11-13",
+      "last_updated": "2026-11-13"
+    },
+    {
+      "id": "AIS-018",
+      "term": "护栏",
+      "aliases": [
+        "Guardrails",
+        "LLM Guardrails",
+        "安全护栏"
+      ],
+      "category": "防御与检测",
+      "tags": [
+        "防御",
+        "LLM 安全"
+      ],
+      "definition": "模型输入与输出侧的策略执行层，拦截违规内容、注入攻击与高危操作",
+      "source": "行业实践",
+      "first_added": "2026-11-13",
+      "last_updated": "2026-11-13"
+    },
+    {
+      "id": "AIS-019",
+      "term": "提示注入检测",
+      "aliases": [
+        "Prompt Injection Detection"
+      ],
+      "category": "防御与检测",
+      "tags": [
+        "防御",
+        "蓝队",
+        "LLM 安全"
+      ],
+      "definition": "识别输入与工具输出中注入意图的检测手段（分类器、规则、沙箱执行等）",
+      "source": "行业实践",
+      "first_added": "2026-11-13",
+      "last_updated": "2026-11-13"
+    },
+    {
+      "id": "AIS-020",
+      "term": "RAG 安全",
+      "aliases": [
+        "检索增强生成安全",
+        "RAG Security"
+      ],
+      "category": "防御与检测",
+      "tags": [
+        "防御",
+        "RAG"
+      ],
+      "definition": "检索源信任治理、外部内容消毒与引用隔离，防范间接注入与数据泄漏",
+      "source": "行业实践",
+      "first_added": "2026-11-13",
+      "last_updated": "2026-11-13"
+    },
+    {
+      "id": "AIS-021",
+      "term": "DLP",
+      "aliases": [
+        "Data Loss Prevention",
+        "数据防泄漏"
+      ],
+      "category": "防御与检测",
+      "tags": [
+        "防御",
+        "合规"
+      ],
+      "definition": "防止敏感数据经 AI 应用、提示词或模型输出外泄的控制体系",
+      "source": "行业实践",
+      "first_added": "2026-11-13",
+      "last_updated": "2026-11-13"
+    },
+    {
+      "id": "AIS-022",
+      "term": "DSPM",
+      "aliases": [
+        "Data Security Posture Management",
+        "数据安全态势管理"
+      ],
+      "category": "防御与检测",
+      "tags": [
+        "防御",
+        "治理"
+      ],
+      "definition": "发现、分类与治理数据资产安全态势的技术，AI 场景覆盖向量库与训练数据集",
+      "source": "行业实践",
+      "first_added": "2026-11-13",
+      "last_updated": "2026-11-13"
+    },
+    {
+      "id": "AIS-023",
+      "term": "Shadow AI",
+      "aliases": [
+        "影子 AI",
+        "未申报 AI 使用"
+      ],
+      "category": "防御与检测",
+      "tags": [
+        "治理",
+        "风险"
+      ],
+      "definition": "未经安全与合规治理即投入使用的 AI 工具与服务，构成数据与合规盲区",
+      "source": "行业实践",
+      "first_added": "2026-11-13",
+      "last_updated": "2026-11-13"
+    },
+    {
+      "id": "AIS-024",
+      "term": "零信任",
+      "aliases": [
+        "Zero Trust",
+        "ZT"
+      ],
+      "category": "防御与检测",
+      "tags": [
+        "架构",
+        "防御"
+      ],
+      "definition": "永不信任、持续验证的安全架构原则，适用于 Agent 权限与身份设计",
+      "source": "NIST SP 800-207",
+      "first_added": "2026-11-13",
+      "last_updated": "2026-11-13"
+    },
+    {
+      "id": "AIS-025",
+      "term": "EDR",
+      "aliases": [
+        "Endpoint Detection and Response",
+        "端点检测与响应"
+      ],
+      "category": "防御与检测",
+      "tags": [
+        "蓝队",
+        "检测"
+      ],
+      "definition": "端点侧持续监测、告警与响应能力",
+      "source": "行业实践",
+      "first_added": "2026-11-13",
+      "last_updated": "2026-11-13"
+    },
+    {
+      "id": "AIS-026",
+      "term": "AI 事件响应",
+      "aliases": [
+        "AI Incident Response"
+      ],
+      "category": "防御与检测",
+      "tags": [
+        "蓝队",
+        "响应"
+      ],
+      "definition": "针对 AI 安全事件（投毒、越狱、数据泄漏、Agent 失控）的检测、遏制与恢复流程",
+      "source": "行业实践",
+      "first_added": "2026-11-13",
+      "last_updated": "2026-11-13"
+    },
+    {
+      "id": "AIS-027",
+      "term": "模型水印",
+      "aliases": [
+        "Model Watermarking",
+        "AI 内容溯源"
+      ],
+      "category": "防御与检测",
+      "tags": [
+        "溯源",
+        "治理"
+      ],
+      "definition": "对 AI 生成内容或模型输出植入可验证标识以支持溯源",
+      "source": "行业综述（需核实原文）",
+      "first_added": "2026-11-13",
+      "last_updated": "2026-11-13"
+    },
+    {
+      "id": "AIS-028",
+      "term": "PyRIT",
+      "aliases": [
+        "Microsoft PyRIT"
+      ],
+      "category": "工具与平台",
+      "tags": [
+        "红队",
+        "工具链"
+      ],
+      "definition": "微软开源的 AI 红队自动化框架，支持风险识别流水线与对抗提示编排",
+      "source": "github.com/Azure/PyRIT",
+      "first_added": "2026-11-13",
+      "last_updated": "2026-11-13"
+    },
+    {
+      "id": "AIS-029",
+      "term": "promptfoo",
+      "aliases": [],
+      "category": "工具与平台",
+      "tags": [
+        "红队",
+        "评估"
+      ],
+      "definition": "开源 LLM 评估与红队测试工具，支持用例化对抗测试与 CI 集成",
+      "source": "github.com/promptfoo/promptfoo",
+      "first_added": "2026-11-13",
+      "last_updated": "2026-11-13"
+    },
+    {
+      "id": "AIS-030",
+      "term": "garak",
+      "aliases": [
+        "LLM vulnerability scanner"
+      ],
+      "category": "工具与平台",
+      "tags": [
+        "红队",
+        "扫描"
+      ],
+      "definition": "NVIDIA 开源 LLM 漏洞扫描器，探测越狱、注入、数据泄漏等模型弱点",
+      "source": "github.com/NVIDIA/garak",
+      "first_added": "2026-11-13",
+      "last_updated": "2026-11-13"
+    },
+    {
+      "id": "AIS-031",
+      "term": "OWASP Top 10 for LLM Applications",
+      "aliases": [
+        "LLM Top 10",
+        "OWASP LLM Top 10"
+      ],
+      "category": "框架与标准",
+      "tags": [
+        "标准",
+        "LLM 安全"
+      ],
+      "definition": "LLM 应用十大风险清单（2025 版 LLM01 为提示注入）",
+      "source": "genai.owasp.org",
+      "first_added": "2026-11-13",
+      "last_updated": "2026-11-13"
+    },
+    {
+      "id": "AIS-032",
+      "term": "OWASP Agentic Top 10",
+      "aliases": [
+        "Agentic AI Top 10"
+      ],
+      "category": "框架与标准",
+      "tags": [
+        "标准",
+        "Agent"
+      ],
+      "definition": "Agentic AI 系统十大风险清单",
+      "source": "genai.owasp.org/agentic-top-10",
+      "first_added": "2026-11-13",
+      "last_updated": "2026-11-13"
+    },
+    {
+      "id": "AIS-033",
+      "term": "NIST AI RMF",
+      "aliases": [
+        "AI 风险管理框架",
+        "AI Risk Management Framework"
+      ],
+      "category": "框架与标准",
+      "tags": [
+        "标准",
+        "治理"
+      ],
+      "definition": "AI 风险的治理、映射、测量与管理框架",
+      "source": "nist.gov",
+      "first_added": "2026-11-13",
+      "last_updated": "2026-11-13"
+    },
+    {
+      "id": "AIS-034",
+      "term": "EU AI Act",
+      "aliases": [
+        "欧盟人工智能法案",
+        "Regulation (EU) 2024/1689"
+      ],
+      "category": "框架与标准",
+      "tags": [
+        "法规",
+        "合规"
+      ],
+      "definition": "欧盟按风险分级监管 AI 系统的法案",
+      "source": "EUR-Lex",
+      "first_added": "2026-11-13",
+      "last_updated": "2026-11-13"
+    },
+    {
+      "id": "AIS-035",
+      "term": "ISO/IEC 42001",
+      "aliases": [
+        "AI 管理体系",
+        "AIMS"
+      ],
+      "category": "框架与标准",
+      "tags": [
+        "标准",
+        "治理"
+      ],
+      "definition": "AI 管理体系国际标准",
+      "source": "iso.org",
+      "first_added": "2026-11-13",
+      "last_updated": "2026-11-13"
+    },
+    {
+      "id": "AIS-036",
+      "term": "MITRE ATT&CK",
+      "aliases": [
+        "ATT&CK"
+      ],
+      "category": "框架与标准",
+      "tags": [
+        "标准",
+        "威胁情报"
+      ],
+      "definition": "通用网络攻击战术与技术知识库，AI 相关攻击映射的基础框架",
+      "source": "attack.mitre.org",
+      "first_added": "2026-11-13",
+      "last_updated": "2026-11-13"
+    },
+    {
+      "id": "AIS-037",
+      "term": "MITRE ATLAS",
+      "aliases": [
+        "ATLAS",
+        "Adversarial Threat Landscape for AI Systems"
+      ],
+      "category": "框架与标准",
+      "tags": [
+        "标准",
+        "AI 安全"
+      ],
+      "definition": "AI 系统对抗性威胁战术与技术知识库",
+      "source": "atlas.mitre.org",
+      "first_added": "2026-11-13",
+      "last_updated": "2026-11-13"
+    },
+    {
+      "id": "AIS-038",
+      "term": "AI 红队认证考试",
+      "aliases": [
+        "AI Red Team Certification",
+        "AI 红队认证"
+      ],
+      "category": "认证与资质",
+      "tags": [
+        "认证",
+        "红队"
+      ],
+      "definition": "面向 AI 红队从业者的认证考试统称；主流包括 ISACA AAIS、IAPP AIGP（治理向）、CREST AI 测试资质等，报考条件以颁发机构官方页为准",
+      "source": "颁发机构官网（需核实原文）",
+      "first_added": "2026-11-13",
+      "last_updated": "2026-11-13"
+    },
+    {
+      "id": "AIS-039",
+      "term": "AAIS",
+      "aliases": [
+        "ISACA Advanced in AI Security",
+        "ISACA AI 安全高级认证"
+      ],
+      "category": "认证与资质",
+      "tags": [
+        "认证",
+        "AI 安全"
+      ],
+      "definition": "ISACA 面向 AI 安全的高级技术认证考试",
+      "source": "isaca.org（需核实原文）",
+      "first_added": "2026-11-13",
+      "last_updated": "2026-11-13"
+    },
+    {
+      "id": "AIS-040",
+      "term": "AIGP",
+      "aliases": [
+        "AI Governance Professional",
+        "IAPP AIGP"
+      ],
+      "category": "认证与资质",
+      "tags": [
+        "认证",
+        "AI 治理"
+      ],
+      "definition": "IAPP 颁发的 AI 治理专业人员认证考试",
+      "source": "iapp.org",
+      "first_added": "2026-11-13",
+      "last_updated": "2026-11-13"
+    },
+    {
+      "id": "AIS-041",
+      "term": "CISSP",
+      "aliases": [
+        "注册信息系统安全专家"
+      ],
+      "category": "认证与资质",
+      "tags": [
+        "认证",
+        "通用安全"
+      ],
+      "definition": "通用信息安全认证，现行考纲已纳入 AI 安全相关内容",
+      "source": "isc2.org（需核实原文）",
+      "first_added": "2026-11-13",
+      "last_updated": "2026-11-13"
+    },
+    {
+      "id": "AIS-042",
+      "term": "SWE-bench Verified",
+      "aliases": [
+        "SWE-bench"
+      ],
+      "category": "基准与评估",
+      "tags": [
+        "基准",
+        "代码"
+      ],
+      "definition": "软件工程任务代码修复基准；Verified 为人工核验子集，2026-02 退役",
+      "source": "openai.com（需核实原文）",
+      "first_added": "2026-11-13",
+      "last_updated": "2026-11-13"
+    },
+    {
+      "id": "AIS-043",
+      "term": "OSWorld",
+      "aliases": [
+        "OSWorld 基准"
+      ],
+      "category": "基准与评估",
+      "tags": [
+        "基准",
+        "Agent"
+      ],
+      "definition": "计算机使用类 Agent 真实环境基准，人类基线 72.35%",
+      "source": "Stanford HAI",
+      "first_added": "2026-11-13",
+      "last_updated": "2026-11-13"
+    },
+    {
+      "id": "AIS-044",
+      "term": "HarmBench",
+      "aliases": [
+        "HarmBench 基准"
+      ],
+      "category": "基准与评估",
+      "tags": [
+        "基准",
+        "红队"
+      ],
+      "definition": "标准化红队攻击效果评测基准",
+      "source": "行业综述（需核实原文）",
+      "first_added": "2026-11-13",
+      "last_updated": "2026-11-13"
+    },
+    {
+      "id": "AIS-045",
+      "term": "人类基线",
+      "aliases": [
+        "Human Baseline"
+      ],
+      "category": "基准与评估",
+      "tags": [
+        "基准",
+        "评估"
+      ],
+      "definition": "基准评估中人类表现的参照值，用于解读模型得分",
+      "source": "Stanford HAI",
+      "first_added": "2026-11-13",
+      "last_updated": "2026-11-13"
+    },
+    {
+      "id": "AIS-046",
+      "term": "幻觉",
+      "aliases": [
+        "Hallucination",
+        "模型幻觉"
+      ],
+      "category": "基准与评估",
+      "tags": [
+        "评估",
+        "风险"
+      ],
+      "definition": "模型生成与事实不符或无依据内容的现象，是评估与风险治理的核心对象",
+      "source": "Stanford HAI",
+      "first_added": "2026-11-13",
+      "last_updated": "2026-11-13"
+    },
+    {
+      "id": "AIS-047",
+      "term": "基准饱和",
+      "aliases": [
+        "Benchmark Saturation"
+      ],
+      "category": "基准与评估",
+      "tags": [
+        "评估",
+        "基准"
+      ],
+      "definition": "基准得分逼近上限、失去模型区分度的状态，触发基准退役或换代",
+      "source": "OpenAI（需核实原文）",
+      "first_added": "2026-11-13",
+      "last_updated": "2026-11-13"
+    }
+  ]
+}

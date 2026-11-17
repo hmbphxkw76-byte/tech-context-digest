@@ -1,0 +1,109 @@
+name: Webhook 告警
+
+# 通用告警出口（阶段四）。
+#
+# 触发方式：
+#   1. workflow_call —— 其他工作流在失败时调用（推荐）；
+#   2. repository_dispatch（type: automation-alert）—— 外部系统 / Agent 触发。
+#
+# 配置（可选）：
+#   仓库 Settings → Secrets and variables → Actions → New repository secret
+#   名称：AUTOMATION_WEBHOOK_URL
+#   值：飞书 / 钉钉 / 企业微信机器人 Webhook，或任意接收 JSON POST 的端点
+#   未配置时：跳过发送（不阻断主流程），Issue 告警仍然生效。
+#
+# 载荷（JSON）：
+#   { "repo", "title", "message", "level", "run_url", "time" }
+
+on:
+  workflow_call:
+    inputs:
+      title:
+        description: "告警标题"
+        required: true
+        type: string
+      message:
+        description: "告警正文"
+        required: true
+        type: string
+      level:
+        description: "级别：info / warning / error"
+        required: false
+        type: string
+        default: "error"
+      run_url:
+        description: "关联运行链接"
+        required: false
+        type: string
+        default: ""
+    # 调用方以 secrets 传入；未声明时 GitHub 会判定工作流文件无效。
+    secrets:
+      AUTOMATION_WEBHOOK_URL:
+        description: "Webhook 接收端点（可选；未配置则跳过发送）"
+        required: false
+  repository_dispatch:
+    types: [automation-alert]
+
+jobs:
+  send:
+    name: 发送 Webhook 告警
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: 解析输入
+        id: alert
+        env:
+          IS_CALL: ${{ github.event_name == 'workflow_call' }}
+        run: |
+          if [ "$IS_CALL" = "true" ]; then
+            echo "title=${{ inputs.title }}" >> "$GITHUB_OUTPUT"
+            echo "message=${{ inputs.message }}" >> "$GITHUB_OUTPUT"
+            echo "level=${{ inputs.level }}" >> "$GITHUB_OUTPUT"
+            echo "run_url=${{ inputs.run_url }}" >> "$GITHUB_OUTPUT"
+          else
+            echo "title=${{ github.event.client_payload.title || '自动化告警' }}" >> "$GITHUB_OUTPUT"
+            echo "message=${{ github.event.client_payload.message || '' }}" >> "$GITHUB_OUTPUT"
+            echo "level=${{ github.event.client_payload.level || 'error' }}" >> "$GITHUB_OUTPUT"
+            echo "run_url=${{ github.event.client_payload.run_url || '' }}" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: 发送
+        env:
+          WEBHOOK_URL: ${{ secrets.AUTOMATION_WEBHOOK_URL }}
+          REPO: ${{ github.repository }}
+          TITLE: ${{ steps.alert.outputs.title }}
+          MESSAGE: ${{ steps.alert.outputs.message }}
+          LEVEL: ${{ steps.alert.outputs.level }}
+          RUN_URL: ${{ steps.alert.outputs.run_url }}
+        run: |
+          export TIME=$(date -u +%Y-%m-%dT%H:%M:%SZ)
+          if [ -z "$WEBHOOK_URL" ]; then
+            echo "::warning::未配置 AUTOMATION_WEBHOOK_URL，跳过 Webhook（Issue 告警不受影响）"
+            exit 0
+          fi
+          python - <<'PY'
+          import json
+          import os
+          import urllib.error
+          import urllib.request
+
+          payload = {
+              "repo": os.environ["REPO"],
+              "title": os.environ["TITLE"],
+              "message": os.environ["MESSAGE"],
+              "level": os.environ["LEVEL"],
+              "run_url": os.environ["RUN_URL"],
+              "time": os.environ["TIME"],
+          }
+          data = json.dumps(payload, ensure_ascii=False).encode("utf-8")
+          req = urllib.request.Request(
+              os.environ["WEBHOOK_URL"], data=data,
+              headers={"Content-Type": "application/json; charset=utf-8"},
+          )
+          try:
+              with urllib.request.urlopen(req, timeout=15) as resp:
+                  print(f"✅ Webhook 已发送：HTTP {resp.status}")
+          except urllib.error.URLError as exc:
+              # 告警失败不阻断主流程
+              print(f"::warning::Webhook 发送失败：{exc}")
+          PY

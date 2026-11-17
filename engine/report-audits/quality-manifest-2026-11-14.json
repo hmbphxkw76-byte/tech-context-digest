@@ -1,0 +1,104 @@
+{
+  "schema_version": "1.0",
+  "generated_at": "2026-11-14T23:00:00+08:00",
+  "scope": {
+    "business_lines": [
+      "content/economy/dubai/apartment",
+      "content/economy/real-estate/dubai/market-sizing",
+      "content/economy/real-estate/dubai/policy-analysis",
+      "content/economy/global/trends",
+      "content/tech/competitive-intelligence/dubai",
+      "content/tech/industry-research/dubai",
+      "content/tech/security/dubai",
+      "content/tech/trends/global"
+    ],
+    "templates": [
+      "market-monitoring",
+      "employment-research",
+      "trend-weekly",
+      "competitive-intelligence",
+      "sentiment-monitoring",
+      "consumer-research",
+      "industry-research",
+      "market-sizing",
+      "investment-research",
+      "policy-analysis",
+      "feasibility-study",
+      "flash-commentary",
+      "whitepaper"
+    ],
+    "vocab": ["ai-security", "cybersecurity", "financial-markets", "economy", "ai-agent"]
+  },
+  "inventory": {
+    "reports": [
+      {"path": "content/economy/dubai/apartment/reports/2026-11_baseline_report.html", "type": "report", "cycle": "baseline", "business_line": "content/economy/dubai/apartment"},
+      {"path": "content/economy/dubai/apartment/reports/2026-11_monthly.html", "type": "report", "cycle": "monthly", "business_line": "content/economy/dubai/apartment"},
+      {"path": "content/economy/dubai/apartment/reports/2026-Q3_quarterly.html", "type": "report", "cycle": "quarterly", "business_line": "content/economy/dubai/apartment"},
+      {"path": "content/economy/dubai/apartment/reports/2026_annual.html", "type": "report", "cycle": "annual", "business_line": "content/economy/dubai/apartment"},
+      {"path": "content/economy/real-estate/dubai/market-sizing/reports/2026-12_baseline_report.html", "type": "report", "cycle": "baseline", "business_line": "content/economy/real-estate/dubai/market-sizing"},
+      {"path": "content/economy/real-estate/dubai/policy-analysis/reports/2026-12_baseline_report.html", "type": "report", "cycle": "baseline", "business_line": "content/economy/real-estate/dubai/policy-analysis"},
+      {"path": "content/economy/global/trends/reports/2026-11-13_weekly.html", "type": "report", "cycle": "weekly", "business_line": "content/economy/global/trends"},
+      {"path": "content/tech/competitive-intelligence/dubai/reports/2026-12_baseline_report.html", "type": "report", "cycle": "baseline", "business_line": "content/tech/competitive-intelligence/dubai"},
+      {"path": "content/tech/industry-research/dubai/reports/2026-12_baseline_report.html", "type": "report", "cycle": "baseline", "business_line": "content/tech/industry-research/dubai"},
+      {"path": "content/tech/security/dubai/reports/2026-11_baseline_report.html", "type": "report", "cycle": "baseline", "business_line": "content/tech/security/dubai"},
+      {"path": "content/tech/trends/global/reports/2026-11-13_weekly.html", "type": "report", "cycle": "weekly", "business_line": "content/tech/trends/global"}
+    ],
+    "prompts": [
+      {"path": "content/economy/dubai/apartment/prompts/business-config.md", "type": "prompt", "business_line": "content/economy/dubai/apartment"},
+      {"path": "content/economy/real-estate/dubai/market-sizing/prompts/prompt-baseline-setup.md", "type": "prompt", "business_line": "content/economy/real-estate/dubai/market-sizing"},
+      {"path": "content/economy/real-estate/dubai/market-sizing/prompts/prompt-annual-refresh.md", "type": "prompt", "business_line": "content/economy/real-estate/dubai/market-sizing"},
+      {"path": "content/economy/real-estate/dubai/policy-analysis/prompts/prompt-baseline-setup.md", "type": "prompt", "business_line": "content/economy/real-estate/dubai/policy-analysis"},
+      {"path": "content/economy/real-estate/dubai/policy-analysis/prompts/prompt-policy-review.md", "type": "prompt", "business_line": "content/economy/real-estate/dubai/policy-analysis"},
+      {"path": "content/tech/competitive-intelligence/dubai/prompts/prompt-baseline-setup.md", "type": "prompt", "business_line": "content/tech/competitive-intelligence/dubai"},
+      {"path": "content/tech/competitive-intelligence/dubai/prompts/prompt-monthly-monitor.md", "type": "prompt", "business_line": "content/tech/competitive-intelligence/dubai"},
+      {"path": "content/tech/competitive-intelligence/dubai/prompts/prompt-flash-update.md", "type": "prompt", "business_line": "content/tech/competitive-intelligence/dubai"},
+      {"path": "content/tech/industry-research/dubai/prompts/prompt-baseline-setup.md", "type": "prompt", "business_line": "content/tech/industry-research/dubai"},
+      {"path": "content/tech/industry-research/dubai/prompts/prompt-annual-refresh.md", "type": "prompt", "business_line": "content/tech/industry-research/dubai"},
+      {"path": "content/tech/security/dubai/prompts/prompt-baseline-setup.md", "type": "prompt", "business_line": "content/tech/security/dubai"},
+      {"path": "content/tech/security/dubai/prompts/prompt-monthly-monitor.md", "type": "prompt", "business_line": "content/tech/security/dubai"}
+    ],
+    "registries": [
+      {"path": "data/processed/economy/dubai/apartment/dubai_apartment_indicator_registry_2027-01.xlsx", "type": "registry", "business_line": "content/economy/dubai/apartment"},
+      {"path": "data/processed/tech/security/dubai/ai_cybersecurity_indicator_registry.md", "type": "registry", "business_line": "content/tech/security/dubai"},
+      {"path": "data/processed/economy/global/trends/economy_trend_ledger.md", "type": "registry", "business_line": "content/economy/global/trends"},
+      {"path": "data/processed/tech/trends/global/ai_trend_ledger.md", "type": "registry", "business_line": "content/tech/trends/global"}
+    ],
+    "vocab_terms": [
+      {"path": "engine/vocabulary/data/ai-security/terms.md", "type": "vocab", "business_line": "engine/vocabulary"},
+      {"path": "engine/vocabulary/data/cybersecurity/terms.md", "type": "vocab", "business_line": "engine/vocabulary"},
+      {"path": "engine/vocabulary/data/financial-markets/terms.md", "type": "vocab", "business_line": "engine/vocabulary"},
+      {"path": "engine/vocabulary/data/economy/terms.md", "type": "vocab", "business_line": "engine/vocabulary"},
+      {"path": "engine/vocabulary/data/ai-agent/terms.md", "type": "vocab", "business_line": "engine/vocabulary"}
+    ]
+  },
+  "findings": [],
+  "repairs": [
+    {"id": "F-01", "scenario": "C10", "sop": "SOP-10", "severity": "P0", "target": "data/processed/economy/dubai/apartment/dubai_apartment_indicator_registry_2027-01.xlsx", "finding": "信号规则表黄灯/红灯与预警红线表、business-config 不一致", "action": "对齐 v2.0 五态口径", "verification": "两表逐行 0 处不一致", "status": "fixed"},
+    {"id": "F-02", "scenario": "C06", "sop": "SOP-06", "severity": "P0", "target": "content/tech/trends/global/reports/2026-11-13_weekly.html", "finding": "Anthropic Q3 收入单位误写为「亿」（应为 B，差 10×）", "action": "修正 3 处单位并新增 7.1 已修正事实清单", "verification": "旧表述仅剩更正引用 1 处", "status": "fixed"},
+    {"id": "F-03", "scenario": "C08", "sop": "SOP-08", "severity": "P1", "target": "content/economy/dubai/apartment/reports/2026-Q3_quarterly.html", "finding": "仍用已并入 S11 的 S12 编号", "action": "两处改为「S11 子项」并加编号说明", "verification": "活跃 S12 仅剩说明 1 处", "status": "fixed"},
+    {"id": "F-04", "scenario": "C05", "sop": "SOP-08", "severity": "P2", "target": "engine/tools/update_planner.py", "finding": "规划器给条件节拍（核验型轻运行）派任务", "action": "新增 prompt_produces_report() 与 report-output: none 约定", "verification": "pending 清单为空", "status": "fixed"},
+    {"id": "F-05", "scenario": "C13", "sop": "SOP-13", "severity": "P2", "target": "content/economy/dubai/apartment/reports/2026_annual.html", "finding": "数据截止 11-10 未标注 EIBOR 11-12 更新", "action": "数据截止声明加版本说明", "verification": "已标注 4.394390%", "status": "fixed"},
+    {"id": "N1", "scenario": "C05", "sop": "SOP-05", "severity": "P1", "target": "content/economy/real-estate/dubai/market-sizing/prompts/business-config.md", "finding": "登记册路径指向不存在的本地文件；3 线登记册未建", "action": "路径改指公寓台账；3 线标注「运行期创建，基线可缺」", "verification": "路径存在；标注到位", "status": "fixed"},
+    {"id": "N2", "scenario": "C05", "sop": "SOP-05", "severity": "P1", "target": "4 条新线 prompts/", "finding": "配置声明的周期提示词缺失", "action": "按类型脚手架补建 9 份提示词", "verification": "TODO=0；九节锚与基线一致", "status": "fixed"},
+    {"id": "N3", "scenario": "C06", "sop": "SOP-06", "severity": "P1", "target": "content/tech/industry-research/dubai/reports/2026-12_baseline_report.html", "finding": "business-config 第七节 6 条修正未继承", "action": "新增 8.6 已修正事实清单", "verification": "报告含 6 条 ❌ 修正锚", "status": "fixed"}
+  ],
+  "verification": {
+    "tools": [
+      {"name": "validate.py", "exit_code": 0, "errors": 0, "warnings": 0},
+      {"name": "validate_layout.py", "exit_code": 0, "errors": 0, "warnings": 0},
+      {"name": "compliance_check.py --check", "exit_code": 0, "errors": 0, "warnings": 0},
+      {"name": "page_build_check.py", "exit_code": 0, "errors": 0, "warnings": 0},
+      {"name": "lint_reports.py", "exit_code": 2, "errors": 0, "warnings": 86},
+      {"name": "check_links.py", "exit_code": 0, "errors": 0, "warnings": 0},
+      {"name": "classify_reports.py --check", "exit_code": 0, "errors": 0, "warnings": 0},
+      {"name": "update_planner.py --pending-only", "exit_code": 0, "errors": 0, "warnings": 0},
+      {"name": "vocab_tool.py check/topic-check", "exit_code": 0, "errors": 0, "warnings": 0},
+      {"name": "sync_vocab.py verify", "exit_code": 0, "errors": 0, "warnings": 0},
+      {"name": "unittest discover engine/tests", "exit_code": 0, "errors": 0, "warnings": 0}
+    ],
+    "semantic": {"residual_p0": 0, "residual_p1": 0, "residual_p2": 0},
+    "regression": {"new_issues": 0, "verdict": "pass"},
+    "health": {"completeness": 100, "accuracy": 100, "consistency": 100, "relevance": 100, "overall": 100},
+    "gate": "pass"
+  }
+}

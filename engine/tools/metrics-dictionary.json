@@ -1,0 +1,41 @@
+{
+  "schema_version": "1.0",
+  "updated": "2026-11-15",
+  "comment": "指标定义与阈值的单一事实源（T3）。audit L3 四项与 quality rubric 21 项重叠处在此合并；audit/quality 消费方只读本字典。threshold 为可解析表达式（支持 >= <= > < = 与百分数）。",
+  "metrics": [
+    {"metric_id": "C-01", "name": "结构完整率", "formula": "实际 h2.sec 节数 / 类型骨架节数", "threshold": ">=1.0", "severity": "P0", "detected_by": "TOOL", "owner": "quality", "aliases": ["L1-结构"]},
+    {"metric_id": "C-02", "name": "必填字段完整率", "formula": "已填必填字段数 / 应填必填字段数", "threshold": "=1.0", "severity": "P0", "detected_by": "TOOL", "owner": "quality", "aliases": []},
+    {"metric_id": "C-03", "name": "目录完整率", "formula": "具备 prompts/business-config.md + reports/ + data/ 的业务线数 / 业务线总数", "threshold": "=1.0", "severity": "P0", "detected_by": "TOOL", "owner": "quality", "aliases": []},
+    {"metric_id": "C-04", "name": "登记册指标覆盖率", "formula": "报告实际引用的登记册指标数 / 登记册登记指标总数", "threshold": ">=0.9", "severity": "P1", "detected_by": "MIXED", "owner": "quality", "aliases": []},
+    {"metric_id": "C-05", "name": "节拍达成率", "formula": "实际存在报告数 / 应产出报告数", "threshold": "=1.0", "severity": "P1", "detected_by": "TOOL", "owner": "quality", "aliases": []},
+    {"metric_id": "C-06", "name": "词汇同步覆盖率", "formula": "已绑定同步的词汇主题数 / 已注册词汇主题数", "threshold": "=1.0", "severity": "P1", "detected_by": "TOOL", "owner": "quality", "aliases": []},
+
+    {"metric_id": "A-01", "name": "来源可追溯率", "formula": "有来源标注的关键数字数 / 关键数字总数", "threshold": ">=0.95", "severity": "P0", "detected_by": "MIXED", "owner": "audit+quality", "aliases": ["L3-4.2", "L3-来源可追溯"]},
+    {"metric_id": "A-02", "name": "来源分级合规率", "formula": "合规来源条目数 / 来源条目总数", "threshold": "=1.0", "severity": "P1", "detected_by": "LLM", "owner": "quality", "aliases": []},
+    {"metric_id": "A-03", "name": "数值一致率", "formula": "与登记册/台账一致的可核对数值数 / 可核对数值总数", "threshold": ">=0.99", "severity": "P0", "detected_by": "MIXED", "owner": "audit+quality", "aliases": ["L3-4.1", "L3-信息准确性"]},
+    {"metric_id": "A-04", "name": "新鲜度合规率", "formula": "在声明时效内的数据条目数 / 数据条目总数", "threshold": ">=0.9", "severity": "P1", "detected_by": "LLM", "owner": "quality", "aliases": []},
+    {"metric_id": "A-05", "name": "链接可达率", "formula": "可达链接数 / 链接总数", "threshold": "=1.0", "severity": "P0", "detected_by": "TOOL", "owner": "audit+quality", "aliases": ["L1-6"]},
+
+    {"metric_id": "L-01", "name": "跨章节数值一致率", "formula": "1 - 同一指标冲突数 / 指标总数", "threshold": ">=0.99", "severity": "P0", "detected_by": "LLM", "owner": "audit+quality", "aliases": ["L3-4.3", "L3-数据一致性"]},
+    {"metric_id": "L-02", "name": "口径一致率", "formula": "遵守术语口径区分表的条目数 / 应遵守条目数", "threshold": "=1.0", "severity": "P1", "detected_by": "LLM", "owner": "quality", "aliases": []},
+    {"metric_id": "L-03", "name": "阈值三处一致率", "formula": "business-config / 登记册 / 报告三处一致的阈值数 / 阈值总数", "threshold": "=1.0", "severity": "P0", "detected_by": "MIXED", "owner": "audit+quality", "aliases": ["L3-4.3-阈值", "L3-阈值三处一致"]},
+    {"metric_id": "L-04", "name": "结论-证据一致率", "formula": "有证据支撑的结论数 / 结论总数", "threshold": ">=0.95", "severity": "P1", "detected_by": "LLM", "owner": "audit+quality", "aliases": ["L3-4.4", "L3-表述逻辑"]},
+    {"metric_id": "L-05", "name": "时间线一致率", "formula": "无日期倒置/矛盾的事件数 / 事件总数", "threshold": "=1.0", "severity": "P1", "detected_by": "LLM", "owner": "quality", "aliases": []},
+
+    {"metric_id": "R-01", "name": "归属正确率", "formula": "归属正确的报告数 / 报告总数", "threshold": "=1.0", "severity": "P0", "detected_by": "TOOL", "owner": "quality", "aliases": []},
+    {"metric_id": "R-02", "name": "维度优先级合规率", "formula": "无倒置的业务线数 / 业务线总数", "threshold": "=1.0", "severity": "P0", "detected_by": "TOOL", "owner": "quality", "aliases": []},
+    {"metric_id": "R-03", "name": "跨主题重复率", "formula": "重复段落数 / 段落总数", "threshold": "<=0.05", "severity": "P1", "detected_by": "LLM", "owner": "quality", "aliases": []},
+    {"metric_id": "R-04", "name": "断头锚点率", "formula": "断头锚点数 / 锚点总数", "threshold": "=0.0", "severity": "P0", "detected_by": "TOOL", "owner": "audit+quality", "aliases": ["L1-3"]},
+    {"metric_id": "R-05", "name": "主题-内容匹配率", "formula": "内容命中其业务线主题词的报告数 / 报告总数", "threshold": ">=0.95", "severity": "P1", "detected_by": "LLM", "owner": "quality", "aliases": []},
+
+    {"metric_id": "I-01", "name": "分层交付合规率", "formula": "含决策摘要且未整段复制共享 boilerplate 的报告数 / 报告总数", "threshold": ">=1.0", "severity": "P0", "detected_by": "TOOL", "owner": "quality", "aliases": ["ID-01"]},
+    {"metric_id": "I-02", "name": "信息等级标注率", "formula": "关键信息带四级标注的报告数 / 报告总数", "threshold": ">=0.95", "severity": "P1", "detected_by": "MIXED", "owner": "quality", "aliases": ["ID-03"]},
+    {"metric_id": "I-03", "name": "新增信息模块覆盖率", "formula": "含「本期新增/修正/无变化/假设核验进度」四要素的报告数 / 报告总数", "threshold": ">=1.0", "severity": "P0", "detected_by": "TOOL", "owner": "quality", "aliases": ["ID-05"]},
+    {"metric_id": "I-04", "name": "事实卡片引用率", "formula": "共享事实域报告中使用 [FC-…] 的报告数 / 共享事实域报告总数", "threshold": ">=1.0", "severity": "P0", "detected_by": "TOOL", "owner": "quality", "aliases": ["ID-07", "FC-03"]},
+    {"metric_id": "I-05", "name": "行动协议合规率", "formula": "含「触发条件+阈值+责任角色+时限+验证指标」五要素行动项的报告数 / 应含行动项报告数", "threshold": ">=1.0", "severity": "P0", "detected_by": "MIXED", "owner": "quality", "aliases": ["DC-02"]},
+    {"metric_id": "I-06", "name": "决策卡覆盖率", "formula": "核心判断有标准化决策卡的决策卡数 / 核心判断总数", "threshold": ">=0.9", "severity": "P1", "detected_by": "MIXED", "owner": "quality", "aliases": ["DC-01"]},
+    {"metric_id": "I-07", "name": "ex-ante 标注率", "formula": "信号灯/阈值报告含「预校准（ex-ante）」标注的报告数 / 信号灯报告总数", "threshold": ">=1.0", "severity": "P0", "detected_by": "TOOL", "owner": "quality", "aliases": ["DC-04"]},
+    {"metric_id": "I-08", "name": "盲区消号率", "formula": "closed 盲区数 / 盲区总数", "threshold": ">=0.6", "severity": "P1", "detected_by": "TOOL", "owner": "audit+quality", "aliases": ["BS-04"]},
+    {"metric_id": "I-09", "name": "版本读数时点标注率", "formula": "核验/收敛型报告含「读数时点」的报告数 / 核验/收敛型报告总数", "threshold": ">=1.0", "severity": "P1", "detected_by": "TOOL", "owner": "quality", "aliases": ["DC-05"]}
+  ]
+}

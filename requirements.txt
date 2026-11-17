@@ -1,0 +1,6 @@
+# tech-context-digest 工具与脚本依赖
+# 由 .github/workflows/*.yml 的「pip install -r requirements.txt」安装。
+# 精确锁定（2026-11-16 核验的最新版），保证 CI 可复现；升级须同步核验并更新本文件。
+openpyxl==3.1.5
+markdown==3.11.3
+PyYAML==6.0.3

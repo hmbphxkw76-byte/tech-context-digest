@@ -1,0 +1,176 @@
+{
+  "schema_version": "1.0",
+  "run": "2026-11-16T10:03:41",
+  "baseline": true,
+  "environment": {
+    "concurrency_default": 1,
+    "warmup": 1,
+    "samples": 2
+  },
+  "metrics": [
+    "throughput_per_sec",
+    "wall_ms.avg/p50/p95/max",
+    "error_rate",
+    "cpu_ms.avg"
+  ],
+  "scenarios": [
+    {
+      "id": "l0_l1_full",
+      "desc": "L0/L1 全量门禁（串行）",
+      "kind": "seq",
+      "concurrency": 1,
+      "acceptable_rc": [
+        0,
+        2
+      ],
+      "runs": 2,
+      "errors": 0,
+      "error_rate": 0.0,
+      "wall_ms": {
+        "avg": 1416.07,
+        "p50": 1416.07,
+        "p95": 1416.34,
+        "max": 1416.38,
+        "min": 1415.76
+      },
+      "cpu_ms": {
+        "avg": 2.97
+      },
+      "throughput_per_sec": 0.706,
+      "unit": "全量仓库"
+    },
+    {
+      "id": "single_report_l1",
+      "desc": "单报告 L1（合规 + 来源校验）",
+      "kind": "seq",
+      "concurrency": 1,
+      "acceptable_rc": [
+        0,
+        2
+      ],
+      "runs": 10,
+      "errors": 0,
+      "error_rate": 0.0,
+      "wall_ms": {
+        "avg": 117.2,
+        "p50": 116.89,
+        "p95": 120.83,
+        "max": 123.26,
+        "min": 114.36
+      },
+      "cpu_ms": {
+        "avg": 0.65
+      },
+      "throughput_per_sec": 8.532,
+      "unit": "单份报告"
+    },
+    {
+      "id": "source_check_full",
+      "desc": "来源登记校验（全量）",
+      "kind": "cmd",
+      "concurrency": 1,
+      "acceptable_rc": [
+        0,
+        2
+      ],
+      "runs": 2,
+      "errors": 0,
+      "error_rate": 0.0,
+      "wall_ms": {
+        "avg": 250.26,
+        "p50": 250.26,
+        "p95": 252.66,
+        "max": 252.92,
+        "min": 247.6
+      },
+      "cpu_ms": {
+        "avg": 0.43
+      },
+      "throughput_per_sec": 3.996,
+      "unit": "全量仓库"
+    },
+    {
+      "id": "build_hub_check",
+      "desc": "汇总页一致性校验",
+      "kind": "cmd",
+      "concurrency": 1,
+      "acceptable_rc": [
+        0,
+        2
+      ],
+      "runs": 2,
+      "errors": 0,
+      "error_rate": 0.0,
+      "wall_ms": {
+        "avg": 47.27,
+        "p50": 47.27,
+        "p95": 48.02,
+        "max": 48.11,
+        "min": 46.43
+      },
+      "cpu_ms": {
+        "avg": 0.3
+      },
+      "throughput_per_sec": 21.157,
+      "unit": "全量仓库"
+    },
+    {
+      "id": "audit_run_default",
+      "desc": "审计四环节（默认模式，dry-run）",
+      "kind": "cmd",
+      "concurrency": 1,
+      "acceptable_rc": [
+        0,
+        1,
+        2
+      ],
+      "runs": 3,
+      "errors": 0,
+      "error_rate": 0.0,
+      "wall_ms": {
+        "avg": 73.6,
+        "p50": 73.62,
+        "p95": 73.64,
+        "max": 73.65,
+        "min": 73.55
+      },
+      "cpu_ms": {
+        "avg": 0.31
+      },
+      "throughput_per_sec": 149.447,
+      "unit": "全量正式报告"
+    },
+    {
+      "id": "audit_run_strict",
+      "desc": "审计四环节（strict 模式，dry-run）",
+      "kind": "cmd",
+      "concurrency": 1,
+      "acceptable_rc": [
+        0,
+        1,
+        2
+      ],
+      "runs": 3,
+      "errors": 0,
+      "error_rate": 0.0,
+      "wall_ms": {
+        "avg": 80147.79,
+        "p50": 80812.69,
+        "p95": 81521.01,
+        "max": 81599.72,
+        "min": 78030.96
+      },
+      "cpu_ms": {
+        "avg": 0.39
+      },
+      "throughput_per_sec": 0.137,
+      "unit": "全量正式报告"
+    }
+  ],
+  "thresholds": {
+    "ci_total_increase_pct": 10.0,
+    "l0_l1_full_p95_ms": 60000.0,
+    "single_report_l1_avg_ms": 2000.0,
+    "error_rate_max": 0.0
+  }
+}

@@ -1,0 +1,124 @@
+name: 提交并开 PR（自动合并）
+description: >
+  将工作区变更提交到固定 CI 分支，开/复用 PR 并启用 auto-merge（合并队列）。
+  用于替代「直推 main」，把 CI 自动提交纳入串行合并。
+
+inputs:
+  branch:
+    description: CI 分支名（固定，便于复用同一 PR）
+    required: true
+  title:
+    description: PR 标题
+    required: true
+  body:
+    description: PR 正文
+    required: false
+    default: ""
+  commit-message:
+    description: 提交信息
+    required: true
+  add-paths:
+    description: 提交路径（默认 -A 全部）
+    required: false
+    default: "-A"
+  base:
+    description: 目标分支
+    required: false
+    default: "main"
+  enable-auto-merge:
+    description: 是否启用自动合并（合并队列）
+    required: false
+    default: "true"
+  token:
+    description: 用于开 PR 的令牌（建议 PAT，可规避 bot PR 审批门）；留空回退 GITHUB_TOKEN
+    required: false
+    default: ""
+
+runs:
+  using: composite
+  steps:
+    - name: 配置 git
+      shell: bash
+      run: |
+        git config user.name "github-actions[bot]"
+        git config user.email "github-actions[bot]@users.noreply.github.com"
+
+    - name: 提交前工作区清理（缓存/临时/构建产物）
+      shell: bash
+      run: |
+        PY="$(command -v python3 || command -v python)"
+        "$PY" engine/tools/workspace_cleanup.py
+
+    - name: 切到 CI 分支并提交
+      id: commit
+      shell: bash
+      env:
+        BRANCH: ${{ inputs.branch }}
+        ADD_PATHS: ${{ inputs.add-paths }}
+        COMMIT_MESSAGE: ${{ inputs.commit-message }}
+      run: |
+        set +e
+        git checkout -B "$BRANCH"
+        if [ "$ADD_PATHS" = "-A" ] || [ "$ADD_PATHS" = "." ]; then
+          git add -A
+        else
+          # shellcheck disable=SC2086
+          git add -- $ADD_PATHS
+        fi
+        if git diff --cached --quiet; then
+          echo "NO_CHANGES=true" >> "$GITHUB_OUTPUT"
+          echo "无变更，跳过提交"
+          exit 0
+        fi
+        git commit -m "$COMMIT_MESSAGE"
+        echo "NO_CHANGES=false" >> "$GITHUB_OUTPUT"
+
+    - name: 变基到最新 main 并推送分支
+      if: steps.commit.outputs.NO_CHANGES != 'true'
+      shell: bash
+      env:
+        BRANCH: ${{ inputs.branch }}
+      run: |
+        set +e
+        git fetch origin main
+        if ! git rebase origin/main; then
+          git rebase --abort
+          echo "::error::rebase 到 origin/main 冲突，无法提交 PR；将在下次运行时重试"
+          exit 1
+        fi
+        for i in 1 2 3; do
+          # 先刷新 CI 分支的远端跟踪引用，否则并发 / 前序运行后 --force-with-lease 会因
+          # 本地引用过期被拒（stale info）。远端尚无该分支时回退普通 force。
+          git fetch --force origin "refs/heads/$BRANCH:refs/remotes/origin/$BRANCH" 2>/dev/null || true
+          if git push --force-with-lease -u origin "$BRANCH"; then exit 0; fi
+          if git push --force -u origin "$BRANCH"; then exit 0; fi
+          sleep 5
+        done
+        echo "::error::CI 分支推送失败"
+        exit 1
+
+    - name: 开/复用 PR 并启用自动合并
+      if: steps.commit.outputs.NO_CHANGES != 'true'
+      shell: bash
+      env:
+        GH_TOKEN: ${{ inputs.token || github.token }}
+        BRANCH: ${{ inputs.branch }}
+        TITLE: ${{ inputs.title }}
+        BODY: ${{ inputs.body }}
+        BASE: ${{ inputs.base }}
+        AUTO: ${{ inputs.enable-auto-merge }}
+      run: |
+        set +e
+        number=$(gh pr list --head "$BRANCH" --state open --json number -q '.[0].number' 2>/dev/null)
+        if [ -z "$number" ]; then
+          gh pr create --base "$BASE" --head "$BRANCH" --title "$TITLE" --body "$BODY" \
+            || { echo "::error::创建 PR 失败"; exit 1; }
+          number=$(gh pr view "$BRANCH" --json number -q .number)
+          echo "已创建 PR #$number"
+        else
+          echo "复用已有 PR #$number"
+        fi
+        if [ "$AUTO" = "true" ]; then
+          gh pr merge "$number" --auto --merge \
+            || echo "::warning::启用自动合并失败（检查 repo auto-merge 与必需检查配置）"
+        fi

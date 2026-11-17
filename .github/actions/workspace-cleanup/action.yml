@@ -1,0 +1,28 @@
+name: 工作区标准化清理
+description: >
+  清除缓存 / 临时 / 构建产物 / 自动化临时目录，保持流水线工作区干净。
+  幂等、确定性、只删未跟踪路径（由 git ls-files 保护版本控制内容）。
+  供各工作流在「阶段开始前（预清理）」与「阶段结束后（收尾清理，if: always())」复用。
+inputs:
+  mode:
+    description: "clean=清理（默认）；dry-run=只报告；verify=有残留即失败"
+    required: false
+    default: "clean"
+  deep:
+    description: "是否连同虚拟环境 .venv/venv/env 一起清理（默认 false）"
+    required: false
+    default: "false"
+runs:
+  using: composite
+  steps:
+    - name: 工作区清理
+      shell: bash
+      env:
+        CLEAN_MODE: ${{ inputs.mode }}
+        CLEAN_DEEP: ${{ inputs.deep }}
+      run: |
+        set -euo pipefail
+        args=(--mode "$CLEAN_MODE")
+        if [ "$CLEAN_DEEP" = "true" ]; then args+=(--deep); fi
+        PY="$(command -v python3 || command -v python)"
+        "$PY" engine/tools/workspace_cleanup.py "${args[@]}"

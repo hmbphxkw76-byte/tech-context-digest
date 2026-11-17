@@ -1,0 +1,79 @@
+{
+  "version": "v1.6",
+  "updated": "2026-11-17",
+  "comment": "词汇库 → 业务提示词自动同步配置。bindings[].topic 必须已在 topics.json 注册；source 缺省取 topics.json 的 storage；target.path 相对 engine/vocabulary/ 根；insert_before 为区块缺失时的插入锚点（须为目标文件内唯一文本，区块替换时不参与匹配）；format=digest（按分类紧凑速览，缺省）| table（三列表格）；categories_include / tags_include 为可选过滤（空 = 全量）；section_title 为区块内标题（含 ## 前缀）。",
+  "auto_trigger": true,
+  "watch_interval_sec": 5,
+  "backup_dir": "data/sync-backups",
+  "backup_keep": 5,
+  "state_file": "data/sync-state.json",
+  "log_file": "data/sync.log",
+  "bindings": [
+    {
+      "topic": "ai-security",
+      "targets": [
+        {
+          "path": "../../content/tech/trends/global/prompts/business-config.md",
+          "format": "digest",
+          "section_title": "## 词汇速览 · AI 安全（词汇库自动同步）",
+          "insert_before": "## 七、版本记录",
+          "categories_include": [],
+          "tags_include": []
+        }
+      ]
+    },
+    {
+      "topic": "cybersecurity",
+      "targets": [
+        {
+          "path": "../../content/tech/security/dubai/prompts/business-config.md",
+          "format": "digest",
+          "section_title": "## 词汇速览（词汇库自动同步）",
+          "insert_before": "## 九、版本记录",
+          "categories_include": [],
+          "tags_include": []
+        }
+      ]
+    },
+    {
+      "topic": "financial-markets",
+      "targets": [
+        {
+          "path": "../../content/economy/dubai/apartment/prompts/business-config.md",
+          "format": "digest",
+          "section_title": "## 词汇速览（词汇库自动同步）",
+          "insert_before": "## 十三、版本记录",
+          "categories_include": [],
+          "tags_include": []
+        }
+      ]
+    },
+    {
+      "topic": "economy",
+      "targets": [
+        {
+          "path": "../../content/economy/global/trends/prompts/business-config.md",
+          "format": "digest",
+          "section_title": "## 词汇速览（词汇库自动同步）",
+          "insert_before": "## 七、版本记录",
+          "categories_include": [],
+          "tags_include": []
+        }
+      ]
+    },
+    {
+      "topic": "ai-agent",
+      "targets": [
+        {
+          "path": "../../content/tech/trends/global/prompts/business-config.md",
+          "format": "digest",
+          "section_title": "## 词汇速览 · AI Agent（词汇库自动同步）",
+          "insert_before": "## 七、版本记录",
+          "categories_include": [],
+          "tags_include": []
+        }
+      ]
+    }
+  ]
+}
+

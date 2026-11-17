@@ -1,0 +1,6 @@
+id,name,tool,chain,lag_quarters,status,source_url,effective_date,review_date,multiplier_low,multiplier_high,multiplier_unit,multiplier_note,reference_low,reference_high,reference_basis
+G01,黄金签证房产门槛,购房门槛调整,需求→外籍购房资格→成交量,1-2,未核验,https://u.ae/,—,年度复核,,,,未取得官方英文条款页；禁止引用中介数值,,,
+G02,CBUAE 按揭 LTV 规则,LTV 收紧/放松,利率→按揭成数→杠杆买家需求→成交量,1-2,未核验,https://centralbank.ae/en,—,年度复核,,,,未取得 CBUAE 官方通告；LTV 每 -10pp 的需求影响待本地回测,,,
+G03,DLD 过户费与交易成本,交易税费调整,需求→交易成本→成交量,0-1,未核验,https://dubailand.gov.ae/en/,—,年度复核,,,,未取得 DLD 官方费率页；费率每 +1pp 的成本影响待本地回测,,,
+G04,期房资金托管 / Oqood,托管制度强化,供给→期房信心→需求→成交量,2-4,未核验,https://dubailand.gov.ae/en/eservices/,—,年度复核,,,,未取得官方法条页；不引用法条编号作为事实,,,
+G05,RERA 租金涨幅规则与 90 天通知,租金管制,租赁→租金增速→收益率,1-2,已核验,http://dubailand.gov.ae/en/frequently-asked-questions,现行,年度复核,,,%,规则型政策：乘数取决于涨幅分档与市场议价权；无可下载序列，暂不可估,,,

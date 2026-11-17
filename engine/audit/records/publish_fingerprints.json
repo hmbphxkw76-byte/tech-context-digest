@@ -1,0 +1,16 @@
+{
+  "schema_version": "1.0",
+  "comment": "正式发布报告指纹（sha256，确定性无时间戳）。由 publish_fingerprint.py --emit 生成。",
+  "fingerprints": {
+    "content/economy/dubai/apartment/reports/2026-11_baseline_report.html": "90598ff578708c1c5d2599ceca6f2c558701d7e575eb7ad762217c63cdd8bebe",
+    "content/economy/dubai/apartment/reports/2026-11_monthly.html": "451b20dcdd7aa9d0f0faf5c4a2aa31419aaa257f0f71b5b73b24d5a0b7f5cb7f",
+    "content/economy/dubai/apartment/reports/2026-Q3_quarterly.html": "f19c6b4f4f92ec69472329c25c3463a2d39d0991de72275aebbb410982c5290f",
+    "content/economy/dubai/apartment/reports/2026_annual.html": "80273566b9e088a34c77dd996186bcdd462c295aa12a659732a1f625bcc76fbc",
+    "content/economy/global/decision-hub/reports/2026-12_baseline_report.html": "923eb78691ce8eb8b8eee1195d674d73d8fb9c1a85b05bfb66d64599f72c689c",
+    "content/economy/global/trends/reports/2026-11-13_weekly.html": "a5cea5b940efbca935e844cd286c95082bbe085519d05b18612a8b05de9fd2dd",
+    "content/tech/competitive-intelligence/dubai/reports/2026-12_baseline_report.html": "4b0efffa23efaf30d695e8205036dc8cd42def85f2d1221bd08c08b58c970f22",
+    "content/tech/industry-research/dubai/reports/2026-12_baseline_report.html": "cb77306b7faf12ecd7fc80fdc4b326817f0c7a78aa63ab7c0d7a43018f875f84",
+    "content/tech/security/dubai/reports/2026-11_baseline_report.html": "2156a55a913f054f066061ed02131fa357d934587c7395b478d5b84773f52f0d",
+    "content/tech/trends/global/reports/2026-11-13_weekly.html": "94e23e79889407619f5897bc7eea2c968fa48e9263b4cd610dc0a36447871916"
+  }
+}

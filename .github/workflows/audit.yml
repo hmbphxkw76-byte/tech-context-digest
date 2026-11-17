@@ -1,0 +1,129 @@
+name: 审计流程（四环节）
+
+# 每次报告生成后自动执行审计四环节（确定性部分）：
+#   生成 → 初审（L1+L2）→ 复核（L3 确定性子集）→ 终审（A1–A8 确定性项）→ 注入「已审计」标识
+# 语义深度复核（L3 全量）由 Agent 定期执行（见 engine/audit/prompts/30-second-review.md）。
+#
+# 与 content-update / html-sync / scheduled-maintenance 共用并发组，串行提交避免冲突。
+on:
+  push:
+    branches: [main]
+    paths:
+      - "**/reports/*.html"
+      - "**/reports/*.md"
+      - "engine/audit/**"
+      - "engine/report-audits/**"
+      - "requirements.txt"
+  pull_request:
+    branches: [main]
+    paths:
+      - "**/reports/*.html"
+      - "**/reports/*.md"
+      - "engine/audit/**"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  issues: write
+  pull-requests: write
+
+concurrency:
+  group: auto-commit-main
+  cancel-in-progress: false
+
+jobs:
+  audit:
+    name: 审计四环节 + 登记留痕
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09  # v5
+
+      - name: 工作区预清理（缓存/临时/构建产物）
+        uses: ./.github/actions/workspace-cleanup
+
+      - name: 设置 Python
+        uses: actions/setup-python@ece7cb06caefa5fff74198d8649806c4678c61a1  # v6
+        with:
+          python-version: "3.12"
+
+      - name: 安装依赖
+        run: pip install -r requirements.txt
+
+      # 确定性执行四环节；对不达标报告回退（fix），不注入标识。
+      # 审计阶段经 audit_tool._run_gate() 内部调用优化流程统一门禁（optimization_gate --probe），
+      # 与 ci.yml 同口径；此处不重复分项扫描（P1-2 去重）。
+      # --strict：final 由 machine_final（统一门禁真实退出码）+ semantic_final（Agent L3 证据）判定，
+      # 未做 L3 的报告只能注入「预审通过」标识，不得显示「已审计」。
+      # P0-2：语义环节以 Agent 记录为权威，ci-bot 不得覆盖 Agent 的 second 复核。
+      # P0-3：新报告 L3 宽限期（audit_tool.L3_GRACE_DAYS）内缺语义终审只告警：
+      #        run 退出码 2 = 宽限内待 L3（不阻断）；1 = machine_final 失败或超期缺失（fail-fast）。
+      - name: 执行审计四环节（确定性 · strict · fail-fast · L3 宽限）
+        run: |
+          set +e
+          python engine/audit/scripts/audit_tool.py run --strict
+          code=$?
+          python engine/audit/scripts/audit_tool.py accept
+          if [ "$code" -eq 1 ]; then
+            echo "::error::审计四环节未通过：存在待修报告（见上方 [BLOCK] 输出），fail-fast 阻断"
+            exit 1
+          elif [ "$code" -eq 2 ]; then
+            echo "::warning::存在宽限期内待补 L3 复核的报告（见上方 [GRACE] 输出，暂不阻断）"
+          fi
+          exit 0
+
+      # 提交并开 PR（自动合并）；pull_request 事件下只跑审计、不再嵌套开 PR。
+      - name: 提交并开 PR（自动合并）
+        if: success() && github.event_name != 'pull_request'
+        uses: ./.github/actions/submit-pr
+        with:
+          branch: ci/audit
+          title: "chore(audit): 审计四环节执行与「已审计」标识（由 CI 生成）"
+          body: |
+            由审计流程工作流自动生成：审计四环节登记 + 「已审计」标识注入。
+            合并方式：必需检查通过后自动合并（合并队列）。
+          commit-message: "chore(audit): 审计四环节执行与「已审计」标识（由 CI 生成）"
+          token: ${{ secrets.CI_PR_TOKEN }}
+
+      - name: 失败告警
+        if: failure()
+        uses: actions/github-script@f28e40c7f34bde8b3046d885e986cb6290c5673b  # v7
+        with:
+          script: |
+            const runUrl = `${context.payload.repository.html_url}/actions/runs/${context.runId}`;
+            await github.rest.issues.create({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              title: `[automation-failure] 审计四环节失败 @ ${context.runId}`,
+              labels: ['automation-failure'],
+              body: [
+                '审计四环节执行失败（存在 machine_final 失败或超 L3 宽限期的报告），请查看上方 [BLOCK] 输出。',
+                '',
+                `- 运行链接：${runUrl}`,
+                `- 触发提交：${context.sha}`,
+                '',
+                '补跑方式：Actions → 审计流程（四环节）→ Run workflow。'
+              ].join('\n')
+            });
+
+      - name: 闭环修正工单（门禁 [E] / 活跃度超阈值）
+        if: always()
+        uses: ./.github/actions/remediation-ticket
+
+      - name: 工作区收尾清理（始终执行）
+        if: always()
+        uses: ./.github/actions/workspace-cleanup
+
+  webhook-alert:
+    name: Webhook 告警
+    needs: audit
+    if: failure()
+    uses: ./.github/workflows/webhook-alert.yml
+    with:
+      title: "[automation-failure] 审计四环节失败 @ ${{ github.run_id }}"
+      message: |
+        审计四环节执行失败，请查看日志并处理 [BLOCK] 报告。
+        运行链接：${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+      level: error
+      run_url: "${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"
+    secrets:
+      AUTOMATION_WEBHOOK_URL: ${{ secrets.AUTOMATION_WEBHOOK_URL }}

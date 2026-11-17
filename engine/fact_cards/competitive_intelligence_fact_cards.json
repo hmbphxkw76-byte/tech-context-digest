@@ -1,0 +1,106 @@
+{
+  "schema_version": "1.0",
+  "domain": "CI",
+  "comment": "competitive-intelligence（竞争情报）共享事实卡片。字段规范见 engine/fact_cards/README.md 与信息分层规范第五节。",
+  "cards": [
+    {
+      "card_id": "FC-CI-001",
+      "fact": "企业 LLM API 支出份额（全球）：Anthropic 55%、OpenAI 31%、Google 9%，Anthropic + OpenAI 合计 86%。",
+      "source": "Menlo Ventures https://menlovc.com/perspective/2026-the-state-of-enterprise-ai/, 2026-11",
+      "tier": 2,
+      "verify_status": "部分核验",
+      "level": "部分核验",
+      "updated": "2026-11-13",
+      "indicators": ["CI-份额"],
+      "used_by": ["competitive-intelligence", "industry-research"]
+    },
+    {
+      "card_id": "FC-CI-002",
+      "fact": "企业 AI 部署支出 5.4 倍增长（2025 年 330 亿 → 2026-09 1768 亿美元）。",
+      "source": "Menlo Ventures https://menlovc.com/perspective/2026-the-state-of-enterprise-ai/, 2026-11",
+      "tier": 2,
+      "verify_status": "部分核验",
+      "level": "部分核验",
+      "updated": "2026-11-13",
+      "indicators": ["CI-支出"],
+      "used_by": ["competitive-intelligence", "industry-research"]
+    },
+    {
+      "card_id": "FC-CI-003",
+      "fact": "模型层高度集中（Anthropic + OpenAI 86%）通过 API 与产品能力向本地交付层传导，约束本地 AI 网安产品的模型选型与成本结构。",
+      "source": "综合推断（基于 FC-CI-001）",
+      "tier": 2,
+      "verify_status": "未核验",
+      "level": "推断",
+      "updated": "2026-11-13",
+      "indicators": ["CI-格局"],
+      "used_by": ["competitive-intelligence"]
+    },
+    {
+      "card_id": "FC-CI-004",
+      "fact": "主权玩家垂直整合构成独立一极：G42 系覆盖算力（Khazna，承建 Stargate UAE）、主权云（Core42）、MSSP（CPX）；微软 2024-04 对 G42 股权投资 15 亿美元并配套 10 亿美元开发者基金。",
+      "source": "g42.ai / core42.ai / cpx.net / Microsoft, 2024–2026",
+      "tier": 1,
+      "verify_status": "已核验",
+      "level": "已核验事实",
+      "updated": "2026-11-13",
+      "indicators": ["CI-玩家"],
+      "used_by": ["competitive-intelligence", "industry-research"]
+    },
+    {
+      "card_id": "FC-CI-005",
+      "fact": "政策是第一驱动力，合规能力成为产品准入与采购放大器：迪拜 ISR v3.1（13 个控制域）为强制标准；国家网络认证计划（NCAP）限制未认证 MSSP 服务关键基础设施。",
+      "source": "DESC / Chambers https://practiceguides.chambers.com/cybersecurity-2026/uae, 2026",
+      "tier": 1,
+      "verify_status": "已核验",
+      "level": "已核验事实",
+      "updated": "2026-11-13",
+      "indicators": ["CI-政策"],
+      "used_by": ["competitive-intelligence", "industry-research"]
+    },
+    {
+      "card_id": "FC-CI-006",
+      "fact": "DESC 在 GISEC Global 2026（第 15 届，2026-09-16–18，迪拜世博城）发布 SARAAB（开源阿拉伯语政府 AI 深度伪造检测模型）、迪拜网络安全技能框架与 ISR 审核员认证计划。",
+      "source": "DESC https://desc.gov.ae/dubai-electronic-security-center-unveils-saraab-and-new-cybersecurity-initiatives-at-gisec-global-2026, 2026",
+      "tier": 1,
+      "verify_status": "已核验",
+      "level": "已核验事实",
+      "updated": "2026-11-13",
+      "indicators": ["CI-动作"],
+      "used_by": ["competitive-intelligence", "security"]
+    },
+    {
+      "card_id": "FC-CI-007",
+      "fact": "Anthropic 同源双模型 Fable 5.2 / Mythos 5.2 发布（2026-11-09）：Mythos 仅向通过 Cyber / Life Sciences 验证计划的机构开放，分级开放影响网安能力可得性。",
+      "source": "Anthropic https://www.anthropic.com/claude-fable-and-mythos-5-2, 2026-11-09",
+      "tier": 1,
+      "verify_status": "已核验",
+      "level": "已核验事实",
+      "updated": "2026-11-13",
+      "indicators": ["CI-动作"],
+      "used_by": ["competitive-intelligence"]
+    },
+    {
+      "card_id": "FC-CI-008",
+      "fact": "Anthropic 启动 IPO 路演（2026-11-10），拟发行 8.25 亿股，定价区间 70.00–78.00 美元/股。",
+      "source": "Anthropic https://www.anthropic.com/news/roadshow-launch, 2026-11-10",
+      "tier": 1,
+      "verify_status": "已核验",
+      "level": "已核验事实",
+      "updated": "2026-11-13",
+      "indicators": ["CI-资本"],
+      "used_by": ["competitive-intelligence"]
+    },
+    {
+      "card_id": "FC-CI-009",
+      "fact": "GITEX Global 2026 档期 2026-12-07–11 于迪拜世博城举办，设网络安全与数字主权专区。",
+      "source": "gitex.com, 2026",
+      "tier": 1,
+      "verify_status": "已核验",
+      "level": "已核验事实",
+      "updated": "2026-11-13",
+      "indicators": ["CI-活动"],
+      "used_by": ["competitive-intelligence", "security"]
+    }
+  ]
+}

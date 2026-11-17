@@ -1,0 +1,95 @@
+{
+  "schema_version": "1.0",
+  "domain": "IND",
+  "comment": "industry-research（AI 网安行业深度）共享事实卡片。字段规范见 engine/fact_cards/README.md 与信息分层规范第五节。",
+  "cards": [
+    {
+      "card_id": "FC-IND-001",
+      "fact": "迪拜（阿联酋）AI 网安行业由「主权 AI 基建 + 强制合规 + 威胁国家化」三重驱动，交付以托管安全服务与主权云安全为主，人才供给是最紧约束。",
+      "source": "综合推断（基于 FC-SEC-009/010/001 与行业报告）",
+      "tier": 2,
+      "verify_status": "未核验",
+      "level": "推断",
+      "updated": "2026-12-01",
+      "indicators": ["IND-驱动"],
+      "used_by": ["industry-research", "competitive-intelligence"]
+    },
+    {
+      "card_id": "FC-IND-002",
+      "fact": "产业链三层结构：上游算力与主权基建（NVIDIA GB300、Stargate UAE、Core42 主权云、Cisco 零信任、Khazna 承建）→ 中游平台/产品/服务与集成（G42 系、e&/Help AG、Moro Hub、全球厂商区域总部、咨询）→ 下游监管与行业客户（DESC、UAE CSC、TDRA/aeCERT、DIFC/ADGM、政府与关键基础设施）。",
+      "source": "综合推断（基于 FC-SEC-009/010 与各公司官网）",
+      "tier": 2,
+      "verify_status": "未核验",
+      "level": "推断",
+      "updated": "2026-12-01",
+      "indicators": ["IND-产业链"],
+      "used_by": ["industry-research"]
+    },
+    {
+      "card_id": "FC-IND-003",
+      "fact": "主权科技栈：G42 为 AI 控股集团（23,000+ 员工、30 国），旗下 Core42（主权公有云，映射 200+ 阿联酋控制项）、CPX（端到端 MSSP，约 600 名专家、200+ 客户）、Khazna、M42；Core42 2026-09 与 TII 在 HSM/机密计算/加密 AI 推理上合作。",
+      "source": "g42.ai / core42.ai / cpx.net, 2026",
+      "tier": 1,
+      "verify_status": "部分核验",
+      "level": "部分核验",
+      "updated": "2026-12-01",
+      "indicators": ["IND-玩家"],
+      "used_by": ["industry-research", "competitive-intelligence"]
+    },
+    {
+      "card_id": "FC-IND-004",
+      "fact": "托管安全/MSSP：e& enterprise / Help AG 为迪拜 HQ + 阿布扎比双城 MSSP，200+ SOC 分析师，IDC MarketScape 领导者（MSS 2026、MDR 2025）；Cloud4C 为自由区生态代表。",
+      "source": "eand.com, 2026；IDC MarketScape（第三方）",
+      "tier": 2,
+      "verify_status": "部分核验",
+      "level": "部分核验",
+      "updated": "2026-12-01",
+      "indicators": ["IND-玩家"],
+      "used_by": ["industry-research", "competitive-intelligence"]
+    },
+    {
+      "card_id": "FC-IND-005",
+      "fact": "Hub71（阿布扎比）第 19 批（2026 年 10 月）90% 为 AI 原生，40 家初创、累计融资 2.96 亿美元，是主要 AI/网络创业池。",
+      "source": "hub71.com, 2026",
+      "tier": 1,
+      "verify_status": "已核验",
+      "level": "已核验事实",
+      "updated": "2026-12-01",
+      "indicators": ["IND-生态"],
+      "used_by": ["industry-research", "competitive-intelligence"]
+    },
+    {
+      "card_id": "FC-IND-006",
+      "fact": "市场规模多口径并列（不合并）：Gartner MENA 终端支出 2025 年 33 亿美元 +14%；Mordor 阿联酋 2025→2031 8.2 亿→15.1 亿美元 CAGR 10.66%；GMI 2025 约 34 亿美元 CAGR 12.29%；Grand View Research 全球 AI in cybersecurity 2025→2033 315 亿→1829 亿美元 CAGR 24.7%（单一机构预测，置信度中）。",
+      "source": "Gartner 2025 / Mordor 2025 / GMI 2025 / Grand View Research 2026",
+      "tier": 2,
+      "verify_status": "已核验",
+      "level": "已核验事实",
+      "updated": "2026-12-01",
+      "indicators": ["IND-规模"],
+      "used_by": ["industry-research", "competitive-intelligence"]
+    },
+    {
+      "card_id": "FC-IND-007",
+      "fact": "攻击行业分布：政府管理 9.4%、金融 9.3%、房地产 5.5%；按酋长国：迪拜 21%、阿布扎比 19%、沙迦 18%；中东平均数据泄露成本 792 万美元（全球 488 万）。",
+      "source": "Khaleej Times（转引官方）https://khaleejtimes.com/uae/uae-faces-200000-daily-cyberattacks, 2025",
+      "tier": 4,
+      "verify_status": "部分核验",
+      "level": "部分核验",
+      "updated": "2026-12-01",
+      "indicators": ["IND-威胁"],
+      "used_by": ["industry-research", "competitive-intelligence"]
+    },
+    {
+      "card_id": "FC-IND-008",
+      "fact": "格局特征（推断）：主权资本（G42 系）与全球厂商并存的双轨结构；本地 MSSP/自由区承担主要交付；ISR 与 AI 安全政策推动治理、审计与认证需求上升；缺少可核实份额数值，集中度未知。",
+      "source": "综合推断（基于 FC-IND-003/004/009）",
+      "tier": 2,
+      "verify_status": "未核验",
+      "level": "推断",
+      "updated": "2026-12-01",
+      "indicators": ["IND-格局"],
+      "used_by": ["industry-research", "competitive-intelligence"]
+    }
+  ]
+}
