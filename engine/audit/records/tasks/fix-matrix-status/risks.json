@@ -1,0 +1,8 @@
+[
+  {
+    "description": "状态漏改",
+    "id": "R-01",
+    "mitigation": "提交前全量 grep 校验无残留待实施",
+    "owner": ""
+  }
+]
