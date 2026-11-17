@@ -113,6 +113,15 @@ def save_registry(reg: dict) -> None:
     REGISTRY.write_text(json.dumps(reg, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
 
 
+def stale_paths(reports: dict) -> list[str]:
+    """登记路径在磁盘上不存在的失效条目（P-01）。
+
+    业务报告被删除 / 迁移后，登记册残留旧路径会损害审计留痕可信度；
+    本函数为唯一判定入口，供 status（告警）与 prune（清理）复用。
+    """
+    return sorted(rel for rel in reports if not (ROOT / rel).exists())
+
+
 def cmd_init(_args) -> int:
     reg = load_registry()
     reports = reg.setdefault("reports", {})
@@ -453,6 +462,20 @@ def _next_audit_id(reg: dict) -> str:
     return f"AUD-{today}-{n + 1:03d}"
 
 
+def cmd_prune(_args) -> int:
+    """移除登记路径不存在的失效条目（P-01）。幂等：无失效条目时不写盘。"""
+    reg = load_registry()
+    reports = reg.get("reports", {})
+    stale = stale_paths(reports)
+    for rel in stale:
+        reports.pop(rel, None)
+    if stale:
+        save_registry(reg)
+    print(f"[prune] 移除失效登记 {len(stale)} 条"
+          + (f"：{', '.join(stale)}" if stale else "（无失效条目）"))
+    return 0
+
+
 def cmd_status(args) -> int:
     reg = load_registry()["reports"]
     if args.report:
@@ -461,6 +484,9 @@ def cmd_status(args) -> int:
         if not e:
             print(f"未登记：{rel}")
             return 1
+        if not (ROOT / rel).exists():
+            print(f"[STALE] 登记路径不存在：{rel}")
+            return 2
         print(json.dumps({rel: e}, ensure_ascii=False, indent=2))
         return 0
     print(f"{'报告':<62} {'状态':<10} {'审查链':<10} {'标识'}")
@@ -469,7 +495,11 @@ def cmd_status(args) -> int:
         done = sum(1 for s in STAGES if e.get("stages", {}).get(s))
         level = e.get("mark_level") if e.get("mark") else "none"
         print(f"{rel:<62} {e.get('status','-'):<10} {done}/4       {mark_label.get(level, '-')}")
-    return 0
+    stale = stale_paths(reg)
+    print(f"\n登记 {len(reg)} 条；失效条目（stale）：{len(stale)}")
+    for rel in stale:
+        print(f"  [STALE] {rel}（登记路径不存在）")
+    return 2 if stale else 0
 
 
 # ---------------------------------------------------------------- 抽检与验收
@@ -714,6 +744,7 @@ def main() -> int:
     sub = ap.add_subparsers(dest="cmd", required=True)
     sub.add_parser("inventory")
     sub.add_parser("init")
+    sub.add_parser("prune", help="移除登记路径不存在的失效条目（stale）")
     p = sub.add_parser("structure"); p.add_argument("report")
     p = sub.add_parser("verify"); p.add_argument("report")
     p = sub.add_parser("review")
@@ -730,7 +761,8 @@ def main() -> int:
                    help="严格模式下不内部重跑统一门禁（由调用方统一执行，避免重复）")
     args = ap.parse_args()
     return {
-        "inventory": cmd_inventory, "init": cmd_init, "structure": cmd_structure, "verify": cmd_verify,
+        "inventory": cmd_inventory, "init": cmd_init, "prune": cmd_prune,
+        "structure": cmd_structure, "verify": cmd_verify,
         "review": cmd_review, "mark": cmd_mark, "unmark": cmd_unmark, "status": cmd_status,
         "sample": cmd_sample, "accept": cmd_accept, "run": cmd_run,
     }[args.cmd](args)

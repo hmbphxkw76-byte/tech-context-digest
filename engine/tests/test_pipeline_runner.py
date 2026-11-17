@@ -146,6 +146,60 @@ class TestGateExecution(unittest.TestCase):
         self.assertIn("审计", g.detail)
 
 
+class TestProbeSemantics(unittest.TestCase):
+    """P-04 / 0.3：probe 语义必须尊重清单 gate.probe 字段（缺省不覆盖）。"""
+
+    class _Fake:
+        CHECKS = [(n, [], True) for n in REAL_CHECK_NAMES]
+
+        def __init__(self):
+            self.probe = None
+
+        def run_checks(self, names=None, gate_period=None, source_gate_period=None,
+                       quiet=True, probe=False):
+            self.probe = probe
+            return {"checks": [], "errors": 0, "warnings": 0}
+
+    def test_manifest_probe_true_respected(self):
+        fake = self._Fake()
+        with mock.patch.object(pr, "_gate_module", return_value=fake):
+            pr.run_gate(MANIFEST, "G2", probe=None)   # G2 probe:true
+        self.assertIs(True, fake.probe)
+
+    def test_manifest_probe_false_respected(self):
+        fake = self._Fake()
+        with mock.patch.object(pr, "_gate_module", return_value=fake):
+            pr.run_gate(MANIFEST, "G0", probe=None)   # G0 probe:false
+        self.assertIs(False, fake.probe)
+
+    def test_probe_override(self):
+        fake = self._Fake()
+        with mock.patch.object(pr, "_gate_module", return_value=fake):
+            pr.run_gate(MANIFEST, "G0", probe=True)
+            self.assertIs(True, fake.probe)
+            pr.run_gate(MANIFEST, "G2", probe=False)
+            self.assertIs(False, fake.probe)
+
+    @staticmethod
+    def _gate_result():
+        return pr.GateResult(id="G2", name="分级 / 双源 / 死链校验", after="N2",
+                            checks=["source_check"], errors=0, warnings=0,
+                            status="ok", blocked=False, on_fail="N2")
+
+    def test_cli_gate_probe_default_is_none(self):
+        with mock.patch.object(pr, "run_gate", return_value=self._gate_result()) as rg, \
+             mock.patch.object(sys, "argv", ["pipeline_runner.py", "gate", "G2"]):
+            pr.main()
+        self.assertIsNone(rg.call_args.kwargs["probe"])
+
+    def test_cli_gate_probe_flags(self):
+        for flag, expected in (("--probe", True), ("--no-probe", False)):
+            with mock.patch.object(pr, "run_gate", return_value=self._gate_result()) as rg, \
+                 mock.patch.object(sys, "argv", ["pipeline_runner.py", "gate", "G2", flag]):
+                pr.main()
+            self.assertIs(expected, rg.call_args.kwargs["probe"])
+
+
 class TestPipelineRouting(unittest.TestCase):
     """核心执行逻辑：通过则下一节点，E 阻断则精准退回。"""
 
