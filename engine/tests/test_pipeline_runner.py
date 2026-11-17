@@ -72,7 +72,7 @@ class TestManifestGraph(unittest.TestCase):
                     continue
                 self.assertIn(c, REAL_CHECK_NAMES, f"{g['id']} 引用未知门禁 {c}")
 
-    def test_star_expands_to_all_21(self):
+    def test_star_expands_to_all_23(self):
         g6 = pr.get_gate(MANIFEST, "G6")
         self.assertEqual(g6["checks"], ["*"])
         self.assertEqual(len(pr.resolve_checks(MANIFEST, g6)), len(REAL_CHECK_NAMES))

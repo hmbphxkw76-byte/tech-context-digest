@@ -28,6 +28,13 @@
       "slug": "fix-alignment",
       "task": "fix-alignment"
     },
+    "task/fix-gate23-replay-4e8d2882": {
+      "note": "source=env:CATPAW_CONVERSATION_ID",
+      "session": "4e8d2882bbbd4d66a1c8f8ed44b2c21a",
+      "session_short": "4e8d2882",
+      "slug": "fix-gate23-replay",
+      "task": "fix-gate23-replay"
+    },
     "task/fix-matrix-status-cd95c5fa": {
       "note": "source=env:CATPAW_CONVERSATION_ID",
       "session": "cd95c5fad1b94ba18de3bbc3b62eea99",

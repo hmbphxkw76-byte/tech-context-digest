@@ -40,7 +40,7 @@
 
 ### 1.3 统一门禁单一入口（`optimization_gate.py`）
 
-- **21 项**：validate / validate_layout / lint / compliance / classify / region_topics / links / hub / page_build / source_check / metric_registry / metric_audit / release_calendar / publish_fingerprint / semantic_diff / perf_monitor / research_kernel / info_density / fact_card / decision_hub / blind_spot。
+- **23 项**（基线 21 项，Phase 3.1 起 23 项）：validate / validate_layout / lint / compliance / classify / region_topics / links / hub / page_build / source_check / metric_registry / metric_audit / release_calendar / publish_fingerprint / semantic_diff / perf_monitor / research_kernel / info_density / fact_card / decision_hub / blind_spot / ruff / mypy。
 - **退出码**：0 通过；1 有 `[E]`（阻断）；2 仅 `[W]`（放行）。`warn_ok` 仅 `links` / `hub` / `metric_registry` 不容忍 exit 2。
 - **复用矩阵**：`repo_sync run --gate`（本地提交）、`ci.yml` / `html-sync.yml` / `content-update.yml` / `scheduled-maintenance.yml`（CI 步骤）、`audit_tool._run_gate()`（审计内部）。
 - **一致性强制**：`engine/tests/test_process_gates.py::TestOptimizationGateReuse` 锁定「四门禁必须在 `CHECKS`、四工作流必须调用统一入口且不得分项重复」。
@@ -130,9 +130,9 @@
 | 维度 | 评分 | 判断 |
 |---|---|---|
 | **流程适配性** | 中 | mainline 是软件交付范式（TDD / release tag / changelog / 11 阶段硬编码）；本仓库是内容生产 + 工具链。内容线 40% 不适配（报告不是代码，TDD 不适用；无版本发布需求）。引擎线高度适配。 |
-| **落地成本** | 高 | 需重写规范体系（AGENTS.md + 6 份 docs + manifest）、改造 6 工作流、新增三件套生成器与本地 mainline 脚本、重训团队习惯；而现有体系已 448 单测 + 21 门禁 + 6 工作流稳定运行。 |
+| **落地成本** | 高 | 需重写规范体系（AGENTS.md + 6 份 docs + manifest）、改造 6 工作流、新增三件套生成器与本地 mainline 脚本、重训团队习惯；而现有体系已 448 单测 + 23 门禁（基线 21）+ 6 工作流稳定运行。 |
 | **团队协作效率** | 中（有明确增量） | mainline 的任务级工件（plan/tasks/risks）正是当前缺口（P-05），能提升多会话可追溯性；但可用更轻量方式吸收，无需整体替换。 |
-| **质量保障能力** | 现有**更强** | 现有 5 防线 + 21 门禁 + 审计四环节 + 两级 gate-period，显著强于 mainline 的「单测 + 本地脚本」。以 mainline 为核心替换等于**降级**。 |
+| **质量保障能力** | 现有**更强** | 现有 5 防线 + 23 门禁 + 审计四环节 + 两级 gate-period，显著强于 mainline 的「单测 + 本地脚本」。以 mainline 为核心替换等于**降级**。 |
 | **长期可维护性** | 中偏负 | 规范已过剩（P-07/21），再叠加 11 阶段 + 三件套会加剧复杂度与漂移；但「分支登记册 + 完成前证据索引」对长期审计有利，值得吸收。 |
 
 ---
@@ -143,7 +143,7 @@
 
 **不需要以 mainline 规范为核心做整体融合（替换）。** 三条核心原因：
 
-1. **质量保障会降级**：现有 5 道防线 / 21 项统一门禁 / 审计四环节 / 两级 gate-period 在「内容生产」维度上**强于** mainline 的质量门（单测 + 本地脚本）。以 mainline 为核心替换，等于用简化门禁替换成熟门禁。
+1. **质量保障会降级**：现有 5 道防线 / 23 项统一门禁 / 审计四环节 / 两级 gate-period 在「内容生产」维度上**强于** mainline 的质量门（单测 + 本地脚本）。以 mainline 为核心替换，等于用简化门禁替换成熟门禁。
 2. **40% 阶段与仓库性质不适配**：TDD 不适用于报告内容生成；`tag/changelog/RELEASES.md` 对静态 HTML 交付物无意义。强行套用会制造形式主义工件，反而增加负担。
 3. **落地成本 > 收益，且规范已过载**：现有体系已稳定运行且经 448 单测锁定；再引入 11 阶段 + 三件套会加剧「规范复述漂移」（P-07），与长期可维护性目标冲突。
 
@@ -251,3 +251,4 @@
 | v1.0 | 2026-11-17 | 初始评估：现有流程梳理、11 阶段对照、五维评估、结论（不整体融合 + 吸收式融合）、四阶段路线图、风险与量化收益 |
 | v1.1 | 2026-11-17 | 实施回写：Phase 0–3 全部落地（吸收式融合，**主体 N0–N8 保留**）。Phase 0.4 选**方案 A**（`ci.yml` 增 `pipeline_runner validate`）；Phase 2.2 L3 采用「依据 2026-11-16 L3 记录批量补审 + 每两周 SLA」；P-06（注册结构化）/ P-09（并发写）**显式延后**（理由与归属见覆盖矩阵）。逐项状态与实测见 [覆盖矩阵](./mainline-adoption-coverage-matrix.md)。 |
 | v1.2 | 2026-11-17 | 核心事实修正：§1.2 统一门禁数量由 21 项更正为 **23 项**（基线 21 项，Phase 3.1 起 23 项）；收口轮修复证据索引 `plan.reports` 关联、L3 SLA 接线、任务启动文件四件套强制与门禁数量复述漂移，见 [覆盖矩阵](./mainline-adoption-coverage-matrix.md) v0.2。 |
+| v1.3 | 2026-11-17 | 门禁数量复述收口：§1.3 / §四 / §五 由 21 更正为 23，与 §1.2、`optimization_gate.CHECKS` 全量对齐（§1.3 清单补齐 ruff / mypy 两项）。 |
