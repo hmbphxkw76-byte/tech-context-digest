@@ -93,7 +93,15 @@ def build_plan(slug: str, title: str, source: str = "main") -> dict:
             "start": f"engine/audit/records/tasks/{slug}/task-start.md",
         },
         "reuse": dict(REUSE),
+        # 关联报告 rel 列表（按字典序去重）：供 audit_tool 证据索引汇聚（吸收项 ③）。
+        # 只登记 rel，不校验文件存在性（任务可先于报告创建）。
+        "reports": [],
     }
+
+
+def normalize_reports(items: list[str] | None) -> list[str]:
+    """关联报告 rel 列表：去重 + 字典序（确定性，供证据索引汇聚）。"""
+    return sorted({x.strip() for x in (items or []) if isinstance(x, str) and x.strip()})
 
 
 def parse_tasks(items: list[str] | None) -> list[dict]:
@@ -171,6 +179,17 @@ def render_start_md(slug: str, plan: dict, tasks: list[dict], risks: list[dict])
     for r in risks:
         lines.append(f"- {r['id']} {r['description']}"
                      + (f"（缓解：{r['mitigation']}）" if r.get("mitigation") else ""))
+    lines += [
+        "",
+        "## 关联报告",
+        "",
+    ]
+    reports = plan.get("reports") or []
+    if reports:
+        for rep in reports:
+            lines.append(f"- `{rep}`")
+    else:
+        lines.append("- 无（手工/工具类任务）")
     lines.append("")
     return "\n".join(lines)
 
@@ -200,6 +219,15 @@ def validate_artifacts(slug: str, plan: dict, tasks: list[dict], risks: list[dic
     for r in risks:
         if not r.get("id") or not str(r.get("description", "")).strip():
             problems.append(f"risk 缺 id/description：{r}")
+    # 关联报告：非空字符串列表、无重复；不校验文件存在性（任务可先于报告创建）。
+    reports = plan.get("reports", [])
+    if not isinstance(reports, list):
+        problems.append("plan.reports 须为列表")
+    else:
+        if any((not isinstance(x, str)) or not x.strip() for x in reports):
+            problems.append("plan.reports 含非字符串或空项")
+        if len(reports) != len(set(reports)):
+            problems.append("plan.reports 重复")
     return problems
 
 
@@ -266,6 +294,7 @@ def main() -> int:
     p.add_argument("--title", required=True)
     p.add_argument("--task", action="append", default=[], help="任务：\"T-1:标题\"")
     p.add_argument("--risk", action="append", default=[], help="风险：\"R-1:描述:缓解\"")
+    p.add_argument("--report", action="append", default=[], help="关联报告 rel（可重复，写入 plan.reports）")
     p.add_argument("--from", dest="source", default="main", help="起点 ref（默认 main）")
 
     p = sub.add_parser("show", help="打印 plan.json")
@@ -282,6 +311,7 @@ def main() -> int:
             print(f"[ERROR] {why}", file=sys.stderr)
             return 2
         plan = build_plan(args.slug, args.title, args.source)
+        plan["reports"] = normalize_reports(args.report)
         tasks = parse_tasks(args.task)
         risks = parse_risks(args.risk)
         problems = validate_artifacts(args.slug, plan, tasks, risks)

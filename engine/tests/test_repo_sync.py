@@ -166,16 +166,41 @@ class TestTaskPlanGate(unittest.TestCase):
         with tempfile.TemporaryDirectory() as d:
             ok, msg = rs.require_task_plan(branch="task/x-00000000", root=Path(d))
             self.assertFalse(ok)
-            self.assertIn("缺任务计划", msg)
+            self.assertIn("缺任务计划工件", msg)
 
     def test_managed_branch_plan_present(self):
         with tempfile.TemporaryDirectory() as d:
             p = Path(d) / "engine/audit/records/tasks/x"
             p.mkdir(parents=True)
-            (p / "plan.json").write_text("{}\n", encoding="utf-8")
+            for name in rs.TASK_ARTIFACTS:
+                (p / name).write_text("{}\n", encoding="utf-8")
             ok, msg = rs.require_task_plan(branch="task/x-00000000", root=Path(d))
             self.assertTrue(ok)
             self.assertIn("任务计划就绪", msg)
+            self.assertIn("四件套齐备", msg)
+
+    def test_managed_branch_missing_start_rejected(self):
+        with tempfile.TemporaryDirectory() as d:
+            p = Path(d) / "engine/audit/records/tasks/x"
+            p.mkdir(parents=True)
+            for name in rs.TASK_ARTIFACTS:
+                (p / name).write_text("{}\n", encoding="utf-8")
+            (p / "task-start.md").unlink()
+            ok, msg = rs.require_task_plan(branch="task/x-00000000", root=Path(d))
+            self.assertFalse(ok)
+            self.assertIn("task-start.md", msg)
+
+    def test_managed_branch_missing_each_artifact_rejected(self):
+        for missing in rs.TASK_ARTIFACTS:
+            with tempfile.TemporaryDirectory() as d:
+                p = Path(d) / "engine/audit/records/tasks/x"
+                p.mkdir(parents=True)
+                for name in rs.TASK_ARTIFACTS:
+                    if name != missing:
+                        (p / name).write_text("{}\n", encoding="utf-8")
+                ok, msg = rs.require_task_plan(branch="task/x-00000000", root=Path(d))
+                self.assertFalse(ok, missing)
+                self.assertIn(missing, msg)
 
     def test_run_refuses_without_plan(self):
         from contextlib import contextmanager

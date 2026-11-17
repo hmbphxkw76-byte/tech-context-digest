@@ -93,7 +93,7 @@ flowchart LR
 
 ### 1.4 任务级闭环（N0.5，适配 mainline）
 
-在 N0 之后新增 **N0.5「任务计划」子节点**，吸收 mainline 阶段 2 / 5 / 11 的三项增量机制（计划工件 / 本地 mainline 编排 / 完成前证据索引），**不改动 N0–N8 主链与 G0–G8 门禁**。任务工件落 `engine/audit/records/` 下的 `tasks/<slug>/`，由 `task_plan.py` 生成、`local_mainline.py` 编排、`repo_sync.py` 提交；无 `plan.json` 不得 `repo_sync run --gate`。
+在 N0 之后新增 **N0.5「任务计划」子节点**，吸收 mainline 阶段 2 / 5 / 11 的三项增量机制（计划工件 / 本地 mainline 编排 / 完成前证据索引），**不改动 N0–N8 主链与 G0–G8 门禁**。任务工件落 `engine/audit/records/` 下的 `tasks/<slug>/`，由 `task_plan.py` 生成、`local_mainline.py` 编排、`repo_sync.py` 提交；无任务计划四件套（`plan.json` / `tasks.json` / `risks.json` / `task-start.md`）不得 `repo_sync run --gate`。
 
 ```mermaid
 flowchart LR
@@ -124,8 +124,8 @@ flowchart LR
 | 项 | 内容 |
 |---|---|
 | 输入 | 任务需求 / 验收标准 / 分支 slug |
-| 核心步骤 | ① `task_plan.py init` 生成 `plan.json` / `tasks.json` / `risks.json` / `task-start.md`（落 `engine/audit/records/` 下的 `tasks/<slug>/`）；② 声明与 N0–N8 的映射与复用入口 |
-| 输出标准 | 工件 schema 固定、确定性可重放（`task_plan.py check`）；受管 `task/*` 分支无 `plan.json` 不得 `repo_sync run --gate` |
+| 核心步骤 | ① `task_plan.py init --report <rel>...` 生成 `plan.json`（含 `reports` 关联）/ `tasks.json` / `risks.json` / `task-start.md`（落 `engine/audit/records/` 下的 `tasks/<slug>/`）；② 声明与 N0–N8 的映射与复用入口 |
+| 输出标准 | 工件 schema 固定、确定性可重放（`task_plan.py check`）；受管 `task/*` 分支无任务计划四件套不得 `repo_sync run --gate` |
 | 工具 | `task_plan.py`、`local_mainline.py`（薄封装，只编排）、`repo_sync.py`（提交网关） |
 | 门禁 | 复用统一门禁 `optimization_gate.py --probe`；不另写校验 |
 
@@ -250,7 +250,7 @@ flowchart LR
 
 - **标识三态**：`none` / `pre`（机器终审过、L3 未完成，灰）/ `full`（navy）。
 - **宽限期**：`L3_GRACE_DAYS=14`；宽限内缺语义终审只告警（退出码 2），超期或 `machine_final` 失败才 fail-fast（退出码 1）。
-- **L3 SLA**：语义终审由 Agent 定期执行，**每两周覆盖全部有效正式报告**；与 14 天宽限期一致，超期未审由维护流水线告警。
+- **L3 SLA**：语义终审由 Agent 定期执行，**每两周覆盖全部有效正式报告**；与 14 天宽限期一致，超期未审由维护流水线告警（`audit_tool.py l3-status`，接入 `scheduled-maintenance.yml`，超期 `[W]` 不阻断）。
 - **P0-2**：语义环节以 Agent 记录为权威，ci-bot 不得覆盖。
 - **留痕**：`records/reviews/<slug>.json` 只追加；`records/audit_registry.json` 状态机 `draft → in-review → audited / rejected`。
 

@@ -110,6 +110,21 @@ jobs:
           fi
           exit 0
 
+      # L3 SLA 超期检测（R3 / L3 SLA）：语义终审每两周覆盖全部有效正式报告；
+      # 复用 audit_tool l3-status（纯读、幂等），超期只告警不阻断提交。
+      - name: L3 SLA 超期检测
+        run: |
+          set +e
+          python engine/audit/scripts/audit_tool.py l3-status
+          code=$?
+          if [ "$code" -eq 2 ]; then
+            echo "::warning::L3 语义终审存在超期报告（见上方 [OVERDUE] 输出，不阻断提交）"
+          elif [ "$code" -ne 0 ]; then
+            echo "::error::L3 SLA 超期检测执行失败（退出码 $code）"
+            exit 1
+          fi
+          exit 0
+
       # 全链路唯一门禁入口（P1-2 去重）：与 ci.yml 同口径（含 probe）。
       - name: 优化流程一致性门禁（统一入口 · 含 probe）
         run: |
