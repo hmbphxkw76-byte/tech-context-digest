@@ -3,7 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>迪拜（阿联酋）AI 网安行业深度研究基线报告</title>
+<title>迪拜（阿联酋）AI 网安行业 · 首期基线报告 · 2026-12</title>
+<style>
 <style>
 :root{
   --radius-sm:8px; --radius:12px; --radius-lg:16px; --radius-pill:999px;
@@ -45,6 +46,7 @@ header.report-head,header.hero{
   background:linear-gradient(128deg,#0f2338 0%,var(--navy) 52%,var(--navy2) 100%);
   color:#fff;padding:40px 0 30px;
 }
+/* trends 的 .report-head 内含 .wrap；apartment 的 .hero 无 .wrap，用内联 padding 约束到 1160px */
 header.report-head .wrap{padding:0 24px}
 header.hero{padding-left:max(24px,calc(50% - 580px));padding-right:max(24px,calc(50% - 580px))}
 header.report-head h1,header.hero h1{margin:0 0 8px;font-size:27px;font-weight:700;letter-spacing:.4px;line-height:1.35}
@@ -59,6 +61,7 @@ header .tag{display:inline-block;background:rgba(255,255,255,.11);border:1px sol
 /* ── 顶部固定导航 ── */
 nav.report-nav{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.96);border-bottom:1px solid var(--line);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);margin-bottom:26px}
 nav.report-nav .wrap{display:flex;flex-wrap:wrap;gap:6px 14px;align-items:center;padding-top:10px;padding-bottom:10px}
+/* apartment monthly/quarterly/baseline 的 .nav-tabs 是 nav 直接子元素（无 .wrap） */
 nav.report-nav > .nav-tabs{max-width:1160px;margin:0 auto;padding:10px 24px}
 .nav-url{display:flex;align-items:baseline;gap:8px;flex-wrap:wrap;font-size:11.5px;line-height:1.6;color:var(--ink3);padding-bottom:6px;margin-bottom:6px;border-bottom:1px dashed var(--line);width:100%}
 .nav-url-label{font-weight:700;color:var(--ink2);white-space:nowrap}
@@ -300,6 +303,60 @@ details.registry[open]{padding-bottom:18px}
 .mini{background:#fff;border:1px solid var(--line);border-radius:9px;padding:12px 14px}
 .mini h4{margin-top:0}
 
+/* ── 信息等级标签（四级，信息分层规范） ── */
+.lvl{display:inline-block;font-size:11px;line-height:1.5;padding:1px 7px;border-radius:9px;
+  border:1px solid transparent;white-space:nowrap;font-weight:600;vertical-align:1px}
+.lvl-verified{background:var(--green-l);color:var(--green);border-color:var(--green-line,#d3ead9)}
+.lvl-partial{background:var(--amber-l);color:var(--amber);border-color:var(--amber-line,#f0e3c2)}
+.lvl-inferred{background:var(--blue-l);color:var(--navy2);border-color:#cdddf0}
+.lvl-assumption{background:var(--gray-l);color:var(--gray);border-color:var(--gray-line,#e6eaee)}
+
+/* ── 新增信息统计条（本期新增/修正/无变化/假设核验进度） ── */
+.delta-strip{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:14px 0}
+.delta-strip .d{background:var(--card);border:1px solid var(--line);border-radius:10px;
+  padding:12px 14px;box-shadow:var(--shadow)}
+.delta-strip .d .n{font-size:22px;font-weight:700;color:var(--navy);line-height:1.25}
+.delta-strip .d .l{font-size:11.6px;color:var(--ink3);margin-top:2px}
+.delta-strip .d.add .n{color:var(--green)}
+.delta-strip .d.fix .n{color:var(--amber)}
+.delta-strip .d.same .n{color:var(--ink3)}
+.delta-strip .d.hyp .n{color:var(--navy2)}
+
+/* ── 行动协议卡（触发条件+阈值+责任角色+时限+验证指标） ── */
+.action-card{background:var(--card);border:1px solid var(--line);border-left:4px solid var(--navy2);
+  border-radius:10px;padding:14px 16px;margin:12px 0;box-shadow:var(--shadow)}
+.action-card.immediate{border-left-color:var(--red)}
+.action-card.watch{border-left-color:var(--amber)}
+.action-card.archive{border-left-color:var(--gray)}
+.action-card .a-head{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:6px}
+.action-card .a-title{font-weight:700;color:var(--navy);font-size:14.5px}
+.action-card .a-meta{font-size:12.3px;color:var(--ink2);line-height:1.7}
+.action-card .a-meta b{color:var(--navy)}
+.prio{display:inline-block;font-size:11px;padding:1px 8px;border-radius:9px;font-weight:700}
+.prio.immediate{background:var(--red-l);color:var(--red)}
+.prio.watch{background:var(--amber-l);color:var(--amber)}
+.prio.archive{background:var(--gray-l);color:var(--gray)}
+
+/* ── 决策卡（结论/证据强度/触发条件/反向证据/信息充分度） ── */
+.decision-card{background:var(--card);border:1px solid var(--line);border-radius:12px;
+  padding:16px 18px;margin:14px 0;box-shadow:var(--shadow)}
+.decision-card .dc-head{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap;margin-bottom:8px}
+.decision-card .dc-title{font-weight:700;color:var(--navy);font-size:15px}
+.decision-card .dc-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px 18px;font-size:12.8px;line-height:1.7}
+.decision-card .dc-grid .k{color:var(--ink3);font-weight:600}
+.suff{display:inline-block;font-size:11px;padding:1px 8px;border-radius:9px;font-weight:700}
+.suff.ok{background:var(--green-l);color:var(--green)}
+.suff.need{background:var(--amber-l);color:var(--amber)}
+.ev-strong{color:var(--green);font-weight:700}
+.ev-mid{color:var(--amber);font-weight:700}
+.ev-weak{color:var(--red);font-weight:700}
+
+/* ── 场景切片 / 事实卡片指针 ── */
+.slice{border:1px dashed var(--navy2);border-radius:10px;padding:12px 16px;margin:12px 0;background:var(--blue-l)}
+.slice .slice-head{font-weight:700;color:var(--navy);margin-bottom:4px}
+.fact-ref{font-family:var(--font-mono);font-size:11.5px;color:var(--navy2);
+  background:var(--blue-l);border:1px solid #cdddf0;border-radius:5px;padding:0 5px;white-space:nowrap}
+
 /* ── 响应式 / 打印 ── */
 @media (max-width:720px){
   body{font-size:14px}
@@ -314,6 +371,8 @@ details.registry[open]{padding-bottom:18px}
   .kpi-grid{grid-template-columns:repeat(2,1fr)}
   .two-col,.sig-grid{grid-template-columns:1fr}
   .stat-strip{grid-template-columns:repeat(2,1fr)}
+  .delta-strip{grid-template-columns:repeat(2,1fr)}
+  .decision-card .dc-grid{grid-template-columns:1fr}
   .tl-date{flex-basis:64px;font-size:11.5px}
 }
 @media print{
@@ -322,29 +381,22 @@ details.registry[open]{padding-bottom:18px}
   body{font-size:12px}
 }
 
-/* 信息分层组件（与 report_style.py canonical 同步） */
-.delta-strip{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:14px 0}
-.delta-strip .d{background:var(--card,#fff);border:1px solid var(--line,#e1e7ee);border-radius:10px;padding:12px 14px}
-.delta-strip .d .n{font-size:22px;font-weight:700;color:var(--navy,#16324f);line-height:1.25}
-.delta-strip .d .l{font-size:11.6px;color:var(--ink3,#657180);margin-top:2px}
-.delta-strip .d.add .n{color:#1c7444}.delta-strip .d.fix .n{color:#956612}
-.delta-strip .d.same .n{color:#657180}.delta-strip .d.hyp .n{color:#2f5597}
-.lvl{display:inline-block;font-size:11px;line-height:1.5;padding:1px 7px;border-radius:9px;border:1px solid transparent;white-space:nowrap;font-weight:600}
-.lvl-verified{background:#eaf5ef;color:#1c7444}.lvl-partial{background:#fdf4e2;color:#956612}
-.lvl-inferred{background:#eaf1fa;color:#2f5597}.lvl-assumption{background:#eff2f4;color:#646f7b}
-.fact-ref{font-family:var(--font-mono,monospace);font-size:11.5px;color:#2f5597;background:#eaf1fa;border:1px solid #cdddf0;border-radius:5px;padding:0 5px;white-space:nowrap}
+</style>
 </style>
 </head>
 <body>
-<div class="audit-mark" data-audit-id="AUD-2026-11-14-009" data-mark-level="full" style="background:#16324f;color:#fff;font:600 13px/1.6 system-ui,-apple-system,'Segoe UI',sans-serif;padding:8px 16px;text-align:center;letter-spacing:.02em"><span class="audit-badge">已审计</span><span class="audit-meta">终审通过 · 2026-11-17 · 审查链 4/4 · AUD-2026-11-14-009</span></div>
-
-<a class="skip-link" href="#s1">跳到主要内容</a>
-<header class="report-head">
-  <div class="wrap">
-    <h1>迪拜（阿联酋）AI 网安行业深度研究基线报告</h1>
-    <p class="sub">行业深度研究型（industry-research）· 首份基线 · 后续年度刷新的对比锚</p>
-    <p class="meta">数据截止 <b>2026-12</b> · 地区维度：<b>迪拜（阿联酋）</b> · 主题：<b>AI 网安行业</b> · 口径冲突处并列呈现、不做合并 · 趋势判断一律标「推断」</p>
-  </div>
+<a class="skip-link" href="#main-content">跳到主要内容</a>
+<header class="hero">
+  <p class="eyebrow">行业深度研究型 · 基线报告</p>
+  <h1>迪拜（阿联酋）AI 网安行业 · 首期基线报告</h1>
+  <p class="sub">九节固化锚 · 中性全景刻画 · 后续年度刷新的对比锚</p>
+  <p class="meta">
+    <b>数据截止</b>：2026-12（基线期）｜<b>报告版本</b>：v1.0（首期基线固定）｜<b>本期读数时点</b>：2026-12<br>
+    <b>来源语言</b>：仅英文（官方与权威英文页优先；中文源仅作线索，须标「需核实原文」）｜<b>汇率</b>：1 USD = 3.6725 AED（钉住）
+  </p>
+  <p>
+    <span class="tag">行业研究</span><span class="tag">九节固化锚</span><span class="tag">预校准（ex-ante）</span><span class="tag">公开信息边界</span>
+  </p>
 </header>
 <nav class="report-nav" aria-label="报告导航">
   <div class="wrap">
@@ -361,342 +413,399 @@ details.registry[open]{padding-bottom:18px}
     </div>
   </div>
 </nav>
+<main class="wrap" id="main-content">
 
-<main class="wrap">
-<div class="delta-strip" data-module="delta">
-  <div class="d add"><div class="n">8</div><div class="l">本期新增（条）</div></div>
-  <div class="d fix"><div class="n">0</div><div class="l">修正（条）</div></div>
-  <div class="d same"><div class="n">6</div><div class="l">无变化（条）</div></div>
-  <div class="d hyp"><div class="n">3/8</div><div class="l">假设核验进度</div></div>
+<div class="delta-strip">
+  <div class="d add"><div class="n">全量</div><div class="l">本期新增（基线首期 = 全部基线项）</div></div>
+  <div class="d fix"><div class="n">0 条</div><div class="l">修正（已修正事实清单见第八节）</div></div>
+  <div class="d same"><div class="n">0 条</div><div class="l">无变化（无上期报告）</div></div>
+  <div class="d hyp"><div class="n">0/5</div><div class="l">假设核验进度（已登记 5 条假设）</div></div>
 </div>
-<p class="small muted">本期读数时点：2026-12-01 ｜ 阈值校准：<span class="lvl lvl-assumption">预校准（ex-ante）</span> ｜ 场景切片：主场景 投资决策；次场景 政策制定 ｜ 信息等级：已核验 / 部分核验 / 推断 / 假设</p>
-
+<p class="small muted">基线首期：新增 = 全部基线项；「已修正事实清单」为空，产生修正后逐条补记。</p>
 
 <h2 class="sec" id="s1">一、执行摘要</h2>
-<p class="lead"><strong>行业一句话定位</strong>：迪拜（阿联酋）AI 网安行业是「主权 AI 基建 + 强制合规 + 威胁国家化」三重驱动下的早中期高景气赛道，交付以托管安全服务与主权云安全为主，人才供给是最紧约束。</p>
-<p><strong>关键数字卡</strong>（口径与来源见对应章节）</p>
-<table class="fixed">
-<thead>
-<tr><th style="width:34%">指标</th><th style="width:33%">数值</th><th style="width:33%">口径·来源</th></tr>
-</thead>
-<tbody>
-<tr><td>MENA 信息安全终端支出（2025）</td><td>33 亿美元，同比 +14%</td><td>亿美元 / % [Gartner, 2025]</td></tr>
-<tr><td>阿联酋网安市场规模（2025→2031）</td><td>8.2 亿 → 15.1 亿美元，CAGR 10.66%</td><td>亿美元 / % [Mordor, 2025]</td></tr>
-<tr><td>阿联酋日均抵御网络攻击</td><td>约 20 万次</td><td>次/日 [Khaleej Times, 2026]</td></tr>
-<tr><td>国家背景威胁行为体占比</td><td>71.4%</td><td>% [Khaleej Times, 2026]</td></tr>
-<tr><td>AI 为最缺技能占比</td><td>41%</td><td>% [ISC2, 2025]</td></tr>
-<tr><td>阿联酋企业难以招募合格网安人员</td><td>87%</td><td>% [Mordor, 2025]</td></tr>
-<tr><td>Stargate UAE 首批算力</td><td>200MW 计划 2026 年上线</td><td>[OpenAI, 2025]</td></tr>
-<tr><td>DESC ISR 控制域</td><td>13 个</td><td>[DESC, 2026]</td></tr>
-</tbody>
-</table>
-<ol>
-<li><p><strong>需求侧高景气，AI 安全是结构性增量主线</strong>。阿联酋日均抵御约 20 万次网络攻击，2026 年以来确认事件 128 起，官方称 71.4% 的追踪威胁行为体为国家背景；AI 驱动的攻击（深度伪造、AI 勒索、提示注入）被列为增长最快的威胁类别，倒逼防御侧采用 AI（智能 SOC、威胁情报）。[Source: https://khaleejtimes.com/uae/over-70-of-cyber-threats-targeting-uae-are-state-sponsored-authority-says, 2026]</p></li>
-<li><p><strong>强制合规构成本地市场的制度底座</strong>。迪拜电子安全中心（DESC）发布强制标准 ISR（信息安全条例 v3.1，含 13 个控制域）与《迪拜 AI 安全政策》（2024 年 9 月），适用于政府实体及处理政府数据的第三方，形成实质采购门槛。[Source: https://desc.gov.ae/hamdan-bin-mohammed-launches-second-cycle-of-dubai-cyber-security-strategy, 2023]；[Source: https://gulftime.ae/dubai-electronic-security-centre-unveils-dubai-ai-security-policy, 2024]</p></li>
-<li><p><strong>主权 AI 基建创造全新攻击面与本地安全需求</strong>。Stargate UAE（5GW AI 园区 / 1GW 算力集群，首批 200MW 计划 2026 年上线）与 Core42 主权公有云构成上游增量；微软 2024 年 4 月对 G42 的 15 亿美元股权注资与 10 亿美元开发者基金承诺强化了主权科技生态。[Source: https://openai.com/index/introducing-stargate-uae, 2025]；[Source: https://blogs.microsoft.com/blog/2024/04/15/microsoft-and-g42-partner, 2024]</p></li>
-<li><p><strong>人才供给是最紧约束，呈卖方市场</strong>。ISC2 2025 研究显示 AI 为最急需技能（41%）、88% 受访者因技能短缺遭遇过安全后果；Mordor 指出 87% 的阿联酋企业难以招募到合格网络安全人员。[Source: https://isc2.org/Insights/2025/12/ISC2-Publishes-2025-Cybersecurity-Workforce-Study]；[Source: https://mordorintelligence.com/industry-reports/uae-cybersecurity-market]</p></li>
-<li><p><strong>全球对照（全球口径，非本地）</strong>：Grand View Research 估计全球 AI in cybersecurity 市场 2025 年 315 亿美元、2033 年 1829 亿美元，CAGR 24.7%（经同源趋势周报转引，单一机构预测，置信度中）。[Source: https://www.grandviewresearch.com/industry-analysis/ai-in-cybersecurity-market-report, 2026]</p></li>
-</ol>
-<p><strong>共享事实卡片</strong>：本报告为共享事实域（IND），正文以指针复用 <span class="fact-ref">[FC-IND-001]</span>–<span class="fact-ref">[FC-IND-008]</span>（<code>engine/fact_cards/industry_research_fact_cards.json</code>），不复制卡片全文；新增事实须先登记卡片。</p>
-<p><strong>趋势方向综述（推断）</strong>：2026–2030 年迪拜 / 阿布扎比对 AI 安全技能与托管安全的需求，结构性跑赢通用安全需求；但需求向价值链上移，部分 L1 SOC 工作可能被 AI 自动化吸收（Gartner 预计 2028 年）。<strong>研究说明</strong>：本报告为行业深度研究型基线，保持中性全景刻画，不给投资评级、不出具 Go/No-Go 建议；边界、口径与时效见第二节，数据治理与局限见第八节。</p>
+<div class="card leadbox">
+  <h3>核心判断</h3>
+  <ol class="tight">
+    <li><b>三重驱动确立</b>：迪拜（阿联酋）AI 网安行业由「主权 AI 基建 + 强制合规 + 威胁国家化」三重驱动，交付以托管安全服务与主权云安全为主，人才供给是最紧约束。<span class="lvl lvl-inferred">推断</span> <span class="fact-ref">[FC-IND-001]</span></li>
+    <li><b>政策强制门槛</b>：DESC 强制标准 ISR v3.1（13 个控制域）适用所有迪拜政府实体及处理政府数据的第三方；《迪拜 AI 安全政策》（2024-09）覆盖生成式 AI 安全；NCAP 限制未认证 MSSP 服务关键基础设施。<span class="lvl lvl-verified">已核验</span> <span class="fact-ref">[FC-SEC-009]</span></li>
+    <li><b>市场规模多口径不可合并</b>：Gartner 2025 年 MENA 终端支出 33 亿美元（+14%）；Mordor 阿联酋 2025 年 8.2 亿→2031 年 15.1 亿美元（CAGR 10.66%）；GMI 2025 年约 34 亿美元（CAGR 12.29%）；Grand View Research 全球 AI in cybersecurity 2025→2033 年 315 亿→1,829 亿美元（CAGR 24.7%）。<span class="lvl lvl-verified">已核验</span> <span class="fact-ref">[FC-IND-006]</span></li>
+    <li><b>主权科技栈垂直整合</b>：G42 系覆盖算力（Khazna）、主权云（Core42）、MSSP（CPX，约 600 名专家、200+ 客户）、应用（M42）；Core42 映射 200+ 阿联酋控制项，2026-09 与 TII 在 HSM / 机密计算 / 加密 AI 推理上合作。<span class="lvl lvl-partial">部分核验</span> <span class="fact-ref">[FC-IND-003]</span></li>
+    <li><b>本地 MSSP 承担主要交付</b>：e&amp; enterprise / Help AG 为迪拜 HQ + 阿布扎比双城 MSSP，200+ SOC 分析师，IDC MarketScape 领导者（MSS 2026、MDR 2025）；Cloud4C 为自由区生态代表。<span class="lvl lvl-partial">部分核验</span> <span class="fact-ref">[FC-IND-004]</span></li>
+    <li><b>创业池与资本密度上升</b>：Hub71 第 19 批（2026-10）90% 为 AI 原生、40 家初创、累计融资 2.96 亿美元；微软–G42 15 亿美元股权注资 + 10 亿美元开发者基金。<span class="lvl lvl-verified">已核验</span> <span class="fact-ref">[FC-IND-005]</span><span class="fact-ref">[FC-SEC-011]</span></li>
+    <li><b>威胁国家化与泄露成本高企</b>：日均抵御约 20 万次攻击；71.4% 追踪威胁行为体为国家背景 APT；攻击行业分布政府管理 9.4%、金融 9.3%；中东平均数据泄露成本 792 万美元（全球 488 万）。<span class="lvl lvl-partial">部分核验</span> <span class="fact-ref">[FC-IND-007]</span></li>
+  </ol>
+  <p><b>行业一句话定位</b>：迪拜 AI 网安行业呈「政策强驱动 + 主权垂直整合 + 全球厂商区域落地」三极结构；本地交付以托管安全服务与主权云安全为主。</p>
+  <p><b>趋势方向综述</b>：ISR / NCAP 与 AI 安全政策放大治理、审计与认证需求；Stargate UAE 与主权云抬高云安全 / 机密计算 / AI 系统安全技能溢价；威胁国家化支撑 SOC、威胁情报与红队需求；人才供给是最紧约束。全球 AI in cybersecurity 口径增速（CAGR 24.7%）显著高于区域网安市场口径，二者不可混算。</p>
+  <p class="small muted">来源与时点：数据截止 2026-12；来源分级见第八节、完整 URL 见第九节。</p>
+</div>
 
-<hr />
+<h3>决策卡</h3>
+<div class="decision-card">
+  <div class="dc-head"><span class="dc-title">DC-1 合规门槛</span><span class="suff ok">可直接决策</span></div>
+  <div class="dc-grid">
+    <div><span class="k">结论：</span>政策合规能力是进入迪拜 AI 网安市场的首要门槛（已核验）。</div>
+    <div><span class="k">证据强度：</span><span class="ev-strong">强</span>（ISR v3.1 强制 + NCAP 限制，双源）。</div>
+    <div><span class="k">触发条件：</span>任一直接玩家取得 ISR 审核员 / AI Seal / NCAP 相关资质或发布合规产品。</div>
+    <div><span class="k">反向证据：</span>未发现官方明确豁免条款；媒体转述的「政策松动」未提供官方来源（检索范围：DESC / TDRA 官网 2026）。</div>
+    <div><span class="k">信息充分度：</span>合规路径可直接决策；市场定价与份额需补充。</div>
+  </div>
+</div>
+<div class="decision-card">
+  <div class="dc-head"><span class="dc-title">DC-2 主权一极</span><span class="suff need">需补充信息</span></div>
+  <div class="dc-grid">
+    <div><span class="k">结论：</span>主权垂直整合（G42 系 + 微软）将在算力、云与 MSSP 层形成独立一极（部分核验）。</div>
+    <div><span class="k">证据强度：</span><span class="ev-mid">中</span>（官方合作披露充分，但财务与份额口径未公开）。</div>
+    <div><span class="k">触发条件：</span>G42 系或微软发布区域 AI 网安新产品线 / 大额合同 / 资质获取。</div>
+    <div><span class="k">反向证据：</span>未发现 G42 官方披露 AI 网安收入份额；第三方转述的 CPX 与 DarkMatter 渊源未获官方证实。</div>
+    <div><span class="k">信息充分度：</span>需补充财务与份额类信息才可决策。</div>
+  </div>
+</div>
+<div class="preline">阈值与信号规则为「预校准（ex-ante）」；首次中期回测 2027-06，校准完成前不将信号灯作为确定结论。</div>
 
 <h2 class="sec" id="s2">二、研究范围与方法</h2>
-<h3>2.1 行业边界定义</h3>
-<p><strong>含（本报告覆盖）</strong>：</p>
-<ul class="tight">
-<li>AI 系统安全：模型 / Agent / 数据 / 供应链安全（对应 OWASP LLM Top 10（2025）、MITRE ATLAS 框架）。</li>
-<li>AI 用于安全运营：智能 SOC、威胁情报、MDR / XDR、AI 辅助分诊与事件摘要。</li>
-<li>迪拜 / 阿联酋网安市场中 AI 相关的支出、采购与合规需求。</li>
-</ul>
-<p><strong>不含（明确排除）</strong>：无 AI 维度的传统网安市场测算；中国及其他地区的本地化落地；投资评级与 Go/No-Go 决策建议（属投资分析与尽调型、可行性型边界）。</p>
-<h3>2.2 产业链分层口径</h3>
-<p>按「上游算力与主权基建 → 中游平台 / 产品 / 服务与集成 → 下游监管与行业客户」三层刻画；层内代表方与价值分布见第三节。</p>
-<h3>2.3 研究方法</h3>
-<ul class="tight">
-<li><strong>案头研究</strong>：以英文公开来源为主，多源交叉核验；官方 / 权威来源优先，媒体线索须回原始页校验。</li>
-<li><strong>同源事实复用</strong>：复用 <code>content/tech/security/dubai/</code> 业务线已核实的基线事实与指标登记册，不重复其就业 / 薪酬细节，仅在本行业与市场维度引用。</li>
-<li><strong>专家访谈</strong>：计划方法；本期基线<strong>未执行</strong>，相应结论标「推断」并在第八节列为局限。</li>
-</ul>
-<h3>2.4 数据时效窗口</h3>
-<p>近 12 个月内数据优先；超过 24 个月须标注年份并谨慎使用。本报告引用数据截至 <strong>2026-12</strong>；无更新时间戳，生成物保持确定性。</p>
-<h3>2.5 研究维度 × 优先来源（追踪表）</h3>
-<table class="fixed">
-<thead>
-<tr><th style="width:22%">研究维度</th><th style="width:44%">优先来源（英文）</th><th style="width:34%">核验状态</th></tr>
-</thead>
+<h3>行业边界定义</h3>
+<div class="tblwrap"><table class="fixed">
+<thead><tr><th style="width:14%">口径</th><th style="width:43%">包含</th><th style="width:43%">不包含</th></tr></thead>
 <tbody>
-<tr><td>政策与合规</td><td>desc.gov.ae / u.ae / tdra.gov.ae / uaecsc.gov.ae</td><td>已核实（截至 2026-12）</td></tr>
-<tr><td>市场规模</td><td>gartner.com / mordorintelligence.com / gminsights.com</td><td>多口径并列，不合并</td></tr>
-<tr><td>威胁态势</td><td>khaleejtimes.com / uaecsc.gov.ae</td><td>媒体转引官方，已核实</td></tr>
-<tr><td>产业链与玩家</td><td>各公司官网 / WAM</td><td>部分待核实</td></tr>
-<tr><td>人才与技能</td><td>isc2.org / 招聘平台抽样</td><td>抽样，谨慎引用</td></tr>
-<tr><td>全球趋势对照</td><td><code>content/tech/trends/global/reports/2026-11-13_weekly.html</code></td><td>经周报转引，须标注</td></tr>
+<tr><td>AI 网安行业</td><td>AI 系统安全（模型 / Agent / 数据 / 供应链安全）+ AI 用于安全运营（智能 SOC、威胁情报、MDR / XDR）+ 网安市场中 AI 相关支出与采购</td><td>无 AI 维度的传统网安市场测算</td></tr>
 </tbody>
-</table>
-<div class="note">
-<strong>数据底座与同源锚</strong>：本报告仅使用仓库已文档化事实，来源限于：
-<code>content/tech/security/dubai/reports/2026-11_baseline_report.html</code>、
-<code>content/tech/security/dubai/sources/2026-11_baseline_report.md</code>、
-<code>data/processed/tech/security/dubai/ai_cybersecurity_indicator_registry.md</code>、
-<code>content/tech/trends/global/reports/2026-11-13_weekly.html</code>。
-未核验项不补值、不外推。
-</div>
+</table></div>
+<h3>产业链分层口径</h3>
+<ul class="tight">
+  <li><b>上游</b>：算力与主权基建（NVIDIA GB300、Stargate UAE、Core42 主权云、Cisco 零信任、Khazna 承建）。</li>
+  <li><b>中游</b>：平台 / 产品 / 服务与集成（G42 系、e&amp; / Help AG、Moro Hub、全球厂商区域总部、咨询）。</li>
+  <li><b>下游</b>：监管与行业客户（DESC、UAE CSC、TDRA / aeCERT、DIFC / ADGM、政府与关键基础设施）。</li>
+</ul>
+<h3>研究方法</h3>
+<ul class="tight">
+  <li><b>案头研究</b>：官方一手 / 行业机构 / 招聘平台抽样 / 媒体转述四级来源分级，仅英文；关键数字回原始页校验。</li>
+  <li><b>专家访谈</b>：基线期以公开信息为主，专家访谈待后续年度刷新补充（本节为机制预留）。</li>
+  <li><b>数据时效窗口</b>：近 12 个月内数据优先；超过 24 个月须标注年份并谨慎使用。</li>
+  <li><b>同源已核实资产</b>：复用 <code>content/tech/security/dubai/</code> 业务线基线报告、md 源稿与指标登记册的已核实活值，不新造数值。</li>
+</ul>
+<h3>来源优先级（指针）</h3>
+<p>官方一手（u.ae、desc.gov.ae、tdra.gov.ae、mediaoffice.ae、icp.gov.ae、WAM 英文、各自由区官网）＞ 国际权威组织与分析机构（ISC2、ISACA、Gartner、IDC、SANS / GIAC、MITRE、OWASP、NIST、Mordor、GMI）＞ 头部薪酬指南与招聘平台抽样 ＞ 英文行业 / 主流媒体 ＞ 同源已核实资产。完整清单见第九节。</p>
 
-<hr />
+<h3>研究内核：周期定位与传导量化</h3>
+<p><b>周期定位</b>：阿联酋 / 海湾 AI 网安处于政策驱动的早期基础设施建设阶段（主权 AI 基建 + 强制合规 + 威胁国家化三重驱动，<span class="fact-ref">[FC-IND-001]</span>，推断）。</p>
+<p><b>传导量化（预校准 ex-ante）</b>：<span class="lvl lvl-assumption">假设</span> 上游算力与主权云落地向中游交付传导的弹性取 0.5–0.7（区间，假设值），时滞 2–3 个季度；下游强制合规（ISR / NCAP）对中游采购的放大按政策乘数处理（见第六节）。该弹性与时滞为机制首年的假设值，待 2027-06 首次中期回测校准；校准前相关判断维持「预校准（ex-ante）」。</p>
 
 <h2 class="sec" id="s3">三、产业链图谱</h2>
-<p>迪拜（阿联酋）AI 网安产业链呈「上游主权算力与云 → 中游安全与 AI 平台 / 服务 → 下游监管与行业客户」的三层结构。</p>
+<p class="small muted">三层结构为综合推断（基于官方披露与行业报告），用于建立后续追踪分层；不代表价值链分布数值（无公开可核实来源，标注「未核验」）。<span class="fact-ref">[FC-IND-002]</span></p>
 <div class="flow">
-  <div class="node"><b>上游 · 算力与主权基建</b><span>AI 芯片（NVIDIA GB300 等）、主权 AI 园区与云（Stargate UAE 5GW / 1GW，首批 200MW 计划 2026 上线；Core42 主权公有云）、零信任网络（Cisco）、承建（Khazna）</span></div>
+  <div class="node"><b>上游 · 算力与主权基建</b><span>NVIDIA GB300、Stargate UAE（5GW / 1GW）、Core42 主权云、Cisco 零信任、Khazna 承建</span></div>
   <div class="arrow">→</div>
-  <div class="node"><b>中游 · 平台 / 产品 / 服务与集成</b><span>G42 系（Core42 / CPX）、e&amp; enterprise / Help AG、Moro Hub；全球厂商区域总部（Microsoft、Cisco、Palo Alto Networks、Fortinet、Kaspersky）；咨询与集成（四大、Accenture、EY）；自由区生态（Hub71）</span></div>
+  <div class="node"><b>中游 · 平台 / 产品 / 服务与集成</b><span>G42 系、e&amp; / Help AG、Moro Hub、全球厂商区域总部、咨询</span></div>
   <div class="arrow">→</div>
-  <div class="node"><b>下游 · 监管与行业客户</b><span>DESC、UAE CSC、TDRA / aeCERT；DIFC / ADGM 自由区；政府实体与关键基础设施；金融、地产、企业</span></div>
+  <div class="node"><b>下游 · 监管与行业客户</b><span>DESC、UAE CSC、TDRA / aeCERT、DIFC / ADGM、政府与关键基础设施</span></div>
 </div>
-<h3>3.1 上游：算力与主权基建</h3>
-<ul class="tight">
-<li><strong>Stargate UAE</strong>：2025 年 5 月宣布、落地阿布扎比的 5GW AI 园区 / 1GW 算力集群（G42 建设、OpenAI 与 Oracle 运营、NVIDIA GB300、Cisco 零信任），首批 200MW 计划于 2026 年上线，由 Khazna 承建；截至 2026 年仍在建设阶段，运营状态待官方确认。[Source: https://openai.com/index/introducing-stargate-uae, 2025]</li>
-<li><strong>Core42（G42 子公司）</strong>：主权公有云（映射 200+ 阿联酋控制项）、Greenshield；2026 年 9 月与 TII 在 HSM、机密计算、加密 AI 推理上达成研发合作；并与阿联酋央行推进主权金融云（SFCSI，2026 年 2 月）。[Source: https://core42.ai]</li>
-<li><strong>网络与安全底座</strong>：Cisco 零信任架构随 Stargate 项目进入；本地数据中心与自由区（DIFC / ADGM）提供合规托管环境。</li>
-</ul>
-<h3>3.2 中游：平台 / 产品 / 服务与集成</h3>
-<ul class="tight">
-<li><strong>主权科技</strong>：G42（AI 控股集团，23,000+ 员工、30 国）及其 Core42、CPX、Khazna、M42 等实体，构成从算力到安全服务的垂直栈。[Source: https://g42.ai, 2026]</li>
-<li><strong>托管安全 / MSSP</strong>：CPX（端到端网络与物理安全 MSSP，24/7 SOC、DFIR、IAM、OT，约 600 名专家、200+ 客户）；e&amp; enterprise / Help AG（MSSP，200+ SOC 分析师，IDC MarketScape 领导者）。[Source: https://cpx.net]；[Source: https://eand.com]</li>
-<li><strong>全球厂商区域总部</strong>：Microsoft、Cisco、Palo Alto Networks、Fortinet、Kaspersky（多设于迪拜 DIC / JLT），承担区域销售与工程；微软安全体系（含 Security Copilot）已进入本地 SOC。</li>
-<li><strong>咨询与集成</strong>：四大、Accenture、EY 等提供 AI 治理与安全咨询，是合规落地的主要通道（推断）。</li>
-</ul>
-<h3>3.3 下游：监管与行业客户</h3>
-<ul class="tight">
-<li><strong>监管与政府</strong>：DESC（隶属 Digital Dubai，主导 ISR 与《迪拜 AI 安全政策》）、UAE CSC（2020 年成立，统筹国家网络安全战略 2025–2031）、TDRA / aeCERT（国家级事件协调与响应、24 小时违规通报义务）。</li>
-<li><strong>自由区与金融</strong>：DIFC、ADGM 有独立监管与签证通道，是金融科技安全需求最集中的下游。</li>
-<li><strong>关键行业</strong>：攻击行业分布显示政府管理 9.4%、金融 9.3%、房地产 5.5%；按酋长国：迪拜 21%、阿布扎比 19%、沙迦 18%。[Source: https://khaleejtimes.com/uae/uae-faces-200000-daily-cyberattacks, 2025]</li>
-</ul>
-<h3>3.4 价值分布与传导关系</h3>
-<p><strong>价值分布（推断）</strong>：主权基建与合规 / 审计环节价值集中度较高，中游托管服务承担主要交付；本报告未取得可核实的价值链分布数值，故不估算。<strong>传导关系</strong>：上游算力 / 合规要求向中游平台与服务传导，再向下游采购与运营落地；下游威胁事件与监管要求亦回传，驱动上游与中游的投入（双向传导）。</p>
-
-<hr />
+<div class="tblwrap"><table class="fixed">
+<thead><tr><th style="width:12%">层级</th><th style="width:30%">关键环节</th><th style="width:34%">代表方</th><th style="width:24%">价值分布 / 说明</th></tr></thead>
+<tbody>
+<tr><td>上游</td><td>AI 芯片与算力集群、主权云、零信任网络、数据中心承建</td><td>NVIDIA、Stargate UAE（OpenAI / Oracle / G42）、Core42、Cisco、Khazna</td><td>高资本密度；价值集中于算力与主权云（推断）</td></tr>
+<tr><td>中游</td><td>MSSP / MDR、安全咨询、AI 网安产品、系统集成</td><td>G42 系、e&amp; / Help AG、Moro Hub、Cloud4C、Microsoft、Palo Alto / Fortinet / Kaspersky</td><td>交付密度最高；本地 MSSP 承担主要交付（部分核验）</td></tr>
+<tr><td>下游</td><td>监管合规、政府与关键基础设施采购、金融 / 自由区客户</td><td>DESC、UAE CSC、TDRA / aeCERT、DIFC / ADGM</td><td>需求侧由政策与威胁双轮驱动（已核验）</td></tr>
+</tbody>
+</table></div>
+<h3>环节间传导关系</h3>
+<p><span class="lvl lvl-inferred">推断</span> 上游算力与主权云落地 → 中游 MSSP / 平台获得可交付的合规基座 → 下游监管与客户采购被 ISR / NCAP 强制放大；同时下游威胁国家化与泄露成本上行反向拉动中游托管安全服务需求。该传导链基于已核验事实的机制分析，非确定预测。<span class="fact-ref">[FC-IND-001]</span><span class="fact-ref">[FC-IND-002]</span></p>
 
 <h2 class="sec" id="s4">四、市场规模与格局</h2>
-<p>本节只呈现读数，多口径并列不合并；表内预测为来源机构口径，<strong>非本报告预测</strong>。</p>
-<table class="fixed">
-<thead>
-<tr><th style="width:30%">口径</th><th style="width:40%">规模 / 增速</th><th style="width:30%">来源</th></tr>
-</thead>
+<h3>多口径规模并列（不合并）</h3>
+<div class="tblwrap"><table class="fixed">
+<thead><tr><th style="width:20%">口径</th><th style="width:30%">读数</th><th style="width:18%">机构</th><th style="width:14%">统计周期 / 发布</th><th style="width:8%">核验状态</th><th style="width:10%">地域</th></tr></thead>
 <tbody>
-<tr><td>MENA 信息安全终端支出（2025）</td><td>33 亿美元，同比 +14%；安全服务为增速最快板块（+16.6%）</td><td>[Gartner, 2025]</td></tr>
-<tr><td>阿联酋网安市场（2025→2031）</td><td>8.2 亿 → 15.1 亿美元，CAGR 10.66%</td><td>[Mordor, 2025]</td></tr>
-<tr><td>阿联酋网安市场（2025，含硬件与服务）</td><td>约 34 亿美元，CAGR 12.29%</td><td>[GMI, 2025]</td></tr>
-<tr><td>全球 AI in cybersecurity（2025→2033，全球口径）</td><td>315 亿 → 1829 亿美元，CAGR 24.7%（单一机构预测，置信度中）</td><td>[Grand View Research, 2026，经周报转引]</td></tr>
+<tr><td>MENA 信息安全终端支出</td><td>2025 年 33 亿美元，同比 +14%<span class="fact-ref">[FC-IND-006]</span></td><td>Gartner</td><td>2025 全年预测 / 2025-04-08</td><td>已核验</td><td>区域</td></tr>
+<tr><td>阿联酋网安市场（Mordor）</td><td>2025 年 8.2 亿 → 2031 年 15.1 亿美元，CAGR 10.66%<span class="fact-ref">[FC-IND-006]</span></td><td>Mordor Intelligence</td><td>2025 发布</td><td>已核验</td><td>阿联酋</td></tr>
+<tr><td>阿联酋网安市场（GMI）</td><td>2025 年约 34 亿美元，CAGR 12.29%（含硬件与服务）<span class="fact-ref">[FC-IND-006]</span></td><td>Global Market Insights</td><td>2025 发布</td><td>已核验</td><td>阿联酋</td></tr>
+<tr><td>全球 AI in cybersecurity</td><td>2025→2033 年 315 亿 → 1,829 亿美元，CAGR 24.7%<span class="fact-ref">[FC-IND-006]</span></td><td>Grand View Research</td><td>2026 发布</td><td>已核验</td><td>全球</td></tr>
 </tbody>
-</table>
-<h3>4.1 口径差异与裁决</h3>
-<p>Gartner 为「终端支出」口径，Mordor / GMI 为「含服务总收入」口径，全球 AI in cybersecurity 为另一专项口径；三者定义不同致数值差异较大，<strong>裁决为并列呈现、不做平均或合并</strong>。[Source: https://gartner.com/en/newsroom/press-releases/2025-04-08-gartner-forecasts-spending-on-information-security-in-mena-to-grow-14-percent-in-2025, 2025]；[Source: https://mordorintelligence.com/industry-reports/uae-cybersecurity-market, 2025]；[Source: https://gminsights.com/industry-analysis/cybersecurity-market, 2025]</p>
-<h3>4.2 增速与结构</h3>
-<ul class="tight">
-<li><strong>MENA 结构</strong>：安全软件占比约 45%，安全服务为增速最快板块（+16.6%），由技能短缺与托管检测响应（MDR）需求驱动。[Source: https://gartner.com/en/newsroom/press-releases/2025-04-08-gartner-forecasts-spending-on-information-security-in-mena-to-grow-14-percent-in-2025, 2025]</li>
-<li><strong>全球 AI 安全结构（全球口径）</strong>：2025 年 Services 占 34.7%、Network Security 占 35.9%、ML 占 46.2%。[Source: https://www.grandviewresearch.com/industry-analysis/ai-in-cybersecurity-market-report, 2026]</li>
-</ul>
-<h3>4.3 集中度指标</h3>
-<p>未取得公开可核实的 CR3 / CR5 或份额数值，<strong>标注「未核验」</strong>；以第五节玩家分层做定性替代。市场口径差异大本身即是格局读数的一部分。</p>
+</table></div>
+<div class="note">口径警示：Gartner 为「终端支出」，Mordor / GMI 为「含服务总收入」，Grand View 为「全球 AI in cybersecurity」；统计域与地域不同，<b>不可相加、不可静默择一、不可混算</b>。</div>
 
-<hr />
+<div class="chart-box">
+  <h4>图 1 区域网安市场多口径（亿美元，2025）</h4>
+  <p class="chart-note">单位：亿美元；来源：Gartner（MENA 终端支出）、Mordor 与 GMI（阿联酋含服务总收入），2025 发布。口径不可比，图示仅为量级并列。</p>
+  <div class="chart-eh" id="chart-region"></div>
+</div>
+<div class="chart-box">
+  <h4>图 2 全球 AI in cybersecurity 市场（亿美元，2025 vs 2033）</h4>
+  <p class="chart-note">单位：亿美元；来源：Grand View Research（2026，单一机构预测，置信度中）。口径为全球 AI in cybersecurity，与区域网安市场口径不可比；2025 与 2033 为预测区间端点，不可与区域口径相加。</p>
+  <div class="chart-eh" id="chart-global"></div>
+</div>
+
+<h3>集中度与格局读数</h3>
+<ul class="tight">
+  <li><b>集中度</b>：缺少可核实份额数值，CRn 未核验；本报告不估算未文档化的集中度。</li>
+  <li><b>格局特征</b>：主权资本（G42 系）与全球厂商并存的双轨结构；本地 MSSP / 自由区承担主要交付；ISR 与 AI 安全政策推动治理、审计与认证需求上升。<span class="lvl lvl-inferred">推断</span> <span class="fact-ref">[FC-IND-008]</span></li>
+</ul>
 
 <h2 class="sec" id="s5">五、头部玩家与竞争格局</h2>
-<p><strong>入选标准</strong>：在迪拜 / 阿联酋有实体运营或主权抓手；AI 安全相关度高；英文公开来源可核实。规模口径均附来源，抽样口径已标注。</p>
-<table class="fixed">
-<thead>
-<tr><th style="width:16%">层级</th><th style="width:30%">代表方</th><th style="width:36%">定位与规模口径</th><th style="width:18%">来源</th></tr>
-</thead>
+<h3>玩家分层与入选标准</h3>
+<p class="small muted">入选标准：在迪拜 / 阿联酋有 AI 网安产品或交付能力，或具主权资本 / 算力抓手，或正进入区域市场；每家均有可追溯公开来源。</p>
+<div class="tblwrap"><table class="fixed">
+<thead><tr><th style="width:10%">分层</th><th style="width:28%">玩家</th><th style="width:44%">判断依据</th><th style="width:18%">监测重点</th></tr></thead>
 <tbody>
-<tr><td>主权科技</td><td>G42 / Core42 / CPX / Moro Hub</td><td>G42 23,000+ 员工、30 国；Core42 主权公有云；CPX 约 600 名专家、200+ 客户；Moro Hub 为 DEWA 子公司、主权 AI 平台</td><td>g42.ai / core42.ai / cpx.net</td></tr>
-<tr><td>托管安全 / MSSP</td><td>e&amp; enterprise / Help AG、Cloud4C</td><td>e&amp; 200+ SOC 分析师，IDC MarketScape 领导者（MSS 2026、MDR 2025）</td><td>eand.com</td></tr>
-<tr><td>全球厂商区域总部</td><td>Microsoft、Cisco、Palo Alto Networks、Fortinet、Kaspersky</td><td>区域销售 / 工程，安全产品与平台（含 Security Copilot）</td><td>各厂商官网</td></tr>
-<tr><td>监管与政府</td><td>DESC、UAE CSC、TDRA / aeCERT</td><td>ISR 与 AI 安全政策制定、国家事件响应</td><td>desc.gov.ae / tdra.gov.ae</td></tr>
-<tr><td>自由区 / 生态</td><td>Hub71、DIFC、ADGM</td><td>Hub71 第 19 批 40 家初创、90% AI 原生、累计融资 2.96 亿美元</td><td>hub71.com</td></tr>
-<tr><td>咨询 / 集成</td><td>四大、Accenture、EY</td><td>AI 治理与安全咨询、合规落地</td><td>各机构官网</td></tr>
+<tr><td>直接</td><td>G42 集团（Core42、CPX、Khazna、M42）</td><td>算力—云—安全—应用垂直整合；官网与官方合作披露充分<span class="fact-ref">[FC-IND-003]</span></td><td>算力 / 主权云 / MSSP 交付</td></tr>
+<tr><td>直接</td><td>e&amp; enterprise / Help AG</td><td>本地 MSSP 头部；IDC MarketScape 领导者（MSS 2026 / MDR 2025）<span class="fact-ref">[FC-IND-004]</span></td><td>托管安全 / 区域合作</td></tr>
+<tr><td>直接</td><td>Moro Hub（DEWA 子公司）</td><td>全栈主权 AI 平台；迪拜 AI Seal Tier S（单一聚合源，待复核）</td><td>主权 AI 平台 / 资质</td></tr>
+<tr><td>直接</td><td>Cloud4C</td><td>自由区托管 SOC / MSSP</td><td>托管 SOC / 自由区渠道</td></tr>
+<tr><td>直接</td><td>Microsoft（区域总部 + G42 投资）</td><td>15 亿美元股权投资 + 10 亿美元开发者基金；Stargate UAE 生态<span class="fact-ref">[FC-SEC-011]</span></td><td>云 / 安全产品 / 资本联动</td></tr>
+<tr><td>直接</td><td>Palo Alto Networks、Fortinet、Kaspersky、Cisco</td><td>DIC / JLT 区域总部，产品组合覆盖 AI 网安</td><td>产品组合 / 自由区渠道</td></tr>
+<tr><td>间接</td><td>Hub71 生态</td><td>AI 原生初创池（第 19 批 90% AI 原生、40 家、累计融资 2.96 亿美元）<span class="fact-ref">[FC-IND-005]</span></td><td>初创池 / 融资</td></tr>
+<tr><td>间接</td><td>四大、Accenture、EY</td><td>AI 治理与合规咨询需求高</td><td>咨询 / 合规交付</td></tr>
+<tr><td>间接</td><td>DarkMatter / Digital14</td><td>历史玩家，动态待核实；与 CPX 的渊源未获官方证实</td><td>事件触发</td></tr>
+<tr><td>潜在</td><td>Presight</td><td>G42 系 AI 分析，安全延展待核实</td><td>安全产品线</td></tr>
+<tr><td>潜在</td><td>中国开源模型厂商（Kimi、DeepSeek、GLM、Qwen）</td><td>以模型能力入模方式渗透（推断）</td><td>模型能力 / 区域渗透</td></tr>
 </tbody>
-</table>
-<h3>5.1 逐家要点</h3>
-<ul class="tight">
-<li><strong>G42</strong>（阿布扎比）：AI 控股集团，旗下 Core42、CPX、Khazna、M42；2025–26 推出 Assurance Compute Framework（安全美国 AI 芯片）与 Greenshield 主权 AI 管控。[Source: https://g42.ai, 2026]</li>
-<li><strong>CPX</strong>（G42 子公司，2022 年成立，阿布扎比）：端到端网络与物理安全 MSSP，24/7 SOC、DFIR、IAM、OT；2025 年收购 spiderSilk 与 TSI Tech，2026 年与网络安全委员会共建 UAE Cyber Factory。[Source: https://cpx.net]</li>
-<li><strong>e&amp; enterprise / Help AG</strong>（迪拜 HQ + 阿布扎比）：MSSP，托管 SOC / MDR，200+ SOC 分析师。[Source: https://eand.com]</li>
-<li><strong>Core42</strong>：主权公有云映射 200+ 阿联酋控制项，Greenshield；与 TII 在 HSM / 机密计算 / 加密 AI 推理上合作。[Source: https://core42.ai]</li>
-<li><strong>微软–G42</strong>：15 亿美元为微软 2024 年 4 月对 G42 的已确认股权注资，并配套 10 亿美元开发者基金承诺；中文媒体所称「152 亿美元对阿联酋投资计划」未获英文权威来源证实，已剔除。[Source: https://blogs.microsoft.com/blog/2024/04/15/microsoft-and-g42-partner, 2024]</li>
-<li><strong>Hub71</strong>（阿布扎比）：第 19 批（2026 年 10 月）90% 为 AI 原生，40 家初创、累计融资 2.96 亿美元。[Source: https://hub71.com, 2026]</li>
-</ul>
-<h3>5.2 格局特征（推断）</h3>
-<ul class="tight">
-<li><strong>双轨结构</strong>：主权资本（G42 系）与全球厂商并存，主权轨掌握算力与合规入口，厂商轨提供产品与平台。</li>
-<li><strong>交付集中</strong>：本地 MSSP / 自由区承担主要交付与运营，咨询通道承接合规落地。</li>
-<li><strong>合规咨询上升</strong>：ISR 与 AI 安全政策推动治理、审计与认证需求（推断）。</li>
-<li><strong>集中度未知</strong>：缺少可核实份额数值，是格局研究的主要盲区。</li>
-</ul>
+</table></div>
 
-<hr />
+<h3>逐家要点</h3>
+<div class="card tight">
+  <h3>G42 集团（Core42、CPX、Khazna、M42）· 直接</h3>
+  <div class="tblwrap"><table class="fixed">
+  <thead><tr><th style="width:22%">字段</th><th style="width:78%">内容</th></tr></thead>
+  <tbody>
+  <tr><td>定位</td><td>算力—云—安全—应用垂直整合的主权 AI 平台 <span class="fact-ref">[FC-IND-003]</span></td></tr>
+  <tr><td>规模口径</td><td>23,000+ 员工、30 国；CPX 约 600 名专家、200+ 客户 <span class="fact-ref">[FC-IND-003]</span></td></tr>
+  <tr><td>近期动作</td><td>Core42 2026-09 与 TII 在 HSM / 机密计算 / 加密 AI 推理上合作；与阿联酋央行推主权金融云（SFCSI）</td></tr>
+  <tr><td>来源与日期</td><td>g42.ai / core42.ai / cpx.net，2026</td></tr>
+  </tbody>
+  </table></div>
+</div>
+<div class="card tight">
+  <h3>e&amp; enterprise / Help AG · 直接</h3>
+  <div class="tblwrap"><table class="fixed">
+  <thead><tr><th style="width:22%">字段</th><th style="width:78%">内容</th></tr></thead>
+  <tbody>
+  <tr><td>定位</td><td>本地 MSSP 头部；IDC MarketScape 领导者（MSS 2026 / MDR 2025）<span class="fact-ref">[FC-IND-004]</span></td></tr>
+  <tr><td>规模口径</td><td>200+ SOC 分析师；迪拜 HQ + 阿布扎比双城</td></tr>
+  <tr><td>近期动作</td><td>2026-01 为 Sergas 交付下一代 SOC</td></tr>
+  <tr><td>来源与日期</td><td>eand.com，2026-01-13</td></tr>
+  </tbody>
+  </table></div>
+</div>
+<div class="card tight">
+  <h3>Moro Hub（DEWA 子公司）· 直接</h3>
+  <div class="tblwrap"><table class="fixed">
+  <thead><tr><th style="width:22%">字段</th><th style="width:78%">内容</th></tr></thead>
+  <tbody>
+  <tr><td>定位</td><td>全栈主权 AI 平台；迪拜 AI Seal Tier S（2025-12，单一聚合源，建议以 Digital Dubai 复核）</td></tr>
+  <tr><td>近期动作</td><td>主权 AI 平台运营与资质更新（区域产品细节待核实）</td></tr>
+  <tr><td>来源与日期</td><td>brief.news / lumitech.co，2026</td></tr>
+  </tbody>
+  </table></div>
+</div>
+<div class="card tight">
+  <h3>Hub71（阿布扎比）· 间接</h3>
+  <div class="tblwrap"><table class="fixed">
+  <thead><tr><th style="width:22%">字段</th><th style="width:78%">内容</th></tr></thead>
+  <tbody>
+  <tr><td>定位</td><td>主要 AI / 网络创业池 <span class="fact-ref">[FC-IND-005]</span></td></tr>
+  <tr><td>规模口径</td><td>第 19 批（2026-10）90% AI 原生、40 家初创、累计融资 2.96 亿美元</td></tr>
+  <tr><td>来源与日期</td><td>hub71.com，2026</td></tr>
+  </tbody>
+  </table></div>
+</div>
 
 <h2 class="sec" id="s6">六、驱动因素与风险</h2>
-<h3>6.1 需求侧驱动因素</h3>
+<h3>需求侧驱动</h3>
 <ul class="tight">
-<li><strong>威胁国家化与 AI 化</strong>：日均抵御约 20 万次攻击，71.4% 的追踪威胁行为体为国家背景 APT（21 组中 15 组），2026 年以来确认事件 128 起；中东平均数据泄露成本 792 万美元（全球 488 万）。[Source: https://khaleejtimes.com/uae/over-70-of-cyber-threats-targeting-uae-are-state-sponsored-authority-says, 2026]；[Source: https://khaleejtimes.com/uae/uae-faces-200000-daily-cyberattacks, 2025]</li>
-<li><strong>强制合规</strong>：ISR v3.1（13 个控制域）适用于所有迪拜政府实体及处理政府数据的第三方供应商，是采购门槛；《迪拜 AI 安全政策》（2024 年 9 月）覆盖生成式 AI 安全；国家层面推进 NCAP（限制未认证 MSSP 服务关键基础设施）、SBOM、量子安全（PQC）计划。[Source: https://desc.gov.ae, 2026]；[Source: https://practiceguides.chambers.com/cybersecurity-2026/uae, 2026]</li>
-<li><strong>主权 AI 基建</strong>：Stargate UAE 与 Core42 主权云创造超大尺度 AI 基础设施攻击面与本地安全需求。[Source: https://openai.com/index/introducing-stargate-uae, 2025]</li>
-<li><strong>人才缺口</strong>：ISC2 2025 显示 AI 为最急需技能（41%）、88% 因技能短缺遭遇安全后果；Mordor 显示 87% 的阿联酋企业难以招募合格网安人员，2024–2025 年仅约 5,000 名本国人进入私企网安岗。</li>
-<li><strong>经济议程</strong>：迪拜 D33 经济议程（2023）目标 2033 年经济翻番，数字化年均贡献约 1,000 亿 AED。[Source: https://mediaoffice.ae/en/news/2023/january/04-01/mohammed-bin-rashid-launches-dubai-economic-agenda-d33, 2023]</li>
+  <li><b>政策合规</b>：ISR v3.1 强制 + NCAP 限制 + AI 安全政策，放大治理、审计与认证需求（已核验）。<span class="fact-ref">[FC-SEC-009]</span></li>
+  <li><b>主权 AI 基建</b>：Stargate UAE 5GW / 1GW 与主权云上线，创造超大尺度 AI 基础设施攻击面（部分核验）。<span class="fact-ref">[FC-SEC-010]</span></li>
+  <li><b>威胁国家化</b>：71.4% 追踪威胁行为体为国家背景 APT；中东数据泄露成本 792 万美元（部分核验）。<span class="fact-ref">[FC-IND-007]</span></li>
+  <li><b>人才缺口</b>：87% 阿联酋企业难以招募合格网安人员；ISC2 2025 显示 AI 为最急需技能（41%）（部分核验）。<span class="fact-ref">[FC-SEC-004]</span><span class="fact-ref">[FC-SEC-005]</span></li>
 </ul>
-<h3>6.2 供给侧驱动因素</h3>
+<h3>供给侧驱动</h3>
 <ul class="tight">
-<li><strong>AI 防御采用</strong>：Microsoft Security Copilot 已在服务 DIFC / ADGM 金融机构与公用事业的迪拜 SOC 中部署，用于分诊与事件摘要。[Source: https://learn.microsoft.com/en-us/security-copilot]</li>
-<li><strong>托管安全增长</strong>：Gartner 指安全服务为 MENA 增速最快板块（+16.6%），由技能短缺与 MDR 需求驱动。</li>
-<li><strong>证书体系扩散</strong>：GIAC GAIPS / GASAE、CompTIA SecAI+、ISACA AAIA / AAIR / AAISM 等 2025–2026 新发 AI 专项证，为人才供给与差异化提供通道。[Source: https://giac.org]；[Source: https://isc2.org/new-ai-certification]</li>
+  <li><b>主权资本</b>：G42 系垂直整合 + 微软 15 亿美元股权投资与 10 亿美元开发者基金（已核验）。<span class="fact-ref">[FC-SEC-011]</span></li>
+  <li><b>全球厂商区域落地</b>：Microsoft、Cisco、Palo Alto、Fortinet、Kaspersky 以 DIC / JLT 自由区设区域总部。</li>
+  <li><b>自由区与创业池</b>：Hub71 第 19 批 90% AI 原生、40 家、累计融资 2.96 亿美元；DIFC / ADGM 独立通道（已核验）。<span class="fact-ref">[FC-IND-005]</span></li>
 </ul>
-<h3>6.3 传导量化：弹性与时滞</h3>
-<p><strong>需求弹性</strong>：AI 安全支出对威胁事件与合规强制高度敏感（事件驱动型需求弹性高），但预算落地、采购流程与人员补充存在明显<strong>时滞</strong>——中级 SOC / 云安全岗平均填补 3–6 个月，CISO 级 4–8 个月；政策从发布到采购绑定亦有执行时滞。本报告不估算弹性系数，仅作定性刻画。</p>
-<h3>6.4 政策乘数</h3>
-<p><strong>政策乘数</strong>取决于执法覆盖与采购绑定程度：ISR 适用于政府实体及处理政府数据的第三方，构成实质采购门槛；AI 安全政策与 NCAP 进一步放大合规需求。政策乘数的数值估算所需执法与采购数据缺失，本报告只做定性判断（推断），不给出乘数值。</p>
-<h3>6.5 风险清单（条目式，不给应对建议）</h3>
+<h3>风险清单（条目式，不给应对建议）</h3>
 <ul class="tight">
-<li><strong>口径分歧</strong>：Gartner（终端支出）与 Mordor / GMI（含服务总收入）差异大，误用会放大或缩小市场。</li>
-<li><strong>人才供给约束</strong>：本土人才池薄，中高级岗位长期依赖外籍；阿化（Emiratisation）配额影响私企招聘。</li>
-<li><strong>AI 自动化替代</strong>：Gartner 预计 2028 年 AI 将自动化部分 L1 SOC 工作，需求向价值链上移而非消失。</li>
-<li><strong>数据缺口与时滞</strong>：集中度、价值链分布、部分企业规模口径缺乏可核实公开来源。</li>
-<li><strong>主权采购集中</strong>：需求高度依赖政府与主权实体预算周期，波动性大（推断）。</li>
-<li><strong>全球预测可信度</strong>：全球 AI 安全市场预测为单一机构口径；同源周报亦记录编码 / AI 基准可信度危机，提示预测类数据需谨慎。</li>
+  <li><b>口径风险</b>：市场口径差异大（终端支出 vs 含服务总收入 vs 全球 AI in cybersecurity），误混算将导致规模误判。</li>
+  <li><b>集中度过高风险</b>：主权资本在算力与云层垂直整合，可能挤压独立 MSSP 与咨询的定价空间（推断）。</li>
+  <li><b>政策不确定风险</b>：NCAP / ISR 审核员认证细则、黄金签证 2026 阿布扎比收紧动向待 ICP 最终确认。</li>
+  <li><b>人才供给风险</b>：本土人才池薄，中高级岗填补周期 3–6 个月、CISO 级 4–8 个月；阿化配额影响私企招聘。</li>
+  <li><b>地缘与运营风险</b>：威胁国家化与数据泄露成本上行；Stargate UAE 运营状态待官方确认。</li>
 </ul>
-
-<hr />
 
 <h2 class="sec" id="s7">七、趋势判断（推断）</h2>
-<div class="note">
-<strong>周期定位</strong>：从周期阶段看，迪拜（阿联酋）AI 网安处于「政策与基建双驱动的早中期」——合规框架已落地、主权算力在建、威胁与国家化攻击持续高位，但规模化商业交付与人才供给仍在爬坡。该定位为研究推断，非数据直接读数。
-</div>
-<h3>7.1 趋势方向逐条推导</h3>
-<div class="callout">
-<strong>趋势一：AI 安全成为结构性增量主线。</strong>
-<strong>依据</strong>：ISC2 连续两年将 AI 列为最缺技能（41%）；阿联酋 71.4% 威胁行为体为国家背景、日均 20 万次攻击；AI 驱动攻击（深度伪造、提示注入、AI 勒索）增长最快。<strong>推断</strong>：2026–2030 年 AI 安全需求结构性跑赢通用安全需求。<strong>反向声音</strong>：Gartner 预计 2028 年 AI 将自动化部分 L1 SOC 工作，增量可能集中在高价值环节而非全量岗位。
-</div>
-<div class="callout">
-<strong>趋势二：合规驱动的托管安全与审计需求上升。</strong>
-<strong>依据</strong>：ISR v3.1（13 控制域）构成采购门槛；《迪拜 AI 安全政策》覆盖生成式 AI；NCAP 限制未认证 MSSP 服务关键基础设施；DESC 2026 年推出 ISR 审核员认证计划。<strong>推断</strong>：MSSP、审计与认证服务需求上升。<strong>反向声音</strong>：合规成本可能抑制中小企业支出，且执法覆盖度未经公开量化。
-</div>
-<p><strong>趋势三：主权 AI 基建创造新攻击面与本地安全市场。</strong><strong>依据</strong>：Stargate UAE（首批 200MW 计划 2026 上线）、Core42 主权云、微软–G42 生态。<strong>推断</strong>：AI 工厂与主权云的安全建设 / 运营需求本地化。<strong>反向声音</strong>：Stargate 运营状态与 Core42 商业规模待官方确认，建设进度存在不确定性。</p>
-<p><strong>趋势四：人才缺口持续，证书体系扩散。</strong><strong>依据</strong>：ISC2 88% 因技能短缺遭遇安全后果；Mordor 87% 企业招聘难；2025–2026 新发多项 AI 安全专项证。<strong>推断</strong>：证书成为差异化通道。<strong>反向声音</strong>：证书供给增加可能削弱溢价，且抽样岗位多未将其列为硬门槛。</p>
-<h3>7.2 已发生的结构变化 vs 前瞻推断</h3>
-<table class="fixed">
-<thead>
-<tr><th style="width:50%">已发生的结构变化（事实）</th><th style="width:50%">前瞻推断（推断）</th></tr>
-</thead>
-<tbody>
-<tr><td>ISR v3.1 生效并覆盖政府第三方；《迪拜 AI 安全政策》发布；Stargate UAE 宣布并在建；微软–G42 15 亿美元注资确认；ISC2 / Mordor 人才缺口数据</td><td>AI 安全需求结构性跑赢通用安全；合规托管与审计需求上升；主权基建安全本地化；证书扩散与溢价变化</td></tr>
-</tbody>
-</table>
+<p class="small muted">以下判断均标「推断」，逐条给出依据 → 推断 → 反向声音；首次中期回测 2027-06。</p>
+<div class="note preline"><b>趋势 1 · 合规能力成为产品准入与采购放大器</b><br>
+依据：ISR v3.1（13 控制域）强制 + NCAP 限制未认证 MSSP 服务关键基础设施（已核验）。<br>
+推断：治理、审计、认证与主权云安全需求结构性上升。<br>
+反向声音：官方豁免条款未见披露；媒体转述的「政策松动」未提供官方来源。</div>
+<div class="note preline"><b>趋势 2 · 主权垂直整合形成独立一极</b><br>
+依据：G42 系覆盖算力 / 云 / MSSP / 应用；微软 15 亿美元股权投资 + 10 亿美元开发者基金（已核验）。<br>
+推断：算力、主权云与 MSSP 层将出现独立于全球厂商的交付极。<br>
+反向声音：G42 未披露 AI 网安收入份额；第三方转述的 CPX 与 DarkMatter 渊源未获官方证实。</div>
+<div class="note"><b>趋势 3 · AI 系统安全技能溢价上行</b><br>
+依据：ISC2 2025 显示 AI 为最急需技能（41%）；AI 安全专项招聘机构抽样薪资高于通用岗（部分核验 / 抽样）。<br>
+推断：提示注入测试、安全 RAG、AI 供应链、Shadow AI 发现等技能需求集中释放。<br>
+反向声音：抽样岗位尚无一条将 AI 专项证列为硬性门槛；「MLSecOps」「对抗机器学习」术语在迪拜样本中尚未出现。</div>
+<div class="note"><b>趋势 4 · 需求向价值链上移而非消失</b><br>
+依据：Gartner 预计 2028 年 AI 将自动化部分 L1 SOC 工作；威胁国家化与泄露成本上行。<br>
+推断：SOC 初级岗部分被自动化，威胁情报、红队、AI 系统安全等中高阶需求上升。<br>
+反向声音：自动化替代速度缺乏官方测算；本地人才池薄或延缓替代节奏。</div>
 
-<hr />
+<h3>行动协议</h3>
+<div class="action-card immediate">
+  <div class="a-head"><span class="prio immediate">立即行动</span><span class="a-title">A1 建立合规基线追踪</span></div>
+  <div class="a-meta"><b>触发条件：</b>DESC / TDRA 发布 ISR 修订、NCAP 名单或 AI 安全政策更新。<br><b>阈值：</b>任一官方细则或名单更新即触发。<br><b>责任角色：</b>行业研究维护方。<br><b>时限：</b>事件后 2 周内完成登记。<br><b>验证指标：</b>官方页面版本日期与登记册记录一致。</div>
+</div>
+<div class="action-card watch">
+  <div class="a-head"><span class="prio watch">持续观察</span><span class="a-title">A2 跟踪主权一极进展</span></div>
+  <div class="a-meta"><b>触发条件：</b>G42 系或微软发布区域 AI 网安新产品线 / 大额合同 / 资质获取。<br><b>阈值：</b>单笔合同或产品线发布即记录。<br><b>责任角色：</b>行业研究维护方。<br><b>时限：</b>每月复核一次。<br><b>验证指标：</b>官方公告 URL 与日期、登记册回写。</div>
+</div>
+<div class="action-card archive">
+  <div class="a-head"><span class="prio archive">仅记录存档</span><span class="a-title">A3 记录市场规模口径变化</span></div>
+  <div class="a-meta"><b>触发条件：</b>Gartner / Mordor / GMI / Grand View 发布新年版或修订口径。<br><b>阈值：</b>口径定义或基准年发生变化。<br><b>责任角色：</b>行业研究维护方。<br><b>时限：</b>随年度刷新滚动记录。<br><b>验证指标：</b>新版本页面与口径对照表。</div>
+</div>
+
+<h3>场景切片</h3>
+<div class="slice">
+  <p class="slice-head">场景切片 · 投资决策</p>
+  <p>关注主权资本 / 算力抓手（G42 系、Moro Hub）与合规资质（ISR / NCAP / AI Seal）双门槛；估值与标的筛选需补充非公开财务信息。本报告只给「条件 → 判读 → 框架性含义 → 风险提示」，不给买卖价位、杠杆与仓位建议。</p>
+</div>
+<div class="slice">
+  <p class="slice-head">场景切片 · 政策制定</p>
+  <p>政策乘数显著：ISR v3.1 与 NCAP 直接放大合规产品采购。建议以 DESC / TDRA 官方名单与指南为合规基线，跟踪 GISEC / GITEX 发布节奏与资质更新。</p>
+</div>
+<div class="slice">
+  <p class="slice-head">场景切片 · 就业决策</p>
+  <p>以「云安全 + AI 安全」双技能切入，关注 CISSP / ISO 27001 LI / OSCP 等硬门槛与 2025–2026 新发 AI 专项证差异化；人才供给为最紧约束意味着中高级岗议价空间存在（推断）。本报告不承诺就业结果、不保证薪资水平。</p>
+</div>
+<div class="preline">阈值与信号规则为「预校准（ex-ante）」；首次中期回测 2027-06，校准完成前不将信号灯作为确定结论。</div>
 
 <h2 class="sec" id="s8">八、数据治理与局限</h2>
-<h3>8.1 来源分级表</h3>
-<table class="fixed">
-<thead>
-<tr><th style="width:8%">级别</th><th style="width:24%">来源类型</th><th style="width:42%">实例</th><th style="width:26%">使用规则</th></tr>
-</thead>
-<tbody>
-<tr><td>①</td><td>政府 / 官方</td><td>desc.gov.ae、u.ae、tdra.gov.ae、mediaoffice.ae、WAM、uaecsc.gov.ae</td><td>优先采信</td></tr>
-<tr><td>②</td><td>国际权威组织</td><td>ISC2、ISACA、Gartner、SANS / GIAC、MITRE、OWASP、NIST</td><td>优先采信</td></tr>
-<tr><td>③</td><td>分析机构 / 薪酬指南</td><td>Mordor、Global Market Insights、Hays、Michael Page、Cooper Fitch</td><td>采信并标注口径</td></tr>
-<tr><td>④</td><td>招聘抽样</td><td>LinkedIn、Bayt、GulfTalent、hiredeveloper.ae</td><td>仅作市场信号</td></tr>
-<tr><td>⑤</td><td>英文行业 / 主流媒体</td><td>Khaleej Times、The National、Gulf News、Zawya</td><td>发现线索，数值回原始页</td></tr>
-<tr><td>⑥</td><td>同源资产 / 周报</td><td><code>content/tech/security/dubai/</code> 基线、登记册；<code>content/tech/trends/global/reports/2026-11-13_weekly.html</code></td><td>已核实事实复用；转引须标注</td></tr>
-</tbody>
-</table>
-<h3>8.2 口径冲突案例与裁决</h3>
+<h3>来源分级（指针）</h3>
+<p>来源按「官方一手 → 行业机构（英文研究报告 / 数据页）→ 挂牌门户（仅作卖方预期）→ 媒体转述（须标需核实原文）」分级；本业务线仅采信英文来源，中文源仅作线索。完整清单与分级见第九节。</p>
+<h3>口径冲突案例与裁决</h3>
 <ul class="tight">
-<li><strong>市场规模</strong>：Gartner（MENA 终端支出 33 亿美元）vs Mordor（阿联酋 8.2→15.1 亿美元）vs GMI（约 34 亿美元）——口径不同，<strong>裁决为并列不合并</strong>。</li>
-<li><strong>全球 vs 本地</strong>：全球 AI in cybersecurity（315 亿→1829 亿美元）与迪拜 / 阿联酋口径分列，禁止混算。</li>
-<li><strong>威胁数据</strong>：媒体转引官方（Khaleej Times 转引 UAE CSC），标注转引链路。</li>
+  <li><b>市场规模口径</b>：Gartner（终端支出）≠ Mordor / GMI（含服务总收入）≠ Grand View（全球 AI in cybersecurity）；并列呈现、标注口径，禁止合并或混算。</li>
+  <li><b>地域口径</b>：区域（MENA / 阿联酋）与全球口径分列，禁止混算。</li>
+  <li><b>招聘抽样口径</b>：招聘机构抽样 ≠ 官方或权威机构口径；标注「抽样」并谨慎引用。</li>
+  <li><b>薪酬口径</b>：招聘机构抽样与薪酬指南年版冲突时保留双份引用，不合并。</li>
 </ul>
-<h3>8.3 未核验项（单列，不补值、不外推）</h3>
+<h3>未核验项</h3>
 <ul class="tight">
-<li>市场集中度（CR3 / CR5）与价值链分布数值——无公开可核实来源（<strong>未核验</strong>）。</li>
-<li>CPX 确切人数（约 600 为来源口径）、Moro Hub AI Seal Tier S 主源（单一聚合源）、TDRA / aeCERT 完整培训目录。</li>
-<li>Stargate UAE 首批 200MW 是否已投入运营——截至 2026-12 待官方确认。</li>
-<li>部分薪资抽样（招聘机构口径）与薪酬指南未单列「AI 安全」岗的交叉差异。</li>
+  <li>市场集中度 CRn 与价值链分布数值：无公开可核实来源，标注「未核验」。</li>
+  <li>Moro Hub AI Seal Tier S 主源（brief.news 单一聚合源，建议以 Digital Dubai 复核）。</li>
+  <li>Stargate UAE 首批 200MW 是否已运营（待官方确认）。</li>
+  <li>TDRA / aeCERT 完整培训目录（待 tdra.gov.ae 复核）。</li>
+  <li>2026 阿布扎比黄金签证通函的最终 ICP 确认。</li>
 </ul>
-<h3>8.4 研究局限</h3>
+<h3>已修正事实清单（防回退锚）</h3>
 <ul class="tight">
-<li><strong>数据缺口</strong>：本地 AI 安全专项支出拆分、玩家份额、供应链分布缺乏公开数据。</li>
-<li><strong>时滞</strong>：政策执行、采购绑定与人员补充存在时滞，最新政策未必即时反映在市场中。</li>
-<li><strong>方法局限</strong>：本期基线以案头研究为主，专家访谈未执行；趋势判断均标「推断」。</li>
-<li><strong>语言规则</strong>：仅采用英文来源；中文来源零使用。</li>
+  <li>不得再称「Black Hat MEA 在阿布扎比」——该会议 2025 年起已在沙特利雅得举办。<span class="src-inline">blackhatmea.com</span></li>
+  <li>不得再称 ILOE 失业险「每周 AED 5/10」——实为每月 AED 5（基本 ≤1.6 万）/ AED 10（基本 &gt;1.6 万）+ 5% VAT。<span class="fact-ref">[FC-SEC-008]</span></li>
+  <li>不得再将 CPX 与 DarkMatter 绑定——CPX 为 2022 年成立的 G42 子公司，与 DarkMatter → Digital14 系不同实体。<span class="fact-ref">[FC-IND-003]</span></li>
+  <li>不得再引用微软–G42「152 亿美元」broad 投资计划——经复核未获英文权威来源证实（仅 15 亿美元股权注资 + 10 亿美元开发者基金）。<span class="fact-ref">[FC-SEC-011]</span></li>
+  <li>不得将 Gartner（终端支出）与 Mordor / GMI（含服务总收入）口径直接比较或合并——并列呈现并标注口径。<span class="fact-ref">[FC-IND-006]</span></li>
+  <li>不得估算本报告未文档化的集中度（CRn）或价值链分布数值——无公开可核实来源时标注「未核验」。</li>
 </ul>
-<h3>8.5 盲区</h3>
-<p>本报告明确的研究<strong>盲区</strong>：① 无公开可核实的集中度与价值链分布；② 主权项目运营状态与商业规模；③ AI 安全岗位的本地专项薪资官方基准。上述盲区不以外推或估算填充，留待年度刷新补足。时间基准：除明确标注年份者，引用数据截至 2026 年 12 月。</p>
-
-<h3>8.6 已修正事实清单（基线锚，防回退）</h3>
-<ol>
-  <li>❌ 不得再称「Black Hat MEA 在阿布扎比」——该会议 2025 年起已在沙特利雅得举办。[Source: https://www.blackhatmea.com/about-us/key-information, 2026]</li>
-  <li>❌ 不得再称 ILOE 失业险「每周 AED 5/10」——实为每月 AED 5（基本≤1.6 万）/ AED 10（基本>1.6 万）+5% VAT。[Source: https://www.iloe.ae/pdf/Involuntary-Loss-of-Employment-Brochure-ILOE-V2.pdf, 2025]</li>
-  <li>❌ 不得再将 CPX 与 DarkMatter 绑定——CPX 为 2022 年成立的 G42 子公司，与 DarkMatter→Digital14 系不同实体。[Source: https://www.cpx.net, 2025]</li>
-  <li>❌ 不得再引用微软–G42「152 亿美元」broad 投资计划——经复核未获英文权威来源证实（微软官方仅确认 2024.4 的 15 亿美元股权注资与 10 亿美元开发者基金）。[Source: https://blogs.microsoft.com/blog/2024/04/15/microsoft-and-g42-partner, 2024]</li>
-  <li>❌ 不得将 Gartner（终端支出）与 Mordor/GMI（含服务总收入）口径直接比较或合并——并列呈现并标注口径。</li>
-  <li>❌ 不得估算本报告未文档化的集中度（CRn）或价值链分布数值——无公开可核实来源时标注「未核验」。</li>
-</ol>
-
-<hr />
+<h3>研究局限</h3>
+<ul class="tight">
+  <li><b>数据缺口</b>：区域市场的官方统计披露有限，规模数值依赖分析机构口径；集中度与价值链分布无可核实来源。</li>
+  <li><b>时滞</b>：行业报告与官方页面更新频率不同，部分数据点为 2025 发布；关键数字须以最新官方页面复核。</li>
+  <li><b>专家访谈缺失</b>：基线期为案头研究，专家访谈待后续年度刷新补充。</li>
+</ul>
+<h3>版本治理</h3>
+<ul class="tight">
+  <li>基线 v1.0 固定；核验 / 收敛型运行不升级版本号，统一标注「本期读数时点」；仅核心事实修正才升级版本号。</li>
+  <li>本报告为基线首期，无上期报告；「已修正事实清单」为空，产生修正后逐条补记。</li>
+</ul>
 
 <h2 class="sec" id="s9">九、参考来源清单</h2>
-<p><strong>政府 / 官方</strong></p>
-<ul class="tight">
-<li>UAE AI Strategy 2031: https://ai.gov.ae/strategy</li>
-<li>UAE 国家网络安全战略 2025–2031: https://cybersecuritydatabase.org/en/documents/ae-national-cybersecurity-strategy-2025-2031</li>
-<li>DESC 战略与 ISR 标准: https://desc.gov.ae/hamdan-bin-mohammed-launches-second-cycle-of-dubai-cyber-security-strategy；https://mastcgroup.com/desc-isr-v3-1-compliance-guide-iso-27001-mapping-requirements</li>
-<li>DESC AI Security Policy (2024) 与 GISEC 2026 发布 SARAAB / ISR 审核员: https://gulftime.ae/dubai-electronic-security-centre-unveils-dubai-ai-security-policy；https://desc.gov.ae/dubai-electronic-security-center-unveils-saraab-and-new-cybersecurity-initiatives-at-gisec-global-2026</li>
-<li>TDRA / aeCERT: https://tdra.gov.ae/en/aecert/initiatives</li>
-<li>D33 经济议程: https://mediaoffice.ae/en/news/2023/january/04-01/mohammed-bin-rashid-launches-dubai-economic-agenda-d33</li>
-<li>NCAP / 国家安全新规（Chambers 2026 UAE）: https://practiceguides.chambers.com/cybersecurity-2026/uae</li>
-</ul>
-<p><strong>国际权威组织</strong></p>
-<ul class="tight">
-<li>Gartner MENA 安全支出（2025-04-08）: https://gartner.com/en/newsroom/press-releases/2025-04-08-gartner-forecasts-spending-on-information-security-in-mena-to-grow-14-percent-in-2025</li>
-<li>ISC2 2025 人力研究: https://isc2.org/Insights/2025/12/ISC2-Publishes-2025-Cybersecurity-Workforce-Study；ISC2 AI 认证试点: https://isc2.org/new-ai-certification</li>
-<li>SANS / GIAC: https://giac.org；https://sans.org/community</li>
-<li>OWASP LLM Top 10: https://genai.owasp.org/llm-top-10</li>
-<li>MITRE ATLAS: https://atlas.mitre.org</li>
-<li>NIST AI RMF 1.0: https://nvlpubs.nist.gov/nistpubs/ai/nist.ai.100-1.pdf</li>
-<li>ISACA（AAIA / AAIR / AAISM）: https://isaca.org</li>
-</ul>
-<p><strong>市场 / 分析机构 / 媒体</strong></p>
-<ul class="tight">
-<li>Mordor Intelligence（阿联酋网安市场）: https://mordorintelligence.com/industry-reports/uae-cybersecurity-market</li>
-<li>Global Market Insights（网安市场）: https://gminsights.com/industry-analysis/cybersecurity-market</li>
-<li>Grand View Research（AI in cybersecurity，经周报转引）: https://www.grandviewresearch.com/industry-analysis/ai-in-cybersecurity-market-report</li>
-<li>Khaleej Times（威胁态势系列）: https://khaleejtimes.com/uae/over-70-of-cyber-threats-targeting-uae-are-state-sponsored-authority-says；https://khaleejtimes.com/uae/uae-faces-200000-daily-cyberattacks</li>
-<li>The National（ITU 全球网络安全指数）: https://thenationalnews.com/news/uae/2024/09/13/uae-ranked-as-role-model-for-cybersecurity-in-global-report</li>
-<li>OpenAI Stargate UAE: https://openai.com/index/introducing-stargate-uae</li>
-<li>Microsoft–G42: https://blogs.microsoft.com/blog/2024/04/15/microsoft-and-g42-partner</li>
-<li>Microsoft Security Copilot: https://learn.microsoft.com/en-us/security-copilot</li>
-<li>GITEX / GISEC: https://gitex.com；https://gisec.ae</li>
-</ul>
-<p><strong>企业 / 样本</strong></p>
-<ul class="tight">
-<li>G42: https://g42.ai；Core42: https://core42.ai；CPX: https://cpx.net</li>
-<li>e&amp; / Help AG: https://eand.com；Moro Hub: https://morohub.ae</li>
-<li>Hub71: https://hub71.com</li>
-<li>自由区: https://difc.ae；https://adgm.com</li>
-</ul>
-<p><strong>同源锚（仓库内已核实资产）</strong></p>
-<ul class="tight">
-<li><code>content/tech/security/dubai/reports/2026-11_baseline_report.html</code></li>
-<li><code>content/tech/security/dubai/sources/2026-11_baseline_report.md</code></li>
-<li><code>data/processed/tech/security/dubai/ai_cybersecurity_indicator_registry.md</code></li>
-<li><code>content/tech/trends/global/reports/2026-11-13_weekly.html</code></li>
-</ul>
-<div class="disc">
-<strong>结束</strong>：本报告为 <code>content/tech/industry-research/dubai</code> 业务线首份基线报告（行业深度研究型），完稿于 2026-12。全部数据源自仓库已文档化事实与英文公开来源，关键数据点均附来源；口径冲突处并列呈现、不做合并；趋势判断一律标「推断」。报告不给投资评级、不出具 Go/No-Go 建议；未核验项已单列，未以外推填充。
+<p class="small muted">按来源分级分组，完整 URL，逐点可回溯；媒体转述标「需核实原文」。</p>
+<div class="refs">
+<h4>官方一手</h4>
+<ol>
+<li>UAE AI Strategy 2031 — <a href="https://ai.gov.ae/strategy" target="_blank" rel="noopener">ai.gov.ae/strategy</a></li>
+<li>UAE 国家网络安全战略 2025–2031 — <a href="https://cybersecuritydatabase.org/en/documents/ae-national-cybersecurity-strategy-2025-2031" target="_blank" rel="noopener">cybersecuritydatabase.org</a></li>
+<li>DESC · 迪拜网络安全战略第二周期 — <a href="https://desc.gov.ae/hamdan-bin-mohammed-launches-second-cycle-of-dubai-cyber-security-strategy" target="_blank" rel="noopener">desc.gov.ae</a></li>
+<li>DESC · SARAAB 与 GISEC Global 2026 — <a href="https://desc.gov.ae/dubai-electronic-security-center-unveils-saraab-and-new-cybersecurity-initiatives-at-gisec-global-2026" target="_blank" rel="noopener">desc.gov.ae</a></li>
+<li>TDRA · aeCERT 倡议 — <a href="https://tdra.gov.ae/en/aecert/initiatives" target="_blank" rel="noopener">tdra.gov.ae</a></li>
+<li>OpenAI · Stargate UAE — <a href="https://openai.com/index/introducing-stargate-uae" target="_blank" rel="noopener">openai.com</a></li>
+<li>Microsoft × G42 合作 — <a href="https://blogs.microsoft.com/blog/2024/04/15/microsoft-and-g42-partner" target="_blank" rel="noopener">blogs.microsoft.com</a></li>
+<li>Microsoft · Security Copilot — <a href="https://learn.microsoft.com/en-us/security-copilot" target="_blank" rel="noopener">learn.microsoft.com</a></li>
+<li>G42 — <a href="https://g42.ai" target="_blank" rel="noopener">g42.ai</a></li>
+<li>Core42 — <a href="https://core42.ai" target="_blank" rel="noopener">core42.ai</a></li>
+<li>CPX — <a href="https://cpx.net" target="_blank" rel="noopener">cpx.net</a></li>
+<li>e&amp; — <a href="https://eand.com" target="_blank" rel="noopener">eand.com</a></li>
+<li>Hub71 — <a href="https://hub71.com" target="_blank" rel="noopener">hub71.com</a></li>
+<li>Moro Hub — <a href="https://morohub.ae" target="_blank" rel="noopener">morohub.ae</a></li>
+<li>Government of Dubai Media Office · D33 — <a href="https://mediaoffice.ae/en/news/2023/january/04-01/mohammed-bin-rashid-launches-dubai-economic-agenda-d33" target="_blank" rel="noopener">mediaoffice.ae</a></li>
+<li>DIFC — <a href="https://difc.ae" target="_blank" rel="noopener">difc.ae</a></li>
+<li>ADGM — <a href="https://adgm.com" target="_blank" rel="noopener">adgm.com</a></li>
+<li>ILOE 失业险 — <a href="https://www.iloe.ae/pdf/Involuntary-Loss-of-Employment-Brochure-ILOE-V2.pdf" target="_blank" rel="noopener">iloe.ae</a></li>
+</ol>
+<h4>行业机构 / 第三方研究</h4>
+<ol>
+<li>Gartner · MENA 信息安全支出 2025 预测 — <a href="https://gartner.com/en/newsroom/press-releases/2025-04-08-gartner-forecasts-spending-on-information-security-in-mena-to-grow-14-percent-in-2025" target="_blank" rel="noopener">gartner.com</a></li>
+<li>(ISC)² · 2025 Cybersecurity Workforce Study — <a href="https://isc2.org/Insights/2025/12/ISC2-Publishes-2025-Cybersecurity-Workforce-Study" target="_blank" rel="noopener">isc2.org</a></li>
+<li>Mordor Intelligence · UAE Cybersecurity Market — <a href="https://mordorintelligence.com/industry-reports/uae-cybersecurity-market" target="_blank" rel="noopener">mordorintelligence.com</a></li>
+<li>Global Market Insights · Cybersecurity Market — <a href="https://gminsights.com/industry-analysis/cybersecurity-market" target="_blank" rel="noopener">gminsights.com</a></li>
+<li>Grand View Research · AI in Cybersecurity Market — <a href="https://www.grandviewresearch.com/industry-analysis/ai-in-cybersecurity-market-report" target="_blank" rel="noopener">grandviewresearch.com</a></li>
+<li>OWASP GenAI Security · LLM Top 10 — <a href="https://genai.owasp.org/llm-top-10" target="_blank" rel="noopener">genai.owasp.org</a></li>
+<li>NIST · AI RMF 1.0 — <a href="https://nvlpubs.nist.gov/nistpubs/ai/nist.ai.100-1.pdf" target="_blank" rel="noopener">nvlpubs.nist.gov</a></li>
+<li>MITRE ATLAS — <a href="https://atlas.mitre.org" target="_blank" rel="noopener">atlas.mitre.org</a></li>
+<li>SANS / GIAC — <a href="https://giac.org" target="_blank" rel="noopener">giac.org</a></li>
+<li>ISACA — <a href="https://isaca.org" target="_blank" rel="noopener">isaca.org</a></li>
+<li>MASTC Group · DESC ISR v3.1 合规指南 — <a href="https://mastcgroup.com/desc-isr-v3-1-compliance-guide-iso-27001-mapping-requirements" target="_blank" rel="noopener">mastcgroup.com</a></li>
+<li>Chambers and Partners · Cybersecurity 2026 UAE — <a href="https://practiceguides.chambers.com/cybersecurity-2026/uae" target="_blank" rel="noopener">practiceguides.chambers.com</a></li>
+<li>GITEX GLOBAL — <a href="https://gitex.com" target="_blank" rel="noopener">gitex.com</a></li>
+<li>GISEC — <a href="https://gisec.ae" target="_blank" rel="noopener">gisec.ae</a></li>
+</ol>
+<h4>媒体转述（需核实原文）</h4>
+<ol>
+<li>Khaleej Times · 70% 国家支持威胁 — <a href="https://khaleejtimes.com/uae/over-70-of-cyber-threats-targeting-uae-are-state-sponsored-authority-says" target="_blank" rel="noopener">khaleejtimes.com</a>（需核实原文）</li>
+<li>Khaleej Times · 每日 20 万次网络攻击 — <a href="https://khaleejtimes.com/uae/uae-faces-200000-daily-cyberattacks" target="_blank" rel="noopener">khaleejtimes.com</a>（需核实原文）</li>
+<li>Gulf Time · 迪拜 AI 安全政策 — <a href="https://gulftime.ae/dubai-electronic-security-centre-unveils-dubai-ai-security-policy" target="_blank" rel="noopener">gulftime.ae</a>（需核实原文）</li>
+<li>The National · 阿联酋网安全球报告 — <a href="https://thenationalnews.com/news/uae/2024/09/13/uae-ranked-as-role-model-for-cybersecurity-in-global-report" target="_blank" rel="noopener">thenationalnews.com</a>（需核实原文）</li>
+<li>Black Hat MEA — <a href="https://www.blackhatmea.com/about-us/key-information" target="_blank" rel="noopener">blackhatmea.com</a>（需核实原文）</li>
+</ol>
 </div>
 
+<div class="disc">
+  <strong>口径与边界声明：</strong>本报告为行业深度研究型基线（首期），保持中性全景刻画，只采集公开合法英文信息；不给投资评级、不出具 Go / No-Go 决策建议；趋势判断一律标「推断」并配反向声音；多口径规模数据并列不合并；不给买卖价位、杠杆与仓位建议。数据截止 2026-12，报告版本 v1.0，本期读数时点 2026-12。阈值与信号规则为「预校准（ex-ante）」，首次中期回测 2027-06。
+</div>
+<footer>tech-context-digest · 行业深度研究型基线 · 九节固化锚 · 生成于 2026-12</footer>
 </main>
+
+<script src="https://cdn.jsdelivr.net/npm/echarts@5/dist/echarts.min.js"></script>
+<script>
+(function(){
+  function initCharts(){
+    if (typeof echarts === 'undefined') { return; }
+    var c1 = document.getElementById('chart-region');
+    if (c1) {
+      echarts.init(c1).setOption({
+        title: { text: '区域网安市场多口径（亿美元，2025）', subtext: '来源：Gartner / Mordor / GMI；口径不可比，不可相加', left: 'center', textStyle: { fontSize: 13, color: '#16324f' } },
+        tooltip: { trigger: 'axis', valueFormatter: function(v){ return v + ' 亿美元'; } },
+        grid: { left: 56, right: 24, top: 56, bottom: 30 },
+        xAxis: { type: 'category', data: ['MENA 终端支出（Gartner）', 'UAE（Mordor）', 'UAE（GMI）'] },
+        yAxis: { type: 'value', axisLabel: { formatter: '{value}' } },
+        series: [{ type: 'bar', data: [33, 8.2, 34], itemStyle: { color: '#16324f' }, label: { show: true, position: 'top', formatter: '{c}' } }]
+      });
+    }
+    var c2 = document.getElementById('chart-global');
+    if (c2) {
+      echarts.init(c2).setOption({
+        title: { text: '全球 AI in cybersecurity 市场（亿美元，2025 vs 2033）', subtext: '来源：Grand View Research（2026）；预测区间端点，不可与区域口径相加', left: 'center', textStyle: { fontSize: 13, color: '#16324f' } },
+        tooltip: { trigger: 'axis', valueFormatter: function(v){ return v + ' 亿美元'; } },
+        grid: { left: 56, right: 24, top: 56, bottom: 30 },
+        xAxis: { type: 'category', data: ['2025', '2033（预测）'] },
+        yAxis: { type: 'value', axisLabel: { formatter: '{value}' } },
+        series: [{ type: 'bar', data: [315, 1829], itemStyle: { color: '#2f5597' }, label: { show: true, position: 'top', formatter: '{c}' } }]
+      });
+    }
+  }
+  if (document.readyState === 'loading') { document.addEventListener('DOMContentLoaded', initCharts); } else { initCharts(); }
+})();
+</script>
 </body>
 </html>

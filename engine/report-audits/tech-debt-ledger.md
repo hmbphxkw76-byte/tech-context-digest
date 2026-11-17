@@ -57,9 +57,9 @@
 | B09 | `release-calendar.md` | audit-doc | 研究负责人；每季度复核「下次预期窗口」 | open |
 | B10 | `system-optimization-plan-2026-11-15.md` | audit-doc | 质量管控体系迭代维护 | open |
 | B11 | `pipeline-integration-review-2026-11-15.md` | audit-doc | 时点审查；留存备查 | closed（留存） |
-| B12 | `content/tech/trends/global/reports/legacy/ai-agent/2026-11-13_weekly.html` | archived | 冻结保管，不修改 | closed（冻结） |
-| B13 | `content/tech/trends/global/reports/legacy/ai-security/2026-11-13_weekly.html` | archived | 冻结保管，不修改 | closed（冻结） |
-| B14 | `content/tech/trends/global/reports/legacy/ai-security/2026-11-14_weekly.html` | archived | 冻结保管，不修改 | closed（冻结） |
+| B12 | 历史周报快照（ai-agent 2026-11-13，原 `reports/legacy/ai-agent/2026-11-13_weekly.html`） | archived | 2026-11-17 全量重生成时清理 | closed（已清理） |
+| B13 | 历史周报快照（ai-security 2026-11-13，原 `reports/legacy/ai-security/2026-11-13_weekly.html`） | archived | 2026-11-17 全量重生成时清理 | closed（已清理） |
+| B14 | 历史周报快照（ai-security 2026-11-14，原 `reports/legacy/ai-security/2026-11-14_weekly.html`） | archived | 2026-11-17 全量重生成时清理 | closed（已清理） |
 | B15 | `tech-debt-ledger.md`（本台账） | audit-doc | 规范所有者；季度盘点 | open |
 | B16 | `l3-deep-review-2026-11-16.md` | audit-doc | 时点深度复核；留存备查 | closed（留存） |
 | B17 | `cicd-alignment-audit-2026-11-16.md` | audit-doc | 时点对齐校验；留存备查 | closed（留存） |
