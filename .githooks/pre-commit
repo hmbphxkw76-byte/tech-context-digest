@@ -1,0 +1,17 @@
+#!/bin/sh
+# pre-commit：提交前分支命名门禁（见 engine/docs/branch-naming-and-lifecycle.md）
+#
+# 当前检出若为受管分支（task/*）且命名不含会话标识 → 阻断提交，
+# 避免「先提交、后改名」留下不可追溯的历史。基座 main 与系统 ci/* 豁免。
+# 手动安装：python engine/tools/repo_sync.py hook-install
+
+set -u
+
+ROOT=$(git rev-parse --show-toplevel 2>/dev/null) || exit 0
+[ -n "$ROOT" ] || exit 0
+cd "$ROOT" || exit 0
+
+PY=python
+command -v python >/dev/null 2>&1 || PY=python3
+
+exec "$PY" engine/tools/repo_sync.py guard --stage commit
