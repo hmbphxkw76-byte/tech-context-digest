@@ -60,6 +60,9 @@ CHECKS: list[tuple[str, list[str], bool]] = [
     ("fact_card", [sys.executable, f"{TOOLS}/fact_card_check.py", "--gate-period", "__GATE__"], True),
     ("decision_hub", [sys.executable, f"{TOOLS}/decision_hub_check.py", "--gate-period", "__GATE__"], True),
     ("blind_spot", [sys.executable, f"{TOOLS}/blind_spot_check.py"], True),
+    # 静态检查（Phase 3.1）：默认 [W]，稳定后评 [E]。仅适配退出码，规则见 pyproject.toml。
+    ("ruff", [sys.executable, f"{TOOLS}/static_check.py", "ruff"], True),
+    ("mypy", [sys.executable, f"{TOOLS}/static_check.py", "mypy"], True),
 ]
 
 # 两级 gate-period 默认值（见模块 docstring）

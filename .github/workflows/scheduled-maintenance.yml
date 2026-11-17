@@ -82,6 +82,9 @@ jobs:
         run: |
           python engine/tools/md2html.py
           python engine/tools/archive_reports.py
+          # 审计文档轮转（《方案》Phase 3.2）：engine/report-audits 根只保留最近 12 个月，
+          # 更早的移入 archives/；复用 archive_reports.py，不另写轮转。
+          python engine/tools/archive_reports.py --audit-docs
           python engine/tools/build_index.py
           python engine/tools/build_hub.py
           python engine/tools/release_calendar.py --emit engine/report-audits/release-calendar.json
@@ -207,7 +210,7 @@ jobs:
             由定时维护工作流自动生成（结构补全 / 归档 / 索引 / 汇总页 / 发布日历 / 发布指纹 / 性能基线）。
             合并方式：必需检查通过后自动合并（合并队列）。
           commit-message: "chore: 定时维护（结构/校验/归档/索引/性能）"
-          add-paths: "automation-status.json index.html reader.html INDEX.md perf-status.json engine/report-audits/release-calendar.json engine/report-audits/compliance-audit.md engine/audit/records/publish_fingerprints.json engine/audit/records/audit_registry.json"
+          add-paths: "automation-status.json index.html reader.html INDEX.md perf-status.json engine/report-audits engine/audit/records/publish_fingerprints.json engine/audit/records/audit_registry.json"
           token: ${{ secrets.CI_PR_TOKEN }}
 
       - name: 提交失败状态（仅失败时，开 PR 记录，不自动合并）

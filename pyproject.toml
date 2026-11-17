@@ -1,0 +1,16 @@
+# 静态检查配置（ruff / mypy）。
+# 供 engine/tools/static_check.py 复用，并纳入统一门禁 optimization_gate.py（默认 [W]）。
+# 精确依赖版本见 requirements.txt；升级须同步核验。
+
+[tool.ruff]
+target-version = "py310"
+line-length = 120
+
+[tool.ruff.lint]
+# 高信号、低噪声规则集：语法 / 风格错误、未用导入、导入排序。
+select = ["E", "F", "I"]
+ignore = ["E501"]
+
+[tool.mypy]
+ignore_missing_imports = true
+warn_unused_ignores = false

@@ -128,6 +128,14 @@ class TestOptimizationGateReuse(unittest.TestCase):
                            cwd=ROOT, capture_output=True, text=True)
         self.assertEqual(r.returncode, 1)
 
+    def test_spec_layering_declared(self):
+        """Phase 3.3：AGENTS.md 只留硬性约束 + 指针，遵循「新增即删旧」。"""
+        agents = (ROOT / "AGENTS.md").read_text(encoding="utf-8")
+        self.assertIn("规范分层", agents)
+        self.assertIn("新增即删旧", agents)
+        # 详细清单下沉到专用规范：AGENTS.md 不再复述完整 23 项门禁清单。
+        self.assertNotIn("validate、validate_layout、lint、compliance", agents)
+
     def test_task_loop_declared(self):
         """Phase 1.3：任务级闭环硬性约束与 N0.5 映射已声明。"""
         agents = (ROOT / "AGENTS.md").read_text(encoding="utf-8")

@@ -50,8 +50,8 @@ class TestPipelineSystemDoc(unittest.TestCase):
     def test_gate_count_matches_code(self):
         mod = _load_gate_module()
         names = [c[0] for c in mod.CHECKS]
-        self.assertEqual(len(names), 21, "门禁清单数量变化须同步体系文档")
-        self.assertIn("21 项", self.text)
+        self.assertEqual(len(names), 23, "门禁清单数量变化须同步体系文档")
+        self.assertIn("23 项", self.text)
         for name in names:
             self.assertIn(name, self.text, f"文档门禁清单缺 {name}")
 
