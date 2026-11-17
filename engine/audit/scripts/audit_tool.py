@@ -122,6 +122,65 @@ def stale_paths(reports: dict) -> list[str]:
     return sorted(rel for rel in reports if not (ROOT / rel).exists())
 
 
+# ---------------------------------------------------------------- 证据索引
+
+def _rel_or_empty(path: Path) -> str:
+    return str(path.relative_to(ROOT)).replace("\\", "/") if path.exists() else ""
+
+
+def build_evidence(rel: str, entry: dict | None = None) -> dict:
+    """汇总单份报告的完成前证据索引（P-02 / 吸收项 ③）。
+
+    关联四类证据：任务计划工件（plan/tasks/risks）、统一门禁入口、审计记录（reviews）、
+    登记状态。只做**指针汇聚**，不重算校验结论（校验仍由 optimization_gate / audit_tool 承载）。
+    """
+    entry = entry or {}
+    plans: list[dict] = []
+    tasks_root = RECORDS / "tasks"
+    bl = entry.get("business_line", "")
+    if tasks_root.is_dir():
+        for d in sorted(tasks_root.iterdir()):
+            if not d.is_dir():
+                continue
+            plan_fp = d / "plan.json"
+            tasks_fp = d / "tasks.json"
+            risks_fp = d / "risks.json"
+            if not plan_fp.exists():
+                continue
+            try:
+                plan = json.loads(plan_fp.read_text(encoding="utf-8"))
+                tasks = json.loads(tasks_fp.read_text(encoding="utf-8")) if tasks_fp.exists() else []
+                risks = json.loads(risks_fp.read_text(encoding="utf-8")) if risks_fp.exists() else []
+            except (OSError, json.JSONDecodeError):
+                continue
+            plan_blob = json.dumps([plan, tasks], ensure_ascii=False)
+            matched = rel in json.dumps([plan, tasks, risks], ensure_ascii=False) \
+                or (bool(bl) and bl in plan_blob)
+            if matched:
+                plans.append({
+                    "slug": d.name,
+                    "plan": _rel_or_empty(plan_fp),
+                    "tasks": _rel_or_empty(tasks_fp),
+                    "risks": _rel_or_empty(risks_fp),
+                    "task_count": len(tasks),
+                    "risk_count": len(risks),
+                })
+    review = _review_file(rel)
+    return {
+        "report": rel,
+        "business_line": entry.get("business_line", ""),
+        "plans": plans,
+        "gate": {"entry": "engine/tools/optimization_gate.py", "probe": True},
+        "audit": {
+            "review": _rel_or_empty(review),
+            "status": entry.get("status", ""),
+            "stages": entry.get("stages", {}),
+            "mark_level": entry.get("mark_level", "none"),
+            "audit_id": entry.get("audit_id", ""),
+        },
+    }
+
+
 def cmd_init(_args) -> int:
     reg = load_registry()
     reports = reg.setdefault("reports", {})
@@ -140,6 +199,7 @@ def cmd_init(_args) -> int:
         # 兼容旧登记：已注入标识但无 mark_level 的，视为 full
         if rec.get("mark") and not rec.get("mark_level"):
             rec["mark_level"] = "full"
+        rec["evidence"] = build_evidence(r["path"], rec)
         reports[r["path"]] = rec
     save_registry(reg)
     print(f"[init] 登记 {len(reports)} 份报告 → {REGISTRY.relative_to(ROOT)}")
@@ -462,6 +522,27 @@ def _next_audit_id(reg: dict) -> str:
     return f"AUD-{today}-{n + 1:03d}"
 
 
+def cmd_index(_args) -> int:
+    """刷新登记册 evidence 字段（吸收项 ③）。"""
+    reg = load_registry()
+    for rel, rec in reg.get("reports", {}).items():
+        rec["evidence"] = build_evidence(rel, rec)
+    save_registry(reg)
+    print(f"[index] 已刷新 {len(reg.get('reports', {}))} 条登记的证据索引")
+    return 0
+
+
+def cmd_evidence(args) -> int:
+    """打印单份报告的证据索引 JSON（实时计算）。"""
+    path = _resolve(args.report)
+    if path is None:
+        return 2
+    rel = str(path.relative_to(ROOT)).replace("\\", "/")
+    entry = load_registry().get("reports", {}).get(rel, {})
+    print(json.dumps(build_evidence(rel, entry), ensure_ascii=False, indent=2))
+    return 0
+
+
 def cmd_prune(_args) -> int:
     """移除登记路径不存在的失效条目（P-01）。幂等：无失效条目时不写盘。"""
     reg = load_registry()
@@ -496,7 +577,8 @@ def cmd_status(args) -> int:
         level = e.get("mark_level") if e.get("mark") else "none"
         print(f"{rel:<62} {e.get('status','-'):<10} {done}/4       {mark_label.get(level, '-')}")
     stale = stale_paths(reg)
-    print(f"\n登记 {len(reg)} 条；失效条目（stale）：{len(stale)}")
+    with_ev = sum(1 for e in reg.values() if e.get("evidence"))
+    print(f"\n登记 {len(reg)} 条；失效条目（stale）：{len(stale)}；含证据索引：{with_ev}")
     for rel in stale:
         print(f"  [STALE] {rel}（登记路径不存在）")
     return 2 if stale else 0
@@ -745,6 +827,9 @@ def main() -> int:
     sub.add_parser("inventory")
     sub.add_parser("init")
     sub.add_parser("prune", help="移除登记路径不存在的失效条目（stale）")
+    sub.add_parser("index", help="刷新登记册 evidence 字段（证据索引）")
+    p = sub.add_parser("evidence", help="打印单份报告的证据索引 JSON")
+    p.add_argument("report")
     p = sub.add_parser("structure"); p.add_argument("report")
     p = sub.add_parser("verify"); p.add_argument("report")
     p = sub.add_parser("review")
@@ -762,6 +847,7 @@ def main() -> int:
     args = ap.parse_args()
     return {
         "inventory": cmd_inventory, "init": cmd_init, "prune": cmd_prune,
+        "index": cmd_index, "evidence": cmd_evidence,
         "structure": cmd_structure, "verify": cmd_verify,
         "review": cmd_review, "mark": cmd_mark, "unmark": cmd_unmark, "status": cmd_status,
         "sample": cmd_sample, "accept": cmd_accept, "run": cmd_run,

@@ -34,6 +34,13 @@
       "session_short": "cd95c5fa",
       "slug": "phase1-task-loop",
       "task": "phase1-task-loop"
+    },
+    "task/phase2-evidence-index-cd95c5fa": {
+      "note": "source=env:CATPAW_CONVERSATION_ID",
+      "session": "cd95c5fad1b94ba18de3bbc3b62eea99",
+      "session_short": "cd95c5fa",
+      "slug": "phase2-evidence-index",
+      "task": "phase2-evidence-index"
     }
   },
   "schema": 1,

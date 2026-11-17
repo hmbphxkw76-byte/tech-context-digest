@@ -250,6 +250,7 @@ flowchart LR
 
 - **标识三态**：`none` / `pre`（机器终审过、L3 未完成，灰）/ `full`（navy）。
 - **宽限期**：`L3_GRACE_DAYS=14`；宽限内缺语义终审只告警（退出码 2），超期或 `machine_final` 失败才 fail-fast（退出码 1）。
+- **L3 SLA**：语义终审由 Agent 定期执行，**每两周覆盖全部有效正式报告**；与 14 天宽限期一致，超期未审由维护流水线告警。
 - **P0-2**：语义环节以 Agent 记录为权威，ci-bot 不得覆盖。
 - **留痕**：`records/reviews/<slug>.json` 只追加；`records/audit_registry.json` 状态机 `draft → in-review → audited / rejected`。
 
