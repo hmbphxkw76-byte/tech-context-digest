@@ -11,13 +11,13 @@ import shutil
 import sys
 import tempfile
 import unittest
-from datetime import datetime, timezone
+from datetime import date, datetime, timezone
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "tools"))
 
 import _common  # noqa: E402
-from archive_reports import select_archives  # noqa: E402
+from archive_reports import rotate_audit_docs, select_archives, select_audit_docs  # noqa: E402
 from automation_status import days_since_latest  # noqa: E402
 from build_hub import build_outputs, collect_topics, normalize_for_check  # noqa: E402
 from compliance_check import check_report, cycle_rule, detect_type, load_rules  # noqa: E402
@@ -193,6 +193,36 @@ class TestSelectArchives(unittest.TestCase):
         to_archive = select_archives(items, {"monthly": 12})
         # 13 期保留最新 12 期，归档最早 1 期（排序为 period 降序）
         self.assertEqual([p.name for p in to_archive], ["2025-01_monthly.html"])
+
+
+class TestAuditDocRotation(unittest.TestCase):
+    """审计文档轮转（Phase 3.2）：根只保留最近 12 个月，无日期账本型不轮转。"""
+
+    def _mk(self, tmp, names):
+        for n in names:
+            (Path(tmp) / n).write_text("# x\n", encoding="utf-8")
+
+    def test_select_old_and_keep_recent(self):
+        with tempfile.TemporaryDirectory() as d:
+            self._mk(d, ["a-2025-01-01.md", "b-2026-11-17.md", "coverage-matrix.md"])
+            out = select_audit_docs(Path(d), keep_months=12, today=date(2026, 11, 17))
+            self.assertEqual([p.name for p in out], ["a-2025-01-01.md"])
+
+    def test_boundary_is_archived(self):
+        with tempfile.TemporaryDirectory() as d:
+            self._mk(d, ["c-2025-11-17.md"])
+            out = select_audit_docs(Path(d), keep_months=12, today=date(2026, 11, 17))
+            self.assertEqual([p.name for p in out], ["c-2025-11-17.md"])
+
+    def test_rotate_idempotent(self):
+        with tempfile.TemporaryDirectory() as d:
+            self._mk(d, ["old-2024-05-05.md", "new-2026-11-17.md"])
+            rc = rotate_audit_docs(Path(d), keep_months=12, today=date(2026, 11, 17))
+            self.assertEqual(rc, 0)
+            self.assertFalse((Path(d) / "old-2024-05-05.md").exists())
+            self.assertTrue((Path(d) / "archives" / "old-2024-05-05.md").exists())
+            rc2 = rotate_audit_docs(Path(d), keep_months=12, today=date(2026, 11, 17))
+            self.assertEqual(rc2, 0)
 
 
 class TestLintHtml(unittest.TestCase):

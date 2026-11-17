@@ -8,8 +8,10 @@
 """
 from __future__ import annotations
 
+import re
 import shutil
 import sys
+from datetime import date
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
@@ -18,6 +20,13 @@ from _common import detect_report, iter_business_dirs  # noqa: E402
 
 # 每类保留的最新期数（超出部分归档；周报频率高，滚动保留近 12 期）
 KEEP = {"monthly": 12, "quarterly": 8, "annual": 5, "baseline": 3, "weekly": 12}
+
+# 审计文档轮转（Phase 3.2）：`engine/report-audits/` 根只保留最近 12 个月，
+# 更早的移入 `archives/`；无日期后缀的账本型文档不轮转。
+AUDIT_DOCS = Path(__file__).resolve().parents[2] / "engine" / "report-audits"
+AUDIT_ARCHIVE = AUDIT_DOCS / "archives"
+AUDIT_KEEP_MONTHS = 12
+AUDIT_DATE_RE = re.compile(r"-(\d{4})-(\d{2})-(\d{2})\.md$")
 
 
 def select_archives(items, keep_map=None):
@@ -38,7 +47,56 @@ def select_archives(items, keep_map=None):
     return to_archive
 
 
+def select_audit_docs(root: Path | None = None, keep_months: int = AUDIT_KEEP_MONTHS,
+                      today: date | None = None) -> list[Path]:
+    """纯函数：返回应轮转到 `archives/` 的审计文档（早于最近 keep_months 个月）。
+
+    仅识别 `<slug>-YYYY-MM-DD.md` 命名；无日期后缀的账本型文档（如覆盖矩阵）不轮转。
+    `today` 显式传入以保证确定性（测试可重放）。
+    """
+    root = AUDIT_DOCS if root is None else root
+    today = today or date.today()
+    out: list[Path] = []
+    if not root.is_dir():
+        return out
+    for f in sorted(root.glob("*.md")):
+        m = AUDIT_DATE_RE.search(f.name)
+        if not m:
+            continue
+        try:
+            d = date(int(m.group(1)), int(m.group(2)), int(m.group(3)))
+        except ValueError:
+            continue
+        months = (today.year - d.year) * 12 + (today.month - d.month)
+        if months >= keep_months:
+            out.append(f)
+    return out
+
+
+def rotate_audit_docs(root: Path | None = None, keep_months: int = AUDIT_KEEP_MONTHS,
+                      today: date | None = None) -> int:
+    """轮转审计文档：超出保留期的移入 `archives/`。幂等。退出码 0/1。"""
+    root = AUDIT_DOCS if root is None else root
+    files = select_audit_docs(root, keep_months, today)
+    if not files:
+        print(f"审计文档轮转：无超出保留期（最近 {keep_months} 个月）的文档，未移动")
+        return 0
+    archive = root / "archives"
+    archive.mkdir(parents=True, exist_ok=True)
+    for f in files:
+        try:
+            shutil.move(str(f), str(archive / f.name))
+            print(f"[ARCHIVED] engine/report-audits/{f.name} -> archives/")
+        except OSError as e:
+            print(f"[ERROR] 轮转失败 {f.name}: {e}")
+            return 1
+    print(f"审计文档轮转：移动 {len(files)} 份文档")
+    return 0
+
+
 def main() -> int:
+    if "--audit-docs" in sys.argv[1:]:
+        return rotate_audit_docs()
     moved = 0
     for b in iter_business_dirs():
         reports = b.path / "reports"

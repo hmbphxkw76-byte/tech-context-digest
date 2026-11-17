@@ -1,0 +1,34 @@
+[
+  {
+    "acceptance": "",
+    "depends_on": [],
+    "id": "T-01",
+    "phase": "",
+    "status": "pending",
+    "title": "ruff / mypy 纳入统一门禁（static_check 适配 + pyproject + requirements）"
+  },
+  {
+    "acceptance": "",
+    "depends_on": [],
+    "id": "T-02",
+    "phase": "",
+    "status": "pending",
+    "title": "report-audits 轮转归档（archive_reports --audit-docs，维护流水线执行）"
+  },
+  {
+    "acceptance": "",
+    "depends_on": [],
+    "id": "T-03",
+    "phase": "",
+    "status": "pending",
+    "title": "规范上位-下位收敛（AGENTS.md 精简 + 新增即删旧）"
+  },
+  {
+    "acceptance": "",
+    "depends_on": [],
+    "id": "T-04",
+    "phase": "",
+    "status": "pending",
+    "title": "门禁计数与文档同步（21→23）+ 单测全量回归"
+  }
+]

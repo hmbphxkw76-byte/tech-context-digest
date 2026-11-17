@@ -4,3 +4,6 @@
 openpyxl==3.1.5
 markdown==3.11.3
 PyYAML==6.0.3
+# 静态检查（Phase 3.1，经 optimization_gate 的 static_check.py 复用）
+ruff==0.17.5
+mypy==2.4.1

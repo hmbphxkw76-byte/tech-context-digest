@@ -41,6 +41,13 @@
       "session_short": "cd95c5fa",
       "slug": "phase2-evidence-index",
       "task": "phase2-evidence-index"
+    },
+    "task/phase3-static-linting-cd95c5fa": {
+      "note": "source=env:CATPAW_CONVERSATION_ID",
+      "session": "cd95c5fad1b94ba18de3bbc3b62eea99",
+      "session_short": "cd95c5fa",
+      "slug": "phase3-static-linting",
+      "task": "phase3-static-linting"
     }
   },
   "schema": 1,

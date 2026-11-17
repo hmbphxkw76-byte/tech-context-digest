@@ -12,6 +12,10 @@ Five canonical triage roles, label strings equal to role names. See `engine/docs
 
 Single-context: one `GLOSSARY.md` + `engine/docs/adr/` at the repo root. See `engine/docs/agents/domain.md`.
 
+## 规范分层（硬性约束，适用于任何 Agent 平台）
+
+`AGENTS.md` 只保留**硬性约束 + 指针**；实现细节、清单、阈值与操作手册下沉到专用规范（`engine/docs/`、`engine/templates/`、`engine/audit/`）。新增规范内容遵循「新增即删旧」：每新增一层表述，同步删除等量旧表述，避免复述漂移。
+
 ## 仓库三层架构（tech-context-digest）
 
 仓库名 `tech-context-digest`，按三层组织，**不得跨层存放**：
@@ -44,36 +48,34 @@ Single-context: one `GLOSSARY.md` + `engine/docs/adr/` at the repo root. See `en
 
 所有 HTML 页面（hub / 报告 / 新主题）必须遵循 **`engine/docs/page-build-spec.md`（PAGE-BUILD-SPEC v1.0）** 与 **`engine/docs/page-build-governance.md`**：
 
-- **设计系统**：只用 canonical 令牌（`--navy:#16324f` 等，事实源 `engine/tools/report_style.py` 与 `build_hub.py`）；禁止私建主色 / 私有样式分支（漂移色 `#1f3d63` / `#123a5c` / `#1a1a2e` / `#16213e` 直接判错）。
-- **结构**：报告统一 `header.report-head`/`.hero` + `nav.report-nav`（`.nav-url` + `.nav-tabs`）+ `main.wrap` + `h2.sec`；hub 沿用既有骨架；新主题不得另创同义类名。
-- **可访问性 / 兼容性**：`lang`/`viewport`/`.skip-link`/焦点环/`prefers-reduced-motion`/`@media print` 为强制项。
-- **门禁**：`python engine/tools/page_build_check.py` 必须零 `[E]`；新增组件先并入 `report_style.py`；生成物必须确定性（无时间戳）。
+- **设计系统**：只用 canonical 令牌（事实源 `engine/tools/report_style.py` 与 `build_hub.py`）；漂移色直接判错。
+- **结构**：报告统一 `header.report-head`/`.hero` + `nav.report-nav` + `main.wrap` + `h2.sec`；hub 沿用既有骨架；新主题不得另创同义类名。
+- **可访问性 / 兼容性 / 性能 / 打印**：`lang`/`viewport`/`.skip-link`/焦点环/`prefers-reduced-motion`/`@media print` 为强制项；预算与断点以下位规范为准。
+- **门禁**：`python engine/tools/page_build_check.py` 必须零 `[E]`；新增组件先并入 `report_style.py`；生成物确定性（无时间戳）。
 - **CI**：ci.yml / html-sync / scheduled-maintenance / content-update 均含该门禁，[E] 阻断合并与提交。
 
 ## 信息分层与决策交付（硬性约束，适用于任何 Agent 平台）
 
 所有报告必须遵循 **`engine/templates/information-layering-spec.md`（INFORMATION-LAYERING-SPEC v1.0）** 与 **`engine/templates/decision-delivery-spec.md`（DECISION-DELIVERY-SPEC v1.0）**：
 
-- **分层交付**：决策摘要（≤1 屏，仅结论）/ 证据层（逻辑）/ 原始层（台账与来源）；共享 boilerplate（来源分级规则、口径声明模板、研究局限模板）上移至通用基座第十节，报告正文只写专属口径与前提假设。
-- **信息等级**：关键信息标注 `已核验 / 部分核验 / 推断 / 假设`；决策摘要仅允许已核验 + 部分核验；market-sizing 数值必须标「假设乘积」并区间化。
+- **分层交付**：决策摘要（≤1 屏，仅结论）/ 证据层（逻辑）/ 原始层（台账与来源）；共享 boilerplate 上移至通用基座第十节。
+- **信息等级**：关键信息标注 `已核验 / 部分核验 / 推断 / 假设`；决策摘要仅允许已核验 + 部分核验；market-sizing 数值标「假设乘积」并区间化。
 - **新增信息模块**：报告开头输出「本期新增 X / 修正 Y / 无变化 Z / 假设核验进度 k/n」。
-- **单一事实源 + 指针**：事实唯一定义于台账 / 登记册 / 事实卡片（`engine/fact_cards/`，`[FC-…]` 引用），正文用「指标编号 + 指针」，删除同义复述。
-- **决策卡与行动协议**：核心判断输出决策卡（结论 / 证据强度 / 触发条件 / 反向证据 / 信息充分度）；行动项按「触发条件 + 阈值 + 责任角色 + 时限 + 验证指标」并分三档优先级（立即行动 / 持续观察 / 仅记录存档）。
-- **阈值校准**：首次中期回测 2027-06；校准完成前信号灯标注「预校准（ex-ante）」。
-- **版本治理**：核验 / 收敛型运行不升级版本号，标注「本期读数时点」；仅核心事实修正才升级版本号。
-- **门禁**：`info_density_check.py` / `fact_card_check.py` / `decision_hub_check.py` / `blind_spot_check.py` 纳入 `optimization_gate.py` 统一入口；新报告缺项 = [E] 阻断，历史报告 = [W]。
-- **阶段复用（硬性）**：四门禁与全部 P0/P1/P2 确定性检查必须由 `optimization_gate.py` 统一承载（P1-2 去重）；`ci.yml` / `html-sync.yml` / `content-update.yml` / `scheduled-maintenance.yml` 一律只调用该入口（`--probe`），不得分项重复扫描；阶段 × 复用映射见 `engine/docs/report-process-reuse.md`；一致性由 `engine/tests/test_process_gates.py` 强制（缺一阶段即失败）。
+- **单一事实源 + 指针**：事实唯一定义于台账 / 登记册 / 事实卡片（`engine/fact_cards/`，`[FC-…]`），正文用「指标编号 + 指针」。
+- **决策卡与行动协议**：核心判断输出决策卡（结论 / 证据强度 / 触发条件 / 反向证据 / 信息充分度）；行动项五要素 + 三档优先级。
+- **阈值校准 / 版本治理**：首次中期回测 2027-06；校准前标「预校准（ex-ante）」；核验型运行不升级版本号。
+- **门禁**：`info_density_check.py` / `fact_card_check.py` / `decision_hub_check.py` / `blind_spot_check.py` 纳入 `optimization_gate.py` 统一入口；新报告缺项 = [E]，历史 = [W]。
 
 ## 优化流程门禁（硬性约束，适用于任何 Agent 平台）
 
-P0/P1/P2 优化清单（邻近判定 / 机构分级主数据 / 指标字典 / gate-period / 分类口径 / R5 token 化 / URL 探测 / 发布日历 / 去重血缘 / 类型双校验 / 全量准确性兜底 / 覆盖率 / 发布指纹 / 分类边界）的全部确定性检查收敛为**单一入口** `engine/tools/optimization_gate.py`，后续所有阶段必须复用，不得另写一套：
+P0/P1/P2 优化清单的全部确定性检查收敛为**单一入口** `engine/tools/optimization_gate.py`（23 项），后续所有阶段必须复用，不得另写一套：
 
 - **本地提交**：`python engine/tools/repo_sync.py run --message ... --paths ... --gate`（统一门禁 [E] 直接拒绝提交）。
-- **CI / 自动提交**：`ci.yml` / `html-sync.yml` / `content-update.yml` / `scheduled-maintenance.yml` 均含「优化流程一致性门禁（统一入口）」步骤。
-- **审计**：`audit.yml` 四环节 fail-fast（[E] 即阻断，不再告警后放行）；`audit_tool.py verify` 内含 `source_check`。
-- **一致性校验**：`engine/tests/test_process_gates.py::TestOptimizationGateReuse` 强制各阶段复用；阶段 × 复用映射见 `engine/docs/report-process-reuse.md` 第三节。
-- **全链路体系**：信息录入 → 校验 → 更新 → 生成 → 发布的全链路节点、五道防线、两级 gate-period 与闭环联动见 `engine/docs/report-pipeline-system.md`（REPORT-PIPELINE-SYSTEM v1.2，门禁左移：N0–N5 各阶段就地门禁 G0–G5，N6 统一门禁 + 审计兜底）；文档与门禁清单数量由 `engine/tests/test_pipeline_system_doc.py` 锁定。
-- **端到端编排（硬性约束）**：流程图落地为 `engine/tools/pipeline_manifest.json`（声明式 N0–N8 / G0–G8 图 + L1/L2 闭环）+ `engine/tools/pipeline_runner.py`（节点→门禁→路由/退回，复用统一门禁单一入口）+ `engine/tools/pipeline_audit.py`（追加式留痕）；方案与任务清单见 `engine/docs/report-pipeline-implementation-plan.md`；一致性由 `engine/tests/test_pipeline_runner.py` 锁定（9 节点 / 9 门禁 / G6→N4 / N8→N1）。
+- **CI / 自动提交**：`ci.yml` / `html-sync.yml` / `content-update.yml` / `scheduled-maintenance.yml` 一律只调用该入口（`--probe`），不得分项重复扫描。
+- **审计**：`audit.yml` 四环节 fail-fast；`audit_tool.py verify` 内含 `source_check`。
+- **一致性校验**：`engine/tests/test_process_gates.py::TestOptimizationGateReuse` 强制各阶段复用；阶段 × 复用映射见 `engine/docs/report-process-reuse.md`。
+- **全链路体系**：N0–N8 / G0–G8 / 两级 gate-period / 闭环联动见 `engine/docs/report-pipeline-system.md`；文档与门禁清单数量由 `engine/tests/test_pipeline_system_doc.py` 锁定。
+- **端到端编排**：`engine/tools/pipeline_manifest.json` + `engine/tools/pipeline_runner.py` + `engine/tools/pipeline_audit.py`；一致性由 `engine/tests/test_pipeline_runner.py` 锁定。
 
 ## 任务级闭环（适配 mainline）（硬性约束，适用于任何 Agent 平台）
 
@@ -96,19 +98,17 @@ P0/P1/P2 优化清单（邻近判定 / 机构分级主数据 / 指标字典 / ga
 
 多个 Agent 会话与多个 CI 工作流共用同一 `main`，必须遵守 **`engine/docs/multi-session-git-protocol.md`（MULTI-SESSION-GIT-PROTOCOL v1.5）** 与 **`engine/docs/branch-naming-and-lifecycle.md`（BRANCH-NAMING-SPEC v1.0）**：
 
-- **禁止直推 `main`**：任务一律在 `task/<slug>-<session8>` 分支提交（`<session8>` = 会话标识前 8 位十六进制，见命名规范），经 PR 合并；直推 `main` 会与其他会话/CI 竞争并触发 non-fast-forward。
-- **统一网关**：提交/推送使用 `python engine/tools/repo_sync.py`（`run` / `push` / `pr` / `branch` / `branch-rename` / `branch-audit`），它提供共享检出锁、推送前 `fetch --rebase`、直推 `main` 守卫与分支命名校验。
-- **分支命名**：受管分支 `task/*` 必须内嵌会话标识（`task/<slug>-<session8>`）；建分支用 `repo_sync.py branch <slug>` 自动追加，不得手打；`main` 与 `ci/*` 豁免。
-- **钩子**：本克隆启用 `core.hooksPath=.githooks`（安装：`repo_sync.py hook-install`）；pre-push 在直推 `main`、GitLab 远端、受管分支命名不符时阻断（v1.2 起按 refspec 判定：即使站在 `task/*` 显式 `git push origin main` 也阻断），pre-commit 在违规受管分支上阻断提交。
-- **CI 也走 PR**：`audit.yml` / `html-sync.yml` / `content-update.yml` / `scheduled-maintenance.yml` 不再直推 `main`，统一经 `.github/actions/submit-pr` 开 PR + 自动合并；`main` 启用分支保护（必需检查 + strict）。
+- **禁止直推 `main`**：任务一律在 `task/<slug>-<session8>` 分支提交，经 PR 合并。
+- **统一网关**：提交/推送使用 `python engine/tools/repo_sync.py`（run / push / pr / branch / branch-rename / branch-audit）。
+- **分支命名**：受管分支 `task/*` 必须内嵌会话标识；建分支用 `repo_sync.py branch <slug>`；`main` 与 `ci/*` 豁免。
+- **钩子**：`core.hooksPath=.githooks`（安装：`repo_sync.py hook-install`）；pre-push 按 refspec 判定，pre-commit 在违规受管分支上阻断。
+- **CI 也走 PR**：audit.yml / html-sync.yml / content-update.yml / scheduled-maintenance.yml 经 `.github/actions/submit-pr` 开 PR + 自动合并；`main` 启用分支保护。
 
 ## 工作区清理（硬性约束，适用于任何 Agent 平台）
 
-**单一入口** `engine/tools/workspace_cleanup.py`（复合动作 `.github/actions/workspace-cleanup`）负责缓存 / 临时 / 构建产物清理，各阶段一律复用，不得另写一套：
+**单一入口** `engine/tools/workspace_cleanup.py`（复合动作 `.github/actions/workspace-cleanup`）负责缓存 / 临时 / 构建产物清理，各阶段一律复用：
 
-- **只删未被 git 跟踪的路径**：跟踪集合取自 `git ls-files`；被跟踪文件 / 目录（含其内部）一律跳过，绝不删版本控制内容；默认跳过 `.git`。删除操作前必须确认目标未跟踪。
-- **覆盖范围**：`__pycache__/`、`*.pyc/pyo/pyd`、`.pytest_cache/`、`.ruff_cache/`、`.mypy_cache/`、`.coverage`、`htmlcov/`、`*.egg-info/`、`.eggs/`、`build/`、`dist/`、`.automation-tmp/`、`.screenshots/`、`.trae-html-share-packages/`、`*.html.tmp`、`*.tmp`（`--deep` 才含虚拟环境）。
-- **CI 全流程自动触发**：`ci.yml` / `html-sync.yml` / `content-update.yml` / `scheduled-maintenance.yml` / `audit.yml` 每个作业在**阶段开始前（预清理）**与**阶段结束后（收尾清理，`if: always()`）**调用；`submit-pr` 在 `git add` 前清理；`pre-push` 钩子在推送网关前清理。新增工作流 / 作业须沿用同一复合动作，不得省略。
-- **确定性**：输出排序、无时间戳，重复执行结果一致（幂等）；清理失败逐项容错，不掩盖。
-- **审计流水轮转**：`pipeline_audit.py --rotate`（超量归档 + 只保留最近 5 份）由 `scheduled-maintenance` 每周执行，防止 `pipeline_runs.jsonl` 无限增长。
-- **门禁归属**：清理属工作区维护，**不得**并入 `optimization_gate` 门禁清单（其 21 项数量由 `engine/tests/test_pipeline_system_doc.py` 锁定）。
+- **只删未被 git 跟踪的路径**：跟踪集合取自 `git ls-files`；删除前必须确认目标未跟踪。
+- **覆盖范围 / 豁免**：见工具 `--help` 与 `engine/docs/structure-and-naming-spec.md`；生成物豁免路径不清理。
+- **CI 全流程自动触发**：各工作流预清理 + 收尾清理（`if: always()`）；`submit-pr` 在 `git add` 前清理。
+- **确定性 / 门禁归属**：输出排序、无时间戳、幂等；不得并入 `optimization_gate` 门禁清单。

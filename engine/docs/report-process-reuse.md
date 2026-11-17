@@ -47,7 +47,7 @@ P0/P1/P2 优化清单的全部确定性检查收敛为单一入口 **`engine/too
 | 定时维护 | `scheduled-maintenance.yml` | 同上 | 存在该步骤 |
 | 审计 | `audit.yml`（fail-fast）+ `audit_tool verify`（内含 source_check） | [E] 即阻断，不再告警后放行 | `::error::审计四环节未通过` |
 
-- 门禁清单（21 项）：validate / validate_layout / lint / compliance / classify / region_topics / links / hub / page_build / source_check / metric_registry / metric_audit / release_calendar / publish_fingerprint / semantic_diff / perf_monitor / research_kernel / info_density / fact_card / decision_hub / blind_spot（以 `optimization_gate.py --list` 为准）。
+- 门禁清单（23 项）：validate / validate_layout / lint / compliance / classify / region_topics / links / hub / page_build / source_check / metric_registry / metric_audit / release_calendar / publish_fingerprint / semantic_diff / perf_monitor / research_kernel / info_density / fact_card / decision_hub / blind_spot / ruff / mypy（以 `optimization_gate.py --list` 为准）。
 - 两级 gate-period：内容四门禁 + 研究内核用 `--gate-period`（默认 2026-12）；来源登记 `source_check` 用 `--source-gate-period`（默认 2027-01），见 [report-pipeline-system.md](./report-pipeline-system.md) §5.2。
 - 退出码：0 通过；1 存在错误项（阻断）；2 仅警告（不阻断）。
 - 一致性由 `engine/tests/test_process_gates.py::TestOptimizationGateReuse` 强制：任一阶段未复用即失败。
