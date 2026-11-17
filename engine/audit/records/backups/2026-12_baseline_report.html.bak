@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>跨研究线决策仪表盘 · 2026-12 基线</title>
+<style>
+:root{
+  --radius-sm:8px; --radius:12px; --shadow:0 1px 3px rgba(20,40,70,.06); --shadow-md:0 4px 14px rgba(20,40,70,.09);
+  --font-sans:"Microsoft YaHei","PingFang SC","Segoe UI",Arial,sans-serif;
+  --font-mono:"SFMono-Regular",Consolas,"Liberation Mono",monospace;
+  --focus-ring:0 0 0 3px rgba(63,111,176,.35);
+  --bg:#f4f6f9; --card:#ffffff; --ink:#15202b; --ink2:#465667; --ink3:#657180;
+  --line:#e1e7ee; --line2:#eef2f6;
+  --navy:#16324f; --navy2:#2f5597; --blue:#3f6fb0; --blue-l:#eaf1fa;
+  --red:#a83224; --red-d:#822116; --red-l:#fbece8;
+  --green:#1c7444; --green-l:#eaf5ef; --green-line:#d3ead9;
+  --amber:#956612; --amber-l:#fdf4e2; --amber-line:#f0e3c2;
+  --gray:#646f7b; --gray-l:#eff2f4; --gray-line:#e6eaee;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important}}
+body{font-family:var(--font-sans);background:var(--bg);color:var(--ink);line-height:1.76;font-size:14.5px}
+a{color:var(--navy2);text-decoration:none}
+a:hover{text-decoration:underline}
+a:focus-visible,button:focus-visible{outline:none;box-shadow:var(--focus-ring)}
+.wrap{max-width:1160px;margin:0 auto;padding:0 24px 64px}
+.skip-link{position:absolute;left:12px;top:-48px;z-index:100;background:var(--navy);color:#fff;padding:8px 16px;border-radius:0 0 8px 8px;font-size:12.5px}
+.skip-link:focus{top:0;color:#fff;text-decoration:none}
+header.report-head{background:linear-gradient(128deg,#0f2338 0%,var(--navy) 52%,var(--navy2) 100%);color:#fff;padding:40px 0 30px}
+header.report-head .wrap{padding:0 24px}
+header.report-head h1{margin:0 0 8px;font-size:27px;font-weight:700;letter-spacing:.4px;line-height:1.35}
+header .sub{font-size:14px;color:rgba(255,255,255,.82);margin:2px 0}
+header .meta{font-size:12.3px;color:rgba(255,255,255,.75);margin-top:14px;line-height:1.9}
+header .meta b{color:#fff}
+header .nav-url{font-size:11.5px;color:rgba(255,255,255,.78);margin-top:10px;word-break:break-all}
+nav.report-nav{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.96);border-bottom:1px solid var(--line);margin-bottom:26px}
+nav.report-nav .nav-tabs{max-width:1160px;margin:0 auto;padding:10px 24px;display:flex;flex-wrap:wrap;gap:6px}
+nav.report-nav .nav-tabs a{color:var(--navy);text-decoration:none;font-size:12.5px;padding:4px 10px;border-radius:14px;border:1px solid var(--line);background:#f5f8fb;white-space:nowrap}
+nav.report-nav .nav-tabs a:hover{background:var(--blue-l);text-decoration:none}
+h2.sec{font-size:19px;color:var(--navy);margin:38px 0 14px;padding-bottom:8px;border-bottom:2px solid var(--navy);scroll-margin-top:100px;font-weight:700}
+h3{font-size:15.5px;color:var(--navy);margin:22px 0 8px;font-weight:700}
+p{margin:8px 0}
+ul,ol{margin:8px 0;padding-left:22px}
+li{margin:5px 0}
+b,strong{font-weight:650;color:var(--ink)}
+.lead{color:var(--ink2);font-size:13.8px;margin:6px 0 14px}
+.muted{color:var(--ink3)}
+.small{font-size:11.7px;color:var(--ink3)}
+table{width:100%;border-collapse:collapse;font-size:13px;background:var(--card);margin:12px 0}
+th,td{border:1px solid var(--line);padding:8px 10px;text-align:left;vertical-align:top;line-height:1.62}
+thead th{background:var(--navy);color:#fff;font-weight:600;white-space:nowrap}
+tbody th{background:var(--blue-l);color:var(--navy);font-weight:600}
+tbody tr:nth-child(even) td{background:#fbfcfe}
+table.fixed{table-layout:fixed}
+.tblwrap{overflow-x:auto;border-radius:var(--radius-sm);border:1px solid var(--line);margin:12px 0}
+.tblwrap table{margin:0;border:0}
+.src{font-size:11.1px;color:var(--ink3);word-break:break-word;line-height:1.58}
+.src a{color:#5b7bb4;text-decoration:none}
+.card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:16px 18px;margin:14px 0;box-shadow:var(--shadow)}
+.note{background:var(--blue-l);border-left:4px solid var(--navy2);border-radius:0 8px 8px 0;padding:10px 14px;margin:12px 0;font-size:13px}
+.lvl{display:inline-block;font-size:11px;line-height:1.5;padding:1px 7px;border-radius:9px;border:1px solid transparent;white-space:nowrap;font-weight:600;vertical-align:1px}
+.lvl-verified{background:var(--green-l);color:var(--green);border-color:var(--green-line)}
+.lvl-partial{background:var(--amber-l);color:var(--amber);border-color:var(--amber-line)}
+.lvl-inferred{background:var(--blue-l);color:var(--navy2);border-color:#cdddf0}
+.lvl-assumption{background:var(--gray-l);color:var(--gray);border-color:var(--gray-line)}
+.delta-strip{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:14px 0}
+.delta-strip .d{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:12px 14px;box-shadow:var(--shadow)}
+.delta-strip .d .n{font-size:22px;font-weight:700;color:var(--navy);line-height:1.25}
+.delta-strip .d .l{font-size:11.6px;color:var(--ink3);margin-top:2px}
+.delta-strip .d.add .n{color:var(--green)}
+.delta-strip .d.fix .n{color:var(--amber)}
+.delta-strip .d.same .n{color:var(--ink3)}
+.delta-strip .d.hyp .n{color:var(--navy2)}
+.action-card{background:var(--card);border:1px solid var(--line);border-left:4px solid var(--navy2);border-radius:10px;padding:14px 16px;margin:12px 0;box-shadow:var(--shadow)}
+.action-card.immediate{border-left-color:var(--red)}
+.action-card.watch{border-left-color:var(--amber)}
+.action-card.archive{border-left-color:var(--gray)}
+.action-card .a-head{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:6px}
+.action-card .a-title{font-weight:700;color:var(--navy);font-size:14.5px}
+.action-card .a-meta{font-size:12.3px;color:var(--ink2);line-height:1.7}
+.action-card .a-meta b{color:var(--navy)}
+.prio{display:inline-block;font-size:11px;padding:1px 8px;border-radius:9px;font-weight:700}
+.prio.immediate{background:var(--red-l);color:var(--red)}
+.prio.watch{background:var(--amber-l);color:var(--amber)}
+.prio.archive{background:var(--gray-l);color:var(--gray)}
+.decision-card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:16px 18px;margin:14px 0;box-shadow:var(--shadow)}
+.decision-card .dc-head{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap;margin-bottom:8px}
+.decision-card .dc-title{font-weight:700;color:var(--navy);font-size:15px}
+.decision-card .dc-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px 18px;font-size:12.8px;line-height:1.7}
+.decision-card .dc-grid .k{color:var(--ink3);font-weight:600}
+.suff{display:inline-block;font-size:11px;padding:1px 8px;border-radius:9px;font-weight:700}
+.suff.ok{background:var(--green-l);color:var(--green)}
+.suff.need{background:var(--amber-l);color:var(--amber)}
+.ev-strong{color:var(--green);font-weight:700}
+.ev-mid{color:var(--amber);font-weight:700}
+.ev-weak{color:var(--red);font-weight:700}
+.slice{border:1px dashed var(--navy2);border-radius:10px;padding:12px 16px;margin:12px 0;background:var(--blue-l)}
+.slice .slice-head{font-weight:700;color:var(--navy);margin-bottom:4px}
+.fact-ref{font-family:var(--font-mono);font-size:11.5px;color:var(--navy2);background:var(--blue-l);border:1px solid #cdddf0;border-radius:5px;padding:0 5px;white-space:nowrap}
+@media (max-width:720px){
+  body{font-size:14px}
+  header.report-head h1{font-size:21px}
+  .delta-strip{grid-template-columns:repeat(2,1fr)}
+  .decision-card .dc-grid{grid-template-columns:1fr}
+  table{display:block;overflow-x:auto;white-space:nowrap}
+}
+@media print{
+  nav.report-nav,.skip-link{display:none}
+  .card,.decision-card,.action-card{box-shadow:none}
+  body{font-size:12px}
+}
+</style>
+</head>
+<body>
+<div class="audit-mark" data-audit-id="AUD-2026-11-16-001" data-mark-level="pre" style="background:#5b6b7c;color:#fff;font:600 13px/1.6 system-ui,-apple-system,'Segoe UI',sans-serif;padding:8px 16px;text-align:center;letter-spacing:.02em"><span class="audit-badge">预审通过（机器）</span><span class="audit-meta">语义复核待完成 · 2026-11-16 · 审查链 3/4 · AUD-2026-11-16-001</span></div>
+
+<a class="skip-link" href="#main-content">跳转到主要内容</a>
+<header class="report-head">
+  <div class="wrap">
+    <h1>跨研究线决策仪表盘</h1>
+    <p class="sub">2026-12 基线 · 决策卡 / 证据强度 / 触发条件 / 反向证据 / 信息充分度</p>
+    <p class="sub">收敛 · 暴露 · 触发 —— 跨研究线统一决策层</p>
+    <div class="meta">
+      <div><b>读数时点：</b>2026-11-15（本期读数时点；核验 / 收敛型运行不升级版本号）</div>
+      <div><b>报告版本：</b>v1.0（仅核心事实修正时升级）</div>
+      <div><b>决策卡台账：</b>data/processed/economy/global/decision-hub/decision_cards.json（6 张）｜ 场景切片：data/processed/economy/global/decision-hub/scenario_slices.md</div>
+      <div><b>阈值校准：</b>首次中期回测 2027-06；校准完成前信号灯一律标注「预校准（ex-ante）」</div>
+    </div>
+    <div class="nav-url">报告 URL：<code>https://github.com/hmbphxkw76-byte/tech-context-digest/blob/main/content/economy/global/decision-hub/reports/2026-12_baseline_report.html</code></div>
+  </div>
+</header>
+
+<nav class="report-nav" aria-label="报告导航">
+  <div class="nav-tabs">
+    <a href="#s1">1 决策摘要</a>
+    <a href="#s2">2 决策卡总表</a>
+    <a href="#s3">3 证据强度与反向证据</a>
+    <a href="#s4">4 触发条件与阈值距离</a>
+    <a href="#s5">5 信息充分度与缺失清单</a>
+    <a href="#s6">6 行动协议</a>
+    <a href="#s7">7 场景切片</a>
+    <a href="#s8">8 盲区与消号进度</a>
+    <a href="#s9">9 参考来源与读数时点</a>
+  </div>
+</nav>
+
+<main class="wrap" id="main-content">
+
+<h2 class="sec" id="s1">1 · 决策摘要</h2>
+<div class="card">
+  <p class="lead"><b>跨线 Top 结论（仅引用已核验事实 + 部分核验）：</b></p>
+  <ol>
+    <li><b>迪拜公寓市场</b>：高位钝化 → 供给延迟型再平衡，信号结构未翻转；融资成本逼近硬红线（K01 距 10.56bp）。<span class="lvl lvl-partial">部分核验</span></li>
+    <li><b>全球宏观</b>：过热—滞胀过渡带，主要央行集体转鹰、再通胀固化。<span class="lvl lvl-partial">部分核验</span></li>
+    <li><b>AI 网安就业</b>：卖方市场，AI 安全为结构性增量主线；人才供给是最紧约束。<span class="lvl lvl-partial">部分核验</span> <span class="fact-ref">FC-SEC-005</span></li>
+    <li><b>AI 网安行业</b>：主权 AI 基建 + 强制合规 + 威胁国家化三重驱动，托管安全为主交付形态。<span class="lvl lvl-inferred">推断</span> <span class="fact-ref">FC-IND-001</span></li>
+    <li><b>模型层集中度</b>：Anthropic + OpenAI 合计 86% 企业 LLM API 支出，向本地交付层传导。<span class="lvl lvl-partial">部分核验</span> <span class="fact-ref">FC-CI-001</span></li>
+  </ol>
+  <p class="small muted">信息充分度分布：可直接决策 2 项（就业、AI 安全攻击面）；需补充信息 4 项（投资、宏观、行业、竞争）。market-sizing 类数值均未作为确定点值进入本摘要。</p>
+</div>
+
+<div class="delta-strip">
+  <div class="d add"><div class="n">6</div><div class="l">本期新增（决策卡 6 张）</div></div>
+  <div class="d fix"><div class="n">0</div><div class="l">本期修正（无核心事实修正）</div></div>
+  <div class="d same"><div class="n">11</div><div class="l">无变化（既有报告结论维持）</div></div>
+  <div class="d hyp"><div class="n">0/15</div><div class="l">假设核验进度（分子=盲区台账 closed 数=0；分母=盲区总数 15，其中 open 12、in_progress 2）</div></div>
+</div>
+
+<h2 class="sec" id="s2">2 · 决策卡总表</h2>
+<div class="tblwrap">
+<table class="fixed">
+<thead>
+<tr><th style="width:16%">决策卡</th><th style="width:30%">结论</th><th style="width:9%">证据强度</th><th style="width:25%">信息充分度</th><th style="width:20%">缺失信息</th></tr>
+</thead>
+<tbody>
+<tr><td>DC-ECO-APT-01</td><td>高位钝化 → 供给延迟型再平衡；融资成本逼近硬红线</td><td><span class="ev-mid">中</span></td><td><span class="suff need">需补充 P0 四类</span></td><td>就业 / 收入 / 空置 / 竣工</td></tr>
+<tr><td>DC-ECO-TRD-01</td><td>全球过热—滞胀过渡带，央行集体转鹰</td><td><span class="ev-mid">中</span></td><td><span class="suff need">需补充 PMI/薪资/利差</span></td><td>PMI、薪资增速、期限利差</td></tr>
+<tr><td>DC-AI-SEC-01</td><td>AI 网安就业卖方市场，AI 安全结构性增量</td><td><span class="ev-strong">强</span></td><td><span class="suff ok">可直接决策</span></td><td>—</td></tr>
+<tr><td>DC-AI-IND-01</td><td>三重驱动，托管安全为主交付形态</td><td><span class="ev-mid">中</span></td><td><span class="suff need">需补充份额/价值链</span></td><td>CR3/CR5、价值链分布</td></tr>
+<tr><td>DC-AI-CI-01</td><td>模型层 86% 集中，向本地交付层传导</td><td><span class="ev-mid">中</span></td><td><span class="suff need">需补充选型/成本</span></td><td>模型选型分布、成本占比</td></tr>
+<tr><td>DC-AI-TRD-01</td><td>AI 安全攻击面扩张，红队与 Agent 安全为主线</td><td><span class="ev-strong">强</span></td><td><span class="suff ok">可直接决策</span></td><td>—</td></tr>
+</tbody>
+</table>
+</div>
+<p class="small muted">台账：<code>data/processed/economy/global/decision-hub/decision_cards.json</code>（字段：结论 / 证据强度 / 触发条件 / 反向证据 / 信息充分度 / 行动）。</p>
+
+<h2 class="sec" id="s3">3 · 证据强度与反向证据</h2>
+<div class="decision-card">
+  <div class="dc-head"><span class="dc-title">DC-ECO-APT-01 · 迪拜公寓</span><span class="ev-mid">证据强度：中</span></div>
+  <div class="dc-grid">
+    <div><span class="k">结论：</span>信号结构未翻转，融资成本为最主要边际约束</div>
+    <div><span class="k">触发条件：</span>K01 3M EIBOR 破 4.50%（距 10.56bp）；K07 连续 3 月 &lt;−5%</div>
+    <div><span class="k">反向证据：</span>成交量 −38% 有基数/结构效应；新推盘 9M −64% 供给收缩支撑价格</div>
+    <div><span class="k">信息充分度：</span><span class="suff need">需补充就业/收入/空置/竣工</span></div>
+  </div>
+</div>
+<div class="decision-card">
+  <div class="dc-head"><span class="dc-title">DC-AI-SEC-01 · AI 网安就业</span><span class="ev-strong">证据强度：强</span></div>
+  <div class="dc-grid">
+    <div><span class="k">结论：</span>卖方市场，AI 安全为结构性增量主线</div>
+    <div><span class="k">触发条件：</span>87% 企业招聘困难；填补周期 3–6 个月；AI 为最缺技能 41%</div>
+    <div><span class="k">反向证据：</span>阿化配额影响私企招聘；L1 SOC 或受 AI 自动化挤压（需求上移）</div>
+    <div><span class="k">信息充分度：</span><span class="suff ok">可直接决策</span></div>
+  </div>
+</div>
+<div class="decision-card">
+  <div class="dc-head"><span class="dc-title">DC-AI-TRD-01 · AI 安全攻击面</span><span class="ev-strong">证据强度：强</span></div>
+  <div class="dc-grid">
+    <div><span class="k">结论：</span>攻击面扩张，红队与 Agent 安全为技术主线</div>
+    <div><span class="k">触发条件：</span>微软投毒研究 90 条样本 → 78% ASR；OWASP Agentic Top 10</div>
+    <div><span class="k">反向证据：</span>移除推理链后 ASR 94.8%→1.0%；沉睡特工野外未观测到</div>
+    <div><span class="k">信息充分度：</span><span class="suff ok">可直接决策</span></div>
+  </div>
+</div>
+<p class="small muted">其余决策卡（DC-ECO-TRD-01 / DC-AI-IND-01 / DC-AI-CI-01）证据与反向证据详见 <code>data/processed/economy/global/decision-hub/decision_cards.json</code>。</p>
+
+<h2 class="sec" id="s4">4 · 触发条件与阈值距离</h2>
+<div class="tblwrap">
+<table class="fixed">
+<thead>
+<tr><th style="width:22%">触发条件</th><th style="width:18%">当前阈值距离</th><th style="width:30%">触发后动作</th><th style="width:30%">校准状态</th></tr>
+</thead>
+<tbody>
+<tr><td>K01 3M EIBOR &gt; 4.50%（硬红线）</td><td>10.56bp（逼近）</td><td>重算月供/可负担性/收益利差；升级复核</td><td><span class="lvl lvl-assumption">预校准（ex-ante）</span></td></tr>
+<tr><td>K07 公寓中位价同比 &lt; −5% 连续 3 月</td><td>连续 2 期确认</td><td>切换同质化指数复核；重算估值</td><td><span class="lvl lvl-assumption">预校准（ex-ante）</span></td></tr>
+<tr><td>ISR v3.1 合规门槛变更</td><td>已生效（持续）</td><td>重算需求情景；更新政策乘数</td><td><span class="lvl lvl-assumption">预校准（ex-ante）</span></td></tr>
+<tr><td>Stargate UAE 首批 200MW 上线</td><td>在建（待官方确认）</td><td>更新主权 AI 攻击面与本地安全需求</td><td><span class="lvl lvl-assumption">预校准（ex-ante）</span></td></tr>
+</tbody>
+</table>
+</div>
+<p class="small muted">首次中期回测 2027-06；校准对象 K01–K15 + RL-01–RL-09，输出 95% CI 与分位依据（工具 <code>threshold_calibration.py</code>）。</p>
+<p class="small muted"><b>研究内核四项</b>：① 周期定位——全球宏观「过热—滞胀过渡带」（<code>cycle_clock.py</code>），作为上游输入；② 传导量化——核心传导链弹性 η 与时滞由 <code>transmission.py</code> 输出参数区间（利率→成交量 / 供给→租金 / 需求→价格 / 情绪→成交量）；③ 政策入模——<code>policy_multiplier.py</code> 政策乘数表（未核验政策只给 <code>reference_range</code>，不给数值）；④ 盲区列示——见第八节与 <code>engine/report-audits/blind-spot-ledger.md</code>。</p>
+
+<h2 class="sec" id="s5">5 · 信息充分度与缺失清单</h2>
+<div class="tblwrap">
+<table class="fixed">
+<thead>
+<tr><th style="width:24%">决策卡</th><th style="width:22%">信息充分度</th><th style="width:54%">缺失信息 → 盲区台账</th></tr>
+</thead>
+<tbody>
+<tr><td>DC-ECO-APT-01</td><td><span class="suff need">需补充</span></td><td>B02 就业 / B15 收入 / B01 空置 / B03 竣工（P0 四类）</td></tr>
+<tr><td>DC-ECO-TRD-01</td><td><span class="suff need">需补充</span></td><td>PMI、薪资增速、3M/6M/1Y 期限利差（B12 利率期限结构）</td></tr>
+<tr><td>DC-AI-IND-01</td><td><span class="suff need">需补充</span></td><td>CR3/CR5 份额、价值链利润池分布</td></tr>
+<tr><td>DC-AI-CI-01</td><td><span class="suff need">需补充</span></td><td>本地企业模型选型分布、模型成本占交付成本比</td></tr>
+<tr><td>DC-AI-SEC-01 / DC-AI-TRD-01</td><td><span class="suff ok">可直接决策</span></td><td>—</td></tr>
+</tbody>
+</table>
+</div>
+<p class="small muted">缺失清单与消号进度见 <code>engine/report-audits/blind-spot-ledger.md</code>（P0 四类优先）。</p>
+
+<h2 class="sec" id="s6">6 · 行动协议</h2>
+<div class="action-card immediate">
+  <div class="a-head"><span class="prio immediate">立即行动</span><span class="a-title">维持融资成本专题六件套监测</span></div>
+  <div class="a-meta">
+    <b>触发条件：</b>3M EIBOR 距 K01 硬红线 ≤25bp（当前 10.56bp）｜ <b>阈值：</b>4.50% 硬红线 ｜
+    <b>责任角色：</b>研究负责人 ｜ <b>时限：</b>2026-12-31 ｜ <b>验证指标：</b>K01 阈值距离（bp，方向：扩大为改善）
+  </div>
+</div>
+<div class="action-card immediate">
+  <div class="a-head"><span class="prio immediate">立即行动</span><span class="a-title">按黄金签证门槛锁定就业目标</span></div>
+  <div class="a-meta">
+    <b>触发条件：</b>目标岗位基本月薪达门槛 ｜ <b>阈值：</b>基本月薪 ≥30,000 AED ｜
+    <b>责任角色：</b>研究负责人 ｜ <b>时限：</b>2026-12-31 ｜ <b>验证指标：</b>offer 基本工资（AED/月）
+  </div>
+</div>
+<div class="action-card immediate">
+  <div class="a-head"><span class="prio immediate">立即行动</span><span class="a-title">将投毒 / 推理链耦合纳入 RedTeam_AI 测试集</span></div>
+  <div class="a-meta">
+    <b>触发条件：</b>下期测试周期 ｜ <b>阈值：</b>复现 ASR ≥70%（已见 harness）｜
+    <b>责任角色：</b>模型负责人 ｜ <b>时限：</b>2026-12-31 ｜ <b>验证指标：</b>PyRIT / garak 用例数与 ASR 复现
+  </div>
+</div>
+<div class="action-card watch">
+  <div class="a-head"><span class="prio watch">持续观察</span><span class="a-title">P0 四类盲区取数消号</span></div>
+  <div class="a-meta">
+    <b>触发条件：</b>每月复盘会审 ｜ <b>阈值：</b>就业 / 收入 / 空置 / 竣工四类 ｜
+    <b>责任角色：</b>数据采集 ｜ <b>时限：</b>2026-12-31 ｜ <b>验证指标：</b>盲区台账 closed 数
+  </div>
+</div>
+<div class="action-card archive">
+  <div class="a-head"><span class="prio archive">仅记录存档</span><span class="a-title">记录模型层集中度与分级开放动态</span></div>
+  <div class="a-meta">
+    <b>触发条件：</b>季度刷新 ｜ <b>阈值：</b>Menlo 份额 / 厂商公告 ｜
+    <b>责任角色：</b>研究负责人 ｜ <b>时限：</b>2026-12-31 ｜ <b>验证指标：</b>份额序列与开放政策变更
+  </div>
+</div>
+
+<h2 class="sec" id="s7">7 · 场景切片</h2>
+<div class="slice">
+  <div class="slice-head">场景一 · 投资决策</div>
+  <p>结论：高位钝化 → 供给延迟型再平衡（<span class="lvl lvl-partial">部分核验</span>）。估值锚由 <code>valuation.py</code> 输出区间（cap rate / DCF，Fed 路径为外生输入）；尾部损失由 <code>stress_test.py</code> 五情景区间。信息充分度：<span class="suff need">需补充 P0 四类</span>。立即行动：维持融资成本专题六件套监测。</p>
+</div>
+<div class="slice">
+  <div class="slice-head">场景二 · 就业决策</div>
+  <p>结论：卖方市场，AI 安全为结构性增量主线（<span class="lvl lvl-verified">已核验</span> <span class="fact-ref">FC-SEC-005</span>）。门槛：基本月薪 ≥30,000 AED；CISSP / ISO 27001 LI / OSCP 最常点名。薪酬锚：资深 AI 安全工程师 55,000–75,000 AED/月 <span class="fact-ref">FC-SEC-006</span>。信息充分度：<span class="suff ok">可直接决策</span>。</p>
+</div>
+<div class="slice">
+  <div class="slice-head">场景三 · 政策制定</div>
+  <p>结论：强制合规为制度底座，合规能力为准入放大器（<span class="lvl lvl-verified">已核验</span> <span class="fact-ref">FC-CI-005</span>）。政策乘数：未核验政策只给 <code>reference_range</code>，不给数值。信息充分度：<span class="suff need">需补充政策原文核验（G01–G04）</span>。</p>
+</div>
+<p class="small muted">完整切片见 <code>data/processed/economy/global/decision-hub/scenario_slices.md</code>；跨切片共享事实走事实卡片，不复述。</p>
+
+<h2 class="sec" id="s8">8 · 盲区与消号进度</h2>
+<div class="tblwrap">
+<table class="fixed">
+<thead>
+<tr><th style="width:10%">ID</th><th style="width:30%">项目</th><th style="width:10%">优先级</th><th style="width:14%">责任周期</th><th style="width:12%">状态</th><th style="width:24%">消号条件</th></tr>
+</thead>
+<tbody>
+<tr><td>B01</td><td>官方住宅空置率序列</td><td>P0</td><td>2026-12</td><td>open</td><td>②代理替代（ValuStrat/REIDIN + DLD 自建）</td></tr>
+<tr><td>B02</td><td>就业 / 失业率数值</td><td>P0</td><td>2026-12</td><td>in_progress</td><td>①2026 劳动力调查双源入库</td></tr>
+<tr><td>B03</td><td>迪拜官方竣工登记</td><td>P0</td><td>2026-12</td><td>open</td><td>②代理替代（DM 竣工证书 + 机构三口径）</td></tr>
+<tr><td>B15</td><td>收入 / 薪资序列</td><td>P0</td><td>2026-12</td><td>open</td><td>①LFS / 薪酬指南官方英文页双源入库</td></tr>
+<tr><td>B04–B14</td><td>其余 11 项</td><td>P1 / P2</td><td>2027-01 起</td><td>open / in_progress</td><td>见台账</td></tr>
+</tbody>
+</table>
+</div>
+<p class="small muted">当前盲区 15 项（P0 四类优先）；消号条件与责任周期以 <code>engine/report-audits/blind-spot-ledger.md</code> 为准。</p>
+
+<h2 class="sec" id="s9">9 · 参考来源与读数时点</h2>
+<p><b>本期读数时点：</b>2026-11-15 ｜ <b>报告版本：</b>v1.0（基线；核验 / 收敛型运行不升级版本号）</p>
+<p><b>数据来源：</b>本仪表盘不新采数据，只收敛仓库内已文档化事实：</p>
+<ul>
+<li>各研究线最新报告：<code>content/economy/dubai/apartment</code>、<code>content/economy/global/trends</code>、<code>content/tech/security/dubai</code>、<code>content/tech/industry-research/dubai</code>、<code>content/tech/competitive-intelligence/dubai</code>、<code>content/tech/trends/global</code>。</li>
+<li>事实卡片库：<code>engine/fact_cards/</code>（SEC / IND / CI 三域，引用以 <span class="fact-ref">FC-…</span> 标记）。</li>
+<li>盲区台账：<code>engine/report-audits/blind-spot-ledger.md</code>。</li>
+<li>决策卡台账：<code>data/processed/economy/global/decision-hub/decision_cards.json</code>；场景切片：<code>data/processed/economy/global/decision-hub/scenario_slices.md</code>。</li>
+</ul>
+<p class="small muted">信息等级：已核验 / 部分核验 / 推断 / 假设；决策摘要仅引用已核验 + 部分核验。market-sizing 数值均为「假设乘积」，只以区间形式出现。阈值校准完成前（至 2027-06）信号灯一律标注「预校准（ex-ante）」。</p>
+
+</main>
+</body>
+</html>
