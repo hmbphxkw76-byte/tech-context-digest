@@ -395,7 +395,7 @@ python engine/tools/blind_spot_check.py
 ```
 
 规范：`engine/templates/information-layering-spec.md`、`engine/templates/decision-delivery-spec.md`；
-决策层业务线：`content/economy/global/decision-hub`（类型 `decision-dashboard`）；
+决策层业务线：`content/economy/insight`（类型 `decision-dashboard`）；
 指标：`engine/tools/metrics-dictionary.json` 的 I-01–I-09。
 
 ## 量化研究模型链（方案 N1–N8）

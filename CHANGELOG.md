@@ -2,6 +2,13 @@
 
 本文件记录仓库的结构与规范级变更（报告内容变更见各业务线 `reports/`）。
 
+## 3.2.0 — 2026-11-17：业务线去 global 段 + region 可选维度
+
+- **结构**：`content/economy/global/trends` → `content/economy/trends`；`content/economy/global/decision-hub` → `content/economy/insight`；`content/tech/trends/global` → `content/tech/weekly-roundup`。`data/processed/` 下对应台账 / 登记同步迁移。删除 `content/tech/{papers,principles,solutions,docs-analysis}` 四个空占位目录。
+- **layout.json v4.1**：新增主题级 `optional_dimensions`，`economy` / `tech` 声明 `["region"]`；`regions` 白名单收敛为 `["dubai"]`。业务线可缺省 region 段，直接以 category 段落位。
+- **引擎**：`_common.resolve_segments()` 统一维度段映射；`iter_business_dirs()` 改为按 `prompts/business-config.md` 锚点发现（1..维度数深度）；`validate_layout` 同步支持缺省 region；`decision_hub_check` 决策层标记由 `decision-hub` 改为 `insight`；`classify_reports` 过滤空 region 线索。
+- **同步**：hub / INDEX.md / 发布指纹重新生成；审计登记册 prune + init；词汇库同步配置与状态刷新。
+
 ## 3.1.0 — 2026-11-17：全维度收口与稳定性加固
 
 在 3.0.0 基础上完成「全维度范围梳理 → 架构对齐 → 自动化验证 → 交付物」收口。
@@ -67,12 +74,12 @@
 | `economy/dubai/apartment` | `content/economy/real-estate/apartment` |
 | `economy/dubai/market-sizing` | `content/economy/real-estate/market-sizing` |
 | `economy/dubai/policy-analysis` | `content/economy/real-estate/policy-analysis` |
-| `economy/global/decision-hub` | `content/economy/global/decision-hub` |
-| `economy/global/trends` | `content/economy/global/trends` |
+| `economy/insight` | `content/economy/insight` |
+| `economy/trends` | `content/economy/trends` |
 | `technology/ai/dubai/competitive-intelligence` | `content/tech/regional/dubai/competitive-intelligence` |
 | `technology/ai/dubai/industry-research` | `content/tech/regional/dubai/industry-research` |
 | `technology/ai/dubai/security` | `content/tech/security/dubai` |
-| `technology/ai/global/trends` | `content/tech/trends/global` |
+| `technology/ai/global/trends` | `content/tech/weekly-roundup` |
 
 ### 配套变更
 

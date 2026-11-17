@@ -1,0 +1,481 @@
+{
+  "schema_version": "1.0",
+  "business_line": "content/tech/weekly-roundup",
+  "path_rule": "business-config {{SOURCE_REGISTRY_PATH}} = data/source_registry.json",
+  "tier_legend": {
+    "1": "官方一手（政府 / 央行 / 统计机构 / 多边机构 / 官方发布）",
+    "2": "行业机构（研究 / 数据 / 咨询）",
+    "3": "挂牌门户（仅作卖方预期）",
+    "4": "媒体转述（须标『需核实原文』）"
+  },
+  "sources": [
+    {
+      "source_id": "S-001",
+      "tier": 1,
+      "publisher": "Tech Life Research（本仓库）",
+      "title": "https://github.com/hmbphxkw76-byte/tech-context-digest/blob/main/content/tech/weekly-roundup/reports/2026-11-13_weekly.html",
+      "url": "https://github.com/hmbphxkw76-byte/tech-context-digest/blob/main/content/tech/weekly-roundup/reports/2026-11-13_weekly.html",
+      "lang": "en",
+      "verify_status": "verified",
+      "in_synthesis": false,
+      "used_in": [
+        "reports/2026-11-13_weekly.html"
+      ]
+    },
+    {
+      "source_id": "S-002",
+      "tier": 1,
+      "publisher": "Anthropic",
+      "title": "https://www.anthropic.com/claude-fable-and-mythos-5-2",
+      "url": "https://www.anthropic.com/claude-fable-and-mythos-5-2",
+      "lang": "en",
+      "verify_status": "verified",
+      "in_synthesis": false,
+      "used_in": [
+        "reports/2026-11-13_weekly.html"
+      ]
+    },
+    {
+      "source_id": "S-003",
+      "tier": 1,
+      "publisher": "Microsoft",
+      "title": "https://www.microsoft.com/en-us/security/blog/2026/11/12/trained-to-betray-dataset-poisoning-and-model-poisoning/",
+      "url": "https://www.microsoft.com/en-us/security/blog/2026/11/12/trained-to-betray-dataset-poisoning-and-model-poisoning/",
+      "lang": "en",
+      "verify_status": "verified",
+      "in_synthesis": false,
+      "used_in": [
+        "reports/2026-11-13_weekly.html"
+      ]
+    },
+    {
+      "source_id": "S-004",
+      "tier": 1,
+      "publisher": "OpenAI",
+      "title": "https://openai.com/index/why-we-no-longer-evaluate-swe-bench-verified/",
+      "url": "https://openai.com/index/why-we-no-longer-evaluate-swe-bench-verified/",
+      "lang": "en",
+      "verify_status": "verified",
+      "in_synthesis": false,
+      "used_in": [
+        "reports/2026-11-13_weekly.html"
+      ]
+    },
+    {
+      "source_id": "S-005",
+      "tier": 1,
+      "publisher": "OpenAI",
+      "title": "https://openai.com/index/separating-signal-from-noise-coding-evaluations/",
+      "url": "https://openai.com/index/separating-signal-from-noise-coding-evaluations/",
+      "lang": "en",
+      "verify_status": "verified",
+      "in_synthesis": false,
+      "used_in": [
+        "reports/2026-11-13_weekly.html"
+      ]
+    },
+    {
+      "source_id": "S-006",
+      "tier": 2,
+      "publisher": "arXiv",
+      "title": "https://arxiv.org/abs/2611.08417",
+      "url": "https://arxiv.org/abs/2611.08417",
+      "lang": "en",
+      "verify_status": "verified",
+      "in_synthesis": false,
+      "used_in": [
+        "reports/2026-11-13_weekly.html"
+      ]
+    },
+    {
+      "source_id": "S-007",
+      "tier": 2,
+      "publisher": "Menlo Ventures",
+      "title": "https://menlovc.com/perspective/2026-the-state-of-enterprise-ai/",
+      "url": "https://menlovc.com/perspective/2026-the-state-of-enterprise-ai/",
+      "lang": "en",
+      "verify_status": "verified",
+      "in_synthesis": false,
+      "used_in": [
+        "reports/2026-11-13_weekly.html"
+      ]
+    },
+    {
+      "source_id": "S-008",
+      "tier": 1,
+      "publisher": "U.S. SEC EDGAR",
+      "title": "https://www.sec.gov/Archives/edgar/data/2130357/000162828026072484/anthropicpbc-sx1ax2.htm",
+      "url": "https://www.sec.gov/Archives/edgar/data/2130357/000162828026072484/anthropicpbc-sx1ax2.htm",
+      "lang": "en",
+      "verify_status": "verified",
+      "in_synthesis": false,
+      "used_in": [
+        "reports/2026-11-13_weekly.html"
+      ]
+    },
+    {
+      "source_id": "S-009",
+      "tier": 2,
+      "publisher": "OWASP",
+      "title": "https://genai.owasp.org/agentic-top-10/",
+      "url": "https://genai.owasp.org/agentic-top-10/",
+      "lang": "en",
+      "verify_status": "verified",
+      "in_synthesis": false,
+      "used_in": [
+        "reports/2026-11-13_weekly.html"
+      ]
+    },
+    {
+      "source_id": "S-010",
+      "tier": 1,
+      "publisher": "EUR-Lex（EU 官方）",
+      "title": "https://eur-lex.europa.eu/eli/reg/2024/1689/oj",
+      "url": "https://eur-lex.europa.eu/eli/reg/2024/1689/oj",
+      "lang": "en",
+      "verify_status": "verified",
+      "in_synthesis": false,
+      "used_in": [
+        "reports/2026-11-13_weekly.html"
+      ]
+    },
+    {
+      "source_id": "S-011",
+      "tier": 2,
+      "publisher": "OWASP",
+      "title": "https://owasp.org/www-project-top-10-for-large-language-model-applications/",
+      "url": "https://owasp.org/www-project-top-10-for-large-language-model-applications/",
+      "lang": "en",
+      "verify_status": "verified",
+      "in_synthesis": false,
+      "used_in": [
+        "reports/2026-11-13_weekly.html"
+      ]
+    },
+    {
+      "source_id": "S-012",
+      "tier": 2,
+      "publisher": "Grand View Research",
+      "title": "https://www.grandviewresearch.com/industry-analysis/ai-in-cybersecurity-market-report",
+      "url": "https://www.grandviewresearch.com/industry-analysis/ai-in-cybersecurity-market-report",
+      "lang": "en",
+      "verify_status": "verified",
+      "in_synthesis": false,
+      "used_in": [
+        "reports/2026-11-13_weekly.html"
+      ]
+    },
+    {
+      "source_id": "S-013",
+      "tier": 4,
+      "publisher": "钛媒体",
+      "title": "https://www.tmtpost.com/agent/ai-article/22497",
+      "url": "https://www.tmtpost.com/agent/ai-article/22497",
+      "lang": "en",
+      "verify_status": "media_unverified",
+      "in_synthesis": false,
+      "used_in": [
+        "reports/2026-11-13_weekly.html"
+      ]
+    },
+    {
+      "source_id": "S-014",
+      "tier": 4,
+      "publisher": "新浪财经",
+      "title": "http://finance.sina.com.cn/stock/t/2026-11-10/doc-iniyfeci2796989.shtml",
+      "url": "http://finance.sina.com.cn/stock/t/2026-11-10/doc-iniyfeci2796989.shtml",
+      "lang": "en",
+      "verify_status": "media_unverified",
+      "in_synthesis": false,
+      "used_in": [
+        "reports/2026-11-13_weekly.html"
+      ]
+    },
+    {
+      "source_id": "S-015",
+      "tier": 1,
+      "publisher": "Moonshot AI（Kimi）",
+      "title": "https://platform.kimi.com/docs/models",
+      "url": "https://platform.kimi.com/docs/models",
+      "lang": "en",
+      "verify_status": "verified",
+      "in_synthesis": false,
+      "used_in": [
+        "reports/2026-11-13_weekly.html"
+      ]
+    },
+    {
+      "source_id": "S-016",
+      "tier": 4,
+      "publisher": "腾讯云社区",
+      "title": "https://cloud.tencent.com/developer/article/2777813",
+      "url": "https://cloud.tencent.com/developer/article/2777813",
+      "lang": "en",
+      "verify_status": "media_unverified",
+      "in_synthesis": false,
+      "used_in": [
+        "reports/2026-11-13_weekly.html"
+      ]
+    },
+    {
+      "source_id": "S-017",
+      "tier": 4,
+      "publisher": "网易",
+      "title": "https://www.163.com/dy/article/LBEFH3E00556ENJI.html",
+      "url": "https://www.163.com/dy/article/LBEFH3E00556ENJI.html",
+      "lang": "en",
+      "verify_status": "media_unverified",
+      "in_synthesis": false,
+      "used_in": [
+        "reports/2026-11-13_weekly.html"
+      ]
+    },
+    {
+      "source_id": "S-018",
+      "tier": 4,
+      "publisher": "CSDN",
+      "title": "https://blog.csdn.net/shaobingj126/article/details/164249861",
+      "url": "https://blog.csdn.net/shaobingj126/article/details/164249861",
+      "lang": "en",
+      "verify_status": "media_unverified",
+      "in_synthesis": false,
+      "used_in": [
+        "reports/2026-11-13_weekly.html"
+      ]
+    },
+    {
+      "source_id": "S-019",
+      "tier": 4,
+      "publisher": "百度百科",
+      "title": "https://baike.baidu.com/item/模型上下文协议/65540618",
+      "url": "https://baike.baidu.com/item/模型上下文协议/65540618",
+      "lang": "en",
+      "verify_status": "media_unverified",
+      "in_synthesis": false,
+      "used_in": [
+        "reports/2026-11-13_weekly.html"
+      ]
+    },
+    {
+      "source_id": "S-020",
+      "tier": 4,
+      "publisher": "博客园",
+      "title": "https://www.cnblogs.com/itech/category/2501460.html",
+      "url": "https://www.cnblogs.com/itech/category/2501460.html",
+      "lang": "en",
+      "verify_status": "media_unverified",
+      "in_synthesis": false,
+      "used_in": [
+        "reports/2026-11-13_weekly.html"
+      ]
+    },
+    {
+      "source_id": "S-021",
+      "tier": 1,
+      "publisher": "Cursor（Anysphere）",
+      "title": "https://cursor.com/changelog",
+      "url": "https://cursor.com/changelog",
+      "lang": "en",
+      "verify_status": "verified",
+      "in_synthesis": false,
+      "used_in": [
+        "reports/2026-11-13_weekly.html"
+      ]
+    },
+    {
+      "source_id": "S-022",
+      "tier": 4,
+      "publisher": "CSDN",
+      "title": "https://blog.csdn.net/2601_96168194/article/details/170188164",
+      "url": "https://blog.csdn.net/2601_96168194/article/details/170188164",
+      "lang": "en",
+      "verify_status": "media_unverified",
+      "in_synthesis": false,
+      "used_in": [
+        "reports/2026-11-13_weekly.html"
+      ]
+    },
+    {
+      "source_id": "S-023",
+      "tier": 1,
+      "publisher": "METR",
+      "title": "https://metr.org/blog/",
+      "url": "https://metr.org/blog/",
+      "lang": "en",
+      "verify_status": "verified",
+      "in_synthesis": false,
+      "used_in": [
+        "reports/2026-11-13_weekly.html"
+      ]
+    },
+    {
+      "source_id": "S-024",
+      "tier": 1,
+      "publisher": "Anthropic",
+      "title": "https://docs.anthropic.com/en/docs/claude-code/changelog",
+      "url": "https://docs.anthropic.com/en/docs/claude-code/changelog",
+      "lang": "en",
+      "verify_status": "verified",
+      "in_synthesis": false,
+      "used_in": [
+        "reports/2026-11-13_weekly.html"
+      ]
+    },
+    {
+      "source_id": "S-025",
+      "tier": 1,
+      "publisher": "GitHub Blog",
+      "title": "https://github.blog/changelog/",
+      "url": "https://github.blog/changelog/",
+      "lang": "en",
+      "verify_status": "verified",
+      "in_synthesis": false,
+      "used_in": [
+        "reports/2026-11-13_weekly.html"
+      ]
+    },
+    {
+      "source_id": "S-026",
+      "tier": 1,
+      "publisher": "Codeium",
+      "title": "https://www.codeium.com/changelog",
+      "url": "https://www.codeium.com/changelog",
+      "lang": "en",
+      "verify_status": "verified",
+      "in_synthesis": false,
+      "used_in": [
+        "reports/2026-11-13_weekly.html"
+      ]
+    },
+    {
+      "source_id": "S-027",
+      "tier": 1,
+      "publisher": "Stanford HAI",
+      "title": "https://hai.stanford.edu/ai-index/2026-ai-index-report",
+      "url": "https://hai.stanford.edu/ai-index/2026-ai-index-report",
+      "lang": "en",
+      "verify_status": "verified",
+      "in_synthesis": false,
+      "used_in": [
+        "reports/2026-11-13_weekly.html"
+      ]
+    },
+    {
+      "source_id": "S-028",
+      "tier": 2,
+      "publisher": "Gartner",
+      "title": "https://www.gartner.com/en/newsroom/press-releases/",
+      "url": "https://www.gartner.com/en/newsroom/press-releases/",
+      "lang": "en",
+      "verify_status": "verified",
+      "in_synthesis": false,
+      "used_in": [
+        "reports/2026-11-13_weekly.html"
+      ]
+    },
+    {
+      "source_id": "S-029",
+      "tier": 4,
+      "publisher": "17173",
+      "title": "https://news.17173.com/content/07212026/120235804.shtml",
+      "url": "https://news.17173.com/content/07212026/120235804.shtml",
+      "lang": "en",
+      "verify_status": "media_unverified",
+      "in_synthesis": false,
+      "used_in": [
+        "reports/2026-11-13_weekly.html"
+      ]
+    },
+    {
+      "source_id": "S-030",
+      "tier": 1,
+      "publisher": "Moonshot AI（Kimi）",
+      "title": "https://platform.kimi.com/docs/hosted-agents/overview",
+      "url": "https://platform.kimi.com/docs/hosted-agents/overview",
+      "lang": "en",
+      "verify_status": "verified",
+      "in_synthesis": false,
+      "used_in": [
+        "reports/2026-11-13_weekly.html"
+      ]
+    },
+    {
+      "source_id": "S-031",
+      "tier": 1,
+      "publisher": "Anthropic",
+      "title": "https://www.anthropic.com/research/early-progress-drug-development",
+      "url": "https://www.anthropic.com/research/early-progress-drug-development",
+      "lang": "en",
+      "verify_status": "verified",
+      "in_synthesis": false,
+      "used_in": [
+        "reports/2026-11-13_weekly.html"
+      ]
+    },
+    {
+      "source_id": "S-032",
+      "tier": 1,
+      "publisher": "Anthropic",
+      "title": "https://www.anthropic.com/news/roadshow-launch",
+      "url": "https://www.anthropic.com/news/roadshow-launch",
+      "lang": "en",
+      "verify_status": "verified",
+      "in_synthesis": false,
+      "used_in": [
+        "reports/2026-11-13_weekly.html"
+      ]
+    },
+    {
+      "source_id": "S-033",
+      "tier": 4,
+      "publisher": "Bloomberg",
+      "title": "https://www.bloomberg.com/news/articles/2026-11-06/openai-completes-11-billion-portion-of-funding-at-1-25-trillion-value",
+      "url": "https://www.bloomberg.com/news/articles/2026-11-06/openai-completes-11-billion-portion-of-funding-at-1-25-trillion-value",
+      "lang": "en",
+      "verify_status": "media_unverified",
+      "in_synthesis": false,
+      "used_in": [
+        "reports/2026-11-13_weekly.html"
+      ]
+    },
+    {
+      "source_id": "S-034",
+      "tier": 4,
+      "publisher": "36氪",
+      "title": "https://36kr.com/p/3556763628502150",
+      "url": "https://36kr.com/p/3556763628502150",
+      "lang": "en",
+      "verify_status": "media_unverified",
+      "in_synthesis": false,
+      "used_in": [
+        "reports/2026-11-13_weekly.html"
+      ]
+    },
+    {
+      "source_id": "S-035",
+      "tier": 1,
+      "publisher": "Microsoft",
+      "title": "https://www.microsoft.com/en-us/security/blog/2026/11/10/detecting-sleeper-agents/",
+      "url": "https://www.microsoft.com/en-us/security/blog/2026/11/10/detecting-sleeper-agents/",
+      "lang": "en",
+      "verify_status": "verified",
+      "in_synthesis": false,
+      "used_in": [
+        "reports/2026-11-13_weekly.html"
+      ]
+    },
+    {
+      "source_id": "S-036",
+      "tier": 4,
+      "publisher": "央广网",
+      "title": "https://www.cnr.cn/jingji/ycbd/20261110/t20261110_527868436.shtml",
+      "url": "https://www.cnr.cn/jingji/ycbd/20261110/t20261110_527868436.shtml",
+      "lang": "en",
+      "verify_status": "media_unverified",
+      "in_synthesis": false,
+      "used_in": [
+        "reports/2026-11-13_weekly.html"
+      ]
+    }
+  ]
+}

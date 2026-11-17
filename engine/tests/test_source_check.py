@@ -84,7 +84,7 @@ class TestSourceStrategyParsing(unittest.TestCase):
         self.assertEqual(source_check.parse_source_strategy("official_en"), "")
 
     def test_decision_hub_config_declares_synthesis_only(self):
-        ctx = source_check._ctx_for("content/economy/global/decision-hub")
+        ctx = source_check._ctx_for("content/economy/insight")
         self.assertEqual(ctx.get("source_strategy"), "synthesis_only")
 
 

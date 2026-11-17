@@ -24,7 +24,8 @@ sys.path.insert(0, str(Path(__file__).resolve().parent))
 from _common import ROOT, detect_report, iter_business_dirs  # noqa: E402
 
 DEFAULT_GATE = "2026-12"
-HUB_LINE = "decision-hub"
+# 跨研究线决策层业务线目录段（content/economy/insight）
+HUB_LINE = "insight"
 
 _PROTOCOL_KEYS = ("触发条件", "阈值", "责任角色", "时限", "验证指标")
 _PRIO_KEYS = ("立即行动", "持续观察", "仅记录存档")

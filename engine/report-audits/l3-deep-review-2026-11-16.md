@@ -27,7 +27,7 @@
 | content/tech/competitive-intelligence/dubai/reports/2026-12_baseline_report.html | 4/4 | AUD-2026-11-14-008 |
 | content/tech/industry-research/dubai/reports/2026-12_baseline_report.html | 4/4 | AUD-2026-11-14-009 |
 | content/tech/security/dubai/reports/2026-11_baseline_report.html | 4/4 | AUD-2026-11-14-010 |
-| content/tech/trends/global/reports/2026-11-13_weekly.html | 4/4 | AUD-2026-11-14-011 |
+| content/tech/weekly-roundup/reports/2026-11-13_weekly.html | 4/4 | AUD-2026-11-14-011 |
 
 ## 三、待修清单（4 份，转 `engine/quality/` 修复闭环）
 
@@ -50,7 +50,7 @@
 | F2-2 | §4.5 | 「配合 Decree 43/2013」未标「需核实原文」，与 §4.4「不引用法条编号作为事实」矛盾 | 补「需核实原文」标注 |
 | F2-3 | §4.x / §5 | 「R15」为 apartment 台账编号，本业务线未登记 | 注册跨线指针或改称「G05 配套分档」 |
 
-### F3 content/economy/global/decision-hub/reports/2026-12_baseline_report.html
+### F3 content/economy/insight/reports/2026-12_baseline_report.html
 
 | # | 位置 | 问题 | 建议 |
 |---|---|---|---|
@@ -58,7 +58,7 @@
 | F3-2 | §1 决策摘要第 3 条 | 标「已核验」而 `FC-SEC-005` verify_status = 部分核验 | 降级为「部分核验」 |
 | F3-3 | delta 条 | 「假设核验进度 5/15」与盲区台账（closed 0、in_progress 2）口径不符，不可复核 | 写明分子分母构成或改为 0/15 |
 
-### F4 content/economy/global/trends/reports/2026-11-13_weekly.html
+### F4 content/economy/trends/reports/2026-11-13_weekly.html
 
 | # | 位置 | 问题 | 建议 |
 |---|---|---|---|
@@ -72,7 +72,7 @@
 - 6 份报告缺 E9「修正记录」关键词命中（baseline / Q3 / market-sizing / policy-analysis / decision-hub 等），L2 完整率 9/10，达 ≥9/10 门槛。
 - apartment baseline / Q3 / annual 仍用 P03 样本 8,671，登记册 v2.0 已于 11-12 更新为 8,670（monthly 报告已并列说明）；建议下一期同步。
 - competitive-intelligence / industry-research 正文事实卡指针覆盖较薄（分别仅引用 FC-CI-001/009、FC-IND-001/008），建议后续按「指标编号 + 指针」规范补齐。
-- content/tech/trends/global delta 条「传导量化：政策乘数显著」宜注明指 AI 政策，避免与房地产政策乘数口径混淆。
+- content/tech/weekly-roundup delta 条「传导量化：政策乘数显著」宜注明指 AI 政策，避免与房地产政策乘数口径混淆。
 
 ## 五、是否需人工介入
 
@@ -102,4 +102,4 @@
 
 **销号结论**：`audit_tool.py run --strict` 覆盖 12 份正式报告 **全部通过**，4 份 fix 报告审查链回到 4/4 并重新签发「已审计」；统一门禁 0 错误。
 
-**遗留（不阻断）**：~~`content/economy/global/decision-hub` 无外部 URL（跨线综合层），`source_check` R1「登记为空」为规则误报~~ → **已消除（2026-11-16）**：business-config 声明 `{{SOURCE_STRATEGY}} = synthesis_only`，`source_check` R1 据此区分「无外部来源的综合层」与「登记缺失」（含外部 URL 时仍登记）。
+**遗留（不阻断）**：~~`content/economy/insight` 无外部 URL（跨线综合层），`source_check` R1「登记为空」为规则误报~~ → **已消除（2026-11-16）**：business-config 声明 `{{SOURCE_STRATEGY}} = synthesis_only`，`source_check` R1 据此区分「无外部来源的综合层」与「登记缺失」（含外部 URL 时仍登记）。

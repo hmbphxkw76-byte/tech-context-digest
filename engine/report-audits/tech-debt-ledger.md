@@ -76,9 +76,9 @@
 |---|---|---|---|---|
 | C1 | `content/economy/dubai/apartment/reports/2026-11_baseline_report.html` | 2026-11 | 周期定位、传导量化、政策入模 | closed |
 | C2 | `content/economy/dubai/apartment/reports/2026-Q3_quarterly.html` | 2026-Q3 | 周期定位、传导量化、政策入模 | closed |
-| C3 | `content/economy/global/trends/reports/2026-11-13_weekly.html` | 2026-11-13 | 传导量化、政策入模、盲区列示 | closed |
+| C3 | `content/economy/trends/reports/2026-11-13_weekly.html` | 2026-11-13 | 传导量化、政策入模、盲区列示 | closed |
 | C4 | `content/tech/security/dubai/reports/2026-11_baseline_report.html` | 2026-11 | 周期定位、传导量化、政策入模、盲区列示 | closed |
-| C5 | `content/tech/trends/global/reports/2026-11-13_weekly.html` | 2026-11-13 | 传导量化、盲区列示 | closed |
+| C5 | `content/tech/weekly-roundup/reports/2026-11-13_weekly.html` | 2026-11-13 | 传导量化、盲区列示 | closed |
 
 ---
 
@@ -94,8 +94,8 @@
 | D02 | `content/economy/dubai/apartment/reports/2026-Q3_quarterly.html` | R2 ×3 | closed |
 | D03 | `content/economy/dubai/apartment/reports/2026_annual.html` | R2 ×5 | closed |
 | D04 | `content/economy/real-estate/dubai/market-sizing/reports/2026-12_baseline_report.html` | R1 ×1（登记为空） | closed |
-| D05 | `content/economy/global/decision-hub/reports/2026-12_baseline_report.html` | R1 ×1（登记为空） | closed（规则误报，`SOURCE_STRATEGY=synthesis_only` 豁免） |
-| D06 | `content/economy/global/trends/reports/2026-11-13_weekly.html` | R2 ×4 | closed |
+| D05 | `content/economy/insight/reports/2026-12_baseline_report.html` | R1 ×1（登记为空） | closed（规则误报，`SOURCE_STRATEGY=synthesis_only` 豁免） |
+| D06 | `content/economy/trends/reports/2026-11-13_weekly.html` | R2 ×4 | closed |
 | D07 | `content/tech/competitive-intelligence/dubai/reports/2026-12_baseline_report.html` | R2 ×2 | closed |
 | D08 | `content/tech/industry-research/dubai/reports/2026-12_baseline_report.html` | R1 ×1 + R7 ×1 | closed |
 | D09 | `content/tech/security/dubai/reports/2026-11_baseline_report.html` | R1 ×1（登记为空） | closed |
@@ -118,9 +118,9 @@
 | E2 | `content/economy/dubai/apartment/reports/2026-11_monthly.html` | 可疑 ×1 | cavendishmaxwell.com |
 | E3 | `content/economy/dubai/apartment/reports/2026-Q3_quarterly.html` | 死链 ×3 | centralbank.ae 统计公报 |
 | E4 | `content/economy/dubai/apartment/reports/2026_annual.html` | 死链 ×4 | centralbank.ae 统计公报 |
-| E5 | `content/economy/global/trends/reports/2026-11-13_weekly.html` | 可疑 ×12 | gov.cn 联播 |
+| E5 | `content/economy/trends/reports/2026-11-13_weekly.html` | 可疑 ×12 | gov.cn 联播 |
 | E6 | `content/tech/competitive-intelligence/dubai/reports/2026-12_baseline_report.html` | 死链 ×2 | practiceguides.chambers.com |
-| E7 | `content/tech/trends/global/reports/2026-11-13_weekly.html` | 死链 ×2 | microsoft.com/security/blog |
+| E7 | `content/tech/weekly-roundup/reports/2026-11-13_weekly.html` | 死链 ×2 | microsoft.com/security/blog |
 
 **处置**：登记跟踪；随下一期报告按来源登记机制使用可归档 URL（优先官方统计/机构一手页），并在宽限期结束（2027-01）后纳入强制校验。
 

@@ -239,11 +239,11 @@ python engine/vocabulary/script/vocab_tool.py topic-add --topic financial-market
 
 | 词汇库主题 | 目标提示词 | 接入日期 |
 |---|---|---|
-| ai-security（49 条，v1.3） | `content/tech/trends/global/prompts/business-config.md`「词汇速览 · AI 安全」区块（插于第七节版本记录之前） | 2026-11-13 |
+| ai-security（49 条，v1.3） | `content/tech/weekly-roundup/prompts/business-config.md`「词汇速览 · AI 安全」区块（插于第七节版本记录之前） | 2026-11-13 |
 | cybersecurity（153 条，v1.4） | `content/tech/security/dubai/prompts/business-config.md`「词汇速览」区块（插于第九节版本记录之前） | 2026-11-13 |
 | financial-markets（49 条，v1.1） | `content/economy/dubai/apartment/prompts/business-config.md`「词汇速览」区块（插于第十三节版本记录之前） | 2026-11-13 |
-| economy（48 条，v1.3） | `content/economy/global/trends/prompts/business-config.md`「词汇速览」区块（插于第七节版本记录之前） | 2026-11-13 |
-| ai-agent（73 条，v1.2） | `content/tech/trends/global/prompts/business-config.md`「词汇速览 · AI Agent」区块（插于第七节版本记录之前） | 2026-11-13 |
+| economy（48 条，v1.3） | `content/economy/trends/prompts/business-config.md`「词汇速览」区块（插于第七节版本记录之前） | 2026-11-13 |
+| ai-agent（73 条，v1.2） | `content/tech/weekly-roundup/prompts/business-config.md`「词汇速览 · AI Agent」区块（插于第七节版本记录之前） | 2026-11-13 |
 
 ---
 
@@ -257,8 +257,8 @@ python engine/vocabulary/script/vocab_tool.py topic-add --topic financial-market
 | v1.3 | 2026-11-13 | 主题管理自动化 | 新增 topic-add / topic-remove / topic-check：新增主题一条命令自动完成注册表登记 + 目录创建 + 索引重建（备份回滚 + topic-ops.log 操作日志，前缀自动派生查重、孤儿目录纳管）；手工编辑 topics.json 降级为非支持入口。正反路径与孤儿纳管实测通过 |
 | v1.4 | 2026-11-13 | 新增 cybersecurity 主题与第二条绑定 | cybersecurity 主题接入（6 分类 90 条，两批种子）并绑定同步至 content/tech/regional/dubai/security/prompts/business-config.md（sync.json v1.1）；全库 3 主题 188 条 |
 | v1.5 | 2026-11-13 | 第三条绑定（全量覆盖） | financial-markets 绑定同步至 content/economy/real-estate/apartment/prompts/business-config.md；至此三条业务线全部接入自动同步（49+90+49=188 条） |
-| v1.6 | 2026-11-13 | 新增 economy 主题与第四条绑定 | economy（经济）主题接入：3 分类（经济体与国家 / 区域经济组织 / 经济概念），种子 17 条入库 + 并行批次扩展至 44 条 + 海湾补充批次 4 条（v1.3），ECO 前缀；绑定同步至 content/economy/global/trends/prompts/business-config.md（sync.json v1.2）；全库 4 主题 |
+| v1.6 | 2026-11-13 | 新增 economy 主题与第四条绑定 | economy（经济）主题接入：3 分类（经济体与国家 / 区域经济组织 / 经济概念），种子 17 条入库 + 并行批次扩展至 44 条 + 海湾补充批次 4 条（v1.3），ECO 前缀；绑定同步至 content/economy/trends/prompts/business-config.md（sync.json v1.2）；全库 4 主题 |
 | v1.7 | 2026-11-13 | 新增 ai-agent 主题与第五条绑定 | ai-agent（AI Agent 与大模型）主题接入：5 分类（模型与厂商 / Agent 技术与框架 / 编码工具与 IDE / 应用与产品 / 概念与评估），两批种子共 73 条入库（v1.2），AAG 前缀；绑定同步至 content/tech/regional/global/trends/prompts/business-config.md（sync.json v1.3）；全库 5 主题 372 条 |
 | v1.8 | 2026-11-14 | 绑定迁移（业务线合并） | trends/ai-security 与 trends/ai-agent 合并为 content/tech/regional/global/trends；两条词汇主题（ai-security 49 条、ai-agent 73 条）改绑定至 `content/tech/regional/global/trends/prompts/business-config.md`（两个「词汇速览」区块）；sync.json v1.4 |
 | v1.9 | 2026-11-14 | 绑定路径更新（地区优先重构） | 地区维度优先级调整：`technology/ai/{sub_direction}/{region}` → `technology/ai/{region}/{sub_direction}`；ai-security / ai-agent 绑定改指 `content/tech/regional/global/trends/prompts/business-config.md`，cybersecurity 改指 `content/tech/regional/dubai/security/prompts/business-config.md`；sync.json v1.5 |
-| v1.10 | 2026-11-17 | 绑定路径迁移（六主题回滚） | 内容结构回滚至 economy/tech 六主题：ai-security / ai-agent → `content/tech/trends/global/...`，cybersecurity → `content/tech/security/dubai/...`，financial-markets → `content/economy/dubai/apartment/...`，economy → `content/economy/global/trends/...`；sync.json v1.6 |
+| v1.10 | 2026-11-17 | 绑定路径迁移（六主题回滚） | 内容结构回滚至 economy/tech 六主题：ai-security / ai-agent → `content/tech/weekly-roundup/...`，cybersecurity → `content/tech/security/dubai/...`，financial-markets → `content/economy/dubai/apartment/...`，economy → `content/economy/trends/...`；sync.json v1.6 |

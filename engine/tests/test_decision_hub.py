@@ -28,10 +28,10 @@ HUB_TEXT = """
 
 class TestDecisionHub(unittest.TestCase):
     def test_hub_text_passes(self):
-        self.assertEqual(m.check_text(HUB_TEXT, "content/economy/global/decision-hub"), [])
+        self.assertEqual(m.check_text(HUB_TEXT, "content/economy/insight"), [])
 
     def test_decision_card_fields_required(self):
-        rules = {r for r, _ in m.check_text("决策卡：结论。", "content/economy/global/decision-hub")}
+        rules = {r for r, _ in m.check_text("决策卡：结论。", "content/economy/insight")}
         self.assertIn("DC-01", rules)
 
     def test_action_protocol_elements(self):
@@ -47,7 +47,7 @@ class TestDecisionHub(unittest.TestCase):
 
     def test_hub_requires_all_three_slices(self):
         text = "场景切片：投资决策。"
-        rules = {r for r, _ in m.check_text(text, "content/economy/global/decision-hub")}
+        rules = {r for r, _ in m.check_text(text, "content/economy/insight")}
         self.assertIn("DC-03", rules)
 
     def test_business_line_needs_one_slice(self):
@@ -63,7 +63,7 @@ class TestDecisionHub(unittest.TestCase):
         self.assertNotIn("DC-04", rules2)
 
     def test_decision_hub_report_passes(self):
-        p = ROOT / "content/economy/global/decision-hub/reports/2026-12_baseline_report.html"
+        p = ROOT / "content/economy/insight/reports/2026-12_baseline_report.html"
         if not p.exists():
             self.skipTest("decision-hub 报告不存在")
         errors, warnings, lines = m.run(str(p.relative_to(ROOT)), "2026-12")

@@ -349,7 +349,7 @@ class TestComplianceCheck(unittest.TestCase):
         self.assertEqual(rule["sections"], self.rules["types"]["competitive-intelligence"]["cycles"]["baseline"]["sections"])
 
     def test_business_override_takes_precedence(self):
-        rule, inherited = cycle_rule(self.rules, "trend-weekly", "weekly", "content/tech/trends/global")
+        rule, inherited = cycle_rule(self.rules, "trend-weekly", "weekly", "content/tech/weekly-roundup")
         self.assertFalse(inherited)
         self.assertEqual(rule["sections"], 10)
         # 未指定业务线时回落类型规则（8 节）
@@ -634,7 +634,7 @@ class TestLayout(unittest.TestCase):
         self.assertIn(".github", self.layout.root_reserved)
 
     def test_regions_whitelist(self):
-        self.assertEqual(set(self.layout.regions), {"dubai", "global"})
+        self.assertEqual(set(self.layout.regions), {"dubai"})
 
     def test_business_depth(self):
         for theme in ("economy", "tech", "education", "international", "political", "society"):
@@ -646,10 +646,10 @@ class TestLayout(unittest.TestCase):
             rels,
             {
                 "content/economy/dubai/apartment",
-                "content/economy/global/trends",
-                "content/economy/global/decision-hub",
+                "content/economy/trends",
+                "content/economy/insight",
                 "content/tech/security/dubai",
-                "content/tech/trends/global",
+                "content/tech/weekly-roundup",
                 "content/tech/industry-research/dubai",
                 "content/tech/competitive-intelligence/dubai",
             },
@@ -659,12 +659,22 @@ class TestLayout(unittest.TestCase):
         by_rel = {b.rel: b for b in _common.iter_business_dirs()}
         self.assertEqual(by_rel["content/economy/dubai/apartment"].region, "dubai")
         self.assertEqual(by_rel["content/economy/dubai/apartment"].property_type, "apartment")
-        self.assertEqual(by_rel["content/economy/global/trends"].region, "global")
-        self.assertEqual(by_rel["content/economy/global/trends"].property_type, "trends")
+        self.assertEqual(by_rel["content/economy/trends"].region, "")
+        self.assertEqual(by_rel["content/economy/trends"].property_type, "trends")
+        self.assertEqual(by_rel["content/economy/insight"].region, "")
+        self.assertEqual(by_rel["content/economy/insight"].property_type, "insight")
         self.assertEqual(by_rel["content/tech/security/dubai"].region, "dubai")
         self.assertEqual(by_rel["content/tech/security/dubai"].property_type, "security")
-        self.assertEqual(by_rel["content/tech/trends/global"].region, "global")
-        self.assertEqual(by_rel["content/tech/trends/global"].property_type, "trends")
+        self.assertEqual(by_rel["content/tech/weekly-roundup"].region, "")
+        self.assertEqual(by_rel["content/tech/weekly-roundup"].property_type, "weekly-roundup")
+
+    def test_optional_region_resolution(self):
+        """region 为可选维度：缺省时 category 直接落位，存在时按声明顺序映射。"""
+        by_rel = {b.rel: b for b in _common.iter_business_dirs()}
+        self.assertEqual(by_rel["content/economy/trends"].category, "trends")
+        self.assertEqual(by_rel["content/tech/weekly-roundup"].category, "weekly-roundup")
+        self.assertEqual(by_rel["content/tech/security/dubai"].category, "security")
+        self.assertEqual(by_rel["content/tech/security/dubai"].region, "dubai")
 
     def test_business_path_exists(self):
         for b in _common.iter_business_dirs():
@@ -738,11 +748,16 @@ class TestDimensionOrder(unittest.TestCase):
     def test_every_business_segments_follow_declared_order(self):
         for b in _common.iter_business_dirs():
             dims = self.layout.dimensions(b.theme)
+            optional = self.layout.optional_dims(b.theme)
             segs = list(b.segments)
-            self.assertEqual(len(segs), len(dims), f"{b.rel}: 段数与维度数不符")
-            for dim, seg in zip(dims, segs):
-                if dim == "region":
-                    self.assertIn(seg, self.layout.regions, f"{b.rel}: region 段 {seg} 不在白名单")
+            allowed = {len(dims)}
+            if "region" in dims and "region" in optional:
+                allowed.add(len(dims) - 1)
+            self.assertIn(len(segs), allowed, f"{b.rel}: 段数与维度数不符")
+            mapping = _common.resolve_segments(self.layout, b.theme, tuple(segs))
+            region = mapping.get("region")
+            if region is not None:
+                self.assertIn(region, self.layout.regions, f"{b.rel}: region 段 {region} 不在白名单")
 
     def test_property_type_is_not_region(self):
         for b in _common.iter_business_dirs():

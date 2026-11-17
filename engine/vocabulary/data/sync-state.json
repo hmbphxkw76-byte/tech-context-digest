@@ -1,8 +1,8 @@
 {
   "targets": {
-    "ai-security=>../../content/tech/trends/global/prompts/business-config.md": {
+    "ai-security=>../../content/tech/weekly-roundup/prompts/business-config.md": {
       "topic": "ai-security",
-      "target": "../../content/tech/trends/global/prompts/business-config.md",
+      "target": "../../content/tech/weekly-roundup/prompts/business-config.md",
       "vocab_version": "v1.3",
       "term_count": 49,
       "synced_at": "2026-11-14T15:24:27",
@@ -281,9 +281,9 @@
         "FIN-049": "92db92cc8bedac7a9e0cc686639c0d250adf59bbd60fb480dad1dafc0fe74d6e"
       }
     },
-    "economy=>../../content/economy/global/trends/prompts/business-config.md": {
+    "economy=>../../content/economy/trends/prompts/business-config.md": {
       "topic": "economy",
-      "target": "../../content/economy/global/trends/prompts/business-config.md",
+      "target": "../../content/economy/trends/prompts/business-config.md",
       "vocab_version": "v1.3",
       "term_count": 48,
       "synced_at": "2026-11-14T15:24:27",
@@ -339,9 +339,9 @@
         "ECO-048": "a97c0a970ca8bd059c50033857f03dd61bc142d75483e8f9a6f21789371bee77"
       }
     },
-    "ai-agent=>../../content/tech/trends/global/prompts/business-config.md": {
+    "ai-agent=>../../content/tech/weekly-roundup/prompts/business-config.md": {
       "topic": "ai-agent",
-      "target": "../../content/tech/trends/global/prompts/business-config.md",
+      "target": "../../content/tech/weekly-roundup/prompts/business-config.md",
       "vocab_version": "v1.2",
       "term_count": 73,
       "synced_at": "2026-11-14T15:24:27",

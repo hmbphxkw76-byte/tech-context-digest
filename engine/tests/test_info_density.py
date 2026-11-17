@@ -103,7 +103,7 @@ class TestInfoDensity(unittest.TestCase):
         self.assertGreaterEqual(k("2026-12-01"), k("2026-12"))
 
     def test_decision_hub_report_passes(self):
-        p = ROOT / "content/economy/global/decision-hub/reports/2026-12_baseline_report.html"
+        p = ROOT / "content/economy/insight/reports/2026-12_baseline_report.html"
         if not p.exists():
             self.skipTest("decision-hub 报告不存在")
         errors, warnings, lines = m.run(str(p.relative_to(ROOT)), "2026-12")

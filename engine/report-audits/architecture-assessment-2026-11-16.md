@@ -194,7 +194,7 @@ flowchart TD
 | F-17 | **类型注册需改三处** | 见 F-08 | 扩展成本高于「单一登记 + 生成」 |
 | F-18 | **hub 类型简称硬编码**：`build_hub.TYPE_SHORT` 14 项手工维护，`parse_type_names()` 解析全称但简称需另写 | `build_hub.py:42-57` | 新增类型忘加简称 → 筛选栏显示生 ID |
 | F-19 | **门禁清单硬编码**：新增检查必须改 `optimization_gate.py` 并同步 4 个工作流（测试强制复用） | `optimization_gate.py:41-63`、`test_process_gates.py` | 扩展需改代码 + 测试，无法配置化 |
-| F-20 | **维度序列长度决定目录深度**，无「主题级分类」与「业务线」的显式区分字段 | `layout.json`（themes 仅有 name/dimensions/segment） | `content/tech/principles/` 这类主题级目录靠 `_walk_to_depth` 深度跳过，语义靠约定 |
+| F-20 | **维度序列长度决定目录深度**，无「主题级分类」与「业务线」的显式区分字段 | `layout.json`（themes 仅有 name/dimensions/segment） | `content/tech/weekly-roundup/` 这类区域缺省业务线靠 `_walk_upto_depth` 锚点发现，语义靠 `optional_dimensions` 约定 |
 
 ### 2.6 可维护性
 
