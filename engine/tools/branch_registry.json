@@ -21,6 +21,13 @@
       "slug": "final-self-audit",
       "task": "final-self-audit"
     },
+    "task/fix-matrix-status-cd95c5fa": {
+      "note": "source=env:CATPAW_CONVERSATION_ID",
+      "session": "cd95c5fad1b94ba18de3bbc3b62eea99",
+      "session_short": "cd95c5fa",
+      "slug": "fix-matrix-status",
+      "task": "fix-matrix-status"
+    },
     "task/mainline-adoption-assess-8e70425f": {
       "note": "source=env:CATPAW_CONVERSATION_ID",
       "session": "8e70425f74ef40dfbbabc8e45ad4e542",
