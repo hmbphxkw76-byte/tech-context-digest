@@ -40,5 +40,8 @@ Desktop.ini
 # 自动化临时目录
 .automation-tmp/
 
+# 审计标记备份（audit_tool 生成，报告本体已入库，备份不重复跟踪）
+engine/audit/records/backups/
+
 # HTML 与 md 同目录存放，随源文件入库；仅忽略临时文件
 *.html.tmp

@@ -176,8 +176,8 @@ data/assets/<theme>/...       图片 / 图表资源
 |---|---|---|
 | **P1 结构对齐** ✅ | layout.json v4.0；apartment 归一化；全量旧路径改写；维度校验放宽 | `validate_layout` / `validate` / `classify_reports` 通过；工具发现 7 条业务线 / 10 份报告 |
 | **P2 补齐引擎** ✅ | 恢复 docs / audit / report-audits / fact_cards / sources / quality / vocabulary 并适配 | `optimization_gate --probe` 的错误清零（仅剩运行期数据 / 交付物） |
-| **P3 数据与交付** | 恢复 `.github`；重建 hub 与根文档；data 层骨架 | `build_hub --check` 通过；CI 工作流可跑 |
-| **P4 接线验证** | `pipeline_runner` N0–N8 全流程试跑；`engine/tests` 回归 | unittest 全绿；`optimization_gate` 0 阻断 |
+| **P3 数据与交付** ✅ | 恢复 `.github`；重建 hub 与根文档；data 层骨架 | `build_hub --check` 通过；CI 工作流可跑 |
+| **P4 接线验证** ✅ | `pipeline_runner` N0–N8 全流程试跑；`engine/tests` 回归 | unittest 全绿；`optimization_gate` 0 阻断；`run --from N0 --to N8` `outcome=passed` |
 
 ---
 
@@ -191,4 +191,4 @@ data/assets/<theme>/...       图片 / 图表资源
 
 ---
 
-*按 P1→P4 执行；每阶段结束跑对应校验并汇报。*
+*按 P1→P4 执行；每阶段结束跑对应校验并汇报。全维度覆盖映射见 [end-to-end-coverage.md](./end-to-end-coverage.md)。*

@@ -100,7 +100,7 @@ flowchart LR
 | 项 | 内容 |
 |---|---|
 | 输入 | 业务需求；类型选型结论（[report-classification](../templates/report-classification.md) 六族十二类） |
-| 核心步骤 | ① 在 `engine/tools/layout.json` 注册主题与维度序列（**category 必须先于 region**）；② 建 `{theme}/{category}/{region}/`（`prompts/` `data/` `reports/`）；③ 撰写 `prompts/business-config.md` 单一事实源；④ 周期提示词头部声明继承 `engine/templates/<类型ID>/`；⑤ 首期跑基线提示词，建立台账与基线锚 |
+| 核心步骤 | ① 在 `engine/tools/layout.json` 注册主题与维度序列（**维度先后按主题声明**：`economy` 为 `region→category`，其余主题为 `category→region`）；② 建 `{theme}/<维度段...>/`（`prompts/` `reports/`；数据落 `data/processed/<theme>/<维度段...>/`）；③ 撰写 `prompts/business-config.md` 单一事实源；④ 周期提示词头部声明继承 `engine/templates/<类型ID>/`；⑤ 首期跑基线提示词，建立台账与基线锚 |
 | 输出标准 | 可被 `_common.iter_business_dirs()` 发现；核心变量齐全；类型引用已注册 |
 | 工具 | `validate_layout.py`（`check_dimension_priority()`）、`validate.py`、`ensure_region_topics.py`、`_common.py`、`test_prompt_inheritance.py` |
 
@@ -130,7 +130,7 @@ flowchart LR
 | 项 | 内容 |
 |---|---|
 | 输入 | 报告文件、业务线目录、类型注册表 |
-| 核心步骤 | ① 类型分类（已注册类型，选型参考六族十二类）；② 维度分类（`theme/region/sector`；technology 为 `theme/tech_field/region/sub_direction`）；③ 命名识别（`monthly` / `quarterly` / `annual` / `baseline` / `weekly`）；④ 报告归位 `classify_reports.py` **双校验**（property_type 精匹配 + cycle ∈ `TYPE_CADENCE` 白名单） |
+| 核心步骤 | ① 类型分类（已注册类型，选型参考六族十二类）；② 维度分类（按 `layout.json` 主题维度序列：`economy` 为 `theme/region/category`，其余主题为 `theme/category/region`）；③ 命名识别（`monthly` / `quarterly` / `annual` / `baseline` / `weekly`）；④ 报告归位 `classify_reports.py` **双校验**（细分领域段精匹配 + cycle ∈ `TYPE_CADENCE` 白名单） |
 | 输出标准 | 报告落位唯一、类型与节拍一致、目录深度 = 主题维度数 + 1、region 段位置正确 |
 | 工具 | `_common.py`、`classify_reports.py`、`validate_layout.py`、`test_classification_mapping.py` |
 
@@ -345,7 +345,7 @@ flowchart TD
 
 ## 六、当前基线与版本治理
 
-**基线（2026-11-16）**：`unittest` 377 项全通过；统一门禁 0 错误 / 6 警告（历史报告降级告警 + 指纹漂移，不阻断）；审计 `run --strict` 覆盖 12 份正式报告全部 PASS；`page_build_check` 17 页 0E / 0W；`lint_reports` 12 份报告全部合格。
+**基线（2026-11-17）**：`unittest` 398 项全通过（1 跳过）；统一门禁 0 错误 / 1 警告（R6 历史死链，宽限期内不追溯）；`page_build_check` 15 页 0E / 0W；`build_hub --check` 通过；`pipeline_runner validate` 9 节点 / 9 门禁 / 2 闭环；正式报告 10 份。
 
 **版本治理**：核验 / 收敛型运行不升级版本号，只标注「本期读数时点」；仅核心事实修正才升级版本号；阈值校准完成前（至 2027-06）信号灯标注「预校准（ex-ante）」。
 
@@ -356,3 +356,4 @@ flowchart TD
 | v1.0 | 2026-11-15 | 初始版本 | 全链路 N0–N8 节点、五道防线、阶段 × 防线矩阵、四层收敛、两级 gate-period、单一事实源清单；配套 `test_pipeline_system_doc.py` |
 | v1.1 | 2026-11-15 | 门禁左移 | §1.1 主流程图改为「主链 + 就地门禁 G0–G8」；新增 §1.3 门禁左移原则（三层梯度）；§1.2 / §4.1 同步；测试锁定 |
 | v1.1（补丁） | 2026-11-16 | 基线刷新 | §六基线更新为 377 单测 / 12 份正式报告 / 17 页 0E0W / lint 全合格；补充 `test_pipeline_runner` 固化项 |
+| v1.2 | 2026-11-17 | 基线刷新 | §六基线更新为 398 单测 / 10 份正式报告 / 15 页 0E0W；N0 / N3 维度口径对齐 `layout.json`（按主题声明） |

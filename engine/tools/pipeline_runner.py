@@ -43,6 +43,11 @@ MANIFEST_PATH = TOOLS_DIR / "pipeline_manifest.json"
 DEFAULT_GATE_PERIOD = "2026-12"
 DEFAULT_SOURCE_GATE_PERIOD = "2027-01"
 
+# 子进程 wall 上限（秒）：审计四环节（约 160s）与 tool 节点命令不得无限挂起。
+DEFAULT_AUDIT_TIMEOUT = 600
+DEFAULT_NODE_TIMEOUT = 600
+TIMEOUT_EXIT_CODE = 124
+
 
 # --------------------------------------------------------------------------
 # 契约层：数据结构
@@ -186,18 +191,24 @@ def render_flow(manifest: dict) -> str:
 # --------------------------------------------------------------------------
 # 执行层
 # --------------------------------------------------------------------------
-def _run_command(cmd: str) -> tuple[int, str]:
+def _run_command(cmd: str, timeout: int = DEFAULT_AUDIT_TIMEOUT) -> tuple[int, str]:
     """执行外部命令（如审计四环节），返回 (退出码, 输出)。
 
     退出码约定（全仓一致）：0=通过，1=错误（阻断），2=警告（不阻断）。
     以字节捕获并按 utf-8 容错解码，兼容 Windows 控制台 GBK 输出。
+    timeout 为 wall 上限（秒）；超时按错误（124）处理，不向上崩溃。
     """
     import subprocess
     try:
-        r = subprocess.run(cmd, shell=True, cwd=ROOT, capture_output=True)
+        r = subprocess.run(cmd, shell=True, cwd=ROOT, capture_output=True, timeout=timeout)
         out = ((r.stdout or b"").decode("utf-8", "replace")
                + (r.stderr or b"").decode("utf-8", "replace"))
         return r.returncode, out
+    except subprocess.TimeoutExpired as e:
+        partial = e.stdout or e.stderr or b""
+        if isinstance(partial, bytes):
+            partial = partial.decode("utf-8", "replace")
+        return TIMEOUT_EXIT_CODE, f"[E] 命令执行超时（>{timeout}s）：{cmd}\n{partial}"
     except Exception as e:  # noqa: BLE001
         return 1, f"{type(e).__name__}: {e}"
 
@@ -250,15 +261,21 @@ def run_gate(manifest: dict, gate_id: str, gate_period: str = DEFAULT_GATE_PERIO
                       output=output, detail=detail)
 
 
-def run_node(manifest: dict, node_id: str, command: str | None = None) -> StageResult:
+def run_node(manifest: dict, node_id: str, command: str | None = None,
+             timeout: int = DEFAULT_NODE_TIMEOUT) -> StageResult:
     """节点处理。manual / ci 由 Agent / CI 完成并登记；tool 节点可经 command 执行。"""
     node = next(n for n in manifest["nodes"] if n["id"] == node_id)
     driver = node.get("driver", "manual")
     if command:
         import subprocess
-        r = subprocess.run(command, shell=True, cwd=ROOT, capture_output=True, text=True)
-        status = "done" if r.returncode == 0 else "error"
-        detail = (r.stdout or "") + (r.stderr or "")
+        try:
+            r = subprocess.run(command, shell=True, cwd=ROOT, capture_output=True,
+                               text=True, timeout=timeout)
+            status = "done" if r.returncode == 0 else "error"
+            detail = (r.stdout or "") + (r.stderr or "")
+        except subprocess.TimeoutExpired:
+            status = "error"
+            detail = f"[E] 节点命令执行超时（>{timeout}s）：{command}"
         return StageResult(id=node_id, name=node["name"], driver=driver,
                            status=status, detail=detail[-2000:])
     status = {"manual": "manual", "ci": "external"}.get(driver, "done")

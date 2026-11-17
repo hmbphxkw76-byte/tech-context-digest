@@ -66,6 +66,11 @@ CHECKS: list[tuple[str, list[str], bool]] = [
 DEFAULT_GATE_PERIOD = "2026-12"
 DEFAULT_SOURCE_GATE_PERIOD = "2027-01"
 
+# 单项门禁 wall 上限（秒）：任一检查挂起（如网络探测）不得无限阻塞统一入口。
+# 探测类（source_check --probe）实测可达数分钟，故上限取宽松值，只拦真正挂死。
+DEFAULT_CHECK_TIMEOUT = 900
+TIMEOUT_EXIT_CODE = 124
+
 
 def resolve_checks(names: list[str] | None = None, gate_period: str = DEFAULT_GATE_PERIOD,
                    source_gate_period: str = DEFAULT_SOURCE_GATE_PERIOD) -> list[tuple[str, list[str]]]:
@@ -84,10 +89,12 @@ def resolve_checks(names: list[str] | None = None, gate_period: str = DEFAULT_GA
 
 def run_checks(names: list[str] | None = None, gate_period: str = DEFAULT_GATE_PERIOD,
                source_gate_period: str = DEFAULT_SOURCE_GATE_PERIOD,
-               quiet: bool = False, probe: bool = False) -> dict:
+               quiet: bool = False, probe: bool = False,
+               timeout: int = DEFAULT_CHECK_TIMEOUT) -> dict:
     """顺序执行门禁 -> 报告字典（确定性，无时间戳）。
 
     probe=True 时给 source_check 追加 --probe（R6 死链真阻断，与 ci/audit 同口径）。
+    timeout 为单项 wall 上限（秒）；超时按错误处理（退出码 124），不向上崩溃。
     """
     results = []
     errors = warnings = 0
@@ -96,9 +103,16 @@ def run_checks(names: list[str] | None = None, gate_period: str = DEFAULT_GATE_P
         if probe and name == "source_check" and "--probe" not in cmd:
             # lenient（CI 口径）：明确 4xx/5xx 死链阻断，网络超时/反爬仅告警
             cmd = [*cmd, "--probe", "--probe-lenient"]
-        r = subprocess.run(cmd, cwd=ROOT, capture_output=True, text=True)
-        code = r.returncode
-        out = (r.stdout or "") + (r.stderr or "")
+        try:
+            r = subprocess.run(cmd, cwd=ROOT, capture_output=True, text=True, timeout=timeout)
+            code = r.returncode
+            out = (r.stdout or "") + (r.stderr or "")
+        except subprocess.TimeoutExpired as e:
+            code = TIMEOUT_EXIT_CODE
+            partial = e.stdout or e.stderr or ""
+            if isinstance(partial, bytes):
+                partial = partial.decode("utf-8", "replace")
+            out = (f"[E] 门禁执行超时（>{timeout}s）：{' '.join(cmd)}\n" + partial)
         if code == 0:
             status = "ok"
         elif code == 2 and warn_ok:
@@ -128,6 +142,8 @@ def main() -> int:
     ap.add_argument("--quiet", action="store_true", help="仅输出汇总")
     ap.add_argument("--probe", action="store_true",
                     help="source_check 启用外部 URL 探测（R6 死链真阻断，与 ci/audit 同口径）")
+    ap.add_argument("--timeout", type=int, default=DEFAULT_CHECK_TIMEOUT,
+                    help=f"单项门禁 wall 上限（秒，默认 {DEFAULT_CHECK_TIMEOUT}；超时按错误处理）")
     args = ap.parse_args()
 
     if args.list:
@@ -148,7 +164,8 @@ def main() -> int:
 
     rep = run_checks(names, gate_period=args.gate_period,
                      source_gate_period=args.source_gate_period,
-                     quiet=args.quiet or args.json, probe=args.probe)
+                     quiet=args.quiet or args.json, probe=args.probe,
+                     timeout=args.timeout)
     if args.json:
         print(json.dumps(rep, ensure_ascii=False, indent=2))
         if rep["errors"]:

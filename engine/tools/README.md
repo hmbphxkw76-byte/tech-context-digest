@@ -101,8 +101,8 @@ python engine/tools/validate_layout.py
 ```
 
 校验一级根目录合规（无未注册目录）、主题注册完整、业务线层级深度与主题维度数一致、
-命名符合 kebab-case、地域段命中 `layout.regions` 白名单，以及**维度优先级硬性规则：
-category 必须先于 region**（`check_dimension_priority()`，倒置即判错）。
+命名符合 kebab-case、地域段命中 `layout.regions` 白名单，以及**维度顺序按主题声明**
+（`check_dimension_priority()` 校验维度序列自洽：无重复、无未登记维度名；与主题声明不符即判错）。
 单一事实源为 [engine/tools/layout.json](../tools/layout.json)；新增主题 / 业务线只改该文件，
 工具与 CI 自动适配。
 

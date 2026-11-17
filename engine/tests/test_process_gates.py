@@ -133,6 +133,24 @@ class TestOptimizationGateReuse(unittest.TestCase):
         self.assertIn("--gate", text)
         self.assertIn("optimization_gate.py", text)
 
+    def test_gate_timeout_is_bounded(self):
+        """单项门禁挂起 → 超时按错误处理（退出码 124），不无限阻塞。"""
+        import importlib.util
+        spec = importlib.util.spec_from_file_location(
+            "optimization_gate", ROOT / "engine" / "tools" / "optimization_gate.py")
+        mod = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(mod)
+        self.assertGreater(mod.DEFAULT_CHECK_TIMEOUT, 0)
+        old = mod.CHECKS
+        mod.CHECKS = [("sleepy", [sys.executable, "-c", "import time; time.sleep(5)"], True)]
+        try:
+            rep = mod.run_checks(names=["sleepy"], timeout=1, quiet=True)
+        finally:
+            mod.CHECKS = old
+        self.assertEqual(rep["errors"], 1)
+        self.assertEqual(rep["checks"][0]["code"], mod.TIMEOUT_EXIT_CODE)
+        self.assertIn("超时", rep["checks"][0]["output"])
+
 
 if __name__ == "__main__":
     unittest.main()

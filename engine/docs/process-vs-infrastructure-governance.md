@@ -28,7 +28,7 @@
 | 治理领域 | 流程侧（软，引导） | 基础设施侧（硬，阻断） |
 |---|---|---|
 | 需求 / 选型 | [六族十二类](./report-classification.md) 选型参考、类型模板 | 类型引用必须已在 `template-registry.md` 注册（G0 `[E]`） |
-| 目录 / 命名 | category-first 维度规则（`AGENTS.md` + `engine/tools/layout.json`） | `validate_layout.py` 对 category / region 倒置判 `[E]` |
+| 目录 / 命名 | 按主题声明的维度顺序（`AGENTS.md` + `engine/tools/layout.json`） | `validate_layout.py` 对维度序列与主题声明不符判 `[E]` |
 | 页面构建 | [PAGE-BUILD-SPEC](./page-build-spec.md) 规范正文 | `page_build_check.py` P01–P15，`[E]` 阻断合并 |
 | 内容质量 | [信息分层](../templates/information-layering-spec.md) / [决策交付](../templates/decision-delivery-spec.md) | 四门禁 + 研究内核纳入统一门禁 |
 | 来源 / 数据 | 来源四级分层、双源确认、采集 SOP | `source_check.py` R1–R7 + 死链探测 |
