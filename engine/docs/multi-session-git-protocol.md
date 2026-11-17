@@ -1,4 +1,4 @@
-# 多会话 Git 协作协议（MULTI-SESSION-GIT-PROTOCOL v1.3）
+# 多会话 Git 协作协议（MULTI-SESSION-GIT-PROTOCOL v1.4）
 
 > **状态**：现行规范
 > **定位**：当多个 Agent 会话与多个 GitHub Actions 共用同一仓库、同一 `main` 时，约定统一的提交与合并方式，保证**各任务独立提交互不覆盖**。

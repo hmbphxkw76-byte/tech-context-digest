@@ -72,7 +72,7 @@ P0/P1/P2 优化清单（邻近判定 / 机构分级主数据 / 指标字典 / ga
 - **CI / 自动提交**：`ci.yml` / `html-sync.yml` / `content-update.yml` / `scheduled-maintenance.yml` 均含「优化流程一致性门禁（统一入口）」步骤。
 - **审计**：`audit.yml` 四环节 fail-fast（[E] 即阻断，不再告警后放行）；`audit_tool.py verify` 内含 `source_check`。
 - **一致性校验**：`engine/tests/test_process_gates.py::TestOptimizationGateReuse` 强制各阶段复用；阶段 × 复用映射见 `engine/docs/report-process-reuse.md` 第三节。
-- **全链路体系**：信息录入 → 校验 → 更新 → 生成 → 发布的全链路节点、五道防线、两级 gate-period 与闭环联动见 `engine/docs/report-pipeline-system.md`（REPORT-PIPELINE-SYSTEM v1.1，门禁左移：N0–N5 各阶段就地门禁 G0–G5，N6 统一门禁 + 审计兜底）；文档与门禁清单数量由 `engine/tests/test_pipeline_system_doc.py` 锁定。
+- **全链路体系**：信息录入 → 校验 → 更新 → 生成 → 发布的全链路节点、五道防线、两级 gate-period 与闭环联动见 `engine/docs/report-pipeline-system.md`（REPORT-PIPELINE-SYSTEM v1.2，门禁左移：N0–N5 各阶段就地门禁 G0–G5，N6 统一门禁 + 审计兜底）；文档与门禁清单数量由 `engine/tests/test_pipeline_system_doc.py` 锁定。
 - **端到端编排（硬性约束）**：流程图落地为 `engine/tools/pipeline_manifest.json`（声明式 N0–N8 / G0–G8 图 + L1/L2 闭环）+ `engine/tools/pipeline_runner.py`（节点→门禁→路由/退回，复用统一门禁单一入口）+ `engine/tools/pipeline_audit.py`（追加式留痕）；方案与任务清单见 `engine/docs/report-pipeline-implementation-plan.md`；一致性由 `engine/tests/test_pipeline_runner.py` 锁定（9 节点 / 9 门禁 / G6→N4 / N8→N1）。
 
 ## 报告生成规则（硬性约束，适用于任何 Agent 平台）
@@ -83,7 +83,7 @@ P0/P1/P2 优化清单（邻近判定 / 机构分级主数据 / 指标字典 / ga
 
 ## 多会话 Git 协作（硬性约束，适用于任何 Agent 平台）
 
-多个 Agent 会话与多个 CI 工作流共用同一 `main`，必须遵守 **`engine/docs/multi-session-git-protocol.md`（MULTI-SESSION-GIT-PROTOCOL v1.2）**：
+多个 Agent 会话与多个 CI 工作流共用同一 `main`，必须遵守 **`engine/docs/multi-session-git-protocol.md`（MULTI-SESSION-GIT-PROTOCOL v1.4）**：
 
 - **禁止直推 `main`**：任务一律在 `task/<slug>` 分支提交，经 PR 合并；直推 `main` 会与其他会话/CI 竞争并触发 non-fast-forward。
 - **统一网关**：提交/推送使用 `python engine/tools/repo_sync.py`（`run` / `push` / `pr`），它提供共享检出锁、推送前 `fetch --rebase`、直推 `main` 守卫。

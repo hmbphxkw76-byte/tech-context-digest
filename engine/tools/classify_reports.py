@@ -58,8 +58,8 @@ def owner_signals(name: str) -> dict:
     """
     lower = name.lower()
     businesses = iter_business_dirs()
-    # 地区线索取自「region 白名单 + 各业务线 region 段」（category-first 下 region
-    # 位于 category 之后，由 Business.region 按维度序列取出），避免新结构下漏检。
+    # 地区线索取自「region 白名单 + 各业务线 region 段」（region 段由 Business.region
+    # 按主题维度序列取出），避免新结构下漏检。
     region_tokens = set(load_layout().regions) | {b.region for b in businesses if b.segments}
     regions_in_name = [r for r in sorted(region_tokens) if r.lower() in lower]
 

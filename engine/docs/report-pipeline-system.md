@@ -1,11 +1,11 @@
-# 报告全链路信息处理体系（REPORT-PIPELINE-SYSTEM v1.1）
+# 报告全链路信息处理体系（REPORT-PIPELINE-SYSTEM v1.2）
 
 > **状态**：现行规范
 > **用途**：把 tech-context-digest 从「信息录入 → 校验 → 更新 → 生成 → 发布」的全链路节点、质量保障流水线、联动闭环固化为**唯一体系说明**，供人工与 Agent 共同遵循。
 > **事实源**：本文件是体系层说明；各环节规则正文以专用规范为准——[通用基座](../templates/prompt-generic-base.md)、[监测报告通用规范](../templates/monitoring-common-spec.md)、[信息分层规范](../templates/information-layering-spec.md)、[决策交付规范](../templates/decision-delivery-spec.md)、[页面构建规范](./page-build-spec.md)、[页面构建治理](./page-build-governance.md)、[流程复用清单](./report-process-reuse.md)、[多会话 Git 协议](./multi-session-git-protocol.md)。
 > **适用**：全部业务线报告（基线 / 月 / 季 / 年 / 周报）、决策仪表盘、hub 页（`index.html` / `reader.html`）与未来新增主题。
 > **硬性约束**：本文件与 `AGENTS.md` 同级生效；环节规则冲突时以专用规范与代码事实源为准，并回写本文件。
-> **最后更新**：2026-11-16
+> **最后更新**：2026-11-17
 
 ---
 

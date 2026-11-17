@@ -1,11 +1,11 @@
-# 报告全流程端到端编排方案与任务清单（REPORT-PIPELINE-IMPL-PLAN v1.1）
+# 报告全流程端到端编排方案与任务清单（REPORT-PIPELINE-IMPL-PLAN v1.2）
 
 > **状态**：已落地（编排器 / 清单 / 留痕均已实现并通过集成审查，见 [pipeline-integration-review](../report-audits/pipeline-integration-review-2026-11-15.md)）
 > **用途**：基于 [体系说明 §1.1 全链路主流程图](./report-pipeline-system.md) 给出可运行的端到端编排方案，确保实现与流程图的**节点、流转规则、校验标准 100% 对齐**。
 > **对齐声明**：流程图为 **9 个节点 N0–N8 + 9 个门禁 G0–G8**（G8 = 运维 / 告警）。
 > **落地载体**：`engine/tools/pipeline_manifest.json`（声明式图）、`engine/tools/pipeline_runner.py`（编排）、`engine/tools/pipeline_audit.py`（审计）、`engine/tests/test_pipeline_runner.py`（一致性测试）。
 > **硬性约束**：节点处理 → 门禁校验 → **通过则进入下一节点，不通过则按流程图路径精准退回**；不允许任何流程分支的自定义调整。
-> **最后更新**：2026-11-16
+> **最后更新**：2026-11-17
 
 ---
 
@@ -308,3 +308,4 @@ page_build（P01–P15）/ lint（W）/ compliance（节数 / `id="sN"` / 断头
 |---|---|---|---|
 | v1.0 | 2026-11-15 | 初始版本 | 端到端方案（架构 / 节点规范 / 门禁规则 / 闭环 / 任务清单 / 保障）；配套 manifest + runner + audit + 测试 |
 | v1.1 | 2026-11-16 | 状态与精简 | 状态改为「已落地」；任务清单由日期计划改为交付状态表；合并重复门禁规则表；补充集成审查指针 |
+| v1.2 | 2026-11-17 | 维度口径对齐 | N0 / N3 维度分类与归位双校验改为按 `layout.json` 主题声明顺序；`property_type` 表述改为细分领域段 |

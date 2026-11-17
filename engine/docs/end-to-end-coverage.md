@@ -12,7 +12,7 @@
 | # | 要求 | 覆盖产物（事实源 / 机制） | 强制手段 | 验证入口 |
 |---|---|---|---|---|
 | 1 | 全维度范围梳理 | 本文件 + [软件架构全面评估](../report-audits/architecture-assessment-2026-11-16.md) + [报告全链路体系](./report-pipeline-system.md)（N0–N8 / 五道防线） | — | 本文件 §四 |
-| 2 | 系统性架构规划与优化 | [架构与全流程设计基线](./architecture-and-pipeline-design.md) + [架构开发规范](./architecture-development-standard.md) + [目录结构与命名规范](./structure-and-naming-spec.md) + [页面构建规范](./page-build-spec.md) | `validate_layout` / `validate` / `page_build_check` | unittest + 统一门禁 |
+| 2 | 系统性架构规划与优化 | [架构与全流程设计基线](./architecture-and-pipeline-design.md)（含 §3.5 部署架构）+ [架构开发规范](./architecture-development-standard.md) + [目录结构与命名规范](./structure-and-naming-spec.md) + [页面构建规范](./page-build-spec.md) | `validate_layout` / `validate` / `page_build_check` | unittest + 统一门禁 |
 | 3 | 分阶段落地实施 | 设计基线 §6 的 P1–P4 + [架构开发规范](./architecture-development-standard.md) §三（流程与评审节点） | 阶段出口就地门禁 G0–G5 | `pipeline_runner run` |
 | 4 | 全链路自动化与稳定性保障 | `pipeline_runner` + `pipeline_manifest.json` + `automation_status` / `perf_monitor` / `remediation_ticket` / `workspace_cleanup` | 子进程 wall 超时 / 共享检出锁 / 退出码 0-1-2 / 幂等 | `test_pipeline_runner` / `test_perf_monitor` |
 | 5 | 标准化交付物输出 | 见 §三交付物清单 | 命名规范 + 生成物确定性 | `check_links` / `validate` |
@@ -45,7 +45,7 @@
 | 类别 | 交付物 |
 |---|---|
 | 全流程操作文档 | [engine/tools/README.md](../tools/README.md)（工具）、[report-pipeline-system.md](./report-pipeline-system.md)（体系）、[architecture-development-standard.md](./architecture-development-standard.md)（流程与验收） |
-| 架构设计说明 | [architecture-and-pipeline-design.md](./architecture-and-pipeline-design.md)、[architecture-development-standard.md](./architecture-development-standard.md) |
+| 架构设计说明 | [architecture-and-pipeline-design.md](./architecture-and-pipeline-design.md)（含 §3.5 部署架构：静态交付 + CI 编排）、[architecture-development-standard.md](./architecture-development-standard.md) |
 | 治理规范手册 | [process-vs-infrastructure-governance.md](./process-vs-infrastructure-governance.md)、[page-build-governance.md](./page-build-governance.md)、[multi-session-git-protocol.md](./multi-session-git-protocol.md)、[report-process-reuse.md](./report-process-reuse.md) |
 | CI/CD 流水线配置 | `.github/workflows/{ci,html-sync,content-update,scheduled-maintenance,audit,webhook-alert}.yml` + `.github/actions/{submit-pr,workspace-cleanup,remediation-ticket}/action.yml` |
 | 自动化报告生成脚本 | `engine/tools/{md2html,report_style,build_hub,build_index,publish_fingerprint,archive_reports}.py` |

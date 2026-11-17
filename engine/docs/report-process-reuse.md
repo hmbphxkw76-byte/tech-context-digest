@@ -1,10 +1,10 @@
-# 报告流程复用清单（PROCESS-REUSE-MANIFEST v1.2）
+# 报告流程复用清单（PROCESS-REUSE-MANIFEST v1.3）
 
 > **状态**：现行规范
 > **用途**：确认「信息分层与决策交付」优化后的流程被**后续每一个阶段**一致复用，杜绝某阶段绕过新规范。
 > **事实源**：[信息分层规范](../templates/information-layering-spec.md)、[决策交付规范](../templates/decision-delivery-spec.md)、[通用基座](../templates/prompt-generic-base.md) 第十/十一节。
 > **校验**：`engine/tests/test_process_gates.py`（阶段复用一致性测试，接入 unittest / ci.yml）。
-> **最后更新**：2026-11-16
+> **最后更新**：2026-11-17
 
 ---
 
