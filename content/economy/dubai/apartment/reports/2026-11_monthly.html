@@ -1,13 +1,10 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="2026 年 11 月期迪拜公寓住宅市场月度监测简报：价格、成交、租赁、供给、融资条件与宏观先行的逐项对比与信号判定。">
-  <meta name="color-scheme" content="light">
-  <title>迪拜公寓住宅市场月度监测简报 · 2026 年 11 月（v5）</title>
-  <script src="https://cdn.jsdelivr.net/npm/echarts@5/dist/echarts.min.js"></script>
-  <style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>迪拜公寓住宅市场月度简报 2026-11</title>
+<style>
 :root{
   --radius-sm:8px; --radius:12px; --radius-lg:16px; --radius-pill:999px;
   --shadow:0 1px 3px rgba(20,40,70,.06); --shadow-md:0 4px 14px rgba(20,40,70,.09);
@@ -244,7 +241,7 @@ table.fixed{table-layout:fixed}
 .tier.t1{border-top:4px solid var(--red)} .tier.t2{border-top:4px solid var(--pre)} .tier.t3{border-top:4px solid var(--amber)}
 .tier h4{margin:0 0 6px} .tier p{font-size:12.2px;color:var(--ink2);margin:0}
 
-/* ── 声明 / 页脚 / 索引链接 ── */
+/* ── 标注 / 页脚 / 索引链接 ── */
 .disc{margin-top:34px;padding:16px 18px;background:var(--bg-soft);border:1px solid var(--line);border-radius:var(--radius);font-size:13px;color:var(--ink3)}
 .disc strong{color:var(--ink)}
 footer,.footer{font-size:11.4px;color:var(--ink3);text-align:center;margin-top:22px;line-height:1.8}
@@ -305,6 +302,60 @@ details.registry[open]{padding-bottom:18px}
 .mini{background:#fff;border:1px solid var(--line);border-radius:9px;padding:12px 14px}
 .mini h4{margin-top:0}
 
+/* ── 信息等级标签（四级，信息分层规范） ── */
+.lvl{display:inline-block;font-size:11px;line-height:1.5;padding:1px 7px;border-radius:9px;
+  border:1px solid transparent;white-space:nowrap;font-weight:600;vertical-align:1px}
+.lvl-verified{background:var(--green-l);color:var(--green);border-color:var(--green-line,#d3ead9)}
+.lvl-partial{background:var(--amber-l);color:var(--amber);border-color:var(--amber-line,#f0e3c2)}
+.lvl-inferred{background:var(--blue-l);color:var(--navy2);border-color:#cdddf0}
+.lvl-assumption{background:var(--gray-l);color:var(--gray);border-color:var(--gray-line,#e6eaee)}
+
+/* ── 新增信息统计条（本期新增/修正/无变化/假设核验进度） ── */
+.delta-strip{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:14px 0}
+.delta-strip .d{background:var(--card);border:1px solid var(--line);border-radius:10px;
+  padding:12px 14px;box-shadow:var(--shadow)}
+.delta-strip .d .n{font-size:22px;font-weight:700;color:var(--navy);line-height:1.25}
+.delta-strip .d .l{font-size:11.6px;color:var(--ink3);margin-top:2px}
+.delta-strip .d.add .n{color:var(--green)}
+.delta-strip .d.fix .n{color:var(--amber)}
+.delta-strip .d.same .n{color:var(--ink3)}
+.delta-strip .d.hyp .n{color:var(--navy2)}
+
+/* ── 行动协议卡（触发条件+阈值+责任角色+时限+验证指标） ── */
+.action-card{background:var(--card);border:1px solid var(--line);border-left:4px solid var(--navy2);
+  border-radius:10px;padding:14px 16px;margin:12px 0;box-shadow:var(--shadow)}
+.action-card.immediate{border-left-color:var(--red)}
+.action-card.watch{border-left-color:var(--amber)}
+.action-card.archive{border-left-color:var(--gray)}
+.action-card .a-head{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:6px}
+.action-card .a-title{font-weight:700;color:var(--navy);font-size:14.5px}
+.action-card .a-meta{font-size:12.3px;color:var(--ink2);line-height:1.7}
+.action-card .a-meta b{color:var(--navy)}
+.prio{display:inline-block;font-size:11px;padding:1px 8px;border-radius:9px;font-weight:700}
+.prio.immediate{background:var(--red-l);color:var(--red)}
+.prio.watch{background:var(--amber-l);color:var(--amber)}
+.prio.archive{background:var(--gray-l);color:var(--gray)}
+
+/* ── 决策卡（结论/证据强度/触发条件/反向证据/信息充分度） ── */
+.decision-card{background:var(--card);border:1px solid var(--line);border-radius:12px;
+  padding:16px 18px;margin:14px 0;box-shadow:var(--shadow)}
+.decision-card .dc-head{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap;margin-bottom:8px}
+.decision-card .dc-title{font-weight:700;color:var(--navy);font-size:15px}
+.decision-card .dc-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px 18px;font-size:12.8px;line-height:1.7}
+.decision-card .dc-grid .k{color:var(--ink3);font-weight:600}
+.suff{display:inline-block;font-size:11px;padding:1px 8px;border-radius:9px;font-weight:700}
+.suff.ok{background:var(--green-l);color:var(--green)}
+.suff.need{background:var(--amber-l);color:var(--amber)}
+.ev-strong{color:var(--green);font-weight:700}
+.ev-mid{color:var(--amber);font-weight:700}
+.ev-weak{color:var(--red);font-weight:700}
+
+/* ── 场景切片 / 事实卡片指针 ── */
+.slice{border:1px dashed var(--navy2);border-radius:10px;padding:12px 16px;margin:12px 0;background:var(--blue-l)}
+.slice .slice-head{font-weight:700;color:var(--navy);margin-bottom:4px}
+.fact-ref{font-family:var(--font-mono);font-size:11.5px;color:var(--navy2);
+  background:var(--blue-l);border:1px solid #cdddf0;border-radius:5px;padding:0 5px;white-space:nowrap}
+
 /* ── 响应式 / 打印 ── */
 @media (max-width:720px){
   body{font-size:14px}
@@ -319,6 +370,8 @@ details.registry[open]{padding-bottom:18px}
   .kpi-grid{grid-template-columns:repeat(2,1fr)}
   .two-col,.sig-grid{grid-template-columns:1fr}
   .stat-strip{grid-template-columns:repeat(2,1fr)}
+  .delta-strip{grid-template-columns:repeat(2,1fr)}
+  .decision-card .dc-grid{grid-template-columns:1fr}
   .tl-date{flex-basis:64px;font-size:11.5px}
 }
 @media print{
@@ -327,918 +380,484 @@ details.registry[open]{padding-bottom:18px}
   body{font-size:12px}
 }
 
-
-/* 信息分层组件（与 report_style.py canonical 同步） */
-.delta-strip{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:14px 0}
-.delta-strip .d{background:var(--card,#fff);border:1px solid var(--line,#e1e7ee);border-radius:10px;padding:12px 14px}
-.delta-strip .d .n{font-size:22px;font-weight:700;color:var(--navy,#16324f);line-height:1.25}
-.delta-strip .d .l{font-size:11.6px;color:var(--ink3,#657180);margin-top:2px}
-.delta-strip .d.add .n{color:#1c7444}.delta-strip .d.fix .n{color:#956612}
-.delta-strip .d.same .n{color:#657180}.delta-strip .d.hyp .n{color:#2f5597}
-.lvl{display:inline-block;font-size:11px;line-height:1.5;padding:1px 7px;border-radius:9px;border:1px solid transparent;white-space:nowrap;font-weight:600}
-.lvl-verified{background:#eaf5ef;color:#1c7444}.lvl-partial{background:#fdf4e2;color:#956612}
-.lvl-inferred{background:#eaf1fa;color:#2f5597}.lvl-assumption{background:#eff2f4;color:#646f7b}
 </style>
 </head>
 <body>
-<div class="audit-mark" data-audit-id="AUD-2026-11-14-001" data-mark-level="full" style="background:#16324f;color:#fff;font:600 13px/1.6 system-ui,-apple-system,'Segoe UI',sans-serif;padding:8px 16px;text-align:center;letter-spacing:.02em"><span class="audit-badge">已审计</span><span class="audit-meta">终审通过 · 2026-11-17 · 审查链 4/4 · AUD-2026-11-14-001</span></div>
-
-<a class="skip-link" href="#main-content">跳转到主要内容</a>
+<a class="skip-link" href="#main-content">跳到主要内容</a>
 <header class="hero">
-  <h1>迪拜公寓住宅市场月度监测简报</h1>
-  <p class="sub">2026 年 11 月期 · v5（刷新 / 复核型）</p>
-  <p class="sub">住宅市场 · 价格 / 成交 / 租赁 / 供给 / 融资条件 / 宏观先行</p>
-  <div class="meta">
-    <div><b>执行日期：</b>2026-11-15（北京时间 GMT+8）</div>
-    <div><b>本期为 2026-11 月度周期第 5 次执行</b>（核验 / 收敛型）：v1 基线（2026-11-10）→ v2 刷新（2026-11-11 上午）→ v3 复核（2026-11-11 午后）→ v4 刷新 / 复核（2026-11-13）→ v5 刷新 / 复核（2026-11-15，本版，覆盖 v4）</div>
-    <div><b>报告版本：</b>v5（序列号）＝ v2026.11.15</div>
-    <div><b>对比锚：</b>v4 简报与指标台账「首期基线值」</div>
-    <div><b>指标台账：</b>data/processed/economy/dubai/apartment/dubai_apartment_indicator_registry_2027-01.xlsx（v2.0.2 · 75 项指标）</div>
-    <div><b>本期性质：</b>核验 / 收敛型——本期未重新直连官方源（网络受限），读数沿用 v4 与指标台账（读数时点 2026-11-13），不虚构；价值在核验、口径澄清、阈值距离与规范对齐。本报告正文中的「本期」均指该读数时点。</div>
-    <div><b>本版要点：</b>按最新代码 / 规范重新生成——补齐研究内核「政策入模（政策乘数）」（3.6）与「传导量化（弹性·时滞）」（4.3），并建立业务线来源登记 data/processed/economy/dubai/apartment/source_registry.json（76 条）</div>
+  <div class="wrap">
+    <p class="kicker">市场监测 · 月度简报 · 2026-11</p>
+    <h1>迪拜公寓住宅市场月度简报（2026-11）</h1>
+    <p class="lede">覆盖 2026-09-16～2026-11-15 已发布数据；v2.0 重置后首个正式月度周期，对比首期基线（2026-11-10）。</p>
+    <dl class="meta">
+      <div><dt>业务线</dt><dd>economy / dubai / apartment</dd></div>
+      <div><dt>监测周期</dt><dd>2026-09-16～2026-11-15</dd></div>
+      <div><dt>读数时点</dt><dd>2026-11-13（registry v2.0.2）</dd></div>
+      <div><dt>上一期</dt><dd>无（首期基线后首个正式月度）</dd></div>
+      <div><dt>编制</dt><dd>2026-11 月度循环</dd></div>
+      <div><dt>来源语言</dt><dd>仅英文</dd></div>
+    </dl>
   </div>
-  <div class="nav-url">报告 URL：<code>https://github.com/hmbphxkw76-byte/tech-context-digest/blob/main/content/economy/dubai/apartment/reports/2026-11_monthly.html</code></div>
 </header>
-
 <nav class="report-nav" aria-label="报告导航">
-  <div class="nav-tabs">
-    <a href="#s1">1 结论先行</a>
-    <a href="#s2">2 关键数字卡</a>
-    <a href="#s3">3 月度指标逐项对比</a>
-    <a href="#s4">4 信号灯判定</a>
-    <a href="#s5">5 与首期基线的偏离</a>
-    <a href="#s6">6 数据缺口与未核验项</a>
-    <a href="#s7">7 下期观察清单</a>
-    <a href="#s8">8 台账更新编号与来源</a>
+  <div class="wrap nav-inner">
+    <span class="nav-url">https://github.com/hmbphxkw76-byte/tech-context-digest/blob/main/content/economy/dubai/apartment</span>
+    <div class="nav-tabs">
+      <a href="#s1">结论先行</a>
+      <a href="#s2">关键数字卡</a>
+      <a href="#s3">月度指标逐项对比</a>
+      <a href="#s4">信号灯判定</a>
+      <a href="#s5">与首期基线的偏离</a>
+      <a href="#s6">数据缺口与未核验项</a>
+      <a href="#s7">下期观察清单</a>
+      <a href="#s8">台账更新编号与来源</a>
+    </div>
   </div>
 </nav>
-
 <main class="wrap" id="main-content">
-<div class="delta-strip" data-module="delta">
-  <div class="d add"><div class="n">3</div><div class="l">本期新增（条）</div></div>
-  <div class="d fix"><div class="n">0</div><div class="l">修正（条）</div></div>
-  <div class="d same"><div class="n">15</div><div class="l">无变化（条）</div></div>
-  <div class="d hyp"><div class="n">4/15</div><div class="l">假设核验进度</div></div>
-</div>
-<p class="small muted">本期读数时点：2026-11-13 ｜ 阈值校准：<span class="lvl lvl-assumption">预校准（ex-ante）</span> ｜ 场景切片：主场景 投资决策；次场景 政策制定 ｜ 信息等级：已核验 / 部分核验 / 推断 / 假设</p>
 
-<div class="note check"><b>本期性质声明：</b>本期为 v5 核验 / 收敛型重新生成，覆盖 v4。<b>数据层：</b>本期未重新直连官方源（网络受限），全部读数沿用 v4 与指标台账（v2.0.2），无新发布被引用，<b>信号结构未翻转</b>。<b>规范层（本版实质变更）</b>：① 补齐研究内核「政策入模（政策乘数）」（见 3.6）与「传导量化（弹性·时滞）」（见 4.3）；② 建立业务线来源登记 data/processed/economy/dubai/apartment/source_registry.json（76 条，覆盖基线 / 月度 / 季度 / 年度全部外部 URL），来源登记前置校验（L0）由「无登记」转为通过；③ 版本号 v4 → v5、执行日期 2026-11-15。<b>修正：</b>无新增事实修正，第 8.4 节 10 条继续有效。</div>
-
-<h2 class="sec" id="s1">1 · 结论先行</h2>
-<div class="card leadbox">
-  <p style="margin-top:0"><b>本期判定：</b>市场状态与信号结构<b>未翻转</b>——15 项信号规则维持「硬红·完全 1 + 硬红·方向 3 + 预警红 4 + 黄 2 + 绿 4 + 灰 1」；但<b>阈值距离与确认进度两项实质推进</b>：K01 距硬红线由 13.5bp 收窄至 <b>10.56bp</b>，K07 价格同比确认进度由 1 期升级为<b>连续 2 期</b>。</p>
-  <p style="margin-bottom:0"><b>本期为 v5 核验 / 收敛型：</b>数据层沿用 v4（读数时点 2026-11-13），未重新直连官方源，不制造变化；价值在核验、口径澄清、阈值距离与规范对齐。<b>市场状态：</b>高位钝化 → 供给延迟型再平衡。周期定位与 v4 一致，未翻转。</p>
+<h2 class="sec" id="s1">结论先行</h2>
+<div class="delta-strip">
+  <span>本期新增 <b>6</b> 条</span>
+  <span>修正 <b>3</b> 条</span>
+  <span>无变化 <b>4</b> 条</span>
+  <span>假设核验进度 <b>4/8</b></span>
 </div>
-<div class="card tight">
-  <ol class="tight">
-    <li><b>融资（本期焦点）：</b>3M EIBOR 最新定盘 <b>4.394390%</b>（11-12），较 v3 的 4.364820%（11-10）上行 2.96bp；距 K01 硬红线 4.50% 仅 <b>10.56bp</b>（v3 为 13.5bp），越预警线 4.35% 达 <b>+4.44bp</b>。触发专题预警条件（≤25bp），本期启用六件套。</li>
-    <li><b>货币与信用：</b>CBUAE 9 月统计公报于 2026-11-11 发布，M07 信贷 2,871.4 → <b>2,908.0</b>（+1.3%）、M08 存款 3,534.8 → <b>3,567.7</b>（+0.9%）、M09 M1/M2/M3 1,022.2/2,938.1/3,508.1（M1 −0.8%、M2 +0.6%、M3 +1.2%）。</li>
-    <li><b>价格：</b>PIX© 10 月指数 <b>203.7</b>（−0.9% MoM / −5.5% YoY / 10,407 笔 / 中位 1,637）。v3 记录的 204.0 为快照误差，本期修正；8 月口径冲突由 10 月发布页「months leading in」表化解（Aug 206.6 −2.4% / Sep 205.6 −3.9% / Oct 203.7 −5.5%）。</li>
-    <li><b>租赁：</b>新签公寓租金中位 65,000（10 月），同质化 0.0%（230 格）——表观租金回落与同质化走平并存，结构效应为主。</li>
-    <li><b>成交与供给：</b>Q3 成交量同比 −38%（K08 预警红）；新推盘 9M −64%（K05 绿）。</li>
-    <li><b>宏观与外需：</b>EIA STEO 11 月版（2026-11-10）Brent 4Q26 上修至 <b>109.13</b>（v3 的 10-06 版为 105）；DET 旅游 9/10 月仍缺席。</li>
-  </ol>
+<div class="decision-summary">
+<h3>决策摘要</h3>
+<ul>
+<li><span class="lvl lvl-verified">已核验</span> 融资成本维持预警红：CBUAE 基准利率 3.900%（2026-10-28 维持，10-2 票），3M EIBOR 11-12 定盘 4.394390%，距硬红线 4.50% 仅 10.56bp（M01/M02，K01）。</li>
+<li><span class="lvl lvl-verified">已核验</span> 价格端连续 2 月同比 &lt;−5%：PIX© 203.7（2026-10，−0.9% MoM / −5.5% YoY），公寓成交中位 1,659 AED/sqft（−5.5% YoY），K07 确认进度升至 2 个月（P03/P04）。</li>
+<li><span class="lvl lvl-verified">已核验</span> 租赁端房东定价权走弱：降租续约占比 21.4%（2026Q3，Q1 为 4.8%），新签中位租金 65,000 AED/年（2026-10，较 9 月 68,000 回落）（R06/R01）。</li>
+<li><span class="lvl lvl-partial">部分核验</span> 供给兑现持续偏低：交付兑现率 41.3%（2026H1），9M 交付 40,400 套（C&amp;W），2027 计划交付区间 60,000–162,500 套（S01/S03/S06）。</li>
+<li><span class="lvl lvl-partial">部分核验</span> 宏观预测分歧并列：Brent 2026F 97.44 US$/bbl（EIA STEO 2026-11 版），GDP 预测 CBUAE ≈5.6% 与 IMF 3.1% 分歧 2.5pp（M16/M15）。</li>
+<li><span class="lvl lvl-verified">已核验</span> 供给端新推盘同比 −64%（9M），开发商主动收缩；K05 维持绿灯（S07）。</li>
+</ul>
 </div>
+<p><span class="lvl lvl-inferred">推断</span> 综合五态：本期无红线触发，但 K01/K03 处预警红、K02/K06 处硬红·方向；价格与融资两端尚未出清，租金端定价权继续向租客转移。</p>
 
-<h3 class="sec-sub">s1.0 周期定位</h3>
-<p><b>阶段判定：过热—滞胀过渡带</b>（cycle_clock.py，置信度 100%）。增长 +1、通胀 +1、政策 +1、流动性 +1。宏观周期处于「过热→滞胀」过渡带，与本期限时「融资成本高位、降租续约占比恶化」的读数方向一致；周期定位作为本期信号合成的上游输入。</p>
-<h2 class="sec" id="s2">2 · 关键数字卡</h2>
+<p class="term"><b>周期定位：</b>本期为 v2.0 重置后首个正式月度周期，处于「价格与融资预警红、租金定价权走弱、供给冲击后置」阶段；无红线触发。</p>
+
+<h2 class="sec" id="s2">关键数字卡</h2>
 <div class="kcards">
-  <div class="kcard bad">
-    <div class="lab">PIX© 混合调整指数</div>
-    <div class="val">203.7</div>
-    <div class="note">2026-10 · −0.9% MoM / −5.5% YoY · 样本 10,407 笔 · 全住宅中位 1,637 AED/sqft · 行业机构</div>
-  </div>
-  <div class="kcard">
-    <div class="lab">公寓成交中位价</div>
-    <div class="val">AED 1,659</div>
-    <div class="note">/sqft · 2026-10 · 8,670 笔公寓登记（价格页 11-12 更新）· 行业机构</div>
-  </div>
-  <div class="kcard">
-    <div class="lab">新签公寓租金中位</div>
-    <div class="val">AED 65,000</div>
-    <div class="note">/年 · 2026-10 · 同质化 0.0%（230 格）· 行业机构</div>
-  </div>
-  <div class="kcard warn">
-    <div class="lab">3M EIBOR</div>
-    <div class="val">4.394390%</div>
-    <div class="note">2026-11-12 定盘 · 距 K01 硬红线 10.56bp · 官方一手</div>
-  </div>
-  <div class="kcard">
-    <div class="lab">CBUAE 基准利率</div>
-    <div class="val">3.900%</div>
-    <div class="note">2026-10-28 维持 · 官方一手</div>
-  </div>
-  <div class="kcard">
-    <div class="lab">Fed 联邦基金目标区间</div>
-    <div class="val">3.75–4.00%</div>
-    <div class="note">2026-10-28 维持，10–2 票 · 官方一手</div>
-  </div>
-  <div class="kcard">
-    <div class="lab">M3 货币供应</div>
-    <div class="val">3,508.1</div>
-    <div class="note">AED bn · 2026-09（初步*）· M1 1,022.2 / M2 2,938.1 · 官方统计公报</div>
-  </div>
-  <div class="kcard">
-    <div class="lab">Brent 4Q26 预测（STEO）</div>
-    <div class="val">US$109.13</div>
-    <div class="note">/b · 2026-11-10 版 · 官方一手</div>
-  </div>
+  <div class="kcard warn"><div class="lab">3M EIBOR（11-12 定盘）</div><div class="val">4.394390%</div><div class="s">CBUAE · 2026-11-12 · 已核验 · 预警红（K01）</div></div>
+  <div class="kcard warn"><div class="lab">CBUAE 基准利率</div><div class="val">3.900%</div><div class="s">CBUAE · 2026-10-28 维持 · 已核验 · 10-2 票</div></div>
+  <div class="kcard bad"><div class="lab">Fed 联邦基金目标区间</div><div class="val">3.75–4.00%</div><div class="s">Federal Reserve · 2026-10-28 · 已核验 · 2 票主张 +25bp</div></div>
+  <div class="kcard warn"><div class="lab">公寓成交中位价</div><div class="val">1,659 <small>AED/sqft</small></div><div class="s">PropertyIndex（DLD） · 2026-10 · 已核验 · −5.5% YoY</div></div>
+  <div class="kcard warn"><div class="lab">PIX© 混合调整指数</div><div class="val">203.7 <small>点</small></div><div class="s">PropertyIndex · 2026-10 · 已核验 · −0.9% MoM / −5.5% YoY</div></div>
+  <div class="kcard warn"><div class="lab">新签公寓租金中位</div><div class="val">65,000 <small>AED/年</small></div><div class="s">Peak Trust（Ejari） · 2026-10 · 已核验 · 同质化 0.0%</div></div>
+  <div class="kcard bad"><div class="lab">降租续约占比</div><div class="val">21.4%</div><div class="s">Cavendish Maxwell · 2026Q3 · 部分核验 · Q1 为 4.8%</div></div>
+  <div class="kcard good"><div class="lab">银行信贷总额</div><div class="val">2,908.0 <small>AED bn</small></div><div class="s">CBUAE · 2026-09 · 已核验 · +1.3% MoM</div></div>
 </div>
-<p class="src">数据来源与时点：价格、租金、成交、交付、收益率为英文行业机构（PropertyIndex、Peak Trust、Cavendish Maxwell、Savills、ValuStrat），统计周期 2026Q3–2026-10；利率、汇率、货币信贷、油价为官方英文一手来源（CBUAE、Federal Reserve、U.S. EIA），时点 2026-10-28 至 2026-11-12。货币与信用组来自 CBUAE Statistical Bulletin September 2026（2026-11-11 发布，xlsx 已归档）。<span class="muted">*2026-09 为初步数据，标注 *；待后续修订。</span></p>
+<p class="term"><b>读数口径：</b>卡片数值优先取自 <code>data/processed/economy/dubai/apartment/dubai_apartment_indicator_registry_2027-01.xlsx</code>（v2.0.2，2026-11-13）；卡片不构成投资建议。</p>
 
-<h2 class="sec" id="s3">3 · 月度指标逐项对比</h2>
-<p class="small muted" style="margin-top:-6px">五组结构：3.1 融资（含风险预警）/ 3.2 货币与信用 / 3.3 价格（含口径冲突并列）/ 3.4 成交与租赁 / 3.5 宏观与外需；另设 3.6 政策入模（G01–G05 政策乘数表）。每行含编号、指标、上期值、本期读数、方向、信号/阈值距离、来源（机构·周期·发布日·核验状态）；来源 URL 全文见第 8.3 节弹层，不在单元格内书写。</p>
+<h2 class="sec" id="s3">月度指标逐项对比</h2>
+<p class="note">「上期值」取首期基线（2026-11-10）或最近已发布读数；来源单元格只写机构·周期·发布日·核验状态，完整 URL 见第 8 节来源浮层。</p>
 
-<h3>3.1 融资条件（含风险预警）</h3>
-<div class="tblwrap">
+<h3>3.1 融资与货币</h3>
 <table class="fixed">
-  <thead>
-    <tr>
-      <th style="width:6%">编号</th>
-      <th style="width:14%">指标</th>
-      <th style="width:16%">上期值（v3）</th>
-      <th style="width:18%">本期读数</th>
-      <th style="width:7%">方向</th>
-      <th style="width:16%">信号 / 阈值距离</th>
-      <th style="width:23%">来源（机构·周期·发布日·核验状态）</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>M01a</td>
-      <td>CBUAE 基准利率</td>
-      <td>3.900%（2026-10-28 维持）</td>
-      <td><b>3.900%</b>（2026-10-28 维持）</td>
-      <td><span class="pill k">持平</span></td>
-      <td>政策利率锚，无独立阈值</td>
-      <td>CBUAE · 2026-10-28 宣布 · 2026-10-28 发布 · <span class="pill g">已核验</span></td>
-    </tr>
-    <tr>
-      <td>M01</td>
-      <td>Fed 联邦基金目标区间</td>
-      <td>3.75–4.00%（10-28，10–2 票）</td>
-      <td><b>3.75–4.00%</b>（10-28，10–2 票）</td>
-      <td><span class="pill k">持平</span></td>
-      <td>K02 硬红·方向（≥1 票主张加息已触发）</td>
-      <td>Federal Reserve · 2026-10-27/28 · 2026-10-28 发布 · <span class="pill g">已核验</span></td>
-    </tr>
-    <tr>
-      <td>M02</td>
-      <td>3M EIBOR</td>
-      <td>4.364820%（11-10 定盘）</td>
-      <td><b>4.394390%</b>（11-12 定盘）</td>
-      <td><span class="pill p">上行 2.96bp</span></td>
-      <td>K01 预警红；距硬红线 <b>10.56bp</b>、越预警线 <b>+4.44bp</b></td>
-      <td>CBUAE · 日度定盘 · 2026-11-12 12:15 UAE · <span class="pill g">已核验</span></td>
-    </tr>
-    <tr>
-      <td>M03</td>
-      <td>6M / 1Y EIBOR</td>
-      <td>4.631080% / 4.603340%（11-10）</td>
-      <td><b>4.444220% / 4.724730%</b>（11-12）</td>
-      <td><span class="pill p">6M −18.69bp / 1Y +12.14bp</span></td>
-      <td>1Y−6M 利差 <b>+28.05bp</b>（11-10 的 6M&gt;1Y 倒挂已化解）</td>
-      <td>CBUAE · 日度定盘 · 2026-11-12 · <span class="pill g">已核验</span></td>
-    </tr>
-    <tr>
-      <td>M04</td>
-      <td>AED/USD 参考汇率</td>
-      <td>3.6725（11-09 快照）</td>
-      <td><b>3.6725</b>（钉住，未变）</td>
-      <td><span class="pill k">持平</span></td>
-      <td>钉住制，无独立阈值</td>
-      <td>CBUAE · 日度 · 2026-11-09 · <span class="pill g">已核验</span></td>
-    </tr>
-  </tbody>
+<thead><tr>
+<th style="width:7%">编号</th><th style="width:16%">指标</th><th style="width:15%">上期值</th><th style="width:20%">本期读数</th><th style="width:8%">方向</th><th style="width:16%">阈值距离 / 信号</th><th style="width:18%">来源（机构·周期·发布日·核验）</th>
+</tr></thead>
+<tbody>
+<tr><td>M01</td><td>CBUAE 基准利率</td><td>3.900%</td><td>3.900%</td><td>持平</td><td>预警红（K01）</td><td>CBUAE · 2026-10-28 · 已核验</td></tr>
+<tr><td>M02</td><td>3 个月 EIBOR</td><td>4.364820%（11-10）</td><td>4.394390%（11-12）</td><td>上行 +2.96bp</td><td>预警红；距硬红 10.56bp</td><td>CBUAE · 2026-11-12 · 已核验</td></tr>
+<tr><td>M03</td><td>6M / 1Y EIBOR</td><td>6M&gt;1Y 倒挂</td><td>6M 4.444220 / 1Y 4.724730</td><td>倒挂化解</td><td>预警红（K01 辅助）</td><td>CBUAE · 2026-11-12 · 已核验</td></tr>
+<tr><td>M04</td><td>AED/USD 参考汇率</td><td>3.6725</td><td>3.6725</td><td>持平</td><td>绿（钉住）</td><td>CBUAE · 2026-11-09 · 已核验</td></tr>
+<tr><td>M05</td><td>Fed 目标区间</td><td>3.75–4.00%</td><td>3.75–4.00%</td><td>维持</td><td>硬红·方向（2 票主张加息）</td><td>Federal Reserve · 2026-10-28 · 已核验</td></tr>
+<tr><td>M06</td><td>FOMC 会议与纪要日历</td><td>12/08–09</td><td>12/08–09（含 SEP）；纪要 12-30</td><td>待观察</td><td>硬红·方向（K02）</td><td>Federal Reserve · 2026 · 已核验</td></tr>
+</tbody>
 </table>
-</div>
-
-<div class="chart-box">
-  <div id="chartEibor" class="chart-eh" role="img" aria-label="3M EIBOR 路径图：2026 年 1 至 10 月月均与 11 月逐日定盘"></div>
-  <p class="chart-note"><b>图 1｜3M EIBOR 路径：</b>2026-01～10 为逐日定盘的月算术平均（数据源 CBUAE EIBOR 2026 年归档文件 eibor_2026.xlsx）；11-06 起为官方页逐日定盘（Last updated Thursday 12 November 2026 12:15:19 PM）。月均自 7 月 3.870124% 升至 10 月 4.303021%（<b>+43.29bp</b>，越 40bp 预警线、未达 50bp 硬红线）；11 月 9 次定盘均值 4.313649%，较 8 月月均 3.899114% 上行 <b>+41.45bp</b>，同处 40–50bp 区间。红线/绿线取自业务配置第五节 K01 阈值。</p>
-</div>
-
-<h4>3.1.1 风险预警：融资成本（专题六件套）</h4>
-<div class="note correct"><b>触发依据：</b>来源：业务配置第九节（阈值口径）、eibor_2026.xlsx（读数复算）——当 3M EIBOR 距 K01 红线 ≤25bp，或单月上行 ≥20bp 时触发。本期 3M EIBOR 距硬红线 4.50% 为 <b>10.56bp</b>（≤25bp），且 10 月均值较 9 月单月上行 12.57bp、11 月 MTD 较 8 月月均上行 41.45bp（≥20bp），<b>双条件命中，本期必须启用六件套</b>。v3 未启用，本期补足。</div>
-
-<p><b>① 预警面板（四个距离同时看）</b></p>
-<div class="tblwrap">
-<table class="fixed">
-  <thead>
-    <tr>
-      <th style="width:24%">距离维度</th>
-      <th style="width:14%">数值</th>
-      <th style="width:62%">说明</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr><td>距硬红线 4.50%（绝对）</td><td><b>10.56bp</b></td><td>4.500000 − 4.394390 = 0.105610pp；v3 为 13.5bp，本期收窄 2.94bp</td></tr>
-    <tr><td>相对幅度</td><td><b>2.40%</b></td><td>10.561 / 439.439 = 2.4033%；以当前定盘为分母</td></tr>
-    <tr><td>近 10 次定盘均值距红线</td><td><b>18.37bp</b></td><td>近 10 次定盘（10-30、11-02、11-03、11-04、11-05、11-06、11-09、11-10、11-11、11-12）均值 4.316301%，4.500 − 4.316301 = 0.183699pp</td></tr>
-    <tr><td>近两日累计变动</td><td><b>+5.45bp</b></td><td>11-11 定盘 4.339930% → 11-12 定盘 4.394390%；11-10 → 11-12 为 +2.96bp</td></tr>
-  </tbody>
-</table>
-</div>
-
-<p><b>② 关键区分：仪表盘距离 ≠ 风险发生点</b></p>
-<p>K01 确认标准为「<b>月均连续 2 期同向</b>」，单日定盘破线不构成确认。v3 以单日定盘判定距离，本期补足月均口径，两口径并列：</p>
-<div class="tblwrap">
-<table class="fixed">
-  <thead>
-    <tr>
-      <th style="width:22%">口径</th>
-      <th style="width:26%">计算</th>
-      <th style="width:14%">结果</th>
-      <th style="width:38%">判定</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr><td>单日定盘（v3 口径）</td><td>11-12 定盘 4.394390%</td><td>距红线 10.56bp</td><td>越预警线 4.35%（+4.44bp），未触硬红线 4.50%</td></tr>
-    <tr><td>月均「3 月累计上行」</td><td>Jul 3.870124 → Oct 4.303021</td><td><b>+43.29bp</b></td><td>越 40bp 预警线，未达 50bp 硬红线</td></tr>
-    <tr><td>11 月 MTD 对 8 月月均</td><td>4.313649 − 3.899114</td><td><b>+41.45bp</b></td><td>同处 40–50bp 区间（越预警线、未达硬红线）</td></tr>
-  </tbody>
-</table>
-</div>
-<p class="small muted">结论：<b>月均口径下「3 月累计上行」由 v3 的「不可算」变为「可算且越预警线」</b>，但两口径均未达 50bp 硬红线，K01 维持预警红、不升级硬红。</p>
-
-<p><b>③ 四条证据</b></p>
-<div class="tblwrap">
-<table class="fixed">
-  <thead>
-    <tr>
-      <th style="width:12%">证据</th>
-      <th style="width:88%">内容与读数</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr><td><b>斜率</b></td><td>11-06 至 11-12 五个定盘累计 <b>+18.762bp</b>（4.206770 → 4.394390）；10 月单日最大上行 <b>+27.633bp</b>、最大下行 <b>−22.347bp</b>（官方 2026 年归档文件），单日跳价属业务配置第八节失真信号清单项，不单独作为趋势依据。</td></tr>
-    <tr><td><b>期限结构</b></td><td>11-12 定盘 3M 4.394390% / 6M 4.444220% / 1Y 4.724730%，<b>1Y 高于 6M 28.05bp</b>；11-10 曾出现 6M（4.631080）&gt; 1Y（4.603340）的 −27.74bp 倒挂，两个交易日后化解。短端 O/N 3.650010 / 1W 3.957310 / 1M 4.157240，1M−O/N 利差 50.72bp。</td></tr>
-    <tr><td><b>政策约束</b></td><td>Fed 10-28 维持 3.75–4.00%（10–2 票，2 票主张 +25bp）；12-08/09 会议含 SEP（点阵图）；AED 钉住美元 3.6725，CBUAE 基准利率 3.900% 与 Fed 区间下限利差 15bp。</td></tr>
-    <tr><td><b>银行资金成本溢价</b></td><td>EIBOR − Base Rate = 4.394390 − 3.900 = <b>49.44bp</b>（v3 为 46.48bp），银行间融资相对政策利率的溢价走阔 2.96bp。</td></tr>
-  </tbody>
-</table>
-</div>
-
-<p><b>④ 传导量化表（自算，假设性测算）</b></p>
-<p class="small muted">假设：贷款本金 AED 2,000,000；期限 300 个月（25 年）；等额本息；利率<b>全额传导</b>；未计 margin 与重定价周期。毛收益率利差 = 公寓毛收益率 − 按揭利率，基准取三口径并列（登记 TTM 6.0% / 23 区中位 6.2% / CM 问询 6.6%）。</p>
-<div class="tblwrap">
-<table class="fixed">
-  <thead>
-    <tr>
-      <th style="width:16%">利率档</th>
-      <th style="width:12%">月供 (AED)</th>
-      <th style="width:14%">月供变化</th>
-      <th style="width:18%">同等月供可负担房价 (AED)</th>
-      <th style="width:14%">房价上限变化</th>
-      <th style="width:26%">毛收益率利差</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr><td><b>4.394390%</b>（当前）</td><td class="num">10,997</td><td class="num">—</td><td class="num">2,000,000</td><td class="num">0.00%</td><td class="num">1.61–2.21pp</td></tr>
-    <tr><td><b>4.50%</b>（红线）</td><td class="num">11,117</td><td class="num">+120（+1.09%）</td><td class="num">1,978,492</td><td class="num">−1.08%</td><td class="num">1.50–2.10pp</td></tr>
-    <tr><td><b>4.75%</b>（+25bp 以上）</td><td class="num">11,402</td><td class="num">+405（+3.69%）</td><td class="num">1,928,919</td><td class="num">−3.55%</td><td class="num">1.25–1.85pp</td></tr>
-    <tr><td><b>5.00%</b></td><td class="num">11,692</td><td class="num">+695（+6.32%）</td><td class="num">1,881,165</td><td class="num">−5.94%</td><td class="num">1.00–1.60pp</td></tr>
-    <tr><td><b>5.25%</b></td><td class="num">11,985</td><td class="num">+988（+8.98%）</td><td class="num">1,835,151</td><td class="num">−8.24%</td><td class="num">0.75–1.35pp</td></tr>
-  </tbody>
-</table>
-</div>
-<div class="chart-box">
-  <div id="chartRate" class="chart-eh" role="img" aria-label="利率敏感性图：五档利率下的月供与可负担房价变化"></div>
-  <p class="chart-note"><b>图 2｜利率敏感性：月供与可负担房价：</b>五档利率下的等额本息月供（柱，左轴）与同等月供可负担房价相对 AED 2,000,000 的变化（线，右轴）。假设性测算，非机构发布。</p>
-</div>
-
-<p><b>⑤ 三情景（只给可观测触发条件，不赋概率）</b></p>
-<div class="tblwrap">
-<table class="fixed">
-  <thead>
-    <tr>
-      <th style="width:14%">情景</th>
-      <th style="width:30%">可观测触发条件</th>
-      <th style="width:20%">EIBOR 路径（3M）</th>
-      <th style="width:14%">K01 判定</th>
-      <th style="width:22%">对公寓市场的影响</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr><td><b>A 回归区间</b></td><td>11 月下旬至 12 月定盘回落至 4.35% 预警线下方，且连续 3 次定盘</td><td>4.20–4.30%</td><td>预警红解除（需月均连续 2 期同向）</td><td>按揭月供压力缓解，Q4 成交量（K08）下行斜率放缓</td></tr>
-    <tr><td><b>B 横盘越线</b></td><td>3M 定盘在 4.35–4.50% 区间震荡，月均连续 2 期 ≥4.50% 未出现</td><td>4.35–4.45%</td><td>维持预警红</td><td>购买力持续侵蚀但无断崖，价格同比（K07）负向加深</td></tr>
-    <tr><td><b>C 突破红线</b></td><td>月均连续 2 期 ≥4.50%，或 3 月累计上行 &gt;50bp</td><td>4.55–4.75%</td><td>升级硬红</td><td>月供 +1.1%～+3.7%，可负担房价 −1.1%～−3.6%，K07 / K08 负向共振风险上升</td></tr>
-  </tbody>
-</table>
-</div>
-
-<p><b>⑥ 反向校准 + 来源核查表</b></p>
-<div class="tblwrap">
-<table class="fixed">
-  <thead>
-    <tr>
-      <th style="width:18%">校准项</th>
-      <th style="width:20%">应有权威来源</th>
-      <th style="width:30%">本期核查结果</th>
-      <th style="width:12%">核验状态</th>
-      <th style="width:20%">对预警的影响</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr><td>3M EIBOR 逐日定盘</td><td>CBUAE EIBOR 页</td><td>已直连读取 11-02～11-12 共 9 次定盘（Last updated Thursday 12 November 2026 12:15:19 PM）</td><td><span class="pill g">已核验</span></td><td>预警面板读数可信</td></tr>
-    <tr><td>2026 年 1–10 月定盘序列</td><td>CBUAE EIBOR 历史文件</td><td>eibor_2026.xlsx 已归档（10 个工作表，1 月–10 月），直连来源链接有效</td><td><span class="pill g">已核验</span></td><td>月均口径「3 月累计」由不可算变为可算</td></tr>
-    <tr><td>月均计算口径</td><td>自算（无官方月均序列）</td><td>逐日定盘算术平均，非成交量加权；官方未发布月均序列</td><td><span class="pill b">自算</span></td><td>与官方口径可能存在微小差异，两口径并列呈现</td></tr>
-    <tr><td>2M 期限</td><td>CBUAE EIBOR 页</td><td>官方页面期限表仅提供 O/N、1W、1M、3M、6M、1Y，无 2M</td><td><span class="pill y">部分核验</span></td><td>短端曲线不完整，不影响 3M 判定</td></tr>
-    <tr><td>按揭利率传导</td><td>商业银行挂牌产品页</td><td>未取得任何银行按揭产品报价页（本期未检索到可引用英文一手页）</td><td><span class="pill k">未取得</span></td><td>传导量化表为假设性测算，非市场报价</td></tr>
-    <tr><td>毛收益率基准</td><td>Peak Trust / Cavendish Maxwell</td><td>23 区中位 6.2%（2026Q3）；登记 TTM 6.0%；CM 问询 6.6%</td><td><span class="pill g">已核验</span></td><td>利差以区间值呈现</td></tr>
-    <tr><td>11-13 及以后定盘</td><td>CBUAE EIBOR 页</td><td>本期执行时点（09:22 UAE）尚未生成（官方 12:15 UAE 发布）</td><td><span class="pill k">未发布</span></td><td>预警面板为 11-12 时点快照</td></tr>
-  </tbody>
-</table>
-</div>
 
 <h3>3.2 货币与信用</h3>
-<div class="note"><b>本期触发器命中：</b>业务配置第七节「CBUAE 统计公报发布 → 货币与信用」。Statistical Bulletin September 2026 于 <b>2026-11-11</b> 发布（v3 执行时点 2026-11-11 午后尚未取得），本期完成 8 月 → 9 月的月度推进。</div>
-<div class="tblwrap">
 <table class="fixed">
-  <thead>
-    <tr>
-      <th style="width:6%">编号</th>
-      <th style="width:15%">指标</th>
-      <th style="width:16%">上期值（2026-08）</th>
-      <th style="width:18%">本期读数（2026-09）</th>
-      <th style="width:7%">方向</th>
-      <th style="width:15%">信号 / 阈值距离</th>
-      <th style="width:23%">来源（机构·周期·发布日·核验状态）</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr><td>M07</td><td>银行信贷总额（Gross Credit）</td><td>2,871.4 AED bn</td><td><b>2,908.0 AED bn</b></td><td><span class="pill p">上行 +1.3%</span></td><td>无独立阈值（背景项）</td><td>CBUAE Statistical Bulletin · 2026-09 · 2026-11-11 · <span class="pill g">已核验</span></td></tr>
-    <tr><td>M07a</td><td>国内信贷（Domestic Credit）</td><td>2,268.8</td><td><b>2,304.5</b></td><td><span class="pill p">上行 +1.6%</span></td><td>企业 +10.8bn / 政府 +11.1bn（+4.2%）/ 个人 +5.2bn（+0.8%）</td><td>同上</td></tr>
-    <tr><td>M08</td><td>银行存款总额</td><td>3,534.8</td><td><b>3,567.7</b></td><td><span class="pill p">上行 +0.9%</span></td><td>居民 3,249.8（+0.6%）/ 非居民 317.9（+4.1%）</td><td>同上</td></tr>
-    <tr><td>M09</td><td>M1 / M2 / M3</td><td>1,038.9 / 2,919.9 / 3,465.6</td><td><b>1,022.2 / 2,938.1 / 3,508.1</b></td><td><span class="pill p">M1 −0.8% / M2 +0.6% / M3 +1.2%</span></td><td>2026-09 为初步数据（*）</td><td>同上</td></tr>
-    <tr><td>M09a</td><td>货币基数 / 准备金余额</td><td>825.9 / 232.0</td><td><b>801.9 / 304.7</b></td><td><span class="pill y">基数 −2.9% / 准备金 +31.3%</span></td><td>背景项</td><td>同上</td></tr>
-    <tr><td>M07b</td><td>银行总资产</td><td>5,741.3</td><td><b>5,815.3</b></td><td><span class="pill p">上行 +1.3%</span></td><td>背景项</td><td>同上</td></tr>
-  </tbody>
+<thead><tr>
+<th style="width:7%">编号</th><th style="width:16%">指标</th><th style="width:15%">上期值</th><th style="width:20%">本期读数</th><th style="width:8%">方向</th><th style="width:16%">阈值距离 / 信号</th><th style="width:18%">来源（机构·周期·发布日·核验）</th>
+</tr></thead>
+<tbody>
+<tr><td>M07</td><td>银行信贷总额</td><td>2,871.4 AED bn（2026-08）</td><td>2,908.0 AED bn（2026-09）</td><td>+1.3% MoM</td><td>绿</td><td>CBUAE · 2026-09 · 已核验</td></tr>
+<tr><td>M08</td><td>银行存款总额</td><td>—</td><td>3,567.7 AED bn（2026-09）</td><td>+0.9% MoM</td><td>绿</td><td>CBUAE · 2026-09 · 已核验</td></tr>
+<tr><td>M09</td><td>货币供应 M1/M2/M3</td><td>—</td><td>1,022.2 / 2,938.1 / 3,508.1 AED bn</td><td>M1 −0.8% MoM</td><td>绿</td><td>CBUAE · 2026-09 · 已核验</td></tr>
+<tr><td>M21</td><td>国内信贷（Domestic Credit）</td><td>—</td><td>2,304.5 AED bn（2026-09）</td><td>+1.6% MoM</td><td>背景项</td><td>CBUAE · 2026-09 · 已核验</td></tr>
+<tr><td>M22</td><td>货币基数 / 准备金余额</td><td>—</td><td>801.9 / 304.7 AED bn（2026-09）</td><td>基数 −2.9% / 准备金 +31.3%</td><td>背景项</td><td>CBUAE · 2026-09 · 已核验</td></tr>
+<tr><td>M10</td><td>季度经济评论 / 信贷景气调查</td><td>QER 2026-09</td><td>QER 2026-09（09-30）；CSS Q2（09-17）</td><td>绿</td><td>三级</td><td>CBUAE · 2026Q3 · 已核验</td></tr>
+</tbody>
 </table>
-</div>
-<p class="small muted">口径并列：① Summary Report 正文 M2 段称 GREs 存款「+9.7%」，存款段称「+9.6%」；统计公报分部门表计算为 344,944.787 → 378,216.546 = <b>+9.645%（取 9.6%）</b>，以分部门表为准。② 居民企业存款 9 月 <b>−2.0%</b>（1,476,943.658 → 1,447,642.474），M2 增长主要由 GREs（+9.6%）与非居民（+4.1%）拉动，私营部门存款 2,345.0bn、政府部门 460.4bn。</p>
 
-<h3>3.3 价格（含口径冲突并列）</h3>
-<div class="tblwrap">
+<h3>3.3 价格</h3>
 <table class="fixed">
-  <thead>
-    <tr>
-      <th style="width:6%">编号</th>
-      <th style="width:15%">指标</th>
-      <th style="width:16%">上期值（v3）</th>
-      <th style="width:18%">本期读数</th>
-      <th style="width:7%">方向</th>
-      <th style="width:16%">信号 / 阈值距离</th>
-      <th style="width:22%">来源（机构·周期·发布日·核验状态）</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr><td>P04</td><td>PIX© 混合调整指数（全住宅）</td><td>204.0（v3 快照，−5.4% YoY，10,496 笔）</td><td><b>203.7</b>（−0.9% MoM / −5.5% YoY / 10,407 笔 / 中位 1,637）</td><td><span class="pill p">下行 −0.3 点</span></td><td>K07 预警红；距硬红确认线（−5%）<b>0.5pp</b>；确认进度 <b>连续 2 月</b></td><td>PropertyIndex · 2026-10 · 快照 2026-11-13 · <span class="pill g">已核验</span></td></tr>
-    <tr><td>P04a</td><td>PIX© 公寓板块</td><td>200.3（8 月发布页快照）</td><td><b>196.2</b>（−1.0% MoM / −6.0% YoY / 8,653 笔 / 中位 1,659）</td><td><span class="pill p">下行</span></td><td>K07 同源同向</td><td>同上</td></tr>
-    <tr><td>P03</td><td>公寓成交中位价</td><td>1,659 AED/sqft（8,671 笔）</td><td><b>1,659 AED/sqft</b>（8,670 笔）</td><td><span class="pill k">持平</span></td><td>行业机构口径</td><td>PropertyIndex · 2026-10 · 2026-11-12 更新 · <span class="pill g">已核验</span></td></tr>
-    <tr><td>P03a</td><td>全住宅中位价</td><td>1,639（11-10 更新）</td><td><b>1,639</b>（11-12 更新，10,610 笔）</td><td><span class="pill k">持平</span></td><td>—</td><td>同上</td></tr>
-    <tr><td>P04b</td><td>城市指数（Property Monitor）</td><td>1,644（2026-09）</td><td>1,644（2026-09）</td><td><span class="pill k">持平</span></td><td>第二指数，同向</td><td>DXBinteract / Property Monitor · 2026-09 · 2026-10 · <span class="pill y">部分核验</span></td></tr>
-    <tr><td>P05</td><td>ValuStrat VPI</td><td>−4.5% YoY（Q3）</td><td>未取得 10 月值</td><td><span class="pill k">—</span></td><td>第二指数缺口</td><td>valustrat.com · 未取得</td></tr>
-  </tbody>
+<thead><tr>
+<th style="width:7%">编号</th><th style="width:16%">指标</th><th style="width:15%">上期值</th><th style="width:20%">本期读数</th><th style="width:8%">方向</th><th style="width:16%">阈值距离 / 信号</th><th style="width:18%">来源（机构·周期·发布日·核验）</th>
+</tr></thead>
+<tbody>
+<tr><td>P01</td><td>公寓成交均价</td><td>1,817 AED/sqft（2026Q3）</td><td>1,817 AED/sqft（2026Q3）</td><td>−4.8% QoQ</td><td>参考（受成交结构影响）</td><td>Savills · 2026Q3 · 已核验</td></tr>
+<tr><td>P02</td><td>公寓同质化价格变动</td><td>−1.7% QoQ</td><td>−1.7% QoQ</td><td>横盘</td><td>参考（K07 辅助）</td><td>Savills · 2026Q3 · 已核验</td></tr>
+<tr><td>P03</td><td>公寓成交中位价</td><td>1,659 AED/sqft（2026-10）</td><td>1,659 AED/sqft（8,670 笔）</td><td>−5.5% YoY</td><td>预警红（K07）</td><td>PropertyIndex（DLD） · 2026-10 · 已核验</td></tr>
+<tr><td>P04</td><td>PIX© 混合调整价格指数</td><td>204.0（快照，已修正）</td><td>203.7（10,407 笔；中位 1,637）</td><td>−0.9% MoM / −5.5% YoY</td><td>预警红（K07）</td><td>PropertyIndex · 2026-10 · 已核验</td></tr>
+<tr><td>P05</td><td>ValuStrat 公寓资本价值指数</td><td>公寓 168.1 / 全市 218.6</td><td>公寓 168.1 / 全市 218.6</td><td>−0.6% QoQ / −4.5% YoY</td><td>预警红（K07）</td><td>ValuStrat · 2026Q3 · 部分核验</td></tr>
+<tr><td>P06</td><td>Property Monitor 城市指数</td><td>1,644 AED/sqft（9 月）</td><td>1,644（9 月）；8 月 1,632</td><td>−1.9% YoY</td><td>参考（已降级，不进信号合成）</td><td>Property Monitor · 2026-09 · 部分核验</td></tr>
+<tr><td>P13</td><td>期房-现房成交中位价差</td><td>—</td><td>32.6%（1,760 vs 1,327）</td><td>溢价收窄</td><td>黄</td><td>PropertyIndex（DLD） · 2026-10 · 已核验</td></tr>
+<tr><td>P14</td><td>全住宅登记中位价</td><td>—</td><td>1,639 AED/sqft（10,610 笔）</td><td>第二口径</td><td>参考（与 P03 并列）</td><td>PropertyIndex · 2026-10 · 已核验</td></tr>
+</tbody>
 </table>
-</div>
-<div class="note correct"><b>口径冲突并列（价格组）：</b>
-<ul class="tight" style="margin-bottom:0">
-  <li><b>样本数：</b>价格页（11-12 更新）全住宅 <b>10,610 笔</b> / 公寓 <b>8,670 笔</b>；PIX 10 月发布页全住宅 <b>10,407 笔</b> / 公寓 <b>8,653 笔</b>。差异 203 笔 / 17 笔来自登记补录时点差（PIX 页注明「Computed nightly … the latest month may revise as late registrations land」）。</li>
-  <li><b>全住宅中位 PSF：</b>价格页 <b>1,639</b>；PIX 页/发布页 <b>1,637</b>。v3 曾记「PIX 页由 1,637 修订至 1,639」，本期核实 PIX 页仍为 1,637，两值并列。</li>
-  <li><b>8 月口径冲突（已化解）：</b>当前发布序列为 <b>Aug 206.6（−2.4% YoY）/ Sep 205.6（−3.9%）/ Oct 203.7（−5.5%）</b>（10 月发布页「months leading in」表）；8 月历史发布页快照（205.6 / −3.5% / 1,673 / 7,612 / Apartments 200.3 −4.2%）为旧版，<b>须并列引用，不得单独作为当前值</b>。</li>
-  <li><b>口径不可比：</b>PIX© 为混合调整指数（AED 点值，非价格）；中位 PSF 为原始登记价；城市指数为 DXBinteract 口径；公寓均价 / 顶级公寓均价为 Savills Q3 口径。四者统计域与调整方法各异，禁止直接相减。</li>
-</ul>
-</div>
-<div class="chart-box">
-  <div id="chartPrice" class="chart-eh" role="img" aria-label="价格口径对照图：六种口径下的价格水平"></div>
-  <p class="chart-note"><b>图 3｜价格口径对照（不可直接相减）：</b>六种口径的 2026-09/10 水平并列。PIX 页全住宅中位 1,637 与价格页 1,639 的 2 AED 差来自登记补录时点；城市指数 1,644 为 2026-09 的 DXBinteract 口径。</p>
-</div>
 
 <h3>3.4 成交与租赁</h3>
-<div class="tblwrap">
 <table class="fixed">
-  <thead>
-    <tr>
-      <th style="width:6%">编号</th>
-      <th style="width:15%">指标</th>
-      <th style="width:16%">上期值</th>
-      <th style="width:18%">本期读数</th>
-      <th style="width:7%">方向</th>
-      <th style="width:16%">信号 / 阈值距离</th>
-      <th style="width:22%">来源（机构·周期·发布日·核验状态）</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr><td>R01</td><td>新签公寓租金中位</td><td>65,000 AED/年（10 月）</td><td><b>65,000 AED/年</b>（10 月）</td><td><span class="pill k">持平</span></td><td>同质化 0.0%（230 格）</td><td>Peak Trust · 2026-10 · 2026-11-03 · <span class="pill g">已核验</span></td></tr>
-    <tr><td>R06</td><td>降租续约占比</td><td>21.4%（2026Q3）</td><td>21.4%（2026Q3）</td><td><span class="pill k">持平</span></td><td>K06 硬红·方向（&gt;20%，高出 1.4pp）</td><td>Cavendish Maxwell（媒体转述）· 2026Q3 · 2026-11-02 · <span class="pill y">部分核验</span></td></tr>
-    <tr><td>R10/R11</td><td>公寓毛 / 净收益率（23 区）</td><td>毛 4.9–9.1% / 净 4.1–7.6%（中位 6.6% / 5.4%）</td><td>同值</td><td><span class="pill k">持平</span></td><td>K10 黄（登记口径 6.0%）</td><td>Peak Trust · 2026-10 · 2026-11-03 · <span class="pill g">已核验</span></td></tr>
-    <tr><td>K08</td><td>成交量同比</td><td>−38%（2026Q3）</td><td>−38%（2026Q3）</td><td><span class="pill k">持平</span></td><td>K08 预警红（&lt;−20%，超出 8pp）</td><td>Savills · 2026Q3 · 2026-10-12 · <span class="pill g">已核验</span></td></tr>
-    <tr><td>K05</td><td>新推盘量同比</td><td>−64%（9M）</td><td>−64%（9M）</td><td><span class="pill k">持平</span></td><td>K05 绿（&lt;−50%）</td><td>Savills / Cavendish Maxwell · 9M 2026 · 2026-10 · <span class="pill g">已核验</span></td></tr>
-  </tbody>
+<thead><tr>
+<th style="width:7%">编号</th><th style="width:16%">指标</th><th style="width:15%">上期值</th><th style="width:20%">本期读数</th><th style="width:8%">方向</th><th style="width:16%">阈值距离 / 信号</th><th style="width:18%">来源（机构·周期·发布日·核验）</th>
+</tr></thead>
+<tbody>
+<tr><td>P07</td><td>住宅成交笔数与金额</td><td>Q3 ≈34,500 笔 / AED70.8bn</td><td>Q3 ≈34,500 笔 / AED70.8bn；DLD 口径 33,949 笔 / AED72.58bn</td><td>−38% / −46% YoY</td><td>预警红（K08）</td><td>Savills / DLD · 2026Q3 · 已核验</td></tr>
+<tr><td>P08</td><td>期房成交占比</td><td>72.2%（笔数）</td><td>72.2%（笔数）</td><td>横盘</td><td>黄</td><td>Cavendish Maxwell / Savills · 2026Q3 · 已核验</td></tr>
+<tr><td>P09</td><td>二手/转售成交占比</td><td>30.8% / ≈29%</td><td>30.8%（DXBinteract 全物业）/ ≈29%（betterhomes）</td><td>上升</td><td>绿（K09）</td><td>DXBinteract / Savills · 2026Q3 · 部分核验</td></tr>
+<tr><td>P10</td><td>豪宅成交量（&gt;AED10m）</td><td>Q2 871 笔</td><td>669 笔</td><td>下降</td><td>黄</td><td>Savills / Knight Frank · 2026Q3 · 已核验</td></tr>
+<tr><td>R01</td><td>新签公寓租金中位数</td><td>68,000 AED/年（2026-09）</td><td>65,000 AED/年（2026-10）；同质化 0.0%（230 组）</td><td>−4.4% MoM</td><td>黄（K06 辅助）</td><td>Peak Trust（Ejari） · 2026-10 · 已核验</td></tr>
+<tr><td>R02</td><td>续约公寓租金中位数</td><td>59,000 AED/年</td><td>59,000 / 73 AED/sqft</td><td>横盘</td><td>黄</td><td>DXBinteract（DLD） · 2026Q3 · 部分核验</td></tr>
+<tr><td>R03</td><td>平均租金</td><td>77.3 AED/sqft/年</td><td>77.3（+5.5% YoY）</td><td>放缓</td><td>黄</td><td>Cavendish Maxwell · 2026-09 · 部分核验</td></tr>
+<tr><td>R04</td><td>Ejari 登记合约总数</td><td>Q1 253,992（全物业）</td><td>Q3 &gt;172,000</td><td>口径不可串</td><td>黄</td><td>DLD / Cavendish Maxwell · 2026Q3 · 部分核验</td></tr>
+<tr><td>R05</td><td>新签 / 续约合约数</td><td>—</td><td>新签 77,700（+18.2% YoY）/ 续约 94,300（−10.6% YoY）</td><td>迁移加速</td><td>黄</td><td>Cavendish Maxwell / fäm · 2026Q3 · 部分核验</td></tr>
+<tr><td>R06</td><td>降租续约占比 ★</td><td>21.4%（Q1 4.8%）</td><td>21.4%</td><td>+5pp 以上</td><td>硬红·方向（K06）</td><td>Cavendish Maxwell · 2026Q3 · 部分核验</td></tr>
+<tr><td>R07</td><td>持平续约占比</td><td>—</td><td>38.7%</td><td>—</td><td>黄（与 R06 合并判读）</td><td>Cavendish Maxwell · 2026Q3 · 部分核验</td></tr>
+<tr><td>R08</td><td>涨租续约占比</td><td>59.4%（Q1）</td><td>40.0%</td><td>下降</td><td>黄</td><td>Cavendish Maxwell · 2026Q3 · 部分核验</td></tr>
+<tr><td>R09</td><td>同质化新签租约价差</td><td>−15.3%（8 月）</td><td>−15.3%；续约仅约 −1%</td><td>背离</td><td>黄</td><td>fäm Properties / DLD · 2026-08 · 已核验</td></tr>
+<tr><td>R10</td><td>公寓毛收益率（登记口径）</td><td>6.0 / 6.2 / 6.6%</td><td>6.0（登记 TTM）/ 6.2（23 区中位）/ 6.6（CM 问询）</td><td>三口径并列</td><td>黄（K10）</td><td>DRED / Peak Trust / CM · 2026Q3 · 部分核验</td></tr>
+<tr><td>R11</td><td>净收益率（仅扣物业费）</td><td>5.4% 中位</td><td>5.4%（区间 4.1–7.6%）</td><td>横盘</td><td>黄</td><td>Peak Trust · 2026Q3 · 已核验</td></tr>
+<tr><td>R12</td><td>分区毛收益率</td><td>—</td><td>DIP 10.0｜国际城 9.0–9.3｜Production City 8.0–10.5｜JVC 7.1–7.4｜Business Bay 6.0–6.1｜Downtown 5.1–5.4｜Marina 5.0–5.5｜Palm 4.4–4.6</td><td>分化</td><td>黄</td><td>Cavendish Maxwell / Bayut / DRED · 2026Q3 · 部分核验</td></tr>
+<tr><td>R13</td><td>门户挂牌租金同比</td><td>—</td><td>Downtown −21.7｜Marina −16.1｜Meydan −13.3｜Business Bay −12.5｜JVC −10.0｜Dubai Hills 0.0</td><td>下行</td><td>黄</td><td>Property Finder · 2026Q3 · 部分核验</td></tr>
+<tr><td>R14</td><td>挂牌量 / 询盘比</td><td>—</td><td>挂牌量 +55.1% YoY；询盘 +15.4%；单盘询盘 −23%</td><td>去化转弱</td><td>黄</td><td>Property Finder · 2026-09 · 部分核验</td></tr>
+</tbody>
 </table>
-</div>
-<div class="chart-box">
-  <div id="chartRent" class="chart-eh" role="img" aria-label="公寓新签租约中位租金按面积段结构图"></div>
-  <p class="chart-note"><b>图 4｜公寓新签租约中位租金（按面积段）：</b>Ejari 登记口径，Peak Trust 2026-10（发布 2026-11-03，本期复核确认）。&gt;1,300 sqft 段 10 月 120,000 为四个月最高；&lt;550 sqft 段 44,000 为四个月最高。结构效应（大面积段占比）是表观租金的主要驱动，同质化 0.0%。</p>
-</div>
 
 <h3>3.5 宏观与外需</h3>
-<div class="tblwrap">
 <table class="fixed">
-  <thead>
-    <tr>
-      <th style="width:6%">编号</th>
-      <th style="width:15%">指标</th>
-      <th style="width:16%">上期值（v3）</th>
-      <th style="width:18%">本期读数</th>
-      <th style="width:7%">方向</th>
-      <th style="width:16%">信号 / 阈值距离</th>
-      <th style="width:22%">来源（机构·周期·发布日·核验状态）</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr><td>M16</td><td>Brent 4Q26 预测（STEO）</td><td>105 US$/b（2026-10-06 版）</td><td><b>109.13 US$/b</b>（2026-11-10 版）</td><td><span class="pill p">上修 +4.13</span></td><td>无独立阈值（背景项）</td><td>U.S. EIA · 2026-11 版 · 2026-11-10 · <span class="pill g">已核验</span></td></tr>
-    <tr><td>M16a</td><td>Brent 2026F / 2027F</td><td>96 / 84 US$/b</td><td><b>97.44 / 85.78 US$/b</b></td><td><span class="pill p">上修</span></td><td>2025 均价 69.04</td><td>同上</td></tr>
-    <tr><td>M17</td><td>国际过夜游客</td><td>6.97m（2026 1–8 月）</td><td>同值</td><td><span class="pill k">空窗</span></td><td>K14 黄（&lt;65% 预警未触发）</td><td>Dubai DET / Media Office · 1–8 月 · 2026-09-13 · <span class="pill g">已核验</span></td></tr>
-    <tr><td>M18</td><td>酒店入住率</td><td>66%（2026-08）</td><td>同值</td><td><span class="pill k">空窗</span></td><td>K14 黄（高于预警线 6pp）</td><td>同上</td></tr>
-    <tr><td>K11</td><td>FDI 流入同比</td><td>+5.7%（2025，US$48,243m）</td><td>同值</td><td><span class="pill k">持平</span></td><td>K11 绿（&gt;+5%）</td><td>UNCTAD WIR 2026 · 2025 · 2026-07 · <span class="pill g">已核验</span></td></tr>
-    <tr><td>K12</td><td>人口 / 家庭形成</td><td>4.580m（2025 末，+7.5%）</td><td>同值</td><td><span class="pill k">持平</span></td><td>K12 绿（&gt;5%）</td><td>DDSE · 2025 末 · 2026-07-30 · <span class="pill g">已核验</span></td></tr>
-    <tr><td>K13</td><td>就业 / 失业率</td><td>未发布</td><td>未发布</td><td><span class="pill k">数据缺口</span></td><td>K13 灰（无数值）</td><td>官方劳动力调查 2026-10 启动 · 无数值</td></tr>
-  </tbody>
+<thead><tr>
+<th style="width:7%">编号</th><th style="width:16%">指标</th><th style="width:15%">上期值</th><th style="width:20%">本期读数</th><th style="width:8%">方向</th><th style="width:16%">阈值距离 / 信号</th><th style="width:18%">来源（机构·周期·发布日·核验）</th>
+</tr></thead>
+<tbody>
+<tr><td>M11</td><td>就业 / 失业率</td><td>未发布</td><td>2026 劳动力调查 10-13 启动（5,000 户），结果未发布</td><td>灰</td><td>无法计算（K13）</td><td>DDSE / FCSC · 2026 · 未核验</td></tr>
+<tr><td>M12</td><td>UAE FDI 流入</td><td>48,243 US$m（2025）</td><td>48,243 US$m（+5.7%）</td><td>绿</td><td>绿灯（K11）</td><td>UNCTAD WIR · 2025 · 已核验</td></tr>
+<tr><td>M13</td><td>FDI 存量与绿地项目</td><td>—</td><td>存量 AED1.171tn；绿地 1,562 个；就业 &gt;65,000</td><td>绿</td><td>绿灯（K11 辅助）</td><td>UAE Ministry of Investment · 2025 · 部分核验</td></tr>
+<tr><td>M14</td><td>CPI 通胀</td><td>1.8% / 2.5%（2026F）</td><td>CBUAE 1.8% / IMF 2.5%</td><td>分歧</td><td>硬红·完全（K15）</td><td>CBUAE QER / IMF WEO · 2026F · 部分核验</td></tr>
+<tr><td>M15</td><td>实际 GDP 增长</td><td>5.6% / 3.1%（2026F）</td><td>CBUAE ≈5.6% / IMF 3.1%</td><td>分歧 2.5pp</td><td>硬红·完全（K15）</td><td>CBUAE / IMF · 2026F · 部分核验</td></tr>
+<tr><td>M16</td><td>Brent 原油价格</td><td>69 / 96 / 84（2025/2026F/2027F）</td><td>2025 69.04；2026F 97.44；2027F 85.78；4Q26F 109.13</td><td>上修</td><td>黄</td><td>EIA STEO · 2026-11 · 已核验</td></tr>
+<tr><td>M17</td><td>国际过夜游客</td><td>6.97 百万人（1–8 月）</td><td>8 月 0.869；1–8 月 6.97；2025 全年 19.6</td><td>修复</td><td>黄（K14）</td><td>Dubai DET / Media Office · 2026 1–8 月 · 已核验</td></tr>
+<tr><td>M18</td><td>酒店入住率</td><td>66%（2026-08）</td><td>66%（2026-08）；36%（2026-03）</td><td>修复</td><td>黄（K14）</td><td>Dubai DET / Media Office · 2026-08 · 已核验</td></tr>
+<tr><td>M19</td><td>迪拜实际 GDP（H1）</td><td>—</td><td>AED473bn（H1 2026 标题数据）</td><td>未核验</td><td>黄（K15 辅助）</td><td>Digital Dubai · 2026H1 · 未核验</td></tr>
+</tbody>
 </table>
-</div>
-<p class="small muted">本期触发器命中情况：<b>CBUAE 统计公报发布</b>（货币与信用，命中）、<b>EIA STEO 月报发布</b>（宏观与外需，命中）；DLD/Dubai Pulse 月度数据 11-10～11-12 已更新（价格页 11-12 更新，命中）；DET/Media Office 旅游月度稿件 9/10 月缺席（未命中）；FOMC 10 月纪要预期 11-18（未命中）。<b>非轻运行</b>。</p>
 
-<h3>3.6 政策入模：G01–G05 政策乘数表</h3>
-<p class="small muted" style="margin-top:-4px">政策入模 = 把政策工具纳入「工具 → 中间目标 → 最终目标 → 时滞 → 乘数」链条。数据源 <code>data/processed/economy/dubai/apartment/quant_policy_multipliers.csv</code>，工具 <code>engine/tools/policy_multiplier.py</code>（N3）。硬规则：状态非「已核验」不得给出乘数数值，只给参考区间（文献 / 经验，未经本地回测）。</p>
-<div class="tblwrap">
+<h2 class="sec" id="s4">信号灯判定</h2>
+<h3>4.1 先行信号矩阵（核心 8 项）</h3>
 <table class="fixed">
-  <thead>
-    <tr>
-      <th style="width:6%">编号</th>
-      <th style="width:18%">政策项</th>
-      <th style="width:12%">工具</th>
-      <th style="width:24%">链条</th>
-      <th style="width:8%">时滞</th>
-      <th style="width:10%">状态</th>
-      <th style="width:22%">乘数 / 参考区间</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr><td>G01</td><td>黄金签证房产门槛</td><td>购房门槛调整</td><td>需求→外籍购房资格→成交量</td><td>1–2 季</td><td><span class="pill k">未核验</span></td><td>不可估（未取得官方英文条款页；禁止引用中介数值）</td></tr>
-    <tr><td>G02</td><td>CBUAE 按揭 LTV 规则</td><td>LTV 收紧 / 放松</td><td>利率→按揭成数→杠杆买家需求→成交量</td><td>1–2 季</td><td><span class="pill k">未核验</span></td><td>不可估（来源：CBUAE 官方通告，本期未取得；LTV 每 −10pp 的需求影响待本地回测）</td></tr>
-    <tr><td>G03</td><td>DLD 过户费与交易成本</td><td>交易税费调整</td><td>需求→交易成本→成交量</td><td>0–1 季</td><td><span class="pill k">未核验</span></td><td>不可估（来源：DLD 官方费率页，本期未取得；费率每 +1pp 的成本影响待本地回测）</td></tr>
-    <tr><td>G04</td><td>期房资金托管 / Oqood</td><td>托管制度强化</td><td>供给→期房信心→需求→成交量</td><td>2–4 季</td><td><span class="pill k">未核验</span></td><td>不可估（未取得官方法条页；不引用法条编号作为事实）</td></tr>
-    <tr><td>G05</td><td>RERA 租金涨幅规则与 90 天通知</td><td>租金管制</td><td>租赁→租金增速→收益率</td><td>1–2 季</td><td><span class="pill g">已核验</span></td><td>规则型政策：乘数取决于涨幅分档与市场议价权；无可下载序列，暂不可估</td></tr>
-  </tbody>
+<thead><tr>
+<th style="width:20%">指标</th><th style="width:26%">本期读数</th><th style="width:14%">对应规则</th><th style="width:14%">状态</th><th style="width:26%">较上期是否变化</th>
+</tr></thead>
+<tbody>
+<tr><td>CBUAE 基准利率 / 3M EIBOR</td><td>3.900% / 4.394390%</td><td>K01</td><td><span class="lvl lvl-verified">预警红</span></td><td>读数上移，判定未翻转</td></tr>
+<tr><td>Fed 票型 / 点阵图</td><td>2 票主张 +25bp</td><td>K02</td><td><span class="lvl lvl-inferred">硬红·方向</span></td><td>未翻转</td></tr>
+<tr><td>建筑许可 / 许可面积</td><td>+12% / +48%（Q1）</td><td>K03</td><td><span class="lvl lvl-verified">预警红</span></td><td>未翻转（仅 1 季）</td></tr>
+<tr><td>新推盘量</td><td>−64%（9M）</td><td>K05</td><td><span class="lvl lvl-inferred">绿灯</span></td><td>未翻转</td></tr>
+<tr><td>FDI 流入</td><td>+5.7%（2025）</td><td>K11</td><td><span class="lvl lvl-inferred">绿灯</span></td><td>未翻转</td></tr>
+<tr><td>人口 / 家庭形成</td><td>+7.5%（2025 末）</td><td>K12</td><td><span class="lvl lvl-inferred">绿灯</span></td><td>未翻转</td></tr>
+<tr><td>降租续约占比</td><td>21.4%（Q3）</td><td>K06</td><td><span class="lvl lvl-inferred">硬红·方向</span></td><td>未翻转</td></tr>
+<tr><td>就业 / 失业率</td><td>未发布</td><td>K13</td><td><span class="lvl lvl-assumption">灰灯</span></td><td>未翻转</td></tr>
+</tbody>
 </table>
-</div>
-<p class="small muted">政策核验覆盖率 <b>1/5（20%）</b>（G05 已核验；G01–G04 未核验，见第 6 节与业务配置第十节 / 盲区登记 B05）。政策入模当前为「链条登记 + 参考区间」，<b>不给点值</b>；取得官方英文条款页后按同一表格补乘数并记版本。</p>
+<p class="term">核心矩阵计数：2 硬红·方向 + 2 预警红 + 3 绿 + 1 灰；与基线（4 红 3 绿 1 灰）计数一致，未发生翻转。</p>
+<p class="term"><b>传导量化：</b>传导时滞为分析性估计（非官方统计）：利率 2–4 季、许可 8–16 季、就业/FDI 2–6 季、降租续约占比 0–2 季；本报告未给出经验弹性系数。</p>
 
-<h2 class="sec" id="s4">4 · 信号灯判定</h2>
-<p class="small muted" style="margin-top:-6px">判定执行「连续 2 期同向 + 排除失真信号 + 多指数互证」三原则；阈值取自业务配置第五节与台账「信号规则」表（v2.0 五态 + 三级红线组 + 预警红线）。口径见业务配置第八节，与基线同口径。</p>
-
-<h3>4.1 先行信号矩阵（8 项）</h3>
-<div class="tblwrap">
+<h3>4.2 全部信号规则判定（K01–K15）</h3>
 <table class="fixed">
-  <thead>
-    <tr>
-      <th style="width:4%">#</th>
-      <th style="width:12%">先行指标</th>
-      <th style="width:16%">最新读数</th>
-      <th style="width:8%">方向</th>
-      <th style="width:9%">信号灯</th>
-      <th style="width:15%">传导链</th>
-      <th style="width:6%">领先期</th>
-      <th style="width:16%">对公寓市场的含义</th>
-      <th style="width:6%">来源级别</th>
-      <th style="width:8%">较上期</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr><td>1</td><td>CBUAE 基准利率 / 3M EIBOR</td><td>3.900% / 4.394390%（11-12）</td><td>高位·越预警线</td><td><span class="pill p">预警红（K01）</span></td><td>利率→按揭月供→购买力→成交量→价格</td><td>2–4 季</td><td>融资成本高位，距硬红线 <b>10.56bp</b>（v3 为 13.5bp，收窄 2.94bp）</td><td>官方一手</td><td><span class="pill p">变化</span></td></tr>
-    <tr><td>2</td><td>Fed 政策倾向</td><td>3.75–4.00%，2 票主张加息</td><td>偏鹰</td><td><span class="pill r">硬红·方向（K02）</span></td><td>Fed→IORB→CBUAE→EIBOR→按揭</td><td>2–4 季</td><td>声明确认；10 月纪要 11-18 待双确认</td><td>官方一手</td><td><span class="pill k">无变化</span></td></tr>
-    <tr><td>3</td><td>建筑许可 / 许可面积</td><td>10,776 份许可 / +48% 面积（2026Q1）</td><td>扩张</td><td><span class="pill p">预警红（K03）</span></td><td>许可→开工→2–4 年交付→租金与价格</td><td>8–16 季</td><td>仅 2026Q1 一季，无法确认「连续 2 季」</td><td>官方一手</td><td><span class="pill k">无变化</span></td></tr>
-    <tr><td>4</td><td>新推盘量</td><td>9M ≈50,000 套 / −64% 同比</td><td>收缩</td><td><span class="pill g">绿灯（K05）</span></td><td>推盘→3–4 年后交付 / 当期可售库存</td><td>当期+长周期</td><td>开发商主动刹车，缓冲 2029+ 供给</td><td>行业机构</td><td><span class="pill k">无变化</span></td></tr>
-    <tr><td>5</td><td>FDI 流入</td><td>US$48,243m（2025）/ +5.7%</td><td>增长</td><td><span class="pill g">绿灯（K11）</span></td><td>FDI→企业设立→外籍就业→家庭形成→需求</td><td>2–6 季</td><td>支撑长期自住与租赁需求</td><td>官方一手</td><td><span class="pill k">无变化</span></td></tr>
-    <tr><td>6</td><td>人口 / 家庭形成</td><td>4.580m（2025 末）/ +7.5%</td><td>增长</td><td><span class="pill g">绿灯（K12）</span></td><td>人口→家庭数→租赁需求→租金→价格</td><td>1–4 季</td><td>需求分母仍在扩张</td><td>官方一手</td><td><span class="pill k">无变化</span></td></tr>
-    <tr><td>7</td><td>降租续约占比</td><td>21.4%（Q3）vs 4.8%（Q1）</td><td>恶化</td><td><span class="pill r">硬红·方向（K06）</span></td><td>交付→空置竞争→议价权→租金→收益率</td><td>0–2 季</td><td>定价权快速流失；Q2 缺失，原始 PDF 未取得</td><td>行业机构（媒体转述）</td><td><span class="pill k">无变化</span></td></tr>
-    <tr><td>8</td><td>就业 / 失业率</td><td>2026 调查 10 月启动，结果未发布</td><td>数据缺口</td><td><span class="pill k">灰灯（K13）</span></td><td>就业→净迁入→家庭形成→租金</td><td>1–3 季</td><td>最大监测盲区，暂不可量化</td><td>官方（无数值）</td><td><span class="pill k">无变化</span></td></tr>
-  </tbody>
+<thead><tr>
+<th style="width:6%">编号</th><th style="width:15%">监测对象</th><th style="width:22%">阈值（预警红 / 硬红）</th><th style="width:22%">本期读数</th><th style="width:12%">判定</th><th style="width:23%">确认进度 / 升级动作</th>
+</tr></thead>
+<tbody>
+<tr><td>K01</td><td>3M EIBOR</td><td>&gt;4.35% 或 3 月 +40bp / &gt;4.50% 或 3 月 +50bp</td><td>4.394390%（11-12）</td><td><span class="lvl lvl-verified">预警红</span></td><td>月均 3 月 +43.29bp；连续 2 期 ≥4.50% → 硬红</td></tr>
+<tr><td>K02</td><td>Fed 票型 / 点阵图</td><td>≥1 票主张加息 / ≥2 票或加息倾向</td><td>2 票主张 +25bp</td><td><span class="lvl lvl-inferred">硬红·方向</span></td><td>纪要 11-18 双确认 → 硬红·完全</td></tr>
+<tr><td>K03</td><td>许可建筑面积同比</td><td>&gt;20% 单季 / &gt;30% 连续 2 季</td><td>+48%（2026Q1）</td><td><span class="lvl lvl-verified">预警红</span></td><td>第 2 季 &gt;30% → 硬红</td></tr>
+<tr><td>K04</td><td>交付兑现率</td><td>&lt;50% / &lt;45% 且计划量创高</td><td>41.3%（2026H1）</td><td><span class="lvl lvl-inferred">硬红·方向</span></td><td>补同口径双源 → 硬红·完全</td></tr>
+<tr><td>K05</td><td>新推盘量同比</td><td>&gt;+10% 单季 / &gt;+20% 连续 2 季</td><td>−64%（9M）</td><td><span class="lvl lvl-inferred">绿灯</span></td><td>维持</td></tr>
+<tr><td>K06</td><td>降租续约占比</td><td>&gt;15% / &gt;20% 或单季 +5pp</td><td>21.4%（2026Q3）</td><td><span class="lvl lvl-inferred">硬红·方向</span></td><td>补 Q2 与原始 PDF → 硬红·完全</td></tr>
+<tr><td>K07</td><td>公寓中位价同比</td><td>&lt;−3% 连续 2 月 / &lt;−5% 连续 3 月</td><td>−5.5% YoY（PIX 10 月）；Sep −3.9%</td><td><span class="lvl lvl-verified">预警红</span></td><td>连续 2 月；再 1 月 + 2 指数 → 硬红</td></tr>
+<tr><td>K08</td><td>成交量同比</td><td>&lt;−20% / &lt;−30% 连续 2 季</td><td>−38% YoY（Q3）</td><td><span class="lvl lvl-verified">预警红</span></td><td>连续 2 季 → 硬红</td></tr>
+<tr><td>K09</td><td>现房成交金额占比</td><td>单季下滑 / 连续 2 季下滑</td><td>现房 +18.5% QoQ</td><td><span class="lvl lvl-inferred">绿灯</span></td><td>按金额复核</td></tr>
+<tr><td>K10</td><td>登记口径毛收益率</td><td>&lt;6.0% / &lt;5.5%</td><td>6.0–6.6%（中位）</td><td><span class="lvl lvl-partial">黄</span></td><td>低收益区已破 5.5%</td></tr>
+<tr><td>K11</td><td>FDI 流入同比</td><td>&lt;+2% / &lt;0%</td><td>+5.7%（2025）</td><td><span class="lvl lvl-inferred">绿灯</span></td><td>2027-06/07 观察</td></tr>
+<tr><td>K12</td><td>人口 / 家庭增速</td><td>&lt;5% / &lt;3% 或家庭显著低于人口</td><td>+7.5%（2025 末）</td><td><span class="lvl lvl-inferred">绿灯</span></td><td>家庭户数待核验</td></tr>
+<tr><td>K13</td><td>就业 / 失业</td><td>结果发布后 30 日未入库 / 失业率连续 2 期上行</td><td>未发布</td><td><span class="lvl lvl-assumption">灰</span></td><td>发布后立即入库</td></tr>
+<tr><td>K14</td><td>酒店入住率 / 游客</td><td>&lt;65% / &lt;60% 连续 3 月</td><td>66%（2026-08）</td><td><span class="lvl lvl-partial">黄</span></td><td>仅高于预警线 1pp</td></tr>
+<tr><td>K15</td><td>官方 GDP/CPI 分歧</td><td>&gt;1.5pp / &gt;2pp 或方向相反</td><td>GDP 5.6% vs 3.1%</td><td><span class="lvl lvl-inferred">硬红·完全</span></td><td>并列呈现，区间替代点值</td></tr>
+</tbody>
 </table>
-</div>
-<div class="stat-strip">
-  <div class="stat hard"><div class="lab">硬红·完全</div><div class="n">1</div></div>
-  <div class="stat hard"><div class="lab">硬红·方向</div><div class="n">3</div></div>
-  <div class="stat pre"><div class="lab">预警红</div><div class="n">4</div></div>
-  <div class="stat yel"><div class="lab">黄</div><div class="n">2</div></div>
-  <div class="stat grn"><div class="lab">绿</div><div class="n">4</div></div>
-  <div class="stat gry"><div class="lab">灰</div><div class="n">1</div></div>
-</div>
-<p class="small muted">矩阵计数（15 项）：硬红·完全 1（K15）+ 硬红·方向 3（K02/K04/K06）+ 预警红 4（K01/K03/K07/K08）+ 黄 2（K10/K14）+ 绿 4（K05/K09/K11/K12）+ 灰 1（K13）。<b>核心 8 项矩阵为 2 硬红 + 2 预警红 + 3 绿 + 1 灰</b>，与基线首期「4 红 3 绿 1 灰」计数一致（v2.0 五态拆分后口径一致，未机械沿用）。</p>
 
-<h3>4.2 K01–K15 逐条判定</h3>
-<div class="tblwrap">
-<table class="fixed">
-  <thead>
-    <tr>
-      <th style="width:5%">规则</th>
-      <th style="width:12%">监测对象</th>
-      <th style="width:19%">本期读数</th>
-      <th style="width:8%">判定</th>
-      <th style="width:11%">确认进度</th>
-      <th style="width:11%">距硬红线</th>
-      <th style="width:14%">可观测触发</th>
-      <th style="width:9%">数据状态</th>
-      <th style="width:11%">动作</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr><td>K01</td><td>3M EIBOR</td><td>4.394390%（11-12 定盘）；月均 Jul 3.870124 → Oct 4.303021</td><td><span class="pill p">预警红</span></td><td>1 期（单日定盘）；月均连续 2 期未出现</td><td><b>10.56bp</b>（越预警线 +4.44bp）</td><td>月均连续 2 期 ≥4.50%，或 3 月累计上行 &gt;50bp</td><td>正常（官方页 11-12）</td><td>维持；专题六件套已启用</td></tr>
-    <tr><td>K02</td><td>Fed 票型 / 点阵图</td><td>3.75–4.00%，2 票主张 +25bp（10-28）</td><td><span class="pill r">硬红·方向</span></td><td>1 期（声明）</td><td>已触发</td><td>10 月纪要 11-18 双确认</td><td>正常</td><td>维持；待纪要</td></tr>
-    <tr><td>K03</td><td>许可建筑面积同比</td><td>+48%（2026Q1）</td><td><span class="pill p">预警红</span></td><td>1 期</td><td>超 18pp（仅 1 季）</td><td>第 2 季 &gt;30% 升级硬红</td><td>停更（Q2/Q3 无同类发布）</td><td>维持</td></tr>
-    <tr><td>K04</td><td>交付兑现率</td><td>41.3%（2026H1）</td><td><span class="pill r">硬红·方向</span></td><td>1 期</td><td>低于 3.7pp</td><td>双源同口径互证</td><td>部分核验</td><td>维持；补同口径双源</td></tr>
-    <tr><td>K05</td><td>新推盘量同比</td><td>−64%（9M）</td><td><span class="pill g">绿灯</span></td><td>1 期</td><td>远低于</td><td>单季 &gt;+10%</td><td>正常</td><td>维持</td></tr>
-    <tr><td>K06</td><td>降租续约占比</td><td>21.4%（Q3）vs 4.8%（Q1）</td><td><span class="pill r">硬红·方向</span></td><td>2 期（Q1/Q3）</td><td>高出 1.4pp</td><td>单季 +5pp 以上</td><td>部分核验（Q2 缺失）</td><td>维持；补 Q2 与原始 PDF</td></tr>
-    <tr><td>K07</td><td>公寓成交中位价同比</td><td>−5.5% YoY（PIX 10 月）；Sep −3.9%</td><td><span class="pill p">预警红</span></td><td><b>连续 2 月</b>（Sep/Oct）</td><td>超 0.5pp</td><td>连续 3 月 &lt;−5% 升级硬红</td><td>正常</td><td>维持；确认进度由 1 期升级</td></tr>
-    <tr><td>K08</td><td>成交量同比</td><td>−38%（2026Q3）</td><td><span class="pill p">预警红</span></td><td>1 期</td><td>超 8pp</td><td>连续 2 季 &lt;−30%</td><td>正常</td><td>维持</td></tr>
-    <tr><td>K09</td><td>现房成交金额占比</td><td>现房 +18.5% QoQ</td><td><span class="pill g">绿灯</span></td><td>1 期</td><td>未触发</td><td>单季下滑</td><td>正常</td><td>维持；按金额复核</td></tr>
-    <tr><td>K10</td><td>登记口径毛收益率</td><td>6.0–6.6% 中位</td><td><span class="pill y">黄灯</span></td><td>1 期</td><td>中位高于 0.5–1.1pp</td><td>&lt;5.5%</td><td>正常</td><td>维持</td></tr>
-    <tr><td>K11</td><td>FDI 流入同比</td><td>+5.7%（2025）</td><td><span class="pill g">绿灯</span></td><td>年度 1 期</td><td>高于 5.7pp</td><td>&lt;+2%</td><td>正常</td><td>维持；2027-06/07 观察</td></tr>
-    <tr><td>K12</td><td>人口 / 家庭户数增速</td><td>+7.5%（2025 末）</td><td><span class="pill g">绿灯</span></td><td>年度 1 期</td><td>高于 4.5pp</td><td>&lt;5%</td><td>正常</td><td>维持；家庭户数未核验</td></tr>
-    <tr><td>K13</td><td>就业 / 失业</td><td>未发布</td><td><span class="pill k">灰灯</span></td><td>0 期</td><td>无法计算</td><td>结果发布后 30 日未入库</td><td>未发布</td><td>维持</td></tr>
-    <tr><td>K14</td><td>酒店入住率 / 游客</td><td>66%（2026-08）</td><td><span class="pill y">黄灯</span></td><td>1 期</td><td>高于 6pp</td><td>&lt;65%</td><td>空窗约 2 月</td><td>维持</td></tr>
-    <tr><td>K15</td><td>官方 GDP/CPI 预测分歧</td><td>GDP 5.6% vs 3.1%</td><td><span class="pill r">硬红·完全</span></td><td>1 期</td><td>超 0.5pp</td><td>&gt;1.5pp</td><td>正常</td><td>维持；并列呈现</td></tr>
-  </tbody>
-</table>
+<h3>4.3 决策卡</h3>
+<div class="decision-card">
+  <div class="dc-head"><span class="dc-title">决策卡 A · 融资成本</span><span class="tag">K01 / K02</span></div>
+  <div class="dc-grid">
+    <div><span class="k">结论：</span>融资条件处预警红，硬红线未破但距离收窄；不触发全面收紧，触发定向复核。</div>
+    <div><span class="k">证据强度：</span>高（CBUAE 直连 + Fed 声明直连）。</div>
+    <div><span class="k">触发条件：</span>3M EIBOR 月均连续 2 期 ≥4.50%，或 Fed 纪要确认加息倾向。</div>
+    <div><span class="k">反向证据：</span>11-10 曾出现 6M&gt;1Y 倒挂，11-12 已化解；AED/USD 钉住未变。</div>
+    <div><span class="k">信息充分度：</span>充分（官方一手可读）；Fed SEP 点阵图 12-08/09 才发布。</div>
+  </div>
 </div>
-<div class="note"><b>信号结构结论：</b>15 项规则五态计数与 v3 完全一致，<b>未翻转</b>。本期实质变化集中在确认进度与阈值距离：K01 距硬红线 13.5bp → 10.56bp（且月均口径「3 月累计上行」由不可算变为 +43.29bp、越 40bp 预警线）；K07 确认进度 1 期 → 连续 2 月（Sep −3.9%、Oct −5.5%）。两项均<b>未达升级条件</b>（K01 需 50bp 或月均连续 2 期 ≥4.50%；K07 需连续 3 月 &lt;−5%），维持预警红。</div>
+<div class="decision-card">
+  <div class="dc-head"><span class="dc-title">决策卡 B · 价格与租金</span><span class="tag">K06 / K07 / K10</span></div>
+  <div class="dc-grid">
+    <div><span class="k">结论：</span>价格端确认进度升至 2 个月，租金端定价权走弱；两端尚未出清。</div>
+    <div><span class="k">证据强度：</span>中高（PIX/DLD 直连；降租占比为媒体转述部分核验）。</div>
+    <div><span class="k">触发条件：</span>K07 再 1 月 &lt;−5% 且 2 指数同向 → 硬红；R06 补 Q2 与原始 PDF。</div>
+    <div><span class="k">反向证据：</span>同质化价格变动 −1.7% QoQ 小于表观跌幅；新签中位租金 10 月回落但同质化 0.0%。</div>
+    <div><span class="k">信息充分度：</span>中（R06 原始 PDF 与 Q2 缺失；R18 自主复算未执行）。</div>
+  </div>
+</div>
+<p class="note preline"><b>预校准（ex-ante）：</b>本报告全部阈值（K01–K15、RL-01–RL-09）为机制自设，未经历史回测；首次校准回测窗口为 2027-06，校准前结论一律标注「预校准（ex-ante）」。</p>
 
-<h3>4.3 传导量化：弹性与时滞</h3>
-<p class="small muted" style="margin-top:-4px">传导量化 = 估计先行 / 政策变量向目标变量（成交量、价格、租金）传导的<b>弹性</b>（η = (ΔY/Y)/(ΔX/X)）与<b>时滞</b>（领先期）。工具 <code>engine/tools/transmission.py</code>（N4，OLS + VAR 双方法）。</p>
-<p><b>① 时滞（领先期，分析性估计，非官方统计）</b>——取业务配置「使用说明 · 领先期定义」，与 4.1 矩阵并列：</p>
-<div class="tblwrap">
+<h2 class="sec" id="s5">与首期基线的偏离</h2>
+<p class="note">基线为 <code>2026-11_baseline_report.html</code>（2026-11-10/11，v2.0 重置）。下表并列基线值与本期值；「零偏离」指基线后无新发布或读数未变。</p>
 <table class="fixed">
-  <thead>
-    <tr>
-      <th style="width:26%">传导链</th>
-      <th style="width:14%">时滞（领先期）</th>
-      <th style="width:60%">口径与用途</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr><td>利率 → 按揭月供 → 购买力 → 成交量 → 价格</td><td>2–4 季</td><td>K01 / K02 的传导时滞；本期 K01 阈值距离收窄按此链解读</td></tr>
-    <tr><td>许可 → 开工 → 交付 → 租金与价格</td><td>8–16 季</td><td>K03；仅 2026Q1 一季，不可确认「连续 2 季」</td></tr>
-    <tr><td>降租续约占比 → 议价权 → 租金 → 收益率</td><td>0–2 季</td><td>K06；Q3 读数对租金 / 收益率的传导在 0–2 季内</td></tr>
-    <tr><td>就业 / FDI → 净迁入 → 家庭形成 → 需求</td><td>2–6 季</td><td>K11 / K13；K13 无数值，仅登记链条</td></tr>
-  </tbody>
+<thead><tr>
+<th style="width:8%">编号</th><th style="width:20%">指标</th><th style="width:20%">基线值（2026-11-10）</th><th style="width:22%">本期值</th><th style="width:12%">偏离</th><th style="width:18%">判定</th>
+</tr></thead>
+<tbody>
+<tr><td>M02</td><td>3M EIBOR</td><td>4.364820%（11-10）</td><td>4.394390%（11-12）</td><td>+2.96bp</td><td>读数推进</td></tr>
+<tr><td>M07</td><td>银行信贷总额</td><td>2,871.4 AED bn（2026-08）</td><td>2,908.0 AED bn（2026-09）</td><td>+1.3% MoM</td><td>读数推进</td></tr>
+<tr><td>M08</td><td>银行存款总额</td><td>—</td><td>3,567.7 AED bn（2026-09）</td><td>新增</td><td>口径新增</td></tr>
+<tr><td>M09</td><td>M1/M2/M3</td><td>—</td><td>1,022.2 / 2,938.1 / 3,508.1</td><td>新增</td><td>口径新增</td></tr>
+<tr><td>M16</td><td>Brent</td><td>69 / 96 / 84</td><td>69.04 / 97.44 / 85.78；4Q26F 109.13</td><td>上修</td><td>STEO 11 月版</td></tr>
+<tr><td>P04</td><td>PIX© 指数</td><td>204.0（快照）</td><td>203.7</td><td>修正</td><td>已修正事实清单 #1</td></tr>
+<tr><td>R01</td><td>新签公寓租金中位</td><td>68,000 AED/年（2026-09）</td><td>65,000 AED/年（2026-10）</td><td>−4.4% MoM</td><td>读数推进</td></tr>
+<tr><td>P01</td><td>公寓成交均价</td><td>1,817 AED/sqft</td><td>1,817 AED/sqft</td><td>0</td><td>零偏离</td></tr>
+<tr><td>P03</td><td>公寓成交中位价</td><td>1,659 AED/sqft</td><td>1,659 AED/sqft</td><td>0</td><td>零偏离</td></tr>
+<tr><td>P05</td><td>ValuStrat VPI</td><td>全市 218.6</td><td>公寓 168.1 / 全市 218.6</td><td>0</td><td>零偏离</td></tr>
+<tr><td>R06</td><td>降租续约占比</td><td>21.4%</td><td>21.4%</td><td>0</td><td>零偏离</td></tr>
+<tr><td>M01</td><td>CBUAE 基准利率</td><td>3.900%</td><td>3.900%</td><td>0</td><td>零偏离</td></tr>
+<tr><td>M05</td><td>Fed 目标区间</td><td>3.75–4.00%</td><td>3.75–4.00%</td><td>0</td><td>零偏离</td></tr>
+</tbody>
 </table>
+<p class="term">偏离小结：本期实质偏离集中在「读数推进」（M02/M07/R01）与「口径新增」（M08/M09/M21/M22/P14/M23）；价格与融资判定未发生方向性翻转。</p>
+
+<h2 class="sec" id="s6">数据缺口与未核验项</h2>
+<table class="fixed">
+<thead><tr>
+<th style="width:6%">编号</th><th style="width:22%">缺口 / 未核验项</th><th style="width:12%">状态</th><th style="width:34%">影响</th><th style="width:26%">处置</th>
+</tr></thead>
+<tbody>
+<tr><td>M11</td><td>就业 / 失业率（官方序列）</td><td>未核验</td><td>K13 无法判定，需求端最大盲区</td><td>2026 劳动力调查 10-13 启动，结果发布后 30 日内入库</td></tr>
+<tr><td>S14</td><td>住宅空置率</td><td>无官方序列</td><td>持有成本与空置风险无法量化</td><td>第三方估算 4–8% 不可采信；用 DLD 单元登记自建</td></tr>
+<tr><td>R18</td><td>Ejari 自主复算降租续约占比</td><td>待执行</td><td>R06 依赖媒体转述，K06 无法双源确认</td><td>下载全量 Ejari（2026-04 起按面积段配对）</td></tr>
+<tr><td>G01–G04</td><td>黄金签证门槛 / LTV / 过户费 / 期房托管</td><td>未核验</td><td>政策阈值不可作为事实引用</td><td>仅保留商业引述并标注「需核实原文」</td></tr>
+<tr><td>M20</td><td>Fed SEP 点阵图中位数</td><td>未取得</td><td>K02 强化条件无法判定</td><td>12-08/09 会议含 SEP，会后补</td></tr>
+<tr><td>M19</td><td>迪拜实际 GDP（H1）</td><td>未核验</td><td>仅标题 AED473bn，细项与增速缺失</td><td>待 Digital Dubai 细项发布</td></tr>
+<tr><td>P06</td><td>Property Monitor 城市指数</td><td>部分核验</td><td>主站与方法论未取得，仅经纪商转载</td><td>v2.0 起降级为参考序列，不进信号合成</td></tr>
+<tr><td>P12</td><td>门户挂牌要价指数</td><td>部分核验</td><td>主报告 URL 未取得，挂牌≠成交</td><td>仅作卖方预期，校正期以 DLD 登记为准</td></tr>
+</tbody>
+</table>
+<p class="term"><b>政策入模：</b>政策阈值类指标（G01–G04）未取得官方英文页面，政策乘数未入模；政策观察以已核验的 G05（续约涨租 90 天通知）为限。</p>
+<p class="note gap">来源约束：本业务线仅采信英文来源；中文来源一律排除。来源分级规则见通用基座第四节（本报告以指针引用，不整段复制）。</p>
+
+<h2 class="sec" id="s7">下期观察清单</h2>
+<div class="timeline">
+  <div class="tl-item"><div class="tl-date">11-18</div><div class="tl-body amber"><div class="t">Fed 10 月会议纪要</div><div class="d">验证 2 票加息主张是否扩散（K02）；影响 M05/M06。</div></div></div>
+  <div class="tl-item"><div class="tl-date">11-30</div><div class="tl-body"><div class="t">CBUAE 11 月定盘与汇率</div><div class="d">跟踪 3M EIBOR 月均是否连续 2 期 ≥4.50%（K01）；影响 M01/M02。</div></div></div>
+  <div class="tl-item"><div class="tl-date">12-08/09</div><div class="tl-body red"><div class="t">FOMC 12 月会议（含 SEP）</div><div class="d">点阵图中位数上移 ≥25bp → K02 强化；影响 M05/M20。</div></div></div>
+  <div class="tl-item"><div class="tl-date">12-30</div><div class="tl-body"><div class="t">FOMC 11 月纪要</div><div class="d">双确认票型；影响 K02。</div></div></div>
+  <div class="tl-item"><div class="tl-date">2027-01</div><div class="tl-body"><div class="t">DLD / PropertyIndex 11 月价格</div><div class="d">K07 连续 3 月 &lt;−5% 判定；影响 P03/P04。</div></div></div>
+  <div class="tl-item"><div class="tl-date">2027-01</div><div class="tl-body"><div class="t">CBUAE Statistical Bulletin 10 月</div><div class="d">M07–M09 读数推进；影响货币与信用组。</div></div></div>
 </div>
-<p><b>② 弹性：可量化部分与不可量化部分并列</b></p>
-<ul class="tight">
-  <li><b>可量化（按揭渠道，半弹性）</b>：来源：3.1.1 ④ 传导量化表（自算，假设性测算）——利率自 4.394390% 升至红线 4.50%（+10.56bp）时，月供 +1.09%、同等月供可负担房价 −1.08%；升至 4.75%（+25bp 以上）时，月供 +3.69%、房价上限 −3.55%。口径：名义利率全额传导、等额本息、贷款本金 AED 2,000,000 / 300 个月、未计 margin 与重定价周期；非市场报价。</li>
-  <li><b>不可量化（成交量 / 价格渠道，缺官方时序）</b>：<code>transmission.py</code> 的 OLS / VAR 弹性估计需要目标变量的官方一手时序；当前 <code>data/processed/economy/dubai/apartment/quant_transmission_series_synthetic.csv</code> 为<b>结构性示意序列（非真实数据，不得作为研究结论引用）</b>，故本期不给弹性点值，只给方向性判断（利率上行 → 需求与价格承压，方向确定、幅度未知）。</li>
+
+<div class="slice">
+  <div class="slice-head">场景切片</div>
+  <p><b>投资决策：</b>融资成本与价格同向承压，持有期回报需按 K10 三套收益率口径（6.0/6.2/6.6%）与净收益率中位 5.4% 重估；本报告不给买卖价位、杠杆与仓位。</p>
+  <p><b>政策制定：</b>供给兑现率与许可建筑面积（+48%，仅 1 季）是中期供给与租赁压力的两个政策观察锚；政策阈值类指标（G01–G04）仍未取得官方英文页面。</p>
+  <p class="note">就业决策不在本业务线声明范围（business-config 主/次场景为投资决策、政策制定）；就业数据本身处灰灯（K13）。</p>
+</div>
+
+<h3>7.1 行动协议（三档优先级）</h3>
+<div class="action-card immediate">
+  <div class="a-head"><span class="a-title">立即行动 · 融资成本复核</span><span class="tag">触发条件：3M EIBOR 月均连续 2 期 ≥4.50%</span></div>
+  <div class="a-meta"><b>阈值：</b>4.50%（硬红）｜<b>责任角色：</b>宏观监测岗｜<b>时限：</b>触发后 5 个工作日｜<b>验证指标：</b>M02 月均与 M01 基准利率｜<b>动作：</b>重算 K01 与利率敏感性情景，更新持有期回报假设。</div>
+</div>
+<div class="action-card watch">
+  <div class="a-head"><span class="a-title">持续观察 · 价格确认与租赁定价权</span><span class="tag">触发条件：K07 再 1 月 &lt;−5%，或 R06 补 Q2 后仍 &gt;20%</span></div>
+  <div class="a-meta"><b>阈值：</b>K07 −5% 连续 3 月；R06 20%｜<b>责任角色：</b>价格与租赁监测岗｜<b>时限：</b>下次月度｜<b>验证指标：</b>P03/P04、R06/R07/R08｜<b>动作：</b>切换至同质化指数复核，重估租金与毛收益率。</div>
+</div>
+<div class="action-card archive">
+  <div class="a-head"><span class="a-title">仅记录存档 · 供给与外需</span><span class="tag">触发条件：无</span></div>
+  <div class="a-meta"><b>阈值：</b>K04 兑现率 45%；K14 入住率 60%｜<b>责任角色：</b>供需监测岗｜<b>时限：</b>下次季度｜<b>验证指标：</b>S01/S03/S06、M17/M18｜<b>动作：</b>维持登记，不触发情景重算。</div>
+</div>
+
+<h3>7.2 本期排除的伪信号</h3>
+<ul>
+<li><b>EIBOR 期限倒挂：</b>11-10 曾出现 6M&gt;1Y 倒挂（−27.74bp），11-12 定盘 1Y 4.724730% 高于 6M 4.444220% 达 28.05bp，倒挂已化解，不作为银行资金压力信号。</li>
+<li><b>PIX 9 月发布页缺席：</b>9 月与 10 月发布页均已挂出，缺席说法不成立；8 月历史快照（205.6 / −3.5%）与当前序列（206.6 / −2.4%）须并列引用。</li>
+<li><b>「9 月加息细节未官方核验」：</b>仅见 WAM/媒体转载，官方页面未核验生效日；不作为事实引用。</li>
 </ul>
-<p class="small muted">结论：传导<b>方向确定、时滞可登记、按揭渠道幅度可测算</b>；成交量与价格渠道的弹性幅度因缺官方时序而<b>不可量化</b>，按「方向确定、幅度未知」处理，不做点估计（同第 6 节盲区口径）。</p>
 
-<h2 class="sec" id="s5">5 · 与首期基线的偏离</h2>
-<p class="small muted" style="margin-top:-6px">基线 = 首期基线报告（2026-11-10，v1.0）。偏离幅度按指标性质区分「市场型」（由市场读数推进）与「日历型」（由数据发布节奏推进）与「无偏离」。</p>
-<div class="tblwrap">
+<h2 class="sec" id="s8">台账更新编号与来源</h2>
+<h3>8.1 台账更新分组</h3>
 <table class="fixed">
-  <thead>
-    <tr>
-      <th style="width:16%">指标</th>
-      <th style="width:18%">基线值（2026-11-10）</th>
-      <th style="width:18%">本期值（2026-11-13）</th>
-      <th style="width:12%">偏离</th>
-      <th style="width:12%">偏离幅度</th>
-      <th style="width:24%">性质</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr><td>P04 / K07 价格同比</td><td>203.7 / −5.5% YoY</td><td>203.7 / −5.5% YoY</td><td>0</td><td>无偏离</td><td>v3 的 204.0 为快照误差，本期修正后与基线一致</td></tr>
-    <tr><td>M02 / K01 3M EIBOR</td><td>4.364820%（11-10 定盘）</td><td>4.394390%（11-12 定盘）</td><td>+2.96bp</td><td>轻微</td><td>市场型（定盘推进）</td></tr>
-    <tr><td>K01 距硬红线</td><td>13.5bp</td><td>10.56bp</td><td>−2.94bp</td><td>收窄</td><td>市场型（阈值距离收窄）</td></tr>
-    <tr><td>K01 3 月累计上行</td><td>不可算（缺 1–10 月定盘文件）</td><td>+43.29bp（月均口径）</td><td>由不可算 → 可算</td><td>越 40bp 预警线</td><td>数据升级（eibor_2026.xlsx 归档）</td></tr>
-    <tr><td>K07 确认进度</td><td>1 期</td><td>连续 2 月</td><td>+1 期</td><td>接近硬红确认线</td><td>确认推进（9 月发布页挂出）</td></tr>
-    <tr><td>M07 / M08 / M09</td><td>2026-08</td><td>2026-09</td><td>月度推进</td><td>正常节奏</td><td>日历型（9 月统计公报 11-11 发布）</td></tr>
-    <tr><td>K08 / K06 / K15</td><td>−38% / 21.4% / 5.6 vs 3.1</td><td>−38% / 21.4% / 5.6 vs 3.1</td><td>0</td><td>无偏离</td><td>无新发布</td></tr>
-  </tbody>
+<thead><tr>
+<th style="width:16%">分组</th><th style="width:84%">条目</th>
+</tr></thead>
+<tbody>
+<tr><td>实质修订</td><td>P04（204.0 → 203.7）；M02（11-10 → 11-12 定盘）；M16（STEO 11 月版）</td></tr>
+<tr><td>新增口径记录</td><td>M21 国内信贷；M22 货币基数/准备金；P14 全住宅登记中位价；M23 Brent 年度预测；M08/M09 9 月读数</td></tr>
+<tr><td>复核确认</td><td>M07/M08/M09 核验升级为「已核验（官方 xlsx 直连）」；K07 确认进度 1 → 2 月</td></tr>
+<tr><td>未取得（维持上期值）</td><td>M11 就业；M20 点阵图；R18 自主复算；G01–G04 政策阈值；M19 GDP 细项</td></tr>
+<tr><td>结论不变</td><td>K05/K09/K11/K12 绿灯；K13 灰灯；价格与融资方向判定未翻转</td></tr>
+</tbody>
 </table>
-</div>
 
-<h2 class="sec" id="s6">6 · 数据缺口与未核验项</h2>
-<div class="note check"><b>本期解除 5 项缺口：</b>
-<ol class="tight" style="margin-bottom:0">
-  <li><b>EIBOR 2026 全年定盘文件</b>——eibor_2026.xlsx（1–10 月，10 个工作表）已取得并归档 data/processed/economy/dubai/apartment/eibor_2026.xlsx，直连来源 https://centralbank.ae/media/zqfkpibt/eibor_2026.xlsx 有效。</li>
-  <li><b>CBUAE 9 月统计公报</b>——Statistical Bulletin September 2026 于 2026-11-11 发布，xlsx 已归档 data/processed/economy/dubai/apartment/cbuae_statistical_bulletin_2026-09.xlsx。</li>
-  <li><b>EIA STEO 11 月版</b>——2026-11-10 发布，Brent 4Q26 105 → 109.13。</li>
-  <li><b>PIX 9 月发布页</b>——9 月与 10 月发布页均已挂出（/2026-09、/2026-10）。</li>
-  <li><b>PIX 8 月口径冲突</b>——由 10 月发布页「months leading in」表化解，当前序列 Aug 206.6 / Sep 205.6 / Oct 203.7。</li>
-</ol>
-</div>
-<div class="note gap"><b>未解除缺口（6 项）：</b>
-<ol class="tight" style="margin-bottom:0">
-  <li><b>FOMC 10 月纪要</b>——预期 2026-11-18 发布；K02 待双确认。</li>
-  <li><b>DET / Media Office 旅游月度稿件</b>——9/10 月缺席，空窗约 2 月；K14 无法判连续 3 月。</li>
-  <li><b>EIBOR 11-13 及以后定盘</b>——官方 12:15 UAE 发布；本期执行时点 09:22 UAE 尚未生成。</li>
-  <li><b>AED/USD 日度参考价</b>——钉住 3.6725 未变，日度页本期未直连（时点受限）。</li>
-  <li><b>ValuStrat 10 月 VPI</b>——未取得；价格组第二指数缺口。</li>
-  <li><b>CBUAE 统计公报聚合页</b>——原聚合 URL 曾 404；9 月落地页有效，已改引落地页。</li>
-</ol>
-</div>
-
-<h2 class="sec" id="s7">7 · 下期观察清单</h2>
-<p class="small muted" style="margin-top:-6px">本节即通用自检要求的「待复核清单」，含发布日历与触发器判定、结构性观察两部分。</p>
-<h3>7.1 发布日历与触发器判定</h3>
-<p class="small muted">T+0 / T+1 / 空窗判定：本期与上期发布窗口同日或仅隔 1 日 → T+1 刷新。<b>触发器命中 → 该组必须做聚焦更新；未命中 → 降级为核验/收敛型轻运行，不得为制造变化而虚构变化。</b></p>
-<div class="tblwrap">
+<h3>8.2 追踪表（12 项）</h3>
 <table class="fixed">
-  <thead>
-    <tr>
-      <th style="width:18%">日期</th>
-      <th style="width:26%">事件 / 数据</th>
-      <th style="width:12%">触发器</th>
-      <th style="width:12%">状态</th>
-      <th style="width:32%">对指标的影响</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr><td>2026-11-13 起</td><td>EIBOR 11-13、11-16 定盘（12:15 UAE）</td><td>融资条件</td><td><span class="pill b">待发布</span></td><td>K01 阈值距离与月均路径；六件套预警面板更新</td></tr>
-    <tr><td>2026-11-18</td><td>FOMC 10 月会议纪要</td><td>融资条件 / 宏观先行</td><td><span class="pill b">待发布</span></td><td>K02 双确认（声明 + 纪要）</td></tr>
-    <tr><td>2026-11 月下旬</td><td>CBUAE 11 月统计公报窗口（10 月数据）</td><td>货币与信用</td><td><span class="pill b">待发布</span></td><td>M07 / M08 / M09 月度推进</td></tr>
-    <tr><td>2026-12-08/09</td><td>FOMC 12 月会议（含 SEP 点阵图）</td><td>融资条件 / 宏观先行</td><td><span class="pill b">待发布</span></td><td>K02 判定与 2027 融资条件假设</td></tr>
-    <tr><td>2026-12 月内</td><td>EIA STEO 12 月版</td><td>宏观与外需</td><td><span class="pill b">待发布</span></td><td>Brent 4Q26 / 2026F / 2027F</td></tr>
-    <tr><td>2026-12 月初</td><td>PIX 11 月版 / Peak Trust 11 月期 / ValuStrat 10 月 VPI</td><td>价格 / 租赁</td><td><span class="pill b">待发布</span></td><td>K07 连续月数、R01/R10/R11、第二指数复核</td></tr>
-    <tr><td>2027-01-08</td><td>季度任务（2026-Q4）</td><td>季度</td><td><span class="pill k">排期</span></td><td>四维全景、红线归一化、情景重算</td></tr>
-    <tr><td>2027-01-15</td><td>年度任务（2026 年度）</td><td>年度</td><td><span class="pill k">排期</span></td><td>长期基线重置、阈值回测、来源巡检</td></tr>
-  </tbody>
+<thead><tr>
+<th style="width:8%">编号</th><th style="width:22%">指标</th><th style="width:16%">本期读数</th><th style="width:12%">信号</th><th style="width:42%">来源与口径</th>
+</tr></thead>
+<tbody>
+<tr><td>M01/M02</td><td>利率（Base / 3M EIBOR）</td><td>3.900% / 4.394390%</td><td>预警红</td><td>CBUAE 直连；EIBOR 11-12 定盘</td></tr>
+<tr><td>M05</td><td>Fed 目标区间</td><td>3.75–4.00%</td><td>硬红·方向</td><td>Federal Reserve 声明 10-28</td></tr>
+<tr><td>M07–M09</td><td>货币与信用</td><td>2,908.0 / 3,567.7 / M1 1,022.2</td><td>绿</td><td>CBUAE Statistical Bulletin 2026-09</td></tr>
+<tr><td>P03/P04</td><td>价格（中位 / PIX）</td><td>1,659 / 203.7</td><td>预警红</td><td>PropertyIndex（DLD）2026-10</td></tr>
+<tr><td>R01</td><td>新签租金中位</td><td>65,000 AED/年</td><td>黄</td><td>Peak Trust（Ejari）2026-10</td></tr>
+<tr><td>R06</td><td>降租续约占比</td><td>21.4%</td><td>硬红·方向</td><td>Cavendish Maxwell 2026Q3（部分核验）</td></tr>
+<tr><td>R10/R11</td><td>收益率（毛 / 净）</td><td>6.0–6.6% / 5.4%</td><td>黄</td><td>DRED / Peak Trust / CM 2026Q3</td></tr>
+<tr><td>S01/S03/S06</td><td>供给（交付 / 计划 / 兑现率）</td><td>40,400 / 60,000–162,500 / 41.3%</td><td>硬红·方向</td><td>C&amp;W / CM / ValuStrat</td></tr>
+<tr><td>S07</td><td>新推盘</td><td>≈50,000（9M，−64%）</td><td>绿</td><td>Savills 2026Q3</td></tr>
+<tr><td>M12</td><td>FDI 流入</td><td>48,243 US$m（+5.7%）</td><td>绿</td><td>UNCTAD WIR 2026</td></tr>
+<tr><td>M15/M14</td><td>GDP / CPI 预测</td><td>5.6% vs 3.1% / 1.8% vs 2.5%</td><td>硬红·完全</td><td>CBUAE / IMF 并列</td></tr>
+<tr><td>M16/M17/M18</td><td>外需（Brent / 游客 / 入住率）</td><td>97.44 / 6.97m / 66%</td><td>黄</td><td>EIA STEO / DET</td></tr>
+</tbody>
 </table>
-</div>
-<h3>7.2 结构性观察（数据未到时的跟踪项）</h3>
-<ol class="tight">
-  <li><b>11 月下旬 EIBOR 路径：</b>若月均连续 2 期 ≥4.50%，K01 升级硬红，须重算按揭月供与可负担性上限。</li>
-  <li><b>PIX 11 月同比是否连续 3 月 &lt;−5%：</b>若成立，K07 由预警红升级硬红，须切换至同质化指数复核并下修价格预测。</li>
-  <li><b>CBUAE 10 月货币信贷：</b>跟踪 M1 是否连续第 2 月负增、GREs 存款高增是否持续（9 月 +9.6%）。</li>
-</ol>
 
-<h2 class="sec" id="s8">8 · 台账更新编号与来源</h2>
-<h3>8.1 本期数据变更摘要（台账更新编号，五类分组）</h3>
-<p class="small muted" style="margin-top:-4px">本节即通用自检要求的「数据变更摘要」；更新编号按五类分组（实质修订 / 新增口径记录 / 复核确认 / 未取得（维持上期值）/ 结论不变）。</p>
-<div class="tblwrap">
+<h3>8.3 来源清单（机构·文件·URL）</h3>
 <table class="fixed">
-  <thead>
-    <tr>
-      <th style="width:7%">编号</th>
-      <th style="width:11%">类别</th>
-      <th style="width:22%">指标</th>
-      <th style="width:30%">更新内容</th>
-      <th style="width:30%">依据</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr><td>U1</td><td><span class="pill p">实质修订</span></td><td>P04 / K07</td><td>204.0 / −5.4% YoY / 10,496 笔 → <b>203.7 / −5.5% YoY / 10,407 笔 / 中位 1,637</b></td><td>PIX 10 月发布页与指数页一致（2026-11-13 快照）</td></tr>
-    <tr><td>U2</td><td><span class="pill p">实质修订</span></td><td>M07 / M08 / M09</td><td>2026-08 → <b>2026-09</b>：2,908.0 / 3,567.7 / 1,022.2·2,938.1·3,508.1</td><td>CBUAE Statistical Bulletin September 2026（2026-11-11）</td></tr>
-    <tr><td>U3</td><td><span class="pill p">实质修订</span></td><td>M16</td><td>Brent 4Q26 105（10-06 版）→ <b>109.13</b>（11-10 版）；2026F/2027F 97.44/85.78</td><td>EIA STEO 2026-11 版 Table 2</td></tr>
-    <tr><td>U4</td><td><span class="pill p">实质修订</span></td><td>M02 / K01</td><td>4.364820%（11-10）→ <b>4.394390%（11-12）</b>；距硬红线 13.5bp → 10.56bp</td><td>CBUAE EIBOR 页（Last updated 2026-11-12 12:15:19 PM）</td></tr>
-    <tr><td>U5</td><td><span class="pill p">实质修订</span></td><td>M03</td><td>6M/1Y 4.631080/4.603340 → <b>4.444220/4.724730</b>；1Y−6M −27.74bp → +28.05bp</td><td>同上</td></tr>
-    <tr><td>U6</td><td><span class="pill b">新增口径记录</span></td><td>P04 / P03</td><td>8 月口径冲突化解（Aug 206.6 / Sep 205.6 / Oct 203.7）；样本数并列 10,610/8,670（价格页）与 10,407/8,653（发布页）</td><td>PIX 10 月发布页「months leading in」表；价格页 11-12 更新</td></tr>
-    <tr><td>U7</td><td><span class="pill b">新增口径记录</span></td><td>K07</td><td>确认进度 1 期 → <b>连续 2 月</b>（Sep −3.9%、Oct −5.5%）</td><td>PIX 9 月 / 10 月发布页</td></tr>
-    <tr><td>U8</td><td><span class="pill b">新增口径记录</span></td><td>K01</td><td>「3 月累计上行」由不可算 → <b>+43.29bp</b>（月均口径，Jul→Oct）；11 月 MTD 对 8 月月均 +41.45bp</td><td>eibor_2026.xlsx（1–10 月）+ 官方页 11 月定盘</td></tr>
-    <tr><td>U9</td><td><span class="pill b">新增口径记录</span></td><td>M07/M08 口径并列</td><td>GREs 存款增速 9.7%（正文）vs 9.6%（分部门表），取 9.6%；居民企业存款 −2.0%</td><td>统计公报分部门表复算</td></tr>
-    <tr><td>U10</td><td><span class="pill g">复核确认</span></td><td>P03 / P03a</td><td>公寓中位 1,659、全住宅中位 1,639 维持</td><td>价格页 11-12 更新复核</td></tr>
-    <tr><td>U11</td><td><span class="pill g">复核确认</span></td><td>R01 / R10 / R11</td><td>65,000；毛 4.9–9.1% / 净 4.1–7.6% 维持</td><td>来源：Peak Trust 2026-10 复核</td></tr>
-    <tr><td>U12</td><td><span class="pill g">复核确认</span></td><td>M01a / M01 / M04</td><td>3.900% / 3.75–4.00% / 3.6725 维持</td><td>官方页复核（截至 2026-11-13）</td></tr>
-    <tr><td>U13</td><td><span class="pill k">未取得（维持上期值）</span></td><td>K08 / K06 / K05 / K09 / K10 / K11 / K12 / K13 / K14 / K15</td><td>维持上期值</td><td>本期无新发布（见第 6 节）</td></tr>
-    <tr><td>U14</td><td><span class="pill k">结论不变</span></td><td>信号结构</td><td>15 项五态计数与 v3 一致，未翻转</td><td>第 4.2 节逐条判定</td></tr>
-  </tbody>
+<thead><tr>
+<th style="width:100%">机构 / 文件<span class="src-head">来源与完整 URL<span class="src-pop"><ul>
+<li><a href="https://www.centralbank.ae/en/forex-eibor/eibor-rates/" target="_blank" rel="noopener">CBUAE – EIBOR Rates</a></li>
+<li><a href="https://centralbank.ae/en/forex-eibor/exchange-rates/" target="_blank" rel="noopener">CBUAE – Exchange Rates</a></li>
+<li><a href="https://centralbank.ae/en/research-and-statistics/latest-statistics/statistical-bulletin-banking-monetary-statistics/statistical-bulletin-september-2026/" target="_blank" rel="noopener">CBUAE – Statistical Bulletin 2026-09</a></li>
+<li><a href="https://centralbank.ae/en/news-and-publications/publications/quarterly-reports/" target="_blank" rel="noopener">CBUAE – Quarterly Reports</a></li>
+<li><a href="https://www.federalreserve.gov/monetarypolicy/fomccalendars.htm" target="_blank" rel="noopener">Federal Reserve – FOMC Calendars</a></li>
+<li><a href="https://www.federalreserve.gov/newsevents/pressreleases/monetary20261028a.htm" target="_blank" rel="noopener">Federal Reserve – FOMC Statement 2026-10-28</a></li>
+<li><a href="https://mediaoffice.ae/en/news/2026/march/25-03/dubai-records-strong-performance-in-the-construction-sector" target="_blank" rel="noopener">Dubai Media Office – Construction Q1 2026</a></li>
+<li><a href="https://mediaoffice.ae/en/news/2026/september/13-09/dubai-tourism-records-highest-visitor-numbers-since-february-as-atm-2026-opens" target="_blank" rel="noopener">Dubai Media Office – Tourism 1–8 月</a></li>
+<li><a href="https://www.digitaldubai.ae/initiatives/paperless/dubai-digital-dubai's-population-tops-4.580-million-by-the-end-of-2025-recording-7.5-growth" target="_blank" rel="noopener">Digital Dubai – Population 2025</a></li>
+<li><a href="https://www.dubaipulse.gov.ae/data/dld-registration/dld_rent_contracts-open" target="_blank" rel="noopener">Dubai Pulse – DLD Rent Contracts</a></li>
+<li><a href="https://www.dubaipulse.gov.ae/data/dld-transactions/dld_transactions-open" target="_blank" rel="noopener">Dubai Pulse – DLD Transactions</a></li>
+<li><a href="https://dubailand.gov.ae/en/open-data/indexes-home/" target="_blank" rel="noopener">DLD – Open Data Indexes</a></li>
+<li><a href="https://unctad.org/system/files/non-official-document/wir_fs_qa_en.pdf" target="_blank" rel="noopener">UNCTAD – World Investment Report</a></li>
+<li><a href="https://imf.org/external/country/are/index.htm" target="_blank" rel="noopener">IMF – UAE Country Page</a></li>
+<li><a href="https://www.eia.gov/outlooks/steo/report/global_oil.php" target="_blank" rel="noopener">EIA – STEO Global Oil</a></li>
+<li><a href="https://www.savills.ae/research_articles/379881/395342-0" target="_blank" rel="noopener">Savills – Dubai Residential Q3 2026</a></li>
+<li><a href="https://www.propertyindex.ae/dubai-real-estate-price-index/2026-10" target="_blank" rel="noopener">PropertyIndex – PIX 2026-10</a></li>
+<li><a href="https://www.propertyindex.ae/dubai-real-estate-prices" target="_blank" rel="noopener">PropertyIndex – Dubai Real Estate Prices</a></li>
+<li><a href="https://peaktrust.ae/insights/rent-yield-monitor/2026-10" target="_blank" rel="noopener">Peak Trust – Rent Yield Monitor 2026-10</a></li>
+<li><a href="https://cavendishmaxwell.com/" target="_blank" rel="noopener">Cavendish Maxwell</a></li>
+<li><a href="https://valustrat.com/products/dubai-real-estate-review-q3-2026" target="_blank" rel="noopener">ValuStrat – Dubai Real Estate Review Q3 2026</a></li>
+<li><a href="https://dxbinteract.com/market-reports/2026/Q3" target="_blank" rel="noopener">DXBinteract – Market Report Q3 2026</a></li>
+<li><a href="https://www.cbre.ae/insights/figures/uae-real-estate-market-review-q3-2026" target="_blank" rel="noopener">CBRE – UAE Real Estate Market Review Q3 2026</a></li>
+<li><a href="https://www.jll.com/en-ae/insights/market-dynamics/uae-living" target="_blank" rel="noopener">JLL – UAE Living</a></li>
+</ul></span></span></th>
+</tr></thead>
+<tbody>
+<tr><td>本节列出本期引用的官方一手与行业机构来源；完整 URL 见表头浮层。</td></tr>
+</tbody>
 </table>
-</div>
+<p class="note gap">来源分级（官方一手 / 行业机构 / 挂牌门户 / 媒体转述）与核验状态定义见通用基座第三、四节；本报告仅使用英文来源，媒体转述一律标注「需核实原文」。</p>
 
-<h3>8.2 本期引用来源清单（英文，按级别）</h3>
-<p class="small muted">来源 URL 全文由弹层承载（悬停或键盘聚焦「来源」标记查看），表格内不设「完整 URL」列。级别：官方一手 / 官方通讯社 / 行业机构。本节全部外部 URL 均已登记于 <code>data/processed/economy/dubai/apartment/source_registry.json</code>（业务线来源登记，76 条，含基线 / 月度 / 季度 / 年度）。</p>
-<p>
-  <span class="src-head" tabindex="0">CBUAE EIBOR 页（官方一手）<span class="src-pop"><span class="pop-title">CBUAE · EIBOR Rates</span>各期限 EIBOR 每日定盘；Last updated Thursday 12 November 2026 12:15:19 PM。<span class="pop-url"><a href="https://www.centralbank.ae/en/forex-eibor/eibor-rates/" target="_blank" rel="noopener">https://www.centralbank.ae/en/forex-eibor/eibor-rates/</a></span></span></span>
-  ·
-  <span class="src-head" tabindex="0">CBUAE EIBOR 2026 年归档文件（官方一手）<span class="src-pop"><span class="pop-title">CBUAE · EIBOR 2026</span>eibor_2026.xlsx（1–10 月，10 个工作表），已归档 data/processed/economy/dubai/apartment/eibor_2026.xlsx。<span class="pop-url"><a href="https://centralbank.ae/media/zqfkpibt/eibor_2026.xlsx" target="_blank" rel="noopener">https://centralbank.ae/media/zqfkpibt/eibor_2026.xlsx</a></span></span></span>
-  ·
-  <span class="src-head" tabindex="0">CBUAE Statistical Bulletin September 2026（官方一手）<span class="src-pop"><span class="pop-title">CBUAE · Statistical Bulletin September 2026</span>银行资产 / 信贷 / 存款 / M1–M3；Last updated Wednesday 11 November 2026；xlsx 已归档 data/processed/economy/dubai/apartment/cbuae_statistical_bulletin_2026-09.xlsx。<span class="pop-url"><a href="https://centralbank.ae/en/research-and-statistics/latest-statistics/statistical-bulletin-banking-monetary-statistics/statistical-bulletin-september-2026/" target="_blank" rel="noopener">https://centralbank.ae/en/research-and-statistics/latest-statistics/statistical-bulletin-banking-monetary-statistics/statistical-bulletin-september-2026/</a></span></span></span>
-  ·
-  <span class="src-head" tabindex="0">CBUAE Monetary & Banking Developments September 2026（官方一手）<span class="src-pop"><span class="pop-title">CBUAE · Monetary & Banking Developments</span>Summary Report，Date 04/11/2026；已归档 data/processed/economy/dubai/apartment/cbuae_summary_report_2026-09.pdf。<span class="pop-url"><a href="https://centralbank.ae/media/cysbl3ar/statistical-bulletin-september-2026.pdf" target="_blank" rel="noopener">https://centralbank.ae/media/cysbl3ar/statistical-bulletin-september-2026.pdf</a></span></span></span>
-  ·
-  <span class="src-head" tabindex="0">Federal Reserve FOMC（官方一手）<span class="src-pop"><span class="pop-title">U.S. Federal Reserve · FOMC</span>联邦基金目标区间 / 声明 / 纪要 / SEP。<span class="pop-url"><a href="https://www.federalreserve.gov/monetarypolicy/fomccalendars.htm" target="_blank" rel="noopener">https://www.federalreserve.gov/monetarypolicy/fomccalendars.htm</a></span></span></span>
-  ·
-  <span class="src-head" tabindex="0">U.S. EIA STEO（官方一手）<span class="src-pop"><span class="pop-title">U.S. EIA · Short-Term Energy Outlook</span>Brent 现货与预测；2026-11 版（2026-11-10 发布），Table 2 已归档 data/processed/economy/dubai/apartment/steo_table2_2026-11.pdf。<span class="pop-url"><a href="https://www.eia.gov/outlooks/steo/" target="_blank" rel="noopener">https://www.eia.gov/outlooks/steo/</a></span></span></span>
-</p>
-<p>
-  <span class="src-head" tabindex="0">PropertyIndex PIX© 指数页（行业机构）<span class="src-pop"><span class="pop-title">PropertyIndex · Dubai Property Price Index</span>PIX© 混合调整指数与全住宅中位 PSF；快照 2026-11-13。<span class="pop-url"><a href="https://www.propertyindex.ae/dubai-real-estate-price-index" target="_blank" rel="noopener">https://www.propertyindex.ae/dubai-real-estate-price-index</a></span></span></span>
-  ·
-  <span class="src-head" tabindex="0">PropertyIndex 10 月发布页（行业机构）<span class="src-pop"><span class="pop-title">PIX© Monthly Release · October 2026</span>分段指数 / 中位 PSF / 登记销售；含「months leading in」表。<span class="pop-url"><a href="https://www.propertyindex.ae/dubai-real-estate-price-index/2026-10" target="_blank" rel="noopener">https://www.propertyindex.ae/dubai-real-estate-price-index/2026-10</a></span></span></span>
-  ·
-  <span class="src-head" tabindex="0">PropertyIndex 9 月发布页（行业机构）<span class="src-pop"><span class="pop-title">PIX© Monthly Release · September 2026</span>205.6 / −3.9% YoY。<span class="pop-url"><a href="https://www.propertyindex.ae/dubai-real-estate-price-index/2026-09" target="_blank" rel="noopener">https://www.propertyindex.ae/dubai-real-estate-price-index/2026-09</a></span></span></span>
-  ·
-  <span class="src-head" tabindex="0">PropertyIndex 价格页（行业机构）<span class="src-pop"><span class="pop-title">PropertyIndex · Dubai Real Estate Prices</span>Reporting period 1-31 October 2026；Updated 12 November 2026。<span class="pop-url"><a href="https://www.propertyindex.ae/dubai-real-estate-prices" target="_blank" rel="noopener">https://www.propertyindex.ae/dubai-real-estate-prices</a></span></span></span>
-  ·
-  <span class="src-head" tabindex="0">Peak Trust（行业机构）<span class="src-pop"><span class="pop-title">Peak Trust · Rental Barometer</span>Ejari 新签租约中位租金与 23 区收益率；2026-10 期（发布 2026-11-03）。<span class="pop-url"><a href="https://peaktrust.ae/" target="_blank" rel="noopener">https://peaktrust.ae/</a></span></span></span>
-  ·
-  <span class="src-head" tabindex="0">Cavendish Maxwell（行业机构）<span class="src-pop"><span class="pop-title">Cavendish Maxwell · Market Reports</span>降租续约占比（媒体转述）；2026Q3。<span class="pop-url"><a href="https://cavendishmaxwell.com/" target="_blank" rel="noopener">https://cavendishmaxwell.com/</a></span></span></span>
-  ·
-  <span class="src-head" tabindex="0">Savills（行业机构）<span class="src-pop"><span class="pop-title">Savills · Dubai Residential</span>Q3 成交量同比 / 均价 / 顶级公寓；2026Q3（发布 2026-10-12）。<span class="pop-url"><a href="https://www.savills.ae/" target="_blank" rel="noopener">https://www.savills.ae/</a></span></span></span>
-  ·
-  <span class="src-head" tabindex="0">Dubai DET / Media Office（官方一手）<span class="src-pop"><span class="pop-title">Government of Dubai Media Office · Tourism</span>国际过夜游客与入住率；2026 年 1–8 月（发布 2026-09-13）。<span class="pop-url"><a href="https://mediaoffice.ae/en" target="_blank" rel="noopener">https://mediaoffice.ae/en</a></span></span></span>
-  ·
-  <span class="src-head" tabindex="0">UNCTAD WIR 2026（官方一手·多边）<span class="src-pop"><span class="pop-title">UNCTAD · World Investment Report 2026</span>UAE FDI 流入 2025 年 US$48,243m。<span class="pop-url"><a href="https://unctad.org/" target="_blank" rel="noopener">https://unctad.org/</a></span></span></span>
-  ·
-  <span class="src-head" tabindex="0">Dubai Digital Dubai / DDSE（官方一手）<span class="src-pop"><span class="pop-title">Digital Dubai · Population</span>2025 末人口 4.580m（+7.5%）。<span class="pop-url"><a href="https://www.digitaldubai.ae/" target="_blank" rel="noopener">https://www.digitaldubai.ae/</a></span></span></span>
-</p>
-
-<h3>8.3 追踪表 12 项核对（是否更新）</h3>
-<div class="tblwrap">
-<table class="fixed">
-  <thead>
-    <tr>
-      <th style="width:5%">#</th>
-      <th style="width:22%">监测指标</th>
-      <th style="width:20%">优先数据源</th>
-      <th style="width:25%">上次值（运行前台账读数）</th>
-      <th style="width:28%">本次是否更新</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr><td>1</td><td>CBUAE 基准利率</td><td>centralbank.ae</td><td>3.900%（2026-10-28 维持）</td><td><span class="pill k">否</span> 截至 2026-11-13 无更新</td></tr>
-    <tr><td>2</td><td>3M EIBOR</td><td>centralbank.ae</td><td>4.364820%（11-10 定盘）</td><td><span class="pill p">是</span> → 4.394390%（11-12 定盘）</td></tr>
-    <tr><td>3</td><td>AED/USD</td><td>centralbank.ae</td><td>3.6725</td><td><span class="pill k">否</span> 钉住未变；日度页本期未直连</td></tr>
-    <tr><td>4</td><td>银行信贷</td><td>CBUAE Statistical Bulletin</td><td>2,871.4 AED bn（2026-08）</td><td><span class="pill p">是</span> → 2,908.0（2026-09）</td></tr>
-    <tr><td>5</td><td>PIX© 混合调整指数</td><td>propertyindex.ae</td><td>204.0（v3 快照，错误）</td><td><span class="pill p">是</span> → 203.7（修正）</td></tr>
-    <tr><td>6</td><td>ValuStrat VPI</td><td>valustrat.com</td><td>−4.5% YoY（Q3）</td><td><span class="pill k">否</span> 10 月值未取得</td></tr>
-    <tr><td>7</td><td>DLD 登记成交中位价</td><td>dubaipulse.gov.ae</td><td>1,659 AED/sqft（8,671 笔）</td><td><span class="pill p">是</span> → 1,659（8,670 笔，11-12 更新）</td></tr>
-    <tr><td>8</td><td>新签公寓租金中位</td><td>peaktrust.ae</td><td>65,000 AED/年（10 月）</td><td><span class="pill k">否</span> 11 月期未发布</td></tr>
-    <tr><td>9</td><td>降租续约占比</td><td>Cavendish Maxwell</td><td>21.4%（Q3）</td><td><span class="pill k">否</span></td></tr>
-    <tr><td>10</td><td>Brent 油价</td><td>eia.gov</td><td>4Q26 105 US$/b（10-06 版）</td><td><span class="pill p">是</span> → 109.13（11-10 版）</td></tr>
-    <tr><td>11</td><td>国际游客</td><td>mediaoffice.ae</td><td>6.97m（2026 1–8 月）</td><td><span class="pill k">否</span> 9/10 月缺席</td></tr>
-    <tr><td>12</td><td>酒店入住率</td><td>mediaoffice.ae</td><td>66%（2026-08）</td><td><span class="pill k">否</span></td></tr>
-  </tbody>
-</table>
-</div>
-
-<h3>8.4 已修正事实清单（首次建立）</h3>
-<div class="note correct"><b>说明：</b>v3 及以前各期均无「已修正事实清单」，本期为首次建立。以下条目自本期起生效，后续任何周期报告不得回退。</div>
-<div class="tblwrap">
-<table class="fixed">
-  <thead>
-    <tr>
-      <th style="width:6%">序号</th>
-      <th style="width:94%">修正条目</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr><td>1</td><td>❌ 不得再称「PIX© 2026-10 指数为 204.0、同比 −5.4%、样本 10,496 笔」——正确结论为 <b>203.7 / −0.9% MoM / −5.5% YoY / 10,407 笔 / 中位 1,637 AED/sqft</b>（官方 10 月发布页与指数页一致）。[Source: https://www.propertyindex.ae/dubai-real-estate-price-index/2026-10, 2026-11]</td></tr>
-    <tr><td>2</td><td>❌ 不得再称「3M EIBOR 最新定盘为 4.364820%（11-10）」——官方页已更新至 <b>11-12 定盘 4.394390%</b>（Last updated Thursday 12 November 2026 12:15:19 PM）。[Source: https://www.centralbank.ae/en/forex-eibor/eibor-rates/, 2026-11]</td></tr>
-    <tr><td>3</td><td>❌ 不得再称「EIBOR 6M&gt;1Y 倒挂约 2.8bp 维持」——11-12 定盘 <b>1Y 4.724730% 高于 6M 4.444220% 达 28.05bp</b>，倒挂已化解。[Source: 同上, 2026-11]</td></tr>
-    <tr><td>4</td><td>❌ 不得再称「EIA STEO 11 月版未更新」——11 月版已于 <b>2026-11-10</b> 发布，Brent 4Q26 105 → <b>109.13</b>。[Source: https://www.eia.gov/outlooks/steo/, 2026-11]</td></tr>
-    <tr><td>5</td><td>❌ 不得再称「CBUAE 9 月统计公报未发布」——Statistical Bulletin September 2026 已于 <b>2026-11-11</b> 发布（xlsx 已归档 data/processed/economy/dubai/apartment/cbuae_statistical_bulletin_2026-09.xlsx）。[Source: https://centralbank.ae/en/research-and-statistics/latest-statistics/statistical-bulletin-banking-monetary-statistics/statistical-bulletin-september-2026/, 2026-11]</td></tr>
-    <tr><td>6</td><td>❌ 不得再称「PIX 9 月发布页缺席」——9 月与 10 月发布页均已挂出（/2026-09、/2026-10）。[Source: https://www.propertyindex.ae/dubai-real-estate-price-index/2026-09, 2026-11]</td></tr>
-    <tr><td>7</td><td>❌ 不得再称「EIBOR 2026 全年定盘文件 404、不可得」——eibor_2026.xlsx（1–10 月，10 个工作表）已取得并归档 data/processed/economy/dubai/apartment/eibor_2026.xlsx。[Source: https://centralbank.ae/media/zqfkpibt/eibor_2026.xlsx, 2026-11]</td></tr>
-    <tr><td>8</td><td>❌ 不得再称「PIX 8 月指数 205.6 / −3.5% YoY」为当前序列值——当前发布序列为 <b>8 月 206.6 / −2.4% YoY</b>，8 月历史发布页快照（205.6 / −3.5%）须并列引用。[Source: https://www.propertyindex.ae/dubai-real-estate-price-index/2026-10, 2026-11]</td></tr>
-    <tr><td>9</td><td>❌ 不得再称「公寓登记样本 8,671 笔」为唯一口径——价格页为 <b>8,670 笔</b>（11-12 更新）、PIX 发布页为 <b>8,653 笔</b>，须并列引用。[Source: https://www.propertyindex.ae/dubai-real-estate-prices, 2026-11]</td></tr>
-    <tr><td>10</td><td>❌ 不得再称「K07 价格同比确认进度为 1 期」——按当前发布序列（Sep −3.9%、Oct −5.5%）为 <b>连续 2 月</b>。[Source: https://www.propertyindex.ae/dubai-real-estate-price-index/2026-10, 2026-11]</td></tr>
-  </tbody>
-</table>
-</div>
-
-<p class="small muted">版本说明：本报告为 2026-11 月度周期第 5 次执行（v5），覆盖 v4。v5 为按最新代码 / 规范的重新生成：新增 3.6 政策入模、4.3 传导量化两节，建立业务线来源登记 data/processed/economy/dubai/apartment/source_registry.json；数据层与 v4 一致（本期未重新直连官方源，无新发布被引用）。v4 的 U1–U9 修订与第 8.4 节「已修正事实清单」10 条继续有效。L3 深度复核后同步修正 4 处：净收益率区间 4.1–7.8% → 4.1–7.6%（口径：23 区净收益率分布，对齐台账 R11）、许可单位「套」→「份」、10 月单月上行 3.07bp → 12.57bp（按 eibor_2026.xlsx 月均复算）、移除残留模板占位符。最新月份官方读数可能随后续登记继续修订；2026-09 货币信贷数据为初步值（*）。</p>
-
-<footer role="contentinfo" aria-label="页脚">
-  <p>迪拜公寓住宅市场月度监测简报 · 2026 年 11 月期 v5 ｜ 执行日期 2026-11-15 ｜ 输出语言：中文 ｜ 资料来源：英文网站，经济指标取自官方英文权威渠道</p>
-  <p>报告路径：content/economy/dubai/apartment/reports/2026-11_monthly.html ｜ 指标台账：data/processed/economy/dubai/apartment/dubai_apartment_indicator_registry_2027-01.xlsx（v2.0.2）｜ 来源登记：data/processed/economy/dubai/apartment/source_registry.json</p>
-  <p>下一期：2026 年 12 月《月度监测简报》（按月度自动化任务生成）；季度任务 2027-01-08；年度任务 2027-01-15。</p>
-</footer>
-</main>
-
-<script>
+<script src="https://cdn.jsdelivr.net/npm/echarts@5/dist/echarts.min.js"></script>
+<script>document.addEventListener('DOMContentLoaded', function(){
 (function(){
-  if(!window.echarts){return;}
-  var palette={navy:'#16324f',blue:'#3f6fb0',light:'#c9d7e8',red:'#a83224',pre:'#b8541c',green:'#1c7444',amber:'#956612',ink:'#16233a',ink2:'#4a5a70',line:'#e3e9f0'};
-
-  var dom1=document.getElementById('chartEibor');
-  if(dom1){
-    var c1=echarts.init(dom1,null,{renderer:'canvas'});
-    c1.setOption({
-      backgroundColor:'#ffffff',
-      title:{text:'3M EIBOR 路径：2026 年月均与 11 月逐日定盘',subtext:'月均为逐日定盘算术平均｜数据源 CBUAE EIBOR 2026 归档文件与官方页｜Last updated 2026-11-12 12:15:19 PM',left:8,top:4,textStyle:{fontSize:14,color:palette.navy,fontWeight:'bold'},subtextStyle:{fontSize:11,color:palette.ink2}},
-      tooltip:{trigger:'axis',axisPointer:{type:'line'},valueFormatter:function(v){return v==null?'':Number(v).toFixed(6)+'%';}},
-      legend:{top:30,right:12,itemWidth:12,itemHeight:8,textStyle:{color:palette.ink2,fontSize:11}},
-      grid:{left:62,right:24,top:74,bottom:42},
-      xAxis:{type:'category',data:['1月','2月','3月','4月','5月','6月','7月','8月','9月','10月','11-06','11-09','11-10','11-11','11-12'],axisLine:{lineStyle:{color:palette.line}},axisTick:{show:false},axisLabel:{color:palette.ink2,fontSize:11}},
-      yAxis:{type:'value',min:3.4,max:4.7,axisLine:{show:false},axisTick:{show:false},axisLabel:{color:palette.ink2,fontSize:11,formatter:'{value}%'},splitLine:{lineStyle:{color:'#eef2f6'}}},
-      series:[
-        {name:'月均（1–10 月）',type:'line',smooth:false,symbol:'circle',symbolSize:6,data:[3.578997,3.572268,3.637528,3.750042,3.750571,3.804954,3.870124,3.899114,4.177326,4.303021,null,null,null,null,null],lineStyle:{color:palette.blue,width:2},itemStyle:{color:palette.blue},connectNulls:false},
-        {name:'11 月逐日定盘',type:'line',smooth:false,symbol:'circle',symbolSize:7,data:[null,null,null,null,null,null,null,null,null,null,4.206770,4.321380,4.364820,4.339930,4.394390],lineStyle:{color:palette.navy,width:2.4},itemStyle:{color:palette.navy},connectNulls:false,
-          label:{show:true,position:'top',color:palette.navy,fontSize:11,formatter:function(p){return p.value==null?'':p.value.toFixed(5);}},
-          markLine:{silent:true,symbol:'none',data:[
-            {yAxis:4.50,lineStyle:{color:palette.red,type:'solid',width:1.6},label:{formatter:'硬红线 4.50%',color:palette.red,fontSize:10,position:'insideEndTop'}},
-            {yAxis:4.35,lineStyle:{color:palette.pre,type:'dashed',width:1.3},label:{formatter:'预警红线 4.35%（已越 4.44bp）',color:palette.pre,fontSize:10,position:'insideEndBottom'}},
-            {yAxis:3.50,lineStyle:{color:palette.green,type:'dashed',width:1.2},label:{formatter:'绿灯 3.50%',color:palette.green,fontSize:10,position:'insideEndBottom'}}
-          ]}
-        }
-      ]
-    });
-    window.addEventListener('resize',function(){c1.resize();});
+  function mk(id, opt){
+    var el = document.getElementById(id);
+    if(!el || typeof echarts === 'undefined'){ return; }
+    var c = echarts.init(el);
+    c.setOption(opt);
+    window.addEventListener('resize', function(){ c.resize(); });
   }
+  var grid = {left:58,right:26,top:46,bottom:44};
 
-  var dom2=document.getElementById('chartRate');
-  if(dom2){
-    var c2=echarts.init(dom2,null,{renderer:'canvas'});
-    c2.setOption({
-      backgroundColor:'#ffffff',
-      title:{text:'利率敏感性：月供与可负担房价',subtext:'假设 AED 2,000,000 / 300 个月 / 等额本息 / 利率全额传导｜假设性测算，非机构发布',left:8,top:4,textStyle:{fontSize:14,color:palette.navy,fontWeight:'bold'},subtextStyle:{fontSize:11,color:palette.ink2}},
-      tooltip:{trigger:'axis',axisPointer:{type:'shadow'},formatter:function(params){var s=params[0].axisValue+'<br/>';for(var i=0;i<params.length;i++){var p=params[i];s+=p.marker+(p.seriesName==='月供'?'月供：AED '+Number(p.value).toLocaleString()+'/月':'可负担房价：'+p.value+'%')+'<br/>';}return s;}},
-      legend:{top:30,right:12,itemWidth:12,itemHeight:8,textStyle:{color:palette.ink2,fontSize:11}},
-      grid:{left:68,right:64,top:78,bottom:44},
-      xAxis:{type:'category',data:['4.3944%（当前）','4.50%（红线）','4.75%','5.00%','5.25%'],axisLine:{lineStyle:{color:palette.line}},axisTick:{show:false},axisLabel:{color:palette.ink2,fontSize:11}},
-      yAxis:[
-        {type:'value',name:'月供 AED',min:10400,max:12200,nameTextStyle:{color:palette.ink2,fontSize:11},axisLine:{show:false},axisTick:{show:false},axisLabel:{color:palette.ink2,fontSize:11,formatter:function(v){return (v/1000)+'k';}},splitLine:{lineStyle:{color:'#eef2f6'}}},
-        {type:'value',name:'可负担房价变化 %',min:-9,max:1,nameTextStyle:{color:palette.red,fontSize:11},axisLine:{show:false},axisTick:{show:false},axisLabel:{color:palette.red,fontSize:11,formatter:'{value}%'},splitLine:{show:false}}
-      ],
-      series:[
-        {name:'月供',type:'bar',barWidth:34,data:[10997,11117,11402,11692,11985],itemStyle:{color:palette.navy}},
-        {name:'可负担房价',type:'line',yAxisIndex:1,symbol:'circle',symbolSize:7,data:[0,-1.08,-3.55,-5.94,-8.24],lineStyle:{color:palette.red,width:2},itemStyle:{color:palette.red}}
-      ]
-    });
-    window.addEventListener('resize',function(){c2.resize();});
-  }
-
-  var dom3=document.getElementById('chartPrice');
-  if(dom3){
-    var c3=echarts.init(dom3,null,{renderer:'canvas'});
-    c3.setOption({
-      backgroundColor:'#ffffff',
-      title:{text:'价格口径对照（不可直接相减）',subtext:'单位 AED/sqft｜统计域与调整方法各异｜价格页 11-12 更新；PIX 页 10 月发布',left:8,top:4,textStyle:{fontSize:14,color:palette.navy,fontWeight:'bold'},subtextStyle:{fontSize:11,color:palette.ink2}},
-      grid:{left:208,right:68,top:64,bottom:34},
-      tooltip:{trigger:'axis',axisPointer:{type:'shadow'}},
-      xAxis:{type:'value',axisLine:{show:false},axisTick:{show:false},axisLabel:{color:palette.ink2,fontSize:11},splitLine:{lineStyle:{color:'#eef2f6'}}},
-      yAxis:{type:'category',inverse:true,data:['公寓登记中位（2026-10）','全住宅中位·价格页（11-12 更新）','全住宅中位·PIX 页（10 月发布）','城市指数（2026-09）','公寓成交均价（2026Q3）','顶级公寓均价（2026Q3）'],axisLine:{lineStyle:{color:palette.line}},axisTick:{show:false},axisLabel:{color:palette.ink2,fontSize:11.5}},
-      series:[{type:'bar',barWidth:15,data:[{value:1659,itemStyle:{color:palette.navy}},{value:1639,itemStyle:{color:palette.blue}},{value:1637,itemStyle:{color:palette.light}},{value:1644,itemStyle:{color:'#7fa4cd'}},{value:1817,itemStyle:{color:'#c08a3e'}},{value:5237,itemStyle:{color:palette.red}}],label:{show:true,position:'right',color:palette.ink,fontSize:11,formatter:'{c}'}}]
-    });
-    window.addEventListener('resize',function(){c3.resize();});
-  }
-
-  var dom4=document.getElementById('chartRent');
-  if(dom4){
-    var c4=echarts.init(dom4,null,{renderer:'canvas'});
-    c4.setOption({
-      backgroundColor:'#ffffff',
-      title:{text:'公寓新签租约中位租金（按面积段）',subtext:'单位 AED/年｜Ejari 登记｜Peak Trust 2026-10（发布 2026-11-03，本期复核确认）',left:8,top:4,textStyle:{fontSize:14,color:palette.navy,fontWeight:'bold'},subtextStyle:{fontSize:11,color:palette.ink2}},
-      tooltip:{trigger:'axis',axisPointer:{type:'shadow'}},
-      legend:{top:30,right:12,itemWidth:12,itemHeight:8,textStyle:{color:palette.ink2,fontSize:11}},
-      grid:{left:72,right:24,top:76,bottom:42},
-      xAxis:{type:'category',data:['<550 sqft','550–850','850–1,300','>1,300','全部公寓'],axisLine:{lineStyle:{color:palette.line}},axisTick:{show:false},axisLabel:{color:palette.ink2,fontSize:11}},
-      yAxis:{type:'value',name:'AED/年',nameTextStyle:{color:palette.ink2,fontSize:11},axisLine:{show:false},axisTick:{show:false},axisLabel:{color:palette.ink2,fontSize:11,formatter:function(v){return v/1000+'k';}},splitLine:{lineStyle:{color:'#eef2f6'}}},
-      series:[
-        {name:'7 月',type:'bar',data:[40000,55800,69300,100000,62000],itemStyle:{color:'#c9d7e8'},barGap:'10%'},
-        {name:'8 月',type:'bar',data:[42000,60500,75000,115000,67000],itemStyle:{color:'#9db9da'}},
-        {name:'9 月',type:'bar',data:[43000,63000,78175,115000,68000],itemStyle:{color:'#5f88bb'}},
-        {name:'10 月',type:'bar',data:[44000,62000,77175,120000,65000],itemStyle:{color:palette.navy}}
-      ]
-    });
-    window.addEventListener('resize',function(){c4.resize();});
-  }
-})();
-</script>
-
-<script>
-(function(){
-  var nav=document.querySelector('.report-nav');
-  if(!nav)return;
-  var tabs=Array.prototype.slice.call(nav.querySelectorAll('.nav-tabs a'));
-  var targets=tabs.map(function(a){
-    var id=a.getAttribute('href');
-    return id&&id.charAt(0)==='#'?document.getElementById(id.slice(1)):null;
+  mk('c-eibor', {
+    title:{text:'3M EIBOR 月均与双阈值（%，CBUAE）',left:'center',textStyle:{fontSize:13}},
+    tooltip:{trigger:'axis',valueFormatter:function(v){return v.toFixed(4)+'%';}},
+    legend:{data:['3M EIBOR 月均'],top:26},
+    grid:grid,
+    xAxis:{type:'category',data:['1月','2月','3月','4月','5月','6月','7月','8月','9月','10月','11月MTD']},
+    yAxis:{type:'value',min:3.3,max:4.6,axisLabel:{formatter:'{value}%'}},
+    series:[{
+      name:'3M EIBOR 月均',type:'line',smooth:false,symbol:'circle',symbolSize:6,
+      data:[3.578997,3.572268,3.637528,3.750042,3.750571,3.804954,3.870124,3.899114,4.177326,4.303021,4.313649],
+      lineStyle:{width:2.5,color:'#2f5597'},itemStyle:{color:'#2f5597'},
+      markLine:{silent:true,symbol:'none',data:[
+        {yAxis:4.35,lineStyle:{color:'#c0392b',type:'dashed'},label:{formatter:'预警红 4.35%',position:'insideEndTop'}},
+        {yAxis:4.50,lineStyle:{color:'#8b1a1a',type:'solid'},label:{formatter:'硬红 4.50%',position:'insideEndTop'}}
+      ]}
+    }]
   });
-  var headings=document.querySelectorAll('h2.sec,h3[id],#main-content');
-  function updateOffsets(){
-    var h=nav.offsetHeight+12;
-    Array.prototype.forEach.call(headings,function(el){el.style.scrollMarginTop=h+'px';});
-  }
-  function updateActive(){
-    var pos=window.scrollY+nav.offsetHeight+24;
-    var cur=0;
-    for(var i=0;i<targets.length;i++){
-      var el=targets[i];
-      if(!el)continue;
-      var top=el.getBoundingClientRect().top+window.scrollY;
-      if(top<=pos)cur=i;else break;
-    }
-    if(window.innerHeight+window.scrollY>=document.documentElement.scrollHeight-2)cur=tabs.length-1;
-    tabs.forEach(function(a,i){a.classList.toggle('active',i===cur);});
-  }
-  updateOffsets();
-  updateActive();
-  window.addEventListener('resize',function(){updateOffsets();updateActive();},{passive:true});
-  window.addEventListener('scroll',updateActive,{passive:true});
+
+  mk('c-rent', {
+    title:{text:'续约租金结构：降租/持平/涨租占比（%，Cavendish Maxwell）',left:'center',textStyle:{fontSize:13}},
+    tooltip:{trigger:'axis',axisPointer:{type:'shadow'},valueFormatter:function(v){return v==null?'未发布':v+'%';}},
+    legend:{data:['2026Q1','2026Q3'],top:26},
+    grid:grid,
+    xAxis:{type:'category',data:['降租','持平','涨租']},
+    yAxis:{type:'value',max:70,axisLabel:{formatter:'{value}%'}},
+    series:[
+      {name:'2026Q1',type:'bar',data:[4.8,null,59.4],itemStyle:{color:'#9db9da'},label:{show:true,position:'top',formatter:function(p){return p.value==null?'—':p.value+'%';}}},
+      {name:'2026Q3',type:'bar',data:[21.4,38.7,40.0],itemStyle:{color:'#2f5597'},label:{show:true,position:'top',formatter:function(p){return p.value+'%';}}}
+    ]
+  });
+
+  mk('c-price', {
+    title:{text:'价格口径对照（AED/sqft，2026-09/10）',left:'center',textStyle:{fontSize:13}},
+    tooltip:{trigger:'axis',axisPointer:{type:'shadow'},valueFormatter:function(v){return v+' AED/sqft';}},
+    grid:{left:170,right:60,top:46,bottom:34},
+    xAxis:{type:'value',min:1500,max:1900,axisLabel:{formatter:'{value}'}},
+    yAxis:{type:'category',inverse:true,data:['PIX 中位','PropertyIndex 全住宅中位','PropertyIndex 公寓中位','Property Monitor 城市指数','Savills 均价']},
+    series:[{type:'bar',data:[1637,1639,1659,1644,1817],itemStyle:{color:'#2f5597'},label:{show:true,position:'right',formatter:'{c}'}}]
+  });
+
+  mk('c-sens', {
+    title:{text:'利率敏感性：月供与可负担房价（AED，假设性测算）',left:'center',textStyle:{fontSize:13}},
+    tooltip:{trigger:'axis'},
+    legend:{data:['月供（AED/月）','可负担房价变化（AED）'],top:26},
+    grid:grid,
+    xAxis:{type:'category',data:['当前 4.394%','红线 4.50%','+25bp','+50bp']},
+    yAxis:[
+      {type:'value',name:'月供',min:9000,max:10500,axisLabel:{formatter:'{value}'}},
+      {type:'value',name:'房价变化',min:-100000,max:10000,axisLabel:{formatter:'{value}'}}
+    ],
+    series:[
+      {name:'月供（AED/月）',type:'bar',data:[9567.92,9664.52,9797.35,10029.34],itemStyle:{color:'#2f5597'},label:{show:true,position:'top',formatter:function(p){return p.value.toLocaleString();}}},
+      {name:'可负担房价变化（AED）',type:'line',yAxisIndex:1,data:[0,-18742,-43908,-86264],symbol:'circle',symbolSize:7,lineStyle:{color:'#c0392b',width:2.5},itemStyle:{color:'#c0392b'}}
+    ]
+  });
 })();
-</script>
+});</script>
+
+<div class="chart-box">
+  <div class="chart-eh" id="c-eibor"></div>
+  <p class="chart-note"><b>图 1 · 利率路径：</b>3M EIBOR 月均（2026-01～10 自算自 <code>eibor_2026.xlsx</code> 全定盘日算术平均；11 月为 9 次定盘均值 4.313649%，来源 CBUAE）。虚线为机制自设预警红 4.35%、硬红 4.50%（预校准 ex-ante）。</p>
+</div>
+<div class="chart-box">
+  <div class="chart-eh" id="c-rent"></div>
+  <p class="chart-note"><b>图 2 · 租金结构：</b>续约租金变动方向占比，Q1 与 Q3 对比；Q1 持平值未发布（—），Q2 全组缺失。来源 Cavendish Maxwell（媒体转述，部分核验）。</p>
+</div>
+<div class="chart-box">
+  <div class="chart-eh" id="c-price"></div>
+  <p class="chart-note"><b>图 3 · 价格口径对照：</b>五套口径均为 AED/sqft 但统计域不同（均价 / 中位 / 混合调整 / 城市指数），禁止相减或合并；数值取自 registry v2.0.2。</p>
+</div>
+<div class="chart-box">
+  <div class="chart-eh" id="c-sens"></div>
+  <p class="chart-note"><b>图 4 · 利率敏感性（假设性测算）：</b>假设浮动按揭利率 = 3M EIBOR + 1.50pp margin、贷款额 AED 1,500,000、期限 25 年、等额本息、LTV 80%；月供与「同一月供下可负担房价变化」为自算值，非市场数据，不构成建议。</p>
+</div>
+
+</main>
+<footer>
+  <div class="wrap">
+    <p>tech-context-digest · 迪拜公寓监测 · 月度简报 2026-11 · 仅英文来源 · 读数时点 2026-11-13（registry v2.0.2）</p>
+  </div>
+</footer>
 </body>
 </html>

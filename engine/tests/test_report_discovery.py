@@ -28,7 +28,8 @@ class TestDiscoveryCategories(unittest.TestCase):
     def test_legacy_not_published(self):
         formal = {r.rel for r in iter_reports()}
         legacy = {r.rel for r in iter_reports(include_legacy=True) if r.category == "legacy"}
-        self.assertTrue(legacy)
+        # 2026-11-17 全量重生成已清理 reports/legacy/（tech-debt-ledger B12–B14），
+        # 存档机制保留：legacy 允许为空，但一旦存在必须全部未发布。
         self.assertTrue(all(rel not in formal for rel in legacy))
 
     def test_every_business_line_represented(self):
