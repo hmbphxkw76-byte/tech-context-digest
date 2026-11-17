@@ -16,7 +16,7 @@
 | P-02 | 「已审计」实际覆盖率≈0（10 份停在 in-review 3/4） | Phase 2.2：L3 批量补审 + SLA；`audit_tool accept` 覆盖率 | `python engine/audit/scripts/audit_tool.py accept` | 待实施 |
 | P-03 | strict 审计耗时无阈值 | Phase 0.2：`perf-status.json` 增 `audit_strict_p95_ms`；`perf_monitor.check_thresholds` 增规则 | `python engine/tools/perf_monitor.py check` | 已实施 |
 | P-04 | 声明与实现落差（pipeline_runner / repo_sync 工作流零调用） | Phase 0.4 方案 A：`ci.yml` 增 `pipeline_runner validate` | `python engine/tools/pipeline_runner.py validate` | 已实施 |
-| P-05 | 任务级闭环工件缺失 | Phase 1.1 / 1.2：`task_plan.py` + `local_mainline.py` | `task_plan.py --check`（置于 `engine/tools/`） | 待实施 |
+| P-05 | 任务级闭环工件缺失 | Phase 1.1 / 1.2：`task_plan.py` + `local_mainline.py` | `task_plan.py --check`（置于 `engine/tools/`） | 已实施 |
 | P-06 | 门禁清单 / 类型注册多点手工同步 | 未列入 Phase 0–3 | — | 显式延后（需另立「注册结构化」专项，重构 `optimization_gate.CHECKS` / `template-registry.md` / `compliance-rules.json` / `_common.TEMPLATE_TYPE_DIRS` / `build_hub.TYPE_SHORT` 五处对齐；本轮聚焦吸收式融合，避免范围蔓延） |
 | P-07 | 规范复述漂移 | Phase 3.3：AGENTS.md 上位-下位收敛，复述点清零 | `python engine/tools/check_links.py` + 人工核查 | 待实施 |
 | P-08 | 无静态检查 | Phase 3.1：ruff / mypy 纳入 `optimization_gate` | `python engine/tools/optimization_gate.py --only ruff,mypy` | 待实施 |
@@ -27,8 +27,8 @@
 
 | 编号 | 吸收项 | 任务 / 产物 | 验收命令 | 状态 |
 |---|---|---|---|---|
-| ① | 任务计划工件（plan/tasks/risks + 任务启动文件） | Phase 1.1：`task_plan.py`（置于 `engine/tools/`）→ `engine/audit/records/` 下的 `tasks/<slug>/` 子目录 | `task_plan.py --help`（置于 `engine/tools/`） | 待实施 |
-| ② | 本地 mainline 编排脚本 | Phase 1.2：`local_mainline.py`（置于 `engine/tools/`；薄封装，复用 `repo_sync` / `optimization_gate`） | `local_mainline.py --help`（置于 `engine/tools/`） | 待实施 |
+| ① | 任务计划工件（plan/tasks/risks + 任务启动文件） | Phase 1.1：`task_plan.py`（置于 `engine/tools/`）→ `engine/audit/records/` 下的 `tasks/<slug>/` 子目录 | `task_plan.py --help`（置于 `engine/tools/`） | 已实施 |
+| ② | 本地 mainline 编排脚本 | Phase 1.2：`local_mainline.py`（置于 `engine/tools/`；薄封装，复用 `repo_sync` / `optimization_gate`） | `local_mainline.py --help`（置于 `engine/tools/`） | 已实施 |
 | ③ | 完成前审计证据索引 | Phase 2.1：`audit_tool` evidence index + `audit_registry.evidence` | `python engine/audit/scripts/audit_tool.py evidence <report>` | 待实施 |
 | ④ | 分支登记册语义对齐 | 既有 `branch_registry.json` + BRANCH-NAMING-SPEC v1.0 | `python engine/tools/repo_sync.py branches` | 已复用 |
 
@@ -40,9 +40,9 @@
 | 0.2 | strict 审计性能阈值 | `perf-status.json` / `perf_monitor.py` | `python engine/tools/perf_monitor.py check` | 已实施 |
 | 0.3 | 修 `pipeline_runner` probe 语义 | `pipeline_runner.py`（CLI `--probe/--no-probe` 默认尊重清单） | `python engine/tools/pipeline_runner.py validate` | 已实施 |
 | 0.4 | 收口「声明-实现」落差（方案 A） | `ci.yml` 增 `pipeline_runner validate` 步骤 | `grep pipeline_runner .github/workflows/ci.yml` | 已实施 |
-| 1.1 | 新增 `task_plan.py` | `task_plan.py` + `test_task_plan.py`（均置于 `engine/tools/` 与 `engine/tests/`） | `python -m unittest engine.tests.test_task_plan` | 待实施 |
-| 1.2 | 新增 `local_mainline.py` | `local_mainline.py` + `test_local_mainline.py`（均置于 `engine/tools/` 与 `engine/tests/`） | `python -m unittest engine.tests.test_local_mainline` | 待实施 |
-| 1.3 | AGENTS.md 增「任务级闭环」硬性约束节 | `AGENTS.md` / `report-pipeline-system.md` N0.5 | `python engine/tools/check_links.py` | 待实施 |
+| 1.1 | 新增 `task_plan.py` | `task_plan.py` + `test_task_plan.py`（均置于 `engine/tools/` 与 `engine/tests/`） | `python -m unittest engine.tests.test_task_plan` | 已实施 |
+| 1.2 | 新增 `local_mainline.py` | `local_mainline.py` + `test_local_mainline.py`（均置于 `engine/tools/` 与 `engine/tests/`） | `python -m unittest engine.tests.test_local_mainline` | 已实施 |
+| 1.3 | AGENTS.md 增「任务级闭环」硬性约束节 | `AGENTS.md` / `report-pipeline-system.md` N0.5 | `python engine/tools/check_links.py` | 已实施 |
 | 2.1 | `audit_tool` 增 evidence index | `audit_tool.py` + `audit_registry.json` `evidence` 字段 | `python engine/audit/scripts/audit_tool.py evidence` | 待实施 |
 | 2.2 | L3 瓶颈专项 | 10 份 `in-review` 批量补 L3 + SLA 写入规范 | `python engine/audit/scripts/audit_tool.py accept` | 待实施 |
 | 2.3 | 登记册清理纳入维护流水线 | `scheduled-maintenance.yml` stale 检测步骤 | `grep audit_tool .github/workflows/scheduled-maintenance.yml` | 待实施 |
@@ -65,9 +65,9 @@
 
 | # | 标准 | 落地 | 状态 |
 |---|---|---|---|
-| 1 | 工件即门禁输入：无 `plan.json` 不得 `repo_sync run --gate` | `repo_sync.run` 增计划校验（`task/*` 分支 + `--gate`），`local_mainline` 强制计划 | 待实施 |
-| 2 | 单一事实源：任务工件 schema 由 `task_plan.py` 定义 | `task_plan.py` schema + 其余位置只指针 | 待实施 |
-| 3 | 复用纪律：`local_mainline.py` 只编排，禁止重写校验 | 单测锁定「门禁仍走 `optimization_gate`」 | 待实施 |
+| 1 | 工件即门禁输入：无 `plan.json` 不得 `repo_sync run --gate` | `repo_sync.run` 增计划校验（`task/*` 分支 + `--gate`），`local_mainline` 强制计划 | 已实施 |
+| 2 | 单一事实源：任务工件 schema 由 `task_plan.py` 定义 | `task_plan.py` schema + 其余位置只指针 | 已实施 |
+| 3 | 复用纪律：`local_mainline.py` 只编排，禁止重写校验 | 单测锁定「门禁仍走 `optimization_gate`」 | 已实施 |
 | 4 | 版本治理：核验 / 收敛不升级版本号 | 既有 `report-pipeline-system.md` §六 | 已复用 |
 | 5 | 新增即删旧：每新增一层规范，同步删除等量旧表述 | Phase 3.3 执行并记录删改点 | 待实施 |
 
@@ -75,8 +75,8 @@
 
 | # | 风险 | 缓解 | 状态 |
 |---|---|---|---|
-| R1 | 任务工件沦为形式主义 | 「工件即门禁输入」+ 任务启动文件强制 | 待实施 |
-| R2 | 双入口漂移 | `local_mainline.py` 只编排；测试锁定复用关系 | 待实施 |
+| R1 | 任务工件沦为形式主义 | 「工件即门禁输入」+ 任务启动文件强制 | 已实施 |
+| R2 | 双入口漂移 | `local_mainline.py` 只编排；测试锁定复用关系 | 已实施 |
 | R3 | L3 瓶颈不解决 | SLA（每两周）+ 批量复核 | 待实施 |
 | R4 | 规范复杂度再增 | 「新增即删旧」；版本治理 | 待实施 |
 | R5 | 多会话并发写 | 文件编辑锁 / 会话协调 | 显式延后（见 P-09） |
@@ -88,7 +88,7 @@
 |---|---|---|---|---|---|
 | M1 | 审计登记册失效条目 | 2 | 0 | `audit_tool status` | 已实施 |
 | M2 | 有效报告「已审计」覆盖率 | 0/10 | ≥90% | `audit_tool accept` | 待实施 |
-| M3 | 本地一次任务闭环操作数 | ~6 条 | 1 条 | `local_mainline.py` | 待实施 |
+| M3 | 本地一次任务闭环操作数 | ~6 条 | 1 条 | `local_mainline.py` | 已实施 |
 | M4 | strict 审计性能护栏 | 无阈值 | p95 ≤180s 有阈值 | `perf_monitor check` | 已实施 |
 | M5 | 门禁噪声（validate 警告） | 0 | 保持 0 | `validate.py` | 已复用 |
 | M6 | 规范复述点 | 多处残留 | 0 | `check_links` + 人工核查 | 待实施 |
@@ -101,7 +101,7 @@
 |---|---|---|---|---|---|
 | 基线（2026-11-17） | 0 | 448 OK（1 skip） | 通过 | 0E/0W | 见《方案》§1.6 |
 | Phase 0 | 0 | 459 OK（1 skip） | 通过 | 0E/0W | — |
-| Phase 1 | 待测 | 待测 | 待测 | 待测 | — |
+| Phase 1 | 0 | 478 OK（1 skip） | 通过 | 0E/0W | — |
 | Phase 2 | 待测 | 待测 | 待测 | 待测 | — |
 | Phase 3 | 待测 | 待测 | 待测 | 待测 | — |
 

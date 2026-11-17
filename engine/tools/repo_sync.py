@@ -74,6 +74,26 @@ def divergence(base: str = BASE_BRANCH) -> tuple[int, int]:
     return int(a), int(b)
 
 
+def require_task_plan(branch: str | None = None, root: Path | None = None) -> tuple[bool, str]:
+    """治理标准 1「工件即门禁输入」：受管 task/* 分支 `run --gate` 前必须存在计划。
+
+    非受管分支（main / ci/* / 其它）不强制；计划路径为
+    `engine/audit/records/tasks/<slug>/plan.json`（由 task_plan.py 生成）。
+    """
+    root = ROOT if root is None else root
+    br = current_branch() if branch is None else branch
+    parsed = branch_naming.parse_branch(br)
+    if parsed is None:
+        return True, f"非受管分支 {br}，不强制任务计划"
+    slug = parsed["slug"]
+    plan = root / "engine" / "audit" / "records" / "tasks" / slug / "plan.json"
+    if not plan.exists():
+        return False, (f"受管分支 {br} 缺任务计划 {plan.relative_to(root)}；"
+                       f"先执行 `python engine/tools/task_plan.py init --slug {slug} --title ...`"
+                       f"（或显式 --allow-no-plan 跳过）")
+    return True, f"任务计划就绪：{plan.relative_to(root)}"
+
+
 # ---------------------------------------------------------------- 锁
 
 def _read_lock() -> dict | None:
@@ -212,16 +232,22 @@ def create_pr(title: str, body: str, queue: bool = False,
 
 
 def run(paths: list[str], message: str, allow_main: bool = False,
-        checks: list[list[str]] | None = None, gate: bool = True) -> tuple[bool, str]:
+        checks: list[list[str]] | None = None, gate: bool = True,
+        allow_no_plan: bool = False) -> tuple[bool, str]:
     """锁 → 校验 → 提交 → sync → 推送的组合流程。
 
     先提交再 sync：`git rebase` 要求干净工作区，若先 sync 则带未提交改动时必然失败
     （与协议文档的标准用法矛盾）。sync 失败时提交已保留在本地，修复后可重试 push。
     `gate` 默认 True：先运行优化流程统一门禁（optimization_gate.py，含 source_check），
     [E] 直接拒绝提交；[E] 才拒绝（退出码 2=警告放行）。--no-gate 可显式跳过。
+    治理标准 1：受管 task/* 分支在 `--gate` 下必须先有任务计划（plan.json），
+    否则拒绝；`--allow-no-plan` 仅用于应急并需人工确认。
     """
     with locked(holder="run"):
         if gate:
+            plan_ok, plan_why = require_task_plan()
+            if not plan_ok and not allow_no_plan:
+                return False, f"工件即门禁输入：{plan_why}"
             r = subprocess.run([sys.executable, GATE_SCRIPT,
                                 "--gate-period", GATE_PERIOD,
                                 "--source-gate-period", SOURCE_GATE_PERIOD],
@@ -482,6 +508,8 @@ def main() -> int:
     p.add_argument("--gate", action=argparse.BooleanOptionalAction, default=True,
                    help="提交前运行优化流程统一门禁（默认开启；--no-gate 跳过）")
     p.add_argument("--checks", nargs="*", help="追加自定义校验命令（每项为 shell 字符串）")
+    p.add_argument("--allow-no-plan", action="store_true",
+                   help="受管 task/* 分支无任务计划时仍允许 --gate（应急，需人工确认）")
     sub.add_parser("session", help="解析并打印当前会话标识（含来源）")
     p = sub.add_parser("branch", help="按规范自动追加会话标识建分支")
     p.add_argument("slug"); p.add_argument("--from", dest="from_ref", default=f"origin/{BASE_BRANCH}")
@@ -520,7 +548,8 @@ def main() -> int:
         if args.cmd == "run":
             checks = [c.split() for c in args.checks] if args.checks else None
             ok, msg = run(args.paths, args.message, allow_main=args.allow_main,
-                          checks=checks, gate=args.gate)
+                          checks=checks, gate=args.gate,
+                          allow_no_plan=args.allow_no_plan)
             print(("[OK] " if ok else "[FAIL] ") + msg); return 0 if ok else 1
         if args.cmd == "session":
             ok, msg = cmd_session(); print(("[OK] " if ok else "[FAIL] ") + msg); return 0 if ok else 1

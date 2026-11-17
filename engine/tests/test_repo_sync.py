@@ -155,5 +155,69 @@ class TestGuard(unittest.TestCase):
         self.assertIn("分支：", r.stdout)
 
 
+class TestTaskPlanGate(unittest.TestCase):
+    """治理标准 1：受管 task/* 分支 `run --gate` 前必须有任务计划。"""
+
+    def test_non_managed_branch_not_required(self):
+        ok, _ = rs.require_task_plan(branch="main", root=Path("/nonexistent"))
+        self.assertTrue(ok)
+
+    def test_managed_branch_missing_plan(self):
+        with tempfile.TemporaryDirectory() as d:
+            ok, msg = rs.require_task_plan(branch="task/x-00000000", root=Path(d))
+            self.assertFalse(ok)
+            self.assertIn("缺任务计划", msg)
+
+    def test_managed_branch_plan_present(self):
+        with tempfile.TemporaryDirectory() as d:
+            p = Path(d) / "engine/audit/records/tasks/x"
+            p.mkdir(parents=True)
+            (p / "plan.json").write_text("{}\n", encoding="utf-8")
+            ok, msg = rs.require_task_plan(branch="task/x-00000000", root=Path(d))
+            self.assertTrue(ok)
+            self.assertIn("任务计划就绪", msg)
+
+    def test_run_refuses_without_plan(self):
+        from contextlib import contextmanager
+
+        @contextmanager
+        def fake_locked(holder=""):
+            yield "tok"
+
+        orig_locked, orig_req = rs.locked, rs.require_task_plan
+        rs.locked = fake_locked
+        rs.require_task_plan = lambda *a, **k: (False, "缺任务计划")
+        try:
+            ok, msg = rs.run(["a"], "m", gate=True)
+        finally:
+            rs.locked, rs.require_task_plan = orig_locked, orig_req
+        self.assertFalse(ok)
+        self.assertIn("工件即门禁输入", msg)
+
+    def test_run_allow_no_plan_override(self):
+        from contextlib import contextmanager
+
+        @contextmanager
+        def fake_locked(holder=""):
+            yield "tok"
+
+        orig_locked = rs.locked
+        orig_req = rs.require_task_plan
+        orig_run = rs.subprocess.run
+        orig_git = rs._git
+        rs.locked = fake_locked
+        rs.require_task_plan = lambda *a, **k: (False, "缺任务计划")
+        rs.subprocess.run = lambda *a, **k: subprocess.CompletedProcess(a, 0, "", "")
+        rs._git = lambda *a, **k: subprocess.CompletedProcess(a, 1, "", "no match")
+        try:
+            ok, msg = rs.run(["a"], "m", gate=True, allow_no_plan=True)
+        finally:
+            rs.locked, rs.require_task_plan, rs.subprocess.run, rs._git = (
+                orig_locked, orig_req, orig_run, orig_git)
+        # 计划缺失但显式放行后，会继续走门禁（此处 mock 门禁退出码 0，随后因无变更 / add 等失败，
+        # 关键断言是「未在计划校验处被拒绝」）。
+        self.assertNotIn("工件即门禁输入", msg)
+
+
 if __name__ == "__main__":
     unittest.main()
