@@ -1,11 +1,11 @@
-# 报告全流程端到端编排方案与任务清单（REPORT-PIPELINE-IMPL-PLAN v1.1）
+# 报告全流程端到端编排方案与任务清单（REPORT-PIPELINE-IMPL-PLAN v1.2）
 
 > **状态**：已落地（编排器 / 清单 / 留痕均已实现并通过集成审查，见 [pipeline-integration-review](../report-audits/pipeline-integration-review-2026-11-15.md)）
 > **用途**：基于 [体系说明 §1.1 全链路主流程图](./report-pipeline-system.md) 给出可运行的端到端编排方案，确保实现与流程图的**节点、流转规则、校验标准 100% 对齐**。
 > **对齐声明**：流程图为 **9 个节点 N0–N8 + 9 个门禁 G0–G8**（G8 = 运维 / 告警）。
 > **落地载体**：`engine/tools/pipeline_manifest.json`（声明式图）、`engine/tools/pipeline_runner.py`（编排）、`engine/tools/pipeline_audit.py`（审计）、`engine/tests/test_pipeline_runner.py`（一致性测试）。
 > **硬性约束**：节点处理 → 门禁校验 → **通过则进入下一节点，不通过则按流程图路径精准退回**；不允许任何流程分支的自定义调整。
-> **最后更新**：2026-11-16
+> **最后更新**：2026-11-17
 
 ---
 
@@ -128,7 +128,7 @@ return passed
 ### N0 需求与配置（业务线接入）
 - **职责边界**：注册主题与维度、建目录、撰写 business-config；**不**做内容加工。
 - **输入**：业务需求；类型选型结论。
-- **核心处理逻辑**：① `layout.json` 注册维度（**category 必须先于 region**）；② 建 `{theme}/{category}/{region}/{prompts,data,reports}`；③ 写 business-config 单一事实源（14 节）；④ 提示词声明继承类型模板；⑤ 首期基线建台账。
+- **核心处理逻辑**：① `layout.json` 注册维度（**维度先后按主题声明**：`economy` 为 `region→category`，其余主题为 `category→region`）；② 建 `{theme}/<维度段...>/{prompts,reports}`（数据落 `data/processed/<theme>/<维度段...>/`）；③ 写 business-config 单一事实源（14 节）；④ 提示词声明继承类型模板；⑤ 首期基线建台账。
 - **输出标准**：可被 `iter_business_dirs()` 发现；核心变量齐全；类型引用已注册。
 - **异常处理**：维度倒置 / 变量缺失 / 类型未注册 → G0 阻断，退回 N0。
 - **分支场景**：新业务线首次接入（全量步骤）；既有业务线变更（跳过期初步骤，仅更新配置）。
@@ -149,7 +149,7 @@ return passed
 
 ### N3 信息分类
 - **职责边界**：类型 / 维度 / 归位；**不**生成内容。
-- **核心处理逻辑**：类型分类（已注册类型）；维度分类；命名识别；`classify_reports.py` 双校验（property_type 精匹配 + cycle ∈ `TYPE_CADENCE`）。
+- **核心处理逻辑**：类型分类（已注册类型）；维度分类；命名识别；`classify_reports.py` 双校验（细分领域段精匹配 + cycle ∈ `TYPE_CADENCE`）。
 - **输出标准**：落位唯一、类型与节拍一致、目录深度 = 主题维度数 + 1、region 位置正确。
 - **异常处理**：维度倒置 / 归位失败 / 断链 → G3 阻断，退回 N3。
 - **分支场景**：常规归位；`--unknown-warn` 未知类型告警。
@@ -196,7 +196,7 @@ return passed
 > 所有门禁**配置化**：检查项、周期、退回目标来自 `pipeline_manifest.json`；runner 只做调度，不内嵌规则。
 
 ### G0 配置校验（N0 → N0）
-维度优先（category 先于 region）、变量齐全、类型注册、提示词继承，任一 `[E]` 即阻断。
+维度顺序（按主题声明）、变量齐全、类型注册、提示词继承，任一 `[E]` 即阻断。
 
 ### G1 来源登记校验（N1 → N1）
 R1 登记覆盖 / R2 分级合规 / R3 双源 / R4 关键数字 / R5 语言规则 / R7 机构分级 + 发布日历 P0 覆盖率 100% + 指标登记必填字段。阻断触发：上述任一 `[E]`（`--source-gate-period` 默认 2027-01）。
@@ -205,7 +205,7 @@ R1 登记覆盖 / R2 分级合规 / R3 双源 / R4 关键数字 / R5 语言规�
 R2 / R3 复核 + R6 死链（404 / 410 / 451 = 死链；403 / 429 / 5xx / 超时 = 不可达）。阻断触发：明确死链 `[E]`（`--probe --probe-lenient`）。
 
 ### G3 分类 / 归位 / 断链校验（N3 → N3）
-维度优先 + 归位双校验（property_type 精匹配 + cycle 白名单）+ 无断头锚点。阻断触发：任一 `[E]`。
+维度顺序 + 归位双校验（细分领域段精匹配 + cycle 白名单）+ 无断头锚点。阻断触发：任一 `[E]`。
 
 ### G4 内容四门禁 + 研究内核（N4 → N4）
 | 门禁 | 规则 | 级别 |
@@ -308,3 +308,4 @@ page_build（P01–P15）/ lint（W）/ compliance（节数 / `id="sN"` / 断头
 |---|---|---|---|
 | v1.0 | 2026-11-15 | 初始版本 | 端到端方案（架构 / 节点规范 / 门禁规则 / 闭环 / 任务清单 / 保障）；配套 manifest + runner + audit + 测试 |
 | v1.1 | 2026-11-16 | 状态与精简 | 状态改为「已落地」；任务清单由日期计划改为交付状态表；合并重复门禁规则表；补充集成审查指针 |
+| v1.2 | 2026-11-17 | 维度口径对齐 | N0 / N3 维度分类与归位双校验改为按 `layout.json` 主题声明顺序；`property_type` 表述改为细分领域段 |

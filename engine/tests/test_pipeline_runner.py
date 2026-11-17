@@ -181,6 +181,22 @@ class TestPipelineRouting(unittest.TestCase):
         self.assertEqual([s.id for s in run.stages], ["N0"])
 
 
+class TestSubprocessBounds(unittest.TestCase):
+    """子进程 wall 上限：挂起不得无限阻塞编排。"""
+
+    def test_run_command_timeout(self):
+        cmd = f'{sys.executable} -c "import time; time.sleep(5)"'
+        rc, out = pr._run_command(cmd, timeout=1)
+        self.assertEqual(rc, pr.TIMEOUT_EXIT_CODE)
+        self.assertIn("超时", out)
+
+    def test_run_node_command_timeout(self):
+        cmd = f'{sys.executable} -c "import time; time.sleep(5)"'
+        st = pr.run_node(MANIFEST, "N3", command=cmd, timeout=1)
+        self.assertEqual(st.status, "error")
+        self.assertIn("超时", st.detail)
+
+
 class TestAudit(unittest.TestCase):
     """审计留痕：只追加、可还原。"""
 

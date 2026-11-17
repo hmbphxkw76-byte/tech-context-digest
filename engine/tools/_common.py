@@ -43,7 +43,7 @@ class Layout:
 
     themes: 主题 ID -> (主题名, 维度序列)；维度序列长度 + 1 = 业务线层级深度。
     content_root: 内容层根目录（默认 content）；regional_segment: 地区分组字面段
-    （category-first 规则下为空串，即无独立地区分组段，region 直接作为维度段）。
+    （默认空串，即无独立地区分组段，region 直接作为维度段）。
     """
 
     root_reserved: frozenset[str]
@@ -62,7 +62,7 @@ class Layout:
     def segment(self, theme: str) -> str:
         """主题的地区分组段：默认 regional_segment；主题可声明 segment 覆盖（空串表示无该段）。
 
-        category-first 规则下默认即为空串（无独立地区分组段）。
+        默认即为空串（无独立地区分组段）。
         """
         return self.theme_segments.get(theme, self.regional_segment)
 
@@ -371,7 +371,7 @@ class Business:
     def property_type(self) -> str:
         """细分领域/方向段：剔除 region 段后的末段。
 
-        category-first 规则下 region 位于 category 之后，末段可能是 region；
+        维度序列中 region 可能位于 category 之前或之后（按主题声明）；
         因此先剔除 region 段再取末段，得到真正的细分领域（如 apartment / security）。
         """
         dims = load_layout().dimensions(self.theme)
@@ -398,7 +398,7 @@ def _walk_to_depth(base: Path, depth: int):
 def iter_business_dirs() -> list[Business]:
     """按 layout.json 发现全部业务线（以 prompts/business-config.md 为锚点）。
 
-    业务线默认位于 content/<theme>/<category>/<region>/（category-first）；
+    业务线默认位于 content/<theme>/<维度段...>/（维度先后按主题声明）；
     主题可声明 segment 覆盖（空串表示无地区分组段）。
     segments 为剔除 content/<theme>/<segment> 前缀后的维度段。
     """
@@ -491,7 +491,7 @@ def business_depth(theme: str) -> int:
 def processed_data_dir(business_rel: str) -> Path:
     """业务线清洗后数据目录：data/processed/<theme>/<维度段...>。
 
-    维度段为剔除 content/<theme> 与主题地区分组段（category-first 下为空串）后的路径段；
+    维度段为剔除 content/<theme> 与主题地区分组段（默认空串）后的路径段；
     数据层统一收口于 data/processed/，不再散落在各业务线内。
     """
     layout = load_layout()

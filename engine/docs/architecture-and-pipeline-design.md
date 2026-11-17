@@ -1,9 +1,9 @@
-# 架构与全流程设计基线（ARCHITECTURE-AND-PIPELINE-DESIGN v1.0）
+# 架构与全流程设计基线（ARCHITECTURE-AND-PIPELINE-DESIGN v1.1）
 
 > **状态**：已批准，实施基线（P1–P4 按此执行）
 > **日期**：2026-11-17
 > **范围**：tech-context-digest 仓库在「回滚到六主题结构 + 可运行工具链」方向下的架构规划，以及 采集 → 筛选 → 分类 → 生产 → 渲染 → 校验 → 发布 → 运维 全流程落地。
-> **上位约束**：本文件是 `report-pipeline-system.md`（REPORT-PIPELINE-SYSTEM v1.1）的**结构适配版**；节点 / 门禁编号（N0–N8 / G0–G8）与退回语义**保持不变**。
+> **上位约束**：本文件是 `report-pipeline-system.md`（REPORT-PIPELINE-SYSTEM v1.2）的**结构适配版**；节点 / 门禁编号（N0–N8 / G0–G8）与退回语义**保持不变**。
 
 ---
 
@@ -100,11 +100,28 @@ content/
 
 沿用 STRUCTURE-AND-NAMING-SPEC 口径：目录 kebab-case；报告 `<period>_<cycle>.html`（基线 `_baseline_report.html`）；提示词 `business-config.md` + `prompt-<cycle>.md`；模板 `prompt-<cycle>-template.md`；数据主体 snake_case + 可选周期后缀。
 
+### 3.5 部署架构（静态交付 + CI 编排）
+
+本仓库不是运行态服务，部署架构由「静态交付物 + 工具链 + CI 编排」构成：
+
+| 层 | 载体 | 说明 |
+|---|---|---|
+| 交付物 | 自包含 HTML（报告 + `index.html` / `reader.html` / `INDEX.md`） | CSS/JS 内联，ECharts 走 CDN 白名单；无服务端渲染 |
+| 发布源 | GitHub `main` 分支（仓库根 + `content/**/reports/`） | 分支保护（必需检查 + strict）；不直推，经 PR 合并 |
+| 构建 | `engine/tools/{md2html,build_hub,build_index,publish_fingerprint,archive_reports}.py` | 本地或 CI 生成，确定性（无时间戳） |
+| 托管 | 静态站点托管（GitHub Pages / 任意静态服务器），入口 `index.html` | 无数据库 / 无运行态进程 / 无外部服务依赖 |
+| CI 编排 | `.github/workflows/{ci,html-sync,content-update,scheduled-maintenance,audit,webhook-alert}.yml` + `.github/actions/{submit-pr,workspace-cleanup,remediation-ticket}` | 提交 → 门禁 → PR → 合并 → 自动发布 |
+| 环境 | 本地 Windows（Python 3.12）+ CI `ubuntu-latest`（Python 3.12） | 依赖仅 `requirements.txt`；发布用 `gh`（GitHub 托管） |
+| 数据流 | `data/raw/` → `data/processed/<theme>/<维度段>/` → `content/<theme>/<维度段>/reports/` → hub / INDEX | 地区分组段不计入 processed |
+| 回滚 / 留痕 | Git 历史 + `engine/audit/records/publish_fingerprints.json` + `archive_reports` 归档 + `pipeline_runs.jsonl` | 任一发布可经指纹比对与 Git 回退 |
+
+**部署约束**：不引入运行态服务 / 容器 / 数据库；所有发布产物必须确定性可重放（`build_hub --check` / `publish_fingerprint --check` 门禁）；发布动作统一经 `repo_sync` / `submit-pr`，禁止直推 `main`。
+
 ---
 
 ## 4. 全流程设计（N0–N8 + G0–G8）
 
-节点 / 门禁编号、退回语义**完全沿用** `pipeline_manifest.json` 与 `report-pipeline-system.md` v1.1，本节只补充「在本仓库如何落地」。
+节点 / 门禁编号、退回语义**完全沿用** `pipeline_manifest.json` 与 `report-pipeline-system.md` v1.2，本节只补充「在本仓库如何落地」。
 
 ### 4.1 节点 - 门禁总表
 
@@ -176,8 +193,8 @@ data/assets/<theme>/...       图片 / 图表资源
 |---|---|---|
 | **P1 结构对齐** ✅ | layout.json v4.0；apartment 归一化；全量旧路径改写；维度校验放宽 | `validate_layout` / `validate` / `classify_reports` 通过；工具发现 7 条业务线 / 10 份报告 |
 | **P2 补齐引擎** ✅ | 恢复 docs / audit / report-audits / fact_cards / sources / quality / vocabulary 并适配 | `optimization_gate --probe` 的错误清零（仅剩运行期数据 / 交付物） |
-| **P3 数据与交付** | 恢复 `.github`；重建 hub 与根文档；data 层骨架 | `build_hub --check` 通过；CI 工作流可跑 |
-| **P4 接线验证** | `pipeline_runner` N0–N8 全流程试跑；`engine/tests` 回归 | unittest 全绿；`optimization_gate` 0 阻断 |
+| **P3 数据与交付** ✅ | 恢复 `.github`；重建 hub 与根文档；data 层骨架 | `build_hub --check` 通过；CI 工作流可跑 |
+| **P4 接线验证** ✅ | `pipeline_runner` N0–N8 全流程试跑；`engine/tests` 回归 | unittest 全绿；`optimization_gate` 0 阻断；`run --from N0 --to N8` `outcome=passed` |
 
 ---
 
@@ -191,4 +208,12 @@ data/assets/<theme>/...       图片 / 图表资源
 
 ---
 
-*按 P1→P4 执行；每阶段结束跑对应校验并汇报。*
+## 8. 版本记录
+
+| 版本 | 日期 | 变更 | 说明 |
+|---|---|---|---|
+| v1.0 | 2026-11-17 | 初始版本 | 六主题三层结构、layout.json v4.0、N0–N8 / G0–G8 落地、P1–P4 计划 |
+| v1.1 | 2026-11-17 | 补齐部署架构 | 新增 §3.5 部署架构（静态交付 + CI 编排）；P3 / P4 标记完成；交叉引用 REPORT-PIPELINE-SYSTEM v1.2 |
+
+---
+*按 P1→P4 执行；每阶段结束跑对应校验并汇报。全维度覆盖映射见 [end-to-end-coverage.md](./end-to-end-coverage.md)。*

@@ -143,7 +143,7 @@
 | `engine/templates/<type>/` | `prompt-<cycle>-template.md`；固定 `operations-guide.md` / `README.md` | `prompt-baseline-setup-template.md` | 目录名 = 类型 ID（kebab） |
 | `engine/prompts/<type>/` | `prompt-<cycle>.md` | `prompt-weekly-monitor.md` | 与类型模板一一对应 |
 | `engine/docs/*.md` | kebab-case | `page-build-spec.md`、`report-pipeline-system.md` | — |
-| `engine/docs/adr/` | `NNNN-slug.md` | `0001-category-first.md` | 四位序号 + kebab |
+| `engine/docs/adr/` | `NNNN-slug.md` | `0001-dimension-order.md` | 四位序号 + kebab |
 | `engine/audit/*.md`、`engine/quality/*.md` | kebab-case | `report-standard.md`、`repair-sop.md` | — |
 | `engine/{audit,quality}/prompts/` | `NN-slug.md`（两位序号） | `00-orchestrator.md`、`10-draft.md` | 同目录内唯一、连续 |
 | `engine/report-audits/*.md` | `<slug>[-YYYY-MM-DD].md` | `cicd-alignment-audit-2026-11-16.md`、`tech-debt-ledger.md` | 台账类不加日期；一次性审计带日期 |
@@ -356,7 +356,7 @@
 
 | 规范条目 | 现有强制 |
 |---|---|
-| 目录段 kebab / 一级目录白名单 / category-first / 深度 | `engine/tools/validate_layout.py` |
+| 目录段 kebab / 一级目录白名单 / 维度顺序（按主题声明） / 深度 | `engine/tools/validate_layout.py` |
 | 报告文件名周期 | `engine/tools/validate.py`、`_common.REPORT_RES` |
 | 模板 / 提示词必备文件 | `engine/tools/validate.py` |
 | 路径引用可达 | `engine/tools/check_links.py` |

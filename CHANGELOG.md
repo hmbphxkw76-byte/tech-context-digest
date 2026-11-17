@@ -2,6 +2,29 @@
 
 本文件记录仓库的结构与规范级变更（报告内容变更见各业务线 `reports/`）。
 
+## 3.1.0 — 2026-11-17：全维度收口与稳定性加固
+
+在 3.0.0 基础上完成「全维度范围梳理 → 架构对齐 → 自动化验证 → 交付物」收口。
+
+### 收口
+
+- **维度口径统一（F-02）**：`report-pipeline-system.md` / `report-pipeline-implementation-plan.md` / `process-vs-infrastructure-governance.md` / `engine/tools/README.md` / `structure-and-naming-spec.md` 中「category 必须先于 region」残留全部改为「按主题声明顺序」，与 `layout.json` / `AGENTS.md` 一致。
+- **计数与基线刷新**：`report-process-reuse.md` / `report-pipeline-system.md` / `page-build-spec.md` / `architecture-development-standard.md` 的测试数（377/405 → 398）、报告数（12 → 10）、页数（17 → 15）、business-config 数（9 → 7）按实跑刷新。
+- **发布指纹收敛**：`publish_fingerprint --emit` 重采集 10 份正式报告，`--check` 0 漂移。
+
+### 加固
+
+- **子进程 wall 超时**：`optimization_gate.run_checks`（默认 900s，`--timeout` 可覆盖）与 `pipeline_runner._run_command` / `run_node`（默认 600s）超时按错误（退出码 124）处理，单点挂起不再拖死全链路；新增 `test_gate_timeout_is_bounded` / `test_run_command_timeout` / `test_run_node_command_timeout`。
+
+### 交付
+
+- 新增 `engine/docs/end-to-end-coverage.md`（END-TO-END-COVERAGE v1.0）：六项要求 × 产物映射、N0–N8 覆盖矩阵、交付物清单、验证基线。
+- `architecture-and-pipeline-design.md` P3 / P4 标记完成。
+
+### 验证
+
+`pipeline_runner run --from N0 --to N8` `outcome=passed`（run_id `3a0c4033553f`）；unittest 398 通过（1 跳过）；`optimization_gate --probe` 0 错误 / 1 警告；`publish_fingerprint --check` 0 漂移。
+
 ## 3.0.0 — 2026-11-17：回滚至六主题结构 + 全流程重建
 
 内容结构由三层主题（`ai-tech` / `current-affairs` / `education`）回滚为**六主题**，补齐被删的引擎配套 / CI / 数据层，并完成 N0–N8 全流程接线。设计基线见 `engine/docs/architecture-and-pipeline-design.md`。
@@ -25,7 +48,7 @@
 
 ### 提交
 
-`1f12b3e`（压平回滚）→ `0fd12b4`(P1) → `ca0ff0c`(P2+P3) → `355943f`(P4)。**未推送**。
+`c5056e9`（初始化 tech-context-digest：完整迁移核心代码与内容，已推送 `main`）。过程提交 `1f12b3e`（压平回滚）→ `0fd12b4`(P1) → `ca0ff0c`(P2+P3) → `355943f`(P4) 已压平。
 
 ## 2.0.0 — 2026-11-16：三层架构重构与仓库独立化
 
