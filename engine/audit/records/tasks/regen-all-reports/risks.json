@@ -1,0 +1,14 @@
+[
+  {
+    "description": "重生成内容与台账口径漂移",
+    "id": "R-1",
+    "mitigation": "数值优先取自 registry/ledger 并标注自算",
+    "owner": ""
+  },
+  {
+    "description": "legacy 删除导致引用断链",
+    "id": "R-2",
+    "mitigation": "同步更新 tech-debt-ledger 与源稿",
+    "owner": ""
+  }
+]
