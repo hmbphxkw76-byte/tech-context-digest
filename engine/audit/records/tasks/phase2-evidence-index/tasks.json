@@ -1,0 +1,42 @@
+[
+  {
+    "acceptance": "",
+    "depends_on": [],
+    "id": "T-01",
+    "phase": "",
+    "status": "pending",
+    "title": "audit_tool 增 evidence index（关联 plan/tasks/risks + 统一门禁 + 审计记录）"
+  },
+  {
+    "acceptance": "",
+    "depends_on": [],
+    "id": "T-02",
+    "phase": "",
+    "status": "pending",
+    "title": "10 份 in-review 批量补 L3 语义终审并签发 full 标识"
+  },
+  {
+    "acceptance": "",
+    "depends_on": [],
+    "id": "T-03",
+    "phase": "",
+    "status": "pending",
+    "title": "L3 SLA 写入规范（每两周覆盖全部有效正式报告）"
+  },
+  {
+    "acceptance": "",
+    "depends_on": [],
+    "id": "T-04",
+    "phase": "",
+    "status": "pending",
+    "title": "scheduled-maintenance 增 stale 检测与清理（复用 audit_tool）"
+  },
+  {
+    "acceptance": "",
+    "depends_on": [],
+    "id": "T-05",
+    "phase": "",
+    "status": "pending",
+    "title": "audit.yml 接入 evidence index 刷新步骤"
+  }
+]

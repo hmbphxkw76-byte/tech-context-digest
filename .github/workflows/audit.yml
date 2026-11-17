@@ -71,6 +71,11 @@ jobs:
           fi
           exit 0
 
+      # 完成前证据索引（《方案》Phase 2.1 / 吸收项 ③）：
+      # 刷新登记册 evidence 字段（关联 plan/tasks/risks + 统一门禁入口 + 审计记录）。
+      - name: 刷新完成前证据索引（audit_tool index）
+        run: python engine/audit/scripts/audit_tool.py index
+
       # 提交并开 PR（自动合并）；pull_request 事件下只跑审计、不再嵌套开 PR。
       - name: 提交并开 PR（自动合并）
         if: success() && github.event_name != 'pull_request'

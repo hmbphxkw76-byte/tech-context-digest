@@ -91,6 +91,22 @@ jobs:
       - name: 审计流水轮转（超量归档）
         run: python engine/tools/pipeline_audit.py --rotate
 
+      # 审计登记册 stale 检测与清理（《方案》Phase 2.3）：复用 audit_tool，不另写检测。
+      # prune 移除登记路径不存在的失效条目；status 输出 stale 计数（应为 0）。
+      - name: 审计登记册 stale 检测与清理
+        run: |
+          set +e
+          python engine/audit/scripts/audit_tool.py prune
+          python engine/audit/scripts/audit_tool.py status
+          code=$?
+          if [ "$code" -eq 2 ]; then
+            echo "::warning::审计登记册曾存在失效条目（prune 已清理，见上方输出）"
+          elif [ "$code" -ne 0 ]; then
+            echo "::error::审计登记册状态检查失败（退出码 $code）"
+            exit 1
+          fi
+          exit 0
+
       # 全链路唯一门禁入口（P1-2 去重）：与 ci.yml 同口径（含 probe）。
       - name: 优化流程一致性门禁（统一入口 · 含 probe）
         run: |
@@ -191,7 +207,7 @@ jobs:
             由定时维护工作流自动生成（结构补全 / 归档 / 索引 / 汇总页 / 发布日历 / 发布指纹 / 性能基线）。
             合并方式：必需检查通过后自动合并（合并队列）。
           commit-message: "chore: 定时维护（结构/校验/归档/索引/性能）"
-          add-paths: "automation-status.json index.html reader.html INDEX.md perf-status.json engine/report-audits/release-calendar.json engine/report-audits/compliance-audit.md engine/audit/records/publish_fingerprints.json"
+          add-paths: "automation-status.json index.html reader.html INDEX.md perf-status.json engine/report-audits/release-calendar.json engine/report-audits/compliance-audit.md engine/audit/records/publish_fingerprints.json engine/audit/records/audit_registry.json"
           token: ${{ secrets.CI_PR_TOKEN }}
 
       - name: 提交失败状态（仅失败时，开 PR 记录，不自动合并）

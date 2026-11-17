@@ -2,7 +2,11 @@
 """审计标准化管理工具（engine/audit/scripts/audit_tool.py）单元测试。"""
 from __future__ import annotations
 
+import argparse
+import contextlib
 import importlib.util
+import io
+import json
 import unittest
 from pathlib import Path
 
@@ -73,6 +77,42 @@ class TestStaleDetection(unittest.TestCase):
         self.assertEqual(audit_tool.cmd_prune(None), 0)
         self.assertEqual(audit_tool.cmd_prune(None), 0)
         self.assertEqual(len(audit_tool.load_registry()["reports"]), before)
+
+
+class TestEvidenceIndex(unittest.TestCase):
+    """吸收项 ③：完成前审计证据索引。"""
+
+    REL = "content/economy/dubai/apartment/reports/2026-11_monthly.html"
+
+    def test_build_evidence_keys(self):
+        entry = audit_tool.load_registry()["reports"][self.REL]
+        ev = audit_tool.build_evidence(self.REL, entry)
+        self.assertEqual(ev["report"], self.REL)
+        self.assertEqual(ev["business_line"], "content/economy/dubai/apartment")
+        self.assertIn("plans", ev)
+        self.assertEqual(ev["gate"]["entry"], "engine/tools/optimization_gate.py")
+        self.assertTrue((ROOT / ev["audit"]["review"]).exists())
+        self.assertIn(ev["audit"]["status"], {"in-review", "audited", "draft", "rejected"})
+        self.assertEqual(ev["audit"]["mark_level"], "full")
+
+    def test_registry_entries_have_evidence(self):
+        reg = audit_tool.load_registry()["reports"]
+        for rel, rec in reg.items():
+            self.assertIn("evidence", rec, rel)
+            self.assertEqual(rec["evidence"]["report"], rel)
+
+    def test_cmd_evidence_prints_json(self):
+        buf = io.StringIO()
+        with contextlib.redirect_stdout(buf):
+            rc = audit_tool.cmd_evidence(argparse.Namespace(report=self.REL))
+        self.assertEqual(rc, 0)
+        self.assertEqual(json.loads(buf.getvalue())["report"], self.REL)
+
+    def test_cmd_index_idempotent(self):
+        before = json.dumps(audit_tool.load_registry()["reports"], sort_keys=True, ensure_ascii=False)
+        self.assertEqual(audit_tool.cmd_index(None), 0)
+        after = json.dumps(audit_tool.load_registry()["reports"], sort_keys=True, ensure_ascii=False)
+        self.assertEqual(before, after)
 
 
 if __name__ == "__main__":
