@@ -57,7 +57,8 @@ a:hover{text-decoration:underline}
 .chip:hover{border-color:var(--blue)}
 .chip.on{background:var(--navy);border-color:var(--navy);color:#fff}
 .chips-type{flex-basis:100%;flex-wrap:wrap;gap:5px;min-width:0}
-.chips-type .chip{font-size:12px;padding:3px 10px}
+.chips-type .chip{font-size:12px;padding:3px 10px;flex:1 1 auto;min-width:0;
+  text-align:center;white-space:nowrap;overflow:hidden}
 .filterbar .count{font-size:12px;color:var(--ink3);margin-left:auto;white-space:nowrap}
 
 /* ── 主区：地区 → 主题 → 报告 ── */
@@ -154,7 +155,6 @@ a:hover{text-decoration:underline}
 <button class="chip" data-topic="content/tech/trends/global" aria-pressed="false">AI 行业趋势（安全 × Agent 生态）</button>
 </div>
 <div class="chips chips-type" id="chips-type" role="group" aria-label="类型筛选">
-<span class="chips-label">类型</span>
 <button class="chip on" data-type="all" aria-pressed="true">全部类型</button>
 <button class="chip" data-type="market-monitoring" aria-pressed="false" title="市场指标监测型">市场动态</button>
 <button class="chip" data-type="trend-weekly" aria-pressed="false" title="行业趋势周报型">行业趋势</button>

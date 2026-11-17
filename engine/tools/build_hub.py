@@ -117,7 +117,8 @@ a:hover{text-decoration:underline}
 .chip:hover{border-color:var(--blue)}
 .chip.on{background:var(--navy);border-color:var(--navy);color:#fff}
 .chips-type{flex-basis:100%;flex-wrap:wrap;gap:5px;min-width:0}
-.chips-type .chip{font-size:12px;padding:3px 10px}
+.chips-type .chip{font-size:12px;padding:3px 10px;flex:1 1 auto;min-width:0;
+  text-align:center;white-space:nowrap;overflow:hidden}
 .filterbar .count{font-size:12px;color:var(--ink3);margin-left:auto;white-space:nowrap}
 
 /* ── 主区：地区 → 主题 → 报告 ── */
@@ -627,7 +628,6 @@ def render_hub(topics: list[Topic]) -> str:
     parts += [
         "</div>",
         '<div class="chips chips-type" id="chips-type" role="group" aria-label="类型筛选">',
-        '<span class="chips-label">类型</span>',
         '<button class="chip on" data-type="all" aria-pressed="true">全部类型</button>',
     ]
     for tid, tname in all_types:
@@ -740,7 +740,6 @@ def render_reader(topics: list[Topic]) -> str:
     parts += [
         "</div>",
         '<div class="chips chips-type" id="reader-chips-type" role="group" aria-label="类型筛选">',
-        '<span class="chips-label">类型</span>',
         '<button class="chip on" data-type="all" aria-pressed="true">全部类型</button>',
     ]
     for tid, tname in all_types:
