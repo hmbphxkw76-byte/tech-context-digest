@@ -91,6 +91,19 @@ flowchart LR
 - 统一门禁不替代就地门禁，只做收敛与兜底；两级 gate-period 保证历史报告不追溯阻断（见 §5.2）。
 - 门禁在落盘后异步执行，不阻塞生成（性能见 `perf_monitor`）。
 
+### 1.4 任务级闭环（N0.5，适配 mainline）
+
+在 N0 之后新增 **N0.5「任务计划」子节点**，吸收 mainline 阶段 2 / 5 / 11 的三项增量机制（计划工件 / 本地 mainline 编排 / 完成前证据索引），**不改动 N0–N8 主链与 G0–G8 门禁**。任务工件落 `engine/audit/records/` 下的 `tasks/<slug>/`，由 `task_plan.py` 生成、`local_mainline.py` 编排、`repo_sync.py` 提交；无 `plan.json` 不得 `repo_sync run --gate`。
+
+```mermaid
+flowchart LR
+    P["N0.5 任务计划<br/>plan/tasks/risks"] --> U["unittest"]
+    U --> G["optimization_gate --probe<br/>统一门禁"]
+    G --> S["repo_sync push / pr<br/>提交网关"]
+    S --> E["N6 完成前证据索引<br/>evidence index"]
+    E -. "缺证据 / E 阻断" .-> P
+```
+
 ---
 
 ## 二、全链路节点拆解（N0–N8）
@@ -105,6 +118,16 @@ flowchart LR
 | 工具 | `validate_layout.py`（`check_dimension_priority()`）、`validate.py`、`ensure_region_topics.py`、`_common.py`、`test_prompt_inheritance.py` |
 
 `business-config.md` 是**业务单一事实源**，含 14 节：运行变量固定值、受众、术语口径、来源优先级（四级 + P0–P5 + 获取路径 + 最小可替代集）、信号阈值 K01–K15、结构红线 RL-01–RL-09、重大事件触发器、先行信号矩阵、专题预警、政策框架 G01–G05、口径冲突并列、渲染差异实例化、信息分层强制项、版本记录。
+
+#### N0.5 任务计划（mainline 阶段 2 吸收，任务级闭环层）
+
+| 项 | 内容 |
+|---|---|
+| 输入 | 任务需求 / 验收标准 / 分支 slug |
+| 核心步骤 | ① `task_plan.py init` 生成 `plan.json` / `tasks.json` / `risks.json` / `task-start.md`（落 `engine/audit/records/` 下的 `tasks/<slug>/`）；② 声明与 N0–N8 的映射与复用入口 |
+| 输出标准 | 工件 schema 固定、确定性可重放（`task_plan.py check`）；受管 `task/*` 分支无 `plan.json` 不得 `repo_sync run --gate` |
+| 工具 | `task_plan.py`、`local_mainline.py`（薄封装，只编排）、`repo_sync.py`（提交网关） |
+| 门禁 | 复用统一门禁 `optimization_gate.py --probe`；不另写校验 |
 
 ### N1 信息采集
 

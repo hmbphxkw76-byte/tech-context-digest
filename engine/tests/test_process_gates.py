@@ -128,6 +128,16 @@ class TestOptimizationGateReuse(unittest.TestCase):
                            cwd=ROOT, capture_output=True, text=True)
         self.assertEqual(r.returncode, 1)
 
+    def test_task_loop_declared(self):
+        """Phase 1.3：任务级闭环硬性约束与 N0.5 映射已声明。"""
+        agents = (ROOT / "AGENTS.md").read_text(encoding="utf-8")
+        self.assertIn("任务级闭环", agents)
+        self.assertIn("task_plan.py", agents)
+        self.assertIn("local_mainline.py", agents)
+        doc = (ROOT / "engine" / "docs" / "report-pipeline-system.md").read_text(encoding="utf-8")
+        self.assertIn("N0.5", doc)
+        self.assertIn("任务计划", doc)
+
     def test_ci_runs_pipeline_runner_validate(self):
         """Phase 0.4 方案 A：ci.yml 必须执行端到端编排校验（声明-实现一致）。"""
         text = (WF / "ci.yml").read_text(encoding="utf-8")

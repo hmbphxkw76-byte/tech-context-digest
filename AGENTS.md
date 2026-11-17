@@ -75,6 +75,17 @@ P0/P1/P2 优化清单（邻近判定 / 机构分级主数据 / 指标字典 / ga
 - **全链路体系**：信息录入 → 校验 → 更新 → 生成 → 发布的全链路节点、五道防线、两级 gate-period 与闭环联动见 `engine/docs/report-pipeline-system.md`（REPORT-PIPELINE-SYSTEM v1.2，门禁左移：N0–N5 各阶段就地门禁 G0–G5，N6 统一门禁 + 审计兜底）；文档与门禁清单数量由 `engine/tests/test_pipeline_system_doc.py` 锁定。
 - **端到端编排（硬性约束）**：流程图落地为 `engine/tools/pipeline_manifest.json`（声明式 N0–N8 / G0–G8 图 + L1/L2 闭环）+ `engine/tools/pipeline_runner.py`（节点→门禁→路由/退回，复用统一门禁单一入口）+ `engine/tools/pipeline_audit.py`（追加式留痕）；方案与任务清单见 `engine/docs/report-pipeline-implementation-plan.md`；一致性由 `engine/tests/test_pipeline_runner.py` 锁定（9 节点 / 9 门禁 / G6→N4 / N8→N1）。
 
+## 任务级闭环（适配 mainline）（硬性约束，适用于任何 Agent 平台）
+
+**主体保留、增量吸收**：保留现有 N0–N8 体系为主体，选择性接入 mainline 的任务级闭环机制（计划工件 / 本地 mainline 编排 / 完成前证据索引）；**禁止整体替换为 mainline 11 阶段**，禁止引入 `tag` / `changelog` / `RELEASES.md`。依据见 [mainline 规范适配性评估](engine/report-audits/mainline-adoption-assessment-2026-11-17.md) 与 [覆盖矩阵](engine/report-audits/mainline-adoption-coverage-matrix.md)。
+
+- **N0.5 任务计划子节点**：任务计划作为 N0 之后的子节点，映射与流程图见 [report-pipeline-system.md](engine/docs/report-pipeline-system.md) §N0.5；其余 N0–N8 与 G0–G8 不变。
+- **工件位置与 schema**：`engine/audit/records/` 下的 `tasks/<slug>/`，含 `plan.json` / `tasks.json` / `risks.json` / `task-start.md`；schema 由 `engine/tools/task_plan.py` 单一事实源定义，其余位置只指针。
+- **复用入口（不得另写一套）**：统一门禁 `engine/tools/optimization_gate.py`；提交网关 `engine/tools/repo_sync.py`；端到端编排 `engine/tools/pipeline_runner.py`；一键闭环 `engine/tools/local_mainline.py`（薄封装，只编排）；审计 `engine/audit/scripts/audit_tool.py`。
+- **工件即门禁输入**：受管 `task/*` 分支无 `plan.json` 不得执行 `repo_sync run --gate`（应急需显式 `--allow-no-plan` 并人工确认）。
+- **确定性**：任务工件不得嵌入时间戳 / mtime；`task_plan.py check --slug <slug>` 必须可重放。
+- **内容线不强制 TDD**：TDD 仅建议引擎线遵循；报告内容生成不强制红-绿-重构。
+
 ## 报告生成规则（硬性约束，适用于任何 Agent 平台）
 
 1. **触发词「执行xx报告」**：用户说「执行xx报告」（如「执行 AI 安全周报」）时，视为完整下达报告生成指令，须严格遵循对应模板/提示词的全部规范执行，无需用户重复说明：①先定位并读取该报告对应类型模板与业务提示词（含 business-config 单一事实源）作为唯一规范依据；②内容结构、章节层级、格式排版、数据呈现方式、术语标准、输出格式全维度对齐模板，不得出现结构偏差、格式错乱、内容遗漏或任何不符合规范的自定义调整；③生成完成后逐项对照模板交叉校验，确认所有规范要求满足，保证规范性、一致性与合规性后才交付。
