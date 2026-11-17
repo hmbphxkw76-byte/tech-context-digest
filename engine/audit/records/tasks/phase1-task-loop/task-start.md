@@ -43,3 +43,7 @@
 - R-01 任务工件形式主义（缓解：工件即门禁输入 + check 可重放）
 - R-02 双入口漂移（缓解：local_mainline 只编排，测试锁定复用 optimization_gate/repo_sync）
 - R-03 计划强制影响既有会话（缓解：仅受管 task/* 生效，保留 --allow-no-plan 应急）
+
+## 关联报告
+
+- 无（手工/工具类任务）

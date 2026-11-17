@@ -107,28 +107,46 @@ class TestPipelineSystemDoc(unittest.TestCase):
 
 
 class TestGateCountConsistency(unittest.TestCase):
-    """P-07 / M6：现行文档/代码不得残留「21 项」门禁口径（Phase 3.1 起为 23 项）。"""
+    """P-07 / M6：现行文档/代码不得残留陈述性「21 项 / 21 门禁」门禁口径（Phase 3.1 起为 23 项）。
+
+    合法表述显式放行：历史基线（「基线 21 项」）与更正记录（「由 21 项更正为 23 项」）。
+    扫描范围沿用 GATE_COUNT_FILES（已排除历史时点报告与 engine/quality/**）。
+    """
 
     FORBIDDEN = re.compile(
-        r"optimization_gate[^。；\n]{0,60}21 项"
-        r"|21 项[^。；\n]{0,30}optimization_gate"
-        r"|全量\s*21\s*项"
-        r"|统一门禁\s*21\s*项"
+        r"21\s*项"
+        r"|21\s*门禁"
         r"|门禁\s*21\s*项"
-        r"|21\s*项单一入口"
-        r"|21\s*项确定性"
-        r"|21\s*项\s*0E"
-        r"|21\s*项门禁"
     )
+    # 合法历史 / 基线 / 更正表述：先剥离再匹配，避免误伤。
+    ALLOWED = re.compile(
+        r"基线\s*21\s*项?"
+        r"|由\s*21\s*项?\s*更正为"
+    )
+
+    def _offender(self, text: str) -> str | None:
+        m = self.FORBIDDEN.search(self.ALLOWED.sub("", text))
+        return m.group(0) if m else None
 
     def test_no_stale_gate_count_in_current_docs(self):
         offenders = {}
         for f in GATE_COUNT_FILES:
             text = f.read_text(encoding="utf-8")
-            m = self.FORBIDDEN.search(text)
-            if m:
-                offenders[str(f.relative_to(ROOT))] = m.group(0)
+            hit = self._offender(text)
+            if hit:
+                offenders[str(f.relative_to(ROOT))] = hit
         self.assertEqual(offenders, {}, f"现行文件残留 21 项门禁口径：{offenders}")
+
+    def test_forbidden_pattern_catches_stale_wording(self):
+        """反恒真：FORBIDDEN 必须真的能命中陈述性残留，否则扫描无意义。"""
+        for sample in ("统一门禁 21 项", "21 门禁", "门禁 21 项", "全量 21 项"):
+            self.assertIsNotNone(self._offender(sample), f"未命中陈述性残留：{sample}")
+
+    def test_allowed_baseline_wording_is_permitted(self):
+        """合法基线 / 更正表述不得误报。"""
+        for sample in ("基线 21 项", "（基线 21 项，Phase 3.1 起 23 项）",
+                       "由 21 项更正为 23 项", "由 21 更正为 23"):
+            self.assertIsNone(self._offender(sample), f"合法表述被误报：{sample}")
 
     def test_gate_count_declarations_are_23(self):
         mod = _load_gate_module()

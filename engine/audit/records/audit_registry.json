@@ -1106,6 +1106,18 @@
             "risk_count": 0
           },
           {
+            "slug": "fix-gate23-replay",
+            "plan": "engine/audit/records/tasks/fix-gate23-replay/plan.json",
+            "tasks": "engine/audit/records/tasks/fix-gate23-replay/tasks.json",
+            "risks": "engine/audit/records/tasks/fix-gate23-replay/risks.json",
+            "reports": [
+              "engine/report-audits/mainline-adoption-assessment-2026-11-17.md",
+              "engine/report-audits/mainline-adoption-coverage-matrix.md"
+            ],
+            "task_count": 5,
+            "risk_count": 3
+          },
+          {
             "slug": "phase2-evidence-index",
             "plan": "engine/audit/records/tasks/phase2-evidence-index/plan.json",
             "tasks": "engine/audit/records/tasks/phase2-evidence-index/tasks.json",
@@ -1165,6 +1177,18 @@
             ],
             "task_count": 8,
             "risk_count": 0
+          },
+          {
+            "slug": "fix-gate23-replay",
+            "plan": "engine/audit/records/tasks/fix-gate23-replay/plan.json",
+            "tasks": "engine/audit/records/tasks/fix-gate23-replay/tasks.json",
+            "risks": "engine/audit/records/tasks/fix-gate23-replay/risks.json",
+            "reports": [
+              "engine/report-audits/mainline-adoption-assessment-2026-11-17.md",
+              "engine/report-audits/mainline-adoption-coverage-matrix.md"
+            ],
+            "task_count": 5,
+            "risk_count": 3
           },
           {
             "slug": "phase2-evidence-index",

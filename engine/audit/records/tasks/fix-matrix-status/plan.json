@@ -69,6 +69,7 @@
       "note": "CI 工作流 + 告警"
     }
   ],
+  "reports": [],
   "reuse": {
     "audit": "engine/audit/scripts/audit_tool.py",
     "commit": "engine/tools/repo_sync.py",

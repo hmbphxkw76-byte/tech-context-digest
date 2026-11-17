@@ -131,6 +131,16 @@
 - M2 的「已审计」为**依据既有 2026-11-16 L3 记录的回溯补录**（非本轮重新全文复核），已在 Phase 2 PR 与覆盖矩阵登记；后续按 L3 SLA（每两周）由 Agent 定期复核。
 - M7 的 3 项警告为：来源登记历史死链（宽限期内）+ ruff（88）+ mypy（40），均默认 `[W]` 不阻断。
 
+**收口轮实测（fix-gate23-replay，2026-11-17）**：
+
+| 项 | 命令 | 实测输出 | 判定 |
+|---|---|---|---|
+| 门禁数量 | `python -c "import sys;sys.path.insert(0,'engine/tools');import optimization_gate as g;print(len(g.CHECKS))"` | `23` | 达标 |
+| 门禁数量一致性 | `python -m unittest engine.tests.test_pipeline_system_doc -v` | `Ran 13 tests ... OK`（`offenders == {}`，含反恒真 / 放行用例） | 达标 |
+| 任务工件可重放 | `python engine/tools/task_plan.py check --slug <slug>`（7 存量 + fix-gate23-replay） | 8/8 退出码 0 | 达标 |
+
+本次收口修复两点：①《方案》§1.3 / §四 / §五 门禁数量由 21 更正为 23，与 §1.2、`optimization_gate.CHECKS` 全量对齐（§1.3 清单补齐 ruff / mypy）；② `task_plan.render_start_md` 新增「## 关联报告」段后，5 个旧任务工件（final-self-audit / fix-matrix-status / phase1-task-loop / phase3-static-linting / verification-prompt）纯渲染重写恢复可重放（tasks/risks 实质内容不变）。
+
 ## 十、规范分层删改记录（Phase 3.3，「新增即删旧」）
 
 | 上位（AGENTS.md）删改点 | 下沉事实源 | 理由 |
@@ -142,6 +152,7 @@
 | 删除多会话 Git 的 v1.5 钩子细节 / 分支命名细则 | `engine/docs/multi-session-git-protocol.md`、`branch-naming-and-lifecycle.md` | 协议文档为准 |
 | 删除工作区清理覆盖范围逐项列表 | `engine/tools/workspace_cleanup.py --help`、`engine/docs/structure-and-naming-spec.md` | 工具与规范为准 |
 | 澄清「禁止 changelog」为 mainline 阶段 8 的 tag / 发布 changelog 流程 / `RELEASES.md` | 既有根文档 `CHANGELOG.md` 不在此列（见 AGENTS.md） | 消除与仓库既有 `CHANGELOG.md` 的字面冲突 |
+| 强化 `TestGateCountConsistency`：FORBIDDEN 覆盖旧门禁口径 21（项 / 门禁写法），显式放行「基线 21 项」「由 21 项更正为 23 项」，新增反恒真与放行用例；《方案》§1.3/§四/§五 由 21 更正为 23 | `engine/tests/test_pipeline_system_doc.py`、`engine/report-audits/mainline-adoption-assessment-2026-11-17.md` v1.3 | 门禁数量口径单一事实源（`optimization_gate.CHECKS` = 23），消除复述漂移且避免测试恒真 |
 
 **保留**：四门禁脚本名（`info_density_check.py` / `fact_card_check.py` / `decision_hub_check.py` / `blind_spot_check.py`）、「信息分层与决策交付（硬性约束」、全部硬性约束与指针；由 `test_process_gates.py::test_spec_layering_declared` 锁定。
 
@@ -151,3 +162,4 @@
 |---|---|---|
 | v0.1 | 2026-11-17 | 初始覆盖矩阵：P-01..P-10 / 吸收项①..④ / Phase 0.1..3.3 / CI 改造 / 治理标准 / 风险 / 量化指标全量映射 |
 | v0.2 | 2026-11-17 | 收口轮：吸收项③ `plan.reports` 关联汇聚（修 31/31 恒空）；P-07 / M6 门禁数量 21→23 一致性（新增 `test_pipeline_system_doc` 扫描）；R3 / M10 `l3-status` 接线维护流水线；§九 实测更新（unittest 510、evidence.plans 非空、L3 SLA 接线）；§十 增记 AGENTS.md「禁止 changelog」措辞澄清 |
+| v0.3 | 2026-11-17 | 收口轮（fix-gate23-replay）：《方案》升 v1.3，§1.3 / §四 / §五 门禁数量 21→23 全量对齐；强化 `TestGateCountConsistency`（FORBIDDEN 覆盖旧门禁口径 21 的项 / 门禁写法 + 显式放行基线 / 更正表述 + 反恒真用例）；5 个旧任务工件纯渲染重写恢复可重放；§九 增收口轮实测、§十 增收改记录 |
