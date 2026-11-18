@@ -62,6 +62,23 @@ class TestDecisionHub(unittest.TestCase):
         rules2 = {r for r, _ in m.check_text("信号灯判定：预校准（ex-ante）。", "x")}
         self.assertNotIn("DC-04", rules2)
 
+    @staticmethod
+    def _action(threshold):
+        return ('可执行启示：触发条件 + 阈值 + 责任角色 + 时限 + 验证指标。'
+                '立即行动 / 持续观察 / 仅记录存档。'
+                '<div class="a-head"><span class="a-title">t</span></div>'
+                '<div class="a-meta"><b>触发条件：</b>x<br>'
+                f'<b>阈值：</b>{threshold}<br>'
+                '<b>责任角色：</b>y<br><b>时限：</b>2026-12-31<br>'
+                '<b>验证指标：</b>z</div>')
+
+    def test_action_threshold_must_be_observable(self):
+        """P1-4：阈值须为数值 / 区间 / 日期，定性表述告警。"""
+        rules = {r for r, _ in m.check_text(self._action("定性表述"), "x")}
+        self.assertIn("DC-02", rules)
+        rules2 = {r for r, _ in m.check_text(self._action("≥1 轮 / 2026-12-31 前"), "x")}
+        self.assertNotIn("DC-02", rules2)
+
     def test_decision_hub_report_passes(self):
         p = ROOT / "content/economy/insight/reports/2026-12_baseline_report.html"
         if not p.exists():

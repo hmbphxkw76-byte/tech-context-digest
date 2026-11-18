@@ -70,6 +70,23 @@ class TestInfoDensity(unittest.TestCase):
         rules = {r for r, _ in m.check_text(text)}
         self.assertNotIn("ID-04", rules)
 
+    def test_self_computed_without_label_flagged(self):
+        """P1-3：摘要内的自算 / 机制自算值未标「假设乘积 + 区间」须告警。"""
+        text = ('<h2 class="sec">一、决策摘要</h2>'
+                '<p>月供由 10,447 升至 10,992（机制自算）。</p>'
+                '<p>本期新增 1 条；修正 0 条；无变化 1 条；核验进度 1/2。</p>'
+                '<p>场景切片：投资决策。</p>')
+        rules = {r for r, _ in m.check_text(text)}
+        self.assertIn("ID-04", rules)
+
+    def test_self_computed_with_label_passes(self):
+        text = ('<h2 class="sec">一、决策摘要</h2>'
+                '<p>月供区间 10,447–10,992（假设乘积，区间）。</p>'
+                '<p>本期新增 1 条；修正 0 条；无变化 1 条；核验进度 1/2。</p>'
+                '<p>场景切片：投资决策。</p>')
+        rules = {r for r, _ in m.check_text(text)}
+        self.assertNotIn("ID-04", rules)
+
     def test_shared_domain_requires_fact_card(self):
         text = ("<h2 class='sec'>一、决策摘要</h2><p>已核验</p>"
                 "<p>本期新增 1 / 修正 0 / 无变化 1 / 假设核验进度 1/2。</p>"

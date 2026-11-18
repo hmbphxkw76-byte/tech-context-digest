@@ -666,7 +666,7 @@ details.registry[open]{padding-bottom:18px}
 <h3>4.5 传导链复盘</h3>
 <p><strong>周期定位：</strong>本报告将 2026 年定位为「金融条件收紧主导的方向性下行初期」——方向层（K02 / K04 / K06 硬红·方向）已成立，水平层（价格与成交量的绝对水平）未确认；被复盘年份全年值待 2027-01 发布后复核。</p>
 <p><strong>传导量化（弹性与时滞）：</strong>政策利率 → EIBOR 的弹性近似 1:1（CBUAE 年内跟随式加息 150bp，3M EIBOR 月均上行 52bp）；EIBOR → 月供的时滞取决于重定价周期与 margin（本轮自算未计 margin，故为「瞬时全额传导」下限估计）；EIBOR → 成交量的弹性本轮<strong>无法估计</strong>（就业 / 收入盲区 B02 / B15 未消号），仅能给出方向。</p>
-<p><strong>主导传导链（政策利率 → EIBOR → 月供 → 可负担性 → 成交量 / 价）：</strong>Fed 暂停降息但保留加息选项 → CBUAE 全年 +150bp → 3M EIBOR 上行 52bp（月均）→ 等额本息月供上升（机制自算：AED 2,000,000 / 25 年，月供由 10,447 升至 10,992）→ 成交量 −38% 与同质价格 −4% 量级下行。该链条在「量」上已确认，在「价」的水平上未确认。</p>
+<p><strong>主导传导链（政策利率 → EIBOR → 月供 → 可负担性 → 成交量 / 价）：</strong>Fed 暂停降息但保留加息选项 → CBUAE 全年 +150bp → 3M EIBOR 上行 52bp（月均）→ 等额本息月供上升（<span class="lvl lvl-assumption">假设乘积</span>：贷款 AED 2,000,000 / 25 年，月供由 10,447 升至 10,992，随利率情景呈区间）→ 成交量 −38% 与同质价格 −4% 量级下行。该链条在「量」上已确认，在「价」的水平上未确认。</p>
 <p><strong>反向声音（至少一条，须显式列出）：</strong></p>
 <ul>
   <li>需求分母仍在扩张：人口 +7.5%、UAE FDI 流入 +5.7%、家庭户数 858,000，与「需求崩塌」叙事相反。</li>
@@ -778,7 +778,7 @@ details.registry[open]{padding-bottom:18px}
 <tr><td><strong>乐观</strong></td><td>60.0%</td><td>97,500</td><td>93,420</td><td>133,740</td></tr>
 </tbody>
 </table>
-<p class="note">全部为机制自算（计划锚 × 兑现率），非机构预测；2029–2030 为管道残差均分，误差最大。<strong>本报告不提供任何买卖价位、杠杆或仓位建议</strong>，情景仅用于框架性风险判断。</p>
+<p class="note"><span class="lvl lvl-assumption">假设乘积</span> 全部为机制自算（计划锚 × 兑现率），非机构预测；2029–2030 为管道残差均分，误差最大。以三情景「区间」呈现（见上表），禁止作为确定点值。<strong>本报告不提供任何买卖价位、杠杆或仓位建议</strong>，情景仅用于框架性风险判断。</p>
 
 <h3>6.3 利率路径传导（三条件，不给概率）</h3>
 <p><strong>政策乘数：</strong>G01–G05 政策变量均「未核验」，<strong>不进入量化传导链</strong>（不入模）；政策影响仅以条件化情景（见 6.5 决策矩阵最后一行）表达。</p>
@@ -791,8 +791,8 @@ details.registry[open]{padding-bottom:18px}
 </tbody>
 </table>
 
-<h3>6.4 敏感度（机制自算）</h3>
-<p>假设：贷款额 AED 2,000,000、期限 25 年（300 期）、等额本息、利率全额传导；<strong>未计 margin 与重定价周期</strong>。月供上限取当前（3.90% Base Rate）月供 10,447 AED，反推各利率下可负担房价。</p>
+<h3>6.4 敏感度（假设乘积）</h3>
+<p><span class="lvl lvl-assumption">假设乘积</span> 下表为机制自算区间估计，非机构预测；假设：贷款额 AED 2,000,000、期限 25 年（300 期）、等额本息、利率全额传导；<strong>未计 margin 与重定价周期</strong>。月供上限取当前（3.90% Base Rate）月供 10,447 AED，反推各利率下可负担房价。</p>
 <table class="fixed">
 <thead><tr><th style="width:14%">利率</th><th style="width:18%">月供（AED / 月）</th><th style="width:22%">可负担房价（AED）</th><th style="width:18%">较当前</th><th style="width:28%">收益利差（毛收益率 6.0% − 利率）</th></tr></thead>
 <tbody>
@@ -913,7 +913,7 @@ details.registry[open]{padding-bottom:18px}
 <div class="chart-box">
   <h3>图 3　2026 年 3M EIBOR 月度均值与三级红线（单位：%；来源：CBUAE EIBOR 定盘，2026-01 至 2026-10 月均，11-12 定盘 4.394390%）</h3>
   <div class="chart-eh" id="chart-eibor" role="img" aria-label="3M EIBOR 月度均值与红线折线图"></div>
-  <div class="chart-note">红线：硬红线 4.50%、预警红线 4.25%、绿灯线 3.50%（K01 规则）。10 月月均 4.303% 已越预警红线，11-12 定盘 4.394390% 距硬红线 10.56bp。月均为机制自算（定盘日度算术平均）。</div>
+  <div class="chart-note">红线：硬红线 4.50%、预警红线 4.25%、绿灯线 3.50%（K01 规则）。10 月月均 4.303% 已越预警红线，11-12 定盘 4.394390% 距硬红线 10.56bp。月均为<span class="lvl lvl-assumption">假设乘积</span>（定盘日度算术平均）。</div>
 </div>
 </section>
 

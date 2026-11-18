@@ -125,7 +125,7 @@
 | 规则 | 工具 | 判定 | 级别 |
 |---|---|---|---|
 | DC-01 决策卡字段 | decision_hub_check.py | 结论 / 证据强度 / 触发条件 / 反向证据 / 信息充分度齐全 | 新报告 [E] |
-| DC-02 行动协议 | decision_hub_check.py | 触发条件 + 阈值 + 责任角色 + 时限 + 验证指标齐全，三档优先级 | 新报告 [E] |
+| DC-02 行动协议 | decision_hub_check.py | 触发条件 + 阈值 + 责任角色 + 时限 + 验证指标齐全，三档优先级；阈值须为数值 / 区间 / 日期（定性表述告警） | 新报告 [E] |
 | DC-03 场景切片 | decision_hub_check.py | 声明场景与切片对应 | 新报告 [E] |
 | DC-04 ex-ante 标注 | decision_hub_check.py | 信号灯 / 阈值处含「预校准（ex-ante）」 | 新报告 [E] |
 | DC-05 版本治理 | info_density_check.py | 核验 / 收敛型报告含读数时点、无新版本号噪声 | [W] |

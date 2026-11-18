@@ -13,7 +13,7 @@
       "missing": ["B02 就业/失业率", "B15 收入/薪资", "B01 空置率", "B03 竣工登记"],
       "actions": [
         {"priority": "立即行动", "action": "维持融资成本专题六件套监测", "threshold": "3M EIBOR 距 K01 硬红线 ≤25bp", "role": "研究负责人", "deadline": "2026-12-31", "verify": "K01 阈值距离（bp，方向：扩大为改善）"},
-        {"priority": "持续观察", "action": "P0 四类盲区取数消号", "threshold": "每月复盘会审", "role": "数据采集", "deadline": "2026-12-31", "verify": "盲区台账 closed 数"}
+        {"priority": "持续观察", "action": "P0 四类盲区取数消号", "threshold": "每月 1 次（次月 5 日前），盲区 closed ≥1", "role": "数据采集", "deadline": "2026-12-31", "verify": "盲区台账 closed 数"}
       ]
     },
     {
@@ -26,7 +26,7 @@
       "sufficiency": "需补充 PMI、薪资增速、期限利差信息才可决策",
       "missing": ["PMI", "薪资增速", "3M/6M/1Y 期限利差"],
       "actions": [
-        {"priority": "持续观察", "action": "周报 s2.0 周期定位节滚动更新", "threshold": "每期周报", "role": "研究负责人", "deadline": "2026-12-31", "verify": "cycle_clock 阶段判定（四阶段 + 过渡带）"}
+        {"priority": "持续观察", "action": "周报 s2.0 周期定位节滚动更新", "threshold": "每周 1 期（数据截止日后 3 日内）", "role": "研究负责人", "deadline": "2026-12-31", "verify": "cycle_clock 阶段判定（四阶段 + 过渡带）"}
       ]
     },
     {
@@ -40,7 +40,7 @@
       "missing": [],
       "actions": [
         {"priority": "立即行动", "action": "按黄金签证门槛锁定目标（基本月薪 ≥30,000 AED）", "threshold": "基本月薪 ≥30,000 AED", "role": "研究负责人", "deadline": "2026-12-31", "verify": "offer 基本工资（AED/月）"},
-        {"priority": "持续观察", "action": "跟踪 2026 阿布扎比黄金签证通函的 ICP 最终确认", "threshold": "ICP 页面更新", "role": "数据采集", "deadline": "2027-01-31", "verify": "icp.gov.ae 条款页"}
+        {"priority": "持续观察", "action": "跟踪 2026 阿布扎比黄金签证通函的 ICP 最终确认", "threshold": "2027-01-31 前取得官方英文条款页", "role": "数据采集", "deadline": "2027-01-31", "verify": "icp.gov.ae 条款页"}
       ]
     },
     {
@@ -53,7 +53,7 @@
       "sufficiency": "需补充份额 / 价值链分布信息才可决策",
       "missing": ["CR3/CR5 份额", "价值链利润池分布"],
       "actions": [
-        {"priority": "持续观察", "action": "年度刷新时补份额与价值链数据", "threshold": "年度刷新", "role": "数据采集", "deadline": "2027-02-28", "verify": "财报 / Menlo / Gartner 份额序列"}
+        {"priority": "持续观察", "action": "年度刷新时补份额与价值链数据", "threshold": "2027-02-28 前完成年度刷新", "role": "数据采集", "deadline": "2027-02-28", "verify": "财报 / Menlo / Gartner 份额序列"}
       ]
     },
     {
@@ -66,7 +66,7 @@
       "sufficiency": "需补充本地模型选型与成本结构信息才可决策",
       "missing": ["本地企业模型选型分布", "模型成本占交付成本比"],
       "actions": [
-        {"priority": "仅记录存档", "action": "记录模型层集中度与分级开放动态", "threshold": "季度刷新", "role": "研究负责人", "deadline": "2026-12-31", "verify": "Menlo / 厂商公告"}
+        {"priority": "仅记录存档", "action": "记录模型层集中度与分级开放动态", "threshold": "2026-12-31 前完成季度刷新", "role": "研究负责人", "deadline": "2026-12-31", "verify": "Menlo / 厂商公告"}
       ]
     },
     {
@@ -79,7 +79,7 @@
       "sufficiency": "可直接决策",
       "missing": [],
       "actions": [
-        {"priority": "立即行动", "action": "将投毒 / 推理链耦合纳入 RedTeam_AI 测试集", "threshold": "下期测试周期", "role": "模型负责人", "deadline": "2026-12-31", "verify": "PyRIT / garak 用例数与 ASR 复现"}
+        {"priority": "立即行动", "action": "将投毒 / 推理链耦合纳入 RedTeam_AI 测试集", "threshold": "2026-12-31 前完成 ≥1 轮复现（用例数 ≥3）", "role": "模型负责人", "deadline": "2026-12-31", "verify": "PyRIT / garak 用例数与 ASR 复现"}
       ]
     }
   ]

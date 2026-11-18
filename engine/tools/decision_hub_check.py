@@ -116,6 +116,15 @@ def check_text(text: str, business_line: str = "") -> list[tuple[str, str]]:
             if bad:
                 out.append(("DC-02", f"第 {'、'.join(map(str, bad))} 条行动项缺要素"
                                     f"（{'、'.join(_PROTOCOL_KEYS)}）"))
+            # 阈值须可观测：数值 / 区间 / 日期（P1-4：定性表述不可自动判定）
+            thr_bad = []
+            for i, a in enumerate(acts):
+                m = re.search(r"阈值：</b>\s*([^<]*)", a)
+                if m and not re.search(r"\d", m.group(1)):
+                    thr_bad.append(i + 1)
+            if thr_bad:
+                out.append(("DC-02", f"第 {'、'.join(map(str, thr_bad))} 条行动项阈值为定性表述"
+                                    f"（须为数值 / 区间 / 日期）"))
         if not all(k in text for k in _PRIO_KEYS):
             out.append(("DC-02", "行动项未按三档优先级（立即行动 / 持续观察 / 仅记录存档）划分"))
 

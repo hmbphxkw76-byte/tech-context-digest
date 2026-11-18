@@ -134,6 +134,10 @@ def check_text(text: str, business_line: str = "") -> list[tuple[str, str]]:
     if sec:
         if "假设乘积" in sec and "区间" not in sec:
             out.append(("ID-04", "决策摘要出现「假设乘积」但未区间化（禁止作为确定点值）"))
+        # 自算 / 机制自算值须显式标「假设乘积」并区间化（P1-3：不再允许无标注自算点值）
+        if "自算" in sec and "假设乘积" not in sec:
+            out.append(("ID-04", "决策摘要出现自算值（「自算 / 机制自算」）但未标「假设乘积 + 区间」"
+                                "（禁止作为确定点值）"))
         # 结论性要点不得带「推断 / 假设」等级标记（口径/局限提示块除外）。
         # 仅当标记文本确为等级词时才判——信号灯（如「灰灯」）复用 lvl 类不算越级。
         bad = sorted({lbl for cls, lbl in (("inferred", "推断"), ("assumption", "假设"))
