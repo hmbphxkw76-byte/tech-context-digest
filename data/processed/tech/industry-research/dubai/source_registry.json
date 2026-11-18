@@ -1,5 +1,5 @@
 {
- "schema_version": "1.0",
+ "schema_version": "1.1",
  "business_line": "content/tech/industry-research/dubai",
  "path_rule": "business-config {{SOURCE_REGISTRY_PATH}} = data/source_registry.json",
  "tier_legend": {
@@ -17,6 +17,7 @@
    "url": "https://khaleejtimes.com/uae/over-70-of-cyber-threats-targeting-uae-are-state-sponsored-authority-says",
    "lang": "en",
    "verify_status": "media_unverified",
+   "updated": "2026-11-18",
    "in_synthesis": false,
    "used_in": [
     "2026-12_baseline_report.html"
@@ -30,6 +31,7 @@
    "url": "https://desc.gov.ae/hamdan-bin-mohammed-launches-second-cycle-of-dubai-cyber-security-strategy",
    "lang": "en",
    "verify_status": "verified",
+   "updated": "2026-11-18",
    "in_synthesis": false,
    "used_in": [
     "2026-12_baseline_report.html"
@@ -43,6 +45,7 @@
    "url": "https://gulftime.ae/dubai-electronic-security-centre-unveils-dubai-ai-security-policy",
    "lang": "en",
    "verify_status": "media_unverified",
+   "updated": "2026-11-18",
    "in_synthesis": false,
    "used_in": [
     "2026-12_baseline_report.html"
@@ -56,6 +59,7 @@
    "url": "https://openai.com/index/introducing-stargate-uae",
    "lang": "en",
    "verify_status": "verified",
+   "updated": "2026-11-18",
    "in_synthesis": false,
    "used_in": [
     "2026-12_baseline_report.html"
@@ -69,6 +73,7 @@
    "url": "https://blogs.microsoft.com/blog/2024/04/15/microsoft-and-g42-partner",
    "lang": "en",
    "verify_status": "verified",
+   "updated": "2026-11-18",
    "in_synthesis": false,
    "used_in": [
     "2026-12_baseline_report.html"
@@ -82,6 +87,7 @@
    "url": "https://isc2.org/Insights/2025/12/ISC2-Publishes-2025-Cybersecurity-Workforce-Study",
    "lang": "en",
    "verify_status": "verified",
+   "updated": "2026-11-18",
    "in_synthesis": false,
    "used_in": [
     "2026-12_baseline_report.html"
@@ -95,6 +101,7 @@
    "url": "https://mordorintelligence.com/industry-reports/uae-cybersecurity-market",
    "lang": "en",
    "verify_status": "verified",
+   "updated": "2026-11-18",
    "in_synthesis": false,
    "used_in": [
     "2026-12_baseline_report.html"
@@ -108,6 +115,7 @@
    "url": "https://www.grandviewresearch.com/industry-analysis/ai-in-cybersecurity-market-report",
    "lang": "en",
    "verify_status": "verified",
+   "updated": "2026-11-18",
    "in_synthesis": false,
    "used_in": [
     "2026-12_baseline_report.html"
@@ -121,6 +129,7 @@
    "url": "https://core42.ai",
    "lang": "en",
    "verify_status": "verified",
+   "updated": "2026-11-18",
    "in_synthesis": false,
    "used_in": [
     "2026-12_baseline_report.html"
@@ -134,6 +143,7 @@
    "url": "https://g42.ai",
    "lang": "en",
    "verify_status": "verified",
+   "updated": "2026-11-18",
    "in_synthesis": false,
    "used_in": [
     "2026-12_baseline_report.html"
@@ -147,6 +157,7 @@
    "url": "https://cpx.net",
    "lang": "en",
    "verify_status": "verified",
+   "updated": "2026-11-18",
    "in_synthesis": false,
    "used_in": [
     "2026-12_baseline_report.html"
@@ -160,6 +171,7 @@
    "url": "https://eand.com",
    "lang": "en",
    "verify_status": "verified",
+   "updated": "2026-11-18",
    "in_synthesis": false,
    "used_in": [
     "2026-12_baseline_report.html"
@@ -173,6 +185,7 @@
    "url": "https://khaleejtimes.com/uae/uae-faces-200000-daily-cyberattacks",
    "lang": "en",
    "verify_status": "media_unverified",
+   "updated": "2026-11-18",
    "in_synthesis": false,
    "used_in": [
     "2026-12_baseline_report.html"
@@ -186,6 +199,7 @@
    "url": "https://gartner.com/en/newsroom/press-releases/2025-04-08-gartner-forecasts-spending-on-information-security-in-mena-to-grow-14-percent-in-2025",
    "lang": "en",
    "verify_status": "verified",
+   "updated": "2026-11-18",
    "in_synthesis": false,
    "used_in": [
     "2026-12_baseline_report.html"
@@ -199,6 +213,7 @@
    "url": "https://gminsights.com/industry-analysis/cybersecurity-market",
    "lang": "en",
    "verify_status": "verified",
+   "updated": "2026-11-18",
    "in_synthesis": false,
    "used_in": [
     "2026-12_baseline_report.html"
@@ -212,6 +227,7 @@
    "url": "https://hub71.com",
    "lang": "en",
    "verify_status": "verified",
+   "updated": "2026-11-18",
    "in_synthesis": false,
    "used_in": [
     "2026-12_baseline_report.html"
@@ -225,6 +241,7 @@
    "url": "https://desc.gov.ae",
    "lang": "en",
    "verify_status": "verified",
+   "updated": "2026-11-18",
    "in_synthesis": false,
    "used_in": [
     "2026-12_baseline_report.html"
@@ -238,6 +255,7 @@
    "url": "https://practiceguides.chambers.com/",
    "lang": "en",
    "verify_status": "verified",
+   "updated": "2026-11-18",
    "in_synthesis": false,
    "used_in": [
     "2026-12_baseline_report.html"
@@ -251,6 +269,7 @@
    "url": "https://mediaoffice.ae/en/news/2023/january/04-01/mohammed-bin-rashid-launches-dubai-economic-agenda-d33",
    "lang": "en",
    "verify_status": "verified",
+   "updated": "2026-11-18",
    "in_synthesis": false,
    "used_in": [
     "2026-12_baseline_report.html"
@@ -264,6 +283,7 @@
    "url": "https://learn.microsoft.com/en-us/security-copilot",
    "lang": "en",
    "verify_status": "verified",
+   "updated": "2026-11-18",
    "in_synthesis": false,
    "used_in": [
     "2026-12_baseline_report.html"
@@ -277,6 +297,7 @@
    "url": "https://giac.org",
    "lang": "en",
    "verify_status": "verified",
+   "updated": "2026-11-18",
    "in_synthesis": false,
    "used_in": [
     "2026-12_baseline_report.html"
@@ -290,6 +311,7 @@
    "url": "https://isc2.org/new-ai-certification",
    "lang": "en",
    "verify_status": "verified",
+   "updated": "2026-11-18",
    "in_synthesis": false,
    "used_in": [
     "2026-12_baseline_report.html"
@@ -303,6 +325,7 @@
    "url": "https://www.blackhatmea.com/about-us/key-information",
    "lang": "en",
    "verify_status": "verified",
+   "updated": "2026-11-18",
    "in_synthesis": false,
    "used_in": [
     "2026-12_baseline_report.html"
@@ -316,6 +339,7 @@
    "url": "https://www.iloe.ae/pdf/Involuntary-Loss-of-Employment-Brochure-ILOE-V2.pdf",
    "lang": "en",
    "verify_status": "verified",
+   "updated": "2026-11-18",
    "in_synthesis": false,
    "used_in": [
     "2026-12_baseline_report.html"
@@ -329,6 +353,7 @@
    "url": "https://www.cpx.net",
    "lang": "en",
    "verify_status": "verified",
+   "updated": "2026-11-18",
    "in_synthesis": false,
    "used_in": [
     "2026-12_baseline_report.html"
@@ -342,6 +367,7 @@
    "url": "https://ai.gov.ae/strategy",
    "lang": "en",
    "verify_status": "verified",
+   "updated": "2026-11-18",
    "in_synthesis": false,
    "used_in": [
     "2026-12_baseline_report.html"
@@ -355,6 +381,7 @@
    "url": "https://cybersecuritydatabase.org/en/documents/ae-national-cybersecurity-strategy-2025-2031",
    "lang": "en",
    "verify_status": "verified",
+   "updated": "2026-11-18",
    "in_synthesis": false,
    "used_in": [
     "2026-12_baseline_report.html"
@@ -368,6 +395,7 @@
    "url": "https://mastcgroup.com/desc-isr-v3-1-compliance-guide-iso-27001-mapping-requirements",
    "lang": "en",
    "verify_status": "verified",
+   "updated": "2026-11-18",
    "in_synthesis": false,
    "used_in": [
     "2026-12_baseline_report.html"
@@ -381,6 +409,7 @@
    "url": "https://desc.gov.ae/dubai-electronic-security-center-unveils-saraab-and-new-cybersecurity-initiatives-at-gisec-global-2026",
    "lang": "en",
    "verify_status": "verified",
+   "updated": "2026-11-18",
    "in_synthesis": false,
    "used_in": [
     "2026-12_baseline_report.html"
@@ -394,6 +423,7 @@
    "url": "https://tdra.gov.ae/en/aecert/initiatives",
    "lang": "en",
    "verify_status": "verified",
+   "updated": "2026-11-18",
    "in_synthesis": false,
    "used_in": [
     "2026-12_baseline_report.html"
@@ -407,6 +437,7 @@
    "url": "https://sans.org/community",
    "lang": "en",
    "verify_status": "verified",
+   "updated": "2026-11-18",
    "in_synthesis": false,
    "used_in": [
     "2026-12_baseline_report.html"
@@ -420,6 +451,7 @@
    "url": "https://genai.owasp.org/llm-top-10",
    "lang": "en",
    "verify_status": "verified",
+   "updated": "2026-11-18",
    "in_synthesis": false,
    "used_in": [
     "2026-12_baseline_report.html"
@@ -433,6 +465,7 @@
    "url": "https://atlas.mitre.org",
    "lang": "en",
    "verify_status": "verified",
+   "updated": "2026-11-18",
    "in_synthesis": false,
    "used_in": [
     "2026-12_baseline_report.html"
@@ -445,7 +478,8 @@
    "title": "https://nvlpubs.nist.gov/nistpubs/ai/nist.ai.100-1.pdf",
    "url": "https://nvlpubs.nist.gov/nistpubs/ai/nist.ai.100-1.pdf",
    "lang": "en",
-   "verify_status": "verified",
+   "verify_status": "unverifiable",
+   "updated": "2026-11-18",
    "in_synthesis": false,
    "used_in": [
     "2026-12_baseline_report.html"
@@ -459,6 +493,7 @@
    "url": "https://isaca.org",
    "lang": "en",
    "verify_status": "verified",
+   "updated": "2026-11-18",
    "in_synthesis": false,
    "used_in": [
     "2026-12_baseline_report.html"
@@ -472,6 +507,7 @@
    "url": "https://thenationalnews.com/news/uae/2024/09/13/uae-ranked-as-role-model-for-cybersecurity-in-global-report",
    "lang": "en",
    "verify_status": "media_unverified",
+   "updated": "2026-11-18",
    "in_synthesis": false,
    "used_in": [
     "2026-12_baseline_report.html"
@@ -485,6 +521,7 @@
    "url": "https://gitex.com",
    "lang": "en",
    "verify_status": "verified",
+   "updated": "2026-11-18",
    "in_synthesis": false,
    "used_in": [
     "2026-12_baseline_report.html"
@@ -498,6 +535,7 @@
    "url": "https://gisec.ae",
    "lang": "en",
    "verify_status": "verified",
+   "updated": "2026-11-18",
    "in_synthesis": false,
    "used_in": [
     "2026-12_baseline_report.html"
@@ -511,6 +549,7 @@
    "url": "https://morohub.ae",
    "lang": "en",
    "verify_status": "verified",
+   "updated": "2026-11-18",
    "in_synthesis": false,
    "used_in": [
     "2026-12_baseline_report.html"
@@ -524,6 +563,7 @@
    "url": "https://difc.ae",
    "lang": "en",
    "verify_status": "verified",
+   "updated": "2026-11-18",
    "in_synthesis": false,
    "used_in": [
     "2026-12_baseline_report.html"
@@ -537,6 +577,7 @@
    "url": "https://adgm.com",
    "lang": "en",
    "verify_status": "verified",
+   "updated": "2026-11-18",
    "in_synthesis": false,
    "used_in": [
     "2026-12_baseline_report.html"

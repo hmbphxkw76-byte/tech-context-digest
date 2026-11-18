@@ -16,6 +16,8 @@
   R5 语言规则   tier1/2 来源语言须符合业务配置的语言规则（token 化分级）
   R6 死链       明确 404/410/451 = 死链（阻断期内 [E] / 此前 [W] / 历史 [W]）；403/429/5xx/超时 = 网络不可达 [W]
   R7 机构分级   机构级分级主数据与来源登记 / 业务配置的一致性（分级校验）
+  R8 登记字段   来源登记条目 verify_status 取值合法（verified / media_unverified / unverifiable）
+                 且含 updated（YYYY-MM-DD）；缺失 / 非法仅 [W]（数据卫生，不阻断）
 
 gate-period 前置：周期早于 `--gate-period` 的报告为历史报告，R1–R6 的 [E] 前置
 降级为 [W]（不追溯阻断历史）；R7 结构性冲突（重复 source_id / 同机构不同分级）不降级。
@@ -50,7 +52,11 @@ sys.path.insert(0, str(Path(__file__).resolve().parent))
 from _common import ROOT, detect_report, iter_business_dirs, iter_business_reports, processed_data_dir  # noqa: E402
 from gate_period import is_auto, resolve as resolve_period  # noqa: E402
 
-REGISTRY_SCHEMA = "1.0"
+REGISTRY_SCHEMA = "1.1"
+
+# R8 登记字段：verify_status 合法取值（「无法核实」自 P1-6 起纳入，不再只能降级表达）
+VERIFY_STATUS_VALUES = ("verified", "media_unverified", "unverifiable")
+UPDATED_RE = re.compile(r"^\d{4}-\d{2}-\d{2}$")
 
 # R6 死链阻断的生效周期：链接腐烂修复属内容维护（见目标对齐方案 P1-8），
 # 集中清理完成前死链只告警不阻断；到期后自动转 [E]（滚动基线下不失效）。
@@ -427,6 +433,25 @@ def check_institution_consistency(registry: dict, master: dict, config_text: str
     return issues
 
 
+def check_registry_fields(registry: dict, ctx: dict | None = None) -> list[tuple[str, str]]:
+    """R8 登记字段完备 -> [(level, msg)]（仅 [W]，数据卫生不阻断）。
+
+    verify_status ∈ verified / media_unverified / unverifiable；updated 为 YYYY-MM-DD。
+    缺失 / 非法只告警，不追溯阻断（与 R1–R6 的 gate-period 降级口径一致）。
+    """
+    issues: list[tuple[str, str]] = []
+    sources = registry.get("sources", []) if isinstance(registry, dict) else []
+    for s in sources:
+        sid = str(s.get("source_id", "")).strip() or "<无 source_id>"
+        vs = s.get("verify_status")
+        if vs not in VERIFY_STATUS_VALUES:
+            issues.append(("W", f"R8 登记字段：{sid} 的 verify_status「{vs}」非法"
+                                 f"（须为 {' / '.join(VERIFY_STATUS_VALUES)}）"))
+        if not UPDATED_RE.match(str(s.get("updated", "")).strip()):
+            issues.append(("W", f"R8 登记字段：{sid} 缺 updated（YYYY-MM-DD）"))
+    return issues
+
+
 # ---------------------------------------------------------------- 覆盖率度量
 
 def coverage_report(registry: dict, text: str) -> dict:
@@ -701,6 +726,7 @@ def run(only_file: str | None, gate_period: str | None = None,
 
         issues = check_report(text, registry, ctx)
         issues += check_institution_consistency(registry, master, ctx.get("config_text", ""), ctx)
+        issues += check_registry_fields(registry, ctx)
 
         for level, msg in issues:
             lines.append(f"[{level}] {rel}: {msg}")

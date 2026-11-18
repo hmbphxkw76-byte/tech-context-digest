@@ -316,5 +316,46 @@ class TestSelfTest(unittest.TestCase):
         self.assertEqual(source_check._self_test(), 0)
 
 
+class TestR8RegistryFields(unittest.TestCase):
+    """R8 登记字段：verify_status 取值合法 + updated 为 YYYY-MM-DD（仅 [W]）。"""
+
+    def test_valid_entry_has_no_findings(self):
+        reg = _reg({"source_id": "S1", "tier": 1, "verify_status": "verified",
+                    "updated": "2026-11-18"})
+        self.assertEqual(source_check.check_registry_fields(reg), [])
+
+    def test_unverifiable_is_allowed(self):
+        reg = _reg({"source_id": "S1", "tier": 2, "verify_status": "unverifiable",
+                    "updated": "2026-11-18"})
+        self.assertEqual(source_check.check_registry_fields(reg), [])
+
+    def test_illegal_status_and_missing_updated_warn(self):
+        reg = _reg({"source_id": "S1", "tier": 1, "verify_status": "待核实"})
+        issues = source_check.check_registry_fields(reg)
+        self.assertTrue(all(lvl == "W" for lvl, _ in issues))
+        self.assertEqual(len(issues), 2)
+        self.assertTrue(any("verify_status" in msg for _, msg in issues))
+        self.assertTrue(any("updated" in msg for _, msg in issues))
+
+    def test_malformed_updated_warns(self):
+        reg = _reg({"source_id": "S1", "tier": 1, "verify_status": "verified",
+                    "updated": "2026/11/18"})
+        issues = source_check.check_registry_fields(reg)
+        self.assertEqual(len(issues), 1)
+        self.assertIn("updated", issues[0][1])
+
+    def test_repo_registries_are_clean(self):
+        """全仓来源登记条目字段完备（P1-6 存量补字段后应零告警）。"""
+        import glob
+        import json
+        found = False
+        for f in glob.glob(str(ROOT / "data" / "processed" / "**" / "source_registry.json"),
+                           recursive=True):
+            found = True
+            reg = json.loads(Path(f).read_text(encoding="utf-8"))
+            self.assertEqual(source_check.check_registry_fields(reg), [], f)
+        self.assertTrue(found, "未找到任何 source_registry.json")
+
+
 if __name__ == "__main__":
     unittest.main()

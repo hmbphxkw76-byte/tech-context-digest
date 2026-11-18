@@ -1,5 +1,5 @@
 {
- "schema_version": "1.0",
+ "schema_version": "1.1",
  "business_line": "content/political/political-system",
  "path_rule": "business-config {{SOURCE_REGISTRY_PATH}} = data/processed/political/political-system/source_registry.json",
  "tier_legend": {
