@@ -12,7 +12,7 @@
 ### 1.1 目标
 
 1. **结构统一**：把 `engine/tools/layout.json`（目录结构单一事实源）与磁盘 `content/` 统一为六主题结构，消除「工具发现 0 报告」的错位。
-2. **补齐引擎**：补回被删的 `engine/docs`、`engine/audit`、`engine/report-audits`、`engine/fact_cards`、`engine/sources`、`engine/quality`，并适配新路径。
+2. **补齐引擎**：补回被删的 `engine/docs`、`engine/audit`、`engine/report-audits`、`engine/fact_cards`、`engine/quality`，并适配新路径。
 3. **补齐交付**：补回 `.github/` 工作流与 action、根文档（`AGENTS.md` / `README.md` / `INDEX.md` / `CHANGELOG.md`）、hub（`index.html` / `reader.html`）、状态文件（`automation-status.json` / `perf-status.json`）。
 4. **接线全流程**：让 `pipeline_manifest.json`（N0–N8 + G0–G8）→ `pipeline_runner.py` → `optimization_gate.py` 真正可运行，报告风格对齐 `content/economy/dubai/apartment/reports/` 的 canonical 样式。
 
@@ -31,7 +31,7 @@
 | 提交 | 内容 |
 |---|---|
 | `3307bea del` | 删除 `.github/` 全部 6 个工作流 + 3 个 action（9 文件） |
-| `e87e082 del` | 删除 229 文件 + 54 纯改名：内容由三层 `ai-tech` / `current-affairs` 回滚为 `tech` / `economy`；删除 `engine/docs`(13)、`engine/audit`、`engine/report-audits`、`engine/fact_cards`、`engine/sources`、`engine/quality`、`engine/vocabulary/data`、根文档、hub、`data/processed` 全部数据 |
+| `e87e082 del` | 删除 229 文件 + 54 纯改名：内容由三层 `ai-tech` / `current-affairs` 回滚为 `tech` / `economy`；删除 `engine/docs`(13)、`engine/audit`、`engine/report-audits`、`engine/fact_cards`、引擎层 sources、`engine/quality`、`engine/vocabulary/data`、根文档、hub、`data/processed` 全部数据 |
 
 ### 2.2 回滚前的阻断（实测）
 
@@ -47,7 +47,7 @@
 
 ```
 content/   内容层：<theme>/<维度段...>/  （业务线 = 含 prompts/business-config.md 的目录）
-engine/    引擎层：tools / templates / prompts / vocabulary / audit / quality / report-audits / fact_cards / sources / tests / docs
+engine/    引擎层：tools / templates / prompts / vocabulary / audit / quality / report-audits / fact_cards / tests / docs
 data/      资产层：raw / processed / assets （processed 统一收口于 data/processed/<theme>/<维度段...>）
 ```
 
@@ -178,9 +178,9 @@ data/assets/<theme>/...       图片 / 图表资源
 | `engine/docs/` | 恢复 13 份并适配路径；本文件为结构适配设计基线 |
 | `engine/audit/` | 恢复结构（README / prompts / records）；历史记录文件名保留 |
 | `engine/report-audits/` | 恢复；路径引用改六主题 |
-| `engine/fact_cards/` / `engine/sources/` | 恢复 |
+| `engine/fact_cards/` | 恢复 |
 | `engine/quality/` | 恢复（含 rubric / chaos-taxonomy / repair-sop / ops-guide / manifest.schema.json / prompts） |
-| `engine/vocabulary/data/` | 恢复主题词库（ai-agent / ai-security / cybersecurity / economy / financial-markets + imports/exports） |
+| `engine/vocabulary/data/` | 恢复主题词库（economy / tech / education / international / political / society + imports/exports；economy、tech 为归并后词库） |
 | `.github/` | 恢复 6 工作流 + 3 action；按新结构校准路径 |
 | 根文档 / hub / 状态文件 | 恢复并重新生成（`build_hub.py` / `automation_status.py` / `perf_monitor.py`） |
 | `data/processed/` | 运行期产出，基线可缺（白名单前缀）；业务线首次采集时落盘 |
@@ -193,7 +193,7 @@ data/assets/<theme>/...       图片 / 图表资源
 | 阶段 | 内容 | 出口标准 |
 |---|---|---|
 | **P1 结构对齐** ✅ | layout.json v4.0；apartment 归一化；全量旧路径改写；维度校验放宽 | `validate_layout` / `validate` / `classify_reports` 通过；工具发现 7 条业务线 / 10 份报告 |
-| **P2 补齐引擎** ✅ | 恢复 docs / audit / report-audits / fact_cards / sources / quality / vocabulary 并适配 | `optimization_gate --probe` 的错误清零（仅剩运行期数据 / 交付物） |
+| **P2 补齐引擎** ✅ | 恢复 docs / audit / report-audits / fact_cards / quality / vocabulary 并适配 | `optimization_gate --probe` 的错误清零（仅剩运行期数据 / 交付物） |
 | **P3 数据与交付** ✅ | 恢复 `.github`；重建 hub 与根文档；data 层骨架 | `build_hub --check` 通过；CI 工作流可跑 |
 | **P4 接线验证** ✅ | `pipeline_runner` N0–N8 全流程试跑；`engine/tests` 回归 | unittest 全绿；`optimization_gate` 0 阻断；`run --from N0 --to N8` `outcome=passed` |
 

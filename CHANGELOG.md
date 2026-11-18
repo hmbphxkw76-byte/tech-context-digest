@@ -2,6 +2,12 @@
 
 本文件记录仓库的结构与规范级变更（报告内容变更见各业务线 `reports/`）。
 
+## 3.3.0 — 2026-11-18：engine/sources 迁移至业务线 sources
+
+- **结构**：删除引擎层 `engine/sources/`；5 份 md 源稿按业务归属迁至 `content/economy/trends/sources/` 与 `content/tech/weekly-roundup/sources/`（含 `legacy/` 历史存档）。
+- **归档**：`archive_reports.py` 同时轮转 `reports/` 与 `sources/`，源稿与报告共用同一保留策略；`sources/legacy/` 不参与轮转。
+- **规范**：`AGENTS.md`、`structure-and-naming-spec.md`、`architecture-and-pipeline-design.md`、`engine/docs/agents/domain.md` 同步移除 `engine/sources` 表述；Markdown 源稿统一放业务线 `sources/`。
+
 ## 3.2.0 — 2026-11-17：业务线去 global 段 + region 可选维度
 
 - **结构**：`content/economy/global/trends` → `content/economy/trends`；`content/economy/global/decision-hub` → `content/economy/insight`；`content/tech/trends/global` → `content/tech/weekly-roundup`。`data/processed/` 下对应台账 / 登记同步迁移。删除 `content/tech/{papers,principles,solutions,docs-analysis}` 四个空占位目录。

@@ -1,0 +1,46 @@
+[2026-11-18T08:31:51] [error] tech -> ../../content/tech/weekly-roundup/prompts/business-config.md：未找到插入锚点「## 七、版本记录」：../../content/tech/weekly-roundup/prompts/business-config.md
+[2026-11-18T08:31:51] [error] 可修复后手动重试：python engine/vocabulary/script/sync_vocab.py sync --topic tech
+[2026-11-18T08:31:51] [error] tech -> ../../content/tech/security/dubai/prompts/business-config.md：未找到插入锚点「## 九、版本记录」：../../content/tech/security/dubai/prompts/business-config.md
+[2026-11-18T08:31:51] [error] 可修复后手动重试：python engine/vocabulary/script/sync_vocab.py sync --topic tech
+[2026-11-18T08:31:51] [error] tech -> ../../content/tech/weekly-roundup/prompts/business-config.md：未找到插入锚点「## 七、版本记录」：../../content/tech/weekly-roundup/prompts/business-config.md
+[2026-11-18T08:31:51] [error] 可修复后手动重试：python engine/vocabulary/script/sync_vocab.py sync --topic tech
+[2026-11-18T08:31:51] [error] tech -> ../../content/tech/security/dubai/prompts/business-config.md：未找到插入锚点「## 九、版本记录」：../../content/tech/security/dubai/prompts/business-config.md
+[2026-11-18T08:31:51] [error] 可修复后手动重试：python engine/vocabulary/script/sync_vocab.py sync --topic tech
+[2026-11-18T08:31:51] [error] tech -> ../../content/tech/weekly-roundup/prompts/business-config.md：未找到插入锚点「## 七、版本记录」：../../content/tech/weekly-roundup/prompts/business-config.md
+[2026-11-18T08:31:51] [error] 可修复后手动重试：python engine/vocabulary/script/sync_vocab.py sync --topic tech
+[2026-11-18T08:31:51] [error] tech -> ../../content/tech/security/dubai/prompts/business-config.md：未找到插入锚点「## 九、版本记录」：../../content/tech/security/dubai/prompts/business-config.md
+[2026-11-18T08:31:51] [error] 可修复后手动重试：python engine/vocabulary/script/sync_vocab.py sync --topic tech
+[2026-11-18T08:31:52] [error] economy -> ../../content/economy/trends/prompts/business-config.md：未找到插入锚点「## 七、版本记录」：../../content/economy/trends/prompts/business-config.md
+[2026-11-18T08:31:52] [error] 可修复后手动重试：python engine/vocabulary/script/sync_vocab.py sync --topic economy
+[2026-11-18T08:31:52] [error] economy -> ../../content/economy/dubai/apartment/prompts/business-config.md：未找到插入锚点「## 十三、版本记录」：../../content/economy/dubai/apartment/prompts/business-config.md
+[2026-11-18T08:31:52] [error] 可修复后手动重试：python engine/vocabulary/script/sync_vocab.py sync --topic economy
+[2026-11-18T08:32:41] [sync] tech -> ../../content/tech/weekly-roundup/prompts/business-config.md：新区块插入成功：新增 119 / 修改 0 / 删除 0，共 119 条（v1.3）；备份 sync-backups/tech.business-config.md.20261118_083241.bak
+[2026-11-18T08:32:41] [sync] tech -> ../../content/tech/security/dubai/prompts/business-config.md：新区块插入成功：新增 153 / 修改 0 / 删除 0，共 153 条（v1.3）；备份 sync-backups/tech.business-config.md.20261118_083241.bak
+[2026-11-18T08:32:41] [sync] economy -> ../../content/economy/trends/prompts/business-config.md：新区块插入成功：新增 48 / 修改 0 / 删除 0，共 48 条（v1.4）；备份 sync-backups/economy.business-config.md.20261118_083241.bak
+[2026-11-18T08:32:41] [sync] economy -> ../../content/economy/dubai/apartment/prompts/business-config.md：新区块插入成功：新增 49 / 修改 0 / 删除 0，共 49 条（v1.4）；备份 sync-backups/economy.business-config.md.20261118_083241.bak
+[2026-11-18T08:32:41] [verify] tech -> business-config.md：通过（119 条覆盖完整，区间外内容一致，词汇库 v1.3）
+[2026-11-18T08:32:42] [verify] tech -> business-config.md：通过（153 条覆盖完整，区间外内容一致，词汇库 v1.3）
+[2026-11-18T08:32:42] [verify] economy -> business-config.md：通过（48 条覆盖完整，区间外内容一致，词汇库 v1.4）
+[2026-11-18T08:32:42] [verify] economy -> business-config.md：通过（49 条覆盖完整，区间外内容一致，词汇库 v1.4）
+[2026-11-18T08:34:49] [sync] tech -> ../../content/tech/weekly-roundup/prompts/business-config.md：区块替换成功：新增 0 / 修改 1 / 删除 46，共 73 条（v1.1）；备份 sync-backups/tech.business-config.md.20261118_083449.bak
+[2026-11-18T08:34:49] [sync] tech -> ../../content/tech/security/dubai/prompts/business-config.md：区块替换成功：新增 0 / 修改 0 / 删除 153，共 0 条（v1.1）；备份 sync-backups/tech.business-config.md.20261118_083449.bak
+[2026-11-18T08:34:50] [sync] tech -> ../../content/tech/weekly-roundup/prompts/business-config.md：区块替换成功：新增 46 / 修改 0 / 删除 0，共 119 条（v1.2）；备份 sync-backups/tech.business-config.md.20261118_083450.bak
+[2026-11-18T08:34:50] [sync] tech -> ../../content/tech/security/dubai/prompts/business-config.md：无变更（词汇库与提示词区间一致）
+[2026-11-18T08:34:50] [sync] tech -> ../../content/tech/weekly-roundup/prompts/business-config.md：无变更（词汇库与提示词区间一致）
+[2026-11-18T08:34:50] [sync] tech -> ../../content/tech/security/dubai/prompts/business-config.md：区块替换成功：新增 153 / 修改 0 / 删除 0，共 153 条（v1.3）；备份 sync-backups/tech.business-config.md.20261118_083450.bak
+[2026-11-18T08:48:49] [verify] tech -> ../../content/tech/weekly-roundup/prompts/business-config.md：不通过（词汇库在最近一次同步后有变更（建议重新 sync））
+[2026-11-18T08:48:49] [verify] tech -> business-config.md：通过（153 条覆盖完整，区间外内容一致，词汇库 v1.3）
+[2026-11-18T08:48:49] [verify] economy -> business-config.md：通过（48 条覆盖完整，区间外内容一致，词汇库 v1.4）
+[2026-11-18T08:48:49] [verify] economy -> business-config.md：通过（49 条覆盖完整，区间外内容一致，词汇库 v1.4）
+[2026-11-18T08:49:35] [sync] tech -> ../../content/tech/weekly-roundup/prompts/business-config.md：无变更（词汇库与提示词区间一致）
+[2026-11-18T08:49:35] [sync] tech -> ../../content/tech/security/dubai/prompts/business-config.md：无变更（词汇库与提示词区间一致）
+[2026-11-18T08:49:36] [verify] tech -> ../../content/tech/weekly-roundup/prompts/business-config.md：不通过（词汇库在最近一次同步后有变更（建议重新 sync））
+[2026-11-18T08:49:36] [verify] tech -> business-config.md：通过（153 条覆盖完整，区间外内容一致，词汇库 v1.3）
+[2026-11-18T08:49:36] [verify] economy -> business-config.md：通过（48 条覆盖完整，区间外内容一致，词汇库 v1.4）
+[2026-11-18T08:49:36] [verify] economy -> business-config.md：通过（49 条覆盖完整，区间外内容一致，词汇库 v1.4）
+[2026-11-18T08:50:16] [sync] tech -> ../../content/tech/weekly-roundup/prompts/business-config.md：区块替换成功：新增 0 / 修改 0 / 删除 0，共 119 条（v1.3）；备份 sync-backups/tech.business-config.md.20261118_085016.bak
+[2026-11-18T08:50:16] [sync] tech -> ../../content/tech/security/dubai/prompts/business-config.md：区块替换成功：新增 0 / 修改 0 / 删除 0，共 153 条（v1.3）；备份 sync-backups/tech.business-config.md.20261118_085016.bak
+[2026-11-18T08:50:16] [verify] tech -> business-config.md：通过（119 条覆盖完整，区间外内容一致，词汇库 v1.3）
+[2026-11-18T08:50:16] [verify] tech -> business-config.md：通过（153 条覆盖完整，区间外内容一致，词汇库 v1.3）
+[2026-11-18T08:50:16] [verify] economy -> business-config.md：通过（48 条覆盖完整，区间外内容一致，词汇库 v1.4）
+[2026-11-18T08:50:16] [verify] economy -> business-config.md：通过（49 条覆盖完整，区间外内容一致，词汇库 v1.4）

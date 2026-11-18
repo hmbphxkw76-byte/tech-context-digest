@@ -1,0 +1,130 @@
+{
+  "version": "v1.10",
+  "updated": "2026-11-18",
+  "comment": "主题注册表（vocabulary 子系统单一事实源）。本文件由 vocab_tool.py 自动维护，请勿手工编辑：新增主题用 topic-add（自动登记注册表 + 创建 data/<topic>/ 目录 + 重建索引 + 备份回滚 + 操作日志），移除用 topic-remove，一致性审计用 topic-check。storage/imports_dir/exports_dir 为相对 vocabulary/ 根目录的路径。",
+  "topics": {
+    "ai-security": {
+      "name": "AI 安全",
+      "description": "AI 安全全领域词汇：红队/蓝队、AI 红队认证考试、攻击技术、防御与检测、工具与平台、框架与标准、基准与评估",
+      "id_prefix": "AIS",
+      "storage": "data/ai-security/terms.md",
+      "imports_dir": "data/ai-security/imports",
+      "exports_dir": "data/ai-security/exports",
+      "categories": [
+        "攻击技术",
+        "防御与检测",
+        "工具与平台",
+        "框架与标准",
+        "认证与资质",
+        "组织与岗位",
+        "基准与评估"
+      ]
+    },
+    "financial-markets": {
+      "name": "金融市场",
+      "description": "金融市场全领域词汇：宏观与经济指标、金融机构与组织、金融工具与产品、市场机制与交易、监管与政策、估值与风险",
+      "id_prefix": "FIN",
+      "storage": "data/financial-markets/terms.md",
+      "imports_dir": "data/financial-markets/imports",
+      "exports_dir": "data/financial-markets/exports",
+      "categories": [
+        "宏观与经济指标",
+        "金融机构与组织",
+        "金融工具与产品",
+        "市场机制与交易",
+        "监管与政策",
+        "估值与风险"
+      ]
+    },
+    "cybersecurity": {
+      "name": "网络安全",
+      "description": "网络（非 AI）安全全领域词汇：攻击技术、安全运营、漏洞管理、密码与身份、框架合规、认证岗位",
+      "id_prefix": "CYB",
+      "storage": "data/cybersecurity/terms.md",
+      "imports_dir": "data/cybersecurity/imports",
+      "exports_dir": "data/cybersecurity/exports",
+      "categories": [
+        "网络攻击技术",
+        "防御与安全运营",
+        "漏洞与漏洞管理",
+        "密码与身份认证",
+        "框架与合规",
+        "认证与岗位"
+      ]
+    },
+    "economy": {
+      "name": "经济",
+      "description": "全球主要经济体与宏观经济词汇：主要经济体国家与地区、区域经济组织、经济概念",
+      "id_prefix": "ECO",
+      "storage": "data/economy/terms.md",
+      "imports_dir": "data/economy/imports",
+      "exports_dir": "data/economy/exports",
+      "categories": [
+        "经济体与国家",
+        "区域经济组织",
+        "经济概念"
+      ]
+    },
+    "ai-agent": {
+      "name": "AI Agent 与大模型",
+      "description": "AI Agent 与大模型生态词汇：LLM 模型与厂商、Agent 技术与框架、AI 编码工具与 IDE、AI 应用与产品、概念与评估",
+      "id_prefix": "AAG",
+      "storage": "data/ai-agent/terms.md",
+      "imports_dir": "data/ai-agent/imports",
+      "exports_dir": "data/ai-agent/exports",
+      "categories": [
+        "模型与厂商",
+        "Agent 技术与框架",
+        "编码工具与 IDE",
+        "应用与产品",
+        "概念与评估"
+      ]
+    },
+    "tech": {
+      "name": "科技",
+      "description": "科技全领域词汇：AI 大模型与 Agent、AI 安全、网络安全（归并自 ai-agent / ai-security / cybersecurity 三主题）",
+      "id_prefix": "TEC",
+      "storage": "data/tech/terms.md",
+      "imports_dir": "data/tech/imports",
+      "exports_dir": "data/tech/exports",
+      "categories": [
+        "模型与厂商",
+        "Agent 技术与框架",
+        "编码工具与 IDE",
+        "应用与产品",
+        "概念与评估",
+        "攻击技术",
+        "防御与检测",
+        "工具与平台",
+        "框架与标准",
+        "认证与资质",
+        "组织与岗位",
+        "基准与评估",
+        "网络攻击技术",
+        "防御与安全运营",
+        "漏洞与漏洞管理",
+        "密码与身份认证",
+        "框架与合规",
+        "认证与岗位"
+      ]
+    },
+    "education": {
+      "name": "教育",
+      "description": "教育主题词汇：教育体系与制度、院校与机构、专业与课程、教育政策法规、评价认证、教育技术、国际教育、终身学习（骨架，待采集）",
+      "id_prefix": "EDU",
+      "storage": "data/education/terms.md",
+      "imports_dir": "data/education/imports",
+      "exports_dir": "data/education/exports",
+      "categories": [
+        "教育体系与制度",
+        "院校与机构",
+        "专业与课程",
+        "教育政策与法规",
+        "教育评价与认证",
+        "教育技术与学习科学",
+        "国际教育",
+        "终身学习"
+      ]
+    }
+  }
+}

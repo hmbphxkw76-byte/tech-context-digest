@@ -94,6 +94,7 @@
 │   │       │   ├── archives/                  # 归档（保留策略）
 │   │       │   └── legacy/                    # 存档（不发布不审计）
 │   │       ├── sources/                       # md 源稿（与报告同名）
+│   │       │   └── archives/                  # 源稿归档（与报告同保留策略）
 │   │       ├── script/                        # 业务脚本（可选）
 │   │       ├── operations-guide.md
 │   │       └── README.md
@@ -107,7 +108,6 @@
 │   ├── quality/                              # 质量规则 + prompts/
 │   ├── audit/                                # 审计规范 + scripts/ + prompts/ + records/
 │   ├── report-audits/                        # 审计产出
-│   ├── sources/                              # 通用层源稿（按主题）
 │   ├── docs/                                 # 仓库级规范文档
 │   └── tests/                                # 单元测试（集中）
 ├── data/                                     # 资产层
@@ -148,10 +148,9 @@
 | `engine/{audit,quality}/prompts/` | `NN-slug.md`（两位序号） | `00-orchestrator.md`、`10-draft.md` | 同目录内唯一、连续 |
 | `engine/report-audits/*.md` | `<slug>[-YYYY-MM-DD].md` | `cicd-alignment-audit-2026-11-16.md`、`tech-debt-ledger.md` | 台账类不加日期；一次性审计带日期 |
 | `engine/report-audits/*.json` | kebab，可带日期 | `release-calendar.json`、`quality-manifest-2026-11-14.json` | — |
-| `engine/sources/<theme>/` | `<period>_<cycle>.md` | `2026-11-13_weekly.md` | `{legacy}/` 内为存档，保留旧名 |
 | `content/**/prompts/*.md` | `business-config.md` + `prompt-<cycle>.md` | `business-config.md`、`prompt-monthly-monitor.md` | 见第七节 |
 | `content/**/reports/*.html` | `<period>_<cycle>[_report].html` | `2026-11_monthly.html`、`2026-11_baseline_report.html` | 见第六节 |
-| `content/**/sources/*.md` | 与对应报告同名（`.md`） | `2026-11_baseline_report.md` | 纯 HTML 业务线可无 |
+| `content/**/sources/*.md` | 与对应报告同名（`.md`） | `2026-11_baseline_report.md` | 纯 HTML 业务线可无；归档入 `sources/archives/` |
 | `content/**/operations-guide.md`、`README.md` | 固定名 | — | — |
 | `data/processed/{theme}/{维度段...}/` | snake_case 主体 + 可选 `_period` 后缀 | `ai_trend_ledger.md`、`source_registry.json`、`dubai_apartment_indicator_registry_2026-11.xlsx` | 见第八节 |
 | `data/raw/**` | 来源原名（豁免），建议 `<source>_<period>.<ext>` | `cbuae_statistical_bulletin_2026-08_official.xlsx` | 不清洗、不改名原始抓取 |
@@ -193,8 +192,8 @@
 
 - **canonical**：`YYYY-MM_monthly.html`、`YYYY-Qn_quarterly.html`、`YYYY_annual.html`、`YYYY-MM-DD_weekly.html`、`YYYY-MM_baseline_report.html`。
 - `YYYY-MM_baseline.html` 为兼容别名，仅历史文件保留；新文件统一 `_baseline_report.html`（与 `_common.expected_output()` 一致）。
-- **交付物只放 `.html`**；Markdown 源稿放业务线 `sources/` 或 `engine/sources/`，不得放入 `reports/`。
-- 归档：`reports/archives/`（保留策略内）；存档：`reports/legacy/`（不发布不审计）。
+- **交付物只放 `.html`**；Markdown 源稿放业务线 `sources/`，不得放入 `reports/`。
+- 归档：`reports/archives/` 与 `sources/archives/`（保留策略内）；存档：`reports/legacy/`（不发布不审计）。
 - 项目制 / 事件触发类型的一次性件使用 `YYYY-MM-DD_<slug>.html`（如快评、专项），须在类型模板注册表中登记命名兼容性。
 
 ### 6.3 反例
@@ -334,7 +333,6 @@
   - 目录 `engine/fact_cards/`（snake，非包）；
   - `engine/tools/institution_tiers.json`、`engine/tools/pipeline_manifest.json`（snake，工具直接加载）；
   - `engine/quality/manifest.schema.json`（点号模式）；
-  - `engine/sources/{legacy}/**`（存档）；
   - `engine/vocabulary/data/{sync-backups,topic-backups,imports,exports}/**`（时间戳生成物）。
 - 报告源稿镜像：`content/**/sources/` 下与报告同名的 `.md`（如 `2026-11_baseline_report.md`）按报告周期命名豁免。
 - 报告命名：`validate.py` 已对 `reports/` 做正则校验；`validate_layout.py` 已对目录段与维度声明做校验。

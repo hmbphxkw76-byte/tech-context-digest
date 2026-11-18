@@ -1,0 +1,26 @@
+[
+  {
+    "description": "归并产生跨主题词条冲突（幻觉/模型上下文协议/SWE-bench）",
+    "id": "R-1",
+    "mitigation": "保留更完整定义并合并别名后重编号",
+    "owner": ""
+  },
+  {
+    "description": "合并后同步区块语义漂移（AI 安全与 AI Agent 两块并成一块）",
+    "id": "R-2",
+    "mitigation": "用 categories_include 过滤，digestion 按分类分组保留语义边界",
+    "owner": ""
+  },
+  {
+    "description": "旧主题目录删除不可逆",
+    "id": "R-3",
+    "mitigation": "先归并校验通过再删除，全程 git 留痕可回滚",
+    "owner": ""
+  },
+  {
+    "description": "空主题无术语支撑导致编造",
+    "id": "R-4",
+    "mitigation": "仅建分类+提示词骨架+信息缺口清单，词条留空待采集",
+    "owner": ""
+  }
+]

@@ -176,7 +176,7 @@ flowchart TD
 |---|---|---|---|
 | F-14 | **数据层无 schema 校验**：`data/processed/**` 的 CSV / JSON / XLSX 仅 `metric_registry` 覆盖指标字典，台账结构靠约定 | `data/processed/**`；`metric_registry.py` | 台账「只增不改」无强制；字段漂移只能在下游报告暴露 |
 | F-15 | **`source_registry.json` 是数据层唯一结构化登记，但位置在 `data/processed/`，而规范 §5.1 又把「来源登记」写到 N1 节点** | `report-pipeline-system.md` §N1 vs 实际 `data/processed/<theme>/<维度段...>/source_registry.json` | 概念位置一致，但 `validate.py` 却不校验它（见 F-01） |
-| F-16 | **词汇库双写**：`engine/vocabulary/data/**` 由 `sync_vocab.py` 生成（含 imports/exports/backups），同时 `engine/sources/**` 存放源稿 | `engine/vocabulary/`、`engine/sources/` | 「源稿」与「受控词表」边界模糊；F-03 同源 |
+| F-16 | **词汇库双写**：`engine/vocabulary/data/**` 由 `sync_vocab.py` 生成（含 imports/exports/backups），同时 `content/**/sources/**` 存放源稿 | `engine/vocabulary/`、`content/**/sources/` | 「源稿」与「受控词表」边界模糊；F-03 同源 |
 
 ### 2.5 可扩展性
 
@@ -352,7 +352,7 @@ flowchart TD
 - **方案**
   1. 为 `source_registry.json` 定 JSON Schema（已有 `engine/quality/manifest.schema.json` 先例）。
   2. 台账（`*_ledger.md`）定「头部元数据块 + 追加表」契约，由 `metric_registry` 或新 `ledger_check` 校验。
-  3. 明确 `engine/sources/`（通用源稿）与 `content/**/sources/`（业务源稿）的判定规则并写入规范。
+  3. 明确 `content/**/sources/`（业务源稿）的判定规则并写入规范。
 - **影响面**：`data/processed/**`、`engine/tools/*`、规范。
 - **风险**：低。验收：schema 校验纳入统一门禁（`[W]` 起步）。
 

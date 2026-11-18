@@ -17,7 +17,7 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "tools"))
 
 import _common  # noqa: E402
-from archive_reports import rotate_audit_docs, select_archives, select_audit_docs  # noqa: E402
+from archive_reports import archive_cycle_dir, rotate_audit_docs, select_archives, select_audit_docs  # noqa: E402
 from automation_status import days_since_latest  # noqa: E402
 from build_hub import build_outputs, collect_topics, normalize_for_check  # noqa: E402
 from compliance_check import check_report, cycle_rule, detect_type, load_rules  # noqa: E402
@@ -193,6 +193,31 @@ class TestSelectArchives(unittest.TestCase):
         to_archive = select_archives(items, {"monthly": 12})
         # 13 期保留最新 12 期，归档最早 1 期（排序为 period 降序）
         self.assertEqual([p.name for p in to_archive], ["2025-01_monthly.html"])
+
+
+class TestArchiveCycleDir(unittest.TestCase):
+    def test_sources_archive_oldest(self):
+        with tempfile.TemporaryDirectory() as d:
+            root = Path(d) / "sources"
+            root.mkdir()
+            names = [f"2025-{m:02d}_monthly.md" for m in range(1, 13)] + ["2026-01_monthly.md"]
+            for n in names:
+                (root / n).write_text("# x\n", encoding="utf-8")
+            moved = archive_cycle_dir(root, "content/demo/sources")
+            self.assertEqual(moved, 1)
+            self.assertFalse((root / "2025-01_monthly.md").exists())
+            self.assertTrue((root / "archives" / "2025-01_monthly.md").exists())
+
+    def test_legacy_dir_not_archived(self):
+        with tempfile.TemporaryDirectory() as d:
+            root = Path(d) / "sources"
+            legacy = root / "legacy" / "ai-security"
+            legacy.mkdir(parents=True)
+            f = legacy / "2026-11-14_weekly.md"
+            f.write_text("# x\n", encoding="utf-8")
+            moved = archive_cycle_dir(root, "content/demo/sources")
+            self.assertEqual(moved, 0)
+            self.assertTrue(f.exists())
 
 
 class TestAuditDocRotation(unittest.TestCase):

@@ -1,7 +1,7 @@
 {
-  "version": "v1.6",
-  "updated": "2026-11-17",
-  "comment": "词汇库 → 业务提示词自动同步配置。bindings[].topic 必须已在 topics.json 注册；source 缺省取 topics.json 的 storage；target.path 相对 engine/vocabulary/ 根；insert_before 为区块缺失时的插入锚点（须为目标文件内唯一文本，区块替换时不参与匹配）；format=digest（按分类紧凑速览，缺省）| table（三列表格）；categories_include / tags_include 为可选过滤（空 = 全量）；section_title 为区块内标题（含 ## 前缀）。",
+  "version": "v1.7",
+  "updated": "2026-11-18",
+  "comment": "词汇库 → 业务提示词自动同步配置。bindings[].topic 必须已在 topics.json 注册；source 缺省取 topics.json 的 storage；target.path 相对 engine/vocabulary/ 根；insert_before 为区块缺失时的插入锚点（须为目标文件内唯一文本，区块替换时不参与匹配）；format=digest（按分类紧凑速览，缺省）| table（三列表格）；categories_include / tags_include 为可选过滤（空 = 全量）；section_title 为区块内标题（含 ## 前缀）。六主题归并后，tech / economy 两个词库按 categories_include 拆分到不同业务线，保持各业务线原有词汇范围不变。",
   "auto_trigger": true,
   "watch_interval_sec": 5,
   "backup_dir": "data/sync-backups",
@@ -10,40 +10,42 @@
   "log_file": "data/sync.log",
   "bindings": [
     {
-      "topic": "ai-security",
+      "topic": "tech",
       "targets": [
         {
           "path": "../../content/tech/weekly-roundup/prompts/business-config.md",
           "format": "digest",
-          "section_title": "## 词汇速览 · AI 安全（词汇库自动同步）",
-          "insert_before": "## 七、版本记录",
-          "categories_include": [],
+          "section_title": "## 词汇速览 · 科技（词汇库自动同步）",
+          "insert_before": "## 八、版本记录",
+          "categories_include": [
+            "模型与厂商",
+            "Agent 技术与框架",
+            "编码工具与 IDE",
+            "应用与产品",
+            "概念与评估",
+            "攻击技术",
+            "防御与检测",
+            "工具与平台",
+            "框架与标准",
+            "认证与资质",
+            "组织与岗位",
+            "基准与评估"
+          ],
           "tags_include": []
-        }
-      ]
-    },
-    {
-      "topic": "cybersecurity",
-      "targets": [
+        },
         {
           "path": "../../content/tech/security/dubai/prompts/business-config.md",
           "format": "digest",
           "section_title": "## 词汇速览（词汇库自动同步）",
-          "insert_before": "## 九、版本记录",
-          "categories_include": [],
-          "tags_include": []
-        }
-      ]
-    },
-    {
-      "topic": "financial-markets",
-      "targets": [
-        {
-          "path": "../../content/economy/dubai/apartment/prompts/business-config.md",
-          "format": "digest",
-          "section_title": "## 词汇速览（词汇库自动同步）",
-          "insert_before": "## 十三、版本记录",
-          "categories_include": [],
+          "insert_before": "## 十、版本记录",
+          "categories_include": [
+            "网络攻击技术",
+            "防御与安全运营",
+            "漏洞与漏洞管理",
+            "密码与身份认证",
+            "框架与合规",
+            "认证与岗位"
+          ],
           "tags_include": []
         }
       ]
@@ -55,25 +57,30 @@
           "path": "../../content/economy/trends/prompts/business-config.md",
           "format": "digest",
           "section_title": "## 词汇速览（词汇库自动同步）",
-          "insert_before": "## 七、版本记录",
-          "categories_include": [],
+          "insert_before": "## 八、版本记录",
+          "categories_include": [
+            "经济概念",
+            "经济体与国家",
+            "区域经济组织"
+          ],
           "tags_include": []
-        }
-      ]
-    },
-    {
-      "topic": "ai-agent",
-      "targets": [
+        },
         {
-          "path": "../../content/tech/weekly-roundup/prompts/business-config.md",
+          "path": "../../content/economy/dubai/apartment/prompts/business-config.md",
           "format": "digest",
-          "section_title": "## 词汇速览 · AI Agent（词汇库自动同步）",
-          "insert_before": "## 七、版本记录",
-          "categories_include": [],
+          "section_title": "## 词汇速览（词汇库自动同步）",
+          "insert_before": "## 十四、版本记录",
+          "categories_include": [
+            "宏观与经济指标",
+            "金融机构与组织",
+            "金融工具与产品",
+            "市场机制与交易",
+            "监管与政策",
+            "估值与风险"
+          ],
           "tags_include": []
         }
       ]
     }
   ]
 }
-

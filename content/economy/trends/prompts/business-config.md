@@ -57,16 +57,6 @@
 - **纯 HTML 交付**（业务配置声明，走 monitoring-common-spec 第 1 节例外条款）：富样式手写自包含 HTML 为主交付物，落盘 `reports/{{YYYY-MM-DD}}_weekly.html`（日期 = 数据截止日）；md 源稿存 `sources/` 同名存档，**不参与 `md2html.py` 自动转换**（防止覆盖手工渲染）。
 - 周报按归档保留策略滚动（weekly 保留 12 期，超限移入 `reports/archives/`）。
 
-<!-- VOCAB-SYNC:BEGIN topic=economy do-not-edit -->
-## 词汇速览（词汇库自动同步）
-
-> 由 `engine/vocabulary/script/sync_vocab.py` 自动维护：词汇库 economy v1.3，共 48 条（同步于 2026-11-14T15:24:27）。标记区间内请勿手工编辑；词条变更走词汇库导入流程（engine/vocabulary/README.md 第三节），同步机制见第九节。
-
-- **经济体与国家**（22）：美国（United States、USA、U.S.）；中国（China、中华人民共和国）；新加坡（Singapore）；日本（Japan）；韩国（South Korea、Korea）；德国（Germany）；法国（France）；英国（United Kingdom、UK）；新西兰（New Zealand）；澳大利亚（Australia）；阿联酋（United Arab Emirates、UAE）；沙特（Saudi Arabia、沙特阿拉伯、KSA）；越南（Vietnam、Viet Nam）；马来西亚（Malaysia）；卡塔尔（Qatar）；欧元区（Eurozone、欧元经济区）；新兴市场（Emerging Markets、EM）；发达经济体（Advanced Economies）；前沿市场（Frontier Markets）；科威特（Kuwait）；巴林（Bahrain）；阿曼（Oman）
-- **区域经济组织**（10）：欧盟（European Union、EU）；G7（七国集团、Group of Seven）；G20（二十国集团、Group of Twenty）；金砖国家（BRICS、金砖机制）；海湾合作委员会（GCC、Gulf Cooperation Council、海湾六国）；OPEC（石油输出国组织、欧佩克）；东盟（ASEAN、东南亚国家联盟）；APEC（亚太经合组织、Asia-Pacific Economic Cooperation）；WTO（世界贸易组织、World Trade Organization）；IEA（国际能源署、International Energy Agency）
-- **经济概念**（16）：全球主要经济体（全球主要经济体国家、Major Economies）；购买力平价（PPP、Purchasing Power Parity）；经济周期（Business Cycle、繁荣衰退周期）；滞胀（Stagflation）；软着陆与硬着陆（Soft Landing、Hard Landing）；人口红利（Demographic Dividend）；城镇化率（Urbanization Rate）；全要素生产率（TFP、Total Factor Productivity）；贸易顺差与逆差（Trade Surplus、Trade Deficit）；外汇储备（Foreign Exchange Reserves）；主权债务（Sovereign Debt、公共债务）；基尼系数（Gini Coefficient）；中等收入陷阱（Middle-Income Trap）；石油美元（Petrodollar）；产业转移（Manufacturing Relocation、供应链转移）；海湾国家（Gulf States、Gulf Countries、海湾地区国家）
-<!-- VOCAB-SYNC:END -->
-
 ## 七、信息分层与决策交付（强制项）
 
 - **分层交付**：决策摘要（≤1 屏，仅结论）/ 证据层 / 原始层；共享 boilerplate 上移通用基座第十节，不复制（规范：`engine/templates/information-layering-spec.md`）。
@@ -79,6 +69,16 @@
 - **盲区**：P0 四类（就业 / 收入 / 空置 / 竣工）优先消号。
 
 ---
+
+<!-- VOCAB-SYNC:BEGIN topic=economy do-not-edit -->
+## 词汇速览（词汇库自动同步）
+
+> 由 `engine/vocabulary/script/sync_vocab.py` 自动维护：词汇库 economy v1.4，共 48 条（同步于 2026-11-18T08:32:41）。标记区间内请勿手工编辑；词条变更走词汇库导入流程（engine/vocabulary/README.md 第三节），同步机制见第九节。
+
+- **经济概念**（16）：全球主要经济体（全球主要经济体国家、Major Economies）；购买力平价（PPP、Purchasing Power Parity）；经济周期（Business Cycle、繁荣衰退周期）；滞胀（Stagflation）；软着陆与硬着陆（Soft Landing、Hard Landing）；人口红利（Demographic Dividend）；城镇化率（Urbanization Rate）；全要素生产率（TFP、Total Factor Productivity）；贸易顺差与逆差（Trade Surplus、Trade Deficit）；外汇储备（Foreign Exchange Reserves）；主权债务（Sovereign Debt、公共债务）；基尼系数（Gini Coefficient）；中等收入陷阱（Middle-Income Trap）；石油美元（Petrodollar）；产业转移（Manufacturing Relocation、供应链转移）；海湾国家（Gulf States、Gulf Countries、海湾地区国家）
+- **经济体与国家**（22）：美国（United States、USA、U.S.）；中国（China、中华人民共和国）；新加坡（Singapore）；日本（Japan）；韩国（South Korea、Korea）；德国（Germany）；法国（France）；英国（United Kingdom、UK）；新西兰（New Zealand）；澳大利亚（Australia）；阿联酋（United Arab Emirates、UAE）；沙特（Saudi Arabia、沙特阿拉伯、KSA）；越南（Vietnam、Viet Nam）；马来西亚（Malaysia）；卡塔尔（Qatar）；欧元区（Eurozone、欧元经济区）；新兴市场（Emerging Markets、EM）；发达经济体（Advanced Economies）；前沿市场（Frontier Markets）；科威特（Kuwait）；巴林（Bahrain）；阿曼（Oman）
+- **区域经济组织**（10）：欧盟（European Union、EU）；G7（七国集团、Group of Seven）；G20（二十国集团、Group of Twenty）；金砖国家（BRICS、金砖机制）；海湾合作委员会（GCC、Gulf Cooperation Council、海湾六国）；OPEC（石油输出国组织、欧佩克）；东盟（ASEAN、东南亚国家联盟）；APEC（亚太经合组织、Asia-Pacific Economic Cooperation）；WTO（世界贸易组织、World Trade Organization）；IEA（国际能源署、International Energy Agency）
+<!-- VOCAB-SYNC:END -->
 
 ## 八、版本记录
 

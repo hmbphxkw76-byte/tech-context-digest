@@ -1,8 +1,9 @@
-"""报告归档策略（CI: scheduled-maintenance 的 archive_reports 步骤）。
+"""报告与源稿归档策略（CI: scheduled-maintenance 的 archive_reports 步骤）。
 
-对每条业务线的 reports/ 按报告类型执行滚动归档：每类只保留最新 N 期，
-超出的移动到 reports/archives/（创建于业务目录内，与「报告与归档都在
+对每条业务线的 reports/ 与 sources/ 按报告类型执行滚动归档：每类只保留最新 N 期，
+超出的移动到对应目录的 archives/（创建于业务目录内，与「报告与归档都在
 各项目内部」的约定一致）。基线报告为对比锚，同样只保留最新 3 份。
+sources/legacy/ 为存档，不参与轮转。
 
 幂等：重复执行不再移动任何文件。退出码：0 = 成功；1 = 移动失败。
 """
@@ -94,38 +95,45 @@ def rotate_audit_docs(root: Path | None = None, keep_months: int = AUDIT_KEEP_MO
     return 0
 
 
+def archive_cycle_dir(root: Path, label: str) -> int:
+    """归档单个周期目录（reports/ 或 sources/），返回移动数量。"""
+    if not root.is_dir():
+        return 0
+    items = []
+    for f in sorted(root.iterdir()):
+        if not f.is_file():
+            continue
+        det = detect_report(f.name)
+        if det:
+            items.append((det[0], det[1], f))
+    to_archive = select_archives(items)
+    if not to_archive:
+        return 0
+    archives = root / "archives"
+    archives.mkdir(exist_ok=True)
+    moved = 0
+    for f in to_archive:
+        try:
+            shutil.move(str(f), str(archives / f.name))
+            print(f"[ARCHIVED] {label}/{f.name} -> archives/")
+            moved += 1
+        except OSError as e:
+            print(f"[ERROR] 归档失败 {f.name}: {e}")
+            return 1
+    return moved
+
+
 def main() -> int:
     if "--audit-docs" in sys.argv[1:]:
         return rotate_audit_docs()
     moved = 0
     for b in iter_business_dirs():
-        reports = b.path / "reports"
-        if not reports.is_dir():
-            continue
-        items = []
-        for f in sorted(reports.iterdir()):
-            if not f.is_file():
-                continue
-            det = detect_report(f.name)
-            if det:
-                items.append((det[0], det[1], f))
-        to_archive = select_archives(items)
-        if not to_archive:
-            continue
-        archives = reports / "archives"
-        archives.mkdir(exist_ok=True)
-        for f in to_archive:
-            try:
-                shutil.move(str(f), str(archives / f.name))
-                print(f"[ARCHIVED] {b.rel}/reports/{f.name} -> archives/")
-                moved += 1
-            except OSError as e:
-                print(f"[ERROR] 归档失败 {f.name}: {e}")
-                return 1
+        for sub in ("reports", "sources"):
+            moved += archive_cycle_dir(b.path / sub, f"{b.rel}/{sub}")
     if moved:
-        print(f"归档完成：移动 {moved} 份历史报告")
+        print(f"归档完成：移动 {moved} 份历史报告 / 源稿")
     else:
-        print("归档策略检查：无超出保留期数的报告，未移动任何文件")
+        print("归档策略检查：无超出保留期数的报告 / 源稿，未移动任何文件")
     return 0
 
 

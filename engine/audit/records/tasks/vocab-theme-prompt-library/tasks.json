@@ -1,0 +1,66 @@
+[
+  {
+    "acceptance": "",
+    "depends_on": [],
+    "id": "T-1",
+    "phase": "",
+    "status": "pending",
+    "title": "六主题分类与归并映射设计（ID 前缀/受控分类/sync 绑定口径）"
+  },
+  {
+    "acceptance": "",
+    "depends_on": [],
+    "id": "T-2",
+    "phase": "",
+    "status": "pending",
+    "title": "词汇库归并：economy+financial-markets→economy，ai-agent+ai-security+cybersecurity→tech"
+  },
+  {
+    "acceptance": "",
+    "depends_on": [],
+    "id": "T-3",
+    "phase": "",
+    "status": "pending",
+    "title": "新建 education/international/political/society 空主题并建立词库骨架"
+  },
+  {
+    "acceptance": "",
+    "depends_on": [],
+    "id": "T-4",
+    "phase": "",
+    "status": "pending",
+    "title": "更新 topics.json/sync.json/INDEX.md/exports，移除旧主题注册与目录"
+  },
+  {
+    "acceptance": "",
+    "depends_on": [],
+    "id": "T-5",
+    "phase": "",
+    "status": "pending",
+    "title": "重建 4 个 business-config 的词汇同步区块（按分类过滤）"
+  },
+  {
+    "acceptance": "",
+    "depends_on": [],
+    "id": "T-6",
+    "phase": "",
+    "status": "pending",
+    "title": "建立 engine/vocabulary/prompts/<theme>/ 六主题提示词库"
+  },
+  {
+    "acceptance": "",
+    "depends_on": [],
+    "id": "T-7",
+    "phase": "",
+    "status": "pending",
+    "title": "更新 structure-and-naming-spec、vocabulary README、AGENTS.md 指针"
+  },
+  {
+    "acceptance": "",
+    "depends_on": [],
+    "id": "T-8",
+    "phase": "",
+    "status": "pending",
+    "title": "全量校验（vocab check/topic-check/unittest/optimization_gate/page_build_check）并提交 PR"
+  }
+]
