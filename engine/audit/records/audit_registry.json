@@ -1215,6 +1215,42 @@
           "audit_id": ""
         }
       }
+    },
+    "engine/report-audits/goal-alignment-batch-progress-2026-11-18.md": {
+      "title": "目标对齐批次执行差异报告（b0–b5）",
+      "kind": "audit",
+      "category": "audit-doc",
+      "business_line": "engine/report-audits",
+      "status": "draft",
+      "stages": {
+        "draft": false,
+        "initial": false,
+        "second": false,
+        "final": false
+      },
+      "mark": false,
+      "first_seen_at": "2026-11-18",
+      "evidence": {
+        "report": "engine/report-audits/goal-alignment-batch-progress-2026-11-18.md",
+        "business_line": "engine/report-audits",
+        "plans": [],
+        "gate": {
+          "entry": "engine/tools/optimization_gate.py",
+          "probe": true
+        },
+        "audit": {
+          "review": "",
+          "status": "draft",
+          "stages": {
+            "draft": false,
+            "initial": false,
+            "second": false,
+            "final": false
+          },
+          "mark_level": "none",
+          "audit_id": ""
+        }
+      }
     }
   }
 }
