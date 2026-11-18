@@ -1,0 +1,42 @@
+[
+  {
+    "acceptance": "",
+    "depends_on": [],
+    "id": "T-1",
+    "phase": "",
+    "status": "completed",
+    "title": "新增 engine/tools/git_history_audit.py（main 首亲历史直推检测，单一事实源）"
+  },
+  {
+    "acceptance": "",
+    "depends_on": [],
+    "id": "T-2",
+    "phase": "",
+    "status": "completed",
+    "title": "新增单测 engine/tests/test_git_history_audit.py（含误报口径用例）"
+  },
+  {
+    "acceptance": "",
+    "depends_on": [],
+    "id": "T-3",
+    "phase": "",
+    "status": "completed",
+    "title": "CI 接入 ci.yml（push main 触发 history-audit）并纳入 webhook-alert needs"
+  },
+  {
+    "acceptance": "",
+    "depends_on": [],
+    "id": "T-4",
+    "phase": "",
+    "status": "completed",
+    "title": "文档更正 AGENTS.md 与 multi-session-git-protocol.md（服务端保护不可用 + 补偿控制 + 审计口径）"
+  },
+  {
+    "acceptance": "",
+    "depends_on": [],
+    "id": "T-5",
+    "phase": "",
+    "status": "in_progress",
+    "title": "核验（unittest/optimization_gate/check_links）并提交"
+  }
+]

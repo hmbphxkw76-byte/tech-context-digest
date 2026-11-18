@@ -97,13 +97,14 @@ P0/P1/P2 优化清单的全部确定性检查收敛为**单一入口** `engine/t
 
 ## 多会话 Git 协作（硬性约束，适用于任何 Agent 平台）
 
-多个 Agent 会话与多个 CI 工作流共用同一 `main`，必须遵守 **`engine/docs/multi-session-git-protocol.md`（MULTI-SESSION-GIT-PROTOCOL v1.5）** 与 **`engine/docs/branch-naming-and-lifecycle.md`（BRANCH-NAMING-SPEC v1.0）**：
+多个 Agent 会话与多个 CI 工作流共用同一 `main`，必须遵守 **`engine/docs/multi-session-git-protocol.md`（MULTI-SESSION-GIT-PROTOCOL v1.6）** 与 **`engine/docs/branch-naming-and-lifecycle.md`（BRANCH-NAMING-SPEC v1.0）**：
 
 - **禁止直推 `main`**：任务一律在 `task/<slug>-<session8>` 分支提交，经 PR 合并。
 - **统一网关**：提交/推送使用 `python engine/tools/repo_sync.py`（run / push / pr / branch / branch-rename / branch-audit）。
 - **分支命名**：受管分支 `task/*` 必须内嵌会话标识；建分支用 `repo_sync.py branch <slug>`；`main` 与 `ci/*` 豁免。
 - **钩子**：`core.hooksPath=.githooks`（安装：`repo_sync.py hook-install`）；pre-push 按 refspec 判定，pre-commit 在违规受管分支上阻断。
-- **CI 也走 PR**：audit.yml / html-sync.yml / content-update.yml / scheduled-maintenance.yml 经 `.github/actions/submit-pr` 开 PR + 自动合并；`main` 启用分支保护。
+- **CI 也走 PR**：audit.yml / html-sync.yml / content-update.yml / scheduled-maintenance.yml 经 `.github/actions/submit-pr` 开 PR + 自动合并。
+- **直推防护真相**：本仓库为 GitHub private 免费方案，**服务端分支保护不可用**（API 403）；禁止直推 `main` 由客户端 pre-push 钩子 + `repo_sync.py` 网关双重拦截，补偿以 CI **main 首亲历史审计**（`engine/tools/git_history_audit.py`，见 multi-session-git-protocol.md §二）。
 
 ## 工作区清理（硬性约束，适用于任何 Agent 平台）
 

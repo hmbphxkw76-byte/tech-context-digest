@@ -49,6 +49,13 @@
       "slug": "fix-vocab-empty-dirs",
       "task": "fix-vocab-empty-dirs"
     },
+    "task/git-history-audit-da51f1bb": {
+      "note": "source=env:CATPAW_CONVERSATION_ID",
+      "session": "da51f1bb41f941a2ae07e88a470beb10",
+      "session_short": "da51f1bb",
+      "slug": "git-history-audit",
+      "task": "git-history-audit"
+    },
     "task/mainline-adoption-assess-8e70425f": {
       "note": "source=env:CATPAW_CONVERSATION_ID",
       "session": "8e70425f74ef40dfbbabc8e45ad4e542",

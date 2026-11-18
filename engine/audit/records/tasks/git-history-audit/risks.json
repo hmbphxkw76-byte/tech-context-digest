@@ -1,0 +1,14 @@
+[
+  {
+    "description": "审计误报（squash/rebase 合并）",
+    "id": "R-1",
+    "mitigation": "允许 (#NN) 与历史白名单，测试覆盖",
+    "owner": ""
+  },
+  {
+    "description": "与既有 ci.yml 门禁冲突",
+    "id": "R-2",
+    "mitigation": "复用 workspace-cleanup，不改动既有 job",
+    "owner": ""
+  }
+]
