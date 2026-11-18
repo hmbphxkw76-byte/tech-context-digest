@@ -14,7 +14,7 @@
 ### 1.1 设计目标
 
 1. **流程可执行**：把概念流程图变成可运行、可复现、可审计的编排（manifest → runner）。
-2. **门禁单一入口**：所有校验复用 `optimization_gate.py`（24 项），不另写检查命令。
+2. **门禁单一入口**：所有校验复用 `optimization_gate.py`（29 项），不另写检查命令。
 3. **退回精准**：阻断时按 `gate.on_fail` 跳转，并携带上下文（失败检查项 + 输出）。
 4. **全链路可追溯**：每个节点 / 门禁 / 路由 / 闭环事件追加留痕。
 5. **配置化**：门禁组合、周期、退回目标全部来自 manifest，无硬编码。
@@ -31,7 +31,7 @@ flowchart TB
         S["manual / tool / ci<br/>Agent · CI · 工具链"]
     end
     subgraph GATE["门禁层 Gates（G0–G8）"]
-        OG["optimization_gate.py<br/>24 项单一入口"]
+        OG["optimization_gate.py<br/>29 项单一入口"]
     end
     subgraph CONTRACT["契约层 Contract"]
         C["StageResult / GateResult<br/>PipelineRun"]
@@ -64,7 +64,7 @@ flowchart TB
 | N3 | 信息分类 | tool | 只做类型 / 维度 / 归位，不做内容生成 | G3 | validate_layout, classify, links | N3 |
 | N4 | 内容生成 | manual | 只做内容，不做渲染 | G4 | research_kernel, info_density, fact_card, decision_hub, blind_spot | N4 |
 | N5 | 渲染与交付 | tool | 只做 canonical 渲染，不做质量判定 | G5 | page_build, lint, compliance, perf_monitor | N5 |
-| N6 | 质量校验与审计 | tool | 只做校验 / 审计，不做生成 | G6 | `*`（全量 24 项）+ 审计四环节 | **N4** |
+| N6 | 质量校验与审计 | tool | 只做校验 / 审计，不做生成 | G6 | `*`（全量 29 项）+ 审计四环节 | **N4** |
 | N7 | 发布 / 索引 / 归档 | tool | 只做发布留痕，不做校验 | G7 | hub, publish_fingerprint | N7 |
 | N8 | 运维与监控 | ci | 只做监控 / 告警，不做内容 | G8 | （外部 CI，无检查项） | N8 |
 
@@ -170,7 +170,7 @@ return passed
 
 ### N6 质量校验与审计
 - **职责边界**：校验 / 审计；**不**生成内容。
-- **核心处理逻辑**：G6 统一门禁（24 项）+ 审计四环节（L1/L2/L3 + A1–A8）+ 语义增量 + 性能。
+- **核心处理逻辑**：G6 统一门禁（29 项）+ 审计四环节（L1/L2/L3 + A1–A8）+ 语义增量 + 性能。
 - **输出标准**：0 `[E]`；审计覆盖 12/12；标识与 registry 一致。
 - **异常处理**：任一 `[E]` → G6 阻断，**退回 N4**；审计 fail-fast。
 - **分支场景**：常规终审；L3 宽限期内（14 天）告警不阻断。
@@ -222,7 +222,7 @@ R2 / R3 复核 + R6 死链（404 / 410 / 451 = 死链；403 / 429 / 5xx / 超时
 page_build（P01–P15）/ lint（W）/ compliance（节数 / `id="sN"` / 断头锚点 / 导航）/ perf_monitor（全量 P95 ≤60s；单报告 avg ≤2s；错误率 0）。阻断触发：任一 `[E]`。
 
 ### G6 统一门禁 + 审计（N6 → **N4**）
-检查项 `*`（全量 24 项，含 `--probe`）+ 审计 L1/L2/L3 + 终审 A1–A8；退出码 0 通过 / 1 有 `[E]` / 2 仅 `[W]`；两级周期（内容 2026-12、来源 2027-01）。阻断触发：任一 `[E]` 或审计 fail-fast，**退回 N4**，携带 `GateResult.output`。
+检查项 `*`（全量 29 项，含 `--probe`）+ 审计 L1/L2/L3 + 终审 A1–A8；退出码 0 通过 / 1 有 `[E]` / 2 仅 `[W]`；两级周期（内容 2026-12、来源 2027-01）。阻断触发：任一 `[E]` 或审计 fail-fast，**退回 N4**，携带 `GateResult.output`。
 
 ### G7 产物确定性校验（N7 → N7）
 `build_hub.py --check` 比对通过（E）；sha256 无漂移 / 无重复内容（E / W）。阻断触发：`--check` 过期或指纹漂移。
@@ -270,7 +270,7 @@ page_build（P01–P15）/ lint（W）/ compliance（节数 / `id="sN"` / 断头
 | T0-4 | 实现审计 | `pipeline_audit.py` + JSONL | 只追加 / 可回放 |
 | T0-5 | 一致性测试 | `test_pipeline_runner.py` | 16 项通过 |
 | T1-1/T1-2 | G0–G5 接入 | runner 门禁调度 | 退回 N0–N5 正确 |
-| T2-1/T2-2 | G6 全量 + 审计；G7 / G8 接入 | G6 = 24 项 + 审计；产物 / 运维守卫 | 退回 N4 / N7；G8 外部 |
+| T2-1/T2-2 | G6 全量 + 审计；G7 / G8 接入 | G6 = 29 项 + 审计；产物 / 运维守卫 | 退回 N4 / N7；G8 外部 |
 | T3-1/T3-2 | L2 / L1 闭环 | `route` 留痕 + 上下文；manifest loops + 心跳登记 | 断言 rollback=N4 |
 | T4-1/T4-2 | 审计 CI 接入；埋点规范 | ci.yml / 维护步骤；日志字段标准 | 运行留痕可查 |
 | T5-1 | 全场景验证 | 验证报告 | 正常 / 异常 / 闭环覆盖 |

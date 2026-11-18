@@ -30,10 +30,11 @@ python -m unittest discover -s engine/tests -v   # 单元测试（全量）
 | lint_reports.py | 校验 | ci.yml / scheduled-maintenance / content-update「报告内容校验」 |
 | compliance_check.py | 校验+引导+审计 | ci.yml / content-update「报告模板合规校验」；scheduled-maintenance「报告合规性审计」 |
 | source_check.py | 校验 | ci.yml「来源登记前置校验（L0）」：R1 登记覆盖 / R2 分级邻近 / R3 双源 / R4 关键数字 / R5 语言规则 / R6 死链 / R7 机构分级主数据一致性 |
-| metric_registry.py | 校验+服务 | 指标单一事实源（T3）：字典体检 / 阈值求值 / 归一化存储 / 去重血缘 / 全量准确性兜底 |
+| metric_registry.py | 校验+服务 | 指标单一事实源（T3）：字典体检 / 阈值求值 / 归一化存储 / 去重血缘 / 全量准确性兜底；`audit --coverage` 叠加指标实测覆盖报告 |
+| metric_coverage.py | 校验+度量 | 指标实测覆盖（批次 B）：TOOL 指标实测接线 + LLM/未接线显式标注 + 覆盖率与缺口报告 |
 | release_calendar.py | 采集 | 发布日历结构化采集（P1-2）：解析 release-calendar.md → JSON + 覆盖率 |
 | publish_fingerprint.py | 校验+留痕 | 发布指纹（P2-2）：sha256 登记 / 重复检测 / 漂移比对 |
-| optimization_gate.py | 校验（统一入口） | ci / html-sync / content-update / scheduled-maintenance / `repo_sync run --gate` 复用；24 项门禁单一入口 |
+| optimization_gate.py | 校验（统一入口） | ci / html-sync / content-update / scheduled-maintenance / `repo_sync run --gate` 复用；29 项门禁单一入口 |
 | pipeline_manifest.json | 配置（声明式图） | 报告全流程 N0–N8 / G0–G8 声明式清单（流程图唯一落地载体） |
 | pipeline_runner.py | 编排 | 节点→门禁→路由/退回；复用 `optimization_gate` 单一入口；见 `engine/docs/report-pipeline-implementation-plan.md` |
 | pipeline_audit.py | 审计 | 全流程追加式留痕 `engine/audit/records/pipeline_runs.jsonl` |
@@ -42,6 +43,11 @@ python -m unittest discover -s engine/tests -v   # 单元测试（全量）
 | fact_card_check.py | 校验 | ci.yml「事实卡片门禁（FC）」：卡片库结构 + 报告 `[FC-…]` 引用解析 + 共享域覆盖 |
 | decision_hub_check.py | 校验 | ci.yml「决策交付门禁（DC）」：决策卡字段 / 行动协议五要素 + 三档优先级 / 场景切片 / ex-ante |
 | blind_spot_check.py | 校验 | ci.yml「盲区台账门禁（BS）」：字段 / 状态 / 责任周期 / P0 四类 |
+| monitoring_render_check.py | 校验 | 监测渲染规范机械项（MON-01–05）：图注齐备 / 口径并列 / 列宽塌缩 / noopener / 原生 title；接入统一门禁 |
+| consistency_check.py | 校验 | 看板-台账一致与版本治理（LC-01–02 / VG-01–02）：台账结构 / 指标名在报告出现 / 读数时点 / 语义版本修正留痕 |
+| naming_check.py | 校验 | 命名规范全量扫描（NC-01–02）：目录 kebab-case / 按位置文件命名规则矩阵 |
+| prompt_consistency_check.py | 校验 | 提示词一致性（PC-01–03）：类型注册表与实际业务线一致 / business-config 不复述规范 / 周期提示词齐备 |
+| model_contract_check.py | 校验 | 模型契约（MC-01–05，DC-07）：参数区间 / 假设留痕 / 失败上报；接入统一门禁 |
 | cycle_clock.py | 量化模型 | 方案 N1：宏观周期时钟（四阶段 + 过渡带） |
 | signal_synth.py | 量化模型 | 方案 N2：K 系三层信号合成 |
 | policy_multiplier.py | 量化模型 | 方案 N3：政策乘数表（G01–G05） |
@@ -133,7 +139,7 @@ python engine/tools/lint_reports.py
 ### optimization_gate.py — 优化流程统一门禁（单一入口）
 
 ```bash
-python engine/tools/optimization_gate.py                      # 全部门禁（24 项）
+python engine/tools/optimization_gate.py                      # 全部门禁（29 项）
 python engine/tools/optimization_gate.py --only source_check,metric_registry
 python engine/tools/optimization_gate.py --gate-period 2026-12 --source-gate-period 2027-01 --json
 python engine/tools/optimization_gate.py --list

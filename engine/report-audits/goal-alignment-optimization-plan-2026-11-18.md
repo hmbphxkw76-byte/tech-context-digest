@@ -1,6 +1,6 @@
-# tech-context-digest 目标对齐优化解决方案（GOAL-ALIGNMENT-PLAN v1.0）
+# tech-context-digest 目标对齐优化解决方案（GOAL-ALIGNMENT-PLAN v1.2）
 
-> **状态**：现行方案（2026-11-18 全量重审产出）
+> **状态**：现行方案（2026-11-18 全量重审产出；v1.2 增「语义弱 / 度量空」专项方案）
 > **目标**：以「尽可能消除信息差 / 保持信息质量可靠 / 支持基于信息的决策」为唯一评判尺，给出优化解决方案与可落地、可验收的完整实施清单。
 > **方法**：从零重审（不采信既有审计结论），六维并行审计 + 规范逐条比对 + 工具实测复核；证据统一到 `文件:行号`。
 > **等级标注**：本方案自身按[信息分层规范](../templates/information-layering-spec.md)第二节标注——`已核验`（代码/文件实测）、`部分核验`（抽样推断）、`推断`（机制分析）、`假设`（待验证）。
@@ -199,6 +199,46 @@
 - **模型契约门禁**：把 `transmission/valuation/stress_test` 的「参数区间 + 假设 + 失败上报」从单测提升为 `optimization_gate` 检查项（DC-07）。
 - 清理死代码与规范外结构（C-15），文档漂移修正（`weekly-roundup/README.md`）。
 
+### 4.9 语义弱专项方案（批次 A）
+
+**根因**：规范条文只约束「新报告撰写时的人工照做」，没有机械门禁在生成 / 提交时校验；存量报告与生成器可绕开。**解法**：把规范中**机械可判定**的条款逐条接入门禁，并修掉存量违规；语义判断类条款不伪造自动化，显式标注为 LLM / 人工项。
+
+**8 类「规范有、门禁不查」缺口 → 接线**：
+
+| # | 缺口 | 规范出处 | 门禁接线 | 级别 |
+|---|---|---|---|---|
+| S1 | 监测渲染机械项：图表图注单位 / 来源、口径并列、列宽塌缩、noopener、断头数字、hover tooltip | monitoring-common-spec §2 / §3 / §4 / §6 | 新增 `engine/tools/monitoring_render_check.py`（MON-01..），接入统一门禁 | [W] |
+| S2 | 看板-台账一致：阈值 / 口径 / 基期在 hub 与 `data/processed` 台账一致 | information-layering §3.2 | `consistency_check.py`（LC-01 台账结构 / LC-02 看板指标名在最新报告出现） | [W] |
+| S3 | 版本治理：仅核心事实修正才升版本号，核验型运行不升版本 | decision-delivery §7 | `consistency_check.py`（VG-01 读数时点 / VG-02 语义版本修正留痕） | [W] |
+| S4 | 文件命名与维度顺序：kebab-case、`layout.json` 声明顺序 | structure-and-naming §8 | `validate_layout.py`（维度顺序）+ `naming_check.py`（NC-01/02 全量命名扫描） | [E] / [W] |
+| S5 | 假设不得进入决策摘要点值 | information-layering §2.3-3 | 已由 P0-2（ID-04 点值检查）落地 | [E] |
+| S6 | 模型契约：指标定义 / 阈值 / 口径三处一致 | decision-delivery §4 | 新增契约门禁，接 `L-03` 阈值三处一致 | [W] |
+| S7 | 不得复制决策卡全文 / 卡片同义复述 | information-layering §5.3 | 重复率代理校验，接 `R-03` | [W] |
+| S8 | 共享 boilerplate 上移后报告残留 | prompt-generic-base §10 | 残留率代理校验，接 `R-02` | [W] |
+
+**执行顺序**：S1（新增渲染门禁）→ S2 / S3（一致性 / 版本）→ S4（命名收口）→ S6–S8（契约与重复率，随批次 C / D 收口）。
+
+### 4.10 度量空专项方案（批次 B）
+
+**根因**：`metrics-dictionary.json` 的 38 项指标注册了公式与阈值，但只有 IGI-01..08 接了实测；其余 30 项走结构兜底（FALLBACK），`metric_registry audit` 恒报「30 项无实测值」——**看起来像达标、实际没度量**。
+
+**38 项盘点**（`detected_by`）：
+
+| 类别 | 数量 | 指标 | 处置 |
+|---|---|---|---|
+| TOOL | 22 | C-01/02/03/05/06、A-05、R-01/02/04、I-01/03/04/07/08/09、IGI-01/02/03/04/06/07/08 | 复用既有工具产出实测值 |
+| MIXED | 8 | C-04、A-01、A-03、L-03、I-02、I-05、I-06、IGI-05 | 工具可测部分接线，语义部分标 LLM |
+| LLM | 8 | A-02、A-04、L-01、L-02、L-04、L-05、R-03、R-05 | 显式标注「LLM / 人工判定」，不伪造实测值 |
+
+**解法**：
+
+1. 新增 `engine/tools/metric_coverage.py`（**已落地**）：汇总 22 项 TOOL 指标的实测值（复用 `validate_layout` / `check_links` / `page_build_check` / `info_density` / `fact_card` / `decision_hub` / `source_check` / `metric_registry` / `info_gap_metrics`），产出覆盖率与缺口清单。当前实测 **26 项**（TOOL 22 项中 21 项 measured、A-05 需网络探测；MIXED 代理 4 项），LLM 8 项显式标注，未接线 3 项（A-01 / A-03 / L-03）入 gap。
+2. 8 项 MIXED 指标中工具可测子集（I-02 标注率、I-06 决策卡覆盖、L-03 阈值三处一致、IGI-05 来源指针率）接线实测。
+3. `metric_registry audit --coverage` 输出「指标覆盖报告」：measured / fallback / LLM 三类计数与逐项缺口，替代恒报 FALLBACK 的沉默。
+4. 覆盖率为 0 的指标视为**未度量**，进入 `tech-debt-ledger` 并给出接线计划（不静默跳过）。
+
+**验收**：22 项 TOOL 指标全部有实测值（非 FALLBACK）；MIXED 工具部分接线；LLM 项显式标注；`audit` 输出覆盖率与缺口清单。**实际**：26 measured / 1 probe（A-05）/ 3 fallback（A-01、A-03、L-03）/ 8 llm；`metric_registry audit --coverage` 已输出覆盖与缺口。
+
 ---
 
 ## 5. 完整实施清单
@@ -233,25 +273,29 @@
 | P1-7 | R4 关键数字逐点指针 | `source_check.py:556-559` | 含数字块级断言附近窗口内须有来源标记；抽样误报率 < 5% | `source_check` R4 |
 | P1-8 | 死链真实修复 | `content/economy/dubai/apartment/reports/2026_annual.html` 等 5 处死链 | `--probe` 下死链 `[E]` 归零 | `source_check` R6 |
 | P1-9 | 四主题接入就绪化 | `content/{education,international,political,society}/prompts/business-config.md` 等 | 四主题 `iter_business_dirs()` 可发现；IGI-01 ≥ 0.5；词库骨架非空 | `vocab_drift_check`、`IGI-01` |
-| P1-10 | 提示词单一事实源收敛 + 一致性门禁 | `engine/prompts/trend-weekly/prompt-weekly-monitor.md`、`engine/prompts/` 下各周期提示词、**新增** `prompt_consistency_check.py`（置于 `engine/tools/`） | 泛用版与业务线实例一致或前者改为指针；business-config 去复述；注册表与实际业务线一致（C-11） | `optimization_gate`（新增第 25 项） |
+| P1-10 | 提示词单一事实源收敛 + 一致性门禁 | `engine/prompts/trend-weekly/prompt-weekly-monitor.md`、`engine/prompts/` 下各周期提示词、**新增** `prompt_consistency_check.py`（置于 `engine/tools/`） | 泛用版与业务线实例一致或前者改为指针；business-config 去复述；注册表与实际业务线一致（C-11） | `optimization_gate`（**已接入 `prompt_consistency`**） |
 | P1-11 | 词库规范形统一 + 缺口补录 | `engine/vocabulary/data/*/terms.md`、`engine/vocabulary/prompts/*` | 提示词声称的规范形与词库一致；top 10 高频概念入库 | `vocab_drift_check` |
 | P1-12 | N0–N8 接线 | `.github/workflows/ci.yml:239-240`、`engine/tools/pipeline_manifest.json:168`、`pipeline_runner.py` | CI 调用 `pipeline_runner run` 并留痕；G8 `checks` 非空 | `pipeline_audit` |
 | P1-13 | 模型契约门禁 | `engine/tools/` 下 `transmission/` 弹性模型、`optimization_gate.py` | DC-07 从单测提升为 gate 检查项 | `optimization_gate` |
 | P1-14 | 数据层补薄 + raw 落仓 | `data/processed/tech/{competitive-intelligence,industry-research}/dubai/`、`data/raw/` | 两条 tech 业务线有台账 + 量化数据；官方来源快照落 raw | `IGI-05` |
 | P1-15 | hub 卡片信息区分度 | `build_hub.py` | 同周期多报告可区分（标题/类型/地区） | `hub` |
 
+> **批次 C 进度（2026-11-18）**：P1-10 已落地——新增 `prompt_consistency_check.py`（PC-01 注册表一致 / PC-02 去复述 / PC-03 周期模板齐备）并接入统一门禁（第 28 项）；`template-registry.md` 补登 `competitive-intelligence/dubai`、`industry-research/dubai`（修 C-11）；7 份 business-config 复述段改为指针。P1-1/3/4/5/6/7/8/9/11/12/13/14/15 未落地（见 §5.2）。
+
 ### 5.3 P2 —— 治理与卫生
 
 | ID | 动作 | 涉及文件 | 验收标准 |
 |---|---|---|---|
 | P2-1 | 死代码清理 | `content/economy/dubai/apartment/script/build_registry_v1.py`、`content/economy/trends/followup/`、`content/tech/weekly-roundup/sources/legacy/` | 删除或迁入 `sources/archives/`；`validate_layout` 通过 |
-| P2-2 | 文档漂移修正 | `content/tech/weekly-roundup/README.md`（指向不存在的 `reports/legacy/`） | 文档与实际目录一致；`check_links` 通过 |
-| P2-3 | 提示词引用 AGENTS/PCE | `engine/templates/prompt-generic-base.md`、`engine/prompts/*` | 提示词层感知「执行xx报告」触发与润色-确认门禁 |
-| P2-4 | 类型注册表同步 | `engine/templates/template-registry.md` 第二节 | 登记全部 7 条业务线；新增业务线自动校验 |
+| P2-2 | 文档漂移修正 | `content/tech/weekly-roundup/README.md`（指向不存在的 `reports/legacy/`） | 文档与实际目录一致；`check_links` 通过（**已核实无漂移**：两 legacy 目录均存在） |
+| P2-3 | 提示词引用 AGENTS/PCE | `engine/templates/prompt-generic-base.md`、`engine/prompts/*` | 提示词层感知「执行xx报告」触发与润色-确认门禁（**已落地**：通用基座第八节新增指针） |
+| P2-4 | 类型注册表同步 | `engine/templates/template-registry.md` 第二节 | 登记全部 7 条业务线；新增业务线自动校验（**已落地**：PC-01 补登 + 门禁） |
 | P2-5 | 主题 README 治理 | 各主题 README | 与 `business-config.md` 一致 |
 | P2-6 | 审计报表增强 | `engine/audit/`、`audit_tool.py` | IGI 趋势纳入审计报表现 |
 | P2-7 | 报告结构加固 | `apartment/monthly|baseline|annual` 缺 `nav-tabs` | `compliance_check` 0E |
-| P2-8 | 术语策略文档 | `engine/vocabulary/README.md` | 明确缩写/中文规范形策略 |
+| P2-8 | 术语策略文档 | `engine/vocabulary/README.md` | 明确缩写/中文规范形策略（**已落地**：新增「七·补 术语策略」） |
+
+> **批次 D 进度（2026-11-18）**：P2-2 已核实无漂移；P2-3 / P2-4 / P2-8 已落地；P2-1（死代码删除 / 迁移，需授权）、P2-5（主题 README 治理）、P2-6（审计报表增强）、P2-7（核实已基本满足：baseline 属规范豁免，compliance_check 0E）未落地。
 
 ---
 
@@ -311,3 +355,4 @@
 |---|---|---|---|
 | v1.0 | 2026-11-18 | 初始版本 | 六维全量重审；三维诊断（2/5、3/5、3/5）；15 项核心问题；八面优化方案；52 条实施清单（P0 6 / P1 15 / P2 8） |
 | v1.1 | 2026-11-18 | 落地记录 | 附录 A：P0 落地与验证、R6 规则级期限与自链接豁免两项新政策、受阻项说明 |
+| v1.2 | 2026-11-18 | 专项方案 | 新增 §4.9「语义弱专项方案」（8 类门禁缺口逐条接线）与 §4.10「度量空专项方案」（38 项指标盘点与实测覆盖路径）；批次 b0 产出 |

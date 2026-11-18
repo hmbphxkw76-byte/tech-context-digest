@@ -195,6 +195,15 @@ python engine/vocabulary/script/vocab_tool.py topic-add --topic financial-market
 | 可追溯 | 每条可回溯引入文件与版本；索引同步 | `terms.md` 版本记录 + `INDEX.md` 更新时间 |
 | 幂等安全 | 重复 import 零新增；init 重复执行零覆盖 | 重跑 `import`/`init` 观察输出 |
 
+## 七·补、术语策略（缩写 vs 中文规范形）
+
+- **规范形优先中文全称**：词条 `canonical` 默认使用中文全称（如「贷款市场报价利率」），缩写（LPR）入 `aliases`；报告与提示词正文引用规范形，缩写仅在括号注或空间受限时使用。
+- **跨语言词条**：英文专有名词（机构 / 产品 / 基准名）保留原文规范形（如 `SWE-bench Verified`），中文译名录入 `aliases`，不强制翻译。
+- **缩写收敛**：同一缩写对应多个全称时（如「CPI」），须按主题 / 口径拆分词条并在 `aliases` 中显式区分，不得共用规范形。
+- **单一事实源**：规范形只定义于 `data/<theme>/terms.md`；提示词与报告只引用，不复制定义（见第三节）。
+
+---
+
 ## 八、异常排查
 
 | 现象 | 原因 | 处置 |

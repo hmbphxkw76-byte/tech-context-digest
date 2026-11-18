@@ -24,6 +24,15 @@ class TestFingerprint(unittest.TestCase):
             self.assertEqual(pf.fingerprint_file(p), pf.fingerprint_file(p))
             self.assertEqual(len(pf.fingerprint_file(p)), 64)
 
+    def test_crlf_normalized_cross_platform(self):
+        """CRLF 与 LF 版本必须同指纹（Windows 工作区 / CI 一致性）。"""
+        with tempfile.TemporaryDirectory() as d:
+            a = Path(d) / "a.html"
+            b = Path(d) / "b.html"
+            a.write_bytes(b"<html>x</html>\n")
+            b.write_bytes(b"<html>x</html>\r\n")
+            self.assertEqual(pf.fingerprint_file(a), pf.fingerprint_file(b))
+
     def test_duplicates_grouping(self):
         fps = {"a.html": "h1", "b.html": "h1", "c.html": "h2"}
         self.assertEqual(pf.duplicates(fps), [["a.html", "b.html"]])

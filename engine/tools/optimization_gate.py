@@ -56,7 +56,7 @@ CHECKS: list[tuple[str, list[str], bool]] = [
     ("page_build", [sys.executable, f"{TOOLS}/page_build_check.py"], True),
     ("source_check", [sys.executable, f"{TOOLS}/source_check.py", "--gate-period", "__SOURCE_GATE__"], True),
     ("metric_registry", [sys.executable, f"{TOOLS}/metric_registry.py", "check"], False),
-    ("metric_audit", [sys.executable, f"{TOOLS}/metric_registry.py", "audit"], True),
+    ("metric_audit", [sys.executable, f"{TOOLS}/metric_registry.py", "audit", "--coverage"], True),
     ("release_calendar", [sys.executable, f"{TOOLS}/release_calendar.py", "--check"], True),
     ("publish_fingerprint", [sys.executable, f"{TOOLS}/publish_fingerprint.py", "--check"], True),
     ("semantic_diff", [sys.executable, f"{TOOLS}/semantic_diff.py", "scan"], True),
@@ -70,6 +70,16 @@ CHECKS: list[tuple[str, list[str], bool]] = [
     # 静态检查（Phase 3.1）：默认 [W]，稳定后评 [E]。仅适配退出码，规则见 pyproject.toml。
     ("ruff", [sys.executable, f"{TOOLS}/static_check.py", "ruff"], True),
     ("mypy", [sys.executable, f"{TOOLS}/static_check.py", "mypy"], True),
+    # 监测渲染规范机械项（MON-01..05）：规范有、门禁不查缺口接线，默认 [W]。
+    ("monitoring_render", [sys.executable, f"{TOOLS}/monitoring_render_check.py"], True),
+    # 看板-台账一致与版本治理（LC-01..02 / VG-01..02），默认 [W]。
+    ("consistency", [sys.executable, f"{TOOLS}/consistency_check.py"], True),
+    # 命名规范全量扫描（NC-01..02），默认 [W]。
+    ("naming", [sys.executable, f"{TOOLS}/naming_check.py"], True),
+    # 提示词一致性（PC-01..03）：注册表 / 复述规范 / 周期模板齐备，默认 [W]。
+    ("prompt_consistency", [sys.executable, f"{TOOLS}/prompt_consistency_check.py"], True),
+    # 模型契约（MC-01..05，DC-07 / P1-13）：参数区间 / 假设留痕 / 失败上报，默认 [W]。
+    ("model_contract", [sys.executable, f"{TOOLS}/model_contract_check.py"], True),
 ]
 
 # 两级 gate-period 默认值（见模块 docstring）：auto = 滚动基线（当前月 + 1）

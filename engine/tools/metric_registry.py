@@ -355,7 +355,8 @@ def main() -> int:
     p.add_argument("--case-insensitive", action="store_true", help="去重时 indicator_id/caliber 忽略大小写")
     p.add_argument("--lineage", help="输出去重血缘与冲突明细 JSON（与 --dedupe 同用）")
     sub.add_parser("check")
-    sub.add_parser("audit")
+    sub.add_parser("audit").add_argument("--coverage", action="store_true",
+                                          help="叠加指标实测覆盖报告（metric_coverage）")
     args = ap.parse_args()
 
     d = load_dictionary()
@@ -374,12 +375,24 @@ def main() -> int:
         return 0
     if args.cmd == "audit":
         measured = measured_from_info_gap()
+        coverage_rep = None
+        if getattr(args, "coverage", False):
+            from metric_coverage import coverage_report, measure
+            cov = measure()
+            measured = {mid: rec["value"] for mid, rec in cov.items()
+                       if rec["value"] is not None}
+            coverage_rep = coverage_report(cov)
         rep = check_all_metrics(d, measured)
         for r in rep["metrics"]:
             flag = "FALLBACK" if r["fallback"] else r["status"].upper()
             print(f"[{flag}] {r['metric_id']:<6} {r['severity']:<3} {r['name']}：{r['detail']}")
         print(f"\n[audit] {len(rep['metrics'])} 项全量检查；实测 {len(measured)} 项；"
               f"兜底 {rep['fallback_count']} 项；不达标 {len(rep['failures'])} 项；问题 {len(rep['issues'])} 项")
+        if coverage_rep:
+            print(f"[coverage] 覆盖 {coverage_rep['total']} 项；{coverage_rep['statuses']}")
+            if coverage_rep["gaps"]:
+                print(f"[gap] 未实测 {len(coverage_rep['gaps'])} 项："
+                      f"{'、'.join(coverage_rep['gaps'])}")
         if rep["issues"]:
             return 1
         if rep["fallback_count"]:

@@ -35,6 +35,10 @@ info_density = _load("info_density_check", "engine/tools/info_density_check.py")
 decision_hub = _load("decision_hub_check", "engine/tools/decision_hub_check.py")
 vocab_drift = _load("vocab_drift_check", "engine/tools/vocab_drift_check.py")
 build_hub = _load("build_hub", "engine/tools/build_hub.py")
+monitoring_render = _load("monitoring_render", "engine/tools/monitoring_render_check.py")
+consistency = _load("consistency_check", "engine/tools/consistency_check.py")
+naming = _load("naming_check", "engine/tools/naming_check.py")
+prompt_consistency = _load("prompt_consistency", "engine/tools/prompt_consistency_check.py")
 
 
 class TestGatePeriod(unittest.TestCase):
@@ -171,6 +175,153 @@ class TestVocabDrift(unittest.TestCase):
         forms, n = vocab_drift.load_terms("economy")
         self.assertGreater(n, 0)
         self.assertGreaterEqual(len(forms), n)
+
+
+class TestMonitoringRender(unittest.TestCase):
+    """批次 A：监测渲染规范机械项（MON-01..05）可检出，且不误报合规写法。"""
+
+    def _check(self, html: str):
+        import tempfile
+        with tempfile.TemporaryDirectory() as d:
+            p = Path(d) / "r.html"
+            p.write_text(html, encoding="utf-8")
+            return monitoring_render.check_report(p)
+
+    def test_compliant_report_is_clean(self):
+        html = ('<div class="chart-box"><h3>图 1 · 序列（单位：%；来源：X）</h3>'
+                '<div class="chart-eh" id="c1"></div>'
+                '<div class="chart-note">口径并列，不可相减。来源：X。</div></div>'
+                '<table class="fixed"><tr><th style="width:50%">A</th>'
+                '<th style="width:50%">B</th></tr></table>')
+        errs, warns = self._check(html)
+        self.assertEqual(errs, [])
+        self.assertEqual(warns, [])
+
+    def test_mon01_missing_note(self):
+        html = '<div class="chart-box"><div class="chart-eh" id="c1"></div></div>'
+        _e, warns = self._check(html)
+        self.assertTrue(any("MON-01" in w for w in warns))
+
+    def test_mon02_caliber_without_warning(self):
+        html = ('<div class="chart-box"><h3>图 1 · 多口径（%；来源：X）</h3>'
+                '<div class="chart-eh" id="c1"></div>'
+                '<div class="chart-note">口径并列，图示仅为对照。</div></div>')
+        _e, warns = self._check(html)
+        self.assertTrue(any("MON-02" in w for w in warns))
+
+    def test_mon03_narrow_column(self):
+        html = ('<table class="fixed"><tr>' + ''.join(
+            f'<th style="width:1%">列{i}</th>' for i in range(7)) + '</tr></table>')
+        _e, warns = self._check(html)
+        self.assertTrue(any("MON-03" in w for w in warns))
+
+    def test_mon04_missing_noopener(self):
+        html = '<a href="https://example.com/x">x</a>'
+        _e, warns = self._check(html)
+        self.assertTrue(any("MON-04" in w for w in warns))
+
+    def test_mon04_self_link_exempt(self):
+        html = ('<a href="https://github.com/hmbphxkw76-byte/tech-context-digest/blob/main/x">x</a>')
+        _e, warns = self._check(html)
+        self.assertFalse(any("MON-04" in w for w in warns))
+
+    def test_mon05_native_title(self):
+        html = '<a href="https://example.com/x" title="https://example.com/x">x</a>'
+        _e, warns = self._check(html)
+        self.assertTrue(any("MON-05" in w for w in warns))
+
+
+class TestConsistency(unittest.TestCase):
+    """批次 A：看板-台账一致（LC）与版本治理（VG）。"""
+
+    def test_ledger_rows_parse(self):
+        text = ("## 一、数据看板追踪表\n\n"
+                "| 板块 | 指标 | 上期值 | 本期值 | 来源 |\n"
+                "| --- | --- | --- | --- | --- |\n"
+                "| 宏观 | 美国 CPI | +0.6% | +0.4% | BLS |\n")
+        rows = consistency.parse_ledger_rows(text)
+        self.assertEqual(len(rows), 1)
+        self.assertEqual(consistency.metric_name(rows[0]), "美国 CPI")
+
+    def test_vg01_missing_reading_time(self):
+        import tempfile
+        with tempfile.TemporaryDirectory() as d:
+            p = Path(d) / "2026-11_monthly.html"
+            p.write_text("<html><body>无时点</body></html>", encoding="utf-8")
+            warns = consistency.check_version(p, p.read_text(encoding="utf-8"))
+        self.assertTrue(any("VG-01" in w for w in warns))
+
+    def test_vg02_semver_requires_fixed_list(self):
+        import tempfile
+        with tempfile.TemporaryDirectory() as d:
+            p = Path(d) / "2026-11_monthly.html"
+            p.write_text("读数时点 2026-11-13 ｜ 报告版本 v2.0", encoding="utf-8")
+            warns = consistency.check_version(p, p.read_text(encoding="utf-8"))
+        self.assertTrue(any("VG-02" in w for w in warns))
+
+    def test_vg02_reading_time_identifier_not_semver(self):
+        """vYYYY.MM.DD 为读数时点标识，不得被当作语义版本升级。"""
+        import tempfile
+        with tempfile.TemporaryDirectory() as d:
+            p = Path(d) / "2026-11_monthly.html"
+            p.write_text("读数时点 2026-11-13 ｜ 报告版本 v2026.11.13", encoding="utf-8")
+            warns = consistency.check_version(p, p.read_text(encoding="utf-8"))
+        self.assertFalse(any("VG-02" in w for w in warns))
+
+    def test_repo_is_consistent(self):
+        """现行仓库：台账结构 / 指标名 / 读数时点均无告警。"""
+        from _common import iter_business_dirs, iter_business_reports
+        warns = []
+        for b in iter_business_dirs():
+            cfg = b.path / "prompts" / "business-config.md"
+            text = cfg.read_text(encoding="utf-8") if cfg.exists() else ""
+            warns += consistency.check_ledger(b, text)
+            for r in iter_business_reports(b):
+                warns += consistency.check_version(ROOT / r.rel,
+                                                   (ROOT / r.rel).read_text(encoding="utf-8"))
+        self.assertEqual(warns, [])
+
+
+class TestNaming(unittest.TestCase):
+    """批次 A：命名规范全量扫描（NC-01..02）。"""
+
+    def test_repo_is_clean(self):
+        self.assertEqual(naming.check_dirs() + naming.check_files(), [])
+
+    def test_file_rule_detects_violations(self):
+        self.assertIsNotNone(naming._check_file("engine/tools/BadName.py", "BadName.py"))
+        self.assertIsNotNone(naming._check_file("engine/docs/Bad Name.md", "Bad Name.md"))
+        self.assertIsNotNone(naming._check_file("content/x/reports/foo.html", "foo.html"))
+        self.assertIsNone(naming._check_file("engine/tools/validate_layout.py", "validate_layout.py"))
+        self.assertIsNone(naming._check_file("engine/docs/page-build-spec.md", "page-build-spec.md"))
+        self.assertIsNone(naming._check_file("content/x/reports/2026-11_monthly.html", "2026-11_monthly.html"))
+
+
+class TestPromptConsistency(unittest.TestCase):
+    """批次 C（P1-10）：类型注册表一致 / business-config 去复述 / 周期模板齐备。"""
+
+    def test_repo_is_consistent(self):
+        self.assertEqual(
+            prompt_consistency.pc01_registry()
+            + prompt_consistency.pc02_restatement()
+            + prompt_consistency.pc03_prompt_files(), [])
+
+    def test_pc01_detects_unregistered(self):
+        """合成用例：登记缺失 / 未登记双向可检出。"""
+        import tempfile
+        from pathlib import Path as P
+        with tempfile.TemporaryDirectory() as d:
+            reg = P(d) / "template-registry.md"
+            reg.write_text("## 二、已注册类型清单\n"
+                           "| foo-type | x | y | z | content/a；content/b |\n", encoding="utf-8")
+            orig = prompt_consistency.REGISTRY
+            prompt_consistency.REGISTRY = reg
+            try:
+                warns = prompt_consistency.pc01_registry()
+            finally:
+                prompt_consistency.REGISTRY = orig
+            self.assertTrue(any("不存在" in w for w in warns))
+            self.assertTrue(any("未登记" in w for w in warns))
 
 
 if __name__ == "__main__":
