@@ -34,7 +34,7 @@
 
 - [completed] T-1 economy README §2.2 补分类列、覆盖经济体与国家/区域经济组织并修正 IMF/巴塞尔协议III/LIBOR 别名
 - [completed] T-2 tech README §2.2 补分类列、覆盖 9 个缺失分类并修正密码与身份认证/多因素认证规范形
-- [in_progress] T-3 核验（vocab check/topic-check/optimization_gate/unittest）并提交
+- [completed] T-3 核验（vocab check/topic-check/optimization_gate/unittest）并提交
 
 ## 风险登记（2 项，详见 risks.json）
 
