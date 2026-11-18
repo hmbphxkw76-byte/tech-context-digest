@@ -1,0 +1,4 @@
+metric_id,caliber,metric,period,value,unit,source_id,publisher,verify_status,note
+EAD-01,企业 AI 部署支出,支出读数,2025,330,十亿美元,S-006,Menlo Ventures,partial,统计周期=2025 全年
+EAD-02,企业 AI 部署支出,支出读数,2026-09,1768,十亿美元,S-006,Menlo Ventures,partial,统计周期=2026-09 月度；与全年口径不可直接相减
+EAD-03,企业 AI 部署支出,倍数（自算）,2026-09,5.4,倍,S-006,Menlo Ventures,derived,自算=1768/330≈5.36；基线报告原口径记 5.4，两值并列不合并

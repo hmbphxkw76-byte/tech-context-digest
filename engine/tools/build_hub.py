@@ -168,6 +168,7 @@ a:hover{text-decoration:underline}
 .cycle-flag{font-size:11px;color:var(--green);background:var(--green-l);
   border:1px solid #cfe6d8;border-radius:10px;padding:1px 7px;white-space:nowrap}
 .tag-updated{background:var(--green-l);color:var(--green);border-color:#cfe6d8;font-weight:600}
+.tag-type{background:var(--blue-l);color:var(--navy2);border-color:#d6e3f2}
 .more{margin:2px 0 6px}
 .more>summary{cursor:pointer;font-size:12.5px;color:var(--navy2);list-style:none;
   padding:6px 10px;border:1px dashed var(--line);border-radius:var(--radius-sm);user-select:none}
@@ -721,9 +722,15 @@ def _search_text(topic: Topic, report: ReportEntry) -> str:
 
 
 def _render_card(group: CycleGroup, report: ReportEntry, topic: Topic, reader: bool) -> str:
-    """单张报告卡（hub 外链 / reader 站内阅读统一结构，含本期更新高亮）。"""
+    """单张报告卡（hub 外链 / reader 站内阅读统一结构，含本期更新高亮）。
+
+    信息区分度：同一周期分组下可能并列多份报告（如基线与月度同落一个期间），
+    卡片须仅凭自身即可区分——row1 常驻「类型」标签，标题缺失时以「类型 · 期间」
+    兜底，并把 region / type 写入 data 属性供筛选与机器判读。
+    """
     label = CYCLE_LABEL.get(report.cycle, report.cycle)
-    title = _esc(report.title or report.period)
+    type_short = TYPE_SHORT.get(topic.type_id, topic.type_name)
+    title = _esc(report.title or f"{type_short} · {report.period}")
     badge = ""
     if group.current and report.period == group.latest:
         if has_previous_period(topic, report):
@@ -732,15 +739,19 @@ def _render_card(group: CycleGroup, report: ReportEntry, topic: Topic, reader: b
                      f"本期更新</span>")
         else:
             badge = ('<span class="tag" title="该周期首期报告，无环比基期">首期</span>')
-    row1 = (f'<div class="row1">{badge}<span class="tag">{_esc(label)}</span>'
+    row1 = (f'<div class="row1">{badge}'
+            f'<span class="tag tag-type" title="{_esc(topic.type_name)}">'
+            f'{_esc(type_short)}</span>'
+            f'<span class="tag">{_esc(label)}</span>'
             f'<span class="period">{_esc(report.period)}</span></div>')
+    attrs = (f'data-region="{_esc(topic.region)}" data-type="{_esc(topic.type_id)}" '
+             f'data-search="{_esc(_search_text(topic, report))}"')
     if reader:
-        return (f'<article class="rcard" data-path="{_esc(report.path)}" '
-                f'data-search="{_esc(_search_text(topic, report))}">'
+        return (f'<article class="rcard" data-path="{_esc(report.path)}" {attrs}>'
                 f"{row1}"
                 f'<h4><a href="?report={_esc(report.path)}" title="{title}">{title}</a></h4>'
                 f'<div class="path">{_esc(report.path)}</div></article>')
-    return (f'<article class="rcard" data-search="{_esc(_search_text(topic, report))}">'
+    return (f'<article class="rcard" {attrs}>'
             f"{row1}"
             f'<h4><a href="{_esc(report.path)}" target="_blank" rel="noopener" '
             f'title="{title}">{title}</a></h4>'
