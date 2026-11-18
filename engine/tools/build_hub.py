@@ -632,12 +632,23 @@ def displayed_report_count(topics: list[Topic]) -> int:
 
 
 def global_base_period(topics: list[Topic]) -> str | None:
-    """全局环比基期：仓库内最新一期月报 period（如 2026-11）；无月报返回 None。
+    """仓库内最新一期月报 period（如 2026-11）；无月报返回 None。
 
-    基期随最新月报自动滚动（2026-11 → 2026-12 → …）。
+    仅作**展示**用途；「环比基期」只在存在上一期报告时才具意义（见 `has_previous_period`），
+    避免向读者暗示存在实际不存在的历史对比基准。
     """
     periods = [r.period for t in topics for r in t.reports if r.cycle == "monthly"]
     return max(periods) if periods else None
+
+
+def has_previous_period(topic: Topic, report: ReportEntry) -> bool:
+    """该主题是否存在与 report **同周期**的上一期报告（真实环比基期）。
+
+    反例（2026-11-18 实测）：仓库仅有 2026-11 月报，hub 却标「环比基期 2026-10」，
+    而 2026-10 报告并不存在——属算术虚构，会向读者放大信息差。
+    """
+    prev = prev_period(report.period)
+    return any(r.cycle == report.cycle and r.period == prev for r in topic.reports)
 
 
 def parse_type_names() -> dict[str, str]:
@@ -715,9 +726,12 @@ def _render_card(group: CycleGroup, report: ReportEntry, topic: Topic, reader: b
     title = _esc(report.title or report.period)
     badge = ""
     if group.current and report.period == group.latest:
-        prev = _esc(prev_period(report.period))
-        badge = (f'<span class="tag tag-updated" title="本期更新 · 环比基期 {prev}">'
-                 f"本期更新</span>")
+        if has_previous_period(topic, report):
+            prev = _esc(prev_period(report.period))
+            badge = (f'<span class="tag tag-updated" title="本期更新 · 环比基期 {prev}">'
+                     f"本期更新</span>")
+        else:
+            badge = ('<span class="tag" title="该周期首期报告，无环比基期">首期</span>')
     row1 = (f'<div class="row1">{badge}<span class="tag">{_esc(label)}</span>'
             f'<span class="period">{_esc(report.period)}</span></div>')
     if reader:
@@ -766,8 +780,8 @@ def render_hub(topics: list[Topic]) -> str:
     n_types = len({t.type_id for t in topics if t.type_id})
     base = global_base_period(topics)
     base_note = (
-        f'<span class="base-note" title="本期更新报告以该期为基期做环比；随最新月报滚动">'
-        f"环比基期 {_esc(base)}</span>"
+        f'<span class="base-note" title="仓库内最新一期月报；「本期更新 · 环比基期」仅在存在上一期报告时标注">'
+        f"最新月报 {_esc(base)}</span>"
     ) if base else ""
 
     # 类型清单：全部 13 个已注册类型（按注册表顺序）
@@ -872,8 +886,8 @@ def render_reader(topics: list[Topic]) -> str:
     all_types = list(parse_type_names().items())
     base = global_base_period(topics)
     base_note = (
-        f'<span class="base-note" title="本期更新报告以该期为基期做环比；随最新月报滚动">'
-        f"环比基期 {_esc(base)}</span>"
+        f'<span class="base-note" title="仓库内最新一期月报；「本期更新 · 环比基期」仅在存在上一期报告时标注">'
+        f"最新月报 {_esc(base)}</span>"
     ) if base else ""
 
     parts = [

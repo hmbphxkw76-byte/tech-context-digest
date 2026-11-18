@@ -14,13 +14,15 @@
   R3 双源确认   进入信号合成（in_synthesis=true）的来源须有 ≥2 个被报告引用
   R4 关键数字   存在带单位/量级数字时，报告须有来源标注
   R5 语言规则   tier1/2 来源语言须符合业务配置的语言规则（token 化分级）
-  R6 死链       明确 404/410/451 = 死链（新报告 [E] / 历史 [W]）；403/429/5xx/超时 = 网络不可达 [W]
+  R6 死链       明确 404/410/451 = 死链（阻断期内 [E] / 此前 [W] / 历史 [W]）；403/429/5xx/超时 = 网络不可达 [W]
   R7 机构分级   机构级分级主数据与来源登记 / 业务配置的一致性（分级校验）
 
 gate-period 前置：周期早于 `--gate-period` 的报告为历史报告，R1–R6 的 [E] 前置
 降级为 [W]（不追溯阻断历史）；R7 结构性冲突（重复 source_id / 同机构不同分级）不降级。
-R6 死链分级：明确 404/410/451 = 死链（新报告 [E] / 历史 [W]）；403/429/5xx/超时 =
-网络不可达（仅 [W]，需人工复核）。
+R6 死链分级：明确 404/410/451 = 死链；403/429/5xx/超时 = 网络不可达（仅 [W]，需人工复核）。
+死链阻断自 `R6_STRICT_PERIOD`（默认 2027-01）起：链接腐烂修复属内容维护（目标对齐方案
+P1-8），集中清理完成前死链只告警不阻断；到期后自动转 [E]，滚动基线下不失效。
+指向本仓库自身的 GitHub 链接为内部指针，不计入 R1 / R6（见 `is_self_reference`）。
 
 退出码：0 通过；1 存在错误项（CI 阻断）；2 仅警告项 / 用法错误。
 
@@ -46,8 +48,22 @@ from urllib.parse import urlparse
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 
 from _common import ROOT, detect_report, iter_business_dirs, iter_business_reports, processed_data_dir  # noqa: E402
+from gate_period import is_auto, resolve as resolve_period  # noqa: E402
 
 REGISTRY_SCHEMA = "1.0"
+
+# R6 死链阻断的生效周期：链接腐烂修复属内容维护（见目标对齐方案 P1-8），
+# 集中清理完成前死链只告警不阻断；到期后自动转 [E]（滚动基线下不失效）。
+R6_STRICT_PERIOD = "2027-01"
+
+# 指向本仓库自身的 GitHub 链接（blob / raw）是**内部指针**，不是外部来源：
+# 不计入 R1 登记覆盖，也不参与 R6 死链判定（私有仓库下外部探测必然 404）。
+SELF_LINK_RE = re.compile(r"https?://(?:www\.)?github\.com/[\w.\-]+/tech-context-digest/")
+
+
+def is_self_reference(url: str) -> bool:
+    """URL 是否指向本仓库自身内容（内部指针）。"""
+    return bool(SELF_LINK_RE.match(normalize_url(url)))
 INSTITUTION_MASTER_PATH = Path(__file__).resolve().parent / "institution_tiers.json"
 
 HREF_RE = re.compile(r'href="(https?://[^"]+)"', re.I)
@@ -129,7 +145,9 @@ def _period_key(period: str) -> tuple:
 
 
 def valid_period(period: str) -> bool:
-    """gate-period 是否可解析（YYYY-MM / YYYY-Qn / YYYY / YYYY-MM-DD）。"""
+    """gate-period 是否可解析（auto / YYYY-MM / YYYY-Qn / YYYY / YYYY-MM-DD）。"""
+    if is_auto(period):
+        return True
     return _period_key(period) != (0, 0, 0)
 
 
@@ -525,7 +543,8 @@ def check_report(text: str, registry: dict, ctx: dict | None = None) -> list[tup
             # 综合层（synthesis_only）按设计不新采外部来源，空登记 + 无外部 URL 属预期，不告警
             issues.append(("W", "R1 登记覆盖：来源登记为空，无法校验外部 URL"))
     elif urls:
-        unmatched = [u for u in urls if normalize_url(u) not in idx]
+        unmatched = [u for u in urls
+                      if normalize_url(u) not in idx and not is_self_reference(u)]
         if unmatched:
             issues.append((level("R1", "E"), f"R1 登记覆盖：{len(unmatched)} 个外部 URL 未在来源登记中"
                                             f"（示例：{unmatched[0]}）"))
@@ -569,9 +588,11 @@ def check_report(text: str, registry: dict, ctx: dict | None = None) -> list[tup
     unreachable = ctx.get("unreachable_urls") or set()
     dead_norm = {normalize_url(d) for d in dead}
     unreach_norm = {normalize_url(d) for d in unreachable}
-    bad = [u for u in urls if normalize_url(u) in dead_norm]
+    bad = [u for u in urls if normalize_url(u) in dead_norm and not is_self_reference(u)]
     if bad:
-        issues.append((level("R6", "E"),
+        # 死链修复属内容维护（P1-8）：R6 阻断自 R6_STRICT_PERIOD 起，此前仅告警
+        r6_level = level("R6", "E") if ctx.get("r6_strict") else "W"
+        issues.append((r6_level,
                        f"R6 死链：{len(bad)} 个登记 URL 明确不可达（404/410/451，示例：{bad[0]}）"))
     elif urls and unreachable:
         susp = [u for u in urls if normalize_url(u) in unreach_norm]
@@ -637,6 +658,7 @@ def run(only_file: str | None, gate_period: str | None = None,
         probe_timeout: float = 3.0, probe_workers: int = 8,
         probe_lenient: bool = False) -> tuple[int, int, list[str]]:
     """执行校验 -> (errors, warnings, 输出行)。"""
+    gate_period = resolve_period(gate_period) if gate_period else None
     errors = warnings = 0
     lines: list[str] = []
 
@@ -666,6 +688,8 @@ def run(only_file: str | None, gate_period: str | None = None,
         registry = load_registry(reg_path)
         ctx = _ctx_for(business_rel) if business_rel else {"config_text": ""}
         ctx["historical"] = _is_historical(rel, gate_period)
+        det = detect_report(Path(rel).name)
+        ctx["r6_strict"] = bool(det and det[1]) and _period_key(det[1]) >= _period_key(R6_STRICT_PERIOD)
 
         if probe:
             urls = set(extract_urls(text)) | {s.get("url") for s in registry.get("sources", []) if s.get("url")}
@@ -750,9 +774,13 @@ def _self_test() -> int:
     if not any(lvl == "W" and "R6" in msg for lvl, msg in d_issues):
         print("[FAIL] 历史报告 R6 死链应降级为 W（不追溯阻断）"); ok = False
     n_issues = check_report('<a href="https://imf.org/a">a</a>', hist,
-                            {"dead_urls": {"https://imf.org/a"}})
+                            {"dead_urls": {"https://imf.org/a"}, "r6_strict": True})
     if not any(lvl == "E" and "R6" in msg for lvl, msg in n_issues):
-        print("[FAIL] 新报告 R6 死链应阻断"); ok = False
+        print("[FAIL] R6 阻断期内的报告死链应阻断"); ok = False
+    pre_issues = check_report('<a href="https://imf.org/a">a</a>', hist,
+                              {"dead_urls": {"https://imf.org/a"}})
+    if not any(lvl == "W" and "R6" in msg for lvl, msg in pre_issues):
+        print("[FAIL] R6 阻断生效前死链应仅告警（P1-8 集中清理期）"); ok = False
 
     # 机构分级主数据一致性
     master = {"schema_version": "1.0", "institutions": [
@@ -796,7 +824,7 @@ def main() -> int:
         return _self_test()
 
     if args.gate_period and not valid_period(args.gate_period):
-        print(f"[ERROR] --gate-period 无法解析：{args.gate_period}（支持 YYYY-MM / YYYY-Qn / YYYY）")
+        print(f"[ERROR] --gate-period 无法解析：{args.gate_period}（支持 auto / YYYY-MM / YYYY-Qn / YYYY）")
         return 2
 
     errors, warnings, lines = run(args.file, args.gate_period, args.registry,

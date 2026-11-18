@@ -13,10 +13,13 @@
 
 gate-period 分两级（显式、可分别覆盖，避免单一 flag 语义含糊）：
   - 内容门禁（research_kernel / info_density / fact_card / decision_hub）
-    用 --gate-period，默认 2026-12（与四门禁自身 DEFAULT_GATE 一致）；
-  - 来源登记门禁（source_check）用 --source-gate-period，默认 2027-01
-    （给新报告留来源登记缓冲；2026-12 起的新报告在内容侧已强阻断）。
+    用 --gate-period；
+  - 来源登记门禁（source_check）用 --source-gate-period。
 两级都遵循「历史报告 [W] 不追溯 / 新报告 [E] 阻断」。
+
+默认值 `auto`（滚动基线，见 gate_period.py）：解析为「当前自然月 + 1」，
+使新报告判定**不随时间失效**——写死的常量会让「新报告」在若干月后自动变成
+「历史」而降级放行。显式传 YYYY-MM / YYYY-Qn / YYYY 可固定口径复现。
 
 退出码（与仓库门禁约定一致）：0 通过；1 存在错误项（阻断）；2 仅警告项（不阻断）。
 
@@ -32,6 +35,9 @@ import json
 import subprocess
 import sys
 from pathlib import Path
+
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+from gate_period import AUTO, describe as describe_period  # noqa: E402
 
 ROOT = Path(__file__).resolve().parents[2]
 TOOLS = "engine/tools"
@@ -60,14 +66,15 @@ CHECKS: list[tuple[str, list[str], bool]] = [
     ("fact_card", [sys.executable, f"{TOOLS}/fact_card_check.py", "--gate-period", "__GATE__"], True),
     ("decision_hub", [sys.executable, f"{TOOLS}/decision_hub_check.py", "--gate-period", "__GATE__"], True),
     ("blind_spot", [sys.executable, f"{TOOLS}/blind_spot_check.py"], True),
+    ("vocab_drift", [sys.executable, f"{TOOLS}/vocab_drift_check.py"], True),
     # 静态检查（Phase 3.1）：默认 [W]，稳定后评 [E]。仅适配退出码，规则见 pyproject.toml。
     ("ruff", [sys.executable, f"{TOOLS}/static_check.py", "ruff"], True),
     ("mypy", [sys.executable, f"{TOOLS}/static_check.py", "mypy"], True),
 ]
 
-# 两级 gate-period 默认值（见模块 docstring）
-DEFAULT_GATE_PERIOD = "2026-12"
-DEFAULT_SOURCE_GATE_PERIOD = "2027-01"
+# 两级 gate-period 默认值（见模块 docstring）：auto = 滚动基线（当前月 + 1）
+DEFAULT_GATE_PERIOD = AUTO
+DEFAULT_SOURCE_GATE_PERIOD = AUTO
 
 # 单项门禁 wall 上限（秒）：任一检查挂起（如网络探测）不得无限阻塞统一入口。
 # 探测类（source_check --probe）实测可达数分钟，故上限取宽松值，只拦真正挂死。
@@ -137,9 +144,10 @@ def main() -> int:
     ap = argparse.ArgumentParser(description="优化流程统一门禁（单一入口）")
     ap.add_argument("--only", help="只跑指定门禁（逗号分隔）")
     ap.add_argument("--gate-period", default=DEFAULT_GATE_PERIOD,
-                    help="内容门禁（研究内核/信息分层/事实卡片/决策交付）新报告判定周期下限")
+                    help="内容门禁（研究内核/信息分层/事实卡片/决策交付）新报告判定周期下限；"
+                         "默认 auto = 滚动基线（当前月 + 1），可显式传 YYYY-MM / YYYY-Qn / YYYY")
     ap.add_argument("--source-gate-period", default=DEFAULT_SOURCE_GATE_PERIOD,
-                    help="来源登记门禁（source_check）新报告判定周期下限")
+                    help="来源登记门禁（source_check）新报告判定周期下限；默认 auto = 滚动基线")
     ap.add_argument("--json", action="store_true", help="输出 JSON 报告")
     ap.add_argument("--list", action="store_true", help="列出门禁清单")
     ap.add_argument("--quiet", action="store_true", help="仅输出汇总")
@@ -154,7 +162,8 @@ def main() -> int:
             ph = next((a for a in cmd if a in ("__GATE__", "__SOURCE_GATE__")), "")
             period = {"__GATE__": args.gate_period,
                       "__SOURCE_GATE__": args.source_gate_period}.get(ph, "-")
-            print(f"{name:<18} warn_ok={warn_ok}  gate={period:<8}  {' '.join(cmd)}")
+            shown = describe_period(period) if period != "-" else "-"
+            print(f"{name:<18} warn_ok={warn_ok}  gate={shown:<16}  {' '.join(cmd)}")
         return 0
 
     names = [s.strip() for s in args.only.split(",")] if args.only else None

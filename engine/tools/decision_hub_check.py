@@ -22,8 +22,9 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 
 from _common import ROOT, detect_report, iter_business_dirs  # noqa: E402
+from gate_period import AUTO, resolve as resolve_period  # noqa: E402
 
-DEFAULT_GATE = "2026-12"
+DEFAULT_GATE = AUTO
 # 跨研究线决策层业务线目录段（content/economy/insight）
 HUB_LINE = "insight"
 
@@ -31,6 +32,14 @@ _PROTOCOL_KEYS = ("触发条件", "阈值", "责任角色", "时限", "验证指
 _PRIO_KEYS = ("立即行动", "持续观察", "仅记录存档")
 _SLICE_KEYS = ("投资决策", "就业决策", "政策制定")
 _CARD_KEYS = ("结论", "证据强度", "触发条件", "反向证据", "信息充分度")
+# 卡片级必备字段：决策卡块内必须出现的三个（触发条件 / 信息充分度允许位于
+# dc-head 或报告其他章节，故不做卡片级强制）
+_CARD_LEVEL_KEYS = ("结论", "证据强度", "反向证据")
+_COMMENT_RE = re.compile(r"<!--.*?-->", re.DOTALL)
+_STYLE_RE = re.compile(r"<(style|script)\b[^>]*>.*?</\1>", re.DOTALL | re.IGNORECASE)
+_CARD_RE = re.compile(r'<div class="decision-card"')
+_ACTION_RE = re.compile(r'<div class="a-head"')
+_TAG_RE = re.compile(r"<[^>]+>")
 
 
 def _period_key(period: str) -> tuple:
@@ -54,8 +63,22 @@ def _period_of(name: str) -> str:
     return det[1] if det else ""
 
 
+def _strip_noise(html: str) -> str:
+    """剥离注释与 style/script（防注释误判：trends 周报曾在 CSS 注释中写「决策卡」）。"""
+    return _STYLE_RE.sub("", _COMMENT_RE.sub("", html))
+
+
+def _blocks(text: str, start_re: re.Pattern) -> list[str]:
+    """按起始标记切分出各卡片 / 行动项块（到下一个同类起始或文末）。"""
+    ms = list(start_re.finditer(text))
+    return [text[m.start(): ms[i + 1].start() if i + 1 < len(ms) else len(text)]
+            for i, m in enumerate(ms)]
+
+
 def check_text(text: str, business_line: str = "") -> list[tuple[str, str]]:
     out: list[tuple[str, str]] = []
+    text = _strip_noise(text)
+    plain = _TAG_RE.sub("", text)
     is_hub = HUB_LINE in business_line
 
     # DC-01 决策卡（decision-hub 强制；其他报告含「决策卡」字样时同样检查）
@@ -63,12 +86,28 @@ def check_text(text: str, business_line: str = "") -> list[tuple[str, str]]:
         missing = [k for k in _CARD_KEYS if k not in text]
         if missing:
             out.append(("DC-01", f"决策卡缺字段：{'、'.join(missing)}"))
+        # 卡片级逐卡校验：每张 decision-card 必须具备结论 / 证据强度 / 反向证据
+        cards = _blocks(text, _CARD_RE)
+        if cards:
+            bad = [i + 1 for i, c in enumerate(cards)
+                   if any(k not in _TAG_RE.sub("", c) for k in _CARD_LEVEL_KEYS)]
+            if bad:
+                out.append(("DC-01", f"第 {'、'.join(map(str, bad))} 张决策卡缺卡片级字段"
+                                    f"（{'、'.join(_CARD_LEVEL_KEYS)}）"))
 
     # DC-02 行动协议（含「可执行启示 / 行动 / 行动项」的报告）
     if any(k in text for k in ("可执行启示", "行动项", "行动协议", "立即行动", "持续观察")):
         missing = [k for k in _PROTOCOL_KEYS if k not in text]
         if missing:
             out.append(("DC-02", f"行动协议缺要素：{'、'.join(missing)}"))
+        # 逐条行动项校验：每个 a-head 块须含五要素
+        acts = _blocks(text, _ACTION_RE)
+        if acts:
+            bad = [i + 1 for i, a in enumerate(acts)
+                   if any(k not in _TAG_RE.sub("", a) for k in _PROTOCOL_KEYS)]
+            if bad:
+                out.append(("DC-02", f"第 {'、'.join(map(str, bad))} 条行动项缺要素"
+                                    f"（{'、'.join(_PROTOCOL_KEYS)}）"))
         if not all(k in text for k in _PRIO_KEYS):
             out.append(("DC-02", "行动项未按三档优先级（立即行动 / 持续观察 / 仅记录存档）划分"))
 
@@ -106,6 +145,7 @@ def iter_targets(only_file: str | None):
 
 
 def run(only_file: str | None, gate: str) -> tuple[int, int, list[str]]:
+    gate = resolve_period(gate)
     errors = warnings = 0
     lines = []
     targets = iter_targets(only_file)

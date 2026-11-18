@@ -5,7 +5,8 @@
 - `engine/docs/report-pipeline-system.md` 存在、含完整 Mermaid 流程图、覆盖 N0–N8 全链路节点；
 - **门禁左移**：主链各阶段配就地门禁 G0–G8，G0–G5 左移到 N6 之前，N6 为兜底；
 - 文档门禁清单数量与 `optimization_gate.CHECKS` 一致（新增门禁须同步文档）；
-- 两级 gate-period（内容 2026-12 / 来源 2027-01）在文档与代码中显式声明且接线正确。
+- 两级 gate-period（内容 / 来源）在文档与代码中显式声明且接线正确；
+  默认 `auto`（滚动基线 = 当前自然月 + 1），不写死周期。
 
 运行：python -m unittest discover -s engine/tests -v
 """
@@ -21,7 +22,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[2]
 DOC = ROOT / "engine" / "docs" / "report-pipeline-system.md"
 
-# 现行（非历史时点）文件：门禁数量口径必须为 23 项（Phase 3.1 起）。
+# 现行（非历史时点）文件：门禁数量口径必须为 24 项（IGI/词库漂移接入后）。
 # 历史时点报告（report-audits/*-2026-11-15/16.md）与 engine/quality/** 的
 # 「21 项量化指标」为另一套口径，不在扫描范围。
 GATE_COUNT_FILES = [
@@ -80,13 +81,13 @@ class TestPipelineSystemDoc(unittest.TestCase):
     def test_gate_count_matches_code(self):
         mod = _load_gate_module()
         names = [c[0] for c in mod.CHECKS]
-        self.assertEqual(len(names), 23, "门禁清单数量变化须同步体系文档")
-        self.assertIn("23 项", self.text)
+        self.assertEqual(len(names), 24, "门禁清单数量变化须同步体系文档")
+        self.assertIn("24 项", self.text)
         for name in names:
             self.assertIn(name, self.text, f"文档门禁清单缺 {name}")
 
     def test_two_level_gate_period_declared(self):
-        for kw in ("2026-12", "2027-01", "--gate-period", "--source-gate-period"):
+        for kw in ("auto", "滚动", "--gate-period", "--source-gate-period"):
             self.assertIn(kw, self.text)
 
     def test_five_defense_lines_declared(self):
@@ -107,7 +108,7 @@ class TestPipelineSystemDoc(unittest.TestCase):
 
 
 class TestGateCountConsistency(unittest.TestCase):
-    """P-07 / M6：现行文档/代码不得残留陈述性「21 项 / 21 门禁」门禁口径（Phase 3.1 起为 23 项）。
+    """P-07 / M6：现行文档/代码不得残留陈述性「21 项 / 21 门禁」门禁口径（现为 24 项）。
 
     合法表述显式放行：历史基线（「基线 21 项」）与更正记录（「由 21 项更正为 23 项」）。
     扫描范围沿用 GATE_COUNT_FILES（已排除历史时点报告与 engine/quality/**）。
@@ -144,16 +145,16 @@ class TestGateCountConsistency(unittest.TestCase):
 
     def test_allowed_baseline_wording_is_permitted(self):
         """合法基线 / 更正表述不得误报。"""
-        for sample in ("基线 21 项", "（基线 21 项，Phase 3.1 起 23 项）",
-                       "由 21 项更正为 23 项", "由 21 更正为 23"):
+        for sample in ("基线 21 项", "（基线 21 项，Phase 3.1 起 24 项）",
+                       "由 21 项更正为 24 项", "由 21 更正为 24"):
             self.assertIsNone(self._offender(sample), f"合法表述被误报：{sample}")
 
-    def test_gate_count_declarations_are_23(self):
+    def test_gate_count_declarations_are_24(self):
         mod = _load_gate_module()
-        self.assertEqual(len(mod.CHECKS), 23)
+        self.assertEqual(len(mod.CHECKS), 24)
         for f in GATE_COUNT_DECLARING:
             text = f.read_text(encoding="utf-8")
-            self.assertIn("23 项", text, f"{f.relative_to(ROOT)} 未声明 23 项门禁")
+            self.assertIn("24 项", text, f"{f.relative_to(ROOT)} 未声明 24 项门禁")
 
 
 class TestGatePeriodWiring(unittest.TestCase):
@@ -161,8 +162,12 @@ class TestGatePeriodWiring(unittest.TestCase):
 
     def test_placeholders_and_defaults(self):
         mod = _load_gate_module()
-        self.assertEqual(mod.DEFAULT_GATE_PERIOD, "2026-12")
-        self.assertEqual(mod.DEFAULT_SOURCE_GATE_PERIOD, "2027-01")
+        # 默认为滚动基线 auto；解析结果 = 当前自然月 + 1（不随时间失效）
+        self.assertEqual(mod.DEFAULT_GATE_PERIOD, "auto")
+        self.assertEqual(mod.DEFAULT_SOURCE_GATE_PERIOD, "auto")
+        from gate_period import resolve
+        self.assertEqual(resolve(mod.DEFAULT_GATE_PERIOD), resolve("auto"))
+        self.assertNotEqual(resolve("auto"), "auto")
         by_name = {n: cmd for n, cmd, _w in mod.CHECKS}
         self.assertIn("__SOURCE_GATE__", by_name["source_check"])
         for gate in ("research_kernel", "info_density", "fact_card", "decision_hub"):

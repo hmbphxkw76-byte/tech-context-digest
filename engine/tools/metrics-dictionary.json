@@ -36,6 +36,15 @@
     {"metric_id": "I-06", "name": "决策卡覆盖率", "formula": "核心判断有标准化决策卡的决策卡数 / 核心判断总数", "threshold": ">=0.9", "severity": "P1", "detected_by": "MIXED", "owner": "quality", "aliases": ["DC-01"]},
     {"metric_id": "I-07", "name": "ex-ante 标注率", "formula": "信号灯/阈值报告含「预校准（ex-ante）」标注的报告数 / 信号灯报告总数", "threshold": ">=1.0", "severity": "P0", "detected_by": "TOOL", "owner": "quality", "aliases": ["DC-04"]},
     {"metric_id": "I-08", "name": "盲区消号率", "formula": "closed 盲区数 / 盲区总数", "threshold": ">=0.6", "severity": "P1", "detected_by": "TOOL", "owner": "audit+quality", "aliases": ["BS-04"]},
-    {"metric_id": "I-09", "name": "版本读数时点标注率", "formula": "核验/收敛型报告含「读数时点」的报告数 / 核验/收敛型报告总数", "threshold": ">=1.0", "severity": "P1", "detected_by": "TOOL", "owner": "quality", "aliases": ["DC-05"]}
+    {"metric_id": "I-09", "name": "版本读数时点标注率", "formula": "核验/收敛型报告含「读数时点」的报告数 / 核验/收敛型报告总数", "threshold": ">=1.0", "severity": "P1", "detected_by": "TOOL", "owner": "quality", "aliases": ["DC-05"]},
+
+    {"metric_id": "IGI-01", "name": "主题覆盖率", "formula": "有业务线（business-config）的主题数 / layout.json 注册主题数", "threshold": ">=0.5", "severity": "P0", "detected_by": "TOOL", "owner": "goal-alignment", "aliases": []},
+    {"metric_id": "IGI-02", "name": "业务线覆盖率", "formula": "有 ≥1 份正式报告的业务线数 / 已声明业务线数", "threshold": ">=0.8", "severity": "P0", "detected_by": "TOOL", "owner": "goal-alignment", "aliases": []},
+    {"metric_id": "IGI-03", "name": "时效健康度", "formula": "最新报告期次距当前 ≤1 个节拍周期的业务线占比", "threshold": ">=0.8", "severity": "P1", "detected_by": "TOOL", "owner": "goal-alignment", "aliases": []},
+    {"metric_id": "IGI-04", "name": "来源登记覆盖率", "formula": "报告内外部 URL 能在对应 source_registry 匹配的比例", "threshold": ">=0.95", "severity": "P0", "detected_by": "TOOL", "owner": "goal-alignment", "aliases": []},
+    {"metric_id": "IGI-05", "name": "关键断言核验率", "formula": "含数字断言块中带来源指针的比例（代理指标，窗口=同表格行或 ±240 字符，待校准）", "threshold": ">=0.9", "severity": "P1", "detected_by": "MIXED", "owner": "goal-alignment", "aliases": []},
+    {"metric_id": "IGI-06", "name": "决策卡完备率", "formula": "通过卡片级字段校验（结论/证据强度/反向证据）的决策卡占比", "threshold": ">=0.95", "severity": "P0", "detected_by": "TOOL", "owner": "goal-alignment", "aliases": []},
+    {"metric_id": "IGI-07", "name": "摘要合规率", "formula": "无 ID-04 越级（无推断/假设等级标记）的报告数 / 有决策摘要的报告数", "threshold": ">=1.0", "severity": "P0", "detected_by": "TOOL", "owner": "goal-alignment", "aliases": []},
+    {"metric_id": "IGI-08", "name": "信息差指数", "formula": "1 − Σ w_i·(1 − IGI-i)，权重 0.25/0.15/0.15/0.15/0.10/0.10/0.10", "threshold": ">=0.8", "severity": "P0", "detected_by": "TOOL", "owner": "goal-alignment", "aliases": []}
   ]
 }

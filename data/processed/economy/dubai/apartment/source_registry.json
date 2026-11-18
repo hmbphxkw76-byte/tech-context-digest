@@ -1067,6 +1067,71 @@
       "used_in": [
         "2026_annual.html"
       ]
+    },
+    {
+      "source_id": "S-077",
+      "tier": 1,
+      "publisher": "Central Bank of the UAE",
+      "title": "https://centralbank.ae/en/forex-eibor/eibor-rates",
+      "url": "https://centralbank.ae/en/forex-eibor/eibor-rates",
+      "lang": "en",
+      "verify_status": "verified",
+      "in_synthesis": false,
+      "used_in": [
+        "reports/2026_annual.html"
+      ]
+    },
+    {
+      "source_id": "S-078",
+      "tier": 1,
+      "publisher": "Digital Dubai",
+      "title": "https://www.digitaldubai.ae/initiatives/paperless/digital-dubai-launches-the-labour-force-survey-2026-to-strengthen-data-driven-labour-market-planning-and-decision-making",
+      "url": "https://www.digitaldubai.ae/initiatives/paperless/digital-dubai-launches-the-labour-force-survey-2026-to-strengthen-data-driven-labour-market-planning-and-decision-making",
+      "lang": "en",
+      "verify_status": "verified",
+      "in_synthesis": false,
+      "used_in": [
+        "reports/2026_annual.html"
+      ]
+    },
+    {
+      "source_id": "S-079",
+      "tier": 1,
+      "publisher": "Digital Dubai",
+      "title": "https://www.digitaldubai.ae/initiatives/paperless/dubai-digital-dubai%27s-population-tops-4.580-million-by-the-end-of-2025-recording-7.5-growth",
+      "url": "https://www.digitaldubai.ae/initiatives/paperless/dubai-digital-dubai%27s-population-tops-4.580-million-by-the-end-of-2025-recording-7.5-growth",
+      "lang": "en",
+      "verify_status": "verified",
+      "in_synthesis": false,
+      "used_in": [
+        "reports/2026_annual.html"
+      ]
+    },
+    {
+      "source_id": "S-080",
+      "tier": 1,
+      "publisher": "Dubai Pulse / DLD",
+      "title": "https://www.dubaipulse.gov.ae/data/dld-registration/dld_transactions-open",
+      "url": "https://www.dubaipulse.gov.ae/data/dld-registration/dld_transactions-open",
+      "lang": "en",
+      "verify_status": "verified",
+      "in_synthesis": false,
+      "used_in": [
+        "reports/2026_annual.html"
+      ]
+    },
+    {
+      "source_id": "S-081",
+      "tier": 4,
+      "publisher": "Khaleej Times",
+      "title": "https://www.khaleejtimes.com/business/dubai-developer-launches-drop-64-in-9m-as-market-shifts-from-new-projects-to-delivery",
+      "url": "https://www.khaleejtimes.com/business/dubai-developer-launches-drop-64-in-9m-as-market-shifts-from-new-projects-to-delivery",
+      "lang": "en",
+      "verify_status": "media_unverified",
+      "in_synthesis": false,
+      "used_in": [
+        "reports/2026_annual.html"
+      ]
     }
   ]
 }

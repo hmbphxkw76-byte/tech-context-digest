@@ -211,11 +211,16 @@ class TestGatePeriodPreCheck(unittest.TestCase):
         self.assertTrue(any(lvl == "W" and "R6" in msg for lvl, msg in issues))
         self.assertFalse(any(lvl == "E" and "R6" in msg for lvl, msg in issues))
 
-    def test_new_report_r6_is_error(self):
+    def test_r6_strict_period_gates_dead_link_blocking(self):
+        """R6 死链阻断自 R6_STRICT_PERIOD 起；此前仅告警（P1-8 集中清理期）。"""
         reg = _reg({"source_id": "S1", "tier": 1, "url": "https://imf.org/a"})
-        issues = source_check.check_report('<a href="https://imf.org/a">a</a>', reg,
-                                          {"dead_urls": {"https://imf.org/a"}})
-        self.assertTrue(any(lvl == "E" and "R6" in msg for lvl, msg in issues))
+        strict = source_check.check_report('<a href="https://imf.org/a">a</a>', reg,
+                                           {"dead_urls": {"https://imf.org/a"}, "r6_strict": True})
+        self.assertTrue(any(lvl == "E" and "R6" in msg for lvl, msg in strict))
+        pre = source_check.check_report('<a href="https://imf.org/a">a</a>', reg,
+                                        {"dead_urls": {"https://imf.org/a"}})
+        self.assertTrue(any(lvl == "W" and "R6" in msg for lvl, msg in pre))
+        self.assertFalse(any(lvl == "E" and "R6" in msg for lvl, msg in pre))
 
     def test_is_historical(self):
         self.assertTrue(source_check._is_historical("economy/x/reports/2026-11_monthly.html", "2027-01"))
@@ -256,11 +261,20 @@ class TestCoverageAndProbe(unittest.TestCase):
 
 
 class TestR6DeadLink(unittest.TestCase):
-    def test_dead_url_is_error(self):
+    def test_dead_url_is_error_in_strict_period(self):
         reg = _reg({"source_id": "S1", "tier": 1, "url": "https://imf.org/a"})
         issues = source_check.check_report('<a href="https://imf.org/a">a</a>', reg,
-                                           {"dead_urls": {"https://imf.org/a"}})
+                                           {"dead_urls": {"https://imf.org/a"}, "r6_strict": True})
         self.assertTrue(any(lvl == "E" and "R6" in msg for lvl, msg in issues))
+
+    def test_self_reference_link_is_exempt(self):
+        """指向本仓库自身的 GitHub 链接是内部指针，不计入 R1 / R6。"""
+        reg = _reg({"source_id": "S1", "tier": 1, "url": "https://imf.org/a"})
+        url = "https://github.com/hmbphxkw76-byte/tech-context-digest/blob/main/content/x"
+        self.assertTrue(source_check.is_self_reference(url))
+        issues = source_check.check_report(f'<a href="{url}">x</a>', reg,
+                                           {"dead_urls": {url}, "r6_strict": True})
+        self.assertFalse(any("R1" in msg or "R6" in msg for _lvl, msg in issues))
 
 
 class TestBusinessRelFor(unittest.TestCase):
