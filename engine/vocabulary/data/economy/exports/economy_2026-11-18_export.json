@@ -1,0 +1,1627 @@
+{
+  "topic": "economy",
+  "name": "经济",
+  "version": "v1.4",
+  "generated_at": "2026-11-18T08:33:56",
+  "count": 97,
+  "categories": {
+    "经济概念": 16,
+    "经济体与国家": 22,
+    "区域经济组织": 10,
+    "宏观与经济指标": 10,
+    "金融机构与组织": 8,
+    "金融工具与产品": 10,
+    "市场机制与交易": 8,
+    "监管与政策": 6,
+    "估值与风险": 7
+  },
+  "terms": [
+    {
+      "id": "ECO-001",
+      "term": "全球主要经济体",
+      "aliases": [
+        "全球主要经济体国家",
+        "Major Economies"
+      ],
+      "category": "经济概念",
+      "tags": [
+        "总称",
+        "经济体"
+      ],
+      "definition": "对全球经济产出、贸易与金融占主导地位的一组经济体的统称，常用于宏观经济监测与跨国对比的范围界定；无统一官方名单，常用口径包括 G20、IMF《世界经济展望》主要经济体等，跨口径不可混用",
+      "source": "IMF World Economic Outlook（需核实原文）",
+      "first_added": "2026-11-13",
+      "last_updated": "2026-11-13"
+    },
+    {
+      "id": "ECO-002",
+      "term": "美国",
+      "aliases": [
+        "United States",
+        "USA",
+        "U.S."
+      ],
+      "category": "经济体与国家",
+      "tags": [
+        "经济体",
+        "北美"
+      ],
+      "definition": "北美洲联邦制共和国，名义 GDP 口径全球最大经济体，美元发行国；美联储货币政策对全球金融环境有显著外溢影响",
+      "source": "IMF WEO / BEA",
+      "first_added": "2026-11-13",
+      "last_updated": "2026-11-13"
+    },
+    {
+      "id": "ECO-003",
+      "term": "中国",
+      "aliases": [
+        "China",
+        "中华人民共和国"
+      ],
+      "category": "经济体与国家",
+      "tags": [
+        "经济体",
+        "亚洲"
+      ],
+      "definition": "亚洲最大经济体，购买力平价口径全球第一大经济体；国家统计局按月、季发布 GDP、CPI、PMI 等核心宏观指标",
+      "source": "国家统计局 / IMF WEO",
+      "first_added": "2026-11-13",
+      "last_updated": "2026-11-13"
+    },
+    {
+      "id": "ECO-004",
+      "term": "新加坡",
+      "aliases": [
+        "Singapore"
+      ],
+      "category": "经济体与国家",
+      "tags": [
+        "经济体",
+        "亚洲"
+      ],
+      "definition": "东南亚城市型发达经济体，全球金融、贸易与航运枢纽；新加坡金融管理局（MAS）为货币当局",
+      "source": "IMF WEO / MAS",
+      "first_added": "2026-11-13",
+      "last_updated": "2026-11-13"
+    },
+    {
+      "id": "ECO-005",
+      "term": "日本",
+      "aliases": [
+        "Japan"
+      ],
+      "category": "经济体与国家",
+      "tags": [
+        "经济体",
+        "亚洲"
+      ],
+      "definition": "东亚发达经济体，全球主要工业与出口国之一；日本央行（BOJ）负责货币政策，内阁府按季发布 GDP",
+      "source": "IMF WEO / 日本内阁府",
+      "first_added": "2026-11-13",
+      "last_updated": "2026-11-13"
+    },
+    {
+      "id": "ECO-006",
+      "term": "韩国",
+      "aliases": [
+        "South Korea",
+        "Korea"
+      ],
+      "category": "经济体与国家",
+      "tags": [
+        "经济体",
+        "亚洲"
+      ],
+      "definition": "东亚发达经济体，半导体、造船与汽车等出口制造业占比较高；韩国银行（BOK）为中央银行",
+      "source": "IMF WEO / BOK",
+      "first_added": "2026-11-13",
+      "last_updated": "2026-11-13"
+    },
+    {
+      "id": "ECO-007",
+      "term": "欧盟",
+      "aliases": [
+        "European Union",
+        "EU"
+      ],
+      "category": "区域经济组织",
+      "tags": [
+        "区域组织",
+        "欧洲"
+      ],
+      "definition": "由 27 个欧洲成员国组成的经济与政治联盟，实行关税同盟与单一市场；欧元区成员国共用欧元，欧盟委员会与欧洲央行主导经济治理",
+      "source": "europa.eu / ECB",
+      "first_added": "2026-11-13",
+      "last_updated": "2026-11-13"
+    },
+    {
+      "id": "ECO-008",
+      "term": "德国",
+      "aliases": [
+        "Germany"
+      ],
+      "category": "经济体与国家",
+      "tags": [
+        "经济体",
+        "欧洲"
+      ],
+      "definition": "欧洲最大经济体与欧盟人口最多的成员国，欧元区核心国家，以制造业与出口见长",
+      "source": "IMF WEO / Destatis",
+      "first_added": "2026-11-13",
+      "last_updated": "2026-11-13"
+    },
+    {
+      "id": "ECO-009",
+      "term": "法国",
+      "aliases": [
+        "France"
+      ],
+      "category": "经济体与国家",
+      "tags": [
+        "经济体",
+        "欧洲"
+      ],
+      "definition": "欧盟主要经济体之一，欧元区核心国家，服务业与制造业并重",
+      "source": "IMF WEO / INSEE",
+      "first_added": "2026-11-13",
+      "last_updated": "2026-11-13"
+    },
+    {
+      "id": "ECO-010",
+      "term": "英国",
+      "aliases": [
+        "United Kingdom",
+        "UK"
+      ],
+      "category": "经济体与国家",
+      "tags": [
+        "经济体",
+        "欧洲"
+      ],
+      "definition": "欧洲主要经济体，2020 年脱欧后实行独立贸易政策；英格兰银行负责货币政策",
+      "source": "IMF WEO / ONS",
+      "first_added": "2026-11-13",
+      "last_updated": "2026-11-13"
+    },
+    {
+      "id": "ECO-011",
+      "term": "新西兰",
+      "aliases": [
+        "New Zealand"
+      ],
+      "category": "经济体与国家",
+      "tags": [
+        "经济体",
+        "大洋洲"
+      ],
+      "definition": "大洋洲发达经济体，农牧产品出口占比较高；新西兰储备银行（RBNZ）为中央银行",
+      "source": "IMF WEO / Stats NZ",
+      "first_added": "2026-11-13",
+      "last_updated": "2026-11-13"
+    },
+    {
+      "id": "ECO-012",
+      "term": "澳大利亚",
+      "aliases": [
+        "Australia"
+      ],
+      "category": "经济体与国家",
+      "tags": [
+        "经济体",
+        "大洋洲"
+      ],
+      "definition": "大洋洲最大经济体，矿产资源与农产品出口大国；澳大利亚储备银行（RBA）为中央银行",
+      "source": "IMF WEO / ABS",
+      "first_added": "2026-11-13",
+      "last_updated": "2026-11-13"
+    },
+    {
+      "id": "ECO-013",
+      "term": "阿联酋",
+      "aliases": [
+        "United Arab Emirates",
+        "UAE"
+      ],
+      "category": "经济体与国家",
+      "tags": [
+        "经济体",
+        "中东"
+      ],
+      "definition": "由七个酋长国组成的联邦制国家，海湾合作委员会成员国，石油、转口贸易与金融服务业为经济支柱；阿联酋中央银行（CBUAE）为货币当局",
+      "source": "IMF WEO / CBUAE",
+      "first_added": "2026-11-13",
+      "last_updated": "2026-11-13"
+    },
+    {
+      "id": "ECO-014",
+      "term": "沙特",
+      "aliases": [
+        "Saudi Arabia",
+        "沙特阿拉伯",
+        "KSA"
+      ],
+      "category": "经济体与国家",
+      "tags": [
+        "经济体",
+        "中东"
+      ],
+      "definition": "中东最大经济体，OPEC 核心成员国，石油出口为财政收入主要来源；沙特中央银行（SAMA）为货币当局",
+      "source": "IMF WEO / GASTAT",
+      "first_added": "2026-11-13",
+      "last_updated": "2026-11-13"
+    },
+    {
+      "id": "ECO-015",
+      "term": "越南",
+      "aliases": [
+        "Vietnam",
+        "Viet Nam"
+      ],
+      "category": "经济体与国家",
+      "tags": [
+        "经济体",
+        "亚洲"
+      ],
+      "definition": "东南亚新兴制造业经济体，出口导向型增长，近年持续承接全球制造业转移",
+      "source": "IMF WEO / GSO",
+      "first_added": "2026-11-13",
+      "last_updated": "2026-11-13"
+    },
+    {
+      "id": "ECO-016",
+      "term": "马来西亚",
+      "aliases": [
+        "Malaysia"
+      ],
+      "category": "经济体与国家",
+      "tags": [
+        "经济体",
+        "亚洲"
+      ],
+      "definition": "东南亚中等收入经济体，电子、油气与棕榈油出口为主要支柱；马来西亚国家银行（BNM）为中央银行",
+      "source": "IMF WEO / DOSM",
+      "first_added": "2026-11-13",
+      "last_updated": "2026-11-13"
+    },
+    {
+      "id": "ECO-017",
+      "term": "卡塔尔",
+      "aliases": [
+        "Qatar"
+      ],
+      "category": "经济体与国家",
+      "tags": [
+        "经济体",
+        "中东"
+      ],
+      "definition": "波斯湾高收入经济体，全球主要液化天然气（LNG）出口国，人均 GDP 居全球前列；卡塔尔中央银行（QCB）为货币当局",
+      "source": "IMF WEO / PSA",
+      "first_added": "2026-11-13",
+      "last_updated": "2026-11-13"
+    },
+    {
+      "id": "ECO-018",
+      "term": "欧元区",
+      "aliases": [
+        "Eurozone",
+        "欧元经济区"
+      ],
+      "category": "经济体与国家",
+      "tags": [
+        "经济体",
+        "货币区"
+      ],
+      "definition": "使用欧元的 20 国货币联盟，货币政策由欧洲央行统一制定",
+      "source": "欧盟委员会",
+      "first_added": "2026-11-13",
+      "last_updated": "2026-11-13"
+    },
+    {
+      "id": "ECO-019",
+      "term": "新兴市场",
+      "aliases": [
+        "Emerging Markets",
+        "EM"
+      ],
+      "category": "经济体与国家",
+      "tags": [
+        "经济体",
+        "分类"
+      ],
+      "definition": "处于工业化加速与国际资本净流入阶段的经济体统称（MSCI/IMF 口径各异）",
+      "source": "IMF（需核实原文）",
+      "first_added": "2026-11-13",
+      "last_updated": "2026-11-13"
+    },
+    {
+      "id": "ECO-020",
+      "term": "发达经济体",
+      "aliases": [
+        "Advanced Economies"
+      ],
+      "category": "经济体与国家",
+      "tags": [
+        "经济体",
+        "分类"
+      ],
+      "definition": "IMF 分类下的高收入、多元化成熟经济体统称",
+      "source": "IMF WEO",
+      "first_added": "2026-11-13",
+      "last_updated": "2026-11-13"
+    },
+    {
+      "id": "ECO-021",
+      "term": "前沿市场",
+      "aliases": [
+        "Frontier Markets"
+      ],
+      "category": "经济体与国家",
+      "tags": [
+        "经济体",
+        "分类"
+      ],
+      "definition": "市场规模与流动性低于新兴市场、可投资性受限的经济体统称",
+      "source": "MSCI（需核实原文）",
+      "first_added": "2026-11-13",
+      "last_updated": "2026-11-13"
+    },
+    {
+      "id": "ECO-022",
+      "term": "G7",
+      "aliases": [
+        "七国集团",
+        "Group of Seven"
+      ],
+      "category": "区域经济组织",
+      "tags": [
+        "论坛",
+        "发达"
+      ],
+      "definition": "美、日、德、英、法、意、加七国年度首脑协调机制",
+      "source": "G7 官方（需核实原文）",
+      "first_added": "2026-11-13",
+      "last_updated": "2026-11-13"
+    },
+    {
+      "id": "ECO-023",
+      "term": "G20",
+      "aliases": [
+        "二十国集团",
+        "Group of Twenty"
+      ],
+      "category": "区域经济组织",
+      "tags": [
+        "论坛",
+        "全球"
+      ],
+      "definition": "主要发达与新兴经济体组成的全球宏观经济协调论坛",
+      "source": "g20.org",
+      "first_added": "2026-11-13",
+      "last_updated": "2026-11-13"
+    },
+    {
+      "id": "ECO-024",
+      "term": "金砖国家",
+      "aliases": [
+        "BRICS",
+        "金砖机制"
+      ],
+      "category": "区域经济组织",
+      "tags": [
+        "论坛",
+        "新兴"
+      ],
+      "definition": "巴西、俄罗斯、印度、中国、南非（及后续扩员）合作机制",
+      "source": "金砖官方（需核实原文）",
+      "first_added": "2026-11-13",
+      "last_updated": "2026-11-13"
+    },
+    {
+      "id": "ECO-025",
+      "term": "海湾合作委员会",
+      "aliases": [
+        "GCC",
+        "Gulf Cooperation Council",
+        "海湾六国"
+      ],
+      "category": "区域经济组织",
+      "tags": [
+        "组织",
+        "海湾"
+      ],
+      "definition": "阿联酋、沙特等六个海湾君主国的区域政治经济组织",
+      "source": "gcc-sg.org",
+      "first_added": "2026-11-13",
+      "last_updated": "2026-11-13"
+    },
+    {
+      "id": "ECO-026",
+      "term": "OPEC",
+      "aliases": [
+        "石油输出国组织",
+        "欧佩克"
+      ],
+      "category": "区域经济组织",
+      "tags": [
+        "组织",
+        "能源"
+      ],
+      "definition": "协调成员国产油政策的政府间组织（+以俄罗斯等为主的 OPEC+ 联盟）",
+      "source": "opec.org",
+      "first_added": "2026-11-13",
+      "last_updated": "2026-11-13"
+    },
+    {
+      "id": "ECO-027",
+      "term": "东盟",
+      "aliases": [
+        "ASEAN",
+        "东南亚国家联盟"
+      ],
+      "category": "区域经济组织",
+      "tags": [
+        "组织",
+        "亚太"
+      ],
+      "definition": "东南亚十国区域组织，RCEP 核心与东盟 centrality 倡议者",
+      "source": "asean.org",
+      "first_added": "2026-11-13",
+      "last_updated": "2026-11-13"
+    },
+    {
+      "id": "ECO-028",
+      "term": "APEC",
+      "aliases": [
+        "亚太经合组织",
+        "Asia-Pacific Economic Cooperation"
+      ],
+      "category": "区域经济组织",
+      "tags": [
+        "论坛",
+        "亚太"
+      ],
+      "definition": "亚太 21 经济体的非约束性经贸合作论坛",
+      "source": "apec.org",
+      "first_added": "2026-11-13",
+      "last_updated": "2026-11-13"
+    },
+    {
+      "id": "ECO-029",
+      "term": "WTO",
+      "aliases": [
+        "世界贸易组织",
+        "World Trade Organization"
+      ],
+      "category": "区域经济组织",
+      "tags": [
+        "组织",
+        "贸易"
+      ],
+      "definition": "制定多边贸易规则与裁决争端的全球贸易组织（中国 2001 年加入）",
+      "source": "wto.org",
+      "first_added": "2026-11-13",
+      "last_updated": "2026-11-13"
+    },
+    {
+      "id": "ECO-030",
+      "term": "IEA",
+      "aliases": [
+        "国际能源署",
+        "International Energy Agency"
+      ],
+      "category": "区域经济组织",
+      "tags": [
+        "组织",
+        "能源"
+      ],
+      "definition": "发布月度石油市场报告与能源展望的 OECD 旗下机构",
+      "source": "iea.org",
+      "first_added": "2026-11-13",
+      "last_updated": "2026-11-13"
+    },
+    {
+      "id": "ECO-031",
+      "term": "购买力平价",
+      "aliases": [
+        "PPP",
+        "Purchasing Power Parity"
+      ],
+      "category": "经济概念",
+      "tags": [
+        "计量",
+        "比较"
+      ],
+      "definition": "以价格水平差异折算 GDP 的跨国比较方法（区别于汇率法）",
+      "source": "世界银行 ICP",
+      "first_added": "2026-11-13",
+      "last_updated": "2026-11-13"
+    },
+    {
+      "id": "ECO-032",
+      "term": "经济周期",
+      "aliases": [
+        "Business Cycle",
+        "繁荣衰退周期"
+      ],
+      "category": "经济概念",
+      "tags": [
+        "理论",
+        "波动"
+      ],
+      "definition": "产出围绕长期趋势的扩张、峰值、收缩与谷底循环",
+      "source": "NBER（需核实原文）",
+      "first_added": "2026-11-13",
+      "last_updated": "2026-11-13"
+    },
+    {
+      "id": "ECO-033",
+      "term": "滞胀",
+      "aliases": [
+        "Stagflation"
+      ],
+      "category": "经济概念",
+      "tags": [
+        "理论",
+        "风险"
+      ],
+      "definition": "经济停滞（或衰退）与高通胀并存的组合状态",
+      "source": "IMF（需核实原文）",
+      "first_added": "2026-11-13",
+      "last_updated": "2026-11-13"
+    },
+    {
+      "id": "ECO-034",
+      "term": "软着陆与硬着陆",
+      "aliases": [
+        "Soft Landing",
+        "Hard Landing"
+      ],
+      "category": "经济概念",
+      "tags": [
+        "理论",
+        "政策"
+      ],
+      "definition": "形容紧缩政策使通胀回落时经济「温和放缓」或「深度衰退」的两种结局",
+      "source": "行业通用惯例",
+      "first_added": "2026-11-13",
+      "last_updated": "2026-11-13"
+    },
+    {
+      "id": "ECO-035",
+      "term": "人口红利",
+      "aliases": [
+        "Demographic Dividend"
+      ],
+      "category": "经济概念",
+      "tags": [
+        "结构",
+        "人口"
+      ],
+      "definition": "劳动年龄人口占比上升对经济增长的阶段性贡献",
+      "source": "联合国人口司（需核实原文）",
+      "first_added": "2026-11-13",
+      "last_updated": "2026-11-13"
+    },
+    {
+      "id": "ECO-036",
+      "term": "城镇化率",
+      "aliases": [
+        "Urbanization Rate"
+      ],
+      "category": "经济概念",
+      "tags": [
+        "结构",
+        "人口"
+      ],
+      "definition": "常住人口中城镇人口占比，是内需与房地产需求的长期变量",
+      "source": "国家统计局",
+      "first_added": "2026-11-13",
+      "last_updated": "2026-11-13"
+    },
+    {
+      "id": "ECO-037",
+      "term": "全要素生产率",
+      "aliases": [
+        "TFP",
+        "Total Factor Productivity"
+      ],
+      "category": "经济概念",
+      "tags": [
+        "理论",
+        "增长"
+      ],
+      "definition": "剔除资本与劳动投入后的技术效率对增长的贡献（索洛残差）",
+      "source": "OECD（需核实原文）",
+      "first_added": "2026-11-13",
+      "last_updated": "2026-11-13"
+    },
+    {
+      "id": "ECO-038",
+      "term": "贸易顺差与逆差",
+      "aliases": [
+        "Trade Surplus",
+        "Trade Deficit"
+      ],
+      "category": "经济概念",
+      "tags": [
+        "贸易",
+        "计量"
+      ],
+      "definition": "出口大于进口为顺差，反之为逆差，按货物与服务口径分列",
+      "source": "WTO / 海关总署",
+      "first_added": "2026-11-13",
+      "last_updated": "2026-11-13"
+    },
+    {
+      "id": "ECO-039",
+      "term": "外汇储备",
+      "aliases": [
+        "Foreign Exchange Reserves"
+      ],
+      "category": "经济概念",
+      "tags": [
+        "货币",
+        "资产"
+      ],
+      "definition": "央行持有的可自由兑换外币资产，用于干预汇率与对外支付",
+      "source": "国家外汇管理局 / IMF",
+      "first_added": "2026-11-13",
+      "last_updated": "2026-11-13"
+    },
+    {
+      "id": "ECO-040",
+      "term": "主权债务",
+      "aliases": [
+        "Sovereign Debt",
+        "公共债务"
+      ],
+      "category": "经济概念",
+      "tags": [
+        "财政",
+        "风险"
+      ],
+      "definition": "一国政府举借的债务，常以「债务/GDP」衡量可持续性",
+      "source": "IMF（需核实原文）",
+      "first_added": "2026-11-13",
+      "last_updated": "2026-11-13"
+    },
+    {
+      "id": "ECO-041",
+      "term": "基尼系数",
+      "aliases": [
+        "Gini Coefficient"
+      ],
+      "category": "经济概念",
+      "tags": [
+        "计量",
+        "分配"
+      ],
+      "definition": "衡量收入或财富分配不平等的 0–1 系数，越高越不平等",
+      "source": "国家统计局 / 世界银行",
+      "first_added": "2026-11-13",
+      "last_updated": "2026-11-13"
+    },
+    {
+      "id": "ECO-042",
+      "term": "中等收入陷阱",
+      "aliases": [
+        "Middle-Income Trap"
+      ],
+      "category": "经济概念",
+      "tags": [
+        "理论",
+        "发展"
+      ],
+      "definition": "经济体达到中等收入后增长动力断档、长期难以跻身高收入的假说",
+      "source": "世界银行（需核实原文）",
+      "first_added": "2026-11-13",
+      "last_updated": "2026-11-13"
+    },
+    {
+      "id": "ECO-043",
+      "term": "石油美元",
+      "aliases": [
+        "Petrodollar"
+      ],
+      "category": "经济概念",
+      "tags": [
+        "能源",
+        "货币"
+      ],
+      "definition": "石油出口收入循环（产油国盈余回流金融资产）及其对美元体系的支撑",
+      "source": "行业综述（需核实原文）",
+      "first_added": "2026-11-13",
+      "last_updated": "2026-11-13"
+    },
+    {
+      "id": "ECO-044",
+      "term": "产业转移",
+      "aliases": [
+        "Manufacturing Relocation",
+        "供应链转移"
+      ],
+      "category": "经济概念",
+      "tags": [
+        "结构",
+        "产业"
+      ],
+      "definition": "制造业产能随成本、关税与地缘因素在区域间重新布局的过程",
+      "source": "UNCTAD（需核实原文）",
+      "first_added": "2026-11-13",
+      "last_updated": "2026-11-13"
+    },
+    {
+      "id": "ECO-045",
+      "term": "海湾国家",
+      "aliases": [
+        "Gulf States",
+        "Gulf Countries",
+        "海湾地区国家"
+      ],
+      "category": "经济概念",
+      "tags": [
+        "总称",
+        "海湾"
+      ],
+      "definition": "波斯湾沿岸君主制国家群体的统称，通常指海湾合作委员会（GCC）六国：沙特、阿联酋、卡塔尔、科威特、巴林、阿曼；更宽泛口径可含伊拉克、伊朗，范围须逐处注明",
+      "source": "GCC 官方 / IMF WEO（需核实原文）",
+      "first_added": "2026-11-13",
+      "last_updated": "2026-11-13"
+    },
+    {
+      "id": "ECO-046",
+      "term": "科威特",
+      "aliases": [
+        "Kuwait"
+      ],
+      "category": "经济体与国家",
+      "tags": [
+        "经济体",
+        "中东"
+      ],
+      "definition": "海湾合作委员会成员国，石油储量居全球前列，政府主权财富基金（KIA）规模庞大；科威特中央银行（CBK）为货币当局",
+      "source": "IMF WEO / CBK",
+      "first_added": "2026-11-13",
+      "last_updated": "2026-11-13"
+    },
+    {
+      "id": "ECO-047",
+      "term": "巴林",
+      "aliases": [
+        "Bahrain"
+      ],
+      "category": "经济体与国家",
+      "tags": [
+        "经济体",
+        "中东"
+      ],
+      "definition": "海湾合作委员会成员国，波斯湾岛国，金融服务业与炼油为经济支柱，为海湾地区金融中心之一；巴林中央银行（CBB）为货币当局",
+      "source": "IMF WEO / CBB",
+      "first_added": "2026-11-13",
+      "last_updated": "2026-11-13"
+    },
+    {
+      "id": "ECO-048",
+      "term": "阿曼",
+      "aliases": [
+        "Oman"
+      ],
+      "category": "经济体与国家",
+      "tags": [
+        "经济体",
+        "中东"
+      ],
+      "definition": "海湾合作委员会成员国，位于阿拉伯半岛东南部，油气、港口物流与旅游为经济支柱；阿曼中央银行（CBO）为货币当局",
+      "source": "IMF WEO / CBO",
+      "first_added": "2026-11-13",
+      "last_updated": "2026-11-13"
+    },
+    {
+      "id": "ECO-049",
+      "term": "CPI",
+      "aliases": [
+        "消费者价格指数",
+        "Consumer Price Index"
+      ],
+      "category": "宏观与经济指标",
+      "tags": [
+        "指标",
+        "通胀"
+      ],
+      "definition": "衡量一篮子消费品与服务价格随时间变动的指数，是通胀监测的核心指标",
+      "source": "国家统计局 / BLS",
+      "first_added": "2026-11-18",
+      "last_updated": "2026-11-18"
+    },
+    {
+      "id": "ECO-050",
+      "term": "核心CPI",
+      "aliases": [
+        "Core CPI",
+        "核心消费者价格指数"
+      ],
+      "category": "宏观与经济指标",
+      "tags": [
+        "指标",
+        "通胀"
+      ],
+      "definition": "剔除食品与能源等波动项后的 CPI，用于识别通胀的持续性趋势",
+      "source": "BLS（需核实原文）",
+      "first_added": "2026-11-18",
+      "last_updated": "2026-11-18"
+    },
+    {
+      "id": "ECO-051",
+      "term": "PPI",
+      "aliases": [
+        "生产者价格指数",
+        "Producer Price Index"
+      ],
+      "category": "宏观与经济指标",
+      "tags": [
+        "指标",
+        "通胀"
+      ],
+      "definition": "衡量生产者出厂价格变动的指数，常作为 CPI 的上游先行指标",
+      "source": "国家统计局 / BLS",
+      "first_added": "2026-11-18",
+      "last_updated": "2026-11-18"
+    },
+    {
+      "id": "ECO-052",
+      "term": "GDP",
+      "aliases": [
+        "国内生产总值",
+        "Gross Domestic Product"
+      ],
+      "category": "宏观与经济指标",
+      "tags": [
+        "指标",
+        "增长"
+      ],
+      "definition": "一定时期内一个经济体境内生产的全部最终产品与服务价值的总和",
+      "source": "国家统计局 / IMF",
+      "first_added": "2026-11-18",
+      "last_updated": "2026-11-18"
+    },
+    {
+      "id": "ECO-053",
+      "term": "PMI",
+      "aliases": [
+        "采购经理人指数",
+        "Purchasing Managers' Index"
+      ],
+      "category": "宏观与经济指标",
+      "tags": [
+        "指标",
+        "先行"
+      ],
+      "definition": "基于企业采购经理调查的景气指数，50 为荣枯分界线",
+      "source": "S&P Global / 中国物流与联合会（需核实原文）",
+      "first_added": "2026-11-18",
+      "last_updated": "2026-11-18"
+    },
+    {
+      "id": "ECO-054",
+      "term": "失业率",
+      "aliases": [
+        "Unemployment Rate"
+      ],
+      "category": "宏观与经济指标",
+      "tags": [
+        "指标",
+        "就业"
+      ],
+      "definition": "劳动力中正在寻找工作但未就业者的比例",
+      "source": "BLS / 国家统计局",
+      "first_added": "2026-11-18",
+      "last_updated": "2026-11-18"
+    },
+    {
+      "id": "ECO-055",
+      "term": "非农就业",
+      "aliases": [
+        "Nonfarm Payrolls",
+        "NFP"
+      ],
+      "category": "宏观与经济指标",
+      "tags": [
+        "指标",
+        "就业"
+      ],
+      "definition": "美国月度非农业部门就业人数变动，是全球市场重点关注的就业数据",
+      "source": "BLS",
+      "first_added": "2026-11-18",
+      "last_updated": "2026-11-18"
+    },
+    {
+      "id": "ECO-056",
+      "term": "基准利率",
+      "aliases": [
+        "政策利率",
+        "Policy Rate"
+      ],
+      "category": "宏观与经济指标",
+      "tags": [
+        "利率",
+        "货币政策"
+      ],
+      "definition": "中央银行设定并传导至金融体系的核心利率（如联邦基金利率目标区间）",
+      "source": "美联储 / 中国人民银行",
+      "first_added": "2026-11-18",
+      "last_updated": "2026-11-18"
+    },
+    {
+      "id": "ECO-057",
+      "term": "通胀率",
+      "aliases": [
+        "Inflation",
+        "通货膨胀率"
+      ],
+      "category": "宏观与经济指标",
+      "tags": [
+        "指标",
+        "通胀"
+      ],
+      "definition": "物价水平在一定时期内的上涨幅度，通常以 CPI 同比变化表示",
+      "source": "IMF / 国家统计局",
+      "first_added": "2026-11-18",
+      "last_updated": "2026-11-18"
+    },
+    {
+      "id": "ECO-058",
+      "term": "收益率曲线",
+      "aliases": [
+        "Yield Curve",
+        "利率期限结构"
+      ],
+      "category": "宏观与经济指标",
+      "tags": [
+        "利率",
+        "先行"
+      ],
+      "definition": "同一信用等级债券收益率随期限变化的曲线；倒挂常被视为衰退先行信号",
+      "source": "美国财政部（需核实原文）",
+      "first_added": "2026-11-18",
+      "last_updated": "2026-11-18"
+    },
+    {
+      "id": "ECO-059",
+      "term": "美联储",
+      "aliases": [
+        "Federal Reserve",
+        "FED",
+        "美国联邦储备系统"
+      ],
+      "category": "金融机构与组织",
+      "tags": [
+        "央行",
+        "机构"
+      ],
+      "definition": "美国中央银行体系，制定货币政策并维护金融稳定",
+      "source": "federalreserve.gov",
+      "first_added": "2026-11-18",
+      "last_updated": "2026-11-18"
+    },
+    {
+      "id": "ECO-060",
+      "term": "欧洲央行",
+      "aliases": [
+        "ECB",
+        "European Central Bank"
+      ],
+      "category": "金融机构与组织",
+      "tags": [
+        "央行",
+        "机构"
+      ],
+      "definition": "欧元区货币政策与欧元稳定的中央银行",
+      "source": "ecb.europa.eu",
+      "first_added": "2026-11-18",
+      "last_updated": "2026-11-18"
+    },
+    {
+      "id": "ECO-061",
+      "term": "中国人民银行",
+      "aliases": [
+        "PBOC",
+        "央行"
+      ],
+      "category": "金融机构与组织",
+      "tags": [
+        "央行",
+        "机构"
+      ],
+      "definition": "中华人民共和国中央银行，制定执行货币政策、维护金融稳定",
+      "source": "pbc.gov.cn",
+      "first_added": "2026-11-18",
+      "last_updated": "2026-11-18"
+    },
+    {
+      "id": "ECO-062",
+      "term": "国际货币基金组织",
+      "aliases": [
+        "IMF",
+        "International Monetary Fund"
+      ],
+      "category": "金融机构与组织",
+      "tags": [
+        "国际组织"
+      ],
+      "definition": "促进国际货币合作与金融稳定的国际机构，发布世界经济展望等基准报告",
+      "source": "imf.org",
+      "first_added": "2026-11-18",
+      "last_updated": "2026-11-18"
+    },
+    {
+      "id": "ECO-063",
+      "term": "世界银行",
+      "aliases": [
+        "World Bank",
+        "WB"
+      ],
+      "category": "金融机构与组织",
+      "tags": [
+        "国际组织"
+      ],
+      "definition": "提供长期发展融资与技术支持的国际机构",
+      "source": "worldbank.org",
+      "first_added": "2026-11-18",
+      "last_updated": "2026-11-18"
+    },
+    {
+      "id": "ECO-064",
+      "term": "国际清算银行",
+      "aliases": [
+        "BIS",
+        "Bank for International Settlements"
+      ],
+      "category": "金融机构与组织",
+      "tags": [
+        "国际组织",
+        "监管"
+      ],
+      "definition": "促进各国央行合作的国际组织，主持巴塞尔银行监管委员会",
+      "source": "bis.org",
+      "first_added": "2026-11-18",
+      "last_updated": "2026-11-18"
+    },
+    {
+      "id": "ECO-065",
+      "term": "FOMC",
+      "aliases": [
+        "联邦公开市场委员会",
+        "Federal Open Market Committee"
+      ],
+      "category": "金融机构与组织",
+      "tags": [
+        "货币政策",
+        "会议"
+      ],
+      "definition": "美联储负责公开市场操作与利率决策的委员会，会议纪要为重要信息源",
+      "source": "federalreserve.gov",
+      "first_added": "2026-11-18",
+      "last_updated": "2026-11-18"
+    },
+    {
+      "id": "ECO-066",
+      "term": "主权财富基金",
+      "aliases": [
+        "Sovereign Wealth Fund",
+        "SWF"
+      ],
+      "category": "金融机构与组织",
+      "tags": [
+        "机构",
+        "投资"
+      ],
+      "definition": "由国家设立并管理公共资金的长期投资机构（如阿布扎比 ADIA、挪威 NBIM）",
+      "source": "主权基金研究所（需核实原文）",
+      "first_added": "2026-11-18",
+      "last_updated": "2026-11-18"
+    },
+    {
+      "id": "ECO-067",
+      "term": "国债",
+      "aliases": [
+        "政府债券",
+        "Government Bond",
+        "Treasury"
+      ],
+      "category": "金融工具与产品",
+      "tags": [
+        "债券",
+        "固收"
+      ],
+      "definition": "中央政府发行的无风险基准债券，收益率构成其他资产定价锚",
+      "source": "美国财政部 / 财政部（需核实原文）",
+      "first_added": "2026-11-18",
+      "last_updated": "2026-11-18"
+    },
+    {
+      "id": "ECO-068",
+      "term": "EIBOR",
+      "aliases": [
+        "Emirates Interbank Offered Rate",
+        "迪拜银行间同业拆借利率"
+      ],
+      "category": "金融工具与产品",
+      "tags": [
+        "利率",
+        "基准"
+      ],
+      "definition": "阿联酋银行间拆借基准利率，迪拜抵押贷款（浮动利率）定价锚",
+      "source": "CBUAE",
+      "first_added": "2026-11-18",
+      "last_updated": "2026-11-18"
+    },
+    {
+      "id": "ECO-069",
+      "term": "SOFR",
+      "aliases": [
+        "担保隔夜融资利率",
+        "Secured Overnight Financing Rate"
+      ],
+      "category": "金融工具与产品",
+      "tags": [
+        "利率",
+        "基准"
+      ],
+      "definition": "基于国债回购市场的美元隔夜基准利率，LIBOR 的替代基准",
+      "source": "NY Fed",
+      "first_added": "2026-11-18",
+      "last_updated": "2026-11-18"
+    },
+    {
+      "id": "ECO-070",
+      "term": "LIBOR",
+      "aliases": [
+        "伦敦银行间同业拆借利率",
+        "London Interbank Offered Rate"
+      ],
+      "category": "金融工具与产品",
+      "tags": [
+        "利率",
+        "基准"
+      ],
+      "definition": "曾为全球主要拆借基准利率，因操纵丑闻与流动性枯竭已全面退役，存量合约迁移至 SOFR 等替代基准",
+      "source": "ICE（退役公告，需核实原文）",
+      "first_added": "2026-11-18",
+      "last_updated": "2026-11-18"
+    },
+    {
+      "id": "ECO-071",
+      "term": "掉期",
+      "aliases": [
+        "互换",
+        "Swap"
+      ],
+      "category": "金融工具与产品",
+      "tags": [
+        "衍生品"
+      ],
+      "definition": "双方在未来按约定规则交换现金流的场外衍生合约",
+      "source": "BIS（需核实原文）",
+      "first_added": "2026-11-18",
+      "last_updated": "2026-11-18"
+    },
+    {
+      "id": "ECO-072",
+      "term": "利率互换",
+      "aliases": [
+        "IRS",
+        "Interest Rate Swap"
+      ],
+      "category": "金融工具与产品",
+      "tags": [
+        "衍生品",
+        "利率"
+      ],
+      "definition": "固定利率与浮动利率现金流交换的合约，是利率风险管理的主要工具",
+      "source": "BIS（需核实原文）",
+      "first_added": "2026-11-18",
+      "last_updated": "2026-11-18"
+    },
+    {
+      "id": "ECO-073",
+      "term": "期货",
+      "aliases": [
+        "Futures"
+      ],
+      "category": "金融工具与产品",
+      "tags": [
+        "衍生品"
+      ],
+      "definition": "在未来特定日期以约定价格买卖标的资产的标准化交易所合约",
+      "source": "CME（需核实原文）",
+      "first_added": "2026-11-18",
+      "last_updated": "2026-11-18"
+    },
+    {
+      "id": "ECO-074",
+      "term": "期权",
+      "aliases": [
+        "Options"
+      ],
+      "category": "金融工具与产品",
+      "tags": [
+        "衍生品"
+      ],
+      "definition": "赋予持有者在约定价格买入（看涨）或卖出（看跌）标的资产权利的合约",
+      "source": "CBOE（需核实原文）",
+      "first_added": "2026-11-18",
+      "last_updated": "2026-11-18"
+    },
+    {
+      "id": "ECO-075",
+      "term": "ETF",
+      "aliases": [
+        "交易所交易基金",
+        "Exchange-Traded Fund"
+      ],
+      "category": "金融工具与产品",
+      "tags": [
+        "基金"
+      ],
+      "definition": "在交易所像股票一样连续交易的基金，通常跟踪指数或一篮子资产",
+      "source": "SEC（需核实原文）",
+      "first_added": "2026-11-18",
+      "last_updated": "2026-11-18"
+    },
+    {
+      "id": "ECO-076",
+      "term": "REIT",
+      "aliases": [
+        "房地产投资信托",
+        "Real Estate Investment Trust"
+      ],
+      "category": "金融工具与产品",
+      "tags": [
+        "基金",
+        "地产"
+      ],
+      "definition": "持有并运营能产生租金收入的不动产组合、须按规则分红的投资工具",
+      "source": "SEC（需核实原文）",
+      "first_added": "2026-11-18",
+      "last_updated": "2026-11-18"
+    },
+    {
+      "id": "ECO-077",
+      "term": "流动性",
+      "aliases": [
+        "Liquidity"
+      ],
+      "category": "市场机制与交易",
+      "tags": [
+        "交易",
+        "风险"
+      ],
+      "definition": "资产在不显著影响价格条件下快速变现的能力，分市场流动性与融资流动性",
+      "source": "BIS（需核实原文）",
+      "first_added": "2026-11-18",
+      "last_updated": "2026-11-18"
+    },
+    {
+      "id": "ECO-078",
+      "term": "做市商",
+      "aliases": [
+        "Market Maker"
+      ],
+      "category": "市场机制与交易",
+      "tags": [
+        "交易"
+      ],
+      "definition": "持续提供买卖双边报价、赚取价差并为市场提供流动性的机构",
+      "source": "SEC（需核实原文）",
+      "first_added": "2026-11-18",
+      "last_updated": "2026-11-18"
+    },
+    {
+      "id": "ECO-079",
+      "term": "卖空",
+      "aliases": [
+        "Short Selling",
+        "做空"
+      ],
+      "category": "市场机制与交易",
+      "tags": [
+        "交易"
+      ],
+      "definition": "借入证券卖出后择机买回平仓、从价格下跌中获利的交易机制",
+      "source": "SEC（需核实原文）",
+      "first_added": "2026-11-18",
+      "last_updated": "2026-11-18"
+    },
+    {
+      "id": "ECO-080",
+      "term": "杠杆",
+      "aliases": [
+        "Leverage"
+      ],
+      "category": "市场机制与交易",
+      "tags": [
+        "风险",
+        "交易"
+      ],
+      "definition": "使用借入资金放大投资敞口的机制，同步放大收益与亏损",
+      "source": "Basel III（需核实原文）",
+      "first_added": "2026-11-18",
+      "last_updated": "2026-11-18"
+    },
+    {
+      "id": "ECO-081",
+      "term": "保证金",
+      "aliases": [
+        "Margin"
+      ],
+      "category": "市场机制与交易",
+      "tags": [
+        "交易",
+        "风险"
+      ],
+      "definition": "开立与维持杠杆头寸需缴纳的履约担保资金",
+      "source": "CME（需核实原文）",
+      "first_added": "2026-11-18",
+      "last_updated": "2026-11-18"
+    },
+    {
+      "id": "ECO-082",
+      "term": "IPO",
+      "aliases": [
+        "首次公开募股",
+        "Initial Public Offering"
+      ],
+      "category": "市场机制与交易",
+      "tags": [
+        "股权",
+        "发行"
+      ],
+      "definition": "私募公司首次向公众投资者发行股票并在交易所挂牌的过程",
+      "source": "SEC",
+      "first_added": "2026-11-18",
+      "last_updated": "2026-11-18"
+    },
+    {
+      "id": "ECO-083",
+      "term": "市值",
+      "aliases": [
+        "Market Capitalization",
+        "Market Cap"
+      ],
+      "category": "市场机制与交易",
+      "tags": [
+        "股权"
+      ],
+      "definition": "公司全部流通股按现价计算的总价值，为股票规模分类依据",
+      "source": "交易所官方行情（需核实原文）",
+      "first_added": "2026-11-18",
+      "last_updated": "2026-11-18"
+    },
+    {
+      "id": "ECO-084",
+      "term": "基点",
+      "aliases": [
+        "Basis Point",
+        "bp",
+        "bps"
+      ],
+      "category": "市场机制与交易",
+      "tags": [
+        "计量"
+      ],
+      "definition": "万分之一（0.01%）的利率与收益率变动计量单位",
+      "source": "市场通用惯例",
+      "first_added": "2026-11-18",
+      "last_updated": "2026-11-18"
+    },
+    {
+      "id": "ECO-085",
+      "term": "量化宽松",
+      "aliases": [
+        "QE",
+        "Quantitative Easing"
+      ],
+      "category": "监管与政策",
+      "tags": [
+        "货币政策"
+      ],
+      "definition": "央行购买长期债券等资产向金融体系注入流动性的非常规货币政策",
+      "source": "美联储",
+      "first_added": "2026-11-18",
+      "last_updated": "2026-11-18"
+    },
+    {
+      "id": "ECO-086",
+      "term": "量化紧缩",
+      "aliases": [
+        "QT",
+        "Quantitative Tightening"
+      ],
+      "category": "监管与政策",
+      "tags": [
+        "货币政策"
+      ],
+      "definition": "央行缩减资产负债表规模、回收流动性的货币政策操作",
+      "source": "美联储",
+      "first_added": "2026-11-18",
+      "last_updated": "2026-11-18"
+    },
+    {
+      "id": "ECO-087",
+      "term": "巴塞尔协议III",
+      "aliases": [
+        "Basel III",
+        "巴塞尔III"
+      ],
+      "category": "监管与政策",
+      "tags": [
+        "银行监管"
+      ],
+      "definition": "全球银行监管框架：资本充足率、杠杆率、流动性与逆周期缓冲要求",
+      "source": "BIS",
+      "first_added": "2026-11-18",
+      "last_updated": "2026-11-18"
+    },
+    {
+      "id": "ECO-088",
+      "term": "反洗钱",
+      "aliases": [
+        "AML",
+        "Anti-Money Laundering"
+      ],
+      "category": "监管与政策",
+      "tags": [
+        "合规"
+      ],
+      "definition": "防范掩饰非法所得来源行为的法律、制度与监测体系",
+      "source": "FATF",
+      "first_added": "2026-11-18",
+      "last_updated": "2026-11-18"
+    },
+    {
+      "id": "ECO-089",
+      "term": "KYC",
+      "aliases": [
+        "了解你的客户",
+        "Know Your Customer"
+      ],
+      "category": "监管与政策",
+      "tags": [
+        "合规"
+      ],
+      "definition": "金融机构核实客户身份与风险状况的尽职调查要求",
+      "source": "FATF（需核实原文）",
+      "first_added": "2026-11-18",
+      "last_updated": "2026-11-18"
+    },
+    {
+      "id": "ECO-090",
+      "term": "宏观审慎评估",
+      "aliases": [
+        "MPA",
+        "Macroprudential Assessment"
+      ],
+      "category": "监管与政策",
+      "tags": [
+        "银行监管"
+      ],
+      "definition": "中国人民银行对银行体系系统性风险实施的综合评估框架",
+      "source": "中国人民银行（需核实原文）",
+      "first_added": "2026-11-18",
+      "last_updated": "2026-11-18"
+    },
+    {
+      "id": "ECO-091",
+      "term": "市盈率",
+      "aliases": [
+        "P/E",
+        "Price-to-Earnings Ratio"
+      ],
+      "category": "估值与风险",
+      "tags": [
+        "估值"
+      ],
+      "definition": "股价与每股盈利之比，衡量股权估值的常用相对指标",
+      "source": "交易所官方行情（需核实原文）",
+      "first_added": "2026-11-18",
+      "last_updated": "2026-11-18"
+    },
+    {
+      "id": "ECO-092",
+      "term": "市净率",
+      "aliases": [
+        "P/B",
+        "Price-to-Book Ratio"
+      ],
+      "category": "估值与风险",
+      "tags": [
+        "估值"
+      ],
+      "definition": "股价与每股净资产之比，常用于银行与重资产行业估值",
+      "source": "交易所官方行情（需核实原文）",
+      "first_added": "2026-11-18",
+      "last_updated": "2026-11-18"
+    },
+    {
+      "id": "ECO-093",
+      "term": "股息率",
+      "aliases": [
+        "Dividend Yield"
+      ],
+      "category": "估值与风险",
+      "tags": [
+        "估值",
+        "收益"
+      ],
+      "definition": "近十二个月每股分红与股价之比，衡量现金回报水平",
+      "source": "交易所官方行情（需核实原文）",
+      "first_added": "2026-11-18",
+      "last_updated": "2026-11-18"
+    },
+    {
+      "id": "ECO-094",
+      "term": "风险溢价",
+      "aliases": [
+        "Risk Premium"
+      ],
+      "category": "估值与风险",
+      "tags": [
+        "估值",
+        "风险"
+      ],
+      "definition": "投资者承担额外风险所要求的超出无风险利率的补偿收益率",
+      "source": "Damodaran（需核实原文）",
+      "first_added": "2026-11-18",
+      "last_updated": "2026-11-18"
+    },
+    {
+      "id": "ECO-095",
+      "term": "信用评级",
+      "aliases": [
+        "Credit Rating"
+      ],
+      "category": "估值与风险",
+      "tags": [
+        "信用",
+        "风险"
+      ],
+      "definition": "评级机构对发行人偿付能力的意见符号（AAA 至 D），影响融资成本",
+      "source": "S&P / Moody's / Fitch",
+      "first_added": "2026-11-18",
+      "last_updated": "2026-11-18"
+    },
+    {
+      "id": "ECO-096",
+      "term": "在险价值",
+      "aliases": [
+        "VaR",
+        "Value at Risk"
+      ],
+      "category": "估值与风险",
+      "tags": [
+        "风险"
+      ],
+      "definition": "给定置信水平与持有期内投资组合可能遭受的最大损失估计",
+      "source": "Basel III（需核实原文）",
+      "first_added": "2026-11-18",
+      "last_updated": "2026-11-18"
+    },
+    {
+      "id": "ECO-097",
+      "term": "波动率指数",
+      "aliases": [
+        "VIX",
+        "恐慌指数"
+      ],
+      "category": "估值与风险",
+      "tags": [
+        "风险",
+        "指标"
+      ],
+      "definition": "基于 S&P 500 期权隐含波动率的市场恐慌情绪指数",
+      "source": "CBOE",
+      "first_added": "2026-11-18",
+      "last_updated": "2026-11-18"
+    }
+  ]
+}

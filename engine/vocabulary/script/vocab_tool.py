@@ -10,11 +10,11 @@
 
 用法示例：
   python engine/vocabulary/script/vocab_tool.py topics
-  python engine/vocabulary/script/vocab_tool.py init --topic ai-security
-  python engine/vocabulary/script/vocab_tool.py import --topic ai-security --file engine/vocabulary/data/ai-security/imports/2026-11-13_seed-ai-security.md
-  python engine/vocabulary/script/vocab_tool.py check --topic ai-security
-  python engine/vocabulary/script/vocab_tool.py tag --topic ai-security --id AIS-001 --add 蓝队 --remove 红队
-  python engine/vocabulary/script/vocab_tool.py export --topic ai-security --format all
+  python engine/vocabulary/script/vocab_tool.py init --topic economy
+  python engine/vocabulary/script/vocab_tool.py import --topic economy --file engine/vocabulary/data/economy/imports/2026-11-13_seed-economy.md
+  python engine/vocabulary/script/vocab_tool.py check --topic economy
+  python engine/vocabulary/script/vocab_tool.py tag --topic economy --id ECO-001 --add 宏观 --remove 区域
+  python engine/vocabulary/script/vocab_tool.py export --topic economy --format all
   python engine/vocabulary/script/vocab_tool.py index
 """
 

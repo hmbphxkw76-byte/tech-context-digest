@@ -59,7 +59,7 @@
       { "path": "data/processed/economy/dubai/apartment/dubai_apartment_indicator_registry_2027-01.xlsx", "type": "registry", "business_line": "content/economy/dubai/apartment" }
     ],
     "vocab_terms": [
-      { "path": "engine/vocabulary/data/financial-markets/terms.md", "type": "vocab", "business_line": "engine/vocabulary" }
+      { "path": "engine/vocabulary/data/economy/terms.md", "type": "vocab", "business_line": "engine/vocabulary" }
     ]
   }
 }

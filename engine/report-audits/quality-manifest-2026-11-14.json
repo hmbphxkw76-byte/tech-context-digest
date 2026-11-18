@@ -64,11 +64,8 @@
       {"path": "data/processed/tech/weekly-roundup/ai_trend_ledger.md", "type": "registry", "business_line": "content/tech/weekly-roundup"}
     ],
     "vocab_terms": [
-      {"path": "engine/vocabulary/data/ai-security/terms.md", "type": "vocab", "business_line": "engine/vocabulary"},
-      {"path": "engine/vocabulary/data/cybersecurity/terms.md", "type": "vocab", "business_line": "engine/vocabulary"},
-      {"path": "engine/vocabulary/data/financial-markets/terms.md", "type": "vocab", "business_line": "engine/vocabulary"},
-      {"path": "engine/vocabulary/data/economy/terms.md", "type": "vocab", "business_line": "engine/vocabulary"},
-      {"path": "engine/vocabulary/data/ai-agent/terms.md", "type": "vocab", "business_line": "engine/vocabulary"}
+      {"path": "engine/vocabulary/data/tech/terms.md", "type": "vocab", "business_line": "engine/vocabulary"},
+      {"path": "engine/vocabulary/data/economy/terms.md", "type": "vocab", "business_line": "engine/vocabulary"}
     ]
   },
   "findings": [],

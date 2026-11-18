@@ -11,16 +11,25 @@ vocabulary/
 ├── README.md                          # 本文件：标准操作流程（SOP）
 ├── INDEX.md                           # 全主题索引（index 命令自动生成，勿手工编辑）
 ├── config/
-│   └── topics.json                    # 主题注册表（扩展唯一改动点，单一事实源）
+│   ├── topics.json                    # 主题注册表（扩展唯一改动点，单一事实源）
+│   └── sync.json                      # 词条 → 业务提示词自动同步绑定
 ├── script/
-│   └── vocab_tool.py                  # 核心脚本（主题无关，仅依赖 Python 标准库）
+│   ├── vocab_tool.py                  # 核心脚本（主题无关，仅依赖 Python 标准库）
+│   └── sync_vocab.py                  # 词条自动同步脚本
+├── prompts/                           # 多主题提示词库（与 data/<theme> 同主题对齐，见第十节）
+│   ├── README.md                      # 总览：分类 / 原则 / 扩展
+│   └── <theme>/                       # economy / tech / education / international / political / society
+│       ├── README.md                  # 主题库：定义边界 / 术语对齐 / 场景词汇 / 索引 / 核验 / 缺口
+│       └── prompt-<slug>.md            # 可复用提示词（work/life/research/learning-brief、skeleton）
 └── data/
-    └── ai-security/                   # 每主题一个数据目录（由 init 创建）
+    └── <theme>/                        # 每主题一个数据目录（与 content/ 六主题同名，由 init 创建）
         ├── terms.md                   # 结构化存储（9 列 md-table 契约，脚本统一读写）
         ├── imports/                   # 批量导入文件暂存（保留留痕）
-        │   └── 2026-11-13_seed-ai-security.md
+        │   └── 2026-11-18_merge-from-financial-markets.md
         └── exports/                   # 导出产物（json / csv / jsonl，供上层对接）
 ```
+
+**主题与目录对齐（硬性）**：`data/<theme>/` 与 `prompts/<theme>/` 的主题名必须与 `content/` 六主题（`economy` / `tech` / `education` / `international` / `political` / `society`）及 `engine/tools/layout.json` 的 `themes` 一致；新增主题须先登记 `layout.json` 与 `topics.json`。
 
 **三层解耦设计**（主题与实现完全分离的保证）：
 
@@ -35,11 +44,14 @@ vocabulary/
 ## 二、快速开始（AI 安全词汇已就位）
 
 ```powershell
-python engine/vocabulary/script/vocab_tool.py topics                                          # 查看已注册主题
-python engine/vocabulary/script/vocab_tool.py check --topic ai-security                       # 质量校验（当前 47 条，0 错误 0 警告）
-python engine/vocabulary/script/vocab_tool.py export --topic ai-security --format all         # 一键导出 json/csv/jsonl
+python engine/vocabulary/script/vocab_tool.py topics                                          # 查看已注册主题（当前 6 个）
+python engine/vocabulary/script/vocab_tool.py check --topic economy                           # 质量校验（当前 97 条，0 错误 0 警告）
+python engine/vocabulary/script/vocab_tool.py export --topic economy --format all             # 一键导出 json/csv/jsonl
 python engine/vocabulary/script/vocab_tool.py index                                           # 重新生成全主题索引
+python engine/vocabulary/script/vocab_tool.py topic-check                                     # 注册表与目录一致性审计
 ```
+
+提示词库入口：[prompts/README.md](./prompts/README.md)（总览）与各主题 `prompts/<theme>/README.md`。
 
 ## 三、全链路标准操作流程（六步）
 
@@ -117,7 +129,7 @@ python engine/vocabulary/script/vocab_tool.py topic-add --topic financial-market
 
 命令自动完成（实时同步主题↔目录映射）：
 
-1. **注册表登记**：写入 topics.json（自动备份到 `data/topic-backups/`、注册表版本号自动递增）；`--prefix` 缺省自动派生并查重。
+1. **注册表登记**：写入 topics.json（自动备份到 `data/topic-backups/`、注册表版本号自动递增）；`--prefix` 缺省自动派生并查重。同时须在 `engine/tools/layout.json` 登记主题与维度、在 `prompts/<theme>/` 建提示词库（见第十节）。
 2. **目录结构创建**：`data/<topic>/` 三件套（terms.md 词库骨架 + imports/ + exports/）；若同名目录已存在则**孤儿纳管**（不覆盖既有内容）。
 3. **索引同步**：INDEX.md 自动重建。
 4. **操作日志**：`data/topic-ops.log` 逐条留痕（动作 / 前缀 / 分类 / 备份文件名 / 结果）。
@@ -239,11 +251,38 @@ python engine/vocabulary/script/vocab_tool.py topic-add --topic financial-market
 
 | 词汇库主题 | 目标提示词 | 接入日期 |
 |---|---|---|
-| ai-security（49 条，v1.3） | `content/tech/weekly-roundup/prompts/business-config.md`「词汇速览 · AI 安全」区块（插于第七节版本记录之前） | 2026-11-13 |
-| cybersecurity（153 条，v1.4） | `content/tech/security/dubai/prompts/business-config.md`「词汇速览」区块（插于第九节版本记录之前） | 2026-11-13 |
-| financial-markets（49 条，v1.1） | `content/economy/dubai/apartment/prompts/business-config.md`「词汇速览」区块（插于第十三节版本记录之前） | 2026-11-13 |
-| economy（48 条，v1.3） | `content/economy/trends/prompts/business-config.md`「词汇速览」区块（插于第七节版本记录之前） | 2026-11-13 |
-| ai-agent（73 条，v1.2） | `content/tech/weekly-roundup/prompts/business-config.md`「词汇速览 · AI Agent」区块（插于第七节版本记录之前） | 2026-11-13 |
+| tech（AI 类 12 分类，119 条） | `content/tech/weekly-roundup/prompts/business-config.md`「词汇速览 · 科技」区块（插于第八节版本记录之前） | 2026-11-18 |
+| tech（网络类 6 分类，153 条） | `content/tech/security/dubai/prompts/business-config.md`「词汇速览」区块（插于第十节版本记录之前） | 2026-11-18 |
+| economy（宏观经济 3 分类，48 条） | `content/economy/trends/prompts/business-config.md`「词汇速览」区块（插于第八节版本记录之前） | 2026-11-18 |
+| economy（金融 6 分类，49 条） | `content/economy/dubai/apartment/prompts/business-config.md`「词汇速览」区块（插于第十四节版本记录之前） | 2026-11-18 |
+
+> 归并后 `tech` / `economy` 各按 `categories_include` 拆分为不同业务线区块，各业务线原有词汇范围不变。
+
+---
+
+## 十、提示词库（prompts/）— 与词库同主题对齐的可复用提示词层
+
+提示词库与词库**同主题、同目录名**管理，随词条演进维护；入口 [prompts/README.md](./prompts/README.md)。
+
+### 10.1 目录与命名
+
+| 位置 | 规则 | 示例 |
+|---|---|---|
+| `prompts/<theme>/README.md` | 主题库总览（定义边界 / 术语对齐 / 场景词汇 / 索引 / 核验 / 缺口） | `prompts/economy/README.md` |
+| `prompts/<theme>/prompt-<slug>.md` | 可复用提示词；slug ∈ `work-brief` / `life-brief` / `research-brief` / `learning-brief` / `skeleton` | `prompt-work-brief.md` |
+
+- `<theme>` 必须命中 `topics.json` 注册主题与 `content/` 六主题。
+- 空主题仅交 `README.md` + `prompt-skeleton.md`（骨架），词库采集后补全。
+- 上位规范 `engine/docs/structure-and-naming-spec.md` 第 7.2 节的位置登记待一次性同步补登（本节为该位置的现行规则）。
+
+### 10.2 维护规则
+
+| 项 | 规则 |
+|---|---|
+| 术语单一事实源 | 提示词中的术语规范形与同义表达**只引用** `data/<theme>/terms.md`，不复制定义 |
+| 词条变更 | 走 `import` / `tag`；如影响提示词术语约束，同步更新 `prompts/<theme>/README.md` 第 2.2 节 |
+| 新增场景提示词 | 复用四场景结构；正文含「适用 / 不适用 / 边界 / 常见误解 / 信息缺口」 |
+| 核验 | 对照 `prompts/README.md` 第五节口径逐项自检；缺口显式登记于主题 README 第六节 |
 
 ---
 
@@ -262,3 +301,4 @@ python engine/vocabulary/script/vocab_tool.py topic-add --topic financial-market
 | v1.8 | 2026-11-14 | 绑定迁移（业务线合并） | trends/ai-security 与 trends/ai-agent 合并为 content/tech/regional/global/trends；两条词汇主题（ai-security 49 条、ai-agent 73 条）改绑定至 `content/tech/regional/global/trends/prompts/business-config.md`（两个「词汇速览」区块）；sync.json v1.4 |
 | v1.9 | 2026-11-14 | 绑定路径更新（地区优先重构） | 地区维度优先级调整：`technology/ai/{sub_direction}/{region}` → `technology/ai/{region}/{sub_direction}`；ai-security / ai-agent 绑定改指 `content/tech/regional/global/trends/prompts/business-config.md`，cybersecurity 改指 `content/tech/regional/dubai/security/prompts/business-config.md`；sync.json v1.5 |
 | v1.10 | 2026-11-17 | 绑定路径迁移（六主题回滚） | 内容结构回滚至 economy/tech 六主题：ai-security / ai-agent → `content/tech/weekly-roundup/...`，cybersecurity → `content/tech/security/dubai/...`，financial-markets → `content/economy/dubai/apartment/...`，economy → `content/economy/trends/...`；sync.json v1.6 |
+| v1.11 | 2026-11-18 | 主题归并 + 提示词库 | `data/` 对齐 `content/` 六主题：economy（归并 financial-markets，97 条）、tech（归并 ai-agent / ai-security / cybersecurity，272 条）；新建 education / international / political / society 空主题；新增 `prompts/` 多主题提示词库；sync.json 改按 `categories_include` 拆分（v1.7） |

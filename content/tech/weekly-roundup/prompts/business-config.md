@@ -63,32 +63,6 @@
 - **纯 HTML 交付**（业务配置声明，走 monitoring-common-spec 第 1 节例外条款）：富样式手写自包含 HTML 为主交付物，落盘 `reports/{{YYYY-MM-DD}}_weekly.html`（日期 = 数据截止日）；md 源稿存 `sources/` 同名存档，**不参与 `md2html.py` 自动转换**（防止覆盖手工渲染）。
 - 周报按归档保留策略滚动（weekly 12 期，超限移入 `reports/archives/`）。
 
-<!-- VOCAB-SYNC:BEGIN topic=ai-security do-not-edit -->
-## 词汇速览 · AI 安全（词汇库自动同步）
-
-> 由 `engine/vocabulary/script/sync_vocab.py` 自动维护：词汇库 ai-security v1.3，共 49 条（同步于 2026-11-14T15:24:27）。标记区间内请勿手工编辑；词条变更走词汇库导入流程（engine/vocabulary/README.md 第三节），同步机制见第九节。
-
-- **攻击技术**（12）：提示注入（Prompt Injection、PI）；间接提示注入（Indirect Prompt Injection、IPI）；越狱（Jailbreak、LLM 越狱）；数据投毒（Data Poisoning、训练数据投毒）；模型投毒（Model Poisoning、权重投毒）；后门攻击（Backdoor Attack、木马化模型）；模型窃取（Model Extraction、Model Theft、模型提取攻击）；训练数据提取（Training Data Extraction、模型反演、Model Inversion）；成员推断（Membership Inference）；Agent 工具滥用（Agent Tool Abuse、Confused Deputy、越权工具调用）；多模态注入（Multimodal Injection、跨模态注入）；提示词泄露（Prompt Leaking、系统提示提取）
-- **防御与检测**（11）：威胁情报（Threat Intelligence、CTI）；护栏（Guardrails、LLM Guardrails、安全护栏）；提示注入检测（Prompt Injection Detection）；RAG 安全（检索增强生成安全、RAG Security）；DLP（Data Loss Prevention、数据防泄漏）；DSPM（Data Security Posture Management、数据安全态势管理）；Shadow AI（影子 AI、未申报 AI 使用）；零信任（Zero Trust、ZT）；EDR（Endpoint Detection and Response、端点检测与响应）；AI 事件响应（AI Incident Response）；模型水印（Model Watermarking、AI 内容溯源）
-- **工具与平台**（3）：PyRIT（Microsoft PyRIT）；promptfoo；garak（LLM vulnerability scanner）
-- **框架与标准**（8）：OWASP Top 10 for LLM Applications（LLM Top 10、OWASP LLM Top 10）；OWASP Agentic Top 10（Agentic AI Top 10）；NIST AI RMF（AI 风险管理框架、AI Risk Management Framework）；EU AI Act（欧盟人工智能法案、Regulation (EU) 2024/1689）；ISO/IEC 42001（AI 管理体系、AIMS）；MITRE ATT&CK（ATT&CK）；MITRE ATLAS（ATLAS、Adversarial Threat Landscape for AI Systems）；模型上下文协议（MCP、Model Context Protocol）
-- **认证与资质**（4）：AI 红队认证考试（AI Red Team Certification、AI 红队认证）；AAIS（ISACA Advanced in AI Security、ISACA AI 安全高级认证）；AIGP（AI Governance Professional、IAPP AIGP）；CISSP（注册信息系统安全专家）
-- **组织与岗位**（5）：红队（Red Team、攻击模拟队）；蓝队（Blue Team、防御团队）；紫队（Purple Team）；AI 红队（AI Red Team、LLM 红队、AI Red Teaming）；SOC（Security Operations Center、安全运营中心）
-- **基准与评估**（6）：SWE-bench Verified（SWE-bench）；OSWorld（OSWorld 基准）；HarmBench（HarmBench 基准）；人类基线（Human Baseline）；幻觉（Hallucination、模型幻觉）；基准饱和（Benchmark Saturation）
-<!-- VOCAB-SYNC:END -->
-
-<!-- VOCAB-SYNC:BEGIN topic=ai-agent do-not-edit -->
-## 词汇速览 · AI Agent（词汇库自动同步）
-
-> 由 `engine/vocabulary/script/sync_vocab.py` 自动维护：词汇库 ai-agent v1.2，共 73 条（同步于 2026-11-14T15:24:27）。标记区间内请勿手工编辑；词条变更走词汇库导入流程（engine/vocabulary/README.md 第三节），同步机制见第九节。
-
-- **模型与厂商**（19）：多模态模型（Multimodal Model、多模态）；推理模型（Reasoning Model、推理增强模型、思维链模型）；OpenAI（openai.com）；Anthropic（anthropic.com）；Google DeepMind（谷歌deepmind、Google AI）；Meta AI（Meta、Facebook AI）；xAI（X.AI、xAI 公司）；Mistral AI（Mistral）；DeepSeek（深度求索）；阿里通义千问（Qwen、通义千问）；智谱 GLM（GLM、Zhipu AI、智谱AI）；月之暗面 Kimi（Moonshot AI、Kimi）；字节豆包（Doubao、豆包大模型）；百度文心（ERNIE、文心一言）；GPT（GPT 系列、GPT-4、GPT-5）；Claude（Claude 系列、Claude Sonnet、Claude Opus）；Gemini（Gemini 系列）；Llama（Llama 系列、Llama 开源）；Grok（Grok 系列）
-- **Agent 技术与框架**（14）：AI Agent（智能体、Agent）；多智能体系统（Multi-Agent System、MAS、多智能体协作）；工具调用（Function Calling、Tool Use、函数调用）；模型上下文协议（MCP、Model Context Protocol）；A2A（Agent-to-Agent、Agent2Agent 协议）；ReAct（Reasoning and Acting）；Agent 记忆（Agent Memory、长期记忆）；Computer Use（计算机使用、屏幕操作 Agent）；LangChain（LangChain 框架）；LangGraph（LangGraph 编排）；LlamaIndex（LlamaIndex 框架）；AutoGen（Microsoft AutoGen）；CrewAI（CrewAI 框架）；Dify（Dify 平台）
-- **编码工具与 IDE**（13）：AI IDE（AI 集成开发环境、AI-native IDE）；AI 编码助手（Coding Assistant、代码助手）；Cursor（Cursor IDE、Anysphere Cursor）；GitHub Copilot（Copilot）；Windsurf（Windsurf IDE、Codeium）；Trae（Trae IDE）；Claude Code（Claude Code CLI）；Codex（OpenAI Codex、Codex CLI）；Devin（Devin AI）；OpenHands（OpenHands 框架、原 OpenDevin）；Aider（Aider CLI）；Cline（Cline 插件）；Vibe Coding（氛围编程）
-- **应用与产品**（15）：ChatGPT（chatgpt.com）；Perplexity（Perplexity AI）；NotebookLM（NotebookLM 产品）；Microsoft 365 Copilot（M365 Copilot、Office Copilot）；Deep Research（深度研究）；AI 搜索（AI Search、答案引擎）；Midjourney（MJ）；Sora（OpenAI Sora）；Suno（Suno AI）；ElevenLabs（ElevenLabs 语音）；Lovable（Lovable.dev）；Bolt.new（Bolt）；v0（v0.dev）；Replit Agent（Replit）；Manus（Manus AI）
-- **概念与评估**（12）：大语言模型（LLM、Large Language Model、大模型）；生成式 AI（Generative AI、AIGC）；开源权重模型（Open-Weights Model、开放权重）；上下文窗口（Context Window、上下文长度）；Token（词元）；幻觉（Hallucination、模型幻觉）；微调（Fine-tuning、SFT、监督微调）；RLHF（基于人类反馈的强化学习、Reinforcement Learning from Human Feedback）；蒸馏（Distillation、模型蒸馏）；Prompt 工程（Prompt Engineering、提示词工程）；SWE-bench（SWE-bench Verified、SWE-bench 基准）；GAIA（GAIA 基准）
-<!-- VOCAB-SYNC:END -->
-
 ## 七、信息分层与决策交付（强制项）
 
 - **分层交付**：决策摘要（≤1 屏，仅结论）/ 证据层 / 原始层；共享 boilerplate 上移通用基座第十节，不复制（规范：`engine/templates/information-layering-spec.md`）。
@@ -101,6 +75,25 @@
 - **盲区**：P0 四类（就业 / 收入 / 空置 / 竣工）优先消号。
 
 ---
+
+<!-- VOCAB-SYNC:BEGIN topic=tech do-not-edit -->
+## 词汇速览 · 科技（词汇库自动同步）
+
+> 由 `engine/vocabulary/script/sync_vocab.py` 自动维护：词汇库 tech v1.3，共 119 条（同步于 2026-11-18T08:50:16）。标记区间内请勿手工编辑；词条变更走词汇库导入流程（engine/vocabulary/README.md 第三节），同步机制见第九节。
+
+- **模型与厂商**（19）：多模态模型（Multimodal Model、多模态）；推理模型（Reasoning Model、推理增强模型、思维链模型）；OpenAI（openai.com）；Anthropic（anthropic.com）；Google DeepMind（谷歌deepmind、Google AI）；Meta AI（Meta、Facebook AI）；xAI（X.AI、xAI 公司）；Mistral AI（Mistral）；DeepSeek（深度求索）；阿里通义千问（Qwen、通义千问）；智谱 GLM（GLM、Zhipu AI、智谱AI）；月之暗面 Kimi（Moonshot AI、Kimi）；字节豆包（Doubao、豆包大模型）；百度文心（ERNIE、文心一言）；GPT（GPT 系列、GPT-4、GPT-5）；Claude（Claude 系列、Claude Sonnet、Claude Opus）；Gemini（Gemini 系列）；Llama（Llama 系列、Llama 开源）；Grok（Grok 系列）
+- **Agent 技术与框架**（13）：AI Agent（智能体、Agent）；多智能体系统（Multi-Agent System、MAS、多智能体协作）；工具调用（Function Calling、Tool Use、函数调用）；A2A（Agent-to-Agent、Agent2Agent 协议）；ReAct（Reasoning and Acting）；Agent 记忆（Agent Memory、长期记忆）；Computer Use（计算机使用、屏幕操作 Agent）；LangChain（LangChain 框架）；LangGraph（LangGraph 编排）；LlamaIndex（LlamaIndex 框架）；AutoGen（Microsoft AutoGen）；CrewAI（CrewAI 框架）；Dify（Dify 平台）
+- **编码工具与 IDE**（13）：AI IDE（AI 集成开发环境、AI-native IDE）；AI 编码助手（Coding Assistant、代码助手）；Cursor（Cursor IDE、Anysphere Cursor）；GitHub Copilot（Copilot）；Windsurf（Windsurf IDE、Codeium）；Trae（Trae IDE）；Claude Code（Claude Code CLI）；Codex（OpenAI Codex、Codex CLI）；Devin（Devin AI）；OpenHands（OpenHands 框架、原 OpenDevin）；Aider（Aider CLI）；Cline（Cline 插件）；Vibe Coding（氛围编程）
+- **应用与产品**（15）：ChatGPT（chatgpt.com）；Perplexity（Perplexity AI）；NotebookLM（NotebookLM 产品）；Microsoft 365 Copilot（M365 Copilot、Office Copilot）；Deep Research（深度研究）；AI 搜索（AI Search、答案引擎）；Midjourney（MJ）；Sora（OpenAI Sora）；Suno（Suno AI）；ElevenLabs（ElevenLabs 语音）；Lovable（Lovable.dev）；Bolt.new（Bolt）；v0（v0.dev）；Replit Agent（Replit）；Manus（Manus AI）
+- **概念与评估**（11）：大语言模型（LLM、Large Language Model、大模型）；生成式 AI（Generative AI、AIGC）；开源权重模型（Open-Weights Model、开放权重）；上下文窗口（Context Window、上下文长度）；Token（词元）；幻觉（Hallucination、模型幻觉）；微调（Fine-tuning、SFT、监督微调）；RLHF（基于人类反馈的强化学习、Reinforcement Learning from Human Feedback）；蒸馏（Distillation、模型蒸馏）；Prompt 工程（Prompt Engineering、提示词工程）；GAIA（GAIA 基准）
+- **攻击技术**（12）：提示注入（Prompt Injection、PI）；间接提示注入（Indirect Prompt Injection、IPI）；越狱（Jailbreak、LLM 越狱）；数据投毒（Data Poisoning、训练数据投毒）；模型投毒（Model Poisoning、权重投毒）；后门攻击（Backdoor Attack、木马化模型）；模型窃取（Model Extraction、Model Theft、模型提取攻击）；训练数据提取（Training Data Extraction、模型反演、Model Inversion）；成员推断（Membership Inference）；Agent 工具滥用（Agent Tool Abuse、Confused Deputy、越权工具调用）；多模态注入（Multimodal Injection、跨模态注入）；提示词泄露（Prompt Leaking、系统提示提取）
+- **防御与检测**（11）：威胁情报（Threat Intelligence、CTI）；护栏（Guardrails、LLM Guardrails、安全护栏）；提示注入检测（Prompt Injection Detection）；RAG 安全（检索增强生成安全、RAG Security）；DLP（Data Loss Prevention、数据防泄漏）；DSPM（Data Security Posture Management、数据安全态势管理）；Shadow AI（影子 AI、未申报 AI 使用）；零信任（Zero Trust、ZT）；EDR（Endpoint Detection and Response、端点检测与响应）；AI 事件响应（AI Incident Response）；模型水印（Model Watermarking、AI 内容溯源）
+- **工具与平台**（3）：PyRIT（Microsoft PyRIT）；promptfoo；garak（LLM vulnerability scanner）
+- **框架与标准**（8）：模型上下文协议（MCP、Model Context Protocol）；OWASP Top 10 for LLM Applications（LLM Top 10、OWASP LLM Top 10）；OWASP Agentic Top 10（Agentic AI Top 10）；NIST AI RMF（AI 风险管理框架、AI Risk Management Framework）；EU AI Act（欧盟人工智能法案、Regulation (EU) 2024/1689）；ISO/IEC 42001（AI 管理体系、AIMS）；MITRE ATT&CK（ATT&CK）；MITRE ATLAS（ATLAS、Adversarial Threat Landscape for AI Systems）
+- **认证与资质**（4）：AI 红队认证考试（AI Red Team Certification、AI 红队认证）；AAIS（ISACA Advanced in AI Security、ISACA AI 安全高级认证）；AIGP（AI Governance Professional、IAPP AIGP）；CISSP（注册信息系统安全专家）
+- **组织与岗位**（5）：红队（Red Team、攻击模拟队）；蓝队（Blue Team、防御团队）；紫队（Purple Team）；AI 红队（AI Red Team、LLM 红队、AI Red Teaming）；SOC（Security Operations Center、安全运营中心）
+- **基准与评估**（5）：SWE-bench（SWE-bench Verified、SWE-bench 基准）；OSWorld（OSWorld 基准）；HarmBench（HarmBench 基准）；人类基线（Human Baseline）；基准饱和（Benchmark Saturation）
+<!-- VOCAB-SYNC:END -->
 
 ## 八、版本记录
 

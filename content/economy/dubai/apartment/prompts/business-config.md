@@ -235,19 +235,6 @@
 
 ---
 
-<!-- VOCAB-SYNC:BEGIN topic=financial-markets do-not-edit -->
-## 词汇速览（词汇库自动同步）
-
-> 由 `engine/vocabulary/script/sync_vocab.py` 自动维护：词汇库 financial-markets v1.1，共 49 条（同步于 2026-11-14T15:24:27）。标记区间内请勿手工编辑；词条变更走词汇库导入流程（engine/vocabulary/README.md 第三节），同步机制见第九节。
-
-- **宏观与经济指标**（10）：CPI（消费者价格指数、Consumer Price Index）；核心CPI（Core CPI、核心消费者价格指数）；PPI（生产者价格指数、Producer Price Index）；GDP（国内生产总值、Gross Domestic Product）；PMI（采购经理人指数、Purchasing Managers' Index）；失业率（Unemployment Rate）；非农就业（Nonfarm Payrolls、NFP）；基准利率（政策利率、Policy Rate）；通胀率（Inflation、通货膨胀率）；收益率曲线（Yield Curve、利率期限结构）
-- **金融机构与组织**（8）：美联储（Federal Reserve、FED、美国联邦储备系统）；欧洲央行（ECB、European Central Bank）；中国人民银行（PBOC、央行）；国际货币基金组织（IMF、International Monetary Fund）；世界银行（World Bank、WB）；国际清算银行（BIS、Bank for International Settlements）；FOMC（联邦公开市场委员会、Federal Open Market Committee）；主权财富基金（Sovereign Wealth Fund、SWF）
-- **金融工具与产品**（10）：国债（政府债券、Government Bond、Treasury）；EIBOR（Emirates Interbank Offered Rate、迪拜银行间同业拆借利率）；SOFR（担保隔夜融资利率、Secured Overnight Financing Rate）；LIBOR（伦敦银行间同业拆借利率、London Interbank Offered Rate）；掉期（互换、Swap）；利率互换（IRS、Interest Rate Swap）；期货（Futures）；期权（Options）；ETF（交易所交易基金、Exchange-Traded Fund）；REIT（房地产投资信托、Real Estate Investment Trust）
-- **市场机制与交易**（8）：流动性（Liquidity）；做市商（Market Maker）；卖空（Short Selling、做空）；杠杆（Leverage）；保证金（Margin）；IPO（首次公开募股、Initial Public Offering）；市值（Market Capitalization、Market Cap）；基点（Basis Point、bp、bps）
-- **监管与政策**（6）：量化宽松（QE、Quantitative Easing）；量化紧缩（QT、Quantitative Tightening）；巴塞尔协议III（Basel III、巴塞尔III）；反洗钱（AML、Anti-Money Laundering）；KYC（了解你的客户、Know Your Customer）；宏观审慎评估（MPA、Macroprudential Assessment）
-- **估值与风险**（7）：市盈率（P/E、Price-to-Earnings Ratio）；市净率（P/B、Price-to-Book Ratio）；股息率（Dividend Yield）；风险溢价（Risk Premium）；信用评级（Credit Rating）；在险价值（VaR、Value at Risk）；波动率指数（VIX、恐慌指数）
-<!-- VOCAB-SYNC:END -->
-
 ## 十三、信息分层与决策交付（强制项）
 
 - **分层交付**：决策摘要（≤1 屏，仅结论）/ 证据层（逻辑）/ 原始层（台账与来源）；共享 boilerplate 上移通用基座第十节，不复制（规范：`engine/templates/information-layering-spec.md`）。
@@ -261,6 +248,19 @@
 - **盲区**：P0 四类（就业 / 收入 / 空置 / 竣工）优先消号，台账 `engine/report-audits/blind-spot-ledger.md`。
 
 ---
+
+<!-- VOCAB-SYNC:BEGIN topic=economy do-not-edit -->
+## 词汇速览（词汇库自动同步）
+
+> 由 `engine/vocabulary/script/sync_vocab.py` 自动维护：词汇库 economy v1.4，共 49 条（同步于 2026-11-18T08:32:41）。标记区间内请勿手工编辑；词条变更走词汇库导入流程（engine/vocabulary/README.md 第三节），同步机制见第九节。
+
+- **宏观与经济指标**（10）：CPI（消费者价格指数、Consumer Price Index）；核心CPI（Core CPI、核心消费者价格指数）；PPI（生产者价格指数、Producer Price Index）；GDP（国内生产总值、Gross Domestic Product）；PMI（采购经理人指数、Purchasing Managers' Index）；失业率（Unemployment Rate）；非农就业（Nonfarm Payrolls、NFP）；基准利率（政策利率、Policy Rate）；通胀率（Inflation、通货膨胀率）；收益率曲线（Yield Curve、利率期限结构）
+- **金融机构与组织**（8）：美联储（Federal Reserve、FED、美国联邦储备系统）；欧洲央行（ECB、European Central Bank）；中国人民银行（PBOC、央行）；国际货币基金组织（IMF、International Monetary Fund）；世界银行（World Bank、WB）；国际清算银行（BIS、Bank for International Settlements）；FOMC（联邦公开市场委员会、Federal Open Market Committee）；主权财富基金（Sovereign Wealth Fund、SWF）
+- **金融工具与产品**（10）：国债（政府债券、Government Bond、Treasury）；EIBOR（Emirates Interbank Offered Rate、迪拜银行间同业拆借利率）；SOFR（担保隔夜融资利率、Secured Overnight Financing Rate）；LIBOR（伦敦银行间同业拆借利率、London Interbank Offered Rate）；掉期（互换、Swap）；利率互换（IRS、Interest Rate Swap）；期货（Futures）；期权（Options）；ETF（交易所交易基金、Exchange-Traded Fund）；REIT（房地产投资信托、Real Estate Investment Trust）
+- **市场机制与交易**（8）：流动性（Liquidity）；做市商（Market Maker）；卖空（Short Selling、做空）；杠杆（Leverage）；保证金（Margin）；IPO（首次公开募股、Initial Public Offering）；市值（Market Capitalization、Market Cap）；基点（Basis Point、bp、bps）
+- **估值与风险**（7）：市盈率（P/E、Price-to-Earnings Ratio）；市净率（P/B、Price-to-Book Ratio）；股息率（Dividend Yield）；风险溢价（Risk Premium）；信用评级（Credit Rating）；在险价值（VaR、Value at Risk）；波动率指数（VIX、恐慌指数）
+- **监管与政策**（6）：量化宽松（QE、Quantitative Easing）；量化紧缩（QT、Quantitative Tightening）；巴塞尔协议III（Basel III、巴塞尔III）；反洗钱（AML、Anti-Money Laundering）；KYC（了解你的客户、Know Your Customer）；宏观审慎评估（MPA、Macroprudential Assessment）
+<!-- VOCAB-SYNC:END -->
 
 ## 十四、版本记录
 
