@@ -31,7 +31,7 @@
 | 目录 / 命名 | 按主题声明的维度顺序（`AGENTS.md` + `engine/tools/layout.json`） | `validate_layout.py` 对维度序列与主题声明不符判 `[E]` |
 | 页面构建 | [PAGE-BUILD-SPEC](./page-build-spec.md) 规范正文 | `page_build_check.py` P01–P15，`[E]` 阻断合并 |
 | 内容质量 | [信息分层](../templates/information-layering-spec.md) / [决策交付](../templates/decision-delivery-spec.md) | 四门禁 + 研究内核纳入统一门禁 |
-| 来源 / 数据 | 来源四级分层、双源确认、采集 SOP | `source_check.py` R1–R7 + 死链探测 |
+| 来源 / 数据 | 来源四级分层、双源确认、采集 SOP | `source_check.py` R1–R8 + 死链探测 |
 | 报告审计 | [审计四环节](../audit/review-workflow.md)、L3 语义由 Agent 写证据 | `audit_tool.py run --strict` fail-fast + 标识三态 |
 | 提交 / 合并 | [多会话 Git 协议](./multi-session-git-protocol.md) | `repo_sync.py run --gate` + pre-push refspec 守卫 + main 分支保护 |
 | 运维 / 告警 | 维护任务清单、定期复盘 | CI 五工作流 + `webhook-alert.yml` + 闭环修正工单 |

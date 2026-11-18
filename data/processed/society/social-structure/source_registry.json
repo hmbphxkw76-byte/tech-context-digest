@@ -1,5 +1,5 @@
 {
- "schema_version": "1.0",
+ "schema_version": "1.1",
  "business_line": "content/society/social-structure",
  "path_rule": "business-config {{SOURCE_REGISTRY_PATH}} = data/processed/society/social-structure/source_registry.json",
  "tier_legend": {

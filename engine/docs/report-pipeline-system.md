@@ -17,7 +17,7 @@
 
 **五道防线**（左移分布，非末端集中）：
 
-1. **L0 入口拦截**：`source_check.py`（R1–R7），生成前把关来源登记 / 分级 / 双源 / 死链。
+1. **L0 入口拦截**：`source_check.py`（R1–R8），生成前把关来源登记 / 分级 / 双源 / 死链 / 登记字段。
 2. **内容四门禁**：信息分层（ID）/ 事实卡片（FC）/ 决策交付（DC）/ 盲区台账（BS），外加研究内核（M4）。
 3. **统一门禁**：`optimization_gate.py`（29 项单一入口），CI / 提交 / 审计共用同口径。
 4. **审计四环节**：生成 → 初审 → 复核 → 终审（L1 / L2 / L3 + A1–A8），标识三态 + 宽限期。
@@ -134,7 +134,7 @@ flowchart LR
 | 项 | 内容 |
 |---|---|
 | 输入 | business-config 的来源优先级、发布日历、触发器清单 |
-| 核心步骤 | ① 官方一手优先采集；② 登记 `data/processed/<theme>/<维度段...>/source_registry.json`（`source_id` / `tier` / `publisher` / `url` / `lang` / `in_synthesis`）；③ 消费机构分级主数据 `institution_tiers.json`；④ 指标字典 `metrics-dictionary.json`；⑤ 台账运行前读、运行后回写（增量另存，不覆盖历史）；⑥ 发布日历结构化；⑦ 量化数据落盘（供 N1–N8 模型） |
+| 核心步骤 | ① 官方一手优先采集；② 登记 `data/processed/<theme>/<维度段...>/source_registry.json`（`source_id` / `tier` / `publisher` / `url` / `lang` / `verify_status` / `updated` / `in_synthesis`）；③ 消费机构分级主数据 `institution_tiers.json`；④ 指标字典 `metrics-dictionary.json`；⑤ 台账运行前读、运行后回写（增量另存，不覆盖历史）；⑥ 发布日历结构化；⑦ 量化数据落盘（供 N1–N8 模型） |
 | 输出标准 | 报告内每个外部 URL 可匹配登记；关键数字有来源标注；P0 六维度来源覆盖率 100%；台账只增不改 |
 | 工具 | `source_check.py`、`release_calendar.py`、`metric_registry.py`、`_quant.py` 与 N1–N8 量化模型 |
 
@@ -143,7 +143,7 @@ flowchart LR
 | 项 | 内容 |
 |---|---|
 | 输入 | 报告 HTML + 业务线来源登记 + business-config 语言规则 |
-| 核心规则 | **四层分级**：① 官方一手（可直接采信）② 行业机构（PDF 须记日期页码）③ 挂牌门户（仅卖方预期 / 情绪）④ 媒体转述（须标「需核实原文」）；**R1–R7**：登记覆盖 / 分级邻近 / 双源确认 / 关键数字来源 / 语言规则 / 死链 / 机构分级主数据一致性 |
+| 核心规则 | **四层分级**：① 官方一手（可直接采信）② 行业机构（PDF 须记日期页码）③ 挂牌门户（仅卖方预期 / 情绪）④ 媒体转述（须标「需核实原文」）；**R1–R8**：登记覆盖 / 分级邻近 / 双源确认 / 关键数字来源 / 语言规则 / 死链 / 机构分级主数据一致性 / 登记字段（verify_status ∈ verified·media_unverified·unverifiable，updated = YYYY-MM-DD） |
 | 阈值 | `PROXIMITY_WINDOW=240` 字符；`DEAD_STATUS={404,410,451}`；`in_synthesis` 来源 ≥2 被引用；`official_en` 违规 = E、`en_or_zh` 集外 = W |
 | 拦截 | 新报告（周期 ≥ source-gate-period）缺项 = `[E]` 阻断；历史报告降级 `[W]`；R7 的 M3 / M4 结构性冲突不降级 |
 | 工具 | `source_check.py`（`--probe` 并发 8 线程 / 3s 超时；CI 用 `--probe-lenient`） |
@@ -216,6 +216,7 @@ flowchart LR
 | R5 语言规则 | tier1/2 来源语言须符合业务配置（token 化分级） | E / W |
 | R6 死链 | 404 / 410 / 451 = 死链；403 / 429 / 5xx / 超时 = 网络不可达 | E / W（历史降级） |
 | R7 机构分级 | 与 `institution_tiers.json` / business-config 一致性（M1–M5） | 结构性 M3 / M4 恒 E |
+| R8 登记字段 | `verify_status` ∈ verified / media_unverified / unverifiable；含 `updated`（YYYY-MM-DD） | W（数据卫生） |
 
 ### 3.2 防线二：内容四门禁 + 研究内核
 

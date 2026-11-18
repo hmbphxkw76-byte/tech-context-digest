@@ -1,5 +1,5 @@
 {
- "schema_version": "1.0",
+ "schema_version": "1.1",
  "business_line": "content/international/international-relations",
  "path_rule": "business-config {{SOURCE_REGISTRY_PATH}} = data/processed/international/international-relations/source_registry.json",
  "tier_legend": {

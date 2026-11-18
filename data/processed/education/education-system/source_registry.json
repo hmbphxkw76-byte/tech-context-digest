@@ -1,5 +1,5 @@
 {
- "schema_version": "1.0",
+ "schema_version": "1.1",
  "business_line": "content/education/education-system",
  "path_rule": "business-config {{SOURCE_REGISTRY_PATH}} = data/processed/education/education-system/source_registry.json",
  "tier_legend": {

@@ -29,7 +29,7 @@ python -m unittest discover -s engine/tests -v   # 单元测试（全量）
 | check_links.py | 校验 | ci.yml「路径引用可达性」 |
 | lint_reports.py | 校验 | ci.yml / scheduled-maintenance / content-update「报告内容校验」 |
 | compliance_check.py | 校验+引导+审计 | ci.yml / content-update「报告模板合规校验」；scheduled-maintenance「报告合规性审计」 |
-| source_check.py | 校验 | ci.yml「来源登记前置校验（L0）」：R1 登记覆盖 / R2 分级邻近 / R3 双源 / R4 关键数字 / R5 语言规则 / R6 死链 / R7 机构分级主数据一致性 |
+| source_check.py | 校验 | ci.yml「来源登记前置校验（L0）」：R1 登记覆盖 / R2 分级邻近 / R3 双源 / R4 关键数字 / R5 语言规则 / R6 死链 / R7 机构分级主数据一致性 / R8 登记字段（verify_status / updated） |
 | metric_registry.py | 校验+服务 | 指标单一事实源（T3）：字典体检 / 阈值求值 / 归一化存储 / 去重血缘 / 全量准确性兜底；`audit --coverage` 叠加指标实测覆盖报告 |
 | metric_coverage.py | 校验+度量 | 指标实测覆盖（批次 B）：TOOL 指标实测接线 + LLM/未接线显式标注 + 覆盖率与缺口报告 |
 | release_calendar.py | 采集 | 发布日历结构化采集（P1-2）：解析 release-calendar.md → JSON + 覆盖率 |
@@ -179,8 +179,9 @@ python engine/tools/source_check.py --coverage               # 输出来源登�
 python engine/tools/source_check.py --self-test              # 内置合成用例自检
 ```
 
-规则 R1–R7；退出码 0/1/2。**gate-period 前置**：历史报告由 `check_report` 内部把
-R1–R6 的 `[E]` 前置降级为 `[W]`；**R7 结构性冲突（M3 重复 source_id / M4 同机构同登记多分级）任何周期都阻断**。
+规则 R1–R8；退出码 0/1/2。**gate-period 前置**：历史报告由 `check_report` 内部把
+R1–R6 的 `[E]` 前置降级为 `[W]`；**R7 结构性冲突（M3 重复 source_id / M4 同机构同登记多分级）任何周期都阻断**；
+**R8 登记字段**（`verify_status` ∈ verified / media_unverified / unverifiable，`updated` = YYYY-MM-DD）仅 `[W]`，数据卫生不阻断。
 R2 采用**邻近判定**（标注须出现在来源链接后 `PROXIMITY_WINDOW` 字符内）；
 R5 为 **token 化分级**（`official_en`=`[E]`，`en_or_zh` 集外语言=`[W]`）；
 R7 消费机构级分级主数据 `engine/tools/institution_tiers.json`（机构 → tier，

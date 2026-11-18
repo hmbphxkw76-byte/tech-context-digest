@@ -1,5 +1,5 @@
 {
- "schema_version": "1.0",
+ "schema_version": "1.1",
  "business_line": "content/economy/trends",
  "path_rule": "business-config {{SOURCE_REGISTRY_PATH}} = data/source_registry.json",
  "tier_legend": {
@@ -17,6 +17,7 @@
    "url": "https://github.com/hmbphxkw76-byte/tech-context-digest/blob/main/content/economy/trends/reports/2026-11-13_weekly.html",
    "lang": "en",
    "verify_status": "verified",
+   "updated": "2026-11-18",
    "in_synthesis": false,
    "used_in": [
     "reports/2026-11-13_weekly.html"
@@ -30,6 +31,7 @@
    "url": "https://english.ts.cn/system/2026/11/11/037023412.shtml",
    "lang": "en",
    "verify_status": "media_unverified",
+   "updated": "2026-11-18",
    "in_synthesis": false,
    "used_in": [
     "reports/2026-11-13_weekly.html"
@@ -43,6 +45,7 @@
    "url": "https://ec.europa.eu/eurostat/web/main/news/euro-indicators",
    "lang": "en",
    "verify_status": "verified",
+   "updated": "2026-11-18",
    "in_synthesis": false,
    "used_in": [
     "reports/2026-11-13_weekly.html"
@@ -56,6 +59,7 @@
    "url": "http://baijiahao.baidu.com/s?id=1881464352325676627",
    "lang": "en",
    "verify_status": "media_unverified",
+   "updated": "2026-11-18",
    "in_synthesis": false,
    "used_in": [
     "reports/2026-11-13_weekly.html"
@@ -69,6 +73,7 @@
    "url": "https://www.eia.gov/outlooks/steo/",
    "lang": "en",
    "verify_status": "verified",
+   "updated": "2026-11-18",
    "in_synthesis": false,
    "used_in": [
     "reports/2026-11-13_weekly.html"
@@ -82,6 +87,7 @@
    "url": "https://energy.cngold.org/c/2026-11-13/c10877809.html",
    "lang": "en",
    "verify_status": "media_unverified",
+   "updated": "2026-11-18",
    "in_synthesis": false,
    "used_in": [
     "reports/2026-11-13_weekly.html"
@@ -95,6 +101,7 @@
    "url": "https://www.gov.cn/lianbo/202611/content_7085583.htm",
    "lang": "en",
    "verify_status": "verified",
+   "updated": "2026-11-18",
    "in_synthesis": false,
    "used_in": [
     "reports/2026-11-13_weekly.html"
@@ -108,6 +115,7 @@
    "url": "https://ustr.gov/sites/default/files/files/Issue_Areas/Enforcement/Section%20301/USTR%20FRN%20Extending%20Section%20301%20China%20FTT%20Exclusions%20to%20Jan%202027.pdf",
    "lang": "en",
    "verify_status": "verified",
+   "updated": "2026-11-18",
    "in_synthesis": false,
    "used_in": [
     "reports/2026-11-13_weekly.html"
@@ -121,6 +129,7 @@
    "url": "https://tradingeconomics.com/vietnam/gdp-growth-annual",
    "lang": "en",
    "verify_status": "media_unverified",
+   "updated": "2026-11-18",
    "in_synthesis": false,
    "used_in": [
     "reports/2026-11-13_weekly.html"
@@ -134,6 +143,7 @@
    "url": "https://sa.mofcom.gov.cn/jmxw/art/2026/art_eb55daeacd284bab9592428d1f5d1477.html",
    "lang": "en",
    "verify_status": "verified",
+   "updated": "2026-11-18",
    "in_synthesis": false,
    "used_in": [
     "reports/2026-11-13_weekly.html"
@@ -147,6 +157,7 @@
    "url": "https://www.chinatoday.com.cn/zw2018/bktg/202611/t20261106_800450538.html",
    "lang": "en",
    "verify_status": "verified",
+   "updated": "2026-11-18",
    "in_synthesis": false,
    "used_in": [
     "reports/2026-11-13_weekly.html"
@@ -160,6 +171,7 @@
    "url": "https://mp.weixin.qq.com/s?__biz=Mzg2ODE1NDY2Ng==&mid=2247547768&idx=5&sn=3122118ccb7faec000e4e194dc31457e",
    "lang": "en",
    "verify_status": "verified",
+   "updated": "2026-11-18",
    "in_synthesis": false,
    "used_in": [
     "reports/2026-11-13_weekly.html"
@@ -173,6 +185,7 @@
    "url": "https://www.bea.gov/news/glance",
    "lang": "en",
    "verify_status": "verified",
+   "updated": "2026-11-18",
    "in_synthesis": false,
    "used_in": [
     "reports/2026-11-13_weekly.html"
@@ -186,6 +199,7 @@
    "url": "https://www.esri.cao.go.jp/jp/sna/menu.html",
    "lang": "en",
    "verify_status": "verified",
+   "updated": "2026-11-18",
    "in_synthesis": false,
    "used_in": [
     "reports/2026-11-13_weekly.html"
@@ -199,6 +213,7 @@
    "url": "https://www.bok.or.kr/",
    "lang": "en",
    "verify_status": "verified",
+   "updated": "2026-11-18",
    "in_synthesis": false,
    "used_in": [
     "reports/2026-11-13_weekly.html"
@@ -212,6 +227,7 @@
    "url": "https://www.ons.gov.uk/economy/grossdomesticproductgdp/bulletins/quarterlynationalaccounts/latest",
    "lang": "en",
    "verify_status": "verified",
+   "updated": "2026-11-18",
    "in_synthesis": false,
    "used_in": [
     "reports/2026-11-13_weekly.html"
@@ -225,6 +241,7 @@
    "url": "https://www.stat.go.jp/english/",
    "lang": "en",
    "verify_status": "verified",
+   "updated": "2026-11-18",
    "in_synthesis": false,
    "used_in": [
     "reports/2026-11-13_weekly.html"
@@ -238,6 +255,7 @@
    "url": "https://www.rba.gov.au/inflation-overview.html",
    "lang": "en",
    "verify_status": "verified",
+   "updated": "2026-11-18",
    "in_synthesis": false,
    "used_in": [
     "reports/2026-11-13_weekly.html"
@@ -251,6 +269,7 @@
    "url": "https://www.stats.govt.nz/",
    "lang": "en",
    "verify_status": "verified",
+   "updated": "2026-11-18",
    "in_synthesis": false,
    "used_in": [
     "reports/2026-11-13_weekly.html"
@@ -264,6 +283,7 @@
    "url": "https://www.federalreserve.gov/",
    "lang": "en",
    "verify_status": "verified",
+   "updated": "2026-11-18",
    "in_synthesis": false,
    "used_in": [
     "reports/2026-11-13_weekly.html"
@@ -277,6 +297,7 @@
    "url": "https://fiscaldata.treasury.gov/",
    "lang": "en",
    "verify_status": "verified",
+   "updated": "2026-11-18",
    "in_synthesis": false,
    "used_in": [
     "reports/2026-11-13_weekly.html"
@@ -290,6 +311,7 @@
    "url": "https://www.pbc.gov.cn/",
    "lang": "en",
    "verify_status": "verified",
+   "updated": "2026-11-18",
    "in_synthesis": false,
    "used_in": [
     "reports/2026-11-13_weekly.html"
@@ -303,6 +325,7 @@
    "url": "https://www.ecb.europa.eu/",
    "lang": "en",
    "verify_status": "verified",
+   "updated": "2026-11-18",
    "in_synthesis": false,
    "used_in": [
     "reports/2026-11-13_weekly.html"
@@ -316,6 +339,7 @@
    "url": "https://www.boj.or.jp/en/",
    "lang": "en",
    "verify_status": "verified",
+   "updated": "2026-11-18",
    "in_synthesis": false,
    "used_in": [
     "reports/2026-11-13_weekly.html"
@@ -329,6 +353,7 @@
    "url": "https://www.bankofengland.co.uk/",
    "lang": "en",
    "verify_status": "verified",
+   "updated": "2026-11-18",
    "in_synthesis": false,
    "used_in": [
     "reports/2026-11-13_weekly.html"
@@ -342,6 +367,7 @@
    "url": "https://www.rba.gov.au/news/",
    "lang": "en",
    "verify_status": "verified",
+   "updated": "2026-11-18",
    "in_synthesis": false,
    "used_in": [
     "reports/2026-11-13_weekly.html"
@@ -355,6 +381,7 @@
    "url": "https://www.rbnz.govt.nz/",
    "lang": "en",
    "verify_status": "verified",
+   "updated": "2026-11-18",
    "in_synthesis": false,
    "used_in": [
     "reports/2026-11-13_weekly.html"
@@ -368,6 +395,7 @@
    "url": "https://trumptradetracker.com/",
    "lang": "en",
    "verify_status": "media_unverified",
+   "updated": "2026-11-18",
    "in_synthesis": false,
    "used_in": [
     "reports/2026-11-13_weekly.html"
@@ -381,6 +409,7 @@
    "url": "https://www.wto.org/",
    "lang": "en",
    "verify_status": "verified",
+   "updated": "2026-11-18",
    "in_synthesis": false,
    "used_in": [
     "reports/2026-11-13_weekly.html"
@@ -394,6 +423,7 @@
    "url": "https://taxation-customs.ec.europa.eu/carbon-border-adjustment-mechanism_en",
    "lang": "en",
    "verify_status": "verified",
+   "updated": "2026-11-18",
    "in_synthesis": false,
    "used_in": [
     "reports/2026-11-13_weekly.html"
@@ -407,6 +437,7 @@
    "url": "https://ec.europa.eu/",
    "lang": "en",
    "verify_status": "verified",
+   "updated": "2026-11-18",
    "in_synthesis": false,
    "used_in": [
     "reports/2026-11-13_weekly.html"
@@ -420,6 +451,7 @@
    "url": "https://www.commerce.gov/",
    "lang": "en",
    "verify_status": "verified",
+   "updated": "2026-11-18",
    "in_synthesis": false,
    "used_in": [
     "reports/2026-11-13_weekly.html"
@@ -433,6 +465,7 @@
    "url": "https://www.meti.go.jp/",
    "lang": "en",
    "verify_status": "verified",
+   "updated": "2026-11-18",
    "in_synthesis": false,
    "used_in": [
     "reports/2026-11-13_weekly.html"
@@ -446,6 +479,7 @@
    "url": "https://www.mofcom.gov.cn/",
    "lang": "en",
    "verify_status": "verified",
+   "updated": "2026-11-18",
    "in_synthesis": false,
    "used_in": [
     "reports/2026-11-13_weekly.html"
@@ -459,6 +493,7 @@
    "url": "https://home.treasury.gov/",
    "lang": "en",
    "verify_status": "verified",
+   "updated": "2026-11-18",
    "in_synthesis": false,
    "used_in": [
     "reports/2026-11-13_weekly.html"
@@ -472,6 +507,7 @@
    "url": "https://www.bis.doc.gov/",
    "lang": "en",
    "verify_status": "verified",
+   "updated": "2026-11-18",
    "in_synthesis": false,
    "used_in": [
     "reports/2026-11-13_weekly.html"
@@ -485,6 +521,7 @@
    "url": "https://tradingeconomics.com/malaysia/gdp-growth-annual",
    "lang": "en",
    "verify_status": "media_unverified",
+   "updated": "2026-11-18",
    "in_synthesis": false,
    "used_in": [
     "reports/2026-11-13_weekly.html"
@@ -498,6 +535,7 @@
    "url": "https://www.cbuae.gov.ae/",
    "lang": "en",
    "verify_status": "verified",
+   "updated": "2026-11-18",
    "in_synthesis": false,
    "used_in": [
     "reports/2026-11-13_weekly.html"
@@ -511,6 +549,7 @@
    "url": "https://www.imf.org/",
    "lang": "en",
    "verify_status": "verified",
+   "updated": "2026-11-18",
    "in_synthesis": false,
    "used_in": [
     "reports/2026-11-13_weekly.html"
@@ -524,6 +563,7 @@
    "url": "http://www.xinhuanet.com/english/20260325/a9ed89d8609d4450b54691f51f56620f/c.html",
    "lang": "en",
    "verify_status": "verified",
+   "updated": "2026-11-18",
    "in_synthesis": false,
    "used_in": [
     "reports/2026-11-13_weekly.html"
@@ -537,6 +577,7 @@
    "url": "https://www.kitco.com/charts/gold",
    "lang": "en",
    "verify_status": "media_unverified",
+   "updated": "2026-11-18",
    "in_synthesis": false,
    "used_in": [
     "reports/2026-11-13_weekly.html"
@@ -550,6 +591,7 @@
    "url": "https://www.lme.com/market-data/reports-and-data/lme-official-prices",
    "lang": "en",
    "verify_status": "media_unverified",
+   "updated": "2026-11-18",
    "in_synthesis": false,
    "used_in": [
     "reports/2026-11-13_weekly.html"

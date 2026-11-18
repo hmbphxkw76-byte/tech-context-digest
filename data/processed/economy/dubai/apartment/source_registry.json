@@ -1,1137 +1,1218 @@
 {
-  "schema_version": "1.0",
-  "business_line": "content/economy/dubai/apartment",
-  "path_rule": "business-config {{SOURCE_REGISTRY_PATH}} = data/source_registry.json",
-  "tier_legend": {
-    "1": "官方一手（政府 / 央行 / 统计机构 / 多边机构原始发布）",
-    "2": "行业机构（英文研究报告 / 数据页）",
-    "3": "挂牌门户（仅作卖方预期）",
-    "4": "媒体转述（须标『需核实原文』）"
+ "schema_version": "1.1",
+ "business_line": "content/economy/dubai/apartment",
+ "path_rule": "business-config {{SOURCE_REGISTRY_PATH}} = data/source_registry.json",
+ "tier_legend": {
+  "1": "官方一手（政府 / 央行 / 统计机构 / 多边机构原始发布）",
+  "2": "行业机构（英文研究报告 / 数据页）",
+  "3": "挂牌门户（仅作卖方预期）",
+  "4": "媒体转述（须标『需核实原文』）"
+ },
+ "sources": [
+  {
+   "source_id": "S-001",
+   "tier": 1,
+   "publisher": "Central Bank of the UAE (CBUAE)",
+   "title": "https://centralbank.ae/en",
+   "url": "https://centralbank.ae/en",
+   "lang": "en",
+   "verify_status": "verified",
+   "updated": "2026-11-18",
+   "in_synthesis": false,
+   "used_in": [
+    "2026-11_baseline_report.html",
+    "2026-Q3_quarterly.html",
+    "2026_annual.html"
+   ]
   },
-  "sources": [
-    {
-      "source_id": "S-001",
-      "tier": 1,
-      "publisher": "Central Bank of the UAE (CBUAE)",
-      "title": "https://centralbank.ae/en",
-      "url": "https://centralbank.ae/en",
-      "lang": "en",
-      "verify_status": "verified",
-      "in_synthesis": false,
-      "used_in": [
-        "2026-11_baseline_report.html",
-        "2026-Q3_quarterly.html",
-        "2026_annual.html"
-      ]
-    },
-    {
-      "source_id": "S-002",
-      "tier": 1,
-      "publisher": "U.S. Federal Reserve",
-      "title": "https://www.federalreserve.gov/newsevents/pressreleases/monetary20261028a.htm",
-      "url": "https://www.federalreserve.gov/newsevents/pressreleases/monetary20261028a.htm",
-      "lang": "en",
-      "verify_status": "verified",
-      "in_synthesis": false,
-      "used_in": [
-        "2026-11_baseline_report.html",
-        "2026-Q3_quarterly.html",
-        "2026_annual.html"
-      ]
-    },
-    {
-      "source_id": "S-003",
-      "tier": 1,
-      "publisher": "UNCTAD",
-      "title": "https://unctad.org/system/files/non-official-document/wir_fs_qa_en.pdf",
-      "url": "https://unctad.org/system/files/non-official-document/wir_fs_qa_en.pdf",
-      "lang": "en",
-      "verify_status": "verified",
-      "in_synthesis": false,
-      "used_in": [
-        "2026-11_baseline_report.html",
-        "2026-Q3_quarterly.html",
-        "2026_annual.html"
-      ]
-    },
-    {
-      "source_id": "S-004",
-      "tier": 1,
-      "publisher": "Government of Dubai Media Office",
-      "title": "https://mediaoffice.ae/en/news/2026/march/25-03/dubai-records-strong-performance-in-the-construction-sector",
-      "url": "https://mediaoffice.ae/en/news/2026/march/25-03/dubai-records-strong-performance-in-the-construction-sector",
-      "lang": "en",
-      "verify_status": "verified",
-      "in_synthesis": false,
-      "used_in": [
-        "2026-11_baseline_report.html",
-        "2026-Q3_quarterly.html",
-        "2026_annual.html"
-      ]
-    },
-    {
-      "source_id": "S-005",
-      "tier": 1,
-      "publisher": "Digital Dubai / DDSE",
-      "title": "https://www.digitaldubai.ae/initiatives/paperless/dubai-digital-dubai's-population-tops-4.580-million-by-the-end-of-2025-recording-7.5-growth",
-      "url": "https://www.digitaldubai.ae/initiatives/paperless/dubai-digital-dubai's-population-tops-4.580-million-by-the-end-of-2025-recording-7.5-growth",
-      "lang": "en",
-      "verify_status": "verified",
-      "in_synthesis": false,
-      "used_in": [
-        "2026-11_baseline_report.html",
-        "2026-Q3_quarterly.html",
-        "2026_annual.html"
-      ]
-    },
-    {
-      "source_id": "S-006",
-      "tier": 1,
-      "publisher": "Government of Dubai Media Office",
-      "title": "https://mediaoffice.ae/en/news/2026/september/13-09/dubai-tourism-records-highest-visitor-numbers-since-february-as-atm-2026-opens",
-      "url": "https://mediaoffice.ae/en/news/2026/september/13-09/dubai-tourism-records-highest-visitor-numbers-since-february-as-atm-2026-opens",
-      "lang": "en",
-      "verify_status": "verified",
-      "in_synthesis": false,
-      "used_in": [
-        "2026-11_baseline_report.html",
-        "2026-Q3_quarterly.html",
-        "2026_annual.html"
-      ]
-    },
-    {
-      "source_id": "S-007",
-      "tier": 1,
-      "publisher": "Central Bank of the UAE (CBUAE)",
-      "title": "https://www.centralbank.ae/en/forex-eibor/eibor-rates/",
-      "url": "https://www.centralbank.ae/en/forex-eibor/eibor-rates/",
-      "lang": "en",
-      "verify_status": "verified",
-      "in_synthesis": true,
-      "used_in": [
-        "2026-11_baseline_report.html",
-        "2026-11_monthly.html",
-        "2026-Q3_quarterly.html",
-        "2026_annual.html"
-      ]
-    },
-    {
-      "source_id": "S-008",
-      "tier": 1,
-      "publisher": "Central Bank of the UAE (CBUAE)",
-      "title": "https://centralbank.ae/en/research-and-statistics/",
-      "url": "https://centralbank.ae/en/research-and-statistics/",
-      "lang": "en",
-      "verify_status": "verified",
-      "in_synthesis": false,
-      "used_in": [
-        "2026-11_baseline_report.html",
-        "2026-Q3_quarterly.html",
-        "2026_annual.html"
-      ]
-    },
-    {
-      "source_id": "S-009",
-      "tier": 1,
-      "publisher": "Central Bank of the UAE (CBUAE)",
-      "title": "https://centralbank.ae/en/news-and-publications/publications/",
-      "url": "https://centralbank.ae/en/news-and-publications/publications/",
-      "lang": "en",
-      "verify_status": "verified",
-      "in_synthesis": false,
-      "used_in": [
-        "2026-11_baseline_report.html",
-        "2026-Q3_quarterly.html",
-        "2026_annual.html"
-      ]
-    },
-    {
-      "source_id": "S-010",
-      "tier": 1,
-      "publisher": "U.S. Federal Reserve",
-      "title": "https://www.federalreserve.gov/monetarypolicy/fomccalendars.htm",
-      "url": "https://www.federalreserve.gov/monetarypolicy/fomccalendars.htm",
-      "lang": "en",
-      "verify_status": "verified",
-      "in_synthesis": true,
-      "used_in": [
-        "2026-11_baseline_report.html",
-        "2026-11_monthly.html",
-        "2026-Q3_quarterly.html",
-        "2026_annual.html"
-      ]
-    },
-    {
-      "source_id": "S-011",
-      "tier": 1,
-      "publisher": "Dubai Pulse / DLD Open Data",
-      "title": "https://www.dubaipulse.gov.ae/data/dld-registration/dld_rent_contracts-open",
-      "url": "https://www.dubaipulse.gov.ae/data/dld-registration/dld_rent_contracts-open",
-      "lang": "en",
-      "verify_status": "verified",
-      "in_synthesis": false,
-      "used_in": [
-        "2026-11_baseline_report.html",
-        "2026-Q3_quarterly.html",
-        "2026_annual.html"
-      ]
-    },
-    {
-      "source_id": "S-012",
-      "tier": 1,
-      "publisher": "Dubai Land Department (DLD)",
-      "title": "https://dubailand.gov.ae/en/open-data/indexes-home/",
-      "url": "https://dubailand.gov.ae/en/open-data/indexes-home/",
-      "lang": "en",
-      "verify_status": "verified",
-      "in_synthesis": false,
-      "used_in": [
-        "2026-11_baseline_report.html",
-        "2026-Q3_quarterly.html",
-        "2026_annual.html"
-      ]
-    },
-    {
-      "source_id": "S-013",
-      "tier": 1,
-      "publisher": "International Monetary Fund (IMF)",
-      "title": "https://imf.org/external/country/are/index.htm",
-      "url": "https://imf.org/external/country/are/index.htm",
-      "lang": "en",
-      "verify_status": "verified",
-      "in_synthesis": false,
-      "used_in": [
-        "2026-11_baseline_report.html",
-        "2026-Q3_quarterly.html",
-        "2026_annual.html"
-      ]
-    },
-    {
-      "source_id": "S-014",
-      "tier": 1,
-      "publisher": "U.S. Energy Information Administration",
-      "title": "https://www.eia.gov/outlooks/steo/report/global_oil.php",
-      "url": "https://www.eia.gov/outlooks/steo/report/global_oil.php",
-      "lang": "en",
-      "verify_status": "verified",
-      "in_synthesis": false,
-      "used_in": [
-        "2026-11_baseline_report.html",
-        "2026-Q3_quarterly.html",
-        "2026_annual.html"
-      ]
-    },
-    {
-      "source_id": "S-015",
-      "tier": 1,
-      "publisher": "Dubai Statistics Centre (DSC)",
-      "title": "https://www.dsc.gov.ae/",
-      "url": "https://www.dsc.gov.ae/",
-      "lang": "en",
-      "verify_status": "verified",
-      "in_synthesis": false,
-      "used_in": [
-        "2026-11_baseline_report.html",
-        "2026-Q3_quarterly.html",
-        "2026_annual.html"
-      ]
-    },
-    {
-      "source_id": "S-016",
-      "tier": 2,
-      "publisher": "DXBinteract",
-      "title": "https://react.dxbinteract.com/dubai-property-prices/dubai/apartments",
-      "url": "https://react.dxbinteract.com/dubai-property-prices/dubai/apartments",
-      "lang": "en",
-      "verify_status": "verified",
-      "in_synthesis": false,
-      "used_in": [
-        "2026-11_baseline_report.html",
-        "2026_annual.html"
-      ]
-    },
-    {
-      "source_id": "S-017",
-      "tier": 2,
-      "publisher": "Knight Frank",
-      "title": "https://www.knightfrank.ae/site-assets/pdf/2026/dubai-residential-market-review-q1-2026.pdf",
-      "url": "https://www.knightfrank.ae/site-assets/pdf/2026/dubai-residential-market-review-q1-2026.pdf",
-      "lang": "en",
-      "verify_status": "verified",
-      "in_synthesis": false,
-      "used_in": [
-        "2026-11_baseline_report.html"
-      ]
-    },
-    {
-      "source_id": "S-018",
-      "tier": 2,
-      "publisher": "Reidin",
-      "title": "https://reidin.com/dubai-residential-real-estate-q2-2026-market-overview",
-      "url": "https://reidin.com/dubai-residential-real-estate-q2-2026-market-overview",
-      "lang": "en",
-      "verify_status": "verified",
-      "in_synthesis": false,
-      "used_in": [
-        "2026-11_baseline_report.html"
-      ]
-    },
-    {
-      "source_id": "S-019",
-      "tier": 2,
-      "publisher": "Savills Middle East",
-      "title": "https://www.savills.ae/research_articles/379881/395342-0",
-      "url": "https://www.savills.ae/research_articles/379881/395342-0",
-      "lang": "en",
-      "verify_status": "verified",
-      "in_synthesis": false,
-      "used_in": [
-        "2026-11_baseline_report.html",
-        "2026-Q3_quarterly.html",
-        "2026_annual.html"
-      ]
-    },
-    {
-      "source_id": "S-020",
-      "tier": 4,
-      "publisher": "Zawya",
-      "title": "https://www.zawya.com/en/press-release/research-studies/dubai-residential-sales-values-top-aed72.6-billion-in-q3-2026-cavendish-maxwell-1518343",
-      "url": "https://www.zawya.com/en/press-release/research-studies/dubai-residential-sales-values-top-aed72.6-billion-in-q3-2026-cavendish-maxwell-1518343",
-      "lang": "en",
-      "verify_status": "media_unverified",
-      "in_synthesis": false,
-      "used_in": [
-        "2026-11_baseline_report.html",
-        "2026-Q3_quarterly.html",
-        "2026_annual.html"
-      ]
-    },
-    {
-      "source_id": "S-021",
-      "tier": 2,
-      "publisher": "Cushman & Wakefield",
-      "title": "https://www.cushwake.ae/en/marketbeats/marketbeat-residential-q3-2026-dubai-uae",
-      "url": "https://www.cushwake.ae/en/marketbeats/marketbeat-residential-q3-2026-dubai-uae",
-      "lang": "en",
-      "verify_status": "verified",
-      "in_synthesis": false,
-      "used_in": [
-        "2026-11_baseline_report.html",
-        "2026-Q3_quarterly.html",
-        "2026_annual.html"
-      ]
-    },
-    {
-      "source_id": "S-022",
-      "tier": 4,
-      "publisher": "Zawya",
-      "title": "https://zawya.com/en/press-release/research-studies/dubai-adds-24800-new-residential-units-in-h1-2026-as-market-shifts-from-launch-led-to-delivery-driven-says-cavendish-maxwell-414719",
-      "url": "https://zawya.com/en/press-release/research-studies/dubai-adds-24800-new-residential-units-in-h1-2026-as-market-shifts-from-launch-led-to-delivery-driven-says-cavendish-maxwell-414719",
-      "lang": "en",
-      "verify_status": "media_unverified",
-      "in_synthesis": false,
-      "used_in": [
-        "2026-11_baseline_report.html",
-        "2026-Q3_quarterly.html",
-        "2026_annual.html"
-      ]
-    },
-    {
-      "source_id": "S-023",
-      "tier": 4,
-      "publisher": "Khaleej Times",
-      "title": "https://www.khaleejtimes.com/business/dubai-rents-1-in-5-tenants-now-pays-less-than-before-as-rentals-ease-on-new-supply",
-      "url": "https://www.khaleejtimes.com/business/dubai-rents-1-in-5-tenants-now-pays-less-than-before-as-rentals-ease-on-new-supply",
-      "lang": "en",
-      "verify_status": "media_unverified",
-      "in_synthesis": false,
-      "used_in": [
-        "2026-11_baseline_report.html",
-        "2026-Q3_quarterly.html",
-        "2026_annual.html"
-      ]
-    },
-    {
-      "source_id": "S-024",
-      "tier": 2,
-      "publisher": "Peak Trust",
-      "title": "https://peaktrust.ae/insights/rent-yield-monitor/2026-09",
-      "url": "https://peaktrust.ae/insights/rent-yield-monitor/2026-09",
-      "lang": "en",
-      "verify_status": "verified",
-      "in_synthesis": false,
-      "used_in": [
-        "2026-11_baseline_report.html",
-        "2026-Q3_quarterly.html",
-        "2026_annual.html"
-      ]
-    },
-    {
-      "source_id": "S-025",
-      "tier": 2,
-      "publisher": "Dubai Real Estate Data",
-      "title": "https://www.dubairealestatedata.com/yields",
-      "url": "https://www.dubairealestatedata.com/yields",
-      "lang": "en",
-      "verify_status": "verified",
-      "in_synthesis": false,
-      "used_in": [
-        "2026-11_baseline_report.html",
-        "2026-Q3_quarterly.html",
-        "2026_annual.html"
-      ]
-    },
-    {
-      "source_id": "S-026",
-      "tier": 4,
-      "publisher": "The Gulf Pulse",
-      "title": "https://thegulfpulse.com/dubai-asking-rents-fall-up-to-22-in-tracked-areas",
-      "url": "https://thegulfpulse.com/dubai-asking-rents-fall-up-to-22-in-tracked-areas",
-      "lang": "en",
-      "verify_status": "media_unverified",
-      "in_synthesis": false,
-      "used_in": [
-        "2026-11_baseline_report.html",
-        "2026-Q3_quarterly.html",
-        "2026_annual.html"
-      ]
-    },
-    {
-      "source_id": "S-027",
-      "tier": 4,
-      "publisher": "Khaleej Times",
-      "title": "https://www.khaleejtimes.com/business/dubai-tenants-move-homes-as-new-leases-offer-rents-up-to-15-lower",
-      "url": "https://www.khaleejtimes.com/business/dubai-tenants-move-homes-as-new-leases-offer-rents-up-to-15-lower",
-      "lang": "en",
-      "verify_status": "media_unverified",
-      "in_synthesis": false,
-      "used_in": [
-        "2026-11_baseline_report.html",
-        "2026-Q3_quarterly.html",
-        "2026_annual.html"
-      ]
-    },
-    {
-      "source_id": "S-028",
-      "tier": 1,
-      "publisher": "Central Bank of the UAE (CBUAE)",
-      "title": "https://centralbank.ae/media/zqfkpibt/eibor_2026.xlsx",
-      "url": "https://centralbank.ae/media/zqfkpibt/eibor_2026.xlsx",
-      "lang": "en",
-      "verify_status": "verified",
-      "in_synthesis": true,
-      "used_in": [
-        "2026-11_monthly.html"
-      ]
-    },
-    {
-      "source_id": "S-029",
-      "tier": 1,
-      "publisher": "Central Bank of the UAE (CBUAE)",
-      "title": "https://centralbank.ae/en/research-and-statistics/",
-      "url": "https://centralbank.ae/en/research-and-statistics/",
-      "lang": "en",
-      "verify_status": "verified",
-      "in_synthesis": false,
-      "used_in": [
-        "2026-11_monthly.html"
-      ]
-    },
-    {
-      "source_id": "S-030",
-      "tier": 1,
-      "publisher": "Central Bank of the UAE (CBUAE)",
-      "title": "https://centralbank.ae/media/cysbl3ar/statistical-bulletin-september-2026.pdf",
-      "url": "https://centralbank.ae/media/cysbl3ar/statistical-bulletin-september-2026.pdf",
-      "lang": "en",
-      "verify_status": "verified",
-      "in_synthesis": false,
-      "used_in": [
-        "2026-11_monthly.html"
-      ]
-    },
-    {
-      "source_id": "S-031",
-      "tier": 1,
-      "publisher": "U.S. Energy Information Administration",
-      "title": "https://www.eia.gov/outlooks/steo/",
-      "url": "https://www.eia.gov/outlooks/steo/",
-      "lang": "en",
-      "verify_status": "verified",
-      "in_synthesis": false,
-      "used_in": [
-        "2026-11_monthly.html"
-      ]
-    },
-    {
-      "source_id": "S-032",
-      "tier": 2,
-      "publisher": "PropertyIndex.ae",
-      "title": "https://www.propertyindex.ae/dubai-real-estate-price-index",
-      "url": "https://www.propertyindex.ae/dubai-real-estate-price-index",
-      "lang": "en",
-      "verify_status": "verified",
-      "in_synthesis": true,
-      "used_in": [
-        "2026-11_monthly.html",
-        "2026-Q3_quarterly.html",
-        "2026_annual.html"
-      ]
-    },
-    {
-      "source_id": "S-033",
-      "tier": 2,
-      "publisher": "PropertyIndex.ae",
-      "title": "https://www.propertyindex.ae/dubai-real-estate-price-index/2026-10",
-      "url": "https://www.propertyindex.ae/dubai-real-estate-price-index/2026-10",
-      "lang": "en",
-      "verify_status": "verified",
-      "in_synthesis": true,
-      "used_in": [
-        "2026-11_monthly.html"
-      ]
-    },
-    {
-      "source_id": "S-034",
-      "tier": 2,
-      "publisher": "PropertyIndex.ae",
-      "title": "https://www.propertyindex.ae/dubai-real-estate-price-index/2026-09",
-      "url": "https://www.propertyindex.ae/dubai-real-estate-price-index/2026-09",
-      "lang": "en",
-      "verify_status": "verified",
-      "in_synthesis": false,
-      "used_in": [
-        "2026-11_monthly.html"
-      ]
-    },
-    {
-      "source_id": "S-035",
-      "tier": 2,
-      "publisher": "PropertyIndex.ae",
-      "title": "https://www.propertyindex.ae/dubai-real-estate-prices",
-      "url": "https://www.propertyindex.ae/dubai-real-estate-prices",
-      "lang": "en",
-      "verify_status": "verified",
-      "in_synthesis": true,
-      "used_in": [
-        "2026-11_monthly.html",
-        "2026-Q3_quarterly.html",
-        "2026_annual.html"
-      ]
-    },
-    {
-      "source_id": "S-036",
-      "tier": 2,
-      "publisher": "Peak Trust",
-      "title": "https://peaktrust.ae/",
-      "url": "https://peaktrust.ae/",
-      "lang": "en",
-      "verify_status": "verified",
-      "in_synthesis": false,
-      "used_in": [
-        "2026-11_monthly.html"
-      ]
-    },
-    {
-      "source_id": "S-037",
-      "tier": 2,
-      "publisher": "Cavendish Maxwell",
-      "title": "https://cavendishmaxwell.com/",
-      "url": "https://cavendishmaxwell.com/",
-      "lang": "en",
-      "verify_status": "verified",
-      "in_synthesis": false,
-      "used_in": [
-        "2026-11_monthly.html"
-      ]
-    },
-    {
-      "source_id": "S-038",
-      "tier": 2,
-      "publisher": "Savills Middle East",
-      "title": "https://www.savills.ae/",
-      "url": "https://www.savills.ae/",
-      "lang": "en",
-      "verify_status": "verified",
-      "in_synthesis": false,
-      "used_in": [
-        "2026-11_monthly.html"
-      ]
-    },
-    {
-      "source_id": "S-039",
-      "tier": 1,
-      "publisher": "Government of Dubai Media Office",
-      "title": "https://mediaoffice.ae/en",
-      "url": "https://mediaoffice.ae/en",
-      "lang": "en",
-      "verify_status": "verified",
-      "in_synthesis": false,
-      "used_in": [
-        "2026-11_monthly.html"
-      ]
-    },
-    {
-      "source_id": "S-040",
-      "tier": 1,
-      "publisher": "UNCTAD",
-      "title": "https://unctad.org/",
-      "url": "https://unctad.org/",
-      "lang": "en",
-      "verify_status": "verified",
-      "in_synthesis": false,
-      "used_in": [
-        "2026-11_monthly.html"
-      ]
-    },
-    {
-      "source_id": "S-041",
-      "tier": 1,
-      "publisher": "Digital Dubai / DDSE",
-      "title": "https://www.digitaldubai.ae/",
-      "url": "https://www.digitaldubai.ae/",
-      "lang": "en",
-      "verify_status": "verified",
-      "in_synthesis": false,
-      "used_in": [
-        "2026-11_monthly.html",
-        "2026_annual.html"
-      ]
-    },
-    {
-      "source_id": "S-042",
-      "tier": 1,
-      "publisher": "Tech Life Research（本仓库）",
-      "title": "https://github.com/hmbphxkw76-byte/tech-context-digest/blob/main/content/economy/dubai/apartment/reports/2026-Q3_quarterly.html",
-      "url": "https://github.com/hmbphxkw76-byte/tech-context-digest/blob/main/content/economy/dubai/apartment/reports/2026-Q3_quarterly.html",
-      "lang": "en",
-      "verify_status": "verified",
-      "in_synthesis": false,
-      "used_in": [
-        "2026-Q3_quarterly.html"
-      ]
-    },
-    {
-      "source_id": "S-043",
-      "tier": 2,
-      "publisher": "Crescore Real Estate",
-      "title": "https://crescorealestate.ae/dubai-supply-2027-2028-handover-risk/",
-      "url": "https://crescorealestate.ae/dubai-supply-2027-2028-handover-risk/",
-      "lang": "en",
-      "verify_status": "verified",
-      "in_synthesis": false,
-      "used_in": [
-        "2026-Q3_quarterly.html",
-        "2026_annual.html"
-      ]
-    },
-    {
-      "source_id": "S-044",
-      "tier": 2,
-      "publisher": "Peak Trust",
-      "title": "https://peaktrust.ae/insights/rent-yield-monitor/2026-10",
-      "url": "https://peaktrust.ae/insights/rent-yield-monitor/2026-10",
-      "lang": "en",
-      "verify_status": "verified",
-      "in_synthesis": false,
-      "used_in": [
-        "2026-Q3_quarterly.html",
-        "2026_annual.html"
-      ]
-    },
-    {
-      "source_id": "S-045",
-      "tier": 2,
-      "publisher": "ValuStrat",
-      "title": "https://valustrat.com/products/dubai-real-estate-review-q3-2026",
-      "url": "https://valustrat.com/products/dubai-real-estate-review-q3-2026",
-      "lang": "en",
-      "verify_status": "verified",
-      "in_synthesis": false,
-      "used_in": [
-        "2026-Q3_quarterly.html",
-        "2026_annual.html"
-      ]
-    },
-    {
-      "source_id": "S-046",
-      "tier": 2,
-      "publisher": "Property Monitor (Seven Century)",
-      "title": "https://www.sevencentury.com/market-insights/reports/monthly/dubai-property-market-report-september-2026",
-      "url": "https://www.sevencentury.com/market-insights/reports/monthly/dubai-property-market-report-september-2026",
-      "lang": "en",
-      "verify_status": "verified",
-      "in_synthesis": false,
-      "used_in": [
-        "2026-Q3_quarterly.html"
-      ]
-    },
-    {
-      "source_id": "S-047",
-      "tier": 4,
-      "publisher": "OffPlan Insider",
-      "title": "https://offplaninsider.com/news/dubai-asking-prices-steady-q3-2026-bayut-56600-new-homes",
-      "url": "https://offplaninsider.com/news/dubai-asking-prices-steady-q3-2026-bayut-56600-new-homes",
-      "lang": "en",
-      "verify_status": "media_unverified",
-      "in_synthesis": false,
-      "used_in": [
-        "2026-Q3_quarterly.html"
-      ]
-    },
-    {
-      "source_id": "S-048",
-      "tier": 2,
-      "publisher": "CBRE",
-      "title": "https://www.cbre.ae/insights/figures/uae-real-estate-market-review-q3-2026",
-      "url": "https://www.cbre.ae/insights/figures/uae-real-estate-market-review-q3-2026",
-      "lang": "en",
-      "verify_status": "verified",
-      "in_synthesis": false,
-      "used_in": [
-        "2026-Q3_quarterly.html"
-      ]
-    },
-    {
-      "source_id": "S-049",
-      "tier": 2,
-      "publisher": "JLL",
-      "title": "https://www.jll.com/en-ae/insights/market-dynamics/uae-living",
-      "url": "https://www.jll.com/en-ae/insights/market-dynamics/uae-living",
-      "lang": "en",
-      "verify_status": "verified",
-      "in_synthesis": false,
-      "used_in": [
-        "2026-Q3_quarterly.html"
-      ]
-    },
-    {
-      "source_id": "S-050",
-      "tier": 2,
-      "publisher": "Knight Frank",
-      "title": "https://www.knightfrank.ae/newsroom/article/2026/10/412-us$10-million-homes-sell-in-dubai-for-us$-6.7bn-between-q1-q3-2026",
-      "url": "https://www.knightfrank.ae/newsroom/article/2026/10/412-us$10-million-homes-sell-in-dubai-for-us$-6.7bn-between-q1-q3-2026",
-      "lang": "en",
-      "verify_status": "verified",
-      "in_synthesis": false,
-      "used_in": [
-        "2026-Q3_quarterly.html"
-      ]
-    },
-    {
-      "source_id": "S-051",
-      "tier": 2,
-      "publisher": "DXBinteract",
-      "title": "https://dxbinteract.com/market-reports/2026/Q3",
-      "url": "https://dxbinteract.com/market-reports/2026/Q3",
-      "lang": "en",
-      "verify_status": "verified",
-      "in_synthesis": false,
-      "used_in": [
-        "2026-Q3_quarterly.html",
-        "2026_annual.html"
-      ]
-    },
-    {
-      "source_id": "S-052",
-      "tier": 2,
-      "publisher": "CBRE",
-      "title": "https://mktgdocs.cbre.com/2299/8274dd48-9cc9-485f-aa6b-b1db2718cbe0-2065516102/CBRE_-_UAE_Real_Estate_Market_.pdf",
-      "url": "https://mktgdocs.cbre.com/2299/8274dd48-9cc9-485f-aa6b-b1db2718cbe0-2065516102/CBRE_-_UAE_Real_Estate_Market_.pdf",
-      "lang": "en",
-      "verify_status": "verified",
-      "in_synthesis": false,
-      "used_in": [
-        "2026-Q3_quarterly.html"
-      ]
-    },
-    {
-      "source_id": "S-053",
-      "tier": 1,
-      "publisher": "Dubai Pulse / DLD Open Data",
-      "title": "https://www.dubaipulse.gov.ae/data/dld-transactions/dld_transactions-open",
-      "url": "https://www.dubaipulse.gov.ae/data/dld-transactions/dld_transactions-open",
-      "lang": "en",
-      "verify_status": "verified",
-      "in_synthesis": false,
-      "used_in": [
-        "2026-Q3_quarterly.html",
-        "2026_annual.html"
-      ]
-    },
-    {
-      "source_id": "S-054",
-      "tier": 1,
-      "publisher": "Dubai Pulse / DLD Open Data",
-      "title": "https://www.dubaipulse.gov.ae/data/dld-registration/dld_units-open",
-      "url": "https://www.dubaipulse.gov.ae/data/dld-registration/dld_units-open",
-      "lang": "en",
-      "verify_status": "verified",
-      "in_synthesis": false,
-      "used_in": [
-        "2026-Q3_quarterly.html",
-        "2026_annual.html"
-      ]
-    },
-    {
-      "source_id": "S-055",
-      "tier": 1,
-      "publisher": "Digital Dubai / DDSE",
-      "title": "https://www.digitaldubai.ae/initiatives/paperless/dubai-digital-dubai&#x27;s-population-tops-4.580-million-by-the-end-of-2025-recording-7.5-growth",
-      "url": "https://www.digitaldubai.ae/initiatives/paperless/dubai-digital-dubai&#x27;s-population-tops-4.580-million-by-the-end-of-2025-recording-7.5-growth",
-      "lang": "en",
-      "verify_status": "verified",
-      "in_synthesis": false,
-      "used_in": [
-        "2026-Q3_quarterly.html"
-      ]
-    },
-    {
-      "source_id": "S-056",
-      "tier": 1,
-      "publisher": "Dubai Land Department (DLD)",
-      "title": "https://dubailand.gov.ae/en/eservices/rental-index/rental-index/",
-      "url": "https://dubailand.gov.ae/en/eservices/rental-index/rental-index/",
-      "lang": "en",
-      "verify_status": "verified",
-      "in_synthesis": false,
-      "used_in": [
-        "2026-Q3_quarterly.html",
-        "2026_annual.html"
-      ]
-    },
-    {
-      "source_id": "S-057",
-      "tier": 1,
-      "publisher": "Central Bank of the UAE (CBUAE)",
-      "title": "https://centralbank.ae/en/forex-eibor/exchange-rates/",
-      "url": "https://centralbank.ae/en/forex-eibor/exchange-rates/",
-      "lang": "en",
-      "verify_status": "verified",
-      "in_synthesis": false,
-      "used_in": [
-        "2026-Q3_quarterly.html",
-        "2026_annual.html"
-      ]
-    },
-    {
-      "source_id": "S-058",
-      "tier": 1,
-      "publisher": "Digital Dubai / DDSE",
-      "title": "https://www.digitaldubai.ae/newsroom/digital-dubai-launches-the-labour-force-survey-2026-to-strengthen-data-driven-labour-market-planning-and-decision-making",
-      "url": "https://www.digitaldubai.ae/newsroom/digital-dubai-launches-the-labour-force-survey-2026-to-strengthen-data-driven-labour-market-planning-and-decision-making",
-      "lang": "en",
-      "verify_status": "verified",
-      "in_synthesis": false,
-      "used_in": [
-        "2026-Q3_quarterly.html",
-        "2026_annual.html"
-      ]
-    },
-    {
-      "source_id": "S-059",
-      "tier": 4,
-      "publisher": "Zawya",
-      "title": "https://www.zawya.com/en/press-release/government-news/uae-attracts-aed-1773bln-in-fdi-inflows-in-2025-ciq4f0bg",
-      "url": "https://www.zawya.com/en/press-release/government-news/uae-attracts-aed-1773bln-in-fdi-inflows-in-2025-ciq4f0bg",
-      "lang": "en",
-      "verify_status": "media_unverified",
-      "in_synthesis": false,
-      "used_in": [
-        "2026-Q3_quarterly.html",
-        "2026_annual.html"
-      ]
-    },
-    {
-      "source_id": "S-060",
-      "tier": 1,
-      "publisher": "Digital Dubai / DDSE",
-      "title": "https://www.digitaldubai.ae/en/",
-      "url": "https://www.digitaldubai.ae/en/",
-      "lang": "en",
-      "verify_status": "verified",
-      "in_synthesis": false,
-      "used_in": [
-        "2026-Q3_quarterly.html"
-      ]
-    },
-    {
-      "source_id": "S-061",
-      "tier": 1,
-      "publisher": "Dubai.ae Open Data",
-      "title": "https://www.dubai.ae/open-data",
-      "url": "https://www.dubai.ae/open-data",
-      "lang": "en",
-      "verify_status": "verified",
-      "in_synthesis": false,
-      "used_in": [
-        "2026-Q3_quarterly.html",
-        "2026_annual.html"
-      ]
-    },
-    {
-      "source_id": "S-062",
-      "tier": 1,
-      "publisher": "Dubai Land Department (DLD)",
-      "title": "https://dubailand.gov.ae/en/news-media/dubai-s-rental-market-charts-stable-trajectory-reflecting-integrated-regulatory-environment-and-sustained-public-confidence",
-      "url": "https://dubailand.gov.ae/en/news-media/dubai-s-rental-market-charts-stable-trajectory-reflecting-integrated-regulatory-environment-and-sustained-public-confidence",
-      "lang": "en",
-      "verify_status": "verified",
-      "in_synthesis": false,
-      "used_in": [
-        "2026-Q3_quarterly.html",
-        "2026_annual.html"
-      ]
-    },
-    {
-      "source_id": "S-063",
-      "tier": 1,
-      "publisher": "UAE Government",
-      "title": "https://u.ae/",
-      "url": "https://u.ae/",
-      "lang": "en",
-      "verify_status": "verified",
-      "in_synthesis": false,
-      "used_in": [
-        "2026-Q3_quarterly.html",
-        "2026_annual.html"
-      ]
-    },
-    {
-      "source_id": "S-064",
-      "tier": 1,
-      "publisher": "Dubai Land Department (DLD)",
-      "title": "https://dubailand.gov.ae/en/open-data/real-estate-data/",
-      "url": "https://dubailand.gov.ae/en/open-data/real-estate-data/",
-      "lang": "en",
-      "verify_status": "verified",
-      "in_synthesis": false,
-      "used_in": [
-        "2026-Q3_quarterly.html"
-      ]
-    },
-    {
-      "source_id": "S-065",
-      "tier": 1,
-      "publisher": "Dubai Land Department (DLD)",
-      "title": "https://dubailand.gov.ae/en/eservices/",
-      "url": "https://dubailand.gov.ae/en/eservices/",
-      "lang": "en",
-      "verify_status": "verified",
-      "in_synthesis": false,
-      "used_in": [
-        "2026-Q3_quarterly.html",
-        "2026_annual.html"
-      ]
-    },
-    {
-      "source_id": "S-066",
-      "tier": 1,
-      "publisher": "Dubai Land Department (DLD)",
-      "title": "http://dubailand.gov.ae/en/frequently-asked-questions",
-      "url": "http://dubailand.gov.ae/en/frequently-asked-questions",
-      "lang": "en",
-      "verify_status": "verified",
-      "in_synthesis": false,
-      "used_in": [
-        "2026-Q3_quarterly.html",
-        "2026_annual.html"
-      ]
-    },
-    {
-      "source_id": "S-067",
-      "tier": 2,
-      "publisher": "CBRE",
-      "title": "https://www.cbre.ae/insights",
-      "url": "https://www.cbre.ae/insights",
-      "lang": "en",
-      "verify_status": "verified",
-      "in_synthesis": false,
-      "used_in": [
-        "2026-Q3_quarterly.html"
-      ]
-    },
-    {
-      "source_id": "S-068",
-      "tier": 2,
-      "publisher": "JLL",
-      "title": "https://www.jll.com/en-ae/insights",
-      "url": "https://www.jll.com/en-ae/insights",
-      "lang": "en",
-      "verify_status": "verified",
-      "in_synthesis": false,
-      "used_in": [
-        "2026-Q3_quarterly.html"
-      ]
-    },
-    {
-      "source_id": "S-069",
-      "tier": 2,
-      "publisher": "JLL",
-      "title": "https://www.jll.com/en-ae/insights/market-dynamics",
-      "url": "https://www.jll.com/en-ae/insights/market-dynamics",
-      "lang": "en",
-      "verify_status": "verified",
-      "in_synthesis": false,
-      "used_in": [
-        "2026-Q3_quarterly.html"
-      ]
-    },
-    {
-      "source_id": "S-070",
-      "tier": 2,
-      "publisher": "Knight Frank",
-      "title": "https://www.knightfrank.ae/newsroom/press-release",
-      "url": "https://www.knightfrank.ae/newsroom/press-release",
-      "lang": "en",
-      "verify_status": "verified",
-      "in_synthesis": false,
-      "used_in": [
-        "2026-Q3_quarterly.html"
-      ]
-    },
-    {
-      "source_id": "S-071",
-      "tier": 1,
-      "publisher": "Tech Life Research（本仓库）",
-      "title": "https://github.com/hmbphxkw76-byte/tech-context-digest/blob/main/content/economy/dubai/apartment/reports/2026_annual.html",
-      "url": "https://github.com/hmbphxkw76-byte/tech-context-digest/blob/main/content/economy/dubai/apartment/reports/2026_annual.html",
-      "lang": "en",
-      "verify_status": "verified",
-      "in_synthesis": false,
-      "used_in": [
-        "2026_annual.html"
-      ]
-    },
-    {
-      "source_id": "S-072",
-      "tier": 1,
-      "publisher": "Dubai Land Department (DLD)",
-      "title": "https://dubailand.gov.ae/en/",
-      "url": "https://dubailand.gov.ae/en/",
-      "lang": "en",
-      "verify_status": "verified",
-      "in_synthesis": false,
-      "used_in": [
-        "2026_annual.html"
-      ]
-    },
-    {
-      "source_id": "S-073",
-      "tier": 1,
-      "publisher": "Central Bank of the UAE (CBUAE)",
-      "title": "https://centralbank.ae/en/research-and-statistics/",
-      "url": "https://centralbank.ae/en/research-and-statistics/",
-      "lang": "en",
-      "verify_status": "verified",
-      "in_synthesis": false,
-      "used_in": [
-        "2026_annual.html"
-      ]
-    },
-    {
-      "source_id": "S-074",
-      "tier": 1,
-      "publisher": "Dubai Municipality",
-      "title": "https://dm.gov.ae/open-data/",
-      "url": "https://dm.gov.ae/open-data/",
-      "lang": "en",
-      "verify_status": "verified",
-      "in_synthesis": false,
-      "used_in": [
-        "2026_annual.html"
-      ]
-    },
-    {
-      "source_id": "S-075",
-      "tier": 1,
-      "publisher": "Emirates News Agency (WAM)",
-      "title": "https://www.wam.ae/en",
-      "url": "https://www.wam.ae/en",
-      "lang": "en",
-      "verify_status": "verified",
-      "in_synthesis": false,
-      "used_in": [
-        "2026_annual.html"
-      ]
-    },
-    {
-      "source_id": "S-076",
-      "tier": 1,
-      "publisher": "Federal Competitiveness and Statistics Centre",
-      "title": "https://fcsc.gov.ae/en",
-      "url": "https://fcsc.gov.ae/en",
-      "lang": "en",
-      "verify_status": "verified",
-      "in_synthesis": false,
-      "used_in": [
-        "2026_annual.html"
-      ]
-    },
-    {
-      "source_id": "S-077",
-      "tier": 1,
-      "publisher": "Central Bank of the UAE",
-      "title": "https://centralbank.ae/en/forex-eibor/eibor-rates",
-      "url": "https://centralbank.ae/en/forex-eibor/eibor-rates",
-      "lang": "en",
-      "verify_status": "verified",
-      "in_synthesis": false,
-      "used_in": [
-        "reports/2026_annual.html"
-      ]
-    },
-    {
-      "source_id": "S-078",
-      "tier": 1,
-      "publisher": "Digital Dubai",
-      "title": "https://www.digitaldubai.ae/initiatives/paperless/digital-dubai-launches-the-labour-force-survey-2026-to-strengthen-data-driven-labour-market-planning-and-decision-making",
-      "url": "https://www.digitaldubai.ae/initiatives/paperless/digital-dubai-launches-the-labour-force-survey-2026-to-strengthen-data-driven-labour-market-planning-and-decision-making",
-      "lang": "en",
-      "verify_status": "verified",
-      "in_synthesis": false,
-      "used_in": [
-        "reports/2026_annual.html"
-      ]
-    },
-    {
-      "source_id": "S-079",
-      "tier": 1,
-      "publisher": "Digital Dubai",
-      "title": "https://www.digitaldubai.ae/initiatives/paperless/dubai-digital-dubai%27s-population-tops-4.580-million-by-the-end-of-2025-recording-7.5-growth",
-      "url": "https://www.digitaldubai.ae/initiatives/paperless/dubai-digital-dubai%27s-population-tops-4.580-million-by-the-end-of-2025-recording-7.5-growth",
-      "lang": "en",
-      "verify_status": "verified",
-      "in_synthesis": false,
-      "used_in": [
-        "reports/2026_annual.html"
-      ]
-    },
-    {
-      "source_id": "S-080",
-      "tier": 1,
-      "publisher": "Dubai Pulse / DLD",
-      "title": "https://www.dubaipulse.gov.ae/data/dld-registration/dld_transactions-open",
-      "url": "https://www.dubaipulse.gov.ae/data/dld-registration/dld_transactions-open",
-      "lang": "en",
-      "verify_status": "verified",
-      "in_synthesis": false,
-      "used_in": [
-        "reports/2026_annual.html"
-      ]
-    },
-    {
-      "source_id": "S-081",
-      "tier": 4,
-      "publisher": "Khaleej Times",
-      "title": "https://www.khaleejtimes.com/business/dubai-developer-launches-drop-64-in-9m-as-market-shifts-from-new-projects-to-delivery",
-      "url": "https://www.khaleejtimes.com/business/dubai-developer-launches-drop-64-in-9m-as-market-shifts-from-new-projects-to-delivery",
-      "lang": "en",
-      "verify_status": "media_unverified",
-      "in_synthesis": false,
-      "used_in": [
-        "reports/2026_annual.html"
-      ]
-    }
-  ]
+  {
+   "source_id": "S-002",
+   "tier": 1,
+   "publisher": "U.S. Federal Reserve",
+   "title": "https://www.federalreserve.gov/newsevents/pressreleases/monetary20261028a.htm",
+   "url": "https://www.federalreserve.gov/newsevents/pressreleases/monetary20261028a.htm",
+   "lang": "en",
+   "verify_status": "verified",
+   "updated": "2026-11-18",
+   "in_synthesis": false,
+   "used_in": [
+    "2026-11_baseline_report.html",
+    "2026-Q3_quarterly.html",
+    "2026_annual.html"
+   ]
+  },
+  {
+   "source_id": "S-003",
+   "tier": 1,
+   "publisher": "UNCTAD",
+   "title": "https://unctad.org/system/files/non-official-document/wir_fs_qa_en.pdf",
+   "url": "https://unctad.org/system/files/non-official-document/wir_fs_qa_en.pdf",
+   "lang": "en",
+   "verify_status": "verified",
+   "updated": "2026-11-18",
+   "in_synthesis": false,
+   "used_in": [
+    "2026-11_baseline_report.html",
+    "2026-Q3_quarterly.html",
+    "2026_annual.html"
+   ]
+  },
+  {
+   "source_id": "S-004",
+   "tier": 1,
+   "publisher": "Government of Dubai Media Office",
+   "title": "https://mediaoffice.ae/en/news/2026/march/25-03/dubai-records-strong-performance-in-the-construction-sector",
+   "url": "https://mediaoffice.ae/en/news/2026/march/25-03/dubai-records-strong-performance-in-the-construction-sector",
+   "lang": "en",
+   "verify_status": "verified",
+   "updated": "2026-11-18",
+   "in_synthesis": false,
+   "used_in": [
+    "2026-11_baseline_report.html",
+    "2026-Q3_quarterly.html",
+    "2026_annual.html"
+   ]
+  },
+  {
+   "source_id": "S-005",
+   "tier": 1,
+   "publisher": "Digital Dubai / DDSE",
+   "title": "https://www.digitaldubai.ae/initiatives/paperless/dubai-digital-dubai's-population-tops-4.580-million-by-the-end-of-2025-recording-7.5-growth",
+   "url": "https://www.digitaldubai.ae/initiatives/paperless/dubai-digital-dubai's-population-tops-4.580-million-by-the-end-of-2025-recording-7.5-growth",
+   "lang": "en",
+   "verify_status": "verified",
+   "updated": "2026-11-18",
+   "in_synthesis": false,
+   "used_in": [
+    "2026-11_baseline_report.html",
+    "2026-Q3_quarterly.html",
+    "2026_annual.html"
+   ]
+  },
+  {
+   "source_id": "S-006",
+   "tier": 1,
+   "publisher": "Government of Dubai Media Office",
+   "title": "https://mediaoffice.ae/en/news/2026/september/13-09/dubai-tourism-records-highest-visitor-numbers-since-february-as-atm-2026-opens",
+   "url": "https://mediaoffice.ae/en/news/2026/september/13-09/dubai-tourism-records-highest-visitor-numbers-since-february-as-atm-2026-opens",
+   "lang": "en",
+   "verify_status": "verified",
+   "updated": "2026-11-18",
+   "in_synthesis": false,
+   "used_in": [
+    "2026-11_baseline_report.html",
+    "2026-Q3_quarterly.html",
+    "2026_annual.html"
+   ]
+  },
+  {
+   "source_id": "S-007",
+   "tier": 1,
+   "publisher": "Central Bank of the UAE (CBUAE)",
+   "title": "https://www.centralbank.ae/en/forex-eibor/eibor-rates/",
+   "url": "https://www.centralbank.ae/en/forex-eibor/eibor-rates/",
+   "lang": "en",
+   "verify_status": "verified",
+   "updated": "2026-11-18",
+   "in_synthesis": true,
+   "used_in": [
+    "2026-11_baseline_report.html",
+    "2026-11_monthly.html",
+    "2026-Q3_quarterly.html",
+    "2026_annual.html"
+   ]
+  },
+  {
+   "source_id": "S-008",
+   "tier": 1,
+   "publisher": "Central Bank of the UAE (CBUAE)",
+   "title": "https://centralbank.ae/en/research-and-statistics/",
+   "url": "https://centralbank.ae/en/research-and-statistics/",
+   "lang": "en",
+   "verify_status": "verified",
+   "updated": "2026-11-18",
+   "in_synthesis": false,
+   "used_in": [
+    "2026-11_baseline_report.html",
+    "2026-Q3_quarterly.html",
+    "2026_annual.html"
+   ]
+  },
+  {
+   "source_id": "S-009",
+   "tier": 1,
+   "publisher": "Central Bank of the UAE (CBUAE)",
+   "title": "https://centralbank.ae/en/news-and-publications/publications/",
+   "url": "https://centralbank.ae/en/news-and-publications/publications/",
+   "lang": "en",
+   "verify_status": "verified",
+   "updated": "2026-11-18",
+   "in_synthesis": false,
+   "used_in": [
+    "2026-11_baseline_report.html",
+    "2026-Q3_quarterly.html",
+    "2026_annual.html"
+   ]
+  },
+  {
+   "source_id": "S-010",
+   "tier": 1,
+   "publisher": "U.S. Federal Reserve",
+   "title": "https://www.federalreserve.gov/monetarypolicy/fomccalendars.htm",
+   "url": "https://www.federalreserve.gov/monetarypolicy/fomccalendars.htm",
+   "lang": "en",
+   "verify_status": "verified",
+   "updated": "2026-11-18",
+   "in_synthesis": true,
+   "used_in": [
+    "2026-11_baseline_report.html",
+    "2026-11_monthly.html",
+    "2026-Q3_quarterly.html",
+    "2026_annual.html"
+   ]
+  },
+  {
+   "source_id": "S-011",
+   "tier": 1,
+   "publisher": "Dubai Pulse / DLD Open Data",
+   "title": "https://www.dubaipulse.gov.ae/data/dld-registration/dld_rent_contracts-open",
+   "url": "https://www.dubaipulse.gov.ae/data/dld-registration/dld_rent_contracts-open",
+   "lang": "en",
+   "verify_status": "verified",
+   "updated": "2026-11-18",
+   "in_synthesis": false,
+   "used_in": [
+    "2026-11_baseline_report.html",
+    "2026-Q3_quarterly.html",
+    "2026_annual.html"
+   ]
+  },
+  {
+   "source_id": "S-012",
+   "tier": 1,
+   "publisher": "Dubai Land Department (DLD)",
+   "title": "https://dubailand.gov.ae/en/open-data/indexes-home/",
+   "url": "https://dubailand.gov.ae/en/open-data/indexes-home/",
+   "lang": "en",
+   "verify_status": "verified",
+   "updated": "2026-11-18",
+   "in_synthesis": false,
+   "used_in": [
+    "2026-11_baseline_report.html",
+    "2026-Q3_quarterly.html",
+    "2026_annual.html"
+   ]
+  },
+  {
+   "source_id": "S-013",
+   "tier": 1,
+   "publisher": "International Monetary Fund (IMF)",
+   "title": "https://imf.org/external/country/are/index.htm",
+   "url": "https://imf.org/external/country/are/index.htm",
+   "lang": "en",
+   "verify_status": "verified",
+   "updated": "2026-11-18",
+   "in_synthesis": false,
+   "used_in": [
+    "2026-11_baseline_report.html",
+    "2026-Q3_quarterly.html",
+    "2026_annual.html"
+   ]
+  },
+  {
+   "source_id": "S-014",
+   "tier": 1,
+   "publisher": "U.S. Energy Information Administration",
+   "title": "https://www.eia.gov/outlooks/steo/report/global_oil.php",
+   "url": "https://www.eia.gov/outlooks/steo/report/global_oil.php",
+   "lang": "en",
+   "verify_status": "verified",
+   "updated": "2026-11-18",
+   "in_synthesis": false,
+   "used_in": [
+    "2026-11_baseline_report.html",
+    "2026-Q3_quarterly.html",
+    "2026_annual.html"
+   ]
+  },
+  {
+   "source_id": "S-015",
+   "tier": 1,
+   "publisher": "Dubai Statistics Centre (DSC)",
+   "title": "https://www.dsc.gov.ae/",
+   "url": "https://www.dsc.gov.ae/",
+   "lang": "en",
+   "verify_status": "verified",
+   "updated": "2026-11-18",
+   "in_synthesis": false,
+   "used_in": [
+    "2026-11_baseline_report.html",
+    "2026-Q3_quarterly.html",
+    "2026_annual.html"
+   ]
+  },
+  {
+   "source_id": "S-016",
+   "tier": 2,
+   "publisher": "DXBinteract",
+   "title": "https://react.dxbinteract.com/dubai-property-prices/dubai/apartments",
+   "url": "https://react.dxbinteract.com/dubai-property-prices/dubai/apartments",
+   "lang": "en",
+   "verify_status": "verified",
+   "updated": "2026-11-18",
+   "in_synthesis": false,
+   "used_in": [
+    "2026-11_baseline_report.html",
+    "2026_annual.html"
+   ]
+  },
+  {
+   "source_id": "S-017",
+   "tier": 2,
+   "publisher": "Knight Frank",
+   "title": "https://www.knightfrank.ae/site-assets/pdf/2026/dubai-residential-market-review-q1-2026.pdf",
+   "url": "https://www.knightfrank.ae/site-assets/pdf/2026/dubai-residential-market-review-q1-2026.pdf",
+   "lang": "en",
+   "verify_status": "verified",
+   "updated": "2026-11-18",
+   "in_synthesis": false,
+   "used_in": [
+    "2026-11_baseline_report.html"
+   ]
+  },
+  {
+   "source_id": "S-018",
+   "tier": 2,
+   "publisher": "Reidin",
+   "title": "https://reidin.com/dubai-residential-real-estate-q2-2026-market-overview",
+   "url": "https://reidin.com/dubai-residential-real-estate-q2-2026-market-overview",
+   "lang": "en",
+   "verify_status": "verified",
+   "updated": "2026-11-18",
+   "in_synthesis": false,
+   "used_in": [
+    "2026-11_baseline_report.html"
+   ]
+  },
+  {
+   "source_id": "S-019",
+   "tier": 2,
+   "publisher": "Savills Middle East",
+   "title": "https://www.savills.ae/research_articles/379881/395342-0",
+   "url": "https://www.savills.ae/research_articles/379881/395342-0",
+   "lang": "en",
+   "verify_status": "verified",
+   "updated": "2026-11-18",
+   "in_synthesis": false,
+   "used_in": [
+    "2026-11_baseline_report.html",
+    "2026-Q3_quarterly.html",
+    "2026_annual.html"
+   ]
+  },
+  {
+   "source_id": "S-020",
+   "tier": 4,
+   "publisher": "Zawya",
+   "title": "https://www.zawya.com/en/press-release/research-studies/dubai-residential-sales-values-top-aed72.6-billion-in-q3-2026-cavendish-maxwell-1518343",
+   "url": "https://www.zawya.com/en/press-release/research-studies/dubai-residential-sales-values-top-aed72.6-billion-in-q3-2026-cavendish-maxwell-1518343",
+   "lang": "en",
+   "verify_status": "media_unverified",
+   "updated": "2026-11-18",
+   "in_synthesis": false,
+   "used_in": [
+    "2026-11_baseline_report.html",
+    "2026-Q3_quarterly.html",
+    "2026_annual.html"
+   ]
+  },
+  {
+   "source_id": "S-021",
+   "tier": 2,
+   "publisher": "Cushman & Wakefield",
+   "title": "https://www.cushwake.ae/en/marketbeats/marketbeat-residential-q3-2026-dubai-uae",
+   "url": "https://www.cushwake.ae/en/marketbeats/marketbeat-residential-q3-2026-dubai-uae",
+   "lang": "en",
+   "verify_status": "verified",
+   "updated": "2026-11-18",
+   "in_synthesis": false,
+   "used_in": [
+    "2026-11_baseline_report.html",
+    "2026-Q3_quarterly.html",
+    "2026_annual.html"
+   ]
+  },
+  {
+   "source_id": "S-022",
+   "tier": 4,
+   "publisher": "Zawya",
+   "title": "https://zawya.com/en/press-release/research-studies/dubai-adds-24800-new-residential-units-in-h1-2026-as-market-shifts-from-launch-led-to-delivery-driven-says-cavendish-maxwell-414719",
+   "url": "https://zawya.com/en/press-release/research-studies/dubai-adds-24800-new-residential-units-in-h1-2026-as-market-shifts-from-launch-led-to-delivery-driven-says-cavendish-maxwell-414719",
+   "lang": "en",
+   "verify_status": "media_unverified",
+   "updated": "2026-11-18",
+   "in_synthesis": false,
+   "used_in": [
+    "2026-11_baseline_report.html",
+    "2026-Q3_quarterly.html",
+    "2026_annual.html"
+   ]
+  },
+  {
+   "source_id": "S-023",
+   "tier": 4,
+   "publisher": "Khaleej Times",
+   "title": "https://www.khaleejtimes.com/business/dubai-rents-1-in-5-tenants-now-pays-less-than-before-as-rentals-ease-on-new-supply",
+   "url": "https://www.khaleejtimes.com/business/dubai-rents-1-in-5-tenants-now-pays-less-than-before-as-rentals-ease-on-new-supply",
+   "lang": "en",
+   "verify_status": "media_unverified",
+   "updated": "2026-11-18",
+   "in_synthesis": false,
+   "used_in": [
+    "2026-11_baseline_report.html",
+    "2026-Q3_quarterly.html",
+    "2026_annual.html"
+   ]
+  },
+  {
+   "source_id": "S-024",
+   "tier": 2,
+   "publisher": "Peak Trust",
+   "title": "https://peaktrust.ae/insights/rent-yield-monitor/2026-09",
+   "url": "https://peaktrust.ae/insights/rent-yield-monitor/2026-09",
+   "lang": "en",
+   "verify_status": "verified",
+   "updated": "2026-11-18",
+   "in_synthesis": false,
+   "used_in": [
+    "2026-11_baseline_report.html",
+    "2026-Q3_quarterly.html",
+    "2026_annual.html"
+   ]
+  },
+  {
+   "source_id": "S-025",
+   "tier": 2,
+   "publisher": "Dubai Real Estate Data",
+   "title": "https://www.dubairealestatedata.com/yields",
+   "url": "https://www.dubairealestatedata.com/yields",
+   "lang": "en",
+   "verify_status": "verified",
+   "updated": "2026-11-18",
+   "in_synthesis": false,
+   "used_in": [
+    "2026-11_baseline_report.html",
+    "2026-Q3_quarterly.html",
+    "2026_annual.html"
+   ]
+  },
+  {
+   "source_id": "S-026",
+   "tier": 4,
+   "publisher": "The Gulf Pulse",
+   "title": "https://thegulfpulse.com/dubai-asking-rents-fall-up-to-22-in-tracked-areas",
+   "url": "https://thegulfpulse.com/dubai-asking-rents-fall-up-to-22-in-tracked-areas",
+   "lang": "en",
+   "verify_status": "media_unverified",
+   "updated": "2026-11-18",
+   "in_synthesis": false,
+   "used_in": [
+    "2026-11_baseline_report.html",
+    "2026-Q3_quarterly.html",
+    "2026_annual.html"
+   ]
+  },
+  {
+   "source_id": "S-027",
+   "tier": 4,
+   "publisher": "Khaleej Times",
+   "title": "https://www.khaleejtimes.com/business/dubai-tenants-move-homes-as-new-leases-offer-rents-up-to-15-lower",
+   "url": "https://www.khaleejtimes.com/business/dubai-tenants-move-homes-as-new-leases-offer-rents-up-to-15-lower",
+   "lang": "en",
+   "verify_status": "media_unverified",
+   "updated": "2026-11-18",
+   "in_synthesis": false,
+   "used_in": [
+    "2026-11_baseline_report.html",
+    "2026-Q3_quarterly.html",
+    "2026_annual.html"
+   ]
+  },
+  {
+   "source_id": "S-028",
+   "tier": 1,
+   "publisher": "Central Bank of the UAE (CBUAE)",
+   "title": "https://centralbank.ae/media/zqfkpibt/eibor_2026.xlsx",
+   "url": "https://centralbank.ae/media/zqfkpibt/eibor_2026.xlsx",
+   "lang": "en",
+   "verify_status": "verified",
+   "updated": "2026-11-18",
+   "in_synthesis": true,
+   "used_in": [
+    "2026-11_monthly.html"
+   ]
+  },
+  {
+   "source_id": "S-029",
+   "tier": 1,
+   "publisher": "Central Bank of the UAE (CBUAE)",
+   "title": "https://centralbank.ae/en/research-and-statistics/",
+   "url": "https://centralbank.ae/en/research-and-statistics/",
+   "lang": "en",
+   "verify_status": "verified",
+   "updated": "2026-11-18",
+   "in_synthesis": false,
+   "used_in": [
+    "2026-11_monthly.html"
+   ]
+  },
+  {
+   "source_id": "S-030",
+   "tier": 1,
+   "publisher": "Central Bank of the UAE (CBUAE)",
+   "title": "https://centralbank.ae/media/cysbl3ar/statistical-bulletin-september-2026.pdf",
+   "url": "https://centralbank.ae/media/cysbl3ar/statistical-bulletin-september-2026.pdf",
+   "lang": "en",
+   "verify_status": "verified",
+   "updated": "2026-11-18",
+   "in_synthesis": false,
+   "used_in": [
+    "2026-11_monthly.html"
+   ]
+  },
+  {
+   "source_id": "S-031",
+   "tier": 1,
+   "publisher": "U.S. Energy Information Administration",
+   "title": "https://www.eia.gov/outlooks/steo/",
+   "url": "https://www.eia.gov/outlooks/steo/",
+   "lang": "en",
+   "verify_status": "verified",
+   "updated": "2026-11-18",
+   "in_synthesis": false,
+   "used_in": [
+    "2026-11_monthly.html"
+   ]
+  },
+  {
+   "source_id": "S-032",
+   "tier": 2,
+   "publisher": "PropertyIndex.ae",
+   "title": "https://www.propertyindex.ae/dubai-real-estate-price-index",
+   "url": "https://www.propertyindex.ae/dubai-real-estate-price-index",
+   "lang": "en",
+   "verify_status": "verified",
+   "updated": "2026-11-18",
+   "in_synthesis": true,
+   "used_in": [
+    "2026-11_monthly.html",
+    "2026-Q3_quarterly.html",
+    "2026_annual.html"
+   ]
+  },
+  {
+   "source_id": "S-033",
+   "tier": 2,
+   "publisher": "PropertyIndex.ae",
+   "title": "https://www.propertyindex.ae/dubai-real-estate-price-index/2026-10",
+   "url": "https://www.propertyindex.ae/dubai-real-estate-price-index/2026-10",
+   "lang": "en",
+   "verify_status": "verified",
+   "updated": "2026-11-18",
+   "in_synthesis": true,
+   "used_in": [
+    "2026-11_monthly.html"
+   ]
+  },
+  {
+   "source_id": "S-034",
+   "tier": 2,
+   "publisher": "PropertyIndex.ae",
+   "title": "https://www.propertyindex.ae/dubai-real-estate-price-index/2026-09",
+   "url": "https://www.propertyindex.ae/dubai-real-estate-price-index/2026-09",
+   "lang": "en",
+   "verify_status": "verified",
+   "updated": "2026-11-18",
+   "in_synthesis": false,
+   "used_in": [
+    "2026-11_monthly.html"
+   ]
+  },
+  {
+   "source_id": "S-035",
+   "tier": 2,
+   "publisher": "PropertyIndex.ae",
+   "title": "https://www.propertyindex.ae/dubai-real-estate-prices",
+   "url": "https://www.propertyindex.ae/dubai-real-estate-prices",
+   "lang": "en",
+   "verify_status": "verified",
+   "updated": "2026-11-18",
+   "in_synthesis": true,
+   "used_in": [
+    "2026-11_monthly.html",
+    "2026-Q3_quarterly.html",
+    "2026_annual.html"
+   ]
+  },
+  {
+   "source_id": "S-036",
+   "tier": 2,
+   "publisher": "Peak Trust",
+   "title": "https://peaktrust.ae/",
+   "url": "https://peaktrust.ae/",
+   "lang": "en",
+   "verify_status": "verified",
+   "updated": "2026-11-18",
+   "in_synthesis": false,
+   "used_in": [
+    "2026-11_monthly.html"
+   ]
+  },
+  {
+   "source_id": "S-037",
+   "tier": 2,
+   "publisher": "Cavendish Maxwell",
+   "title": "https://cavendishmaxwell.com/",
+   "url": "https://cavendishmaxwell.com/",
+   "lang": "en",
+   "verify_status": "verified",
+   "updated": "2026-11-18",
+   "in_synthesis": false,
+   "used_in": [
+    "2026-11_monthly.html"
+   ]
+  },
+  {
+   "source_id": "S-038",
+   "tier": 2,
+   "publisher": "Savills Middle East",
+   "title": "https://www.savills.ae/",
+   "url": "https://www.savills.ae/",
+   "lang": "en",
+   "verify_status": "verified",
+   "updated": "2026-11-18",
+   "in_synthesis": false,
+   "used_in": [
+    "2026-11_monthly.html"
+   ]
+  },
+  {
+   "source_id": "S-039",
+   "tier": 1,
+   "publisher": "Government of Dubai Media Office",
+   "title": "https://mediaoffice.ae/en",
+   "url": "https://mediaoffice.ae/en",
+   "lang": "en",
+   "verify_status": "verified",
+   "updated": "2026-11-18",
+   "in_synthesis": false,
+   "used_in": [
+    "2026-11_monthly.html"
+   ]
+  },
+  {
+   "source_id": "S-040",
+   "tier": 1,
+   "publisher": "UNCTAD",
+   "title": "https://unctad.org/",
+   "url": "https://unctad.org/",
+   "lang": "en",
+   "verify_status": "verified",
+   "updated": "2026-11-18",
+   "in_synthesis": false,
+   "used_in": [
+    "2026-11_monthly.html"
+   ]
+  },
+  {
+   "source_id": "S-041",
+   "tier": 1,
+   "publisher": "Digital Dubai / DDSE",
+   "title": "https://www.digitaldubai.ae/",
+   "url": "https://www.digitaldubai.ae/",
+   "lang": "en",
+   "verify_status": "verified",
+   "updated": "2026-11-18",
+   "in_synthesis": false,
+   "used_in": [
+    "2026-11_monthly.html",
+    "2026_annual.html"
+   ]
+  },
+  {
+   "source_id": "S-042",
+   "tier": 1,
+   "publisher": "Tech Life Research（本仓库）",
+   "title": "https://github.com/hmbphxkw76-byte/tech-context-digest/blob/main/content/economy/dubai/apartment/reports/2026-Q3_quarterly.html",
+   "url": "https://github.com/hmbphxkw76-byte/tech-context-digest/blob/main/content/economy/dubai/apartment/reports/2026-Q3_quarterly.html",
+   "lang": "en",
+   "verify_status": "verified",
+   "updated": "2026-11-18",
+   "in_synthesis": false,
+   "used_in": [
+    "2026-Q3_quarterly.html"
+   ]
+  },
+  {
+   "source_id": "S-043",
+   "tier": 2,
+   "publisher": "Crescore Real Estate",
+   "title": "https://crescorealestate.ae/dubai-supply-2027-2028-handover-risk/",
+   "url": "https://crescorealestate.ae/dubai-supply-2027-2028-handover-risk/",
+   "lang": "en",
+   "verify_status": "verified",
+   "updated": "2026-11-18",
+   "in_synthesis": false,
+   "used_in": [
+    "2026-Q3_quarterly.html",
+    "2026_annual.html"
+   ]
+  },
+  {
+   "source_id": "S-044",
+   "tier": 2,
+   "publisher": "Peak Trust",
+   "title": "https://peaktrust.ae/insights/rent-yield-monitor/2026-10",
+   "url": "https://peaktrust.ae/insights/rent-yield-monitor/2026-10",
+   "lang": "en",
+   "verify_status": "verified",
+   "updated": "2026-11-18",
+   "in_synthesis": false,
+   "used_in": [
+    "2026-Q3_quarterly.html",
+    "2026_annual.html"
+   ]
+  },
+  {
+   "source_id": "S-045",
+   "tier": 2,
+   "publisher": "ValuStrat",
+   "title": "https://valustrat.com/products/dubai-real-estate-review-q3-2026",
+   "url": "https://valustrat.com/products/dubai-real-estate-review-q3-2026",
+   "lang": "en",
+   "verify_status": "verified",
+   "updated": "2026-11-18",
+   "in_synthesis": false,
+   "used_in": [
+    "2026-Q3_quarterly.html",
+    "2026_annual.html"
+   ]
+  },
+  {
+   "source_id": "S-046",
+   "tier": 2,
+   "publisher": "Property Monitor (Seven Century)",
+   "title": "https://www.sevencentury.com/market-insights/reports/monthly/dubai-property-market-report-september-2026",
+   "url": "https://www.sevencentury.com/market-insights/reports/monthly/dubai-property-market-report-september-2026",
+   "lang": "en",
+   "verify_status": "verified",
+   "updated": "2026-11-18",
+   "in_synthesis": false,
+   "used_in": [
+    "2026-Q3_quarterly.html"
+   ]
+  },
+  {
+   "source_id": "S-047",
+   "tier": 4,
+   "publisher": "OffPlan Insider",
+   "title": "https://offplaninsider.com/news/dubai-asking-prices-steady-q3-2026-bayut-56600-new-homes",
+   "url": "https://offplaninsider.com/news/dubai-asking-prices-steady-q3-2026-bayut-56600-new-homes",
+   "lang": "en",
+   "verify_status": "media_unverified",
+   "updated": "2026-11-18",
+   "in_synthesis": false,
+   "used_in": [
+    "2026-Q3_quarterly.html"
+   ]
+  },
+  {
+   "source_id": "S-048",
+   "tier": 2,
+   "publisher": "CBRE",
+   "title": "https://www.cbre.ae/insights/figures/uae-real-estate-market-review-q3-2026",
+   "url": "https://www.cbre.ae/insights/figures/uae-real-estate-market-review-q3-2026",
+   "lang": "en",
+   "verify_status": "verified",
+   "updated": "2026-11-18",
+   "in_synthesis": false,
+   "used_in": [
+    "2026-Q3_quarterly.html"
+   ]
+  },
+  {
+   "source_id": "S-049",
+   "tier": 2,
+   "publisher": "JLL",
+   "title": "https://www.jll.com/en-ae/insights/market-dynamics/uae-living",
+   "url": "https://www.jll.com/en-ae/insights/market-dynamics/uae-living",
+   "lang": "en",
+   "verify_status": "verified",
+   "updated": "2026-11-18",
+   "in_synthesis": false,
+   "used_in": [
+    "2026-Q3_quarterly.html"
+   ]
+  },
+  {
+   "source_id": "S-050",
+   "tier": 2,
+   "publisher": "Knight Frank",
+   "title": "https://www.knightfrank.ae/newsroom/article/2026/10/412-us$10-million-homes-sell-in-dubai-for-us$-6.7bn-between-q1-q3-2026",
+   "url": "https://www.knightfrank.ae/newsroom/article/2026/10/412-us$10-million-homes-sell-in-dubai-for-us$-6.7bn-between-q1-q3-2026",
+   "lang": "en",
+   "verify_status": "verified",
+   "updated": "2026-11-18",
+   "in_synthesis": false,
+   "used_in": [
+    "2026-Q3_quarterly.html"
+   ]
+  },
+  {
+   "source_id": "S-051",
+   "tier": 2,
+   "publisher": "DXBinteract",
+   "title": "https://dxbinteract.com/market-reports/2026/Q3",
+   "url": "https://dxbinteract.com/market-reports/2026/Q3",
+   "lang": "en",
+   "verify_status": "verified",
+   "updated": "2026-11-18",
+   "in_synthesis": false,
+   "used_in": [
+    "2026-Q3_quarterly.html",
+    "2026_annual.html"
+   ]
+  },
+  {
+   "source_id": "S-052",
+   "tier": 2,
+   "publisher": "CBRE",
+   "title": "https://mktgdocs.cbre.com/2299/8274dd48-9cc9-485f-aa6b-b1db2718cbe0-2065516102/CBRE_-_UAE_Real_Estate_Market_.pdf",
+   "url": "https://mktgdocs.cbre.com/2299/8274dd48-9cc9-485f-aa6b-b1db2718cbe0-2065516102/CBRE_-_UAE_Real_Estate_Market_.pdf",
+   "lang": "en",
+   "verify_status": "verified",
+   "updated": "2026-11-18",
+   "in_synthesis": false,
+   "used_in": [
+    "2026-Q3_quarterly.html"
+   ]
+  },
+  {
+   "source_id": "S-053",
+   "tier": 1,
+   "publisher": "Dubai Pulse / DLD Open Data",
+   "title": "https://www.dubaipulse.gov.ae/data/dld-transactions/dld_transactions-open",
+   "url": "https://www.dubaipulse.gov.ae/data/dld-transactions/dld_transactions-open",
+   "lang": "en",
+   "verify_status": "verified",
+   "updated": "2026-11-18",
+   "in_synthesis": false,
+   "used_in": [
+    "2026-Q3_quarterly.html",
+    "2026_annual.html"
+   ]
+  },
+  {
+   "source_id": "S-054",
+   "tier": 1,
+   "publisher": "Dubai Pulse / DLD Open Data",
+   "title": "https://www.dubaipulse.gov.ae/data/dld-registration/dld_units-open",
+   "url": "https://www.dubaipulse.gov.ae/data/dld-registration/dld_units-open",
+   "lang": "en",
+   "verify_status": "verified",
+   "updated": "2026-11-18",
+   "in_synthesis": false,
+   "used_in": [
+    "2026-Q3_quarterly.html",
+    "2026_annual.html"
+   ]
+  },
+  {
+   "source_id": "S-055",
+   "tier": 1,
+   "publisher": "Digital Dubai / DDSE",
+   "title": "https://www.digitaldubai.ae/initiatives/paperless/dubai-digital-dubai&#x27;s-population-tops-4.580-million-by-the-end-of-2025-recording-7.5-growth",
+   "url": "https://www.digitaldubai.ae/initiatives/paperless/dubai-digital-dubai&#x27;s-population-tops-4.580-million-by-the-end-of-2025-recording-7.5-growth",
+   "lang": "en",
+   "verify_status": "verified",
+   "updated": "2026-11-18",
+   "in_synthesis": false,
+   "used_in": [
+    "2026-Q3_quarterly.html"
+   ]
+  },
+  {
+   "source_id": "S-056",
+   "tier": 1,
+   "publisher": "Dubai Land Department (DLD)",
+   "title": "https://dubailand.gov.ae/en/eservices/rental-index/rental-index/",
+   "url": "https://dubailand.gov.ae/en/eservices/rental-index/rental-index/",
+   "lang": "en",
+   "verify_status": "verified",
+   "updated": "2026-11-18",
+   "in_synthesis": false,
+   "used_in": [
+    "2026-Q3_quarterly.html",
+    "2026_annual.html"
+   ]
+  },
+  {
+   "source_id": "S-057",
+   "tier": 1,
+   "publisher": "Central Bank of the UAE (CBUAE)",
+   "title": "https://centralbank.ae/en/forex-eibor/exchange-rates/",
+   "url": "https://centralbank.ae/en/forex-eibor/exchange-rates/",
+   "lang": "en",
+   "verify_status": "verified",
+   "updated": "2026-11-18",
+   "in_synthesis": false,
+   "used_in": [
+    "2026-Q3_quarterly.html",
+    "2026_annual.html"
+   ]
+  },
+  {
+   "source_id": "S-058",
+   "tier": 1,
+   "publisher": "Digital Dubai / DDSE",
+   "title": "https://www.digitaldubai.ae/newsroom/digital-dubai-launches-the-labour-force-survey-2026-to-strengthen-data-driven-labour-market-planning-and-decision-making",
+   "url": "https://www.digitaldubai.ae/newsroom/digital-dubai-launches-the-labour-force-survey-2026-to-strengthen-data-driven-labour-market-planning-and-decision-making",
+   "lang": "en",
+   "verify_status": "verified",
+   "updated": "2026-11-18",
+   "in_synthesis": false,
+   "used_in": [
+    "2026-Q3_quarterly.html",
+    "2026_annual.html"
+   ]
+  },
+  {
+   "source_id": "S-059",
+   "tier": 4,
+   "publisher": "Zawya",
+   "title": "https://www.zawya.com/en/press-release/government-news/uae-attracts-aed-1773bln-in-fdi-inflows-in-2025-ciq4f0bg",
+   "url": "https://www.zawya.com/en/press-release/government-news/uae-attracts-aed-1773bln-in-fdi-inflows-in-2025-ciq4f0bg",
+   "lang": "en",
+   "verify_status": "media_unverified",
+   "updated": "2026-11-18",
+   "in_synthesis": false,
+   "used_in": [
+    "2026-Q3_quarterly.html",
+    "2026_annual.html"
+   ]
+  },
+  {
+   "source_id": "S-060",
+   "tier": 1,
+   "publisher": "Digital Dubai / DDSE",
+   "title": "https://www.digitaldubai.ae/en/",
+   "url": "https://www.digitaldubai.ae/en/",
+   "lang": "en",
+   "verify_status": "verified",
+   "updated": "2026-11-18",
+   "in_synthesis": false,
+   "used_in": [
+    "2026-Q3_quarterly.html"
+   ]
+  },
+  {
+   "source_id": "S-061",
+   "tier": 1,
+   "publisher": "Dubai.ae Open Data",
+   "title": "https://www.dubai.ae/open-data",
+   "url": "https://www.dubai.ae/open-data",
+   "lang": "en",
+   "verify_status": "verified",
+   "updated": "2026-11-18",
+   "in_synthesis": false,
+   "used_in": [
+    "2026-Q3_quarterly.html",
+    "2026_annual.html"
+   ]
+  },
+  {
+   "source_id": "S-062",
+   "tier": 1,
+   "publisher": "Dubai Land Department (DLD)",
+   "title": "https://dubailand.gov.ae/en/news-media/dubai-s-rental-market-charts-stable-trajectory-reflecting-integrated-regulatory-environment-and-sustained-public-confidence",
+   "url": "https://dubailand.gov.ae/en/news-media/dubai-s-rental-market-charts-stable-trajectory-reflecting-integrated-regulatory-environment-and-sustained-public-confidence",
+   "lang": "en",
+   "verify_status": "verified",
+   "updated": "2026-11-18",
+   "in_synthesis": false,
+   "used_in": [
+    "2026-Q3_quarterly.html",
+    "2026_annual.html"
+   ]
+  },
+  {
+   "source_id": "S-063",
+   "tier": 1,
+   "publisher": "UAE Government",
+   "title": "https://u.ae/",
+   "url": "https://u.ae/",
+   "lang": "en",
+   "verify_status": "verified",
+   "updated": "2026-11-18",
+   "in_synthesis": false,
+   "used_in": [
+    "2026-Q3_quarterly.html",
+    "2026_annual.html"
+   ]
+  },
+  {
+   "source_id": "S-064",
+   "tier": 1,
+   "publisher": "Dubai Land Department (DLD)",
+   "title": "https://dubailand.gov.ae/en/open-data/real-estate-data/",
+   "url": "https://dubailand.gov.ae/en/open-data/real-estate-data/",
+   "lang": "en",
+   "verify_status": "verified",
+   "updated": "2026-11-18",
+   "in_synthesis": false,
+   "used_in": [
+    "2026-Q3_quarterly.html"
+   ]
+  },
+  {
+   "source_id": "S-065",
+   "tier": 1,
+   "publisher": "Dubai Land Department (DLD)",
+   "title": "https://dubailand.gov.ae/en/eservices/",
+   "url": "https://dubailand.gov.ae/en/eservices/",
+   "lang": "en",
+   "verify_status": "verified",
+   "updated": "2026-11-18",
+   "in_synthesis": false,
+   "used_in": [
+    "2026-Q3_quarterly.html",
+    "2026_annual.html"
+   ]
+  },
+  {
+   "source_id": "S-066",
+   "tier": 1,
+   "publisher": "Dubai Land Department (DLD)",
+   "title": "http://dubailand.gov.ae/en/frequently-asked-questions",
+   "url": "http://dubailand.gov.ae/en/frequently-asked-questions",
+   "lang": "en",
+   "verify_status": "verified",
+   "updated": "2026-11-18",
+   "in_synthesis": false,
+   "used_in": [
+    "2026-Q3_quarterly.html",
+    "2026_annual.html"
+   ]
+  },
+  {
+   "source_id": "S-067",
+   "tier": 2,
+   "publisher": "CBRE",
+   "title": "https://www.cbre.ae/insights",
+   "url": "https://www.cbre.ae/insights",
+   "lang": "en",
+   "verify_status": "verified",
+   "updated": "2026-11-18",
+   "in_synthesis": false,
+   "used_in": [
+    "2026-Q3_quarterly.html"
+   ]
+  },
+  {
+   "source_id": "S-068",
+   "tier": 2,
+   "publisher": "JLL",
+   "title": "https://www.jll.com/en-ae/insights",
+   "url": "https://www.jll.com/en-ae/insights",
+   "lang": "en",
+   "verify_status": "verified",
+   "updated": "2026-11-18",
+   "in_synthesis": false,
+   "used_in": [
+    "2026-Q3_quarterly.html"
+   ]
+  },
+  {
+   "source_id": "S-069",
+   "tier": 2,
+   "publisher": "JLL",
+   "title": "https://www.jll.com/en-ae/insights/market-dynamics",
+   "url": "https://www.jll.com/en-ae/insights/market-dynamics",
+   "lang": "en",
+   "verify_status": "verified",
+   "updated": "2026-11-18",
+   "in_synthesis": false,
+   "used_in": [
+    "2026-Q3_quarterly.html"
+   ]
+  },
+  {
+   "source_id": "S-070",
+   "tier": 2,
+   "publisher": "Knight Frank",
+   "title": "https://www.knightfrank.ae/newsroom/press-release",
+   "url": "https://www.knightfrank.ae/newsroom/press-release",
+   "lang": "en",
+   "verify_status": "verified",
+   "updated": "2026-11-18",
+   "in_synthesis": false,
+   "used_in": [
+    "2026-Q3_quarterly.html"
+   ]
+  },
+  {
+   "source_id": "S-071",
+   "tier": 1,
+   "publisher": "Tech Life Research（本仓库）",
+   "title": "https://github.com/hmbphxkw76-byte/tech-context-digest/blob/main/content/economy/dubai/apartment/reports/2026_annual.html",
+   "url": "https://github.com/hmbphxkw76-byte/tech-context-digest/blob/main/content/economy/dubai/apartment/reports/2026_annual.html",
+   "lang": "en",
+   "verify_status": "verified",
+   "updated": "2026-11-18",
+   "in_synthesis": false,
+   "used_in": [
+    "2026_annual.html"
+   ]
+  },
+  {
+   "source_id": "S-072",
+   "tier": 1,
+   "publisher": "Dubai Land Department (DLD)",
+   "title": "https://dubailand.gov.ae/en/",
+   "url": "https://dubailand.gov.ae/en/",
+   "lang": "en",
+   "verify_status": "verified",
+   "updated": "2026-11-18",
+   "in_synthesis": false,
+   "used_in": [
+    "2026_annual.html"
+   ]
+  },
+  {
+   "source_id": "S-073",
+   "tier": 1,
+   "publisher": "Central Bank of the UAE (CBUAE)",
+   "title": "https://centralbank.ae/en/research-and-statistics/",
+   "url": "https://centralbank.ae/en/research-and-statistics/",
+   "lang": "en",
+   "verify_status": "verified",
+   "updated": "2026-11-18",
+   "in_synthesis": false,
+   "used_in": [
+    "2026_annual.html"
+   ]
+  },
+  {
+   "source_id": "S-074",
+   "tier": 1,
+   "publisher": "Dubai Municipality",
+   "title": "https://dm.gov.ae/open-data/",
+   "url": "https://dm.gov.ae/open-data/",
+   "lang": "en",
+   "verify_status": "verified",
+   "updated": "2026-11-18",
+   "in_synthesis": false,
+   "used_in": [
+    "2026_annual.html"
+   ]
+  },
+  {
+   "source_id": "S-075",
+   "tier": 1,
+   "publisher": "Emirates News Agency (WAM)",
+   "title": "https://www.wam.ae/en",
+   "url": "https://www.wam.ae/en",
+   "lang": "en",
+   "verify_status": "verified",
+   "updated": "2026-11-18",
+   "in_synthesis": false,
+   "used_in": [
+    "2026_annual.html"
+   ]
+  },
+  {
+   "source_id": "S-076",
+   "tier": 1,
+   "publisher": "Federal Competitiveness and Statistics Centre",
+   "title": "https://fcsc.gov.ae/en",
+   "url": "https://fcsc.gov.ae/en",
+   "lang": "en",
+   "verify_status": "verified",
+   "updated": "2026-11-18",
+   "in_synthesis": false,
+   "used_in": [
+    "2026_annual.html"
+   ]
+  },
+  {
+   "source_id": "S-077",
+   "tier": 1,
+   "publisher": "Central Bank of the UAE",
+   "title": "https://centralbank.ae/en/forex-eibor/eibor-rates",
+   "url": "https://centralbank.ae/en/forex-eibor/eibor-rates",
+   "lang": "en",
+   "verify_status": "verified",
+   "updated": "2026-11-18",
+   "in_synthesis": false,
+   "used_in": [
+    "reports/2026_annual.html"
+   ]
+  },
+  {
+   "source_id": "S-078",
+   "tier": 1,
+   "publisher": "Digital Dubai",
+   "title": "https://www.digitaldubai.ae/initiatives/paperless/digital-dubai-launches-the-labour-force-survey-2026-to-strengthen-data-driven-labour-market-planning-and-decision-making",
+   "url": "https://www.digitaldubai.ae/initiatives/paperless/digital-dubai-launches-the-labour-force-survey-2026-to-strengthen-data-driven-labour-market-planning-and-decision-making",
+   "lang": "en",
+   "verify_status": "verified",
+   "updated": "2026-11-18",
+   "in_synthesis": false,
+   "used_in": [
+    "reports/2026_annual.html"
+   ]
+  },
+  {
+   "source_id": "S-079",
+   "tier": 1,
+   "publisher": "Digital Dubai",
+   "title": "https://www.digitaldubai.ae/initiatives/paperless/dubai-digital-dubai%27s-population-tops-4.580-million-by-the-end-of-2025-recording-7.5-growth",
+   "url": "https://www.digitaldubai.ae/initiatives/paperless/dubai-digital-dubai%27s-population-tops-4.580-million-by-the-end-of-2025-recording-7.5-growth",
+   "lang": "en",
+   "verify_status": "verified",
+   "updated": "2026-11-18",
+   "in_synthesis": false,
+   "used_in": [
+    "reports/2026_annual.html"
+   ]
+  },
+  {
+   "source_id": "S-080",
+   "tier": 1,
+   "publisher": "Dubai Pulse / DLD",
+   "title": "https://www.dubaipulse.gov.ae/data/dld-registration/dld_transactions-open",
+   "url": "https://www.dubaipulse.gov.ae/data/dld-registration/dld_transactions-open",
+   "lang": "en",
+   "verify_status": "verified",
+   "updated": "2026-11-18",
+   "in_synthesis": false,
+   "used_in": [
+    "reports/2026_annual.html"
+   ]
+  },
+  {
+   "source_id": "S-081",
+   "tier": 4,
+   "publisher": "Khaleej Times",
+   "title": "https://www.khaleejtimes.com/business/dubai-developer-launches-drop-64-in-9m-as-market-shifts-from-new-projects-to-delivery",
+   "url": "https://www.khaleejtimes.com/business/dubai-developer-launches-drop-64-in-9m-as-market-shifts-from-new-projects-to-delivery",
+   "lang": "en",
+   "verify_status": "media_unverified",
+   "updated": "2026-11-18",
+   "in_synthesis": false,
+   "used_in": [
+    "reports/2026_annual.html"
+   ]
+  }
+ ]
 }
