@@ -88,7 +88,7 @@
 | Digital Dubai / DDSE | 年度人口基准、家庭户数、劳动力调查 | `https://www.digitaldubai.ae/` |
 | Dubai Statistics Centre | 人口与生命统计、住房与建筑年度表 | `https://www.dsc.gov.ae/` |
 | IMF | WEO、Article IV、UAE 国别页 | `https://imf.org/external/country/are/index.htm` |
-| CBUAE | Quarterly Economic Review、信贷景气调查 | `https://centralbank.ae/en/news-and-publications/publications/quarterly-reports/` |
+| CBUAE | Quarterly Economic Review、信贷景气调查 | `https://centralbank.ae/en/news-and-publications/publications/` |
 | U.S. EIA | STEO：Brent 现货与预测 | `https://www.eia.gov/outlooks/steo/report/global_oil.php` |
 | Dubai DET / Media Office | 全年游客、酒店入住率、客房夜 | `https://mediaoffice.ae/en` |
 
