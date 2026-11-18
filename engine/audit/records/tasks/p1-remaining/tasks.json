@@ -1,0 +1,138 @@
+[
+  {
+    "acceptance": "",
+    "depends_on": [],
+    "id": "P1-1",
+    "phase": "",
+    "status": "pending",
+    "title": "摘要越级修正（5 处）"
+  },
+  {
+    "acceptance": "",
+    "depends_on": [],
+    "id": "P1-2",
+    "phase": "",
+    "status": "pending",
+    "title": "证据强度一致性 + DC-08 门禁"
+  },
+  {
+    "acceptance": "",
+    "depends_on": [],
+    "id": "P1-3",
+    "phase": "",
+    "status": "pending",
+    "title": "「假设乘积」标注治理"
+  },
+  {
+    "acceptance": "",
+    "depends_on": [],
+    "id": "P1-4",
+    "phase": "",
+    "status": "pending",
+    "title": "行动项阈值数值化"
+  },
+  {
+    "acceptance": "",
+    "depends_on": [],
+    "id": "P1-5",
+    "phase": "",
+    "status": "pending",
+    "title": "trends 决策卡补全或显式豁免"
+  },
+  {
+    "acceptance": "",
+    "depends_on": [],
+    "id": "P1-6",
+    "phase": "",
+    "status": "pending",
+    "title": "来源登记字段扩展（unverifiable / updated）"
+  },
+  {
+    "acceptance": "",
+    "depends_on": [],
+    "id": "P1-7",
+    "phase": "",
+    "status": "pending",
+    "title": "R4 关键数字逐点指针（重新设计）"
+  },
+  {
+    "acceptance": "",
+    "depends_on": [],
+    "id": "P1-8",
+    "phase": "",
+    "status": "pending",
+    "title": "死链真实修复"
+  },
+  {
+    "acceptance": "",
+    "depends_on": [],
+    "id": "P1-9",
+    "phase": "",
+    "status": "pending",
+    "title": "四主题接入就绪化"
+  },
+  {
+    "acceptance": "",
+    "depends_on": [],
+    "id": "P1-11",
+    "phase": "",
+    "status": "pending",
+    "title": "词库规范形统一 + 缺口补录"
+  },
+  {
+    "acceptance": "",
+    "depends_on": [],
+    "id": "P1-14",
+    "phase": "",
+    "status": "pending",
+    "title": "数据层补薄 + raw 落仓"
+  },
+  {
+    "acceptance": "",
+    "depends_on": [],
+    "id": "P1-15",
+    "phase": "",
+    "status": "pending",
+    "title": "hub 卡片信息区分度"
+  },
+  {
+    "acceptance": "",
+    "depends_on": [],
+    "id": "P2-1",
+    "phase": "",
+    "status": "pending",
+    "title": "死代码清理（需授权）"
+  },
+  {
+    "acceptance": "",
+    "depends_on": [],
+    "id": "P2-5",
+    "phase": "",
+    "status": "pending",
+    "title": "主题 README 治理"
+  },
+  {
+    "acceptance": "",
+    "depends_on": [],
+    "id": "P2-6",
+    "phase": "",
+    "status": "pending",
+    "title": "审计报表增强（IGI 趋势）"
+  },
+  {
+    "acceptance": "",
+    "depends_on": [],
+    "id": "P2-7",
+    "phase": "",
+    "status": "pending",
+    "title": "报告结构加固"
+  },
+  {
+    "acceptance": "",
+    "depends_on": [],
+    "id": "V",
+    "phase": "",
+    "status": "pending",
+    "title": "终验 unittest + optimization_gate --probe + 专项门禁"
+  }
+]

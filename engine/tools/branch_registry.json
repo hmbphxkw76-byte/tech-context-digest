@@ -98,6 +98,13 @@
       "slug": "merge-ci-audit",
       "task": "merge-ci-audit"
     },
+    "task/p1-remaining-67312f84": {
+      "note": "source=env:CATPAW_CONVERSATION_ID",
+      "session": "67312f84befa4b8f888353b19c6abde5",
+      "session_short": "67312f84",
+      "slug": "p1-remaining",
+      "task": "p1-remaining"
+    },
     "task/pce-gate-5231d7e5": {
       "note": "source=env:CATPAW_CONVERSATION_ID",
       "session": "5231d7e5e70c440eaf2d9c2b5abef0bc",
