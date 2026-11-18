@@ -1,0 +1,8 @@
+[
+  {
+    "description": "空目录不入 git，CI 断链",
+    "id": "R-1",
+    "mitigation": "以 .gitkeep 固化目录",
+    "owner": ""
+  }
+]
