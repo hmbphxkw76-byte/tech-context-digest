@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 """决策交付门禁（DECISION-DELIVERY-SPEC v1.0）单元测试。
 
-覆盖 decision_hub_check：DC-01 决策卡字段、DC-02 行动协议、DC-03 场景切片、DC-04 ex-ante。
+覆盖 decision_hub_check：DC-01 决策卡字段、DC-02 行动协议、DC-03 场景切片、DC-04 ex-ante、DC-08 证据强度一致性。
 运行：python -m unittest discover -s engine/tests -v
 """
 from __future__ import annotations
@@ -68,6 +68,60 @@ class TestDecisionHub(unittest.TestCase):
             self.skipTest("decision-hub 报告不存在")
         errors, warnings, lines = m.run(str(p.relative_to(ROOT)), "2026-12")
         self.assertEqual(errors, 0, lines)
+
+
+class TestEvidenceStrengthConsistency(unittest.TestCase):
+    """DC-08：证据强度由支撑事实卡 level 唯一推导，并与台账交叉校验。"""
+
+    def test_derive_strength_rules(self):
+        V = m._VERIFIED
+        self.assertEqual(m.derive_strength([]), "")
+        self.assertEqual(m.derive_strength([(V, "A"), (V, "B")]), "强")   # 全部已核验 + 双源
+        self.assertEqual(m.derive_strength([(V, "A")]), "中")              # 单源不满足双源
+        self.assertEqual(m.derive_strength([(V, "A"), ("部分核验", "B")]), "中")
+        self.assertEqual(m.derive_strength([(V, "A"), ("推断", "B")]), "弱")
+        self.assertEqual(m.derive_strength([("假设", "A")]), "弱")
+
+    @staticmethod
+    def _card(strength, src):
+        return ('<div class="decision-card">'
+                '<div class="dc-head"><span class="dc-title">DC-X-01 · x</span>'
+                f'<span class="ev-mid">证据强度：{strength}</span></div>'
+                '<div class="dc-grid">'
+                '<div><span class="k">结论：</span>c</div>'
+                f'<div><span class="k">证据来源：</span>{src}</div>'
+                '<div><span class="k">反向证据：</span>r</div>'
+                '</div></div>')
+
+    def test_dc08_flags_strength_mismatch(self):
+        m._FC_INDEX = {
+            "FC-SEC-001": {"card_id": "FC-SEC-001", "level": "部分核验", "source": "A"},
+            "FC-SEC-002": {"card_id": "FC-SEC-002", "level": m._VERIFIED, "source": "B"},
+        }
+        try:
+            rules = {r for r, _ in m.dc08_strength(self._card("强", "[FC-SEC-001] [FC-SEC-002]"), {})}
+            self.assertIn("DC-08", rules)
+        finally:
+            m._FC_INDEX = None
+
+    def test_dc08_flags_ledger_mismatch(self):
+        m._FC_INDEX = {}
+        try:
+            rules = {r for r, _ in m.dc08_strength(self._card("中", "无"), {"DC-X-01": "强"})}
+            self.assertIn("DC-08", rules)
+        finally:
+            m._FC_INDEX = None
+
+    def test_dc08_passes_when_consistent(self):
+        m._FC_INDEX = {
+            "FC-SEC-001": {"card_id": "FC-SEC-001", "level": m._VERIFIED, "source": "A"},
+            "FC-SEC-002": {"card_id": "FC-SEC-002", "level": m._VERIFIED, "source": "B"},
+        }
+        try:
+            self.assertEqual(
+                m.dc08_strength(self._card("强", "[FC-SEC-001] [FC-SEC-002]"), {"DC-X-01": "强"}), [])
+        finally:
+            m._FC_INDEX = None
 
 
 class TestModelContract(unittest.TestCase):

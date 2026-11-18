@@ -5,6 +5,7 @@
     DC-02 行动协议：触发条件 + 阈值 + 责任角色 + 时限 + 可观测验证指标，且三档优先级
     DC-03 场景切片：投资决策 / 就业决策 / 政策制定
     DC-04 ex-ante 标注：信号灯 / 阈值处含「预校准（ex-ante）」
+    DC-08 证据强度一致性：决策卡「证据强度」与支撑事实卡 level 推导结果一致，且与台账一致
 
 新报告缺项 = [E]；历史报告 = [W]。退出码 0/1/2。
 
@@ -15,6 +16,7 @@
 from __future__ import annotations
 
 import argparse
+import json
 import re
 import sys
 from pathlib import Path
@@ -35,6 +37,12 @@ _CARD_KEYS = ("结论", "证据强度", "触发条件", "反向证据", "信息�
 # 卡片级必备字段：决策卡块内必须出现的三个（触发条件 / 信息充分度允许位于
 # dc-head 或报告其他章节，故不做卡片级强制）
 _CARD_LEVEL_KEYS = ("结论", "证据强度", "反向证据")
+_CARD_FIELD_RE = re.compile(r'<span class="k">([^<]+)：</span>(.*?)</div>', re.DOTALL)
+_CARD_HEAD_RE = re.compile(
+    r'<span class="dc-title">([^<]+)</span><span class="ev-\w+">证据强度：(\S+?)</span>')
+_FC_REF_RE = re.compile(r"\[FC-[A-Z]+-\d+\]")
+_LEDGER_RELPATH = "data/processed/economy/insight/decision_cards.json"
+_VERIFIED = "已核验事实"
 _COMMENT_RE = re.compile(r"<!--.*?-->", re.DOTALL)
 _STYLE_RE = re.compile(r"<(style|script)\b[^>]*>.*?</\1>", re.DOTALL | re.IGNORECASE)
 _CARD_RE = re.compile(r'<div class="decision-card"')
@@ -127,6 +135,86 @@ def check_text(text: str, business_line: str = "") -> list[tuple[str, str]]:
     return out
 
 
+_FC_INDEX: dict | None = None
+
+
+def fact_card_index() -> dict:
+    """事实卡片索引（card_id → 卡片），来自 engine/fact_cards/*.json。"""
+    global _FC_INDEX
+    if _FC_INDEX is None:
+        idx: dict = {}
+        fcdir = ROOT / "engine" / "fact_cards"
+        if fcdir.is_dir():
+            for f in sorted(fcdir.glob("*.json")):
+                try:
+                    data = json.loads(f.read_text(encoding="utf-8", errors="replace"))
+                except (OSError, ValueError):
+                    continue
+                for c in data.get("cards", []):
+                    if c.get("card_id"):
+                        idx[c["card_id"]] = c
+        _FC_INDEX = idx
+    return _FC_INDEX
+
+
+def derive_strength(entries: list[tuple[str, str]]) -> str:
+    """由支撑卡 (level, source) 推导证据强度。
+
+    强 = 关键事实全部「已核验事实」且来源 ≥ 2（双源）；
+    弱 = 含「推断 / 假设」；其余（主体已核验）= 中。
+    """
+    if not entries:
+        return ""
+    if any(lv in ("推断", "假设") for lv, _s in entries):
+        return "弱"
+    if all(lv == _VERIFIED for lv, _s in entries) and len({s for _lv, s in entries}) >= 2:
+        return "强"
+    return "中"
+
+
+def load_ledger() -> dict:
+    """决策卡台账 card_id → evidence_strength。"""
+    p = ROOT / _LEDGER_RELPATH
+    if not p.exists():
+        return {}
+    try:
+        data = json.loads(p.read_text(encoding="utf-8", errors="replace"))
+    except (OSError, ValueError):
+        return {}
+    return {c.get("card_id"): c.get("evidence_strength", "") for c in data.get("cards", [])}
+
+
+def dc08_strength(text: str, ledger: dict) -> list[tuple[str, str]]:
+    """DC-08：报告决策卡「证据强度」与支撑卡等级推导结果、台账三方一致。
+
+    支撑卡 = 决策卡「证据来源」字段中引用的事实卡片；未引用支撑卡的决策卡
+    （如无事实卡底座的业务线）不参与推导，仅做台账一致性校验。
+    """
+    out: list[tuple[str, str]] = []
+    idx = fact_card_index()
+    for blk in _blocks(text, _CARD_RE):
+        head = _CARD_HEAD_RE.search(blk)
+        if not head:
+            continue
+        card_id = head.group(1).split("·")[0].strip()
+        stated = head.group(2)
+        fields = {k: v for k, v in _CARD_FIELD_RE.findall(blk)}
+        entries = []
+        for ref in dict.fromkeys(_FC_REF_RE.findall(fields.get("证据来源", ""))):
+            c = idx.get(ref[1:-1])
+            if c:
+                entries.append((c.get("level", ""), c.get("source", "")))
+        if entries:
+            expected = derive_strength(entries)
+            if expected and expected != stated:
+                out.append(("DC-08", f"{card_id} 证据强度标「{stated}」，"
+                                        f"据支撑卡等级应为「{expected}」"))
+        if card_id in ledger and ledger[card_id] and ledger[card_id] != stated:
+            out.append(("DC-08", f"{card_id} 报告标「{stated}」与台账 "
+                                    f"{_LEDGER_RELPATH} 的「{ledger[card_id]}」不一致"))
+    return out
+
+
 def iter_targets(only_file: str | None):
     if only_file:
         p = ROOT / only_file
@@ -152,8 +240,11 @@ def run(only_file: str | None, gate: str) -> tuple[int, int, list[str]]:
     if not targets:
         lines.append("决策交付门禁：未发现报告，跳过")
         return 0, 0, lines
+    ledger = load_ledger()
     for rel, text, period, bline in targets:
         findings = check_text(text, bline)
+        if HUB_LINE in bline:
+            findings = findings + dc08_strength(text, ledger)
         if not findings:
             continue
         is_new = bool(period) and _period_key(period) >= _period_key(gate)
