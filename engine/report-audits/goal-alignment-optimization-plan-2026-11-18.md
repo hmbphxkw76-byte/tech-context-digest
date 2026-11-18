@@ -113,7 +113,7 @@
 | **C-12** | N0–N8 编排未接线，CI 只 validate | `.github/workflows/ci.yml:239-240`；`pipeline_manifest.json:168` G8 `checks=[]` 恒 skipped | 决策 | **P1** |
 | **C-13** | R4 关键数字判定过弱 | `source_check.py:556-559` | 质量可靠 | **P1** |
 | **C-14** | 数据层两条 tech 业务线过薄（仅 source_registry） | `data/processed/tech/{competitive-intelligence,industry-research}/dubai/` | 决策 | **P2** |
-| **C-15** | 死代码与规范外结构 | `content/economy/dubai/apartment/script/build_registry_v1.py`（无引用）；`content/economy/trends/followup/`、`content/tech/weekly-roundup/sources/legacy/`；`weekly-roundup/README.md` 指向不存在的 `reports/legacy/` | 质量可靠 | **P2** |
+| **C-15** | 死代码与规范外结构 | `content/economy/dubai/apartment/script/build_registry_v1.py`（保留：tracked xlsx 生产者，见 tech-debt-ledger §十）；`content/economy/trends/sources/archives/`（原 `followup/`，已迁移）；`content/tech/weekly-roundup/sources/legacy/`（保留：存档）；`weekly-roundup/README.md` 指向不存在的 `reports/legacy/`（已修正） | 质量可靠 | **P2** |
 
 ---
 
@@ -286,8 +286,8 @@
 
 | ID | 动作 | 涉及文件 | 验收标准 |
 |---|---|---|---|
-| P2-1 | 死代码清理 | `content/economy/dubai/apartment/script/build_registry_v1.py`、`content/economy/trends/followup/`、`content/tech/weekly-roundup/sources/legacy/` | 删除或迁入 `sources/archives/`；`validate_layout` 通过 |
-| P2-2 | 文档漂移修正 | `content/tech/weekly-roundup/README.md`（指向不存在的 `reports/legacy/`） | 文档与实际目录一致；`check_links` 通过（**已核实无漂移**：两 legacy 目录均存在） |
+| P2-1 | 死代码清理 | `content/economy/dubai/apartment/script/build_registry_v1.py`（保留）、`content/economy/trends/sources/archives/`（原 `followup/`，已迁移）、`content/tech/weekly-roundup/sources/legacy/`（保留） | 删除或迁入 `sources/archives/`；`validate_layout` 通过（**已落地，处置见 tech-debt-ledger §十**） |
+| P2-2 | 文档漂移修正 | `content/tech/weekly-roundup/README.md`（指向不存在的 `reports/legacy/`） | 文档与实际目录一致；`check_links` 通过（**已落地**：仅 `sources/legacy/` 存在；`reports/legacy/` 系 2026-11-17 有意清理（tech-debt-ledger B12–B14 closed），README / operations-guide / 台账三处指向已修正） |
 | P2-3 | 提示词引用 AGENTS/PCE | `engine/templates/prompt-generic-base.md`、`engine/prompts/*` | 提示词层感知「执行xx报告」触发与润色-确认门禁（**已落地**：通用基座第八节新增指针） |
 | P2-4 | 类型注册表同步 | `engine/templates/template-registry.md` 第二节 | 登记全部 7 条业务线；新增业务线自动校验（**已落地**：PC-01 补登 + 门禁） |
 | P2-5 | 主题 README 治理 | 各主题 README | 与 `business-config.md` 一致 |

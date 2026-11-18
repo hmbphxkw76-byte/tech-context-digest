@@ -2,7 +2,7 @@
 
 > **类型**：行业趋势周报型（trend-weekly） · **地区**：全球 · **节拍**：周（数据截止日命名）
 > **通用指南**：接入与使用见 [类型通用接入指南](../../../engine/templates/trend-weekly/README.md)；生命周期与校验见 [类型通用运维手册](../../../engine/templates/trend-weekly/operations-guide.md)。本文件只写本业务线身份与差异。
-> **合并来源**：由 `trends/ai-security`（AI 安全）与 `trends/ai-agent`（AI Agent 与大模型）合并；历史报告与 md 源稿存于 `reports/legacy/` 与 `sources/legacy/`。
+> **合并来源**：由 `trends/ai-security`（AI 安全）与 `trends/ai-agent`（AI Agent 与大模型）合并；历史 md 源稿存于 `sources/legacy/{ai-security,ai-agent}/`。历史报告 HTML 已于 2026-11-17 全量重生成时清理（tech-debt-ledger B12–B14，closed），原快照见 git 历史。
 
 ## 一、业务身份
 
@@ -35,3 +35,4 @@
 | 版本 | 日期 | 变更 | 说明 |
 |---|---|---|---|
 | v1.0 | 2026-11-14 | 新增 | 由 trends/ai-security 与 trends/ai-agent 合并建立；通用接入指南下沉至类型通用层 |
+| v1.1 | 2026-11-18 | 修正 | 「合并来源」中 `reports/legacy/` 指向已不存在（2026-11-17 清理，tech-debt-ledger B12–B14 closed），改为实际状态 |

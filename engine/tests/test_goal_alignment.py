@@ -271,6 +271,39 @@ class TestTechDataLayerThin(unittest.TestCase):
             self.assertEqual(man["counts"]["tier1_total"], len(man["sources"]))
 
 
+class TestDeadCodeCleanup(unittest.TestCase):
+    """P2-1 / C-15：规范外目录已撤销；存档与生成器按依据保留；文档漂移已修正。"""
+
+    def test_followup_dir_removed_and_archived(self):
+        self.assertFalse((ROOT / "content/economy/trends/followup").exists())
+        self.assertTrue(
+            (ROOT / "content/economy/trends/sources/archives"
+             / "2026-11-13_followup-execution.md").is_file())
+
+    def test_legacy_sources_kept(self):
+        """存档目录有文档依据，不得当作规范外结构删除。"""
+        self.assertTrue((ROOT / "content/tech/weekly-roundup/sources/legacy").is_dir())
+
+    def test_registry_generator_kept(self):
+        """v1 是 tracked xlsx 的生产者（v2 以其输出为输入），删除破坏可重放性。"""
+        self.assertTrue(
+            (ROOT / "content/economy/dubai/apartment/script/build_registry_v1.py").is_file())
+
+    def test_docs_no_longer_claim_reports_legacy_exists(self):
+        claims = {
+            "content/tech/weekly-roundup/README.md":
+                "历史报告与 md 源稿存于 `reports/legacy/`",
+            "content/tech/weekly-roundup/operations-guide.md":
+                "| 历史报告迁移 | `reports/legacy/{ai-security,ai-agent}/` |",
+            "data/processed/tech/weekly-roundup/ai_trend_ledger.md":
+                "历史版本见 `reports/legacy/{ai-security,ai-agent}/`",
+        }
+        for rel, stale in claims.items():
+            text = (ROOT / rel).read_text(encoding="utf-8")
+            self.assertNotIn(stale, text, rel)
+            self.assertIn("sources/legacy", text, rel)
+
+
 class TestVocabDrift(unittest.TestCase):
     def test_pair_issue_detects_mismatch(self):
         """合成用例：BEGIN/END 数量不等必须可检出；当前仓库处于成对状态。"""

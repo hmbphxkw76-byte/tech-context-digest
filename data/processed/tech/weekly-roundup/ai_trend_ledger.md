@@ -2,7 +2,7 @@
 
 > **定位**：`content/tech/weekly-roundup` 业务线的活值登记载体（业务配置 `{{REGISTRY_PATH}}`）。运行前读 → 核验 → 运行后回写；prompt 模板内严禁预填活值。
 > **格式**：md-ledger。台账修改采用增量方式：报告层补充与台账更新严格区分。
-> **合并说明**：本台账由原 ai-security 与 ai-agent 两条业务线台账合并（历史版本见 `reports/legacy/{ai-security,ai-agent}/`）；两线重复指标（SWE-bench Verified 状态、组织 AI 采用率）已去重保留单行。
+> **合并说明**：本台账由原 ai-security 与 ai-agent 两条业务线台账合并（历史版本见 `sources/legacy/{ai-security,ai-agent}/`）；两线重复指标（SWE-bench Verified 状态、组织 AI 采用率）已去重保留单行。原历史报告 HTML 已于 2026-11-17 清理（tech-debt-ledger B12–B14 closed），快照见 git 历史。
 
 ---
 
