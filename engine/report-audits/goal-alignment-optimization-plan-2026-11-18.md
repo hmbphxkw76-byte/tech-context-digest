@@ -232,12 +232,12 @@
 
 **解法**：
 
-1. 新增指标覆盖模块 `metric_coverage.py`（批次 B 落地）：汇总 22 项 TOOL 指标的实测值（复用 `validate_layout` / `check_links` / `page_build_check` / `info_density` / `fact_card` / `decision_hub` / `source_check` / `metric_registry` / `info_gap_metrics`），产出覆盖率与缺口清单。
+1. 新增 `engine/tools/metric_coverage.py`（**已落地**）：汇总 22 项 TOOL 指标的实测值（复用 `validate_layout` / `check_links` / `page_build_check` / `info_density` / `fact_card` / `decision_hub` / `source_check` / `metric_registry` / `info_gap_metrics`），产出覆盖率与缺口清单。当前实测 **26 项**（TOOL 22 项中 21 项 measured、A-05 需网络探测；MIXED 代理 4 项），LLM 8 项显式标注，未接线 3 项（A-01 / A-03 / L-03）入 gap。
 2. 8 项 MIXED 指标中工具可测子集（I-02 标注率、I-06 决策卡覆盖、L-03 阈值三处一致、IGI-05 来源指针率）接线实测。
 3. `metric_registry audit --coverage` 输出「指标覆盖报告」：measured / fallback / LLM 三类计数与逐项缺口，替代恒报 FALLBACK 的沉默。
 4. 覆盖率为 0 的指标视为**未度量**，进入 `tech-debt-ledger` 并给出接线计划（不静默跳过）。
 
-**验收**：22 项 TOOL 指标全部有实测值（非 FALLBACK）；MIXED 工具部分接线；LLM 项显式标注；`audit` 输出覆盖率与缺口清单。
+**验收**：22 项 TOOL 指标全部有实测值（非 FALLBACK）；MIXED 工具部分接线；LLM 项显式标注；`audit` 输出覆盖率与缺口清单。**实际**：26 measured / 1 probe（A-05）/ 3 fallback（A-01、A-03、L-03）/ 8 llm；`metric_registry audit --coverage` 已输出覆盖与缺口。
 
 ---
 

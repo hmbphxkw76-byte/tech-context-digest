@@ -30,7 +30,8 @@ python -m unittest discover -s engine/tests -v   # 单元测试（全量）
 | lint_reports.py | 校验 | ci.yml / scheduled-maintenance / content-update「报告内容校验」 |
 | compliance_check.py | 校验+引导+审计 | ci.yml / content-update「报告模板合规校验」；scheduled-maintenance「报告合规性审计」 |
 | source_check.py | 校验 | ci.yml「来源登记前置校验（L0）」：R1 登记覆盖 / R2 分级邻近 / R3 双源 / R4 关键数字 / R5 语言规则 / R6 死链 / R7 机构分级主数据一致性 |
-| metric_registry.py | 校验+服务 | 指标单一事实源（T3）：字典体检 / 阈值求值 / 归一化存储 / 去重血缘 / 全量准确性兜底 |
+| metric_registry.py | 校验+服务 | 指标单一事实源（T3）：字典体检 / 阈值求值 / 归一化存储 / 去重血缘 / 全量准确性兜底；`audit --coverage` 叠加指标实测覆盖报告 |
+| metric_coverage.py | 校验+度量 | 指标实测覆盖（批次 B）：TOOL 指标实测接线 + LLM/未接线显式标注 + 覆盖率与缺口报告 |
 | release_calendar.py | 采集 | 发布日历结构化采集（P1-2）：解析 release-calendar.md → JSON + 覆盖率 |
 | publish_fingerprint.py | 校验+留痕 | 发布指纹（P2-2）：sha256 登记 / 重复检测 / 漂移比对 |
 | optimization_gate.py | 校验（统一入口） | ci / html-sync / content-update / scheduled-maintenance / `repo_sync run --gate` 复用；27 项门禁单一入口 |

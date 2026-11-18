@@ -56,7 +56,7 @@ CHECKS: list[tuple[str, list[str], bool]] = [
     ("page_build", [sys.executable, f"{TOOLS}/page_build_check.py"], True),
     ("source_check", [sys.executable, f"{TOOLS}/source_check.py", "--gate-period", "__SOURCE_GATE__"], True),
     ("metric_registry", [sys.executable, f"{TOOLS}/metric_registry.py", "check"], False),
-    ("metric_audit", [sys.executable, f"{TOOLS}/metric_registry.py", "audit"], True),
+    ("metric_audit", [sys.executable, f"{TOOLS}/metric_registry.py", "audit", "--coverage"], True),
     ("release_calendar", [sys.executable, f"{TOOLS}/release_calendar.py", "--check"], True),
     ("publish_fingerprint", [sys.executable, f"{TOOLS}/publish_fingerprint.py", "--check"], True),
     ("semantic_diff", [sys.executable, f"{TOOLS}/semantic_diff.py", "scan"], True),
