@@ -34,7 +34,7 @@
 
 - [completed] T-1 vocab-prompt-align 与 git-history-audit 任务工件 T-3/T-5 置 completed（含 task-start 勾选）
 - [completed] T-2 .gitignore 增 engine/vocabulary/data/sync-backups/ 生成物忽略
-- [in_progress] T-3 核验并提交
+- [completed] T-3 核验并提交
 
 ## 风险登记（1 项，详见 risks.json）
 

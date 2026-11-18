@@ -1,0 +1,10 @@
+[
+  {
+    "acceptance": "",
+    "depends_on": [],
+    "id": "T-1",
+    "phase": "",
+    "status": "completed",
+    "title": "debt-closeout 任务工件 T-3 由 in_progress 置 completed（含 task-start 勾选）"
+  }
+]

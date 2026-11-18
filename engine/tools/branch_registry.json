@@ -7,6 +7,13 @@
       "slug": "branch-naming",
       "task": "branch-naming"
     },
+    "task/debt-closeout-2-da51f1bb": {
+      "note": "source=env:CATPAW_CONVERSATION_ID",
+      "session": "da51f1bb41f941a2ae07e88a470beb10",
+      "session_short": "da51f1bb",
+      "slug": "debt-closeout-2",
+      "task": "debt-closeout-2"
+    },
     "task/debt-closeout-da51f1bb": {
       "note": "source=env:CATPAW_CONVERSATION_ID",
       "session": "da51f1bb41f941a2ae07e88a470beb10",
