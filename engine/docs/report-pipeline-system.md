@@ -19,7 +19,7 @@
 
 1. **L0 入口拦截**：`source_check.py`（R1–R7），生成前把关来源登记 / 分级 / 双源 / 死链。
 2. **内容四门禁**：信息分层（ID）/ 事实卡片（FC）/ 决策交付（DC）/ 盲区台账（BS），外加研究内核（M4）。
-3. **统一门禁**：`optimization_gate.py`（25 项单一入口），CI / 提交 / 审计共用同口径。
+3. **统一门禁**：`optimization_gate.py`（27 项单一入口），CI / 提交 / 审计共用同口径。
 4. **审计四环节**：生成 → 初审 → 复核 → 终审（L1 / L2 / L3 + A1–A8），标识三态 + 宽限期。
 5. **发布留痕**：指纹（sha256）/ 归档 / 索引心跳 / 词汇同步 / `pre-push` 守卫。
 
@@ -38,7 +38,7 @@ flowchart TD
     N4 --> G4["G4 内容四门禁 + 研究内核<br/>ID · FC · DC · BS · M4"]
     G4 -->|通过| N5["N5 渲染与交付<br/>canonical 样式 + 自包含 HTML"]
     N5 --> G5["G5 页面 · 合规 · 性能<br/>page_build · lint · compliance · perf"]
-    G5 -->|通过| N6["N6 质量校验与审计（兜底）<br/>统一门禁 25 项 + 审计四环节"]
+    G5 -->|通过| N6["N6 质量校验与审计（兜底）<br/>统一门禁 27 项 + 审计四环节"]
     N6 --> G6["G6 统一门禁 + 审计<br/>optimization_gate --probe · L1/L2/L3 · A1–A8"]
     G6 -->|通过| N7["N7 发布 / 索引 / 归档<br/>hub / INDEX / 指纹 / 归档"]
     N7 --> G7["G7 产物确定性<br/>hub --check · 指纹 · 归档"]
@@ -60,7 +60,7 @@ flowchart TD
 flowchart LR
     IN["信息录入"] --> D1["防线一<br/>L0 source_check"]
     D1 --> D2["防线二<br/>四门禁 + 研究内核"]
-    D2 --> D3["防线三<br/>optimization_gate 25 项"]
+    D2 --> D3["防线三<br/>optimization_gate 27 项"]
     D3 --> D4["防线四<br/>审计四环节 L1/L2/L3"]
     D4 --> D5["防线五<br/>发布留痕 / 标识 / 归档"]
     D5 --> OUT["可信报告输出"]
@@ -82,7 +82,7 @@ flowchart LR
 | 层 | 门禁 | 位置 | 作用 | 失败回路 |
 |---|---|---|---|---|
 | ① 就地门禁 | G0–G5 | N0–N5 各阶段出口 | 生产时拦截：配置 / 来源 / 分级 / 分类 / 内容 / 页面 | 短回路退回本阶段 |
-| ② 统一门禁 | G6 | N6 | 25 项单一入口收敛同口径，防漏检 | 长回路退回生成 |
+| ② 统一门禁 | G6 | N6 | 27 项单一入口收敛同口径，防漏检 | 长回路退回生成 |
 | ③ 出口审计 | 审计四环节 | N6 | L1 / L2 / L3 + A1–A8，语义与终审 | fail-fast 退回 |
 
 **纪律**：
@@ -178,7 +178,7 @@ flowchart LR
 
 ### N6 质量校验与审计
 
-详见 §三。核心：四门禁 + 研究内核 + 统一门禁 25 项 + 审计四环节 + quality 修复 + 语义增量 + 性能 + 合规 + 页面。
+详见 §三。核心：四门禁 + 研究内核 + 统一门禁 27 项 + 审计四环节 + quality 修复 + 语义增量 + 性能 + 合规 + 页面。
 
 ### N7 发布 / 索引 / 归档
 
@@ -228,12 +228,14 @@ flowchart LR
 | **vocab_drift**（VD-01–03） | 同步区块成对 / 已注册主题词库非空 / 提示词规范形与词库一致 | VD-01 E；VD-02/03 W |
 | **research_kernel**（M4） | 周期定位 / 传导量化 / 政策入模 / 盲区列示 | 新 E / 历史 W |
 | **monitoring_render**（MON-01–05） | 图注齐备 / 口径并列须注明不可相减 / 列宽塌缩 / noopener / 原生 title | W（存量不阻断，新报告评 E） |
+| **consistency**（LC-01–02 / VG-01–02） | md-ledger 结构 / 看板指标名在最新报告出现 / 周期报告读数时点 / 语义版本修正留痕 | W |
+| **naming**（NC-01–02） | 目录 kebab-case（含 Python 包 snake 白名单）/ 按位置文件命名规则矩阵 | W |
 
-### 3.3 防线三：统一门禁（`optimization_gate.py`，25 项单一入口）
+### 3.3 防线三：统一门禁（`optimization_gate.py`，27 项单一入口）
 
 | 项 | 内容 |
 |---|---|
-| 清单（25） | validate、validate_layout、lint、compliance、classify、region_topics、links、hub、page_build、source_check、metric_registry、metric_audit、release_calendar、publish_fingerprint、semantic_diff、perf_monitor、research_kernel、info_density、fact_card、decision_hub、blind_spot、vocab_drift、ruff、mypy、monitoring_render |
+| 清单（27） | validate、validate_layout、lint、compliance、classify、region_topics、links、hub、page_build、source_check、metric_registry、metric_audit、release_calendar、publish_fingerprint、semantic_diff、perf_monitor、research_kernel、info_density、fact_card、decision_hub、blind_spot、vocab_drift、ruff、mypy、monitoring_render、consistency、naming |
 | 退出码 | 0 通过；1 有 `[E]`（阻断）；2 仅 `[W]`（放行） |
 | warn_ok | 多数检查容忍 exit 2；`links` / `hub` / `metric_registry` 不容忍；`ruff` / `mypy` 默认容忍（Phase 3.1，稳定后评 `[E]`） |
 | `--probe` | 给 `source_check` 追加 `--probe --probe-lenient`（明确死链在 R6 阻断期内阻断，环境性不可达仅告警） |
@@ -284,7 +286,7 @@ flowchart LR
 | N3 分类 | **G3** | `validate_layout` / `classify` / `check_links` | 维度倒置、归位失败、断链 |
 | N4 生成 | **G4** | 提示词自检 + `research_kernel` + 四门禁（内容侧） | 结构缺节、内核缺失、分层 / 卡片 / 决策缺项 |
 | N5 渲染 | **G5** | `page_build_check` / `lint_reports` / `compliance_check` | 漂移色、骨架缺失、断头锚点、节数不符 |
-| N6 校验 | **G6（兜底）** | **统一门禁 25 项** + 审计四环节 + `quality` | 任一 `[E]`；审计 fail-fast |
+| N6 校验 | **G6（兜底）** | **统一门禁 27 项** + 审计四环节 + `quality` | 任一 `[E]`；审计 fail-fast |
 | N7 发布 | **G7** | `build_hub --check` / 指纹 / 归档 | 产物过期、重复内容 |
 | N8 运维 | **G8** | CI 工作流 + 告警 + 活跃度 | 失败即 Issue |
 
@@ -313,7 +315,7 @@ flowchart TD
 3. **分级收敛**：两级 gate-period——历史报告只 `[W]`、新报告 `[E]`，既不追溯阻断历史，也不放行新报告缺项。
 4. **证据收敛**：审计四环节 L1 → L2 → L3 → 终审 A1–A8，标识三态 + 宽限期 + 只追加留痕，保证「已审计」可信、可追溯、不可伪造。
 
-**目标达成路径**：采集端（登记 + 双源 + 分级）保**准确性**；生成端（分层 + 等级 + 单一事实源）保**一致性**；校验端（四门禁 + 25 项 + 审计 + quality）保**完整性**；发布端（hub / 索引 / 指纹 / 归档 / 词汇）保**可发现与可追溯**；运维端（CI + 活跃度 + 告警）保**可持续**。
+**目标达成路径**：采集端（登记 + 双源 + 分级）保**准确性**；生成端（分层 + 等级 + 单一事实源）保**一致性**；校验端（四门禁 + 27 项 + 审计 + quality）保**完整性**；发布端（hub / 索引 / 指纹 / 归档 / 词汇）保**可发现与可追溯**；运维端（CI + 活跃度 + 告警）保**可持续**。
 
 ### 4.4 闭环修正工单机制（remediation-ticket）
 

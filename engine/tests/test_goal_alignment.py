@@ -36,6 +36,8 @@ decision_hub = _load("decision_hub_check", "engine/tools/decision_hub_check.py")
 vocab_drift = _load("vocab_drift_check", "engine/tools/vocab_drift_check.py")
 build_hub = _load("build_hub", "engine/tools/build_hub.py")
 monitoring_render = _load("monitoring_render", "engine/tools/monitoring_render_check.py")
+consistency = _load("consistency_check", "engine/tools/consistency_check.py")
+naming = _load("naming_check", "engine/tools/naming_check.py")
 
 
 class TestGatePeriod(unittest.TestCase):
@@ -226,6 +228,72 @@ class TestMonitoringRender(unittest.TestCase):
         html = '<a href="https://example.com/x" title="https://example.com/x">x</a>'
         _e, warns = self._check(html)
         self.assertTrue(any("MON-05" in w for w in warns))
+
+
+class TestConsistency(unittest.TestCase):
+    """批次 A：看板-台账一致（LC）与版本治理（VG）。"""
+
+    def test_ledger_rows_parse(self):
+        text = ("## 一、数据看板追踪表\n\n"
+                "| 板块 | 指标 | 上期值 | 本期值 | 来源 |\n"
+                "| --- | --- | --- | --- | --- |\n"
+                "| 宏观 | 美国 CPI | +0.6% | +0.4% | BLS |\n")
+        rows = consistency.parse_ledger_rows(text)
+        self.assertEqual(len(rows), 1)
+        self.assertEqual(consistency.metric_name(rows[0]), "美国 CPI")
+
+    def test_vg01_missing_reading_time(self):
+        import tempfile
+        with tempfile.TemporaryDirectory() as d:
+            p = Path(d) / "2026-11_monthly.html"
+            p.write_text("<html><body>无时点</body></html>", encoding="utf-8")
+            warns = consistency.check_version(p, p.read_text(encoding="utf-8"))
+        self.assertTrue(any("VG-01" in w for w in warns))
+
+    def test_vg02_semver_requires_fixed_list(self):
+        import tempfile
+        with tempfile.TemporaryDirectory() as d:
+            p = Path(d) / "2026-11_monthly.html"
+            p.write_text("读数时点 2026-11-13 ｜ 报告版本 v2.0", encoding="utf-8")
+            warns = consistency.check_version(p, p.read_text(encoding="utf-8"))
+        self.assertTrue(any("VG-02" in w for w in warns))
+
+    def test_vg02_reading_time_identifier_not_semver(self):
+        """vYYYY.MM.DD 为读数时点标识，不得被当作语义版本升级。"""
+        import tempfile
+        with tempfile.TemporaryDirectory() as d:
+            p = Path(d) / "2026-11_monthly.html"
+            p.write_text("读数时点 2026-11-13 ｜ 报告版本 v2026.11.13", encoding="utf-8")
+            warns = consistency.check_version(p, p.read_text(encoding="utf-8"))
+        self.assertFalse(any("VG-02" in w for w in warns))
+
+    def test_repo_is_consistent(self):
+        """现行仓库：台账结构 / 指标名 / 读数时点均无告警。"""
+        from _common import iter_business_dirs, iter_business_reports
+        warns = []
+        for b in iter_business_dirs():
+            cfg = b.path / "prompts" / "business-config.md"
+            text = cfg.read_text(encoding="utf-8") if cfg.exists() else ""
+            warns += consistency.check_ledger(b, text)
+            for r in iter_business_reports(b):
+                warns += consistency.check_version(ROOT / r.rel,
+                                                   (ROOT / r.rel).read_text(encoding="utf-8"))
+        self.assertEqual(warns, [])
+
+
+class TestNaming(unittest.TestCase):
+    """批次 A：命名规范全量扫描（NC-01..02）。"""
+
+    def test_repo_is_clean(self):
+        self.assertEqual(naming.check_dirs() + naming.check_files(), [])
+
+    def test_file_rule_detects_violations(self):
+        self.assertIsNotNone(naming._check_file("engine/tools/BadName.py", "BadName.py"))
+        self.assertIsNotNone(naming._check_file("engine/docs/Bad Name.md", "Bad Name.md"))
+        self.assertIsNotNone(naming._check_file("content/x/reports/foo.html", "foo.html"))
+        self.assertIsNone(naming._check_file("engine/tools/validate_layout.py", "validate_layout.py"))
+        self.assertIsNone(naming._check_file("engine/docs/page-build-spec.md", "page-build-spec.md"))
+        self.assertIsNone(naming._check_file("content/x/reports/2026-11_monthly.html", "2026-11_monthly.html"))
 
 
 if __name__ == "__main__":

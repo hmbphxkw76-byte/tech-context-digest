@@ -72,6 +72,10 @@ CHECKS: list[tuple[str, list[str], bool]] = [
     ("mypy", [sys.executable, f"{TOOLS}/static_check.py", "mypy"], True),
     # 监测渲染规范机械项（MON-01..05）：规范有、门禁不查缺口接线，默认 [W]。
     ("monitoring_render", [sys.executable, f"{TOOLS}/monitoring_render_check.py"], True),
+    # 看板-台账一致与版本治理（LC-01..02 / VG-01..02），默认 [W]。
+    ("consistency", [sys.executable, f"{TOOLS}/consistency_check.py"], True),
+    # 命名规范全量扫描（NC-01..02），默认 [W]。
+    ("naming", [sys.executable, f"{TOOLS}/naming_check.py"], True),
 ]
 
 # 两级 gate-period 默认值（见模块 docstring）：auto = 滚动基线（当前月 + 1）

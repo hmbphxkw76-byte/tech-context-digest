@@ -11,7 +11,7 @@
 
 **薄编排层**：不重写任何校验逻辑。
 - 节点层：按 `pipeline_manifest.json` 声明驱动（manual / tool / ci）；
-- 门禁层：复用 `optimization_gate.run_checks`（25 项单一入口，同口径）；
+- 门禁层：复用 `optimization_gate.run_checks`（27 项单一入口，同口径）；
 - 契约层：`StageResult` / `GateResult` / `PipelineRun`（本模块数据结构）；
 - 审计层：`pipeline_audit` 追加留痕。
 
@@ -127,7 +127,7 @@ def gate_after(manifest: dict, node_id: str) -> dict | None:
 
 
 def resolve_checks(manifest: dict, gate: dict) -> list[str]:
-    """把 gate.checks（含 '*'）展开为具体门禁名。'*' = 统一门禁全量 25 项。"""
+    """把 gate.checks（含 '*'）展开为具体门禁名。'*' = 统一门禁全量 27 项。"""
     names = gate.get("checks", [])
     if names == ["*"]:
         return sorted(known_checks())

@@ -54,7 +54,7 @@
 | 审计 | audit.yml | 报告变更 / dispatch | `audit_tool run --strict`（四环节 fail-fast）+ `accept` + `submit-pr` | `[E]` 或超 L3 宽限 |
 | 失败告警 | webhook-alert.yml | 上述失败 | 建 Issue / 通知 | — |
 
-> 统一门禁的 25 项清单与两级 gate-period 见 [report-pipeline-system.md](./report-pipeline-system.md) §三、§五。
+> 统一门禁的 27 项清单与两级 gate-period 见 [report-pipeline-system.md](./report-pipeline-system.md) §三、§五。
 
 ### 2.3 并发与提交纪律
 
@@ -165,5 +165,5 @@
 | md 转 HTML | `md2html.py` |
 | 改设计令牌 | 改 `report_style.py` + `build_hub.py` → 迁移 → 更新规范 → 全量校验 |
 | 改 hub 页面 | 改 `build_hub.py` → `build_hub.py --check` → 重新生成 |
-| 本地全量自检 | `py_compile`（编译）→ `unittest`（测试）→ `python engine/tools/optimization_gate.py --probe`（**全部确定性校验统一入口**，25 项；不再分项调用 `validate.py` / `page_build_check.py` / `lint_reports.py` / `compliance_check.py` / `check_links.py` / `build_hub.py --check`） |
+| 本地全量自检 | `py_compile`（编译）→ `unittest`（测试）→ `python engine/tools/optimization_gate.py --probe`（**全部确定性校验统一入口**，27 项；不再分项调用 `validate.py` / `page_build_check.py` / `lint_reports.py` / `compliance_check.py` / `check_links.py` / `build_hub.py --check`） |
 | 排查规范问题 | 先读 `page-build-spec.md` §九 检查项，再定位事实源 |

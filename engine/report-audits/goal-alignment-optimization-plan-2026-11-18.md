@@ -208,9 +208,9 @@
 | # | 缺口 | 规范出处 | 门禁接线 | 级别 |
 |---|---|---|---|---|
 | S1 | 监测渲染机械项：图表图注单位 / 来源、口径并列、列宽塌缩、noopener、断头数字、hover tooltip | monitoring-common-spec §2 / §3 / §4 / §6 | 新增 `engine/tools/monitoring_render_check.py`（MON-01..），接入统一门禁 | [W] |
-| S2 | 看板-台账一致：阈值 / 口径 / 基期在 hub 与 `data/processed` 台账一致 | information-layering §3.2 | 新增一致性校验，读 hub 卡片与台账数值 | [W] |
-| S3 | 版本治理：仅核心事实修正才升版本号，核验型运行不升版本 | decision-delivery §7 | 版本号变更须有 changelog / 任务工件佐证 | [W] |
-| S4 | 文件命名与维度顺序：kebab-case、`layout.json` 声明顺序 | structure-and-naming §8 | 已部分由 `validate_layout.py` 覆盖；补齐命名正则全量扫描 | [E] / [W] |
+| S2 | 看板-台账一致：阈值 / 口径 / 基期在 hub 与 `data/processed` 台账一致 | information-layering §3.2 | `consistency_check.py`（LC-01 台账结构 / LC-02 看板指标名在最新报告出现） | [W] |
+| S3 | 版本治理：仅核心事实修正才升版本号，核验型运行不升版本 | decision-delivery §7 | `consistency_check.py`（VG-01 读数时点 / VG-02 语义版本修正留痕） | [W] |
+| S4 | 文件命名与维度顺序：kebab-case、`layout.json` 声明顺序 | structure-and-naming §8 | `validate_layout.py`（维度顺序）+ `naming_check.py`（NC-01/02 全量命名扫描） | [E] / [W] |
 | S5 | 假设不得进入决策摘要点值 | information-layering §2.3-3 | 已由 P0-2（ID-04 点值检查）落地 | [E] |
 | S6 | 模型契约：指标定义 / 阈值 / 口径三处一致 | decision-delivery §4 | 新增契约门禁，接 `L-03` 阈值三处一致 | [W] |
 | S7 | 不得复制决策卡全文 / 卡片同义复述 | information-layering §5.3 | 重复率代理校验，接 `R-03` | [W] |

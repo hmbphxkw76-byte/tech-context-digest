@@ -31,8 +31,14 @@ SCHEMA_VERSION = "1.0"
 
 
 def fingerprint_file(path: Path) -> str:
-    """文件字节 sha256（十六进制）。"""
-    return hashlib.sha256(Path(path).read_bytes()).hexdigest()
+    """文件内容 sha256（十六进制）。
+
+    指纹对 `\\r\\n` 归一为 `\\n` 后再哈希：仓库在 Windows（core.autocrlf=true）
+    工作区为 CRLF、CI 为 LF，按原始字节哈希会平台相关并恒报漂移。归一后
+    跨平台一致，与生成物「确定性、无时间戳」要求对齐。
+    """
+    data = Path(path).read_bytes().replace(b"\r\n", b"\n")
+    return hashlib.sha256(data).hexdigest()
 
 
 def collect() -> dict[str, str]:
