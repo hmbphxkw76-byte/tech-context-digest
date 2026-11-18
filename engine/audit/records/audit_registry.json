@@ -1233,7 +1233,19 @@
       "evidence": {
         "report": "engine/report-audits/goal-alignment-batch-progress-2026-11-18.md",
         "business_line": "engine/report-audits",
-        "plans": [],
+        "plans": [
+          {
+            "slug": "p1-remaining",
+            "plan": "engine/audit/records/tasks/p1-remaining/plan.json",
+            "tasks": "engine/audit/records/tasks/p1-remaining/tasks.json",
+            "risks": "engine/audit/records/tasks/p1-remaining/risks.json",
+            "reports": [
+              "engine/report-audits/goal-alignment-batch-progress-2026-11-18.md"
+            ],
+            "task_count": 17,
+            "risk_count": 4
+          }
+        ],
         "gate": {
           "entry": "engine/tools/optimization_gate.py",
           "probe": true
