@@ -24,6 +24,7 @@ sys.path.insert(0, str(TOOLS))
 def _load(name: str, rel: str):
     spec = importlib.util.spec_from_file_location(name, ROOT / rel)
     mod = importlib.util.module_from_spec(spec)
+    sys.modules[name] = mod  # dataclass 类型解析需要模块已注册
     spec.loader.exec_module(mod)
     return mod
 
@@ -33,6 +34,7 @@ info_gap = _load("info_gap_metrics", "engine/tools/info_gap_metrics.py")
 info_density = _load("info_density_check", "engine/tools/info_density_check.py")
 decision_hub = _load("decision_hub_check", "engine/tools/decision_hub_check.py")
 vocab_drift = _load("vocab_drift_check", "engine/tools/vocab_drift_check.py")
+build_hub = _load("build_hub", "engine/tools/build_hub.py")
 
 
 class TestGatePeriod(unittest.TestCase):
@@ -122,6 +124,31 @@ class TestDecisionHubSemantics(unittest.TestCase):
         findings = dict(decision_hub.check_text(html_good, ""))
         self.assertIn("DC-01", findings)
         self.assertTrue(any("第 2 张决策卡" in m for m in findings.values()))
+
+
+class TestHubBasePeriod(unittest.TestCase):
+    """P0-5：hub 不得标注实际不存在的环比基期（算术虚构）。"""
+
+    def _topic(self, reports):
+        return build_hub.Topic(rel="content/x", region="", name="X", type_id="",
+                               type_name="", reports=reports)
+
+    def test_no_previous_period_is_not_a_base(self):
+        t = self._topic([build_hub.ReportEntry("monthly", "2026-11", "p", "t")])
+        self.assertFalse(build_hub.has_previous_period(
+            t, build_hub.ReportEntry("monthly", "2026-11", "p", "t")))
+
+    def test_same_cycle_previous_period_counts(self):
+        t = self._topic([build_hub.ReportEntry("monthly", "2026-10", "p", "t"),
+                         build_hub.ReportEntry("monthly", "2026-11", "p", "t")])
+        self.assertTrue(build_hub.has_previous_period(
+            t, build_hub.ReportEntry("monthly", "2026-11", "p", "t")))
+
+    def test_other_cycle_does_not_count(self):
+        """上一期必须同周期：2026-Q3 报告不能充当 2026-11 月报的环比基期。"""
+        t = self._topic([build_hub.ReportEntry("quarterly", "2026-Q3", "p", "t")])
+        self.assertFalse(build_hub.has_previous_period(
+            t, build_hub.ReportEntry("monthly", "2026-11", "p", "t")))
 
 
 class TestVocabDrift(unittest.TestCase):

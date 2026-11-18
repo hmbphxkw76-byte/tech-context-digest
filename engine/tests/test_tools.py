@@ -493,8 +493,10 @@ class TestBuildHubCheck(unittest.TestCase):
     def test_hub_shows_base_and_cycle_grouping(self):
         hub = build_outputs()["index.html"]
         self.assertIn("cycle-head", hub)
-        self.assertIn("环比基期 2026-11", hub)
-        self.assertIn("tag-updated", hub)
+        # 基期展示口径：仓库内最新月报；「本期更新 · 环比基期」仅在存在上一期报告时标注
+        self.assertIn("最新月报 2026-11", hub)
+        self.assertNotIn("环比基期 2026-10", hub)
+        self.assertIn("该周期首期报告，无环比基期", hub)
 
     def test_hub_tokens_match_canonical(self):
         from report_style import CANONICAL_CSS

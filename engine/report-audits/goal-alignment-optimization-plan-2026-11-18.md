@@ -215,7 +215,7 @@
 | **P0-2** | `info_density_check` ID-02/ID-04 语义化 + 剥离注释 | `engine/tools/info_density_check.py:89-139` | ID-02 改为「字符>900 或 要点>12」并正确计数块级要点；ID-04 在摘要节内检出 `lvl-inferred/lvl-assumption` 与「推断/假设」；剥离 `<!-- -->` 后判定；新增单测覆盖 | `info_density` |
 | **P0-3** | `decision_hub_check` 逐卡/逐项校验 | `engine/tools/decision_hub_check.py:57-88` | 剥离注释后逐卡解析五字段、逐条解析行动项五要素 + 三档；`trends` 报告不再因注释误判通过；新增单测（含注释陷阱用例） | `decision_hub` |
 | **P0-4** | 滚动 gate-period（`auto`） | `engine/tools/optimization_gate.py:69-70,139-143`、`info_density_check.py:32,198`、`decision_hub_check.py:26,134`、`source_check.py:131-136,742`、`research_kernel_check.py`、`engine/tests/test_process_gates.py` | `--gate-period auto` / `--source-gate-period auto` 解析为「当前月+1」；默认 auto；显式 `YYYY-MM` 仍可用；单测断言 auto 接线与「历史/W、新/E」判定 | `test_process_gates::TestOptimizationGateReuse`；全部内容门禁 |
-| **P0-5** | ~~hub 环比基期只标真实上期~~（**已消解**） | — | 引入该虚构基期的 CYCLE_WINDOWS 周期窗口特性已由在途会话回退（PR #50/#51）；当前 `index.html` / `reader.html` 中「环比基期」出现次数为 0，问题不再存在。若日后重入该特性，须同步恢复本项 | — |
+| **P0-5** | hub 环比基期只标真实上期 | `engine/tools/build_hub.py`（`has_previous_period` / `_render_card` / `global_base_period`）、`index.html`、`reader.html`、`engine/tests/test_tools.py`、`engine/tests/test_goal_alignment.py` | 无同周期上一期报告时输出「首期」徽章而非虚构基期；Hero 改标「最新月报 X」；`build_hub --check` 通过；单测覆盖有/无上期与跨周期三分支 | `hub` |
 | **P0-6** | 词库同步修复 + 漂移门禁接入统一入口 | `engine/vocabulary/script/vocab_tool.py:273-293`、**新增** `engine/tools/vocab_drift_check.py`、`engine/tools/optimization_gate.py` | `auto_trigger=false` 时钩子不触发（单测）；`vocab_drift` 已接入统一门禁（第 24 项） | `optimization_gate`（第 24 项） |
 
 **P0-6 接线说明**：`vocab_drift_check` 已接入 `optimization_gate`（第 24 项），门禁清单 23 → 24 已同步全部声明文件——包括 `AGENTS.md`、报告全链路体系说明与流程复用清单、架构与开发规范/端到端覆盖/页面构建治理/流程治理四份文档、报告流水线实施方案、audit 目录的 verification 文件、tools 目录的 README 与 pipeline_runner 及其测试、以及 mainline 适配评估（2026-11-17）。
@@ -292,7 +292,7 @@
 | P0-3 | `decision_hub_check` 剥离注释/样式 + 逐卡（结论/证据强度/反向证据）与逐条行动项（五要素）校验 | `trends` 报告不再因 CSS 注释误判通过 |
 | P0-4 | `gate_period.py` 滚动基线（`auto` = 当前月 + 1）；两级默认改 `auto`；`local_mainline` / 各门禁 / 规范同步 | 新报告判定不再随时间失效 |
 | P0-6 | `vocab_tool.auto_sync_hook` 尊重 `auto_trigger`；新增 `vocab_drift_check.py`（VD-01..03）并接入统一门禁（第 24 项） | 门禁清单 23 → 24，声明文件全部同步；gate 0E |
-| P0-5 | 已消解：引入虚构环比基期的 CYCLE_WINDOWS 特性由在途会话回退（PR #50/#51） | `index.html` / `reader.html` 中「环比基期」归零 |
+| P0-5 | `build_hub` 仅在同周期上一期报告真实存在时才标「本期更新 · 环比基期」，否则标「首期」；Hero 改标「最新月报」 | hub 中不再出现虚构基期；`hub --check` / `page_build_check` 通过 |
 | 报告修正 | `industry-research/2026-12` 移除摘要推断项；`competitive-intelligence/2026-12` 推断下沉证据层（FC 指针保留）；`apartment/2026_annual` 补 tier-4 标注 | ID-04 新报告 0E |
 | 来源治理 | 补登 6 条缺失来源（CI menlovc URL 修正 + apartment 5 条官方/媒体源）；CI tier-4 11 条补「需核实原文」；`source_check` 增自链接豁免（内部指针） | source_check 0E / 36W |
 
@@ -304,7 +304,6 @@
 **未落地（顺延）**：
 
 - **P1 全部 15 项 / P2 全部 8 项**：按优先级分批推进。
-- **P0-5**：问题本身已随基线回退消解（见上）。
 
 ## 版本记录
 
