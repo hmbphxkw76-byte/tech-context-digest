@@ -126,15 +126,125 @@ class TestR3DualSource(unittest.TestCase):
 
 
 class TestR4KeyNumber(unittest.TestCase):
-    def test_number_without_source_is_error(self):
+    """P1-7：R4 块级逐点指针——含单位/量级数字的正文断言块附近窗口内须有来源标记。"""
+
+    def test_bare_number_block_without_source_is_error(self):
         reg = _reg({"source_id": "S1", "tier": 1, "url": "https://imf.org/a"})
-        issues = source_check.check_report("规模 1,000 亿", reg)
+        issues = source_check.check_report(
+            "<p>阿联酋网安市场规模 8.2 亿美元，CAGR 10.66%。</p>", reg)
         self.assertTrue(any(lvl == "E" and "R4" in msg for lvl, msg in issues))
 
     def test_number_with_source_marker_passes(self):
         reg = _reg({"source_id": "S1", "tier": 1, "url": "https://imf.org/a"})
-        issues = source_check.check_report("规模 1,000 亿（来源：IMF）", reg)
+        issues = source_check.check_report(
+            "<p>阿联酋网安市场规模 8.2 亿美元（来源：IMF，2026）。</p>", reg)
         self.assertFalse(any(lvl == "E" and "R4" in msg for lvl, msg in issues))
+
+    def test_marker_in_proximity_window_passes(self):
+        """来源标记不在块内、但在 ±PROXIMITY_WINDOW 窗口内，视为已标。"""
+        reg = _reg({"source_id": "S1", "tier": 1, "url": "https://imf.org/a"})
+        issues = source_check.check_report(
+            "<p>规模 1,000 亿。</p><p>数据来源：IMF（2026）</p>", reg)
+        self.assertFalse(any(lvl == "E" and "R4" in msg for lvl, msg in issues))
+
+    def test_table_cells_are_out_of_scope(self):
+        """表格数值不逐单元格判定（来源多写在表注 / 报告来源清单，逐格判定误报不可控）。"""
+        reg = _reg({"source_id": "S1", "tier": 1, "url": "https://imf.org/a"})
+        row = ('<table><tr><th>指标</th><th>读数</th></tr>'
+               '<tr><td>MENA 支出</td><td>33 亿美元</td></tr>'
+               '<tr><td>GCC 增速</td><td>14% YoY</td></tr></table>')
+        issues = source_check.check_report(row, reg)
+        self.assertFalse(any(lvl == "E" and "R4" in msg for lvl, msg in issues))
+
+    def test_plain_year_is_not_a_key_number(self):
+        """年份 / 版本号不算关键数字，不得误报。"""
+        reg = _reg({"source_id": "S1", "tier": 1, "url": "https://imf.org/a"})
+        issues = source_check.check_report(
+            "<p>ISR v3.1 于 2026-09 发布，含 13 个控制域。</p>", reg)
+        self.assertFalse(any(lvl == "E" and "R4" in msg for lvl, msg in issues))
+
+    def test_declared_derived_value_is_exempt(self):
+        """自算 / 推断 / 假设 / 待核属已声明信息，不计。"""
+        reg = _reg({"source_id": "S1", "tier": 1, "url": "https://imf.org/a"})
+        for word in ("自算", "推断", "假设性测算", "待核"):
+            issues = source_check.check_report(
+                f"<p>情景测算规模 52.5 亿（{word}）。</p>", reg)
+            self.assertFalse(any(lvl == "E" and "R4" in msg for lvl, msg in issues), word)
+
+    def test_advisory_container_is_exempt(self):
+        """场景切片 / 行动卡内的阈值与建议不是事实断言。"""
+        reg = _reg({"source_id": "S1", "tier": 1, "url": "https://imf.org/a"})
+        issues = source_check.check_report(
+            '<div class="slice"><p>目标基本月薪 ≥30,000 AED 以锁定黄金签证。</p></div>', reg)
+        self.assertFalse(any(lvl == "E" and "R4" in msg for lvl, msg in issues))
+
+    def test_advisory_heading_section_is_exempt(self):
+        reg = _reg({"source_id": "S1", "tier": 1, "url": "https://imf.org/a"})
+        issues = source_check.check_report(
+            "<h3>分背景切入路径（建议 / 推断）</h3>"
+            "<ol><li>在职提升：目标基本月薪 ≥30,000 AED。</li></ol>", reg)
+        self.assertFalse(any(lvl == "E" and "R4" in msg for lvl, msg in issues))
+
+    def test_verified_badge_counts_as_marker(self):
+        """核验等级标本明该断言已经核验，视为有来源标注。"""
+        reg = _reg({"source_id": "S1", "tier": 1, "url": "https://imf.org/a"})
+        issues = source_check.check_report(
+            '<p>规模 1,000 亿。<span class="lvl lvl-verified">已核验</span></p>', reg)
+        self.assertFalse(any(lvl == "E" and "R4" in msg for lvl, msg in issues))
+
+    def test_corpus_has_no_r4_gaps(self):
+        """现有正式报告在 P1-7 口径下无命中（回归锚）。"""
+        from _common import iter_reports
+        hits = {}
+        for ref in iter_reports():
+            if ref.category != "report":
+                continue
+            p = source_check.ROOT / ref.rel
+            if not p.exists():
+                continue
+            gaps = source_check.r4_assertion_gaps(
+                p.read_text(encoding="utf-8", errors="replace"))
+            if gaps:
+                hits[ref.rel] = gaps
+        self.assertEqual(hits, {})
+
+    def _compliant_blocks(self):
+        """覆盖全部合法来源标记形态 + 各类豁免情形（每条都是一个合规块）。"""
+        return [
+            '<p>规模 8.2 亿美元（来源：Gartner，2025）。</p>',
+            '<p>规模 8.2 亿美元 [FC-IND-006]。</p>',
+            '<p>规模 8.2 亿美元（Gartner, 2025）。</p>',
+            '<p>规模 8.2 亿美元。<span class="lvl lvl-verified">已核验</span></p>',
+            '<p>规模 8.2 亿美元（部分核验）。</p>',
+            '<p>规模 8.2 亿美元（<a href="https://gartner.com/x">Gartner</a>）。</p>',
+            '<p>规模 8.2 亿美元（数值指针 K07）。</p>',
+            '<p>规模 8.2 亿美元 [S-005]。</p>',
+            '<p>规模 8.2 亿美元（自算，34,500 × 72.2%）。</p>',
+            '<p>规模 8.2 亿美元（推断，机制分析）。</p>',
+            '<p>规模 8.2 亿美元（假设性测算，区间 8–9 亿）。</p>',
+            '<div class="slice"><p>目标月薪 ≥30,000 AED 以锁定黄金签证。</p></div>',
+            '<h3>场景切片 · 就业决策</h3><p>目标月薪 ≥30,000 AED。</p>',
+            '<p>方法：偏离度 =（实际 ÷ 对照）− 1，|偏离| &gt; 30% 须重设。</p>',
+            '<header><p>数据截止 2026-11，汇率 1 USD = 3.6725 AED。</p></header>',
+            '<p>规模 8.2 亿美元（数据来源见 <a href="https://x.example/a">来源清单</a>）。</p>',
+            '<p class="note">来源与时点：本期读数时点 2026-11-13；已修正事实 10 条。</p>',
+            '<h3>未核验项</h3><ul><li>Stargate UAE 首批 200MW 是否已运营（待官方确认）。</li></ul>',
+            '<h3>监测竞品清单与入选标准</h3><p>入选标准：共 11 项分层条目（直接 6 / 间接 3 / 潜在 2）。</p>',
+        ]
+
+    def test_false_positive_rate_under_5pct(self):
+        """合规块误报率 < 5%（P1-7 验收口径）。"""
+        blocks = self._compliant_blocks()
+        fp = sum(1 for h in blocks if source_check.r4_assertion_gaps(h))
+        self.assertLess(fp / len(blocks), 0.05, f"误报 {fp}/{len(blocks)}")
+
+    def test_bare_number_blocks_are_recalled(self):
+        """无标记的裸数字块必须被召回（防止规则过窄而失效）。"""
+        for html in ('<p>规模 8.2 亿美元。</p>',
+                     '<p>成交量 34,500 笔 / AED 70.8 亿。</p>',
+                     '<ul><li>Q3 住宅成交 ≈34,500 笔。</li></ul>',
+                     '<ul><li>建筑许可 +54%（份）/ 48%（面积）YoY。</li></ul>'):
+            self.assertTrue(source_check.r4_assertion_gaps(html), html)
 
 
 class TestR5Language(unittest.TestCase):

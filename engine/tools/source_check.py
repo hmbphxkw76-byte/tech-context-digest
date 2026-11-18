@@ -12,7 +12,9 @@
                  无外部 URL 时豁免「登记为空」告警；一旦出现外部 URL 仍须登记）
   R2 分级合规   tier=4 媒体转述出现处须邻近『需核实原文』；tier=3 须标『卖方预期/情绪/参考』
   R3 双源确认   进入信号合成（in_synthesis=true）的来源须有 ≥2 个被报告引用
-  R4 关键数字   存在带单位/量级数字时，报告须有来源标注
+  R4 关键数字   含单位/量级数字的正文断言块（li/p/td）附近 PROXIMITY_WINDOW 内须有来源标记
+                 （事实卡片 / 来源编号 / 来源标签 / 外链 / K 指针 / 核验等级 / 机构引用；
+                 已声明信息（自算/推断/假设/待核）与咨询容器内块不计）
   R5 语言规则   tier1/2 来源语言须符合业务配置的语言规则（token 化分级）
   R6 死链       明确 404/410/451 = 死链（阻断期内 [E] / 此前 [W] / 历史 [W]）；403/429/5xx/超时 = 网络不可达 [W]
   R7 机构分级   机构级分级主数据与来源登记 / 业务配置的一致性（分级校验）
@@ -73,14 +75,57 @@ def is_self_reference(url: str) -> bool:
 INSTITUTION_MASTER_PATH = Path(__file__).resolve().parent / "institution_tiers.json"
 
 HREF_RE = re.compile(r'href="(https?://[^"]+)"', re.I)
-SOURCE_ID_ATTR_RE = re.compile(r'data-source-id="([^"]+)"')
-# 带单位/量级的关键数字（金额、百分比、面积、利率 bp 等）
+# 带单位/量级的关键数字（金额、百分比、面积、利率 bp、成交笔数等）
 NUMBER_UNIT_RE = re.compile(
-    r"\d+(?:\.\d+)?\s*(?:AED|USD|EUR|GBP|\$|€|£|%|亿|万|千|百万|十亿|bp|bps|pp|sqft|m²|套|宗|人)"
+    r"\d+(?:\.\d+)?\s*(?:AED|USD|EUR|GBP|\$|€|£|%|亿|万|千|百万|十亿|bp|bps|pp|sqft|m²"
+    r"|套|宗|人|笔|项|次|条|份|美元|日元|英镑|欧元|MW|GW|平方米|平米|公顷|平方公里)"
 )
 MEDIA_MARKER = "需核实原文"
 PORTAL_MARKERS = ("卖方预期", "情绪", "参考")
-SOURCE_MARKERS = ("来源", "参考", "source")
+
+# ---------------------------------------------------------------- R4 关键数字（块级）
+
+# 正文断言块：列表项 / 段落。
+# 不取 <td>：表格数值的来源常写在表注 / 表级来源行 / 报告来源清单，逐单元格判定
+# 在语料上产生大量误报（P1-7 实测 164 处，其中绝大多数为表格单元格）；
+# 表格数值的溯源由 R2（分级邻近）与来源登记覆盖，本规则与 IGI-05 同口径。
+R4_BLOCK_RE = re.compile(r"<li\b[^>]*>.*?</li>|<p\b[^>]*>.*?</p>",
+                         re.DOTALL | re.IGNORECASE)
+R4_TAG_RE = re.compile(r"<[^>]+>")
+# 窗口内任一命中即视为「有来源标记」：事实卡片 / 来源编号 / 来源标签 /
+# 外链 / K 指针 / 核验等级标 / 机构引用（含年份的括号注）
+R4_SRC_MARKER_RE = re.compile(
+    r"\[FC-[A-Z]+-\d+\]|\[S-\d{3}\]|\[Source:|data-source-id=\"|fact-ref"
+    r"|lvl-verified|lvl-partial|已核验|部分核验"
+    r"|(?:来源|出处|来源机构|source_id)\s*[:：]"
+    r"|<a\b[^>]*href\s*=\s*\"https?://|\bK\d{2}\b"
+    r"|[（(][^（）()]{0,40}?(?:19|20)\d{2}[^（）()]{0,40}?[)）]"
+    r"|\b[A-Z][A-Za-z&.\-]{2,20}\s*,\s*(?:19|20)\d{2}\b",
+    re.IGNORECASE)
+# 已声明的非核验信息（自算派生值 / 推断 / 假设 / 待确认）——不属于「悄悄无来源的关键数字」
+R4_DECL_RE = re.compile(r"自算|推断|假设性测算|假设乘积|待核|待确认|待补|待官方")
+# 说明性段落（方法 / 说明 / 注 / 定义 / 口径 / 入选标准 / 来源与时点）：自身即声明，不要求逐点指针
+R4_NOTE_PREFIX_RE = re.compile(r"^(?:方法|说明|注|注释|定义|口径|入选标准|来源与时点)[：:]")
+# 咨询 / 声明容器（场景切片、行动卡、口径提示、图表脚注、决策卡、时间线等），
+# 其内数值为建议 / 阈值 / 声明 / 图表读数，不是待溯源的事实断言
+R4_ADVISORY_CLASS = ("slice", "a-meta", "a-head", "note", "delta-strip", "callout",
+                     "tl-body", "tl-item", "scenario", "chart-note", "chart-box",
+                     "chart-eh", "dc-grid", "dc-head", "dc-body")
+# 说明性 / 声明性 / 机制推断章节：其数字为复用、说明或判定，不要求逐点指针
+R4_ADV_HEAD_RE = re.compile(
+    r"建议|路径|场景|行动|切入|修正|反向|排除|伪信号|方法|说明|口径|局限|治理"
+    r"|附录|备注|声明|未核验|传导|断裂点|加速点|缓冲点|复盘|判读")
+R4_SKIP_REGION_RE = re.compile(
+    r"<header\b.*?</header>|<footer\b.*?</footer>|<nav\b.*?</nav>",
+    re.DOTALL | re.IGNORECASE)
+R4_DIV_TOKEN_RE = re.compile(r"<div\b[^>]*>|</div>", re.IGNORECASE)
+R4_HEAD_RE = re.compile(r"<h[2-4]\b[^>]*>(.*?)</h[2-4]>", re.DOTALL | re.IGNORECASE)
+R4_HEAD_SPAN = 4000
+# 非 div 的咨询 / 声明元素（如 <p class="note">、<li class="note">）
+R4_ADVISORY_EL_RE = re.compile(
+    r"<(p|li)\b[^>]*class=\"[^\"]*(?:note|chart-note|callout|delta-strip|scenario"
+    r"|slice|a-meta|a-head|tl-body|tl-item)[^\"]*\"[^>]*>.*?</\1>",
+    re.DOTALL | re.IGNORECASE)
 
 # R2 邻近判定：标注须出现在来源链接之后的本段落窗口内（字符数）
 PROXIMITY_WINDOW = 240
@@ -535,12 +580,75 @@ def probe_urls(urls, timeout: float = 3.0, opener=None, workers: int = 8) -> set
 
 # ---------------------------------------------------------------- 核心校验
 
+def r4_advisory_spans(text: str) -> list[tuple[int, int]]:
+    """平衡配对 <div>，返回类名命中「咨询 / 声明容器」的区间。
+
+    场景切片、行动卡、口径提示、时间线等容器内的数值是建议 / 阈值 / 声明，
+    不是待溯源的事实断言；用栈平衡而非正则贪婪，避免嵌套 div 截断。
+    """
+    spans: list[tuple[int, int]] = []
+    stack: list[tuple[str, int]] = []
+    for m in R4_DIV_TOKEN_RE.finditer(text):
+        tok = m.group(0)
+        if tok.startswith("</"):
+            if stack:
+                cls, start = stack.pop()
+                if any(k in cls for k in R4_ADVISORY_CLASS):
+                    spans.append((start, m.end()))
+        else:
+            cm = re.search(r'class="([^"]*)"', tok, re.IGNORECASE)
+            stack.append((cm.group(1) if cm else "", m.start()))
+    return spans
+
+
+def r4_advisory_heading(text: str, pos: int) -> bool:
+    """块是否位于「建议 / 路径 / 场景 / 行动」标题下（4000 字符内最近的 h2–h4）。"""
+    last = None
+    for m in R4_HEAD_RE.finditer(text, 0, pos):
+        last = m
+    if last is None or pos - last.end() > R4_HEAD_SPAN:
+        return False
+    return bool(R4_ADV_HEAD_RE.search(R4_TAG_RE.sub("", last.group(1))))
+
+
+def r4_assertion_gaps(text: str) -> list[str]:
+    """-> 附近窗口内无来源标记的「含单位/量级数字」正文断言块（纯文本摘要）。
+
+    设计口径（P1-7 重新设计，替代原「全文有来源词即豁免」）：
+    - 仅测正文断言块（li / p，与 IGI-05 同口径）；表格数值溯源由 R2 与来源登记承担；
+    - 仅测「带单位/量级」的关键数字（NUMBER_UNIT_RE），年份 / 版本号 / 编号不算；
+    - 已声明信息（自算 / 推断 / 假设 / 待核）与咨询容器 / 咨询章节内块不计；
+    - 窗口内任一来源标记（事实卡片 / 来源编号 / 来源标签 / 外链 / K 指针 /
+      核验等级标 / 含年份机构引用）即视为已标。
+    """
+    text = re.sub(r"<style\b.*?</style>", " ", text, flags=re.DOTALL | re.IGNORECASE)
+    text = re.sub(r"<script\b.*?</script>", " ", text, flags=re.DOTALL | re.IGNORECASE)
+    spans = [(m.start(), m.end()) for m in R4_SKIP_REGION_RE.finditer(text)]
+    spans += [(m.start(), m.end()) for m in R4_ADVISORY_EL_RE.finditer(text)]
+    spans += r4_advisory_spans(text)
+    gaps: list[str] = []
+    for m in R4_BLOCK_RE.finditer(text):
+        if any(a <= m.start() < b for a, b in spans):
+            continue
+        plain = R4_TAG_RE.sub("", m.group(0))
+        if not NUMBER_UNIT_RE.search(plain):
+            continue
+        if R4_DECL_RE.search(plain) or R4_NOTE_PREFIX_RE.match(plain.strip()):
+            continue
+        if r4_advisory_heading(text, m.start()):
+            continue
+        window = text[max(0, m.start() - PROXIMITY_WINDOW): m.end() + PROXIMITY_WINDOW]
+        if R4_SRC_MARKER_RE.search(window):
+            continue
+        gaps.append(re.sub(r"\s+", " ", plain).strip())
+    return gaps
+
+
 def check_report(text: str, registry: dict, ctx: dict | None = None) -> list[tuple[str, str]]:
     """对单份报告执行 R1–R6 -> [(level, message)]，level ∈ {'E','W','I'}。
 
     纯函数，供 engine/tests/ 直接调用。ctx 可含：
       language_rule（如 'official_en'）、dead_urls（不可达 URL 集合）、
-      source_markers（来源标注关键词，可选覆盖）、
       source_strategy（如 'synthesis_only'：无外部来源的综合层，
         R1 空登记 + 无外部 URL 时豁免告警）、
       historical（历史报告：R1–R5 的 E 前置降级为 W；R6 不降级）。
@@ -596,11 +704,12 @@ def check_report(text: str, registry: dict, ctx: dict | None = None) -> list[tup
         if len(referenced) < 2:
             issues.append((level("R3", "E"), f"R3 双源确认：进入信号合成的来源仅 {len(referenced)} 个被引用（需 ≥2）"))
 
-    # R4 关键数字来源
-    markers = ctx.get("source_markers") or SOURCE_MARKERS
-    if NUMBER_UNIT_RE.search(text) and not (SOURCE_ID_ATTR_RE.search(text)
-                                            or any(k in text.lower() for k in markers)):
-        issues.append((level("R4", "E"), "R4 关键数字来源：存在带单位/量级数字但无来源标注"))
+    # R4 关键数字来源（块级逐点指针）
+    gaps = r4_assertion_gaps(text)
+    if gaps:
+        issues.append((level("R4", "E"),
+                       f"R4 关键数字来源：{len(gaps)} 个含单位/量级数字的断言块附近 "
+                       f"{PROXIMITY_WINDOW} 字符内无来源标记（示例：{gaps[0][:60]}）"))
 
     # R5 语言规则（token 化分级）
     rule = ctx.get("language_rule", "")
