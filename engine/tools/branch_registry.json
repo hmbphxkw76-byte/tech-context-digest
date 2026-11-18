@@ -63,6 +63,13 @@
       "slug": "merge-ci-audit",
       "task": "merge-ci-audit"
     },
+    "task/pce-gate-5231d7e5": {
+      "note": "source=env:CATPAW_CONVERSATION_ID",
+      "session": "5231d7e5e70c440eaf2d9c2b5abef0bc",
+      "session_short": "5231d7e5",
+      "slug": "pce-gate",
+      "task": "pce-gate"
+    },
     "task/phase0-governance-cleanup-cd95c5fa": {
       "note": "source=env:CATPAW_CONVERSATION_ID",
       "session": "cd95c5fad1b94ba18de3bbc3b62eea99",

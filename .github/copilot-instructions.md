@@ -1,0 +1,5 @@
+# GitHub Copilot 指令
+
+本仓库会话硬性规约以 `AGENTS.md` 为唯一事实源（含「输入润色与确认门禁」），请严格遵守。
+
+@AGENTS.md
