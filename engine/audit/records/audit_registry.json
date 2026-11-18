@@ -1167,6 +1167,54 @@
       "audit_id": "AUD-2026-11-18-003",
       "mark_level": "pre",
       "audited_at": "2026-11-18T01:38:54+00:00"
+    },
+    "engine/report-audits/goal-alignment-optimization-plan-2026-11-18.md": {
+      "title": "tech-context-digest 目标对齐优化解决方案（GOAL-ALIGNMENT-PLAN v1.0）",
+      "kind": "audit",
+      "category": "audit-doc",
+      "business_line": "engine/report-audits",
+      "status": "draft",
+      "stages": {
+        "draft": false,
+        "initial": false,
+        "second": false,
+        "final": false
+      },
+      "mark": false,
+      "first_seen_at": "2026-11-18",
+      "evidence": {
+        "report": "engine/report-audits/goal-alignment-optimization-plan-2026-11-18.md",
+        "business_line": "engine/report-audits",
+        "plans": [
+          {
+            "slug": "goal-alignment-p0",
+            "plan": "engine/audit/records/tasks/goal-alignment-p0/plan.json",
+            "tasks": "engine/audit/records/tasks/goal-alignment-p0/tasks.json",
+            "risks": "engine/audit/records/tasks/goal-alignment-p0/risks.json",
+            "reports": [
+              "engine/report-audits/goal-alignment-optimization-plan-2026-11-18.md"
+            ],
+            "task_count": 7,
+            "risk_count": 2
+          }
+        ],
+        "gate": {
+          "entry": "engine/tools/optimization_gate.py",
+          "probe": true
+        },
+        "audit": {
+          "review": "",
+          "status": "draft",
+          "stages": {
+            "draft": false,
+            "initial": false,
+            "second": false,
+            "final": false
+          },
+          "mark_level": "none",
+          "audit_id": ""
+        }
+      }
     }
   }
 }
