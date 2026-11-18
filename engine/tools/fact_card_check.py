@@ -24,8 +24,9 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 
 from _common import ROOT, detect_report, iter_business_dirs  # noqa: E402
+from gate_period import AUTO, resolve as resolve_period  # noqa: E402
 
-DEFAULT_GATE = "2026-12"
+DEFAULT_GATE = AUTO
 CARD_DIR = ROOT / "engine" / "fact_cards"
 REQUIRED_FIELDS = ("card_id", "fact", "source", "tier", "verify_status", "level", "updated", "indicators")
 VALID_TIERS = {1, 2, 3, 4}
@@ -106,6 +107,7 @@ def iter_report_refs():
 
 
 def run(gate: str) -> tuple[int, int, list[str], dict]:
+    gate = resolve_period(gate)
     errors = warnings = 0
     lines: list[str] = []
     cards, card_errors = load_cards()

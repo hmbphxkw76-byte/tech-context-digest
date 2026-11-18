@@ -271,9 +271,17 @@ def read_import_file(path: Path) -> list:
 # ---------- 子命令 ----------
 
 def auto_sync_hook(topic_id: str):
-    """词汇库变更后自动触发提示词同步（config/sync.json 存在且 auto_trigger 时生效）。"""
+    """词汇库变更后自动触发提示词同步（config/sync.json 存在且 auto_trigger 为 true 时生效）。"""
     sync_cfg = TOOL_ROOT / "config" / "sync.json"
     if not sync_cfg.exists():
+        return
+    try:
+        cfg = json.loads(sync_cfg.read_text(encoding="utf-8"))
+    except (OSError, json.JSONDecodeError) as exc:
+        print(f"  [warn] 同步配置读取失败，跳过自动同步：{exc}")
+        return
+    if not cfg.get("auto_trigger", False):
+        # 显式停用（auto_trigger: false）时不得触发——否则配置语义失效
         return
     try:
         import subprocess

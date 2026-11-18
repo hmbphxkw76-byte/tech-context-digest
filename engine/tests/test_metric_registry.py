@@ -17,9 +17,13 @@ spec.loader.exec_module(mr)
 
 
 class TestDictionary(unittest.TestCase):
-    def test_has_30_metrics(self):
+    def test_dictionary_has_igi_metrics(self):
+        """字典含 IGI-01..08（信息差度量），且总数与字典一致（不写死数量）。"""
         d = mr.load_dictionary()
-        self.assertEqual(len(mr.metric_ids(d)), 30)
+        ids = mr.metric_ids(d)
+        for i in range(1, 9):
+            self.assertIn(f"IGI-0{i}", ids)
+        self.assertGreaterEqual(len(ids), 30)
 
     def test_get_and_alias(self):
         d = mr.load_dictionary()

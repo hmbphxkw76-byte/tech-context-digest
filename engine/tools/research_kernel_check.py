@@ -24,8 +24,9 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 
 from _common import ROOT, detect_report, iter_business_dirs  # noqa: E402
+from gate_period import AUTO, resolve as resolve_period  # noqa: E402
 
-DEFAULT_GATE = "2026-12"
+DEFAULT_GATE = AUTO
 
 RULES = (
     ("周期定位", lambda t: ("周期定位" in t) or ("周期阶段" in t)),
@@ -92,7 +93,7 @@ def run(only_file: str | None, gate: str) -> tuple[int, int, list[str]]:
         missing = check_text(text)
         if not missing:
             continue
-        is_new = bool(period) and _period_key(period) >= _period_key(gate)
+        is_new = bool(period) and _period_key(period) >= _period_key(resolve_period(gate))
         level = "E" if is_new else "W"
         if is_new:
             errors += 1

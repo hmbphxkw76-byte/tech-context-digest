@@ -134,7 +134,7 @@ content/
 | N3 | 信息分类 | tool | `classify_reports.py` + `layout.json` + `check_links.py` | G3 | validate_layout, classify, links |
 | N4 | 内容生成 | manual | 四层提示词体系（通用基座 × 通用规范 × 类型模板 × business-config） | G4 | research_kernel, info_density, fact_card, decision_hub, blind_spot |
 | N5 | 渲染与交付 | tool | `md2html.py` + `report_style.py`（canonical 样式）+ `page_build_check.py` | G5 | page_build, lint, compliance, perf_monitor |
-| N6 | 质量校验与审计 | tool | `optimization_gate.py`（全量 23 项）+ `audit_tool.py`（审计四环节） | G6 | `*` + 审计 |
+| N6 | 质量校验与审计 | tool | `optimization_gate.py`（全量 24 项）+ `audit_tool.py`（审计四环节） | G6 | `*` + 审计 |
 | N7 | 发布 / 索引 / 归档 | tool | `publish_fingerprint.py` + `build_hub.py` + `archive_reports.py` | G7 | hub, publish_fingerprint |
 | N8 | 运维与监控 | ci | `.github/workflows/` 下的维护 / 内容 / 审计流水线 | G8 | （外部 CI） |
 

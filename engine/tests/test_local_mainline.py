@@ -27,8 +27,8 @@ class TestSteps(unittest.TestCase):
         gate_cmd = steps[2][1]
         self.assertIn("engine/tools/optimization_gate.py", gate_cmd)
         self.assertIn("--probe", gate_cmd)
-        self.assertIn("2026-12", gate_cmd)
-        self.assertIn("2027-01", gate_cmd)
+        # 滚动基线：gate-period 传 auto（不写死周期，避免随时间失效）
+        self.assertIn("auto", gate_cmd)
         self.assertIn("engine/tools/repo_sync.py", steps[3][1])
         self.assertIn("engine/tools/repo_sync.py", steps[4][1])
 

@@ -22,8 +22,9 @@ import sys
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[2]
-GATE_PERIOD = "2026-12"
-SOURCE_GATE_PERIOD = "2027-01"
+# 滚动基线（auto = 当前自然月 + 1）：新报告判定不随时间失效，见 gate_period.py
+GATE_PERIOD = "auto"
+SOURCE_GATE_PERIOD = "auto"
 
 DEFAULT_BODY = (
     "由 `local_mainline.py` 一键闭环生成：计划工件校验 → unittest → "

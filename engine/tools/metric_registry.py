@@ -223,6 +223,15 @@ def dedupe_rows(rows: list[dict], case_sensitive: bool = True) -> tuple[list[dic
     return kept, lineage, conflicts
 
 
+def measured_from_info_gap() -> dict[str, float]:
+    """从 info_gap_metrics 取 IGI-01..08 实测值；不可用时返回空字典（不静默假装达标）。"""
+    try:
+        from info_gap_metrics import compute
+        return dict(compute()["values"])
+    except Exception:
+        return {}
+
+
 def check_all_metrics(dictionary: dict, measured: dict[str, float] | None = None) -> dict:
     """全量准确性检查（兜底）-> 报告字典。
 
@@ -364,14 +373,19 @@ def main() -> int:
         print(f"字典体检通过：{len(d['metrics'])} 项指标，别名唯一、字段齐全、阈值可解析")
         return 0
     if args.cmd == "audit":
-        rep = check_all_metrics(d)
+        measured = measured_from_info_gap()
+        rep = check_all_metrics(d, measured)
         for r in rep["metrics"]:
             flag = "FALLBACK" if r["fallback"] else r["status"].upper()
             print(f"[{flag}] {r['metric_id']:<6} {r['severity']:<3} {r['name']}：{r['detail']}")
-        print(f"\n[audit] {len(rep['metrics'])} 项全量检查；兜底 {rep['fallback_count']} 项；"
-              f"不达标 {len(rep['failures'])} 项；问题 {len(rep['issues'])} 项")
+        print(f"\n[audit] {len(rep['metrics'])} 项全量检查；实测 {len(measured)} 项；"
+              f"兜底 {rep['fallback_count']} 项；不达标 {len(rep['failures'])} 项；问题 {len(rep['issues'])} 项")
         if rep["issues"]:
             return 1
+        if rep["fallback_count"]:
+            # 实测数据缺失不得静默放行：显式作为警告上报
+            print(f"[W] {rep['fallback_count']} 项指标无实测值（实测数据缺失，仅结构兜底）")
+            return 2
         return 2 if rep["failures"] else 0
     if args.cmd == "get":
         m = get_metric(d, args.metric_id) or by_alias(d, args.metric_id)
