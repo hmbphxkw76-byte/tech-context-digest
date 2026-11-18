@@ -184,7 +184,7 @@ flowchart LR
 
 | 项 | 内容 |
 |---|---|
-| 核心步骤 | ① `build_hub.py` 生成 `index.html` / `reader.html`（`--check` 比对确定性）；② `build_index.py` 生成 `INDEX.md`（心跳）；③ `archive_reports.py` 滚动归档（monthly 12 / quarterly 8 / annual 5 / baseline 3 / weekly 12）；④ `publish_fingerprint.py --emit` 采集 sha256；⑤ 词汇库 `sync_vocab.py` 标记区间增量同步（逐词条 sha256、原子写、失败回滚） |
+| 核心步骤 | ① `build_hub.py` 生成 `index.html` / `reader.html`（`--check` 比对确定性）；② `build_index.py` 生成 `INDEX.md`（心跳）；③ `archive_reports.py` 滚动归档 `reports/` 与 `sources/`（monthly 12 / quarterly 8 / annual 5 / baseline 3 / weekly 12）；④ `publish_fingerprint.py --emit` 采集 sha256；⑤ 词汇库 `sync_vocab.py` 标记区间增量同步（逐词条 sha256、原子写、失败回滚） |
 | 输出标准 | 生成物确定性（无时间戳）；`--check` 过期即阻断；归档幂等 |
 | 工具 | `build_hub.py`、`build_index.py`、`archive_reports.py`、`publish_fingerprint.py`、`sync_vocab.py` |
 

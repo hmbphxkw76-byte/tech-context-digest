@@ -21,7 +21,7 @@ Single-context: one `GLOSSARY.md` + `engine/docs/adr/` at the repo root. See `en
 仓库名 `tech-context-digest`，按三层组织，**不得跨层存放**：
 
 - **`content/` — 内容层**：六主题 `economy`（经济）/ `tech`（科技）/ `education`（教育）/ `international`（国际）/ `political`（政治）/ `society`（社会）。业务线位于 `content/<theme>/<维度段...>/`，维度顺序由 `engine/tools/layout.json` 各主题声明（`economy` 为 `<region>/<category>` 地区优先，其余主题为 `<category>/<region>` 细分优先），以 `prompts/business-config.md` 为锚点；`region` 为可选维度（`layout.json` 各主题以 `optional_dimensions` 声明），省略 region 的业务线直接以 category 段落位（如 `content/economy/trends/`、`content/tech/weekly-roundup/`）承载非区域 / 全局内容。
-- **`engine/` — 引擎层**：跨主题复用的机械与规范——`templates/`、`prompts/`（泛用提示词）、`tools/`、`vocabulary/`、`quality/`、`audit/`、`report-audits/`、`fact_cards/`、`sources/`（通用层源稿，按主题）、`tests/`、`docs/`。
+- **`engine/` — 引擎层**：跨主题复用的机械与规范——`templates/`、`prompts/`（泛用提示词）、`tools/`、`vocabulary/`、`quality/`、`audit/`、`report-audits/`、`fact_cards/`、`tests/`、`docs/`。
 - **`data/` — 资产层**：`raw/`（原始抓取）、`processed/<theme>/<维度段...>/`（清洗后台账 / 登记 / 量化数据，地区分组段不计入）、`assets/`（图片图表）。
 
 ## 目录结构硬性规则（适用于任何 Agent 平台）

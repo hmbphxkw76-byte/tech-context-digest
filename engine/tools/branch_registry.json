@@ -97,6 +97,13 @@
       "session_short": "cd95c5fa",
       "slug": "verification-prompt",
       "task": "verification-prompt"
+    },
+    "task/vocab-theme-prompt-library-554d81f6": {
+      "note": "source=env:CATPAW_CONVERSATION_ID",
+      "session": "554d81f6dc5a486984981f00041f2b7b",
+      "session_short": "554d81f6",
+      "slug": "vocab-theme-prompt-library",
+      "task": "vocab-theme-prompt-library"
     }
   },
   "schema": 1,

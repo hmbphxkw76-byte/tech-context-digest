@@ -39,7 +39,6 @@
 │   ├── prompts/                  # 泛用提示词（按类型）
 │   ├── vocabulary/               # 受控词表（INDEX.md 为入口）
 │   ├── fact_cards/               # 事实卡片
-│   ├── sources/                  # 来源登记（md 源稿）
 │   ├── tools/                    # 生成器与校验器
 │   ├── quality/                  # 内容质量评估与修复
 │   ├── audit/                    # 审计管理体系
