@@ -32,23 +32,23 @@
 
 ## 任务清单（17 项，详见 tasks.json）
 
-- [pending] P1-1 摘要越级修正（5 处）
-- [pending] P1-2 证据强度一致性 + DC-08 门禁
-- [pending] P1-3 「假设乘积」标注治理
-- [pending] P1-4 行动项阈值数值化
-- [pending] P1-5 trends 决策卡补全或显式豁免
-- [pending] P1-6 来源登记字段扩展（unverifiable / updated）
-- [pending] P1-7 R4 关键数字逐点指针（重新设计）
-- [pending] P1-8 死链真实修复
-- [pending] P1-9 四主题接入就绪化
-- [pending] P1-11 词库规范形统一 + 缺口补录
-- [pending] P1-14 数据层补薄 + raw 落仓
-- [pending] P1-15 hub 卡片信息区分度
-- [pending] P2-1 死代码清理（需授权）
-- [pending] P2-5 主题 README 治理
-- [pending] P2-6 审计报表增强（IGI 趋势）
-- [pending] P2-7 报告结构加固
-- [pending] V 终验 unittest + optimization_gate --probe + 专项门禁
+- [done] P1-1 摘要越级修正（5 处）
+- [done] P1-2 证据强度一致性 + DC-08 门禁
+- [done] P1-3 「假设乘积」标注治理
+- [done] P1-4 行动项阈值数值化
+- [done] P1-5 trends 决策卡补全或显式豁免
+- [done] P1-6 来源登记字段扩展（unverifiable / updated）
+- [done] P1-7 R4 关键数字逐点指针（重新设计）
+- [done] P1-8 死链真实修复
+- [done] P1-9 四主题接入就绪化
+- [done] P1-11 词库规范形统一 + 缺口补录
+- [done] P1-14 数据层补薄 + raw 落仓
+- [done] P1-15 hub 卡片信息区分度
+- [done] P2-1 死代码清理（需授权）
+- [done] P2-5 主题 README 治理
+- [done] P2-6 审计报表增强（IGI 趋势）
+- [done] P2-7 报告结构加固
+- [done] V 终验 unittest + optimization_gate --probe + 专项门禁
 
 ## 风险登记（4 项，详见 risks.json）
 
