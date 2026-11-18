@@ -3,7 +3,7 @@
 
 锁定内容与清单、流程图一致：
 - `pipeline_manifest.json`：N0–N8 九节点、G0–G8 九门禁、两条闭环（L1 N8→N1 异步、L2 G6→N4 同步）；
-- 门禁 checks 必须是 `optimization_gate.CHECKS` 的子集（'*' = 全量 24 项）；
+- 门禁 checks 必须是 `optimization_gate.CHECKS` 的子集（'*' = 全量 25 项）；
 - 编排路由：通过则下一节点，E 阻断则按 `on_fail` 精准退回（G6 → N4）；
 - 审计：追加式留痕，可按 run_id 还原。
 
@@ -214,7 +214,7 @@ class TestPipelineRouting(unittest.TestCase):
         self.assertEqual(len(run.gates), 9)
 
     def test_g6_block_rolls_back_to_n4(self):
-        # G6 = 全量 24 项；metric_audit 仅属 G6（G0–G5/G7 不含），确保阻断发生在 G6
+        # G6 = 全量 25 项；metric_audit 仅属 G6（G0–G5/G7 不含），确保阻断发生在 G6
         self.assertNotIn("metric_audit", pr.get_gate(MANIFEST, "G0")["checks"])
         fake = _FakeGateModule({"metric_audit": "error"})
         with mock.patch.object(pr, "_gate_module", return_value=fake), \

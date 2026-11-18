@@ -35,6 +35,7 @@ info_density = _load("info_density_check", "engine/tools/info_density_check.py")
 decision_hub = _load("decision_hub_check", "engine/tools/decision_hub_check.py")
 vocab_drift = _load("vocab_drift_check", "engine/tools/vocab_drift_check.py")
 build_hub = _load("build_hub", "engine/tools/build_hub.py")
+monitoring_render = _load("monitoring_render", "engine/tools/monitoring_render_check.py")
 
 
 class TestGatePeriod(unittest.TestCase):
@@ -171,6 +172,60 @@ class TestVocabDrift(unittest.TestCase):
         forms, n = vocab_drift.load_terms("economy")
         self.assertGreater(n, 0)
         self.assertGreaterEqual(len(forms), n)
+
+
+class TestMonitoringRender(unittest.TestCase):
+    """批次 A：监测渲染规范机械项（MON-01..05）可检出，且不误报合规写法。"""
+
+    def _check(self, html: str):
+        import tempfile
+        with tempfile.TemporaryDirectory() as d:
+            p = Path(d) / "r.html"
+            p.write_text(html, encoding="utf-8")
+            return monitoring_render.check_report(p)
+
+    def test_compliant_report_is_clean(self):
+        html = ('<div class="chart-box"><h3>图 1 · 序列（单位：%；来源：X）</h3>'
+                '<div class="chart-eh" id="c1"></div>'
+                '<div class="chart-note">口径并列，不可相减。来源：X。</div></div>'
+                '<table class="fixed"><tr><th style="width:50%">A</th>'
+                '<th style="width:50%">B</th></tr></table>')
+        errs, warns = self._check(html)
+        self.assertEqual(errs, [])
+        self.assertEqual(warns, [])
+
+    def test_mon01_missing_note(self):
+        html = '<div class="chart-box"><div class="chart-eh" id="c1"></div></div>'
+        _e, warns = self._check(html)
+        self.assertTrue(any("MON-01" in w for w in warns))
+
+    def test_mon02_caliber_without_warning(self):
+        html = ('<div class="chart-box"><h3>图 1 · 多口径（%；来源：X）</h3>'
+                '<div class="chart-eh" id="c1"></div>'
+                '<div class="chart-note">口径并列，图示仅为对照。</div></div>')
+        _e, warns = self._check(html)
+        self.assertTrue(any("MON-02" in w for w in warns))
+
+    def test_mon03_narrow_column(self):
+        html = ('<table class="fixed"><tr>' + ''.join(
+            f'<th style="width:1%">列{i}</th>' for i in range(7)) + '</tr></table>')
+        _e, warns = self._check(html)
+        self.assertTrue(any("MON-03" in w for w in warns))
+
+    def test_mon04_missing_noopener(self):
+        html = '<a href="https://example.com/x">x</a>'
+        _e, warns = self._check(html)
+        self.assertTrue(any("MON-04" in w for w in warns))
+
+    def test_mon04_self_link_exempt(self):
+        html = ('<a href="https://github.com/hmbphxkw76-byte/tech-context-digest/blob/main/x">x</a>')
+        _e, warns = self._check(html)
+        self.assertFalse(any("MON-04" in w for w in warns))
+
+    def test_mon05_native_title(self):
+        html = '<a href="https://example.com/x" title="https://example.com/x">x</a>'
+        _e, warns = self._check(html)
+        self.assertTrue(any("MON-05" in w for w in warns))
 
 
 if __name__ == "__main__":

@@ -70,6 +70,8 @@ CHECKS: list[tuple[str, list[str], bool]] = [
     # 静态检查（Phase 3.1）：默认 [W]，稳定后评 [E]。仅适配退出码，规则见 pyproject.toml。
     ("ruff", [sys.executable, f"{TOOLS}/static_check.py", "ruff"], True),
     ("mypy", [sys.executable, f"{TOOLS}/static_check.py", "mypy"], True),
+    # 监测渲染规范机械项（MON-01..05）：规范有、门禁不查缺口接线，默认 [W]。
+    ("monitoring_render", [sys.executable, f"{TOOLS}/monitoring_render_check.py"], True),
 ]
 
 # 两级 gate-period 默认值（见模块 docstring）：auto = 滚动基线（当前月 + 1）
