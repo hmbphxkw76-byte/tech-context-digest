@@ -1,4 +1,4 @@
-# 遗留任务台账（TECH-DEBT-LEDGER v1.3）
+# 遗留任务台账（TECH-DEBT-LEDGER v1.4）
 
 > **状态**：现行台账
 > **定位**：集中登记并跟踪**非阻断**遗留项（`[W]` 警告与登记管理件），保证可追溯、可跟进、不阻塞主流程。
@@ -6,7 +6,7 @@
 > **优先级**：P0 阻断（本台账不含）｜P1 高｜P2 中｜P3 低。
 > **状态机**：`open → in_progress → closed`；暂缓用 `deferred`。
 > **复核节奏**：每月 content-update 对账；每季度末全面盘点一次。
-> **最后更新**：2026-11-16（v1.3 按实跑全量刷新）
+> **最后更新**：2026-11-18（v1.4 新增 §十：C-15 / P2-1 处置）
 
 ---
 
@@ -162,6 +162,24 @@
 | 2026-11-16 | 升版 v1.2 | 按实跑刷新：C 类 6→5 项；D 类由 R1 11 项扩为 R1/R2/R7 20 项 / 9 份报告；B 类补 `system-optimization-plan`、`pipeline-integration-review` 与本台账 |
 | 2026-11-16 | D05 销号 | decision-hub 为无外部来源的综合层，R1「登记为空」系规则误报；business-config 声明 `SOURCE_STRATEGY=synthesis_only`，`source_check` 据此豁免 |
 | 2026-11-16 | 升版 v1.3 | **全量复跑刷新**：C 类 5→0（closed）；D 类 20→0（closed）；B 类 15→17（补 `l3-deep-review`、`cicd-alignment-audit`）；新增 E 类（R6 宽限期探测 7 项）；总览由 40 项修正为 24 项 |
+| 2026-11-18 | 新增 §十 | P2-1（C-15）逐条人工核验处置：保留 2 处 / 迁移 1 处 / 修正文档漂移 3 处；**未删除任何文件**（候选均存在保留或迁移依据） |
+
+---
+
+## 十、C-15 死代码与规范外结构处置（P2-1，2026-11-18）
+
+**来源**：`goal-alignment-optimization-plan-2026-11-18.md` C-15 / P2-1 / P2-2。逐条人工核验后处置如下——**未删除任何文件**：三处候选中两处有明确保留依据，一处迁入规范归档位。
+
+| 候选 | 核验结论 | 处置 | 状态 |
+|---|---|---|---|
+| `content/economy/dubai/apartment/script/build_registry_v1.py` | **保留**。该脚本是 tracked 交付物 `dubai_apartment_indicator_registry_2026-11.xlsx` 的生产者，`build_registry_v2.py` 以其输出为输入；`dead-code-cleanup-2026-11-14.md` §三亦明示保留（「可复用于下一年度重置」）。删除将破坏「生成物确定性可重放」 | 关闭 C-15「无引用」判定（误报） | closed |
+| 原 `followup/`（现 `content/economy/trends/sources/archives/`） | `followup/` 不在 `structure-and-naming-spec.md` §4.4 目标结构内，属规范外；文档无引用 | **迁移**至 `content/economy/trends/sources/archives/2026-11-13_followup-execution.md`，撤销 `followup/` | closed |
+| `content/tech/weekly-roundup/sources/legacy/` | **保留**。`operations-guide.md` §0、`archive_reports.py` 头注释、`business-config.md` 版本记录均明示为存档（不参与轮转） | 关闭 C-15「规范外结构」判定（误报） | closed |
+| `weekly-roundup/README.md` 指向不存在的 `reports/legacy/` | **真实漂移**。`reports/legacy/` 已由 57d1728 清理（B12–B14 closed），仅 md 源稿留存 | 修正 README / `operations-guide.md` / `ai_trend_ledger.md` 三处指向为实际状态 | closed |
+
+**验证**：`validate_layout` / `validate` / `check_links` 均通过；`followup/` 已不存在，`sources/archives/` 入册；`optimization_gate --probe` 0 错误。
+
+**附带纠正**：b5（`goal-alignment-batch-progress-2026-11-18.md`）§四称 P2-2「两 legacy 目录均存在」与事实不符——`reports/legacy/` 自 2026-11-17 起即为空缺，已在规划文档 P2-2 行更正。
 
 ---
 
