@@ -33,16 +33,16 @@ class TestDoubleValidation(unittest.TestCase):
         self.assertFalse(sig["cycle_ok"])
         self.assertIsNone(sig["owner"])
 
-    def test_multi_candidate_is_unknown(self):
-        """trends 细分同时命中两条业务线（economy/global 与 tech/global）-> 需人工。"""
+    def test_unique_property_hit_assigns(self):
+        """trends 细分唯一命中经济趋势业务线（region 缺省）-> 自动归位。"""
         sig = cr.owner_signals("trends_2026-11-13_weekly.html")
-        self.assertEqual(len(sig["property_hits"]), 2)
-        self.assertIsNone(sig["owner"])
+        self.assertEqual(sig["property_hits"], ["content/economy/trends"])
+        self.assertEqual(sig["owner"], "content/economy/trends")
 
     def test_region_mismatch_is_unknown(self):
         """地区线索与候选业务线 region 不一致 -> 需人工。"""
-        sig = cr.owner_signals("global_apartment_2026-11_monthly.html")
-        self.assertEqual(sig["regions_in_name"], ["global"])
+        sig = cr.owner_signals("dubai_trends_2026-11-13_weekly.html")
+        self.assertEqual(sig["regions_in_name"], ["dubai"])
         self.assertEqual(sig["property_hits"], [])
         self.assertIsNone(sig["owner"])
 

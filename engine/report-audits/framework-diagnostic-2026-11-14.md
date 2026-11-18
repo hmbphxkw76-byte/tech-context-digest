@@ -32,7 +32,7 @@
 
 ### 1.1 体系架构（【事实】）
 
-- **业务线（4 条）**：`content/economy/dubai/apartment`（市场指标监测型，旗舰）、`content/economy/global/trends`（行业趋势周报型，全球宏观）、`content/tech/trends/global`（行业趋势周报型，AI 安全×Agent）、`content/tech/security/dubai`（职业就业调研型，AI 网安就业）。
+- **业务线（4 条）**：`content/economy/dubai/apartment`（市场指标监测型，旗舰）、`content/economy/trends`（行业趋势周报型，全球宏观）、`content/tech/weekly-roundup`（行业趋势周报型，AI 安全×Agent）、`content/tech/security/dubai`（职业就业调研型，AI 网安就业）。
 - **通用层**：`engine/templates/` 根部 5 份共享文件 + 13 个类型目录。
 - **分类体系**：六族十二类，全部注册模板化。
 - **继承体系**：业务提示词 = 通用基座 × 通用规范 × 类型模板 × 业务配置。
@@ -108,8 +108,8 @@
 
 ### 3.2 细分赛道穿透
 
-- `content/tech/trends/global` 的五主题矩阵是较好的细分实践，但**未再下一层**（如 AI 安全未分模型安全/应用安全/基础设施安全/合规）。
-- `content/economy/global/trends` 三板块颗粒度偏粗，**无单一经济体深度穿透**。
+- `content/tech/weekly-roundup` 的五主题矩阵是较好的细分实践，但**未再下一层**（如 AI 安全未分模型安全/应用安全/基础设施安全/合规）。
+- `content/economy/trends` 三板块颗粒度偏粗，**无单一经济体深度穿透**。
 - `apartment` 是单一资产类别，**无跨资产与跨城市对标**。
 - 无技术成熟度曲线、无专利/标准必要专利、无 ESG/碳维度。
 

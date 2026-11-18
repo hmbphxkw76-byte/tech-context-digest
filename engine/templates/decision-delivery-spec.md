@@ -2,7 +2,7 @@
 
 > **用途**：本项目所有报告与决策仪表盘的**决策支撑**规范，目标把信息高效转化为可落地决策。与[信息分层规范](./information-layering-spec.md)、[通用基座](./prompt-generic-base.md)配套。
 >
-> **适用**：全部业务线报告；跨研究线决策层（`decision-hub`）为强制载体。
+> **适用**：全部业务线报告；跨研究线决策层（`content/economy/insight`）为强制载体。
 >
 > **单一事实源纪律**：决策卡 / 行动协议 / 盲区消号 / 版本治理的唯一规范来源；业务配置只实例化。
 
@@ -59,12 +59,12 @@
 
 ### 3.1 架构（参照 jp-life-work `00-decision-hub`）
 
-- 载体：业务线 `content/economy/global/decision-hub`，类型 `decision-dashboard`。
+- 载体：业务线 `content/economy/insight`，类型 `decision-dashboard`。
 - 三功能：
   1. **收敛**：各研究线结论 → 标准化决策卡（结论 / 证据强度 / 触发条件 / 反向证据 / 信息充分度）。
   2. **暴露**：标记缺失事实与冲突读数（信息充分度不足项）。
   3. **触发**：按缺失清单与阈值启动补缺 / 专题任务。
-- 决策卡台账：`data/processed/economy/global/decision-hub/decision_cards.json`；场景切片：`data/processed/economy/global/decision-hub/scenario_slices.md`。
+- 决策卡台账：`data/processed/economy/insight/decision_cards.json`；场景切片：`data/processed/economy/insight/scenario_slices.md`。
 
 ### 3.2 决策仪表盘报告骨架（decision-dashboard 基线）
 

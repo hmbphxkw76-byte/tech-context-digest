@@ -40,7 +40,7 @@
 ＞ ② 国际权威组织与分析机构（ISC2、ISACA、Gartner、IDC、SANS/GIAC、MITRE、OWASP、NIST、Mordor Intelligence、Global Market Insights）
 ＞ ③ 头部薪酬指南与招聘平台抽样（Hays、Michael Page、Cooper Fitch、Charterhouse；LinkedIn、Bayt、GulfTalent、foundit Gulf——仅作市场信号）
 ＞ ④ 英文行业/主流媒体（Khaleej Times、The National、Gulf News、Zawya、Reuters——只用于发现线索，数值须回官方/原始页校验）
-＞ ⑤ 同源已核实资产：`content/tech/security/dubai/` 业务线的基线报告、md 源稿与指标登记册，以及 `content/tech/trends/global/reports/2026-11-13_weekly.html`（全球趋势转引，须标注「经周报转引」）。
+＞ ⑤ 同源已核实资产：`content/tech/security/dubai/` 业务线的基线报告、md 源稿与指标登记册，以及 `content/tech/weekly-roundup/reports/2026-11-13_weekly.html`（全球趋势转引，须标注「经周报转引」）。
 
 - 每格活值附 `[来源, 年份]`；冲突时报双份并标注；`{{SOURCE_LANGUAGE_RULE}}` 强制执行，不符合者一律排除。
 

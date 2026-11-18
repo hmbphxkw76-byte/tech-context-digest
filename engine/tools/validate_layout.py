@@ -3,10 +3,10 @@
 单一事实源：engine/tools/layout.json。校验项：
 - 一级根目录合规：无未注册的业务 / 公共目录（白名单之外）
 - 主题注册完整：themes / root_reserved / regions / naming 字段齐全
-- 业务线层级：每条业务线深度与主题维度数一致
+- 业务线层级：每条业务线深度与主题维度数一致（region 为可选维度时可省略该段）
 - 命名规范：全部目录段符合 kebab-case（layout.naming.pattern）
 - 地域白名单：region 维度段命中 layout.regions
-- 维度声明：维度序列自洽（无重复、无未登记维度名）；先后顺序由 layout.json 按主题声明（economy 为 region→category，tech 等主题为 category→region）
+- 维度声明：维度序列自洽（无重复、无未登记维度名）；先后顺序由 layout.json 按主题声明（economy 为 region→category，tech 等主题为 category→region）；optional_dimensions 必须是已声明维度
 
 退出码：0 = 通过；1 = 存在错误；2 = 仅警告（含已注册未创建的主题）。
 
@@ -25,9 +25,9 @@ sys.path.insert(0, str(Path(__file__).resolve().parent))
 
 from _common import (  # noqa: E402
     ROOT,
-    _walk_to_depth,
     iter_business_dirs,
     load_layout,
+    resolve_segments,
 )
 
 ERRORS: list[str] = []
@@ -68,6 +68,9 @@ def check_dimension_priority(layout) -> None:
         for d in dims:
             if d not in KNOWN_DIMENSIONS:
                 err(f"主题 {theme} 含未登记维度名：{d}")
+        for d in layout.optional_dims(theme):
+            if d not in dims:
+                err(f"主题 {theme} 的 optional_dimensions 含未声明维度：{d}")
 
 
 def check_layout_integrity(layout) -> None:
@@ -101,6 +104,22 @@ def check_root(layout) -> None:
             err(f"未注册的一级目录: {d.name}/（请迁入 engine/ 或在 layout.json 注册）")
 
 
+def _walk_theme_dirs(base: Path, max_depth: int):
+    """产出主题下 1..max_depth 层目录，但不进入业务线内部（业务线为叶子）。
+
+    业务线以 prompts/business-config.md 为锚点；其下 prompts/ reports/ 等
+    子目录不是维度段，不参与层级 / 地域校验。
+    """
+    if max_depth < 1 or not base.is_dir():
+        return
+    for child in sorted(base.iterdir()):
+        if child.is_dir() and not child.name.startswith("."):
+            yield child
+            if (child / "prompts" / "business-config.md").exists():
+                continue
+            yield from _walk_theme_dirs(child, max_depth - 1)
+
+
 def check_theme(theme: str, layout) -> None:
     """单个主题的层级、命名与地域白名单。"""
     theme_dir = ROOT / layout.content_root / theme
@@ -109,11 +128,11 @@ def check_theme(theme: str, layout) -> None:
         return
     dims = layout.dimensions(theme)
     naming = re.compile(layout.naming_pattern)
+    optional = layout.optional_dims(theme)
     region_idx = dims.index("region") if "region" in dims else None
+    allow_short = region_idx is not None and "region" in optional
 
-    for d in _walk_to_depth(theme_dir, layout.depth(theme)):
-        if d == theme_dir:
-            continue
+    for d in _walk_theme_dirs(theme_dir, len(dims)):
         rel = d.relative_to(theme_dir).as_posix()
         segments = rel.split("/")
         for seg in segments:
@@ -122,24 +141,38 @@ def check_theme(theme: str, layout) -> None:
         dims_segments = segments
         if dims_segments and dims_segments[0] == layout.regional_segment:
             dims_segments = dims_segments[1:]
-        if region_idx is not None and region_idx < len(dims_segments):
-            region = dims_segments[region_idx]
-            if layout.regions and region not in layout.regions:
-                err(f"{theme}/{rel}: 地域段「{region}」未在 layout.regions 白名单注册")
+        if len(dims_segments) == len(dims):
+            if region_idx is not None and layout.regions and dims_segments[region_idx] not in layout.regions:
+                err(f"{theme}/{rel}: 地域段「{dims_segments[region_idx]}」未在 layout.regions 白名单注册")
+        elif not (allow_short and len(dims_segments) == len(dims) - 1):
+            err(f"{theme}/{rel}: 层级深度 {len(dims_segments)} 与主题 {theme} 声明维度 {list(dims)} 不匹配")
 
 
 def check_business_depth(layout) -> None:
-    """业务线实际深度与主题维度数一致（iter_business_dirs 已按深度发现，此处复核）。
+    """业务线实际段数与主题维度数一致（region 可缺省时允许少一段）。
 
-    业务线全路径默认为 content/<theme>/<category>/<region>，段数 = 1（content）+
-    depth(theme)；主题可声明 segment 覆盖（空串表示无地区分组段，不额外加段）。
+    业务线全路径默认为 content/<theme>/<维度段...>，段数 = 1（content）+
+    维度数；region 为可选维度时可省略该段。主题可声明 segment 覆盖
+    （空串表示无地区分组段，不额外加段）。
     """
     for b in iter_business_dirs():
-        seg = layout.segment(b.theme)
-        expected = layout.depth(b.theme) + 1 + (1 if seg else 0)
-        actual = len(b.rel.split("/"))
-        if actual != expected:
-            err(f"{b.rel}: 层级深度 {actual} 与主题 {b.theme} 期望深度 {expected} 不一致")
+        dims = layout.dimensions(b.theme)
+        optional = layout.optional_dims(b.theme)
+        n = len(b.segments)
+        allowed = {len(dims)}
+        if "region" in dims and "region" in optional:
+            allowed.add(len(dims) - 1)
+        if n not in allowed:
+            err(f"{b.rel}: 层级深度 {n + 1} 与主题 {b.theme} 期望维度 {list(dims)} 不一致")
+            continue
+        try:
+            mapping = resolve_segments(layout, b.theme, b.segments)
+        except ValueError as e:
+            err(f"{b.rel}: {e}")
+            continue
+        region = mapping.get("region")
+        if region is not None and layout.regions and region not in layout.regions:
+            err(f"{b.rel}: 地域段「{region}」未在 layout.regions 白名单注册")
 
 
 def main() -> int:

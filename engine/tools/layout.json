@@ -1,7 +1,7 @@
 {
-  "version": "4.0",
+  "version": "4.1",
   "updated": "2026-11-17",
-  "comment": "仓库目录结构单一事实源（tech-context-digest 三层架构：content/ 内容层、engine/ 引擎层、data/ 资产层）。六主题：economy / tech / education / international / political / society。含 region 维度的主题 region 先于 category（economy）；tech 及后续主题按 category→region。业务线默认位于 content/<theme>/<维度段...>/，以 prompts/business-config.md 为锚点。",
+  "comment": "仓库目录结构单一事实源（tech-context-digest 三层架构：content/ 内容层、engine/ 引擎层、data/ 资产层）。六主题：economy / tech / education / international / political / society。维度顺序由 layout.json 各主题自行声明：economy 为 region→category（地区优先），tech 及后续主题为 category→region（细分优先）。region 为可选维度（optional_dimensions 声明）：业务线可省略 region 段，直接以 category 段落位（如 content/economy/trends、content/tech/weekly-roundup）；省略时剩余段按声明顺序剔除 region 后逐位映射。业务线默认位于 content/<theme>/<维度段...>/，以 prompts/business-config.md 为锚点。",
   "root_reserved": [
     "content",
     "engine",
@@ -21,14 +21,14 @@
   "content_root": "content",
   "regional_segment": "",
   "themes": {
-    "economy": { "name": "经济", "dimensions": ["region", "category"] },
-    "tech": { "name": "科技", "dimensions": ["category", "region"] },
+    "economy": { "name": "经济", "dimensions": ["region", "category"], "optional_dimensions": ["region"] },
+    "tech": { "name": "科技", "dimensions": ["category", "region"], "optional_dimensions": ["region"] },
     "education": { "name": "教育", "dimensions": ["category", "region"] },
     "international": { "name": "国际", "dimensions": ["category", "region"] },
     "political": { "name": "政治", "dimensions": ["category", "region"] },
     "society": { "name": "社会", "dimensions": ["category", "region"] }
   },
-  "regions": ["dubai", "global"],
+  "regions": ["dubai"],
   "naming": {
     "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$",
     "max_depth": 6

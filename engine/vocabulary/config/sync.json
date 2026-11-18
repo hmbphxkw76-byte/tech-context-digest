@@ -13,7 +13,7 @@
       "topic": "ai-security",
       "targets": [
         {
-          "path": "../../content/tech/trends/global/prompts/business-config.md",
+          "path": "../../content/tech/weekly-roundup/prompts/business-config.md",
           "format": "digest",
           "section_title": "## 词汇速览 · AI 安全（词汇库自动同步）",
           "insert_before": "## 七、版本记录",
@@ -52,7 +52,7 @@
       "topic": "economy",
       "targets": [
         {
-          "path": "../../content/economy/global/trends/prompts/business-config.md",
+          "path": "../../content/economy/trends/prompts/business-config.md",
           "format": "digest",
           "section_title": "## 词汇速览（词汇库自动同步）",
           "insert_before": "## 七、版本记录",
@@ -65,7 +65,7 @@
       "topic": "ai-agent",
       "targets": [
         {
-          "path": "../../content/tech/trends/global/prompts/business-config.md",
+          "path": "../../content/tech/weekly-roundup/prompts/business-config.md",
           "format": "digest",
           "section_title": "## 词汇速览 · AI Agent（词汇库自动同步）",
           "insert_before": "## 七、版本记录",

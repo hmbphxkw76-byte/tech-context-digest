@@ -73,10 +73,11 @@
 
 ### 4.3 层级深度与维度优先级
 
-- **深度上限**：`layout.json` 的 `naming.max_depth = 6`。业务线全路径 `content/<theme>/<维度段...>/`（当前各主题均为 2 维），提示词 / 报告文件位于第 5 层。
+- **深度上限**：`layout.json` 的 `naming.max_depth = 6`。业务线全路径 `content/<theme>/<维度段...>/`（当前各主题均为 2 维，`region` 可缺省时为 1 维），提示词 / 报告文件位于业务线之下。
 - **engine 域内深度**：`engine/<域>/<子域>/<文件>`，建议 ≤ 4 层（如 `engine/tools/semantic_checks/base.py`）。
 - **data 深度**：`data/processed/<theme>/<维度段...>/<文件>` 与 content 维度段对齐（≤ 6）；`data/raw/<source>/<文件>` ≤ 3；`data/assets/<文件>` ≤ 2。
-- **维度顺序（硬性）**：维度先后由 `layout.json` 各主题自行声明——`economy` 为 `["region", "category"]`（地区优先），`tech` / `education` / `international` / `political` / `society` 为 `["category", "region"]`（细分优先）；不得在未改 `layout.json` 的情况下倒置。地区段必须命中 `regions` 白名单（当前 `dubai` / `global`）。
+- **维度顺序（硬性）**：维度先后由 `layout.json` 各主题自行声明——`economy` 为 `["region", "category"]`（地区优先），`tech` / `education` / `international` / `political` / `society` 为 `["category", "region"]`（细分优先）；不得在未改 `layout.json` 的情况下倒置。地区段必须命中 `regions` 白名单（当前 `dubai`）。
+- **region 可选（硬性）**：主题可在 `layout.json` 以 `optional_dimensions` 声明某维度可缺省；当前 `economy` / `tech` 声明 `["region"]`。缺省 region 时业务线直接以 category 段落位（如 `content/economy/trends`、`content/tech/weekly-roundup`），剩余段按声明顺序剔除 region 后逐位映射。
 - **禁止过深**：不得在业务线内继续发明 `prompts/{layer1}/{layer2}/` 之类的中间层；需要分类时用文件前缀或台账字段表达。
 
 ### 4.4 目录树示例（目标结构）
@@ -85,18 +86,17 @@
 <repo>/
 ├── content/                                  # 内容层
 │   ├── <theme>/                              # economy / tech / education / international / political / society
-│   │   ├── <region>/                          # economy：地区优先（global / dubai）
-│   │   │   └── <category>/                    # 业务分类
-│   │   └── <category>/                        # tech 等：细分优先
-│   │       └── <region>/                      # dubai / global（category 之下子层级）
-│   │           ├── prompts/                   # business-config.md + prompt-*.md
-│   │           ├── reports/                   # 正式报告 *.html
-│   │           │   ├── archives/              # 归档（保留策略）
-│   │           │   └── legacy/                # 存档（不发布不审计）
-│   │           ├── sources/                   # md 源稿（与报告同名）
-│   │           ├── script/                    # 业务脚本（可选）
-│   │           ├── operations-guide.md
-│   │           └── README.md
+│   │   ├── <region>/<category>/               # economy：地区优先（dubai）
+│   │   ├── <category>/                        # region 缺省：直接以 category 落位（如 content/economy/trends、content/tech/weekly-roundup）
+│   │   └── <category>/<region>/               # tech 等：细分优先（dubai）
+│   │       ├── prompts/                       # business-config.md + prompt-*.md
+│   │       ├── reports/                       # 正式报告 *.html
+│   │       │   ├── archives/                  # 归档（保留策略）
+│   │       │   └── legacy/                    # 存档（不发布不审计）
+│   │       ├── sources/                       # md 源稿（与报告同名）
+│   │       ├── script/                        # 业务脚本（可选）
+│   │       ├── operations-guide.md
+│   │       └── README.md
 ├── engine/                                   # 引擎层
 │   ├── templates/                            # 通用基座 + <type>/ 类型模板
 │   ├── prompts/                              # 泛用版业务提示词 <type>/
@@ -304,7 +304,7 @@
 | 类别 | 反例 | 正确 |
 |---|---|---|
 | 目录 | `Content/`、`currentAffairs/`、`regional_data/` | `content/`、`economy/`、`data/processed/<theme>/<维度段...>/` |
-| 目录 | `content/<theme>/regional/<region>/<category>/`（已撤销的 regional 分组段） | `content/economy/dubai/apartment/`（region→category）或 `content/tech/security/dubai/`（category→region） |
+| 目录 | `content/<theme>/regional/<region>/<category>/`（已撤销的 regional 分组段） | `content/economy/dubai/apartment/`（region→category）或 `content/tech/security/dubai/`（category→region）；区域缺省业务线为 `content/economy/trends/`、`content/tech/weekly-roundup/` |
 | 目录 | `engine/tools/{subdir}/common.py`（过深且职责模糊） | `engine/tools/_common.py` |
 | 文件 | `Report_Final.md` | `report-final.md` 或报告规范名 |
 | 文件 | `2026-11_monthly.html` 放入 `reports/archived/` | `reports/archives/` |
@@ -344,7 +344,7 @@
 | 扩展动作 | 需要改动 | 命名是否需新规则 |
 |---|---|---|
 | 新增主题 | `layout.json` 注册主题 + 建 `content/<theme>/` | 否 |
-| 新增业务线 | 建 `content/<theme>/<维度段...>/`（economy 为 `<region>/<category>`，其余主题为 `<category>/<region>`）+ `business-config.md` | 否 |
+| 新增业务线 | 建 `content/<theme>/<维度段...>/`（economy 为 `<region>/<category>`，其余主题为 `<category>/<region>`；region 缺省时仅 `<category>/`）+ `business-config.md` | 否 |
 | 新增报告类型 | `engine/templates/<type>/` + 注册表 + `compliance-rules.json` + `_common.TEMPLATE_TYPE_DIRS` | 否 |
 | 新增周期报告 | 按 `<period>_<cycle>.html` 落盘 | 否 |
 | 新增数据资产 | 按 `data/processed/{theme}/{维度段...}/<subject>[_period].<ext>` 落盘 | 否 |

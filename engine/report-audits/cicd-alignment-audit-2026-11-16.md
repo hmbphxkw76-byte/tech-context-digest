@@ -119,7 +119,7 @@
 ### P1 — 阻断/高（影响发布留痕与产物确定性）
 
 #### D1 发布指纹漂移未清零
-- **位置**：`engine/audit/records/publish_fingerprints.json` ↔ `content/tech/security/dubai/reports/2026-11_baseline_report.html`、`content/tech/trends/global/reports/2026-11-13_weekly.html`。
+- **位置**：`engine/audit/records/publish_fingerprints.json` ↔ `content/tech/security/dubai/reports/2026-11_baseline_report.html`、`content/tech/weekly-roundup/reports/2026-11-13_weekly.html`。
 - **现象**：`publish_fingerprint.py --check` 报 2 处漂移（`{size,sha1}` 与登记不符）。
 - **影响范围**：G7「产物确定性校验」的指纹防线失效；报告正文被改动但发布留痕未更新，违反 N7 ④「生成 → `publish_fingerprint --emit` 采集」的发布留痕要求。
 - **不符合条款**：[report-pipeline-system §3.5 防线五](../docs/report-pipeline-system.md)「`publish_fingerprint`（漂移与重复内容检测）」；§1.1 G7「产物确定性」。

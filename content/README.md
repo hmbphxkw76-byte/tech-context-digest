@@ -1,11 +1,11 @@
 # 内容层（content/）
 
-研究报告内容按六主题组织；业务线位于 `content/<theme>/<维度段...>/`，维度顺序由 `engine/tools/layout.json` 声明（economy 为 `<region>/<category>`，其余主题为 `<category>/<region>`），以 `prompts/business-config.md` 为单一事实源，报告落 `reports/`。
+研究报告内容按六主题组织；业务线位于 `content/<theme>/<维度段...>/`，维度顺序由 `engine/tools/layout.json` 声明（economy 为 `<region>/<category>`，其余主题为 `<category>/<region>`），以 `prompts/business-config.md` 为单一事实源，报告落 `reports/`。`region` 为可选维度（主题以 `optional_dimensions` 声明），省略 region 的业务线直接以 category 段落位（如 `content/economy/trends`、`content/tech/weekly-roundup`）。
 
 ## economy — 经济
 
-- `content/economy/global/decision-hub` — 跨研究线决策仪表盘
-- `content/economy/global/trends` — 全球经济趋势周报
+- `content/economy/insight` — 跨研究线决策仪表盘
+- `content/economy/trends` — 全球经济趋势周报
 - `content/economy/dubai/apartment` — 迪拜公寓住宅市场监测
 
 ## tech — 科技
@@ -13,7 +13,7 @@
 - `content/tech/competitive-intelligence/dubai` — 迪拜 AI 网安竞争格局（竞争情报）
 - `content/tech/industry-research/dubai` — 迪拜 AI 网安行业研究
 - `content/tech/security/dubai` — AI 安全（红队 / 评估）
-- `content/tech/trends/global` — AI 行业趋势周报（安全 × Agent 生态）
+- `content/tech/weekly-roundup` — AI 行业趋势周报（安全 × Agent 生态）
 
 ## education / international / political / society
 

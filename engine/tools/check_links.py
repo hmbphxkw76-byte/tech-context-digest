@@ -83,12 +83,12 @@ BASE_DIR_OVERRIDES = {
 # 运行期产出目录（前缀匹配）：业务线采集 / 清洗落盘与词汇库同步备份，基线可缺
 ALLOWED_PREFIXES = {
     "data/processed/economy/dubai/apartment",
-    "data/processed/economy/global/decision-hub",
-    "data/processed/economy/global/trends",
+    "data/processed/economy/insight",
+    "data/processed/economy/trends",
     "data/processed/tech/competitive-intelligence/dubai",
     "data/processed/tech/industry-research/dubai",
     "data/processed/tech/security/dubai",
-    "data/processed/tech/trends/global",
+    "data/processed/tech/weekly-roundup",
     "data/sync-backups",
 }
 
@@ -108,7 +108,7 @@ ALLOWED_BROKEN = {
     "content/society/.gitkeep",
     # 概念性默认路径（模板占位；实际登记按业务线落 data/processed/）
     "data/source_registry.json",
-    # 已合并的历史业务线（ai-security / ai-agent → content/tech/trends/global）
+    # 已合并的历史业务线（ai-security / ai-agent → content/tech/weekly-roundup）
     "trends/ai-security",
     "trends/ai-agent",
 }

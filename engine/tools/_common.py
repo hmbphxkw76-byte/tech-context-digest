@@ -9,7 +9,10 @@ data/（资产层：raw / processed / assets）。
 
 业务线默认位于 content/<theme>/<维度段...>/，维度顺序由 layout.json 各主题自行声明：
 economy 为 region→category（地区优先），tech / education / international / political /
-society 为 category→region（细分优先）。无 region 维度的主题可按声明维度建。
+society 为 category→region（细分优先）。region 为可选维度（theme 以 optional_dimensions
+声明）：业务线可省略 region 段，直接以 category 段落位（如 content/economy/trends、
+content/tech/weekly-roundup）；省略时剩余段按声明顺序剔除 region 后逐位映射。
+无 region 维度的主题可按声明维度建。
 
 硬性规则：维度先后按主题声明，不得在未改 layout.json 的情况下倒置；新增主题须在
 layout.json 的 themes 中显式声明 dimensions。
@@ -54,10 +57,15 @@ class Layout:
     content_root: str = "content"
     regional_segment: str = ""
     theme_segments: dict[str, str] = field(default_factory=dict)
+    optional_dimensions: dict[str, tuple[str, ...]] = field(default_factory=dict)
 
     def dimensions(self, theme: str) -> tuple[str, ...]:
         """主题的维度序列（如 ("region", "category")）。"""
         return self.themes.get(theme, ("", ()))[1]
+
+    def optional_dims(self, theme: str) -> tuple[str, ...]:
+        """主题声明为可选的维度名（如 ("region",)）；缺省为空元组。"""
+        return self.optional_dimensions.get(theme, ())
 
     def segment(self, theme: str) -> str:
         """主题的地区分组段：默认 regional_segment；主题可声明 segment 覆盖（空串表示无该段）。
@@ -89,6 +97,10 @@ def load_layout() -> Layout:
         name: str(spec.get("segment", default_segment))
         for name, spec in data.get("themes", {}).items()
     }
+    optional_dimensions = {
+        name: tuple(spec.get("optional_dimensions", ()))
+        for name, spec in data.get("themes", {}).items()
+    }
     naming = data.get("naming", {})
     return Layout(
         root_reserved=frozenset(data.get("root_reserved", ())),
@@ -99,6 +111,7 @@ def load_layout() -> Layout:
         content_root=str(data.get("content_root", "content")),
         regional_segment=default_segment,
         theme_segments=theme_segments,
+        optional_dimensions=optional_dimensions,
     )
 
 
@@ -111,6 +124,25 @@ def known_roots() -> set[str]:
     """现结构根条目 + 历史根条目（路径引用判定 / 批量改写共用）。"""
     layout = load_layout()
     return set(layout.root_reserved) | set(layout.themes) | LEGACY_ROOTS
+
+
+def resolve_segments(layout: Layout, theme: str, segments: tuple[str, ...]) -> dict[str, str]:
+    """将业务线维度段映射为 {维度名: 段}。
+
+    规则：段数 = 维度数 -> 逐位映射；段数 = 维度数 - 1 且 theme 声明 region 可选
+    -> 剔除 region 后逐位映射（region 缺省）。其他情况抛 ValueError。
+    """
+    dims = layout.dimensions(theme)
+    optional = layout.optional_dims(theme)
+    segs = tuple(segments)
+    if len(segs) == len(dims):
+        return dict(zip(dims, segs))
+    if len(segs) == len(dims) - 1 and "region" in dims and "region" in optional:
+        rest = tuple(d for d in dims if d != "region")
+        return dict(zip(rest, segs))
+    raise ValueError(
+        f"业务线维度段数 {len(segs)} 与主题 {theme} 声明维度 {dims} 不匹配"
+    )
 
 # 报告文件命名约定（与 monitoring-common-spec.md 第 1 节一致；月份限 01–12）
 MONTHLY_RE = re.compile(r"^(\d{4}-(?:0[1-9]|1[0-2]))_monthly\.(html|md)$")
@@ -348,39 +380,34 @@ class Business:
         return ROOT / self.rel
 
     @property
+    def dim_map(self) -> dict[str, str]:
+        """维度名 -> 段（region 缺省时不含 region 键）。"""
+        return resolve_segments(load_layout(), self.theme, self.segments)
+
+    @property
     def category(self) -> str:
-        """category 维度段（优先上层层级）；无 category 维度时取第一维度段。"""
-        dims = load_layout().dimensions(self.theme)
-        if "category" in dims:
-            idx = dims.index("category")
-            if idx < len(self.segments):
-                return self.segments[idx]
+        """category 维度段；无 category 维度时取第一维度段。"""
+        d = self.dim_map
+        if "category" in d:
+            return d["category"]
         return self.segments[0] if self.segments else ""
 
     @property
     def region(self) -> str:
-        """地区段：取维度序列中 region 对应的段；无 region 维度时取第一维度段。"""
-        dims = load_layout().dimensions(self.theme)
-        if "region" in dims:
-            idx = dims.index("region")
-            if idx < len(self.segments):
-                return self.segments[idx]
-        return self.segments[0] if self.segments else ""
+        """地区段：region 维度缺省时返回空串。"""
+        return self.dim_map.get("region", "")
 
     @property
     def property_type(self) -> str:
-        """细分领域/方向段：剔除 region 段后的末段。
+        """细分领域/方向段：剔除 region 后的末段（如 apartment / security）。
 
-        维度序列中 region 可能位于 category 之前或之后（按主题声明）；
-        因此先剔除 region 段再取末段，得到真正的细分领域（如 apartment / security）。
+        维度序列中 region 可能位于 category 之前或之后（按主题声明），
+        因此按声明顺序取非 region 维度的末段。
         """
         dims = load_layout().dimensions(self.theme)
-        segs = list(self.segments)
-        if "region" in dims:
-            idx = dims.index("region")
-            if idx < len(segs):
-                segs = segs[:idx] + segs[idx + 1:]
-        return segs[-1] if segs else ""
+        d = self.dim_map
+        non_region = [d[dim] for dim in dims if dim != "region" and dim in d]
+        return non_region[-1] if non_region else ""
 
 
 def _walk_to_depth(base: Path, depth: int):
@@ -395,11 +422,22 @@ def _walk_to_depth(base: Path, depth: int):
             yield from _walk_to_depth(child, depth - 1)
 
 
+def _walk_upto_depth(base: Path, max_depth: int):
+    """产出 base 下层级 1..max_depth 的全部子目录（base 自身深度为 1）。"""
+    if max_depth < 1 or not base.is_dir():
+        return
+    for child in sorted(base.iterdir()):
+        if child.is_dir() and not child.name.startswith("."):
+            yield child
+            yield from _walk_upto_depth(child, max_depth - 1)
+
+
 def iter_business_dirs() -> list[Business]:
     """按 layout.json 发现全部业务线（以 prompts/business-config.md 为锚点）。
 
     业务线默认位于 content/<theme>/<维度段...>/（维度先后按主题声明）；
-    主题可声明 segment 覆盖（空串表示无地区分组段）。
+    主题可声明 segment 覆盖（空串表示无地区分组段）。region 为可选维度时，
+    业务线可省略 region 段（段数 = 维度数 - 1），故按 1..维度数 深度锚点发现。
     segments 为剔除 content/<theme>/<segment> 前缀后的维度段。
     """
     layout = load_layout()
@@ -410,9 +448,7 @@ def iter_business_dirs() -> list[Business]:
         base = content_root / theme / seg if seg else content_root / theme
         if not base.is_dir():
             continue
-        for d in _walk_to_depth(base, len(layout.dimensions(theme)) + 1):
-            if d == base:
-                continue
+        for d in _walk_upto_depth(base, len(layout.dimensions(theme))):
             if (d / "prompts" / "business-config.md").exists():
                 rel = d.relative_to(ROOT).as_posix()
                 out.append(Business(rel=rel, theme=theme,

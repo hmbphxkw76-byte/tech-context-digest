@@ -151,7 +151,7 @@
 ### 5. trend-weekly（行业趋势周报型）——成熟度：高
 
 - **行业范式**：Top 要点 / 分板块事实 / 数据看板（上期/本期/变化）/ 风险 / 行动启示 / 来源。
-- **符合项**：八节骨架与范式完全一致；业务 override 机制支持板块扩展（content/tech/trends/global 为 10 节）；operations-guide 与 README 通用层/业务层职责分离清晰；命名「数据截止日」规则明确。
+- **符合项**：八节骨架与范式完全一致；业务 override 机制支持板块扩展（content/tech/weekly-roundup 为 10 节）；operations-guide 与 README 通用层/业务层职责分离清晰；命名「数据截止日」规则明确。
 - **待调整项**：未发现结构性缺口。
 - **建议**：无需调整（保持）。
 

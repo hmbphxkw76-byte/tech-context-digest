@@ -27,7 +27,7 @@
 
 - 门禁工具：`info_density_check.py`（ID-01–08、DC-05）、`fact_card_check.py`（FC-01–03）、`decision_hub_check.py`（DC-01–04）、`blind_spot_check.py`（BS-01–05）。
 - 规范事实源：`information-layering-spec.md`、`decision-delivery-spec.md`；业务配置只实例化，不复述规则正文。
-- 决策卡事实源：`data/processed/economy/global/decision-hub/decision_cards.json`。
+- 决策卡事实源：`data/processed/economy/insight/decision_cards.json`。
 - 事实卡片事实源：`engine/fact_cards/*.json`。
 - 盲区事实源：`engine/report-audits/blind-spot-ledger.md`。
 - 指标事实源：`engine/tools/metrics-dictionary.json`。

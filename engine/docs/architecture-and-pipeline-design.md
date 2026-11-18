@@ -53,27 +53,27 @@ data/      资产层：raw / processed / assets （processed 统一收口于 dat
 
 六主题（`layout.json` 注册）：`economy`、`tech`、`education`、`international`、`political`、`society`。
 
-### 3.2 layout.json v4.0（已落地）
+### 3.2 layout.json v4.1（已落地）
 
-业务线深度统一为「主题 + 2 维度」，维度顺序按主题声明：
+业务线深度为「主题 + 维度段」，维度顺序按主题声明；`region` 为可选维度（`optional_dimensions`），缺省时业务线直接以 category 段落位：
 
 ```json
 {
-  "version": "4.0",
+  "version": "4.1",
   "updated": "2026-11-17",
-  "comment": "仓库目录结构单一事实源（content、engine、data 三层）。六主题：economy / tech / education / international / political / society。维度顺序按主题声明（economy 为 region→category，其余为 category→region）。",
+  "comment": "仓库目录结构单一事实源（content、engine、data 三层）。六主题：economy / tech / education / international / political / society。维度顺序按主题声明（economy 为 region→category，其余为 category→region）。region 为可选维度。",
   "root_reserved": ["content","engine","data",".github",".gitignore","AGENTS.md","README.md","CHANGELOG.md","requirements.txt","index.html","reader.html","INDEX.md","automation-status.json","perf-status.json"],
   "content_root": "content",
   "regional_segment": "",
   "themes": {
-    "economy": { "name": "经济", "dimensions": ["region", "category"] },
-    "tech": { "name": "科技", "dimensions": ["category", "region"] },
+    "economy": { "name": "经济", "dimensions": ["region", "category"], "optional_dimensions": ["region"] },
+    "tech": { "name": "科技", "dimensions": ["category", "region"], "optional_dimensions": ["region"] },
     "education": { "name": "教育", "dimensions": ["category", "region"] },
     "international": { "name": "国际", "dimensions": ["category", "region"] },
     "political": { "name": "政治", "dimensions": ["category", "region"] },
     "society": { "name": "社会", "dimensions": ["category", "region"] }
   },
-  "regions": ["dubai", "global"],
+  "regions": ["dubai"],
   "naming": { "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$", "max_depth": 6 }
 }
 ```
@@ -87,10 +87,11 @@ data/      资产层：raw / processed / assets （processed 统一收口于 dat
 ```
 content/
   economy/
-    <region>/<category>/     # region=global：decision-hub、trends
+    <category>/              # region 缺省：insight（决策仪表盘）、trends（全球经济趋势周报）
     <region>/<category>/     # region=dubai：apartment（原 real-estate 板块）
   tech/
-    <category>/<region>/     # 如 security 与 dubai、trends 与 global 的组合
+    <category>/              # region 缺省：weekly-roundup（AI 行业趋势周报）
+    <category>/<region>/     # 如 security 与 dubai 的组合
   education/  international/  political/  society/     # 空占位（.gitkeep）
 ```
 

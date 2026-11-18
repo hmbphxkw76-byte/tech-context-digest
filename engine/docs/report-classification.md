@@ -45,7 +45,7 @@
 | A1 市场指标监测型 | `market-monitoring` | 已注册 | `content/economy/dubai/apartment` |
 | A2 竞争情报监测型 | `competitive-intelligence` | 已注册 | `content/tech/competitive-intelligence/dubai` |
 | A3 舆情传播监测型 | `sentiment-monitoring` | 已注册 | 暂无 |
-| A4 行业趋势周报型（扩展） | `trend-weekly` | 已注册 | `content/economy/global/trends`；`content/tech/trends/global` |
+| A4 行业趋势周报型（扩展） | `trend-weekly` | 已注册 | `content/economy/trends`；`content/tech/weekly-roundup` |
 | B1 职业就业调研型 | `employment-research` | 已注册 | `content/tech/security/dubai` |
 | B2 消费者·用户调研型 | `consumer-research` | 已注册 | 暂无 |
 | C1 行业深度研究型 | `industry-research` | 已注册 | `content/tech/industry-research/dubai` |
@@ -55,7 +55,7 @@
 | D3 可行性与市场进入型 | `feasibility-study` | 已注册 | 暂无 |
 | E1 快评·事件点评型 | `flash-commentary` | 已注册 | 暂无 |
 | F1 白皮书·专题深度型 | `whitepaper` | 已注册 | 暂无 |
-| （扩展）决策仪表盘型 | `decision-dashboard` | 已注册 | `content/economy/global/decision-hub` |
+| （扩展）决策仪表盘型 | `decision-dashboard` | 已注册 | `content/economy/insight` |
 
 > 新增类型须同步本表、注册表第二节与 `compliance-rules.json`。
 

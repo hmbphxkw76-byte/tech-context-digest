@@ -14,8 +14,8 @@
 {{CURRENT_DATE}}         = 本次执行日期
 {{CADENCE}}              = 季（决策仪表盘按季更新；事件触发可插刷）
 {{BASELINE_DATE}}        = 首期基线日期（仅基线期必填）
-{{DECISION_CARDS_PATH}}  = 决策卡台账路径（默认 data/processed/economy/global/decision-hub/decision_cards.json）
-{{SLICES_PATH}}          = 场景切片路径（默认 data/processed/economy/global/decision-hub/scenario_slices.md）
+{{DECISION_CARDS_PATH}}  = 决策卡台账路径（默认 data/processed/economy/insight/decision_cards.json）
+{{SLICES_PATH}}          = 场景切片路径（默认 data/processed/economy/insight/scenario_slices.md）
 {{PREVIOUS_REPORT_PATH}} = 最近一期决策仪表盘路径（基线期留空）
 {{OUTPUT_PATH}}          = 本期报告落盘路径
 {{READING_TIME}}         = 本期读数时点（YYYY-MM-DD）
@@ -52,7 +52,7 @@
 
 ---
 
-## 四、决策卡台账格式（data/processed/economy/global/decision-hub/decision_cards.json）
+## 四、决策卡台账格式（data/processed/economy/insight/decision_cards.json）
 
 ```json
 {

@@ -3,7 +3,7 @@
 > **状态**：已落地（实施结果见 [量化实施完成报告](quant-implementation-completion-report-2026-11-14.md)）
 > **交付定位**：把 `tech-context-digest` 的「指标监测型框架」升级为「周期定位 + 传导建模 + 资产定价」的分析型框架。
 > **上游依据**：[框架诊断报告](framework-diagnostic-2026-11-14.md)（六项发现 F1–F6、实测健康度基线）。
-> **基准日**：2026-11-14（T0）｜ **适用范围**：经济分析模块（`content/economy/dubai/apartment` 旗舰、`content/economy/global/trends`）+ 行业研究体系（全谱系报告类型）。
+> **基准日**：2026-11-14（T0）｜ **适用范围**：经济分析模块（`content/economy/dubai/apartment` 旗舰、`content/economy/trends`）+ 行业研究体系（全谱系报告类型）。
 > **证据边界**：仅基于仓库内已提交文件与既有实跑结果；不引入未核验外部数据。**标注约定**：【事实】仓库可回溯；【推断】机制分析；【待补】需新增数据或核验。
 > **硬性约束**：不得违反通用基座「结论边界」；来源语言规则（英文一手）；`AGENTS.md` 页面构建规范与category-first 维度规则。
 > **最后更新**：2026-11-16
