@@ -1,4 +1,4 @@
-# 多会话 Git 协作协议（MULTI-SESSION-GIT-PROTOCOL v1.5）
+# 多会话 Git 协作协议（MULTI-SESSION-GIT-PROTOCOL v1.6）
 
 > **状态**：现行规范
 > **定位**：当多个 Agent 会话与多个 GitHub Actions 共用同一仓库、同一 `main` 时，约定统一的提交与合并方式，保证**各任务独立提交互不覆盖**。
@@ -23,6 +23,12 @@
 | 分支隔离 | 任务在 `task/<slug>-<session8>` 分支提交（会话标识内嵌，见 BRANCH-NAMING-SPEC v1.0）；禁止直推 `main` | 任务之间提交 / 文件互不干扰，且分支可回溯到会话 |
 | 串行合并 | 经 PR 合并到 `main`（GitHub **merge queue** / auto-merge） | 基于最新 main、一次一个，杜绝覆盖 |
 | 共享检出锁 | `.git/catpaw-sync.lock` 互斥 + 推送前 `fetch --rebase` | 多会话共用工作目录时防并发覆盖 |
+
+> **服务端保护缺口与补偿（v1.6）**：本仓库为 GitHub **private 免费方案**，服务端分支保护不可用
+> （`gh api .../branches/main/protection` → 403）。因此直推 `main` 的**拦截**依赖客户端
+> （pre-push 钩子 + `repo_sync.py` 网关）；**检测**由 CI 补偿——`ci.yml` 的 `history-audit` 作业在
+> push 到 main 时运行 `engine/tools/git_history_audit.py`，扫描 main 首亲历史，将「非合并、无 `(#NN)`、
+> 非 CI 留痕、不在历史白名单」的首亲提交判为疑似直推并失败告警。该机制为事后检测，不替代拦截。
 
 ---
 
@@ -132,3 +138,4 @@ GitHub 对由 `github-actions[bot]`（仓库 `GITHUB_TOKEN`）创建的 PR，其
 | v1.3 | 2026-11-15 | `run --gate`：提交前强制复用优化流程统一门禁 `optimization_gate.py`（[E] 拒绝提交）；新增 `--checks` 自定义校验 |
 | v1.4 | 2026-11-16 | 新增远端约束：`guard` 扫描 `git remote -v`，任一远端含 `gitlab` 即阻断推送（本仓库仅允许 GitHub）；单测强制校验 |
 | v1.5 | 2026-11-17 | 分支命名纳入协议：任务分支统一 `task/<slug>-<session8>`（BRANCH-NAMING-SPEC v1.0）；新增 pre-commit 钩子与 `hook-install` / `branch` / `branch-rename` / `branch-audit` 子命令；网关复用命名校验 |
+| v1.6 | 2026-11-18 | 更正「main 启用分支保护」表述：private 免费方案服务端保护不可用；新增 CI 首亲历史直推审计（`git_history_audit.py` + `ci.yml::history-audit`）作为补偿检测 |

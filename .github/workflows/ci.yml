@@ -127,12 +127,39 @@ jobs:
         if: always()
         uses: ./.github/actions/workspace-cleanup
 
+  # main 首亲历史直推审计（补偿服务端分支保护缺失）：
+  # 本仓库为 GitHub private 免费方案，服务端分支保护不可用（API 403），
+  # 故在 CI 侧检测「非 PR 合并」的直接提交（见 multi-session-git-protocol.md §二）。
+  history-audit:
+    name: main 首亲历史审计
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09  # v5
+        with:
+          fetch-depth: 0
+
+      - name: 设置 Python
+        uses: actions/setup-python@ece7cb06caefa5fff74198d8649806c4678c61a1  # v6
+        with:
+          python-version: "3.12"
+
+      - name: 工作区预清理（缓存/临时/构建产物）
+        uses: ./.github/actions/workspace-cleanup
+
+      - name: 审计 main 首亲历史（仅 push 到 main 时）
+        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+        run: python engine/tools/git_history_audit.py --branch main
+
+      - name: 工作区收尾清理（始终执行）
+        if: always()
+        uses: ./.github/actions/workspace-cleanup
+
   # 失败时仅发 webhook（PR 检查失败由 GitHub 原生通知，不额外建 Issue 以免刷屏）。
   webhook-alert:
     name: Webhook 告警
     # 覆盖 CI 全部作业：任一失败均告警（对齐 page-build-governance §2.2
     # 「webhook-alert 由上述失败触发」，不再仅覆盖统一门禁）。
-    needs: [syntax, test, validate]
+    needs: [syntax, test, validate, history-audit]
     if: failure()
     uses: ./.github/workflows/webhook-alert.yml
     with:

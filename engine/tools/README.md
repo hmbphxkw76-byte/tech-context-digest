@@ -65,6 +65,7 @@ python -m unittest discover -s engine/tests -v   # 单元测试（全量）
 | automation_status.py | 编排 | content-update / scheduled-maintenance「状态记录与活跃度」 |
 | workspace_cleanup.py | 维护 | ci / html-sync / content-update / scheduled-maintenance / audit 各阶段「预清理 + 收尾清理」；`submit-pr` 提交前清理；`pre-push` 钩子 |
 | branch_naming.py | 规范+登记 | 分支命名规范（BRANCH-NAMING-SPEC v1.0）：`task/<slug>-<session8>` 生成与校验、会话标识解析链、`branch_registry.json` 登记册；由 `repo_sync.py` 与 `.githooks/` 复用 |
+| git_history_audit.py | 审计 | main 首亲历史直推检测（GIT-HISTORY-AUDIT v1.0）：识别「非合并、无 `(#NN)`、非 CI 留痕、不在白名单」的直接提交；由 `ci.yml::history-audit` 调用 |
 | repo_sync.py | 网关 | 多会话统一提交网关：共享检出锁 / sync / push / pr / `run --gate` / 分支建改与审计 / 钩子安装；命名与直推守卫三重拦截 |
 
 ## 校验类
