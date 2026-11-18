@@ -66,7 +66,8 @@ class TestGateWiring(unittest.TestCase):
         self.assertIn("ruff", names)
         self.assertIn("mypy", names)
         self.assertIn("monitoring_render", names)
-        self.assertEqual(len(names), 27)
+        self.assertIn("prompt_consistency", names)
+        self.assertEqual(len(names), 28)
         warn_ok = {n: w for n, _c, w in mod.CHECKS}
         self.assertTrue(warn_ok["ruff"])
         self.assertTrue(warn_ok["mypy"])

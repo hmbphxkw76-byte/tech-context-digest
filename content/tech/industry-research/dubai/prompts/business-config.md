@@ -95,10 +95,10 @@
 ## 信息分层与决策交付（强制项）
 
 - **分层交付**：决策摘要（≤1 屏，仅结论）/ 证据层 / 原始层；共享 boilerplate 上移通用基座第十节，不复制（规范：`engine/templates/information-layering-spec.md`）。
-- **信息等级**：已核验 / 部分核验 / 推断 / 假设；决策摘要仅引用已核验 + 部分核验；新增信息模块「本期新增 X / 修正 Y / 无变化 Z / 假设核验进度 k/n」。
+- **信息等级**：四级标注与摘要引用约束见 `engine/templates/information-layering-spec.md` 第二 / 四节；新增信息统计模块见第四节。
 - **事实卡片**：本业务线为共享事实域（IND），正文以 `[FC-IND-…]` 引用 `engine/fact_cards/industry_research_fact_cards.json`。
 - **决策卡与行动协议**：核心判断输出决策卡；行动项五要素 + 三档优先级（规范：`engine/templates/decision-delivery-spec.md`）。
-- **阈值校准**：首次中期回测 2027-06；校准完成前信号灯标注「预校准（ex-ante）」。
+- **阈值校准**：首次中期回测 2027-06；校准前标注口径见 `engine/templates/decision-delivery-spec.md` 第六节。
 - **场景切片**：主场景 **投资决策**；次场景 **政策制定**。
 - **版本治理**：核验 / 收敛型运行不升级版本号，标注「本期读数时点」。
 - **盲区**：P0 四类（就业 / 收入 / 空置 / 竣工）优先消号。

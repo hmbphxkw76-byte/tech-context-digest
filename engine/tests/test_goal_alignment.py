@@ -38,6 +38,7 @@ build_hub = _load("build_hub", "engine/tools/build_hub.py")
 monitoring_render = _load("monitoring_render", "engine/tools/monitoring_render_check.py")
 consistency = _load("consistency_check", "engine/tools/consistency_check.py")
 naming = _load("naming_check", "engine/tools/naming_check.py")
+prompt_consistency = _load("prompt_consistency", "engine/tools/prompt_consistency_check.py")
 
 
 class TestGatePeriod(unittest.TestCase):
@@ -294,6 +295,33 @@ class TestNaming(unittest.TestCase):
         self.assertIsNone(naming._check_file("engine/tools/validate_layout.py", "validate_layout.py"))
         self.assertIsNone(naming._check_file("engine/docs/page-build-spec.md", "page-build-spec.md"))
         self.assertIsNone(naming._check_file("content/x/reports/2026-11_monthly.html", "2026-11_monthly.html"))
+
+
+class TestPromptConsistency(unittest.TestCase):
+    """批次 C（P1-10）：类型注册表一致 / business-config 去复述 / 周期模板齐备。"""
+
+    def test_repo_is_consistent(self):
+        self.assertEqual(
+            prompt_consistency.pc01_registry()
+            + prompt_consistency.pc02_restatement()
+            + prompt_consistency.pc03_prompt_files(), [])
+
+    def test_pc01_detects_unregistered(self):
+        """合成用例：登记缺失 / 未登记双向可检出。"""
+        import tempfile
+        from pathlib import Path as P
+        with tempfile.TemporaryDirectory() as d:
+            reg = P(d) / "template-registry.md"
+            reg.write_text("## 二、已注册类型清单\n"
+                           "| foo-type | x | y | z | content/a；content/b |\n", encoding="utf-8")
+            orig = prompt_consistency.REGISTRY
+            prompt_consistency.REGISTRY = reg
+            try:
+                warns = prompt_consistency.pc01_registry()
+            finally:
+                prompt_consistency.REGISTRY = orig
+            self.assertTrue(any("不存在" in w for w in warns))
+            self.assertTrue(any("未登记" in w for w in warns))
 
 
 if __name__ == "__main__":

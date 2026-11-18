@@ -273,12 +273,14 @@
 | P1-7 | R4 关键数字逐点指针 | `source_check.py:556-559` | 含数字块级断言附近窗口内须有来源标记；抽样误报率 < 5% | `source_check` R4 |
 | P1-8 | 死链真实修复 | `content/economy/dubai/apartment/reports/2026_annual.html` 等 5 处死链 | `--probe` 下死链 `[E]` 归零 | `source_check` R6 |
 | P1-9 | 四主题接入就绪化 | `content/{education,international,political,society}/prompts/business-config.md` 等 | 四主题 `iter_business_dirs()` 可发现；IGI-01 ≥ 0.5；词库骨架非空 | `vocab_drift_check`、`IGI-01` |
-| P1-10 | 提示词单一事实源收敛 + 一致性门禁 | `engine/prompts/trend-weekly/prompt-weekly-monitor.md`、`engine/prompts/` 下各周期提示词、**新增** `prompt_consistency_check.py`（置于 `engine/tools/`） | 泛用版与业务线实例一致或前者改为指针；business-config 去复述；注册表与实际业务线一致（C-11） | `optimization_gate`（新增第 25 项） |
+| P1-10 | 提示词单一事实源收敛 + 一致性门禁 | `engine/prompts/trend-weekly/prompt-weekly-monitor.md`、`engine/prompts/` 下各周期提示词、**新增** `prompt_consistency_check.py`（置于 `engine/tools/`） | 泛用版与业务线实例一致或前者改为指针；business-config 去复述；注册表与实际业务线一致（C-11） | `optimization_gate`（**已接入 `prompt_consistency`**） |
 | P1-11 | 词库规范形统一 + 缺口补录 | `engine/vocabulary/data/*/terms.md`、`engine/vocabulary/prompts/*` | 提示词声称的规范形与词库一致；top 10 高频概念入库 | `vocab_drift_check` |
 | P1-12 | N0–N8 接线 | `.github/workflows/ci.yml:239-240`、`engine/tools/pipeline_manifest.json:168`、`pipeline_runner.py` | CI 调用 `pipeline_runner run` 并留痕；G8 `checks` 非空 | `pipeline_audit` |
 | P1-13 | 模型契约门禁 | `engine/tools/` 下 `transmission/` 弹性模型、`optimization_gate.py` | DC-07 从单测提升为 gate 检查项 | `optimization_gate` |
 | P1-14 | 数据层补薄 + raw 落仓 | `data/processed/tech/{competitive-intelligence,industry-research}/dubai/`、`data/raw/` | 两条 tech 业务线有台账 + 量化数据；官方来源快照落 raw | `IGI-05` |
 | P1-15 | hub 卡片信息区分度 | `build_hub.py` | 同周期多报告可区分（标题/类型/地区） | `hub` |
+
+> **批次 C 进度（2026-11-18）**：P1-10 已落地——新增 `prompt_consistency_check.py`（PC-01 注册表一致 / PC-02 去复述 / PC-03 周期模板齐备）并接入统一门禁（第 28 项）；`template-registry.md` 补登 `competitive-intelligence/dubai`、`industry-research/dubai`（修 C-11）；7 份 business-config 复述段改为指针。P1-1/3/4/5/6/7/8/9/11/12/13/14/15 未落地（见 §5.2）。
 
 ### 5.3 P2 —— 治理与卫生
 
