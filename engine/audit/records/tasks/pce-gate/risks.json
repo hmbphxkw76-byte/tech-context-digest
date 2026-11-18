@@ -1,0 +1,8 @@
+[
+  {
+    "description": "与仓库既有规范复述漂移",
+    "id": "R-1",
+    "mitigation": "受管段用 BEGIN/END 标记且声明 SSOT",
+    "owner": ""
+  }
+]

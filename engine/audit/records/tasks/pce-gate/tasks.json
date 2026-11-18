@@ -1,0 +1,10 @@
+[
+  {
+    "acceptance": "",
+    "depends_on": [],
+    "id": "T-1",
+    "phase": "",
+    "status": "pending",
+    "title": "AGENTS.md 增加 PCE 受管段 + 生成 CLAUDE.md/.cursorrules/copilot-instructions 指针"
+  }
+]
