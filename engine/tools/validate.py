@@ -95,7 +95,8 @@ def check_business_dirs() -> None:
         reports = b.path / "reports"
         if reports.is_dir():
             for f in sorted(reports.iterdir()):
-                if f.is_file() and detect_report(f.name) is None:
+                # 占位文件（如 .gitkeep）用于保留空目录，不视为报告，不参与命名判定
+                if f.is_file() and not f.name.startswith(".") and detect_report(f.name) is None:
                     warn(f"{b.rel}/reports/{f.name}: 文件名不符合报告命名约定")
 
 

@@ -44,3 +44,35 @@
 [2026-11-18T08:50:16] [verify] tech -> business-config.md：通过（153 条覆盖完整，区间外内容一致，词汇库 v1.3）
 [2026-11-18T08:50:16] [verify] economy -> business-config.md：通过（48 条覆盖完整，区间外内容一致，词汇库 v1.4）
 [2026-11-18T08:50:16] [verify] economy -> business-config.md：通过（49 条覆盖完整，区间外内容一致，词汇库 v1.4）
+[2026-11-18T18:14:48] [sync] tech -> ../../content/tech/weekly-roundup/prompts/business-config.md：无变更（词汇库与提示词区间一致）
+[2026-11-18T18:14:48] [sync] tech -> ../../content/tech/security/dubai/prompts/business-config.md：无变更（词汇库与提示词区间一致）
+[2026-11-18T18:14:48] [sync] economy -> ../../content/economy/trends/prompts/business-config.md：无变更（词汇库与提示词区间一致）
+[2026-11-18T18:14:48] [sync] economy -> ../../content/economy/dubai/apartment/prompts/business-config.md：无变更（词汇库与提示词区间一致）
+[2026-11-18T18:15:21] [sync] tech -> ../../content/tech/weekly-roundup/prompts/business-config.md：无变更（词汇库与提示词区间一致）
+[2026-11-18T18:15:21] [sync] tech -> ../../content/tech/security/dubai/prompts/business-config.md：无变更（词汇库与提示词区间一致）
+[2026-11-18T18:15:21] [sync] economy -> ../../content/economy/trends/prompts/business-config.md：无变更（词汇库与提示词区间一致）
+[2026-11-18T18:15:21] [sync] economy -> ../../content/economy/dubai/apartment/prompts/business-config.md：无变更（词汇库与提示词区间一致）
+[2026-11-18T18:15:21] [sync] education -> ../../content/education/education-system/prompts/business-config.md：无变更（词汇库与提示词区间一致）
+[2026-11-18T18:15:21] [sync] international -> ../../content/international/international-relations/prompts/business-config.md：无变更（词汇库与提示词区间一致）
+[2026-11-18T18:15:21] [sync] political -> ../../content/political/political-system/prompts/business-config.md：无变更（词汇库与提示词区间一致）
+[2026-11-18T18:15:21] [sync] society -> ../../content/society/social-structure/prompts/business-config.md：无变更（词汇库与提示词区间一致）
+[2026-11-18T18:15:21] [verify] tech -> business-config.md：通过（119 条覆盖完整，区间外内容一致，词汇库 v1.3）
+[2026-11-18T18:15:21] [verify] tech -> business-config.md：通过（153 条覆盖完整，区间外内容一致，词汇库 v1.3）
+[2026-11-18T18:15:21] [verify] economy -> business-config.md：通过（48 条覆盖完整，区间外内容一致，词汇库 v1.4）
+[2026-11-18T18:15:21] [verify] economy -> business-config.md：通过（49 条覆盖完整，区间外内容一致，词汇库 v1.4）
+[2026-11-18T18:15:21] [verify] education -> ../../content/education/education-system/prompts/business-config.md：不通过（状态文件无同步记录）
+[2026-11-18T18:15:21] [verify] international -> ../../content/international/international-relations/prompts/business-config.md：不通过（状态文件无同步记录）
+[2026-11-18T18:15:21] [verify] political -> ../../content/political/political-system/prompts/business-config.md：不通过（状态文件无同步记录）
+[2026-11-18T18:15:21] [verify] society -> ../../content/society/social-structure/prompts/business-config.md：不通过（状态文件无同步记录）
+[2026-11-18T18:26:46] [sync] education -> ../../content/education/education-system/prompts/business-config.md：新区块插入成功：新增 0 / 修改 0 / 删除 0，共 0 条（v1.0）；备份 sync-backups/education.business-config.md.20261118_182646.bak
+[2026-11-18T18:26:46] [sync] international -> ../../content/international/international-relations/prompts/business-config.md：新区块插入成功：新增 0 / 修改 0 / 删除 0，共 0 条（v1.0）；备份 sync-backups/international.business-config.md.20261118_182646.bak
+[2026-11-18T18:26:46] [sync] political -> ../../content/political/political-system/prompts/business-config.md：新区块插入成功：新增 0 / 修改 0 / 删除 0，共 0 条（v1.0）；备份 sync-backups/political.business-config.md.20261118_182646.bak
+[2026-11-18T18:26:46] [sync] society -> ../../content/society/social-structure/prompts/business-config.md：新区块插入成功：新增 0 / 修改 0 / 删除 0，共 0 条（v1.0）；备份 sync-backups/society.business-config.md.20261118_182646.bak
+[2026-11-18T18:26:46] [verify] tech -> business-config.md：通过（119 条覆盖完整，区间外内容一致，词汇库 v1.3）
+[2026-11-18T18:26:46] [verify] tech -> business-config.md：通过（153 条覆盖完整，区间外内容一致，词汇库 v1.3）
+[2026-11-18T18:26:46] [verify] economy -> business-config.md：通过（48 条覆盖完整，区间外内容一致，词汇库 v1.4）
+[2026-11-18T18:26:46] [verify] economy -> business-config.md：通过（49 条覆盖完整，区间外内容一致，词汇库 v1.4）
+[2026-11-18T18:26:46] [verify] education -> business-config.md：通过（0 条覆盖完整，区间外内容一致，词汇库 v1.0）
+[2026-11-18T18:26:46] [verify] international -> business-config.md：通过（0 条覆盖完整，区间外内容一致，词汇库 v1.0）
+[2026-11-18T18:26:46] [verify] political -> business-config.md：通过（0 条覆盖完整，区间外内容一致，词汇库 v1.0）
+[2026-11-18T18:26:46] [verify] society -> business-config.md：通过（0 条覆盖完整，区间外内容一致，词汇库 v1.0）

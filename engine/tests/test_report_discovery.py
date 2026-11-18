@@ -35,8 +35,15 @@ class TestDiscoveryCategories(unittest.TestCase):
     def test_every_business_line_represented(self):
         for b in iter_business_dirs():
             refs = iter_business_reports(b)
-            if (b.path / "reports").is_dir():
-                self.assertTrue(any(r.business_line == b.rel for r in refs), b.rel)
+            reports_dir = b.path / "reports"
+            # 仅对实际含有报告文件的业务线要求可被发现；空目录（仅 .gitkeep 占位）
+            # 对应「已接入、未产出」状态（P1-9 四主题就绪化），不参与本项校验。
+            has_report_files = (
+                any(f.is_file() and not f.name.startswith(".") for f in reports_dir.iterdir())
+                if reports_dir.is_dir() else False
+            )
+            if has_report_files:
+                self.assertTrue(refs, b.rel)
 
     def test_period_parsed_for_named_reports(self):
         for r in iter_reports():

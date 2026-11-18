@@ -1,5 +1,5 @@
 {
-  "version": "v1.7",
+  "version": "v1.8",
   "updated": "2026-11-18",
   "comment": "词汇库 → 业务提示词自动同步配置。bindings[].topic 必须已在 topics.json 注册；source 缺省取 topics.json 的 storage；target.path 相对 engine/vocabulary/ 根；insert_before 为区块缺失时的插入锚点（须为目标文件内唯一文本，区块替换时不参与匹配）；format=digest（按分类紧凑速览，缺省）| table（三列表格）；categories_include / tags_include 为可选过滤（空 = 全量）；section_title 为区块内标题（含 ## 前缀）。六主题归并后，tech / economy 两个词库按 categories_include 拆分到不同业务线，保持各业务线原有词汇范围不变。",
   "auto_trigger": true,
@@ -78,6 +78,58 @@
             "监管与政策",
             "估值与风险"
           ],
+          "tags_include": []
+        }
+      ]
+    },
+    {
+      "topic": "education",
+      "targets": [
+        {
+          "path": "../../content/education/education-system/prompts/business-config.md",
+          "format": "digest",
+          "section_title": "## 词汇速览（词汇库自动同步）",
+          "insert_before": "## 十四、版本记录",
+          "categories_include": [],
+          "tags_include": []
+        }
+      ]
+    },
+    {
+      "topic": "international",
+      "targets": [
+        {
+          "path": "../../content/international/international-relations/prompts/business-config.md",
+          "format": "digest",
+          "section_title": "## 词汇速览（词汇库自动同步）",
+          "insert_before": "## 十四、版本记录",
+          "categories_include": [],
+          "tags_include": []
+        }
+      ]
+    },
+    {
+      "topic": "political",
+      "targets": [
+        {
+          "path": "../../content/political/political-system/prompts/business-config.md",
+          "format": "digest",
+          "section_title": "## 词汇速览（词汇库自动同步）",
+          "insert_before": "## 十四、版本记录",
+          "categories_include": [],
+          "tags_include": []
+        }
+      ]
+    },
+    {
+      "topic": "society",
+      "targets": [
+        {
+          "path": "../../content/society/social-structure/prompts/business-config.md",
+          "format": "digest",
+          "section_title": "## 词汇速览（词汇库自动同步）",
+          "insert_before": "## 十四、版本记录",
+          "categories_include": [],
           "tags_include": []
         }
       ]

@@ -408,6 +408,42 @@
         "ECO-096": "b749b0790c542ffbdce69df016f53df958ab5593a91faab0e1d84ebe2191900c",
         "ECO-097": "0b5fd87e215260245cc875ad1b5d6aeda46db54682b5645a4f28f5d612647c8a"
       }
+    },
+    "education=>../../content/education/education-system/prompts/business-config.md": {
+      "topic": "education",
+      "target": "../../content/education/education-system/prompts/business-config.md",
+      "vocab_version": "v1.0",
+      "term_count": 0,
+      "synced_at": "2026-11-18T18:26:46",
+      "source_hash": "d481caeaf434502f7466f58746ce68c925b47c06edef9230020d07b61118140c",
+      "term_hashes": {}
+    },
+    "international=>../../content/international/international-relations/prompts/business-config.md": {
+      "topic": "international",
+      "target": "../../content/international/international-relations/prompts/business-config.md",
+      "vocab_version": "v1.0",
+      "term_count": 0,
+      "synced_at": "2026-11-18T18:26:46",
+      "source_hash": "8614fad48cdf7e489753ed760cfe269d3137a50f9fe9fe9c67dca9742b0d9db1",
+      "term_hashes": {}
+    },
+    "political=>../../content/political/political-system/prompts/business-config.md": {
+      "topic": "political",
+      "target": "../../content/political/political-system/prompts/business-config.md",
+      "vocab_version": "v1.0",
+      "term_count": 0,
+      "synced_at": "2026-11-18T18:26:46",
+      "source_hash": "a05dcf70d9e303a76f28d297a41359876a3c8308ccadce292a4a7f3c6044bbb1",
+      "term_hashes": {}
+    },
+    "society=>../../content/society/social-structure/prompts/business-config.md": {
+      "topic": "society",
+      "target": "../../content/society/social-structure/prompts/business-config.md",
+      "vocab_version": "v1.0",
+      "term_count": 0,
+      "synced_at": "2026-11-18T18:26:46",
+      "source_hash": "011be2a0e071d5d161abc915a4ba935975751c7ddfa934a9fb2e11996823a0e0",
+      "term_hashes": {}
     }
   }
 }

@@ -777,7 +777,7 @@ class TestLayout(unittest.TestCase):
         for theme in ("economy", "tech", "education", "international", "political", "society"):
             self.assertEqual(_common.business_depth(theme), 3)
 
-    def test_discovers_seven_business_lines(self):
+    def test_discovers_eleven_business_lines(self):
         rels = {b.rel for b in _common.iter_business_dirs()}
         self.assertEqual(
             rels,
@@ -789,8 +789,26 @@ class TestLayout(unittest.TestCase):
                 "content/tech/weekly-roundup",
                 "content/tech/industry-research/dubai",
                 "content/tech/competitive-intelligence/dubai",
+                "content/education/education-system",
+                "content/international/international-relations",
+                "content/political/political-system",
+                "content/society/social-structure",
             },
         )
+
+    def test_four_new_themes_ready(self):
+        """P1-9 四主题接入就绪化：region 可选，业务线以 category 段落位且可被发现。"""
+        by_rel = {b.rel: b for b in _common.iter_business_dirs()}
+        for rel, category in (
+            ("content/education/education-system", "education-system"),
+            ("content/international/international-relations", "international-relations"),
+            ("content/political/political-system", "political-system"),
+            ("content/society/social-structure", "social-structure"),
+        ):
+            self.assertIn(rel, by_rel)
+            self.assertEqual(by_rel[rel].category, category, rel)
+            self.assertEqual(by_rel[rel].region, "", rel)
+            self.assertIn("region", self.layout.optional_dims(by_rel[rel].theme), rel)
 
     def test_region_and_property_type(self):
         by_rel = {b.rel: b for b in _common.iter_business_dirs()}

@@ -77,7 +77,7 @@
 - **engine 域内深度**：`engine/<域>/<子域>/<文件>`，建议 ≤ 4 层（如 `engine/tools/semantic_checks/base.py`）。
 - **data 深度**：`data/processed/<theme>/<维度段...>/<文件>` 与 content 维度段对齐（≤ 6）；`data/raw/<source>/<文件>` ≤ 3；`data/assets/<文件>` ≤ 2。
 - **维度顺序（硬性）**：维度先后由 `layout.json` 各主题自行声明——`economy` 为 `["region", "category"]`（地区优先），`tech` / `education` / `international` / `political` / `society` 为 `["category", "region"]`（细分优先）；不得在未改 `layout.json` 的情况下倒置。地区段必须命中 `regions` 白名单（当前 `dubai`）。
-- **region 可选（硬性）**：主题可在 `layout.json` 以 `optional_dimensions` 声明某维度可缺省；当前 `economy` / `tech` 声明 `["region"]`。缺省 region 时业务线直接以 category 段落位（如 `content/economy/trends`、`content/tech/weekly-roundup`），剩余段按声明顺序剔除 region 后逐位映射。
+- **region 可选（硬性）**：主题可在 `layout.json` 以 `optional_dimensions` 声明某维度可缺省；当前**六个主题均声明** `["region"]`。缺省 region 时业务线直接以 category 段落位（如 `content/economy/trends`、`content/tech/weekly-roundup`、`content/education/education-system`），剩余段按声明顺序剔除 region 后逐位映射。
 - **禁止过深**：不得在业务线内继续发明 `prompts/{layer1}/{layer2}/` 之类的中间层；需要分类时用文件前缀或台账字段表达。
 
 ### 4.4 目录树示例（目标结构）
