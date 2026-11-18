@@ -36,7 +36,7 @@
 - [completed] T-2 新增单测 engine/tests/test_git_history_audit.py（含误报口径用例）
 - [completed] T-3 CI 接入 ci.yml（push main 触发 history-audit）并纳入 webhook-alert needs
 - [completed] T-4 文档更正 AGENTS.md 与 multi-session-git-protocol.md（服务端保护不可用 + 补偿控制 + 审计口径）
-- [in_progress] T-5 核验（unittest/optimization_gate/check_links）并提交
+- [completed] T-5 核验（unittest/optimization_gate/check_links）并提交
 
 ## 风险登记（2 项，详见 risks.json）
 

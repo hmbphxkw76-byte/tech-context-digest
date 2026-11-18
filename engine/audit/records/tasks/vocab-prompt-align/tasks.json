@@ -20,7 +20,7 @@
     "depends_on": [],
     "id": "T-3",
     "phase": "",
-    "status": "in_progress",
+    "status": "completed",
     "title": "核验（vocab check/topic-check/optimization_gate/unittest）并提交"
   }
 ]

@@ -37,6 +37,9 @@ Desktop.ini
 # 工具生成
 .screenshots/
 
+# 词库同步生成备份（时间戳 .bak，见 structure-and-naming-spec §336）
+engine/vocabulary/data/sync-backups/
+
 # 自动化临时目录
 .automation-tmp/
 

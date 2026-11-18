@@ -36,7 +36,7 @@
     "depends_on": [],
     "id": "T-5",
     "phase": "",
-    "status": "in_progress",
+    "status": "completed",
     "title": "核验（unittest/optimization_gate/check_links）并提交"
   }
 ]

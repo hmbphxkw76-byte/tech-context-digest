@@ -1,0 +1,8 @@
+[
+  {
+    "description": "状态字段口径与既有 pending 惯例不一致",
+    "id": "R-1",
+    "mitigation": "仅改本人创建的两份，保留其余 pending 不动",
+    "owner": ""
+  }
+]
