@@ -3,7 +3,7 @@
 
 锁定内容与清单、流程图一致：
 - `pipeline_manifest.json`：N0–N8 九节点、G0–G8 九门禁、两条闭环（L1 N8→N1 异步、L2 G6→N4 同步）；
-- 门禁 checks 必须是 `optimization_gate.CHECKS` 的子集（'*' = 全量 28 项）；
+- 门禁 checks 必须是 `optimization_gate.CHECKS` 的子集（'*' = 全量 29 项）；
 - 编排路由：通过则下一节点，E 阻断则按 `on_fail` 精准退回（G6 → N4）；
 - 审计：追加式留痕，可按 run_id 还原。
 
@@ -117,9 +117,19 @@ class TestGateExecution(unittest.TestCase):
         self.assertEqual(g.on_fail, "N4")
 
     def test_run_gate_skipped_when_no_checks(self):
-        g = pr.run_gate(MANIFEST, "G8")
+        import copy
+        manifest = copy.deepcopy(MANIFEST)
+        for gate in manifest["gates"]:
+            if gate["id"] == "G8":
+                gate["checks"] = []
+        g = pr.run_gate(manifest, "G8")
         self.assertEqual(g.status, "skipped")
         self.assertFalse(g.blocked)
+
+    def test_g8_has_real_checks(self):
+        """P1-12：G8 运维 / 告警校验不得为空（否则编排末段无实际校验）。"""
+        g8 = next(g for g in MANIFEST["gates"] if g["id"] == "G8")
+        self.assertTrue(g8["checks"], "G8 checks 不得为空")
 
     def test_run_gate_exception_blocked(self):
         """门禁工具抛错 → 计为 1 个 error（阻断），不向上崩溃。"""
@@ -214,7 +224,7 @@ class TestPipelineRouting(unittest.TestCase):
         self.assertEqual(len(run.gates), 9)
 
     def test_g6_block_rolls_back_to_n4(self):
-        # G6 = 全量 28 项；metric_audit 仅属 G6（G0–G5/G7 不含），确保阻断发生在 G6
+        # G6 = 全量 29 项；metric_audit 仅属 G6（G0–G5/G7 不含），确保阻断发生在 G6
         self.assertNotIn("metric_audit", pr.get_gate(MANIFEST, "G0")["checks"])
         fake = _FakeGateModule({"metric_audit": "error"})
         with mock.patch.object(pr, "_gate_module", return_value=fake), \

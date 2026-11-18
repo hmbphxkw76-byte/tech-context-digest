@@ -79,7 +79,7 @@ Single-context: one `GLOSSARY.md` + `engine/docs/adr/` at the repo root. See `en
 
 ## 优化流程门禁（硬性约束，适用于任何 Agent 平台）
 
-P0/P1/P2 优化清单的全部确定性检查收敛为**单一入口** `engine/tools/optimization_gate.py`（28 项），后续所有阶段必须复用，不得另写一套：
+P0/P1/P2 优化清单的全部确定性检查收敛为**单一入口** `engine/tools/optimization_gate.py`（29 项），后续所有阶段必须复用，不得另写一套：
 
 - **本地提交**：`python engine/tools/repo_sync.py run --message ... --paths ... --gate`（统一门禁 [E] 直接拒绝提交）。
 - **CI / 自动提交**：`ci.yml` / `html-sync.yml` / `content-update.yml` / `scheduled-maintenance.yml` 一律只调用该入口（`--probe`），不得分项重复扫描。

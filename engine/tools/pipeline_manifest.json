@@ -9,81 +9,184 @@
       "name": "需求与配置",
       "driver": "manual",
       "owner": "agent",
-      "inputs": ["业务需求", "类型选型结论（六族十二类）"],
-      "outputs": ["prompts/business-config.md", "engine/tools/layout.json 维度注册"],
-      "tools": ["validate_layout.py", "validate.py", "ensure_region_topics.py", "test_prompt_inheritance.py"]
+      "inputs": [
+        "业务需求",
+        "类型选型结论（六族十二类）"
+      ],
+      "outputs": [
+        "prompts/business-config.md",
+        "engine/tools/layout.json 维度注册"
+      ],
+      "tools": [
+        "validate_layout.py",
+        "validate.py",
+        "ensure_region_topics.py",
+        "test_prompt_inheritance.py"
+      ]
     },
     {
       "id": "N1",
       "name": "信息采集",
       "driver": "manual",
       "owner": "agent",
-      "inputs": ["business-config 来源优先级", "发布日历", "触发器清单"],
-      "outputs": ["data/processed/<theme>/<维度段...>/source_registry.json", "台账（只增不改）", "release-calendar.json", "量化数据"],
-      "tools": ["source_check.py", "release_calendar.py", "metric_registry.py"]
+      "inputs": [
+        "business-config 来源优先级",
+        "发布日历",
+        "触发器清单"
+      ],
+      "outputs": [
+        "data/processed/<theme>/<维度段...>/source_registry.json",
+        "台账（只增不改）",
+        "release-calendar.json",
+        "量化数据"
+      ],
+      "tools": [
+        "source_check.py",
+        "release_calendar.py",
+        "metric_registry.py"
+      ]
     },
     {
       "id": "N2",
       "name": "信息筛选与分级",
       "driver": "semi",
       "owner": "agent",
-      "inputs": ["报告 HTML", "来源登记", "business-config 语言规则"],
-      "outputs": ["四层分级标注", "双源确认", "死链清单"],
-      "tools": ["source_check.py"]
+      "inputs": [
+        "报告 HTML",
+        "来源登记",
+        "business-config 语言规则"
+      ],
+      "outputs": [
+        "四层分级标注",
+        "双源确认",
+        "死链清单"
+      ],
+      "tools": [
+        "source_check.py"
+      ]
     },
     {
       "id": "N3",
       "name": "信息分类",
       "driver": "tool",
       "owner": "platform",
-      "inputs": ["报告文件", "业务线目录", "类型注册表"],
-      "outputs": ["归位结果", "类型 / 维度标签"],
-      "tools": ["classify_reports.py", "validate_layout.py", "check_links.py"]
+      "inputs": [
+        "报告文件",
+        "业务线目录",
+        "类型注册表"
+      ],
+      "outputs": [
+        "归位结果",
+        "类型 / 维度标签"
+      ],
+      "tools": [
+        "classify_reports.py",
+        "validate_layout.py",
+        "check_links.py"
+      ]
     },
     {
       "id": "N4",
       "name": "内容生成",
       "driver": "manual",
       "owner": "agent",
-      "inputs": ["通用基座", "类型模板", "business-config", "上期 / 基线报告", "台账活值"],
-      "outputs": ["报告 md / HTML", "事实卡片引用", "已修正事实清单"],
-      "tools": ["md2html.py", "metric_registry.py", "threshold_calibration.py"]
+      "inputs": [
+        "通用基座",
+        "类型模板",
+        "business-config",
+        "上期 / 基线报告",
+        "台账活值"
+      ],
+      "outputs": [
+        "报告 md / HTML",
+        "事实卡片引用",
+        "已修正事实清单"
+      ],
+      "tools": [
+        "md2html.py",
+        "metric_registry.py",
+        "threshold_calibration.py"
+      ]
     },
     {
       "id": "N5",
       "name": "渲染与交付",
       "driver": "tool",
       "owner": "platform",
-      "inputs": ["md 源 / 手写 HTML 骨架"],
-      "outputs": ["自包含 HTML（canonical 样式）"],
-      "tools": ["md2html.py", "report_style.py", "restyle_reports.py"]
+      "inputs": [
+        "md 源 / 手写 HTML 骨架"
+      ],
+      "outputs": [
+        "自包含 HTML（canonical 样式）"
+      ],
+      "tools": [
+        "md2html.py",
+        "report_style.py",
+        "restyle_reports.py"
+      ]
     },
     {
       "id": "N6",
       "name": "质量校验与审计",
       "driver": "tool",
       "owner": "platform",
-      "inputs": ["报告", "各阶段产物"],
-      "outputs": ["审计记录", "终审结论（none / pre / full）"],
-      "tools": ["optimization_gate.py", "audit_tool.py", "semantic_diff.py", "perf_monitor.py"]
+      "inputs": [
+        "报告",
+        "各阶段产物"
+      ],
+      "outputs": [
+        "审计记录",
+        "终审结论（none / pre / full）"
+      ],
+      "tools": [
+        "optimization_gate.py",
+        "audit_tool.py",
+        "semantic_diff.py",
+        "perf_monitor.py"
+      ]
     },
     {
       "id": "N7",
       "name": "发布 / 索引 / 归档",
       "driver": "tool",
       "owner": "platform",
-      "inputs": ["已审计报告"],
-      "outputs": ["index.html", "reader.html", "INDEX.md", "归档", "发布指纹"],
-      "tools": ["build_hub.py", "build_index.py", "archive_reports.py", "publish_fingerprint.py", "sync_vocab.py"]
+      "inputs": [
+        "已审计报告"
+      ],
+      "outputs": [
+        "index.html",
+        "reader.html",
+        "INDEX.md",
+        "归档",
+        "发布指纹"
+      ],
+      "tools": [
+        "build_hub.py",
+        "build_index.py",
+        "archive_reports.py",
+        "publish_fingerprint.py",
+        "sync_vocab.py"
+      ]
     },
     {
       "id": "N8",
       "name": "运维与监控",
       "driver": "ci",
       "owner": "platform",
-      "inputs": ["CI 事件", "心跳", "任务清单"],
-      "outputs": ["失败 Issue / webhook 告警", "维护任务清单"],
-      "tools": ["automation_status.py", "webhook-alert.yml", "update_planner.py"]
+      "inputs": [
+        "CI 事件",
+        "心跳",
+        "任务清单"
+      ],
+      "outputs": [
+        "失败 Issue / webhook 告警",
+        "维护任务清单"
+      ],
+      "tools": [
+        "automation_status.py",
+        "webhook-alert.yml",
+        "update_planner.py"
+      ]
     }
   ],
   "gates": [
@@ -91,7 +194,11 @@
       "id": "G0",
       "after": "N0",
       "name": "配置校验",
-      "checks": ["validate_layout", "validate", "region_topics"],
+      "checks": [
+        "validate_layout",
+        "validate",
+        "region_topics"
+      ],
       "probe": false,
       "on_fail": "N0",
       "level": "E"
@@ -100,7 +207,11 @@
       "id": "G1",
       "after": "N1",
       "name": "来源登记校验",
-      "checks": ["source_check", "release_calendar", "metric_registry"],
+      "checks": [
+        "source_check",
+        "release_calendar",
+        "metric_registry"
+      ],
       "probe": false,
       "on_fail": "N1",
       "level": "E"
@@ -109,7 +220,9 @@
       "id": "G2",
       "after": "N2",
       "name": "分级 / 双源 / 死链校验",
-      "checks": ["source_check"],
+      "checks": [
+        "source_check"
+      ],
       "probe": true,
       "on_fail": "N2",
       "level": "E"
@@ -118,7 +231,11 @@
       "id": "G3",
       "after": "N3",
       "name": "分类 / 归位 / 断链校验",
-      "checks": ["validate_layout", "classify", "links"],
+      "checks": [
+        "validate_layout",
+        "classify",
+        "links"
+      ],
       "probe": false,
       "on_fail": "N3",
       "level": "E"
@@ -127,7 +244,13 @@
       "id": "G4",
       "after": "N4",
       "name": "内容四门禁 + 研究内核",
-      "checks": ["research_kernel", "info_density", "fact_card", "decision_hub", "blind_spot"],
+      "checks": [
+        "research_kernel",
+        "info_density",
+        "fact_card",
+        "decision_hub",
+        "blind_spot"
+      ],
       "probe": false,
       "on_fail": "N4",
       "level": "E"
@@ -136,7 +259,12 @@
       "id": "G5",
       "after": "N5",
       "name": "页面 / 合规 / 性能校验",
-      "checks": ["page_build", "lint", "compliance", "perf_monitor"],
+      "checks": [
+        "page_build",
+        "lint",
+        "compliance",
+        "perf_monitor"
+      ],
       "probe": false,
       "on_fail": "N5",
       "level": "E"
@@ -145,17 +273,24 @@
       "id": "G6",
       "after": "N6",
       "name": "统一门禁 + 审计",
-      "checks": ["*"],
+      "checks": [
+        "*"
+      ],
       "probe": true,
       "on_fail": "N4",
       "level": "E",
-      "audit": {"command": "python engine/audit/scripts/audit_tool.py run --strict --no-gate"}
+      "audit": {
+        "command": "python engine/audit/scripts/audit_tool.py run --strict --no-gate"
+      }
     },
     {
       "id": "G7",
       "after": "N7",
       "name": "产物确定性校验",
-      "checks": ["hub", "publish_fingerprint"],
+      "checks": [
+        "hub",
+        "publish_fingerprint"
+      ],
       "probe": false,
       "on_fail": "N7",
       "level": "E",
@@ -165,11 +300,14 @@
       "id": "G8",
       "after": "N8",
       "name": "运维 / 告警校验",
-      "checks": [],
+      "checks": [
+        "perf_monitor"
+      ],
       "probe": false,
       "on_fail": "N8",
       "level": "E",
-      "external": true
+      "external": true,
+      "note": "运维 / 告警校验：性能阈值（perf_monitor）+ 发布指纹漂移由 G7 收敛；external 标记保留（告警通道外部）。"
     }
   ],
   "loops": [
@@ -178,7 +316,11 @@
       "from": "N8",
       "to": "N1",
       "mode": "async",
-      "triggers": ["heartbeat", "schedule", "review"],
+      "triggers": [
+        "heartbeat",
+        "schedule",
+        "review"
+      ],
       "carry": "任务清单 / 复审结论 / 活跃度"
     },
     {
@@ -186,7 +328,9 @@
       "from": "G6",
       "to": "N4",
       "mode": "sync",
-      "triggers": ["E"],
+      "triggers": [
+        "E"
+      ],
       "carry": "门禁输出 / 失败检查项 / 上下文"
     }
   ]

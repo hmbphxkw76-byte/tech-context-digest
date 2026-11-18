@@ -15,7 +15,7 @@ from __future__ import annotations
 import argparse
 import json
 import sys
-from dataclasses import asdict, dataclass
+from dataclasses import asdict, dataclass, field
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
@@ -29,6 +29,7 @@ class CapRateResult:
     noi_net: float
     value: float
     adjustments: dict
+    assumptions: list = field(default_factory=list)
 
     def to_dict(self) -> dict:
         return asdict(self)
@@ -40,6 +41,7 @@ class DcfResult:
     pv_periods: list
     terminal_pv: float
     discount_rates: list
+    assumptions: list = field(default_factory=list)
 
     def to_dict(self) -> dict:
         return asdict(self)
@@ -58,6 +60,8 @@ def cap_rate(noi: float, value: float, adjustments: dict | None = None) -> CapRa
         noi_net=round(noi_net, 2),
         value=float(value),
         adjustments=adj,
+        assumptions=["净口径 = NOI − adjustments；未扣按揭利息（融资成本另计）",
+                     "cap rate 为静态单点，未含时间与情景区间"],
     )
 
 
@@ -75,7 +79,9 @@ def dcf(cashflows: list, discount_rates: list, terminal_value: float = 0.0) -> D
     return DcfResult(npv=round(sum(pv) + term_pv, 2),
                      pv_periods=[round(v, 2) for v in pv],
                      terminal_pv=round(term_pv, 2),
-                     discount_rates=[float(r) for r in discount_rates])
+                     discount_rates=[float(r) for r in discount_rates],
+                     assumptions=["各期折现率由调用方给定，未含利率路径假设",
+                                 "终值按末期折现率贴现，未含永续增长假设"])
 
 
 def sensitivity_cap(noi: float, value: float, rate_shock_bp: float = 0.0,

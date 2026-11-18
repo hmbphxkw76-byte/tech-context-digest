@@ -78,6 +78,8 @@ CHECKS: list[tuple[str, list[str], bool]] = [
     ("naming", [sys.executable, f"{TOOLS}/naming_check.py"], True),
     # 提示词一致性（PC-01..03）：注册表 / 复述规范 / 周期模板齐备，默认 [W]。
     ("prompt_consistency", [sys.executable, f"{TOOLS}/prompt_consistency_check.py"], True),
+    # 模型契约（MC-01..05，DC-07 / P1-13）：参数区间 / 假设留痕 / 失败上报，默认 [W]。
+    ("model_contract", [sys.executable, f"{TOOLS}/model_contract_check.py"], True),
 ]
 
 # 两级 gate-period 默认值（见模块 docstring）：auto = 滚动基线（当前月 + 1）
