@@ -15,6 +15,7 @@
   sample [--ratio R] [--seed N]   生成定期抽检清单
   accept                    项目级合规率汇总
   l3-status                 L3 SLA 超期检测（每两周覆盖全部正式报告；有超期返回 2 告警）
+  igi-snapshot [--period P]  按 gate-period 落盘 IGI 八度实测值（趋势基线，同周期覆盖幂等）
 
 退出码：0 通过；1 存在不合规；2 用法错误。
 """
@@ -588,7 +589,113 @@ def cmd_status(args) -> int:
     print(f"\n登记 {len(reg)} 条；失效条目（stale）：{len(stale)}；含证据索引：{with_ev}")
     for rel in stale:
         print(f"  [STALE] {rel}（登记路径不存在）")
+    period, values = igi_current()
+    for line in igi_block(period, values, load_igi_history()):
+        print(line)
     return 2 if stale else 0
+
+
+# ---------------------------------------------------------------- IGI 趋势（P2-6）
+
+IGI_HISTORY = RECORDS / "igi_history.json"
+IGI_HISTORY_SCHEMA = "1.0"
+METRICS_DICT = ROOT / "engine" / "tools" / "metrics-dictionary.json"
+
+
+def _igi_today(period: str) -> _dt.date:
+    """gate-period → 该月最后一天。
+
+    趋势口径必须确定：不以墙钟为基准，而以 gate-period 月末为「当期」，
+    保证同一周期重放得到同一组值（与 optimization_gate 的 gate-period 口径一致）。
+    """
+    m = re.match(r"^(\d{4})-(\d{2})", str(period or ""))
+    if not m:
+        return _dt.date.today()
+    y, mo = int(m.group(1)), int(m.group(2))
+    nxt_y, nxt_m = (y + 1, 1) if mo == 12 else (y, mo + 1)
+    return _dt.date(nxt_y, nxt_m, 1) - _dt.timedelta(days=1)
+
+
+def load_igi_history() -> dict:
+    """读取 IGI 趋势记录；缺失 / 损坏时返回空表（不抛错）。"""
+    if not IGI_HISTORY.exists():
+        return {"schema_version": IGI_HISTORY_SCHEMA, "records": []}
+    try:
+        data = json.loads(IGI_HISTORY.read_text(encoding="utf-8"))
+    except (OSError, json.JSONDecodeError):
+        return {"schema_version": IGI_HISTORY_SCHEMA, "records": []}
+    recs = [r for r in data.get("records", []) if r.get("gate_period") and r.get("values")]
+    recs.sort(key=lambda r: r["gate_period"])
+    return {"schema_version": IGI_HISTORY_SCHEMA, "records": recs}
+
+
+def save_igi_history(hist: dict) -> None:
+    IGI_HISTORY.parent.mkdir(parents=True, exist_ok=True)
+    IGI_HISTORY.write_text(
+        json.dumps(hist, ensure_ascii=False, indent=1) + "\n", encoding="utf-8")
+
+
+def _metric_names() -> dict:
+    """指标名从 metrics-dictionary.json 读取（单一事实源）。"""
+    try:
+        data = json.loads(METRICS_DICT.read_text(encoding="utf-8"))
+    except (OSError, json.JSONDecodeError):
+        return {}
+    rows = data.get("metrics", []) if isinstance(data, dict) else data
+    return {r.get("metric_id"): r.get("name", "") for r in rows if r.get("metric_id")}
+
+
+def igi_current(period: str | None = None) -> tuple[str, dict]:
+    """-> (gate_period, values)；today 取该周期月末，趋势与当期同口径。"""
+    import gate_period
+    import info_gap_metrics
+    p = gate_period.resolve(period)
+    return p, info_gap_metrics.compute(today=_igi_today(p))["values"]
+
+
+def _fmt_delta(delta: float) -> str:
+    return f"{delta:+.4f}"
+
+
+def igi_block(period: str, values: dict, hist: dict) -> list[str]:
+    """IGI 趋势表：本期值 + 上一期（gate-period 较早的最近一条）与 Δ。"""
+    names = _metric_names()
+    earlier = [r for r in hist["records"] if r["gate_period"] < period]
+    prev = earlier[-1] if earlier else None
+    out = ["", f"## 信息差指数（IGI，gate-period {period}）", "",
+           "| 指标 | 本期 | 上期 | Δ |", "|---|---|---|---|"]
+    for mid in sorted(values):
+        cur = round(float(values[mid]), 4)
+        label = f"{mid} {names.get(mid, '')}".strip()
+        if prev and mid in prev["values"]:
+            pv = round(float(prev["values"][mid]), 4)
+            out.append(f"| {label} | {cur:.4f} | {pv:.4f} | {_fmt_delta(cur - pv)} |")
+        else:
+            out.append(f"| {label} | {cur:.4f} | — | — |")
+    if prev:
+        out.append(f"\n上期基线：gate-period {prev['gate_period']}（Δ = 本期 − 上期）。")
+    elif hist["records"]:
+        out.append(f"\n（本期为首个基线：gate-period {period}；自下一周期起显示 Δ）。")
+    else:
+        out.append("\n（无历史快照：执行 `audit_tool.py igi-snapshot` 建立趋势基线。）")
+    return out
+
+
+def cmd_igi_snapshot(args) -> int:
+    """按 gate-period 落盘 IGI 八度实测值（趋势基线）；同周期重跑为覆盖，幂等。"""
+    period, values = igi_current(args.period)
+    hist = load_igi_history()
+    recs = [r for r in hist["records"] if r.get("gate_period") != period]
+    recs.append({"gate_period": period,
+                 "values": {k: round(float(v), 4) for k, v in sorted(values.items())}})
+    recs.sort(key=lambda r: r["gate_period"])
+    hist["records"] = recs
+    save_igi_history(hist)
+    print(f"IGI 趋势快照已写入 "
+          f"{IGI_HISTORY.relative_to(ROOT).as_posix()}（gate-period {period}，{len(recs)} 条记录）")
+    for line in igi_block(period, values, hist):
+        print(line)
+    return 0
 
 
 # ---------------------------------------------------------------- 抽检与验收
@@ -929,6 +1036,9 @@ def main() -> int:
     p = sub.add_parser("sample"); p.add_argument("--ratio", type=float, default=0.2); p.add_argument("--seed", type=int, default=20261114)
     sub.add_parser("accept")
     sub.add_parser("l3-status", help="L3 SLA 超期检测（每两周覆盖全部正式报告）")
+    p = sub.add_parser("igi-snapshot", help="按 gate-period 落盘 IGI 八度实测值（趋势基线）")
+    p.add_argument("--period", default=None,
+                   help="gate-period（默认 auto = 当前自然月 + 1；显式周期可固定口径复现）")
     p = sub.add_parser("run"); p.add_argument("--dry-run", action="store_true"); p.add_argument("--strict", action="store_true")
     p.add_argument("--no-gate", action="store_true",
                    help="严格模式下不内部重跑统一门禁（由调用方统一执行，避免重复）")
@@ -939,7 +1049,7 @@ def main() -> int:
         "structure": cmd_structure, "verify": cmd_verify,
         "review": cmd_review, "mark": cmd_mark, "unmark": cmd_unmark, "status": cmd_status,
         "sample": cmd_sample, "accept": cmd_accept, "run": cmd_run,
-        "l3-status": cmd_l3_status,
+        "l3-status": cmd_l3_status, "igi-snapshot": cmd_igi_snapshot,
     }[args.cmd](args)
 
 

@@ -48,6 +48,7 @@ python engine/audit/scripts/audit_tool.py review <report> --stage final   --revi
 python engine/audit/scripts/audit_tool.py mark <report>      # 四环节齐备 → 注入标识
 python engine/audit/scripts/audit_tool.py run                # 确定性四环节（CI 用，幂等）
 python engine/audit/scripts/audit_tool.py accept             # 项目级验收
+python engine/audit/scripts/audit_tool.py igi-snapshot   # 落盘 IGI 八度实测值（趋势基线）
 python engine/audit/scripts/audit_tool.py sample --ratio 0.2 # 定期抽检
 ```
 
@@ -71,6 +72,22 @@ python engine/audit/scripts/audit_tool.py sample --ratio 0.2 # 定期抽检
 | 状态 | ACTIVE |
 
 管理：`paw automation list|get|pause|resume|delete`（**禁止直写 automation.json**）。
+
+---
+
+## 三·六、信息差指数（IGI）趋势
+
+`audit_tool.py status` 在登记状态表之后固定输出 **IGI 八度趋势表**（本期值 / 上期值 / Δ），数据源为 `engine/tools/info_gap_metrics.py`（口径事实源 `metrics-dictionary.json`）。
+
+| 项 | 说明 |
+|---|---|
+| 快照命令 | `audit_tool.py igi-snapshot [--period P]`（默认 `--period auto` = 当前自然月 + 1） |
+| 落盘位置 | `engine/audit/records/igi_history.json`（`{"schema_version":"1.0","records":[{"gate_period","values"}]}`） |
+| 幂等性 | 同一 `gate_period` 重跑为**覆盖**，不新增记录 |
+| 确定性 | 「当期」基准取 gate-period **月末**（`_igi_today`），不取墙钟；同周期重放得到同一组值 |
+| 基线 | 首个周期只显示本期值，自下一周期起显示 Δ；趋势随快照逐期积累 |
+
+> 快照为**显式动作**（不接入 CI 自动提交），避免与多会话 Git 协作协议的自动提交并发冲突。
 
 ---
 

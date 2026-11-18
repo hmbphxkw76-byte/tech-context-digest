@@ -10,6 +10,7 @@ import json
 import re
 import tempfile
 import unittest
+from datetime import date as _date
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[2]
@@ -197,6 +198,75 @@ class TestL3Overdue(unittest.TestCase):
             ])
             reports = {self.REL: {"category": "report", "first_seen_at": "2026-01-01"}}
             self.assertEqual(audit_tool.l3_overdue(reports, Path(d), today="2026-11-17"), [])
+
+
+class TestIgiTrend(unittest.TestCase):
+    """P2-6：IGI 趋势纳入审计报表（快照落盘 + status 展示 Δ，确定性可重放）。"""
+
+    def test_igi_today_is_month_end(self):
+        self.assertEqual(audit_tool._igi_today("2026-12"), _date(2026, 12, 31))
+        self.assertEqual(audit_tool._igi_today("2027-01"), _date(2027, 1, 31))
+        self.assertEqual(audit_tool._igi_today("2026-11"), _date(2026, 11, 30))
+        self.assertEqual(audit_tool._igi_today("2024-02"), _date(2024, 2, 29))
+
+    def _use_tmp_history(self, d: str) -> Path:
+        p = Path(d) / "igi_history.json"
+        old = audit_tool.IGI_HISTORY
+        audit_tool.IGI_HISTORY = p
+        self.addCleanup(setattr, audit_tool, "IGI_HISTORY", old)
+        return p
+
+    def test_history_roundtrip_and_upsert(self):
+        with tempfile.TemporaryDirectory() as d:
+            p = self._use_tmp_history(d)
+            audit_tool.save_igi_history({"schema_version": "1.0", "records": [
+                {"gate_period": "2026-11", "values": {"IGI-01": 0.5}},
+                {"gate_period": "2026-12", "values": {"IGI-01": 1.0}},
+            ]})
+            hist = audit_tool.load_igi_history()
+            self.assertEqual([r["gate_period"] for r in hist["records"]],
+                             ["2026-11", "2026-12"])
+            # 同周期重跑 = 覆盖，不新增
+            recs = [r for r in hist["records"] if r["gate_period"] != "2026-12"]
+            recs.append({"gate_period": "2026-12", "values": {"IGI-01": 0.9}})
+            recs.sort(key=lambda r: r["gate_period"])
+            audit_tool.save_igi_history({"schema_version": "1.0", "records": recs})
+            again = audit_tool.load_igi_history()
+            self.assertEqual(len(again["records"]), 2)
+            self.assertEqual(again["records"][-1]["values"]["IGI-01"], 0.9)
+
+    def test_missing_or_corrupt_history_is_empty(self):
+        with tempfile.TemporaryDirectory() as d:
+            p = self._use_tmp_history(d)
+            self.assertEqual(audit_tool.load_igi_history()["records"], [])
+            p.write_text("{not json", encoding="utf-8")
+            self.assertEqual(audit_tool.load_igi_history()["records"], [])
+
+    def test_block_shows_delta_against_earlier_period(self):
+        hist = {"records": [{"gate_period": "2026-11",
+                             "values": {"IGI-01": 0.5, "IGI-08": 0.7}}]}
+        block = "\n".join(audit_tool.igi_block("2026-12", {"IGI-01": 1.0, "IGI-08": 0.8366}, hist))
+        self.assertIn("上期基线：gate-period 2026-11", block)
+        self.assertIn("| IGI-01 主题覆盖率 | 1.0000 | 0.5000 | +0.5000 |", block)
+        self.assertIn("+0.1366", block)
+
+    def test_block_without_history_prompts_snapshot(self):
+        block = "\n".join(audit_tool.igi_block("2026-12", {"IGI-01": 1.0},
+                                                {"records": []}))
+        self.assertIn("igi-snapshot", block)
+
+    def test_block_first_baseline_message(self):
+        hist = {"records": [{"gate_period": "2026-12", "values": {"IGI-01": 1.0}}]}
+        block = "\n".join(audit_tool.igi_block("2026-12", {"IGI-01": 1.0}, hist))
+        self.assertIn("首个基线", block)
+
+    def test_status_prints_igi_block(self):
+        buf = io.StringIO()
+        with contextlib.redirect_stdout(buf):
+            audit_tool.cmd_status(argparse.Namespace(report=None))
+        out = buf.getvalue()
+        self.assertIn("## 信息差指数（IGI，gate-period", out)
+        self.assertIn("IGI-08", out)
 
 
 if __name__ == "__main__":

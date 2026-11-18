@@ -291,8 +291,8 @@
 | P2-3 | 提示词引用 AGENTS/PCE | `engine/templates/prompt-generic-base.md`、`engine/prompts/*` | 提示词层感知「执行xx报告」触发与润色-确认门禁（**已落地**：通用基座第八节新增指针） |
 | P2-4 | 类型注册表同步 | `engine/templates/template-registry.md` 第二节 | 登记全部 7 条业务线；新增业务线自动校验（**已落地**：PC-01 补登 + 门禁） |
 | P2-5 | 主题 README 治理 | 各主题 README | 与 `business-config.md` 一致 |
-| P2-6 | 审计报表增强 | `engine/audit/`、`audit_tool.py` | IGI 趋势纳入审计报表现 |
-| P2-7 | 报告结构加固 | `apartment/monthly|baseline|annual` 缺 `nav-tabs` | `compliance_check` 0E |
+| P2-6 | 审计报表增强 | `engine/audit/`、`audit_tool.py` | IGI 趋势纳入审计报表现（**已落地**：`audit_tool.py status` 固定输出 IGI 八度趋势表；`igi-snapshot` 按 gate-period 落盘 `records/igi_history.json`，月末基准、同周期覆盖幂等） |
+| P2-7 | 报告结构加固 | `apartment/monthly|baseline|annual` 缺 `nav-tabs` | `compliance_check` 0E（**核实已满足**：四份公寓报告 `nav-tabs` 各 7 处；`compliance_check` 通过，0 错误） |
 | P2-8 | 术语策略文档 | `engine/vocabulary/README.md` | 明确缩写/中文规范形策略（**已落地**：新增「七·补 术语策略」） |
 
 > **批次 D 进度（2026-11-18）**：P2-2 已核实无漂移；P2-3 / P2-4 / P2-8 已落地；P2-1（死代码删除 / 迁移，需授权）、P2-5（主题 README 治理）、P2-6（审计报表增强）、P2-7（核实已基本满足：baseline 属规范豁免，compliance_check 0E）未落地。
