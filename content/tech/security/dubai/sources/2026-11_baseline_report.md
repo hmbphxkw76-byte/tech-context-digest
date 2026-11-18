@@ -173,7 +173,7 @@ Gartner 预计 2026 年整合 GenAI 的企业将员工驱动事件减少 40%；I
 ### 3.8 净薪模型与税务（本版新增，核心价值点）
 
 - **个人所得税 0%**：阿联酋政府明确"不向个人征收所得税"[Source: https://u.ae/en/information-and-services/finance-and-investment/taxation/other-taxes, 2026]；财政部确认雇佣/个人所得不在企业税范围内[Source: https://mof.gov.ae, 2023]。
-- **外籍社保 0%**："阿联酋无面向外籍雇员的养老金计划"[Source: https://uaesupremecouncil.org/en/.../pension-schemes-for-expatriate-workers.html]；合规指南确认非 GCC 外籍雇员与雇主社保均为 0%[Source: https://remofirst.com/country-guide/united-arab-emirates]；[Source: https://whichpayroll.com, 2026]。
+- **外籍社保 0%**："阿联酋无面向外籍雇员的养老金计划"[Source: https://uaesupremecouncil.org/en/]；合规指南确认非 GCC 外籍雇员与雇主社保均为 0%[Source: https://remofirst.com/country-guide/united-arab-emirates]；[Source: https://whichpayroll.com, 2026]。
 - **唯一强制薪资扣减——ILOE 失业险（更正）**：A 类（基本工资 ≤1.6 万 AED）**每月 AED 5**，B 类（>1.6 万）**每月 AED 10**，首期加 5% VAT；由雇员承担，雇主不付[Source: https://iloe.ae/pdf/Involuntary-Loss-of-Employment-Brochure-ILOE-V2.pdf]。
 - **离职补偿（Gratuity）由雇主计提，不从薪资扣除**：前 5 年每年 21 天基本工资、之后 30 天，上限 2 年工资[Source: https://usemultiplier.com/united-arab-emirates/employee-benefits-and-compensation, 2026]。
 - **迪拜住房费**：租客按年租金 5% 通过 DEWA 按月缴纳（属生活成本，非薪资扣减）[Source: https://mirabelloconsultancy.com]；[Source: https://eastproperty.com, 2026]。
@@ -218,7 +218,7 @@ Gartner 预计 2026 年整合 GenAI 的企业将员工驱动事件减少 40%；I
 ### 3.10 证书溢价与阿化政策
 
 - **证书溢价**：第三方聚合称认证人员平均溢价 +22–35%；RFS 称 CISSP/CISM/CEH 可为月薪增 AED 3,000–8,000，CISSP 持证者收入高约 25–30%（招聘机构抽样，谨慎引用）。[Source: https://waqov.com/blog/top-10-most-in-demand-skills-in-uae-job-market-2025, 2026]；[Source: https://rfsonshr.com/?p=25253]
-- **阿化（Emiratisation）**：50+ 人私企须每年提升本国籍在技能岗占比 2%、2026 年达 10%；20–49 人且属"信息与通信"等 14 类行业的企业须雇至少 1–2 名本国籍，违者按人头罚款（2026 年约 10.8 万 AED/人）。[Source: https://u.ae/en/information-and-services/jobs/.../emiratis-employment-in-private-sector]；[Source: https://gulfnews.com/uae/uae-firms-face-dh108000-fine, 2025]
+- **阿化（Emiratisation）**：50+ 人私企须每年提升本国籍在技能岗占比 2%、2026 年达 10%；20–49 人且属"信息与通信"等 14 类行业的企业须雇至少 1–2 名本国籍，违者按人头罚款（2026 年约 10.8 万 AED/人）。[Source: https://u.ae/en/information-and-services/jobs/employment-in-the-private-sector/emiratis-employment-in-private-sector]；[Source: https://gulfnews.com/uae/uae-firms-face-dh108000-fine, 2025]
 - **对外籍影响（推断）**：配额针对通用技能岗、无公开的网络安全豁免；但本土网络人才池极薄（年新增约 5,000），中高级技术岗仍以外籍为主，部分初级/GRC/政府关联岗有本国籍偏好。
 
 ---
@@ -254,7 +254,7 @@ Gartner 预计 2026 年整合 GenAI 的企业将员工驱动事件减少 40%；I
 
 - **GISEC Global 2026**（第 15 届，2026 年 9 月 16–18 日，迪拜世博城展览中心，约 182 国）：主题 AI 驱动犯罪、数字主权、韧性；新增"Crime First"部长/央行/CEO 峰会；AI 辅助勒索被指约 60%[Source: https://desc.gov.ae, 2026]；[Source: https://gisec.ae, 2026]。
 - **GITEX Global 2026**：**2026 年 12 月 7–11 日**于迪拜世博城举办，设网络安全与数字主权专区[Source: https://gitex.com, 2026]。
-- **国家级新规（2026 推进，合规/法律分析视角）**：国家网络认证计划（NCAP）限制未认证 MSSP 服务关键基础设施；安全供应链/SBOM 计划；量子安全（PQC）计划；Cyber E71 孵化器与 Cyber Sniper 技能计划[Source: https://practiceguides.chambers.com/cybersecurity-2026/uae, 2026]。
+- **国家级新规（2026 推进，合规/法律分析视角）**：国家网络认证计划（NCAP）限制未认证 MSSP 服务关键基础设施；安全供应链/SBOM 计划；量子安全（PQC）计划；Cyber E71 孵化器与 Cyber Sniper 技能计划[Source: https://practiceguides.chambers.com/, 2026]。
 - **TDRA/aeCERT**：aeCERT 隶属 TDRA，职能含国家级事件协调/响应、意识、漏洞评估与渗透测试、24 小时违规通报义务[Source: https://itu.int, 2023]；[Source: https://hzlegal.ae, 2026]；未能取得带完整培训目录的官方英文页，建议以 tdra.gov.ae 复核。
 
 ---
@@ -280,7 +280,7 @@ Gartner 预计 2026 年整合 GenAI 的企业将员工驱动事件减少 40%；I
 ### 5.2 AI 专项安全技能（已被雇主明确点名）
 
 - 框架：**OWASP LLM Top 10（2025）**（LLM01 提示注入、LLM03 供应链、LLM06 过度代理等）与 **NIST AI RMF 1.0**（GOVERN/MAP/MEASURE/MANAGE）[Source: https://genai.owasp.org/llm-top-10, 2025]；[Source: https://nvlpubs.nist.gov/nistpubs/ai/nist.ai.100-1.pdf, 2023]。
-- **岗位实测要求（CPX/G42、Michael Page 阿布扎比安全负责人岗）**：提示注入/越狱/不安全输出测试、安全 RAG、AI 供应链安全、Shadow AI 发现、模型注册权限、agent 权限管控；监管框架涵盖 UAE PDPL、DIFC/ADGM、UAE CSC、NESA/SIA 与欧盟 AI Act[Source: https://ae.linkedin.com/jobs/view/ai-security-engineer-at-cpx-4474117714, 2026]；[Source: https://jobxdubai.com/jobs/3240-director-ai-security]。
+- **岗位实测要求（CPX/G42、Michael Page 阿布扎比安全负责人岗）**：提示注入/越狱/不安全输出测试、安全 RAG、AI 供应链安全、Shadow AI 发现、模型注册权限、agent 权限管控；监管框架涵盖 UAE PDPL、DIFC/ADGM、UAE CSC、NESA/SIA 与欧盟 AI Act[Source: https://www.cpx.net/, 2026]；[Source: https://jobxdubai.com/jobs/3240-director-ai-security]。
 - **关键观察**：抽样岗位中**无一条**将"AI 安全专项证书"列为硬性门槛，多为"OWASP LLM 知识/AI 安全培训"；术语"MLSecOps""对抗机器学习"在迪拜样本中尚未出现，雇主以"Azure AI/OpenAI 安全、提示注入、AI 治理"表述需求。
 
 ### 5.3 工具栈与语言
@@ -378,8 +378,8 @@ Gartner 预计 2026 年整合 GenAI 的企业将员工驱动事件减少 40%；I
 
 ### 7.1 签证路径
 
-- **标准就业签证**：雇主担保，公司开 MoHRE 档案→配额→工作许可（60 天）→GDRFA 入境许可（2 月内体检+Emirates ID+劳工卡）；雇主承担约 **3,000 AED/人**可退银行担保，且依法须承担招聘/签证成本（阿联酋劳动法 Art. 6(4)）[Source: https://u.ae/.../recruiting-on-the-mainland-]；[Source: https://labeeb.ae, 2026]。
-- **黄金签证（10 年，自担保，本版细化）**：① 技能专业人才：MOHRE 职业 1–2 级（IT 属 2 级）、本科、**基本月薪 ≥30,000 AED**（注意：为基本工资非总额）；② 优先领域杰出人才：**AI、大数据、软件/计算机/电子工程**等明确在列，凭学位+推荐信/博士即可；③ 高级管理人员：基本月薪 ≥50,000 + 5 年经验[Source: https://u.ae/en/.../golden-visa, 2025]；[Source: https://added.gov.ae]；[Source: https://mofa.gov.ae]；[Source: https://takweenadvisory.ae]。**2026 警示**：据 2026-10-21 阿布扎比通函报道，技术人才路线被收紧（需在阿联酋银行账户连续 6 个月支付基本工资、不合并津贴、强制公证本科）；联邦门户（ICP/u.ae）未见新增联邦类别，建议以 ICP 最终确认[Source: https://visahq.news, 2026]。
+- **标准就业签证**：雇主担保，公司开 MoHRE 档案→配额→工作许可（60 天）→GDRFA 入境许可（2 月内体检+Emirates ID+劳工卡）；雇主承担约 **3,000 AED/人**可退银行担保，且依法须承担招聘/签证成本（阿联酋劳动法 Art. 6(4)）[Source: https://u.ae/en/information-and-services/jobs/employment-in-the-private-sector/job-offers-and-work-permits-and-contracts/expatriates-employment-in-private-sector]；[Source: https://labeeb.ae, 2026]。
+- **黄金签证（10 年，自担保，本版细化）**：① 技能专业人才：MOHRE 职业 1–2 级（IT 属 2 级）、本科、**基本月薪 ≥30,000 AED**（注意：为基本工资非总额）；② 优先领域杰出人才：**AI、大数据、软件/计算机/电子工程**等明确在列，凭学位+推荐信/博士即可；③ 高级管理人员：基本月薪 ≥50,000 + 5 年经验[Source: https://u.ae/en/information-and-services/visa-and-emirates-id/residence-visas/golden-visa, 2025]；[Source: https://added.gov.ae]；[Source: https://mofa.gov.ae]；[Source: https://takweenadvisory.ae]。**2026 警示**：据 2026-10-21 阿布扎比通函报道，技术人才路线被收紧（需在阿联酋银行账户连续 6 个月支付基本工资、不合并津贴、强制公证本科）；联邦门户（ICP/u.ae）未见新增联邦类别，建议以 ICP 最终确认[Source: https://visahq.news, 2026]。
 - **DIFC/ADGM 通道**：DIFC 政府服务办公室一站式办理；ADGM 豁免联邦劳动法（适用 2024 雇佣条例），签证内部约 7 个工作日[Source: https://difc.ae/business/services, 2025]；[Source: https://adgm.com/.../visas-and-government-services/overview, 2025]。
 
 ### 7.2 求职渠道与 Networking

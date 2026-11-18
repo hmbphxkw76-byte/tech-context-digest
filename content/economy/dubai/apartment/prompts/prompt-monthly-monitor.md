@@ -62,7 +62,7 @@
 ### 5.2 货币与信用（滞后约 5–6 周）
 - 银行信贷、存款、M1/M2/M3
 
-官方源：`https://centralbank.ae/en/research-and-statistics/latest-statistics/statistical-bulletin-banking-monetary-statistics/`
+官方源：`https://centralbank.ae/en/research-and-statistics/`
 
 ### 5.3 价格
 - PIX© 混合调整指数
