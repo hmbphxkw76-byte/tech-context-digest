@@ -76,3 +76,7 @@
 [2026-11-18T18:26:46] [verify] international -> business-config.md：通过（0 条覆盖完整，区间外内容一致，词汇库 v1.0）
 [2026-11-18T18:26:46] [verify] political -> business-config.md：通过（0 条覆盖完整，区间外内容一致，词汇库 v1.0）
 [2026-11-18T18:26:46] [verify] society -> business-config.md：通过（0 条覆盖完整，区间外内容一致，词汇库 v1.0）
+[2026-11-18T20:19:11] [sync] economy -> ../../content/economy/trends/prompts/business-config.md：无变更（词汇库与提示词区间一致）
+[2026-11-18T20:19:11] [sync] economy -> ../../content/economy/dubai/apartment/prompts/business-config.md：区块替换成功：新增 6 / 修改 0 / 删除 0，共 55 条（v1.5）；备份 sync-backups/economy.business-config.md.20261118_201911.bak
+[2026-11-18T20:19:11] [sync] tech -> ../../content/tech/weekly-roundup/prompts/business-config.md：区块替换成功：新增 1 / 修改 0 / 删除 0，共 120 条（v1.4）；备份 sync-backups/tech.business-config.md.20261118_201911.bak
+[2026-11-18T20:19:11] [sync] tech -> ../../content/tech/security/dubai/prompts/business-config.md：无变更（词汇库与提示词区间一致）

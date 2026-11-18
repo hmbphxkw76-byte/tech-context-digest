@@ -171,8 +171,26 @@ class TestVocabDrift(unittest.TestCase):
         self.assertIn("VD-02", findings)
 
     def test_canonical_form_drift_detected(self):
-        findings = dict(vocab_drift.check_canonical_forms())
-        self.assertIn("VD-03", findings)
+        """P1-11 补录后仓库 VD-03 清零；检测逻辑用合成用例验证仍可检出。"""
+        self.assertEqual([r for r, _ in vocab_drift.check_canonical_forms()], [])
+        import tempfile
+        from pathlib import Path as P
+        with tempfile.TemporaryDirectory() as d:
+            td = P(d) / "economy"
+            td.mkdir()
+            (td / "prompt-x.md").write_text(
+                "术语一致：使用词库规范形（如「贷款市场报价利率」）。", encoding="utf-8")
+            orig_dir, orig_load, orig_root = (vocab_drift.PROMPTS_DIR, vocab_drift.load_terms,
+                                              vocab_drift.ROOT)
+            vocab_drift.PROMPTS_DIR = P(d)
+            vocab_drift.ROOT = P(d)
+            vocab_drift.load_terms = lambda theme: (["消费者价格指数"], 1)
+            try:
+                rules = [r for r, _ in vocab_drift.check_canonical_forms()]
+            finally:
+                (vocab_drift.PROMPTS_DIR, vocab_drift.load_terms,
+                 vocab_drift.ROOT) = orig_dir, orig_load, orig_root
+            self.assertIn("VD-03", rules)
 
     def test_load_terms_counts_rows(self):
         forms, n = vocab_drift.load_terms("economy")
