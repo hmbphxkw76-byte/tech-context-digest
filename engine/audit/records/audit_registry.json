@@ -1014,14 +1014,14 @@
       "kind": "business",
       "category": "report",
       "business_line": "content/economy/insight",
-      "status": "draft",
+      "status": "in-review",
       "stages": {
-        "draft": false,
-        "initial": false,
+        "draft": true,
+        "initial": true,
         "second": false,
         "final": false
       },
-      "mark": false,
+      "mark": true,
       "first_seen_at": "2026-11-17",
       "evidence": {
         "report": "content/economy/insight/reports/2026-12_baseline_report.html",
@@ -1046,32 +1046,35 @@
           "probe": true
         },
         "audit": {
-          "review": "",
-          "status": "draft",
+          "review": "engine/audit/records/reviews/content-economy-insight-reports-2026-12-baseline-report-html.json",
+          "status": "in-review",
           "stages": {
-            "draft": false,
-            "initial": false,
+            "draft": true,
+            "initial": true,
             "second": false,
             "final": false
           },
-          "mark_level": "none",
-          "audit_id": ""
+          "mark_level": "pre",
+          "audit_id": "AUD-2026-11-18-001"
         }
-      }
+      },
+      "audit_id": "AUD-2026-11-18-001",
+      "mark_level": "pre",
+      "audited_at": "2026-11-18T01:38:54+00:00"
     },
     "content/economy/trends/reports/2026-11-13_weekly.html": {
       "title": "全球宏观经济趋势周报（2026-11-13）｜经济趋势周报",
       "kind": "business",
       "category": "report",
       "business_line": "content/economy/trends",
-      "status": "draft",
+      "status": "in-review",
       "stages": {
-        "draft": false,
-        "initial": false,
+        "draft": true,
+        "initial": true,
         "second": false,
         "final": false
       },
-      "mark": false,
+      "mark": true,
       "first_seen_at": "2026-11-17",
       "evidence": {
         "report": "content/economy/trends/reports/2026-11-13_weekly.html",
@@ -1096,32 +1099,35 @@
           "probe": true
         },
         "audit": {
-          "review": "",
-          "status": "draft",
+          "review": "engine/audit/records/reviews/content-economy-trends-reports-2026-11-13-weekly-html.json",
+          "status": "in-review",
           "stages": {
-            "draft": false,
-            "initial": false,
+            "draft": true,
+            "initial": true,
             "second": false,
             "final": false
           },
-          "mark_level": "none",
-          "audit_id": ""
+          "mark_level": "pre",
+          "audit_id": "AUD-2026-11-18-002"
         }
-      }
+      },
+      "audit_id": "AUD-2026-11-18-002",
+      "mark_level": "pre",
+      "audited_at": "2026-11-18T01:38:54+00:00"
     },
     "content/tech/weekly-roundup/reports/2026-11-13_weekly.html": {
       "title": "AI 趋势周报（安全 × Agent 生态）· 2026-11-13",
       "kind": "business",
       "category": "report",
       "business_line": "content/tech/weekly-roundup",
-      "status": "draft",
+      "status": "in-review",
       "stages": {
-        "draft": false,
-        "initial": false,
+        "draft": true,
+        "initial": true,
         "second": false,
         "final": false
       },
-      "mark": false,
+      "mark": true,
       "first_seen_at": "2026-11-17",
       "evidence": {
         "report": "content/tech/weekly-roundup/reports/2026-11-13_weekly.html",
@@ -1146,18 +1152,21 @@
           "probe": true
         },
         "audit": {
-          "review": "",
-          "status": "draft",
+          "review": "engine/audit/records/reviews/content-tech-weekly-roundup-reports-2026-11-13-weekly-html.json",
+          "status": "in-review",
           "stages": {
-            "draft": false,
-            "initial": false,
+            "draft": true,
+            "initial": true,
             "second": false,
             "final": false
           },
-          "mark_level": "none",
-          "audit_id": ""
+          "mark_level": "pre",
+          "audit_id": "AUD-2026-11-18-003"
         }
-      }
+      },
+      "audit_id": "AUD-2026-11-18-003",
+      "mark_level": "pre",
+      "audited_at": "2026-11-18T01:38:54+00:00"
     }
   }
 }
