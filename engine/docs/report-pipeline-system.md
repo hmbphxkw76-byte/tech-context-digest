@@ -184,7 +184,7 @@ flowchart LR
 
 | 项 | 内容 |
 |---|---|
-| 核心步骤 | ① `build_hub.py` 生成 `index.html` / `reader.html`（`--check` 比对确定性）；② `build_index.py` 生成 `INDEX.md`（心跳）；③ `archive_reports.py` 滚动归档 `reports/` 与 `sources/`（monthly 12 / quarterly 8 / annual 5 / baseline 3 / weekly 12）；④ `publish_fingerprint.py --emit` 采集 sha256；⑤ 词汇库 `sync_vocab.py` 标记区间增量同步（逐词条 sha256、原子写、失败回滚） |
+| 核心步骤 | ① `build_hub.py` 生成 `index.html` / `reader.html`（`--check` 比对确定性）；② `build_index.py` 生成 `INDEX.md`（心跳）；③ `archive_reports.py` 滚动归档 `reports/` 与 `sources/`（monthly 18 / quarterly 8 / annual 5 / baseline 3 / weekly 12，与展示窗口同源，见 [report-cycle-windows.md](report-cycle-windows.md)）；④ `publish_fingerprint.py --emit` 采集 sha256；⑤ 词汇库 `sync_vocab.py` 标记区间增量同步（逐词条 sha256、原子写、失败回滚） |
 | 输出标准 | 生成物确定性（无时间戳）；`--check` 过期即阻断；归档幂等 |
 | 工具 | `build_hub.py`、`build_index.py`、`archive_reports.py`、`publish_fingerprint.py`、`sync_vocab.py` |
 
@@ -346,8 +346,9 @@ flowchart TD
 
 ### 5.2 两级 gate-period 与退出码
 
-- **内容门禁周期** `--gate-period`（默认 `2026-12`）：研究内核 / 信息分层 / 事实卡片 / 决策交付。
-- **来源登记周期** `--source-gate-period`（默认 `2027-01`）：`source_check`。
+- **内容门禁周期** `--gate-period`：研究内核 / 信息分层 / 事实卡片 / 决策交付。
+- **来源登记周期** `--source-gate-period`：`source_check`。
+- **默认 `auto`（滚动基线）**：两级默认值均为 `auto`，解析为**当前自然月 + 1**（`engine/tools/gate_period.py` 单一事实源）。写死周期会让「新报告」判定随时间自动失效（如 2027-02 时 2027-01 报告被降级放行），滚动基线保证**新报告永远被强制、历史报告永远只警告**。显式传 `YYYY-MM` / `YYYY-Qn` / `YYYY` 可固定口径复现。
 - **退出码**：校验类统一 0 通过 / 1 有 `[E]` / 2 仅 `[W]`；CI 用 `set +e` 取值后判定（1 → `::error::` + exit 1；2 → `::warning::` + exit 0）。
 
 ### 5.3 测试固化

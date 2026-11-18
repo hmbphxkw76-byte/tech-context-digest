@@ -91,6 +91,22 @@ a:hover{text-decoration:underline}
 .noresult{padding:44px 20px;text-align:center;color:var(--ink3);font-size:13.5px;
   grid-column:1/-1}
 
+/* ── 周期分组 / 本期更新 / 更多 ── */
+.cycle{margin:0 0 10px}
+.cycle-head{display:flex;align-items:baseline;gap:8px;margin:0 0 8px}
+.cycle-name{font-size:12.5px;font-weight:600;color:var(--ink2);letter-spacing:.3px}
+.cycle-flag{font-size:11px;color:var(--green);background:var(--green-l);
+  border:1px solid #cfe6d8;border-radius:10px;padding:1px 7px;white-space:nowrap}
+.tag-updated{background:var(--green-l);color:var(--green);border-color:#cfe6d8;font-weight:600}
+.more{margin:2px 0 6px}
+.more>summary{cursor:pointer;font-size:12.5px;color:var(--navy2);list-style:none;
+  padding:6px 10px;border:1px dashed var(--line);border-radius:var(--radius-sm);user-select:none}
+.more>summary::-webkit-details-marker{display:none}
+.more>summary:hover{border-color:var(--blue);color:var(--navy)}
+.more>summary:focus-visible{outline:2px solid var(--blue);outline-offset:1px}
+.more[open]>summary{margin-bottom:8px;border-style:solid}
+.base-note{font-size:12px;color:var(--ink3);white-space:nowrap}
+
 /* ── 页脚 / 回到顶部 ── */
 .footer{text-align:center;color:var(--ink3);font-size:11.5px;padding:26px 20px 36px;
   line-height:1.9;border-top:1px solid var(--line)}
@@ -171,6 +187,7 @@ a:hover{text-decoration:underline}
 <button class="chip" data-type="whitepaper" aria-pressed="false" title="白皮书·专题深度型">白皮书</button>
 <button class="chip" data-type="decision-dashboard" aria-pressed="false" title="决策仪表盘型">决策仪表盘</button>
 </div>
+<span class="base-note" title="本期更新报告以该期为基期做环比；随最新月报滚动">环比基期 2026-11</span>
 <span class="count" id="hub-count"></span>
 </div>
 <main class="main" id="main-content">
@@ -178,29 +195,56 @@ a:hover{text-decoration:underline}
 <div class="region-head"><h2>迪拜（阿联酋）</h2><span class="rcount js-region-count">4 个主题</span></div>
 <section class="topic" id="topic-content-economy-dubai-apartment" data-topic="content/economy/dubai/apartment" data-type="market-monitoring">
 <div class="topic-head"><h3>公寓住宅市场</h3><span class="badge">市场指标监测型</span><span class="count js-topic-count">4 份报告</span></div>
+<div class="cycle">
+<div class="cycle-head"><span class="cycle-name">月度</span><span class="cycle-flag">本期更新</span></div>
 <div class="reports">
-<article class="rcard" data-search="迪拜（阿联酋） 公寓住宅市场 市场指标监测型 content/economy/dubai/apartment 季度 2026-q3 迪拜公寓住宅市场季度报告 2026-q3 content/economy/dubai/apartment/reports/2026-q3_quarterly.html"><div class="row1"><span class="tag">季度</span><span class="period">2026-Q3</span></div><h4><a href="content/economy/dubai/apartment/reports/2026-Q3_quarterly.html" target="_blank" rel="noopener" title="迪拜公寓住宅市场季度报告 2026-Q3">迪拜公寓住宅市场季度报告 2026-Q3</a></h4><div class="path">content/economy/dubai/apartment/reports/2026-Q3_quarterly.html</div></article>
+<article class="rcard" data-search="迪拜（阿联酋） 公寓住宅市场 市场指标监测型 content/economy/dubai/apartment 月度 2026-11 迪拜公寓住宅市场月度简报 2026-11 content/economy/dubai/apartment/reports/2026-11_monthly.html"><div class="row1"><span class="tag tag-updated" title="本期更新 · 环比基期 2026-10">本期更新</span><span class="tag">月度</span><span class="period">2026-11</span></div><h4><a href="content/economy/dubai/apartment/reports/2026-11_monthly.html" target="_blank" rel="noopener" title="迪拜公寓住宅市场月度简报 2026-11">迪拜公寓住宅市场月度简报 2026-11</a></h4><div class="path">content/economy/dubai/apartment/reports/2026-11_monthly.html</div></article>
+</div>
+</div>
+<div class="cycle">
+<div class="cycle-head"><span class="cycle-name">季度</span><span class="cycle-flag">本期更新</span></div>
+<div class="reports">
+<article class="rcard" data-search="迪拜（阿联酋） 公寓住宅市场 市场指标监测型 content/economy/dubai/apartment 季度 2026-q3 迪拜公寓住宅市场季度报告 2026-q3 content/economy/dubai/apartment/reports/2026-q3_quarterly.html"><div class="row1"><span class="tag tag-updated" title="本期更新 · 环比基期 2026-Q2">本期更新</span><span class="tag">季度</span><span class="period">2026-Q3</span></div><h4><a href="content/economy/dubai/apartment/reports/2026-Q3_quarterly.html" target="_blank" rel="noopener" title="迪拜公寓住宅市场季度报告 2026-Q3">迪拜公寓住宅市场季度报告 2026-Q3</a></h4><div class="path">content/economy/dubai/apartment/reports/2026-Q3_quarterly.html</div></article>
+</div>
+</div>
+<div class="cycle">
+<div class="cycle-head"><span class="cycle-name">年度</span><span class="cycle-flag">本期更新</span></div>
+<div class="reports">
+<article class="rcard" data-search="迪拜（阿联酋） 公寓住宅市场 市场指标监测型 content/economy/dubai/apartment 年度 2026 2026 年迪拜公寓市场年度策略复盘报告（机制首年） · tech-context-digest content/economy/dubai/apartment/reports/2026_annual.html"><div class="row1"><span class="tag tag-updated" title="本期更新 · 环比基期 2025">本期更新</span><span class="tag">年度</span><span class="period">2026</span></div><h4><a href="content/economy/dubai/apartment/reports/2026_annual.html" target="_blank" rel="noopener" title="2026 年迪拜公寓市场年度策略复盘报告（机制首年） · tech-context-digest">2026 年迪拜公寓市场年度策略复盘报告（机制首年） · tech-context-digest</a></h4><div class="path">content/economy/dubai/apartment/reports/2026_annual.html</div></article>
+</div>
+</div>
+<div class="cycle">
+<div class="cycle-head"><span class="cycle-name">基线</span></div>
+<div class="reports">
 <article class="rcard" data-search="迪拜（阿联酋） 公寓住宅市场 市场指标监测型 content/economy/dubai/apartment 基线 2026-11 迪拜公寓住宅市场 · 首期基线报告（2026-11） content/economy/dubai/apartment/reports/2026-11_baseline_report.html"><div class="row1"><span class="tag">基线</span><span class="period">2026-11</span></div><h4><a href="content/economy/dubai/apartment/reports/2026-11_baseline_report.html" target="_blank" rel="noopener" title="迪拜公寓住宅市场 · 首期基线报告（2026-11）">迪拜公寓住宅市场 · 首期基线报告（2026-11）</a></h4><div class="path">content/economy/dubai/apartment/reports/2026-11_baseline_report.html</div></article>
-<article class="rcard" data-search="迪拜（阿联酋） 公寓住宅市场 市场指标监测型 content/economy/dubai/apartment 月度 2026-11 迪拜公寓住宅市场月度简报 2026-11 content/economy/dubai/apartment/reports/2026-11_monthly.html"><div class="row1"><span class="tag">月度</span><span class="period">2026-11</span></div><h4><a href="content/economy/dubai/apartment/reports/2026-11_monthly.html" target="_blank" rel="noopener" title="迪拜公寓住宅市场月度简报 2026-11">迪拜公寓住宅市场月度简报 2026-11</a></h4><div class="path">content/economy/dubai/apartment/reports/2026-11_monthly.html</div></article>
-<article class="rcard" data-search="迪拜（阿联酋） 公寓住宅市场 市场指标监测型 content/economy/dubai/apartment 年度 2026 2026 年迪拜公寓市场年度策略复盘报告（机制首年） · tech-context-digest content/economy/dubai/apartment/reports/2026_annual.html"><div class="row1"><span class="tag">年度</span><span class="period">2026</span></div><h4><a href="content/economy/dubai/apartment/reports/2026_annual.html" target="_blank" rel="noopener" title="2026 年迪拜公寓市场年度策略复盘报告（机制首年） · tech-context-digest">2026 年迪拜公寓市场年度策略复盘报告（机制首年） · tech-context-digest</a></h4><div class="path">content/economy/dubai/apartment/reports/2026_annual.html</div></article>
+</div>
 </div>
 </section>
 <section class="topic" id="topic-content-tech-competitive-intelligence-dubai" data-topic="content/tech/competitive-intelligence/dubai" data-type="competitive-intelligence">
 <div class="topic-head"><h3>AI 网安竞争格局</h3><span class="badge">竞争情报监测型</span><span class="count js-topic-count">1 份报告</span></div>
+<div class="cycle">
+<div class="cycle-head"><span class="cycle-name">基线</span></div>
 <div class="reports">
 <article class="rcard" data-search="迪拜（阿联酋） ai 网安竞争格局 竞争情报监测型 content/tech/competitive-intelligence/dubai 基线 2026-12 迪拜（阿联酋）ai 网安竞争格局 · 首期基线报告 · 2026-12 content/tech/competitive-intelligence/dubai/reports/2026-12_baseline_report.html"><div class="row1"><span class="tag">基线</span><span class="period">2026-12</span></div><h4><a href="content/tech/competitive-intelligence/dubai/reports/2026-12_baseline_report.html" target="_blank" rel="noopener" title="迪拜（阿联酋）AI 网安竞争格局 · 首期基线报告 · 2026-12">迪拜（阿联酋）AI 网安竞争格局 · 首期基线报告 · 2026-12</a></h4><div class="path">content/tech/competitive-intelligence/dubai/reports/2026-12_baseline_report.html</div></article>
+</div>
 </div>
 </section>
 <section class="topic" id="topic-content-tech-industry-research-dubai" data-topic="content/tech/industry-research/dubai" data-type="industry-research">
 <div class="topic-head"><h3>AI 网安行业</h3><span class="badge">行业深度研究型</span><span class="count js-topic-count">1 份报告</span></div>
+<div class="cycle">
+<div class="cycle-head"><span class="cycle-name">基线</span></div>
 <div class="reports">
 <article class="rcard" data-search="迪拜（阿联酋） ai 网安行业 行业深度研究型 content/tech/industry-research/dubai 基线 2026-12 迪拜（阿联酋）ai 网安行业 · 首期基线报告 · 2026-12 content/tech/industry-research/dubai/reports/2026-12_baseline_report.html"><div class="row1"><span class="tag">基线</span><span class="period">2026-12</span></div><h4><a href="content/tech/industry-research/dubai/reports/2026-12_baseline_report.html" target="_blank" rel="noopener" title="迪拜（阿联酋）AI 网安行业 · 首期基线报告 · 2026-12">迪拜（阿联酋）AI 网安行业 · 首期基线报告 · 2026-12</a></h4><div class="path">content/tech/industry-research/dubai/reports/2026-12_baseline_report.html</div></article>
+</div>
 </div>
 </section>
 <section class="topic" id="topic-content-tech-security-dubai" data-topic="content/tech/security/dubai" data-type="employment-research">
 <div class="topic-head"><h3>AI 网络安全</h3><span class="badge">职业就业调研型</span><span class="count js-topic-count">1 份报告</span></div>
+<div class="cycle">
+<div class="cycle-head"><span class="cycle-name">基线</span></div>
 <div class="reports">
 <article class="rcard" data-search="迪拜（阿联酋） ai 网络安全 职业就业调研型 content/tech/security/dubai 基线 2026-11 迪拜（阿联酋）ai 网安就业 · 首期基线报告 · 2026-11 content/tech/security/dubai/reports/2026-11_baseline_report.html"><div class="row1"><span class="tag">基线</span><span class="period">2026-11</span></div><h4><a href="content/tech/security/dubai/reports/2026-11_baseline_report.html" target="_blank" rel="noopener" title="迪拜（阿联酋）AI 网安就业 · 首期基线报告 · 2026-11">迪拜（阿联酋）AI 网安就业 · 首期基线报告 · 2026-11</a></h4><div class="path">content/tech/security/dubai/reports/2026-11_baseline_report.html</div></article>
+</div>
 </div>
 </section>
 </section>
@@ -208,8 +252,11 @@ a:hover{text-decoration:underline}
 <div class="region-head"><h2>跨研究线（全球 / 迪拜）</h2><span class="rcount js-region-count">1 个主题</span></div>
 <section class="topic" id="topic-content-economy-insight" data-topic="content/economy/insight" data-type="decision-dashboard">
 <div class="topic-head"><h3>决策仪表盘</h3><span class="badge">决策仪表盘型</span><span class="count js-topic-count">1 份报告</span></div>
+<div class="cycle">
+<div class="cycle-head"><span class="cycle-name">基线</span></div>
 <div class="reports">
 <article class="rcard" data-search="跨研究线（全球 / 迪拜） 决策仪表盘 决策仪表盘型 content/economy/insight 基线 2026-12 跨研究线决策仪表盘 · 基线报告（2026-12）｜决策仪表盘 content/economy/insight/reports/2026-12_baseline_report.html"><div class="row1"><span class="tag">基线</span><span class="period">2026-12</span></div><h4><a href="content/economy/insight/reports/2026-12_baseline_report.html" target="_blank" rel="noopener" title="跨研究线决策仪表盘 · 基线报告（2026-12）｜决策仪表盘">跨研究线决策仪表盘 · 基线报告（2026-12）｜决策仪表盘</a></h4><div class="path">content/economy/insight/reports/2026-12_baseline_report.html</div></article>
+</div>
 </div>
 </section>
 </section>
@@ -217,14 +264,20 @@ a:hover{text-decoration:underline}
 <div class="region-head"><h2>全球</h2><span class="rcount js-region-count">2 个主题</span></div>
 <section class="topic" id="topic-content-economy-trends" data-topic="content/economy/trends" data-type="trend-weekly">
 <div class="topic-head"><h3>全球宏观经济趋势（主要经济体视角）</h3><span class="badge">行业趋势周报型</span><span class="count js-topic-count">1 份报告</span></div>
+<div class="cycle">
+<div class="cycle-head"><span class="cycle-name">周报</span></div>
 <div class="reports">
 <article class="rcard" data-search="全球 全球宏观经济趋势（主要经济体视角） 行业趋势周报型 content/economy/trends 周报 2026-11-13 全球宏观经济趋势周报（2026-11-13）｜经济趋势周报 content/economy/trends/reports/2026-11-13_weekly.html"><div class="row1"><span class="tag">周报</span><span class="period">2026-11-13</span></div><h4><a href="content/economy/trends/reports/2026-11-13_weekly.html" target="_blank" rel="noopener" title="全球宏观经济趋势周报（2026-11-13）｜经济趋势周报">全球宏观经济趋势周报（2026-11-13）｜经济趋势周报</a></h4><div class="path">content/economy/trends/reports/2026-11-13_weekly.html</div></article>
+</div>
 </div>
 </section>
 <section class="topic" id="topic-content-tech-weekly-roundup" data-topic="content/tech/weekly-roundup" data-type="trend-weekly">
 <div class="topic-head"><h3>Weekly Roundup</h3><span class="badge">行业趋势周报型</span><span class="count js-topic-count">1 份报告</span></div>
+<div class="cycle">
+<div class="cycle-head"><span class="cycle-name">周报</span></div>
 <div class="reports">
 <article class="rcard" data-search="全球 weekly roundup 行业趋势周报型 content/tech/weekly-roundup 周报 2026-11-13 ai 趋势周报（安全 × agent 生态）· 2026-11-13 content/tech/weekly-roundup/reports/2026-11-13_weekly.html"><div class="row1"><span class="tag">周报</span><span class="period">2026-11-13</span></div><h4><a href="content/tech/weekly-roundup/reports/2026-11-13_weekly.html" target="_blank" rel="noopener" title="AI 趋势周报（安全 × Agent 生态）· 2026-11-13">AI 趋势周报（安全 × Agent 生态）· 2026-11-13</a></h4><div class="path">content/tech/weekly-roundup/reports/2026-11-13_weekly.html</div></article>
+</div>
 </div>
 </section>
 </section>
@@ -270,6 +323,14 @@ a:hover{text-decoration:underline}
       var rc = reg.querySelector('.js-region-count');
       if (rc) rc.textContent = shownInRegion + ' 个主题';
     });
+    // 仅在筛选 / 搜索时自动展开「更多」（初始加载保持折叠）
+    if (state.q || state.topic !== 'all' || state.type !== 'all') {
+      document.querySelectorAll('.more').forEach(function (d) {
+        var hasMatch = Array.prototype.filter.call(
+          d.querySelectorAll('.rcard'), function (c) { return c.style.display !== 'none'; }).length > 0;
+        if (hasMatch) { d.open = true; }
+      });
+    }
     noResult.style.display = visibleReports ? 'none' : '';
     countEl.textContent = '共 ' + visibleTopics + ' 个主题 · ' + visibleReports + ' 份报告';
   }
@@ -307,6 +368,9 @@ a:hover{text-decoration:underline}
   });
   totop.addEventListener('click', function () {
     window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+  window.addEventListener('beforeprint', function () {
+    document.querySelectorAll('.more').forEach(function (d) { d.open = true; });
   });
 
   applyFilter();

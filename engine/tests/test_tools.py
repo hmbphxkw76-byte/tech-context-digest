@@ -17,9 +17,19 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "tools"))
 
 import _common  # noqa: E402
-from archive_reports import archive_cycle_dir, rotate_audit_docs, select_archives, select_audit_docs  # noqa: E402
+from archive_reports import KEEP, archive_cycle_dir, rotate_audit_docs, select_archives, select_audit_docs  # noqa: E402
 from automation_status import days_since_latest  # noqa: E402
-from build_hub import build_outputs, collect_topics, normalize_for_check  # noqa: E402
+from build_hub import (  # noqa: E402
+    ReportEntry,
+    Topic,
+    _render_cycle_group,
+    build_outputs,
+    collect_topics,
+    displayed_report_count,
+    global_base_period,
+    group_topic_reports,
+    normalize_for_check,
+)
 from compliance_check import check_report, cycle_rule, detect_type, load_rules  # noqa: E402
 from lint_reports import lint_html  # noqa: E402
 from restyle_reports import normalize_tables  # noqa: E402
@@ -200,13 +210,15 @@ class TestArchiveCycleDir(unittest.TestCase):
         with tempfile.TemporaryDirectory() as d:
             root = Path(d) / "sources"
             root.mkdir()
-            names = [f"2025-{m:02d}_monthly.md" for m in range(1, 13)] + ["2026-01_monthly.md"]
+            # 19 期月报源稿：默认保留 18 期（与展示窗口同源），归档最早 1 期
+            names = [f"2024-{m:02d}_monthly.md" for m in range(1, 13)] + \
+                    [f"2025-{m:02d}_monthly.md" for m in range(1, 8)]
             for n in names:
                 (root / n).write_text("# x\n", encoding="utf-8")
             moved = archive_cycle_dir(root, "content/demo/sources")
             self.assertEqual(moved, 1)
-            self.assertFalse((root / "2025-01_monthly.md").exists())
-            self.assertTrue((root / "archives" / "2025-01_monthly.md").exists())
+            self.assertFalse((root / "2024-01_monthly.md").exists())
+            self.assertTrue((root / "archives" / "2024-01_monthly.md").exists())
 
     def test_legacy_dir_not_archived(self):
         with tempfile.TemporaryDirectory() as d:
@@ -474,9 +486,15 @@ class TestBuildHubCheck(unittest.TestCase):
 
     def test_reader_lists_all_reports(self):
         reader = build_outputs()["reader.html"]
-        n_reports = sum(len(t.reports) for t in collect_topics())
+        n_reports = displayed_report_count(collect_topics())
         self.assertEqual(reader.count('href="?report='), n_reports)
         self.assertIn('id="empty"', reader)
+
+    def test_hub_shows_base_and_cycle_grouping(self):
+        hub = build_outputs()["index.html"]
+        self.assertIn("cycle-head", hub)
+        self.assertIn("环比基期 2026-11", hub)
+        self.assertIn("tag-updated", hub)
 
     def test_hub_tokens_match_canonical(self):
         from report_style import CANONICAL_CSS
@@ -496,6 +514,98 @@ class TestBuildHubCheck(unittest.TestCase):
                     CANONICAL_CSS,
                     f"hub 令牌 {key} 应与 canonical 同值",
                 )
+
+
+class TestReportCycleWindows(unittest.TestCase):
+    """报告周期窗口与环比高亮（REPORT-CYCLE-WINDOWS-SPEC v1.0）。"""
+
+    @staticmethod
+    def _r(cycle, period):
+        return ReportEntry(cycle=cycle, period=period,
+                           path=f"demo/{period}_{cycle}.html", title=period)
+
+    @classmethod
+    def _topic(cls, reports):
+        return Topic(rel="demo/line", region="demo", name="demo",
+                     type_id="market-monitoring", type_name="市场指标监测型",
+                     reports=list(reports))
+
+    @staticmethod
+    def _group(reports, cycle):
+        return {g.cycle: g for g in group_topic_reports(reports)}[cycle]
+
+    def test_period_months_and_prev(self):
+        self.assertEqual(_common.period_months("2026-11"), 2026 * 12 + 10)
+        self.assertEqual(_common.period_months("2026-Q3"), 2026 * 12 + 6)
+        self.assertEqual(_common.period_months("2026"), 2026 * 12)
+        self.assertEqual(_common.prev_period("2026-11"), "2026-10")
+        self.assertEqual(_common.prev_period("2026-01"), "2025-12")
+        self.assertEqual(_common.prev_period("2026-Q1"), "2025-Q4")
+        self.assertEqual(_common.prev_period("2026"), "2025")
+
+    def test_monthly_window_18_and_direct_6(self):
+        reports = [self._r("monthly", f"2025-{m:02d}") for m in range(1, 13)] + \
+                  [self._r("monthly", f"2026-{m:02d}") for m in range(1, 8)]
+        g = self._group(self._topic(reports), "monthly")
+        self.assertEqual(g.latest, "2026-07")
+        # 直接展示最近 6 期：2026-02..2026-07
+        self.assertEqual([r.period for r in g.direct],
+                         [f"2026-{m:02d}" for m in range(7, 1, -1)])
+        # 更多：窗口内更早的 12 期（2025-02..2026-01）；2025-01 超出 18 个月窗口
+        self.assertEqual(len(g.more), 12)
+        self.assertEqual(g.more[0].period, "2026-01")
+        self.assertEqual(g.more[-1].period, "2025-02")
+        self.assertTrue(g.current)
+
+    def test_monthly_beyond_retention_hidden(self):
+        reports = [self._r("monthly", "2024-01"), self._r("monthly", "2026-07")]
+        g = self._group(self._topic(reports), "monthly")
+        self.assertEqual([r.period for r in g.direct], ["2026-07"])
+        self.assertEqual(g.more, [])
+
+    def test_quarterly_window_24_months(self):
+        reports = [self._r("quarterly", "2024-Q3"), self._r("quarterly", "2024-Q4")] + \
+                  [self._r("quarterly", f"2025-Q{q}") for q in range(1, 5)] + \
+                  [self._r("quarterly", f"2026-Q{q}") for q in range(1, 4)]
+        g = self._group(self._topic(reports), "quarterly")
+        self.assertEqual(g.latest, "2026-Q3")
+        self.assertEqual(len(g.direct), 8)  # 近 24 个月 = 8 期
+        self.assertEqual(g.direct[-1].period, "2024-Q4")
+        self.assertEqual(g.more, [])
+
+    def test_annual_max_5(self):
+        reports = [self._r("annual", str(y)) for y in range(2018, 2027)]
+        g = self._group(self._topic(reports), "annual")
+        self.assertEqual([r.period for r in g.direct],
+                         ["2026", "2025", "2024", "2023", "2022"])
+        self.assertEqual(g.more, [])
+
+    def test_weekly_and_baseline_not_highlighted(self):
+        reports = [self._r("weekly", "2026-11-13"), self._r("baseline", "2026-11")]
+        groups = {g.cycle: g for g in group_topic_reports(self._topic(reports))}
+        self.assertFalse(groups["weekly"].current)
+        self.assertFalse(groups["baseline"].current)
+        self.assertEqual(groups["weekly"].direct[0].period, "2026-11-13")
+        self.assertEqual(groups["baseline"].direct[0].period, "2026-11")
+
+    def test_displayed_and_base(self):
+        topic = self._topic([self._r("monthly", "2026-11"),
+                             self._r("weekly", "2026-11-13")])
+        self.assertEqual(displayed_report_count([topic]), 2)
+        self.assertEqual(global_base_period([topic]), "2026-11")
+
+    def test_more_details_rendered_for_monthly(self):
+        reports = [self._r("monthly", f"2026-{m:02d}") for m in range(1, 8)]
+        topic = self._topic(reports)
+        g = self._group(topic, "monthly")
+        html = "".join(_render_cycle_group(g, topic, reader=False))
+        self.assertIn("<details class=\"more\">", html)
+        self.assertIn("更多 1 份", html)
+
+    def test_archive_keep_aligned_with_windows(self):
+        self.assertEqual(KEEP["monthly"], _common.CYCLE_WINDOWS["monthly"]["retention"])
+        self.assertEqual(KEEP["quarterly"], _common.CYCLE_WINDOWS["quarterly"]["retention"] // 3)
+        self.assertEqual(KEEP["annual"], _common.CYCLE_WINDOWS["annual"]["retention"] // 12)
 
 
 class TestCanonicalReportStyle(unittest.TestCase):

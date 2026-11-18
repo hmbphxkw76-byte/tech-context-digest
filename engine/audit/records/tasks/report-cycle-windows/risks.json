@@ -1,0 +1,14 @@
+[
+  {
+    "description": "窗口锚点若取墙钟会导致生成物漂移",
+    "id": "R-1",
+    "mitigation": "锚点取报告 period，禁用时间戳/mtime",
+    "owner": ""
+  },
+  {
+    "description": "展示窗口与归档口径漂移",
+    "id": "R-2",
+    "mitigation": "KEEP 由 CYCLE_WINDOWS 派生，单一事实源",
+    "owner": ""
+  }
+]

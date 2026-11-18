@@ -75,7 +75,7 @@ python engine/tools/build_hub.py --check   # 汇总页时效，期望：均为�
 1. **HTML 同步**：`python engine/tools/md2html.py`。
 2. **校验**：`lint_reports.py`（0 错误）→ `classify_reports.py`（无错位）。
 3. **索引刷新**：`build_index.py` → `build_hub.py`。
-4. **归档**：`archive_reports.py`（保留策略：monthly 12 / quarterly 8 / annual 5 / baseline 3；基线常驻顶层不归档）。
+4. **归档**：`archive_reports.py`（保留策略：monthly 18 / quarterly 8 / annual 5 / baseline 3；基线常驻顶层不归档）。
 5. **提交**：git 提交报告 + 登记册 + 索引产物。
 6. **浏览器抽查**：打开 HTML，确认锚点目录、表格渲染与正文数值一致。
 
