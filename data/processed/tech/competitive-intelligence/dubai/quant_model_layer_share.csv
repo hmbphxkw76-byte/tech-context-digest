@@ -1,0 +1,6 @@
+metric_id,caliber,metric,player,period,value,unit,source_id,publisher,verify_status,note
+LMS-01,全球企业 LLM API 支出份额,模型层份额,Anthropic,2026-11,55,%,S-006,Menlo Ventures,partial,部分核验（第三方研究口径）
+LMS-02,全球企业 LLM API 支出份额,模型层份额,OpenAI,2026-11,31,%,S-006,Menlo Ventures,partial,部分核验（第三方研究口径）
+LMS-03,全球企业 LLM API 支出份额,模型层份额,Google,2026-11,9,%,S-006,Menlo Ventures,partial,部分核验（第三方研究口径）
+LMS-04,全球企业 LLM API 支出份额,模型层份额,其他（自算余量）,2026-11,5,%,S-006,Menlo Ventures,derived,自算=100−已列示三家；非机构披露值
+LMS-05,全球企业 LLM API 支出份额,Anthropic+OpenAI 合计,,2026-11,86,%,S-006,Menlo Ventures,derived,自算=55+31；基线报告引用口径

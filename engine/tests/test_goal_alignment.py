@@ -10,7 +10,10 @@
 """
 from __future__ import annotations
 
+import csv
 import importlib.util
+import json
+import re
 import sys
 import unittest
 from datetime import date
@@ -156,6 +159,116 @@ class TestHubBasePeriod(unittest.TestCase):
         t = self._topic([build_hub.ReportEntry("quarterly", "2026-Q3", "p", "t")])
         self.assertFalse(build_hub.has_previous_period(
             t, build_hub.ReportEntry("monthly", "2026-11", "p", "t")))
+
+
+class TestHubCardDistinguishability(unittest.TestCase):
+    """P1-15：同周期并列的多份报告，仅凭卡片即可区分（标题 / 类型 / 地区）。"""
+
+    def _topic(self):
+        return build_hub.Topic(
+            rel="content/tech/x/dubai", region="迪拜（阿联酋）", name="X",
+            type_id="industry-research", type_name="行业深度研究型")
+
+    def _group(self):
+        return build_hub.CycleGroup(cycle="monthly", latest="2026-11",
+                                    current=True)
+
+    def test_card_carries_type_and_region(self):
+        html = build_hub._render_card(
+            self._group(),
+            build_hub.ReportEntry("monthly", "2026-11", "p.html", "读数"),
+            self._topic(), reader=False)
+        self.assertIn("tag-type", html)
+        self.assertIn("行业深度研究型", html)
+        self.assertIn('data-region="迪拜（阿联酋）"', html)
+        self.assertIn('data-type="industry-research"', html)
+
+    def test_missing_title_falls_back_to_type_and_period(self):
+        """标题缺失不再退化为纯期间（否则同期间卡片彼此不可区分）。"""
+        html = build_hub._render_card(
+            self._group(),
+            build_hub.ReportEntry("monthly", "2026-11", "p.html", ""),
+            self._topic(), reader=False)
+        self.assertIn("行业研究 · 2026-11", html)
+
+    def test_existing_title_is_preserved(self):
+        html = build_hub._render_card(
+            self._group(),
+            build_hub.ReportEntry("monthly", "2026-11", "p.html", "阿联酋网安市场读数"),
+            self._topic(), reader=False)
+        self.assertIn("阿联酋网安市场读数", html)
+        self.assertNotIn("行业研究 · 2026-11", html)
+
+    def test_generated_hub_has_one_type_tag_per_card(self):
+        text = (build_hub.ROOT / "index.html").read_text(encoding="utf-8")
+        self.assertEqual(text.count('class="rcard"'), text.count('class="tag tag-type"'))
+
+
+class TestTechDataLayerThin(unittest.TestCase):
+    """P1-14：两条 tech 业务线数据层补薄——台账 + 量化数据 + 官方来源快照落 raw。"""
+
+    LINES = {
+        "content/tech/competitive-intelligence/dubai": {
+            "processed": "data/processed/tech/competitive-intelligence/dubai",
+            "registry": "ai_cyber_competition_registry.md",
+            "quant": ["quant_model_layer_share.csv",
+                      "quant_enterprise_ai_deploy_spend.csv"],
+            "raw": "data/raw/tech/competitive-intelligence/dubai",
+        },
+        "content/tech/industry-research/dubai": {
+            "processed": "data/processed/tech/industry-research/dubai",
+            "registry": "ai_cybersecurity_indicator_registry.md",
+            "quant": ["quant_ai_cyber_market_size.csv"],
+            "raw": "data/raw/tech/industry-research/dubai",
+        },
+    }
+
+    def _pdir(self, line):
+        return ROOT / self.LINES[line]["processed"]
+
+    def test_registry_declares_sources_and_raw_pointer(self):
+        for line in self.LINES:
+            text = (self._pdir(line) / self.LINES[line]["registry"]).read_text(encoding="utf-8")
+            self.assertIn("| # |", text)
+            self.assertIn("source_registry.json", text)
+            self.assertIn("official_snapshot_manifest.json", text)
+
+    def test_quant_csvs_are_rectangular(self):
+        for line, spec in self.LINES.items():
+            for name in spec["quant"]:
+                with (self._pdir(line) / name).open(encoding="utf-8") as fh:
+                    rows = list(csv.reader(fh))
+                self.assertGreater(len(rows), 1, name)
+                width = len(rows[0])
+                for r in rows:
+                    self.assertEqual(len(r), width, f"{name}: 列数不一致")
+
+    def test_quant_source_ids_are_registered(self):
+        for line, spec in self.LINES.items():
+            reg = json.loads(
+                (self._pdir(line) / "source_registry.json").read_text(encoding="utf-8"))
+            known = {s["source_id"] for s in reg["sources"]}
+            for name in spec["quant"]:
+                text = (self._pdir(line) / name).read_text(encoding="utf-8")
+                for sid in set(re.findall(r"\bS-\d{3}\b", text)):
+                    self.assertIn(sid, known, f"{name}: {sid} 未登记")
+
+    def test_raw_manifest_matches_tier1_sources(self):
+        for line, spec in self.LINES.items():
+            raw = ROOT / spec["raw"]
+            man = json.loads(
+                (raw / "official_snapshot_manifest.json").read_text(encoding="utf-8"))
+            reg = json.loads(
+                (self._pdir(line) / "source_registry.json").read_text(encoding="utf-8"))
+            tier1 = {s["source_id"] for s in reg["sources"] if s["tier"] == 1}
+            self.assertEqual({e["source_id"] for e in man["sources"]}, tier1)
+            snaps = [e["snapshot"] for e in man["sources"] if e["snapshot"]]
+            self.assertTrue(snaps, f"{line}: 无官方快照")
+            for fname in snaps:
+                body = (raw / fname).read_text(encoding="utf-8")
+                self.assertIn("已核验摘录", body, fname)
+            self.assertEqual(man["counts"]["snapshot"], len(snaps))
+            self.assertEqual(man["counts"]["tier1_total"], len(man["sources"]))
 
 
 class TestVocabDrift(unittest.TestCase):

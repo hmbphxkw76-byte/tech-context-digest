@@ -1,0 +1,7 @@
+metric_id,caliber,region,period,value_usd_bn,unit,cagr,source_id,publisher,verify_status,note
+MKT-01,MENA 信息安全终端支出,区域（MENA）,2025,33,亿美元,0.14,S-014,Gartner,verified,预测值 F；2025-04-08 发布
+MKT-02,阿联酋网安市场（Mordor 口径）,阿联酋,2025,8.2,亿美元,0.1066,S-007,Mordor Intelligence,verified,终点 2031 年 15.1 亿美元
+MKT-03,阿联酋网安市场（GMI 口径，含硬件与服务）,阿联酋,2025,34,亿美元,0.1229,S-015,Global Market Insights,verified,约 34 亿美元
+MKT-04,阿联酋网安市场（Mordor 口径·终点）,阿联酋,2031,15.1,亿美元,0.1066,S-007,Mordor Intelligence,verified,预测终点
+MKT-05,全球 AI in cybersecurity 市场（起点）,全球,2025,315,亿美元,0.247,S-008,Grand View Research,verified,2026 发布
+MKT-06,全球 AI in cybersecurity 市场（终点）,全球,2033,1829,亿美元,0.247,S-008,Grand View Research,verified,预测终点
