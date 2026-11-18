@@ -1,4 +1,4 @@
-# 目标对齐批次执行差异报告（b0–b5）
+# 目标对齐批次执行差异报告（b0–b6）
 
 > **时点**：2026-11-18 ｜ **分支**：`task/goal-alignment-batches-67312f84` ｜ **PR**：#58
 > **续接**：会话 `2e6777f5`（「消除信息差的全面优化方案与实施清单」）未完成批次。
@@ -16,6 +16,7 @@
 | b3 | 批次 C P1 内容 / 覆盖 | **部分核验·部分完成** | P1-10 / P1-12 / P1-13 落地；其余 12 项未落地 |
 | b4 | 批次 D P2 治理卫生 | **部分核验·部分完成** | P2-2 / 3 / 4 / 8 落地；其余 4 项未落地 |
 | b5 | 收尾验收与差异报告 | **已核验·完成** | 本报告；unittest 583 通过；gate 0E / 9W |
+| b6 | 续接会话：16 项未落地清单清零（12 P1 + 4 P2） | **已核验·完成** | PR #62/#63/#64/#66/#67/#69/#70/#71/#73/#74；unittest 625 通过；gate 0E / 8W |
 
 **统一门禁**：24 → **29 项**（新增 `monitoring_render`、`consistency`、`naming`、`prompt_consistency`、`model_contract`）。
 
@@ -58,23 +59,63 @@
 - **P2-4**：类型注册表同步（由 PC-01 承载）。
 - **P2-8**：`engine/vocabulary/README.md` 新增「七·补 术语策略」。
 - **P2-2**：核实无漂移（`reports/legacy/`、`sources/legacy/` 均存在，`check_links` 通过）。
+  > **b6 纠正**：该结论有误——`reports/legacy/` 自 2026-11-17（57d1728）起即为空缺，仅 `sources/legacy/` 存在；文档漂移已于 b6 修正（见下）。
+
+### b6 续接会话：未落地清单清零（12 P1 + 4 P2）
+
+> 续接会话 `67312f84`（「继续执行未完成全部任务」）；分支 `task/p1-remaining-67312f84`；任务计划四件套 `engine/audit/records/tasks/p1-remaining/`。
+
+| 项 | 交付 | PR | 关键证据 |
+|---|---|---|---|
+| P1-1 | 摘要越级修正 | #61（启动批次） | apartment monthly / quarterly 共 2 处历史 `[W]` 消除 |
+| P1-2 | 证据强度一致性 + DC-08 | #63 | `decision_hub_check.dc08_strength`；台账 ↔ 正文强度一致 |
+| P1-3 | 「假设乘积」标注治理 | #67 | ID-04 扩展「自算须标假设乘积+区间」 |
+| P1-4 | 行动项阈值数值化 | #67 | DC-02 扩展「阈值须为数值/区间/日期」 |
+| P1-5 | trends 决策卡补全 | #67 | `DC-ECO-TRD-W1` 五字段齐全 |
+| P1-6 | 来源登记字段扩展 | #66 | R8：`verify_status=unverifiable` + `updated` |
+| P1-7 | R4 关键数字逐点指针（重设计） | #74 | 块级判定；误报 **0/19**，非合规召回 4/4，语料 0 命中 |
+| P1-8 | 死链真实修复 | #64 | 17 行处置台账；12 修复 / 5 误报复核 |
+| P1-9 | 四主题接入就绪化 | #62 | IGI-01 由 0.33 → 1.00（6/6） |
+| P1-11 | 词库规范形统一 + 缺口补录 | #69 | VD-03 清零；高频概念补录 |
+| P1-14 | 数据层补薄 + raw 落仓 | #70 | 两线台账 + 3 份量化台账 + raw 官方快照（CI 10/19、IR 7/20） |
+| P1-15 | hub 卡片信息区分度 | #70 | 卡片常驻类型标签 + 标题兜底 + `data-region`/`data-type` |
+| P2-1 | 死代码与规范外结构处置 | #71 | 保留 2（有据）/ 迁移 1 / 修正漂移 3；**未删除任何文件**（详见 tech-debt-ledger §十） |
+| P2-5 | 主题 README 治理 | #69 | 与 business-config 一致 |
+| P2-6 | 审计报表增强 | #73 | `audit_tool status` 输出 IGI 八度趋势表；`igi-snapshot` + `records/igi_history.json` |
+| P2-7 | 报告结构加固（核实） | #73 | 四份公寓报告 `nav-tabs` 各 7 处；`compliance_check` 0E（无代码改动） |
+
+**新增测试**：`TestHubCardDistinguishability`、`TestTechDataLayerThin`、`TestDeadCodeCleanup`、`TestIgiTrend`、`TestR4KeyNumber`（13 项）。
 
 ---
 
 ## 三、验收证据
 
-- `python -m unittest discover -s engine/tests` → **583 通过 / 1 跳过 / 0 失败**。
+- `python -m unittest discover -s engine/tests` → **583 通过 / 1 跳过 / 0 失败**（b5 时点）。
 - `python engine/tools/optimization_gate.py --probe` → **0 错误 / 9 警告**（警告全部 `warn_ok` 容忍，不阻断）。
 - `check_links` / `build_hub --check` / `page_build_check` / `compliance_check` / `pipeline_runner validate` 全部通过。
 - 新增测试：`TestMonitoringRender`、`TestConsistency`、`TestNaming`、`TestPromptConsistency`、`TestModelContract`、`TestCoverage`。
+
+**b6 终态（2026-11-18）**：
+
+- `python -m unittest discover -s engine/tests` → **625 通过 / 1 跳过 / 0 失败**。
+- `python engine/tools/optimization_gate.py --probe` → **0 错误 / 8 警告**。
+- 专项门禁全绿：`validate` / `validate_layout` / `check_links` / `page_build_check`（12 页 0E0W）/ `compliance_check` / `classify_reports` / `lint_reports`（10/10）/ `build_hub --check` / `pipeline_runner validate`（9 节点 / 9 门禁 / 2 闭环）。
+- `audit_tool.py status` 输出 IGI 八度趋势表（基线 gate-period 2026-12：IGI-08 = 0.8366）。
 
 ---
 
 ## 四、未落地清单（诚实登记）
 
+> **b6 状态：以下 16 项已全部落地**（逐项证据见 §二·b6）。
+
 **P1（12 项）**：P1-1 摘要越级修正（apartment monthly / quarterly 共 2 处历史 `[W]`）、P1-2 证据强度一致性 + DC-08、P1-3 「假设乘积」标注治理、P1-4 行动项阈值数值化、P1-5 trends 决策卡补全 / 豁免、P1-6 来源登记字段扩展（`unverifiable` / `updated`）、P1-7 R4 逐点指针（块级抽样误报率远高于 5%，需重新设计）、P1-8 死链真实修复、P1-9 四主题就绪化、P1-11 词库规范形统一 + 缺口补录、P1-14 数据层补薄 + raw 落仓、P1-15 hub 卡片信息区分度。
 
 **P2（4 项）**：P2-1 死代码清理（删除 / 迁移，需授权）、P2-5 主题 README 治理、P2-6 审计报表增强、P2-7 报告结构加固（核实已基本满足：baseline 属规范豁免，`compliance_check` 0E）。
+
+**两项处置与字面不同，需登记**：
+
+- **P2-1 未删除任何文件**——三处候选中两处有明确保留依据（`build_registry_v1.py` 是 tracked xlsx 生产者；`sources/legacy/` 为文档化存档），一处迁入 `sources/archives/`；仅修正真实文档漂移 3 处。详见 `tech-debt-ledger.md` §十。
+- **P2-2 原结论「两 legacy 目录均存在」有误**——`reports/legacy/` 自 2026-11-17 起空缺（有意清理，tech-debt-ledger B12–B14 closed），仅 `sources/legacy/` 存在；已在 b6 修正文档指向。
 
 ---
 
