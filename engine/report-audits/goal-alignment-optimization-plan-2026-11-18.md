@@ -71,7 +71,7 @@
 |---|---|---|
 | Q-1 | **来源门禁实际不阻断**：`optimization_gate.py:51,70` 默认 `--source-gate-period 2027-01`，而现有报告全部为 2026-11/12 → 全部判为历史，R1–R6 降级 `[W]`。实测 `source_check --gate-period 2027-01` = **0 错误 / 28 警告** | 来源质量靠自觉，R1–R6 对存量语料零约束 |
 | Q-2 | **gate-period 是固定常量，会随时间失效**：`DEFAULT_GATE_PERIOD = "2026-12"`、`DEFAULT_SOURCE_GATE_PERIOD = "2027-01"`（`optimization_gate.py:69-70`）写死在代码里。到 2027-02，2027-01 的新报告会被判为「历史」而降级放行 | 「新报告强制」的承诺**随时间自动失效**，与「动态滚动基线」的规范要求相悖 |
-| Q-3 | **R4 判定过弱**：`source_check.py:556-559` 全文任一处出现「来源/参考/source」或任一 `data-source-id` 即通过。实测全部报告 `data-source-id=0`，`src-inline` 仅出现在 CSS | 关键数字可无逐点指针，R4 形同虚设 |
+| Q-3 | ~~**R4 判定过弱**~~（**已解决**） | 原 `source_check.py` 全文任一处出现「来源/参考/source」即通过；实测全部报告 `data-source-id=0` | 关键数字可无逐点指针，R4 形同虚设 → 已改为块级逐点指针（P1-7） |
 | Q-4 | **登记粒度不足**：7 个 `source_registry.json`（357 条）字段统一为 `source_id/tier/publisher/title/url/lang/verify_status/in_synthesis/used_in`，`verify_status` 仅 `verified|media_unverified`，**无「无法核实/待核实」取值**，**无 `updated` 时间字段** | 「无法核实」这一重要等级只能降级表达；时效无法追溯 |
 | Q-5 | **死链真实存在但放行**：`optimization_gate --probe` 报 `source_check` 37 `[W]`，其中含 5 个 404/410/451 死链（如 `apartment/2026_annual`） | 死链在历史宽限下不阻断，读者可能撞上失效来源 |
 | Q-6 | **词库无门禁、无 CI**：`.github/` 全目录 grep 无 vocab 引用；`optimization_gate` 23 项 CHECKS 无词库项；`engine/tests/` 无词库测试。同步失败仅落 `engine/vocabulary/data/sync.log` | 术语→提示词漂移**静默累积**，无兜底 |
@@ -111,7 +111,7 @@
 | **C-10** | 提示词三处复述漂移（泛用版过时 + 同名跨类型） | `engine/prompts/trend-weekly/prompt-weekly-monitor.md` vs `content/tech/weekly-roundup/prompts/prompt-weekly-monitor.md`；`prompt-monthly-monitor` 跨 market-monitoring / employment-research 复用 | 信息差 | **P1** |
 | **C-11** | 类型注册表与实际脱节 | `template-registry.md` 第二节仅登记 5 条，遗漏 `content/tech/industry-research/dubai`、`content/tech/competitive-intelligence/dubai` | 质量可靠 | **P1** |
 | **C-12** | N0–N8 编排未接线，CI 只 validate | `.github/workflows/ci.yml:239-240`；`pipeline_manifest.json:168` G8 `checks=[]` 恒 skipped | 决策 | **P1** |
-| **C-13** | R4 关键数字判定过弱 | `source_check.py:556-559` | 质量可靠 | **P1** |
+| **C-13** | R4 关键数字判定过弱 | `source_check.py`（原全文匹配） | 质量可靠 | **P1**（**已落地**：改为块级逐点指针，见 P1-7） |
 | **C-14** | 数据层两条 tech 业务线过薄（仅 source_registry） | `data/processed/tech/{competitive-intelligence,industry-research}/dubai/` | 决策 | **P2** |
 | **C-15** | 死代码与规范外结构 | `content/economy/dubai/apartment/script/build_registry_v1.py`（保留：tracked xlsx 生产者，见 tech-debt-ledger §十）；`content/economy/trends/sources/archives/`（原 `followup/`，已迁移）；`content/tech/weekly-roundup/sources/legacy/`（保留：存档）；`weekly-roundup/README.md` 指向不存在的 `reports/legacy/`（已修正） | 质量可靠 | **P2** |
 
@@ -153,7 +153,7 @@
 | `info_density_check` ID-02 | 需字数>900 **且** 要点>12，要点计数因 `_plain` 无换行恒 ≤1 | 按「决策摘要节」独立单元：字符数 >900 **或** 要点数 >12（取更严）即报；要点计数改为按块级元素（`li`/`p`/`br`）统计 |
 | `info_density_check` ID-04 | 仅匹配字面「假设乘积」 | 摘要节内出现 `lvl-inferred` / `lvl-assumption` 标记或「推断」「假设」字样即报；剥离 HTML 注释后判定 |
 | `decision_hub_check` DC-01/02 | 全文包含即通过（被 CSS 注释欺骗） | 剥离 `<!-- -->` 注释；解析每张决策卡（`conclusion/evidence_strength/trigger/counter_evidence/sufficiency`）与每条行动项（五要素 + 三档）逐项校验 |
-| `source_check` R4 | 全文有来源词即豁免 | 含数字的块级断言（`p/li/td`）附近 `PROXIMITY_WINDOW` 内须有来源标记（`[FC-`/`[K\d`/`[Source:`/`data-source-id`/registry 编号） |
+| `source_check` R4 | 全文有来源词即豁免 | 含单位 / 量级数字的正文断言块（`li`/`p`）附近 `PROXIMITY_WINDOW` 内须有来源标记；已声明信息、说明性段落与咨询容器 / 章节内块不计（**已落地**，实测误报率 0/16 < 5%，语料 0 命中；详见 P1-7 行） |
 | 全部内容门禁 | 全文匹配 | 判定前先剥离 HTML 注释与 `<style>`/`<script>` 块，避免注释误判 |
 
 ### 4.3 滚动 gate-period（修 C-3）
@@ -270,7 +270,7 @@
 | P1-4 | 行动项阈值数值化 | `content/economy/insight/reports/2026-12_baseline_report.html` 等 | 阈值字段为数值/区间；DC-02 校验阈值可解析 | `decision_hub` DC-02 |
 | P1-5 | trends 决策卡补全或显式豁免 | `content/economy/trends/reports/2026-11-13_weekly.html` | 有二选一的明确处置，门禁判定一致 | `decision_hub` DC-01 |
 | P1-6 | 来源登记字段扩展 | 7 个 `data/processed/**/source_registry.json`、`source_check.py` | `verify_status` 增加 `unverifiable`（无法核实）；新增 `updated` 字段；存量数据补字段 | `source_check` R1/R7 |
-| P1-7 | R4 关键数字逐点指针 | `source_check.py:556-559` | 含数字块级断言附近窗口内须有来源标记；抽样误报率 < 5% | `source_check` R4 |
+| P1-7 | R4 关键数字逐点指针 | `source_check.py`（R4 重写） | 含数字块级断言附近窗口内须有来源标记；抽样误报率 < 5%（**已落地**：`li`/`p` 块级判定 + 来源标记 / 豁免口径；合成合规样本误报 0/16，非合规样本召回 2/2；现有 10 份正式报告 0 命中） | `source_check` R4 |
 | P1-8 | 死链真实修复 | `content/economy/dubai/apartment/reports/2026_annual.html` 等 5 处死链 | `--probe` 下死链 `[E]` 归零 | `source_check` R6 |
 | P1-9 | 四主题接入就绪化 | `content/{education,international,political,society}/prompts/business-config.md` 等 | 四主题 `iter_business_dirs()` 可发现；IGI-01 ≥ 0.5；词库骨架非空 | `vocab_drift_check`、`IGI-01` |
 | P1-10 | 提示词单一事实源收敛 + 一致性门禁 | `engine/prompts/trend-weekly/prompt-weekly-monitor.md`、`engine/prompts/` 下各周期提示词、**新增** `prompt_consistency_check.py`（置于 `engine/tools/`） | 泛用版与业务线实例一致或前者改为指针；business-config 去复述；注册表与实际业务线一致（C-11） | `optimization_gate`（**已接入 `prompt_consistency`**） |
