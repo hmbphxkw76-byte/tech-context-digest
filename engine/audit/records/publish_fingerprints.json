@@ -2,15 +2,15 @@
   "schema_version": "1.0",
   "comment": "正式发布报告指纹（sha256，确定性无时间戳）。由 publish_fingerprint.py --emit 生成。",
   "fingerprints": {
-    "content/economy/dubai/apartment/reports/2026-11_baseline_report.html": "7a63042743c15d1f4775e988600001f74df5e0397f7fea7c907e553135aec89a",
-    "content/economy/dubai/apartment/reports/2026-11_monthly.html": "ca252153a397f1e034c6121237174d7038d17776a0b6f59a56f5c45499c6ea9d",
-    "content/economy/dubai/apartment/reports/2026-Q3_quarterly.html": "602cf3402d5b6d327b08980101f40375b6c0790b35ea038335ef274263b2cea7",
-    "content/economy/dubai/apartment/reports/2026_annual.html": "8ccb4796654c97ec59ee2ba22209bf78831c579e5c0959d1471af2b1e568281e",
-    "content/economy/insight/reports/2026-12_baseline_report.html": "d977ac0c07949987870deca2b73ec7c4708c99057124ee5efad4d4a65374467c",
-    "content/economy/trends/reports/2026-11-13_weekly.html": "d5d7895bb5804ab5f78f9fd7e4fcd0f07d348e133c072cf2f751ab2c24a172d0",
-    "content/tech/competitive-intelligence/dubai/reports/2026-12_baseline_report.html": "77e9420605ca741e5cd26f67287ab420a768a63c67f2876c2f8312041b4a7f55",
-    "content/tech/industry-research/dubai/reports/2026-12_baseline_report.html": "f6655cb4db37054b3d0792c52776697770f18b332baf62b8d8a96006b0414c28",
-    "content/tech/security/dubai/reports/2026-11_baseline_report.html": "5ded919670d87c23031d5e954c6122a7f2c85b477100893d29833ebbf12b1fb5",
-    "content/tech/weekly-roundup/reports/2026-11-13_weekly.html": "ab8a690eb1a046ceb15711990de3bd103c9db135f47b2211948849e9b5a3ea75"
+    "content/economy/dubai/apartment/reports/2026-11_baseline_report.html": "5ef2964dd8569eb7e447395f252eee3e3903328a3243793324a6f8ff40de783b",
+    "content/economy/dubai/apartment/reports/2026-11_monthly.html": "ae2b4845b014a7a6e2d1bdd969ffff46ab20334ac33c712a3fa131460ecb04fd",
+    "content/economy/dubai/apartment/reports/2026-Q3_quarterly.html": "81487bdfe8c3135d3bb91db6f13110e6b44e3ff02c10611aba92f2a8c551f4ba",
+    "content/economy/dubai/apartment/reports/2026_annual.html": "0ad792349a886ad53c5150acdf361a665a7454ec01f9df18c10de35e8a4850c5",
+    "content/economy/insight/reports/2026-12_baseline_report.html": "33b85cc06bb4f66270074aef712a9d51f0b7c1acf9383fb2e1edc31f5451b242",
+    "content/economy/trends/reports/2026-11-13_weekly.html": "a45991569a4354983749a4cf53364b8aae853572bf9be87ca4d1a7c2ba8b709a",
+    "content/tech/competitive-intelligence/dubai/reports/2026-12_baseline_report.html": "a5a50ef0bab5e9be27a41d1e3c061ee75b5b2518e11382eac9e6a9ff5ad29293",
+    "content/tech/industry-research/dubai/reports/2026-12_baseline_report.html": "cec7b20698024b57970c9ca8d7e9cd177dd20a21b206e304b5b5d73d2b4f7cc6",
+    "content/tech/security/dubai/reports/2026-11_baseline_report.html": "d7144bafeaf1e92eb0109e5c698d53ba939cb835ab77c18d42073b4e1f12bb85",
+    "content/tech/weekly-roundup/reports/2026-11-13_weekly.html": "0195d474755e86d527d6923640b2602cd7836debaa1607819b12984c124b0868"
   }
 }
