@@ -1,0 +1,12 @@
+{
+ "schema_version": "1.0",
+ "business_line": "content/international/international-relations",
+ "path_rule": "business-config {{SOURCE_REGISTRY_PATH}} = data/processed/international/international-relations/source_registry.json",
+ "tier_legend": {
+  "1": "官方一手（政府 / 央行 / 统计机构 / 多边机构 / 官方发布）",
+  "2": "行业机构（研究 / 数据 / 咨询）",
+  "3": "挂牌门户（仅作线索）",
+  "4": "媒体转述（须标『需核实原文』）"
+ },
+ "sources": []
+}

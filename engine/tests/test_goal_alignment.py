@@ -74,10 +74,13 @@ class TestInfoGapMetrics(unittest.TestCase):
         self.assertAlmostEqual(vals["IGI-08"], round(1 - gap, 4), places=4)
 
     def test_theme_coverage_reflects_actual_state(self):
-        """实测口径：当前仅 economy / tech 有业务线 → 2/6。"""
+        """实测口径：P1-9 四主题接入就绪化后，六主题均有业务线 → 6/6。"""
         v, detail = info_gap.igi_01_theme_coverage()
-        self.assertEqual(v, round(2 / 6, 4))
-        self.assertEqual(set(detail["covered"]), {"economy", "tech"})
+        self.assertEqual(v, round(6 / 6, 4))
+        self.assertEqual(
+            set(detail["covered"]),
+            {"economy", "tech", "education", "international", "political", "society"},
+        )
 
 
 class TestInfoDensitySemantics(unittest.TestCase):

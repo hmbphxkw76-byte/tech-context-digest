@@ -31,9 +31,12 @@ class TestInventory(unittest.TestCase):
     def test_every_business_line_registered(self):
         import sys
         sys.path.insert(0, str(ROOT / "engine" / "tools"))
-        from _common import iter_business_dirs
+        from _common import iter_business_dirs, iter_business_reports
         reps = audit_tool.collect_reports()
         for b in iter_business_dirs():
+            # 已接入但尚未产出报告的业务线（P1-9 四主题就绪化）不参与报告登记校验
+            if not iter_business_reports(b):
+                continue
             self.assertTrue(any(r["business_line"] == b.rel for r in reps), b.rel)
 
 

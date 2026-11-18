@@ -92,7 +92,7 @@ engine/prompts/                    # 泛用版业务提示词（每类型一目�
 | industry-research | 行业深度研究型 | prompt-baseline-setup-template.md | prompt-annual-refresh-template.md | 一次性深度全景 + 年度刷新（重大事件可插刷） | content/tech/industry-research/dubai |
 | market-sizing | 市场规模测算与预测型 | prompt-baseline-setup-template.md | prompt-annual-refresh-template.md | 一次性测算建模 + 年度假设刷新与回测（失效信号可插刷） | 暂无 |
 | investment-research | 投资分析与尽调型 | prompt-baseline-setup-template.md | prompt-target-update-template.md | 首次覆盖 + 定期复核 + 事件触发结论修订 | 暂无 |
-| policy-analysis | 政策法规解读型 | prompt-baseline-setup-template.md | prompt-policy-review-template.md（覆盖两档） | 事件触发单份解读 + 年度台账复盘 | 暂无 |
+| policy-analysis | 政策法规解读型 | prompt-baseline-setup-template.md | prompt-policy-review-template.md（覆盖两档） | 事件触发单份解读 + 年度台账复盘 | content/education/education-system；content/international/international-relations；content/political/political-system；content/society/social-structure |
 | feasibility-study | 可行性与市场进入型 | prompt-baseline-setup-template.md | prompt-study-template.md（项目制） | 项目制一次性论证 + 项目复盘 | 暂无 |
 | flash-commentary | 快评·事件点评型 | prompt-baseline-setup-template.md（机制文档） | prompt-flash-note-template.md | 事件触发 72h 快评（基线期为机制建立，不出正文） | 暂无 |
 | whitepaper | 白皮书·专题深度型 | prompt-baseline-setup-template.md | prompt-topic-study-template.md（选题制） | 新选题白皮书 + 年度系列篇 + 框架修订篇 | 暂无 |
@@ -140,3 +140,4 @@ engine/prompts/                    # 泛用版业务提示词（每类型一目�
 | v1.11 | 2026-11-16 | 目录树修正 | 泛用版业务提示词已上移至 `engine/prompts/<类型ID>/`（类型目录内 `prompts/` 子目录不再存在）；`business-prompt-scaffold.md` 全 11 份已删除（内容并入泛用版）；目录树与文件清单同步修正 |
 | v1.12 | 2026-11-16 | 计数更正 | 泛用版业务提示词实际 24 份（11 目录：2+3+3+2×8）；第一节当前描述由「23 份」更正为「24 份」，v1.5 历史行的「23 份」为初版计数口径，保留不改 |
 | v1.13 | 2026-11-16 | 同步纪律恢复 | 恢复泛用版「母版定义 + 修改周期提示词须同步类型模板与 engine/prompts/ 泛用版两处」维护纪律（该表述为全仓唯一，此前目录树修正时被精简掉） |
+| v1.14 | 2026-11-18 | 四主题业务线接入 | policy-analysis 类型下新增四条业务线：`content/education/education-system`、`content/international/international-relations`、`content/political/political-system`、`content/society/social-structure`（P1-9 四主题接入就绪化；region 可选，业务线以 category 段落位） |
