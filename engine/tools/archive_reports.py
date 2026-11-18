@@ -2,7 +2,8 @@
 
 对每条业务线的 reports/ 与 sources/ 按报告类型执行滚动归档：每类只保留最新 N 期，
 超出的移动到对应目录的 archives/（创建于业务目录内，与「报告与归档都在
-各项目内部」的约定一致）。基线报告为对比锚，同样只保留最新 3 份。
+各项目内部」的约定一致）。保留期数与展示窗口同源（CYCLE_WINDOWS）：
+月 18 / 季 8 / 年 5 / 基线 3 / 周报 12。基线报告为对比锚，同样只保留最新 3 份。
 sources/legacy/ 为存档，不参与轮转。
 
 幂等：重复执行不再移动任何文件。退出码：0 = 成功；1 = 移动失败。
@@ -17,10 +18,18 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 
-from _common import detect_report, iter_business_dirs  # noqa: E402
+from _common import CYCLE_WINDOWS, detect_report, iter_business_dirs  # noqa: E402
 
-# 每类保留的最新期数（超出部分归档；周报频率高，滚动保留近 12 期）
-KEEP = {"monthly": 12, "quarterly": 8, "annual": 5, "baseline": 3, "weekly": 12}
+# 每类保留的最新期数（超出部分归档；周报频率高，滚动保留近 12 期）。
+# 与展示窗口同源（CYCLE_WINDOWS，REPORT-CYCLE-WINDOWS-SPEC v1.0）：
+# monthly 18 个月 = 18 期；quarterly 24 个月 = 8 期；annual 60 个月 = 5 期。
+KEEP = {
+    "monthly": CYCLE_WINDOWS["monthly"]["retention"],
+    "quarterly": CYCLE_WINDOWS["quarterly"]["retention"] // 3,
+    "annual": CYCLE_WINDOWS["annual"]["retention"] // 12,
+    "baseline": 3,
+    "weekly": 12,
+}
 
 # 审计文档轮转（Phase 3.2）：`engine/report-audits/` 根只保留最近 12 个月，
 # 更早的移入 `archives/`；无日期后缀的账本型文档不轮转。

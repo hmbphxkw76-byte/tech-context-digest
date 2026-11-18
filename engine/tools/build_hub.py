@@ -33,8 +33,18 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 
-from _common import (ROOT, TEMPLATE_DIR, iter_business_dirs,  # noqa: E402
-                     iter_business_reports, report_title)
+from _common import (  # noqa: E402
+    CYCLE_ORDER,
+    CYCLE_WINDOWS,
+    HIGHLIGHT_CYCLES,
+    ROOT,
+    TEMPLATE_DIR,
+    iter_business_dirs,
+    iter_business_reports,
+    period_months,
+    prev_period,
+    report_title,
+)
 
 CYCLE_LABEL = {"monthly": "月度", "quarterly": "季度", "annual": "年度", "baseline": "基线", "weekly": "周报"}
 
@@ -151,6 +161,22 @@ a:hover{text-decoration:underline}
 .noresult{padding:44px 20px;text-align:center;color:var(--ink3);font-size:13.5px;
   grid-column:1/-1}
 
+/* ── 周期分组 / 本期更新 / 更多 ── */
+.cycle{margin:0 0 10px}
+.cycle-head{display:flex;align-items:baseline;gap:8px;margin:0 0 8px}
+.cycle-name{font-size:12.5px;font-weight:600;color:var(--ink2);letter-spacing:.3px}
+.cycle-flag{font-size:11px;color:var(--green);background:var(--green-l);
+  border:1px solid #cfe6d8;border-radius:10px;padding:1px 7px;white-space:nowrap}
+.tag-updated{background:var(--green-l);color:var(--green);border-color:#cfe6d8;font-weight:600}
+.more{margin:2px 0 6px}
+.more>summary{cursor:pointer;font-size:12.5px;color:var(--navy2);list-style:none;
+  padding:6px 10px;border:1px dashed var(--line);border-radius:var(--radius-sm);user-select:none}
+.more>summary::-webkit-details-marker{display:none}
+.more>summary:hover{border-color:var(--blue);color:var(--navy)}
+.more>summary:focus-visible{outline:2px solid var(--blue);outline-offset:1px}
+.more[open]>summary{margin-bottom:8px;border-style:solid}
+.base-note{font-size:12px;color:var(--ink3);white-space:nowrap}
+
 /* ── 页脚 / 回到顶部 ── */
 .footer{text-align:center;color:var(--ink3);font-size:11.5px;padding:26px 20px 36px;
   line-height:1.9;border-top:1px solid var(--line)}
@@ -228,6 +254,14 @@ _SCRIPT = """\
       var rc = reg.querySelector('.js-region-count');
       if (rc) rc.textContent = shownInRegion + ' 个主题';
     });
+    // 仅在筛选 / 搜索时自动展开「更多」（初始加载保持折叠）
+    if (state.q || state.topic !== 'all' || state.type !== 'all') {
+      document.querySelectorAll('.more').forEach(function (d) {
+        var hasMatch = Array.prototype.filter.call(
+          d.querySelectorAll('.rcard'), function (c) { return c.style.display !== 'none'; }).length > 0;
+        if (hasMatch) { d.open = true; }
+      });
+    }
     noResult.style.display = visibleReports ? 'none' : '';
     countEl.textContent = '共 ' + visibleTopics + ' 个主题 · ' + visibleReports + ' 份报告';
   }
@@ -265,6 +299,9 @@ _SCRIPT = """\
   });
   totop.addEventListener('click', function () {
     window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+  window.addEventListener('beforeprint', function () {
+    document.querySelectorAll('.more').forEach(function (d) { d.open = true; });
   });
 
   applyFilter();
@@ -319,6 +356,7 @@ body{display:flex;flex-direction:column;height:100vh;overflow:hidden}
 .sidebar-nav .rcard .path{font-size:10px}
 .sidebar-nav .rcard.active{border-color:var(--navy2);box-shadow:var(--shadow-md)}
 .sidebar-nav .noresult{padding:18px 8px;font-size:12.5px;text-align:center}
+.sidebar-nav .more>summary{font-size:12px;padding:5px 8px}
 .reader-main{position:relative;min-width:0;min-height:0;background:var(--bg)}
 .reader-main iframe{width:100%;height:100%;border:0;display:block;background:var(--card)}
 .empty{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;
@@ -399,6 +437,14 @@ _READER_SCRIPT = """\
       var rc = reg.querySelector('.js-region-count');
       if (rc) rc.textContent = shownInRegion + ' 个主题';
     });
+    // 仅在筛选 / 搜索时自动展开「更多」（初始加载保持折叠）
+    if (state.q || state.topic !== 'all' || state.type !== 'all') {
+      nav.querySelectorAll('.more').forEach(function (d) {
+        var hasMatch = Array.prototype.filter.call(
+          d.querySelectorAll('.rcard'), function (c) { return c.style.display !== 'none'; }).length > 0;
+        if (hasMatch) { d.open = true; }
+      });
+    }
     noResult.style.display = visibleReports ? 'none' : '';
     countEl.textContent = '共 ' + visibleTopics + ' 个主题 · ' + visibleReports + ' 份报告';
     if (sidebarCountEl) sidebarCountEl.textContent = visibleReports + ' 份报告';
@@ -497,6 +543,9 @@ _READER_SCRIPT = """\
     sidebar.scrollTo({ top: 0, behavior: 'smooth' });
     try { frame.contentWindow.scrollTo({ top: 0, behavior: 'smooth' }); } catch (e) {}
   });
+  window.addEventListener('beforeprint', function () {
+    nav.querySelectorAll('.more').forEach(function (d) { d.open = true; });
+  });
 
   applyFilter();
 })();
@@ -519,6 +568,76 @@ class Topic:
     type_id: str
     type_name: str
     reports: list[ReportEntry] = field(default_factory=list)
+
+
+@dataclass
+class CycleGroup:
+    """一个主题下某周期的展示分组（窗口切分结果）。"""
+
+    cycle: str
+    latest: str
+    current: bool
+    direct: list[ReportEntry] = field(default_factory=list)
+    more: list[ReportEntry] = field(default_factory=list)
+
+
+def group_topic_reports(topic: Topic) -> list[CycleGroup]:
+    """按周期窗口切分主题报告 -> [CycleGroup]（月 → 季 → 年 → 基线 → 周报）。
+
+    窗口锚点 = 该主题该周期的最新一期（确定性，不依赖墙钟）：
+    - monthly：保留近 18 个月，最近 6 个月直接展示，更早的进「更多」完整展示；
+    - quarterly：保留并展示近 24 个月（8 期）；
+    - annual：展示近 60 个月的 5 份；
+    - baseline / weekly：不限窗口，全部直接展示（不参与环比高亮）。
+    超出保留窗口的报告不展示（由 archive_reports.py 归档）。
+    """
+    groups: list[CycleGroup] = []
+    for cycle in dict.fromkeys(r.cycle for r in topic.reports):
+        items = [r for r in topic.reports if r.cycle == cycle]
+        latest = max(r.period for r in items)
+        cfg = CYCLE_WINDOWS.get(cycle, {})
+        retention = cfg.get("retention")
+        direct_months = cfg.get("direct")
+        max_reports = cfg.get("max_reports")
+        direct: list[ReportEntry] = []
+        more: list[ReportEntry] = []
+        if max_reports:
+            ordered = sorted(items, key=lambda r: r.period, reverse=True)
+            direct = ordered[:max_reports]
+        elif retention:
+            end = period_months(latest)
+            lo = end - (retention - 1)
+            dlo = end - (direct_months - 1) if direct_months else None
+            for r in items:
+                pm = period_months(r.period)
+                if pm < lo or pm > end:
+                    continue
+                if dlo is not None and pm < dlo:
+                    more.append(r)
+                else:
+                    direct.append(r)
+        else:
+            direct = list(items)
+        direct.sort(key=lambda r: r.period, reverse=True)
+        more.sort(key=lambda r: r.period, reverse=True)
+        groups.append(CycleGroup(cycle, latest, cycle in HIGHLIGHT_CYCLES, direct, more))
+    order = {c: i for i, c in enumerate(CYCLE_ORDER)}
+    groups.sort(key=lambda g: order.get(g.cycle, len(order)))
+    return groups
+
+
+def displayed_report_count(topics: list[Topic]) -> int:
+    """窗口内展示的报告总数（不含超出保留窗口者）。"""
+    return sum(len(g.direct) + len(g.more) for t in topics for g in group_topic_reports(t))
+
+
+def global_base_period(topics: list[Topic]) -> str | None:
+    """全局环比基期：仓库内最新一期月报 period（如 2026-11）；无月报返回 None。
+
+    基期随最新月报自动滚动（2026-11 → 2026-12 → …）。
+    """
+    periods = [r.period for t in topics for r in t.reports if r.cycle == "monthly"]
+    return max(periods) if periods else None
 
 
 def parse_type_names() -> dict[str, str]:
@@ -590,12 +709,66 @@ def _search_text(topic: Topic, report: ReportEntry) -> str:
     ]).lower()
 
 
+def _render_card(group: CycleGroup, report: ReportEntry, topic: Topic, reader: bool) -> str:
+    """单张报告卡（hub 外链 / reader 站内阅读统一结构，含本期更新高亮）。"""
+    label = CYCLE_LABEL.get(report.cycle, report.cycle)
+    title = _esc(report.title or report.period)
+    badge = ""
+    if group.current and report.period == group.latest:
+        prev = _esc(prev_period(report.period))
+        badge = (f'<span class="tag tag-updated" title="本期更新 · 环比基期 {prev}">'
+                 f"本期更新</span>")
+    row1 = (f'<div class="row1">{badge}<span class="tag">{_esc(label)}</span>'
+            f'<span class="period">{_esc(report.period)}</span></div>')
+    if reader:
+        return (f'<article class="rcard" data-path="{_esc(report.path)}" '
+                f'data-search="{_esc(_search_text(topic, report))}">'
+                f"{row1}"
+                f'<h4><a href="?report={_esc(report.path)}" title="{title}">{title}</a></h4>'
+                f'<div class="path">{_esc(report.path)}</div></article>')
+    return (f'<article class="rcard" data-search="{_esc(_search_text(topic, report))}">'
+            f"{row1}"
+            f'<h4><a href="{_esc(report.path)}" target="_blank" rel="noopener" '
+            f'title="{title}">{title}</a></h4>'
+            f'<div class="path">{_esc(report.path)}</div></article>')
+
+
+def _render_cycle_group(group: CycleGroup, topic: Topic, reader: bool) -> list[str]:
+    """一个周期分组：直接展示 + 「更多」折叠（原生 details，无 JS 可用）。"""
+    flag = ""
+    if group.current and group.direct and group.direct[0].period == group.latest:
+        flag = '<span class="cycle-flag">本期更新</span>'
+    parts = [
+        '<div class="cycle">',
+        f'<div class="cycle-head"><span class="cycle-name">'
+        f'{_esc(CYCLE_LABEL.get(group.cycle, group.cycle))}</span>{flag}</div>',
+        '<div class="reports">',
+    ]
+    for r in group.direct:
+        parts.append(_render_card(group, r, topic, reader))
+    parts.append("</div>")
+    if group.more:
+        lo, hi = group.more[-1].period, group.more[0].period
+        parts.append(f'<details class="more"><summary>更多 {len(group.more)} 份 · '
+                     f'{_esc(lo)} ~ {_esc(hi)}</summary><div class="reports">')
+        for r in group.more:
+            parts.append(_render_card(group, r, topic, reader))
+        parts.append("</div></details>")
+    parts.append("</div>")
+    return parts
+
+
 def render_hub(topics: list[Topic]) -> str:
     regions = group_by_region(topics)
     n_topics = len(topics)
-    n_reports = sum(len(t.reports) for t in topics)
+    n_reports = displayed_report_count(topics)
     n_regions = len(regions)
     n_types = len({t.type_id for t in topics if t.type_id})
+    base = global_base_period(topics)
+    base_note = (
+        f'<span class="base-note" title="本期更新报告以该期为基期做环比；随最新月报滚动">'
+        f"环比基期 {_esc(base)}</span>"
+    ) if base else ""
 
     # 类型清单：全部 13 个已注册类型（按注册表顺序）
     all_types = list(parse_type_names().items())
@@ -638,6 +811,7 @@ def render_hub(topics: list[Topic]) -> str:
         )
     parts += [
         "</div>",
+        base_note,
         '<span class="count" id="hub-count"></span>',
         "</div>",
         '<main class="main" id="main-content">',
@@ -657,26 +831,16 @@ def render_hub(topics: list[Topic]) -> str:
                 f'<section class="topic" id="topic-{_esc(t.rel.replace("/", "-"))}" '
                 f'data-topic="{_esc(t.rel)}" data-type="{_esc(t.type_id)}">'
             )
+            groups = [g for g in group_topic_reports(t) if g.direct or g.more]
+            n_show = sum(len(g.direct) + len(g.more) for g in groups)
             parts.append(
                 f'<div class="topic-head"><h3>{_esc(t.name)}</h3>'
                 f'<span class="badge">{_esc(t.type_name)}</span>'
-                f'<span class="count js-topic-count">{len(t.reports)} 份报告</span></div>'
+                f'<span class="count js-topic-count">{n_show} 份报告</span></div>'
             )
-            if t.reports:
-                parts.append('<div class="reports">')
-                for r in t.reports:
-                    label = CYCLE_LABEL.get(r.cycle, r.cycle)
-                    title = _esc(r.title or r.period)
-                    parts.append(
-                        f'<article class="rcard" data-search="{_esc(_search_text(t, r))}">'
-                        f'<div class="row1"><span class="tag">{_esc(label)}</span>'
-                        f'<span class="period">{_esc(r.period)}</span></div>'
-                        f'<h4><a href="{_esc(r.path)}" target="_blank" rel="noopener" '
-                        f'title="{title}">{title}</a></h4>'
-                        f'<div class="path">{_esc(r.path)}</div>'
-                        f"</article>"
-                    )
-                parts.append("</div>")
+            if groups:
+                for g in groups:
+                    parts.extend(_render_cycle_group(g, t, reader=False))
             else:
                 parts.append(
                     '<div class="noresult">该主题暂无已产出报告。</div>'
@@ -702,10 +866,15 @@ def render_reader(topics: list[Topic]) -> str:
     侧栏报告列表 + iframe 阅读区），复用主页公共组件与交互逻辑。"""
     regions = group_by_region(topics)
     n_topics = len(topics)
-    n_reports = sum(len(t.reports) for t in topics)
+    n_reports = displayed_report_count(topics)
     n_regions = len(regions)
     n_types = len({t.type_id for t in topics if t.type_id})
     all_types = list(parse_type_names().items())
+    base = global_base_period(topics)
+    base_note = (
+        f'<span class="base-note" title="本期更新报告以该期为基期做环比；随最新月报滚动">'
+        f"环比基期 {_esc(base)}</span>"
+    ) if base else ""
 
     parts = [
         "<!DOCTYPE html>\n<html lang=\"zh-CN\">\n<head>\n<meta charset=\"utf-8\">",
@@ -750,6 +919,7 @@ def render_reader(topics: list[Topic]) -> str:
         )
     parts += [
         "</div>",
+        base_note,
         '<span class="count" id="reader-count"></span>',
         "</div>",
         '<div class="reader-body">',
@@ -773,26 +943,16 @@ def render_reader(topics: list[Topic]) -> str:
                 f'<section class="topic" data-topic="{_esc(t.rel)}" '
                 f'data-type="{_esc(t.type_id)}">'
             )
+            groups = [g for g in group_topic_reports(t) if g.direct or g.more]
+            n_show = sum(len(g.direct) + len(g.more) for g in groups)
             parts.append(
                 f'<div class="topic-head"><h3>{_esc(t.name)}</h3>'
                 f'<span class="badge">{_esc(t.type_name)}</span>'
-                f'<span class="count js-topic-count">{len(t.reports)} 份报告</span></div>'
+                f'<span class="count js-topic-count">{n_show} 份报告</span></div>'
             )
-            if t.reports:
-                parts.append('<div class="reports">')
-                for r in t.reports:
-                    label = CYCLE_LABEL.get(r.cycle, r.cycle)
-                    title = _esc(r.title or r.period)
-                    parts.append(
-                        f'<article class="rcard" data-path="{_esc(r.path)}" '
-                        f'data-search="{_esc(_search_text(t, r))}">'
-                        f'<div class="row1"><span class="tag">{_esc(label)}</span>'
-                        f'<span class="period">{_esc(r.period)}</span></div>'
-                        f'<h4><a href="?report={_esc(r.path)}" title="{title}">{title}</a></h4>'
-                        f'<div class="path">{_esc(r.path)}</div>'
-                        f"</article>"
-                    )
-                parts.append("</div>")
+            if groups:
+                for g in groups:
+                    parts.extend(_render_cycle_group(g, t, reader=True))
             else:
                 parts.append('<div class="noresult">该主题暂无已产出报告。</div>')
             parts.append("</section>")

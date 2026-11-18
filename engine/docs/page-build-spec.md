@@ -109,6 +109,10 @@
 | 时间线 | `.timeline` + `.tl-*` | 报告 | 时间轴 |
 | 筛选栏 | `.filterbar` + `.chip` + `.count` | hub | sticky、搜索、chips |
 | 报告卡 | `.rcard` + `.tag` + `.period` + `.path` | hub | 枢纽卡片 |
+| 周期分组 | `.cycle` + `.cycle-head` + `.cycle-name` + `.cycle-flag` | hub | 按周期分组展示，组头标「本期更新」 |
+| 更多 | `.more` > `summary` | hub | 月度 6–18 个月折叠，原生 `details`，无 JS 可用 |
+| 本期更新 | `.tag-updated` | hub | 环比高亮徽标（hover 显示环比基期） |
+| 基期 | `.base-note` | hub | 全局环比基期标注 |
 | 回顶 | `.totop` | hub / 报告 | 滚动超过阈值出现 |
 | 跳转 | `.skip-link` | **全部** | 键盘可跳到主内容 |
 

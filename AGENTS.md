@@ -67,6 +67,16 @@ Single-context: one `GLOSSARY.md` + `engine/docs/adr/` at the repo root. See `en
 - **阈值校准 / 版本治理**：首次中期回测 2027-06；校准前标「预校准（ex-ante）」；核验型运行不升级版本号。
 - **门禁**：`info_density_check.py` / `fact_card_check.py` / `decision_hub_check.py` / `blind_spot_check.py` 纳入 `optimization_gate.py` 统一入口；新报告缺项 = [E]，历史 = [W]。
 
+## 报告周期与展示窗口（硬性约束，适用于任何 Agent 平台）
+
+月 / 季 / 年 / 周报的保留、展示与环比高亮统一遵循 **`engine/docs/report-cycle-windows.md`（REPORT-CYCLE-WINDOWS-SPEC v1.0）**：
+
+- **月度**：保留近 18 个月；hub 直接展示最近 6 个月，6–18 个月折叠进「更多」完整展示。
+- **季度**：保留并展示近 24 个月；**年度**：展示近 60 个月的 5 份。
+- **环比高亮**：每个主题每个周期（月 / 季 / 年）的最新一期标「本期更新」（含环比基期）；基期随最新月报滚动（当前 2026-11）；无更新保持不变。
+- **周报**：按周单独展示，不环比、不高亮；**基线**为对比锚，常驻展示。
+- **单一事实源**：`engine/tools/_common.py::CYCLE_WINDOWS`；归档 `KEEP` 由其派生；窗口锚点取报告 period（确定性，不取墙钟）。
+
 ## 优化流程门禁（硬性约束，适用于任何 Agent 平台）
 
 P0/P1/P2 优化清单的全部确定性检查收敛为**单一入口** `engine/tools/optimization_gate.py`（23 项），后续所有阶段必须复用，不得另写一套：

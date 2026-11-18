@@ -587,6 +587,49 @@ def parse_period(s: str):
     raise ValueError(f"无法识别的周期: {s}")
 
 
+# ── 报告周期窗口（单一事实源，REPORT-CYCLE-WINDOWS-SPEC v1.0）──
+# retention：reports/ 内保留时长（月），超出由 archive_reports.py 滚动归档。
+# direct  ：hub 直接展示时长（月）；monthly 超出 direct 的部分折叠进「更多」完整展示。
+# max_reports：hub 最多展示的该周期报告份数（annual = 近 60 个月的 5 份）。
+# 周报 / 基线不参与环比高亮：周报按周单独展示；基线为对比锚，常驻展示。
+CYCLE_WINDOWS = {
+    "monthly": {"retention": 18, "direct": 6},
+    "quarterly": {"retention": 24},
+    "annual": {"retention": 60, "max_reports": 5},
+    "baseline": {},
+    "weekly": {},
+}
+
+# 参与「本期更新」环比高亮的周期（周报 / 基线除外）
+HIGHLIGHT_CYCLES = ("monthly", "quarterly", "annual")
+
+# 周期展示顺序（hub 分组顺序：月 → 季 → 年 → 基线 → 周报）
+CYCLE_ORDER = ("monthly", "quarterly", "annual", "baseline", "weekly")
+
+
+def period_months(period: str) -> int:
+    """周期标识 -> 绝对月序（月 / 季 / 年统一到月），用于窗口比较。
+
+    '2026-11' -> 2026*12+10；'2026-Q3' -> 2026*12+6；'2026' -> 2026*12。
+    """
+    kind, y, n = parse_period(period)
+    if kind == "month":
+        return y * 12 + (n - 1)
+    if kind == "quarter":
+        return y * 12 + (n - 1) * 3
+    return y * 12  # year：按 1 月锚定
+
+
+def prev_period(period: str) -> str:
+    """上一期标识（环比基期）：2026-11 -> 2026-10；2026-Q3 -> 2026-Q2；2026 -> 2025。"""
+    kind, y, n = parse_period(period)
+    if kind == "month":
+        return f"{y}-{n - 1:02d}" if n > 1 else f"{y - 1}-12"
+    if kind == "quarter":
+        return f"{y}-Q{n - 1}" if n > 1 else f"{y - 1}-Q4"
+    return f"{y - 1}"
+
+
 def expected_output(cycle: str, y: int, n) -> str:
     """某周期报告的落盘文件名（业务目录相对路径）。"""
     if cycle == "monthly":
