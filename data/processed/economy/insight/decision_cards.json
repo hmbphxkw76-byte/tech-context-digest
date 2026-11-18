@@ -33,7 +33,7 @@
       "card_id": "DC-AI-SEC-01",
       "line": "content/tech/security/dubai",
       "conclusion": "AI 网安就业为卖方市场，AI 安全是结构性增量主线；人才供给是最紧约束。",
-      "evidence_strength": "强",
+      "evidence_strength": "中",
       "trigger": "87% 企业招聘困难；平均填补周期 3–6 个月；AI 为最缺技能 41%",
       "counter_evidence": "阿化（Emiratisation）配额影响私企招聘；Gartner 预计 2028 年 AI 自动化部分 L1 SOC 工作，需求向价值链上移。",
       "sufficiency": "可直接决策",
