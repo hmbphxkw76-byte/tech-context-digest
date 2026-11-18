@@ -1,0 +1,26 @@
+[
+  {
+    "acceptance": "",
+    "depends_on": [],
+    "id": "T-1",
+    "phase": "",
+    "status": "completed",
+    "title": "economy README §2.2 补分类列、覆盖经济体与国家/区域经济组织并修正 IMF/巴塞尔协议III/LIBOR 别名"
+  },
+  {
+    "acceptance": "",
+    "depends_on": [],
+    "id": "T-2",
+    "phase": "",
+    "status": "completed",
+    "title": "tech README §2.2 补分类列、覆盖 9 个缺失分类并修正密码与身份认证/多因素认证规范形"
+  },
+  {
+    "acceptance": "",
+    "depends_on": [],
+    "id": "T-3",
+    "phase": "",
+    "status": "in_progress",
+    "title": "核验（vocab check/topic-check/optimization_gate/unittest）并提交"
+  }
+]

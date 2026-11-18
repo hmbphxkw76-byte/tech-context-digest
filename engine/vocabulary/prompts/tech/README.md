@@ -48,34 +48,63 @@
 
 ### 2.2 核心术语对齐表
 
-| 术语 | 同义/近义表达 | 使用边界 | 常见误解 | 信息缺口 |
-|---|---|---|---|---|
-| 大语言模型 | LLM、Large Language Model、大模型 | 与「多模态模型」区分；须注上下文窗口 | 把 LLM 当通用人工智能 | — |
-| AI Agent | 智能体、Agent | 与「模型」区分；须说明是否具工具调用/记忆 | 把聊天机器人当 Agent | — |
-| 工具调用 | Function Calling、Tool Use、函数调用 | 指模型调用外部函数；与 MCP 区分 | 把 MCP 当工具调用本身 | — |
-| 模型上下文协议 | MCP、Model Context Protocol | 开放协议；既属 Agent 框架也是攻击面 | 把 MCP 当某厂商私有协议 | 版本演进节奏 |
-| 提示注入 | Prompt Injection、PI | 针对模型指令层；与间接提示注入区分 | 把提示注入当传统注入（SQLi） | — |
-| 间接提示注入 | Indirect Prompt Injection、IPI | 通过外部数据/工具间接生效 | 与直接提示注入混用 | 检测覆盖率 |
-| 越狱 | Jailbreak、LLM 越狱 | 针对安全对齐的绕过 | 把越狱当漏洞利用（CVE） | — |
-| 数据投毒 | Data Poisoning、训练数据投毒 | 作用于训练数据；与模型投毒区分 | 把推理期注入当投毒 | — |
-| 模型窃取 | Model Extraction、Model Theft、模型提取攻击 | 黑盒查询重建；与训练数据提取区分 | 与「模型反演」混用 | — |
-| 幻觉 | Hallucination、模型幻觉 | 指与事实不符的生成；评估与治理对象 | 把幻觉当随机错误 | 度量方法未统一 |
-| 护栏 | Guardrails、LLM Guardrails、安全护栏 | 输入/输出侧的约束机制 | 把护栏当万无一失 | 误拒率数据 |
-| 基准饱和 | Benchmark Saturation | 指基准区分度下降 | 把分数上升当能力同比例提升 | 退役时间表 |
-| SWE-bench | SWE-bench Verified、SWE-bench 基准 | Verified 为人工核验子集（已退役，须注时点） | 把子集当全集 | 退役后替代基准 |
-| 密码与身份认证 | —（分类名） | 分类名，非单一术语 | 与「密码学」混用 | — |
-| 防火墙 | Firewall | 网络边界访问控制 | 把 WAF 当防火墙 | — |
-| IDS/IPS | 入侵检测/防御系统、IDS、IPS | 检测与防御一体两面 | 把 IDS 当 IPS | — |
-| SIEM | 安全信息与事件管理、Security Information and Event Management | 日志聚合与关联分析 | 把 SIEM 当自动化响应 | — |
-| CVE | Common Vulnerabilities and Exposures、公共漏洞披露 | 漏洞编号；与 CWE 区分 | 把 CVE 当漏洞分类 | — |
-| CVSS | 通用漏洞评分系统、Common Vulnerability Scoring System | 严重度评分；须注版本 | 把 CVSS 当可利用性 | — |
-| 多因素认证 | MFA、Multi-Factor Authentication、2FA | 身份认证增强 | 把 2FA 当 MFA 同义（2FA 是子集） | — |
-| 网络安全等级保护 | 等保、MLPS | 中国合规框架 | 与 ISO/IEC 27001 混用 | — |
-| GDPR | 通用数据保护条例、General Data Protection Regulation | 欧盟个人数据 | 与 UAE PDPL 混用 | — |
-| OWASP Top 10 for LLM Applications | LLM Top 10、OWASP LLM Top 10 | 应用层风险清单；与 Agentic Top 10 区分 | 把两份 Top 10 合并使用 | 版本年份 |
-| EU AI Act | 欧盟人工智能法案、Regulation (EU) 2024/1689 | 风险分级监管 | 把「AI 法案」当已全面生效 | 各章生效节点 |
+| 分类 | 术语 | 同义/近义表达 | 使用边界 | 常见误解 | 信息缺口 |
+|---|---|---|---|---|---|
+| 模型与厂商 | OpenAI | openai.com | 模型厂商；须注具体模型版本 | 把厂商名当模型名 | — |
+| 模型与厂商 | DeepSeek | 深度求索 | 中国模型厂商；须注具体模型版本 | 把厂商名当模型名 | — |
+| Agent 技术与框架 | AI Agent | 智能体、Agent | 与「模型」区分；须说明是否具工具调用/记忆 | 把聊天机器人当 Agent | — |
+| Agent 技术与框架 | 工具调用 | Function Calling、Tool Use、函数调用 | 指模型调用外部函数；与 MCP 区分 | 把 MCP 当工具调用本身 | — |
+| Agent 技术与框架 | 多智能体系统 | Multi-Agent System、MAS、多智能体协作 | 多 Agent 协同；须注编排方式 | 把单 Agent 当多智能体 | — |
+| 编码工具与 IDE | Cursor | Cursor IDE、Anysphere Cursor | AI 原生 IDE；须注版本 | 把工具名当概念 | — |
+| 编码工具与 IDE | Claude Code | Claude Code CLI | 命令行编码 Agent | 与「Claude 模型」混用 | — |
+| 应用与产品 | ChatGPT | chatgpt.com | 对话产品；须注版本与订阅层 | 把产品名当模型名 | — |
+| 应用与产品 | AI 搜索 | AI Search、答案引擎 | 搜索引擎形态；须注厂商 | 把 AI 搜索当独立模型 | — |
+| 概念与评估 | 大语言模型 | LLM、Large Language Model、大模型 | 与「多模态模型」区分；须注上下文窗口 | 把 LLM 当通用人工智能 | — |
+| 概念与评估 | 幻觉 | Hallucination、模型幻觉 | 指与事实不符的生成；评估与治理对象 | 把幻觉当随机错误 | 度量方法未统一 |
+| 概念与评估 | 微调 | Fine-tuning、SFT、监督微调 | 作用于预训练模型；须注数据 | 把微调当从头训练 | — |
+| 概念与评估 | Token | 词元 | 模型计费/上下文单位；与分词器相关 | 把 Token 当字数 | 分词器差异 |
+| 攻击技术 | 提示注入 | Prompt Injection、PI | 针对模型指令层；与间接提示注入区分 | 把提示注入当传统注入（SQLi） | — |
+| 攻击技术 | 间接提示注入 | Indirect Prompt Injection、IPI | 通过外部数据/工具间接生效 | 与直接提示注入混用 | 检测覆盖率 |
+| 攻击技术 | 越狱 | Jailbreak、LLM 越狱 | 针对安全对齐的绕过 | 把越狱当漏洞利用（CVE） | — |
+| 攻击技术 | 数据投毒 | Data Poisoning、训练数据投毒 | 作用于训练数据；与模型投毒区分 | 把推理期注入当投毒 | — |
+| 攻击技术 | 模型窃取 | Model Extraction、Model Theft、模型提取攻击 | 黑盒查询重建；与训练数据提取区分 | 与「模型反演」混用 | — |
+| 攻击技术 | 后门攻击 | Backdoor Attack、木马化模型 | 触发器驱动；与投毒区分 | 把后门当硬件木马 | — |
+| 防御与检测 | 护栏 | Guardrails、LLM Guardrails、安全护栏 | 输入/输出侧的约束机制 | 把护栏当万无一失 | 误拒率数据 |
+| 防御与检测 | 提示注入检测 | Prompt Injection Detection | 检测类；须注召回/误报 | 把检测当消除 | — |
+| 防御与检测 | 零信任 | Zero Trust、ZT | 访问控制范式；非单一产品 | 把零信任当产品名 | — |
+| 工具与平台 | PyRIT | Microsoft PyRIT | 红队测试框架 | 把工具名当概念 | — |
+| 工具与平台 | garak | LLM vulnerability scanner | LLM 漏洞扫描器 | 与 PyRIT 混用 | — |
+| 框架与标准 | 模型上下文协议 | MCP、Model Context Protocol | 开放协议；既属 Agent 框架也是攻击面 | 把 MCP 当某厂商私有协议 | 版本演进节奏 |
+| 框架与标准 | OWASP Top 10 for LLM Applications | LLM Top 10、OWASP LLM Top 10 | 应用层风险清单；与 Agentic Top 10 区分 | 把两份 Top 10 合并使用 | 版本年份 |
+| 框架与标准 | MITRE ATLAS | ATLAS、Adversarial Threat Landscape for AI Systems | AI 对抗威胁知识库；与 ATT&CK 区分 | 把 ATLAS 当 ATT&CK 子集 | — |
+| 认证与资质 | AI 红队认证考试 | AI Red Team Certification、AI 红队认证 | 认证考试；须注发证机构 | 把认证当能力等价物 | — |
+| 认证与资质 | AIGP | AI Governance Professional、IAPP AIGP | IAPP 治理认证 | 与 CISSP 混用 | — |
+| 组织与岗位 | AI 红队 | AI Red Team、LLM 红队、AI Red Teaming | 组织/岗位；须注职能边界 | 把红队当攻击者 | — |
+| 组织与岗位 | SOC | Security Operations Center、安全运营中心 | 安全运营中心；非个人岗位 | 把 SOC 当个人岗位 | — |
+| 基准与评估 | SWE-bench | SWE-bench Verified、SWE-bench 基准 | Verified 为人工核验子集（已退役，须注时点） | 把子集当全集 | 退役后替代基准 |
+| 基准与评估 | 基准饱和 | Benchmark Saturation | 指基准区分度下降 | 把分数上升当能力同比例提升 | 退役时间表 |
+| 基准与评估 | OSWorld | OSWorld 基准 | 操作系统环境 Agent 基准 | 把基准分当真实能力 | — |
+| 网络攻击技术 | 勒索软件 | Ransomware | 加密勒索；须注家族 | 把勒索软件当普通恶意软件 | — |
+| 网络攻击技术 | 钓鱼攻击 | Phishing、鱼叉钓鱼、Spear Phishing | 社会工程；鱼叉为定向子类 | 把钓鱼当技术漏洞 | — |
+| 防御与安全运营 | 防火墙 | Firewall | 网络边界访问控制 | 把 WAF 当防火墙 | — |
+| 防御与安全运营 | IDS/IPS | 入侵检测/防御系统、IDS、IPS | 检测与防御一体两面 | 把 IDS 当 IPS | — |
+| 防御与安全运营 | SIEM | 安全信息与事件管理、Security Information and Event Management | 日志聚合与关联分析 | 把 SIEM 当自动化响应 | — |
+| 防御与安全运营 | SOAR | 安全编排自动化与响应、Security Orchestration, Automation and Response | 编排自动化；与 SIEM 区分 | 把 SOAR 当 SIEM 替代 | — |
+| 漏洞与漏洞管理 | CVE | Common Vulnerabilities and Exposures、公共漏洞披露 | 漏洞编号；与 CWE 区分 | 把 CVE 当漏洞分类 | — |
+| 漏洞与漏洞管理 | CVSS | 通用漏洞评分系统、Common Vulnerability Scoring System | 严重度评分；须注版本 | 把 CVSS 当可利用性 | — |
+| 漏洞与漏洞管理 | CWE | 通用缺陷枚举、Common Weakness Enumeration | 缺陷分类；与 CVE 区分 | 把 CWE 当漏洞实例 | — |
+| 密码与身份认证 | MFA | 多因素认证、Multi-Factor Authentication、2FA | 身份认证增强；2FA 为子集 | 把 2FA 当 MFA 同义 | — |
+| 密码与身份认证 | 对称加密 | Symmetric Encryption | 加解密同钥；与非对称加密区分 | 把对称加密当「加密」全部 | — |
+| 密码与身份认证 | TLS | 传输层安全、Transport Layer Security | 传输加密；须注版本 | 把 TLS 当 VPN | — |
+| 框架与合规 | 网络安全等级保护 | 等保、MLPS | 中国合规框架 | 与 ISO/IEC 27001 混用 | — |
+| 框架与合规 | GDPR | 通用数据保护条例、General Data Protection Regulation | 欧盟个人数据 | 与 UAE PDPL 混用 | — |
+| 框架与合规 | EU AI Act | 欧盟人工智能法案、Regulation (EU) 2024/1689 | 风险分级监管 | 把「AI 法案」当已全面生效 | 各章生效节点 |
+| 框架与合规 | ISO/IEC 27001 | 信息安全管理体系、ISMS | 信息安全管理体系标准 | 与等保混用 | — |
+| 框架与合规 | NIST CSF | 网络安全框架、Cybersecurity Framework | 美国网络安全框架 | 与 ISO/IEC 27001 混用 | — |
+| 认证与岗位 | OSCP | 攻击性安全认证专业人员、Offensive Security Certified Professional | 攻防认证；须注发证机构 | 把认证当能力等价物 | — |
+| 认证与岗位 | CISM | 注册信息安全管理师、Certified Information Security Manager | 管理类认证；与 CISSP 区分 | 把 CISM 当技术认证 | — |
 
-> 全量 272 条见词库 `terms.md`；上表为核心子集，新增术语同步补登。
+> 全量 272 条见词库 `terms.md`；上表为核心子集（覆盖全部 18 分类），新增术语同步补登。
 
 ---
 
@@ -104,10 +133,10 @@
 ## 五、核验清单
 
 - [x] 定义清晰度：覆盖 / 不覆盖 / 与 `economy` 界线 / AI 与网络子领域界线齐备（第一节）
-- [x] 覆盖完整性：18 分类全部出现在 2.1；2.2 核心子集均含同义表达
+- [x] 覆盖完整性：18 分类全部出现在 2.1 与 2.2；2.2 核心子集均含同义表达
 - [x] 表达精准度：4 条提示词均有适用 / 不适用 / 边界 / 误解 / 缺口
 - [x] 无重复：AI 类与网络类近义分类（如「框架与标准」vs「框架与合规」）保持区分，未合并
-- [x] 无漂移：归并后规范形统一（如「模型上下文协议」取代「MCP」为首现形）
+- [x] 无漂移：归并后规范形统一（如「模型上下文协议」取代「MCP」为首现形；「多因素认证」用规范形「MFA」）
 - [ ] 来源核验：词库中「需核实原文」条目清零（进行中）
 
 ---
@@ -129,3 +158,4 @@
 | 版本 | 日期 | 变更 | 说明 |
 |---|---|---|---|
 | v1.0 | 2026-11-18 | 初始版本 | 归并 ai-agent / ai-security / cybersecurity 后建立完整提示词库（4 场景 + 核验 + 缺口） |
+| v1.1 | 2026-11-18 | 覆盖补齐 | 2.2 增分类列，补齐 9 个缺失分类（模型与厂商 / 编码工具与 IDE / 应用与产品 / 组织与岗位 / 工具与平台 / 认证与资质 / 网络攻击技术 / 密码与身份认证 / 认证与岗位）；规范形修正「多因素认证」→「MFA」，移除分类名占位行 |
