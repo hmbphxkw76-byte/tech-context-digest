@@ -3,10 +3,10 @@
     "tech=>../../content/tech/weekly-roundup/prompts/business-config.md": {
       "topic": "tech",
       "target": "../../content/tech/weekly-roundup/prompts/business-config.md",
-      "vocab_version": "v1.3",
-      "term_count": 119,
-      "synced_at": "2026-11-18T08:50:16",
-      "source_hash": "59334f942e1e67479a847ad49ffe91bf9cb7e3eb16adf1cd1462c9252424ad4f",
+      "vocab_version": "v1.4",
+      "term_count": 120,
+      "synced_at": "2026-11-18T20:19:11",
+      "source_hash": "b33cf68bb2f6dd00ee55654511bbdbed0be18a328f0c32dfb666e167957a40a7",
       "term_hashes": {
         "TEC-001": "17ab413495f3932feeaac5864b945d17ac5cdb7f63ec52ddae4d78463fd3f58e",
         "TEC-002": "6b0fb1bd2eb06b6ec574e1162e5c71797d30ed4bace181854479bc81953a71d9",
@@ -126,7 +126,8 @@
         "TEC-116": "835ad9611171126a24023a147df1f3bdf97f7ad4ec25ec474ea3e28a5479fe30",
         "TEC-117": "77e490e1130224e1d70248ba2946864e362caa96771d9a6e850cca2dec02a47b",
         "TEC-118": "f80c59539f7f51bde48533c8965bb4b7d8aa0f8748a17bd632f7534d2a63f24b",
-        "TEC-119": "22e496a48f2602628c0e8f2f4ad37a5bcbbb264549778e7ea2d55bcc527b8573"
+        "TEC-119": "22e496a48f2602628c0e8f2f4ad37a5bcbbb264549778e7ea2d55bcc527b8573",
+        "TEC-273": "c367d42121adb8cac335927dc26a7b0a083221d16789cb0e700a0f3196cab9c2"
       }
     },
     "tech=>../../content/tech/security/dubai/prompts/business-config.md": {
@@ -353,10 +354,10 @@
     "economy=>../../content/economy/dubai/apartment/prompts/business-config.md": {
       "topic": "economy",
       "target": "../../content/economy/dubai/apartment/prompts/business-config.md",
-      "vocab_version": "v1.4",
-      "term_count": 49,
-      "synced_at": "2026-11-18T08:32:41",
-      "source_hash": "8edeff582240145d50e6398dd19bdb4c5b9625bb8a9986e54415461adc5cfaf8",
+      "vocab_version": "v1.5",
+      "term_count": 55,
+      "synced_at": "2026-11-18T20:19:11",
+      "source_hash": "4a585ebfd0cc1b923eb9c3fdba9b7138be29fb396b17c1296573d5b486dc8c0f",
       "term_hashes": {
         "ECO-049": "87f7eddb0ae23e744e03f5d26aa48fa3f77951099cedf3c93fdb63bb1bcefb3c",
         "ECO-050": "3ca119f4b4491f9415a75b20952cf98381706862bc80f78aa3535ea19fcd166c",
@@ -406,7 +407,13 @@
         "ECO-094": "40bc54476ad767204b9cd7386020f19185a1176075b6b5f222f08a20f8f62379",
         "ECO-095": "bef9092cf24b877af3510be8872f21c3d012164bbb14b97c3a668db5ac9986ee",
         "ECO-096": "b749b0790c542ffbdce69df016f53df958ab5593a91faab0e1d84ebe2191900c",
-        "ECO-097": "0b5fd87e215260245cc875ad1b5d6aeda46db54682b5645a4f28f5d612647c8a"
+        "ECO-097": "0b5fd87e215260245cc875ad1b5d6aeda46db54682b5645a4f28f5d612647c8a",
+        "ECO-098": "a53b9e2c000df80651ea0b6d37458db0f0c68f60b7050d1bd4a18c147ea6b89c",
+        "ECO-099": "f886204a90b564d18541f8544c8a2f247b2b8ee981552825cb7bbc9542391586",
+        "ECO-100": "dacfe8d4429edca06a11b27093cdb62ad8fd180a5029657166e5566fd7571c87",
+        "ECO-101": "c36c57a4ab0fe38a739d846d7f43dd33eebba4fc6e94db23613a3555075c46d0",
+        "ECO-102": "804e137a7bc6ab9967983308b925b033b0dfd337225af649e67429044c67ae85",
+        "ECO-103": "039854431c658dbd256a9ab19ca5b5d1a1e2579aa177658255bc89f8e59c2500"
       }
     },
     "education=>../../content/education/education-system/prompts/business-config.md": {

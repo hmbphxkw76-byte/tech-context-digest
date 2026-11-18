@@ -1,6 +1,6 @@
 # 内容层（content/）
 
-研究报告内容按六主题组织；业务线位于 `content/<theme>/<维度段...>/`，维度顺序由 `engine/tools/layout.json` 声明（economy 为 `<region>/<category>`，其余主题为 `<category>/<region>`），以 `prompts/business-config.md` 为单一事实源，报告落 `reports/`。`region` 为可选维度（主题以 `optional_dimensions` 声明），省略 region 的业务线直接以 category 段落位（如 `content/economy/trends`、`content/tech/weekly-roundup`）。
+研究报告内容按六主题组织；业务线位于 `content/<theme>/<维度段...>/`，维度顺序由 `engine/tools/layout.json` 声明（economy 为 `<region>/<category>`，其余主题为 `<category>/<region>`），以 `prompts/business-config.md` 为单一事实源，报告落 `reports/`。`region` 为可选维度（六个主题均以 `optional_dimensions` 声明），省略 region 的业务线直接以 category 段落位（如 `content/economy/trends`、`content/tech/weekly-roundup`、`content/education/education-system`）。
 
 ## economy — 经济
 
@@ -17,7 +17,14 @@
 
 ## education / international / political / society
 
-- 主题已注册，暂未建立子目录（保留扩展位）。
+四主题均已接入业务线（P1-9，类型 policy-analysis，region 缺省、以 category 段落位）：
+
+- `content/education/education-system` — 教育体系与政策
+- `content/international/international-relations` — 国际关系与外交
+- `content/political/political-system` — 政治制度与治理
+- `content/society/social-structure` — 社会结构与分层
+
+> 四条业务线目前为「已接入、未产出」状态：已有 14 节 `business-config.md`、基线提示词与数据层骨架，报告正文待按各线提示词人工 / Agent 撰写。
 
 ## 约定
 
