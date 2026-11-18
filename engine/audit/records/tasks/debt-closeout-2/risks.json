@@ -1,0 +1,8 @@
+[
+  {
+    "description": "循环收口",
+    "id": "R-1",
+    "mitigation": "本任务工件以全 completed 提交，避免再次留下 in_progress",
+    "owner": ""
+  }
+]
