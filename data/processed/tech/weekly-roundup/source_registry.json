@@ -235,16 +235,17 @@
   },
   {
    "source_id": "S-017",
-   "tier": 4,
-   "publisher": "网易",
-   "title": "https://www.163.com/dy/article/LBEFH3E00556ENJI.html",
-   "url": "https://www.163.com/dy/article/LBEFH3E00556ENJI.html",
+   "tier": 2,
+   "publisher": "NVIDIA Research",
+   "title": "https://research.nvidia.com/labs/gear/gr00t-2/",
+   "url": "https://research.nvidia.com/labs/gear/gr00t-2/",
    "lang": "en",
-   "verify_status": "media_unverified",
-   "updated": "2026-11-18",
+   "verify_status": "verified",
+   "updated": "2026-11-19",
    "in_synthesis": false,
    "used_in": [
-    "reports/2026-11-13_weekly.html"
+    "reports/2026-11-13_weekly.html",
+    "reports/2026-11-20_weekly.html"
    ]
   },
   {

@@ -4,7 +4,9 @@
 锁定：
 - `metric_coverage.measure()` 覆盖字典全部 38 项，且 TOOL 指标全部为 measured / probe；
 - 覆盖率报告把未接线项显式列为 gap（不静默跳过）；
-- `metric_registry audit --coverage` 输出覆盖与缺口。
+- `metric_registry audit --coverage` 输出覆盖与缺口；
+- 2026-11-19 二次校准口径：R-03 排除来源/链接段落、L-03 仅统计指标编号
+  相邻阈值、A-03 真值核对只出候选差异不计分（见 tech-debt-ledger §十三）。
 """
 from __future__ import annotations
 
@@ -15,6 +17,7 @@ import sys
 import tempfile
 import unittest
 from pathlib import Path
+from unittest import mock
 
 ROOT = Path(__file__).resolve().parents[2]
 TOOLS = ROOT / "engine" / "tools"
@@ -67,8 +70,9 @@ class TestCoverage(unittest.TestCase):
         rec = self.meas["A-05"]
         self.assertEqual(rec["status"], "measured")
         probe = json.loads(mc.LINK_PROBE_PATH.read_text(encoding="utf-8"))
-        self.assertAlmostEqual(rec["value"], round(probe["ok"] / probe["probed"], 4),
-                               places=4)
+        self.assertAlmostEqual(
+            rec["value"], round(probe["ok"] / (probe["ok"] + probe["dead"]), 4),
+            places=4)
 
     def test_llm_metrics_are_not_faked(self):
         dictionary = json.loads((TOOLS / "metrics-dictionary.json").read_text(encoding="utf-8"))
@@ -98,8 +102,9 @@ class TestA05LinkReachability(unittest.TestCase):
             p = self._write(tmp, json.dumps({"probed": 275, "dead": 4,
                                               "unreachable": 90, "ok": 181}))
             value, detail = mc.a05_link_reachability(p)
-            self.assertAlmostEqual(value, 0.6582, places=4)
-            self.assertIn("181/275", detail)
+            # 口径：ok / (ok + dead)，unreachable 不计入分母
+            self.assertAlmostEqual(value, round(181 / 185, 4), places=4)
+            self.assertIn("181/185", detail)
 
     def test_missing_record_is_probe(self):
         value, detail = mc.a05_link_reachability(Path("/nonexistent/link-probe.json"))
@@ -178,6 +183,155 @@ class TestI04FactCard(unittest.TestCase):
         value, detail = mc.i04_fact_card(reports)
         self.assertAlmostEqual(value, 0.0, places=4)
         self.assertIn("0/1", detail)
+
+
+class TestR03DuplicateRate(unittest.TestCase):
+    """R-03 跨主题重复率口径（2026-11-19 校准）：排除来源/链接段落。"""
+
+    LINE_A = "content/tech/weekly-roundup"
+    LINE_B = "content/economy/trends"
+
+    def test_source_link_paragraph_excluded(self):
+        body = "<p>来源：Gulf News https://www.gulfnews.com/dubai</p>"
+        reports = {
+            f"{self.LINE_A}/reports/a.html": body,
+            f"{self.LINE_B}/reports/b.html": body,
+        }
+        value, detail = mc.r03_duplicate_rate(reports)
+        self.assertEqual(value, 0.0)
+        self.assertIn("重复 0/0", detail)
+
+    def test_analytical_duplicate_counted(self):
+        shared = "迪拜公寓市场在 2026 年延续供需两旺格局，价格与成交量同步上行。"
+        only_a = "科技板块的竞争情报需要以季度频率更新，保持与行业节奏一致。"
+        only_b = "经济趋势段落聚焦宏观指标，与科技板块的分析框架相互独立。"
+        reports = {
+            f"{self.LINE_A}/reports/a.html": f"<p>{shared}</p><p>{only_a}</p>",
+            f"{self.LINE_B}/reports/b.html": f"<p>{shared}</p><p>{only_b}</p>",
+        }
+        value, detail = mc.r03_duplicate_rate(reports)
+        # 共享段落被两条业务线各计一次重复：2 / 4
+        self.assertAlmostEqual(value, 0.5, places=4)
+        self.assertIn("重复 2/4", detail)
+
+    def test_same_line_duplicate_not_cross_counted(self):
+        para = "同一业务线内部的重复表述不计入跨主题重复率的分母与分子。"
+        reports = {f"{self.LINE_A}/reports/a.html": f"<p>{para}</p><p>{para}</p>"}
+        value, detail = mc.r03_duplicate_rate(reports)
+        self.assertEqual(value, 0.0)
+        self.assertIn("重复 0/1", detail)
+
+
+class TestL03ThresholdConsistency(unittest.TestCase):
+    """L-03 阈值一致率口径（2026-11-19 校准）：仅统计指标编号相邻阈值。"""
+
+    def _scoped(self):
+        """选一个 business-config 含阈值表达式且有报告的业务线，返回 (line, rel, tokens)。"""
+        for b in mc.iter_business_dirs():
+            cfg = b.path / "prompts" / "business-config.md"
+            if not cfg.exists():
+                continue
+            toks = mc._thresh_tokens(mc._plain(mc._clean(
+                cfg.read_text(encoding="utf-8", errors="replace"))))
+            if not toks:
+                continue
+            reps = [r for r in mc.iter_reports() if r.business_line == b.rel]
+            if reps:
+                return b.rel, reps[0].rel, toks
+        self.fail("无带阈值表达式且有报告的业务线")
+
+    def test_id_adjacent_threshold_included(self):
+        _, rel, toks = self._scoped()
+        tok = sorted(toks)[0]
+        value, detail = mc.l03_threshold_consistency({rel: f"<p>R06 {tok}</p>"})
+        self.assertAlmostEqual(value, 1.0, places=4)
+        self.assertIn("1/1", detail)
+
+    def test_id_adjacent_threshold_miss(self):
+        _, rel, toks = self._scoped()
+        self.assertNotIn("≥9.99%", toks)
+        value, detail = mc.l03_threshold_consistency({rel: "<p>R06 ≥9.99%</p>"})
+        self.assertAlmostEqual(value, 0.0, places=4)
+        self.assertIn("0/1", detail)
+
+    def test_general_threshold_excluded_zero_denominator(self):
+        _, rel, _ = self._scoped()
+        value, detail = mc.l03_threshold_consistency({rel: "<p>本节共 ≥1 项指标</p>"})
+        self.assertIsNone(value)
+        self.assertIn("分母 0", detail)
+
+    def test_mixed_denominator_excludes_general(self):
+        _, rel, toks = self._scoped()
+        tok = sorted(toks)[0]
+        self.assertNotIn("≥9.99%", toks)
+        filler = "本段为口径说明文字，用于拉开与指标编号的距离。" * 4
+        reports = {rel: f"<p>R06 {tok}；R07 ≥9.99%。{filler}共 ≥1 项</p>"}
+        value, detail = mc.l03_threshold_consistency(reports)
+        self.assertAlmostEqual(value, 0.5, places=4)
+        self.assertIn("1/2", detail)
+
+
+class TestA03TruthCandidates(unittest.TestCase):
+    """A-03 真值核对辅助函数（2026-11-19）：只出候选差异，不计分。"""
+
+    REG = {"R06": ("21.4", "2026Q3"), "P01": ("1817", "2026-10")}
+
+    def _patched(self):
+        return mock.patch.object(mc, "_apartment_registry",
+                                 return_value=(Path("fake.xlsx"), dict(self.REG)))
+
+    def test_result_structure(self):
+        with self._patched():
+            res = mc.a03_truth_candidates({})
+        self.assertEqual(set(res), {"registry", "compared", "same", "diff",
+                                    "uncomparable", "diffs"})
+        self.assertEqual(res["registry"], "fake.xlsx")
+        self.assertEqual(res["compared"], res["same"] + res["diff"])
+        self.assertEqual(res["diffs"], [])
+
+    def test_same_diff_uncomparable_and_scope(self):
+        reports = {
+            "content/economy/dubai/apartment/reports/a.html": "<p>R06 21.4；P01 1,817</p>",
+            "content/economy/dubai/apartment/reports/b.html": "<p>R06 20</p>",
+            "content/economy/dubai/apartment/reports/c.html": "<p>Z99 5</p>",
+            "content/tech/weekly-roundup/reports/d.html": "<p>R06 999</p>",
+        }
+        with self._patched():
+            res = mc.a03_truth_candidates(reports)
+        self.assertEqual(res["same"], 2)
+        self.assertEqual(res["diff"], 1)
+        self.assertEqual(res["uncomparable"], 1)
+        self.assertEqual(res["compared"], 3)
+        self.assertEqual(len(res["diffs"]), 1)
+        d = res["diffs"][0]
+        self.assertEqual(d["indicator"], "R06")
+        self.assertEqual(d["report_value"], "20")
+        self.assertEqual(d["registry_value"], "21.4")
+        self.assertEqual(d["registry_period"], "2026Q3")
+        self.assertIn("人工", d["note"])
+
+    def test_truth_diff_does_not_change_a03_value(self):
+        reports = {"content/economy/dubai/apartment/reports/a.html": "<p>R06 20%</p>"}
+        with self._patched():
+            res = mc.a03_truth_candidates(reports)
+        self.assertEqual(res["diff"], 1)
+        value, detail = mc.a03_numeric_consistency(reports)
+        self.assertAlmostEqual(value, 1.0, places=4)
+        self.assertIn("冲突 0/1", detail)
+
+    def test_unreadable_registry(self):
+        with mock.patch.object(mc, "_apartment_registry", return_value=(None, {})):
+            res = mc.a03_truth_candidates({})
+        self.assertEqual(res["error"], "登记册不可读")
+        self.assertIsNone(res["registry"])
+        self.assertEqual(res["compared"], 0)
+        self.assertEqual(res["diffs"], [])
+
+    def test_real_metric_value_stays_one(self):
+        # 实测口径：真值候选存在差异时，A-03 代理值仍为 1.0（真值核对不计分）。
+        value, detail = mc.a03_numeric_consistency(mc._reports_text())
+        self.assertAlmostEqual(value, 1.0, places=4)
+        self.assertIn("冲突 0/", detail)
 
 
 if __name__ == "__main__":
