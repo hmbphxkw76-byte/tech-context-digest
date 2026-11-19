@@ -175,6 +175,13 @@
       "slug": "report-cycle-windows",
       "task": "report-cycle-windows"
     },
+    "task/s3-minimal-set-8185a690": {
+      "note": "source=env:CATPAW_CONVERSATION_ID",
+      "session": "8185a6905e604f2f89e19b5e3757338b",
+      "session_short": "8185a690",
+      "slug": "s3-minimal-set",
+      "task": "s3-minimal-set"
+    },
     "task/verification-prompt-cd95c5fa": {
       "note": "source=env:CATPAW_CONVERSATION_ID",
       "session": "cd95c5fad1b94ba18de3bbc3b62eea99",
