@@ -1383,6 +1383,198 @@
           "audit_id": ""
         }
       }
+    },
+    "content/economy/dubai/apartment/reports/2026-12_monthly.html": {
+      "title": "迪拜公寓住宅市场月度简报 2026-12",
+      "kind": "business",
+      "category": "report",
+      "business_line": "content/economy/dubai/apartment",
+      "status": "in-review",
+      "stages": {
+        "draft": true,
+        "initial": true,
+        "second": false,
+        "final": false
+      },
+      "mark": true,
+      "first_seen_at": "2026-11-19",
+      "evidence": {
+        "report": "content/economy/dubai/apartment/reports/2026-12_monthly.html",
+        "business_line": "content/economy/dubai/apartment",
+        "plans": [],
+        "gate": {
+          "entry": "engine/tools/optimization_gate.py",
+          "probe": true
+        },
+        "audit": {
+          "review": "engine/audit/records/reviews/content-economy-dubai-apartment-reports-2026-12-monthly-html.json",
+          "status": "in-review",
+          "stages": {
+            "draft": true,
+            "initial": true,
+            "second": false,
+            "final": false
+          },
+          "mark_level": "pre",
+          "audit_id": "AUD-2026-11-19-001"
+        }
+      },
+      "audit_id": "AUD-2026-11-19-001",
+      "mark_level": "pre",
+      "audited_at": "2026-11-19T07:42:26+00:00"
+    },
+    "content/economy/trends/reports/2026-11-20_weekly.html": {
+      "title": "全球宏观经济趋势周报（2026-11-20）｜经济趋势周报",
+      "kind": "business",
+      "category": "report",
+      "business_line": "content/economy/trends",
+      "status": "in-review",
+      "stages": {
+        "draft": true,
+        "initial": true,
+        "second": false,
+        "final": false
+      },
+      "mark": true,
+      "first_seen_at": "2026-11-19",
+      "evidence": {
+        "report": "content/economy/trends/reports/2026-11-20_weekly.html",
+        "business_line": "content/economy/trends",
+        "plans": [],
+        "gate": {
+          "entry": "engine/tools/optimization_gate.py",
+          "probe": true
+        },
+        "audit": {
+          "review": "engine/audit/records/reviews/content-economy-trends-reports-2026-11-20-weekly-html.json",
+          "status": "in-review",
+          "stages": {
+            "draft": true,
+            "initial": true,
+            "second": false,
+            "final": false
+          },
+          "mark_level": "pre",
+          "audit_id": "AUD-2026-11-19-002"
+        }
+      },
+      "audit_id": "AUD-2026-11-19-002",
+      "mark_level": "pre",
+      "audited_at": "2026-11-19T07:42:26+00:00"
+    },
+    "content/tech/competitive-intelligence/dubai/reports/2026-12_monthly.html": {
+      "title": "迪拜（阿联酋）AI 网安竞争格局 · 月度更新报告 · 2026-12",
+      "kind": "business",
+      "category": "report",
+      "business_line": "content/tech/competitive-intelligence/dubai",
+      "status": "in-review",
+      "stages": {
+        "draft": true,
+        "initial": true,
+        "second": false,
+        "final": false
+      },
+      "mark": true,
+      "first_seen_at": "2026-11-19",
+      "evidence": {
+        "report": "content/tech/competitive-intelligence/dubai/reports/2026-12_monthly.html",
+        "business_line": "content/tech/competitive-intelligence/dubai",
+        "plans": [],
+        "gate": {
+          "entry": "engine/tools/optimization_gate.py",
+          "probe": true
+        },
+        "audit": {
+          "review": "engine/audit/records/reviews/content-tech-competitive-intelligence-dubai-reports-2026-12-monthly-html.json",
+          "status": "in-review",
+          "stages": {
+            "draft": true,
+            "initial": true,
+            "second": false,
+            "final": false
+          },
+          "mark_level": "pre",
+          "audit_id": "AUD-2026-11-19-003"
+        }
+      },
+      "audit_id": "AUD-2026-11-19-003",
+      "mark_level": "pre",
+      "audited_at": "2026-11-19T07:42:26+00:00"
+    },
+    "content/tech/weekly-roundup/reports/2026-11-20_weekly.html": {
+      "title": "AI 趋势周报（安全 × Agent 生态）· 2026-11-20",
+      "kind": "business",
+      "category": "report",
+      "business_line": "content/tech/weekly-roundup",
+      "status": "in-review",
+      "stages": {
+        "draft": true,
+        "initial": true,
+        "second": false,
+        "final": false
+      },
+      "mark": true,
+      "first_seen_at": "2026-11-19",
+      "evidence": {
+        "report": "content/tech/weekly-roundup/reports/2026-11-20_weekly.html",
+        "business_line": "content/tech/weekly-roundup",
+        "plans": [],
+        "gate": {
+          "entry": "engine/tools/optimization_gate.py",
+          "probe": true
+        },
+        "audit": {
+          "review": "engine/audit/records/reviews/content-tech-weekly-roundup-reports-2026-11-20-weekly-html.json",
+          "status": "in-review",
+          "stages": {
+            "draft": true,
+            "initial": true,
+            "second": false,
+            "final": false
+          },
+          "mark_level": "pre",
+          "audit_id": "AUD-2026-11-19-004"
+        }
+      },
+      "audit_id": "AUD-2026-11-19-004",
+      "mark_level": "pre",
+      "audited_at": "2026-11-19T07:42:26+00:00"
+    },
+    "engine/report-audits/goal-alignment-gap-checklist-2026-11-19.md": {
+      "title": "目标对齐优化方案 · 剩余缺口对齐清单（2026-11-19）",
+      "kind": "audit",
+      "category": "audit-doc",
+      "business_line": "engine/report-audits",
+      "status": "draft",
+      "stages": {
+        "draft": false,
+        "initial": false,
+        "second": false,
+        "final": false
+      },
+      "mark": false,
+      "first_seen_at": "2026-11-19",
+      "evidence": {
+        "report": "engine/report-audits/goal-alignment-gap-checklist-2026-11-19.md",
+        "business_line": "engine/report-audits",
+        "plans": [],
+        "gate": {
+          "entry": "engine/tools/optimization_gate.py",
+          "probe": true
+        },
+        "audit": {
+          "review": "",
+          "status": "draft",
+          "stages": {
+            "draft": false,
+            "initial": false,
+            "second": false,
+            "final": false
+          },
+          "mark_level": "none",
+          "audit_id": ""
+        }
+      }
     }
   }
 }
