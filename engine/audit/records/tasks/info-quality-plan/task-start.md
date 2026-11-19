@@ -30,11 +30,14 @@
 - 端到端编排：`python engine/tools/pipeline_runner.py validate`
 - 一键闭环：`python engine/tools/local_mainline.py run --slug info-quality-plan --title ...`
 
-## 任务清单（3 项，详见 tasks.json）
+## 任务清单（6 项，详见 tasks.json）
 
-- [pending] T-1 生成信息质量改进实施方案文档
-- [pending] T-2 落盘校验（naming / validate_layout / check_links / optimization_gate）
-- [pending] T-3 任务分支提交并开 PR
+- [done] T-1 生成信息质量改进实施方案文档
+- [done] T-2 落盘校验（naming / validate_layout / check_links / optimization_gate）
+- [done] T-3 任务分支提交并开 PR
+- [done] T-4 批 A 工具改动收口（IGI-05 口径校准 / A-01·A-03·L-03·R-03 接线 / 自链接防刷）
+- [done] T-5 IGI 趋势快照接入定时维护（C 轨道）
+- [done] T-6 方案文档追加「就绪 + 阻塞说明」（v1.1）
 
 ## 风险登记（2 项，详见 risks.json）
 

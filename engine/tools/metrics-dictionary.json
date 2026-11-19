@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "updated": "2026-11-15",
+  "updated": "2026-11-19",
   "comment": "指标定义与阈值的单一事实源（T3）。audit L3 四项与 quality rubric 21 项重叠处在此合并；audit/quality 消费方只读本字典。threshold 为可解析表达式（支持 >= <= > < = 与百分数）。",
   "metrics": [
     {"metric_id": "C-01", "name": "结构完整率", "formula": "实际 h2.sec 节数 / 类型骨架节数", "threshold": ">=1.0", "severity": "P0", "detected_by": "TOOL", "owner": "quality", "aliases": ["L1-结构"]},
@@ -24,7 +24,7 @@
 
     {"metric_id": "R-01", "name": "归属正确率", "formula": "归属正确的报告数 / 报告总数", "threshold": "=1.0", "severity": "P0", "detected_by": "TOOL", "owner": "quality", "aliases": []},
     {"metric_id": "R-02", "name": "维度优先级合规率", "formula": "无倒置的业务线数 / 业务线总数", "threshold": "=1.0", "severity": "P0", "detected_by": "TOOL", "owner": "quality", "aliases": []},
-    {"metric_id": "R-03", "name": "跨主题重复率", "formula": "重复段落数 / 段落总数", "threshold": "<=0.05", "severity": "P1", "detected_by": "LLM", "owner": "quality", "aliases": []},
+    {"metric_id": "R-03", "name": "跨主题重复率", "formula": "重复段落数 / 段落总数", "threshold": "<=0.05", "severity": "P1", "detected_by": "TOOL", "owner": "quality", "aliases": []},
     {"metric_id": "R-04", "name": "断头锚点率", "formula": "断头锚点数 / 锚点总数", "threshold": "=0.0", "severity": "P0", "detected_by": "TOOL", "owner": "audit+quality", "aliases": ["L1-3"]},
     {"metric_id": "R-05", "name": "主题-内容匹配率", "formula": "内容命中其业务线主题词的报告数 / 报告总数", "threshold": ">=0.95", "severity": "P1", "detected_by": "LLM", "owner": "quality", "aliases": []},
 
@@ -42,7 +42,7 @@
     {"metric_id": "IGI-02", "name": "业务线覆盖率", "formula": "有 ≥1 份正式报告的业务线数 / 已声明业务线数", "threshold": ">=0.8", "severity": "P0", "detected_by": "TOOL", "owner": "goal-alignment", "aliases": []},
     {"metric_id": "IGI-03", "name": "时效健康度", "formula": "最新报告期次距当前 ≤1 个节拍周期的业务线占比", "threshold": ">=0.8", "severity": "P1", "detected_by": "TOOL", "owner": "goal-alignment", "aliases": []},
     {"metric_id": "IGI-04", "name": "来源登记覆盖率", "formula": "报告内外部 URL 能在对应 source_registry 匹配的比例", "threshold": ">=0.95", "severity": "P0", "detected_by": "TOOL", "owner": "goal-alignment", "aliases": []},
-    {"metric_id": "IGI-05", "name": "关键断言核验率", "formula": "含数字断言块中带来源指针的比例（代理指标，窗口=同表格行或 ±240 字符，待校准）", "threshold": ">=0.9", "severity": "P1", "detected_by": "MIXED", "owner": "goal-alignment", "aliases": []},
+    {"metric_id": "IGI-05", "name": "关键断言核验率", "formula": "含数字断言块中带来源指针的比例（代理指标，窗口=同表格行或 ±240 字符）", "threshold": ">=0.9", "severity": "P1", "detected_by": "MIXED", "owner": "goal-alignment", "aliases": [], "note": "口径校准 2026-11-19：块类型=li/p + div.kpi/stat-strip（td 不纳入，与 R4 同口径）；指针=FC 卡片/fact-ref/data-source-id/来源标签/非自链接外链/登记册指标编号(K/P/M/S/R/RL+2位)/决策卡编号(DC-…)/等级+括注来源；剔除页头/版本/图注/案例/说明等非断言块。校准后 2026-12 基线 IGI-05=0.9299（旧口径 0.4726 存于 git 历史）。"},
     {"metric_id": "IGI-06", "name": "决策卡完备率", "formula": "通过卡片级字段校验（结论/证据强度/反向证据）的决策卡占比", "threshold": ">=0.95", "severity": "P0", "detected_by": "TOOL", "owner": "goal-alignment", "aliases": []},
     {"metric_id": "IGI-07", "name": "摘要合规率", "formula": "无 ID-04 越级（无推断/假设等级标记）的报告数 / 有决策摘要的报告数", "threshold": ">=1.0", "severity": "P0", "detected_by": "TOOL", "owner": "goal-alignment", "aliases": []},
     {"metric_id": "IGI-08", "name": "信息差指数", "formula": "1 − Σ w_i·(1 − IGI-i)，权重 0.25/0.15/0.15/0.15/0.10/0.10/0.10", "threshold": ">=0.8", "severity": "P0", "detected_by": "TOOL", "owner": "goal-alignment", "aliases": []}

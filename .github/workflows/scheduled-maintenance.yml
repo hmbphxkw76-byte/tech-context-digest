@@ -125,6 +125,12 @@ jobs:
           fi
           exit 0
 
+      # IGI 趋势快照（11-19 方案 C 轨道）：按 gate-period 落盘 igi_history.json，
+      # 供 audit_tool status 输出八度趋势表（上一「审计登记册 stale 检测」步骤）。
+      # 同周期重跑为覆盖，幂等；period 取滚动 gate-period（当前月 + 1）。
+      - name: IGI 趋势快照（按 gate-period 落盘）
+        run: python engine/audit/scripts/audit_tool.py igi-snapshot
+
       # 全链路唯一门禁入口（P1-2 去重）：与 ci.yml 同口径（含 probe）。
       - name: 优化流程一致性门禁（统一入口 · 含 probe）
         run: |
@@ -225,7 +231,7 @@ jobs:
             由定时维护工作流自动生成（结构补全 / 归档 / 索引 / 汇总页 / 发布日历 / 发布指纹 / 性能基线）。
             合并方式：必需检查通过后自动合并（合并队列）。
           commit-message: "chore: 定时维护（结构/校验/归档/索引/性能）"
-          add-paths: "automation-status.json index.html reader.html INDEX.md perf-status.json engine/report-audits engine/audit/records/publish_fingerprints.json engine/audit/records/audit_registry.json"
+          add-paths: "automation-status.json index.html reader.html INDEX.md perf-status.json engine/report-audits engine/audit/records/publish_fingerprints.json engine/audit/records/audit_registry.json engine/audit/records/igi_history.json"
           token: ${{ secrets.CI_PR_TOKEN }}
 
       - name: 提交失败状态（仅失败时，开 PR 记录，不自动合并）

@@ -8,8 +8,13 @@
 口径：
   - measured：本模块或既有工具可算出 0–1 的实测值；
   - probe：需网络探测（A-05 链接可达率），未探测时显式标注，不伪造；
-  - llm：语义判定项（A-02/A-04/L-01/L-02/L-04/L-05/R-03/R-05），不伪造实测值；
+  - llm：语义判定项（A-02/A-04/L-01/L-02/L-04/L-05/R-05），不伪造实测值；
+  - probe：需网络探测（A-05）或分母为 0 不可判（如 L-03 无比阈值），显式标注不伪造；
   - fallback：暂无接线（进入 tech-debt-ledger）。
+
+2026-11-19 接线：A-01（复用 IGI-05 断言级测量）/ A-03（指标编号数值冲突代理）/
+L-03（阈值表达式命中 business-config 代理）/ R-03（跨业务线重复段落代理）；
+R-03 随之由 LLM 转 TOOL（字典 detected_by 同步）。
 
 用法：
     python engine/tools/metric_coverage.py                 # 覆盖率报告
@@ -19,6 +24,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import os
 import re
 import sys
 from pathlib import Path
@@ -32,13 +38,15 @@ from _common import (  # noqa: E402
     load_layout,
     processed_data_dir,
 )
+from gate_period import AUTO as GATE_AUTO  # noqa: E402
+from gate_period import resolve as resolve_gate_period  # noqa: E402
 
 DICT_PATH = Path(__file__).resolve().parent / "metrics-dictionary.json"
 
 # 需网络探测的指标（不伪造实测值）
 PROBE_METRICS = {"A-05"}
 # 语义判定项（LLM / 人工）
-LLM_METRICS = {"A-02", "A-04", "L-01", "L-02", "L-04", "L-05", "R-03", "R-05"}
+LLM_METRICS = {"A-02", "A-04", "L-01", "L-02", "L-04", "L-05", "R-05"}
 
 H2_RE = re.compile(r'<h2\b[^>]*class="[^"]*\bsec\b[^"]*"', re.IGNORECASE)
 TITLE_RE = re.compile(r"<title[^>]*>(.*?)</title>", re.DOTALL | re.IGNORECASE)
@@ -108,12 +116,15 @@ def c03_directory(reports: dict[str, str]) -> tuple[float, str]:
 
 
 def c05_cadence(reports: dict[str, str]) -> tuple[float, str]:
-    """节拍达成率：最新报告期次处于当前或上一周期的业务线占比。"""
-    from datetime import date
-    layout = load_layout()
+    """节拍达成率：最新报告期次处于 gate-period 或上一周期的业务线占比。
+
+    确定性（2026-11-19）：锚点取 `GATE_PERIOD` 环境变量（CI 固定口径）或
+    滚动 gate-period（当前自然月 + 1），不再直接取 `date.today()`。
+    """
     dirs = list(iter_business_dirs())
-    today = date.today()
-    cur_m = today.year * 12 + today.month - 1
+    anchor = os.environ.get("GATE_PERIOD") or resolve_gate_period(GATE_AUTO)
+    m = re.fullmatch(r"(\d{4})-(\d{2})", anchor or "")
+    cur_m = (int(m.group(1)) * 12 + int(m.group(2)) - 1) if m else 0
     ok = 0
     for b in dirs:
         reps = [r for r in iter_reports() if r.business_line == b.rel]
@@ -168,7 +179,7 @@ def r02_dimension_priority(reports: dict[str, str]) -> tuple[float, str]:
 
 
 def r04_anchor(reports: dict[str, str]) -> tuple[float, str]:
-    """断头锚点率：1 - 断头锚点 / 锚点总数。"""
+    """断头锚点率：断头锚点数 / 锚点总数（口径与字典一致，越低越好，阈值 =0.0）。"""
     total = broken = 0
     for text in reports.values():
         ids = set(ID_ATTR_RE.findall(text))
@@ -176,7 +187,110 @@ def r04_anchor(reports: dict[str, str]) -> tuple[float, str]:
             total += 1
             if anchor not in ids:
                 broken += 1
-    return round(1 - _ratio(broken, total), 4), f"断头 {broken}/{total}"
+    return _ratio(broken, total), f"断头 {broken}/{total}"
+
+
+# ---------------------------------------------------------------- A/L/R 接线（2026-11-19）
+
+_IND_ID_RE = re.compile(r"\b([A-Z]{1,2}\d{2})\b")
+_NUM_RE = re.compile(r"\d[\d,\.]*")
+# 阈值表达式（L-03 代理口径 2026-11-19）：比较符 + 数字 + 可选百分号
+_THRESH_RE = re.compile(r"[≥≤<>]=?\s*\d+(?:\.\d+)?\s*%?")
+_PARA_RE = re.compile(r"<li[^>]*>.*?</li>|<p[^>]*>.*?</p>", re.DOTALL)
+_COMMENT_RE = re.compile(r"<!--.*?-->", re.DOTALL)
+_STYLE_RE = re.compile(r"<(style|script)\b[^>]*>.*?</\1>", re.DOTALL | re.IGNORECASE)
+
+
+def _clean(html: str) -> str:
+    return _STYLE_RE.sub("", _COMMENT_RE.sub("", html))
+
+
+def _norm_num(tok: str) -> str:
+    return tok.replace(",", "").rstrip(".")
+
+
+def _thresh_tokens(text: str) -> set[str]:
+    """阈值表达式集合（去空白，便于跨 config / 报告比对）。"""
+    return {m.replace(" ", "") for m in _THRESH_RE.findall(text)}
+
+
+def a01_source_traceability(reports: dict[str, str]) -> tuple[float, str]:
+    """来源可追溯率：含数字断言块中带来源指针的比例（与 IGI-05 同口径，复用其测量）。"""
+    import info_gap_metrics
+    n_num = n_src = 0
+    for text in reports.values():
+        a, b = info_gap_metrics._assertion_stats(text)
+        n_num += a
+        n_src += b
+    return _ratio(n_src, n_num), f"{n_src}/{n_num} 断言块带来源指针"
+
+
+def a03_numeric_consistency(reports: dict[str, str]) -> tuple[float, str]:
+    """数值一致率（代理）：同一指标编号在不同位置取不同数值即记冲突；
+    一致率 = 1 - 冲突指标数 / 出现指标数。"""
+    total = conflict = 0
+    for text in reports.values():
+        plain = _plain(_clean(text))
+        by_id: dict[str, set[str]] = {}
+        for m in _IND_ID_RE.finditer(plain):
+            tail = plain[m.end(): m.end() + 60]
+            nums = _NUM_RE.findall(tail)
+            if nums:
+                by_id.setdefault(m.group(1), set()).add(_norm_num(nums[0]))
+        for vs in by_id.values():
+            total += 1
+            if len(vs) > 1:
+                conflict += 1
+    return _ratio(total - conflict, total), f"冲突 {conflict}/{total} 指标"
+
+
+def l03_threshold_consistency(reports: dict[str, str]) -> tuple[float | None, str]:
+    """阈值一致率（代理）：报告中的阈值表达式与同业务线 business-config 的重合比例。
+
+    口径（2026-11-19 校准）：阈值表达式 = `[≥≤<>]=?数字[%]`；config 侧取全文表达式
+    集合，报告侧取全文表达式集合；分母 = 报告侧表达式数（仅统计 config 声明了阈值
+    的业务线）。分母为 0（无可比阈值）时返回 None，由 `measure()` 标为 probe
+    （不可判），不静默给 0。
+    """
+    hit = total = 0
+    for b in iter_business_dirs():
+        cfg = b.path / "prompts" / "business-config.md"
+        cfg_th = _thresh_tokens(_plain(_clean(cfg.read_text(encoding="utf-8", errors="replace")))) \
+            if cfg.exists() else set()
+        if not cfg_th:
+            continue
+        for r in iter_reports():
+            if r.business_line != b.rel:
+                continue
+            for th in _thresh_tokens(_plain(_clean(reports.get(r.rel, "")))):
+                total += 1
+                if th in cfg_th:
+                    hit += 1
+    if not total:
+        return None, "无可比阈值（分母 0，不可判）"
+    return _ratio(hit, total), f"{hit}/{total} 报告阈值表达式命中 business-config"
+
+
+def r03_duplicate_rate(reports: dict[str, str]) -> tuple[float, str]:
+    """跨主题重复率：跨业务线重复段落数 / 段落总数（段落级精确重合代理）。"""
+    by_line: dict[str, set[str]] = {}
+    for rel, text in reports.items():
+        line = rel.split("/reports/")[0]
+        paras = set()
+        for m in _PARA_RE.finditer(_clean(text)):
+            p = re.sub(r"\s+", "", _plain(m.group(0)))
+            if len(p) >= 20:
+                paras.add(p)
+        by_line.setdefault(line, set()).update(paras)
+    total = sum(len(s) for s in by_line.values())
+    dup = 0
+    for line, s in by_line.items():
+        others: set[str] = set()
+        for other, os_ in by_line.items():
+            if other != line:
+                others |= os_
+        dup += len(s & others)
+    return _ratio(dup, total), f"重复 {dup}/{total} 段落"
 
 
 def i01_layering(reports: dict[str, str]) -> tuple[float, str]:
@@ -274,7 +388,11 @@ def measure() -> dict[str, dict]:
         "C-04": c04_registry_coverage(reports),
         "C-05": c05_cadence(reports),
         "C-06": c06_vocab_sync(),
+        "A-01": a01_source_traceability(reports),
+        "A-03": a03_numeric_consistency(reports),
+        "L-03": l03_threshold_consistency(reports),
         "R-01": r01_attribution(reports),
+        "R-03": r03_duplicate_rate(reports),
         "R-02": r02_dimension_priority(reports),
         "R-04": r04_anchor(reports),
         "I-01": i01_layering(reports),
@@ -288,7 +406,11 @@ def measure() -> dict[str, dict]:
         "I-09": i09_reading_time(reports),
     }
     for mid, (v, d) in computed.items():
-        put(mid, v, "measured", d)
+        # 分母为 0 等不可判情形：显式标 probe，不静默给 0
+        if v is None:
+            put(mid, None, "probe", d or "不可判（分母 0）")
+        else:
+            put(mid, v, "measured", d)
     for mid, v in igi_all().items():
         put(mid, v, "measured", "info_gap_metrics 实测")
     for mid in sorted(PROBE_METRICS):

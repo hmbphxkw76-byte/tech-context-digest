@@ -9,7 +9,11 @@
   IGI-02 业务线覆盖率 = 有 ≥1 份正式报告的业务线数 / 已声明业务线数
   IGI-03 时效健康度   = 最新报告期次距当前 ≤1 个节拍周期的业务线占比
   IGI-04 来源登记覆盖率 = 报告内外部 URL 能在对应 source_registry 匹配的比例
-  IGI-05 关键断言核验率 = 含数字的列表断言中带来源指针的比例
+  IGI-05 关键断言核验率 = 含数字的正文断言块中带来源指针的比例
+                        （口径 2026-11-19 校准：块类型 = li / p + div.kpi /
+                         stat-strip；指针含登记册指标编号 / 决策卡编号 /
+                         等级+括注来源 / 非自链接外链；剔除页头 / 图注 /
+                         案例等非断言块；td 不纳入，与 R4 同口径）
   IGI-06 决策卡完备率 = 通过卡片级字段校验的决策卡占比
   IGI-07 摘要合规率   = 无 ID-04 越级的报告数 / 有决策摘要的报告数
   IGI-08 信息差指数   = 1 − 加权缺口（权重见 WEIGHTS）
@@ -49,13 +53,34 @@ _FRESHNESS_TOLERANCE_MONTHS = {"monthly": 1, "weekly": 1, "quarterly": 3, "annua
 
 _URL_RE = re.compile(r"https?://[^\s\"'<>]+")
 _FC_RE = re.compile(r"\[FC-[A-Z]+-\d+\]")
-_SRC_LABEL_RE = re.compile(r"(来源|出处|来源机构|source_id)\s*[:：]")
-_EXT_LINK_RE = re.compile(r'<a\b[^>]*href\s*=\s*"https?://', re.IGNORECASE)
+_SRC_LABEL_RE = re.compile(r"(来源|出处|来源机构|source_id|取自|引自)\s*[:：]?")
+_HREF_RE = re.compile(r'<a\b[^>]*href\s*=\s*"(https?://[^"]*)"', re.IGNORECASE)
+# 指向本仓库自身的链接是内部指针，不作为来源指针（防「自链接充数」，与 source_check 同口径）
+_SELF_LINK_RE = re.compile(r"https?://(?:www\.)?github\.com/[\w.\-]+/tech-context-digest/")
 _LVL_INFER_ASSUMP_RE = re.compile(
     r'<span class="lvl lvl-(?:inferred|assumption)">\s*(?:推断|假设)\s*</span>')
-_BLOCK_RE = re.compile(r"<li[^>]*>.*?</li>|<p[^>]*>.*?</p>", re.DOTALL)
+# 正文断言块：列表项 / 段落 + 指标卡（div.kpi / stat-strip）。
+# 不取 <td>：表格逐单元格判定误报高（P1-7 实测 164 处），与 R4 同口径；
+# 表格数值溯源由 R2 与来源登记承担。
+_BLOCK_RE = re.compile(
+    r"<li[^>]*>.*?</li>|<p[^>]*>.*?</p>"
+    r"|<div[^>]*class=\"[^\"]*\b(?:kpi|stat-strip)\b[^\"]*\"[^>]*>.*?</div>",
+    re.DOTALL)
 _TAG_RE = re.compile(r"<[^>]+>")
 _HAS_DIGIT_RE = re.compile(r"\d")
+# 来源指针的扩展形态（口径校准 2026-11-19）：
+#   ① 登记册指标编号（K/P/M/S/R/RL + 两位数字）——指向单一事实源；
+#   ② 决策卡编号（DC-<域>-<序号>）——指向决策卡；
+#   ③ 等级+括注来源（已核验/部分核验（机构名））——正文内联来源归属。
+_INDICATOR_ID_RE = re.compile(r"\b(?:K|P|M|S|R|RL)\d{2}\b")
+_DC_ID_RE = re.compile(r"\bDC-(?:[A-Z]+-)+\d+\b")
+_SOURCE_PAREN_RE = re.compile(r"(?:已核验|部分核验)(?:【[^】]*】)?[（(][^）)]+[）)]")
+# 非断言块（页头 / 版本 / 覆盖区间 / 图注 / 案例 / 说明）——不含可核验断言，
+# 纳入分母会低估核验率，故剔除（口径校准 2026-11-19）。
+_META_RE = re.compile(
+    r"报告版本|读数时点|数据截止|基线日期|来源语言|受众|覆盖\s*\d{4}"
+    r"|市场监测\s*·|安全\s*×|图\s*\d|案例\s*\d|注：|说明：|一句话结论"
+    r"|覆盖\s*\d+\s*[项个条]")
 _CARD_RE = re.compile(r'<div class="decision-card"')
 _CARD_LEVEL_KEYS = ("结论", "证据强度", "反向证据")
 _H2_RE = re.compile(r'<h2 class="sec"[^>]*>(.*?)</h2>', re.DOTALL)
@@ -161,23 +186,39 @@ def igi_04_source_coverage() -> tuple[float, dict]:
 
 
 def _source_ptr_hit(window: str) -> bool:
-    """窗口内是否存在来源指针（事实卡片 / 来源链接 / 来源编号 / data-source-id）。"""
+    """窗口内是否存在来源指针。
+
+    口径（2026-11-19 校准）：事实卡片 / fact-ref / data-source-id / 来源标签 /
+    外链（须非自链接），**或**登记册指标编号（K/P/M/S/R/RL+两位）/
+    决策卡编号（DC-…）/ 等级+括注来源（已核验/部分核验（机构名））。
+    空指针（如 `[FC-]`）因编号正则要求数字而不命中，不计入。
+    """
+    plain = _TAG_RE.sub("", window)
+    hrefs = _HREF_RE.findall(window)
+    ext_ok = any(not _SELF_LINK_RE.match(h) for h in hrefs)
     return bool(_FC_RE.search(window) or "fact-ref" in window
                 or "data-source-id" in window or _SRC_LABEL_RE.search(window)
-                or _EXT_LINK_RE.search(window))
+                or ext_ok
+                or _INDICATOR_ID_RE.search(plain) or _DC_ID_RE.search(plain)
+                or _SOURCE_PAREN_RE.search(plain))
 
 
 def _assertion_stats(text: str) -> tuple[int, int]:
     """-> (含数字断言块数, 带来源指针的断言块数)。
 
     窗口取值：若断言位于表格行内，取**整行**（来源常写在同行来源列）；
-    否则取前后各 240 字符。仅统计 `<li>` / `<p>` 两类正文断言块。
+    否则取前后各 240 字符。统计 `<li>` / `<p>` 与指标卡（`div.kpi` /
+    `stat-strip`）断言块，并剔除页头 / 版本 / 图注 / 案例 / 说明等非断言块
+    （见 `_META_RE`）。
     """
     text = _clean(text)
     n_num = n_src = 0
     for m in _BLOCK_RE.finditer(text):
         block = m.group(0)
-        if not _HAS_DIGIT_RE.search(_TAG_RE.sub("", block)):
+        plain = _TAG_RE.sub("", block)
+        if not _HAS_DIGIT_RE.search(plain):
+            continue
+        if _META_RE.search(plain):
             continue
         n_num += 1
         tr_start = text.rfind("<tr", 0, m.start())
