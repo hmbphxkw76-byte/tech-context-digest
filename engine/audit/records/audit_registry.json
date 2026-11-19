@@ -1014,12 +1014,12 @@
       "kind": "business",
       "category": "report",
       "business_line": "content/economy/insight",
-      "status": "in-review",
+      "status": "audited",
       "stages": {
         "draft": true,
         "initial": true,
         "second": true,
-        "final": false
+        "final": true
       },
       "mark": true,
       "first_seen_at": "2026-11-17",
@@ -1047,32 +1047,32 @@
         },
         "audit": {
           "review": "engine/audit/records/reviews/content-economy-insight-reports-2026-12-baseline-report-html.json",
-          "status": "in-review",
+          "status": "audited",
           "stages": {
             "draft": true,
             "initial": true,
             "second": true,
-            "final": false
+            "final": true
           },
-          "mark_level": "pre",
+          "mark_level": "full",
           "audit_id": "AUD-2026-11-18-001"
         }
       },
       "audit_id": "AUD-2026-11-18-001",
-      "mark_level": "pre",
-      "audited_at": "2026-11-18T01:38:54+00:00"
+      "mark_level": "full",
+      "audited_at": "2026-11-19T13:30:26+00:00"
     },
     "content/economy/trends/reports/2026-11-13_weekly.html": {
       "title": "全球宏观经济趋势周报（2026-11-13）｜经济趋势周报",
       "kind": "business",
       "category": "report",
       "business_line": "content/economy/trends",
-      "status": "in-review",
+      "status": "audited",
       "stages": {
         "draft": true,
         "initial": true,
         "second": true,
-        "final": false
+        "final": true
       },
       "mark": true,
       "first_seen_at": "2026-11-17",
@@ -1100,32 +1100,32 @@
         },
         "audit": {
           "review": "engine/audit/records/reviews/content-economy-trends-reports-2026-11-13-weekly-html.json",
-          "status": "in-review",
+          "status": "audited",
           "stages": {
             "draft": true,
             "initial": true,
             "second": true,
-            "final": false
+            "final": true
           },
-          "mark_level": "pre",
+          "mark_level": "full",
           "audit_id": "AUD-2026-11-18-002"
         }
       },
       "audit_id": "AUD-2026-11-18-002",
-      "mark_level": "pre",
-      "audited_at": "2026-11-18T01:38:54+00:00"
+      "mark_level": "full",
+      "audited_at": "2026-11-19T13:30:26+00:00"
     },
     "content/tech/weekly-roundup/reports/2026-11-13_weekly.html": {
       "title": "AI 趋势周报（安全 × Agent 生态）· 2026-11-13",
       "kind": "business",
       "category": "report",
       "business_line": "content/tech/weekly-roundup",
-      "status": "in-review",
+      "status": "audited",
       "stages": {
         "draft": true,
         "initial": true,
         "second": true,
-        "final": false
+        "final": true
       },
       "mark": true,
       "first_seen_at": "2026-11-17",
@@ -1153,20 +1153,20 @@
         },
         "audit": {
           "review": "engine/audit/records/reviews/content-tech-weekly-roundup-reports-2026-11-13-weekly-html.json",
-          "status": "in-review",
+          "status": "audited",
           "stages": {
             "draft": true,
             "initial": true,
             "second": true,
-            "final": false
+            "final": true
           },
-          "mark_level": "pre",
+          "mark_level": "full",
           "audit_id": "AUD-2026-11-18-003"
         }
       },
       "audit_id": "AUD-2026-11-18-003",
-      "mark_level": "pre",
-      "audited_at": "2026-11-18T01:38:54+00:00"
+      "mark_level": "full",
+      "audited_at": "2026-11-19T13:30:26+00:00"
     },
     "engine/report-audits/goal-alignment-optimization-plan-2026-11-18.md": {
       "title": "tech-context-digest 目标对齐优化解决方案（GOAL-ALIGNMENT-PLAN v1.0）",
@@ -1389,12 +1389,12 @@
       "kind": "business",
       "category": "report",
       "business_line": "content/economy/dubai/apartment",
-      "status": "in-review",
+      "status": "audited",
       "stages": {
         "draft": true,
         "initial": true,
         "second": true,
-        "final": false
+        "final": true
       },
       "mark": true,
       "first_seen_at": "2026-11-19",
@@ -1408,32 +1408,32 @@
         },
         "audit": {
           "review": "engine/audit/records/reviews/content-economy-dubai-apartment-reports-2026-12-monthly-html.json",
-          "status": "in-review",
+          "status": "audited",
           "stages": {
             "draft": true,
             "initial": true,
             "second": true,
-            "final": false
+            "final": true
           },
-          "mark_level": "pre",
+          "mark_level": "full",
           "audit_id": "AUD-2026-11-19-001"
         }
       },
       "audit_id": "AUD-2026-11-19-001",
-      "mark_level": "pre",
-      "audited_at": "2026-11-19T07:42:26+00:00"
+      "mark_level": "full",
+      "audited_at": "2026-11-19T13:30:26+00:00"
     },
     "content/economy/trends/reports/2026-11-20_weekly.html": {
       "title": "全球宏观经济趋势周报（2026-11-20）｜经济趋势周报",
       "kind": "business",
       "category": "report",
       "business_line": "content/economy/trends",
-      "status": "in-review",
+      "status": "audited",
       "stages": {
         "draft": true,
         "initial": true,
         "second": true,
-        "final": false
+        "final": true
       },
       "mark": true,
       "first_seen_at": "2026-11-19",
@@ -1447,32 +1447,32 @@
         },
         "audit": {
           "review": "engine/audit/records/reviews/content-economy-trends-reports-2026-11-20-weekly-html.json",
-          "status": "in-review",
+          "status": "audited",
           "stages": {
             "draft": true,
             "initial": true,
             "second": true,
-            "final": false
+            "final": true
           },
-          "mark_level": "pre",
+          "mark_level": "full",
           "audit_id": "AUD-2026-11-19-002"
         }
       },
       "audit_id": "AUD-2026-11-19-002",
-      "mark_level": "pre",
-      "audited_at": "2026-11-19T07:42:26+00:00"
+      "mark_level": "full",
+      "audited_at": "2026-11-19T13:30:26+00:00"
     },
     "content/tech/competitive-intelligence/dubai/reports/2026-12_monthly.html": {
       "title": "迪拜（阿联酋）AI 网安竞争格局 · 月度更新报告 · 2026-12",
       "kind": "business",
       "category": "report",
       "business_line": "content/tech/competitive-intelligence/dubai",
-      "status": "in-review",
+      "status": "audited",
       "stages": {
         "draft": true,
         "initial": true,
         "second": true,
-        "final": false
+        "final": true
       },
       "mark": true,
       "first_seen_at": "2026-11-19",
@@ -1486,32 +1486,32 @@
         },
         "audit": {
           "review": "engine/audit/records/reviews/content-tech-competitive-intelligence-dubai-reports-2026-12-monthly-html.json",
-          "status": "in-review",
+          "status": "audited",
           "stages": {
             "draft": true,
             "initial": true,
             "second": true,
-            "final": false
+            "final": true
           },
-          "mark_level": "pre",
+          "mark_level": "full",
           "audit_id": "AUD-2026-11-19-003"
         }
       },
       "audit_id": "AUD-2026-11-19-003",
-      "mark_level": "pre",
-      "audited_at": "2026-11-19T07:42:26+00:00"
+      "mark_level": "full",
+      "audited_at": "2026-11-19T13:30:26+00:00"
     },
     "content/tech/weekly-roundup/reports/2026-11-20_weekly.html": {
       "title": "AI 趋势周报（安全 × Agent 生态）· 2026-11-20",
       "kind": "business",
       "category": "report",
       "business_line": "content/tech/weekly-roundup",
-      "status": "in-review",
+      "status": "audited",
       "stages": {
         "draft": true,
         "initial": true,
         "second": true,
-        "final": false
+        "final": true
       },
       "mark": true,
       "first_seen_at": "2026-11-19",
@@ -1525,20 +1525,20 @@
         },
         "audit": {
           "review": "engine/audit/records/reviews/content-tech-weekly-roundup-reports-2026-11-20-weekly-html.json",
-          "status": "in-review",
+          "status": "audited",
           "stages": {
             "draft": true,
             "initial": true,
             "second": true,
-            "final": false
+            "final": true
           },
-          "mark_level": "pre",
+          "mark_level": "full",
           "audit_id": "AUD-2026-11-19-004"
         }
       },
       "audit_id": "AUD-2026-11-19-004",
-      "mark_level": "pre",
-      "audited_at": "2026-11-19T07:42:26+00:00"
+      "mark_level": "full",
+      "audited_at": "2026-11-19T13:30:26+00:00"
     },
     "engine/report-audits/goal-alignment-gap-checklist-2026-11-19.md": {
       "title": "目标对齐优化方案 · 剩余缺口对齐清单（2026-11-19）",
@@ -1581,12 +1581,12 @@
       "kind": "business",
       "category": "report",
       "business_line": "content/economy/dubai/apartment",
-      "status": "in-review",
+      "status": "audited",
       "stages": {
         "draft": true,
         "initial": true,
         "second": true,
-        "final": false
+        "final": true
       },
       "mark": true,
       "first_seen_at": "2026-11-19",
@@ -1600,32 +1600,32 @@
         },
         "audit": {
           "review": "engine/audit/records/reviews/content-economy-dubai-apartment-reports-2027-01-monthly-html.json",
-          "status": "in-review",
+          "status": "audited",
           "stages": {
             "draft": true,
             "initial": true,
             "second": true,
-            "final": false
+            "final": true
           },
-          "mark_level": "pre",
+          "mark_level": "full",
           "audit_id": "AUD-2026-11-19-005"
         }
       },
       "audit_id": "AUD-2026-11-19-005",
-      "mark_level": "pre",
-      "audited_at": "2026-11-19T10:16:39+00:00"
+      "mark_level": "full",
+      "audited_at": "2026-11-19T13:30:26+00:00"
     },
     "content/economy/trends/reports/2026-11-27_weekly.html": {
       "title": "全球宏观经济趋势周报（2026-11-27）｜经济趋势周报",
       "kind": "business",
       "category": "report",
       "business_line": "content/economy/trends",
-      "status": "in-review",
+      "status": "audited",
       "stages": {
         "draft": true,
         "initial": true,
         "second": true,
-        "final": false
+        "final": true
       },
       "mark": true,
       "first_seen_at": "2026-11-19",
@@ -1639,32 +1639,32 @@
         },
         "audit": {
           "review": "engine/audit/records/reviews/content-economy-trends-reports-2026-11-27-weekly-html.json",
-          "status": "in-review",
+          "status": "audited",
           "stages": {
             "draft": true,
             "initial": true,
             "second": true,
-            "final": false
+            "final": true
           },
-          "mark_level": "pre",
+          "mark_level": "full",
           "audit_id": "AUD-2026-11-19-006"
         }
       },
       "audit_id": "AUD-2026-11-19-006",
-      "mark_level": "pre",
-      "audited_at": "2026-11-19T10:16:39+00:00"
+      "mark_level": "full",
+      "audited_at": "2026-11-19T13:30:26+00:00"
     },
     "content/education/education-system/reports/2026-12_baseline_report.html": {
       "title": "全球 教育体系与政策 · 首期基线报告 · 2026-12",
       "kind": "business",
       "category": "report",
       "business_line": "content/education/education-system",
-      "status": "in-review",
+      "status": "audited",
       "stages": {
         "draft": true,
         "initial": true,
         "second": true,
-        "final": false
+        "final": true
       },
       "mark": true,
       "first_seen_at": "2026-11-19",
@@ -1678,32 +1678,32 @@
         },
         "audit": {
           "review": "engine/audit/records/reviews/content-education-education-system-reports-2026-12-baseline-report-html.json",
-          "status": "in-review",
+          "status": "audited",
           "stages": {
             "draft": true,
             "initial": true,
             "second": true,
-            "final": false
+            "final": true
           },
-          "mark_level": "pre",
+          "mark_level": "full",
           "audit_id": "AUD-2026-11-19-007"
         }
       },
       "audit_id": "AUD-2026-11-19-007",
-      "mark_level": "pre",
-      "audited_at": "2026-11-19T10:16:39+00:00"
+      "mark_level": "full",
+      "audited_at": "2026-11-19T13:30:26+00:00"
     },
     "content/international/international-relations/reports/2026-11_baseline_report.html": {
       "title": "全球 · 国际关系与外交 · 首期基线报告（2026-11）",
       "kind": "business",
       "category": "report",
       "business_line": "content/international/international-relations",
-      "status": "in-review",
+      "status": "audited",
       "stages": {
         "draft": true,
         "initial": true,
         "second": true,
-        "final": false
+        "final": true
       },
       "mark": true,
       "first_seen_at": "2026-11-19",
@@ -1717,20 +1717,20 @@
         },
         "audit": {
           "review": "engine/audit/records/reviews/content-international-international-relations-reports-2026-11-baseline-report-html.json",
-          "status": "in-review",
+          "status": "audited",
           "stages": {
             "draft": true,
             "initial": true,
             "second": true,
-            "final": false
+            "final": true
           },
-          "mark_level": "pre",
+          "mark_level": "full",
           "audit_id": "AUD-2026-11-19-008"
         }
       },
       "audit_id": "AUD-2026-11-19-008",
-      "mark_level": "pre",
-      "audited_at": "2026-11-19T10:16:39+00:00"
+      "mark_level": "full",
+      "audited_at": "2026-11-19T13:30:26+00:00"
     },
     "engine/report-audits/optimization-solution-and-implementation-checklist-2026-11-19.md": {
       "title": "优化解决方案与实施清单（OPTIMIZATION-SOLUTION-AND-IMPLEMENTATION-CHECKLIST v1.0）",
@@ -1773,14 +1773,14 @@
       "kind": "business",
       "category": "report",
       "business_line": "content/political/political-system",
-      "status": "draft",
+      "status": "audited",
       "stages": {
-        "draft": false,
-        "initial": false,
+        "draft": true,
+        "initial": true,
         "second": true,
-        "final": false
+        "final": true
       },
-      "mark": false,
+      "mark": true,
       "first_seen_at": "2026-11-19",
       "evidence": {
         "report": "content/political/political-system/reports/2026-11_baseline_report.html",
@@ -1792,31 +1792,34 @@
         },
         "audit": {
           "review": "engine/audit/records/reviews/content-political-political-system-reports-2026-11-baseline-report-html.json",
-          "status": "draft",
+          "status": "audited",
           "stages": {
-            "draft": false,
-            "initial": false,
+            "draft": true,
+            "initial": true,
             "second": true,
-            "final": false
+            "final": true
           },
-          "mark_level": "none",
-          "audit_id": ""
+          "mark_level": "full",
+          "audit_id": "AUD-2026-11-19-009"
         }
-      }
+      },
+      "audited_at": "2026-11-19T13:30:26+00:00",
+      "audit_id": "AUD-2026-11-19-009",
+      "mark_level": "full"
     },
     "content/society/social-structure/reports/2026-11_baseline_report.html": {
       "title": "全球 · 社会结构与分层 · 首期基线报告（2026-11）",
       "kind": "business",
       "category": "report",
       "business_line": "content/society/social-structure",
-      "status": "draft",
+      "status": "audited",
       "stages": {
-        "draft": false,
-        "initial": false,
+        "draft": true,
+        "initial": true,
         "second": true,
-        "final": false
+        "final": true
       },
-      "mark": false,
+      "mark": true,
       "first_seen_at": "2026-11-19",
       "evidence": {
         "report": "content/society/social-structure/reports/2026-11_baseline_report.html",
@@ -1828,17 +1831,20 @@
         },
         "audit": {
           "review": "engine/audit/records/reviews/content-society-social-structure-reports-2026-11-baseline-report-html.json",
-          "status": "draft",
+          "status": "audited",
           "stages": {
-            "draft": false,
-            "initial": false,
+            "draft": true,
+            "initial": true,
             "second": true,
-            "final": false
+            "final": true
           },
-          "mark_level": "none",
-          "audit_id": ""
+          "mark_level": "full",
+          "audit_id": "AUD-2026-11-19-010"
         }
-      }
+      },
+      "audited_at": "2026-11-19T13:30:26+00:00",
+      "audit_id": "AUD-2026-11-19-010",
+      "mark_level": "full"
     }
   }
 }

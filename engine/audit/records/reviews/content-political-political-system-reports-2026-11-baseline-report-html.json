@@ -11,6 +11,41 @@
       "levels": [
         "L3"
       ]
+    },
+    {
+      "stage": "draft",
+      "reviewer": "ci-bot",
+      "timestamp": "2026-11-19T13:30:26+00:00",
+      "decision": "pass",
+      "findings": [],
+      "evidence": "[strict] L2 10/10；标题 OK；断头锚点 0；门禁错误 0 项；来源可追溯 OK；口径一致 OK；语义终审 reviewer=agent-1024cdca decision=pass",
+      "levels": [
+        "L1",
+        "L2"
+      ]
+    },
+    {
+      "stage": "initial",
+      "reviewer": "ci-bot",
+      "timestamp": "2026-11-19T13:30:26+00:00",
+      "decision": "pass",
+      "findings": [],
+      "evidence": "[strict] L2 10/10；标题 OK；断头锚点 0；门禁错误 0 项；来源可追溯 OK；口径一致 OK；语义终审 reviewer=agent-1024cdca decision=pass",
+      "levels": [
+        "L1",
+        "L2"
+      ]
+    },
+    {
+      "stage": "final",
+      "reviewer": "ci-bot",
+      "timestamp": "2026-11-19T13:30:26+00:00",
+      "decision": "pass",
+      "findings": [],
+      "evidence": "[strict] L2 10/10；标题 OK；断头锚点 0；门禁错误 0 项；来源可追溯 OK；口径一致 OK；语义终审 reviewer=agent-1024cdca decision=pass",
+      "levels": [
+        "L3"
+      ]
     }
   ]
 }
