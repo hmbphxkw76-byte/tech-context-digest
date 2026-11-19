@@ -268,6 +268,11 @@ footer,.footer{font-size:11.4px;color:var(--ink3);text-align:center;margin-top:2
 .idx-link:hover{color:var(--navy2);border-bottom:1px solid var(--blue)}
 .idx-link .ext{font-size:10px;color:var(--blue);margin-left:2px;font-weight:400}
 
+/* ── 消费端反馈入口（T-06）：静态链接 + data 属性占位，无外部依赖 ── */
+.feedback-link{color:var(--navy2);text-decoration:none;border-bottom:1px dotted #9db9da;font-weight:600}
+.feedback-link:hover{color:var(--navy);border-bottom:1px solid var(--blue)}
+.report-foot{border-top:1px solid var(--line);padding:16px 0 34px}
+
 /* ── 报告特有组件（apartment 基线 / 季度） ── */
 .tldr{background:linear-gradient(180deg,#fff,#f8fafe);border-left:5px solid var(--navy2)}
 .verdict{font-size:17px;font-weight:700;color:var(--blue);margin:0 0 12px}
@@ -401,6 +406,22 @@ details.registry[open]{padding-bottom:18px}
 """
 
 CANONICAL_CSS = TOKENS + BASE
+
+# ── 消费端反馈入口（T-06）──────────────────────────────────────────────
+# 静态链接指向仓库 issue 追踪器（见 engine/docs/agents/issue-tracker.md），
+# 不引入外部反馈服务；data-feedback 属性供后续接线消费侧指标
+# （metrics-dictionary.json 的 consumer_metrics_draft，当前 probe 未接线）。
+FEEDBACK_URL = (
+    "https://github.com/hmbphxkw76-byte/tech-context-digest/issues/new"
+    "?title=%E5%8F%8D%E9%A6%88%20/%20%E7%BA%A0%E9%94%99"
+)
+FEEDBACK_ATTR = "consumer-feedback-v1"
+
+
+def feedback_link(label: str = "反馈 / 纠错") -> str:
+    """返回 canonical 反馈入口链接（hub 页脚 / 报告页脚共用，无 JS 依赖）。"""
+    return (f'<a class="feedback-link" data-feedback="{FEEDBACK_ATTR}" '
+            f'href="{FEEDBACK_URL}" target="_blank" rel="noopener">{label}</a>')
 
 
 def style_block() -> str:

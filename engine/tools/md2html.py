@@ -9,6 +9,7 @@
   - 页头 `<header class="report-head">`（h1 + 副标题）；
   - 顶部固定导航 `<nav class="report-nav">` + `.nav-tabs` 锚点标签；
   - `<main class="wrap">` 正文，h2 章节重编号 id="sN"；
+  - 页脚 `<footer class="report-foot">` 统一含「反馈 / 纠错」入口（T-06，静态链接，无 JS 依赖）；
   - 表格加 class="fixed" 并逐列声明百分比列宽。
 
 退出码：0 = 成功（含无 md 可转换）；1 = 转换失败或依赖缺失。
@@ -22,7 +23,7 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 
 from _common import iter_business_dirs  # noqa: E402
-from report_style import style_block  # noqa: E402
+from report_style import feedback_link, style_block  # noqa: E402
 
 TEMPLATE = """<!DOCTYPE html>
 <html lang="zh-CN">
@@ -43,9 +44,19 @@ __NAV__
 <main class="wrap">
 __BODY__
 </main>
+__FOOTER__
 </body>
 </html>
 """
+
+# 消费端反馈入口（T-06）：报告页脚统一静态链接 + data-feedback 占位，无 JS / 外部服务依赖。
+FOOTER = (
+    '<footer class="report-foot">\n'
+    '  <div class="wrap">\n'
+    f'    <p>{feedback_link()} <span class="feedback-note">（消费侧指标 probe，未接线）</span></p>\n'
+    '  </div>\n'
+    '</footer>\n'
+)
 
 H1_RE = re.compile(r"<h1\b[^>]*>.*?</h1>\s*", re.DOTALL)
 H2_RE = re.compile(r"<h2\b[^>]*>.*?</h2>", re.DOTALL)
@@ -148,6 +159,7 @@ def convert(md_path: Path) -> str:
         .replace("__SUBTITLE__", subtitle)
         .replace("__NAV__", nav)
         .replace("__BODY__", body.strip())
+        .replace("__FOOTER__", FOOTER)
     )
 
 

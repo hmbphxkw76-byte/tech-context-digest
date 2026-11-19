@@ -46,5 +46,15 @@
     {"metric_id": "IGI-06", "name": "决策卡完备率", "formula": "通过卡片级字段校验（结论/证据强度/反向证据）的决策卡占比", "threshold": ">=0.95", "severity": "P0", "detected_by": "TOOL", "owner": "goal-alignment", "aliases": []},
     {"metric_id": "IGI-07", "name": "摘要合规率", "formula": "无 ID-04 越级（无推断/假设等级标记）的报告数 / 有决策摘要的报告数", "threshold": ">=1.0", "severity": "P0", "detected_by": "TOOL", "owner": "goal-alignment", "aliases": []},
     {"metric_id": "IGI-08", "name": "信息差指数", "formula": "1 − Σ w_i·(1 − IGI-i)，权重 0.25/0.15/0.15/0.15/0.10/0.10/0.10", "threshold": ">=0.8", "severity": "P0", "detected_by": "TOOL", "owner": "goal-alignment", "aliases": []}
-  ]
+  ],
+  "consumer_metrics_draft": {
+    "status": "probe",
+    "wired": false,
+    "note": "消费侧指标草案（T-06，2026-11-19）：仅登记口径，未接线测量、未改既有阈值，不进入 metric_coverage 的 38 项实测集合；反馈入口为静态链接 + data-feedback 占位（report_style.feedback_link），待读者回访流程接线。",
+    "metrics": [
+      {"metric_id": "CF-01", "name": "决策卡被引用次数", "formula": "决策卡编号（DC-…）在后续报告 / 台账 / 事实卡片中被引用的次数", "unit": "次", "status": "probe", "wired": false, "owner": "quality", "note": "草案：需先定义引用口径（正文 [DC-…] / 台账指针），再接线统计。"},
+      {"metric_id": "CF-02", "name": "纠错条目数", "formula": "经反馈入口提交并登记的纠错条目数", "unit": "条", "status": "probe", "wired": false, "owner": "quality", "note": "草案：依赖读者反馈闭环（issue 登记），未接线。"},
+      {"metric_id": "CF-03", "name": "读者回访参与率", "formula": "有回访记录的报告数 / 报告总数", "unit": "%", "status": "probe", "wired": false, "owner": "quality", "note": "草案：回访流程待设计，未接线。"}
+    ]
+  }
 }
