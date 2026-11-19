@@ -1,0 +1,14 @@
+[
+  {
+    "description": "真值核对跨期误判",
+    "id": "R-1",
+    "mitigation": "仅同周期纳入分母,跨期标不可比",
+    "owner": ""
+  },
+  {
+    "description": "链接不可达",
+    "id": "R-2",
+    "mitigation": "不放宽明确可达定义,无法解决登记豁免",
+    "owner": ""
+  }
+]

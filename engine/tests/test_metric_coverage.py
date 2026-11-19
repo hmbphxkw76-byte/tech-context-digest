@@ -67,8 +67,9 @@ class TestCoverage(unittest.TestCase):
         rec = self.meas["A-05"]
         self.assertEqual(rec["status"], "measured")
         probe = json.loads(mc.LINK_PROBE_PATH.read_text(encoding="utf-8"))
-        self.assertAlmostEqual(rec["value"], round(probe["ok"] / probe["probed"], 4),
-                               places=4)
+        self.assertAlmostEqual(
+            rec["value"], round(probe["ok"] / (probe["ok"] + probe["dead"]), 4),
+            places=4)
 
     def test_llm_metrics_are_not_faked(self):
         dictionary = json.loads((TOOLS / "metrics-dictionary.json").read_text(encoding="utf-8"))
@@ -98,8 +99,9 @@ class TestA05LinkReachability(unittest.TestCase):
             p = self._write(tmp, json.dumps({"probed": 275, "dead": 4,
                                               "unreachable": 90, "ok": 181}))
             value, detail = mc.a05_link_reachability(p)
-            self.assertAlmostEqual(value, 0.6582, places=4)
-            self.assertIn("181/275", detail)
+            # 口径：ok / (ok + dead)，unreachable 不计入分母
+            self.assertAlmostEqual(value, round(181 / 185, 4), places=4)
+            self.assertIn("181/185", detail)
 
     def test_missing_record_is_probe(self):
         value, detail = mc.a05_link_reachability(Path("/nonexistent/link-probe.json"))

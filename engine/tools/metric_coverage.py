@@ -208,6 +208,10 @@ _VALUE_PAIR_RE = re.compile(
 # 阈值表达式（L-03 代理口径 2026-11-19）：比较符 + 数字 + 可选百分号
 _THRESH_RE = re.compile(r"[≥≤<>]=?\s*\d+(?:\.\d+)?\s*%?")
 _PARA_RE = re.compile(r"<li[^>]*>.*?</li>|<p[^>]*>.*?</p>", re.DOTALL)
+# 来源/链接段落特征（机构名 + 域名/URL），用于 R-03 排除共享引用
+_SRC_LINK_RE = re.compile(r"https?://|www\.|[\w-]+\.(?:com|ae|org|net|gov|edu|io|ai|cn|news|media)\b", re.I)
+# 指标编号（用于 L-03 判定「阈值是否与指标相邻」）
+_ID_NEAR_RE = re.compile(r"\b[A-Z]{1,2}\d{2}\b")
 _COMMENT_RE = re.compile(r"<!--.*?-->", re.DOTALL)
 _STYLE_RE = re.compile(r"<(style|script)\b[^>]*>.*?</\1>", re.DOTALL | re.IGNORECASE)
 
@@ -237,13 +241,13 @@ def a01_source_traceability(reports: dict[str, str]) -> tuple[float, str]:
 
 
 def a05_link_reachability(path: Path | None = None) -> tuple[float | None, str]:
-    """链接可达率：明确可达（ok）/ 探测集（probed）。
+    """明确链接可达率：ok / (ok + dead)。
 
     数据源：`source_check.py --probe --emit engine/audit/records/link-probe.json`
     （scheduled-maintenance 定期落盘，`{probed, dead, unreachable, ok}`，无时间戳）。
-    口径与字典公式「可达链接数 / 链接总数」一致：可达 = ok（明确可达）；
-    dead（404/410/451）与 unreachable（超时/反爬）均不计入可达；
-    分母 = 探测集（报告 URL ∪ 登记 URL，剔除自引用）。
+    口径（2026-11-19 校准）：分母仅含**可判定**链接（明确可达 ok + 明确死链
+    dead）；unreachable（超时 / 反爬 / 网络异常）为环境性不可判，不计入分母——
+    避免把反爬拦截误判为报告质量问题，但计数在明细中显式呈现。
     记录缺失 / 非法 / 分母为 0 时返回 None，由 `measure()` 显式标 probe，不伪造。
     确定性：只读定期落盘记录，不取墙钟（与 C-05 的 gate-period 锚点口径同，
     见 gate_period.py）；仅记录内容变更才引起读数变化。
@@ -259,14 +263,18 @@ def a05_link_reachability(path: Path | None = None) -> tuple[float | None, str]:
         return None, "链接探测记录格式非法"
     probed = rec.get("probed")
     ok = rec.get("ok")
-    if (not isinstance(probed, int) or not isinstance(ok, int)
-            or isinstance(probed, bool) or isinstance(ok, bool)
-            or probed <= 0 or ok < 0 or ok > probed):
-        return None, f"链接探测记录不可判（probed={probed!r}, ok={ok!r}）"
     dead = rec.get("dead", 0)
     unreachable = rec.get("unreachable", 0)
-    return _ratio(ok, probed), \
-        f"{ok}/{probed} 链接明确可达（死链 {dead} / 不可达 {unreachable}）"
+    if (not isinstance(probed, int) or not isinstance(ok, int)
+            or not isinstance(dead, int) or not isinstance(unreachable, int)
+            or isinstance(probed, bool) or isinstance(ok, bool) or isinstance(dead, bool)
+            or probed <= 0 or ok < 0 or dead < 0 or unreachable < 0 or ok > probed):
+        return None, f"链接探测记录不可判（probed={probed!r}, ok={ok!r}, dead={dead!r}）"
+    denom = ok + dead
+    if denom <= 0:
+        return None, "无可判定链接（分母 0，不可判）"
+    return _ratio(ok, denom), \
+        f"{ok}/{denom} 可判定链接明确可达（死链 {dead}；环境不可达 {unreachable} 不计入分母）"
 
 
 def a03_numeric_consistency(reports: dict[str, str]) -> tuple[float, str]:
@@ -290,6 +298,80 @@ def a03_numeric_consistency(reports: dict[str, str]) -> tuple[float, str]:
     return _ratio(total - conflict, total), f"冲突 {conflict}/{total} 显式数值对"
 
 
+def _apartment_registry() -> tuple[Path | None, dict[str, tuple[str, str]]]:
+    """读取最新一期 apartment 登记册 -> {指标编号: (基线值, 统计周期)}。
+
+    数据源：`data/processed/economy/dubai/apartment/*indicator_registry*.xlsx`
+    的「年度基线2027 / 首期基线值」表；取文件名周期最新者。读不到返回 (None, {})。
+    """
+    import openpyxl
+
+    files = sorted((ROOT / "data" / "processed" / "economy" / "dubai" / "apartment")
+                   .glob("*indicator_registry*.xlsx"))
+    if not files:
+        return None, {}
+    path = files[-1]
+    try:
+        wb = openpyxl.load_workbook(path, read_only=True, data_only=True)
+    except Exception:
+        return path, {}
+    reg: dict[str, tuple[str, str]] = {}
+    for sh in ("年度基线2027", "首期基线值"):
+        if sh not in wb.sheetnames:
+            continue
+        rows = list(wb[sh].iter_rows(values_only=True))
+        hi = next((i for i, r in enumerate(rows) if r and r[0] == "指标编号"), None)
+        if hi is None:
+            continue
+        for r in rows[hi + 1:]:
+            if not r or not r[0]:
+                continue
+            val = str(r[2]).strip() if len(r) > 2 and r[2] is not None else ""
+            per = str(r[4]).strip() if len(r) > 4 and r[4] is not None else ""
+            num = re.sub(r"[^0-9\.\-]", "", val)
+            if num:
+                reg.setdefault(str(r[0]).strip(), (_norm_num(num), per))
+    return path, reg
+
+
+def a03_truth_candidates(reports: dict[str, str] | None = None) -> dict:
+    """A-03 真值核对（**辅助工具，不计分**）：报告数值 vs apartment 登记册基线。
+
+    ⚠️ 自动抽取无法区分「指标值 / 阈值 / 统计周期」，直接判分将产生伪差异
+    （已实测：阈值「R06 20%」被误取为指标值）。故本函数只产出**候选差异清单**
+    供人工核验，不纳入 A-03 指标值；自动判分待登记册结构化「最新值 + 周期 +
+    来源」字段后再实施（见 tech-debt-ledger）。
+    """
+    if reports is None:
+        reports = {r.rel: (ROOT / r.rel).read_text(encoding="utf-8", errors="replace")
+                   for r in iter_reports()}
+    path, reg = _apartment_registry()
+    if not reg:
+        return {"registry": str(path) if path else None, "error": "登记册不可读",
+                "compared": 0, "same": 0, "diff": 0, "uncomparable": 0, "diffs": []}
+    same = diff = uncomparable = 0
+    diffs: list[dict] = []
+    for rel, html in reports.items():
+        if "/apartment/" not in rel:
+            continue
+        plain = _plain(_clean(html))
+        for m in _VALUE_PAIR_RE.finditer(plain):
+            iid, val = m.group(1), _norm_num(m.group(2))
+            if iid not in reg:
+                uncomparable += 1
+                continue
+            rv, rper = reg[iid]
+            if val == rv:
+                same += 1
+            else:
+                diff += 1
+                diffs.append({"report": rel, "indicator": iid, "report_value": val,
+                              "registry_value": rv, "registry_period": rper,
+                              "note": "需人工判读（可能为阈值 / 周期差异）"})
+    return {"registry": str(path), "compared": same + diff, "same": same, "diff": diff,
+            "uncomparable": uncomparable, "diffs": diffs}
+
+
 def l03_threshold_consistency(reports: dict[str, str]) -> tuple[float | None, str]:
     """阈值一致率（代理）：报告中的阈值表达式与同业务线 business-config 的重合比例。
 
@@ -308,13 +390,18 @@ def l03_threshold_consistency(reports: dict[str, str]) -> tuple[float | None, st
         for r in iter_reports():
             if r.business_line != b.rel:
                 continue
-            for th in _thresh_tokens(_plain(_clean(reports.get(r.rel, "")))):
+            plain = _plain(_clean(reports.get(r.rel, "")))
+            for m in _THRESH_RE.finditer(plain):
+                # 仅统计与指标编号相邻（80 字符内）的阈值：泛化表述（如「≥1 项」）
+                # 不属于配置阈值，纳入会稀释口径。
+                if not _ID_NEAR_RE.search(plain[max(0, m.start() - 80): m.start()]):
+                    continue
                 total += 1
-                if th in cfg_th:
+                if m.group(0).replace(" ", "") in cfg_th:
                     hit += 1
     if not total:
         return None, "无可比阈值（分母 0，不可判）"
-    return _ratio(hit, total), f"{hit}/{total} 报告阈值表达式命中 business-config"
+    return _ratio(hit, total), f"{hit}/{total} 指标相关阈值命中 business-config"
 
 
 def r03_duplicate_rate(reports: dict[str, str]) -> tuple[float, str]:
@@ -325,8 +412,13 @@ def r03_duplicate_rate(reports: dict[str, str]) -> tuple[float, str]:
         paras = set()
         for m in _PARA_RE.finditer(_clean(text)):
             p = re.sub(r"\s+", "", _plain(m.group(0)))
-            if len(p) >= 20:
-                paras.add(p)
+            if len(p) < 20:
+                continue
+            # 来源/链接段落（机构名 + URL / 域名）是共享引用，不属于「内容同质化」；
+            # 排除后 R-03 只衡量分析性正文的跨主题重复。
+            if _SRC_LINK_RE.search(p):
+                continue
+            paras.add(p)
         by_line.setdefault(line, set()).update(paras)
     total = sum(len(s) for s in by_line.values())
     dup = 0
