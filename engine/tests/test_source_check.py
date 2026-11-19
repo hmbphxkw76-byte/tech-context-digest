@@ -27,6 +27,24 @@ class TestNormalizeUrl(unittest.TestCase):
         self.assertEqual(source_check.normalize_url("https://imf.org/a#x"),
                          "https://imf.org/a")
 
+    def test_path_case_is_preserved(self):
+        """path 区分大小写：整串小写会把可访问链接误判为死链（P1-7 续）。"""
+        self.assertEqual(
+            source_check.normalize_url("https://www.163.com/dy/article/LBEFH3E00556ENJI.html"),
+            "https://www.163.com/dy/article/LBEFH3E00556ENJI.html")
+
+
+class TestProbeUrlSet(unittest.TestCase):
+    """R6 探测集：自引用（本仓库链接）不是外部来源，不得参与可达性探测。"""
+
+    def test_self_reference_excluded(self):
+        text = ('<p><a href="https://github.com/hmbphxkw76-byte/tech-context-digest/blob/main/x.html">x</a>'
+                ' <a href="https://imf.org/a">IMF</a></p>')
+        reg = _reg({"source_id": "S1", "tier": 1, "url": "https://imf.org/a"})
+        urls = source_check.probe_url_set(text, reg)
+        self.assertIn("https://imf.org/a", urls)
+        self.assertFalse(any("tech-context-digest" in u for u in urls))
+
 
 class TestR1RegistryCoverage(unittest.TestCase):
     def test_unmatched_url_is_error(self):

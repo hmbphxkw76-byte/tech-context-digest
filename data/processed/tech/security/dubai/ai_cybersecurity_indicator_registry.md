@@ -15,7 +15,7 @@
 | 7 | Numbeo 迪拜 vs 阿布扎比生活成本 | 含租等效月度 | numbeo.com | 迪拜 26,000 vs 阿布扎比 22,175 [Numbeo, 2026] | 2026-11 |
 | 8 | ILOE 费率 & 黄金签证门槛 | AED/月 / AED | iloe.ae / u.ae / icp.gov.ae | ILOE 每月 5/10（+5% VAT）；黄金签证基本月薪 ≥30,000 [ILOE/u.ae, 2026] | 2026-11 |
 | 9 | Stargate UAE 状态 | — | openai.com / coloprice.com | 在建，首批 200MW 计划 2026 上线 [OpenAI, 2025] | 2026-11 |
-| 10 | GISEC / GITEX 最新届次 | 日期 | gisec.ae / gitex.com | GISEC 2026-09-16–18；GITEX 2026-12-07–11 [GISEC/GITEX, 2026] | 2026-11 |
+| 10 | GISEC / GITEX 最新届次 | 日期 | gisec.ae / gitexglobal.com | GISEC 2026-09-16–18；GITEX 2026-12-07–11 [GISEC/GITEX, 2026] | 2026-11 |
 | 11 | G42/Core42/CPX/e&/Moro Hub 动态 | — | 各公司官网 / WAM | G42 23,000+ 员工；CPX ~600 专家 [各公司官网/WAM, 2026] | 2026-11 |
 | 12 | OWASP LLM Top 10 / MITRE ATLAS 版本 | 版本/计数 | genai.owasp.org / atlas.mitre.org | LLM Top 10（2025）；ATLAS 16 战术/221 技术/44 缓解 [OWASP/MITRE, 2026] | 2026-11 |
 | 13 | 新发 AI 安全证书 & 本地考点 | — | giac.org / isc2.org / comptia.org / eccouncil.org / sans.org | GIAC GAIPS/GASAE；CompTIA SecAI+；ISACA AAIA/AAIR/AAISM [各发证方, 2026] | 2026-11 |

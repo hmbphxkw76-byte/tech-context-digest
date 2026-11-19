@@ -64,7 +64,7 @@
 - **主权 AI 基建**：Stargate UAE——2025 年 5 月宣布、落地阿布扎比的 **5GW AI 园区 / 1GW 算力集群**（G42 建设、OpenAI 与 Oracle 运营、NVIDIA GB300、Cisco 零信任），首批 200MW 计划于 2026 年上线（由 Khazna 承建，截至 2026 年仍在建设阶段，运营状态待官方确认）。这创造了全新的、超大尺度的 AI 基础设施攻击面。[Source: https://openai.com/index/introducing-stargate-uae, 2025]；[Source: https://coloprice.com]
 - **微软–G42 投资（已核实口径）**：**15 亿美元**为微软 2024 年 4 月对 G42 的**已确认股权注资**（Brad Smith 进入 G42 董事会），并配套 10 亿美元开发者基金承诺。[Source: https://blogs.microsoft.com/blog/2024/04/15/microsoft-and-g42-partner, 2024]（中文媒体所称"152 亿美元对阿联酋投资计划"未获英文权威来源证实，已按来源语言规则剔除，见第八节）
 - **数字经济议程**：迪拜 D33 经济议程（2023）目标 2033 年经济翻番，数字化年均贡献约 1,000 亿 AED。[Source: https://mediaoffice.ae/en/news/2023/january/04-01/mohammed-bin-rashid-launches-dubai-economic-agenda-d33, 2023]
-- **旗舰活动**：GITEX Global 2025（迪拜）6,800+ 展商、180 国；GISEC Global 2025（迪拜）750+ 品牌、25,000+ 专业人士、160 国，主题即"securing an AI-driven future"。[Source: https://gitex.com/News/gitex-global-2025-closes-a-landmark-45th-edition]；[Source: https://businesswire.com/news/home/20250506057310/en/Resecurity-to-Exhibit-at-GISEC-Global-2025, 2025]
+- **旗舰活动**：GITEX Global 2025（迪拜）6,800+ 展商、180 国；GISEC Global 2025（迪拜）750+ 品牌、25,000+ 专业人士、160 国，主题即"securing an AI-driven future"。[Source: https://gitexglobal.com/News/gitex-global-2025-closes-a-landmark-45th-edition]；[Source: https://businesswire.com/news/home/20250506057310/en/Resecurity-to-Exhibit-at-GISEC-Global-2025, 2025]
 
 ### 2.5 迪拜 vs 阿布扎比：市场结构对比
 
@@ -253,7 +253,7 @@ Gartner 预计 2026 年整合 GenAI 的企业将员工驱动事件减少 40%；I
 ### 4.3 2025–2026 生态更新（关键事件）
 
 - **GISEC Global 2026**（第 15 届，2026 年 9 月 16–18 日，迪拜世博城展览中心，约 182 国）：主题 AI 驱动犯罪、数字主权、韧性；新增"Crime First"部长/央行/CEO 峰会；AI 辅助勒索被指约 60%[Source: https://desc.gov.ae, 2026]；[Source: https://gisec.ae, 2026]。
-- **GITEX Global 2026**：**2026 年 12 月 7–11 日**于迪拜世博城举办，设网络安全与数字主权专区[Source: https://gitex.com, 2026]。
+- **GITEX Global 2026**：**2026 年 12 月 7–11 日**于迪拜世博城举办，设网络安全与数字主权专区[Source: https://gitexglobal.com, 2026]。
 - **国家级新规（2026 推进，合规/法律分析视角）**：国家网络认证计划（NCAP）限制未认证 MSSP 服务关键基础设施；安全供应链/SBOM 计划；量子安全（PQC）计划；Cyber E71 孵化器与 Cyber Sniper 技能计划[Source: https://practiceguides.chambers.com/, 2026]。
 - **TDRA/aeCERT**：aeCERT 隶属 TDRA，职能含国家级事件协调/响应、意识、漏洞评估与渗透测试、24 小时违规通报义务[Source: https://itu.int, 2023]；[Source: https://hzlegal.ae, 2026]；未能取得带完整培训目录的官方英文页，建议以 tdra.gov.ae 复核。
 
@@ -457,7 +457,7 @@ Gartner 预计 2026 年整合 GenAI 的企业将员工驱动事件减少 40%；I
 | 7 | Numbeo 迪拜 vs 阿布扎比生活成本 | 含租等效月度 | numbeo.com |
 | 8 | ILOE 费率 & 黄金签证门槛 | AED/月 / AED | iloe.ae / u.ae / icp.gov.ae |
 | 9 | Stargate UAE 状态 | — | openai.com / coloprice.com |
-| 10 | GISEC / GITEX 最新届次 | 日期 | gisec.ae / gitex.com |
+| 10 | GISEC / GITEX 最新届次 | 日期 | gisec.ae / gitexglobal.com |
 | 11 | G42/Core42/CPX/e&/Moro Hub 动态 | — | 各公司官网 / WAM |
 | 12 | OWASP LLM Top 10 / MITRE ATLAS 版本 | 版本/计数 | genai.owasp.org / atlas.mitre.org |
 | 13 | 新发 AI 安全证书 & 本地考点 | — | giac.org / isc2.org / comptia.org / eccouncil.org / sans.org |
@@ -467,7 +467,7 @@ Gartner 预计 2026 年整合 GenAI 的企业将员工驱动事件减少 40%；I
 
 1. **薪资口径差异大**：Michael Page、Cooper Fitch、Charterhouse、Hays、Robert Half 为较可靠基准；hiredeveloper.ae、angelindubai 等招聘机构抽样与部分聚合站点（waqov、mahadmanpower）为市场抽样或二手转述，已分别标注，引用时建议交叉验证。Hays 与 GulfTalent 的原始网络安全分表未能从英文官方页面直接获取，本报告已排除其未核实数字。
 2. **市场规模分歧**：Gartner（终端支出）与 Mordor/GMI（含服务总收入）口径不同，不可直接比较。
-3. **本版已修正项**：① ILOE 为每月 AED 5/10（非每周）；② 阿布扎比"薪资溢价"多数来源不支持，改为"生活成本更低、净购买力相当"；③ CPX 与 DarkMatter 的渊源未获官方证实，已更正为 G42 子公司；④ 微软–G42 仅保留已确认的 15 亿美元股权注资（另含 10 亿美元开发者基金），中文媒体所称"152 亿美元投资计划"未获英文权威来源证实，已剔除；⑤ 黄金签证门槛以基本工资计；⑥ 移除全部中文来源引用（ae.mofcom.gov.cn、news.cn、sc.gov.cn、worldashow.com、gazetai.com、sgpjbg.com），GITEX 2026 改引官方 gitex.com。
+3. **本版已修正项**：① ILOE 为每月 AED 5/10（非每周）；② 阿布扎比"薪资溢价"多数来源不支持，改为"生活成本更低、净购买力相当"；③ CPX 与 DarkMatter 的渊源未获官方证实，已更正为 G42 子公司；④ 微软–G42 仅保留已确认的 15 亿美元股权注资（另含 10 亿美元开发者基金），中文媒体所称"152 亿美元投资计划"未获英文权威来源证实，已剔除；⑤ 黄金签证门槛以基本工资计；⑥ 移除全部中文来源引用（ae.mofcom.gov.cn、news.cn、sc.gov.cn、worldashow.com、gazetai.com、sgpjbg.com），GITEX 2026 改引官方 gitexglobal.com。
 4. **未证实/待复核项**：① 中文媒体所称"微软 152 亿美元对阿联酋投资计划（2023–2029）"——未找到英文权威来源，已剔除，待 news.microsoft.com 复核；② 中文来源所称"迪拜 AI 政策（Digital Dubai，2025 年 3 月）"（AI 治理委员会 / 首席 AI 官 / 11 项原则）——未找到英文权威来源，已剔除，待 digitaldubai.ae 复核；③ Core42 组建财务、CPX 确切人数（约 600）、TDRA/aeCERT 完整培训目录、Moro Hub AI Seal Tier S 主源复核（brief.news 单一聚合源）、Stargate 首批 200MW 是否已运营、2026 阿布扎比黄金签证通函的最终 ICP 确认。建议以 g42.ai、cpx.net、news.microsoft.com、tdra.gov.ae、digitaldubai.ae、icp.gov.ae 复核。
 5. **全英文来源约束已满足**：本报告所有引用 URL 均为英文网站；中文来源零使用（两处中文源独有数据点已按来源语言规则剔除并说明，见本节第 3、4 条）。
 6. **时间基准**：除明确标注年份者，引用数据截至 2026 年 11 月。
@@ -516,7 +516,7 @@ Gartner 预计 2026 年整合 GenAI 的企业将员工驱动事件减少 40%；I
 - Global Market Insights: gminsights.com/industry-analysis/cybersecurity-market
 - OpenAI Stargate UAE: openai.com/index/introducing-stargate-uae；coloprice.com
 - Microsoft–G42: blogs.microsoft.com/blog/2024/04/15/microsoft-and-g42-partner
-- GITEX/GISEC: gitex.com；gisec.ae；businesswire.com
+- GITEX/GISEC: gitexglobal.com；gisec.ae；businesswire.com
 - Black Hat MEA: blackhatmea.com/about-us/key-information
 
 **企业/岗位样本**

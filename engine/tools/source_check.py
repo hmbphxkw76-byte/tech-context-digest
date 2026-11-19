@@ -137,14 +137,18 @@ BLOCKING_RULES: set[str] = set()
 # ---------------------------------------------------------------- 基础工具
 
 def normalize_url(url: str) -> str:
-    """URL 归一化：小写 host、去片段、去末尾斜杠，便于登记比对。"""
+    """URL 归一化：小写 scheme/host、去片段、去末尾斜杠，便于登记比对。
+
+    路径**不得**小写：URL path 区分大小写（如网易号文章 ID `LBEFH3E00556ENJI`），
+    整串小写会把可正常访问的链接误判为死链。
+    """
     try:
         p = urlparse(url.strip())
     except ValueError:
-        return url.strip().rstrip("/").lower()
+        return url.strip().rstrip("/")
     host = (p.netloc or "").lower()
     path = (p.path or "").rstrip("/")
-    return f"{p.scheme.lower()}://{host}{path}".lower()
+    return f"{p.scheme.lower()}://{host}{path}"
 
 
 def extract_urls(text: str) -> list[str]:
@@ -786,6 +790,13 @@ def _is_historical(rel: str, gate_period: str | None) -> bool:
     return _period_key(det[1]) < _period_key(gate_period)
 
 
+def probe_url_set(text: str, registry: dict) -> set[str]:
+    """R6 探测集：报告正文 URL ∪ 登记 URL，**排除自引用**（本仓库内容不是外部来源）。"""
+    return {u for u in (set(extract_urls(text))
+                        | {s.get("url") for s in registry.get("sources", []) if s.get("url")})
+            if not is_self_reference(u)}
+
+
 def run(only_file: str | None, gate_period: str | None = None,
         registry_override: str | None = None, probe: bool = False,
         coverage: bool = False, master_path: str | None = None,
@@ -826,7 +837,8 @@ def run(only_file: str | None, gate_period: str | None = None,
         ctx["r6_strict"] = bool(det and det[1]) and _period_key(det[1]) >= _period_key(R6_STRICT_PERIOD)
 
         if probe:
-            urls = set(extract_urls(text)) | {s.get("url") for s in registry.get("sources", []) if s.get("url")}
+            # 自引用（本仓库自身内容）不是外部来源，不参与可达性探测
+            urls = probe_url_set(text, registry)
             dead, unreachable = probe_urls_detail(sorted(urls), timeout=probe_timeout,
                                                 workers=probe_workers)
             # lenient（CI 口径）：明确死链阻断，网络不可达仅告警；strict：两者都阻断

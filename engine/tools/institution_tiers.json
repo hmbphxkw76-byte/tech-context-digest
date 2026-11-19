@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "updated": "2026-11-16",
+  "updated": "2026-11-18",
   "comment": "机构级分级主数据（单一事实源）：机构 → 来源分级 tier（1 官方一手 / 2 行业机构 / 3 挂牌门户 / 4 媒体转述）。source_check R7 以此校验 source_registry 与 business-config 来源优先级的一致性；新增机构须先登记本表。",
   "tiers": {
     "1": "官方一手",
@@ -77,7 +77,8 @@
       "tier": 1,
       "aliases": [
         "DDSE",
-        "Dubai LFS（DDSE）"
+        "Dubai LFS（DDSE）",
+        "Digital Dubai"
       ]
     },
     {
@@ -102,7 +103,8 @@
       "tier": 1,
       "aliases": [
         "Dubai Pulse",
-        "DLD Open Data"
+        "DLD Open Data",
+        "Dubai Pulse / DLD"
       ]
     },
     {
