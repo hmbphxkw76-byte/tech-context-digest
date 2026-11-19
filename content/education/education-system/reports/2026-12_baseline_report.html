@@ -1,0 +1,745 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>全球 教育体系与政策 · 首期基线报告 · 2026-12</title>
+<style>
+:root{
+  --radius-sm:8px; --radius:12px; --radius-lg:16px; --radius-pill:999px;
+  --shadow:0 1px 3px rgba(20,40,70,.06); --shadow-md:0 4px 14px rgba(20,40,70,.09);
+  --shadow-lg:0 10px 30px rgba(15,35,56,.2);
+  --font-sans:"Microsoft YaHei","PingFang SC","Segoe UI",Arial,sans-serif;
+  --font-mono:"SFMono-Regular",Consolas,"Liberation Mono",monospace;
+  --focus-ring:0 0 0 3px rgba(63,111,176,.35);
+  --transition:.15s ease;
+  --bg:#f4f6f9; --card:#ffffff; --card2:#fbfcfe; --soft:#f5f8fb;
+  --ink:#15202b; --ink2:#465667; --ink3:#657180;
+  --line:#e1e7ee; --line2:#eef2f6;
+  --navy:#16324f; --navy2:#2f5597; --blue:#3f6fb0; --blue-l:#eaf1fa;
+  --red:#a83224; --red-d:#822116; --red-l:#fbece8; --red-bg:#fbece8; --red-line:#f0d4cf;
+  --pre:#b8541c; --pre-l:#fdf1e4; --pre-bg:#fdf1e4; --pre-line:#f2ddc9;
+  --green:#1c7444; --green-l:#eaf5ef; --green-bg:#eaf5ef; --green-line:#d3ead9;
+  --amber:#956612; --amber-l:#fdf4e2; --amber-bg:#fdf4e2; --amber-line:#f0e3c2;
+  --gray:#646f7b; --gray-l:#eff2f4; --gray-bg:#eff2f4; --gray-line:#e6eaee;
+  /* 别名：兼容既有报告组件的命名习惯 */
+  --surface:#ffffff; --surface2:#fbfcfe;
+  --navy-2:#2f5597; --muted:#657180; --bg-soft:#f5f8fb; --bg-card:#fbfcfe;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  *,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}
+}
+body{font-family:var(--font-sans);background:var(--bg);color:var(--ink);line-height:1.76;font-size:14.5px}
+.wrap{max-width:1160px;margin:0 auto;padding:0 24px 64px}
+a{color:var(--navy2);text-decoration:none}
+a:hover{text-decoration:underline}
+a:focus-visible,button:focus-visible{outline:none;box-shadow:var(--focus-ring)}
+.skip-link{position:absolute;left:12px;top:-48px;z-index:100;background:var(--navy);color:#fff;padding:8px 16px;border-radius:0 0 8px 8px;font-size:12.5px;transition:top var(--transition)}
+.skip-link:focus{top:0;color:#fff;text-decoration:none}
+
+/* ── 页头（trends report-head 结构；.hero 为 apartment 同义类） ── */
+header.report-head,header.hero{
+  background:linear-gradient(128deg,#0f2338 0%,var(--navy) 52%,var(--navy2) 100%);
+  color:#fff;padding:40px 0 30px;
+}
+/* trends 的 .report-head 内含 .wrap；apartment 的 .hero 无 .wrap，用内联 padding 约束到 1160px */
+header.report-head .wrap{padding:0 24px}
+header.hero{padding-left:max(24px,calc(50% - 580px));padding-right:max(24px,calc(50% - 580px))}
+header.report-head h1,header.hero h1{margin:0 0 8px;font-size:27px;font-weight:700;letter-spacing:.4px;line-height:1.35}
+header .eyebrow{font-size:11.5px;letter-spacing:2.4px;color:rgba(255,255,255,.62);text-transform:uppercase}
+header .sub{font-size:14px;color:rgba(255,255,255,.82);margin:2px 0}
+header .meta{font-size:12.3px;color:rgba(255,255,255,.75);margin-top:14px;line-height:1.9}
+header .meta b{color:#fff}
+header .nav-url{font-size:11.5px;color:rgba(255,255,255,.78);margin-top:10px;word-break:break-all}
+header .nav-url a{color:#cfe0ee;text-decoration:none;border-bottom:1px dashed #cfe0ee}
+header .tag{display:inline-block;background:rgba(255,255,255,.11);border:1px solid rgba(255,255,255,.2);border-radius:14px;padding:2px 11px;margin:5px 6px 0 0;font-size:11.5px}
+
+/* ── 顶部固定导航 ── */
+nav.report-nav{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.96);border-bottom:1px solid var(--line);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);margin-bottom:26px}
+nav.report-nav .wrap{display:flex;flex-wrap:wrap;gap:6px 14px;align-items:center;padding-top:10px;padding-bottom:10px}
+/* apartment monthly/quarterly/baseline 的 .nav-tabs 是 nav 直接子元素（无 .wrap） */
+nav.report-nav > .nav-tabs{max-width:1160px;margin:0 auto;padding:10px 24px}
+.nav-url{display:flex;align-items:baseline;gap:8px;flex-wrap:wrap;font-size:11.5px;line-height:1.6;color:var(--ink3);padding-bottom:6px;margin-bottom:6px;border-bottom:1px dashed var(--line);width:100%}
+.nav-url-label{font-weight:700;color:var(--ink2);white-space:nowrap}
+.nav-url a{color:var(--blue);text-decoration:none;word-break:break-all}
+.nav-url a:hover{text-decoration:underline}
+.nav-tabs{display:flex;flex-wrap:wrap;gap:6px}
+.nav-tabs a{color:var(--navy);text-decoration:none;font-size:12.5px;padding:4px 10px;border-radius:14px;border:1px solid var(--line);background:var(--bg-soft);white-space:nowrap;transition:background var(--transition),color var(--transition)}
+.nav-tabs a:hover{background:var(--blue-l);border-color:#b9cfe2;text-decoration:none}
+.nav-tabs a.active{background:var(--blue-l);color:var(--blue);font-weight:700}
+
+/* ── 章节与排版 ── */
+main{padding-top:0}
+h2.sec{font-size:19px;color:var(--navy);margin:38px 0 14px;padding-bottom:8px;border-bottom:2px solid var(--navy);scroll-margin-top:100px;font-weight:700}
+h2.sec .en{font-size:10.8px;color:var(--ink3);font-weight:400;margin-left:10px;letter-spacing:1.1px}
+h3{font-size:15.5px;color:var(--navy);margin:22px 0 8px;font-weight:700;scroll-margin-top:100px}
+h4{font-size:14px;color:var(--navy);margin:16px 0 6px;font-weight:700}
+p{margin:8px 0}
+ul,ol{margin:8px 0;padding-left:22px}
+li{margin:5px 0}
+ul.tight,ol.tight{margin:7px 0}
+ul.tight li,ol.tight li{margin-bottom:6px}
+b,strong{font-weight:650;color:var(--ink)}
+blockquote{border-left:4px solid var(--line);margin:12px 0;padding:2px 0 2px 14px;color:var(--ink2)}
+code{background:var(--bg-soft);padding:2px 5px;border-radius:4px;font-family:var(--font-mono);font-size:.92em}
+pre{background:var(--bg-soft);border:1px solid var(--line);border-radius:var(--radius-sm);padding:12px 14px;overflow-x:auto;margin:12px 0}
+pre code{background:none;padding:0}
+img{max-width:100%}
+.lead{color:var(--ink2);font-size:13.8px;margin:6px 0 14px}
+.muted{color:var(--ink3)}
+.small{font-size:11.7px;color:var(--ink3)}
+hr{border:0;border-top:1px solid var(--line);margin:26px 0 0}
+.hr{height:1px;background:var(--line);margin:26px 0 0}
+b.red,color.red{color:var(--red)} b.pre{color:var(--pre)} b.green{color:var(--green)}
+b.amber{color:var(--amber)} b.navy{color:var(--navy)}
+
+/* ── 表格 ── */
+table{width:100%;border-collapse:collapse;font-size:13px;background:var(--card);margin:12px 0}
+th,td{border:1px solid var(--line);padding:8px 10px;text-align:left;vertical-align:top;line-height:1.62}
+thead th{background:var(--navy);color:#fff;font-weight:600;white-space:nowrap}
+tbody th{background:var(--blue-l);color:var(--navy);font-weight:600}
+tbody tr:nth-child(even) td{background:var(--bg-soft)}
+tbody tr:hover td{background:var(--blue-l)}
+table.fixed{table-layout:fixed}
+.num{text-align:right;font-variant-numeric:tabular-nums}
+.tblwrap{overflow-x:auto;border-radius:var(--radius-sm);border:1px solid var(--line);margin:12px 0}
+.tblwrap table{margin:0;border:0}
+
+/* ── 来源：表头弹层 / 行内链接 / 来源清单 ── */
+.src-head{position:relative;cursor:help;border-bottom:1px dotted var(--blue);white-space:nowrap}
+.src-head .src-pop{position:absolute;left:0;top:100%;z-index:60;display:none;background:var(--navy);color:#fff;font-size:12px;font-weight:400;padding:9px 12px;border-radius:8px;box-shadow:var(--shadow-lg);max-width:min(560px,86vw);white-space:normal;line-height:1.65;border:1px solid rgba(255,255,255,.14)}
+.src-pop .pop-title{font-weight:600;display:block;margin-bottom:4px;color:#fff}
+.src-pop .pop-url{display:block;margin-top:6px;word-break:break-all;color:var(--blue-l)}
+.src-pop .pop-url a{color:#a9c8ee}
+.src-head:hover .src-pop,.src-head:focus .src-pop,.src-head:focus-within .src-pop{display:block}
+.src-inline{color:var(--ink3);font-size:12px;word-break:break-all}
+.src-inline a{color:var(--blue);text-decoration:none;border-bottom:1px dotted var(--blue)}
+.src-inline a:hover{background:#eaf3fa}
+.src{font-size:11.1px;color:var(--ink3);word-break:break-word;line-height:1.58}
+.src a{color:#5b7bb4;text-decoration:none}
+.src a:hover{text-decoration:underline}
+.refs{font-size:12.5px;color:var(--ink3)}
+.refs ol{padding-left:20px}
+.refs a{color:var(--navy);text-decoration:none;border-bottom:1px dashed var(--navy);word-break:break-all}
+.refs a:hover{background:#e8f0f8}
+
+/* ── 卡片 / 结论框 ── */
+.card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:18px 20px;box-shadow:var(--shadow);margin:14px 0}
+.card.tight{padding:14px 16px}
+.leadbox{border-left:4px solid var(--navy2);background:linear-gradient(125deg,#f5f9fd,#edf3fa);border-color:#cfdded}
+.leadbox h3:first-child{margin-top:0}
+
+/* ── KPI 卡（trends .kpi / apartment .kcard） ── */
+.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(168px,1fr));gap:12px;margin:14px 0}
+.kpi{background:var(--card);border:1px solid var(--line);border-left:4px solid var(--navy);border-radius:var(--radius-sm);padding:12px 14px;box-shadow:var(--shadow)}
+.kpi.red{border-left-color:var(--red)} .kpi.green{border-left-color:var(--green)}
+.kpi.amber{border-left-color:var(--amber)} .kpi.blue{border-left-color:var(--blue)}
+.kpi .v{font-size:22px;font-weight:700;color:var(--navy);line-height:1.2}
+.kpi.red .v{color:var(--red)} .kpi.green .v{color:var(--green)}
+.kpi.amber .v{color:var(--amber)} .kpi.blue .v{color:var(--blue)}
+.kpi .l{font-size:12px;color:var(--ink3);margin-top:4px}
+.kpi .s{font-size:11px;color:#8a98a6;margin-top:2px}
+.kcards{display:grid;grid-template-columns:repeat(auto-fit,minmax(232px,1fr));gap:11px;margin:14px 0}
+.kcard{background:var(--card);border:1px solid var(--line);border-left:4px solid var(--navy2);border-radius:10px;padding:13px 15px;box-shadow:var(--shadow)}
+.kcard.warn,.kcard.pre{border-left-color:var(--pre);background:linear-gradient(180deg,var(--pre-bg),#fff 62%)}
+.kcard.bad,.kcard.red{border-left-color:var(--red);background:linear-gradient(180deg,var(--red-bg),#fff 62%)}
+.kcard.good{border-left-color:var(--green);background:linear-gradient(180deg,var(--green-bg),#fff 62%)}
+.kcard .lab,.kcard .t{font-size:12.4px;color:var(--ink2)}
+.kcard .val,.kcard .v{font-size:22px;font-weight:700;color:var(--navy);margin:3px 0 2px;line-height:1.25}
+.kcard.warn .val,.kcard.pre .val{color:var(--pre)}
+.kcard.bad .val,.kcard.red .val{color:var(--red)}
+.kcard.good .val{color:var(--green)}
+.kcard .note,.kcard .s{font-size:11.5px;color:var(--ink3);line-height:1.6;margin-top:4px;word-break:break-word}
+
+/* ── 数据条 / 信号灯 ── */
+.stat-strip{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin:12px 0}
+.stat{background:var(--card);border:1px solid var(--line);border-radius:9px;padding:11px 13px;text-align:center}
+.stat .lab,.stat .l{font-size:11.4px;color:var(--ink3);margin-top:2px}
+.stat .n{font-size:23px;font-weight:700;line-height:1.2}
+.stat.hard .n{color:var(--red)} .stat.pre .n{color:var(--pre)} .stat.yel .n{color:var(--amber)}
+.stat.grn .n{color:var(--green)} .stat.gry .n{color:var(--gray)}
+.lamp{display:inline-block;min-width:9px;width:9px;height:9px;border-radius:50%;margin-right:4px;vertical-align:0}
+.lamp.r{background:var(--red)} .lamp.p{background:var(--pre)} .lamp.y{background:var(--amber)}
+.lamp.g{background:var(--green)} .lamp.k{background:var(--gray)}
+
+/* ── 标签 / 标注 ── */
+.tag{display:inline-block;font-size:11px;padding:1px 7px;border-radius:10px;background:var(--blue-l);color:var(--navy);border:1px solid var(--line);margin-right:4px}
+.tag.red{background:var(--red-l);color:var(--red);border-color:var(--red-line)}
+.tag.green{background:var(--green-l);color:var(--green);border-color:var(--green-line)}
+.tag.amber{background:var(--amber-l);color:var(--amber);border-color:var(--amber-line)}
+.pill{display:inline-block;border-radius:3px;padding:0 7px;font-size:11.3px;white-space:nowrap;line-height:1.72}
+.pill.r{background:var(--red-l);color:var(--red)} .pill.p{background:var(--pre-l);color:var(--pre)}
+.pill.y{background:var(--amber-l);color:var(--amber)} .pill.g{background:var(--green-l);color:var(--green)}
+.pill.k{background:var(--gray-l);color:var(--gray)} .pill.b{background:var(--blue-l);color:var(--navy2)}
+.pill.act{background:#e8eef6;color:#2b4a70}
+.callout{border-left:4px solid var(--amber);background:var(--amber-l);padding:12px 16px;border-radius:0 6px 6px 0;margin:14px 0;font-size:13.5px}
+.callout.red{border-left-color:var(--red);background:var(--red-l)}
+.callout.green{border-left-color:var(--green);background:var(--green-l)}
+.note{border:1px solid var(--line);border-left:4px solid var(--navy2);background:var(--card2);border-radius:var(--radius-sm);padding:12px 15px;margin:14px 0;font-size:13.5px}
+.note.gap{border-left-color:var(--gray);background:var(--gray-l)}
+.note.check{border-left-color:var(--green);background:var(--green-l)}
+.note.correct{border-left-color:var(--red);background:var(--red-l)}
+.note.preline{border-left-color:var(--pre);background:var(--pre-l)}
+.term{font-size:12.5px;color:var(--ink3);background:var(--bg-soft);border:1px solid var(--line);border-radius:6px;padding:8px 12px;margin:14px 0}
+.term b{color:var(--navy)}
+
+/* ── 图表（trends .chart 卡片 / apartment .chart-box + .chart-eh 容器） ── */
+.chart{margin:18px 0;padding:16px;background:var(--card);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow)}
+.chart h4{margin:0 0 4px;font-size:14.5px;color:var(--navy)}
+.chart .unit{font-size:12px;color:var(--ink3);font-weight:400}
+.chart-note{font-size:11.5px;color:var(--ink3);margin:0 0 12px;line-height:1.7}
+.chart svg{display:block;max-width:100%;height:auto;margin:6px auto 0}
+.chart-box{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:14px 14px 6px;box-shadow:var(--shadow);margin:16px 0}
+.chart-eh{width:100%;height:352px;margin:6px 0}
+.legend{display:flex;flex-wrap:wrap;gap:14px;font-size:12px;color:var(--ink2);margin:6px 0 12px}
+.legend span{display:inline-flex;align-items:center;gap:5px}
+.legend i{display:inline-block;width:11px;height:11px;border-radius:2px}
+
+/* ── 时间线 ── */
+.timeline{margin:16px 0;padding-left:8px}
+.tl-item{display:flex;gap:14px;margin:0 0 14px}
+.tl-date{flex:0 0 78px;font-size:12.5px;font-weight:700;color:var(--navy);text-align:right;padding-top:2px}
+.tl-body{flex:1;border-left:2px solid var(--line);padding:0 0 0 14px;position:relative}
+.tl-body::before{content:"";position:absolute;left:-6px;top:6px;width:10px;height:10px;border-radius:50%;background:var(--navy);border:2px solid #fff;box-shadow:0 0 0 1px var(--navy)}
+.tl-body.red::before{background:var(--red);box-shadow:0 0 0 1px var(--red)}
+.tl-body.green::before{background:var(--green);box-shadow:0 0 0 1px var(--green)}
+.tl-body.amber::before{background:var(--amber);box-shadow:0 0 0 1px var(--amber)}
+.tl-body .t{font-weight:600;color:var(--ink)}
+.tl-body .d{font-size:13px;color:var(--ink3);margin-top:2px}
+
+/* ── 风险条 / 风险框 ── */
+.rl-track{position:relative;height:12px;background:var(--gray-line);border-radius:999px;margin:14px 0 6px;overflow:hidden}
+.rl-fill{position:absolute;left:0;top:0;bottom:0;background:var(--green);border-radius:999px}
+.rl-marker{position:absolute;top:-3px;bottom:-3px;width:2px;background:var(--red);left:50%}
+.risk{background:linear-gradient(125deg,#fdf3f1,var(--red-l));border:1px solid #eec8c1;border-left:5px solid var(--red);border-radius:10px;padding:16px 18px;margin:14px 0}
+.risk h4{font-size:14.4px;color:var(--red);margin-bottom:8px}
+.risk .kpis{display:flex;flex-wrap:wrap;gap:22px;margin:10px 0 12px}
+.risk .kpis>div{min-width:150px}
+.risk .kpis .n{font-size:22px;font-weight:700;color:var(--red);line-height:1.25}
+.risk .kpis .l{font-size:11.4px;color:var(--ink2)}
+.redbox{background:linear-gradient(135deg,#fff8f6,var(--red-l));border:1px solid #eec8c1;border-left:5px solid var(--red);border-radius:10px;padding:15px 18px;margin:14px 0}
+.redbox h4{color:var(--red-d);margin-top:0}
+.prebox{background:linear-gradient(135deg,#fffaf4,var(--pre-l));border:1px solid #efd3b6;border-left:5px solid var(--pre);border-radius:10px;padding:15px 18px;margin:14px 0}
+.prebox h4{color:var(--pre);margin-top:0}
+.preline{border-left:4px solid var(--pre);background:var(--pre-l);padding:10px 14px;border-radius:0 6px 6px 0;margin:10px 0;font-size:13px}
+
+/* ── 目录 / 流程 / 分层（年度） ── */
+.toc{display:flex;flex-wrap:wrap;gap:7px;margin:0 0 6px}
+.toc a{font-size:12.3px;color:var(--navy2);background:var(--blue-l);border-radius:15px;padding:3px 12px;text-decoration:none}
+.toc a:hover{background:#dae6f5}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.flow{display:flex;align-items:stretch;gap:7px;flex-wrap:wrap;margin:12px 0}
+.node{flex:1;min-width:150px;background:var(--blue-l);border:1px solid #cfddf3;border-radius:8px;padding:11px 12px}
+.node b{display:block;color:var(--navy);font-size:12.8px;margin-bottom:3px}
+.node span{font-size:11.4px;color:var(--ink2);line-height:1.55;display:block}
+.arrow{display:flex;align-items:center;color:var(--blue);font-size:18px;font-weight:700}
+.tiers{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:12px 0}
+.tier{border:1px solid var(--line);border-radius:10px;padding:14px 15px;background:var(--card)}
+.tier.t1{border-top:4px solid var(--red)} .tier.t2{border-top:4px solid var(--pre)} .tier.t3{border-top:4px solid var(--amber)}
+.tier h4{margin:0 0 6px} .tier p{font-size:12.2px;color:var(--ink2);margin:0}
+
+/* ── 标注 / 页脚 / 索引链接 ── */
+.disc{margin-top:34px;padding:16px 18px;background:var(--bg-soft);border:1px solid var(--line);border-radius:var(--radius);font-size:13px;color:var(--ink3)}
+.disc strong{color:var(--ink)}
+footer,.footer{font-size:11.4px;color:var(--ink3);text-align:center;margin-top:22px;line-height:1.8}
+.idx-link{color:var(--navy);text-decoration:none;border-bottom:1px dotted #9db9da;font-weight:600}
+.idx-link:hover{color:var(--navy2);border-bottom:1px solid var(--blue)}
+.idx-link .ext{font-size:10px;color:var(--blue);margin-left:2px;font-weight:400}
+
+/* ── 报告特有组件（apartment 基线 / 季度） ── */
+.tldr{background:linear-gradient(180deg,#fff,#f8fafe);border-left:5px solid var(--navy2)}
+.verdict{font-size:17px;font-weight:700;color:var(--blue);margin:0 0 12px}
+.kpi-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin:16px 0}
+.tbl-wrap{overflow-x:auto;border:1px solid var(--line);border-radius:8px;margin:12px 0}
+.src-pop .src-pop-title{display:block;font-size:11px;color:var(--ink3);margin-bottom:4px;border-bottom:1px solid var(--line);padding-bottom:4px}
+.t-red{background:var(--red-l);color:var(--red)} .t-green{background:var(--green-l);color:var(--green)}
+.t-amber{background:var(--amber-l);color:var(--amber)} .t-grey{background:var(--gray-l);color:var(--ink3)}
+.t-blue{background:var(--blue-l);color:var(--blue)}
+.toggle{display:inline-flex;border:1px solid var(--line);border-radius:6px;overflow:hidden;margin-bottom:8px}
+.toggle button{border:0;background:#fff;color:var(--ink2);padding:5px 14px;font-size:12px;cursor:pointer;font-family:inherit}
+.toggle button.on{background:var(--navy2);color:#fff}
+.hide{display:none}
+.two-col{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.layer{display:grid;grid-template-columns:110px 1fr;gap:0;border:1px solid var(--line);border-radius:8px;overflow:hidden;margin-bottom:10px;background:#fff}
+.layer .lb{background:var(--navy2);color:#fff;padding:14px 12px;font-weight:700;font-size:13px;display:flex;align-items:center;justify-content:center;text-align:center}
+.layer .lb.q{background:#4472C4} .layer .lb.y{background:var(--navy2)}
+.layer .ct{padding:12px 16px;font-size:12.5px;color:var(--ink2)}
+.layer .ct b{color:var(--ink)}
+.note-box{background:var(--amber-l);border:1px solid var(--amber-line);border-radius:8px;padding:12px 16px;color:#6b4e0a;font-size:12.5px;margin:12px 0}
+.risk-box{background:var(--red-l);border:1px solid var(--red-line);border-radius:8px;padding:12px 16px;color:#8c2f24;font-size:12.5px;margin:12px 0}
+.ok-box{background:var(--green-l);border:1px solid var(--green-line);border-radius:8px;padding:12px 16px;color:#155c39;font-size:12.5px;margin:12px 0}
+.sig-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-top:12px}
+.sig{display:flex;gap:12px;align-items:flex-start;border:1px solid var(--line);border-radius:8px;padding:11px 13px;background:#fff}
+.sig .dot{width:10px;height:10px;border-radius:50%;margin-top:6px;flex:0 0 10px}
+.sig .dot.r{background:var(--red)} .sig .dot.g{background:var(--green)}
+.sig .dot.a{background:var(--amber)} .sig .dot.k{background:var(--gray)}
+.sig b{font-size:13px;color:var(--ink)} .sig p{margin:2px 0 0;font-size:11.5px}
+b.dr{color:var(--red-d)}
+.metric-link{color:var(--navy);text-decoration:none;border-bottom:1px dotted #9db4cf;font-weight:600}
+.metric-link:hover{color:var(--navy2);border-bottom-color:var(--navy2);background:var(--blue-l)}
+.metric-link::after{content:" ↗";font-size:10px;color:#7d96b3;font-weight:400}
+.rl-banner{background:linear-gradient(125deg,#5c1512,#7a1f19 60%,#8a2b20);color:#fff;border-radius:12px;padding:16px 20px;margin:16px 0;border:1px solid #4d100d;box-shadow:0 2px 8px rgba(110,27,22,.18)}
+.rl-banner h3{color:#fff;margin:0 0 6px;font-size:16px}
+.rl-banner p{font-size:12.8px;color:rgba(255,255,255,.88);margin-bottom:6px}
+.rl-banner .rl-kpis{display:flex;flex-wrap:wrap;gap:10px;margin:10px 0 4px}
+.rl-banner .rl-kpis div{background:rgba(255,255,255,.10);border:1px solid rgba(255,255,255,.18);border-radius:8px;padding:8px 12px;min-width:156px}
+.rl-banner .n{font-size:20px;font-weight:700;line-height:1.3}
+.rl-banner .l{font-size:11.4px;color:rgba(255,255,255,.78)}
+.rl-card{border:2px solid var(--red-d);background:linear-gradient(180deg,#fff,#fdf6f4);border-radius:12px;padding:18px 20px;margin:16px 0;box-shadow:0 2px 8px rgba(110,27,22,.08)}
+.rl-card h3{color:var(--red-d);margin-top:0}
+.rl-table th{background:var(--red-d)}
+.rl-table tbody tr:nth-child(even) td{background:#fdf7f5}
+.rl-table tbody tr:hover td{background:var(--red-l)}
+.rl-table td:first-child{border-left:3px solid var(--red-d)}
+.rl-rule{background:#fdf6f4;border-left:4px solid var(--red-d);padding:10px 14px;border-radius:0 7px 7px 0;font-size:12.8px;margin:10px 0}
+.rl-mark{display:inline-block;background:var(--red-d);color:#fff;border-radius:3px;padding:0 6px;font-size:11px;font-weight:700;letter-spacing:.5px}
+details.registry{margin:12px 0;background:var(--card);border:1px solid var(--line);border-radius:10px;padding:12px 16px}
+details.registry summary{cursor:pointer;font-weight:700;color:var(--navy);font-size:14px}
+details.registry[open]{padding-bottom:18px}
+.mini{background:#fff;border:1px solid var(--line);border-radius:9px;padding:12px 14px}
+.mini h4{margin-top:0}
+
+/* ── 信息等级标签（四级，信息分层规范） ── */
+.lvl{display:inline-block;font-size:11px;line-height:1.5;padding:1px 7px;border-radius:9px;
+  border:1px solid transparent;white-space:nowrap;font-weight:600;vertical-align:1px}
+.lvl-verified{background:var(--green-l);color:var(--green);border-color:var(--green-line,#d3ead9)}
+.lvl-partial{background:var(--amber-l);color:var(--amber);border-color:var(--amber-line,#f0e3c2)}
+.lvl-inferred{background:var(--blue-l);color:var(--navy2);border-color:#cdddf0}
+.lvl-assumption{background:var(--gray-l);color:var(--gray);border-color:var(--gray-line,#e6eaee)}
+
+/* ── 新增信息统计条（本期新增/修正/无变化/假设核验进度） ── */
+.delta-strip{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:14px 0}
+.delta-strip .d{background:var(--card);border:1px solid var(--line);border-radius:10px;
+  padding:12px 14px;box-shadow:var(--shadow)}
+.delta-strip .d .n{font-size:22px;font-weight:700;color:var(--navy);line-height:1.25}
+.delta-strip .d .l{font-size:11.6px;color:var(--ink3);margin-top:2px}
+.delta-strip .d.add .n{color:var(--green)}
+.delta-strip .d.fix .n{color:var(--amber)}
+.delta-strip .d.same .n{color:var(--ink3)}
+.delta-strip .d.hyp .n{color:var(--navy2)}
+
+/* ── 行动协议卡（触发条件+阈值+责任角色+时限+验证指标） ── */
+.action-card{background:var(--card);border:1px solid var(--line);border-left:4px solid var(--navy2);
+  border-radius:10px;padding:14px 16px;margin:12px 0;box-shadow:var(--shadow)}
+.action-card.immediate{border-left-color:var(--red)}
+.action-card.watch{border-left-color:var(--amber)}
+.action-card.archive{border-left-color:var(--gray)}
+.action-card .a-head{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:6px}
+.action-card .a-title{font-weight:700;color:var(--navy);font-size:14.5px}
+.action-card .a-meta{font-size:12.3px;color:var(--ink2);line-height:1.7}
+.action-card .a-meta b{color:var(--navy)}
+.prio{display:inline-block;font-size:11px;padding:1px 8px;border-radius:9px;font-weight:700}
+.prio.immediate{background:var(--red-l);color:var(--red)}
+.prio.watch{background:var(--amber-l);color:var(--amber)}
+.prio.archive{background:var(--gray-l);color:var(--gray)}
+
+/* ── 决策卡（结论/证据强度/触发条件/反向证据/信息充分度） ── */
+.decision-card{background:var(--card);border:1px solid var(--line);border-radius:12px;
+  padding:16px 18px;margin:14px 0;box-shadow:var(--shadow)}
+.decision-card .dc-head{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap;margin-bottom:8px}
+.decision-card .dc-title{font-weight:700;color:var(--navy);font-size:15px}
+.decision-card .dc-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px 18px;font-size:12.8px;line-height:1.7}
+.decision-card .dc-grid .k{color:var(--ink3);font-weight:600}
+.suff{display:inline-block;font-size:11px;padding:1px 8px;border-radius:9px;font-weight:700}
+.suff.ok{background:var(--green-l);color:var(--green)}
+.suff.need{background:var(--amber-l);color:var(--amber)}
+.ev-strong{color:var(--green);font-weight:700}
+.ev-mid{color:var(--amber);font-weight:700}
+.ev-weak{color:var(--red);font-weight:700}
+
+/* ── 场景切片 / 事实卡片指针 ── */
+.slice{border:1px dashed var(--navy2);border-radius:10px;padding:12px 16px;margin:12px 0;background:var(--blue-l)}
+.slice .slice-head{font-weight:700;color:var(--navy);margin-bottom:4px}
+.fact-ref{font-family:var(--font-mono);font-size:11.5px;color:var(--navy2);
+  background:var(--blue-l);border:1px solid #cdddf0;border-radius:5px;padding:0 5px;white-space:nowrap}
+
+/* ── 响应式 / 打印 ── */
+@media (max-width:720px){
+  body{font-size:14px}
+  .wrap{padding:0 14px 48px}
+  header.report-head,header.hero{padding:26px 0 22px}
+  header.report-head h1,header.hero h1{font-size:21px}
+  nav.report-nav .nav-url{display:none}
+  table{display:block;overflow-x:auto;white-space:nowrap}
+  th,td{padding:7px 8px;font-size:12.5px}
+  .chart-eh{height:300px}
+  .grid2,.tiers{grid-template-columns:1fr}
+  .kpi-grid{grid-template-columns:repeat(2,1fr)}
+  .two-col,.sig-grid{grid-template-columns:1fr}
+  .stat-strip{grid-template-columns:repeat(2,1fr)}
+  .delta-strip{grid-template-columns:repeat(2,1fr)}
+  .decision-card .dc-grid{grid-template-columns:1fr}
+  .tl-date{flex-basis:64px;font-size:11.5px}
+}
+@media print{
+  nav.report-nav,.skip-link{display:none}
+  .card,.chart,.kpi,.kcard,.chart-box{box-shadow:none}
+  body{font-size:12px}
+}
+
+</style>
+</head>
+<body>
+<a class="skip-link" href="#main-content">跳到主要内容</a>
+<header class="report-head">
+  <div class="wrap">
+    <p class="eyebrow">政策法规解读型 · 基线报告</p>
+    <h1>全球 · 教育体系与政策 · 首期基线报告</h1>
+    <p class="sub">九节固化锚 · 基线固定（后续事件触发解读的对比锚）</p>
+    <p class="meta">
+      <b>数据截止</b>：2026-12（基线期）｜<b>报告版本</b>：v1.0（首期基线固定）｜<b>本期读数时点</b>：2026-12<br>
+      <b>来源语言</b>：官方一手以英文为准；非英语官方文件标注原文语言并附官方 URL｜<b>覆盖</b>：全球多国对照（非单一地区业务线）
+    </p>
+    <p>
+      <span class="tag">政策法规解读</span><span class="tag">九节固化锚</span><span class="tag">预校准（ex-ante）</span><span class="tag">官方原文边界</span>
+    </p>
+  </div>
+</header>
+<nav class="report-nav" aria-label="报告导航">
+  <div class="wrap">
+    <div class="nav-url"><span class="nav-url-label">报告 URL：</span><a href="https://github.com/hmbphxkw76-byte/tech-context-digest/blob/main/content/education/education-system/reports/2026-12_baseline_report.html">github.com/hmbphxkw76-byte/tech-context-digest · content/education/education-system/reports/2026-12_baseline_report.html</a></div>
+    <div class="nav-tabs">
+      <a href="#s1">一、执行摘要</a>
+      <a href="#s2">二、政策台账与监测机制</a>
+      <a href="#s3">三、监管框架总览</a>
+      <a href="#s4">四、重点政策逐条解读</a>
+      <a href="#s5">五、影响对象矩阵</a>
+      <a href="#s6">六、合规应对建议</a>
+      <a href="#s7">七、生效时间线</a>
+      <a href="#s8">八、数据治理与局限</a>
+      <a href="#s9">九、参考来源清单</a>
+    </div>
+  </div>
+</nav>
+<main class="wrap" id="main-content">
+
+<div class="delta-strip">
+  <div class="d add"><div class="n">全量</div><div class="l">本期新增（基线首期 = 全部基线项）</div></div>
+  <div class="d fix"><div class="n">0 条</div><div class="l">修正（已修正事实清单见第八节）</div></div>
+  <div class="d same"><div class="n">0 条</div><div class="l">无变化（无上期报告）</div></div>
+  <div class="d hyp"><div class="n">0/6</div><div class="l">假设核验进度（已登记 6 条假设）</div></div>
+</div>
+<p class="small muted">基线首期：新增 = 全部基线项；「已修正事实清单」为空，产生修正后逐条补记。</p>
+
+<h2 class="sec" id="s1">一、执行摘要</h2>
+<div class="card leadbox">
+  <h3>核心判断</h3>
+  <ol class="tight">
+    <li><b>分类锚</b>：UNESCO ISCED 2011 为跨国教育对照唯一分类锚（9 级 0–8），版本变更须新旧并列。<span class="lvl lvl-verified">已核验</span>（K01 / G02）</li>
+    <li><b>互认扩容</b>：UNESCO 全球高等教育学历资格认可公约 2019 通过、2022-12 达 20 批准、2023 生效，与里斯本区域公约并行。<span class="lvl lvl-verified">已核验</span>（K04 / RL-02）</li>
+    <li><b>投入基线</b>：OECD 国家教育支出占 GDP 平均 4.2%、占政府支出 9.8%（2023，EAG 2026），高于 K03 黄灯区间。<span class="lvl lvl-verified">已核验</span>（K03 / G04）</li>
+    <li><b>入学与结构</b>：OECD 3–5 岁入园率 86%（2024）；48% 年轻人持有高等教育学历（EAG 2025，2000 年为 27%）。<span class="lvl lvl-verified">已核验</span>（K02 / G02）</li>
+    <li><b>测评线索</b>：PISA 2022（81 国、约 69 万学生，2023-12-05 发布）与 PISA 2025（90+ 国，2026-09-08 发布）仅作线索，不单独下结论。<span class="lvl lvl-partial">部分核验</span>（K08）</li>
+    <li><b>国家框架</b>：中国《义务教育法》确立九年义务教育、年满 6 周岁入学（2006 修订，2015 / 2018 修正），基线期无修法。<span class="lvl lvl-verified">已核验</span>（K01 / RL-01）</li>
+    <li><b>首要盲区</b>：非英语官方原文与 ISCED 版本对照为优先补齐项；多数国家义务教育年龄 / 年限口径未回原文核验。<span class="lvl lvl-partial">部分核验</span>（G01）</li>
+  </ol>
+  <p><b>监管态势一句话</b>：全球教育治理呈「国际互认公约扩容 + 测评周期化 + 国家框架稳定」态势，基线期无重大修法触发 K01 / RL-01 红线。</p>
+  <p><b>生效时间线要点</b>：2023 全球公约生效 → 2025-09 EAG 2025 → 2026-09 PISA 2025 第一卷 → 2027 PISA 后续卷 → 2029 PISA 2029 启动。</p>
+</div>
+<div class="note">解读说明：文本依据为官方公报 / 法规数据库 / 官方统计门户原文，逐条附 URL（第九节）；时效以 2026-12 读数时点为准；摘要仅含已核验与部分核验，推断与假设下沉证据层。阈值与信号规则为「预校准（ex-ante）」，首次中期回测 2027-06。</div>
+
+<h2 class="sec" id="s2">二、政策台账与监测机制</h2>
+<h3>台账结构（字段定义）</h3>
+<p>政策台账（<code>data/processed/education/education-system/education_policy_ledger.md</code>，md-ledger）字段：法规 / 政策名称、发布机构、发布与生效日期、状态、官方原文 URL、影响对象、对应 K / RL / G 编号、核验状态、读数时点。基线首建值与本节一致；<b>台账与来源登记落盘位于 data 层，不在本任务独占范围内</b>（见第八节未决项）。</p>
+<h3>监测节拍</h3>
+<ul class="tight">
+  <li><b>事件触发（主节拍）</b>：各国教育部 / 主管机关政策发布与征求意见、立法机关教育修法、UNESCO / OECD 统计与测评报告、互认协议签署 / 生效 / 退出、认证机构资质变更 → 对应专题单份解读。</li>
+  <li><b>年度台账复盘</b>：UNESCO UIS 年度统计更新、OECD Education at a Glance 发布、IEA 测评结果（仅作线索）、台账口径冲突与已修正事实清单更新。</li>
+</ul>
+<h3>周期定位与读数时点</h3>
+<p><b>本期周期</b>：2026-12（基线首期，数据截止 2026-12）；<b>读数时点</b>：2026-12；<b>与上一期关系</b>：无上一期报告，本基线为滚动对比锚，后续事件解读与年度台账在其上叠加，基线不重跑。<span class="lvl lvl-verified">已核验</span>（来源：business-config 第一节，指针）</p>
+<h3>传导量化（弹性与时滞）</h3>
+<p><b>量级 / 比率</b>：EAG 2026 读数——OECD 国家教育支出占 GDP 平均 4.2%、占政府支出 9.8%（2023）；3–5 岁入园率 86%（2024）；48% 年轻人持有高等教育学历（EAG 2025，2000 年为 27%）。<span class="lvl lvl-verified">已核验</span>（K02 / K03 / G04）</p>
+<p><b>弹性与时滞</b>：支出对入园率的弹性取跨国面板方向性区间，未实测（标假设）；政策发布到年度统计落库的时滞按 12–18 个月估计，故单期波动不作趋势。<span class="lvl lvl-assumption">假设</span>（来源：OECD EAG 2025，指针）</p>
+<h3>政策入模（政策乘数）</h3>
+<p><b>政策变量进入判断的方式</b>：互认公约缔约方扩容以「政策乘数」计入互认覆盖（方向性，幅度待缔约方清单核验）；义务教育修法以 K01 / RL-01 触发即重算，不进入基线点值；支出与入学率以 EAG / UIS 官方读数入模，媒体转述不入模。<span class="lvl lvl-verified">已核验</span>（K01 / RL-01 / G04）</p>
+<h3>官方发布渠道清单（G01–G05）</h3>
+<div class="tblwrap"><table class="fixed">
+<thead><tr><th style="width:14%">编号</th><th style="width:24%">政策项</th><th style="width:14%">层级</th><th style="width:34%">官方入口（URL）</th><th style="width:14%">更新机制</th></tr></thead>
+<tbody>
+<tr><td>G01</td><td>义务教育与学制</td><td>国家</td><td>中国教育部 moe.gov.cn；日本 MEXT mext.go.jp；韩国教育部 english.moe.go.kr；英国 DfE gov.uk；美国 ED / NCES ed.gov / nces.ed.gov；德国 KMK kmk.org</td><td>法规修订即复核</td></tr>
+<tr><td>G02</td><td>高等教育结构与入学</td><td>国际</td><td>UNESCO UIS uis.unesco.org；OECD Data data.oecd.org；World Bank EdStats datatopics.worldbank.org/education</td><td>年度统计快照</td></tr>
+<tr><td>G03</td><td>学历学位互认协议</td><td>国际</td><td>UNESCO 高等教育页 unesco.org/en/higher-education；UNESCO 法律事务 unesco.org/en/legal-affairs</td><td>批准 / 生效即复核</td></tr>
+<tr><td>G04</td><td>教育支出与投入</td><td>国际</td><td>UNESCO UIS；World Bank EdStats；OECD Education at a Glance</td><td>年度报告</td></tr>
+<tr><td>G05</td><td>质量保障与认证机构</td><td>国家</td><td>英国 OfS officeforstudents.org.uk；德国 KMK；各国官方认证机构名录</td><td>名单变更即复核</td></tr>
+</tbody>
+</table></div>
+<div class="note">口径规则：未取得官方原文的标「未核验」，禁止引用商业中介网站数值；入口页 ≠ 条款页；任一变更立即重算受影响结论（business-config 第十节，指针）。</div>
+
+<h2 class="sec" id="s3">三、监管框架总览</h2>
+<h3>现行法规地图（层级）</h3>
+<div class="tblwrap"><table class="fixed">
+<thead><tr><th style="width:16%">层级</th><th style="width:30%">代表文件 / 机制</th><th style="width:14%">发布主体</th><th style="width:26%">覆盖</th><th style="width:14%">官方原文 URL</th></tr></thead>
+<tbody>
+<tr><td>分类标准</td><td>ISCED 2011（9 级 0–8）</td><td>UNESCO UIS</td><td>跨国教育统计对照</td><td>isced.uis.unesco.org</td></tr>
+<tr><td>国际公约</td><td>全球高等教育学历资格认可公约（2019）</td><td>UNESCO</td><td>全球范围高等教育资格互认</td><td>unesco.org/en/higher-education</td></tr>
+<tr><td>区域公约</td><td>里斯本区域公约（1997）等区域互认公约群</td><td>UNESCO</td><td>欧洲及区域互认</td><td>unesco.org/en/legal-affairs</td></tr>
+<tr><td>区域机制</td><td>Eurydice 欧洲教育信息网络</td><td>EU EACEA</td><td>欧洲各国教育制度信息</td><td>eurydice.eacea.ec.europa.eu</td></tr>
+<tr><td>统计与测评</td><td>Education at a Glance；PISA / TIMSS / PIRLS</td><td>OECD / IEA</td><td>支出、结构、学习成效</td><td>data.oecd.org；pisa.oecd.org；iea.nl</td></tr>
+<tr><td>国家框架</td><td>中国《义务教育法》；日本《学校教育法》；韩国教育部主管法规（6-3-3 学制）；英国 DfE 法规；美国 NCES 口径；德国 KMK 协定</td><td>各国教育部 / 主管机关</td><td>国内学制、入学、认证</td><td>见第二节 G01</td></tr>
+</tbody>
+</table></div>
+<h3>监管机构职责分工</h3>
+<ul class="tight">
+  <li><b>UNESCO UIS</b>：教育统计口径与数据（ISCED、UIS.stat）。</li>
+  <li><b>UNESCO 法律事务 / 高等教育</b>：互认公约文本、批准与生效状态。</li>
+  <li><b>OECD</b>：Education at a Glance、PISA、政策评论（CERI）。</li>
+  <li><b>IEA</b>：TIMSS / PIRLS / ICILS 测评（仅作线索）。</li>
+  <li><b>EU Eurydice</b>：欧洲各国教育制度与政策信息。</li>
+  <li><b>各国教育部 / 主管机关</b>：法规、学制、认证机构名录（最终裁决层 P5）。</li>
+</ul>
+<h3>框架演变脉络</h3>
+<div class="timeline">
+  <div class="tl-item"><div class="tl-date">1997</div><div class="tl-body"><div class="t">里斯本区域公约采纳</div><div class="d">欧洲区域高等教育学历互认制度化起点（生效日待核验）。</div></div></div>
+  <div class="tl-item"><div class="tl-date">2011 / 2012</div><div class="tl-body"><div class="t">ISCED 2011 发布</div><div class="d">取代 1976 / 1997 版，成为跨国对照分类锚。</div></div></div>
+  <div class="tl-item"><div class="tl-date">2019-11</div><div class="tl-body"><div class="t">全球互认公约通过</div><div class="d">首个全球范围高等教育互认联合国条约。</div></div></div>
+  <div class="tl-item"><div class="tl-date">2023</div><div class="tl-body green"><div class="t">全球公约生效</div><div class="d">对缔约方具有法律约束力，与区域公约并行。</div></div></div>
+  <div class="tl-item"><div class="tl-date">2025-09</div><div class="tl-body"><div class="t">EAG 2025 发布</div><div class="d">聚焦高等教育；支出与结构基线更新。</div></div></div>
+  <div class="tl-item"><div class="tl-date">2026-09</div><div class="tl-body amber"><div class="t">PISA 2025 第一卷发布</div><div class="d">90+ 国参与，科学为主测领域；仅作线索。</div></div></div>
+</div>
+
+<h3>义务教育年限口径对照（基线登记 · 待核验）</h3>
+<div class="tblwrap"><table class="fixed">
+<thead><tr><th style="width:13%">国家 / 地区</th><th style="width:19%">学年口径</th><th style="width:20%">年龄口径</th><th style="width:12%">ISCED 2011</th><th style="width:22%">来源（官方入口）</th><th style="width:14%">核验状态</th></tr></thead>
+<tbody>
+<tr><td>中国</td><td>9 年（小学 6 + 初中 3）</td><td>年满 6 周岁入学（条件不具备可推迟至 7 周岁）</td><td>ISCED 1–2</td><td>moe.gov.cn（《义务教育法》第二条、第五条）</td><td>已核验</td></tr>
+<tr><td>日本</td><td>待核验</td><td>待核验</td><td>待核验</td><td>mext.go.jp</td><td>未核验</td></tr>
+<tr><td>韩国</td><td>6-3-3 学制；义务教育阶段待核验</td><td>待核验</td><td>待核验</td><td>english.moe.go.kr</td><td>未核验</td></tr>
+<tr><td>德国</td><td>各州 9 或 10 年（待核验）</td><td>待核验</td><td>待核验</td><td>kmk.org</td><td>未核验</td></tr>
+<tr><td>英国（England）</td><td>待核验</td><td>5–16 岁（待核验）</td><td>待核验</td><td>gov.uk</td><td>未核验</td></tr>
+<tr><td>美国</td><td>待核验</td><td>各州不同，通常 6–16 岁（待核验）</td><td>待核验</td><td>nces.ed.gov</td><td>未核验</td></tr>
+<tr><td>法国</td><td>待核验</td><td>3–16 岁（2019 年起，待核验）</td><td>待核验</td><td>education.gouv.fr</td><td>未核验</td></tr>
+</tbody>
+</table></div>
+<div class="note">口径规则：义务教育年限须区分「学年口径」与「年龄口径」，并注明来源国定义；跨国对照不设单一「排名」列（business-config 第十二节）。本表为基线登记，除中国外均待回官方原文核验。</div>
+
+<h2 class="sec" id="s4">四、重点政策逐条解读</h2>
+<h3>4.1 ISCED 2011 分类标准</h3>
+<ul class="tight">
+  <li><b>条款摘编</b>：ISCED 2011 将教育程度与课程分为 9 级（0–8），2012 年由 UNESCO UIS 发布，更新 1976 / 1997 版框架；用于跨国教育统计与资格对照。<span class="src-inline">isced.uis.unesco.org</span></li>
+  <li><b>解读</b>：跨国对照必须标注 ISCED 2011 等级；旧版（ISCED 1997）与新版的等级映射并非一一对应，版本变更时新旧并列。</li>
+  <li><b>歧义并列</b>：ISCED 2011 在 5 / 6 / 7 / 8 级细分上与 1997 版存在结构差异；引用具体等级时须注明版本。</li>
+</ul>
+<h3>4.2 UNESCO 全球高等教育学历资格认可公约</h3>
+<ul class="tight">
+  <li><b>条款摘编</b>：2019-11-25 由 UNESCO 大会通过，为首个全球范围高等教育互认联合国条约；要求对资格进行公平、透明、非歧视评估；2022-12-05 达 20 个批准；2023 年生效。<span class="src-inline">unesco.org/en/articles/milestone-global-convention-higher-education-will-enter-force-early-2023</span></li>
+  <li><b>解读</b>：全球公约与区域公约并行，扩大互认覆盖；缔约方持续增加（UNESCO 法律事务页 2026-10 更新显示新增批准）。<span class="lvl lvl-partial">部分核验</span></li>
+  <li><b>歧义并列</b>：「学历互认 ≠ 学位互认」，协议名称与覆盖层级须逐条核对原文（business-config 第三节）。</li>
+</ul>
+<h3>4.3 UNESCO 里斯本区域公约（1997）</h3>
+<ul class="tight">
+  <li><b>条款摘编</b>：1997-04-11 采纳，为欧洲区域高等教育学历互认的基础性公约；生效日期与缔约方数量待回原文核验。<span class="src-inline">unesco.org/en/legal-affairs</span></li>
+  <li><b>解读</b>：全球公约生效后区域公约继续有效；两者口径冲突时并列，不静默择一。</li>
+  <li><b>歧义并列</b>：区域公约与全球公约在适用范围、评估程序上存在差异，须逐条核对。</li>
+</ul>
+<h3>4.4 OECD Education at a Glance</h3>
+<ul class="tight">
+  <li><b>条款摘编</b>：OECD 年度教育指标报告；2025-09-09 发布 EAG 2025（聚焦高等教育）；EAG 2026 指标显示 OECD 国家教育支出占 GDP 平均 4.2%、占政府支出 9.8%（2023），3–5 岁入园率 86%（2024）。<span class="src-inline">doi.org/10.1787/1c0d9c79-en；gpseducation.oecd.org</span></li>
+  <li><b>解读</b>：支出与结构基线主源；与 UNESCO UIS 口径并列使用，不合并。</li>
+  <li><b>歧义并列</b>：EAG 的 GER / NER 定义与 UIS 存在口径差异，引用时注明来源与年份。</li>
+</ul>
+<h3>4.5 IEA 测评周期（PISA / TIMSS / PIRLS）</h3>
+<ul class="tight">
+  <li><b>条款摘编</b>：PISA 2022 有 81 个国家和经济体、约 69 万学生参与，2023-12-05 发布；PISA 2025 有 90+ 国参与、科学为主测领域，2026-09-08 发布第一卷；TIMSS 2023 有 64 国、65 万+ 学生参与；PIRLS 2026 为第六轮。<span class="src-inline">pisa.oecd.org；iea.nl；timssandpirls.bc.edu</span></li>
+  <li><b>解读</b>：测评结果仅作线索，不单独下结论（K08）；单一年份波动不可当趋势。</li>
+  <li><b>歧义并列</b>：PISA（15 岁）与 TIMSS / PIRLS（4 / 8 年级）测评对象与框架不同，不可直接比较。</li>
+</ul>
+<h3>4.6 国家框架示例：中国《义务教育法》</h3>
+<ul class="tight">
+  <li><b>条款摘编</b>：第二条「国家实行九年义务教育制度」；第五条「凡年满六周岁的儿童……应当入学接受并完成义务教育；条件不具备的地区，可以推迟到七周岁」。1986-04-12 通过、2006-06-29 修订、2015 / 2018 修正。<span class="src-inline">moe.gov.cn（教育部法规页）</span></li>
+  <li><b>解读</b>：K01 / RL-01 一级监测对象；基线期无正式修法落地。</li>
+  <li><b>歧义并列</b>：义务教育年限须区分「学年口径（9 年）」与「年龄口径（6–14 / 6–15 岁）」，地方学籍口径另有限定。</li>
+</ul>
+
+<h2 class="sec" id="s5">五、影响对象矩阵</h2>
+<div class="tblwrap"><table class="fixed">
+<thead><tr><th style="width:18%">政策 / 机制</th><th style="width:20%">受影响主体</th><th style="width:14%">影响方向</th><th style="width:14%">量级</th><th style="width:34%">依据条款 / 来源</th></tr></thead>
+<tbody>
+<tr><td>ISCED 2011</td><td>统计机构、研究者</td><td>口径约束</td><td>强</td><td>分类标准（UIS）</td></tr>
+<tr><td>全球互认公约</td><td>流动学生、高校</td><td>正向（互认覆盖扩大）</td><td>中</td><td>公约条款（UNESCO）</td></tr>
+<tr><td>全球互认公约</td><td>认证 / 评估机构</td><td>程序约束（透明、非歧视）</td><td>中</td><td>公约条款（UNESCO）</td></tr>
+<tr><td>EAG 2025 / 2026</td><td>政策制定者、教育部门</td><td>基线锚定</td><td>强</td><td>OECD 指标</td></tr>
+<tr><td>PISA 2025</td><td>教育系统、学校</td><td>测评口径变更（科学主测）</td><td>中</td><td>PISA 框架（OECD）</td></tr>
+<tr><td>中国《义务教育法》</td><td>适龄儿童家庭、地方教育当局</td><td>学制与入学约束</td><td>强</td><td>第二条、第五条（教育部）</td></tr>
+</tbody>
+</table></div>
+<div class="note">矩阵逐格附条款依据；量级为方向性判断，非实测幅度；具体数值见第四节与第七节。</div>
+
+<h2 class="sec" id="s6">六、合规应对建议（建议章）</h2>
+<h3>6.1 合规要点清单（建议）</h3>
+<ul class="tight">
+  <li>以官方原文为唯一采信层；媒体转述仅作线索并标「需核实原文」。</li>
+  <li>互认协议逐条核对名称、覆盖层级、生效日、适用对象与过渡期（学历 ≠ 学位）。</li>
+  <li>认证状态不等同教育质量；义务教育年限区分学年口径与年龄口径。</li>
+  <li>入学率并列 GER / NER，禁止合并或互相折算。</li>
+  <li>支出并列公共 / 私人与 GDP 占比，不取单一值。</li>
+</ul>
+<h3>6.2 过渡期安排</h3>
+<ul class="tight">
+  <li>全球公约生效后既有区域公约继续有效；缔约方过渡期与保留条款待逐条核验。</li>
+  <li>ISCED 版本切换期并列新旧对照，不静默择一。</li>
+</ul>
+<h3>6.3 待明确事项清单</h3>
+<ul class="tight">
+  <li>里斯本公约生效具体日期与缔约方数量。</li>
+  <li>全球公约当前缔约方总数（基线读数时点）。</li>
+  <li>各国义务教育年龄 / 年限官方原文口径（非英语原文优先）。</li>
+  <li>PISA 2025 后续卷与 PISA 2029 框架细则。</li>
+</ul>
+<div class="disc"><strong>结论边界：</strong>本建议章与事实分离，不构成法律意见，亦不构成升学、留学、资格认证个案意见；重大合规决策须咨询执业法律专业人士。</div>
+<h3>6.4 场景切片</h3>
+<div class="slice">
+  <p class="slice-head">场景切片 · 政策制定</p>
+  <p>以 UNESCO / OECD 官方统计与公约文本为政策基线，优先跟踪互认公约缔约方扩容、EAG 支出结构、PISA 口径变更；阈值与信号规则为「预校准（ex-ante）」，首次中期回测 2027-06。（来源：business-config 第十三节，指针）</p>
+</div>
+<div class="slice">
+  <p class="slice-head">场景切片 · 研究参考</p>
+  <p>跨国对照统一标注 ISCED 2011 等级与来源国定义；入学率、支出、学业完成三类口径并列；商业排名仅作线索且须回官方页核验。（来源：business-config 第三节 / 第十一节，指针）</p>
+</div>
+<h3>6.5 决策卡</h3>
+<div class="decision-card">
+  <div class="dc-head"><span class="dc-title">DC-1 互认框架扩容</span><span class="suff ok">方向可决策</span></div>
+  <div class="dc-grid">
+    <div><span class="k">结论：</span>全球公约生效标志互认框架从区域走向全球，覆盖持续扩大（部分核验）。</div>
+    <div><span class="k">证据强度：</span><span class="ev-mid">中</span>（UNESCO 官方公告，缔约方总数待核验）。</div>
+    <div><span class="k">触发条件：</span>新增批准、缔约方过渡期条款公布。</div>
+    <div><span class="k">反向证据：</span>区域公约与全球公约并行，实际执行口径未统一。</div>
+    <div><span class="k">信息充分度：</span>方向可决策；幅度与时点需补缔约方清单。</div>
+  </div>
+</div>
+<div class="decision-card">
+  <div class="dc-head"><span class="dc-title">DC-2 数据口径分层</span><span class="suff need">需补充信息</span></div>
+  <div class="dc-grid">
+    <div><span class="k">结论：</span>GER / NER、公共 / 私人支出、ISCED 新旧版本必须并列，不可合并（已核验）。</div>
+    <div><span class="k">证据强度：</span><span class="ev-strong">强</span>（官方统计定义交叉确认）。</div>
+    <div><span class="k">触发条件：</span>UIS / OECD 定义更新或版本切换。</div>
+    <div><span class="k">反向证据：</span>媒体转述常混用口径，须回原文。</div>
+    <div><span class="k">信息充分度：</span>口径规则可直接决策；国别映射待补。</div>
+  </div>
+</div>
+<h3>6.6 行动协议</h3>
+<div class="action-card immediate">
+  <div class="a-head"><span class="prio immediate">立即行动</span><span class="a-title">A1 回官方原文核验缺口</span></div>
+  <div class="a-meta"><b>触发条件：</b>基线发布后 30 日内。<br><b>阈值：</b>30 日内完成，缺口项 ≤2 项（里斯本公约生效日 / 缔约方数、全球公约缔约方总数）。<br><b>责任角色：</b>本业务线研究者。<br><b>时限：</b>2027-01 前。<br><b>验证指标：</b>官方页面 URL 与提取日期登记入来源登记册。</div>
+</div>
+<div class="action-card watch">
+  <div class="a-head"><span class="prio watch">持续观察</span><span class="a-title">A2 跟踪测评与统计发布节奏</span></div>
+  <div class="a-meta"><b>触发条件：</b>PISA 2025 后续卷（2027）、EAG 年度发布、UIS 年度更新。<br><b>阈值：</b>K08 口径变更或样本不达标。<br><b>责任角色：</b>本业务线研究者。<br><b>时限：</b>每季度复核。<br><b>验证指标：</b>官方发布页版本日期与卷期。</div>
+</div>
+<div class="action-card archive">
+  <div class="a-head"><span class="prio archive">仅记录存档</span><span class="a-title">A3 记录国家框架口径差异</span></div>
+  <div class="a-meta"><b>触发条件：</b>各国义务教育法修订或学制调整。<br><b>阈值：</b>K01 / RL-01 触发（草案审议 / 正式修法）。<br><b>责任角色：</b>本业务线研究者。<br><b>时限：</b>事件触发即记录。<br><b>验证指标：</b>法规库 URL 与生效日期。</div>
+</div>
+
+<h2 class="sec" id="s7">七、生效时间线</h2>
+<div class="tblwrap"><table class="fixed">
+<thead><tr><th style="width:30%">政策 / 事件</th><th style="width:22%">关键节点</th><th style="width:20%">日期</th><th style="width:28%">依据</th></tr></thead>
+<tbody>
+<tr><td>中国《义务教育法》</td><td>通过 / 施行</td><td>1986-04-12 / 1986-07-01</td><td>教育部法规页</td></tr>
+<tr><td>里斯本区域公约</td><td>采纳 / 生效</td><td>1997-04-11 / 生效日待核验</td><td>UNESCO 法律事务</td></tr>
+<tr><td>ISCED 2011</td><td>发布</td><td>2012</td><td>UNESCO UIS</td></tr>
+<tr><td>全球互认公约</td><td>通过</td><td>2019-11-25</td><td>UNESCO</td></tr>
+<tr><td>全球互认公约</td><td>达 20 个批准</td><td>2022-12-05</td><td>UNESCO</td></tr>
+<tr><td>全球互认公约</td><td>生效</td><td>2023</td><td>UNESCO</td></tr>
+<tr><td>Education at a Glance 2025</td><td>发布（聚焦高等教育）</td><td>2025-09-09</td><td>OECD</td></tr>
+<tr><td>PISA 2025 第一卷</td><td>发布（90+ 国）</td><td>2026-09-08</td><td>OECD PISA</td></tr>
+<tr><td>PISA 2025 后续卷</td><td>待发布</td><td>2027</td><td>OECD PISA</td></tr>
+<tr><td>PISA 2029</td><td>启动（阅读主测 + MAIL）</td><td>2029</td><td>OECD PISA</td></tr>
+</tbody>
+</table></div>
+<h3>待生效与待细则清单</h3>
+<ul class="tight">
+  <li>全球公约缔约方扩容与过渡期细则（待核验）。</li>
+  <li>PISA 2025 后续卷（2027）与 PISA 2029 框架细则。</li>
+  <li>各国义务教育法 / 学制修订（K01 / RL-01 触发即复核）。</li>
+</ul>
+
+<h2 class="sec" id="s8">八、数据治理与局限</h2>
+<h3>来源分级（指针）</h3>
+<p>来源按 business-config 第四节四层分级与 P0–P5 获取优先级执行（指针，不复制正文）：<b>官方一手</b>（UNESCO UIS、OECD、各国教育部）为唯一可直接采信层；<b>行业机构</b>（IEA 测评）；<b>挂牌门户 / 数据库</b>（UIS.stat、OECD Data、World Bank EdStats、e-Stat、Eurostat，须注提取日期）；<b>媒体转述</b>（须标「需核实原文」，不得与官方一手同等处理）。商业排名不列入采信层级，仅作线索。</p>
+<h3>文本时效声明</h3>
+<ul class="tight">
+  <li>本报告以 2026-12 读数时点为准；统计门户快照须注提取日期。</li>
+  <li>核验型运行不升级版本号，仅核心事实修正才升级版本号（business-config 第十三节）。</li>
+</ul>
+<h3>核验状态统计</h3>
+<ul class="tight">
+  <li><b>已核验</b>：ISCED 2011、全球公约通过 / 批准 / 生效、中国《义务教育法》条文、EAG 2025 发布与核心指标、PISA 2022 / 2025 发布节奏。</li>
+  <li><b>部分核验</b>：测评结果解读、各国义务教育年龄 / 年限口径、全球公约当前缔约方总数。</li>
+  <li><b>推断</b>：影响对象矩阵中的「方向 / 量级」为方向性判断。</li>
+  <li><b>假设</b>：已登记 6 条，基线期未核验（0/6）。</li>
+</ul>
+<h3>冲突数据与口径裁决</h3>
+<ul class="tight">
+  <li><b>入学率</b>：GER / NER / 分年龄净入学率并列，不合并。</li>
+  <li><b>支出</b>：公共 / 私人 / GDP 占比 / 人均并列，不取单一值。</li>
+  <li><b>学业完成</b>：毕业率 / 完成率 / 辍学率各国定义不同，并列。</li>
+  <li><b>学历层次</b>：ISCED 2011 与旧版并列。</li>
+  <li><b>互认状态</b>：协议文本与实际执行口径并列。</li>
+</ul>
+<h3>未核验 / 待复核清单</h3>
+<ul class="tight">
+  <li>里斯本区域公约生效具体日期与缔约方数量。</li>
+  <li>全球公约当前缔约方总数（2022-12 为 20，其后持续增加）。</li>
+  <li>日本、韩国、德国、英国、美国、法国义务教育年龄 / 年限官方原文口径。</li>
+  <li>非英语官方原文（MEXT 日语、中国教育部中文）可得性与条款对照。</li>
+  <li>PISA 2025 后续卷与 PISA 2029 框架细则。</li>
+  <li>OECD EAG 与 UNESCO UIS 在 GER / NER 定义上的映射差异。</li>
+</ul>
+<h3>解读局限</h3>
+<ul class="tight">
+  <li>本报告为基线首期，仅建立框架地图、台账结构与登记规则，不含深度跨国数值对照。</li>
+  <li>本任务独占范围为 <code>content/education/education-system/**</code>；政策台账（data 层）与来源登记册（source_registry.json）落盘不在本任务范围，标为未决（见下）。</li>
+  <li>阈值与信号规则为「预校准（ex-ante）」，首次中期回测 2027-06，校准前不作确定结论。</li>
+</ul>
+
+<h2 class="sec" id="s9">九、参考来源清单</h2>
+<p class="small muted">按来源分级分组，完整 URL，逐点可回溯；媒体转述标「需核实原文」。</p>
+<div class="refs">
+<h4>官方一手</h4>
+<ol>
+<li>UNESCO · Higher education — <a href="https://www.unesco.org/en/higher-education" target="_blank" rel="noopener">unesco.org/en/higher-education</a></li>
+<li>UNESCO · Global Convention 里程碑（20 批准 / 2023 生效） — <a href="https://www.unesco.org/en/articles/milestone-global-convention-higher-education-will-enter-force-early-2023" target="_blank" rel="noopener">unesco.org/en/articles/milestone-global-convention-higher-education-will-enter-force-early-2023</a></li>
+<li>UNESCO · Legal Affairs（公约批准 / 生效） — <a href="https://www.unesco.org/en/legal-affairs" target="_blank" rel="noopener">unesco.org/en/legal-affairs</a></li>
+<li>UNESCO UIS · ISCED 2011 — <a href="https://isced.uis.unesco.org/" target="_blank" rel="noopener">isced.uis.unesco.org</a>；<a href="https://uis.unesco.org/en/topic/international-standard-classification-of-education-isced" target="_blank" rel="noopener">uis.unesco.org</a></li>
+<li>UNESCO UIS · 统计门户 — <a href="http://uis.unesco.org/" target="_blank" rel="noopener">uis.unesco.org</a></li>
+<li>OECD · PISA — <a href="https://www.pisa.oecd.org/" target="_blank" rel="noopener">pisa.oecd.org</a>；<a href="https://www.oecd.org/en/about/programmes/pisa.html" target="_blank" rel="noopener">oecd.org/en/about/programmes/pisa.html</a></li>
+<li>OECD · Education at a Glance 2025 — <a href="https://www.oecd.org/en/publications/education-at-a-glance-2025_1c0d9c79-en.html" target="_blank" rel="noopener">oecd.org/en/publications/education-at-a-glance-2025_1c0d9c79-en.html</a>（DOI 10.1787/1c0d9c79-en）</li>
+<li>OECD Education GPS — <a href="https://gpseducation.oecd.org/" target="_blank" rel="noopener">gpseducation.oecd.org</a></li>
+<li>OECD Data — <a href="https://data.oecd.org/" target="_blank" rel="noopener">data.oecd.org</a></li>
+<li>中国教育部 · 中华人民共和国义务教育法 — <a href="http://www.moe.gov.cn/jyb_sjzl/sjzl_zcfg/zcfg_jyfl/202110/t20211029_575949.html" target="_blank" rel="noopener">moe.gov.cn</a></li>
+<li>日本文部科学省 MEXT · 教育制度概览 — <a href="https://www.mext.go.jp/en/policy/education/overview/index.htm" target="_blank" rel="noopener">mext.go.jp</a></li>
+<li>韩国教育部 MOE（英文首页） — <a href="https://english.moe.go.kr/main.do?s=english" target="_blank" rel="noopener">english.moe.go.kr/main.do?s=english</a></li>
+<li>英国 Department for Education — <a href="https://www.gov.uk/government/organisations/department-for-education" target="_blank" rel="noopener">gov.uk</a></li>
+<li>英国 Office for Students — <a href="https://www.officeforstudents.org.uk/" target="_blank" rel="noopener">officeforstudents.org.uk</a></li>
+<li>美国 Department of Education / NCES — <a href="https://www.ed.gov/" target="_blank" rel="noopener">ed.gov</a>；<a href="https://nces.ed.gov/" target="_blank" rel="noopener">nces.ed.gov</a></li>
+<li>德国 KMK — <a href="https://www.kmk.org/" target="_blank" rel="noopener">kmk.org</a></li>
+<li>EU Eurydice — <a href="https://eurydice.eacea.ec.europa.eu/" target="_blank" rel="noopener">eurydice.eacea.ec.europa.eu</a></li>
+<li>World Bank EdStats — <a href="https://datatopics.worldbank.org/education/" target="_blank" rel="noopener">datatopics.worldbank.org/education</a></li>
+<li>Eurostat — <a href="https://ec.europa.eu/eurostat" target="_blank" rel="noopener">ec.europa.eu/eurostat</a></li>
+<li>日本 e-Stat — <a href="https://www.e-stat.go.jp/en" target="_blank" rel="noopener">e-stat.go.jp</a></li>
+</ol>
+<h4>行业机构</h4>
+<ol>
+<li>IEA — <a href="https://www.iea.nl/" target="_blank" rel="noopener">iea.nl</a></li>
+<li>TIMSS / PIRLS（波士顿学院） — <a href="https://timssandpirls.bc.edu/" target="_blank" rel="noopener">timssandpirls.bc.edu</a></li>
+<li>OECD CERI — <a href="https://www.oecd.org/en/about/programmes/ceri.html" target="_blank" rel="noopener">oecd.org/en/about/programmes/ceri.html</a></li>
+</ol>
+<h4>媒体转述（需核实原文）</h4>
+<ol>
+<li>上海师范大学 UNTec · EAG 2025 报道 — <a href="https://untec.shnu.edu.cn/c3/88/c26039a836488/page.htm" target="_blank" rel="noopener">untec.shnu.edu.cn</a>（需核实原文）</li>
+<li>观察者网 · PISA 2022 结果报道 — <a href="https://baijiahao.baidu.com/s?id=1784450028616525013" target="_blank" rel="noopener">baijiahao.baidu.com</a>（需核实原文）</li>
+</ol>
+</div>
+
+<div class="disc">
+  <strong>口径与边界声明：</strong>本报告为政策法规解读型基线（首期），只采集官方文本与官方统计；事实与推断分离，影响方向 / 量级标「方向性判断」；入学率、支出、学业完成、ISCED 版本与互认状态多口径并列不合并；不构成升学、留学、资格认证、法律个案意见。数据截止 2026-12，报告版本 v1.0，本期读数时点 2026-12。阈值与信号规则为「预校准（ex-ante）」，首次中期回测 2027-06。
+</div>
+<footer>tech-context-digest · 教育体系与政策基线 · 九节固化锚 · 2026-12</footer>
+</main>
+
+</body>
+</html>

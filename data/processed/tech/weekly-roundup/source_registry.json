@@ -125,14 +125,15 @@
    "source_id": "S-009",
    "tier": 2,
    "publisher": "OWASP",
-   "title": "https://genai.owasp.org/agentic-top-10/",
-   "url": "https://genai.owasp.org/agentic-top-10/",
+   "title": "https://genai.owasp.org/initiatives/agentic-security-initiative/",
+   "url": "https://genai.owasp.org/initiatives/agentic-security-initiative/",
    "lang": "en",
    "verify_status": "verified",
    "updated": "2026-11-18",
    "in_synthesis": false,
    "used_in": [
-    "reports/2026-11-13_weekly.html"
+    "reports/2026-11-13_weekly.html",
+    "reports/2026-11-20_weekly.html"
    ]
   },
   {

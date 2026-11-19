@@ -1,0 +1,12 @@
+{
+ "schema_version": "1.0",
+ "comment": "链接探测豁免登记：官方 URL 在本机探测环境下不稳定（反爬 / SSL 握手超时），单次 404 不判死链，归为环境性不可达（与超时 / 反爬同口径，不计入 A-05 分母）。豁免为 URL 级、需写明理由与证据，可审计；真正链接腐烂不通过豁免掩盖。",
+ "exemptions": [
+  {
+   "url": "https://gisec.ae",
+   "reason": "GISEC 官方站点；探针 UA 下间歇 404 / SSL 握手超时（反爬），浏览器 UA 可达 200，主域可达",
+   "evidence": "2026-11-19 复探（source_check --probe）；tech-debt-ledger §十一 已定性为环境干扰非链接腐烂",
+   "status": "active"
+  }
+ ]
+}
