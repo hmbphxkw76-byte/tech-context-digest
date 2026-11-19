@@ -93,7 +93,8 @@ R4_BLOCK_RE = re.compile(r"<li\b[^>]*>.*?</li>|<p\b[^>]*>.*?</p>",
                          re.DOTALL | re.IGNORECASE)
 R4_TAG_RE = re.compile(r"<[^>]+>")
 # 窗口内任一命中即视为「有来源标记」：事实卡片 / 来源编号 / 来源标签 /
-# 外链 / K 指针 / 核验等级标 / 机构引用（含年份的括号注）
+# 外链 / K 指针 / 核验等级标 / 机构引用（含年份的括号注）。
+# 自链接（本仓库自身内容）须先剔除：内部指针不是来源，不得充当逐点指针。
 R4_SRC_MARKER_RE = re.compile(
     r"\[FC-[A-Z]+-\d+\]|\[S-\d{3}\]|\[Source:|data-source-id=\"|fact-ref"
     r"|lvl-verified|lvl-partial|已核验|部分核验"
@@ -642,7 +643,8 @@ def r4_assertion_gaps(text: str) -> list[str]:
         if r4_advisory_heading(text, m.start()):
             continue
         window = text[max(0, m.start() - PROXIMITY_WINDOW): m.end() + PROXIMITY_WINDOW]
-        if R4_SRC_MARKER_RE.search(window):
+        # 剔除自链接后再判来源标记（防「自链接充数」；自链接豁免仅适用于 R1/R6）
+        if R4_SRC_MARKER_RE.search(SELF_LINK_RE.sub("", window)):
             continue
         gaps.append(re.sub(r"\s+", " ", plain).strip())
     return gaps
@@ -936,6 +938,12 @@ def _self_test() -> int:
         {"source_id": "S1", "tier": 2, "publisher": "IMF", "url": "https://imf.org/a"}]}
     if not any("R7" in msg for _, msg in check_institution_consistency(mreg, master)):
         print("[FAIL] 机构分级与主数据不一致应触发 R7"); ok = False
+
+    # 自链接不是来源：唯一指针为本仓库链接的含数字断言块仍记 gap
+    self_link = ('<p><a href="https://github.com/hmbphxkw76-byte/tech-context-digest'
+                 '/blob/main/engine/tools/source_check.py">source_check</a> 500 亿</p>')
+    if not r4_assertion_gaps(self_link):
+        print("[FAIL] 自链接不得充当来源指针"); ok = False
 
     # 综合层来源策略：synthesis_only + 空登记 + 无 URL 豁免；含 URL 仍须登记
     empty_reg = {"schema_version": "1.0", "sources": []}
