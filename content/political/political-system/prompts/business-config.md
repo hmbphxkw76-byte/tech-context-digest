@@ -198,8 +198,12 @@
 <!-- VOCAB-SYNC:BEGIN topic=political do-not-edit -->
 ## 词汇速览（词汇库自动同步）
 
-> 由 `engine/vocabulary/script/sync_vocab.py` 自动维护：词汇库 political v1.0，共 0 条（同步于 2026-11-18T18:26:46）。标记区间内请勿手工编辑；词条变更走词汇库导入流程（engine/vocabulary/README.md 第三节），同步机制见第九节。
+> 由 `engine/vocabulary/script/sync_vocab.py` 自动维护：词汇库 political v1.1，共 10 条（同步于 2026-11-19T19:15:29）。标记区间内请勿手工编辑；词条变更走词汇库导入流程（engine/vocabulary/README.md 第三节），同步机制见第九节。
 
+- **政治制度与体制**（5）：执政联盟（联合政府、連立政権）；众议院（衆議院、下院）；参议院（参議院、上院）；不信任案（不信任决议、内閣不信任決議）；宪政体制（憲法体制、constitutional system）
+- **政党与选举**（3）：小选举区比例代表并立制（小選挙区比例代表並立制、并立制）；投票率（voter turnout）；比例代表制（比例代表、proportional representation）
+- **廉政与治理**（1）：廉政指数（清廉指数、CPI、Corruption Perceptions Index）
+- **公民社会与参与**（1）：公民社会（市民社会、civil society）
 <!-- VOCAB-SYNC:END -->
 
 ## 十四、版本记录

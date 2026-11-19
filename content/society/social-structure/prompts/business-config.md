@@ -197,8 +197,12 @@
 <!-- VOCAB-SYNC:BEGIN topic=society do-not-edit -->
 ## 词汇速览（词汇库自动同步）
 
-> 由 `engine/vocabulary/script/sync_vocab.py` 自动维护：词汇库 society v1.0，共 0 条（同步于 2026-11-18T18:26:46）。标记区间内请勿手工编辑；词条变更走词汇库导入流程（engine/vocabulary/README.md 第三节），同步机制见第九节。
+> 由 `engine/vocabulary/script/sync_vocab.py` 自动维护：词汇库 society v1.1，共 10 条（同步于 2026-11-19T19:14:22）。标记区间内请勿手工编辑；词条变更走词汇库导入流程（engine/vocabulary/README.md 第三节），同步机制见第九节。
 
+- **社会结构与分层**（2）：基尼系数（Gini coefficient）；劳动参与率（労働力率、labor force participation rate）
+- **人口与家庭**（6）：人口动态（人口動態、population dynamics）；老龄化率（高齢化率、aging rate）；总抚养比（総扶養比、total dependency ratio）；总和生育率（合計特殊出生率、TFR）；家庭户（家庭戸、household）；单人家庭（1人世帯、single-person household）
+- **社会保障与福利**（1）：社会保障覆盖率（社会保障カバー率、social protection coverage）
+- **城市化与社区**（1）：城镇化率（都市化率、urbanization rate）
 <!-- VOCAB-SYNC:END -->
 
 ## 十四、版本记录

@@ -1,0 +1,117 @@
+{
+  "schema_version": "1.0",
+  "comment": "A-03 真值核对结构化登记册（R01–R09）。字段：指标编号 / 最新值 / 周期 / 来源 URL / 核验状态；值取自 data/processed/economy/dubai/apartment/dubai_apartment_indicator_registry_2027-01.xlsx「指标台账」表（确定性、可重放、无墙钟时间戳）。value 为规范数值（多口径以 / 分隔，不等式保留符号），完整原文见 raw_value。",
+  "business_line": "content/economy/dubai/apartment",
+  "registry": "dubai_apartment_indicator_registry_2027-01.xlsx",
+  "sheet": "指标台账",
+  "indicators": [
+    {
+      "indicator_id": "R01",
+      "name": "新签公寓租金中位数",
+      "value": "65,000",
+      "raw_value": "65,000（2026-10）；同质化 0.0%（230 组）",
+      "unit": "AED/年",
+      "period": "2026-10",
+      "source": "DXBinteract / Peak Trust（DLD 登记）",
+      "source_url": "https://peaktrust.ae/insights/rent-yield-monitor/2026-10",
+      "publish_date": "2026-11-03",
+      "verification_status": "已核验"
+    },
+    {
+      "indicator_id": "R02",
+      "name": "续约公寓租金中位数",
+      "value": "59,000",
+      "raw_value": "59,000 / 73 AED/sqft",
+      "unit": "AED/年",
+      "period": "2026Q3",
+      "source": "DXBinteract（DLD 登记）",
+      "source_url": "https://dxbinteract.com/market-reports/2026/Q3",
+      "publish_date": "2026-10-16",
+      "verification_status": "部分核验"
+    },
+    {
+      "indicator_id": "R03",
+      "name": "平均租金",
+      "value": "77.3",
+      "raw_value": "77.3（+5.5% YoY，2025-09 为 +11.5%）",
+      "unit": "AED/sqft/年",
+      "period": "2026-09",
+      "source": "Cavendish Maxwell",
+      "source_url": "https://www.khaleejtimes.com/business/dubai-rents-1-in-5-tenants-now-pays-less-than-before-as-rentals-ease-on-new-supply",
+      "publish_date": "2026-11-02",
+      "verification_status": "部分核验"
+    },
+    {
+      "indicator_id": "R04",
+      "name": "Ejari 登记合约总数",
+      "value": ">172,000",
+      "raw_value": "Q3 >172,000；Q1 253,992（全物业，官方）",
+      "unit": "份",
+      "period": "2026Q3",
+      "source": "DLD / Cavendish Maxwell",
+      "source_url": "https://dubailand.gov.ae/en/news-media/dubai-s-rental-market-charts-stable-trajectory-reflecting-integrated-regulatory-environment-and-sustained-public-confidence",
+      "publish_date": "2026-11-02",
+      "verification_status": "部分核验"
+    },
+    {
+      "indicator_id": "R05",
+      "name": "新签 / 续约合约数",
+      "value": "77,700 / 94,300",
+      "raw_value": "Q3 新签 77,700（+18.2% YoY）/ 续约 94,300（−10.6% YoY）",
+      "unit": "份",
+      "period": "2026Q3",
+      "source": "Cavendish Maxwell / fäm",
+      "source_url": "https://www.khaleejtimes.com/business/dubai-rents-1-in-5-tenants-now-pays-less-than-before-as-rentals-ease-on-new-supply",
+      "publish_date": "2026-11-02",
+      "verification_status": "部分核验"
+    },
+    {
+      "indicator_id": "R06",
+      "name": "降租续约占比",
+      "value": "21.4",
+      "raw_value": "21.4%（Q3）vs 4.8%（Q1）",
+      "unit": "%",
+      "period": "2026Q3",
+      "source": "Cavendish Maxwell",
+      "source_url": "https://www.khaleejtimes.com/business/dubai-rents-1-in-5-tenants-now-pays-less-than-before-as-rentals-ease-on-new-supply",
+      "publish_date": "2026-11-02",
+      "verification_status": "部分核验"
+    },
+    {
+      "indicator_id": "R07",
+      "name": "持平续约占比",
+      "value": "38.7",
+      "raw_value": "38.7%",
+      "unit": "%",
+      "period": "2026Q3",
+      "source": "Cavendish Maxwell",
+      "source_url": "https://www.khaleejtimes.com/business/dubai-rents-1-in-5-tenants-now-pays-less-than-before-as-rentals-ease-on-new-supply",
+      "publish_date": "2026-11-02",
+      "verification_status": "部分核验"
+    },
+    {
+      "indicator_id": "R08",
+      "name": "涨租续约占比",
+      "value": "40.0",
+      "raw_value": "40.0%（Q1 为 59.4%）",
+      "unit": "%",
+      "period": "2026Q3",
+      "source": "Cavendish Maxwell",
+      "source_url": "https://www.khaleejtimes.com/business/dubai-rents-1-in-5-tenants-now-pays-less-than-before-as-rentals-ease-on-new-supply",
+      "publish_date": "2026-11-02",
+      "verification_status": "部分核验"
+    },
+    {
+      "indicator_id": "R09",
+      "name": "同质化新签租约价差",
+      "value": "−15.3",
+      "raw_value": "−15.3%（8月）；续约仅约 −1%",
+      "unit": "%",
+      "period": "2026-08",
+      "source": "fäm Properties / DLD",
+      "source_url": "https://www.khaleejtimes.com/business/dubai-tenants-move-homes-as-new-leases-offer-rents-up-to-15-lower",
+      "publish_date": "2026-09-23",
+      "verification_status": "已核验"
+    }
+  ]
+}

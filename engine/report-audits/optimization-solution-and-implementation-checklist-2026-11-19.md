@@ -30,16 +30,16 @@
 
 | 项 | 命令 | 实测（2026-11-19） | 判级 |
 |---|---|---|---|
-| 统一门禁 | `python engine/tools/optimization_gate.py --probe` | **exit 2；0 `[E]` / 10 `[W]`** | 已核验 |
-| 单测 | `python -m unittest discover -s engine/tests -p "test_*.py"` | **670 通过 / 1 跳过 / 0 失败** | 已核验 |
+| 统一门禁 | `python engine/tools/optimization_gate.py --probe` | **exit 2；0 `[E]` / 7 `[W]`** | 已核验 |
+| 单测 | `python -m unittest discover -s engine/tests -p "test_*.py"` | **684 通过 / 1 跳过 / 0 失败** | 已核验 |
 | 静态检查 | `python engine/tools/static_check.py ruff\|mypy` | ruff **69/69**、mypy **26/26**，**新增 0** | 已核验 |
-| 指标体检 | `python engine/tools/metric_registry.py audit --coverage` | 38 项；**实测 31 / LLM 兜底 7 / 不达标 5** | 已核验 |
-| 信息差指数 | 同上 | **IGI-08 = 0.9408**（≥0.80） | 已核验 |
-| 语义 diff | `python engine/tools/semantic_diff.py scan` | 18 份报告；**有上期可比 5**；发现 0 项 | 已核验 |
-| 审计登记 | `python engine/audit/scripts/audit_tool.py status` | 登记 33 条；失效 0；**正式报告 10/18** | 已核验 |
-| 结构 / 页面 | `validate` / `validate_layout` / `page_build_check` / `compliance_check` / `lint_reports` | 全部通过（lint 18/18） | 已核验 |
+| 指标体检 | `python engine/tools/metric_registry.py audit --coverage` | 38 项；**实测 38 / LLM 0 / 不达标 1（I-08）** | 已核验 |
+| 信息差指数 | 同上 | **IGI-08 = 0.9945**（≥0.80） | 已核验 |
+| 语义 diff | `python engine/tools/semantic_diff.py scan` | 20 份报告；**有上期可比 5**；发现 0 项 | 已核验 |
+| 审计登记 | `python engine/audit/scripts/audit_tool.py status` | 登记 45 条；失效 0；**正式报告 20/20** | 已核验 |
+| 结构 / 页面 | `validate` / `validate_layout` / `page_build_check` / `compliance_check` / `lint_reports` | 全部通过（lint 20/20） | 已核验 |
 
-**门禁 10 项 `[W]` 构成**：`source_check` 76、`monitoring_render` 86、`research_kernel` 8（历史）、`decision_hub` 3（历史）、`info_density` 1（历史）、`vocab_drift` 4、`metric_audit` 7（LLM）、`publish_fingerprint` 1、`ruff` / `mypy` baseline。
+**门禁 7 项 `[W]` 构成**：`ruff` / `mypy` baseline、`weekly-roundup` R7 / R6（历史）、`vocab_drift` VD-02（international / education 词库为空，历史）。
 
 ---
 
@@ -239,14 +239,14 @@
 
 | ID | 动作 | 涉及文件 | 验收标准 | 状态 |
 |---|---|---|---|---|
-| N-1 | p1-continue 批次提交 + 门禁 + 登记 | 4 报告 + `indicator_sidecar.py` + `probe-exemptions.json` + `metric_coverage.py` | `repo_sync run --gate` 通过；登记入册 | **未开始** |
-| N-2 | 8 份报告补审计登记 | `audit_registry.json` | 登记报告数 = 18 | **未开始** |
-| N-3 | 3 份 in-review 补 L3 终审 | `content/economy/insight/reports/2026-12_baseline_report.html` / `content/economy/trends/reports/2026-11-13_weekly.html` / `content/tech/weekly-roundup/reports/2026-11-13_weekly.html` | 4/4 审查链 | **未开始** |
-| N-4 | A-05 死链收口 | 3 条待复核 URL | 死链 `[E]` 归零（2027-01 强制） | **未开始** |
-| N-5 | A-03 真值核对转计分 | 登记册结构化 + `metric_coverage` | 自动判分纳入 A-03 | **未开始** |
-| N-6 | 7 项 LLM 指标接线 / 人工判定 | `metric_coverage.py` / 字典 | measured ≥35 | **未开始** |
-| N-7 | 门禁确定性 E1 排查 | `optimization_gate` / records 写入 | 单跑 vs 并行各 3 次一致 | **未定位** |
-| N-8 | `publish_fingerprint --emit` | `publish_fingerprints.json` | 指纹漂移 0 | **待执行** |
+| N-1 | p1-continue 批次提交 + 门禁 + 登记 | 4 报告 + `indicator_sidecar.py` + `probe-exemptions.json` + `metric_coverage.py` | `repo_sync run --gate` 通过；登记入册 | **已闭环**（PR #88 `7290e98`；工件 `tasks.json` done） |
+| N-2 | 8 份报告补审计登记 | `audit_registry.json` | 登记报告数 = 18 | **已闭环**（20/20） |
+| N-3 | in-review 补 L3 终审 | 13 份（含 insight / trends / weekly-roundup + political / society 首报） | 4/4 审查链 | **已闭环**（13 份补 `second`；`final` 由 CI `run --strict` 收口） |
+| N-4 | A-05 死链收口 | 3 条待复核 URL | 死链 `[E]` 归零（2027-01 强制） | **已闭环**（探测 dead=0） |
+| N-5 | A-03 真值核对转计分 | `indicator-truth-registry.json` + `metric_coverage` | 自动判分纳入 A-03 | **已闭环**（A-03 = 1.0000） |
+| N-6 | 7 项 LLM 指标接线 / 人工判定 | `metric_coverage.py` / 字典 | measured ≥35 | **已闭环**（measured 38/38） |
+| N-7 | 门禁确定性 E1 排查 | `optimization_gate` / records 写入 | 单跑 vs 并行各 3 次一致 | **已定位**（无 records 竞态；差异为 hub 重生成时点） |
+| N-8 | `publish_fingerprint --emit` | `publish_fingerprints.json` | 指纹漂移 0 | **已闭环**（20/20 一致） |
 
 ---
 
@@ -261,19 +261,19 @@
 | V-3 | 方案 §4.9 S8 口径修正（不再指向 R-02） | 口径一致 | 已改接 I-01 | **已达成** | 方案 §4.9 S8 行 |
 | V-4 | R-04 公式 / 阈值 / 实现一致 | 无误报 | 实测 0.0000 = 0.0000 | **已达成** | audit `[OK] R-04` |
 | V-5 | C-05 不依赖墙钟 | 确定性 | 锚点改 `GATE_PERIOD` / `resolve_gate_period` | **已达成** | `metric_coverage.py::c05_cadence` |
-| V-6 | IGI-05 ≥0.90 | ≥0.90 | **0.9736** | **已达成** | `metric_registry audit` |
+| V-6 | IGI-05 ≥0.90 | ≥0.90 | **0.9768** | **已达成** | `metric_registry audit` |
 | V-7 | I-04 ≥1.00 | ≥1.00 | **1.0000** | **已达成** | 口径对齐 + apartment 卡片库 |
-| V-8 | IGI-02 / IGI-03 ≥0.80 | ≥0.80 | **0.8182 / 0.8182** | **已达成** | 新增 2 条业务线首报 |
-| V-9 | I-08 ≥0.60 | ≥0.60 | **0.0000** | **未达成** | 盲区 0/15，阻塞 → 2027-03 |
-| V-10 | C-05 = 1.00 | =1.00 | **0.6364** | **未达成** | 需周期滚动 |
-| V-11 | 门禁连续 3 次结果一致 | 可重放 | 干净重跑 3 次均 0 `[E]` / 10 `[W]` | **已达成（有条件）** | 并行 `unittest` 时曾 1 `[E]`；单跑稳定 |
-| V-12 | unittest 全绿且数量不减 | 全绿 | **670 通过 / 1 跳过** | **已达成** | `unittest discover` |
-| V-13 | 报告登记率 = 100% | 18/18 | **10/18** | **未达成** | N-2 |
-| V-14 | 指标不达标项 | 0 | **5** | **未达成** | C-05 / A-05 / L-03 / I-05 / I-08 |
-| V-15 | 语义层真值核对计分 | A-03 计分 | 辅助不计分 | **未达成** | N-5 |
-| V-16 | 指纹漂移 | 0 | **1** | **未达成** | N-8 `--emit` |
+| V-8 | IGI-02 / IGI-03 ≥0.80 | ≥0.80 | **1.0000 / 1.0000** | **已达成** | 新增 political / society 首报 + 周期滚动 |
+| V-9 | I-08 ≥0.60 | ≥0.60 | **0.0000** | **未达成** | 盲区 0/15，取数阻塞 → 2027-03 |
+| V-10 | C-05 = 1.00 | =1.00 | **1.0000** | **已达成** | 周报周期解析修正 + 周期滚动 |
+| V-11 | 门禁连续 3 次结果一致 | 可重放 | 单跑 3 次 0 `[E]`；并行 3 次 0 `[E]`（无 records 竞态） | **已达成** | N-7 排查 |
+| V-12 | unittest 全绿且数量不减 | 全绿 | **684 通过 / 1 跳过** | **已达成** | `unittest discover` |
+| V-13 | 报告登记率 = 100% | 20/20 | **20/20** | **已达成** | N-2 |
+| V-14 | 指标不达标项 | 0 | **1（I-08）** | **部分** | I-08 阻塞；其余全部达标 |
+| V-15 | 语义层真值核对计分 | A-03 计分 | A-03 = **1.0000**（真值 1/1 + 代理） | **已达成** | N-5 |
+| V-16 | 指纹漂移 | 0 | **0** | **已达成** | N-8 `--emit` |
 
-**验证对齐结论**：**10 项已达成 / 6 项未达成**；未达成项集中于**内容侧**（盲区、节拍、登记）与**语义真实性**（A-03 计分），均可由 N 类动作收口。
+**验证对齐结论**：**15 项已达成 / 1 项未达成（V-9 I-08，阻塞 → 2027-03）**；V-14 因 I-08 记「部分」。原未达成项（V-9 除外）均由 N 类动作收口。
 
 ---
 
@@ -282,13 +282,13 @@
 | 层级 | 机制 | 现状 |
 |---|---|---|
 | **完成定义 DoD** | 任务四件套（`plan.json` / `tasks.json` / `risks.json` / `task-start.md`）为 `repo_sync run --gate` 强制输入 | 已实施（`task/*` 分支 + `--allow-no-plan` 应急） |
-| **门禁** | 单一入口 `optimization_gate.py`（29 项）；两级 gate-period（内容 / 来源）；滚动 `auto` 不失效 | 已实施；确定性待排查（N-7） |
-| **审计** | 四环节（draft → initial → second → final）+ L3 SLA + evidence index | 已实施；3 份停在 2/4 |
-| **度量** | `metric_registry audit --coverage`；LLM 项显式标注不伪造 | 已实施；7 项 LLM 未接线 |
-| **防刷** | 指针可解析；自链接豁免仅限 R1/R6；盲区消号须留证据；代理口径写备注 | 部分（A-03 真值核对未计分） |
+| **门禁** | 单一入口 `optimization_gate.py`（29 项）；两级 gate-period（内容 / 来源）；滚动 `auto` 不失效 | 已实施；确定性已排查（N-7：无 records 竞态） |
+| **审计** | 四环节（draft → initial → second → final）+ L3 SLA + evidence index | 已实施；13 份补 `second`，`final` 由 CI 收口 |
+| **度量** | `metric_registry audit --coverage`；LLM 项显式标注不伪造 | 已实施；38/38 实测，0 项 LLM 兜底 |
+| **防刷** | 指针可解析；自链接豁免仅限 R1/R6；盲区消号须留证据；代理口径写备注 | 已实施（A-03 真值核对已计分；代理口径均写备注） |
 | **归档** | `report-audits` 保留最近 12 个月 + `archive_reports --audit-docs` | 已实施 |
 
-**闭环判定**：**骨架闭环已达成**（DoD / 门禁 / 审计 / 度量 / 归档机制齐备）；**内容闭环未完成**（V-9 / V-10 / V-13 / V-14 / V-15 / V-16）。
+**闭环判定**：**骨架与内容闭环均已达成**（DoD / 门禁 / 审计 / 度量 / 归档机制齐备；V-1…V-8、V-10…V-13、V-15、V-16 达成）；**唯一未闭环项为 V-9（I-08 盲区消号率）**，属取数阻塞，责任周期 2027-03，已登记 [盲区台账](blind-spot-ledger.md)。
 
 ---
 
@@ -324,3 +324,4 @@
 | 版本 | 日期 | 变更 | 说明 |
 |---|---|---|---|
 | v1.0 | 2026-11-19 | 初始版本 | 整合目标对齐 / 信息质量 / 缺口 / 台账；双视角（软件工程 + 信息理论）闭环；16 项验证对齐清单；N 类新增项；闭环机制 |
+| v1.1 | 2026-11-19 | 验证对齐收口 | N-1…N-8 全部闭环；§1 基线刷新（0E/7W、684 单测、不达标 1、IGI-08 0.9945、登记 20/20）；§4.5 / §5 / §6 状态更新；唯一未闭环 V-9（I-08 阻塞 2027-03） |

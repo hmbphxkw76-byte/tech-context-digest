@@ -1,0 +1,783 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>全球 · 社会结构与分层 · 首期基线报告（2026-11）</title>
+<style>
+:root{
+  --radius-sm:8px; --radius:12px; --radius-lg:16px; --radius-pill:999px;
+  --shadow:0 1px 3px rgba(20,40,70,.06); --shadow-md:0 4px 14px rgba(20,40,70,.09);
+  --shadow-lg:0 10px 30px rgba(15,35,56,.2);
+  --font-sans:"Microsoft YaHei","PingFang SC","Segoe UI",Arial,sans-serif;
+  --font-mono:"SFMono-Regular",Consolas,"Liberation Mono",monospace;
+  --focus-ring:0 0 0 3px rgba(63,111,176,.35);
+  --transition:.15s ease;
+  --bg:#f4f6f9; --card:#ffffff; --card2:#fbfcfe; --soft:#f5f8fb;
+  --ink:#15202b; --ink2:#465667; --ink3:#657180;
+  --line:#e1e7ee; --line2:#eef2f6;
+  --navy:#16324f; --navy2:#2f5597; --blue:#3f6fb0; --blue-l:#eaf1fa;
+  --red:#a83224; --red-d:#822116; --red-l:#fbece8; --red-bg:#fbece8; --red-line:#f0d4cf;
+  --pre:#b8541c; --pre-l:#fdf1e4; --pre-bg:#fdf1e4; --pre-line:#f2ddc9;
+  --green:#1c7444; --green-l:#eaf5ef; --green-bg:#eaf5ef; --green-line:#d3ead9;
+  --amber:#956612; --amber-l:#fdf4e2; --amber-bg:#fdf4e2; --amber-line:#f0e3c2;
+  --gray:#646f7b; --gray-l:#eff2f4; --gray-bg:#eff2f4; --gray-line:#e6eaee;
+  /* 别名：兼容既有报告组件的命名习惯 */
+  --surface:#ffffff; --surface2:#fbfcfe;
+  --navy-2:#2f5597; --muted:#657180; --bg-soft:#f5f8fb; --bg-card:#fbfcfe;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  *,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}
+}
+body{font-family:var(--font-sans);background:var(--bg);color:var(--ink);line-height:1.76;font-size:14.5px}
+.wrap{max-width:1160px;margin:0 auto;padding:0 24px 64px}
+a{color:var(--navy2);text-decoration:none}
+a:hover{text-decoration:underline}
+a:focus-visible,button:focus-visible{outline:none;box-shadow:var(--focus-ring)}
+.skip-link{position:absolute;left:12px;top:-48px;z-index:100;background:var(--navy);color:#fff;padding:8px 16px;border-radius:0 0 8px 8px;font-size:12.5px;transition:top var(--transition)}
+.skip-link:focus{top:0;color:#fff;text-decoration:none}
+
+/* ── 页头（trends report-head 结构；.hero 为 apartment 同义类） ── */
+header.report-head,header.hero{
+  background:linear-gradient(128deg,#0f2338 0%,var(--navy) 52%,var(--navy2) 100%);
+  color:#fff;padding:40px 0 30px;
+}
+/* trends 的 .report-head 内含 .wrap；apartment 的 .hero 无 .wrap，用内联 padding 约束到 1160px */
+header.report-head .wrap{padding:0 24px}
+header.hero{padding-left:max(24px,calc(50% - 580px));padding-right:max(24px,calc(50% - 580px))}
+header.report-head h1,header.hero h1{margin:0 0 8px;font-size:27px;font-weight:700;letter-spacing:.4px;line-height:1.35}
+header .eyebrow{font-size:11.5px;letter-spacing:2.4px;color:rgba(255,255,255,.62);text-transform:uppercase}
+header .sub{font-size:14px;color:rgba(255,255,255,.82);margin:2px 0}
+header .meta{font-size:12.3px;color:rgba(255,255,255,.75);margin-top:14px;line-height:1.9}
+header .meta b{color:#fff}
+header .nav-url{font-size:11.5px;color:rgba(255,255,255,.78);margin-top:10px;word-break:break-all}
+header .nav-url a{color:#cfe0ee;text-decoration:none;border-bottom:1px dashed #cfe0ee}
+header .tag{display:inline-block;background:rgba(255,255,255,.11);border:1px solid rgba(255,255,255,.2);border-radius:14px;padding:2px 11px;margin:5px 6px 0 0;font-size:11.5px}
+
+/* ── 顶部固定导航 ── */
+nav.report-nav{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.96);border-bottom:1px solid var(--line);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);margin-bottom:26px}
+nav.report-nav .wrap{display:flex;flex-wrap:wrap;gap:6px 14px;align-items:center;padding-top:10px;padding-bottom:10px}
+/* apartment monthly/quarterly/baseline 的 .nav-tabs 是 nav 直接子元素（无 .wrap） */
+nav.report-nav > .nav-tabs{max-width:1160px;margin:0 auto;padding:10px 24px}
+.nav-url{display:flex;align-items:baseline;gap:8px;flex-wrap:wrap;font-size:11.5px;line-height:1.6;color:var(--ink3);padding-bottom:6px;margin-bottom:6px;border-bottom:1px dashed var(--line);width:100%}
+.nav-url-label{font-weight:700;color:var(--ink2);white-space:nowrap}
+.nav-url a{color:var(--blue);text-decoration:none;word-break:break-all}
+.nav-url a:hover{text-decoration:underline}
+.nav-tabs{display:flex;flex-wrap:wrap;gap:6px}
+.nav-tabs a{color:var(--navy);text-decoration:none;font-size:12.5px;padding:4px 10px;border-radius:14px;border:1px solid var(--line);background:var(--bg-soft);white-space:nowrap;transition:background var(--transition),color var(--transition)}
+.nav-tabs a:hover{background:var(--blue-l);border-color:#b9cfe2;text-decoration:none}
+.nav-tabs a.active{background:var(--blue-l);color:var(--blue);font-weight:700}
+
+/* ── 章节与排版 ── */
+main{padding-top:0}
+h2.sec{font-size:19px;color:var(--navy);margin:38px 0 14px;padding-bottom:8px;border-bottom:2px solid var(--navy);scroll-margin-top:100px;font-weight:700}
+h2.sec .en{font-size:10.8px;color:var(--ink3);font-weight:400;margin-left:10px;letter-spacing:1.1px}
+h3{font-size:15.5px;color:var(--navy);margin:22px 0 8px;font-weight:700;scroll-margin-top:100px}
+h4{font-size:14px;color:var(--navy);margin:16px 0 6px;font-weight:700}
+p{margin:8px 0}
+ul,ol{margin:8px 0;padding-left:22px}
+li{margin:5px 0}
+ul.tight,ol.tight{margin:7px 0}
+ul.tight li,ol.tight li{margin-bottom:6px}
+b,strong{font-weight:650;color:var(--ink)}
+blockquote{border-left:4px solid var(--line);margin:12px 0;padding:2px 0 2px 14px;color:var(--ink2)}
+code{background:var(--bg-soft);padding:2px 5px;border-radius:4px;font-family:var(--font-mono);font-size:.92em}
+pre{background:var(--bg-soft);border:1px solid var(--line);border-radius:var(--radius-sm);padding:12px 14px;overflow-x:auto;margin:12px 0}
+pre code{background:none;padding:0}
+img{max-width:100%}
+.lead{color:var(--ink2);font-size:13.8px;margin:6px 0 14px}
+.muted{color:var(--ink3)}
+.small{font-size:11.7px;color:var(--ink3)}
+hr{border:0;border-top:1px solid var(--line);margin:26px 0 0}
+.hr{height:1px;background:var(--line);margin:26px 0 0}
+b.red,color.red{color:var(--red)} b.pre{color:var(--pre)} b.green{color:var(--green)}
+b.amber{color:var(--amber)} b.navy{color:var(--navy)}
+
+/* ── 表格 ── */
+table{width:100%;border-collapse:collapse;font-size:13px;background:var(--card);margin:12px 0}
+th,td{border:1px solid var(--line);padding:8px 10px;text-align:left;vertical-align:top;line-height:1.62}
+thead th{background:var(--navy);color:#fff;font-weight:600;white-space:nowrap}
+tbody th{background:var(--blue-l);color:var(--navy);font-weight:600}
+tbody tr:nth-child(even) td{background:var(--bg-soft)}
+tbody tr:hover td{background:var(--blue-l)}
+table.fixed{table-layout:fixed}
+.num{text-align:right;font-variant-numeric:tabular-nums}
+.tblwrap{overflow-x:auto;border-radius:var(--radius-sm);border:1px solid var(--line);margin:12px 0}
+.tblwrap table{margin:0;border:0}
+
+/* ── 来源：表头弹层 / 行内链接 / 来源清单 ── */
+.src-head{position:relative;cursor:help;border-bottom:1px dotted var(--blue);white-space:nowrap}
+.src-head .src-pop{position:absolute;left:0;top:100%;z-index:60;display:none;background:var(--navy);color:#fff;font-size:12px;font-weight:400;padding:9px 12px;border-radius:8px;box-shadow:var(--shadow-lg);max-width:min(560px,86vw);white-space:normal;line-height:1.65;border:1px solid rgba(255,255,255,.14)}
+.src-pop .pop-title{font-weight:600;display:block;margin-bottom:4px;color:#fff}
+.src-pop .pop-url{display:block;margin-top:6px;word-break:break-all;color:var(--blue-l)}
+.src-pop .pop-url a{color:#a9c8ee}
+.src-head:hover .src-pop,.src-head:focus .src-pop,.src-head:focus-within .src-pop{display:block}
+.src-inline{color:var(--ink3);font-size:12px;word-break:break-all}
+.src-inline a{color:var(--blue);text-decoration:none;border-bottom:1px dotted var(--blue)}
+.src-inline a:hover{background:#eaf3fa}
+.src{font-size:11.1px;color:var(--ink3);word-break:break-word;line-height:1.58}
+.src a{color:#5b7bb4;text-decoration:none}
+.src a:hover{text-decoration:underline}
+.refs{font-size:12.5px;color:var(--ink3)}
+.refs ol{padding-left:20px}
+.refs a{color:var(--navy);text-decoration:none;border-bottom:1px dashed var(--navy);word-break:break-all}
+.refs a:hover{background:#e8f0f8}
+
+/* ── 卡片 / 结论框 ── */
+.card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:18px 20px;box-shadow:var(--shadow);margin:14px 0}
+.card.tight{padding:14px 16px}
+.leadbox{border-left:4px solid var(--navy2);background:linear-gradient(125deg,#f5f9fd,#edf3fa);border-color:#cfdded}
+.leadbox h3:first-child{margin-top:0}
+
+/* ── KPI 卡（trends .kpi / apartment .kcard） ── */
+.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(168px,1fr));gap:12px;margin:14px 0}
+.kpi{background:var(--card);border:1px solid var(--line);border-left:4px solid var(--navy);border-radius:var(--radius-sm);padding:12px 14px;box-shadow:var(--shadow)}
+.kpi.red{border-left-color:var(--red)} .kpi.green{border-left-color:var(--green)}
+.kpi.amber{border-left-color:var(--amber)} .kpi.blue{border-left-color:var(--blue)}
+.kpi .v{font-size:22px;font-weight:700;color:var(--navy);line-height:1.2}
+.kpi.red .v{color:var(--red)} .kpi.green .v{color:var(--green)}
+.kpi.amber .v{color:var(--amber)} .kpi.blue .v{color:var(--blue)}
+.kpi .l{font-size:12px;color:var(--ink3);margin-top:4px}
+.kpi .s{font-size:11px;color:#8a98a6;margin-top:2px}
+.kcards{display:grid;grid-template-columns:repeat(auto-fit,minmax(232px,1fr));gap:11px;margin:14px 0}
+.kcard{background:var(--card);border:1px solid var(--line);border-left:4px solid var(--navy2);border-radius:10px;padding:13px 15px;box-shadow:var(--shadow)}
+.kcard.warn,.kcard.pre{border-left-color:var(--pre);background:linear-gradient(180deg,var(--pre-bg),#fff 62%)}
+.kcard.bad,.kcard.red{border-left-color:var(--red);background:linear-gradient(180deg,var(--red-bg),#fff 62%)}
+.kcard.good{border-left-color:var(--green);background:linear-gradient(180deg,var(--green-bg),#fff 62%)}
+.kcard .lab,.kcard .t{font-size:12.4px;color:var(--ink2)}
+.kcard .val,.kcard .v{font-size:22px;font-weight:700;color:var(--navy);margin:3px 0 2px;line-height:1.25}
+.kcard.warn .val,.kcard.pre .val{color:var(--pre)}
+.kcard.bad .val,.kcard.red .val{color:var(--red)}
+.kcard.good .val{color:var(--green)}
+.kcard .note,.kcard .s{font-size:11.5px;color:var(--ink3);line-height:1.6;margin-top:4px;word-break:break-word}
+
+/* ── 数据条 / 信号灯 ── */
+.stat-strip{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin:12px 0}
+.stat{background:var(--card);border:1px solid var(--line);border-radius:9px;padding:11px 13px;text-align:center}
+.stat .lab,.stat .l{font-size:11.4px;color:var(--ink3);margin-top:2px}
+.stat .n{font-size:23px;font-weight:700;line-height:1.2}
+.stat.hard .n{color:var(--red)} .stat.pre .n{color:var(--pre)} .stat.yel .n{color:var(--amber)}
+.stat.grn .n{color:var(--green)} .stat.gry .n{color:var(--gray)}
+.lamp{display:inline-block;min-width:9px;width:9px;height:9px;border-radius:50%;margin-right:4px;vertical-align:0}
+.lamp.r{background:var(--red)} .lamp.p{background:var(--pre)} .lamp.y{background:var(--amber)}
+.lamp.g{background:var(--green)} .lamp.k{background:var(--gray)}
+
+/* ── 标签 / 标注 ── */
+.tag{display:inline-block;font-size:11px;padding:1px 7px;border-radius:10px;background:var(--blue-l);color:var(--navy);border:1px solid var(--line);margin-right:4px}
+.tag.red{background:var(--red-l);color:var(--red);border-color:var(--red-line)}
+.tag.green{background:var(--green-l);color:var(--green);border-color:var(--green-line)}
+.tag.amber{background:var(--amber-l);color:var(--amber);border-color:var(--amber-line)}
+.pill{display:inline-block;border-radius:3px;padding:0 7px;font-size:11.3px;white-space:nowrap;line-height:1.72}
+.pill.r{background:var(--red-l);color:var(--red)} .pill.p{background:var(--pre-l);color:var(--pre)}
+.pill.y{background:var(--amber-l);color:var(--amber)} .pill.g{background:var(--green-l);color:var(--green)}
+.pill.k{background:var(--gray-l);color:var(--gray)} .pill.b{background:var(--blue-l);color:var(--navy2)}
+.pill.act{background:#e8eef6;color:#2b4a70}
+.callout{border-left:4px solid var(--amber);background:var(--amber-l);padding:12px 16px;border-radius:0 6px 6px 0;margin:14px 0;font-size:13.5px}
+.callout.red{border-left-color:var(--red);background:var(--red-l)}
+.callout.green{border-left-color:var(--green);background:var(--green-l)}
+.note{border:1px solid var(--line);border-left:4px solid var(--navy2);background:var(--card2);border-radius:var(--radius-sm);padding:12px 15px;margin:14px 0;font-size:13.5px}
+.note.gap{border-left-color:var(--gray);background:var(--gray-l)}
+.note.check{border-left-color:var(--green);background:var(--green-l)}
+.note.correct{border-left-color:var(--red);background:var(--red-l)}
+.note.preline{border-left-color:var(--pre);background:var(--pre-l)}
+.term{font-size:12.5px;color:var(--ink3);background:var(--bg-soft);border:1px solid var(--line);border-radius:6px;padding:8px 12px;margin:14px 0}
+.term b{color:var(--navy)}
+
+/* ── 图表（trends .chart 卡片 / apartment .chart-box + .chart-eh 容器） ── */
+.chart{margin:18px 0;padding:16px;background:var(--card);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow)}
+.chart h4{margin:0 0 4px;font-size:14.5px;color:var(--navy)}
+.chart .unit{font-size:12px;color:var(--ink3);font-weight:400}
+.chart-note{font-size:11.5px;color:var(--ink3);margin:0 0 12px;line-height:1.7}
+.chart svg{display:block;max-width:100%;height:auto;margin:6px auto 0}
+.chart-box{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:14px 14px 6px;box-shadow:var(--shadow);margin:16px 0}
+.chart-eh{width:100%;height:352px;margin:6px 0}
+.legend{display:flex;flex-wrap:wrap;gap:14px;font-size:12px;color:var(--ink2);margin:6px 0 12px}
+.legend span{display:inline-flex;align-items:center;gap:5px}
+.legend i{display:inline-block;width:11px;height:11px;border-radius:2px}
+
+/* ── 时间线 ── */
+.timeline{margin:16px 0;padding-left:8px}
+.tl-item{display:flex;gap:14px;margin:0 0 14px}
+.tl-date{flex:0 0 78px;font-size:12.5px;font-weight:700;color:var(--navy);text-align:right;padding-top:2px}
+.tl-body{flex:1;border-left:2px solid var(--line);padding:0 0 0 14px;position:relative}
+.tl-body::before{content:"";position:absolute;left:-6px;top:6px;width:10px;height:10px;border-radius:50%;background:var(--navy);border:2px solid #fff;box-shadow:0 0 0 1px var(--navy)}
+.tl-body.red::before{background:var(--red);box-shadow:0 0 0 1px var(--red)}
+.tl-body.green::before{background:var(--green);box-shadow:0 0 0 1px var(--green)}
+.tl-body.amber::before{background:var(--amber);box-shadow:0 0 0 1px var(--amber)}
+.tl-body .t{font-weight:600;color:var(--ink)}
+.tl-body .d{font-size:13px;color:var(--ink3);margin-top:2px}
+
+/* ── 风险条 / 风险框 ── */
+.rl-track{position:relative;height:12px;background:var(--gray-line);border-radius:999px;margin:14px 0 6px;overflow:hidden}
+.rl-fill{position:absolute;left:0;top:0;bottom:0;background:var(--green);border-radius:999px}
+.rl-marker{position:absolute;top:-3px;bottom:-3px;width:2px;background:var(--red);left:50%}
+.risk{background:linear-gradient(125deg,#fdf3f1,var(--red-l));border:1px solid #eec8c1;border-left:5px solid var(--red);border-radius:10px;padding:16px 18px;margin:14px 0}
+.risk h4{font-size:14.4px;color:var(--red);margin-bottom:8px}
+.risk .kpis{display:flex;flex-wrap:wrap;gap:22px;margin:10px 0 12px}
+.risk .kpis>div{min-width:150px}
+.risk .kpis .n{font-size:22px;font-weight:700;color:var(--red);line-height:1.25}
+.risk .kpis .l{font-size:11.4px;color:var(--ink2)}
+.redbox{background:linear-gradient(135deg,#fff8f6,var(--red-l));border:1px solid #eec8c1;border-left:5px solid var(--red);border-radius:10px;padding:15px 18px;margin:14px 0}
+.redbox h4{color:var(--red-d);margin-top:0}
+.prebox{background:linear-gradient(135deg,#fffaf4,var(--pre-l));border:1px solid #efd3b6;border-left:5px solid var(--pre);border-radius:10px;padding:15px 18px;margin:14px 0}
+.prebox h4{color:var(--pre);margin-top:0}
+.preline{border-left:4px solid var(--pre);background:var(--pre-l);padding:10px 14px;border-radius:0 6px 6px 0;margin:10px 0;font-size:13px}
+
+/* ── 目录 / 流程 / 分层（年度） ── */
+.toc{display:flex;flex-wrap:wrap;gap:7px;margin:0 0 6px}
+.toc a{font-size:12.3px;color:var(--navy2);background:var(--blue-l);border-radius:15px;padding:3px 12px;text-decoration:none}
+.toc a:hover{background:#dae6f5}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.flow{display:flex;align-items:stretch;gap:7px;flex-wrap:wrap;margin:12px 0}
+.node{flex:1;min-width:150px;background:var(--blue-l);border:1px solid #cfddf3;border-radius:8px;padding:11px 12px}
+.node b{display:block;color:var(--navy);font-size:12.8px;margin-bottom:3px}
+.node span{font-size:11.4px;color:var(--ink2);line-height:1.55;display:block}
+.arrow{display:flex;align-items:center;color:var(--blue);font-size:18px;font-weight:700}
+.tiers{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:12px 0}
+.tier{border:1px solid var(--line);border-radius:10px;padding:14px 15px;background:var(--card)}
+.tier.t1{border-top:4px solid var(--red)} .tier.t2{border-top:4px solid var(--pre)} .tier.t3{border-top:4px solid var(--amber)}
+.tier h4{margin:0 0 6px} .tier p{font-size:12.2px;color:var(--ink2);margin:0}
+
+/* ── 标注 / 页脚 / 索引链接 ── */
+.disc{margin-top:34px;padding:16px 18px;background:var(--bg-soft);border:1px solid var(--line);border-radius:var(--radius);font-size:13px;color:var(--ink3)}
+.disc strong{color:var(--ink)}
+footer,.footer{font-size:11.4px;color:var(--ink3);text-align:center;margin-top:22px;line-height:1.8}
+.idx-link{color:var(--navy);text-decoration:none;border-bottom:1px dotted #9db9da;font-weight:600}
+.idx-link:hover{color:var(--navy2);border-bottom:1px solid var(--blue)}
+.idx-link .ext{font-size:10px;color:var(--blue);margin-left:2px;font-weight:400}
+
+/* ── 报告特有组件（apartment 基线 / 季度） ── */
+.tldr{background:linear-gradient(180deg,#fff,#f8fafe);border-left:5px solid var(--navy2)}
+.verdict{font-size:17px;font-weight:700;color:var(--blue);margin:0 0 12px}
+.kpi-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin:16px 0}
+.tbl-wrap{overflow-x:auto;border:1px solid var(--line);border-radius:8px;margin:12px 0}
+.src-pop .src-pop-title{display:block;font-size:11px;color:var(--ink3);margin-bottom:4px;border-bottom:1px solid var(--line);padding-bottom:4px}
+.t-red{background:var(--red-l);color:var(--red)} .t-green{background:var(--green-l);color:var(--green)}
+.t-amber{background:var(--amber-l);color:var(--amber)} .t-grey{background:var(--gray-l);color:var(--ink3)}
+.t-blue{background:var(--blue-l);color:var(--blue)}
+.toggle{display:inline-flex;border:1px solid var(--line);border-radius:6px;overflow:hidden;margin-bottom:8px}
+.toggle button{border:0;background:#fff;color:var(--ink2);padding:5px 14px;font-size:12px;cursor:pointer;font-family:inherit}
+.toggle button.on{background:var(--navy2);color:#fff}
+.hide{display:none}
+.two-col{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.layer{display:grid;grid-template-columns:110px 1fr;gap:0;border:1px solid var(--line);border-radius:8px;overflow:hidden;margin-bottom:10px;background:#fff}
+.layer .lb{background:var(--navy2);color:#fff;padding:14px 12px;font-weight:700;font-size:13px;display:flex;align-items:center;justify-content:center;text-align:center}
+.layer .lb.q{background:#4472C4} .layer .lb.y{background:var(--navy2)}
+.layer .ct{padding:12px 16px;font-size:12.5px;color:var(--ink2)}
+.layer .ct b{color:var(--ink)}
+.note-box{background:var(--amber-l);border:1px solid var(--amber-line);border-radius:8px;padding:12px 16px;color:#6b4e0a;font-size:12.5px;margin:12px 0}
+.risk-box{background:var(--red-l);border:1px solid var(--red-line);border-radius:8px;padding:12px 16px;color:#8c2f24;font-size:12.5px;margin:12px 0}
+.ok-box{background:var(--green-l);border:1px solid var(--green-line);border-radius:8px;padding:12px 16px;color:#155c39;font-size:12.5px;margin:12px 0}
+.sig-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-top:12px}
+.sig{display:flex;gap:12px;align-items:flex-start;border:1px solid var(--line);border-radius:8px;padding:11px 13px;background:#fff}
+.sig .dot{width:10px;height:10px;border-radius:50%;margin-top:6px;flex:0 0 10px}
+.sig .dot.r{background:var(--red)} .sig .dot.g{background:var(--green)}
+.sig .dot.a{background:var(--amber)} .sig .dot.k{background:var(--gray)}
+.sig b{font-size:13px;color:var(--ink)} .sig p{margin:2px 0 0;font-size:11.5px}
+b.dr{color:var(--red-d)}
+.metric-link{color:var(--navy);text-decoration:none;border-bottom:1px dotted #9db4cf;font-weight:600}
+.metric-link:hover{color:var(--navy2);border-bottom-color:var(--navy2);background:var(--blue-l)}
+.metric-link::after{content:" ↗";font-size:10px;color:#7d96b3;font-weight:400}
+.rl-banner{background:linear-gradient(125deg,#5c1512,#7a1f19 60%,#8a2b20);color:#fff;border-radius:12px;padding:16px 20px;margin:16px 0;border:1px solid #4d100d;box-shadow:0 2px 8px rgba(110,27,22,.18)}
+.rl-banner h3{color:#fff;margin:0 0 6px;font-size:16px}
+.rl-banner p{font-size:12.8px;color:rgba(255,255,255,.88);margin-bottom:6px}
+.rl-banner .rl-kpis{display:flex;flex-wrap:wrap;gap:10px;margin:10px 0 4px}
+.rl-banner .rl-kpis div{background:rgba(255,255,255,.10);border:1px solid rgba(255,255,255,.18);border-radius:8px;padding:8px 12px;min-width:156px}
+.rl-banner .n{font-size:20px;font-weight:700;line-height:1.3}
+.rl-banner .l{font-size:11.4px;color:rgba(255,255,255,.78)}
+.rl-card{border:2px solid var(--red-d);background:linear-gradient(180deg,#fff,#fdf6f4);border-radius:12px;padding:18px 20px;margin:16px 0;box-shadow:0 2px 8px rgba(110,27,22,.08)}
+.rl-card h3{color:var(--red-d);margin-top:0}
+.rl-table th{background:var(--red-d)}
+.rl-table tbody tr:nth-child(even) td{background:#fdf7f5}
+.rl-table tbody tr:hover td{background:var(--red-l)}
+.rl-table td:first-child{border-left:3px solid var(--red-d)}
+.rl-rule{background:#fdf6f4;border-left:4px solid var(--red-d);padding:10px 14px;border-radius:0 7px 7px 0;font-size:12.8px;margin:10px 0}
+.rl-mark{display:inline-block;background:var(--red-d);color:#fff;border-radius:3px;padding:0 6px;font-size:11px;font-weight:700;letter-spacing:.5px}
+details.registry{margin:12px 0;background:var(--card);border:1px solid var(--line);border-radius:10px;padding:12px 16px}
+details.registry summary{cursor:pointer;font-weight:700;color:var(--navy);font-size:14px}
+details.registry[open]{padding-bottom:18px}
+.mini{background:#fff;border:1px solid var(--line);border-radius:9px;padding:12px 14px}
+.mini h4{margin-top:0}
+
+/* ── 信息等级标签（四级，信息分层规范） ── */
+.lvl{display:inline-block;font-size:11px;line-height:1.5;padding:1px 7px;border-radius:9px;
+  border:1px solid transparent;white-space:nowrap;font-weight:600;vertical-align:1px}
+.lvl-verified{background:var(--green-l);color:var(--green);border-color:var(--green-line,#d3ead9)}
+.lvl-partial{background:var(--amber-l);color:var(--amber);border-color:var(--amber-line,#f0e3c2)}
+.lvl-inferred{background:var(--blue-l);color:var(--navy2);border-color:#cdddf0}
+.lvl-assumption{background:var(--gray-l);color:var(--gray);border-color:var(--gray-line,#e6eaee)}
+
+/* ── 新增信息统计条（本期新增/修正/无变化/假设核验进度） ── */
+.delta-strip{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:14px 0}
+.delta-strip .d{background:var(--card);border:1px solid var(--line);border-radius:10px;
+  padding:12px 14px;box-shadow:var(--shadow)}
+.delta-strip .d .n{font-size:22px;font-weight:700;color:var(--navy);line-height:1.25}
+.delta-strip .d .l{font-size:11.6px;color:var(--ink3);margin-top:2px}
+.delta-strip .d.add .n{color:var(--green)}
+.delta-strip .d.fix .n{color:var(--amber)}
+.delta-strip .d.same .n{color:var(--ink3)}
+.delta-strip .d.hyp .n{color:var(--navy2)}
+
+/* ── 行动协议卡（触发条件+阈值+责任角色+时限+验证指标） ── */
+.action-card{background:var(--card);border:1px solid var(--line);border-left:4px solid var(--navy2);
+  border-radius:10px;padding:14px 16px;margin:12px 0;box-shadow:var(--shadow)}
+.action-card.immediate{border-left-color:var(--red)}
+.action-card.watch{border-left-color:var(--amber)}
+.action-card.archive{border-left-color:var(--gray)}
+.action-card .a-head{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:6px}
+.action-card .a-title{font-weight:700;color:var(--navy);font-size:14.5px}
+.action-card .a-meta{font-size:12.3px;color:var(--ink2);line-height:1.7}
+.action-card .a-meta b{color:var(--navy)}
+.prio{display:inline-block;font-size:11px;padding:1px 8px;border-radius:9px;font-weight:700}
+.prio.immediate{background:var(--red-l);color:var(--red)}
+.prio.watch{background:var(--amber-l);color:var(--amber)}
+.prio.archive{background:var(--gray-l);color:var(--gray)}
+
+/* ── 决策卡（结论/证据强度/触发条件/反向证据/信息充分度） ── */
+.decision-card{background:var(--card);border:1px solid var(--line);border-radius:12px;
+  padding:16px 18px;margin:14px 0;box-shadow:var(--shadow)}
+.decision-card .dc-head{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap;margin-bottom:8px}
+.decision-card .dc-title{font-weight:700;color:var(--navy);font-size:15px}
+.decision-card .dc-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px 18px;font-size:12.8px;line-height:1.7}
+.decision-card .dc-grid .k{color:var(--ink3);font-weight:600}
+.suff{display:inline-block;font-size:11px;padding:1px 8px;border-radius:9px;font-weight:700}
+.suff.ok{background:var(--green-l);color:var(--green)}
+.suff.need{background:var(--amber-l);color:var(--amber)}
+.ev-strong{color:var(--green);font-weight:700}
+.ev-mid{color:var(--amber);font-weight:700}
+.ev-weak{color:var(--red);font-weight:700}
+
+/* ── 场景切片 / 事实卡片指针 ── */
+.slice{border:1px dashed var(--navy2);border-radius:10px;padding:12px 16px;margin:12px 0;background:var(--blue-l)}
+.slice .slice-head{font-weight:700;color:var(--navy);margin-bottom:4px}
+.fact-ref{font-family:var(--font-mono);font-size:11.5px;color:var(--navy2);
+  background:var(--blue-l);border:1px solid #cdddf0;border-radius:5px;padding:0 5px;white-space:nowrap}
+
+/* ── 响应式 / 打印 ── */
+@media (max-width:720px){
+  body{font-size:14px}
+  .wrap{padding:0 14px 48px}
+  header.report-head,header.hero{padding:26px 0 22px}
+  header.report-head h1,header.hero h1{font-size:21px}
+  nav.report-nav .nav-url{display:none}
+  table{display:block;overflow-x:auto;white-space:nowrap}
+  th,td{padding:7px 8px;font-size:12.5px}
+  .chart-eh{height:300px}
+  .grid2,.tiers{grid-template-columns:1fr}
+  .kpi-grid{grid-template-columns:repeat(2,1fr)}
+  .two-col,.sig-grid{grid-template-columns:1fr}
+  .stat-strip{grid-template-columns:repeat(2,1fr)}
+  .delta-strip{grid-template-columns:repeat(2,1fr)}
+  .decision-card .dc-grid{grid-template-columns:1fr}
+  .tl-date{flex-basis:64px;font-size:11.5px}
+}
+@media print{
+  nav.report-nav,.skip-link{display:none}
+  .card,.chart,.kpi,.kcard,.chart-box{box-shadow:none}
+  body{font-size:12px}
+}
+
+</style>
+</head>
+<body>
+<a class="skip-link" href="#main-content">跳到主要内容</a>
+<header class="report-head">
+  <div class="wrap">
+    <p class="eyebrow">政策法规解读型 · 基线报告</p>
+    <h1>全球 · 社会结构与分层 · 首期基线报告（2026-11）</h1>
+    <p class="sub">九节固化锚 · 基线固定（后续事件触发解读的对比锚）</p>
+    <p class="meta">
+      <b>数据截止</b>：2026-11（基线期）｜<b>报告版本</b>：v1.0（首期基线固定）｜<b>本期读数时点</b>：2026-11<br>
+      <b>来源语言</b>：官方一手以英文为准；非英语官方统计须标注原文语言并附官方 URL｜<b>覆盖</b>：全球多国对照（非单一地区业务线）
+    </p>
+    <p>
+      <span class="tag">政策法规解读</span><span class="tag">九节固化锚</span><span class="tag">预校准（ex-ante）</span><span class="tag">官方统计边界</span>
+    </p>
+  </div>
+</header>
+<nav class="report-nav" aria-label="报告导航">
+  <div class="wrap">
+    <div class="nav-url"><span class="nav-url-label">报告 URL：</span><a href="https://github.com/hmbphxkw76-byte/tech-context-digest/blob/main/content/society/social-structure/reports/2026-11_baseline_report.html">github.com/hmbphxkw76-byte/tech-context-digest · content/society/social-structure/reports/2026-11_baseline_report.html</a></div>
+    <div class="nav-tabs">
+      <a href="#s1">一、执行摘要</a>
+      <a href="#s2">二、政策台账与监测机制</a>
+      <a href="#s3">三、结构框架总览</a>
+      <a href="#s4">四、重点群体与分层逐条解读</a>
+      <a href="#s5">五、影响对象矩阵</a>
+      <a href="#s6">六、合规应对建议（建议章）</a>
+      <a href="#s7">七、生效时间线</a>
+      <a href="#s8">八、数据治理与局限</a>
+      <a href="#s9">九、参考来源清单</a>
+    </div>
+  </div>
+</nav>
+<main class="wrap" id="main-content">
+
+<div class="delta-strip">
+  <div class="d add"><div class="n">全量</div><div class="l">本期新增（基线首期 = 全部基线项）</div></div>
+  <div class="d fix"><div class="n">0 条</div><div class="l">修正（已修正事实清单见第八节）</div></div>
+  <div class="d same"><div class="n">0 条</div><div class="l">无变化（无上期报告）</div></div>
+  <div class="d hyp"><div class="n">0/6</div><div class="l">假设核验进度（已登记 6 条假设/缺口）</div></div>
+</div>
+<p class="small muted">基线首期：新增 = 全部基线项；「已修正事实清单」为空，产生修正后逐条补记。本报告为后续事件解读与年度台账的滚动基线（对比锚），基线永不重跑。</p>
+
+<h2 class="sec" id="s1">一、执行摘要</h2>
+<div class="card leadbox">
+  <h3>核心判断</h3>
+  <ol class="tight">
+    <li><b>人口基线</b>：UN World Population Prospects 2024 估计 2024 年世界人口约 82 亿，预计 2080 年代中期达峰（约 103 亿）；截至 2024 年已有 63 个国家 / 地区人口达峰（含中国、德国、日本、俄罗斯）。<span class="lvl lvl-verified">已核验</span>（K01 / RL-01）</li>
+    <li><b>老龄化基线</b>：中国 2024 年末 65 岁及以上 2.20 亿人、占 15.6%，60 岁及以上占 22.0%；日本 65 岁及以上约 29.3%；韩国 2025 年居民登记 65 岁及以上占 21.21%，进入超高龄社会。<span class="lvl lvl-partial">部分核验</span>（K04 / RL-03）</li>
+    <li><b>家庭结构</b>：韩国 2025 年居民登记单人家庭占 42.27%，为家庭结构变化的主要信号；人口 ≠ 家庭户，须分列。<span class="lvl lvl-partial">部分核验</span>（K02）</li>
+    <li><b>不平等口径</b>：OECD 以家庭可支配收入计算基尼系数（0–1）；基尼系数 ≠ 收入五等分比，须注明年份与收入定义（税前 / 可支配收入）。<span class="lvl lvl-verified">已核验</span>（K03 / RL-02）</li>
+    <li><b>城镇化</b>：UN World Urbanization Prospects 2025 显示 2025 年全球城市人口约占 45%，巨型城市 33 个；城镇化率口径须注明城乡定义。<span class="lvl lvl-verified">已核验</span>（K05）</li>
+    <li><b>就业口径</b>：ILO 失业率 / 劳动参与率与各国自报口径分列；失业率 ≠ 劳动参与率。<span class="lvl lvl-verified">已核验</span>（K07 / RL-05）</li>
+    <li><b>监测节拍</b>：事件触发单份解读 + 年度台账复盘；K01–K08 与 RL-01–RL-05 为 ex-ante 预校准，首次中期回测 2027-06。<span class="lvl lvl-verified">已核验</span>（G01–G05）</li>
+    <li><b>数据缺口</b>：日本 / 韩国最新年度统计口径、各国社会保障覆盖率与支出占比本期未逐条回原文核验，登记未核验清单 6 项。<span class="lvl lvl-partial">部分核验</span>（G03 / G04）</li>
+    <li><b>结论边界</b>：只给框架性说明与可核验信息，不构成心理、法律、医疗个案意见，不外推个体行为。<span class="lvl lvl-verified">已核验</span>（K08）</li>
+  </ol>
+  <p><b>一句话定位</b>：社会结构与分层监测以官方统计与调查微观数据为唯一采信层，基线锁定人口、家庭、分配、就业、社保与城镇化口径，事件解读与年度台账在基线之上滚动。</p>
+  <p class="small muted">来源与时点：数据截止 2026-11；分级见第八节、URL 见第九节。</p>
+</div>
+<div class="note">解读说明：文本依据为官方统计 / 调查微观数据 / 方法文件，逐条附 URL（第九节）；时效以 2026-11 读数时点为准；摘要仅含已核验与部分核验，推断与假设下沉证据层。阈值与信号规则为「预校准（ex-ante）」，首次中期回测 2027-06。</div>
+
+<h2 class="sec" id="s2">二、政策台账与监测机制</h2>
+
+<h3>2.1 台账结构（字段定义）</h3>
+<p>台账为活值登记载体（<code>data/processed/society/social-structure/social_structure_ledger.md</code>），来源登记为 <code>source_registry.json</code>。字段如下：</p>
+<div class="tblwrap"><table class="fixed">
+<thead><tr><th style="width:16%">字段</th><th style="width:44%">定义</th><th style="width:40%">口径 / 示例</th></tr></thead>
+<tbody>
+<tr><td>指标编号</td><td>K01–K08（信号）/ RL-01–RL-05（红线）/ G01–G05（政策框架）</td><td>一一对应，不混用</td></tr>
+<tr><td>上期值 / 本期值 / 变化</td><td>滚动基线对比</td><td>基线首期无上期值</td></tr>
+<tr><td>来源</td><td>官方统计 URL + 表号 / 版本日期</td><td>媒体转述仅作线索，标「需核实原文」</td></tr>
+<tr><td>口径</td><td>常住 / 户籍 / 家庭户分列；税前 / 可支配收入分列</td><td>人口 ≠ 家庭户；基尼 ≠ 五等分比</td></tr>
+<tr><td>是否更新</td><td>是 / 否 + 更新时间</td><td>核验型运行不升级版本号</td></tr>
+<tr><td>已修正事实清单</td><td>防回退：与清单冲突的旧结论不得复活</td><td>首期为空</td></tr>
+</tbody>
+</table></div>
+
+<h3>2.2 监测节拍与触发器</h3>
+<ul class="tight">
+  <li><b>主节拍（事件触发单份解读）</b>：人口普查 / 抽样调查主要结果发布 → 人口与家庭专题；收入与分配统计发布 → 不平等专题；社会保障法规与覆盖面变更 → 福利专题；城镇化与行政区划调整 → 城镇化专题；重大公共危机（灾害 / 疫情 / 事故）→ 风险专题。</li>
+  <li><b>年度台账复盘</b>：UN World Population Prospects 更新 → 人口基线；OECD Social and Welfare Statistics 更新 → 福利基线；各国统计局年度公报 → 结构基线；台账年度复核 → 口径冲突与已修正事实清单更新。</li>
+  <li><b>先行信号标准矩阵</b>：① 人口与家庭统计；② 收入与分配调查；③ 就业与劳动参与；④ 老龄化与抚养比；⑤ 社会保障覆盖；⑥ 城镇化与社区。</li>
+  <li><b>失真信号清单</b>：单年普查波动、把户籍口径当常住口径、把调查样本波动当趋势、把覆盖率当保障水平、把城镇化率当城市生活质量。</li>
+</ul>
+
+<h3>2.3 官方发布渠道清单（P0–P5）</h3>
+<div class="tblwrap"><table class="fixed">
+<thead><tr><th style="width:8%">优先级</th><th style="width:22%">渠道</th><th style="width:34%">官方 URL</th><th style="width:18%">更新机制</th><th style="width:18%">本期核验</th></tr></thead>
+<tbody>
+<tr><td>P0</td><td>中国国家统计局</td><td><a href="https://www.stats.gov.cn/">https://www.stats.gov.cn/</a></td><td>年度统计公报 / 普查</td><td>已核验（入口）</td></tr>
+<tr><td>P0</td><td>日本総務省統計局</td><td><a href="https://www.stat.go.jp/">https://www.stat.go.jp/</a></td><td>人口推計 / 普查 / 家計調査</td><td>已核验（入口）</td></tr>
+<tr><td>P0</td><td>韓国 統計庁 KOSIS</td><td><a href="https://kosis.kr/">https://kosis.kr/</a></td><td>人口 / 家计 / 就业</td><td>已核验（入口）</td></tr>
+<tr><td>P0</td><td>韓国 行政安全部</td><td><a href="https://www.mois.go.kr/">https://www.mois.go.kr/</a></td><td>居民登记人口</td><td>已核验（入口）</td></tr>
+<tr><td>P1</td><td>UN World Population Prospects</td><td><a href="https://population.un.org/wpp/">https://population.un.org/wpp/</a></td><td>4 年一度</td><td>已核验</td></tr>
+<tr><td>P1</td><td>UN World Urbanization Prospects</td><td><a href="https://population.un.org/wup/">https://population.un.org/wup/</a></td><td>年度 / 不定期</td><td>已核验</td></tr>
+<tr><td>P2</td><td>OECD Data（不平等 / 社会）</td><td><a href="https://data.oecd.org/">https://data.oecd.org/</a></td><td>年度</td><td>已核验（入口）</td></tr>
+<tr><td>P2</td><td>World Bank WDI</td><td><a href="https://data.worldbank.org/">https://data.worldbank.org/</a></td><td>年度</td><td>未核验（入口）</td></tr>
+<tr><td>P2</td><td>ILOSTAT</td><td><a href="https://ilostat.ilo.org/">https://ilostat.ilo.org/</a></td><td>年度</td><td>已核验（入口）</td></tr>
+<tr><td>P2</td><td>UN Data</td><td><a href="http://data.un.org/">http://data.un.org/</a></td><td>年度</td><td>未核验</td></tr>
+<tr><td>P4</td><td>UN DESA</td><td><a href="https://www.un.org/en/desa/">https://www.un.org/en/desa/</a></td><td>世界社会报告</td><td>未核验</td></tr>
+<tr><td>P4</td><td>WHO</td><td><a href="https://www.who.int/">https://www.who.int/</a></td><td>卫生统计</td><td>未核验</td></tr>
+<tr><td>P4</td><td>UN-Habitat</td><td><a href="https://unhabitat.org/">https://unhabitat.org/</a></td><td>城市报告</td><td>未核验</td></tr>
+</tbody>
+</table></div>
+<div class="note">渠道分级按 business-config 第四节：P0 官方统计数据库 / 原始调查文件为唯一可直接采信层；P1 官方统计年鉴 / 报告 PDF（记录版本、发布日期、表号）；P2 国际组织统计门户（须注提取日期）；P3 英文媒体（只作线索）；P4 行业机构与智库（交叉验证方向）；P5 官方调查问卷 / 方法文件（最终裁决口径与可比性）。</div>
+
+<h3>2.4 信号规则阈值（K01–K08，ex-ante 预校准）</h3>
+<div class="tblwrap"><table class="fixed">
+<thead><tr><th style="width:7%">编号</th><th style="width:16%">监测对象</th><th style="width:6%">等级</th><th style="width:15%">绿灯</th><th style="width:16%">黄灯</th><th style="width:19%">预警红线</th><th style="width:13%">硬红线</th><th style="width:8%">基线状态</th></tr></thead>
+<tbody>
+<tr><td>K01</td><td>人口自然增长</td><td>一级</td><td>正增长</td><td>增速趋零</td><td>转负</td><td>连续 2 年负增长</td><td>未触发</td></tr>
+<tr><td>K02</td><td>家庭户数与结构</td><td>二级</td><td>稳定</td><td>户均规模下降</td><td>家庭户增长失速</td><td>户均 &lt;2.0 人</td><td>未触发</td></tr>
+<tr><td>K03</td><td>收入不平等（基尼）</td><td>二级</td><td>&lt;0.35</td><td>0.35–0.40</td><td>&gt;0.40</td><td>&gt;0.45 连续 2 年</td><td>未触发</td></tr>
+<tr><td>K04</td><td>老龄化率</td><td>二级</td><td>&lt;14%</td><td>14–21%</td><td>&gt;21%</td><td>&gt;28%</td><td>未触发</td></tr>
+<tr><td>K05</td><td>城镇化率</td><td>三级</td><td>稳增</td><td>增速放缓</td><td>逆城镇化迹象</td><td>城镇化率下降</td><td>未触发</td></tr>
+<tr><td>K06</td><td>社会保障覆盖率</td><td>二级</td><td>≥90%</td><td>70–90%</td><td>&lt;70%</td><td>&lt;50%</td><td>未触发</td></tr>
+<tr><td>K07</td><td>失业率 / 劳动参与</td><td>一级</td><td>失业率下行</td><td>横盘</td><td>连续 2 期上行</td><td>高企且参与率下降</td><td>未触发</td></tr>
+<tr><td>K08</td><td>教育获得与流动</td><td>三级</td><td>代际流动改善</td><td>横盘</td><td>流动放缓</td><td>代际固化迹象</td><td>未触发</td></tr>
+</tbody>
+</table></div>
+
+<h3>2.5 结构红线登记簿（RL-01–RL-05）</h3>
+<div class="tblwrap"><table class="fixed">
+<thead><tr><th style="width:9%">编号</th><th style="width:16%">监测对象</th><th style="width:33%">硬阈值</th><th style="width:28%">触发后动作</th><th style="width:14%">基线状态</th></tr></thead>
+<tbody>
+<tr><td>RL-01</td><td>人口结构</td><td>人口连续 2 年负增长</td><td>重算长期需求与公共财政假设</td><td>未触发</td></tr>
+<tr><td>RL-02</td><td>收入分配</td><td>基尼 &gt;0.45 连续 2 年</td><td>重算社会稳定性与消费结构假设</td><td>未触发</td></tr>
+<tr><td>RL-03</td><td>老龄化</td><td>65+ 占比 &gt;28% 或总抚养比 &gt;60%</td><td>重算养老金与长期护理假设</td><td>未触发</td></tr>
+<tr><td>RL-04</td><td>社会保障</td><td>主要险种覆盖率 &lt;50%</td><td>重算贫困与兜底假设</td><td>未触发</td></tr>
+<tr><td>RL-05</td><td>就业</td><td>失业率高企且劳动参与率持续下降</td><td>重算居民收入与需求假设</td><td>未触发</td></tr>
+</tbody>
+</table></div>
+
+<h3>2.6 政策框架复核清单（G01–G05）</h3>
+<div class="tblwrap"><table class="fixed">
+<thead><tr><th style="width:9%">编号</th><th style="width:22%">政策项</th><th style="width:45%">官方入口</th><th style="width:24%">复核周期</th></tr></thead>
+<tbody>
+<tr><td>G01</td><td>人口与家庭政策</td><td>各国统计 / 主管机关（総務省統計局、stats.gov.cn、KOSIS）</td><td>事件触发 + 年度</td></tr>
+<tr><td>G02</td><td>收入分配与税收</td><td>各国统计局 / 税务局</td><td>年度</td></tr>
+<tr><td>G03</td><td>社会保障与福利</td><td>各国主管机关 + ILO</td><td>事件触发 + 年度</td></tr>
+<tr><td>G04</td><td>城市化与社区</td><td>各国主管机关 + UN-Habitat</td><td>年度</td></tr>
+<tr><td>G05</td><td>风险与公共危机</td><td>各国应急主管机关 + WHO</td><td>事件触发 + 年度</td></tr>
+</tbody>
+</table></div>
+<p class="small muted">规则：未取得官方原文的标「未核验」；入口页 ≠ 条款页；任一变更 → 立即重算受影响结论。</p>
+
+<h2 class="sec" id="s3">三、结构框架总览</h2>
+
+<h3>3.1 层级地图</h3>
+<div class="tblwrap"><table class="fixed">
+<thead><tr><th style="width:14%">层级</th><th style="width:30%">代表文件 / 数据</th><th style="width:24%">效力</th><th style="width:32%">监测要点</th></tr></thead>
+<tbody>
+<tr><td>L1 国际标准 / 公约</td><td>UN 人口统计标准；UN WPP / WUP；ILO 劳动统计标准</td><td>口径与定义框架</td><td>版本、定义与估计方法并列</td></tr>
+<tr><td>L2 国家统计</td><td>中国统计公报；日本人口推計 / 国势調査；韩国 KOSIS / 居民登记</td><td>官方统计约束</td><td>常住 / 户籍 / 家庭户分列</td></tr>
+<tr><td>L3 调查微观数据</td><td>家计調査；劳动力调查；人口普查抽样</td><td>原始调查</td><td>样本、加权与误差口径</td></tr>
+<tr><td>L4 政策文本</td><td>社会保障法规；人口与家庭政策；城市规划</td><td>政策约束</td><td>覆盖率 ≠ 支出占比；文本 ≠ 执行</td></tr>
+</tbody>
+</table></div>
+
+<h3>3.2 指标地图（跨国对照）</h3>
+<div class="tblwrap"><table class="fixed">
+<thead><tr><th style="width:10%">国家</th><th style="width:16%">65+ 占比</th><th style="width:16%">数据年份</th><th style="width:20%">口径</th><th style="width:20%">来源</th><th style="width:18%">核验状态</th></tr></thead>
+<tbody>
+<tr><td>中国</td><td>15.6%</td><td>2024 年末</td><td>65 周岁及以上占总人口</td><td>国家统计局 / 国家卫健委</td><td>部分核验</td></tr>
+<tr><td>日本</td><td>约 29.3%</td><td>待核验（最新年度）</td><td>65 岁及以上占总人口</td><td>総務省統計局 人口推計</td><td>部分核验</td></tr>
+<tr><td>韩国</td><td>21.21%</td><td>2025</td><td>居民登记人口 65+ 占比</td><td>行政安全部 居民登记统计</td><td>部分核验</td></tr>
+<tr><td>世界</td><td>约 8%（65+）</td><td>2024</td><td>UN WPP 中位估计</td><td>UN WPP 2024</td><td>未核验（点值待补）</td></tr>
+</tbody>
+</table></div>
+<div class="note">跨国对照不设单一「排名」列；须并列口径列（定义 / 年份 / 收入口径 / 数据来源）（business-config 第十二节）。</div>
+
+<h3>3.3 框架演变脉络</h3>
+<div class="timeline">
+  <div class="tl-item"><div class="tl-date">1950s</div><div class="tl-body"><div class="t">UN 人口统计体系建立</div><div class="d">UN World Population Prospects 自 1950 年代起持续发布，形成跨国人口估计与预测基线。<span class="lvl lvl-verified">已核验</span></div></div></div>
+  <div class="tl-item"><div class="tl-date">1982 / 1990</div><div class="tl-body"><div class="t">中国人口普查与统计公报制度</div><div class="d">人口普查（1982 起定期）与年度统计公报构成人口结构基线；2020 年第七次人口普查。<span class="lvl lvl-verified">已核验</span></div></div></div>
+  <div class="tl-item"><div class="tl-date">1950</div><div class="tl-body"><div class="t">日本人口推計制度</div><div class="d">総務省統計局自 1950 年国势调查后建立月度 / 年度人口推計；基干统计。<span class="lvl lvl-verified">已核验</span></div></div></div>
+  <div class="tl-item"><div class="tl-date">2019</div><div class="tl-body"><div class="t">韩国居民登记人口统计</div><div class="d">行政安全部以居民登记为基础发布人口统计，成为家庭结构与老龄化监测补充口径。<span class="lvl lvl-partial">部分核验</span></div></div></div>
+  <div class="tl-item"><div class="tl-date">2024-07</div><div class="tl-body green"><div class="t">UN WPP 2024 发布</div><div class="d">第 28 版；世界人口 82 亿（2024），预计 2080 年代中期达峰。<span class="lvl lvl-verified">已核验</span></div></div></div>
+  <div class="tl-item"><div class="tl-date">2025-11</div><div class="tl-body green"><div class="t">UN World Urbanization Prospects 2025 发布</div><div class="d">2025 年全球城市人口约 45%，巨型城市 33 个。<span class="lvl lvl-verified">已核验</span></div></div></div>
+</div>
+
+<h3>3.4 术语口径区分（不得混用）</h3>
+<div class="term"><b>人口 ≠ 家庭户</b>：常住人口 / 户籍人口 / 家庭户数分列。<br>
+<b>基尼系数 ≠ 收入五等分比</b>：两种不平等度量口径不同，须注明年份与收入定义（税前 / 可支配收入）。<br>
+<b>老龄化率 ≠ 抚养比</b>：65+ 占比与总抚养比（少儿 + 老年）分列。<br>
+<b>城镇人口 ≠ 城镇化率口径一致</b>：各国城乡划分标准不同，跨国对照须注明定义。<br>
+<b>社会保障覆盖 ≠ 社会保障支出</b>：覆盖率与支出占比分列。<br>
+<b>失业率 ≠ 劳动参与率</b>：ILO 口径与各国自报口径分列。</div>
+
+<h2 class="sec" id="s4">四、重点群体与分层逐条解读</h2>
+
+<h3>4.1 老龄人口（中国 / 日本 / 韩国）</h3>
+<p><b>数据摘编</b>：中国 2024 年末 65 周岁及以上人口 22023 万人、占 15.6%，60 周岁及以上 31031 万人、占 22.0%，65+ 老年抚养比 22.8%，人均预期寿命 79.0 岁；日本 65 岁及以上人口约 3625 万人、占总人口约 29.3%；韩国 2025 年居民登记 65 岁及以上 1084 万人、占 21.21%。<span class="lvl lvl-partial">部分核验</span></p>
+<p><b>解读</b>：K04（老龄化率）三国均处 14–21% 黄灯区间上沿或更高；日本已接近 28% 硬红线区间，韩国 2025 年跨过 20% 超高龄社会门槛。监测须并列「65+ 占比」与「总抚养比」，并注明口径（常住 / 居民登记 / 户籍人口）。</p>
+<p><b>官方答问 / 配套</b>：中国国家统计局 / 国家卫健委老龄公报；総務省統計局人口推計；韓国行政安全部居民登记统计。<span class="src-inline">来源：<a href="https://www.stats.gov.cn/">https://www.stats.gov.cn/</a>；<a href="https://www.stat.go.jp/data/jinsui/">https://www.stat.go.jp/data/jinsui/</a>；<a href="https://www.mois.go.kr/">https://www.mois.go.kr/</a></span></p>
+
+<h3>4.2 家庭户结构（以韩国单人家庭为例）</h3>
+<p><b>数据摘编</b>：韩国 2025 年居民登记家庭总数约 2430 万户，其中单人家庭 1027 万户、占 42.27%；70 岁以上单人家庭占单人家庭总数 21.60%。<span class="lvl lvl-partial">部分核验</span></p>
+<p><b>解读</b>：K02（家庭户数与结构）监测须区分「家庭户总数」「户均规模」与「单人家庭占比」；单人家庭增长与老龄化、都市化叠加，影响住房、护理与社区服务需求。</p>
+<p><b>歧义并列</b>：居民登记口径 ≠ 常住口径；单人家庭占比上升不等于家庭功能消失，须与代际同住率并列。</p>
+<p><b>官方答问 / 配套</b>：韓国行政安全部《居民登记人口统计分析》；KOSIS 家庭统计。<span class="src-inline">来源：<a href="https://www.mois.go.kr/">https://www.mois.go.kr/</a>；<a href="https://kosis.kr/">https://kosis.kr/</a></span></p>
+
+<h3>4.3 收入不平等（基尼系数口径）</h3>
+<p><b>条款摘编</b>：OECD 以家庭可支配收入（扣除所得税与社保缴费后）计算基尼系数，取值 0–1；口径含工资、自雇与资本收入及公共现金转移。<span class="lvl lvl-verified">已核验</span></p>
+<p><b>解读</b>：K03（收入不平等）须并列税前 / 可支配收入口径；基尼系数与收入五等分比、帕尔玛比值不可互换。跨国对照注明年份与收入定义。</p>
+<p><b>官方答问 / 配套</b>：OECD Income Distribution Database。<span class="src-inline">来源：<a href="https://data.oecd.org/inequality/income-inequality.htm">https://data.oecd.org/inequality/income-inequality.htm</a></span></p>
+
+<h3>4.4 就业与劳动参与</h3>
+<p><b>条款摘编</b>：ILO 口径将劳动力分为就业与失业（积极求职），劳动参与率为经济活动人口占工作年龄人口比例；各国自报口径与 ILO 口径分列。<span class="lvl lvl-verified">已核验</span></p>
+<p><b>解读</b>：K07（失业率 / 劳动参与）须并列 ILO 与自报口径；失业率下降但参与率下降时，须以「就业率」复核，避免把退出劳动力误读为就业改善。</p>
+<p><b>官方答问 / 配套</b>：ILOSTAT 方法文件。<span class="src-inline">来源：<a href="https://ilostat.ilo.org/">https://ilostat.ilo.org/</a></span></p>
+
+<h3>4.5 城镇化与城市结构</h3>
+<p><b>数据摘编</b>：UN World Urbanization Prospects 2025 显示 2025 年全球城市人口约占 45%，巨型城市（1000 万+）33 个，预计 2050 年增至 37 个；城市人口定义基于各国城乡划分。<span class="lvl lvl-verified">已核验</span></p>
+<p><b>解读</b>：K05（城镇化率）须注明城乡定义（行政划分 / 功能都市区）；城镇化率不等于城市生活质量，须与基础设施、住房与公共服务指标并列。</p>
+<p><b>官方答问 / 配套</b>：UN World Urbanization Prospects。<span class="src-inline">来源：<a href="https://population.un.org/wup/">https://population.un.org/wup/</a></span></p>
+
+<h3>4.6 世界人口基线（UN WPP 2024）</h3>
+<p><b>数据摘编</b>：UN WPP 2024 估计 2024 年世界人口约 82 亿，预计 2080 年代中期达峰（约 103 亿），2100 年回落至约 102 亿；截至 2024 年已有 63 个国家 / 地区人口达峰（含中国、德国、日本、俄罗斯），该组总人口预计未来 30 年下降 14%。<span class="lvl lvl-verified">已核验</span></p>
+<p><b>解读</b>：K01（人口自然增长）与 RL-01（人口结构）的基线锚；人口达峰国家组与仍增长地区分列，不做全球单一趋势外推。</p>
+<p><b>官方答问 / 配套</b>：UN WPP 2024 数据门户与新闻稿。<span class="src-inline">来源：<a href="https://population.un.org/wpp/">https://population.un.org/wpp/</a>；<a href="https://www.un.org/sustainabledevelopment/blog/2024/07/press-release-wpp2024/">https://www.un.org/sustainabledevelopment/blog/2024/07/press-release-wpp2024/</a></span></p>
+
+<h2 class="sec" id="s5">五、影响对象矩阵</h2>
+<p>矩阵按「结构指标 × 受影响主体 × 影响方向」展开，逐格附口径依据与指标指针；本期为基线，影响量级待事件触发后回填。</p>
+<div class="tblwrap"><table class="fixed">
+<thead><tr><th style="width:19%">结构指标</th><th style="width:17%">受影响主体</th><th style="width:30%">影响方向</th><th style="width:34%">依据 / 指针</th></tr></thead>
+<tbody>
+<tr><td>人口自然增长（K01 / RL-01）</td><td>政策制定者</td><td>连续负增长 → 重算长期需求与公共财政假设</td><td>UN WPP 2024；[G01]</td></tr>
+<tr><td>家庭户结构（K02）</td><td>公共服务 / 福利机构</td><td>单人家庭上升 → 重算住房、护理与社区需求</td><td>居民登记 / 家计调查；[G01]</td></tr>
+<tr><td>收入不平等（K03 / RL-02）</td><td>政策制定者 / 研究机构</td><td>基尼上行 → 重算消费结构与社会稳定假设</td><td>OECD 基尼口径；[G02]</td></tr>
+<tr><td>老龄化率（K04 / RL-03）</td><td>养老金 / 长期护理机构</td><td>65+ 占比越阈 → 重算养老金与护理假设</td><td>国家统计 / UN WPP；[G03]</td></tr>
+<tr><td>城镇化率（K05）</td><td>城市规划 / 社区</td><td>增速放缓或逆城镇化 → 重算基础设施投入</td><td>UN WUP；[G04]</td></tr>
+<tr><td>社会保障覆盖率（K06 / RL-04）</td><td>福利 / 兜底机构</td><td>覆盖率下行 → 重算贫困与兜底假设</td><td>ILO / 各国主管机关；[G03]</td></tr>
+<tr><td>失业率 / 参与率（K07 / RL-05）</td><td>劳动 / 统计机构</td><td>高企且参与率下降 → 重算居民收入假设</td><td>ILOSTAT / 自报口径；[G02]</td></tr>
+</tbody>
+</table></div>
+
+<div class="decision-card">
+  <div class="dc-head"><span class="dc-title">DC-1 人口达峰与老龄化并行，口径分层是决策前提</span><span class="suff ok">方向可决策</span></div>
+  <div class="dc-grid">
+    <div><span class="k">结论：</span>世界人口仍在增长但 63 国已达峰；中日韩老龄化率均处黄灯区间上沿或更高，须以「65+ 占比 + 总抚养比」双口径监测。</div>
+    <div><span class="k">证据强度：</span><span class="ev-strong">强</span>（UN WPP / 国家统计官方数据）</div>
+    <div><span class="k">触发条件：</span>65+ 占比越 21% 预警线或 28% 硬红线；人口连续 2 年负增长（RL-01）。</div>
+    <div><span class="k">反向证据：</span>日本 / 韩国最新年度点值未逐条回原文核验（U-01 / U-02）。</div>
+    <div><span class="k">信息充分度：</span>方向可决策；国别时点值需补官方表号。</div>
+  </div>
+</div>
+<div class="decision-card">
+  <div class="dc-head"><span class="dc-title">DC-2 不平等与就业口径必须并列</span><span class="suff need">需补充信息</span></div>
+  <div class="dc-grid">
+    <div><span class="k">结论：</span>基尼（可支配收入口径）与五等分比不可互换；失业率与劳动参与率须并列，退出劳动力不等于就业改善（已核验口径定义）。</div>
+    <div><span class="k">证据强度：</span><span class="ev-strong">强</span>（OECD / ILO 方法文件）</div>
+    <div><span class="k">触发条件：</span>基尼 &gt;0.40 或失业率高企且参与率下降。</div>
+    <div><span class="k">反向证据：</span>各国自报口径差异大，点值须回原文。</div>
+    <div><span class="k">信息充分度：</span>口径规则可决策；国别映射待补。</div>
+  </div>
+</div>
+
+<h2 class="sec" id="s6">六、合规应对建议（建议章）</h2>
+<div class="note correct"><b>结论边界</b>：本章为「建议」，与事实分离；不构成心理、法律、医疗个案意见，不外推个体行为。原文有歧义处并列多解，不静默择一。</div>
+
+<h3>6.1 建议清单</h3>
+<ul class="tight">
+  <li><b>官方统计回溯 SOP</b>（建议）：人口、收入、就业结论一律回溯官方统计数据库 / 原始调查文件；入口页不等于条款页。</li>
+  <li><b>口径分列</b>（建议）：常住 / 户籍 / 家庭户、税前 / 可支配收入、覆盖率 / 支出占比、ILO / 自报口径逐条分列。</li>
+  <li><b>版本与表号标注</b>（建议）：UN WPP / WUP / OECD / ILO 引用须注明版本、年份与表号；跨国对照并列定义与年份。</li>
+  <li><b>不平等度量</b>（建议）：基尼系数与收入五等分比、帕尔玛比值不互换；注明收入定义。</li>
+  <li><b>结论边界</b>（建议）：不外推个体行为，不做个体生涯规划建议；事件解读待触发后启动。</li>
+</ul>
+
+<h3>6.2 待明确事项清单</h3>
+<ul class="tight">
+  <li>日本 65+ 占比最新年度官方点值与表号（待核验）。</li>
+  <li>韩国居民登记统计与 KOSIS / 통계청 口径映射。</li>
+  <li>中国 2024 年统计公报官方 URL 与 65+ 抚养比表号。</li>
+  <li>各国社会保障主要险种覆盖率与支出占比官方原文。</li>
+</ul>
+
+<h3>6.3 场景切片</h3>
+<div class="slice">
+  <p class="slice-head">场景切片 · 政策制定</p>
+  <p>以 UN WPP / 各国统计局官方数据为政策基线，优先跟踪人口达峰（K01 / RL-01）、老龄化越阈（K04 / RL-03）与家庭结构变化（K02）；阈值与信号规则为「预校准（ex-ante）」，首次中期回测 2027-06。（来源：business-config 第十三节，指针）</p>
+</div>
+<div class="slice">
+  <p class="slice-head">场景切片 · 研究参考</p>
+  <p>跨国对照统一标注定义、年份与收入口径；人口、家庭户、不平等与就业多口径并列；媒体转述仅作线索且须回官方页核验。（来源：business-config 第三节 / 第十一节，指针）</p>
+</div>
+
+<h3>6.4 行动协议卡</h3>
+<div class="action-card immediate">
+  <div class="a-head"><span class="prio immediate">立即行动</span><span class="a-title">A1 RL 红线触发</span></div>
+  <div class="a-meta"><b>触发条件：</b>任一 RL-01–RL-05 红线触发。<b>阈值：</b>RL-01–RL-05 硬阈值（详见 2.4 节）。<b>动作：</b>24 小时内重算受影响结论并回写台账。<b>责任角色：</b>业务线负责人。<b>时限：</b>事件触发即启动。<b>验证指标：</b>台账更新记录 + 已修正事实清单。</div>
+</div>
+<div class="action-card watch">
+  <div class="a-head"><span class="prio watch">持续观察</span><span class="a-title">A2 K01–K04 黄灯</span></div>
+  <div class="a-meta"><b>触发条件：</b>人口转负、家庭户失速、基尼上行、老龄化越阈。<b>阈值：</b>K01–K04 黄灯阈值（详见 2.4 节）。<b>动作：</b>48 小时内完成官方统计原文回溯，决定是否升级为事件解读。<b>责任角色：</b>监测岗。<b>时限：</b>事件触发即启动。<b>验证指标：</b>官方 URL、表号与核验状态登记。</div>
+</div>
+<div class="action-card archive">
+  <div class="a-head"><span class="prio archive">仅记录存档</span><span class="a-title">A3 年度台账复核</span></div>
+  <div class="a-meta"><b>触发条件：</b>年度复核节点 / UN WPP 更新。<b>阈值：</b>每年 1 次复核。<b>动作：</b>刷新人口与福利基线，更新已修正事实清单并归档。<b>责任角色：</b>年度复盘。<b>时限：</b>年度。<b>验证指标：</b>台账版本与归档记录。</div>
+</div>
+
+<h2 class="sec" id="s7">七、生效时间线</h2>
+<div class="tblwrap"><table class="fixed">
+<thead><tr><th style="width:26%">数据 / 机制</th><th style="width:22%">关键节点</th><th style="width:20%">日期</th><th style="width:32%">依据</th></tr></thead>
+<tbody>
+<tr><td>UN World Population Prospects</td><td>第 28 版发布</td><td>2024-07</td><td>population.un.org/wpp</td></tr>
+<tr><td>UN World Urbanization Prospects 2025</td><td>摘要发布</td><td>2025-11</td><td>population.un.org/wup</td></tr>
+<tr><td>中国 2023 年统计公报</td><td>发布</td><td>2024-02-29</td><td>stats.gov.cn</td></tr>
+<tr><td>中国 2024 年统计公报 / 老龄公报</td><td>发布</td><td>2025（具体日期待核验）</td><td>stats.gov.cn / 国家卫健委</td></tr>
+<tr><td>日本人口推計</td><td>2025-04-01 现在推計</td><td>2025-04</td><td>stat.go.jp</td></tr>
+<tr><td>韩国居民登记人口统计</td><td>2025 年度发布</td><td>2026-01-04</td><td>mois.go.kr</td></tr>
+<tr><td>OECD Income Distribution Database</td><td>年度更新</td><td>滚动</td><td>data.oecd.org</td></tr>
+<tr><td>ILOSTAT</td><td>年度更新</td><td>滚动</td><td>ilostat.ilo.org</td></tr>
+</tbody>
+</table></div>
+<h3>7.1 待生效与待细则清单</h3>
+<ul class="tight">
+  <li>UN WPP 2026 版与下一轮国家普查结果（待跟踪）。</li>
+  <li>各国社会保障覆盖面与支出占比年度数据（待核验）。</li>
+  <li>中国 2024 年统计公报官方 URL 与表号（待核验）。</li>
+  <li>日本 / 韩国最新年度人口与家庭结构点值（待核验）。</li>
+</ul>
+
+<h2 class="sec" id="s8">八、数据治理与局限</h2>
+<h3>8.1 来源分级（指针）</h3>
+<p>来源按 business-config 第四节四层分级与 P0–P5 获取优先级执行（指针，不复制正文）：<b>官方一手</b>（各国统计局 / 官方统计数据库 / 原始调查文件）为唯一可直接采信层；<b>行业机构</b>（官方调查机构、Pew Research 仅作线索）；<b>挂牌门户 / 数据库</b>（World Bank WDI、UN Data、OECD Data、各国微观数据门户，须注提取日期）；<b>媒体转述</b>（须标「需核实原文」，不得与官方一手同等处理）。</p>
+<h3>8.2 文本时效与版本治理</h3>
+<ul class="tight">
+  <li><b>读数时点</b>：2026-11；统计门户快照须注提取日期与表号。</li>
+  <li><b>版本治理</b>：本报告 v1.0（首期基线固定）；核验 / 收敛型运行不升级版本号，只标注「本期读数时点」。</li>
+  <li><b>基线属性</b>：本报告为后续事件解读与年度台账的对比锚；基线永不重跑，结构变更只影响后续新基线。</li>
+</ul>
+<h3>8.3 核验状态统计</h3>
+<ul class="tight">
+  <li><b>已核验</b>：UN WPP 2024 关键估计、UN WUP 2025 城市人口与巨型城市、OECD 基尼口径、ILO 就业口径。</li>
+  <li><b>部分核验</b>：中国 2024 年 65+ 点值与抚养比、日本 65+ 占比、韩国 2025 居民登记统计。</li>
+  <li><b>推断</b>：影响对象矩阵中的「方向 / 量级」为方向性判断。</li>
+  <li><b>假设</b>：已登记 6 条，基线期未核验（0/6）。</li>
+</ul>
+<h3>8.4 未核验清单（U-01–U-06）</h3>
+<div class="tblwrap"><table class="fixed">
+<thead><tr><th style="width:9%">编号</th><th style="width:55%">未核验项</th><th style="width:36%">影响与处置</th></tr></thead>
+<tbody>
+<tr><td>U-01</td><td>日本 65+ 占比最新年度官方点值与表号</td><td>待回 stat.go.jp 人口推計表号核验</td></tr>
+<tr><td>U-02</td><td>韩国居民登记统计与 KOSIS / 통계청 口径映射</td><td>两口径并列，不合并</td></tr>
+<tr><td>U-03</td><td>中国 2024 年统计公报官方 URL 与 65+ 抚养比表号</td><td>点值暂标部分核验，须回原文</td></tr>
+<tr><td>U-04</td><td>各国社会保障主要险种覆盖率与支出占比</td><td>K06 / RL-04 仅给阈值，未给点值</td></tr>
+<tr><td>U-05</td><td>世界 65+ 占比全球点值（UN WPP 2024）</td><td>仅给方向，未给点值</td></tr>
+<tr><td>U-06</td><td>媒体转述中的家庭结构与社会支出数值</td><td>仅作线索，须回官方或方法文件核验</td></tr>
+</tbody>
+</table></div>
+<h3>8.5 解读局限</h3>
+<ul class="tight">
+  <li>本基线只处理官方统计与政策文本，不采集舆论反应；不做个体外推，不引用匿名消息。</li>
+  <li>结构指标的「影响量级」需事件触发后回填，本期矩阵只给方向与口径依据。</li>
+  <li>「已修正事实清单」首期为空；产生修正后逐条补记，防回退。</li>
+  <li>本主题暂无事实卡片库（engine/fact_cards/），正文以指标编号 + 指针（K / RL / G）引用；未编造 [FC-…] 指针。</li>
+</ul>
+
+<h2 class="sec" id="s9">九、参考来源清单</h2>
+<p class="small muted">按来源分级分组，完整 URL，逐点可回溯；媒体转述标「需核实原文」。</p>
+<div class="refs">
+<h4>官方一手（P0 / P1）</h4>
+<ol>
+<li>中国国家统计局 — <a href="https://www.stats.gov.cn/" target="_blank" rel="noopener">https://www.stats.gov.cn/</a></li>
+<li>中国 2023 年国民经济和社会发展统计公报 — <a href="https://www.stats.gov.cn/sj/zxfb/202402/t20240228_1947915.html" target="_blank" rel="noopener">https://www.stats.gov.cn/sj/zxfb/202402/t20240228_1947915.html</a></li>
+<li>日本総務省統計局 人口推計 — <a href="https://www.stat.go.jp/data/jinsui/" target="_blank" rel="noopener">https://www.stat.go.jp/data/jinsui/</a></li>
+<li>日本総務省統計局 — <a href="https://www.stat.go.jp/" target="_blank" rel="noopener">https://www.stat.go.jp/</a></li>
+<li>韓国 行政安全部 — <a href="https://www.mois.go.kr/" target="_blank" rel="noopener">https://www.mois.go.kr/</a></li>
+<li>韓国 統計庁 KOSIS — <a href="https://kosis.kr/" target="_blank" rel="noopener">https://kosis.kr/</a></li>
+<li>UN World Population Prospects 2024 — <a href="https://population.un.org/wpp/" target="_blank" rel="noopener">https://population.un.org/wpp/</a></li>
+<li>UN WPP 2024 新闻稿 — <a href="https://www.un.org/sustainabledevelopment/blog/2024/07/press-release-wpp2024/" target="_blank" rel="noopener">https://www.un.org/sustainabledevelopment/blog/2024/07/press-release-wpp2024/</a></li>
+<li>UN World Urbanization Prospects — <a href="https://population.un.org/wup/" target="_blank" rel="noopener">https://population.un.org/wup/</a></li>
+<li>ILOSTAT — <a href="https://ilostat.ilo.org/" target="_blank" rel="noopener">https://ilostat.ilo.org/</a></li>
+<li>UN DESA — <a href="https://www.un.org/en/desa/" target="_blank" rel="noopener">https://www.un.org/en/desa/</a></li>
+<li>WHO — <a href="https://www.who.int/" target="_blank" rel="noopener">https://www.who.int/</a></li>
+<li>UN-Habitat — <a href="https://unhabitat.org/" target="_blank" rel="noopener">https://unhabitat.org/</a></li>
+</ol>
+<h4>行业机构（P4）</h4>
+<ol>
+<li>国立社会保障・人口問題研究所 — <a href="https://www.ipss.go.jp/" target="_blank" rel="noopener">https://www.ipss.go.jp/</a></li>
+</ol>
+<h4>挂牌门户（仅作参考）</h4>
+<ol>
+<li>OECD Income Distribution Database — <a href="https://data.oecd.org/inequality/income-inequality.htm" target="_blank" rel="noopener">https://data.oecd.org/inequality/income-inequality.htm</a>（参考）</li>
+<li>OECD Data — <a href="https://data.oecd.org/" target="_blank" rel="noopener">https://data.oecd.org/</a>（参考）</li>
+<li>World Bank WDI — <a href="https://data.worldbank.org/" target="_blank" rel="noopener">https://data.worldbank.org/</a>（参考）</li>
+<li>UN Data — <a href="http://data.un.org/" target="_blank" rel="noopener">http://data.un.org/</a>（参考）</li>
+</ol>
+</div>
+
+<div class="disc">
+  <strong>结论边界与版本治理</strong>：本报告只给框架性说明与可核验信息，不构成心理、法律、医疗个案意见，不外推个体行为。报告版本 v1.0（首期基线固定）；核验 / 收敛型运行不升级版本号，只标注「本期读数时点」。信号阈值与红线为「预校准（ex-ante）」，首次中期回测 2027-06。数据截止 2026-11；来源分级与未核验清单见第八节。
+</div>
+<footer>tech-context-digest · 社会结构与分层基线 · 九节固化锚 · 2026-11</footer>
+</main>
+</body>
+</html>

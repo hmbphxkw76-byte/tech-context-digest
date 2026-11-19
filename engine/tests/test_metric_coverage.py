@@ -5,8 +5,10 @@
 - `metric_coverage.measure()` 覆盖字典全部 38 项，且 TOOL 指标全部为 measured / probe；
 - 覆盖率报告把未接线项显式列为 gap（不静默跳过）；
 - `metric_registry audit --coverage` 输出覆盖与缺口；
-- 2026-11-19 二次校准口径：R-03 排除来源/链接段落、L-03 仅统计指标编号
-  相邻阈值、A-03 真值核对只出候选差异不计分（见 tech-debt-ledger §十三）。
+- 2026-11-19 口径：R-03 排除来源/链接段落；L-03 升级为报告 ↔ business-config ↔
+  登记册三处一致（排除有意泛化）；A-03 计分改为真值核对一致率与代理一致率组合；
+  A-02 / A-04 / L-01 / L-02 / L-04 / L-05 / R-05 由 LLM 兜底转为机械代理（均为代理
+  口径，不得当作语义达标）。
 """
 from __future__ import annotations
 
@@ -434,15 +436,91 @@ class TestA03TruthCheck(unittest.TestCase):
         self.assertEqual(mc._report_number("−1.7"), -1.7)
         self.assertIsNone(mc._report_number("abc"))
 
-    def test_real_sidecar_loads(self):
-        if not mc.SIDECAR_PATH.exists():
-            self.skipTest("sidecar 未落盘")
+    def test_real_registry_loads(self):
+        if not mc.TRUTH_REGISTRY_PATH.exists():
+            self.skipTest("结构化登记册未落盘")
         res = mc.a03_truth_check(mc._reports_text())
         self.assertGreater(res["compared"], 0)
         self.assertTrue(all(r["verdict"] in ("一致", "差异", "不可比")
                             for r in res["records"]))
         # 辅助不计分：A-03 代理值不受真值核对影响
         value, _ = mc.a03_numeric_consistency(mc._reports_text())
+        self.assertAlmostEqual(value, 1.0, places=4)
+
+
+class TestN6MechanicalProxies(unittest.TestCase):
+    """N-6：七项 LLM 兜底接线为机械代理（2026-11-19），均为代理口径。"""
+
+    def test_a02_entry_grading(self):
+        text = '<a href="https://news.example/x">n</a> 需核实原文'
+        self.assertTrue(mc._a02_entry_compliant(
+            text, {"url": "https://news.example/x", "tier": 4}))
+        self.assertFalse(mc._a02_entry_compliant(
+            '<a href="https://news.example/x">n</a>',
+            {"url": "https://news.example/x", "tier": 4}))
+        self.assertTrue(mc._a02_entry_compliant(
+            "anything", {"url": "https://x.example/a", "tier": 1}))
+
+    def test_a04_entry_window(self):
+        # 月度容差 1：同期 / 上月合规，前两月不合规；无周期不可判
+        self.assertTrue(mc._a04_entry_fresh("2026-12", "monthly", "2026-12-01"))
+        self.assertTrue(mc._a04_entry_fresh("2026-12", "monthly", "2026-11-01"))
+        self.assertFalse(mc._a04_entry_fresh("2026-12", "monthly", "2026-10-01"))
+        self.assertIsNone(mc._a04_entry_fresh("", "monthly", "2026-12-01"))
+
+    def test_l01_cross_section_conflict(self):
+        reports = {"a.html": ('<h2 class="sec">一</h2><p> P01 1,817</p>'
+                              '<h2 class="sec">二</h2><p> P01 1,659</p>')}
+        value, detail = mc.l01_cross_section(reports)
+        self.assertLess(value, 1.0)
+        self.assertIn("冲突 1/1", detail)
+
+    def test_l02_conflation_detected(self):
+        self.assertTrue(mc._has_caliber_conflation("均价 = 中位价", ["均价", "中位价"]))
+        self.assertTrue(mc._has_caliber_conflation("均价折算为中位价", ["均价", "中位价"]))
+        self.assertFalse(mc._has_caliber_conflation("均价与中位价分列", ["均价", "中位价"]))
+
+    def test_l04_conclusion_evidence(self):
+        card_ok = ('<div class="decision-card"><div class="dc-grid">'
+                   '<div><span class="k">结论：</span>x</div>'
+                   '<div><span class="k">证据强度：</span>强（官方）</div></div></div>')
+        card_bad = ('<div class="decision-card"><div class="dc-grid">'
+                    '<div><span class="k">结论：</span>x</div>'
+                    '<div><span class="k">证据强度：</span></div></div></div>')
+        value, detail = mc.l04_conclusion_evidence({"a.html": card_ok + card_bad})
+        self.assertAlmostEqual(value, 0.5, places=4)
+        self.assertIn("1/2", detail)
+
+    def test_l05_year_wrap_and_order(self):
+        items = ["11-18", "12-30", "2027-01"]
+        dates = mc._parse_timeline_dates(items, "2027-01")
+        self.assertEqual(dates, [(2026, 11, 18), (2026, 12, 30), (2027, 1, 0)])
+        html = "".join(f'<div class="tl-item"><div class="tl-date">{d}</div></div>'
+                       for d in items)
+        value, _ = mc.l05_timeline_consistency({"2027-01_monthly.html": html})
+        self.assertAlmostEqual(value, 1.0, places=4)
+
+    def test_r05_topic_tokens(self):
+        self.assertEqual(mc._topic_tokens("{{TOPIC}} = 公寓住宅市场"), ["公寓住宅市场"])
+        self.assertEqual(mc._topic_tokens("{{TOPIC}} = AI 网安竞争格局"),
+                         ["AI", "网安竞争格局"])
+
+    def test_l03_generalized_excluded_and_real_value(self):
+        value, detail = mc.l03_threshold_consistency(mc._reports_text())
+        self.assertAlmostEqual(value, 1.0, places=4)
+        self.assertIn("有意泛化", detail)
+
+    def test_a03_combined_uses_truth(self):
+        value, detail = mc.a03_combined(mc._reports_text())
+        self.assertIn("真值核对", detail)
+        self.assertGreater(value, 0.0)
+        # 阈值语境排除后，可比项真值一致 → 组合值应达阈值（≥0.99）。
+        self.assertGreaterEqual(value, 0.99)
+
+    def test_a03_fallback_when_no_comparable(self):
+        # 无 apartment 报告 → 真值可比 0，回退代理并显式标注
+        value, detail = mc.a03_combined({"x.html": "<p>P01 1</p>"})
+        self.assertIn("回退代理", detail)
         self.assertAlmostEqual(value, 1.0, places=4)
 
 

@@ -9,6 +9,7 @@ from __future__ import annotations
 import sys
 import unittest
 from pathlib import Path
+from unittest import mock
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "tools"))
 
@@ -125,6 +126,44 @@ class TestInfoDensity(unittest.TestCase):
             self.skipTest("decision-hub 报告不存在")
         errors, warnings, lines = m.run(str(p.relative_to(ROOT)), "2026-12")
         self.assertEqual(errors, 0, lines)
+
+
+class TestId02RollingGate(unittest.TestCase):
+    """P1-4：ID-02 由 WARN_ONLY 改为滚动 gate-period（新报告 [E] / 历史 [W]）。"""
+
+    @staticmethod
+    def _long_summary() -> str:
+        return ("<h2 class=\"sec\">一、决策摘要</h2>"
+                "<p><span class=\"lvl lvl-verified\">已核验</span> "
+                "本期新增 1；修正 0；无变化 1；假设核验进度 1/2。"
+                "场景切片：投资决策。指标指针：K01。</p>"
+                "<p>" + "填充" * 500 + "</p>")
+
+    def test_id02_not_warn_only(self):
+        self.assertNotIn("ID-02", m._WARN_ONLY)
+        self.assertEqual(m._level_for("ID-02", True), "E")
+        self.assertEqual(m._level_for("ID-02", False), "W")
+
+    def test_id06_stays_warn_only(self):
+        self.assertIn("ID-06", m._WARN_ONLY)
+        self.assertEqual(m._level_for("ID-06", True), "W")
+
+    def test_long_summary_flagged(self):
+        rules = {r for r, _ in m.check_text(self._long_summary())}
+        self.assertIn("ID-02", rules)
+
+    def test_new_report_error_historical_warning(self):
+        text = self._long_summary()
+        with mock.patch.object(m, "iter_targets",
+                               return_value=[("x.html", text, "2026-12", "")]):
+            errors, warnings, lines = m.run(None, "2026-12")
+        self.assertEqual(errors, 1, lines)
+        self.assertIn("ID-02", " ".join(lines))
+        with mock.patch.object(m, "iter_targets",
+                               return_value=[("x.html", text, "2026-11", "")]):
+            errors, warnings, lines = m.run(None, "2026-12")
+        self.assertEqual(errors, 0, lines)
+        self.assertEqual(warnings, 1, lines)
 
 
 if __name__ == "__main__":
