@@ -41,7 +41,20 @@ MYPY_LINE_RE = re.compile(r"^(?P<path>[^:]+):\d+: error: .* \[(?P<code>[A-Za-z0-
 
 
 def _norm(path: str) -> str:
-    return str(path).replace("\\", "/")
+    """路径归一为仓库相对（本地相对路径不变；CI 绝对路径剥前缀）。
+
+    ruff 在 CI（ubuntu）输出绝对路径，而 baseline 键为仓库相对路径；
+    不剥前缀会把每个文件误判为「新增」。
+    """
+    p = str(path).replace("\\", "/")
+    root = ROOT.as_posix().rstrip("/") + "/"
+    if p.startswith(root):
+        return p[len(root):]
+    marker = f"/{ROOT.name}/"
+    i = p.rfind(marker)
+    if i != -1:
+        return p[i + len(marker):]
+    return p
 
 
 def _emit(out: str) -> None:
@@ -154,6 +167,17 @@ def _new_items(cur: dict[str, dict[str, int]],
     return out
 
 
+def _delta(cur: dict[str, dict[str, int]],
+           base: dict[str, dict[str, int]]) -> int:
+    """新增发现总数（仅计 current > baseline 的差额）。"""
+    n = 0
+    for path in set(cur) | set(base):
+        codes = set(cur.get(path, {})) | set(base.get(path, {}))
+        for code in codes:
+            n += max(0, cur.get(path, {}).get(code, 0) - base.get(path, {}).get(code, 0))
+    return n
+
+
 def _load_baseline() -> dict:
     if not BASELINE_PATH.exists():
         return {"schema_version": BASELINE_SCHEMA, "ruff": {}, "mypy": {}}
@@ -202,7 +226,7 @@ def main() -> int:
     for item in new:
         print(f"  [NEW] {item}")
     if new:
-        print(f"[E] {args.tool}：{len(new)} 类发现超出 baseline（新增 {_total(cur) - _total(ref)} 项）")
+        print(f"[E] {args.tool}：{len(new)} 类发现超出 baseline（新增 {_delta(cur, ref)} 项）")
         return 1
     if cur:
         print(f"[W] {args.tool}：{_total(cur)} 项均在 baseline 额度内（不阻断；只拦新增）")

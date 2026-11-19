@@ -2,25 +2,25 @@
  "schema_version": "1.0",
  "policy": "只拦新增：按 (path, code) 计数，current > baseline 即新增；baseline 内遗留计 [W]，新增计 [E]。",
  "ruff": {
-  "D:/文档/GitHub/tech-context-digest/engine/audit/scripts/audit_tool.py": {
+  "engine/audit/scripts/audit_tool.py": {
    "E702": 13
   },
-  "D:/文档/GitHub/tech-context-digest/engine/tests/test_metric_registry.py": {
+  "engine/tests/test_metric_registry.py": {
    "E702": 2
   },
-  "D:/文档/GitHub/tech-context-digest/engine/tools/metric_registry.py": {
+  "engine/tools/metric_registry.py": {
    "E702": 4
   },
-  "D:/文档/GitHub/tech-context-digest/engine/tools/perf_monitor.py": {
+  "engine/tools/perf_monitor.py": {
    "E702": 6
   },
-  "D:/文档/GitHub/tech-context-digest/engine/tools/repo_sync.py": {
+  "engine/tools/repo_sync.py": {
    "E702": 29
   },
-  "D:/文档/GitHub/tech-context-digest/engine/tools/semantic_diff.py": {
+  "engine/tools/semantic_diff.py": {
    "E702": 1
   },
-  "D:/文档/GitHub/tech-context-digest/engine/tools/source_check.py": {
+  "engine/tools/source_check.py": {
    "E702": 14
   }
  },
