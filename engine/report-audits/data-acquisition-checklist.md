@@ -5,7 +5,7 @@
 > **使用方式**：逐项登记 → 取数 → 双源 → 入库 → 消号。状态取值：`pending` / `in_progress` / `done` / `blocked`。
 > **来源分级**：① 官方一手 > ② 行业机构 > ③ 挂牌门户 > ④ 媒体转述（须标「需核实原文」）。
 > **优先级**：P0 = Phase 1 必须上线；P1 = Phase 2；P2 = Phase 3。
-> **最后更新**：2026-11-19
+> **最后更新**：2026-11-19（E1/F1 定向取数留痕）
 
 | # | 维度 | 核心指标 | 权威来源 | 频率 | 优先级 | 口径说明 | 获取方式 | 状态 |
 |---|---|---|---|---|---|---|---|---|
@@ -35,3 +35,13 @@
 - P0 维度：就业、收入、空置、竣工、政策原文、宏观高频（6 项）。
 - **2026-11-19 取数阻塞**：就业 / 收入 / 空置 / 竣工四项状态转 `blocked`——本环境检索未命中可核验的官方一手来源（DDSE、DLD、DM、ValuStrat / REIDIN 官方页）；待官方发布或可核验机构页后解除，对应盲区 B01 / B02 / B03 / B15（责任周期顺延至 2027-03）。
 - 目标：Phase 1 末 P0 数据层上线；Phase 2 末 P1 数据层上线。
+
+## 取数留痕（2026-11-19，E1/F1）
+
+> 目标来源级别：官方一手；原则：不放宽来源级别、不虚报消号。
+
+- **#1 就业**：命中 DDSE 官方 LFS 2026 启动公告（2026-10-28，样本 5,000 户，覆盖就业 / 失业 / 职业 / 行业分项），**结果未发布** → 维持 `blocked`。[Source: https://www.digitaldubai.ae/newsroom/news/digital-dubai-launches-the-labour-force-survey-2026-to-strengthen-data-driven-labour-market-planning-and-decision-making, 2026]
+- **#2 收入**：LFS 收入分项随 LFS 2026 结果待发布；Michael Page / Hays 未获 UAE 2026 官方页 → 维持 `blocked`。
+- **#3 空置**：ValuStrat 官方报告列表命中（《Dubai Real Estate Review Q3 2026》，2026-10-21），正文被浏览器验证拦截；REIDIN 被 Cloudflare 拦截 → 维持 `blocked`。[Source: https://www.valustrat.com/, 2026]
+- **#4 竣工**：WAM 通讯稿转述 DLD 2025 竣工数据（124 个项目 / AED27.5bn，2026-02-24）；DLD 官方页与 DM 竣工证书序列未取得，且非双源 → 维持 `blocked`。[Source: https://www.chinadaily.com.cn/a/202602/24/WS699d6545a310d6866eb3a085.html, 2026]
+- **结论**：P0 四项均未取得「官方一手数值 + 双源」，按「不虚报消号」维持 `blocked`；对应盲区 B01 / B02 / B03 / B15 责任周期维持 2027-03。
