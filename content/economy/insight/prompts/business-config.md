@@ -82,6 +82,7 @@
 
 - 首次回测时间点 **2027-06**（中期），2027-12 全期；校准前标注口径见 `engine/templates/decision-delivery-spec.md` 第六节。
 - 校准对象：K01–K15 + RL-01–RL-09；输出 95% CI 与分位依据；工具 `engine/tools/threshold_calibration.py`。
+- 已登记触发阈值（决策卡触发条件与行动协议引用）：K01 3M EIBOR 距硬红线 **≤25bp**（融资成本专题，口径同 `content/economy/dubai/apartment` 业务线台账）。
 
 ---
 
@@ -89,6 +90,7 @@
 
 - 台账：`engine/report-audits/blind-spot-ledger.md`；P0 四类（就业 / 收入 / 空置 / 竣工）优先消号。
 - 消号条件与责任周期以台账为准；本业务线每季公布状态。
+- 盲区总数目标 **≤6**（KPI-5，Phase 3 末；当前值与消号进度以台账为准）。
 
 ---
 
