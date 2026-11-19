@@ -1,0 +1,309 @@
+{
+  "schema_version": "1.0",
+  "business_line": "content/economy/dubai/apartment",
+  "registry": "dubai_apartment_indicator_registry_2027-01.xlsx",
+  "sheets": [
+    "年度基线2027",
+    "首期基线值"
+  ],
+  "updated": "2027-01",
+  "count": 37,
+  "indicators": [
+    {
+      "indicator_id": "G05",
+      "value": "90",
+      "unit": "天",
+      "period": "现行",
+      "source": "DLD",
+      "updated": "2027-01"
+    },
+    {
+      "indicator_id": "M01",
+      "value": "3.900",
+      "unit": "%",
+      "period": "2026-10-28",
+      "source": "CBUAE",
+      "updated": "2027-01"
+    },
+    {
+      "indicator_id": "M02",
+      "value": "4.364820",
+      "unit": "%",
+      "period": "2026-11-10",
+      "source": "CBUAE",
+      "updated": "2027-01"
+    },
+    {
+      "indicator_id": "M05",
+      "value": "3.75–4.00",
+      "unit": "%",
+      "period": "2026-10-28",
+      "source": "Federal Reserve",
+      "updated": "2027-01"
+    },
+    {
+      "indicator_id": "M07",
+      "value": "2,871.4",
+      "unit": "AED bn",
+      "period": "2026-08",
+      "source": "CBUAE Statistical Bulletin Aug 2026（表 1 / 表 13 / 表 25）",
+      "updated": "2027-01"
+    },
+    {
+      "indicator_id": "M12",
+      "value": "48,243",
+      "unit": "US$ m",
+      "period": "2025",
+      "source": "UNCTAD WIR 2026",
+      "updated": "2027-01"
+    },
+    {
+      "indicator_id": "M14",
+      "value": "1.8 / 2.5",
+      "unit": "%",
+      "period": "2026F",
+      "source": "CBUAE / IMF",
+      "updated": "2027-01"
+    },
+    {
+      "indicator_id": "M15",
+      "value": "5.6 / 3.1",
+      "unit": "%",
+      "period": "2026F",
+      "source": "CBUAE / IMF",
+      "updated": "2027-01"
+    },
+    {
+      "indicator_id": "M16",
+      "value": "96 / 84",
+      "unit": "US$/bbl",
+      "period": "2026F / 2027F",
+      "source": "U.S. EIA",
+      "updated": "2027-01"
+    },
+    {
+      "indicator_id": "M17",
+      "value": "6.97",
+      "unit": "百万人",
+      "period": "2026 1–8 月",
+      "source": "Dubai DET",
+      "updated": "2027-01"
+    },
+    {
+      "indicator_id": "M18",
+      "value": "66",
+      "unit": "%",
+      "period": "2026-08",
+      "source": "Dubai DET",
+      "updated": "2027-01"
+    },
+    {
+      "indicator_id": "P01",
+      "value": "1,817",
+      "unit": "AED/sqft",
+      "period": "2026Q3",
+      "source": "Savills",
+      "updated": "2027-01"
+    },
+    {
+      "indicator_id": "P02",
+      "value": "−1.7",
+      "unit": "% QoQ",
+      "period": "2026Q3",
+      "source": "Savills",
+      "updated": "2027-01"
+    },
+    {
+      "indicator_id": "P03",
+      "value": "1,659",
+      "unit": "AED/sqft",
+      "period": "2026-10",
+      "source": "PropertyIndex (DLD)",
+      "updated": "2027-01"
+    },
+    {
+      "indicator_id": "P04",
+      "value": "203.7",
+      "unit": "点",
+      "period": "2026-10",
+      "source": "PropertyIndex",
+      "updated": "2027-01"
+    },
+    {
+      "indicator_id": "P05",
+      "value": "168.1 / 218.6",
+      "unit": "点",
+      "period": "2026Q3",
+      "source": "ValuStrat",
+      "updated": "2027-01"
+    },
+    {
+      "indicator_id": "P07",
+      "value": "34,500 / 70.8",
+      "unit": "笔 / AED bn",
+      "period": "2026Q3",
+      "source": "Savills",
+      "updated": "2027-01"
+    },
+    {
+      "indicator_id": "P08",
+      "value": "72.2",
+      "unit": "% 笔数",
+      "period": "2026Q3",
+      "source": "Cavendish Maxwell",
+      "updated": "2027-01"
+    },
+    {
+      "indicator_id": "P09",
+      "value": "9,491",
+      "unit": "笔",
+      "period": "2026Q3",
+      "source": "ValuStrat",
+      "updated": "2027-01"
+    },
+    {
+      "indicator_id": "P11",
+      "value": "5,237",
+      "unit": "AED/sqft",
+      "period": "2026Q3",
+      "source": "Savills",
+      "updated": "2027-01"
+    },
+    {
+      "indicator_id": "R01",
+      "value": "65,000",
+      "unit": "AED/年",
+      "period": "2026-10",
+      "source": "Peak Trust (Ejari)",
+      "updated": "2027-01"
+    },
+    {
+      "indicator_id": "R02",
+      "value": "59,000",
+      "unit": "AED/年",
+      "period": "2026Q3",
+      "source": "DXBinteract (DLD)",
+      "updated": "2027-01"
+    },
+    {
+      "indicator_id": "R03",
+      "value": "77.3",
+      "unit": "AED/sqft/年",
+      "period": "2026-09",
+      "source": "Cavendish Maxwell",
+      "updated": "2027-01"
+    },
+    {
+      "indicator_id": "R06",
+      "value": "21.4",
+      "unit": "%",
+      "period": "2026Q3",
+      "source": "Cavendish Maxwell",
+      "updated": "2027-01"
+    },
+    {
+      "indicator_id": "R09",
+      "value": "−15.3",
+      "unit": "%",
+      "period": "2026-08",
+      "source": "fäm / DLD",
+      "updated": "2027-01"
+    },
+    {
+      "indicator_id": "R10",
+      "value": "6.0 / 6.2 / 6.6",
+      "unit": "%",
+      "period": "2026Q3 / TTM",
+      "source": "DRED / Peak / CM",
+      "updated": "2027-01"
+    },
+    {
+      "indicator_id": "R11",
+      "value": "5.4",
+      "unit": "% 中位",
+      "period": "2026Q3",
+      "source": "Peak Trust",
+      "updated": "2027-01"
+    },
+    {
+      "indicator_id": "S01",
+      "value": "40,400",
+      "unit": "套",
+      "period": "2026 1–9 月",
+      "source": "C&W Core",
+      "updated": "2027-01"
+    },
+    {
+      "indicator_id": "S03",
+      "value": "60,000–162,500",
+      "unit": "套",
+      "period": "2027 计划",
+      "source": "C&W / Cavendish Maxwell",
+      "updated": "2027-01"
+    },
+    {
+      "indicator_id": "S05",
+      "value": ">525,000",
+      "unit": "套",
+      "period": "2027–2030",
+      "source": "Savills",
+      "updated": "2027-01"
+    },
+    {
+      "indicator_id": "S06",
+      "value": "41.3",
+      "unit": "%",
+      "period": "2026H1",
+      "source": "Cavendish Maxwell",
+      "updated": "2027-01"
+    },
+    {
+      "indicator_id": "S07",
+      "value": "≈50,000",
+      "unit": "套",
+      "period": "2026 1–9 月",
+      "source": "Savills",
+      "updated": "2027-01"
+    },
+    {
+      "indicator_id": "S08",
+      "value": "≈977,000",
+      "unit": "套",
+      "period": "2026",
+      "source": "ValuStrat",
+      "updated": "2027-01"
+    },
+    {
+      "indicator_id": "S09",
+      "value": "4.580",
+      "unit": "百万人",
+      "period": "2025 年末",
+      "source": "DDSE / Digital Dubai",
+      "updated": "2027-01"
+    },
+    {
+      "indicator_id": "S11",
+      "value": "10,776",
+      "unit": "份",
+      "period": "2026Q1",
+      "source": "Dubai Municipality",
+      "updated": "2027-01"
+    },
+    {
+      "indicator_id": "S12",
+      "value": "≈3.9",
+      "unit": "百万 m²",
+      "period": "2026Q1",
+      "source": "Dubai Municipality",
+      "updated": "2027-01"
+    },
+    {
+      "indicator_id": "S13",
+      "value": "3,154",
+      "unit": "份",
+      "period": "2026Q1",
+      "source": "Dubai Municipality",
+      "updated": "2027-01"
+    }
+  ]
+}

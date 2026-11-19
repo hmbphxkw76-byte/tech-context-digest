@@ -17,6 +17,7 @@
                  已声明信息（自算/推断/假设/待核）与咨询容器内块不计）
   R5 语言规则   tier1/2 来源语言须符合业务配置的语言规则（token 化分级）
   R6 死链       明确 404/410/451 = 死链（阻断期内 [E] / 此前 [W] / 历史 [W]）；403/429/5xx/超时 = 网络不可达 [W]
+                （登记豁免的官方 URL 单次 404 归不可达，见 probe-exemptions.json）
   R7 机构分级   机构级分级主数据与来源登记 / 业务配置的一致性（分级校验）
   R8 登记字段   来源登记条目 verify_status 取值合法（verified / media_unverified / unverifiable）
                  且含 updated（YYYY-MM-DD）；缺失 / 非法仅 [W]（数据卫生，不阻断）
@@ -525,9 +526,44 @@ UA = {"User-Agent": "tech-context-digest-source-check/1.0"}
 # 明确死链状态码（内容确已不存在）；403/429/5xx 属反爬 / 瞬时故障，归可疑
 DEAD_STATUS = {404, 410, 451}
 
+# 探测豁免登记（engine/tools/probe-exemptions.json）：官方 URL 在本机探测环境下
+# 不稳定（反爬 / SSL 握手超时），单次 404 不得直接判死链，归为环境性不可达
+# （与超时 / 反爬同口径，不计入 A-05 分母）。豁免为 URL 级、需写明理由与证据，
+# 可审计；真正链接腐烂不通过豁免掩盖。
+PROBE_EXEMPT_PATH = Path(__file__).resolve().parent / "probe-exemptions.json"
+
 
 def _classify_status(status: int) -> str:
     return "dead" if status in DEAD_STATUS else "unreachable"
+
+
+def load_probe_exemptions(path: Path | None = None) -> dict[str, dict]:
+    """读取探测豁免登记 -> {归一化 URL: 条目}。
+
+    缺失 / 非法 / 无 active 条目时返回空字典（不改变既有探测行为）。
+    仅 status=active 的条目生效。
+    """
+    p = Path(path) if path is not None else PROBE_EXEMPT_PATH
+    if not p.exists():
+        return {}
+    try:
+        data = json.loads(p.read_text(encoding="utf-8"))
+    except (OSError, json.JSONDecodeError):
+        return {}
+    out: dict[str, dict] = {}
+    for item in data.get("exemptions", []) or []:
+        if not isinstance(item, dict):
+            continue
+        u = item.get("url")
+        if u and item.get("status", "active") == "active":
+            out[normalize_url(str(u))] = item
+    return out
+
+
+def is_probe_exempt(url: str, exemptions: dict[str, dict] | None = None) -> bool:
+    """URL 是否登记为探测豁免（归一化后比对）。"""
+    ex = load_probe_exemptions() if exemptions is None else exemptions
+    return normalize_url(url) in ex
 
 
 def _probe_one(url: str, timeout: float, opener=None) -> tuple[str, str]:
@@ -553,13 +589,21 @@ def _probe_one(url: str, timeout: float, opener=None) -> tuple[str, str]:
     return norm, last
 
 
-def probe_urls_detail(urls, timeout: float = 3.0, opener=None, workers: int = 8) -> tuple[set[str], set[str]]:
-    """并发探测 -> (明确死链, 网络不可达)。opener 注入时退化为串行（测试用）。"""
+def probe_urls_detail(urls, timeout: float = 3.0, opener=None, workers: int = 8,
+                      exemptions: dict[str, dict] | None = None) -> tuple[set[str], set[str]]:
+    """并发探测 -> (明确死链, 网络不可达)。opener 注入时退化为串行（测试用）。
+
+    登记为探测豁免的 URL：单次 404 改判 unreachable（环境性不可判），
+    不判死链——见 `probe-exemptions.json` 与 PROBE_EXEMPT_PATH。
+    """
+    exempt = load_probe_exemptions() if exemptions is None else exemptions
     dead: set[str] = set()
     unreachable: set[str] = set()
 
     def _one(url: str) -> None:
         norm, status = _probe_one(url, timeout, opener)
+        if status == "dead" and norm in exempt:
+            status = "unreachable"
         if status == "dead":
             dead.add(norm)
         elif status == "unreachable":
@@ -575,12 +619,14 @@ def probe_urls_detail(urls, timeout: float = 3.0, opener=None, workers: int = 8)
     return dead, unreachable
 
 
-def probe_urls(urls, timeout: float = 3.0, opener=None, workers: int = 8) -> set[str]:
+def probe_urls(urls, timeout: float = 3.0, opener=None, workers: int = 8,
+               exemptions: dict[str, dict] | None = None) -> set[str]:
     """探测外部 URL 可达性 -> 不可达 URL 集合（归一化，明确死链 + 网络不可达）。
 
     兼容旧调用；需要区分死链与环境性不可达时用 probe_urls_detail。
     """
-    dead, unreachable = probe_urls_detail(urls, timeout=timeout, opener=opener, workers=workers)
+    dead, unreachable = probe_urls_detail(urls, timeout=timeout, opener=opener,
+                                          workers=workers, exemptions=exemptions)
     return dead | unreachable
 
 

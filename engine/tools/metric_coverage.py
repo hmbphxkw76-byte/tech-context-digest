@@ -15,6 +15,9 @@
 2026-11-19 接线：A-01（复用 IGI-05 断言级测量）/ A-03（指标编号数值冲突代理）/
 L-03（阈值表达式命中 business-config 代理）/ R-03（跨业务线重复段落代理）；
 R-03 随之由 LLM 转 TOOL（字典 detected_by 同步）。
+2026-11-19 A-03 数据治理：新增 `a03_truth_check()`，读 indicator_latest.json
+sidecar（indicator_sidecar.py 生成）与报告显式数值比对对，输出 一致/差异/不可比；
+仍辅助不计分。
 2026-11-19 A-05 接线：复用 `source_check --probe` 定期落盘的
 `engine/audit/records/link-probe.json`（见 `a05_link_reachability`）。
 
@@ -42,6 +45,7 @@ from _common import (  # noqa: E402
 )
 from gate_period import AUTO as GATE_AUTO  # noqa: E402
 from gate_period import resolve as resolve_gate_period  # noqa: E402
+from indicator_sidecar import SIDECAR_PATH  # noqa: E402
 
 DICT_PATH = Path(__file__).resolve().parent / "metrics-dictionary.json"
 
@@ -283,7 +287,8 @@ def a03_numeric_consistency(reports: dict[str, str]) -> tuple[float, str]:
     口径（2026-11-19 校准）：仅认「指标编号 + 可选分隔符（=／：／，）+ 数值
     （后不接字母）+ 可选单位」的规范数值对，天然排除日期、区间上界、枚举与
     公司名（如 G42/M42）造成的伪冲突。分母为**显式数值对数**（非编号出现数），
-    分母偏小会显式呈现；与登记册的真值核对尚未实现（见 tech-debt-ledger）。
+    分母偏小会显式呈现；与登记册的真值核对见 `a03_truth_check`（sidecar 版，
+    辅助不计分）。
     """
     total = conflict = 0
     for text in reports.values():
@@ -370,6 +375,142 @@ def a03_truth_candidates(reports: dict[str, str] | None = None) -> dict:
                               "note": "需人工判读（可能为阈值 / 周期差异）"})
     return {"registry": str(path), "compared": same + diff, "same": same, "diff": diff,
             "uncomparable": uncomparable, "diffs": diffs}
+
+
+# ---------------------------------------------------------------- A-03 真值核对（sidecar 版）
+
+_SIDECAR_QUALIFIER_RE = re.compile(r"[><≈~约≥≤]")
+_SIDECAR_RANGE_RE = re.compile(r"^\s*(-?\d+(?:\.\d+)?)\s*-\s*(-?\d+(?:\.\d+)?)\s*$")
+_SIDECAR_NUM_RE = re.compile(r"^-?\d+(?:\.\d+)?$")
+_NUM_TOL = 1e-9
+
+
+def _sidecar_value_kind(raw: str) -> tuple[str, list[float], tuple[float, float] | None]:
+    """解析 sidecar value -> (kind, numbers, range)。
+
+    kind ∈ single / multi / range / qualified / nonnumeric / empty。
+    确定性：仅字符串解析，不取墙钟、不联网。
+    """
+    s = str(raw or "").strip()
+    for a, b in (("−", "-"), ("–", "-"), ("—", "-"), (",", "")):
+        s = s.replace(a, b)
+    if not s:
+        return "empty", [], None
+    if _SIDECAR_QUALIFIER_RE.search(s):
+        return "qualified", [], None
+    nums: list[float] = []
+    rng: tuple[float, float] | None = None
+    for part in s.split("/"):
+        p = part.strip()
+        if not p:
+            continue
+        m = _SIDECAR_RANGE_RE.match(p)
+        if m:
+            lo, hi = float(m.group(1)), float(m.group(2))
+            rng = (min(lo, hi), max(lo, hi))
+            continue
+        if _SIDECAR_NUM_RE.match(p):
+            nums.append(float(p))
+            continue
+        return "nonnumeric", [], None
+    if rng is not None:
+        return "range", nums, rng
+    if len(nums) == 1:
+        return "single", nums, None
+    if len(nums) > 1:
+        return "multi", nums, None
+    return "nonnumeric", [], None
+
+
+def _report_number(tok: str) -> float | None:
+    """报告显式数值 -> float；不可解析返回 None。"""
+    s = str(tok or "").strip()
+    for a, b in (("−", "-"), ("–", "-"), ("—", "-"), (",", "")):
+        s = s.replace(a, b)
+    if not _SIDECAR_NUM_RE.match(s):
+        return None
+    try:
+        return float(s)
+    except ValueError:
+        return None
+
+
+def _truth_verdict(kind: str, nums: list[float], rng, report_num: float | None):
+    """单条比对判定 -> (一致 / 差异 / 不可比, 原因)。"""
+    if report_num is None:
+        return "不可比", "报告数值无法解析"
+    if kind == "single":
+        ok = abs(report_num - nums[0]) <= _NUM_TOL
+        return ("一致", "与登记册单值一致") if ok else \
+            ("差异", f"报告 {report_num:g} vs 登记册 {nums[0]:g}")
+    if kind == "multi":
+        ok = any(abs(report_num - n) <= _NUM_TOL for n in nums)
+        return ("一致", "命中登记册多口径之一") if ok else \
+            ("差异", f"报告 {report_num:g} 不在登记册多口径 {nums} 内")
+    if kind == "range":
+        lo, hi = rng
+        ok = lo - _NUM_TOL <= report_num <= hi + _NUM_TOL
+        return ("一致", f"落在登记册区间 [{lo:g}, {hi:g}]") if ok else \
+            ("差异", f"报告 {report_num:g} 落在登记册区间 [{lo:g}, {hi:g}] 之外")
+    if kind == "qualified":
+        return "不可比", "登记册为不等式 / 约数，无法自动判等"
+    return "不可比", "登记册值非数值或无法解析"
+
+
+def a03_truth_check(reports: dict[str, str] | None = None,
+                    sidecar_path: Path | None = None) -> dict:
+    """A-03 真值核对（数据治理版，**辅助工具，不计分**）。
+
+    读取 `indicator_latest.json` sidecar，与 apartment 报告的显式数值对比对，
+    输出 一致 / 差异 / 不可比 明细。与 `a03_truth_candidates` 的区别：
+    sidecar 提供结构化「最新值 / 周期 / 来源」，多口径 / 区间 / 不等式
+    能被正确分类（不可比），避免把阈值 / 区间上界误当指标值差异。
+    仍不纳入 A-03 指标值（是否计分由主会话 / 字典决定，默认不计分）。
+    """
+    if reports is None:
+        reports = _reports_text()
+    p = Path(sidecar_path) if sidecar_path is not None else SIDECAR_PATH
+    empty = {"sidecar": str(p), "compared": 0, "same": 0, "diff": 0,
+             "uncomparable": 0, "records": []}
+    if not p.exists():
+        return {**empty, "error": "sidecar 缺失（indicator_sidecar build 未落盘）"}
+    try:
+        data = json.loads(p.read_text(encoding="utf-8"))
+    except (OSError, json.JSONDecodeError):
+        return {**empty, "error": "sidecar 不可解析"}
+    reg = {str(r.get("indicator_id", "")).strip(): r
+           for r in data.get("indicators", []) if r.get("indicator_id")}
+    same = diff = uncomparable = 0
+    records: list[dict] = []
+    for rel, html in reports.items():
+        if "/apartment/" not in rel:
+            continue
+        plain = _plain(_clean(html))
+        for m in _VALUE_PAIR_RE.finditer(plain):
+            iid, tok = m.group(1), m.group(2)
+            if iid not in reg:
+                uncomparable += 1
+                records.append({"report": rel, "indicator": iid, "report_value": tok,
+                                "sidecar_value": None, "unit": "", "period": "",
+                                "source": "", "verdict": "不可比",
+                                "reason": "报告指标未登记 sidecar"})
+                continue
+            rec = reg[iid]
+            kind, nums, rng = _sidecar_value_kind(rec.get("value", ""))
+            verdict, reason = _truth_verdict(kind, nums, rng, _report_number(tok))
+            if verdict == "一致":
+                same += 1
+            elif verdict == "差异":
+                diff += 1
+            else:
+                uncomparable += 1
+            records.append({"report": rel, "indicator": iid, "report_value": tok,
+                            "sidecar_value": rec.get("value", ""),
+                            "unit": rec.get("unit", ""), "period": rec.get("period", ""),
+                            "source": rec.get("source", ""), "verdict": verdict,
+                            "reason": reason})
+    return {"sidecar": str(p), "compared": same + diff, "same": same, "diff": diff,
+            "uncomparable": uncomparable, "records": records}
 
 
 def l03_threshold_consistency(reports: dict[str, str]) -> tuple[float | None, str]:

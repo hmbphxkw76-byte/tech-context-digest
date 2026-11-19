@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import importlib.util
 import unittest
+import urllib.error
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[2]
@@ -483,6 +484,50 @@ class TestR8RegistryFields(unittest.TestCase):
             reg = json.loads(Path(f).read_text(encoding="utf-8"))
             self.assertEqual(source_check.check_registry_fields(reg), [], f)
         self.assertTrue(found, "未找到任何 source_registry.json")
+
+
+class TestProbeExemptions(unittest.TestCase):
+    """探测豁免：登记豁免的官方 URL 单次 404 归环境性不可达，不判死链。"""
+
+    def test_load_active_exemptions(self):
+        ex = source_check.load_probe_exemptions()
+        self.assertIn(source_check.normalize_url("https://gisec.ae"), ex)
+
+    def test_is_probe_exempt_normalized(self):
+        self.assertTrue(source_check.is_probe_exempt("https://gisec.ae/"))
+        self.assertFalse(source_check.is_probe_exempt("https://example.com"))
+
+    def test_missing_file_is_empty(self):
+        self.assertEqual(
+            source_check.load_probe_exemptions(Path("/nonexistent/x.json")), {})
+
+    def test_dead_exempt_reclassified_unreachable(self):
+        class Resp:
+            status = 200
+            def __enter__(self): return self
+            def __exit__(self, *a): return False
+
+        class Opener:
+            def urlopen(self, req, timeout=None):
+                if "gisec" in req.full_url:
+                    raise urllib.error.HTTPError(req.full_url, 404, "Not Found", {}, None)
+                return Resp()
+
+        ex = {source_check.normalize_url("https://gisec.ae"): {"url": "https://gisec.ae"}}
+        dead, unreachable = source_check.probe_urls_detail(
+            ["https://gisec.ae", "https://ok.example/a"], opener=Opener(), exemptions=ex)
+        self.assertEqual(dead, set())
+        self.assertEqual(unreachable, {source_check.normalize_url("https://gisec.ae")})
+
+    def test_dead_non_exempt_stays_dead(self):
+        class Opener:
+            def urlopen(self, req, timeout=None):
+                raise urllib.error.HTTPError(req.full_url, 404, "Not Found", {}, None)
+
+        dead, _unreachable = source_check.probe_urls_detail(
+            ["https://dead.example/a"], opener=Opener(),
+            exemptions={source_check.normalize_url("https://gisec.ae"): {}})
+        self.assertEqual(dead, {source_check.normalize_url("https://dead.example/a")})
 
 
 if __name__ == "__main__":

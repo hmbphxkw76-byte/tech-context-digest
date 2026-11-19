@@ -132,13 +132,16 @@ class TestBuildTasks(unittest.TestCase):
         self.assertTrue(t["prompt"].endswith("prompt-monthly-monitor.md"))
 
     def test_pending_when_output_missing(self):
-        # 2026-12 月度已产出（第二期最小集），应为 done；2027-01 尚未产出，应为 pending
-        dec = build_tasks("2026-12", _common.iter_business_dirs())
-        by_dec = {t["output"]: t for t in dec}
-        self.assertEqual(by_dec["content/economy/dubai/apartment/reports/2026-12_monthly.html"]["status"], "done")
-        tasks = build_tasks("2027-01", _common.iter_business_dirs())
+        # 2026-12 / 2027-01 月度均已产出（第二/三期），应为 done；2027-02 尚未产出，应为 pending
+        for period, name in (("2026-12", "2026-12_monthly.html"),
+                             ("2027-01", "2027-01_monthly.html")):
+            tasks = build_tasks(period, _common.iter_business_dirs())
+            by_out = {t["output"]: t for t in tasks}
+            self.assertEqual(
+                by_out[f"content/economy/dubai/apartment/reports/{name}"]["status"], "done")
+        tasks = build_tasks("2027-02", _common.iter_business_dirs())
         by_out = {t["output"]: t for t in tasks}
-        self.assertEqual(by_out["content/economy/dubai/apartment/reports/2027-01_monthly.html"]["status"], "pending")
+        self.assertEqual(by_out["content/economy/dubai/apartment/reports/2027-02_monthly.html"]["status"], "pending")
 
     def test_conditional_cycle_not_scheduled(self):
         # security 月度为核验型轻运行（提示词含 report-output: none），不派月度任务
@@ -515,8 +518,8 @@ class TestBuildHubCheck(unittest.TestCase):
         hub = build_outputs()["index.html"]
         self.assertIn("cycle-head", hub)
         # 基期展示口径：仓库内最新月报；「本期更新 · 环比基期」仅在存在上一期报告时标注
-        self.assertIn("最新月报 2026-12", hub)
-        self.assertIn("环比基期 2026-11", hub)
+        self.assertIn("最新月报 2027-01", hub)
+        self.assertIn("环比基期 2026-12", hub)
         self.assertNotIn("环比基期 2026-10", hub)
         self.assertIn("该周期首期报告，无环比基期", hub)
 

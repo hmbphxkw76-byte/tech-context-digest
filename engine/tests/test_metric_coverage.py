@@ -33,6 +33,7 @@ def _load(name: str, rel: str):
 
 
 mc = _load("metric_coverage", "engine/tools/metric_coverage.py")
+isc = _load("indicator_sidecar", "engine/tools/indicator_sidecar.py")
 
 
 class TestCoverage(unittest.TestCase):
@@ -332,6 +333,117 @@ class TestA03TruthCandidates(unittest.TestCase):
         value, detail = mc.a03_numeric_consistency(mc._reports_text())
         self.assertAlmostEqual(value, 1.0, places=4)
         self.assertIn("冲突 0/", detail)
+
+
+class TestIndicatorSidecar(unittest.TestCase):
+    """indicator_latest.json sidecar：确定性可重放、字段固定、主表优先。"""
+
+    def test_build_deterministic_and_byte_replay(self):
+        self.assertEqual(isc.build(), isc.build())
+        with tempfile.TemporaryDirectory() as tmp:
+            p1 = Path(tmp) / "a.json"
+            p2 = Path(tmp) / "b.json"
+            isc.write(isc.build(), p1)
+            isc.write(isc.build(), p2)
+            self.assertEqual(p1.read_bytes(), p2.read_bytes())
+
+    def test_fields_and_order(self):
+        sidecar = isc.build()
+        ids = [r["indicator_id"] for r in sidecar["indicators"]]
+        self.assertEqual(ids, sorted(ids))
+        self.assertEqual(sidecar["count"], len(ids))
+        for r in sidecar["indicators"]:
+            self.assertEqual(set(r), set(isc.FIELDS))
+
+    def test_primary_sheet_precedence(self):
+        # 年度基线2027 为主表：P05 取「168.1 / 218.6」；首期基线值仅补缺（S13）
+        reg = {r["indicator_id"]: r for r in isc.build()["indicators"]}
+        self.assertEqual(reg["P05"]["value"], "168.1 / 218.6")
+        self.assertIn("S13", reg)
+        self.assertEqual(reg["P05"]["updated"], "2027-01")
+
+    def test_on_disk_matches_build(self):
+        if not isc.SIDECAR_PATH.exists():
+            self.skipTest("sidecar 未落盘")
+        self.assertEqual(isc.load(isc.SIDECAR_PATH), isc.build())
+
+
+class TestA03TruthCheck(unittest.TestCase):
+    """A-03 真值核对（sidecar 版）：一致 / 差异 / 不可比。"""
+
+    ROWS = [
+        {"indicator_id": "P01", "value": "1,817", "unit": "AED/sqft",
+         "period": "2026Q3", "source": "Savills", "updated": "2027-01"},
+        {"indicator_id": "P05", "value": "168.1 / 218.6", "unit": "点",
+         "period": "2026Q3", "source": "ValuStrat", "updated": "2027-01"},
+        {"indicator_id": "M05", "value": "3.75–4.00", "unit": "%",
+         "period": "2026-10-28", "source": "Federal Reserve", "updated": "2027-01"},
+        {"indicator_id": "S05", "value": ">525,000", "unit": "套",
+         "period": "2027–2030", "source": "Savills", "updated": "2027-01"},
+    ]
+
+    def _sidecar(self, tmp, rows):
+        p = Path(tmp) / "sidecar.json"
+        p.write_text(json.dumps({"indicators": rows}, ensure_ascii=False), encoding="utf-8")
+        return p
+
+    def test_verdicts(self):
+        reports = {"content/economy/dubai/apartment/reports/a.html":
+                   "<p>P01 1,817；P01 1,659；P05 218.6；M05 3.9；S05 600,000；Z99 5</p>"}
+        with tempfile.TemporaryDirectory() as tmp:
+            res = mc.a03_truth_check(reports, self._sidecar(tmp, self.ROWS))
+        self.assertEqual(res["same"], 3)            # P01 / P05 / M05
+        self.assertEqual(res["diff"], 1)            # P01 1,659
+        self.assertEqual(res["uncomparable"], 2)    # S05 不等式 / Z99 未登记
+        self.assertEqual(res["compared"], 4)
+        by = {(r["indicator"], r["report_value"]): r["verdict"] for r in res["records"]}
+        self.assertEqual(by[("P01", "1,817")], "一致")
+        self.assertEqual(by[("P01", "1,659")], "差异")
+        self.assertEqual(by[("P05", "218.6")], "一致")
+        self.assertEqual(by[("M05", "3.9")], "一致")
+        self.assertEqual(by[("S05", "600,000")], "不可比")
+        self.assertEqual(by[("Z99", "5")], "不可比")
+
+    def test_range_outside_is_diff(self):
+        rows = [{"indicator_id": "M05", "value": "3.75–4.00", "unit": "%",
+                 "period": "2026-10-28", "source": "Federal Reserve", "updated": "2027-01"}]
+        reports = {"content/economy/dubai/apartment/reports/a.html": "<p>M05 4.5</p>"}
+        with tempfile.TemporaryDirectory() as tmp:
+            res = mc.a03_truth_check(reports, self._sidecar(tmp, rows))
+        self.assertEqual(res["diff"], 1)
+        self.assertEqual(res["records"][0]["verdict"], "差异")
+
+    def test_missing_sidecar(self):
+        res = mc.a03_truth_check({}, Path("/nonexistent/sidecar.json"))
+        self.assertIn("缺失", res["error"])
+        self.assertEqual(res["compared"], 0)
+
+    def test_value_kind_parser(self):
+        self.assertEqual(mc._sidecar_value_kind("1,817")[0], "single")
+        self.assertEqual(mc._sidecar_value_kind("−1.7")[0], "single")
+        self.assertEqual(mc._sidecar_value_kind("168.1 / 218.6")[0], "multi")
+        self.assertEqual(mc._sidecar_value_kind("3.75–4.00")[0], "range")
+        self.assertEqual(mc._sidecar_value_kind("60,000–162,500")[0], "range")
+        self.assertEqual(mc._sidecar_value_kind(">525,000")[0], "qualified")
+        self.assertEqual(mc._sidecar_value_kind("≈3.9")[0], "qualified")
+        self.assertEqual(mc._sidecar_value_kind("现行")[0], "nonnumeric")
+        self.assertEqual(mc._sidecar_value_kind("")[0], "empty")
+
+    def test_report_number_parser(self):
+        self.assertEqual(mc._report_number("1,817"), 1817.0)
+        self.assertEqual(mc._report_number("−1.7"), -1.7)
+        self.assertIsNone(mc._report_number("abc"))
+
+    def test_real_sidecar_loads(self):
+        if not mc.SIDECAR_PATH.exists():
+            self.skipTest("sidecar 未落盘")
+        res = mc.a03_truth_check(mc._reports_text())
+        self.assertGreater(res["compared"], 0)
+        self.assertTrue(all(r["verdict"] in ("一致", "差异", "不可比")
+                            for r in res["records"]))
+        # 辅助不计分：A-03 代理值不受真值核对影响
+        value, _ = mc.a03_numeric_consistency(mc._reports_text())
+        self.assertAlmostEqual(value, 1.0, places=4)
 
 
 if __name__ == "__main__":
