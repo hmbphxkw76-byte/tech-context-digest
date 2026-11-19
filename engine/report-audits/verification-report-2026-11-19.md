@@ -38,3 +38,30 @@
 - T-04…T-10 待后续波次（内容侧为主）。
 - I-08 盲区消号仍阻塞（→ 2027-03）。
 - 既有指纹漂移建议单独立项修复（`publish_fingerprint --emit` 重采 + CI 接线）。
+
+## 5. 第二波（T-04 / T-05 / T-06 / T-07）验证
+
+### 5.1 双向追溯
+
+| 方案条目 | 实施工件 | 验收证据 | 判定 |
+|---|---|---|---|
+| T-04 | `task/research-kernel-d4b8f2c5` @ `8806632` | `--only research_kernel` 0 `[W]`；`page_build_check` 22/0E0W；`compliance_check` 通过 | 已闭环 |
+| T-05 | `task/vocab-empty-e5c9a3d6` @ `b601c80` | `--only vocab_drift` 0 `[W]`；词条 113（45+68）；`vocab_tool check` 0 警告 | 已闭环 |
+| T-06 | `task/consumer-feedback-f6d0b4e7` @ `861108b` | `build_hub --check` 通过；报告/hub 页脚反馈入口；消费指标草案 `probe` 入库 | 已闭环 |
+| T-07 | `task/classification-version-a7e1c5f8` @ `99ca0f4` | `test_tools` 120 OK；`validate_layout` 通过；`classification_version=2026-11-19.1` | 已闭环 |
+
+### 5.2 不引入新问题 · 回归结果
+
+| # | 回归项 | 结果 |
+|---|---|---|
+| R-REG-1 | 统一门禁 | 0 `[E]` / 6 `[W]`（较第一波 8 `[W]` 降 2：`research_kernel`、`vocab_drift` 清零） |
+| R-REG-2 | 单元测试 | `Ran 763 tests … OK (skipped=1)` |
+| R-REG-3 | 指标体检 | measured 38；不达标仅 I-08 |
+| R-REG-5 | 链接 | `check_links` 通过 |
+| R-REG-7 | 结构 / 页面 | `validate_layout` 通过；`page_build_check` 22/0E0W；`build_hub --check` 通过 |
+| R-REG-9 | 文档一致性 | naming / prompt_consistency / model_contract 0 警告 |
+
+### 5.3 越界改动核对
+
+- T-05 两处配套修正：`engine/vocabulary/prompts/education/prompt-skeleton.md` 去掉被 VD-03 误判的占位直角引号；`engine/tests/test_goal_alignment.py::test_empty_theme_detected` 改为合成用例（六主题现已全非空）。**核对结论**：均为达成验收所必需，未削弱检测逻辑。
+- T-04 修改 10 份历史报告 → `publish_fingerprint` 漂移属**预期**（内容变更），不构成「新问题」。

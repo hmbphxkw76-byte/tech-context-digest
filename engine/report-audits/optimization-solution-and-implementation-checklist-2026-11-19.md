@@ -311,6 +311,17 @@
 
 **整合后回归（实测）**：`optimization_gate` 0 `[E]` / 8 `[W]`；`unittest discover` 748 OK（skipped=1）；`metric_registry` 38 项实测、不达标仅 I-08、IGI-08 = 0.9945；`check_links` 通过；`publish_fingerprint` 漂移经 `git diff origin/main` 为空确认为**既有问题**（CI 提交 `c44174e` 改报告未重采指纹），非本次引入。
 
+### 4.9 并发执行记录（2026-11-19 第二波）
+
+| 任务 | 分支 | 提交 | 状态 |
+|---|---|---|---|
+| T-04 | `task/research-kernel-d4b8f2c5` | `8806632` | 已合并（实测 **10 份报告**，非摘要所述 2 份；`research_kernel` 0 `[W]`） |
+| T-05 | `task/vocab-empty-e5c9a3d6` | `b601c80` | 已合并（education 45 + international 68 = 113 条；`vocab_drift` 0 `[W]`） |
+| T-06 | `task/consumer-feedback-f6d0b4e7` | `861108b` | 已合并（`build_hub --check` 通过；消费指标草案入库，标 `probe`） |
+| T-07 | `task/classification-version-a7e1c5f8` | `99ca0f4` | 已合并（`classification_version=2026-11-19.1`；互斥检查先 `[W]`） |
+
+**整合后回归（实测）**：`optimization_gate` 0 `[E]` / 6 `[W]`；`unittest discover` 763 OK（skipped=1）；`metric_registry` 38 项实测、不达标仅 I-08；`validate_layout` / `page_build_check`（22 通过 0E0W）/ `build_hub --check` / `check_links` 全通过。
+
 ---
 
 ## 5. 验证对齐清单（确保对齐优化方案的验证清单）
@@ -347,10 +358,10 @@
 | T-01 | `source_check.py` / registry（提交 `7d43984`） | `--only source_check` 0 `[E]`；`test_source_check` 82 OK；抽样 3 条含 `evidence` | **已闭环**（2026-11-19） |
 | T-02 | `proxy_calibration.py` / 字典（提交 `c6508ec`） | `test_proxy_calibration` 29 OK；IGI-05 试跑 precision 0.802 / recall 0.9875（合成真值演示） | **已闭环**（2026-11-19） |
 | T-03 | `engine/audit/` schema + 工具（提交 `356ec38`） | `test_finding_rule` 18 OK；14 项 finding 映射率 100%；`match` 命中 13 条 | **已闭环**（2026-11-19） |
-| T-04 | 10 份历史周报 | `optimization_gate --only research_kernel` 0 `[W]` | 待执行 |
-| T-05 | `terms.md` × 2 | `optimization_gate --only vocab_drift` 0 `[W]` | 待执行 |
-| T-06 | `build_hub.py` / 模板 | `hub --check`；反馈入口存在 | 待执行 |
-| T-07 | `validate_layout.py` | 单测；分类版本号存在 | 待执行 |
+| T-04 | 10 份历史报告（提交 `8806632`） | `--only research_kernel` 0 `[W]`；`page_build_check` / `compliance_check` 通过 | **已闭环**（2026-11-19） |
+| T-05 | `terms.md` × 2（提交 `b601c80`） | `--only vocab_drift` 0 `[W]`；词条 113 条、check 0 警告 | **已闭环**（2026-11-19） |
+| T-06 | `build_hub.py` / 模板（提交 `861108b`） | `build_hub --check` 通过；反馈入口存在；消费指标草案 `probe` 入库 | **已闭环**（2026-11-19） |
+| T-07 | `validate_layout.py` / `layout.json`（提交 `99ca0f4`） | `test_tools` 120 OK；`validate_layout` 通过；`classification_version` 存在 | **已闭环**（2026-11-19） |
 | T-08 | `source_check.py` / registry | 单测；`document_tier` 校验 | 待执行 |
 | T-09 | 字典 / `decision_hub_check.py` | 单测；置信度字段 | 待执行 |
 | T-10 | 规范 / 模板 | 规范条款 + 模板字段 | 待执行 |
