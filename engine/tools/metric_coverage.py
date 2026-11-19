@@ -7,14 +7,16 @@
 
 口径：
   - measured：本模块或既有工具可算出 0–1 的实测值；
-  - probe：需网络探测（A-05 链接可达率），未探测时显式标注，不伪造；
+  - probe：分母为 0 不可判（如 L-03 无比阈值）或探测记录缺失 / 不可判（A-05），
+    显式标注不伪造；
   - llm：语义判定项（A-02/A-04/L-01/L-02/L-04/L-05/R-05），不伪造实测值；
-  - probe：需网络探测（A-05）或分母为 0 不可判（如 L-03 无比阈值），显式标注不伪造；
   - fallback：暂无接线（进入 tech-debt-ledger）。
 
 2026-11-19 接线：A-01（复用 IGI-05 断言级测量）/ A-03（指标编号数值冲突代理）/
 L-03（阈值表达式命中 business-config 代理）/ R-03（跨业务线重复段落代理）；
 R-03 随之由 LLM 转 TOOL（字典 detected_by 同步）。
+2026-11-19 A-05 接线：复用 `source_check --probe` 定期落盘的
+`engine/audit/records/link-probe.json`（见 `a05_link_reachability`）。
 
 用法：
     python engine/tools/metric_coverage.py                 # 覆盖率报告
@@ -43,8 +45,12 @@ from gate_period import resolve as resolve_gate_period  # noqa: E402
 
 DICT_PATH = Path(__file__).resolve().parent / "metrics-dictionary.json"
 
-# 需网络探测的指标（不伪造实测值）
-PROBE_METRICS = {"A-05"}
+# 链接可达率探测记录（source_check --probe --emit 定期落盘，无时间戳）
+LINK_PROBE_PATH = ROOT / "engine" / "audit" / "records" / "link-probe.json"
+
+# 仅探测型指标（不伪造实测值）：A-05 已接线为读定期落盘记录，当前无仅探测项；
+# 保留该集合用于未来「必须现场探测」的指标。
+PROBE_METRICS: set[str] = set()
 # 语义判定项（LLM / 人工）
 LLM_METRICS = {"A-02", "A-04", "L-01", "L-02", "L-04", "L-05", "R-05"}
 
@@ -226,6 +232,39 @@ def a01_source_traceability(reports: dict[str, str]) -> tuple[float, str]:
     return _ratio(n_src, n_num), f"{n_src}/{n_num} 断言块带来源指针"
 
 
+def a05_link_reachability(path: Path | None = None) -> tuple[float | None, str]:
+    """链接可达率：明确可达（ok）/ 探测集（probed）。
+
+    数据源：`source_check.py --probe --emit engine/audit/records/link-probe.json`
+    （scheduled-maintenance 定期落盘，`{probed, dead, unreachable, ok}`，无时间戳）。
+    口径与字典公式「可达链接数 / 链接总数」一致：可达 = ok（明确可达）；
+    dead（404/410/451）与 unreachable（超时/反爬）均不计入可达；
+    分母 = 探测集（报告 URL ∪ 登记 URL，剔除自引用）。
+    记录缺失 / 非法 / 分母为 0 时返回 None，由 `measure()` 显式标 probe，不伪造。
+    确定性：只读定期落盘记录，不取墙钟（与 C-05 的 gate-period 锚点口径同，
+    见 gate_period.py）；仅记录内容变更才引起读数变化。
+    """
+    p = Path(path) if path is not None else LINK_PROBE_PATH
+    if not p.exists():
+        return None, "链接探测记录缺失（source_check --probe 未落盘）"
+    try:
+        rec = json.loads(p.read_text(encoding="utf-8"))
+    except (OSError, json.JSONDecodeError):
+        return None, "链接探测记录不可解析"
+    if not isinstance(rec, dict):
+        return None, "链接探测记录格式非法"
+    probed = rec.get("probed")
+    ok = rec.get("ok")
+    if (not isinstance(probed, int) or not isinstance(ok, int)
+            or isinstance(probed, bool) or isinstance(ok, bool)
+            or probed <= 0 or ok < 0 or ok > probed):
+        return None, f"链接探测记录不可判（probed={probed!r}, ok={ok!r}）"
+    dead = rec.get("dead", 0)
+    unreachable = rec.get("unreachable", 0)
+    return _ratio(ok, probed), \
+        f"{ok}/{probed} 链接明确可达（死链 {dead} / 不可达 {unreachable}）"
+
+
 def a03_numeric_consistency(reports: dict[str, str]) -> tuple[float, str]:
     """数值一致率（代理）：同一指标编号在不同位置取不同数值即记冲突；
     一致率 = 1 - 冲突指标数 / 出现指标数。"""
@@ -391,6 +430,7 @@ def measure() -> dict[str, dict]:
         "C-06": c06_vocab_sync(),
         "A-01": a01_source_traceability(reports),
         "A-03": a03_numeric_consistency(reports),
+        "A-05": a05_link_reachability(),
         "L-03": l03_threshold_consistency(reports),
         "R-01": r01_attribution(reports),
         "R-03": r03_duplicate_rate(reports),

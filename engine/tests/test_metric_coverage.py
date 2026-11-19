@@ -12,6 +12,7 @@ import importlib.util
 import json
 import subprocess
 import sys
+import tempfile
 import unittest
 from pathlib import Path
 
@@ -56,9 +57,18 @@ class TestCoverage(unittest.TestCase):
             self.assertAlmostEqual(self.meas[mid]["value"], v, places=4)
 
     def test_gaps_are_explicit(self):
-        self.assertIn("A-05", self.rep["gaps"])  # 需网络探测
+        self.assertNotIn("A-05", self.rep["gaps"])  # 已接线（读定期落盘记录）
         self.assertTrue(all(self.meas[mid]["status"] in ("fallback", "probe")
                             for mid in self.rep["gaps"]))
+
+    def test_a05_is_measured(self):
+        if not mc.LINK_PROBE_PATH.exists():
+            self.skipTest("link-probe.json 未落盘（scheduled-maintenance 尚未运行）")
+        rec = self.meas["A-05"]
+        self.assertEqual(rec["status"], "measured")
+        probe = json.loads(mc.LINK_PROBE_PATH.read_text(encoding="utf-8"))
+        self.assertAlmostEqual(rec["value"], round(probe["ok"] / probe["probed"], 4),
+                               places=4)
 
     def test_llm_metrics_are_not_faked(self):
         dictionary = json.loads((TOOLS / "metrics-dictionary.json").read_text(encoding="utf-8"))
@@ -71,7 +81,49 @@ class TestCoverage(unittest.TestCase):
         r = subprocess.run([sys.executable, "engine/tools/metric_registry.py",
                             "audit", "--coverage"], cwd=ROOT, capture_output=True, text=True)
         self.assertIn("[coverage]", r.stdout)
-        self.assertIn("[gap]", r.stdout)
+        # A-05 接线后无 fallback / probe 缺口；仅当存在缺口时才输出 [gap]
+        self.assertEqual("[gap]" in r.stdout, bool(self.rep["gaps"]))
+
+
+class TestA05LinkReachability(unittest.TestCase):
+    """A-05 链接可达率接线：复用 link-probe.json，缺失 / 不可判显式 probe。"""
+
+    def _write(self, tmp, content):
+        p = Path(tmp) / "probe.json"
+        p.write_text(content, encoding="utf-8")
+        return p
+
+    def test_reads_record(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            p = self._write(tmp, json.dumps({"probed": 275, "dead": 4,
+                                              "unreachable": 90, "ok": 181}))
+            value, detail = mc.a05_link_reachability(p)
+            self.assertAlmostEqual(value, 0.6582, places=4)
+            self.assertIn("181/275", detail)
+
+    def test_missing_record_is_probe(self):
+        value, detail = mc.a05_link_reachability(Path("/nonexistent/link-probe.json"))
+        self.assertIsNone(value)
+        self.assertIn("缺失", detail)
+
+    def test_zero_denominator_is_probe(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            p = self._write(tmp, json.dumps({"probed": 0, "dead": 0,
+                                              "unreachable": 0, "ok": 0}))
+            value, _ = mc.a05_link_reachability(p)
+            self.assertIsNone(value)
+
+    def test_malformed_record_is_probe(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            p = self._write(tmp, "not-json")
+            value, _ = mc.a05_link_reachability(p)
+            self.assertIsNone(value)
+
+    def test_inconsistent_record_is_probe(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            p = self._write(tmp, json.dumps({"probed": 10, "ok": 11}))
+            value, _ = mc.a05_link_reachability(p)
+            self.assertIsNone(value)
 
 
 if __name__ == "__main__":
