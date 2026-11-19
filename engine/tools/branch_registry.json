@@ -1,5 +1,12 @@
 {
   "branches": {
+    "task/blindspot-closeout-8185a690": {
+      "note": "source=env:CATPAW_CONVERSATION_ID",
+      "session": "8185a6905e604f2f89e19b5e3757338b",
+      "session_short": "8185a690",
+      "slug": "blindspot-closeout",
+      "task": "blindspot-closeout"
+    },
     "task/branch-naming-5f37e90d": {
       "note": "source=env:CATPAW_CONVERSATION_ID",
       "session": "5f37e90deb604247988a9207d64048f5",
