@@ -1,0 +1,95 @@
+{
+  "schema_version": "1.0",
+  "domain": "APT",
+  "comment": "apartment（迪拜公寓监测）共享事实卡片。字段规范见 engine/fact_cards/README.md 与信息分层规范第五节。事实均取自本仓库已核验报告与登记册，禁止无来源新增。",
+  "cards": [
+    {
+      "card_id": "FC-APT-001",
+      "fact": "迪拜公寓成交均价 1,817 AED/sqft（2026Q3，环比 −4.8%）。",
+      "source": "Savills Middle East – Dubai Residential Q3 2026 https://www.savills.ae/research_articles/379881/395342-0, 2026",
+      "tier": 2,
+      "verify_status": "已核验",
+      "level": "已核验事实",
+      "updated": "2026-11-19",
+      "indicators": ["P01"],
+      "used_by": ["apartment"]
+    },
+    {
+      "card_id": "FC-APT-002",
+      "fact": "迪拜公寓成交中位价 1,659 AED/sqft（2026-10，8,670 笔，DLD 登记口径）。",
+      "source": "PropertyIndex.ae（DLD 登记） https://www.propertyindex.ae/dubai-real-estate-prices, 2026-11",
+      "tier": 3,
+      "verify_status": "已核验",
+      "level": "已核验事实",
+      "updated": "2026-11-19",
+      "indicators": ["P03"],
+      "used_by": ["apartment"]
+    },
+    {
+      "card_id": "FC-APT-003",
+      "fact": "PropertyIndex 混合调整指数（PIX©）203.7 点（2026-10，−0.9% MoM / −5.5% YoY，连续 2 月负增）。",
+      "source": "PropertyIndex.ae – PIX 2026-10 https://www.propertyindex.ae/dubai-real-estate-price-index/2026-10, 2026-11",
+      "tier": 3,
+      "verify_status": "部分核验",
+      "level": "部分核验",
+      "updated": "2026-11-19",
+      "indicators": ["P04"],
+      "used_by": ["apartment"]
+    },
+    {
+      "card_id": "FC-APT-004",
+      "fact": "3 个月 EIBOR 定盘 4.394390%（2026-11-12），距 K01 硬红线 4.50% 仅 10.56bp，处预警红。",
+      "source": "Central Bank of the UAE – EIBOR Rates https://www.centralbank.ae/en/forex-eibor/eibor-rates/, 2026-11",
+      "tier": 1,
+      "verify_status": "已核验",
+      "level": "已核验事实",
+      "updated": "2026-11-19",
+      "indicators": ["M02", "K01"],
+      "used_by": ["apartment"]
+    },
+    {
+      "card_id": "FC-APT-005",
+      "fact": "降租续约占比 21.4%（2026Q3），较 2026Q1 的 4.8% 大幅上升，房东定价权走弱。",
+      "source": "Cavendish Maxwell（经 Khaleej Times 转述，原文待核实） https://www.khaleejtimes.com/business/dubai-rents-1-in-5-tenants-now-pays-less-than-before-as-rentals-ease-on-new-supply, 2026",
+      "tier": 4,
+      "verify_status": "部分核验",
+      "level": "部分核验",
+      "updated": "2026-11-19",
+      "indicators": ["R06", "K06"],
+      "used_by": ["apartment"]
+    },
+    {
+      "card_id": "FC-APT-006",
+      "fact": "新签公寓租金中位 65,000 AED/年（2026-10 期，Ejari 登记口径），同质化 0.0%。",
+      "source": "Peak Trust – Rent Yield Monitor 2026-10 https://peaktrust.ae/insights/rent-yield-monitor/2026-10, 2026-10",
+      "tier": 3,
+      "verify_status": "已核验",
+      "level": "已核验事实",
+      "updated": "2026-11-19",
+      "indicators": ["R01"],
+      "used_by": ["apartment"]
+    },
+    {
+      "card_id": "FC-APT-007",
+      "fact": "阿联酋银行信贷总额 2,908.0 AED bn（2026-09，环比 +1.3%）。",
+      "source": "Central Bank of the UAE – Statistical Bulletin 2026-09 https://centralbank.ae/en/research-and-statistics/, 2026-09",
+      "tier": 1,
+      "verify_status": "已核验",
+      "level": "已核验事实",
+      "updated": "2026-11-19",
+      "indicators": ["M07"],
+      "used_by": ["apartment"]
+    },
+    {
+      "card_id": "FC-APT-008",
+      "fact": "迪拜公寓交付兑现率 41.3%（2026H1），低于 FY2025 的 48.9%；单源（二手转载），需补同口径双源。",
+      "source": "Cavendish Maxwell（经 Crescore Real Estate 转载） https://crescorealestate.ae/dubai-supply-2027-2028-handover-risk/, 2026",
+      "tier": 4,
+      "verify_status": "部分核验",
+      "level": "部分核验",
+      "updated": "2026-11-19",
+      "indicators": ["S06", "K04"],
+      "used_by": ["apartment"]
+    }
+  ]
+}

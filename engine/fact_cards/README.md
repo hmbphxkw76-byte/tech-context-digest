@@ -1,6 +1,6 @@
 # 共享事实卡片库（FACT-CARD LIBRARY）
 
-> **定位**：`security`（AI 网安就业）、`industry-research`（AI 网安行业深度）、`competitive-intelligence`（竞争情报）三类报告的**共享事实底座**。所有事实在此唯一一次定义，报告正文以 `[FC-<域>-<序号>]` 指针引用，避免多份报告内容同质化。
+> **定位**：`security`（AI 网安就业）、`industry-research`（AI 网安行业深度）、`competitive-intelligence`（竞争情报）、`apartment`（迪拜公寓监测）四类报告的**共享事实底座**。所有事实在此唯一一次定义，报告正文以 `[FC-<域>-<序号>]` 指针引用，避免多份报告内容同质化。
 >
 > **规范**：字段与引用规则见 [信息分层规范](../templates/information-layering-spec.md) 第五节。
 >
@@ -13,6 +13,7 @@
 | `security_fact_cards.json` | SEC | 就业 / 人才 / 薪资 / 证书 / 签证 |
 | `industry_research_fact_cards.json` | IND | 行业规模 / 产业链 / 玩家 |
 | `competitive_intelligence_fact_cards.json` | CI | 竞争格局 / 份额 / 动作 |
+| `apartment_fact_cards.json` | APT | 价格 / 供需 / 租赁 / 宏观（迪拜公寓） |
 
 ## 字段
 
@@ -26,7 +27,7 @@
 | `level` | 已核验事实 / 部分核验 / 推断 / 假设 |
 | `updated` | 最近更新日期（YYYY-MM-DD）与更新内容摘要 |
 | `indicators` | 关联指标编号（指针） |
-| `used_by` | 引用该卡片的三类报告（可多个） |
+| `used_by` | 引用该卡片的业务线标识（可多个；`fact_card_check` 据此动态派生共享事实域） |
 
 ## 校验
 

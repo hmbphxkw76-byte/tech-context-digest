@@ -1,0 +1,14 @@
+[
+  {
+    "description": "代理分母偏小",
+    "id": "R-1",
+    "mitigation": "显式呈现分母与局限,不掩盖",
+    "owner": ""
+  },
+  {
+    "description": "卡片编造",
+    "id": "R-2",
+    "mitigation": "仅收录已核验/部分核验且有来源的事实",
+    "owner": ""
+  }
+]
