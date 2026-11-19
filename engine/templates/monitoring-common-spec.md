@@ -70,6 +70,7 @@
   的 `CANONICAL_CSS` 统一提供（HTML 逐份内联，满足自包含要求）。
   - `.nav-url`：标签「报告 URL」+ 本报告仓库原始文件完整链接（`{{REPO_RAW_URL_BASE}}` + 业务目录相对路径，基址由业务配置定义）；周期报告（月 / 季 / 年）强制。
   - `.nav-tabs`：锚点标签与报告章节一一对应；标签文案与章节标题一致；`href="#sN"` 与对应 `<h2 class="sec" id="sN">` 逐字对应。
+  - `.report-foot`：报告页脚统一含「反馈 / 纠错」入口（`engine/tools/report_style.py::feedback_link`，静态链接 + `data-feedback` 属性占位，不引入外部服务；消费侧指标 probe 未接线）。
   - 样式与交互：sticky 常驻、平滑滚动、`scroll-margin-top:100px`、窄屏换行。
 - 迁移既有报告用 `python engine/tools/restyle_reports.py --files <报告.html>`；md 源转 HTML 用 `md2html.py`（同样输出 canonical 结构）。
 - **基线特例**：基线报告（含机制建立文档、首次覆盖、一次性深度件）允许使用简化锚点目录（`<nav>` 不含 `.report-nav` / `.nav-url` 组件），不强制 canonical 顶部导航；自首个周期报告（月 / 季 / 年 / 周）起强制 canonical 结构。

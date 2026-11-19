@@ -1,0 +1,8 @@
+[
+  {
+    "description": "破坏无 JS 可用性",
+    "id": "R-1",
+    "mitigation": "保持渐进增强",
+    "owner": ""
+  }
+]

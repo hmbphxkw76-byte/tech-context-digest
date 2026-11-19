@@ -542,6 +542,15 @@ class TestBuildHubCheck(unittest.TestCase):
                     f"hub 令牌 {key} 应与 canonical 同值",
                 )
 
+    def test_feedback_entry_in_hub_and_reader(self):
+        """消费端反馈入口（T-06）：hub / reader 页脚可见，静态链接 + data 占位。"""
+        for name in ("index.html", "reader.html"):
+            text = build_outputs()[name]
+            self.assertIn("反馈 / 纠错", text, f"{name} 页脚应含反馈入口")
+            self.assertIn('data-feedback="consumer-feedback-v1"', text)
+            self.assertIn("feedback-link", text)
+            self.assertIn("//github.com/hmbphxkw76-byte/tech-context-digest/issues/new", text)
+
 
 class TestReportCycleWindows(unittest.TestCase):
     """报告周期窗口与环比高亮（REPORT-CYCLE-WINDOWS-SPEC v1.0）。"""
@@ -671,6 +680,15 @@ class TestCanonicalReportStyle(unittest.TestCase):
         self.assertIn('<header class="report-head">', html)
         self.assertIn('class="report-nav"', html)
         self.assertIn('class="sec"', html)
+
+    def test_md2html_output_has_feedback_entry(self):
+        """T-06：md2html 生成的报告页脚统一含反馈入口（无 JS 依赖）。"""
+        from md2html import convert
+        md = _common.ROOT / "content/tech/security/dubai/sources/2026-11_baseline_report.md"
+        html = convert(md)
+        self.assertIn('class="report-foot"', html)
+        self.assertIn("反馈 / 纠错", html)
+        self.assertIn('data-feedback="consumer-feedback-v1"', html)
 
 
 class TestPageBuildCheck(unittest.TestCase):

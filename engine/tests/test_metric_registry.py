@@ -95,6 +95,30 @@ class TestAliasUniqueness(unittest.TestCase):
         self.assertEqual(mr.check_dictionary(mr.load_dictionary()), [])
 
 
+class TestConsumerMetricsDraft(unittest.TestCase):
+    """消费侧指标草案（T-06）：只登记 probe 口径，不改既有阈值、不进入实测集合。"""
+
+    def test_draft_is_probe_and_unwired(self):
+        d = mr.load_dictionary()
+        draft = d["consumer_metrics_draft"]
+        self.assertEqual(draft["status"], "probe")
+        self.assertFalse(draft["wired"])
+        self.assertTrue(draft["metrics"])
+        for m in draft["metrics"]:
+            self.assertEqual(m["status"], "probe")
+            self.assertFalse(m["wired"])
+            self.assertNotIn("threshold", m)
+
+    def test_draft_not_in_measured_metrics(self):
+        d = mr.load_dictionary()
+        ids = set(mr.metric_ids(d))
+        draft_ids = {m["metric_id"] for m in d["consumer_metrics_draft"]["metrics"]}
+        self.assertEqual(ids & draft_ids, set())
+
+    def test_existing_dictionary_still_valid(self):
+        self.assertEqual(mr.check_dictionary(mr.load_dictionary()), [])
+
+
 class TestDedupeRows(unittest.TestCase):
     def _row(self, date, iid, cal, value, unit="%", src="S1"):
         return {"date": date, "indicator_id": iid, "value": value, "unit": unit,
