@@ -1,0 +1,34 @@
+[
+  {
+    "acceptance": "",
+    "depends_on": [],
+    "id": "T-1",
+    "phase": "已提交（PR 待开）",
+    "status": "done",
+    "title": "发布日历增补收入/薪酬行"
+  },
+  {
+    "acceptance": "",
+    "depends_on": [],
+    "id": "T-2",
+    "phase": "已提交（PR 待开）",
+    "status": "done",
+    "title": "P0 四类取数尝试与阻塞登记（台账 + 采集清单）"
+  },
+  {
+    "acceptance": "",
+    "depends_on": [],
+    "id": "T-3",
+    "phase": "已提交（PR 待开）",
+    "status": "done",
+    "title": "方案 §5 阻塞说明更新（v1.2）"
+  },
+  {
+    "acceptance": "",
+    "depends_on": [],
+    "id": "T-4",
+    "phase": "已提交（PR 待开）",
+    "status": "done",
+    "title": "blind_spot_check / release_calendar --check / 门禁 + 提交 PR"
+  }
+]
