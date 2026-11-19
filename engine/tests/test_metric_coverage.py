@@ -126,5 +126,59 @@ class TestA05LinkReachability(unittest.TestCase):
             self.assertIsNone(value)
 
 
+class TestA03NumericConsistency(unittest.TestCase):
+    """A-03 数值一致率（相邻显式数值对代理，2026-11-19 校准）。"""
+
+    def test_consistent_pairs(self):
+        value, _ = mc.a03_numeric_consistency(
+            {"a.html": "<p>P01 1,817 AED/sqft；另一处 P01 1,817</p>"})
+        self.assertAlmostEqual(value, 1.0, places=4)
+
+    def test_conflict_counts(self):
+        value, detail = mc.a03_numeric_consistency(
+            {"a.html": "<p>P01 1,817；P01 1,659</p>"})
+        self.assertLess(value, 1.0)
+        self.assertIn("冲突 1/1", detail)
+
+    def test_false_positive_classes_excluded(self):
+        # 区间上界 / 发布日 / 枚举 / 公司名 / 「编号 + 3M」不得被当作数值对
+        text = "P01–P14 价格区间；P02 2026-10-12 发布；K02、K04、K06；G42 集团；K01 3M EIBOR"
+        self.assertEqual(mc._VALUE_PAIR_RE.findall(text), [])
+
+    def test_report_value_pair_extracted(self):
+        text = "M02 4.394390% 定盘；P03 1,659 AED/sqft"
+        pairs = {m.group(1): m.group(2) for m in mc._VALUE_PAIR_RE.finditer(text)}
+        self.assertEqual(pairs.get("M02"), "4.394390")
+        self.assertEqual(pairs.get("P03"), "1,659")
+
+
+class TestI04FactCard(unittest.TestCase):
+    """I-04 事实卡片引用率：分母 = 有卡片库业务线（字典口径对齐）。"""
+
+    def test_shared_tokens_include_apartment(self):
+        tokens = mc._shared_fact_tokens()
+        self.assertIn("apartment", tokens)
+        self.assertIn("security", tokens)
+
+    def test_in_shared_by_path_segment(self):
+        self.assertTrue(mc._in_shared_fact("content/economy/dubai/apartment", {"apartment"}))
+        self.assertFalse(mc._in_shared_fact("content/other/topic", {"apartment"}))
+
+    def test_denominator_excludes_non_shared(self):
+        reports = {
+            "content/economy/dubai/apartment/reports/a.html": "<p>[FC-APT-001]</p>",
+            "content/other/topic/reports/b.html": "<p>无指针</p>",
+        }
+        value, detail = mc.i04_fact_card(reports)
+        self.assertAlmostEqual(value, 1.0, places=4)
+        self.assertIn("1/1", detail)
+
+    def test_missing_ref_in_shared_is_counted(self):
+        reports = {"content/economy/dubai/apartment/reports/a.html": "<p>无指针</p>"}
+        value, detail = mc.i04_fact_card(reports)
+        self.assertAlmostEqual(value, 0.0, places=4)
+        self.assertIn("0/1", detail)
+
+
 if __name__ == "__main__":
     unittest.main()

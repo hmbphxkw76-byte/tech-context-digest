@@ -3,7 +3,7 @@
 检查：
     FC-01 卡片库结构：字段齐全、card_id 唯一、枚举合法、来源非空
     FC-02 报告引用可解析：报告内 [FC-…] 引用必须命中卡片库
-    FC-03 共享域覆盖：security / industry-research / competitive-intelligence 的
+    FC-03 共享域覆盖：有事实卡片库的业务线（动态派生自卡片库 used_by）的
          新报告须至少引用 1 张卡片（历史报告只警告）
 
 退出码：0 通过；1 存在 [E]；2 仅 [W]。
@@ -34,7 +34,20 @@ VALID_TIERS = {1, 2, 3, 4}
 VALID_VERIFY = {"已核验", "部分核验", "未核验"}
 VALID_LEVEL = {"已核验事实", "部分核验", "推断", "假设"}
 FC_RE = re.compile(r"\[FC-([A-Z]+)-(\d+)\]")
-SHARED_DOMAINS = ("security", "industry-research", "competitive-intelligence")
+
+
+def shared_fact_tokens(cards: dict[str, dict]) -> set[str]:
+    """共享事实域业务线标识：由卡片库 used_by 动态派生（单一事实源）。"""
+    tokens: set[str] = set()
+    for c in cards.values():
+        for bl in c.get("used_by", []) or []:
+            tokens.add(str(bl))
+    return tokens
+
+
+def _in_shared(line: str, tokens: set[str]) -> bool:
+    """业务线 rel 的任一路径段命中卡片库 used_by 标识即视为共享事实域。"""
+    return bool(set(Path(line).parts) & tokens)
 
 
 def load_cards() -> tuple[dict[str, dict], list[str]]:
@@ -120,6 +133,7 @@ def run(gate: str) -> tuple[int, int, list[str], dict]:
         lines.append("[E] 事实卡片库：未找到任何卡片")
 
     stats = {"cards": len(cards), "reports": 0, "refs": 0, "missing_refs": 0}
+    tokens = shared_fact_tokens(cards)
     for rel, text, period, bline in iter_report_refs():
         stats["reports"] += 1
         refs = {f"FC-{m.group(1)}-{int(m.group(2)):03d}" for m in FC_RE.finditer(text)}
@@ -130,7 +144,7 @@ def run(gate: str) -> tuple[int, int, list[str], dict]:
                 errors += 1
                 lines.append(f"[E] {rel}：引用不存在的卡片 {cid}")
         is_new = bool(period) and _period_key(period) >= _period_key(gate)
-        if any(d in bline for d in SHARED_DOMAINS) and not refs:
+        if _in_shared(bline, tokens) and not refs:
             if is_new:
                 errors += 1
                 lines.append(f"[E] {rel}：共享事实域新报告未引用任何 [FC-…] 卡片")

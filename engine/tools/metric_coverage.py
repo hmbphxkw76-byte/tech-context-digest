@@ -199,8 +199,12 @@ def r04_anchor(reports: dict[str, str]) -> tuple[float, str]:
 
 # ---------------------------------------------------------------- A/L/R 接线（2026-11-19）
 
-_IND_ID_RE = re.compile(r"\b([A-Z]{1,2}\d{2})\b")
-_NUM_RE = re.compile(r"\d[\d,\.]*")
+# 显式数值对（A-03 代理口径 2026-11-19 校准）：指标编号 + 可选分隔符（=／：／，）
+# + 数值（后不接字母，避免 「K01 3M EIBOR」 误取 3）+ 可选单位。
+_VALUE_PAIR_RE = re.compile(
+    r"\b([A-Z]{1,2}\d{2})\b\s*[=＝:：]?\s*(\d[\d,\.]*)(?![\dA-Za-z])(?!\s*[-/]\s*\d)"
+    r"\s*(?:%|bp|个|项|亿|万|元|美元|AED|次|年|月|日|点|sqft|桶|户|家|人)?"
+)
 # 阈值表达式（L-03 代理口径 2026-11-19）：比较符 + 数字 + 可选百分号
 _THRESH_RE = re.compile(r"[≥≤<>]=?\s*\d+(?:\.\d+)?\s*%?")
 _PARA_RE = re.compile(r"<li[^>]*>.*?</li>|<p[^>]*>.*?</p>", re.DOTALL)
@@ -266,22 +270,24 @@ def a05_link_reachability(path: Path | None = None) -> tuple[float | None, str]:
 
 
 def a03_numeric_consistency(reports: dict[str, str]) -> tuple[float, str]:
-    """数值一致率（代理）：同一指标编号在不同位置取不同数值即记冲突；
-    一致率 = 1 - 冲突指标数 / 出现指标数。"""
+    """数值一致率（代理）：同一指标编号的**显式数值对**取值是否一致。
+
+    口径（2026-11-19 校准）：仅认「指标编号 + 可选分隔符（=／：／，）+ 数值
+    （后不接字母）+ 可选单位」的规范数值对，天然排除日期、区间上界、枚举与
+    公司名（如 G42/M42）造成的伪冲突。分母为**显式数值对数**（非编号出现数），
+    分母偏小会显式呈现；与登记册的真值核对尚未实现（见 tech-debt-ledger）。
+    """
     total = conflict = 0
     for text in reports.values():
         plain = _plain(_clean(text))
         by_id: dict[str, set[str]] = {}
-        for m in _IND_ID_RE.finditer(plain):
-            tail = plain[m.end(): m.end() + 60]
-            nums = _NUM_RE.findall(tail)
-            if nums:
-                by_id.setdefault(m.group(1), set()).add(_norm_num(nums[0]))
+        for m in _VALUE_PAIR_RE.finditer(plain):
+            by_id.setdefault(m.group(1), set()).add(_norm_num(m.group(2)))
         for vs in by_id.values():
             total += 1
             if len(vs) > 1:
                 conflict += 1
-    return _ratio(total - conflict, total), f"冲突 {conflict}/{total} 指标"
+    return _ratio(total - conflict, total), f"冲突 {conflict}/{total} 显式数值对"
 
 
 def l03_threshold_consistency(reports: dict[str, str]) -> tuple[float | None, str]:
@@ -351,9 +357,41 @@ def i03_delta_module(reports: dict[str, str]) -> tuple[float, str]:
     return _ratio(ok, len(reports)), f"{ok}/{len(reports)} 份含新增信息模块"
 
 
+def _shared_fact_tokens() -> set[str]:
+    """有事实卡片库的业务线标识（动态派生自 engine/fact_cards/*.json 的 used_by）。"""
+    tokens: set[str] = set()
+    card_dir = ROOT / "engine" / "fact_cards"
+    if not card_dir.is_dir():
+        return tokens
+    for f in sorted(card_dir.glob("*.json")):
+        try:
+            data = json.loads(f.read_text(encoding="utf-8"))
+        except (OSError, json.JSONDecodeError):
+            continue
+        for c in data.get("cards", []):
+            for bl in c.get("used_by", []) or []:
+                tokens.add(str(bl))
+    return tokens
+
+
+def _in_shared_fact(line: str, tokens: set[str]) -> bool:
+    """业务线 rel 的任一路径段命中卡片库 used_by 标识即视为共享事实域。"""
+    return bool(set(Path(line).parts) & tokens)
+
+
 def i04_fact_card(reports: dict[str, str]) -> tuple[float, str]:
-    ok = sum(1 for text in reports.values() if FC_REF_RE.search(_plain(text)))
-    return _ratio(ok, len(reports)), f"{ok}/{len(reports)} 份使用 [FC-…] 指针"
+    """事实卡片引用率：有事实卡片库的业务线报告中引用 [FC-…] 的占比。
+
+    口径（2026-11-19 对齐字典）：分母 = 有卡片库的业务线（动态派生自
+    engine/fact_cards/*.json 的 used_by）的报告数；分子 = 其中引用 [FC-…] 的
+    报告数。无卡片库的业务线不计入分母（不静默给 0）。
+    """
+    tokens = _shared_fact_tokens()
+    scoped = {rel: t for rel, t in reports.items()
+              if _in_shared_fact(rel.split("/reports/")[0], tokens)}
+    ok = sum(1 for t in scoped.values() if FC_REF_RE.search(_plain(t)))
+    return _ratio(ok, len(scoped)), \
+        f"{ok}/{len(scoped)} 份共享事实域报告使用 [FC-…] 指针"
 
 
 def i02_info_level(reports: dict[str, str]) -> tuple[float, str]:

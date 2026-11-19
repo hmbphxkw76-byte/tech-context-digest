@@ -24,7 +24,7 @@ class TestFactCards(unittest.TestCase):
     def test_card_ids_unique_and_pattern(self):
         cards, _ = m.load_cards()
         for cid in cards:
-            self.assertRegex(cid, r"^FC-(SEC|IND|CI)-\d{3}$")
+            self.assertRegex(cid, r"^FC-(SEC|IND|CI|APT)-\d{3}$")
 
     def test_required_fields_and_enums(self):
         cards, _ = m.load_cards()
@@ -41,11 +41,17 @@ class TestFactCards(unittest.TestCase):
         self.assertGreaterEqual(stats["cards"], 20)
 
     def test_shared_domain_new_report_uses_cards(self):
-        # 三份共享域报告均应引用卡片（新报告）
+        # 共享事实域（动态派生自卡片库 used_by）新报告均应引用卡片
+        cards, _ = m.load_cards()
+        tokens = m.shared_fact_tokens(cards)
         refs = {rel: m.FC_RE.findall(text) for rel, text, _, _ in m.iter_report_refs()}
+        checked = 0
         for rel, found in refs.items():
-            if any(d in rel for d in m.SHARED_DOMAINS) and "2026-12" in rel:
+            bline = rel.split("/reports/")[0]
+            if m._in_shared(bline, tokens) and "2026-12" in rel:
                 self.assertTrue(found, f"{rel} 未引用事实卡片")
+                checked += 1
+        self.assertGreaterEqual(checked, 4, "应覆盖多个共享事实域新报告")
 
     def test_missing_reference_detected(self):
         # 合成：引用不存在的卡片应被 run 判错（直接检查解析逻辑）

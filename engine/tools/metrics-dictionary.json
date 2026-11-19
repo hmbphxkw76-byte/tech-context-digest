@@ -12,7 +12,7 @@
 
     {"metric_id": "A-01", "name": "来源可追溯率", "formula": "有来源标注的关键数字数 / 关键数字总数", "threshold": ">=0.95", "severity": "P0", "detected_by": "MIXED", "owner": "audit+quality", "aliases": ["L3-4.2", "L3-来源可追溯"]},
     {"metric_id": "A-02", "name": "来源分级合规率", "formula": "合规来源条目数 / 来源条目总数", "threshold": "=1.0", "severity": "P1", "detected_by": "LLM", "owner": "quality", "aliases": []},
-    {"metric_id": "A-03", "name": "数值一致率", "formula": "与登记册/台账一致的可核对数值数 / 可核对数值总数", "threshold": ">=0.99", "severity": "P0", "detected_by": "MIXED", "owner": "audit+quality", "aliases": ["L3-4.1", "L3-信息准确性"]},
+    {"metric_id": "A-03", "name": "数值一致率", "formula": "同指标编号的显式数值对一致数 / 显式数值对总数（代理）", "threshold": ">=0.99", "severity": "P0", "detected_by": "MIXED", "owner": "audit+quality", "aliases": ["L3-4.1", "L3-信息准确性"], "note": "口径校准 2026-11-19：仅认「指标编号 + 可选分隔符（=／：／，）+ 数值（后不接字母）+ 可选单位」的规范数值对，天然排除日期、区间上界、枚举与公司名（G42/M42）伪冲突；分母为显式数值对数（非编号出现数），分母偏小会显式呈现。与登记册的真值核对尚未实现（见 tech-debt-ledger）。"},
     {"metric_id": "A-04", "name": "新鲜度合规率", "formula": "在声明时效内的数据条目数 / 数据条目总数", "threshold": ">=0.9", "severity": "P1", "detected_by": "LLM", "owner": "quality", "aliases": []},
     {"metric_id": "A-05", "name": "链接可达率", "formula": "可达链接数 / 链接总数", "threshold": "=1.0", "severity": "P0", "detected_by": "TOOL", "owner": "audit+quality", "aliases": ["L1-6"], "note": "接线（2026-11-19）：metric_coverage.a05_link_reachability 复用 source_check --probe 定期落盘 engine/audit/records/link-probe.json；可达=ok（明确可达），dead（404/410/451）/ unreachable（超时/反爬）不计入；分母=探测集（报告 URL ∪ 登记 URL，剔除自引用）；记录缺失 / 分母 0 标 probe 不伪造；只读记录不取墙钟（与 C-05 gate-period 锚点口径同）。"},
 
@@ -31,7 +31,7 @@
     {"metric_id": "I-01", "name": "分层交付合规率", "formula": "含决策摘要且未整段复制共享 boilerplate 的报告数 / 报告总数", "threshold": ">=1.0", "severity": "P0", "detected_by": "TOOL", "owner": "quality", "aliases": ["ID-01"]},
     {"metric_id": "I-02", "name": "信息等级标注率", "formula": "关键信息带四级标注的报告数 / 报告总数", "threshold": ">=0.95", "severity": "P1", "detected_by": "MIXED", "owner": "quality", "aliases": ["ID-03"]},
     {"metric_id": "I-03", "name": "新增信息模块覆盖率", "formula": "含「本期新增/修正/无变化/假设核验进度」四要素的报告数 / 报告总数", "threshold": ">=1.0", "severity": "P0", "detected_by": "TOOL", "owner": "quality", "aliases": ["ID-05"]},
-    {"metric_id": "I-04", "name": "事实卡片引用率", "formula": "共享事实域报告中使用 [FC-…] 的报告数 / 共享事实域报告总数", "threshold": ">=1.0", "severity": "P0", "detected_by": "TOOL", "owner": "quality", "aliases": ["ID-07", "FC-03"]},
+    {"metric_id": "I-04", "name": "事实卡片引用率", "formula": "共享事实域报告中使用 [FC-…] 的报告数 / 共享事实域报告总数", "threshold": ">=1.0", "severity": "P0", "detected_by": "TOOL", "owner": "quality", "aliases": ["ID-07", "FC-03"], "note": "口径对齐 2026-11-19：分母为「有事实卡片库的业务线」的报告数，动态派生自 engine/fact_cards/*.json 的 used_by；无卡片库业务线不计入分母（不静默给 0）。旧实现误用全部报告作分母，已修正。"},
     {"metric_id": "I-05", "name": "行动协议合规率", "formula": "含「触发条件+阈值+责任角色+时限+验证指标」五要素行动项的报告数 / 应含行动项报告数", "threshold": ">=1.0", "severity": "P0", "detected_by": "MIXED", "owner": "quality", "aliases": ["DC-02"]},
     {"metric_id": "I-06", "name": "决策卡覆盖率", "formula": "核心判断有标准化决策卡的决策卡数 / 核心判断总数", "threshold": ">=0.9", "severity": "P1", "detected_by": "MIXED", "owner": "quality", "aliases": ["DC-01"]},
     {"metric_id": "I-07", "name": "ex-ante 标注率", "formula": "信号灯/阈值报告含「预校准（ex-ante）」标注的报告数 / 信号灯报告总数", "threshold": ">=1.0", "severity": "P0", "detected_by": "TOOL", "owner": "quality", "aliases": ["DC-04"]},
