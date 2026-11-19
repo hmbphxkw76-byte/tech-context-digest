@@ -962,6 +962,156 @@ class TestDimensionOrder(unittest.TestCase):
             self.assertNotEqual(b.property_type, b.region, b.rel)
 
 
+class TestClassificationVersion(unittest.TestCase):
+    """分类体系版本号 + 跨主题互斥性（T-07）。"""
+
+    @staticmethod
+    def _layout(version="2026-11-19.1", changelog=None):
+        if changelog is None:
+            changelog = [{"version": "2026-11-19.1", "date": "2026-11-19",
+                          "summary": "首次登记分类版本号"}]
+        return _common.Layout(
+            root_reserved=frozenset({"content", "engine", "data"}),
+            themes={"x": ("X", ("region", "category"))},
+            regions=frozenset({"dubai"}),
+            naming_pattern=r"^[a-z0-9]+$",
+            max_depth=4,
+            classification_version=version,
+            classification_changelog=tuple(changelog),
+        )
+
+    def test_layout_has_classification_version(self):
+        import validate_layout
+
+        layout = _common.load_layout()
+        self.assertTrue(
+            validate_layout.CLASSIFICATION_VERSION_RE.match(layout.classification_version),
+            layout.classification_version,
+        )
+        self.assertTrue(layout.classification_changelog)
+
+    def test_validator_accepts_current_layout(self):
+        import validate_layout
+
+        validate_layout.ERRORS.clear()
+        try:
+            validate_layout.check_classification_version(self._layout())
+            self.assertEqual(validate_layout.ERRORS, [], validate_layout.ERRORS)
+        finally:
+            validate_layout.ERRORS.clear()
+
+    def test_validator_rejects_missing_version(self):
+        import validate_layout
+
+        validate_layout.ERRORS.clear()
+        try:
+            validate_layout.check_classification_version(self._layout(version=""))
+            self.assertTrue(
+                any("classification_version" in e for e in validate_layout.ERRORS),
+                validate_layout.ERRORS,
+            )
+        finally:
+            validate_layout.ERRORS.clear()
+
+    def test_validator_rejects_malformed_version(self):
+        import validate_layout
+
+        validate_layout.ERRORS.clear()
+        try:
+            validate_layout.check_classification_version(
+                self._layout(version="2026-11-19", changelog=[
+                    {"version": "2026-11-19", "date": "2026-11-19", "summary": "x"}
+                ])
+            )
+            self.assertTrue(
+                any("格式非法" in e for e in validate_layout.ERRORS),
+                validate_layout.ERRORS,
+            )
+        finally:
+            validate_layout.ERRORS.clear()
+
+    def test_validator_rejects_unlogged_version(self):
+        import validate_layout
+
+        validate_layout.ERRORS.clear()
+        try:
+            validate_layout.check_classification_version(
+                self._layout(changelog=[
+                    {"version": "2026-11-18.1", "date": "2026-11-18", "summary": "旧版本"}
+                ])
+            )
+            self.assertTrue(
+                any("未出现在 changelog" in e for e in validate_layout.ERRORS),
+                validate_layout.ERRORS,
+            )
+        finally:
+            validate_layout.ERRORS.clear()
+
+    def test_validator_rejects_incomplete_changelog_entry(self):
+        import validate_layout
+
+        validate_layout.ERRORS.clear()
+        try:
+            validate_layout.check_classification_version(
+                self._layout(changelog=[{"version": "2026-11-19.1"}])
+            )
+            self.assertTrue(
+                any("缺字段" in e for e in validate_layout.ERRORS),
+                validate_layout.ERRORS,
+            )
+        finally:
+            validate_layout.ERRORS.clear()
+
+    def test_cross_theme_overlap_flags_duplicate(self):
+        import validate_layout
+
+        entries = [
+            ("economy", "content/economy/trends", "trends"),
+            ("tech", "content/tech/trends", "trends"),
+        ]
+        warnings = validate_layout._cross_theme_warnings(entries)
+        self.assertEqual(len(warnings), 1, warnings)
+        self.assertIn("跨主题疑似重复分类", warnings[0])
+
+    def test_cross_theme_overlap_ignores_same_theme_and_partial(self):
+        import validate_layout
+
+        same_theme = [
+            ("economy", "content/economy/a", "trends"),
+            ("economy", "content/economy/b", "trends"),
+        ]
+        self.assertEqual(validate_layout._cross_theme_warnings(same_theme), [])
+        partial = [
+            ("economy", "content/economy/a", "market-trends"),
+            ("tech", "content/tech/b", "trends"),
+        ]
+        self.assertEqual(validate_layout._cross_theme_warnings(partial), [])
+        self.assertAlmostEqual(
+            validate_layout.classification_overlap("market-trends", "trends"), 0.5
+        )
+
+    def test_cross_theme_check_runs_on_repo(self):
+        import validate_layout
+
+        validate_layout.WARNINGS.clear()
+        try:
+            validate_layout.check_cross_theme_exclusive(_common.load_layout())
+            # 先 [W] 不阻断：只允许告警，不得产生错误
+            self.assertEqual(validate_layout.ERRORS, [], validate_layout.ERRORS)
+        finally:
+            validate_layout.WARNINGS.clear()
+
+    def test_impact_lines_deterministic(self):
+        import validate_layout
+
+        layout = _common.load_layout()
+        first = validate_layout.impact_lines(layout)
+        second = validate_layout.impact_lines(layout)
+        self.assertEqual(first, second)
+        self.assertIn(layout.classification_version, first[0])
+        self.assertTrue(first[-1].startswith("[IMPACT] 合计："), first[-1])
+
+
 class TestCheckLinks(unittest.TestCase):
     """路径引用可达性校验（check_links.py）。"""
 

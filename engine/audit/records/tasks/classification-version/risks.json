@@ -1,0 +1,8 @@
+[
+  {
+    "description": "误判互斥",
+    "id": "R-1",
+    "mitigation": "先 [W] 不阻断",
+    "owner": ""
+  }
+]
