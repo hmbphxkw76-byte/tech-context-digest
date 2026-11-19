@@ -1,0 +1,34 @@
+[
+  {
+    "acceptance": "",
+    "depends_on": [],
+    "id": "T-1",
+    "phase": "已提交（PR 待开）",
+    "status": "done",
+    "title": "update_planner 增盲区阻塞跟踪段（S2 闭环）"
+  },
+  {
+    "acceptance": "",
+    "depends_on": [],
+    "id": "T-2",
+    "phase": "已提交（PR 待开）",
+    "status": "done",
+    "title": "update_planner 支持周周期派发（S3 工具侧）"
+  },
+  {
+    "acceptance": "",
+    "depends_on": [],
+    "id": "T-3",
+    "phase": "已提交（PR 待开）",
+    "status": "done",
+    "title": "产出「第二期最小集」清单文档"
+  },
+  {
+    "acceptance": "",
+    "depends_on": [],
+    "id": "T-4",
+    "phase": "已提交（PR 待开）",
+    "status": "done",
+    "title": "方案 §3 指针 + 测试 + 门禁 + PR"
+  }
+]

@@ -33,7 +33,7 @@ from build_hub import (  # noqa: E402
 from compliance_check import check_report, cycle_rule, detect_type, load_rules  # noqa: E402
 from lint_reports import lint_html  # noqa: E402
 from restyle_reports import normalize_tables  # noqa: E402
-from update_planner import build_tasks, default_period  # noqa: E402
+from update_planner import blindspot_summary, build_tasks, default_period  # noqa: E402
 
 
 class TestDetectReport(unittest.TestCase):
@@ -152,6 +152,23 @@ class TestBuildTasks(unittest.TestCase):
         # 其 2026-12 月度任务应派发
         dec = build_tasks("2026-12", _common.iter_business_dirs())
         self.assertTrue(any(t["project"] == "content/tech/competitive-intelligence/dubai" for t in dec))
+
+    def test_weekly_period_dispatches_weekly_only(self):
+        # 周周期只为具备 weekly 提示词的業務线派发（S3 最小集工具侧）
+        tasks = build_tasks("2026-11-20", _common.iter_business_dirs())
+        self.assertTrue(tasks)
+        self.assertTrue(all(t["cycle"] == "weekly" for t in tasks))
+        proj = {t["project"] for t in tasks}
+        self.assertIn("content/economy/trends", proj)
+        self.assertIn("content/tech/weekly-roundup", proj)
+        self.assertFalse(any("security" in p for p in proj))
+
+    def test_blindspot_summary_lists_open(self):
+        # S2 闭环：未消号项与责任周期进入任务清单（只读台账）
+        s = blindspot_summary(datetime(2026, 11, 19, tzinfo=timezone.utc))
+        self.assertIn("未消号", s)
+        self.assertIn("B01", s)
+        self.assertIn("2027-03", s)
 
 
 class TestPromptFileCandidates(unittest.TestCase):
