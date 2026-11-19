@@ -196,8 +196,8 @@ def main() -> int:
         print(f"[INFO] {i}")
     for w in WARNINGS:
         print(f"[WARN] {w}")
-    for e in ERRORS:
-        print(f"[ERROR] {e}")
+    for err in ERRORS:
+        print(f"[ERROR] {err}")
 
     if ERRORS:
         print(f"目录结构校验失败：{len(ERRORS)} 项错误，{len(WARNINGS)} 项警告")

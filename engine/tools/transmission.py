@@ -24,7 +24,13 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 
 from _quant import (  # noqa: E402
-    mean, ols, read_csv_records, to_float, var_fit, var_irf, var_select_order,
+    mean,
+    ols,
+    read_csv_records,
+    to_float,
+    var_fit,
+    var_irf,
+    var_select_order,
 )
 
 # 链 → (自变量, 因变量, VAR 冲击变量序号名)

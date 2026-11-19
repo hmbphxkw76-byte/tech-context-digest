@@ -31,7 +31,14 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 
 from _common import (  # noqa: E402
-    TEMPLATE_DIR, business_report_type, detect_report, detect_report_loose, iter_business_dirs, load_layout, type_cadence, ROOT,
+    ROOT,
+    TEMPLATE_DIR,
+    business_report_type,
+    detect_report,
+    detect_report_loose,
+    iter_business_dirs,
+    load_layout,
+    type_cadence,
 )
 
 

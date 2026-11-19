@@ -42,7 +42,7 @@ class TestRemediationTicket(unittest.TestCase):
                "尾行\n")
         s = self.mod.summarize(out)
         self.assertIn("content/economy/dubai/apartment/reports/2026-11-monthly.html:42", s["locations"])
-        self.assertTrue(any("未登记外部 URL" in l for l in s["summary"]))
+        self.assertTrue(any("未登记外部 URL" in line for line in s["summary"]))
 
     def test_extract_failures_only_errors(self):
         rep = {"checks": [

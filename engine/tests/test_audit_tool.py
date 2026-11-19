@@ -218,7 +218,7 @@ class TestIgiTrend(unittest.TestCase):
 
     def test_history_roundtrip_and_upsert(self):
         with tempfile.TemporaryDirectory() as d:
-            p = self._use_tmp_history(d)
+            self._use_tmp_history(d)
             audit_tool.save_igi_history({"schema_version": "1.0", "records": [
                 {"gate_period": "2026-11", "values": {"IGI-01": 0.5}},
                 {"gate_period": "2026-12", "values": {"IGI-01": 1.0}},

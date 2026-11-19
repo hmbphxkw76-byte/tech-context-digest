@@ -30,6 +30,8 @@ ASSUMPTION_KEYS = ("note", "assumptions", "assumption", "caliber", "loss_range")
 def _load(name: str, rel: str):
     import importlib.util
     spec = importlib.util.spec_from_file_location(name, ROOT / rel)
+    if spec is None or spec.loader is None:
+        raise ImportError(f"无法定位模块：{rel}")
     mod = importlib.util.module_from_spec(spec)
     sys.modules[name] = mod
     spec.loader.exec_module(mod)

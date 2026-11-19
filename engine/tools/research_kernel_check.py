@@ -24,7 +24,8 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 
 from _common import ROOT, detect_report, iter_business_dirs  # noqa: E402
-from gate_period import AUTO, resolve as resolve_period  # noqa: E402
+from gate_period import AUTO  # noqa: E402
+from gate_period import resolve as resolve_period
 
 DEFAULT_GATE = AUTO
 

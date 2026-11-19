@@ -69,7 +69,7 @@ def _norm_layer_weights(layer: str, ids: list[str]) -> dict:
 
 def synthesize(statuses: dict, phase: str | None = None) -> SynthResult:
     """合成信号（纯函数）。statuses: {K 编号: 状态字符串}。"""
-    layer_counts = {layer: {} for layer in LAYER_WEIGHT}
+    layer_counts: dict = {layer: {} for layer in LAYER_WEIGHT}
     layer_scores = {}
     alerts = []
 
@@ -105,7 +105,7 @@ def synthesize(statuses: dict, phase: str | None = None) -> SynthResult:
     else:
         consistency = "未知"
 
-    overall = sum(LAYER_WEIGHT[l] * (layer_scores[l] or 0.0) for l in LAYER_WEIGHT)
+    overall = sum(LAYER_WEIGHT[k] * (layer_scores[k] or 0.0) for k in LAYER_WEIGHT)
 
     phase_conflict = False
     if phase:

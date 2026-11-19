@@ -316,13 +316,13 @@ def main() -> int:
         risks = parse_risks(args.risk)
         problems = validate_artifacts(args.slug, plan, tasks, risks)
         if problems:
-            for p in problems:
-                print(f"[ERROR] {p}", file=sys.stderr)
+            for prob in problems:
+                print(f"[ERROR] {prob}", file=sys.stderr)
             return 1
         written = write_artifacts(args.slug, plan, tasks, risks)
         print(f"[init] slug={args.slug} 任务 {len(tasks)} 项 / 风险 {len(risks)} 项")
-        for p in written:
-            print(f"  {p.relative_to(ROOT)}")
+        for path in written:
+            print(f"  {path.relative_to(ROOT)}")
         return 0
 
     if args.cmd == "show":
@@ -333,8 +333,8 @@ def main() -> int:
     if args.cmd == "check":
         problems = check(args.slug)
         if problems:
-            for p in problems:
-                print(f"[E] {p}")
+            for prob in problems:
+                print(f"[E] {prob}")
             return 1
         print(f"[OK] 工件 schema / 确定性校验通过：{plan_dir(args.slug).relative_to(ROOT)}")
         return 0

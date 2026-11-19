@@ -131,12 +131,12 @@ def classify(records: list[dict]) -> PhaseResult:
     g = dim_score.get("growth", 0)
     i = dim_score.get("inflation", 0)
     p = dim_score.get("policy", 0)
-    l = dim_score.get("liquidity", 0)
+    liq = dim_score.get("liquidity", 0)
 
     if g == 0 or i == 0:
         phase = "过渡带"
     elif g > 0 and i > 0:
-        phase = "过渡带" if (p > 0 or l > 0) else "过热"
+        phase = "过渡带" if (p > 0 or liq > 0) else "过热"
     elif g < 0 and i > 0:
         phase = "滞胀"
     elif g > 0 and i <= 0:

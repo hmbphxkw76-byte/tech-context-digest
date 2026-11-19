@@ -77,8 +77,8 @@ def read_activity(threshold: int) -> dict:
 
 def summarize(output: str, max_lines: int = 4) -> dict:
     """从门禁输出提取失败摘要与位置。"""
-    lines = [l.strip() for l in (output or "").splitlines() if l.strip()]
-    key = [l for l in lines if KEY_RE.search(l)]
+    lines = [line.strip() for line in (output or "").splitlines() if line.strip()]
+    key = [line for line in lines if KEY_RE.search(line)]
     picked = (key or lines)[-max_lines:]
     locs: list[str] = []
     for m in LOC_RE.finditer(output or ""):

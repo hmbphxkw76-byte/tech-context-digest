@@ -6,7 +6,7 @@
 > **优先级**：P0 阻断（本台账不含）｜P1 高｜P2 中｜P3 低。
 > **状态机**：`open → in_progress → closed`；暂缓用 `deferred`。
 > **复核节奏**：每月 content-update 对账；每季度末全面盘点一次。
-> **最后更新**：2026-11-18（v1.5 E 类按实跑复测刷新 + 新增 §十一：续接会话历史债务清理）
+> **最后更新**：2026-11-19（v1.6 新增 F 类：静态检查 baseline 债务，只拦新增）
 
 ---
 
@@ -19,7 +19,8 @@
 | C 类 · 研究内核门禁（历史报告缺内核项） | 0 项 | P2 | **closed（已清零）** | 复跑 `research_kernel_check --gate-period 2026-12` exit 0 |
 | D 类 · 来源登记 / 分级（R1 / R2 / R7） | 0 项 | P2 | **closed（已清零）** | 复跑 `source_check --gate-period 2027-01`（无探测）exit 0 |
 | E 类 · 来源 R6 探测死链 / 可疑（宽限期） | 9 项 / 9 份报告（死链 3 / 可疑 72） | P3 | open（宽限期登记） | `source-gate-period=2027-01` 前不追溯；其中 3 处已修复（见 §十一） |
-| **合计（未闭环）** | **24 项** | — | — | **全部非阻断**（B 类为登记管理件、E 类为宽限期探测项） |
+| F 类 · 静态检查 baseline（ruff / mypy） | 95 项（ruff 69 / mypy 26） | P2 | open（baseline 只拦新增） | 已入 `engine/quality/lint-baseline.json`；新增即 `[E]`（见 §十二） |
+| **合计（未闭环）** | **119 项** | — | — | **全部非阻断**（B 类为登记管理件、E 类为宽限期探测项、F 类为 baseline 额度内） |
 
 ---
 
@@ -180,6 +181,7 @@
 | 2026-11-16 | 升版 v1.3 | **全量复跑刷新**：C 类 5→0（closed）；D 类 20→0（closed）；B 类 15→17（补 `l3-deep-review`、`cicd-alignment-audit`）；新增 E 类（R6 宽限期探测 7 项）；总览由 40 项修正为 24 项 |
 | 2026-11-18 | 新增 §十 | P2-1（C-15）逐条人工核验处置：保留 2 处 / 迁移 1 处 / 修正文档漂移 3 处；**未删除任何文件**（候选均存在保留或迁移依据） |
 | 2026-11-18 | 升版 v1.5 + 新增 §十一 | 续接会话历史债务清理：变更全量收口；R1/R2/R7 清零；R6 修复 3 处死链（gitex.com → gitexglobal.com、menlovc URL 拼写）；E 类按 2026-11-18 实跑复测刷新 |
+| 2026-11-19 | 升版 v1.6 + 新增 §十二 | F 类静态检查 baseline：ruff 97→69、mypy 45→26，剩余入 baseline（只拦新增）；A-05 探测接入定时维护 |
 
 ---
 
@@ -238,6 +240,27 @@
 | A/C/D 类 | 0 | 已闭环 |
 
 **结论**：本 repo **不存在未登记的历史债务**——所有残留均已在本台账逐条登记并给出定性、证据与责任归属；其中可在「数据完整无缺」前提下安全闭环的部分（R1/R2/R7 与 6 处死链）已全部闭环。
+
+---
+
+## 十二、F 类：静态检查 baseline 债务（2026-11-19）
+
+**来源**：`engine/tools/static_check.py`（ruff / mypy 适配层）+ 统一门禁 `ruff` / `mypy` 项。
+
+**定性**：均为**代码风格与类型注解**类非阻断发现，非变更引入、跨提交稳定。处置策略（11-19 方案 P1-5）：**修高价值 + 其余入 baseline，只拦新增**。
+
+| 工具 | 初始 | 已修 | baseline | 剩余构成 |
+|---|---|---|---|---|
+| ruff | 97 | 28 | 69 | E702 分号多语句 69（风格，逐行拆分收益低） |
+| mypy | 45 | 19 | 26 | `semantic_diff` 7 / `perf_bench` 11 / `transmission` 4 / `pipeline_runner` 2 / `stress_test` 1 / 其他 1（涉及重构，风险高） |
+
+**已修明细（高价值）**：ruff 安全自动修复（导入排序 / 未用导入 13）+ 手工（歧义变量名 `l` 11、未用局部 2）；mypy 类型注解 / None 守卫 / 变量遮蔽 19（含 `metric_coverage`、`model_contract_check`、`task_plan`、`validate_layout`、`repo_sync`、`branch_naming`）。
+
+**baseline 机制**：`engine/quality/lint-baseline.json` 按 `(path, code)` **计数**（不看行号，避免漂移）；`static_check.py` 比对当前与 baseline：额度内 → `[W]`（exit 2，不阻断），超额度 → `[E]`（exit 1，阻断）。更新 baseline 需显式 `static_check.py <tool> --update-baseline` 并随 PR 审核。
+
+**A-05 探测收口**：`scheduled-maintenance.yml` 新增「A-05 链接可达率探测」步骤，`source_check.py --probe --emit engine/audit/records/link-probe.json` 定期落盘（`{probed, dead, unreachable, ok}`，无时间戳）。
+
+**证据**：`python engine/tools/static_check.py ruff` / `mypy` 均输出「新增 0 项」，exit 2；unittest 627 通过。
 
 ---
 

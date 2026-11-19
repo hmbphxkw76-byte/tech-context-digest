@@ -160,8 +160,8 @@ def validate_manifest(manifest: dict) -> list[str]:
             problems.append(f"闭环 {lp['id']}.to 无效：{lp['to']}")
 
     # 流程图硬性对齐：两条闭环的触发条件与路径不得改动
-    l1 = next((l for l in manifest.get("loops", []) if l["id"] == "L1"), None)
-    l2 = next((l for l in manifest.get("loops", []) if l["id"] == "L2"), None)
+    l1 = next((lp for lp in manifest.get("loops", []) if lp["id"] == "L1"), None)
+    l2 = next((lp for lp in manifest.get("loops", []) if lp["id"] == "L2"), None)
     if not l1 or (l1["from"], l1["to"], l1["mode"]) != ("N8", "N1", "async"):
         problems.append("闭环 L1 必须为 N8 --异步--> N1")
     if not l2 or (l2["from"], l2["to"], l2["mode"]) != ("G6", "N4", "sync"):
@@ -288,7 +288,7 @@ def run_pipeline(manifest: dict, from_node: str = "N0", to_node: str = "N8",
                  source_gate_period: str = DEFAULT_SOURCE_GATE_PERIOD,
                  audit=True, probe: bool | None = None) -> PipelineRun:
     """按流程图串行执行：节点 → 门禁 → 通过则下一节点 / 不通过则精准退回。"""
-    import pipeline_audit  # noqa: PLW0406（同目录模块）
+    import pipeline_audit  # 同目录模块  # noqa: PLW0406
 
     ids = node_ids(manifest)
     start, end = ids.index(from_node), ids.index(to_node)
@@ -329,7 +329,7 @@ def run_pipeline(manifest: dict, from_node: str = "N0", to_node: str = "N8",
             break
 
     if audit and outcome == "passed":
-        l1 = next((l for l in manifest.get("loops", []) if l["id"] == "L1"), None)
+        l1 = next((lp for lp in manifest.get("loops", []) if lp["id"] == "L1"), None)
         if l1:
             pipeline_audit.append({"run_id": run_id, "kind": "loop", "id": l1["id"],
                                    "from": l1["from"], "to": l1["to"],

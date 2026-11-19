@@ -78,8 +78,8 @@ class TestManifestGraph(unittest.TestCase):
         self.assertEqual(len(pr.resolve_checks(MANIFEST, g6)), len(REAL_CHECK_NAMES))
 
     def test_loops_exact(self):
-        l1 = next(l for l in MANIFEST["loops"] if l["id"] == "L1")
-        l2 = next(l for l in MANIFEST["loops"] if l["id"] == "L2")
+        l1 = next(lp for lp in MANIFEST["loops"] if lp["id"] == "L1")
+        l2 = next(lp for lp in MANIFEST["loops"] if lp["id"] == "L2")
         self.assertEqual((l1["from"], l1["to"], l1["mode"]), ("N8", "N1", "async"))
         self.assertEqual((l2["from"], l2["to"], l2["mode"]), ("G6", "N4", "sync"))
 

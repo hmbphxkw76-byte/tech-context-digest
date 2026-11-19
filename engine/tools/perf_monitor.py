@@ -144,7 +144,7 @@ def main() -> int:
             return 0
         return 2
     if args.cmd == "update":
-        metrics = {}
+        metrics: dict = {}
         if args.wall_avg is not None:
             metrics.setdefault("wall_ms", {})["avg"] = args.wall_avg
         if args.p95 is not None:

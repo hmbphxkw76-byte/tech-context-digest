@@ -91,6 +91,13 @@
       "slug": "info-quality-plan",
       "task": "info-quality-plan"
     },
+    "task/lint-baseline-8185a690": {
+      "note": "source=env:CATPAW_CONVERSATION_ID",
+      "session": "8185a6905e604f2f89e19b5e3757338b",
+      "session_short": "8185a690",
+      "slug": "lint-baseline",
+      "task": "lint-baseline"
+    },
     "task/mainline-adoption-assess-8e70425f": {
       "note": "source=env:CATPAW_CONVERSATION_ID",
       "session": "8e70425f74ef40dfbbabc8e45ad4e542",

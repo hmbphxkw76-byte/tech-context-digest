@@ -37,7 +37,8 @@ import sys
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
-from gate_period import AUTO, describe as describe_period  # noqa: E402
+from gate_period import AUTO  # noqa: E402
+from gate_period import describe as describe_period
 
 ROOT = Path(__file__).resolve().parents[2]
 TOOLS = "engine/tools"

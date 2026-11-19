@@ -96,7 +96,8 @@ def c02_required_fields(reports: dict[str, str]) -> tuple[float, str]:
     """必填字段完整率：title 非空 + 周期报告含 .nav-url。"""
     ok = 0
     for rel, text in reports.items():
-        title_ok = bool(TITLE_RE.search(text) and _plain(TITLE_RE.search(text).group(1)).strip())
+        m = TITLE_RE.search(text)
+        title_ok = bool(m and _plain(m.group(1)).strip())
         period = any(k in rel for k in ("_monthly", "_quarterly", "_annual", "_weekly"))
         nav_ok = ('class="nav-url"' in text) if period else True
         ok += 1 if (title_ok and nav_ok) else 0
@@ -425,7 +426,7 @@ def measure() -> dict[str, dict]:
 
 
 def coverage_report(meas: dict[str, dict]) -> dict:
-    statuses = {}
+    statuses: dict[str, int] = {}
     for rec in meas.values():
         statuses[rec["status"]] = statuses.get(rec["status"], 0) + 1
     gaps = sorted(mid for mid, r in meas.items() if r["status"] in ("fallback", "probe"))

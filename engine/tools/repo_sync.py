@@ -36,8 +36,8 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 
-from _common import ROOT  # noqa: E402
 import branch_naming  # noqa: E402
+from _common import ROOT  # noqa: E402
 
 BASE_BRANCH = "main"
 MAIN_REF = f"refs/heads/{BASE_BRANCH}"
@@ -457,9 +457,11 @@ def cmd_branch_rename(old: str, new: str, remote: bool = False) -> tuple[bool, s
     if r.returncode != 0:
         return False, f"改名失败：{r.stderr.strip()}"
     branch_naming.unregister_branch(reg, old)
+    parsed = branch_naming.parse_branch(new) or {}
     branch_naming.register_branch(reg, new, session_full,
-                                  task=(rec or {}).get("task") or branch_naming.parse_branch(new)["slug"],
-                                  note=(rec or {}).get("note", ""))
+                                  task=(rec.get("task") if rec else None)
+                                  or parsed.get("slug", ""),
+                                  note=(rec.get("note", "") if rec else ""))
     branch_naming.save_registry(reg)
     msg = f"已改名 {old} → {new}（登记册已更新）"
     if remote:

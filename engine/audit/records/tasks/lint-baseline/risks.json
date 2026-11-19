@@ -1,0 +1,14 @@
+[
+  {
+    "description": "自动修复改动导入顺序 / 未用导入可能影响行为",
+    "id": "R-1",
+    "mitigation": "仅安全修复 + 全量单测 + 门禁复跑",
+    "owner": ""
+  },
+  {
+    "description": "baseline 若按行号会漂移",
+    "id": "R-2",
+    "mitigation": "按 path×code 计数，不看行号",
+    "owner": ""
+  }
+]
