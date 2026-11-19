@@ -79,7 +79,7 @@
 | 7 | Numbeo 迪拜 vs 阿布扎比生活成本 | 含租等效月度 | numbeo.com |
 | 8 | ILOE 费率 & 黄金签证门槛 | AED/月 / AED | iloe.ae / u.ae / icp.gov.ae |
 | 9 | Stargate UAE 状态 | — | openai.com / coloprice.com |
-| 10 | GISEC / GITEX 最新届次 | 日期 | gisec.ae / gitex.com |
+| 10 | GISEC / GITEX 最新届次 | 日期 | gisec.ae / gitexglobal.com |
 | 11 | G42/Core42/CPX/e&/Moro Hub 动态 | — | 各公司官网 / WAM |
 | 12 | OWASP LLM Top 10 / MITRE ATLAS 版本 | 版本/计数 | genai.owasp.org / atlas.mitre.org |
 | 13 | 新发 AI 安全证书 & 本地考点 | — | giac.org / isc2.org / comptia.org / eccouncil.org / sans.org |
