@@ -18,6 +18,7 @@
 | [scripts/audit_tool.py](./scripts/audit_tool.py) | 工具：登记/L2 校验/留痕/标识/抽检/验收 | 全部 |
 | [prompts/](./prompts/) | 审计流程提示词（主控 + 四环节） | 要求 4 |
 | [records/](./records/) | 登记表 `audit_registry.json` + 审查记录 `reviews/` + 备份 `backups/` | 要求 1·4 |
+| [records/finding-rules.json](./records/finding-rules.json) | finding→预防规则回写台账（映射 + 命中跟踪）；工具 `engine/tools/finding_rule.py` | T-03 |
 
 ---
 
@@ -91,6 +92,16 @@ python engine/audit/scripts/audit_tool.py sample --ratio 0.2 # 定期抽检
 
 ---
 
+## 三·七、finding→规则回写台账（T-03）
+
+把「纠错闭环」升级为「学习闭环」：每个 L3 / 质量 finding 映射到预防规则（新增校验项 / 提示词条款 / 模板修订 / 规范条款），并跟踪规则命中。
+
+- 单一事实源：`records/finding-rules.json`（字段：`finding_id` / `source` / `root_cause` / `prevention_rule` / `rule_type` / `rule_location` / `keywords` / `hit_count` / `status`）；
+- 工具：`python engine/tools/finding_rule.py register|match|stats|check`（确定性，无时间戳；`check` 校验可重放）；
+- 与 `engine/quality/repair-sop.md` 的关系为**指针**，不复制 SOP 正文。
+
+---
+
 ## 四、审计状态机
 
 ```
@@ -108,3 +119,4 @@ draft（编制）→ in-review（审查中）→ audited（已审计）
 | 版本 | 日期 | 变更 | 说明 |
 |---|---|---|---|
 | v1.0 | 2026-11-14 | 初始版本 | 建立编制规范、三层级校验、四环节管控、已审计标识与验收抽检 |
+| v1.1 | 2026-11-19 | finding→规则回写台账 | 新增 `records/finding-rules.json` + `engine/tools/finding_rule.py`（T-03） |

@@ -1,0 +1,299 @@
+{
+  "description": "finding→预防规则回写台账：每个 L3 / 质量 finding 映射到预防规则并跟踪命中。",
+  "ledger": "finding-rules",
+  "records": [
+    {
+      "finding_id": "F1-1",
+      "fix_status": "已修复",
+      "hit_count": 0,
+      "keywords": [
+        "期次",
+        "台账",
+        "口径",
+        "租金",
+        "错配"
+      ],
+      "location": "§1.2 / §3.3 / §4.1",
+      "prevention_rule": "正文统计期次须与台账/登记册期次逐项一致；期次错配按口径混用处理",
+      "report": "content/economy/real-estate/dubai/market-sizing/reports/2026-12_baseline_report.html",
+      "root_cause": "正文标注期次（2026-10 新签中位）与台账期次（2026-10=65,000；68,000 为 9 月）错配，缺期次一致性校验",
+      "rule_location": "engine/quality/repair-sop.md#sop-08",
+      "rule_type": "规范条款",
+      "source": "engine/report-audits/l3-deep-review-2026-11-16.md#f1",
+      "status": "已映射"
+    },
+    {
+      "finding_id": "F1-2",
+      "fix_status": "已修复",
+      "hit_count": 0,
+      "keywords": [
+        "外推",
+        "基期",
+        "复利",
+        "指数",
+        "SOM"
+      ],
+      "location": "§5.2 外推表",
+      "prevention_rule": "外推公式须显式定义基期；复利指数须与年份差一致（2026 基期 → 2027 为 ^1）",
+      "report": "content/economy/real-estate/dubai/market-sizing/reports/2026-12_baseline_report.html",
+      "root_cause": "外推公式以 2026 为基期却用 ^2/^3，较年份差多计 1 年复利，基期定义未显式声明",
+      "rule_location": "engine/quality/repair-sop.md#sop-08",
+      "rule_type": "规范条款",
+      "source": "engine/report-audits/l3-deep-review-2026-11-16.md#f1",
+      "status": "已映射"
+    },
+    {
+      "finding_id": "F1-3",
+      "fix_status": "已修复",
+      "hit_count": 0,
+      "keywords": [
+        "核验进度",
+        "分母",
+        "分子",
+        "假设",
+        "口径"
+      ],
+      "location": "delta 条",
+      "prevention_rule": "假设核验进度须按 information-layering-spec §ID-05 写明分子=已核验+部分核验数、分母=关键假设总数",
+      "report": "content/economy/real-estate/dubai/market-sizing/reports/2026-12_baseline_report.html",
+      "root_cause": "「假设核验进度 2/9」分母口径未注明，与表内「1/5 已核验」并存，口径不可复核",
+      "rule_location": "engine/templates/information-layering-spec.md#id-05",
+      "rule_type": "规范条款",
+      "source": "engine/report-audits/l3-deep-review-2026-11-16.md#f1",
+      "status": "已映射"
+    },
+    {
+      "finding_id": "F1-4",
+      "fix_status": "已修复",
+      "hit_count": 0,
+      "keywords": [
+        "URL",
+        "来源登记",
+        "registry",
+        "不一致",
+        "死链"
+      ],
+      "location": "§9.1 第 8 条",
+      "prevention_rule": "正文外部 URL 须与来源登记逐条一致；不一致按来源登记覆盖/死头数字处理",
+      "report": "content/economy/real-estate/dubai/market-sizing/reports/2026-12_baseline_report.html",
+      "root_cause": "正文 Digital Dubai 条目 URL 与 source_registry S-008 不一致，来源登记覆盖校验未拦截",
+      "rule_location": "engine/tools/source_check.py#r1",
+      "rule_type": "校验项",
+      "source": "engine/report-audits/l3-deep-review-2026-11-16.md#f1",
+      "status": "已映射"
+    },
+    {
+      "finding_id": "F2-1",
+      "fix_status": "已修复",
+      "hit_count": 0,
+      "keywords": [
+        "盲区",
+        "台账",
+        "数量",
+        "一致性",
+        "blind-spot"
+      ],
+      "location": "§8.3",
+      "prevention_rule": "正文引用盲区数须与 engine/report-audits/blind-spot-ledger.md 状态计数一致（建议 consistency_check 新增名称级校验）",
+      "report": "content/economy/real-estate/dubai/policy-analysis/reports/2026-12_baseline_report.html",
+      "root_cause": "正文「当前盲区数 14」与 blind-spot-ledger（open 12 + in_progress 2 = 15）不符，报告数字与台账缺一致性校验",
+      "rule_location": "engine/tools/consistency_check.py（待新增：正文盲区数 vs 盲区台账）",
+      "rule_type": "校验项",
+      "source": "engine/report-audits/l3-deep-review-2026-11-16.md#f2",
+      "status": "新建"
+    },
+    {
+      "finding_id": "F2-2",
+      "fix_status": "已修复",
+      "hit_count": 0,
+      "keywords": [
+        "需核实原文",
+        "转述",
+        "法条",
+        "Decree",
+        "来源"
+      ],
+      "location": "§4.5",
+      "prevention_rule": "媒体/转述来源出现处须邻近标注「需核实原文」；法条编号须标核实状态",
+      "report": "content/economy/real-estate/dubai/policy-analysis/reports/2026-12_baseline_report.html",
+      "root_cause": "「配合 Decree 43/2013」转引未标「需核实原文」，与 §4.4「不引用法条编号作为事实」矛盾",
+      "rule_location": "engine/tools/source_check.py#r2",
+      "rule_type": "校验项",
+      "source": "engine/report-audits/l3-deep-review-2026-11-16.md#f2",
+      "status": "已映射"
+    },
+    {
+      "finding_id": "F2-3",
+      "fix_status": "已修复",
+      "hit_count": 0,
+      "keywords": [
+        "跨线",
+        "编号",
+        "台账",
+        "指针",
+        "R15"
+      ],
+      "location": "§4.x / §5",
+      "prevention_rule": "跨业务线引用台账编号须注册指针或改用本线编号；不得静默跨线引用",
+      "report": "content/economy/real-estate/dubai/policy-analysis/reports/2026-12_baseline_report.html",
+      "root_cause": "「R15」为 apartment 台账编号，本业务线未登记，跨线引用未注册指针",
+      "rule_location": "engine/quality/repair-sop.md#sop-08",
+      "rule_type": "规范条款",
+      "source": "engine/report-audits/l3-deep-review-2026-11-16.md#f2",
+      "status": "已映射"
+    },
+    {
+      "finding_id": "F3-1",
+      "fix_status": "已修复",
+      "hit_count": 0,
+      "keywords": [
+        "指针",
+        "事实卡",
+        "FC-",
+        "域",
+        "误引"
+      ],
+      "location": "§1 决策摘要第 1 条",
+      "prevention_rule": "事实卡指针须与结论同域；FC-02 仅校验可解析，须新增指针域一致性校验（建议）",
+      "report": "content/economy/insight/reports/2026-12_baseline_report.html",
+      "root_cause": "「迪拜公寓市场」结论挂 FC-SEC-001（阿联酋网络攻击，SEC 域），指针域与结论域错配",
+      "rule_location": "engine/tools/fact_card_check.py（待新增：指针域与结论域一致性）",
+      "rule_type": "校验项",
+      "source": "engine/report-audits/l3-deep-review-2026-11-16.md#f3",
+      "status": "新建"
+    },
+    {
+      "finding_id": "F3-2",
+      "fix_status": "已修复",
+      "hit_count": 0,
+      "keywords": [
+        "已核验",
+        "部分核验",
+        "信息等级",
+        "事实卡",
+        "verify_status"
+      ],
+      "location": "§1 决策摘要第 3 条",
+      "prevention_rule": "报告信息等级须与事实卡 verify_status 一致；决策摘要仅允许已核验/部分核验",
+      "report": "content/economy/insight/reports/2026-12_baseline_report.html",
+      "root_cause": "结论标「已核验」而 FC-SEC-005 verify_status=部分核验，信息等级标注与卡片不一致",
+      "rule_location": "engine/templates/information-layering-spec.md#信息等级",
+      "rule_type": "规范条款",
+      "source": "engine/report-audits/l3-deep-review-2026-11-16.md#f3",
+      "status": "已映射"
+    },
+    {
+      "finding_id": "F3-3",
+      "fix_status": "已修复",
+      "hit_count": 0,
+      "keywords": [
+        "核验进度",
+        "盲区",
+        "分母",
+        "口径",
+        "不可复核"
+      ],
+      "location": "delta 条",
+      "prevention_rule": "假设核验进度须写明分子分母构成，且不得与盲区销号口径混用",
+      "report": "content/economy/insight/reports/2026-12_baseline_report.html",
+      "root_cause": "「假设核验进度 5/15」与盲区台账（closed 0、in_progress 2）口径不符，分子分母不可复核",
+      "rule_location": "engine/templates/information-layering-spec.md#id-05",
+      "rule_type": "规范条款",
+      "source": "engine/report-audits/l3-deep-review-2026-11-16.md#f3",
+      "status": "已映射"
+    },
+    {
+      "finding_id": "F4-1",
+      "fix_status": "已修复",
+      "hit_count": 0,
+      "keywords": [
+        "转述",
+        "需核实原文",
+        "tier",
+        "分级",
+        "BLS"
+      ],
+      "location": "§4 / registry S-002",
+      "prevention_rule": "媒体转述须标「需核实原文」并按业务配置降级；tier 分级须与来源性质一致",
+      "report": "content/economy/trends/reports/2026-11-13_weekly.html",
+      "root_cause": "BLS 数据以 english.ts.cn 转述呈现且未标「需核实原文」，S-002 仍标 tier 1，分级错误",
+      "rule_location": "engine/tools/source_check.py#r2",
+      "rule_type": "校验项",
+      "source": "engine/report-audits/l3-deep-review-2026-11-16.md#f4",
+      "status": "已映射"
+    },
+    {
+      "finding_id": "F4-2",
+      "fix_status": "已修复",
+      "hit_count": 0,
+      "keywords": [
+        "publisher",
+        "机构",
+        "URL",
+        "发布主体",
+        "中国政府网"
+      ],
+      "location": "registry S-010 / S-022 / S-034",
+      "prevention_rule": "来源 publisher 须与 URL 实际发布主体一致（建议 source_check 新增机构名-域名一致性校验）",
+      "report": "content/economy/trends/reports/2026-11-13_weekly.html",
+      "root_cause": "publisher 均写「中国政府网」，与 URL（mofcom / pbc.gov.cn / mofcom.gov.cn）实际发布主体不符",
+      "rule_location": "engine/tools/source_check.py（待新增：publisher 与 URL 主数据一致性）",
+      "rule_type": "校验项",
+      "source": "engine/report-audits/l3-deep-review-2026-11-16.md#f4",
+      "status": "新建"
+    },
+    {
+      "finding_id": "F4-3",
+      "fix_status": "已修复",
+      "hit_count": 0,
+      "keywords": [
+        "基期",
+        "跌幅",
+        "百分比",
+        "口径",
+        "油价"
+      ],
+      "location": "§1 / §4.2",
+      "prevention_rule": "幅度表述须给基期与计算口径；不得使用无基期百分比",
+      "report": "content/economy/trends/reports/2026-11-13_weekly.html",
+      "root_cause": "「月内累跌约 21%」未给基期，按 9 月均价 114 计为 −16.5%，口径不可复核",
+      "rule_location": "engine/quality/repair-sop.md#sop-08",
+      "rule_type": "规范条款",
+      "source": "engine/report-audits/l3-deep-review-2026-11-16.md#f4",
+      "status": "已映射"
+    },
+    {
+      "finding_id": "F4-4",
+      "fix_status": "已修复",
+      "hit_count": 0,
+      "keywords": [
+        "跨线",
+        "口径冲突",
+        "政策乘数",
+        "入模",
+        "一致性"
+      ],
+      "location": "delta 条",
+      "prevention_rule": "跨线口径冲突须按主题间内容冲突裁决；政策乘数口径须全库一致",
+      "report": "content/economy/trends/reports/2026-11-13_weekly.html",
+      "root_cause": "「需求弹性与政策乘数已入模」与 policy-analysis / decision-hub「乘数不可估、不入模」跨线判断冲突",
+      "rule_location": "engine/quality/repair-sop.md#sop-01",
+      "rule_type": "规范条款",
+      "source": "engine/report-audits/l3-deep-review-2026-11-16.md#f4",
+      "status": "已映射"
+    }
+  ],
+  "rule_types": [
+    "校验项",
+    "提示词条款",
+    "模板修订",
+    "规范条款"
+  ],
+  "schema_version": "1.0",
+  "spec": "FINDING-RULE-LEDGER v1.0",
+  "statuses": [
+    "已映射",
+    "新建",
+    "待补规则"
+  ]
+}
