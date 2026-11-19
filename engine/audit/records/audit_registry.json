@@ -1299,6 +1299,54 @@
           "audit_id": ""
         }
       }
+    },
+    "engine/report-audits/information-quality-improvement-plan-2026-11-19.md": {
+      "title": "信息质量改进实施方案（INFORMATION-QUALITY-IMPROVEMENT-PLAN v1.0）",
+      "kind": "audit",
+      "category": "audit-doc",
+      "business_line": "engine/report-audits",
+      "status": "draft",
+      "stages": {
+        "draft": false,
+        "initial": false,
+        "second": false,
+        "final": false
+      },
+      "mark": false,
+      "first_seen_at": "2026-11-19",
+      "evidence": {
+        "report": "engine/report-audits/information-quality-improvement-plan-2026-11-19.md",
+        "business_line": "engine/report-audits",
+        "plans": [
+          {
+            "slug": "info-quality-plan",
+            "plan": "engine/audit/records/tasks/info-quality-plan/plan.json",
+            "tasks": "engine/audit/records/tasks/info-quality-plan/tasks.json",
+            "risks": "engine/audit/records/tasks/info-quality-plan/risks.json",
+            "reports": [
+              "engine/report-audits/information-quality-improvement-plan-2026-11-19.md"
+            ],
+            "task_count": 6,
+            "risk_count": 2
+          }
+        ],
+        "gate": {
+          "entry": "engine/tools/optimization_gate.py",
+          "probe": true
+        },
+        "audit": {
+          "review": "",
+          "status": "draft",
+          "stages": {
+            "draft": false,
+            "initial": false,
+            "second": false,
+            "final": false
+          },
+          "mark_level": "none",
+          "audit_id": ""
+        }
+      }
     }
   }
 }
