@@ -1731,6 +1731,42 @@
       "audit_id": "AUD-2026-11-19-008",
       "mark_level": "pre",
       "audited_at": "2026-11-19T10:16:39+00:00"
+    },
+    "engine/report-audits/optimization-solution-and-implementation-checklist-2026-11-19.md": {
+      "title": "优化解决方案与实施清单（OPTIMIZATION-SOLUTION-AND-IMPLEMENTATION-CHECKLIST v1.0）",
+      "kind": "audit",
+      "category": "audit-doc",
+      "business_line": "engine/report-audits",
+      "status": "draft",
+      "stages": {
+        "draft": false,
+        "initial": false,
+        "second": false,
+        "final": false
+      },
+      "mark": false,
+      "first_seen_at": "2026-11-19",
+      "evidence": {
+        "report": "engine/report-audits/optimization-solution-and-implementation-checklist-2026-11-19.md",
+        "business_line": "engine/report-audits",
+        "plans": [],
+        "gate": {
+          "entry": "engine/tools/optimization_gate.py",
+          "probe": true
+        },
+        "audit": {
+          "review": "",
+          "status": "draft",
+          "stages": {
+            "draft": false,
+            "initial": false,
+            "second": false,
+            "final": false
+          },
+          "mark_level": "none",
+          "audit_id": ""
+        }
+      }
     }
   }
 }

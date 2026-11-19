@@ -4,6 +4,7 @@
 > **依据**：[信息分层规范](../templates/information-layering-spec.md)、[决策交付规范](../templates/decision-delivery-spec.md)、[质量 rubric](../quality/rubric.md)、[目标对齐方案 v1.2](goal-alignment-optimization-plan-2026-11-18.md)
 > **方法**：以 2026-11-19 实测为基线（`optimization_gate --probe` 0E / 8W、`info_gap_metrics.py`、`info_density_check.py`、`research_kernel_check.py`、盲区台账），逐项给出「动作 / 涉及文件 / 验收标准 / 门禁映射 / 优先级」。
 > **读者**：决策者读第 0 节；执行者读第 2、3 节。
+> **收口整合**：[优化解决方案与实施清单](optimization-solution-and-implementation-checklist-2026-11-19.md)（2026-11-19；双视角闭环 + 16 项验证对齐清单）。
 > **等级标注**：本方案自身按信息分层规范第二节标注——`已核验`（代码 / 工具 / 文件实测）、`部分核验`（抽样推断）、`推断`（机制分析）、`假设`（待验证）。
 
 ---
@@ -217,3 +218,4 @@
 | v1.0 | 2026-11-19 | 初始版本 | 5 项问题（P-A…P-E）+ 5 个杠杆（P0-1…P1-5）+ 实施顺序（S1–S6）+ 风险与反向证据 |
 | v1.1 | 2026-11-19 | 追加 §5 就绪与阻塞说明；批 A 工具收口 | IGI-05 口径校准（块类型 + 指针 + 防刷，0.9338→0.9299）；A-01/A-03/L-03/R-03 接线；L-03 阈值正则重写（0/0 → 21/48）；R-03 字典 LLM→TOOL；scheduled-maintenance 接入 IGI 快照 |
 | v1.2 | 2026-11-19 | S2 取数阻塞登记 | P0 四类取数未获官方一手来源；责任周期 2026-12 → 2027-03；发布日历增补收入/薪酬行；采集清单四项转 blocked |
+| v1.3 | 2026-11-19 | 收口整合 | 新增整合文档 [优化解决方案与实施清单](optimization-solution-and-implementation-checklist-2026-11-19.md)；双视角闭环 + 16 项验证对齐清单 |
