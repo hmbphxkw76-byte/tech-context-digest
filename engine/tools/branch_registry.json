@@ -84,6 +84,13 @@
       "slug": "goal-alignment-p0",
       "task": "goal-alignment-p0"
     },
+    "task/info-quality-plan-79ac0e87": {
+      "note": "source=env:CATPAW_CONVERSATION_ID",
+      "session": "79ac0e87e519415a916d64fdc92a890c",
+      "session_short": "79ac0e87",
+      "slug": "info-quality-plan",
+      "task": "info-quality-plan"
+    },
     "task/mainline-adoption-assess-8e70425f": {
       "note": "source=env:CATPAW_CONVERSATION_ID",
       "session": "8e70425f74ef40dfbbabc8e45ad4e542",
