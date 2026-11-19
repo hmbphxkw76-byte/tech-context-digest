@@ -32,6 +32,11 @@
    "lang": "en",
    "verify_status": "verified",
    "updated": "2026-11-18",
+   "evidence": {
+    "method": "manual",
+    "snapshot_date": "2026-11-18",
+    "note": "T-01 字段示例：登记信息人工核对（未抓取正文，故无 archive_hash）"
+   },
    "in_synthesis": false,
    "used_in": [
     "2026-11_baseline_report.html"
@@ -46,6 +51,11 @@
    "lang": "en",
    "verify_status": "verified",
    "updated": "2026-11-18",
+   "evidence": {
+    "method": "manual",
+    "snapshot_date": "2026-11-18",
+    "note": "T-01 字段示例：登记信息人工核对（未抓取正文，故无 archive_hash）"
+   },
    "in_synthesis": false,
    "used_in": [
     "2026-11_baseline_report.html"
@@ -60,6 +70,11 @@
    "lang": "en",
    "verify_status": "verified",
    "updated": "2026-11-18",
+   "evidence": {
+    "method": "manual",
+    "snapshot_date": "2026-11-18",
+    "note": "T-01 字段示例：登记信息人工核对（未抓取正文，故无 archive_hash）"
+   },
    "in_synthesis": false,
    "used_in": [
     "2026-11_baseline_report.html"

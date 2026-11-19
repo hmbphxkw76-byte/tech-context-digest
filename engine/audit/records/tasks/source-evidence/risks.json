@@ -1,0 +1,8 @@
+[
+  {
+    "description": "改动 source_check 破坏既有规则",
+    "id": "R-1",
+    "mitigation": "保持 R1-R7 不变",
+    "owner": ""
+  }
+]

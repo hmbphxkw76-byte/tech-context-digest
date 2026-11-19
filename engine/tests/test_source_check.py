@@ -450,31 +450,39 @@ class TestR8RegistryFields(unittest.TestCase):
 
     def test_valid_entry_has_no_findings(self):
         reg = _reg({"source_id": "S1", "tier": 1, "verify_status": "verified",
-                    "updated": "2026-11-18"})
+                    "updated": "2026-11-18",
+                    "evidence": {"method": "manual", "snapshot_date": "2026-11-18"}})
         self.assertEqual(source_check.check_registry_fields(reg), [])
 
     def test_unverifiable_is_allowed(self):
         reg = _reg({"source_id": "S1", "tier": 2, "verify_status": "unverifiable",
-                    "updated": "2026-11-18"})
+                    "updated": "2026-11-18",
+                    "evidence": {"method": "web_fetch", "snapshot_date": "2026-11-18"}})
         self.assertEqual(source_check.check_registry_fields(reg), [])
 
     def test_illegal_status_and_missing_updated_warn(self):
         reg = _reg({"source_id": "S1", "tier": 1, "verify_status": "待核实"})
         issues = source_check.check_registry_fields(reg)
         self.assertTrue(all(lvl == "W" for lvl, _ in issues))
-        self.assertEqual(len(issues), 2)
+        # verify_status 非法 + updated 缺失 + evidence 覆盖汇总（缺失不阻断）
+        self.assertEqual(len(issues), 3)
         self.assertTrue(any("verify_status" in msg for _, msg in issues))
         self.assertTrue(any("updated" in msg for _, msg in issues))
+        self.assertTrue(any("evidence 覆盖" in msg for _, msg in issues))
 
     def test_malformed_updated_warns(self):
         reg = _reg({"source_id": "S1", "tier": 1, "verify_status": "verified",
                     "updated": "2026/11/18"})
         issues = source_check.check_registry_fields(reg)
-        self.assertEqual(len(issues), 1)
-        self.assertIn("updated", issues[0][1])
+        # updated 非法 + evidence 覆盖汇总
+        self.assertEqual(len(issues), 2)
+        self.assertTrue(any("updated" in msg for _, msg in issues))
 
     def test_repo_registries_are_clean(self):
-        """全仓来源登记条目字段完备（P1-6 存量补字段后应零告警）。"""
+        """全仓来源登记条目字段完备（P1-6 存量补字段后应零告警）。
+
+        T-01 起 evidence 为可选数据卫生项：缺失仅汇总 [W]，不计入「字段完备」断言。
+        """
         import glob
         import json
         found = False
@@ -482,8 +490,191 @@ class TestR8RegistryFields(unittest.TestCase):
                            recursive=True):
             found = True
             reg = json.loads(Path(f).read_text(encoding="utf-8"))
-            self.assertEqual(source_check.check_registry_fields(reg), [], f)
+            issues = [msg for _, msg in source_check.check_registry_fields(reg)
+                       if "evidence 覆盖" not in msg]
+            self.assertEqual(issues, [], f)
         self.assertTrue(found, "未找到任何 source_registry.json")
+
+
+class TestEvidenceField(unittest.TestCase):
+    """T-01：evidence 可选字段——合法取值 / 非法告警 / 覆盖率统计（缺失不阻断）。"""
+
+    def test_valid_evidence_has_no_finding(self):
+        reg = _reg({"source_id": "S1", "tier": 1, "verify_status": "verified",
+                    "updated": "2026-11-18",
+                    "evidence": {"method": "web_fetch", "snapshot_date": "2026-11-18",
+                                "archive_hash": "a" * 64, "note": "已抓取正文"}})
+        issues = source_check.check_registry_fields(reg)
+        self.assertEqual(issues, [])
+
+    def test_illegal_method_warns_only(self):
+        reg = _reg({"source_id": "S1", "tier": 1, "verify_status": "verified",
+                    "updated": "2026-11-18",
+                    "evidence": {"method": "口头", "snapshot_date": "2026-11-18"}})
+        issues = source_check.check_registry_fields(reg)
+        self.assertTrue(all(lvl == "W" for lvl, _ in issues))
+        self.assertTrue(any("evidence.method" in msg for _, msg in issues))
+
+    def test_illegal_snapshot_date_warns(self):
+        reg = _reg({"source_id": "S1", "tier": 1, "verify_status": "verified",
+                    "updated": "2026-11-18",
+                    "evidence": {"method": "pdf", "snapshot_date": "2026/11/18"}})
+        issues = source_check.check_registry_fields(reg)
+        self.assertTrue(any("snapshot_date" in msg for _, msg in issues))
+
+    def test_illegal_archive_hash_warns(self):
+        reg = _reg({"source_id": "S1", "tier": 1, "verify_status": "verified",
+                    "updated": "2026-11-18",
+                    "evidence": {"method": "manual", "archive_hash": "zz"}})
+        issues = source_check.check_registry_fields(reg)
+        self.assertTrue(any("archive_hash" in msg for _, msg in issues))
+
+    def test_non_dict_evidence_warns(self):
+        reg = _reg({"source_id": "S1", "tier": 1, "verify_status": "verified",
+                    "updated": "2026-11-18", "evidence": "manual"})
+        issues = source_check.check_registry_fields(reg)
+        self.assertTrue(any("evidence 须为对象" in msg for _, msg in issues))
+
+    def test_missing_evidence_is_aggregate_warning_not_blocking(self):
+        reg = _reg(
+            {"source_id": "S1", "tier": 1, "verify_status": "verified",
+             "updated": "2026-11-18"},
+            {"source_id": "S2", "tier": 2, "verify_status": "verified",
+             "updated": "2026-11-18",
+             "evidence": {"method": "manual", "snapshot_date": "2026-11-18"}},
+        )
+        issues = source_check.check_registry_fields(reg)
+        self.assertTrue(all(lvl == "W" for lvl, _ in issues))
+        self.assertEqual(len(issues), 1)
+        self.assertIn("1/2", issues[0][1])
+        self.assertIn("不阻断", issues[0][1])
+
+    def test_coverage_stats(self):
+        reg = _reg(
+            {"source_id": "S1", "tier": 1, "verify_status": "verified",
+             "updated": "2026-11-18"},
+            {"source_id": "S2", "tier": 2, "verify_status": "verified",
+             "updated": "2026-11-18", "evidence": {"note": "仅备注"}},
+        )
+        cov = source_check.evidence_coverage(reg)
+        self.assertEqual(cov, {"total": 2, "with_evidence": 1, "missing": 1, "ratio": 0.5})
+        self.assertEqual(source_check.evidence_coverage(_reg())["ratio"], 1.0)
+
+    def test_sample_registry_has_three_evidence_entries(self):
+        """T-01 验收：抽样登记至少 3 条含 evidence（示例补登记）。"""
+        import json
+        reg = json.loads((ROOT / "data" / "processed" / "tech" / "security" / "dubai"
+                          / "source_registry.json").read_text(encoding="utf-8"))
+        cov = source_check.evidence_coverage(reg)
+        self.assertGreaterEqual(cov["with_evidence"], 3)
+
+
+class TestContentFingerprint(unittest.TestCase):
+    """T-01：tier∈{1,2} 且 in_synthesis=true 的来源正文指纹与变更检测。"""
+
+    def _reg(self):
+        return _reg(
+            {"source_id": "S1", "tier": 1, "in_synthesis": True,
+             "verify_status": "verified", "updated": "2026-11-18"},
+            {"source_id": "S2", "tier": 2, "in_synthesis": True,
+             "verify_status": "verified", "updated": "2026-11-18"},
+            {"source_id": "S3", "tier": 3, "in_synthesis": True,
+             "verify_status": "verified", "updated": "2026-11-18"},
+            {"source_id": "S4", "tier": 1, "in_synthesis": False,
+             "verify_status": "verified", "updated": "2026-11-18"},
+        )
+
+    def test_fingerprint_is_sha256_and_crlf_stable(self):
+        import hashlib
+        nl = chr(10)
+        crlf = chr(13) + nl
+        self.assertEqual(source_check.content_fingerprint("正文" + nl),
+                         hashlib.sha256(("正文" + nl).encode("utf-8")).hexdigest())
+        self.assertEqual(source_check.content_fingerprint("正文" + crlf),
+                         source_check.content_fingerprint("正文" + nl))
+
+    def test_eligible_is_tier12_and_in_synthesis(self):
+        ids = {s["source_id"] for s in source_check.fingerprint_eligible(self._reg())}
+        self.assertEqual(ids, {"S1", "S2"})
+
+    def test_collect_only_eligible_with_snapshot(self):
+        fps = source_check.collect_fingerprints(
+            self._reg(), {"S1": "甲", "S2": "乙", "S3": "丙", "S4": "丁"})
+        self.assertEqual(set(fps), {"S1", "S2"})
+        self.assertEqual(fps["S1"], source_check.content_fingerprint("甲"))
+
+    def test_change_detection(self):
+        reg = self._reg()
+        prev = source_check.collect_fingerprints(reg, {"S1": "甲", "S2": "乙"})
+        cur = source_check.collect_fingerprints(reg, {"S1": "甲改", "S2": "乙"})
+        d = source_check.compare_fingerprints(prev, cur)
+        self.assertEqual(d["changed"], ["S1"])
+        self.assertEqual(d["new"], [])
+        self.assertEqual(d["removed"], [])
+
+    def test_new_and_removed_detection(self):
+        reg = self._reg()
+        prev = source_check.collect_fingerprints(reg, {"S1": "甲"})
+        cur = source_check.collect_fingerprints(reg, {"S2": "乙"})
+        d = source_check.compare_fingerprints(prev, cur)
+        self.assertEqual(d["new"], ["S2"])
+        self.assertEqual(d["removed"], ["S1"])
+
+    def test_store_roundtrip_and_deterministic(self):
+        import json
+        import tempfile
+        reg = self._reg()
+        fps = source_check.collect_fingerprints(reg, {"S1": "甲", "S2": "乙"})
+        with tempfile.TemporaryDirectory() as tmp:
+            p = Path(tmp) / "fp.json"
+            source_check.emit_fingerprint_store(p, fps)
+            source_check.emit_fingerprint_store(p, fps)
+            self.assertEqual(p.read_text(encoding="utf-8"),
+                             p.read_text(encoding="utf-8"))
+            self.assertEqual(source_check.load_fingerprint_store(p), fps)
+            doc = json.loads(p.read_text(encoding="utf-8"))
+            self.assertEqual(doc["schema_version"], source_check.FINGERPRINT_STORE_SCHEMA)
+
+    def test_load_snapshots_reads_txt_and_md(self):
+        import tempfile
+        with tempfile.TemporaryDirectory() as tmp:
+            (Path(tmp) / "S1.txt").write_text("甲", encoding="utf-8")
+            (Path(tmp) / "S2.md").write_text("乙", encoding="utf-8")
+            (Path(tmp) / "ignore.json").write_text("{}", encoding="utf-8")
+            self.assertEqual(source_check.load_snapshots(Path(tmp)), {"S1": "甲", "S2": "乙"})
+
+    def test_fingerprint_mode_requires_args(self):
+        code, lines = source_check.fingerprint_mode(None, "x")
+        self.assertEqual(code, 1)
+        code, lines = source_check.fingerprint_mode("x", None)
+        self.assertEqual(code, 1)
+
+    def test_fingerprint_mode_emits_and_detects_change(self):
+        import json
+        import tempfile
+        reg_rel = "data/processed/economy/dubai/apartment/source_registry.json"
+        with tempfile.TemporaryDirectory() as tmp:
+            snap = Path(tmp) / "snap"
+            snap.mkdir()
+            store = Path(tmp) / "fp.json"
+            # 选两条合格来源：从登记中取 tier1/2 且 in_synthesis 的 source_id
+            reg = json.loads((ROOT / reg_rel).read_text(encoding="utf-8"))
+            eligible = source_check.fingerprint_eligible(reg)
+            self.assertGreaterEqual(len(eligible), 2)
+            for s in eligible[:2]:
+                (snap / f"{s['source_id']}.txt").write_text(
+                    f"正文 {s['source_id']}", encoding="utf-8")
+            code, lines = source_check.fingerprint_mode(reg_rel, str(snap))
+            self.assertEqual(code, 0, lines)
+            code, lines = source_check.fingerprint_mode(reg_rel, str(snap),
+                                                        store_path=str(store), emit=True)
+            self.assertEqual(code, 0, lines)
+            # 变更一条正文 -> 漂移
+            first = eligible[0]["source_id"]
+            (snap / f"{first}.txt").write_text("正文 已改", encoding="utf-8")
+            code, lines = source_check.fingerprint_mode(reg_rel, str(snap), store_path=str(store))
+            self.assertEqual(code, 2)
+            self.assertTrue(any("CHANGED" in ln and first in ln for ln in lines), lines)
 
 
 class TestProbeExemptions(unittest.TestCase):
