@@ -8,7 +8,7 @@
 > **优先级**：**P0 = 就业、收入、空置、竣工四类**（优先补充）；其余 P1 / P2。
 > **目标**：盲区数 15 → ≤6（KPI-5，Phase 3 末）；P0 四类先行消号。
 > **校验**：`python engine/tools/blind_spot_check.py`（字段 / 状态 / 责任周期 / P0 四类）。
-> **最后更新**：2026-11-19
+> **最后更新**：2026-11-19（E1/F1 定向取数留痕，见「阻塞与取数记录」）
 
 | ID | 项目 | 优先级 | 影响 | 发现日期 | 责任周期 | 消号条件 | 状态 | 关联 KPI |
 |---|---|---|---|---|---|---|---|---|
@@ -36,14 +36,29 @@
 
 ## 阻塞与取数记录（2026-11-19）
 
-**P0 四类取数尝试**：本环境检索（web 搜索 / 抓取）未返回可核验的官方一手来源——DDSE / Dubai Statistics Centre、DLD、DM、ValuStrat / REIDIN 官方页均未命中。按「不虚报消号」原则，四类均**不消号**，责任周期由 2026-12 顺延至 2027-03，阻塞原因登记如下。
+**P0 四类取数尝试（首轮）**：本环境检索（web 搜索 / 抓取）未返回可核验的官方一手来源——DDSE / Dubai Statistics Centre、DLD、DM、ValuStrat / REIDIN 官方页均未命中。按「不虚报消号」原则，四类均**不消号**，责任周期由 2026-12 顺延至 2027-03。
+
+**E1/F1 定向取数（2026-11-19 复核）**：详见下方「定向取数留痕」。结论：B02 / B15 命中 DDSE 官方公告但**结果未发布**；B01 / B03 仅获机构入口或官方通讯稿转述，均未满足消号条件。四类维持不消号，责任周期维持 2027-03。
 
 | 关联盲区 | 阻塞原因 | 解除条件 |
 |---|---|---|
-| B01（阻塞） | 未获取 ValuStrat / REIDIN 官方季报与 DLD 单元数据集入口 | 取得 ≥1 机构季报 + DLD 数据集，记录代理与校准方式（消号条件②） |
-| B02（阻塞） | 2026 Dubai LFS 调查结果未见官方发布；检索未命中官方页 | 结果发布后双源入库（消号条件①） |
-| B03（阻塞） | 未获取 DM 竣工证书官方序列与机构三口径 | 取得官方 / 机构序列并并列口径（消号条件②） |
-| B15（阻塞） | 未获取 LFS 收入分项与薪酬指南官方英文页 | 双源入库（消号条件①） |
+| B01（阻塞） | ValuStrat 官方季报入口已定位（《Dubai Real Estate Review Q3 2026》），但正文被浏览器验证拦截；REIDIN 被 Cloudflare 拦截；DLD 单元数据集入口未取得 | 取得 ≥1 机构季报可核验数值 + DLD 数据集，记录代理与校准方式（消号条件②） |
+| B02（阻塞） | DDSE 官方已启动 LFS 2026（样本 5,000 户），**结果尚未发布**；无官方失业率数值 | 结果发布后双源入库（消号条件①） |
+| B03（阻塞） | WAM 通讯稿转述 DLD 2025 竣工数据（124 个项目 / AED27.5bn）已获，但未获 DLD 官方页与 DM 竣工证书序列，且非双源 | 取得官方 / 机构序列并并列口径（消号条件②） |
+| B15（阻塞） | LFS 2026 收入分项随结果待发布；Michael Page / Hays 未获 UAE 2026 官方页 | 双源入库（消号条件①） |
+
+### 定向取数留痕（E1/F1，2026-11-19）
+
+> 检索环境：web 搜索 + 页面抓取；目标来源级别：官方一手（DDSE / Digital Dubai、DLD、Dubai Municipality、ValuStrat / REIDIN 官方页、CBUAE、FCSC）。原则：不放宽来源级别、不虚报消号。
+
+| 关联盲区 | 查询词 | 命中 | 来源 / URL | 处置 |
+|---|---|---|---|---|
+| B02 / B15（就业 / 收入） | `Digital Dubai Labour Force Survey 2026` | 命中（官方） | [Source: https://www.digitaldubai.ae/newsroom/news/digital-dubai-launches-the-labour-force-survey-2026-to-strengthen-data-driven-labour-market-planning-and-decision-making, 2026] | DDSE 官方公告 LFS 2026 已启动（样本 5,000 户，覆盖就业 / 失业 / 职业 / 行业分项），**结果未发布** → 消号条件①未满足，维持 blocked |
+| B01（空置） | `ValuStrat Dubai Real Estate Review Q3 2026` | 部分命中（机构） | [Source: https://www.valustrat.com/, 2026] | 官方列出《Dubai Real Estate Review Q3 2026》(2026-10-21)、《Dubai VPI Residential Values October 2026》(2026-11-10) 免费下载；正文页被浏览器验证拦截，未获空置率数值 → 消号条件②未满足 |
+| B01（空置） | `REIDIN Dubai vacancy rate 2026` | 未命中 | https://www.reidin.com/（Cloudflare 拦截） | 无官方 / 机构空置序列 |
+| B03（竣工） | `Dubai completed projects 2025 DLD` | 部分命中（官方通讯稿转述） | [Source: https://www.chinadaily.com.cn/a/202602/24/WS699d6545a310d6866eb3a085.html, 2026]（WAM 通讯稿转载，2026-02-24） | WAM 转述 DLD：2025 竣工项目 124 个（+7%）、价值 AED27.5bn（+23%）；未获 DLD 官方页 / DM 竣工证书序列，且非双源 → 消号条件②未满足 |
+| B03（竣工） | `Dubai Municipality completion certificates statistics` | 未命中 | https://www.dm.gov.ae/municipality-business/buildings-regulation-permits-agency/ | DM 官方页仅列法规，无竣工统计 |
+| B15（收入） | `Michael Page / Hays UAE salary guide 2026` | 未命中 | https://www.michaelpage.com/salary-guides | 仅见美国 / 中国 / 马来西亚版，无 UAE 2026 版 |
 
 **处置说明**：P0 类别不得降级（`blind_spot_check` BS-04 要求四类恒为 P0），故不以「转 P1」方式处理；改为**更新责任周期 + 登记阻塞**。解除阻塞需官方发布或可核验的机构一手页（见[数据采集清单](data-acquisition-checklist.md)）。
 
@@ -54,3 +69,4 @@
 | 2026-11-14 | 建立台账 | 由年度未核验清单 14 项转入；机制上线 |
 | 2026-11-15 | 优先级 + 收入项 | 新增「优先级」列；P0 四类（就业 / 收入 / 空置 / 竣工）；新增 B15 收入 / 薪资序列；接入 `blind_spot_check.py` 校验 |
 | 2026-11-19 | P0 四类阻塞登记 | 取数尝试未获官方一手来源（检索未命中）；按「不虚报消号」不消号，责任周期 2026-12 → 2027-03；新增「阻塞与取数记录」节 |
+| 2026-11-19 | E1/F1 定向取数留痕 | 复核命中：DDSE 官方 LFS 2026 启动公告（结果未发布）、ValuStrat 官方季报入口（正文拦截）、WAM 转述 DLD 2025 竣工数据；四类均不满足消号条件，维持 open / in_progress 与责任周期 2027-03；新增「定向取数留痕」表 |

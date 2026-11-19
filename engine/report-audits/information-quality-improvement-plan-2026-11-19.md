@@ -1,6 +1,6 @@
-# 信息质量改进实施方案（INFORMATION-QUALITY-IMPROVEMENT-PLAN v1.0）
+# 信息质量改进实施方案（INFORMATION-QUALITY-IMPROVEMENT-PLAN v1.2）
 
-> **状态**：现行方案 v1.1（2026-11-19 评估产出；同日追加「就绪与阻塞说明」与批 A 工具收口）
+> **状态**：现行方案 v1.2（2026-11-19 评估产出；同日追加「就绪与阻塞说明」与批 A 工具收口，并登记 S2 取数阻塞）
 > **依据**：[信息分层规范](../templates/information-layering-spec.md)、[决策交付规范](../templates/decision-delivery-spec.md)、[质量 rubric](../quality/rubric.md)、[目标对齐方案 v1.2](goal-alignment-optimization-plan-2026-11-18.md)
 > **方法**：以 2026-11-19 实测为基线（`optimization_gate --probe` 0E / 8W、`info_gap_metrics.py`、`info_density_check.py`、`research_kernel_check.py`、盲区台账），逐项给出「动作 / 涉及文件 / 验收标准 / 门禁映射 / 优先级」。
 > **读者**：决策者读第 0 节；执行者读第 2、3 节。

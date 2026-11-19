@@ -1,0 +1,13 @@
+{
+  "report": "content/economy/trends/reports/2026-11-20_weekly.html",
+  "business_line": "content/economy/trends",
+  "cycle": "weekly",
+  "period": "2026-11-20",
+  "previous": "content/economy/trends/reports/2026-11-13_weekly.html",
+  "findings": [],
+  "added": 6,
+  "removed": 0,
+  "modified": 17,
+  "changed_blocks": 23,
+  "total_blocks": 570
+}

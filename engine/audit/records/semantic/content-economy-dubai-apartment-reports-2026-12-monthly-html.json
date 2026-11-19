@@ -1,0 +1,13 @@
+{
+  "report": "content/economy/dubai/apartment/reports/2026-12_monthly.html",
+  "business_line": "content/economy/dubai/apartment",
+  "cycle": "monthly",
+  "period": "2026-12",
+  "previous": "content/economy/dubai/apartment/reports/2026-11_monthly.html",
+  "findings": [],
+  "added": 5,
+  "removed": 3,
+  "modified": 31,
+  "changed_blocks": 36,
+  "total_blocks": 673
+}

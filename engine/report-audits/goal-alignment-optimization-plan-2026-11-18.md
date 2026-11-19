@@ -214,7 +214,7 @@
 | S5 | 假设不得进入决策摘要点值 | information-layering §2.3-3 | 已由 P0-2（ID-04 点值检查）落地 | [E] |
 | S6 | 模型契约：指标定义 / 阈值 / 口径三处一致 | decision-delivery §4 | 新增契约门禁，接 `L-03` 阈值三处一致 | [W] |
 | S7 | 不得复制决策卡全文 / 卡片同义复述 | information-layering §5.3 | 重复率代理校验，接 `R-03` | [W] |
-| S8 | 共享 boilerplate 上移后报告残留 | prompt-generic-base §10 | 残留率代理校验，接 `R-02` | [W] |
+| S8 | 共享 boilerplate 上移后报告残留 | prompt-generic-base §10 | 残留率代理校验，接 `I-01`（I-01 公式已含「未整段复制共享 boilerplate」） | [W] |
 
 **执行顺序**：S1（新增渲染门禁）→ S2 / S3（一致性 / 版本）→ S4（命名收口）→ S6–S8（契约与重复率，随批次 C / D 收口）。
 

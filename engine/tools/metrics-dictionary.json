@@ -14,7 +14,7 @@
     {"metric_id": "A-02", "name": "来源分级合规率", "formula": "合规来源条目数 / 来源条目总数", "threshold": "=1.0", "severity": "P1", "detected_by": "LLM", "owner": "quality", "aliases": []},
     {"metric_id": "A-03", "name": "数值一致率", "formula": "与登记册/台账一致的可核对数值数 / 可核对数值总数", "threshold": ">=0.99", "severity": "P0", "detected_by": "MIXED", "owner": "audit+quality", "aliases": ["L3-4.1", "L3-信息准确性"]},
     {"metric_id": "A-04", "name": "新鲜度合规率", "formula": "在声明时效内的数据条目数 / 数据条目总数", "threshold": ">=0.9", "severity": "P1", "detected_by": "LLM", "owner": "quality", "aliases": []},
-    {"metric_id": "A-05", "name": "链接可达率", "formula": "可达链接数 / 链接总数", "threshold": "=1.0", "severity": "P0", "detected_by": "TOOL", "owner": "audit+quality", "aliases": ["L1-6"]},
+    {"metric_id": "A-05", "name": "链接可达率", "formula": "可达链接数 / 链接总数", "threshold": "=1.0", "severity": "P0", "detected_by": "TOOL", "owner": "audit+quality", "aliases": ["L1-6"], "note": "接线（2026-11-19）：metric_coverage.a05_link_reachability 复用 source_check --probe 定期落盘 engine/audit/records/link-probe.json；可达=ok（明确可达），dead（404/410/451）/ unreachable（超时/反爬）不计入；分母=探测集（报告 URL ∪ 登记 URL，剔除自引用）；记录缺失 / 分母 0 标 probe 不伪造；只读记录不取墙钟（与 C-05 gate-period 锚点口径同）。"},
 
     {"metric_id": "L-01", "name": "跨章节数值一致率", "formula": "1 - 同一指标冲突数 / 指标总数", "threshold": ">=0.99", "severity": "P0", "detected_by": "LLM", "owner": "audit+quality", "aliases": ["L3-4.3", "L3-数据一致性"]},
     {"metric_id": "L-02", "name": "口径一致率", "formula": "遵守术语口径区分表的条目数 / 应遵守条目数", "threshold": "=1.0", "severity": "P1", "detected_by": "LLM", "owner": "quality", "aliases": []},
