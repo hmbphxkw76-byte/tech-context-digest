@@ -2,15 +2,15 @@
   "schema_version": "1.0",
   "comment": "正式发布报告指纹（sha256，确定性无时间戳）。由 publish_fingerprint.py --emit 生成。",
   "fingerprints": {
-    "content/economy/dubai/apartment/reports/2026-11_baseline_report.html": "3aa8b27f6bebbfac275e8d7825fdfa6aa2760ed7fc518329dbac5a2a800eded5",
+    "content/economy/dubai/apartment/reports/2026-11_baseline_report.html": "a6c4496a2d3560343fee2a176c07b9826a3bf0de48b0c9ee5876d7c93548558a",
     "content/economy/dubai/apartment/reports/2026-11_monthly.html": "8677bea9925b605f55d47cd9ff3e736a8b029f046a2a22ee9da69fa9dfa02e9c",
     "content/economy/dubai/apartment/reports/2026-Q3_quarterly.html": "0f48ada9e4ee25b2cec03fedab43428362b56fea11b12952c2bb45c32668ee86",
     "content/economy/dubai/apartment/reports/2026_annual.html": "cbe83490080d106fca6ba588f2784dc94ebb90699b27f32e6d1c2f1140d435a1",
     "content/economy/insight/reports/2026-12_baseline_report.html": "fe448b63966b7178bf6186b7e91a4e07bb5d41fddc080208e0e6c54f80585d63",
     "content/economy/trends/reports/2026-11-13_weekly.html": "0f29d77610826807bc48580967afc079966cc929b3a850b06c9a077ad065b20a",
-    "content/tech/competitive-intelligence/dubai/reports/2026-12_baseline_report.html": "413e50b60e67fbb357201ab1d08bc0ca43e1202c627c0bafc711eab3ad3724eb",
-    "content/tech/industry-research/dubai/reports/2026-12_baseline_report.html": "1932e2480d9f9962b42cfaa65bb82ae5d1f1d140a75758d375002cbfae0f50c6",
-    "content/tech/security/dubai/reports/2026-11_baseline_report.html": "b3cdb2268b0a42a72bc368e4005ce9e317f18cfee0a78b15586caece49a4d26e",
-    "content/tech/weekly-roundup/reports/2026-11-13_weekly.html": "d960f9ef7440f7c665e0414200a853a61779034ac74722bf8831771149dffe9e"
+    "content/tech/competitive-intelligence/dubai/reports/2026-12_baseline_report.html": "9c837835c2916a852e415df6c5d97677d52c93a260bd34176254af79ecc736f0",
+    "content/tech/industry-research/dubai/reports/2026-12_baseline_report.html": "52c6e77b467fc0756b3e2529f0a06933ae78766e26ed7282525e5a521088870a",
+    "content/tech/security/dubai/reports/2026-11_baseline_report.html": "fcc8a7ddb030874f03ec8979bc87c39233dfaf4113f3cb3966110dd6dec651b0",
+    "content/tech/weekly-roundup/reports/2026-11-13_weekly.html": "6f05a416b2ac819cddb4f048c6bde8143796ef9f7031dabda8489be819376e17"
   }
 }

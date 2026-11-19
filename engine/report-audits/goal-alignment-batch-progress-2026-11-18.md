@@ -86,6 +86,13 @@
 
 **新增测试**：`TestHubCardDistinguishability`、`TestTechDataLayerThin`、`TestDeadCodeCleanup`、`TestIgiTrend`、`TestR4KeyNumber`（13 项）。
 
+**b6 续：变更收口与历史债务清理**（同日，续接会话第二轮）：
+
+- **变更收口**：远端 6 个分支（`main` / `ci/audit` / `ci/html-sync` / `task×3`）逐条验证**全部已并入 `origin/main`**；open PR 0、stash 0、工作树 clean；本地 `main` 与任务分支均已与远端一致。
+- **来源类债务清零**：R1 未登记 URL 1→0、R2 媒体转述标注 14→0、R7 机构分级 12→0、R6 死链 9→3（修复 `gitex.com` → `gitexglobal.com` 共 24 处引用、menlovc 拼写 3 处）。
+- **探测口径修复**：`normalize_url` 不再小写 path（原会误判 `LBEFH3E00556ENJI` 类路径）；R6 探测集排除自引用。
+- **未闭环项**：B 类 17 份为设计如此的登记管理件、E 类 9 项为宽限期登记 —— 均已逐条登记定性，无未登记债务。详见 [tech-debt-ledger.md](tech-debt-ledger.md) v1.5 §十一。
+
 ---
 
 ## 三、验收证据

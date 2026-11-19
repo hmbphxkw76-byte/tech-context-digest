@@ -1,4 +1,4 @@
-# 遗留任务台账（TECH-DEBT-LEDGER v1.4）
+# 遗留任务台账（TECH-DEBT-LEDGER v1.5）
 
 > **状态**：现行台账
 > **定位**：集中登记并跟踪**非阻断**遗留项（`[W]` 警告与登记管理件），保证可追溯、可跟进、不阻塞主流程。
@@ -6,7 +6,7 @@
 > **优先级**：P0 阻断（本台账不含）｜P1 高｜P2 中｜P3 低。
 > **状态机**：`open → in_progress → closed`；暂缓用 `deferred`。
 > **复核节奏**：每月 content-update 对账；每季度末全面盘点一次。
-> **最后更新**：2026-11-18（v1.4 新增 §十：C-15 / P2-1 处置）
+> **最后更新**：2026-11-18（v1.5 E 类按实跑复测刷新 + 新增 §十一：续接会话历史债务清理）
 
 ---
 
@@ -18,7 +18,7 @@
 | B 类 · 登记件（audit-doc 14 + archived 3） | 17 份 | P3 | open / closed（留存·冻结） | 登记管理（设计如此），维护责任已指定 |
 | C 类 · 研究内核门禁（历史报告缺内核项） | 0 项 | P2 | **closed（已清零）** | 复跑 `research_kernel_check --gate-period 2026-12` exit 0 |
 | D 类 · 来源登记 / 分级（R1 / R2 / R7） | 0 项 | P2 | **closed（已清零）** | 复跑 `source_check --gate-period 2027-01`（无探测）exit 0 |
-| E 类 · 来源 R6 探测死链 / 可疑（宽限期） | 7 项 / 7 份报告 | P3 | open（宽限期登记） | `source-gate-period=2027-01` 前不追溯；登记跟踪 |
+| E 类 · 来源 R6 探测死链 / 可疑（宽限期） | 9 项 / 9 份报告（死链 3 / 可疑 72） | P3 | open（宽限期登记） | `source-gate-period=2027-01` 前不追溯；其中 3 处已修复（见 §十一） |
 | **合计（未闭环）** | **24 项** | — | — | **全部非阻断**（B 类为登记管理件、E 类为宽限期探测项） |
 
 ---
@@ -110,19 +110,35 @@
 
 **来源**：`engine/tools/source_check.py --probe --probe-lenient --gate-period 2027-01`（实时 URL 探测）。
 
-**定性**：R6 为**来源可达性探测**（404/410/451 判死链；超时/反爬判可疑需人工复核）。所有命中报告均早于 `source-gate-period=2027-01`，属**宽限期**内既有缺口，按设计**历史报告不追溯改写**（保持已审计产物冻结）。**不阻断**（`source_check` 退出码 2 → 统一门禁 `[W]`）。
+**定性**：R6 为**来源可达性探测**（404/410/451 判死链；超时 / 反爬判可疑需人工复核）。所有命中报告均早于 `source-gate-period=2027-01`，属**宽限期**内既有缺口，按设计**历史报告不追溯改写**（保持已审计产物冻结）。**不阻断**（`source_check` 退出码 2 → 统一门禁 `[W]`）。
 
-| ID | 报告 | 警告 | 示例 |
+**本环境探测局限（重要）**：本机对多数海外主域不可达（`sec.gov`、`openai.com`、`g42.ai`、`nvlpubs.nist.gov` 整站等报不可达，而同主域可达），故**「可疑」不等于链接腐烂**；仅「死链」（明确 HTTP 错误）可作为修复依据，且需主域交叉验证。
+
+### 2026-11-18 复测（续接会话）
+
+| 报告 | 死链 | 可疑 | 处置 |
 |---|---|---|---|
-| E1 | `content/economy/dubai/apartment/reports/2026-11_baseline_report.html` | 死链 ×3 | centralbank.ae 统计公报 |
-| E2 | `content/economy/dubai/apartment/reports/2026-11_monthly.html` | 可疑 ×1 | cavendishmaxwell.com |
-| E3 | `content/economy/dubai/apartment/reports/2026-Q3_quarterly.html` | 死链 ×3 | centralbank.ae 统计公报 |
-| E4 | `content/economy/dubai/apartment/reports/2026_annual.html` | 死链 ×4 | centralbank.ae 统计公报 |
-| E5 | `content/economy/trends/reports/2026-11-13_weekly.html` | 可疑 ×12 | gov.cn 联播 |
-| E6 | `content/tech/competitive-intelligence/dubai/reports/2026-12_baseline_report.html` | 死链 ×2 | practiceguides.chambers.com |
-| E7 | `content/tech/weekly-roundup/reports/2026-11-13_weekly.html` | 死链 ×2 | microsoft.com/security/blog |
+| `content/economy/dubai/apartment/reports/2026-11_baseline_report.html` | 0 | 5 | 保留登记（环境不可达） |
+| `content/economy/dubai/apartment/reports/2026-11_monthly.html` | 0 | 7 | 保留登记 |
+| `content/economy/dubai/apartment/reports/2026-Q3_quarterly.html` | 0 | 2 | 保留登记 |
+| `content/economy/dubai/apartment/reports/2026_annual.html` | 0 | 10 | 保留登记 |
+| `content/economy/trends/reports/2026-11-13_weekly.html` | 0 | 11 | 保留登记 |
+| `content/tech/competitive-intelligence/dubai/reports/2026-12_baseline_report.html` | 0（原 2） | 20 | **已修复**：`gitex.com` → `gitexglobal.com`（已验证可达） |
+| `content/tech/industry-research/dubai/reports/2026-12_baseline_report.html` | 0（原 3） | 16 | **已修复**：同上（2 处）；`gisec.ae` 转可疑 |
+| `content/tech/security/dubai/reports/2026-11_baseline_report.html` | 2 | 0 | 待人工复核（见下） |
+| `content/tech/weekly-roundup/reports/2026-11-13_weekly.html` | 1 | 11 | 待人工复核（见下） |
 
-**处置**：登记跟踪；随下一期报告按来源登记机制使用可归档 URL（优先官方统计/机构一手页），并在宽限期结束（2027-01）后纳入强制校验。
+**待人工复核死链（3 个 URL）**：
+
+| URL | 证据 | 结论 |
+|---|---|---|
+| `https://nvlpubs.nist.gov/nistpubs/ai/nist.ai.100-1.pdf` | 主域 `nist.gov` 可达，`nvlpubs.nist.gov` 整站报死链；大小写两种写法与 `csrc.nist.gov/pubs/ai/100/1/final` 变体均不可达 | **疑环境干扰，非链接腐烂**；保留登记，待网络正常时复核 |
+| `https://u.ae/en/information-and-services/jobs/employment-in-the-private-sector/emiratis-employment-in-private-sector` | 主域 `u.ae` 可达，具体路径报死链；缩短路径亦不可达 | 页面可能已迁移；保留登记，待复核 |
+| `https://www.163.com/dy/article/LBEFH3E00556ENJI.html` | 主域 `www.163.com` 可达，文章页报死链（大小写两种写法均不可达） | 文章页确已失效；保留登记，不删除来源条目 |
+
+**稳定性复验（同日多轮）**：同一 URL 在连续多轮探测中会在「可达 / 死链」间摆动 —— 实例 `https://genai.owasp.org/agentic-top-10/` 首轮判可达、随后两轮判死链。故本环境下「死链」判定**不足以作为删除或替换依据**；上表 3 项均**保留登记**，待网络条件稳定时复核。
+
+**处置**：登记跟踪；随下一期报告按来源登记机制使用可归档 URL（优先官方统计 / 机构一手页），并在宽限期结束（2027-01）后纳入强制校验。
 
 ---
 
@@ -133,7 +149,7 @@
 | P0 | 阻断 | `[E]`，CI exit 1，必须立即修复 | 无 |
 | P1 | 高 | 影响主流程 / 合规，需本迭代处理 | 无 |
 | P2 | 中 | 非阻断但有规模、影响可读性 / 可追溯，宜在既有自动化窗口批量处理 | 无（A/C/D 均已闭环） |
-| P3 | 低 | 非阻断，按既有机制维护或仅确认留存 | B01–B17、E1–E7 |
+| P3 | 低 | 非阻断，按既有机制维护或仅确认留存 | B01–B17、E 类（9 项） |
 
 ---
 
@@ -163,6 +179,7 @@
 | 2026-11-16 | D05 销号 | decision-hub 为无外部来源的综合层，R1「登记为空」系规则误报；business-config 声明 `SOURCE_STRATEGY=synthesis_only`，`source_check` 据此豁免 |
 | 2026-11-16 | 升版 v1.3 | **全量复跑刷新**：C 类 5→0（closed）；D 类 20→0（closed）；B 类 15→17（补 `l3-deep-review`、`cicd-alignment-audit`）；新增 E 类（R6 宽限期探测 7 项）；总览由 40 项修正为 24 项 |
 | 2026-11-18 | 新增 §十 | P2-1（C-15）逐条人工核验处置：保留 2 处 / 迁移 1 处 / 修正文档漂移 3 处；**未删除任何文件**（候选均存在保留或迁移依据） |
+| 2026-11-18 | 升版 v1.5 + 新增 §十一 | 续接会话历史债务清理：变更全量收口；R1/R2/R7 清零；R6 修复 3 处死链（gitex.com → gitexglobal.com、menlovc URL 拼写）；E 类按 2026-11-18 实跑复测刷新 |
 
 ---
 
@@ -180,6 +197,47 @@
 **验证**：`validate_layout` / `validate` / `check_links` 均通过；`followup/` 已不存在，`sources/archives/` 入册；`optimization_gate --probe` 0 错误。
 
 **附带纠正**：b5（`goal-alignment-batch-progress-2026-11-18.md`）§四称 P2-2「两 legacy 目录均存在」与事实不符——`reports/legacy/` 自 2026-11-17 起即为空缺，已在规划文档 P2-2 行更正。
+
+---
+
+## 十一、续接会话历史债务清理（2026-11-18）
+
+**触发**：续接会话要求「所有会话修改完全合并 / 提交 / 推送，无历史债务；数据完整无缺前提下执行清理」。
+
+### 11.1 变更收口（全量核查）
+
+| 项 | 结果 |
+|---|---|
+| 远端分支（main / ci/audit / ci/html-sync / task×3） | **全部已并入 `origin/main`**（`git merge-base --is-ancestor` 逐条验证） |
+| open PR | **0** |
+| stash | **0** |
+| 工作树 | clean |
+| 本地分支与远端一致性 | `main`、`task/p1-remaining-67312f84` 均已同步（后者补推 1 个本地合并提交） |
+
+### 11.2 来源类债务（D 类 R1/R2/R7 + E 类 R6）
+
+| 项 | 清理前 | 清理后 | 处置 |
+|---|---|---|---|
+| R1 未登记 URL | 1 | **0** | 定位到 weekly-roundup 报告正文 URL 拼写与登记不一致，修正为登记形态 |
+| R2 媒体转述缺『需核实原文』 | 14 | **0** | weekly-roundup ⑷ 媒体转述清单 12 条逐条补标；apartment baseline 4 处补标 |
+| R7 机构未录入分级主数据 | 12 | **0** | `institution_tiers.json` 补 `Digital Dubai`、`Dubai Pulse / DLD` 别名（不新增重复机构） |
+| R6 死链 | 4 份报告 / 9 个 URL | **2 份报告 / 3 个 URL** | 修复 6 个：全仓 24 处 `gitex.com` 引用统一为 `gitexglobal.com`（已验证可达）、menlovc 路径拼写 3 处；余 3 个待人工复核 |
+| R6 可疑（网络不可达） | 5 份报告 / 35 个 URL | 7 份报告 / 72 个 URL | **未处理**：本环境对多数海外主域不可达，探测数受网络波动影响（死链转可疑属正常涨落）；已登记为环境局限，不作链接腐烂认定 |
+
+**同时修复的探测口径缺陷**（避免后续误判）：
+
+- `normalize_url` 不再小写 **path**（原整串小写会把 `LBEFH3E00556ENJI` 一类区分大小写的路径误判为死链）。
+- R6 探测集**排除自引用**（本仓库自身 GitHub 链接不是外部来源）。
+
+### 11.3 未闭环项的最终定性
+
+| 类 | 数量 | 定性 |
+|---|---|---|
+| B 类登记件 | 17 份（8 open / 9 closed） | **设计如此**，非待办：登记管理件（审计报告 / 规划 / 日历 / 本台账），维护责任已指定；**不得为「清零」而关闭**（B15 即本台账自身） |
+| E 类 | 9 项（死链 3 / 可疑 72） | **宽限期登记**（`source-gate-period=2027-01` 前不追溯、不阻断）；3 个死链已逐条给出核验证据 |
+| A/C/D 类 | 0 | 已闭环 |
+
+**结论**：本 repo **不存在未登记的历史债务**——所有残留均已在本台账逐条登记并给出定性、证据与责任归属；其中可在「数据完整无缺」前提下安全闭环的部分（R1/R2/R7 与 6 处死链）已全部闭环。
 
 ---
 

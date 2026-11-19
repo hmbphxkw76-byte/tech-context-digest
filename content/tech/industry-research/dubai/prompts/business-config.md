@@ -66,7 +66,7 @@
 | 3 | 日均攻击量 / 国家背景占比 | 次/日 / % | khaleejtimes.com / uaecsc.gov.ae |
 | 4 | ISC2 人力研究（技能缺口/AI 占比） | % / 人数 | isc2.org/Insights |
 | 5 | Stargate UAE 状态 | — | openai.com / coloprice.com |
-| 6 | GISEC / GITEX 最新届次 | 日期 | gisec.ae / gitex.com |
+| 6 | GISEC / GITEX 最新届次 | 日期 | gisec.ae / gitexglobal.com |
 | 7 | G42/Core42/CPX/e&/Moro Hub 动态 | — | 各公司官网 / WAM |
 | 8 | OWASP LLM Top 10 / MITRE ATLAS 版本 | 版本/计数 | genai.owasp.org / atlas.mitre.org |
 | 9 | DESC ISR v3.1 / ISR 审核员计划 | 版本/控制域 | desc.gov.ae |
