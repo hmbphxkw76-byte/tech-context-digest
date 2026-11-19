@@ -1,0 +1,50 @@
+[
+  {
+    "acceptance": "",
+    "depends_on": [],
+    "id": "T-1",
+    "phase": "已提交（PR 待开）",
+    "status": "done",
+    "title": "ruff 安全自动修复（I001/F401）+ 高价值项手工修（E741/F841）"
+  },
+  {
+    "acceptance": "",
+    "depends_on": [],
+    "id": "T-2",
+    "phase": "已提交（PR 待开）",
+    "status": "done",
+    "title": "mypy 高价值项修复（类型注解 / None 守卫）"
+  },
+  {
+    "acceptance": "",
+    "depends_on": [],
+    "id": "T-3",
+    "phase": "已提交（PR 待开）",
+    "status": "done",
+    "title": "baseline 机制（lint-baseline.json + static_check 只拦新增）"
+  },
+  {
+    "acceptance": "",
+    "depends_on": [],
+    "id": "T-4",
+    "phase": "已提交（PR 待开）",
+    "status": "done",
+    "title": "tech-debt-ledger 登记静态检查债务"
+  },
+  {
+    "acceptance": "",
+    "depends_on": [],
+    "id": "T-5",
+    "phase": "已提交（PR 待开）",
+    "status": "done",
+    "title": "A-05 probe 接入 scheduled-maintenance"
+  },
+  {
+    "acceptance": "",
+    "depends_on": [],
+    "id": "T-6",
+    "phase": "已提交（PR 待开）",
+    "status": "done",
+    "title": "测试 + 门禁 + 提交 + PR"
+  }
+]

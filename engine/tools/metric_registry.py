@@ -427,7 +427,7 @@ def main() -> int:
         if args.dedupe:
             kept, lineage, conflicts = dedupe_rows(ok_rows, case_sensitive=not args.case_insensitive)
             print(f"[dedupe] 去重前 {len(ok_rows)} 行 -> 保留 {len(kept)} 行；"
-                  f"重复 {sum(len(l['dropped_rows']) for l in lineage)} 行；冲突 {len(conflicts)} 组"
+                  f"重复 {sum(len(item['dropped_rows']) for item in lineage)} 行；冲突 {len(conflicts)} 组"
                   f"（大小写{'不敏感' if args.case_insensitive else '敏感'}）")
             for c in conflicts:
                 print(f"[CONFLICT] {c['key']} 字段 {c['fields']}：保留 {c['kept']} vs  incoming {c['incoming']}")

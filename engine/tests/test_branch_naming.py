@@ -7,7 +7,6 @@ pre-push / pre-commit 钩子文件、guard 集成与 CLI 行为。
 from __future__ import annotations
 
 import importlib.util
-import json
 import os
 import subprocess
 import sys

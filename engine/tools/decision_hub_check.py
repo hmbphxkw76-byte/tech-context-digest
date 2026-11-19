@@ -24,7 +24,8 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 
 from _common import ROOT, detect_report, iter_business_dirs  # noqa: E402
-from gate_period import AUTO, resolve as resolve_period  # noqa: E402
+from gate_period import AUTO  # noqa: E402
+from gate_period import resolve as resolve_period
 
 DEFAULT_GATE = AUTO
 # 跨研究线决策层业务线目录段（content/economy/insight）
@@ -86,7 +87,6 @@ def _blocks(text: str, start_re: re.Pattern) -> list[str]:
 def check_text(text: str, business_line: str = "") -> list[tuple[str, str]]:
     out: list[tuple[str, str]] = []
     text = _strip_noise(text)
-    plain = _TAG_RE.sub("", text)
     is_hub = HUB_LINE in business_line
 
     # DC-01 决策卡（decision-hub 强制；其他报告含「决策卡」字样时同样检查）

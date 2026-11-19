@@ -19,15 +19,15 @@ sys.path.insert(0, str(Path(__file__).resolve().parent))
 
 from _common import (  # noqa: E402
     BUSINESS_KEYWORDS,
-    REQUIRED_TEMPLATE_FILES,
-    TEMPLATE_DIR,
-    TEMPLATE_TYPE_DIRS,
     REPORT_TYPE_REF_RE,
     REPORT_TYPE_VAR_RE,
+    REQUIRED_TEMPLATE_FILES,
+    ROOT,
+    TEMPLATE_DIR,
+    TEMPLATE_TYPE_DIRS,
     detect_report,
     iter_business_dirs,
     processed_data_dir,
-    ROOT,
 )
 
 ERRORS: list[str] = []

@@ -52,7 +52,8 @@ from urllib.parse import urlparse
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 
 from _common import ROOT, detect_report, iter_business_dirs, iter_business_reports, processed_data_dir  # noqa: E402
-from gate_period import is_auto, resolve as resolve_period  # noqa: E402
+from gate_period import is_auto  # noqa: E402
+from gate_period import resolve as resolve_period
 
 REGISTRY_SCHEMA = "1.1"
 
@@ -803,8 +804,12 @@ def run(only_file: str | None, gate_period: str | None = None,
         registry_override: str | None = None, probe: bool = False,
         coverage: bool = False, master_path: str | None = None,
         probe_timeout: float = 3.0, probe_workers: int = 8,
-        probe_lenient: bool = False) -> tuple[int, int, list[str]]:
-    """执行校验 -> (errors, warnings, 输出行)。"""
+        probe_lenient: bool = False, emit: str | None = None) -> tuple[int, int, list[str]]:
+    """执行校验 -> (errors, warnings, 输出行)。
+
+    `emit` 给出时，把链接可达率探测汇总落盘为审计记录（JSON）：
+    `{"probed": N, "dead": N, "unreachable": N, "ok": N}`（不含时间戳）。
+    """
     gate_period = resolve_period(gate_period) if gate_period else None
     errors = warnings = 0
     lines: list[str] = []
@@ -829,6 +834,9 @@ def run(only_file: str | None, gate_period: str | None = None,
 
     master = load_institution_master(Path(master_path) if master_path else None)
     cov_rows: list[tuple[str, dict]] = []
+    probed: set[str] = set()
+    dead_all: set[str] = set()
+    unreach_all: set[str] = set()
 
     for rel, text, business_rel in targets:
         reg_path = _registry_path_for(business_rel, registry_override)
@@ -846,6 +854,9 @@ def run(only_file: str | None, gate_period: str | None = None,
             # lenient（CI 口径）：明确死链阻断，网络不可达仅告警；strict：两者都阻断
             ctx["dead_urls"] = dead | unreachable if not probe_lenient else dead
             ctx["unreachable_urls"] = unreachable if probe_lenient else set()
+            probed |= {normalize_url(u) for u in urls}
+            dead_all |= dead
+            unreach_all |= unreachable
 
         issues = check_report(text, registry, ctx)
         issues += check_institution_consistency(registry, master, ctx.get("config_text", ""), ctx)
@@ -869,6 +880,17 @@ def run(only_file: str | None, gate_period: str | None = None,
         matched = sum(c["matched"] for _, c in cov_rows)
         lines.append(f"[COV] 合计：引用 {cited} / 匹配 {matched} / 覆盖率 "
                      f"{(matched / cited if cited else 1.0):.1%}")
+
+    if emit:
+        ok = len(probed - dead_all - unreach_all)
+        rec = {"probed": len(probed), "dead": len(dead_all),
+               "unreachable": len(unreach_all), "ok": ok}
+        ep = ROOT / emit
+        ep.parent.mkdir(parents=True, exist_ok=True)
+        ep.write_text(json.dumps(rec, ensure_ascii=False, indent=1) + "\n",
+                      encoding="utf-8")
+        lines.append(f"[EMIT] 链接可达率记录已写入 {emit}：{len(probed)} 探测 / "
+                     f"{ok} 可达 / {len(dead_all)} 死链 / {len(unreach_all)} 不可达")
 
     return errors, warnings, lines
 
@@ -971,6 +993,7 @@ def main() -> int:
     ap.add_argument("--probe-lenient", action="store_true",
                     help="网络不可达仅告警（CI 口径）；默认严格模式将超时/反爬也计为死链")
     ap.add_argument("--coverage", action="store_true", help="输出来源登记覆盖率")
+    ap.add_argument("--emit", help="把链接可达率探测汇总落盘为审计记录（仓库相对路径 JSON）")
     ap.add_argument("--quiet", action="store_true", help="仅输出汇总")
     ap.add_argument("--self-test", action="store_true", help="内置合成用例自检")
     args = ap.parse_args()
@@ -986,7 +1009,7 @@ def main() -> int:
                                   probe=args.probe, coverage=args.coverage,
                                   master_path=args.master,
                                   probe_timeout=args.probe_timeout, probe_workers=args.probe_workers,
-                                  probe_lenient=args.probe_lenient)
+                                  probe_lenient=args.probe_lenient, emit=args.emit)
     if not args.quiet:
         for line in lines:
             print(line)

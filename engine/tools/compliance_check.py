@@ -30,7 +30,7 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 
-from _common import AUDIT_DIR, TEMPLATE_DIR, detect_report, iter_business_dirs, ROOT  # noqa: E402
+from _common import AUDIT_DIR, ROOT, TEMPLATE_DIR, detect_report, iter_business_dirs  # noqa: E402
 
 RULES_PATH = TEMPLATE_DIR / "compliance-rules.json"
 

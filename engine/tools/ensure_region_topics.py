@@ -14,7 +14,7 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 
-from _common import iter_business_dirs, processed_data_dir, ROOT  # noqa: E402
+from _common import ROOT, iter_business_dirs, processed_data_dir  # noqa: E402
 
 REQUIRED_SUBDIRS = ("prompts", "reports")
 

@@ -88,9 +88,9 @@ def resolve_session(env: dict | None = None, use_git_config: bool = True) -> tup
 
     来源取值：env:<变量名> / git:<配置键>。全部缺失抛 BranchNamingError。
     """
-    env = os.environ if env is None else env
+    env_map: dict = dict(os.environ) if env is None else env
     for key in SESSION_ENV_KEYS:
-        val = (env.get(key) or "").strip()
+        val = (env_map.get(key) or "").strip()
         if not val:
             continue
         try:

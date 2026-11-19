@@ -107,7 +107,7 @@ def main() -> int:
     except ValueError as e:
         print(f"[ERROR] {e}")
         return 1
-    out = {"calibration": cal.to_dict()}
+    out: dict = {"calibration": cal.to_dict()}
     if args.threshold is not None:
         out["state_count"] = state_count(series, args.threshold)
         out["trigger_count"] = trigger_count(series, args.threshold)

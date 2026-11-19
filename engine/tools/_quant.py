@@ -227,7 +227,7 @@ def var_irf(coef: Sequence[Sequence[float]], m: int, p: int, steps: int,
     if any(len(row) != k for row in coef):
         raise ValueError("var_irf: 系数维度与 m/p 不匹配")
     hist = [[0.0] * m for _ in range(p)]  # 前 p 期置于 0
-    irf = []
+    irf: list[list[float]] = []
     for _ in range(steps):
         row = [1.0]
         for lag in range(1, p + 1):
