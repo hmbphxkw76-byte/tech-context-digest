@@ -1575,6 +1575,162 @@
           "audit_id": ""
         }
       }
+    },
+    "content/economy/dubai/apartment/reports/2027-01_monthly.html": {
+      "title": "迪拜公寓住宅市场月度简报 2027-01",
+      "kind": "business",
+      "category": "report",
+      "business_line": "content/economy/dubai/apartment",
+      "status": "in-review",
+      "stages": {
+        "draft": true,
+        "initial": true,
+        "second": false,
+        "final": false
+      },
+      "mark": true,
+      "first_seen_at": "2026-11-19",
+      "evidence": {
+        "report": "content/economy/dubai/apartment/reports/2027-01_monthly.html",
+        "business_line": "content/economy/dubai/apartment",
+        "plans": [],
+        "gate": {
+          "entry": "engine/tools/optimization_gate.py",
+          "probe": true
+        },
+        "audit": {
+          "review": "engine/audit/records/reviews/content-economy-dubai-apartment-reports-2027-01-monthly-html.json",
+          "status": "in-review",
+          "stages": {
+            "draft": true,
+            "initial": true,
+            "second": false,
+            "final": false
+          },
+          "mark_level": "pre",
+          "audit_id": "AUD-2026-11-19-005"
+        }
+      },
+      "audit_id": "AUD-2026-11-19-005",
+      "mark_level": "pre",
+      "audited_at": "2026-11-19T10:16:39+00:00"
+    },
+    "content/economy/trends/reports/2026-11-27_weekly.html": {
+      "title": "全球宏观经济趋势周报（2026-11-27）｜经济趋势周报",
+      "kind": "business",
+      "category": "report",
+      "business_line": "content/economy/trends",
+      "status": "in-review",
+      "stages": {
+        "draft": true,
+        "initial": true,
+        "second": false,
+        "final": false
+      },
+      "mark": true,
+      "first_seen_at": "2026-11-19",
+      "evidence": {
+        "report": "content/economy/trends/reports/2026-11-27_weekly.html",
+        "business_line": "content/economy/trends",
+        "plans": [],
+        "gate": {
+          "entry": "engine/tools/optimization_gate.py",
+          "probe": true
+        },
+        "audit": {
+          "review": "engine/audit/records/reviews/content-economy-trends-reports-2026-11-27-weekly-html.json",
+          "status": "in-review",
+          "stages": {
+            "draft": true,
+            "initial": true,
+            "second": false,
+            "final": false
+          },
+          "mark_level": "pre",
+          "audit_id": "AUD-2026-11-19-006"
+        }
+      },
+      "audit_id": "AUD-2026-11-19-006",
+      "mark_level": "pre",
+      "audited_at": "2026-11-19T10:16:39+00:00"
+    },
+    "content/education/education-system/reports/2026-12_baseline_report.html": {
+      "title": "全球 教育体系与政策 · 首期基线报告 · 2026-12",
+      "kind": "business",
+      "category": "report",
+      "business_line": "content/education/education-system",
+      "status": "in-review",
+      "stages": {
+        "draft": true,
+        "initial": true,
+        "second": false,
+        "final": false
+      },
+      "mark": true,
+      "first_seen_at": "2026-11-19",
+      "evidence": {
+        "report": "content/education/education-system/reports/2026-12_baseline_report.html",
+        "business_line": "content/education/education-system",
+        "plans": [],
+        "gate": {
+          "entry": "engine/tools/optimization_gate.py",
+          "probe": true
+        },
+        "audit": {
+          "review": "engine/audit/records/reviews/content-education-education-system-reports-2026-12-baseline-report-html.json",
+          "status": "in-review",
+          "stages": {
+            "draft": true,
+            "initial": true,
+            "second": false,
+            "final": false
+          },
+          "mark_level": "pre",
+          "audit_id": "AUD-2026-11-19-007"
+        }
+      },
+      "audit_id": "AUD-2026-11-19-007",
+      "mark_level": "pre",
+      "audited_at": "2026-11-19T10:16:39+00:00"
+    },
+    "content/international/international-relations/reports/2026-11_baseline_report.html": {
+      "title": "全球 · 国际关系与外交 · 首期基线报告（2026-11）",
+      "kind": "business",
+      "category": "report",
+      "business_line": "content/international/international-relations",
+      "status": "in-review",
+      "stages": {
+        "draft": true,
+        "initial": true,
+        "second": false,
+        "final": false
+      },
+      "mark": true,
+      "first_seen_at": "2026-11-19",
+      "evidence": {
+        "report": "content/international/international-relations/reports/2026-11_baseline_report.html",
+        "business_line": "content/international/international-relations",
+        "plans": [],
+        "gate": {
+          "entry": "engine/tools/optimization_gate.py",
+          "probe": true
+        },
+        "audit": {
+          "review": "engine/audit/records/reviews/content-international-international-relations-reports-2026-11-baseline-report-html.json",
+          "status": "in-review",
+          "stages": {
+            "draft": true,
+            "initial": true,
+            "second": false,
+            "final": false
+          },
+          "mark_level": "pre",
+          "audit_id": "AUD-2026-11-19-008"
+        }
+      },
+      "audit_id": "AUD-2026-11-19-008",
+      "mark_level": "pre",
+      "audited_at": "2026-11-19T10:16:39+00:00"
     }
   }
 }
