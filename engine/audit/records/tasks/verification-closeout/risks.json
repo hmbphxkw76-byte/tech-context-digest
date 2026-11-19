@@ -1,0 +1,20 @@
+[
+  {
+    "description": "并发 Agent 写同一工作树冲突",
+    "id": "R-1",
+    "mitigation": "按文件归属分区，禁止跑全量 unittest/gate",
+    "owner": ""
+  },
+  {
+    "description": "内容产出编造来源",
+    "id": "R-2",
+    "mitigation": "不虚构 URL/数值，无法核实标未核验",
+    "owner": ""
+  },
+  {
+    "description": "代理口径误当语义达标",
+    "id": "R-3",
+    "mitigation": "字典 detected_by + 备注显式标注",
+    "owner": ""
+  }
+]

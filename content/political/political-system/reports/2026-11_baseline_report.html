@@ -1,0 +1,796 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>全球 · 政治制度与治理 · 首期基线报告（2026-11）</title>
+<style>
+:root{
+  --radius-sm:8px; --radius:12px; --radius-lg:16px; --radius-pill:999px;
+  --shadow:0 1px 3px rgba(20,40,70,.06); --shadow-md:0 4px 14px rgba(20,40,70,.09);
+  --shadow-lg:0 10px 30px rgba(15,35,56,.2);
+  --font-sans:"Microsoft YaHei","PingFang SC","Segoe UI",Arial,sans-serif;
+  --font-mono:"SFMono-Regular",Consolas,"Liberation Mono",monospace;
+  --focus-ring:0 0 0 3px rgba(63,111,176,.35);
+  --transition:.15s ease;
+  --bg:#f4f6f9; --card:#ffffff; --card2:#fbfcfe; --soft:#f5f8fb;
+  --ink:#15202b; --ink2:#465667; --ink3:#657180;
+  --line:#e1e7ee; --line2:#eef2f6;
+  --navy:#16324f; --navy2:#2f5597; --blue:#3f6fb0; --blue-l:#eaf1fa;
+  --red:#a83224; --red-d:#822116; --red-l:#fbece8; --red-bg:#fbece8; --red-line:#f0d4cf;
+  --pre:#b8541c; --pre-l:#fdf1e4; --pre-bg:#fdf1e4; --pre-line:#f2ddc9;
+  --green:#1c7444; --green-l:#eaf5ef; --green-bg:#eaf5ef; --green-line:#d3ead9;
+  --amber:#956612; --amber-l:#fdf4e2; --amber-bg:#fdf4e2; --amber-line:#f0e3c2;
+  --gray:#646f7b; --gray-l:#eff2f4; --gray-bg:#eff2f4; --gray-line:#e6eaee;
+  /* 别名：兼容既有报告组件的命名习惯 */
+  --surface:#ffffff; --surface2:#fbfcfe;
+  --navy-2:#2f5597; --muted:#657180; --bg-soft:#f5f8fb; --bg-card:#fbfcfe;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  *,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}
+}
+body{font-family:var(--font-sans);background:var(--bg);color:var(--ink);line-height:1.76;font-size:14.5px}
+.wrap{max-width:1160px;margin:0 auto;padding:0 24px 64px}
+a{color:var(--navy2);text-decoration:none}
+a:hover{text-decoration:underline}
+a:focus-visible,button:focus-visible{outline:none;box-shadow:var(--focus-ring)}
+.skip-link{position:absolute;left:12px;top:-48px;z-index:100;background:var(--navy);color:#fff;padding:8px 16px;border-radius:0 0 8px 8px;font-size:12.5px;transition:top var(--transition)}
+.skip-link:focus{top:0;color:#fff;text-decoration:none}
+
+/* ── 页头（trends report-head 结构；.hero 为 apartment 同义类） ── */
+header.report-head,header.hero{
+  background:linear-gradient(128deg,#0f2338 0%,var(--navy) 52%,var(--navy2) 100%);
+  color:#fff;padding:40px 0 30px;
+}
+/* trends 的 .report-head 内含 .wrap；apartment 的 .hero 无 .wrap，用内联 padding 约束到 1160px */
+header.report-head .wrap{padding:0 24px}
+header.hero{padding-left:max(24px,calc(50% - 580px));padding-right:max(24px,calc(50% - 580px))}
+header.report-head h1,header.hero h1{margin:0 0 8px;font-size:27px;font-weight:700;letter-spacing:.4px;line-height:1.35}
+header .eyebrow{font-size:11.5px;letter-spacing:2.4px;color:rgba(255,255,255,.62);text-transform:uppercase}
+header .sub{font-size:14px;color:rgba(255,255,255,.82);margin:2px 0}
+header .meta{font-size:12.3px;color:rgba(255,255,255,.75);margin-top:14px;line-height:1.9}
+header .meta b{color:#fff}
+header .nav-url{font-size:11.5px;color:rgba(255,255,255,.78);margin-top:10px;word-break:break-all}
+header .nav-url a{color:#cfe0ee;text-decoration:none;border-bottom:1px dashed #cfe0ee}
+header .tag{display:inline-block;background:rgba(255,255,255,.11);border:1px solid rgba(255,255,255,.2);border-radius:14px;padding:2px 11px;margin:5px 6px 0 0;font-size:11.5px}
+
+/* ── 顶部固定导航 ── */
+nav.report-nav{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.96);border-bottom:1px solid var(--line);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);margin-bottom:26px}
+nav.report-nav .wrap{display:flex;flex-wrap:wrap;gap:6px 14px;align-items:center;padding-top:10px;padding-bottom:10px}
+/* apartment monthly/quarterly/baseline 的 .nav-tabs 是 nav 直接子元素（无 .wrap） */
+nav.report-nav > .nav-tabs{max-width:1160px;margin:0 auto;padding:10px 24px}
+.nav-url{display:flex;align-items:baseline;gap:8px;flex-wrap:wrap;font-size:11.5px;line-height:1.6;color:var(--ink3);padding-bottom:6px;margin-bottom:6px;border-bottom:1px dashed var(--line);width:100%}
+.nav-url-label{font-weight:700;color:var(--ink2);white-space:nowrap}
+.nav-url a{color:var(--blue);text-decoration:none;word-break:break-all}
+.nav-url a:hover{text-decoration:underline}
+.nav-tabs{display:flex;flex-wrap:wrap;gap:6px}
+.nav-tabs a{color:var(--navy);text-decoration:none;font-size:12.5px;padding:4px 10px;border-radius:14px;border:1px solid var(--line);background:var(--bg-soft);white-space:nowrap;transition:background var(--transition),color var(--transition)}
+.nav-tabs a:hover{background:var(--blue-l);border-color:#b9cfe2;text-decoration:none}
+.nav-tabs a.active{background:var(--blue-l);color:var(--blue);font-weight:700}
+
+/* ── 章节与排版 ── */
+main{padding-top:0}
+h2.sec{font-size:19px;color:var(--navy);margin:38px 0 14px;padding-bottom:8px;border-bottom:2px solid var(--navy);scroll-margin-top:100px;font-weight:700}
+h2.sec .en{font-size:10.8px;color:var(--ink3);font-weight:400;margin-left:10px;letter-spacing:1.1px}
+h3{font-size:15.5px;color:var(--navy);margin:22px 0 8px;font-weight:700;scroll-margin-top:100px}
+h4{font-size:14px;color:var(--navy);margin:16px 0 6px;font-weight:700}
+p{margin:8px 0}
+ul,ol{margin:8px 0;padding-left:22px}
+li{margin:5px 0}
+ul.tight,ol.tight{margin:7px 0}
+ul.tight li,ol.tight li{margin-bottom:6px}
+b,strong{font-weight:650;color:var(--ink)}
+blockquote{border-left:4px solid var(--line);margin:12px 0;padding:2px 0 2px 14px;color:var(--ink2)}
+code{background:var(--bg-soft);padding:2px 5px;border-radius:4px;font-family:var(--font-mono);font-size:.92em}
+pre{background:var(--bg-soft);border:1px solid var(--line);border-radius:var(--radius-sm);padding:12px 14px;overflow-x:auto;margin:12px 0}
+pre code{background:none;padding:0}
+img{max-width:100%}
+.lead{color:var(--ink2);font-size:13.8px;margin:6px 0 14px}
+.muted{color:var(--ink3)}
+.small{font-size:11.7px;color:var(--ink3)}
+hr{border:0;border-top:1px solid var(--line);margin:26px 0 0}
+.hr{height:1px;background:var(--line);margin:26px 0 0}
+b.red,color.red{color:var(--red)} b.pre{color:var(--pre)} b.green{color:var(--green)}
+b.amber{color:var(--amber)} b.navy{color:var(--navy)}
+
+/* ── 表格 ── */
+table{width:100%;border-collapse:collapse;font-size:13px;background:var(--card);margin:12px 0}
+th,td{border:1px solid var(--line);padding:8px 10px;text-align:left;vertical-align:top;line-height:1.62}
+thead th{background:var(--navy);color:#fff;font-weight:600;white-space:nowrap}
+tbody th{background:var(--blue-l);color:var(--navy);font-weight:600}
+tbody tr:nth-child(even) td{background:var(--bg-soft)}
+tbody tr:hover td{background:var(--blue-l)}
+table.fixed{table-layout:fixed}
+.num{text-align:right;font-variant-numeric:tabular-nums}
+.tblwrap{overflow-x:auto;border-radius:var(--radius-sm);border:1px solid var(--line);margin:12px 0}
+.tblwrap table{margin:0;border:0}
+
+/* ── 来源：表头弹层 / 行内链接 / 来源清单 ── */
+.src-head{position:relative;cursor:help;border-bottom:1px dotted var(--blue);white-space:nowrap}
+.src-head .src-pop{position:absolute;left:0;top:100%;z-index:60;display:none;background:var(--navy);color:#fff;font-size:12px;font-weight:400;padding:9px 12px;border-radius:8px;box-shadow:var(--shadow-lg);max-width:min(560px,86vw);white-space:normal;line-height:1.65;border:1px solid rgba(255,255,255,.14)}
+.src-pop .pop-title{font-weight:600;display:block;margin-bottom:4px;color:#fff}
+.src-pop .pop-url{display:block;margin-top:6px;word-break:break-all;color:var(--blue-l)}
+.src-pop .pop-url a{color:#a9c8ee}
+.src-head:hover .src-pop,.src-head:focus .src-pop,.src-head:focus-within .src-pop{display:block}
+.src-inline{color:var(--ink3);font-size:12px;word-break:break-all}
+.src-inline a{color:var(--blue);text-decoration:none;border-bottom:1px dotted var(--blue)}
+.src-inline a:hover{background:#eaf3fa}
+.src{font-size:11.1px;color:var(--ink3);word-break:break-word;line-height:1.58}
+.src a{color:#5b7bb4;text-decoration:none}
+.src a:hover{text-decoration:underline}
+.refs{font-size:12.5px;color:var(--ink3)}
+.refs ol{padding-left:20px}
+.refs a{color:var(--navy);text-decoration:none;border-bottom:1px dashed var(--navy);word-break:break-all}
+.refs a:hover{background:#e8f0f8}
+
+/* ── 卡片 / 结论框 ── */
+.card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:18px 20px;box-shadow:var(--shadow);margin:14px 0}
+.card.tight{padding:14px 16px}
+.leadbox{border-left:4px solid var(--navy2);background:linear-gradient(125deg,#f5f9fd,#edf3fa);border-color:#cfdded}
+.leadbox h3:first-child{margin-top:0}
+
+/* ── KPI 卡（trends .kpi / apartment .kcard） ── */
+.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(168px,1fr));gap:12px;margin:14px 0}
+.kpi{background:var(--card);border:1px solid var(--line);border-left:4px solid var(--navy);border-radius:var(--radius-sm);padding:12px 14px;box-shadow:var(--shadow)}
+.kpi.red{border-left-color:var(--red)} .kpi.green{border-left-color:var(--green)}
+.kpi.amber{border-left-color:var(--amber)} .kpi.blue{border-left-color:var(--blue)}
+.kpi .v{font-size:22px;font-weight:700;color:var(--navy);line-height:1.2}
+.kpi.red .v{color:var(--red)} .kpi.green .v{color:var(--green)}
+.kpi.amber .v{color:var(--amber)} .kpi.blue .v{color:var(--blue)}
+.kpi .l{font-size:12px;color:var(--ink3);margin-top:4px}
+.kpi .s{font-size:11px;color:#8a98a6;margin-top:2px}
+.kcards{display:grid;grid-template-columns:repeat(auto-fit,minmax(232px,1fr));gap:11px;margin:14px 0}
+.kcard{background:var(--card);border:1px solid var(--line);border-left:4px solid var(--navy2);border-radius:10px;padding:13px 15px;box-shadow:var(--shadow)}
+.kcard.warn,.kcard.pre{border-left-color:var(--pre);background:linear-gradient(180deg,var(--pre-bg),#fff 62%)}
+.kcard.bad,.kcard.red{border-left-color:var(--red);background:linear-gradient(180deg,var(--red-bg),#fff 62%)}
+.kcard.good{border-left-color:var(--green);background:linear-gradient(180deg,var(--green-bg),#fff 62%)}
+.kcard .lab,.kcard .t{font-size:12.4px;color:var(--ink2)}
+.kcard .val,.kcard .v{font-size:22px;font-weight:700;color:var(--navy);margin:3px 0 2px;line-height:1.25}
+.kcard.warn .val,.kcard.pre .val{color:var(--pre)}
+.kcard.bad .val,.kcard.red .val{color:var(--red)}
+.kcard.good .val{color:var(--green)}
+.kcard .note,.kcard .s{font-size:11.5px;color:var(--ink3);line-height:1.6;margin-top:4px;word-break:break-word}
+
+/* ── 数据条 / 信号灯 ── */
+.stat-strip{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin:12px 0}
+.stat{background:var(--card);border:1px solid var(--line);border-radius:9px;padding:11px 13px;text-align:center}
+.stat .lab,.stat .l{font-size:11.4px;color:var(--ink3);margin-top:2px}
+.stat .n{font-size:23px;font-weight:700;line-height:1.2}
+.stat.hard .n{color:var(--red)} .stat.pre .n{color:var(--pre)} .stat.yel .n{color:var(--amber)}
+.stat.grn .n{color:var(--green)} .stat.gry .n{color:var(--gray)}
+.lamp{display:inline-block;min-width:9px;width:9px;height:9px;border-radius:50%;margin-right:4px;vertical-align:0}
+.lamp.r{background:var(--red)} .lamp.p{background:var(--pre)} .lamp.y{background:var(--amber)}
+.lamp.g{background:var(--green)} .lamp.k{background:var(--gray)}
+
+/* ── 标签 / 标注 ── */
+.tag{display:inline-block;font-size:11px;padding:1px 7px;border-radius:10px;background:var(--blue-l);color:var(--navy);border:1px solid var(--line);margin-right:4px}
+.tag.red{background:var(--red-l);color:var(--red);border-color:var(--red-line)}
+.tag.green{background:var(--green-l);color:var(--green);border-color:var(--green-line)}
+.tag.amber{background:var(--amber-l);color:var(--amber);border-color:var(--amber-line)}
+.pill{display:inline-block;border-radius:3px;padding:0 7px;font-size:11.3px;white-space:nowrap;line-height:1.72}
+.pill.r{background:var(--red-l);color:var(--red)} .pill.p{background:var(--pre-l);color:var(--pre)}
+.pill.y{background:var(--amber-l);color:var(--amber)} .pill.g{background:var(--green-l);color:var(--green)}
+.pill.k{background:var(--gray-l);color:var(--gray)} .pill.b{background:var(--blue-l);color:var(--navy2)}
+.pill.act{background:#e8eef6;color:#2b4a70}
+.callout{border-left:4px solid var(--amber);background:var(--amber-l);padding:12px 16px;border-radius:0 6px 6px 0;margin:14px 0;font-size:13.5px}
+.callout.red{border-left-color:var(--red);background:var(--red-l)}
+.callout.green{border-left-color:var(--green);background:var(--green-l)}
+.note{border:1px solid var(--line);border-left:4px solid var(--navy2);background:var(--card2);border-radius:var(--radius-sm);padding:12px 15px;margin:14px 0;font-size:13.5px}
+.note.gap{border-left-color:var(--gray);background:var(--gray-l)}
+.note.check{border-left-color:var(--green);background:var(--green-l)}
+.note.correct{border-left-color:var(--red);background:var(--red-l)}
+.note.preline{border-left-color:var(--pre);background:var(--pre-l)}
+.term{font-size:12.5px;color:var(--ink3);background:var(--bg-soft);border:1px solid var(--line);border-radius:6px;padding:8px 12px;margin:14px 0}
+.term b{color:var(--navy)}
+
+/* ── 图表（trends .chart 卡片 / apartment .chart-box + .chart-eh 容器） ── */
+.chart{margin:18px 0;padding:16px;background:var(--card);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow)}
+.chart h4{margin:0 0 4px;font-size:14.5px;color:var(--navy)}
+.chart .unit{font-size:12px;color:var(--ink3);font-weight:400}
+.chart-note{font-size:11.5px;color:var(--ink3);margin:0 0 12px;line-height:1.7}
+.chart svg{display:block;max-width:100%;height:auto;margin:6px auto 0}
+.chart-box{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:14px 14px 6px;box-shadow:var(--shadow);margin:16px 0}
+.chart-eh{width:100%;height:352px;margin:6px 0}
+.legend{display:flex;flex-wrap:wrap;gap:14px;font-size:12px;color:var(--ink2);margin:6px 0 12px}
+.legend span{display:inline-flex;align-items:center;gap:5px}
+.legend i{display:inline-block;width:11px;height:11px;border-radius:2px}
+
+/* ── 时间线 ── */
+.timeline{margin:16px 0;padding-left:8px}
+.tl-item{display:flex;gap:14px;margin:0 0 14px}
+.tl-date{flex:0 0 78px;font-size:12.5px;font-weight:700;color:var(--navy);text-align:right;padding-top:2px}
+.tl-body{flex:1;border-left:2px solid var(--line);padding:0 0 0 14px;position:relative}
+.tl-body::before{content:"";position:absolute;left:-6px;top:6px;width:10px;height:10px;border-radius:50%;background:var(--navy);border:2px solid #fff;box-shadow:0 0 0 1px var(--navy)}
+.tl-body.red::before{background:var(--red);box-shadow:0 0 0 1px var(--red)}
+.tl-body.green::before{background:var(--green);box-shadow:0 0 0 1px var(--green)}
+.tl-body.amber::before{background:var(--amber);box-shadow:0 0 0 1px var(--amber)}
+.tl-body .t{font-weight:600;color:var(--ink)}
+.tl-body .d{font-size:13px;color:var(--ink3);margin-top:2px}
+
+/* ── 风险条 / 风险框 ── */
+.rl-track{position:relative;height:12px;background:var(--gray-line);border-radius:999px;margin:14px 0 6px;overflow:hidden}
+.rl-fill{position:absolute;left:0;top:0;bottom:0;background:var(--green);border-radius:999px}
+.rl-marker{position:absolute;top:-3px;bottom:-3px;width:2px;background:var(--red);left:50%}
+.risk{background:linear-gradient(125deg,#fdf3f1,var(--red-l));border:1px solid #eec8c1;border-left:5px solid var(--red);border-radius:10px;padding:16px 18px;margin:14px 0}
+.risk h4{font-size:14.4px;color:var(--red);margin-bottom:8px}
+.risk .kpis{display:flex;flex-wrap:wrap;gap:22px;margin:10px 0 12px}
+.risk .kpis>div{min-width:150px}
+.risk .kpis .n{font-size:22px;font-weight:700;color:var(--red);line-height:1.25}
+.risk .kpis .l{font-size:11.4px;color:var(--ink2)}
+.redbox{background:linear-gradient(135deg,#fff8f6,var(--red-l));border:1px solid #eec8c1;border-left:5px solid var(--red);border-radius:10px;padding:15px 18px;margin:14px 0}
+.redbox h4{color:var(--red-d);margin-top:0}
+.prebox{background:linear-gradient(135deg,#fffaf4,var(--pre-l));border:1px solid #efd3b6;border-left:5px solid var(--pre);border-radius:10px;padding:15px 18px;margin:14px 0}
+.prebox h4{color:var(--pre);margin-top:0}
+.preline{border-left:4px solid var(--pre);background:var(--pre-l);padding:10px 14px;border-radius:0 6px 6px 0;margin:10px 0;font-size:13px}
+
+/* ── 目录 / 流程 / 分层（年度） ── */
+.toc{display:flex;flex-wrap:wrap;gap:7px;margin:0 0 6px}
+.toc a{font-size:12.3px;color:var(--navy2);background:var(--blue-l);border-radius:15px;padding:3px 12px;text-decoration:none}
+.toc a:hover{background:#dae6f5}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.flow{display:flex;align-items:stretch;gap:7px;flex-wrap:wrap;margin:12px 0}
+.node{flex:1;min-width:150px;background:var(--blue-l);border:1px solid #cfddf3;border-radius:8px;padding:11px 12px}
+.node b{display:block;color:var(--navy);font-size:12.8px;margin-bottom:3px}
+.node span{font-size:11.4px;color:var(--ink2);line-height:1.55;display:block}
+.arrow{display:flex;align-items:center;color:var(--blue);font-size:18px;font-weight:700}
+.tiers{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:12px 0}
+.tier{border:1px solid var(--line);border-radius:10px;padding:14px 15px;background:var(--card)}
+.tier.t1{border-top:4px solid var(--red)} .tier.t2{border-top:4px solid var(--pre)} .tier.t3{border-top:4px solid var(--amber)}
+.tier h4{margin:0 0 6px} .tier p{font-size:12.2px;color:var(--ink2);margin:0}
+
+/* ── 标注 / 页脚 / 索引链接 ── */
+.disc{margin-top:34px;padding:16px 18px;background:var(--bg-soft);border:1px solid var(--line);border-radius:var(--radius);font-size:13px;color:var(--ink3)}
+.disc strong{color:var(--ink)}
+footer,.footer{font-size:11.4px;color:var(--ink3);text-align:center;margin-top:22px;line-height:1.8}
+.idx-link{color:var(--navy);text-decoration:none;border-bottom:1px dotted #9db9da;font-weight:600}
+.idx-link:hover{color:var(--navy2);border-bottom:1px solid var(--blue)}
+.idx-link .ext{font-size:10px;color:var(--blue);margin-left:2px;font-weight:400}
+
+/* ── 报告特有组件（apartment 基线 / 季度） ── */
+.tldr{background:linear-gradient(180deg,#fff,#f8fafe);border-left:5px solid var(--navy2)}
+.verdict{font-size:17px;font-weight:700;color:var(--blue);margin:0 0 12px}
+.kpi-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin:16px 0}
+.tbl-wrap{overflow-x:auto;border:1px solid var(--line);border-radius:8px;margin:12px 0}
+.src-pop .src-pop-title{display:block;font-size:11px;color:var(--ink3);margin-bottom:4px;border-bottom:1px solid var(--line);padding-bottom:4px}
+.t-red{background:var(--red-l);color:var(--red)} .t-green{background:var(--green-l);color:var(--green)}
+.t-amber{background:var(--amber-l);color:var(--amber)} .t-grey{background:var(--gray-l);color:var(--ink3)}
+.t-blue{background:var(--blue-l);color:var(--blue)}
+.toggle{display:inline-flex;border:1px solid var(--line);border-radius:6px;overflow:hidden;margin-bottom:8px}
+.toggle button{border:0;background:#fff;color:var(--ink2);padding:5px 14px;font-size:12px;cursor:pointer;font-family:inherit}
+.toggle button.on{background:var(--navy2);color:#fff}
+.hide{display:none}
+.two-col{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.layer{display:grid;grid-template-columns:110px 1fr;gap:0;border:1px solid var(--line);border-radius:8px;overflow:hidden;margin-bottom:10px;background:#fff}
+.layer .lb{background:var(--navy2);color:#fff;padding:14px 12px;font-weight:700;font-size:13px;display:flex;align-items:center;justify-content:center;text-align:center}
+.layer .lb.q{background:#4472C4} .layer .lb.y{background:var(--navy2)}
+.layer .ct{padding:12px 16px;font-size:12.5px;color:var(--ink2)}
+.layer .ct b{color:var(--ink)}
+.note-box{background:var(--amber-l);border:1px solid var(--amber-line);border-radius:8px;padding:12px 16px;color:#6b4e0a;font-size:12.5px;margin:12px 0}
+.risk-box{background:var(--red-l);border:1px solid var(--red-line);border-radius:8px;padding:12px 16px;color:#8c2f24;font-size:12.5px;margin:12px 0}
+.ok-box{background:var(--green-l);border:1px solid var(--green-line);border-radius:8px;padding:12px 16px;color:#155c39;font-size:12.5px;margin:12px 0}
+.sig-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-top:12px}
+.sig{display:flex;gap:12px;align-items:flex-start;border:1px solid var(--line);border-radius:8px;padding:11px 13px;background:#fff}
+.sig .dot{width:10px;height:10px;border-radius:50%;margin-top:6px;flex:0 0 10px}
+.sig .dot.r{background:var(--red)} .sig .dot.g{background:var(--green)}
+.sig .dot.a{background:var(--amber)} .sig .dot.k{background:var(--gray)}
+.sig b{font-size:13px;color:var(--ink)} .sig p{margin:2px 0 0;font-size:11.5px}
+b.dr{color:var(--red-d)}
+.metric-link{color:var(--navy);text-decoration:none;border-bottom:1px dotted #9db4cf;font-weight:600}
+.metric-link:hover{color:var(--navy2);border-bottom-color:var(--navy2);background:var(--blue-l)}
+.metric-link::after{content:" ↗";font-size:10px;color:#7d96b3;font-weight:400}
+.rl-banner{background:linear-gradient(125deg,#5c1512,#7a1f19 60%,#8a2b20);color:#fff;border-radius:12px;padding:16px 20px;margin:16px 0;border:1px solid #4d100d;box-shadow:0 2px 8px rgba(110,27,22,.18)}
+.rl-banner h3{color:#fff;margin:0 0 6px;font-size:16px}
+.rl-banner p{font-size:12.8px;color:rgba(255,255,255,.88);margin-bottom:6px}
+.rl-banner .rl-kpis{display:flex;flex-wrap:wrap;gap:10px;margin:10px 0 4px}
+.rl-banner .rl-kpis div{background:rgba(255,255,255,.10);border:1px solid rgba(255,255,255,.18);border-radius:8px;padding:8px 12px;min-width:156px}
+.rl-banner .n{font-size:20px;font-weight:700;line-height:1.3}
+.rl-banner .l{font-size:11.4px;color:rgba(255,255,255,.78)}
+.rl-card{border:2px solid var(--red-d);background:linear-gradient(180deg,#fff,#fdf6f4);border-radius:12px;padding:18px 20px;margin:16px 0;box-shadow:0 2px 8px rgba(110,27,22,.08)}
+.rl-card h3{color:var(--red-d);margin-top:0}
+.rl-table th{background:var(--red-d)}
+.rl-table tbody tr:nth-child(even) td{background:#fdf7f5}
+.rl-table tbody tr:hover td{background:var(--red-l)}
+.rl-table td:first-child{border-left:3px solid var(--red-d)}
+.rl-rule{background:#fdf6f4;border-left:4px solid var(--red-d);padding:10px 14px;border-radius:0 7px 7px 0;font-size:12.8px;margin:10px 0}
+.rl-mark{display:inline-block;background:var(--red-d);color:#fff;border-radius:3px;padding:0 6px;font-size:11px;font-weight:700;letter-spacing:.5px}
+details.registry{margin:12px 0;background:var(--card);border:1px solid var(--line);border-radius:10px;padding:12px 16px}
+details.registry summary{cursor:pointer;font-weight:700;color:var(--navy);font-size:14px}
+details.registry[open]{padding-bottom:18px}
+.mini{background:#fff;border:1px solid var(--line);border-radius:9px;padding:12px 14px}
+.mini h4{margin-top:0}
+
+/* ── 信息等级标签（四级，信息分层规范） ── */
+.lvl{display:inline-block;font-size:11px;line-height:1.5;padding:1px 7px;border-radius:9px;
+  border:1px solid transparent;white-space:nowrap;font-weight:600;vertical-align:1px}
+.lvl-verified{background:var(--green-l);color:var(--green);border-color:var(--green-line,#d3ead9)}
+.lvl-partial{background:var(--amber-l);color:var(--amber);border-color:var(--amber-line,#f0e3c2)}
+.lvl-inferred{background:var(--blue-l);color:var(--navy2);border-color:#cdddf0}
+.lvl-assumption{background:var(--gray-l);color:var(--gray);border-color:var(--gray-line,#e6eaee)}
+
+/* ── 新增信息统计条（本期新增/修正/无变化/假设核验进度） ── */
+.delta-strip{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:14px 0}
+.delta-strip .d{background:var(--card);border:1px solid var(--line);border-radius:10px;
+  padding:12px 14px;box-shadow:var(--shadow)}
+.delta-strip .d .n{font-size:22px;font-weight:700;color:var(--navy);line-height:1.25}
+.delta-strip .d .l{font-size:11.6px;color:var(--ink3);margin-top:2px}
+.delta-strip .d.add .n{color:var(--green)}
+.delta-strip .d.fix .n{color:var(--amber)}
+.delta-strip .d.same .n{color:var(--ink3)}
+.delta-strip .d.hyp .n{color:var(--navy2)}
+
+/* ── 行动协议卡（触发条件+阈值+责任角色+时限+验证指标） ── */
+.action-card{background:var(--card);border:1px solid var(--line);border-left:4px solid var(--navy2);
+  border-radius:10px;padding:14px 16px;margin:12px 0;box-shadow:var(--shadow)}
+.action-card.immediate{border-left-color:var(--red)}
+.action-card.watch{border-left-color:var(--amber)}
+.action-card.archive{border-left-color:var(--gray)}
+.action-card .a-head{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:6px}
+.action-card .a-title{font-weight:700;color:var(--navy);font-size:14.5px}
+.action-card .a-meta{font-size:12.3px;color:var(--ink2);line-height:1.7}
+.action-card .a-meta b{color:var(--navy)}
+.prio{display:inline-block;font-size:11px;padding:1px 8px;border-radius:9px;font-weight:700}
+.prio.immediate{background:var(--red-l);color:var(--red)}
+.prio.watch{background:var(--amber-l);color:var(--amber)}
+.prio.archive{background:var(--gray-l);color:var(--gray)}
+
+/* ── 决策卡（结论/证据强度/触发条件/反向证据/信息充分度） ── */
+.decision-card{background:var(--card);border:1px solid var(--line);border-radius:12px;
+  padding:16px 18px;margin:14px 0;box-shadow:var(--shadow)}
+.decision-card .dc-head{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap;margin-bottom:8px}
+.decision-card .dc-title{font-weight:700;color:var(--navy);font-size:15px}
+.decision-card .dc-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px 18px;font-size:12.8px;line-height:1.7}
+.decision-card .dc-grid .k{color:var(--ink3);font-weight:600}
+.suff{display:inline-block;font-size:11px;padding:1px 8px;border-radius:9px;font-weight:700}
+.suff.ok{background:var(--green-l);color:var(--green)}
+.suff.need{background:var(--amber-l);color:var(--amber)}
+.ev-strong{color:var(--green);font-weight:700}
+.ev-mid{color:var(--amber);font-weight:700}
+.ev-weak{color:var(--red);font-weight:700}
+
+/* ── 场景切片 / 事实卡片指针 ── */
+.slice{border:1px dashed var(--navy2);border-radius:10px;padding:12px 16px;margin:12px 0;background:var(--blue-l)}
+.slice .slice-head{font-weight:700;color:var(--navy);margin-bottom:4px}
+.fact-ref{font-family:var(--font-mono);font-size:11.5px;color:var(--navy2);
+  background:var(--blue-l);border:1px solid #cdddf0;border-radius:5px;padding:0 5px;white-space:nowrap}
+
+/* ── 响应式 / 打印 ── */
+@media (max-width:720px){
+  body{font-size:14px}
+  .wrap{padding:0 14px 48px}
+  header.report-head,header.hero{padding:26px 0 22px}
+  header.report-head h1,header.hero h1{font-size:21px}
+  nav.report-nav .nav-url{display:none}
+  table{display:block;overflow-x:auto;white-space:nowrap}
+  th,td{padding:7px 8px;font-size:12.5px}
+  .chart-eh{height:300px}
+  .grid2,.tiers{grid-template-columns:1fr}
+  .kpi-grid{grid-template-columns:repeat(2,1fr)}
+  .two-col,.sig-grid{grid-template-columns:1fr}
+  .stat-strip{grid-template-columns:repeat(2,1fr)}
+  .delta-strip{grid-template-columns:repeat(2,1fr)}
+  .decision-card .dc-grid{grid-template-columns:1fr}
+  .tl-date{flex-basis:64px;font-size:11.5px}
+}
+@media print{
+  nav.report-nav,.skip-link{display:none}
+  .card,.chart,.kpi,.kcard,.chart-box{box-shadow:none}
+  body{font-size:12px}
+}
+
+</style>
+</head>
+<body>
+<a class="skip-link" href="#main-content">跳到主要内容</a>
+<header class="report-head">
+  <div class="wrap">
+    <p class="eyebrow">政策法规解读型 · 基线报告</p>
+    <h1>全球 · 政治制度与治理 · 首期基线报告（2026-11）</h1>
+    <p class="sub">九节固化锚 · 基线固定（后续事件触发解读的对比锚）</p>
+    <p class="meta">
+      <b>数据截止</b>：2026-11（基线期）｜<b>报告版本</b>：v1.0（首期基线固定）｜<b>本期读数时点</b>：2026-11<br>
+      <b>来源语言</b>：官方一手以英文为准；非英语官方法律与选举文件标注原文语言并附官方 URL｜<b>覆盖</b>：全球多国对照（非单一地区业务线）
+    </p>
+    <p>
+      <span class="tag">政策法规解读</span><span class="tag">九节固化锚</span><span class="tag">预校准（ex-ante）</span><span class="tag">官方原文边界</span>
+    </p>
+  </div>
+</header>
+<nav class="report-nav" aria-label="报告导航">
+  <div class="wrap">
+    <div class="nav-url"><span class="nav-url-label">报告 URL：</span><a href="https://github.com/hmbphxkw76-byte/tech-context-digest/blob/main/content/political/political-system/reports/2026-11_baseline_report.html">github.com/hmbphxkw76-byte/tech-context-digest · content/political/political-system/reports/2026-11_baseline_report.html</a></div>
+    <div class="nav-tabs">
+      <a href="#s1">一、执行摘要</a>
+      <a href="#s2">二、政策台账与监测机制</a>
+      <a href="#s3">三、制度框架总览</a>
+      <a href="#s4">四、重点制度逐条解读</a>
+      <a href="#s5">五、影响对象矩阵</a>
+      <a href="#s6">六、合规应对建议（建议章）</a>
+      <a href="#s7">七、生效时间线</a>
+      <a href="#s8">八、数据治理与局限</a>
+      <a href="#s9">九、参考来源清单</a>
+    </div>
+  </div>
+</nav>
+<main class="wrap" id="main-content">
+
+<div class="delta-strip">
+  <div class="d add"><div class="n">全量</div><div class="l">本期新增（基线首期 = 全部基线项）</div></div>
+  <div class="d fix"><div class="n">0 条</div><div class="l">修正（已修正事实清单见第八节）</div></div>
+  <div class="d same"><div class="n">0 条</div><div class="l">无变化（无上期报告）</div></div>
+  <div class="d hyp"><div class="n">0/6</div><div class="l">假设核验进度（已登记 6 条假设/缺口）</div></div>
+</div>
+<p class="small muted">基线首期：新增 = 全部基线项；「已修正事实清单」为空，产生修正后逐条补记。本报告为后续事件解读与年度台账的滚动基线（对比锚），基线永不重跑。</p>
+
+<h2 class="sec" id="s1">一、执行摘要</h2>
+<div class="card leadbox">
+  <h3>核心判断</h3>
+  <ol class="tight">
+    <li><b>测量基线</b>：V-Dem Dataset v16（2026-03 发布，531 项指标 / 251 项指数）为跨国民主与治理测量主锚；跨国对照须并列体制类型与年份，不设单一「排名」列。<span class="lvl lvl-verified">已核验</span>（K01 / K02 / G02）</li>
+    <li><b>选举制度基线</b>：日本众议院 465 席（小选举区 289、比例代表 176），采小选举区比例代表并立制（1994 年改制）；参议院 248 席。选举制度 ≠ 政党制度，须分列。<span class="lvl lvl-verified">已核验</span>（K01 / G01）</li>
+    <li><b>议会构成基线</b>：英国下院 650 席（单一小选区多数制）、美国众议院 435 席 / 参议院 100 席、德国联邦议院基本 598 席；单一党派过半即触发 K02 黄灯复核。<span class="lvl lvl-verified">已核验</span>（K02 / RL-02）</li>
+    <li><b>廉政基线</b>：透明国际清廉指数（CPI）为 0–100 感知类评分、覆盖约 180 个经济体；廉政指数 ≠ 腐败案件数，两口径并列。<span class="lvl lvl-verified">已核验</span>（K05 / RL-03）</li>
+    <li><b>数字治理基线</b>：UN E-Government Survey 2024 覆盖 193 个成员国，EGDI 显著改善，数字政府落后人口比例由 2022 年 45.0% 降至 2024 年 22.4%。<span class="lvl lvl-verified">已核验</span>（K08）</li>
+    <li><b>监测节拍</b>：事件触发单份解读 + 年度台账复盘；K01–K08 与 RL-01–RL-05 为 ex-ante 预校准，首次中期回测 2027-06。<span class="lvl lvl-verified">已核验</span>（G01–G05）</li>
+    <li><b>数据缺口</b>：非英语官方法律原文、各国实时议席与选举状态本期未逐条回原文核验，登记未核验清单 6 项。<span class="lvl lvl-partial">部分核验</span>（G03 / G05）</li>
+    <li><b>结论边界</b>：只给框架性说明与可核验信息，不构成政治立场、法律或选举建议，不预测选举结果。<span class="lvl lvl-verified">已核验</span>（K07）</li>
+    <li><b>场景切片</b>：主场景政策制定、次场景合规应对；本期为机制建立，事件解读待触发后启动。<span class="lvl lvl-verified">已核验</span>（G01）</li>
+  </ol>
+  <p><b>一句话定位</b>：政治制度与治理监测以官方法律文本、选举公告与治理统计为唯一采信层，基线锁定制度框架与测量口径，事件解读与年度台账在基线之上滚动。</p>
+  <p class="small muted">来源与时点：数据截止 2026-11；分级见第八节、URL 见第九节。</p>
+</div>
+<div class="note">解读说明：文本依据为官方法律文本 / 选举公告 / 官方统计与方法文件，逐条附 URL（第九节）；时效以 2026-11 读数时点为准；摘要仅含已核验与部分核验，推断与假设下沉证据层。阈值与信号规则为「预校准（ex-ante）」，首次中期回测 2027-06。</div>
+
+<h2 class="sec" id="s2">二、政策台账与监测机制</h2>
+
+<h3>2.1 台账结构（字段定义）</h3>
+<p>台账为活值登记载体（<code>data/processed/political/political-system/political_system_ledger.md</code>），来源登记为 <code>source_registry.json</code>。字段如下：</p>
+<div class="tblwrap"><table class="fixed">
+<thead><tr><th style="width:16%">字段</th><th style="width:44%">定义</th><th style="width:40%">口径 / 示例</th></tr></thead>
+<tbody>
+<tr><td>指标编号</td><td>K01–K08（信号）/ RL-01–RL-05（红线）/ G01–G05（政策框架）</td><td>一一对应，不混用</td></tr>
+<tr><td>上期值 / 本期值 / 变化</td><td>滚动基线对比</td><td>基线首期无上期值</td></tr>
+<tr><td>来源</td><td>官方原文 URL + 版本日期</td><td>媒体转述仅作线索，标「需核实原文」</td></tr>
+<tr><td>口径</td><td>文本规定 / 实际运行分列；选举制度 / 政党制度分列</td><td>投票率 ≠ 得票率；廉政指数 ≠ 案件数</td></tr>
+<tr><td>是否更新</td><td>是 / 否 + 更新时间</td><td>核验型运行不升级版本号</td></tr>
+<tr><td>已修正事实清单</td><td>防回退：与清单冲突的旧结论不得复活</td><td>首期为空</td></tr>
+</tbody>
+</table></div>
+
+<h3>2.2 监测节拍与触发器</h3>
+<ul class="tight">
+  <li><b>主节拍（事件触发单份解读）</b>：选举公告 / 结果 / 争议 → 选举专题；修宪 / 司法改革 → 制度专题；政府组建 / 不信任案 / 解散 → 政局专题；重大腐败判决 / 廉政指数发布 → 廉政专题；集会与结社规制变更 → 公民社会专题。</li>
+  <li><b>年度台账复盘</b>：V-Dem Dataset 年度更新 → 跨国治理基线；OECD Government at a Glance 发布 → 治理结构基线；各国选举日历 → 政治周期基线；台账年度复核 → 口径冲突与已修正事实清单更新。</li>
+  <li><b>先行信号标准矩阵</b>：① 法律与修宪文本；② 选举公告与结果；③ 议席与组阁动态；④ 廉政指数与案件；⑤ 公民社会规制；⑥ 数字治理制度。</li>
+  <li><b>失真信号清单</b>：民调单期波动、匿名爆料、把表态当立法、把指数当案件、把文本规定当实际运行。</li>
+</ul>
+
+<h3>2.3 官方发布渠道清单（P0–P5）</h3>
+<div class="tblwrap"><table class="fixed">
+<thead><tr><th style="width:8%">优先级</th><th style="width:22%">渠道</th><th style="width:34%">官方 URL</th><th style="width:18%">更新机制</th><th style="width:18%">本期核验</th></tr></thead>
+<tbody>
+<tr><td>P0</td><td>日本衆議院</td><td><a href="https://www.shugiin.go.jp/">https://www.shugiin.go.jp/</a></td><td>议席 / 法案 / 选举</td><td>已核验（入口）</td></tr>
+<tr><td>P0</td><td>日本参議院</td><td><a href="https://www.sangiin.go.jp/">https://www.sangiin.go.jp/</a></td><td>议席 / 法案</td><td>已核验（入口）</td></tr>
+<tr><td>P0</td><td>総務省選挙部</td><td><a href="https://www.soumu.go.jp/senkyo/">https://www.soumu.go.jp/senkyo/</a></td><td>选举公告 / 结果</td><td>已核验（入口）</td></tr>
+<tr><td>P0</td><td>德国联邦议院</td><td><a href="https://www.bundestag.de/en">https://www.bundestag.de/en</a></td><td>议席 / 立法 / 宪法</td><td>已核验（入口）</td></tr>
+<tr><td>P0</td><td>英国议会</td><td><a href="https://www.parliament.uk/">https://www.parliament.uk/</a></td><td>议席 / 立法</td><td>已核验（入口）</td></tr>
+<tr><td>P0</td><td>美国国会</td><td><a href="https://www.congress.gov/">https://www.congress.gov/</a></td><td>议席 / 立法</td><td>已核验（入口）</td></tr>
+<tr><td>P0</td><td>中国全国人民代表大会</td><td><a href="http://www.npc.gov.cn/">http://www.npc.gov.cn/</a></td><td>法律 / 代表名单</td><td>未核验（未抓取）</td></tr>
+<tr><td>P1</td><td>V-Dem Institute</td><td><a href="https://www.v-dem.net/">https://www.v-dem.net/</a></td><td>年度数据集 / 报告</td><td>已核验</td></tr>
+<tr><td>P1</td><td>Transparency International</td><td><a href="https://www.transparency.org/en/cpi">https://www.transparency.org/en/cpi</a></td><td>年度 CPI</td><td>已核验</td></tr>
+<tr><td>P2</td><td>UN E-Government Survey</td><td><a href="https://publicadministration.un.org/egovkb/en-us/">https://publicadministration.un.org/egovkb/en-us/</a></td><td>两年一度</td><td>已核验</td></tr>
+<tr><td>P2</td><td>OECD Government at a Glance</td><td><a href="https://www.oecd.org/en/publications/government-at-a-glance.html">https://www.oecd.org/en/publications/government-at-a-glance.html</a></td><td>两年一度</td><td>未核验（入口）</td></tr>
+<tr><td>P2</td><td>World Bank WGI</td><td><a href="https://www.worldbank.org/en/publication/worldwide-governance-indicators">https://www.worldbank.org/en/publication/worldwide-governance-indicators</a></td><td>年度</td><td>未核验（入口）</td></tr>
+<tr><td>P4</td><td>International IDEA</td><td><a href="https://www.idea.int/">https://www.idea.int/</a></td><td>民主状况报告</td><td>未核验</td></tr>
+<tr><td>P4</td><td>IPU 各国议会联盟</td><td><a href="https://www.ipu.org/">https://www.ipu.org/</a></td><td>议席 / 选举观察</td><td>未核验</td></tr>
+<tr><td>线索</td><td>Freedom House</td><td><a href="https://freedomhouse.org/">https://freedomhouse.org/</a></td><td>年度自由报告</td><td>仅作线索，须回官方核验</td></tr>
+</tbody>
+</table></div>
+<div class="note">渠道分级按 business-config 第四节：P0 官方法律 / 选举公告 / 议会记录为唯一可直接采信层；P1 官方 PDF / 统计年鉴；P2 国际治理数据库（须注提取日期与版本）；P3 英文媒体（只作线索）；P4 智库与行业机构（交叉验证方向）；P5 官方法律数据库 / 宪法文本（最终裁决制度与程序口径）。</div>
+
+<h3>2.4 信号规则阈值（K01–K08，ex-ante 预校准）</h3>
+<div class="tblwrap"><table class="fixed">
+<thead><tr><th style="width:7%">编号</th><th style="width:16%">监测对象</th><th style="width:6%">等级</th><th style="width:15%">绿灯</th><th style="width:16%">黄灯</th><th style="width:19%">预警红线</th><th style="width:13%">硬红线</th><th style="width:8%">基线状态</th></tr></thead>
+<tbody>
+<tr><td>K01</td><td>选举与投票率</td><td>一级</td><td>正常周期</td><td>投票率显著下滑</td><td>选举延期 / 取消</td><td>选举制度变更</td><td>未触发</td></tr>
+<tr><td>K02</td><td>议会构成与席位</td><td>二级</td><td>正常轮换</td><td>单一党派过半</td><td>联合政府破裂</td><td>提前大选</td><td>未触发</td></tr>
+<tr><td>K03</td><td>宪法 / 司法改革</td><td>一级</td><td>无变更</td><td>修宪讨论</td><td>草案提交</td><td>修宪通过</td><td>未触发</td></tr>
+<tr><td>K04</td><td>行政区划与地方分权</td><td>二级</td><td>无变更</td><td>调整讨论</td><td>撤并行政区</td><td>事权上收</td><td>未触发</td></tr>
+<tr><td>K05</td><td>廉政与透明度</td><td>二级</td><td>指数稳定</td><td>指数下行</td><td>重大腐败判决</td><td>系统性廉政倒退</td><td>未触发</td></tr>
+<tr><td>K06</td><td>公民社会与集会</td><td>二级</td><td>正常</td><td>限制讨论</td><td>新增许可要求</td><td>事实上禁止</td><td>未触发</td></tr>
+<tr><td>K07</td><td>政府组建与不信任案</td><td>一级</td><td>稳定</td><td>内阁改组</td><td>不信任案提出</td><td>政府解散</td><td>未触发</td></tr>
+<tr><td>K08</td><td>数字治理与数据制度</td><td>三级</td><td>正常</td><td>立法讨论</td><td>新规生效</td><td>跨境数据限制</td><td>未触发</td></tr>
+</tbody>
+</table></div>
+
+<h3>2.5 结构红线登记簿（RL-01–RL-05）</h3>
+<div class="tblwrap"><table class="fixed">
+<thead><tr><th style="width:9%">编号</th><th style="width:16%">监测对象</th><th style="width:33%">硬阈值</th><th style="width:28%">触发后动作</th><th style="width:14%">基线状态</th></tr></thead>
+<tbody>
+<tr><td>RL-01</td><td>宪政体制</td><td>修宪变更权力结构或任期规则</td><td>重算制度稳定性与政策连续性假设</td><td>未触发</td></tr>
+<tr><td>RL-02</td><td>选举制度</td><td>选举法实质变更或选举取消</td><td>重算政治周期与代表性假设</td><td>未触发</td></tr>
+<tr><td>RL-03</td><td>廉政治理</td><td>系统性廉政倒退（指数与案件双证）</td><td>重算合规风险与透明度评分</td><td>未触发</td></tr>
+<tr><td>RL-04</td><td>公民社会</td><td>结社 / 集会 / 媒体自由事实上受限</td><td>重算公民参与与舆情环境假设</td><td>未触发</td></tr>
+<tr><td>RL-05</td><td>司法独立</td><td>宪法法院 / 司法机构重组或权限变更</td><td>重算法律确定性假设</td><td>未触发</td></tr>
+</tbody>
+</table></div>
+
+<h3>2.6 政策框架复核清单（G01–G05）</h3>
+<div class="tblwrap"><table class="fixed">
+<thead><tr><th style="width:9%">编号</th><th style="width:22%">政策项</th><th style="width:45%">官方入口</th><th style="width:24%">复核周期</th></tr></thead>
+<tbody>
+<tr><td>G01</td><td>选举制度与选举日历</td><td>各国选举委员会（日本総務省選挙部等）</td><td>事件触发 + 年度</td></tr>
+<tr><td>G02</td><td>议会与立法程序</td><td>各国议会官方站（衆議院 / 参議院 / Bundestag / parliament.uk）</td><td>事件触发 + 年度</td></tr>
+<tr><td>G03</td><td>行政区划与地方治理</td><td>各国政府官方站</td><td>事件触发 + 年度</td></tr>
+<tr><td>G04</td><td>廉政与透明度</td><td>Transparency International 官方方法文件</td><td>年度</td></tr>
+<tr><td>G05</td><td>司法与宪法</td><td>各国宪法法院 / 法律数据库（Bundestag 宪政法页等）</td><td>事件触发 + 年度</td></tr>
+</tbody>
+</table></div>
+<p class="small muted">规则：未取得官方原文的标「未核验」；入口页 ≠ 条款页；任一变更 → 立即重算受影响结论。</p>
+
+<h2 class="sec" id="s3">三、制度框架总览</h2>
+
+<h3>3.1 层级地图</h3>
+<div class="tblwrap"><table class="fixed">
+<thead><tr><th style="width:14%">层级</th><th style="width:30%">代表文件</th><th style="width:24%">效力</th><th style="width:32%">监测要点</th></tr></thead>
+<tbody>
+<tr><td>L1 宪法 / 基本法</td><td>日本国宪法（1947）；德国 Grundgesetz（1949）；美国宪法（1787）；英国不成文宪法</td><td>最高法律约束</td><td>条文规定与实际运行并列</td></tr>
+<tr><td>L2 选举 / 议会法</td><td>公职选举法（日本）；德国联邦选举法；英国人民代表法；美国选举法</td><td>法律约束</td><td>选举制度 / 政党制度分列</td></tr>
+<tr><td>L3 政党 / 政治资金法</td><td>政治资金规正法（日本）；德国政党法；美国 FECA</td><td>法律约束</td><td>政党门槛、资金与献金口径</td></tr>
+<tr><td>L4 国际 / 区域机制</td><td>UN E-Government Survey；OECD 治理指标；V-Dem 数据集</td><td>测量与比较框架</td><td>版本、提取日期与口径并列</td></tr>
+</tbody>
+</table></div>
+
+<h3>3.2 体制地图（多国对照）</h3>
+<div class="tblwrap"><table class="fixed">
+<thead><tr><th style="width:12%">国家</th><th style="width:16%">体制类型</th><th style="width:16%">议会 / 下院议席</th><th style="width:20%">选举制度</th><th style="width:18%">最近选举</th><th style="width:18%">核验状态</th></tr></thead>
+<tbody>
+<tr><td>日本</td><td>议会内阁制（君主立宪）</td><td>衆議院 465 / 参議院 248</td><td>小选举区比例代表并立制</td><td>2024-10 第 50 届众议院选举</td><td>已核验</td></tr>
+<tr><td>德国</td><td>议会共和制（联邦）</td><td>联邦议院基本 598</td><td>个人化比例代表制（两票）</td><td>2025-02 联邦议院选举</td><td>部分核验</td></tr>
+<tr><td>英国</td><td>议会君主制（单一制）</td><td>下院 650</td><td>单一小选区多数制（FPTP）</td><td>2024-07 大选</td><td>已核验</td></tr>
+<tr><td>美国</td><td>总统共和制（联邦）</td><td>众议院 435 / 参议院 100</td><td>单一小选区多数制（FPTP）</td><td>2024-11 大选</td><td>已核验</td></tr>
+<tr><td>中国</td><td>人民代表大会制度</td><td>全国人大代表（名额待核验）</td><td>间接选举 + 差额选举</td><td>全国两会（年度）</td><td>未核验</td></tr>
+</tbody>
+</table></div>
+<div class="note">跨国对照不设单一「排名」列；议席数为法定 / 基本定额，实际议席可因选举结果与超额议席（Überhang）浮动，引用时须注明年份与口径（business-config 第十二节）。</div>
+
+<h3>3.3 框架演变脉络</h3>
+<div class="timeline">
+  <div class="tl-item"><div class="tl-date">1787</div><div class="tl-body"><div class="t">美国宪法</div><div class="d">世界上最早的成文联邦宪法之一，确立三权分立与联邦制；修正案机制延续至今。<span class="lvl lvl-verified">已核验</span></div></div></div>
+  <div class="tl-item"><div class="tl-date">1889 / 1947</div><div class="tl-body"><div class="t">日本宪法</div><div class="d">1889 年《大日本帝国宪法》颁布；1947-05-03《日本国宪法》施行，确立国民主权、基本人权与和平主义。<span class="lvl lvl-verified">已核验</span></div></div></div>
+  <div class="tl-item"><div class="tl-date">1949</div><div class="tl-body"><div class="t">德国 Grundgesetz</div><div class="d">1949-05-23 生效，为联邦德国基本法，确立联邦制、法治国与防卫性民主。<span class="lvl lvl-verified">已核验</span></div></div></div>
+  <div class="tl-item"><div class="tl-date">1994</div><div class="tl-body"><div class="t">日本选举制度改革</div><div class="d">政治改革四法通过，众议院选举改为小选举区比例代表并立制。<span class="lvl lvl-verified">已核验</span></div></div></div>
+  <div class="tl-item"><div class="tl-date">1995</div><div class="tl-body"><div class="t">透明国际 CPI 首次发布</div><div class="d">清廉指数成为跨国廉政感知测量基线；口径为 0–100 感知评分。<span class="lvl lvl-verified">已核验</span></div></div></div>
+  <div class="tl-item"><div class="tl-date">2004</div><div class="tl-body"><div class="t">UN E-Government Survey 首次发布</div><div class="d">两年一度，形成 EGDI / OSI / LOSI 测量体系。<span class="lvl lvl-verified">已核验</span></div></div></div>
+  <div class="tl-item"><div class="tl-date">2026-03</div><div class="tl-body green"><div class="t">V-Dem Dataset v16 发布</div><div class="d">531 项指标 / 251 项指数，为跨国民主测量最新基线。<span class="lvl lvl-verified">已核验</span></div></div></div>
+</div>
+
+<h3>3.4 术语口径区分（不得混用）</h3>
+<div class="term"><b>选举制度 ≠ 政党制度</b>：多数制 / 比例代表制 / 混合制与一党 / 多党 / 两党分列。<br>
+<b>投票率 ≠ 得票率</b>：登记选民口径与实际投票口径分列。<br>
+<b>中央政府 ≠ 地方政府</b>：事权与财权划分须注明层级。<br>
+<b>廉政指数 ≠ 腐败案件数</b>：感知类指数与司法案件统计口径不同。<br>
+<b>公民社会 ≠ 非政府组织</b>：结社、集会、媒体自由度分列。<br>
+<b>宪政体制 ≠ 实际运行</b>：文本规定与实际运作并列，不互相替代。</div>
+
+<h2 class="sec" id="s4">四、重点制度逐条解读</h2>
+
+<h3>4.1 日本国会与议院制度</h3>
+<p><b>条款摘编</b>：日本国会由众议院（衆議院）与参议院（参議院）两院构成；众议院议员 465 名（小选举区 289、比例代表 176），任期 4 年；参议院议员 248 名，任期 6 年、每 3 年改选半数。1947-05-03《日本国宪法》施行，确立国会为最高权力机关与唯一立法机关。<span class="lvl lvl-verified">已核验</span></p>
+<p><b>解读</b>：K02（议会构成与席位）与 K07（政府组建与不信任案）的条款基准；参议院 2022 年定额改正后固定为 248 名，引用时须注明年份。</p>
+<p><b>官方答问 / 配套</b>：衆議院 / 参議院官方站。<span class="src-inline">来源：<a href="https://www.shugiin.go.jp/">https://www.shugiin.go.jp/</a>；<a href="https://www.sangiin.go.jp/">https://www.sangiin.go.jp/</a></span></p>
+
+<h3>4.2 日本众议院选举制度（小选举区比例代表并立制）</h3>
+<p><b>条款摘编</b>：1994 年政治改革四法后，众议院选举采小选举区比例代表并立制：选民同时投小选举区（单记）与比例代表（政党）两票，两票分别计票、互不折算；小选举区 289 席、比例代表 176 席（11 个比例区）。<span class="lvl lvl-verified">已核验</span></p>
+<p><b>解读</b>：并立制下小选举区与比例代表各自独立分配，易产生「一票之差」与双重候选（重複立候補）现象；K01 选举监测须分别记录小选举区与比例区得票结构，不与得票率混算。</p>
+<p><b>歧义并列</b>：「并立制」与「比例并立·重复落选许可」等配套规则须逐条核对総務省選挙部文本；本基线不展开 2025 年后定额调整讨论（事件触发后解读）。</p>
+<p><b>官方答问 / 配套</b>：総務省選挙部选举制度页。<span class="src-inline">来源：<a href="https://www.soumu.go.jp/senkyo/">https://www.soumu.go.jp/senkyo/</a></span></p>
+
+<h3>4.3 德国联邦议院与 Grundgesetz</h3>
+<p><b>条款摘编</b>：德国《基本法》（Grundgesetz）1949-05-23 生效，确立联邦制、法治国、社会国与防卫性民主；联邦议院（Bundestag）为基本 598 席的议会，采个人化比例代表制（两票制），具体议席可因超额议席与平衡议席高于基本定额。<span class="lvl lvl-partial">部分核验</span></p>
+<p><b>解读</b>：K02 / K03 监测须区分「基本定额」与「实际议席」；修宪受基本法第 79 条约束（联邦制与核心原则不得修改）。</p>
+<p><b>官方答问 / 配套</b>：联邦议院宪法与选举页。<span class="src-inline">来源：<a href="https://www.bundestag.de/en">https://www.bundestag.de/en</a></span></p>
+
+<h3>4.4 英国议会与美国国会</h3>
+<p><b>条款摘编</b>：英国下院 650 个选区，采单一小选区多数制（FPTP），获最多票者当选；美国众议院 435 席（按人口分配）、参议院 100 席（每州 2 席），均为单一小选区多数制 / 全州多数制。<span class="lvl lvl-verified">已核验</span></p>
+<p><b>解读</b>：FPTP 下「得票率 ≠ 席次率」为常态，K02 须并列得票率与席次率；议席定额变动（如选区重划）属 K02 黄灯触发条件。</p>
+<p><b>官方答问 / 配套</b>：英国议会 / 美国国会。<span class="src-inline">来源：<a href="https://www.parliament.uk/">https://www.parliament.uk/</a>；<a href="https://www.congress.gov/">https://www.congress.gov/</a></span></p>
+
+<h3>4.5 V-Dem 民主测量框架</h3>
+<p><b>条款摘编</b>：V-Dem Dataset v16（2026-03 发布）含 531 项指标与 251 项指数，核心为五项高级民主指数（选举、自由、平等、参与、审议）；以「政体类型（Regimes of the World）」与年度编码为基础，覆盖 179+ 国家 / 地区。<span class="lvl lvl-verified">已核验</span></p>
+<p><b>解读</b>：跨国对照以「选举民主 / 自由民主 / 选举威权 / 封闭威权」四类并列，不设单一排名；引用须注明数据集版本（v16）与提取日期（K01 / K02）。</p>
+<p><b>官方答问 / 配套</b>：V-Dem 数据集与参考文档。<span class="src-inline">来源：<a href="https://www.v-dem.net/data/the-v-dem-dataset/">https://www.v-dem.net/data/the-v-dem-dataset/</a></span></p>
+
+<h3>4.6 透明国际清廉指数（CPI）</h3>
+<p><b>条款摘编</b>：CPI 为透明国际发布的公共部门腐败感知评分，0–100 分、覆盖约 180 个经济体，基于 13 个独立数据源与专家 / 商业调查；2025 年 CPI 丹麦以 90 分重回榜首。<span class="lvl lvl-verified">已核验</span></p>
+<p><b>解读</b>：K05（廉政与透明度）须将「感知类指数」与「司法案件数」并列；CPI 口径为感知，不构成腐败案件统计，两者冲突时并列不合并。</p>
+<p><b>官方答问 / 配套</b>：CPI 首页与方法文件。<span class="src-inline">来源：<a href="https://www.transparency.org/en/cpi">https://www.transparency.org/en/cpi</a></span></p>
+
+<h3>4.7 UN E-Government Survey 与数字治理</h3>
+<p><b>条款摘编</b>：UN E-Government Survey 2024（第 13 版）覆盖 193 个成员国，EGDI 全球均值显著改善，数字政府落后人口比例由 2022 年 45.0% 降至 2024 年 22.4%；新增数字政府模型框架与 AI 附录。<span class="lvl lvl-verified">已核验</span></p>
+<p><b>解读</b>：K08（数字治理与数据制度）监测以 EGDI / OSI / LOSI 三级指标为锚；数字治理立法讨论与跨境数据限制分列，不并入同一结论。</p>
+<p><b>官方答问 / 配套</b>：UN E-Government Survey 知识库与数据中心。<span class="src-inline">来源：<a href="https://publicadministration.un.org/egovkb/en-us/">https://publicadministration.un.org/egovkb/en-us/</a></span></p>
+
+<h2 class="sec" id="s5">五、影响对象矩阵</h2>
+<p>矩阵按「制度 / 机制 × 受影响主体 × 影响方向」展开，逐格附条款依据与指标指针；本期为基线，影响量级待事件触发后回填。</p>
+<div class="tblwrap"><table class="fixed">
+<thead><tr><th style="width:19%">制度 / 机制</th><th style="width:17%">受影响主体</th><th style="width:30%">影响方向</th><th style="width:34%">依据 / 指针</th></tr></thead>
+<tbody>
+<tr><td>选举制度（K01 / RL-02）</td><td>政策制定者 / 政党</td><td>选举法实质变更 → 重算政治周期与代表性假设</td><td>公职选举法；総務省選挙部；[G01]</td></tr>
+<tr><td>议会构成与席位（K02）</td><td>政策制定者 / 研究者</td><td>单一党派过半 / 联合政府破裂 → 重算立法与组阁假设</td><td>衆議院 / 参議院 / Bundestag / parliament.uk；[G02]</td></tr>
+<tr><td>宪法 / 司法改革（K03 / RL-01 / RL-05）</td><td>法律合规团队</td><td>修宪或司法重组 → 重算制度稳定性与法律确定性</td><td>Grundgesetz 第 79 条；[G05]</td></tr>
+<tr><td>廉政指数（K05 / RL-03）</td><td>合规 / 涉外团队</td><td>指数下行或重大腐败判决 → 重算合规风险</td><td>CPI 方法文件；[G04]</td></tr>
+<tr><td>公民社会（K06 / RL-04）</td><td>研究者 / 社会组织</td><td>结社 / 集会 / 媒体受限 → 重算参与与舆情假设</td><td>UN OHCHR；[G03]</td></tr>
+<tr><td>政府组建 / 不信任案（K07）</td><td>政策制定者</td><td>内阁改组 / 不信任案 / 解散 → 重算政策连续性</td><td>日本国宪法；衆議院；[G02]</td></tr>
+<tr><td>数字治理（K08）</td><td>合规 / 数据团队</td><td>新规生效 / 跨境数据限制 → 重算合规边界</td><td>UN E-Government Survey；[G04]</td></tr>
+</tbody>
+</table></div>
+
+<div class="decision-card">
+  <div class="dc-head"><span class="dc-title">DC-1 制度测量基线已锁定，事件解读待触发</span><span class="suff need">信息充分度：中</span></div>
+  <div class="dc-grid">
+    <div><span class="k">结论：</span>以官方法律文本与 V-Dem / CPI / EGDI 官方测量为基线，制度框架与口径已锁定；事件触发解读与年度台账在此之上滚动。</div>
+    <div><span class="k">证据强度：</span><span class="ev-strong">强</span>（官方原文 / 官方测量方法）</div>
+    <div><span class="k">触发条件：</span>K01–K08 任一黄灯及以上；RL-01–RL-05 任一红线。</div>
+    <div><span class="k">反向证据：</span>非英语官方法律原文与实时议席 / 选举状态未核验（U-01 / U-02 / U-06）。</div>
+    <div><span class="k">信息充分度：</span>制度框架充分；国别实时状态与事件层面不足。</div>
+    <div><span class="k">行动：</span>见第六节行动协议卡。</div>
+  </div>
+</div>
+<div class="decision-card">
+  <div class="dc-head"><span class="dc-title">DC-2 选举制度与政党制度须分列</span><span class="suff ok">方向可决策</span></div>
+  <div class="dc-grid">
+    <div><span class="k">结论：</span>选举制度（多数 / 比例 / 混合）与政党制度（一党 / 多党 / 两党）不得混用；并立制下两票分别计票（已核验）。</div>
+    <div><span class="k">证据强度：</span><span class="ev-strong">强</span>（総務省選挙部 / 议会官方文本）</div>
+    <div><span class="k">触发条件：</span>选举法修订、选区重划、政党门槛调整。</div>
+    <div><span class="k">反向证据：</span>媒体转述常合并口径，须回原文。</div>
+    <div><span class="k">信息充分度：</span>口径规则可直接决策；国别映射待补。</div>
+  </div>
+</div>
+
+<h2 class="sec" id="s6">六、合规应对建议（建议章）</h2>
+<div class="note correct"><b>结论边界</b>：本章为「建议」，与事实分离；不构成政治立场、法律或选举建议；重大合规决策须咨询执业法律专业人士。原文有歧义处并列多解，不静默择一。</div>
+
+<h3>6.1 建议清单</h3>
+<ul class="tight">
+  <li><b>官方原文回溯 SOP</b>（建议）：制度与选举结论一律回溯官方法律文本 / 选举公告原文；入口页不等于条款页。</li>
+  <li><b>制度口径分列</b>（建议）：选举制度、政党制度、投票率、得票率、廉政指数、案件数逐条分列，不得合并登记。</li>
+  <li><b>测量版本标注</b>（建议）：V-Dem / CPI / EGDI 引用须注明版本与提取日期；跨国对照并列体制类型与年份，不设单一排名。</li>
+  <li><b>议会席次口径</b>（建议）：法定定额与实际席次并列，注明超额议席 / 选区重划等变动因素。</li>
+  <li><b>结论边界</b>（建议）：不预测选举结果，不构成政治立场；事件解读待触发后启动。</li>
+</ul>
+
+<h3>6.2 待明确事项清单</h3>
+<ul class="tight">
+  <li>中国全国人大代表名额与选举程序官方原文口径（未核验）。</li>
+  <li>德国 2025 年联邦议院选举后实际议席与超额议席规模。</li>
+  <li>日本 2025 年后众议院定额调整讨论的立法进度（事件触发后解读）。</li>
+  <li>非英语官方法律原文（日文 / 中文 / 德文）条款对照。</li>
+</ul>
+
+<h3>6.3 场景切片</h3>
+<div class="slice">
+  <p class="slice-head">场景切片 · 政策制定</p>
+  <p>以官方法律文本与官方测量为政策基线，优先跟踪选举制度变更（K01 / RL-02）、议会构成过半（K02）与廉政指数下行（K05）；阈值与信号规则为「预校准（ex-ante）」，首次中期回测 2027-06。（来源：business-config 第十三节，指针）</p>
+</div>
+<div class="slice">
+  <p class="slice-head">场景切片 · 合规应对</p>
+  <p>制度与选举口径并列登记，法律工具与政治信号分列；涉及跨境合规时以官方法律文本为最终裁决层（P5），媒体转述仅作线索。（来源：business-config 第三节 / 第四节，指针）</p>
+</div>
+
+<h3>6.4 行动协议卡</h3>
+<div class="action-card immediate">
+  <div class="a-head"><span class="prio immediate">立即行动</span><span class="a-title">A1 RL 红线触发</span></div>
+  <div class="a-meta"><b>触发条件：</b>任一 RL-01–RL-05 红线触发。<b>阈值：</b>RL-01–RL-05 硬阈值（详见 2.4 节）。<b>动作：</b>24 小时内重算受影响结论并回写台账。<b>责任角色：</b>业务线负责人。<b>时限：</b>事件触发即启动。<b>验证指标：</b>台账更新记录 + 已修正事实清单。</div>
+</div>
+<div class="action-card watch">
+  <div class="a-head"><span class="prio watch">持续观察</span><span class="a-title">A2 K01–K03 黄灯</span></div>
+  <div class="a-meta"><b>触发条件：</b>选举延期 / 讨论、单一党派过半、修宪讨论、内阁改组。<b>阈值：</b>K01–K03 黄灯阈值（详见 2.4 节）。<b>动作：</b>48 小时内完成官方原文回溯，决定是否升级为事件解读。<b>责任角色：</b>监测岗。<b>时限：</b>事件触发即启动。<b>验证指标：</b>原文 URL 与核验状态登记。</div>
+</div>
+<div class="action-card archive">
+  <div class="a-head"><span class="prio archive">仅记录存档</span><span class="a-title">A3 年度台账复核</span></div>
+  <div class="a-meta"><b>触发条件：</b>年度复核节点 / V-Dem 年度更新。<b>阈值：</b>每年 1 次复核。<b>动作：</b>刷新测量基线与政策框架，更新已修正事实清单并归档。<b>责任角色：</b>年度复盘。<b>时限：</b>年度。<b>验证指标：</b>台账版本与归档记录。</div>
+</div>
+
+<h2 class="sec" id="s7">七、生效时间线</h2>
+<div class="tblwrap"><table class="fixed">
+<thead><tr><th style="width:26%">政策 / 机制</th><th style="width:22%">关键节点</th><th style="width:20%">日期</th><th style="width:32%">依据</th></tr></thead>
+<tbody>
+<tr><td>美国宪法</td><td>签署 / 生效</td><td>1787-09 / 1788-06</td><td>congress.gov（入口）</td></tr>
+<tr><td>大日本帝国宪法</td><td>颁布</td><td>1889-02-11</td><td>衆議院（入口）</td></tr>
+<tr><td>日本国宪法</td><td>施行</td><td>1947-05-03</td><td>衆議院 / 参議院</td></tr>
+<tr><td>德国 Grundgesetz</td><td>生效</td><td>1949-05-23</td><td>bundestag.de</td></tr>
+<tr><td>日本政治改革四法（并立制）</td><td>通过 / 施行</td><td>1994</td><td>総務省選挙部</td></tr>
+<tr><td>透明国际 CPI</td><td>首次发布</td><td>1995</td><td>transparency.org</td></tr>
+<tr><td>UN E-Government Survey</td><td>首次发布</td><td>2004</td><td>publicadministration.un.org</td></tr>
+<tr><td>V-Dem Dataset v16</td><td>发布</td><td>2026-03</td><td>v-dem.net</td></tr>
+<tr><td>UN E-Government Survey 2024</td><td>第 13 版发布</td><td>2024</td><td>publicadministration.un.org</td></tr>
+</tbody>
+</table></div>
+<h3>7.1 待生效与待细则清单</h3>
+<ul class="tight">
+  <li>日本众议院定额调整讨论的立法进度与生效安排（未核验，事件触发后解读）。</li>
+  <li>德国 2025 年联邦议院选举后超额议席与联合政府组建细则（未核验）。</li>
+  <li>V-Dem 后续版本（v17）与 OECD Government at a Glance 发布节奏（待跟踪）。</li>
+  <li>UN E-Government Survey 2026 版与 AI 附录更新（待跟踪）。</li>
+</ul>
+
+<h2 class="sec" id="s8">八、数据治理与局限</h2>
+<h3>8.1 来源分级（指针）</h3>
+<p>来源按 business-config 第四节四层分级与 P0–P5 获取优先级执行（指针，不复制正文）：<b>官方一手</b>（官方法律文本 / 选举公告 / 议会记录 / 官方统计）为唯一可直接采信层；<b>行业机构</b>（V-Dem / International IDEA / IPU）；<b>挂牌门户 / 数据库</b>（V-Dem Dataset、OECD 治理指标、World Bank WGI、UN E-Government Survey，须注提取日期与版本）；<b>媒体转述</b>（须标「需核实原文」，不得与官方一手同等处理）。Freedom House / 商业评级机构仅作线索。</p>
+<h3>8.2 文本时效与版本治理</h3>
+<ul class="tight">
+  <li><b>读数时点</b>：2026-11；法律与选举状态以官方页面为准，动态状态须回溯状态页。</li>
+  <li><b>版本治理</b>：本报告 v1.0（首期基线固定）；核验 / 收敛型运行不升级版本号，只标注「本期读数时点」。</li>
+  <li><b>基线属性</b>：本报告为后续事件解读与年度台账的对比锚；基线永不重跑，结构变更只影响后续新基线。</li>
+</ul>
+<h3>8.3 核验状态统计</h3>
+<ul class="tight">
+  <li><b>已核验</b>：日本众 / 参议院议席与并立制、V-Dem v16、CPI 口径、UN E-Government Survey 2024、英美议席定额。</li>
+  <li><b>部分核验</b>：德国联邦议院选举后实际议席、中国全国人大口径、OECD 治理指标。</li>
+  <li><b>推断</b>：影响对象矩阵中的「方向 / 量级」为方向性判断。</li>
+  <li><b>假设</b>：已登记 6 条，基线期未核验（0/6）。</li>
+</ul>
+<h3>8.4 未核验清单（U-01–U-06）</h3>
+<div class="tblwrap"><table class="fixed">
+<thead><tr><th style="width:9%">编号</th><th style="width:55%">未核验项</th><th style="width:36%">影响与处置</th></tr></thead>
+<tbody>
+<tr><td>U-01</td><td>非英语官方法律原文（日文 / 中文 / 德文）条款逐条对照</td><td>须回原文标注条款号与语言；本基线仅用入口页与公开摘要</td></tr>
+<tr><td>U-02</td><td>中国全国人大代表名额与选举程序官方原文</td><td>仅登记入口，未作事实引用</td></tr>
+<tr><td>U-03</td><td>德国 2025 年联邦议院选举后实际议席与超额议席</td><td>待回 bundestag.de 议席表核验</td></tr>
+<tr><td>U-04</td><td>日本 2025 年后众议院定额调整讨论的立法进度</td><td>事件触发后逐条解读（K02 / RL-02）</td></tr>
+<tr><td>U-05</td><td>OECD Government at a Glance / World Bank WGI 具体数值</td><td>本期仅登记入口，未作点值引用</td></tr>
+<tr><td>U-06</td><td>Freedom House / 商业评级机构数值</td><td>仅作线索，须回官方或方法文件核验后使用</td></tr>
+</tbody>
+</table></div>
+<h3>8.5 解读局限</h3>
+<ul class="tight">
+  <li>本基线只处理官方文本与机制框架，不采集舆论反应；不做预测，不引用匿名消息。</li>
+  <li>机制框架的「影响量级」需事件触发后回填，本期矩阵只给方向与条款依据。</li>
+  <li>「已修正事实清单」首期为空；产生修正后逐条补记，防回退。</li>
+  <li>本主题暂无事实卡片库（engine/fact_cards/），正文以指标编号 + 指针（K / RL / G）引用；未编造 [FC-…] 指针。</li>
+</ul>
+
+<h2 class="sec" id="s9">九、参考来源清单</h2>
+<p class="small muted">按来源分级分组，完整 URL，逐点可回溯；媒体转述标「需核实原文」。</p>
+<div class="refs">
+<h4>官方一手（P0 / P1）</h4>
+<ol>
+<li>日本衆議院 — <a href="https://www.shugiin.go.jp/" target="_blank" rel="noopener">https://www.shugiin.go.jp/</a></li>
+<li>日本参議院 — <a href="https://www.sangiin.go.jp/" target="_blank" rel="noopener">https://www.sangiin.go.jp/</a></li>
+<li>総務省選挙部 — <a href="https://www.soumu.go.jp/senkyo/" target="_blank" rel="noopener">https://www.soumu.go.jp/senkyo/</a></li>
+<li>德国联邦议院（英文） — <a href="https://www.bundestag.de/en" target="_blank" rel="noopener">https://www.bundestag.de/en</a></li>
+<li>英国议会 — <a href="https://www.parliament.uk/" target="_blank" rel="noopener">https://www.parliament.uk/</a></li>
+<li>美国国会 — <a href="https://www.congress.gov/" target="_blank" rel="noopener">https://www.congress.gov/</a></li>
+<li>中国全国人民代表大会 — <a href="http://www.npc.gov.cn/" target="_blank" rel="noopener">http://www.npc.gov.cn/</a></li>
+<li>UN OHCHR — <a href="https://www.ohchr.org/" target="_blank" rel="noopener">https://www.ohchr.org/</a></li>
+<li>Inter-Parliamentary Union (IPU) — <a href="https://www.ipu.org/" target="_blank" rel="noopener">https://www.ipu.org/</a></li>
+</ol>
+<h4>行业机构 / 智库（P4）</h4>
+<ol>
+<li>V-Dem Dataset — <a href="https://www.v-dem.net/data/the-v-dem-dataset/" target="_blank" rel="noopener">https://www.v-dem.net/data/the-v-dem-dataset/</a></li>
+<li>Transparency International · CPI — <a href="https://www.transparency.org/en/cpi" target="_blank" rel="noopener">https://www.transparency.org/en/cpi</a></li>
+<li>International IDEA — <a href="https://www.idea.int/" target="_blank" rel="noopener">https://www.idea.int/</a></li>
+</ol>
+<h4>挂牌门户（仅作参考）</h4>
+<ol>
+<li>UN E-Government Survey 知识库 — <a href="https://publicadministration.un.org/egovkb/en-us/" target="_blank" rel="noopener">https://publicadministration.un.org/egovkb/en-us/</a>（参考）</li>
+<li>UN E-Government Survey 数据中心 — <a href="https://publicadministration.un.org/egovkb/en-us/data-center" target="_blank" rel="noopener">https://publicadministration.un.org/egovkb/en-us/data-center</a>（参考）</li>
+<li>OECD · Government at a Glance — <a href="https://www.oecd.org/en/publications/government-at-a-glance.html" target="_blank" rel="noopener">https://www.oecd.org/en/publications/government-at-a-glance.html</a>（参考）</li>
+<li>World Bank · Worldwide Governance Indicators — <a href="https://www.worldbank.org/en/publication/worldwide-governance-indicators" target="_blank" rel="noopener">https://www.worldbank.org/en/publication/worldwide-governance-indicators</a>（参考）</li>
+</ol>
+<h4>线索（须回官方核验）</h4>
+<ol>
+<li>Freedom House — <a href="https://freedomhouse.org/" target="_blank" rel="noopener">https://freedomhouse.org/</a></li>
+</ol>
+</div>
+
+<div class="disc">
+  <strong>结论边界与版本治理</strong>：本报告只给框架性说明与可核验信息，不构成政治立场、法律或选举建议，不预测选举结果，不引用匿名消息。报告版本 v1.0（首期基线固定）；核验 / 收敛型运行不升级版本号，只标注「本期读数时点」。信号阈值与红线为「预校准（ex-ante）」，首次中期回测 2027-06。数据截止 2026-11；来源分级与未核验清单见第八节。
+</div>
+<footer>tech-context-digest · 政治制度与治理基线 · 九节固化锚 · 2026-11</footer>
+</main>
+</body>
+</html>

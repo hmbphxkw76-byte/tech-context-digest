@@ -196,8 +196,18 @@ def _period_of(name: str) -> str:
     return det[1] if det else ""
 
 
-# 规则级别：新报告 [E] / 历史 [W]；仅 [W] 的规则
-_WARN_ONLY = {"ID-02", "ID-06"}
+# 规则级别：新报告 [E] / 历史 [W]；仅 [W] 的规则。
+# P1-4（2026-11-19）：ID-02 移出 WARN_ONLY，改为滚动 gate-period——新报告
+# （period ≥ gate-period）判 [E]，历史报告判 [W]。ID-06 保持 [W]：指针引用为
+# 结构性软要求，存量报告补齐成本高且不影响结论可靠性，继续只告警不阻断。
+_WARN_ONLY = {"ID-06"}
+
+
+def _level_for(rule: str, is_new: bool) -> str:
+    """规则级别：WARN_ONLY 恒 [W]；其余新报告 [E] / 历史 [W]（滚动 gate-period）。"""
+    if rule in _WARN_ONLY:
+        return "W"
+    return "E" if is_new else "W"
 
 
 def run(only_file: str | None, gate: str) -> tuple[int, int, list[str]]:
@@ -214,10 +224,7 @@ def run(only_file: str | None, gate: str) -> tuple[int, int, list[str]]:
             continue
         is_new = bool(period) and _period_key(period) >= _period_key(gate)
         for rule, msg in findings:
-            if rule in _WARN_ONLY:
-                level = "W"
-            else:
-                level = "E" if is_new else "W"
+            level = _level_for(rule, is_new)
             if level == "E":
                 errors += 1
             else:

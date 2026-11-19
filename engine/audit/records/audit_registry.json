@@ -1018,7 +1018,7 @@
       "stages": {
         "draft": true,
         "initial": true,
-        "second": false,
+        "second": true,
         "final": false
       },
       "mark": true,
@@ -1051,7 +1051,7 @@
           "stages": {
             "draft": true,
             "initial": true,
-            "second": false,
+            "second": true,
             "final": false
           },
           "mark_level": "pre",
@@ -1071,7 +1071,7 @@
       "stages": {
         "draft": true,
         "initial": true,
-        "second": false,
+        "second": true,
         "final": false
       },
       "mark": true,
@@ -1104,7 +1104,7 @@
           "stages": {
             "draft": true,
             "initial": true,
-            "second": false,
+            "second": true,
             "final": false
           },
           "mark_level": "pre",
@@ -1124,7 +1124,7 @@
       "stages": {
         "draft": true,
         "initial": true,
-        "second": false,
+        "second": true,
         "final": false
       },
       "mark": true,
@@ -1157,7 +1157,7 @@
           "stages": {
             "draft": true,
             "initial": true,
-            "second": false,
+            "second": true,
             "final": false
           },
           "mark_level": "pre",
@@ -1393,7 +1393,7 @@
       "stages": {
         "draft": true,
         "initial": true,
-        "second": false,
+        "second": true,
         "final": false
       },
       "mark": true,
@@ -1412,7 +1412,7 @@
           "stages": {
             "draft": true,
             "initial": true,
-            "second": false,
+            "second": true,
             "final": false
           },
           "mark_level": "pre",
@@ -1432,7 +1432,7 @@
       "stages": {
         "draft": true,
         "initial": true,
-        "second": false,
+        "second": true,
         "final": false
       },
       "mark": true,
@@ -1451,7 +1451,7 @@
           "stages": {
             "draft": true,
             "initial": true,
-            "second": false,
+            "second": true,
             "final": false
           },
           "mark_level": "pre",
@@ -1471,7 +1471,7 @@
       "stages": {
         "draft": true,
         "initial": true,
-        "second": false,
+        "second": true,
         "final": false
       },
       "mark": true,
@@ -1490,7 +1490,7 @@
           "stages": {
             "draft": true,
             "initial": true,
-            "second": false,
+            "second": true,
             "final": false
           },
           "mark_level": "pre",
@@ -1510,7 +1510,7 @@
       "stages": {
         "draft": true,
         "initial": true,
-        "second": false,
+        "second": true,
         "final": false
       },
       "mark": true,
@@ -1529,7 +1529,7 @@
           "stages": {
             "draft": true,
             "initial": true,
-            "second": false,
+            "second": true,
             "final": false
           },
           "mark_level": "pre",
@@ -1585,7 +1585,7 @@
       "stages": {
         "draft": true,
         "initial": true,
-        "second": false,
+        "second": true,
         "final": false
       },
       "mark": true,
@@ -1604,7 +1604,7 @@
           "stages": {
             "draft": true,
             "initial": true,
-            "second": false,
+            "second": true,
             "final": false
           },
           "mark_level": "pre",
@@ -1624,7 +1624,7 @@
       "stages": {
         "draft": true,
         "initial": true,
-        "second": false,
+        "second": true,
         "final": false
       },
       "mark": true,
@@ -1643,7 +1643,7 @@
           "stages": {
             "draft": true,
             "initial": true,
-            "second": false,
+            "second": true,
             "final": false
           },
           "mark_level": "pre",
@@ -1663,7 +1663,7 @@
       "stages": {
         "draft": true,
         "initial": true,
-        "second": false,
+        "second": true,
         "final": false
       },
       "mark": true,
@@ -1682,7 +1682,7 @@
           "stages": {
             "draft": true,
             "initial": true,
-            "second": false,
+            "second": true,
             "final": false
           },
           "mark_level": "pre",
@@ -1702,7 +1702,7 @@
       "stages": {
         "draft": true,
         "initial": true,
-        "second": false,
+        "second": true,
         "final": false
       },
       "mark": true,
@@ -1721,7 +1721,7 @@
           "stages": {
             "draft": true,
             "initial": true,
-            "second": false,
+            "second": true,
             "final": false
           },
           "mark_level": "pre",
@@ -1761,6 +1761,78 @@
             "draft": false,
             "initial": false,
             "second": false,
+            "final": false
+          },
+          "mark_level": "none",
+          "audit_id": ""
+        }
+      }
+    },
+    "content/political/political-system/reports/2026-11_baseline_report.html": {
+      "title": "全球 · 政治制度与治理 · 首期基线报告（2026-11）",
+      "kind": "business",
+      "category": "report",
+      "business_line": "content/political/political-system",
+      "status": "draft",
+      "stages": {
+        "draft": false,
+        "initial": false,
+        "second": true,
+        "final": false
+      },
+      "mark": false,
+      "first_seen_at": "2026-11-19",
+      "evidence": {
+        "report": "content/political/political-system/reports/2026-11_baseline_report.html",
+        "business_line": "content/political/political-system",
+        "plans": [],
+        "gate": {
+          "entry": "engine/tools/optimization_gate.py",
+          "probe": true
+        },
+        "audit": {
+          "review": "engine/audit/records/reviews/content-political-political-system-reports-2026-11-baseline-report-html.json",
+          "status": "draft",
+          "stages": {
+            "draft": false,
+            "initial": false,
+            "second": true,
+            "final": false
+          },
+          "mark_level": "none",
+          "audit_id": ""
+        }
+      }
+    },
+    "content/society/social-structure/reports/2026-11_baseline_report.html": {
+      "title": "全球 · 社会结构与分层 · 首期基线报告（2026-11）",
+      "kind": "business",
+      "category": "report",
+      "business_line": "content/society/social-structure",
+      "status": "draft",
+      "stages": {
+        "draft": false,
+        "initial": false,
+        "second": true,
+        "final": false
+      },
+      "mark": false,
+      "first_seen_at": "2026-11-19",
+      "evidence": {
+        "report": "content/society/social-structure/reports/2026-11_baseline_report.html",
+        "business_line": "content/society/social-structure",
+        "plans": [],
+        "gate": {
+          "entry": "engine/tools/optimization_gate.py",
+          "probe": true
+        },
+        "audit": {
+          "review": "engine/audit/records/reviews/content-society-social-structure-reports-2026-11-baseline-report-html.json",
+          "status": "draft",
+          "stages": {
+            "draft": false,
+            "initial": false,
+            "second": true,
             "final": false
           },
           "mark_level": "none",

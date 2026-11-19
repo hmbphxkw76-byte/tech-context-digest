@@ -4,7 +4,7 @@
     "depends_on": [],
     "id": "T-1",
     "phase": "",
-    "status": "pending",
+    "status": "done",
     "title": "SA1 education-system 首份 baseline-setup 报告"
   },
   {
@@ -12,7 +12,7 @@
     "depends_on": [],
     "id": "T-2",
     "phase": "",
-    "status": "pending",
+    "status": "done",
     "title": "SA2 international-relations 首份 baseline-setup 报告"
   },
   {
@@ -20,7 +20,7 @@
     "depends_on": [],
     "id": "T-3",
     "phase": "",
-    "status": "pending",
+    "status": "done",
     "title": "SA3 apartment 2027-01 monthly + trends 2026-11-27 weekly"
   },
   {
@@ -28,7 +28,7 @@
     "depends_on": [],
     "id": "T-4",
     "phase": "",
-    "status": "pending",
+    "status": "done",
     "title": "SA4 A-05 死链复探修复 + A-03 真值核对数据治理"
   }
 ]

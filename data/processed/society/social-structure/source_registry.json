@@ -1,12 +1,30 @@
 {
- "schema_version": "1.1",
- "business_line": "content/society/social-structure",
- "path_rule": "business-config {{SOURCE_REGISTRY_PATH}} = data/processed/society/social-structure/source_registry.json",
- "tier_legend": {
-  "1": "官方一手（政府 / 央行 / 统计机构 / 多边机构 / 官方发布）",
-  "2": "行业机构（研究 / 数据 / 咨询）",
-  "3": "挂牌门户（仅作线索）",
-  "4": "媒体转述（须标『需核实原文』）"
- },
- "sources": []
+  "schema_version": "1.1",
+  "business_line": "content/society/social-structure",
+  "path_rule": "business-config {{SOURCE_REGISTRY_PATH}} = data/processed/society/social-structure/source_registry.json",
+  "tier_legend": {
+    "1": "官方一手（政府 / 央行 / 统计机构 / 多边机构 / 官方发布）",
+    "2": "行业机构（研究 / 数据 / 咨询）",
+    "3": "挂牌门户（仅作线索）",
+    "4": "媒体转述（须标『需核实原文』）"
+  },
+  "sources": [
+    { "source_id": "S-001", "tier": 1, "publisher": "中国国家统计局", "title": "国家统计局公式サイト", "url": "https://www.stats.gov.cn/", "lang": "zh", "verify_status": "verified", "updated": "2026-11-18", "in_synthesis": false, "used_in": ["2026-11_baseline_report.html"] },
+    { "source_id": "S-002", "tier": 1, "publisher": "中国国家统计局", "title": "2023 年国民经济和社会发展统计公报", "url": "https://www.stats.gov.cn/sj/zxfb/202402/t20240228_1947915.html", "lang": "zh", "verify_status": "verified", "updated": "2026-11-18", "in_synthesis": false, "used_in": ["2026-11_baseline_report.html"] },
+    { "source_id": "S-003", "tier": 1, "publisher": "日本総務省統計局", "title": "人口推計", "url": "https://www.stat.go.jp/data/jinsui/", "lang": "ja", "verify_status": "verified", "updated": "2026-11-18", "in_synthesis": false, "used_in": ["2026-11_baseline_report.html"] },
+    { "source_id": "S-004", "tier": 1, "publisher": "韓国 行政安全部", "title": "居民登记人口统计分析", "url": "https://www.mois.go.kr/", "lang": "ko", "verify_status": "verified", "updated": "2026-11-18", "in_synthesis": false, "used_in": ["2026-11_baseline_report.html"] },
+    { "source_id": "S-005", "tier": 1, "publisher": "韓国 統計庁 KOSIS", "title": "国家统计门户", "url": "https://kosis.kr/", "lang": "ko", "verify_status": "verified", "updated": "2026-11-18", "in_synthesis": false, "used_in": ["2026-11_baseline_report.html"] },
+    { "source_id": "S-006", "tier": 1, "publisher": "UN DESA", "title": "World Population Prospects 2024", "url": "https://population.un.org/wpp/", "lang": "en", "verify_status": "verified", "updated": "2026-11-18", "in_synthesis": false, "used_in": ["2026-11_baseline_report.html"] },
+    { "source_id": "S-007", "tier": 1, "publisher": "UN DESA", "title": "WPP 2024 新闻稿", "url": "https://www.un.org/sustainabledevelopment/blog/2024/07/press-release-wpp2024/", "lang": "en", "verify_status": "verified", "updated": "2026-11-18", "in_synthesis": false, "used_in": ["2026-11_baseline_report.html"] },
+    { "source_id": "S-008", "tier": 1, "publisher": "UN DESA", "title": "World Urbanization Prospects 2025", "url": "https://population.un.org/wup/", "lang": "en", "verify_status": "verified", "updated": "2026-11-18", "in_synthesis": false, "used_in": ["2026-11_baseline_report.html"] },
+    { "source_id": "S-009", "tier": 3, "publisher": "OECD", "title": "Income Distribution Database（Gini）", "url": "https://data.oecd.org/inequality/income-inequality.htm", "lang": "en", "verify_status": "verified", "updated": "2026-11-18", "in_synthesis": false, "used_in": ["2026-11_baseline_report.html"] },
+    { "source_id": "S-010", "tier": 3, "publisher": "OECD", "title": "OECD Data", "url": "https://data.oecd.org/", "lang": "en", "verify_status": "verified", "updated": "2026-11-18", "in_synthesis": false, "used_in": ["2026-11_baseline_report.html"] },
+    { "source_id": "S-011", "tier": 1, "publisher": "ILO", "title": "ILOSTAT", "url": "https://ilostat.ilo.org/", "lang": "en", "verify_status": "verified", "updated": "2026-11-18", "in_synthesis": false, "used_in": ["2026-11_baseline_report.html"] },
+    { "source_id": "S-012", "tier": 3, "publisher": "World Bank", "title": "World Development Indicators", "url": "https://data.worldbank.org/", "lang": "en", "verify_status": "unverifiable", "updated": "2026-11-18", "in_synthesis": false, "used_in": ["2026-11_baseline_report.html"] },
+    { "source_id": "S-013", "tier": 3, "publisher": "UN", "title": "UN Data", "url": "http://data.un.org/", "lang": "en", "verify_status": "unverifiable", "updated": "2026-11-18", "in_synthesis": false, "used_in": ["2026-11_baseline_report.html"] },
+    { "source_id": "S-014", "tier": 2, "publisher": "国立社会保障・人口問題研究所", "title": "人口統計資料集", "url": "https://www.ipss.go.jp/", "lang": "ja", "verify_status": "unverifiable", "updated": "2026-11-18", "in_synthesis": false, "used_in": ["2026-11_baseline_report.html"] },
+    { "source_id": "S-015", "tier": 1, "publisher": "UN DESA", "title": "Department of Economic and Social Affairs", "url": "https://www.un.org/en/desa/", "lang": "en", "verify_status": "unverifiable", "updated": "2026-11-18", "in_synthesis": false, "used_in": ["2026-11_baseline_report.html"] },
+    { "source_id": "S-016", "tier": 1, "publisher": "WHO", "title": "World Health Organization", "url": "https://www.who.int/", "lang": "en", "verify_status": "unverifiable", "updated": "2026-11-18", "in_synthesis": false, "used_in": ["2026-11_baseline_report.html"] },
+    { "source_id": "S-017", "tier": 1, "publisher": "UN-Habitat", "title": "UN-Habitat", "url": "https://unhabitat.org/", "lang": "en", "verify_status": "unverifiable", "updated": "2026-11-18", "in_synthesis": false, "used_in": ["2026-11_baseline_report.html"] }
+  ]
 }
