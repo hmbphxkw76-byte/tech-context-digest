@@ -301,6 +301,16 @@
 3. 对齐声明：本任务对应方案条目 ID + 验收标准逐条映射；
 4. 回归声明：未引入新问题的证据（见 §5.1）。
 
+### 4.8 并发执行记录（2026-11-19 第一波）
+
+| 任务 | 分支 | 提交 | 状态 |
+|---|---|---|---|
+| T-01 | `task/source-evidence-a1e5c9f2` | `7d43984` | 已合并 |
+| T-02 | `task/proxy-calibration-b2f6d0a3` | `c6508ec` | 已合并（消解 `metrics-dictionary.json` 冲突：保留 T-01 `note` + T-02 `calibration`） |
+| T-03 | `task/finding-rule-c3a7e1b4` | `356ec38` | 已合并 |
+
+**整合后回归（实测）**：`optimization_gate` 0 `[E]` / 8 `[W]`；`unittest discover` 748 OK（skipped=1）；`metric_registry` 38 项实测、不达标仅 I-08、IGI-08 = 0.9945；`check_links` 通过；`publish_fingerprint` 漂移经 `git diff origin/main` 为空确认为**既有问题**（CI 提交 `c44174e` 改报告未重采指纹），非本次引入。
+
 ---
 
 ## 5. 验证对齐清单（确保对齐优化方案的验证清单）
@@ -334,9 +344,9 @@
 
 | 方案条目 | 实施工件（文件 / 提交） | 验收证据（命令 / 值） | 对齐判定 |
 |---|---|---|---|
-| T-01 | `source_check.py` / registry | `optimization_gate --only source_check`；抽样 3 条来源含 `evidence` | 待执行 |
-| T-02 | `proxy_calibration.py` / 字典 | 单测；试跑输出 precision / recall | 待执行 |
-| T-03 | `engine/audit/` schema + 工具 | 单测；finding 映射率 100% | 待执行 |
+| T-01 | `source_check.py` / registry（提交 `7d43984`） | `--only source_check` 0 `[E]`；`test_source_check` 82 OK；抽样 3 条含 `evidence` | **已闭环**（2026-11-19） |
+| T-02 | `proxy_calibration.py` / 字典（提交 `c6508ec`） | `test_proxy_calibration` 29 OK；IGI-05 试跑 precision 0.802 / recall 0.9875（合成真值演示） | **已闭环**（2026-11-19） |
+| T-03 | `engine/audit/` schema + 工具（提交 `356ec38`） | `test_finding_rule` 18 OK；14 项 finding 映射率 100%；`match` 命中 13 条 | **已闭环**（2026-11-19） |
 | T-04 | 10 份历史周报 | `optimization_gate --only research_kernel` 0 `[W]` | 待执行 |
 | T-05 | `terms.md` × 2 | `optimization_gate --only vocab_drift` 0 `[W]` | 待执行 |
 | T-06 | `build_hub.py` / 模板 | `hub --check`；反馈入口存在 | 待执行 |
