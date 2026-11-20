@@ -19,7 +19,7 @@
 {{SOURCE_REGISTRY_PATH}} = data/processed/international/international-relations/source_registry.json
 {{BASELINE_REPORT_PATH}} = reports/{{YYYY-MM}}_baseline_report.html（待首期基线运行后回写）
 {{FRESHNESS_PRIORITY}}   = 官方原文 / 条约文本 > 官方声明 > 国际组织文件 > 媒体转述
-{{SOURCE_LANGUAGE_RULE}} = 官方一手以英文为准；非英语官方文件须标注原文语言并附官方 URL，不得以媒体转述替代
+{{SOURCE_LANGUAGE_RULE}} = 仅英文（严禁中文来源）
 {{REPO_RAW_URL_BASE}}    = https://github.com/hmbphxkw76-byte/tech-context-digest/blob/main/content/international/international-relations
 ```
 

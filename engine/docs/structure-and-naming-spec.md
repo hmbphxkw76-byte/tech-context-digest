@@ -73,11 +73,12 @@
 
 ### 4.3 层级深度与维度优先级
 
-- **深度上限**：`layout.json` 的 `naming.max_depth = 6`。业务线全路径 `content/<theme>/<维度段...>/`（当前各主题均为 2 维，`region` 可缺省时为 1 维），提示词 / 报告文件位于业务线之下。
+- **深度上限**：`layout.json` 的 `naming.max_depth = 6`。业务线全路径 `content/<theme>/<维度段...>/`（多数主题为 2 维、`region` 可缺省时为 1 维；`tech` 为 3 维：`category→subcategory→region`），提示词 / 报告文件位于业务线之下。
 - **engine 域内深度**：`engine/<域>/<子域>/<文件>`，建议 ≤ 4 层（如 `engine/tools/semantic_checks/base.py`）。
 - **data 深度**：`data/processed/<theme>/<维度段...>/<文件>` 与 content 维度段对齐（≤ 6）；`data/raw/<source>/<文件>` ≤ 3；`data/assets/<文件>` ≤ 2。
-- **维度顺序（硬性）**：维度先后由 `layout.json` 各主题自行声明——`economy` 为 `["region", "category"]`（地区优先），`tech` / `education` / `international` / `political` / `society` 为 `["category", "region"]`（细分优先）；不得在未改 `layout.json` 的情况下倒置。地区段必须命中 `regions` 白名单（当前 `dubai`）。
-- **region 可选（硬性）**：主题可在 `layout.json` 以 `optional_dimensions` 声明某维度可缺省；当前**六个主题均声明** `["region"]`。缺省 region 时业务线直接以 category 段落位（如 `content/economy/trends`、`content/tech/weekly-roundup`、`content/education/education-system`），剩余段按声明顺序剔除 region 后逐位映射。
+- **维度顺序（硬性）**：维度先后由 `layout.json` 各主题自行声明——`economy` 为 `["region", "category"]`（地区优先），`tech` 为 `["category", "subcategory", "region"]`（AI 安全 / AI 应用两大类 → 业务线 → 地区），`education` / `international` / `political` / `society` 为 `["category", "region"]`（细分优先）；不得在未改 `layout.json` 的情况下倒置。地区段必须命中 `regions` 白名单（当前 `dubai`）。
+- **region 可选（硬性）**：主题可在 `layout.json` 以 `optional_dimensions` 声明某维度可缺省；当前**六个主题均声明** `["region"]`。缺省 region 时业务线直接以 category（+subcategory）段落位（如 `content/economy/trends`、`content/tech/ai-application/weekly-roundup`、`content/education/education-system`），剩余段按声明顺序剔除 region 后逐位映射。
+- **分组目录（硬性）**：theme 下允许存在不含 `prompts/business-config.md` 的**分组目录**（如 `content/tech/ai-security`），仅作业务线祖先；其层级深度须**小于**该主题维度数，不参与地域白名单与业务线深度校验（校验见 `validate_layout.check_theme`）。
 - **禁止过深**：不得在业务线内继续发明 `prompts/{layer1}/{layer2}/` 之类的中间层；需要分类时用文件前缀或台账字段表达。
 
 ### 4.4 目录树示例（目标结构）
@@ -87,8 +88,10 @@
 ├── content/                                  # 内容层
 │   ├── <theme>/                              # economy / tech / education / international / political / society
 │   │   ├── <region>/<category>/               # economy：地区优先（dubai）
-│   │   ├── <category>/                        # region 缺省：直接以 category 落位（如 content/economy/trends、content/tech/weekly-roundup）
-│   │   └── <category>/<region>/               # tech 等：细分优先（dubai）
+│   │   ├── <category>/                        # region 缺省：直接以 category 落位（如 content/economy/trends）
+│   │   ├── <category>/<region>/               # education 等：细分优先（dubai）
+│   │   └── <category>/<subcategory>/<region>/ # tech：AI 安全 / AI 应用 → 业务线 → 地区
+│   │       └── <category>/<subcategory>/      # tech region 缺省（如 content/tech/ai-application/weekly-roundup）
 │   │       ├── prompts/                       # business-config.md + prompt-*.md
 │   │       ├── reports/                       # 正式报告 *.html
 │   │       │   ├── archives/                  # 归档（保留策略）
@@ -303,7 +306,7 @@
 | 类别 | 反例 | 正确 |
 |---|---|---|
 | 目录 | `Content/`、`currentAffairs/`、`regional_data/` | `content/`、`economy/`、`data/processed/<theme>/<维度段...>/` |
-| 目录 | `content/<theme>/regional/<region>/<category>/`（已撤销的 regional 分组段） | `content/economy/dubai/apartment/`（region→category）或 `content/tech/security/dubai/`（category→region）；区域缺省业务线为 `content/economy/trends/`、`content/tech/weekly-roundup/` |
+| 目录 | `content/<theme>/regional/<region>/<category>/`（已撤销的 regional 分组段） | `content/economy/dubai/apartment/`（region→category）或 `content/tech/ai-security/security/dubai/`（category→subcategory→region）；区域缺省业务线为 `content/economy/trends/`、`content/tech/ai-application/weekly-roundup/` |
 | 目录 | `engine/tools/{subdir}/common.py`（过深且职责模糊） | `engine/tools/_common.py` |
 | 文件 | `Report_Final.md` | `report-final.md` 或报告规范名 |
 | 文件 | `2026-11_monthly.html` 放入 `reports/archived/` | `reports/archives/` |

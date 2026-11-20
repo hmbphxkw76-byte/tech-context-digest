@@ -1,0 +1,14 @@
+[
+  {
+    "description": "路径迁移导致历史引用失效",
+    "id": "R-1",
+    "mitigation": "check_links 白名单放行历史审计记录、活跃链接全量校验",
+    "owner": ""
+  },
+  {
+    "description": "维度模型变更影响工具链",
+    "id": "R-2",
+    "mitigation": "全量 unittest 与 optimization_gate 验证",
+    "owner": ""
+  }
+]

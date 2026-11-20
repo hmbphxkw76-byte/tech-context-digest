@@ -1,7 +1,7 @@
 # 经济趋势周报 · 指标台账（md-ledger）
 
 > **定位**：`content/economy/trends` 业务线的活值登记载体（业务配置 `{{REGISTRY_PATH}}`）。运行前读 → 核验 → 运行后回写；prompt 模板内严禁预填活值。
-> **格式**：md-ledger（同类先例：`data/processed/tech/weekly-roundup/ai_trend_ledger.md`）。台账修改采用增量方式：报告层补充与台账更新严格区分。
+> **格式**：md-ledger（同类先例：`data/processed/tech/ai-security/weekly-roundup/ai_security_trend_ledger.md`）。台账修改采用增量方式：报告层补充与台账更新严格区分。
 
 ---
 
@@ -46,7 +46,6 @@
 | 6 | 美国贸易代表办公室（USTR） | ① 官方一手 | https://ustr.gov/ | 已引用（301 豁免延期） |
 | 7 | 中国国家统计局 | ① 官方一手 | https://www.stats.gov.cn/ | 已引用（GDP / CPI / PPI） |
 | 8 | 中国人民银行 | ① 官方一手 | https://www.pbc.gov.cn/ | 已引用（逆回购 / 黄金储备） |
-| 9 | 中国海关总署 | ① 官方一手 | http://www.customs.gov.cn/ | 已引用（进出口） |
 | 10 | 国务院关税税则委员会 | ① 官方一手 | https://www.gov.cn/ | 已引用（暂停 24% 反制公告） |
 | 11 | 欧洲央行（ECB） | ① 官方一手 | https://www.ecb.europa.eu/ | 已引用（10-29 决议） |
 | 12 | 欧盟统计局（Eurostat） | ① 官方一手 | https://ec.europa.eu/eurostat | 已引用（CPI / GDP） |
@@ -69,8 +68,6 @@
 | 29 | 世界贸易组织（WTO） | ① 官方一手 | https://www.wto.org/ | 已引用（贸易预期） |
 | 30 | 美国能源信息署（EIA） | ① 官方一手 | https://www.eia.gov/ | 已引用（STEO） |
 | 31 | 石油输出国组织（OPEC） | ① 官方一手 | https://www.opec.org/ | 已引用（产量决议） |
-| 32 | 新华社 | ② 行业机构 | https://www.xinhuanet.com/ | 转述引用（BLS / QatarEnergy 等） |
-| 33 | 金投网 | ③ 挂牌门户 | https://energy.cngold.org/ | 行情引用（油价） |
 | 34 | Kitco | ③ 挂牌门户 | https://www.kitco.com/ | 行情引用（黄金） |
 | 35 | 伦敦金属交易所（LME） | ③ 挂牌门户 | https://www.lme.com/ | 行情引用（铜） |
 | 36 | TradingEconomics | ③ 数据库 | https://tradingeconomics.com/ | 数据引用（越南/马来西亚/沙特等） |
@@ -78,6 +75,8 @@
 | 38 | 国际货币基金组织（IMF） | ② 行业机构 | https://www.imf.org/ | 预测引用（WEO） |
 | 39 | 世界银行 | ② 行业机构 | https://www.worldbank.org/ | 预测引用（EM / 卡塔尔） |
 | 40 | 高盛（Goldman Sachs） | ② 行业机构 | https://www.goldmansachs.com/ | 预测引用（金价目标） |
+
+> **来源语言政策**：本业务线为中国宏观数据例外线，英文优先；中文官方来源仅限白名单机构（中国人民银行 / 中国商务部 / 中国国家统计局 / 中国政府网），其他中文来源一律排除（政策：`engine/docs/source-language-policy.md`，门禁 `source_check` R9）。原海关总署 / 新华社中文站 / 金投网条目已按政策移除。
 
 ## 四、触发器登记（业务配置第五节执行记录）
 

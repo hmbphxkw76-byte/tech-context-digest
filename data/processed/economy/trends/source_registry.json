@@ -52,20 +52,6 @@
    ]
   },
   {
-   "source_id": "S-004",
-   "tier": 4,
-   "publisher": "百度百家号",
-   "title": "http://baijiahao.baidu.com/s?id=1881464352325676627",
-   "url": "http://baijiahao.baidu.com/s?id=1881464352325676627",
-   "lang": "en",
-   "verify_status": "media_unverified",
-   "updated": "2026-11-18",
-   "in_synthesis": false,
-   "used_in": [
-    "reports/2026-11-13_weekly.html"
-   ]
-  },
-  {
    "source_id": "S-005",
    "tier": 1,
    "publisher": "U.S. Energy Information Administration",
@@ -73,20 +59,6 @@
    "url": "https://www.eia.gov/outlooks/steo/",
    "lang": "en",
    "verify_status": "verified",
-   "updated": "2026-11-18",
-   "in_synthesis": false,
-   "used_in": [
-    "reports/2026-11-13_weekly.html"
-   ]
-  },
-  {
-   "source_id": "S-006",
-   "tier": 4,
-   "publisher": "金投网",
-   "title": "https://energy.cngold.org/c/2026-11-13/c10877809.html",
-   "url": "https://energy.cngold.org/c/2026-11-13/c10877809.html",
-   "lang": "en",
-   "verify_status": "media_unverified",
    "updated": "2026-11-18",
    "in_synthesis": false,
    "used_in": [
@@ -141,20 +113,6 @@
    "publisher": "中国商务部",
    "title": "https://sa.mofcom.gov.cn/jmxw/art/2026/art_eb55daeacd284bab9592428d1f5d1477.html",
    "url": "https://sa.mofcom.gov.cn/jmxw/art/2026/art_eb55daeacd284bab9592428d1f5d1477.html",
-   "lang": "en",
-   "verify_status": "verified",
-   "updated": "2026-11-18",
-   "in_synthesis": false,
-   "used_in": [
-    "reports/2026-11-13_weekly.html"
-   ]
-  },
-  {
-   "source_id": "S-011",
-   "tier": 1,
-   "publisher": "China Today",
-   "title": "https://www.chinatoday.com.cn/zw2018/bktg/202611/t20261106_800450538.html",
-   "url": "https://www.chinatoday.com.cn/zw2018/bktg/202611/t20261106_800450538.html",
    "lang": "en",
    "verify_status": "verified",
    "updated": "2026-11-18",

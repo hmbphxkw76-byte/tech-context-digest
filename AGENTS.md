@@ -20,7 +20,7 @@ Single-context: one `GLOSSARY.md` + `engine/docs/adr/` at the repo root. See `en
 
 仓库名 `tech-context-digest`，按三层组织，**不得跨层存放**：
 
-- **`content/` — 内容层**：六主题 `economy`（经济）/ `tech`（科技）/ `education`（教育）/ `international`（国际）/ `political`（政治）/ `society`（社会）。业务线位于 `content/<theme>/<维度段...>/`，维度顺序由 `engine/tools/layout.json` 各主题声明（`economy` 为 `<region>/<category>` 地区优先，其余主题为 `<category>/<region>` 细分优先），以 `prompts/business-config.md` 为锚点；`region` 为可选维度（`layout.json` 各主题以 `optional_dimensions` 声明），省略 region 的业务线直接以 category 段落位（如 `content/economy/trends/`、`content/tech/weekly-roundup/`）承载非区域 / 全局内容。
+- **`content/` — 内容层**：六主题 `economy`（经济）/ `tech`（科技）/ `education`（教育）/ `international`（国际）/ `political`（政治）/ `society`（社会）。业务线位于 `content/<theme>/<维度段...>/`，维度顺序由 `engine/tools/layout.json` 各主题声明（`economy` 为 `<region>/<category>` 地区优先，`tech` 为 `<category>/<subcategory>/<region>`：AI 安全 / AI 应用两大类 → 业务线 → 地区，其余主题为 `<category>/<region>` 细分优先），以 `prompts/business-config.md` 为锚点；`region` 为可选维度（`layout.json` 各主题以 `optional_dimensions` 声明），省略 region 的业务线直接以 category（+subcategory）段落位（如 `content/economy/trends/`、`content/tech/ai-application/weekly-roundup/`）承载非区域 / 全局内容；theme 下允许不含业务配置的分组目录（如 `content/tech/ai-security`）。
 - **`engine/` — 引擎层**：跨主题复用的机械与规范——`templates/`、`prompts/`（泛用提示词）、`tools/`、`vocabulary/`、`quality/`、`audit/`、`report-audits/`、`fact_cards/`、`tests/`、`docs/`。
 - **`data/` — 资产层**：`raw/`（原始抓取）、`processed/<theme>/<维度段...>/`（清洗后台账 / 登记 / 量化数据，地区分组段不计入）、`assets/`（图片图表）。
 
@@ -28,8 +28,9 @@ Single-context: one `GLOSSARY.md` + `engine/docs/adr/` at the repo root. See `en
 
 **维度顺序由 `layout.json` 各主题自行声明，不得在未改 `layout.json` 的情况下倒置。**
 
-- 业务线默认路径为 `content/<theme>/<维度段...>/`；主题注册在 `engine/tools/layout.json`。维度先后按主题声明：`economy` 为 `["region", "category"]`，`tech` / `education` / `international` / `political` / `society` 为 `["category", "region"]`；`regional_segment` 为空串（无独立地区分组段，region 直接作为维度段）。
-- `region` 为可选维度：主题可在 `themes` 中以 `optional_dimensions` 声明（当前**六个主题均声明** `["region"]`）。缺省 region 的业务线直接以 category 段落位（如 `content/economy/trends`、`content/tech/weekly-roundup`、`content/education/education-system`）。
+- 业务线默认路径为 `content/<theme>/<维度段...>/`；主题注册在 `engine/tools/layout.json`。维度先后按主题声明：`economy` 为 `["region", "category"]`，`tech` 为 `["category", "subcategory", "region"]`，`education` / `international` / `political` / `society` 为 `["category", "region"]`；`regional_segment` 为空串（无独立地区分组段，region 直接作为维度段）。
+- `region` 为可选维度：主题可在 `themes` 中以 `optional_dimensions` 声明（当前**六个主题均声明** `["region"]`）。缺省 region 的业务线直接以 category（+subcategory）段落位（如 `content/economy/trends`、`content/tech/ai-application/weekly-roundup`、`content/education/education-system`）。
+- **分组目录**：theme 下允许存在不含 `prompts/business-config.md` 的分组目录（如 `content/tech/ai-security`、`content/tech/ai-application`），仅作业务线祖先；其层级深度须小于该主题维度数，不参与地域白名单与业务线深度校验（`validate_layout.check_theme`）。
 - 新增主题 / 业务线时，必须在 `engine/tools/layout.json` 的 `themes` 中登记并显式声明 `dimensions`；地区段必须命中 `regions` 白名单（当前 `dubai`）。
 - 任何涉及维度判断、维度排序、维度筛选的逻辑（业务线发现、结构校验、报告归位、索引、汇总页、筛选栏等）都必须符合声明顺序。
 - 专项校验：`engine/tools/validate_layout.py` 的 `check_dimension_priority()` 校验维度序列自洽（无重复、无未登记维度名）；`engine/tests/test_tools.py::TestDimensionOrder` 在声明与实例两个层面校验。新增代码须保持该校验，不得绕过或降级。（历史规则「category 必须先于 region」随三层重构回滚取消，见 `engine/docs/architecture-and-pipeline-design.md`。）

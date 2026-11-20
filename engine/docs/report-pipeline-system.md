@@ -217,6 +217,7 @@ flowchart LR
 | R6 死链 | 404 / 410 / 451 = 死链；403 / 429 / 5xx / 超时 = 网络不可达 | E / W（历史降级） |
 | R7 机构分级 | 与 `institution_tiers.json` / business-config 一致性（M1–M5） | 结构性 M3 / M4 恒 E |
 | R8 登记字段 | `verify_status` ∈ verified / media_unverified / unverifiable；含 `updated`（YYYY-MM-DD） | W（数据卫生） |
+| R9 中文来源 | 仓库级来源语言政策（`engine/docs/source-language-policy.md`）：默认仅英文；仅中国宏观经济数据业务线（`{{CHINA_MACRO}} = true`）允许中文官方来源，且限白名单机构 / 主机（`institution_tiers.json` `lang` 段）。有效语言按 URL 中文主机（英文段除外）→ `s.lang` → 机构主数据判定 | E / W |
 
 ### 3.2 防线二：内容四门禁 + 研究内核
 

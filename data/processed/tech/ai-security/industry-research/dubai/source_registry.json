@@ -1,0 +1,587 @@
+{
+ "schema_version": "1.1",
+ "business_line": "content/tech/ai-security/industry-research/dubai",
+ "path_rule": "business-config {{SOURCE_REGISTRY_PATH}} = data/source_registry.json",
+ "tier_legend": {
+  "1": "官方一手（政府 / 央行 / 统计机构 / 多边机构原始发布）",
+  "2": "行业机构（英文研究报告 / 数据页）",
+  "3": "挂牌门户（仅作卖方预期）",
+  "4": "媒体转述（须标『需核实原文』）"
+ },
+ "sources": [
+  {
+   "source_id": "S-001",
+   "tier": 4,
+   "publisher": "Khaleej Times",
+   "title": "https://khaleejtimes.com/uae/over-70-of-cyber-threats-targeting-uae-are-state-sponsored-authority-says",
+   "url": "https://khaleejtimes.com/uae/over-70-of-cyber-threats-targeting-uae-are-state-sponsored-authority-says",
+   "lang": "en",
+   "verify_status": "media_unverified",
+   "updated": "2026-11-18",
+   "in_synthesis": false,
+   "used_in": [
+    "2026-12_baseline_report.html"
+   ]
+  },
+  {
+   "source_id": "S-002",
+   "tier": 1,
+   "publisher": "Dubai Electronic Security Center (DESC)",
+   "title": "https://desc.gov.ae/hamdan-bin-mohammed-launches-second-cycle-of-dubai-cyber-security-strategy",
+   "url": "https://desc.gov.ae/hamdan-bin-mohammed-launches-second-cycle-of-dubai-cyber-security-strategy",
+   "lang": "en",
+   "verify_status": "verified",
+   "updated": "2026-11-18",
+   "in_synthesis": false,
+   "used_in": [
+    "2026-12_baseline_report.html"
+   ]
+  },
+  {
+   "source_id": "S-003",
+   "tier": 4,
+   "publisher": "Gulf Time",
+   "title": "https://gulftime.ae/dubai-electronic-security-centre-unveils-dubai-ai-security-policy",
+   "url": "https://gulftime.ae/dubai-electronic-security-centre-unveils-dubai-ai-security-policy",
+   "lang": "en",
+   "verify_status": "media_unverified",
+   "updated": "2026-11-18",
+   "in_synthesis": false,
+   "used_in": [
+    "2026-12_baseline_report.html"
+   ]
+  },
+  {
+   "source_id": "S-004",
+   "tier": 1,
+   "publisher": "OpenAI",
+   "title": "https://openai.com/index/introducing-stargate-uae",
+   "url": "https://openai.com/index/introducing-stargate-uae",
+   "lang": "en",
+   "verify_status": "verified",
+   "updated": "2026-11-18",
+   "in_synthesis": false,
+   "used_in": [
+    "2026-12_baseline_report.html"
+   ]
+  },
+  {
+   "source_id": "S-005",
+   "tier": 1,
+   "publisher": "Microsoft",
+   "title": "https://blogs.microsoft.com/blog/2024/04/15/microsoft-and-g42-partner",
+   "url": "https://blogs.microsoft.com/blog/2024/04/15/microsoft-and-g42-partner",
+   "lang": "en",
+   "verify_status": "verified",
+   "updated": "2026-11-18",
+   "in_synthesis": false,
+   "used_in": [
+    "2026-12_baseline_report.html"
+   ]
+  },
+  {
+   "source_id": "S-006",
+   "tier": 2,
+   "publisher": "(ISC)²",
+   "title": "https://isc2.org/Insights/2025/12/ISC2-Publishes-2025-Cybersecurity-Workforce-Study",
+   "url": "https://isc2.org/Insights/2025/12/ISC2-Publishes-2025-Cybersecurity-Workforce-Study",
+   "lang": "en",
+   "verify_status": "verified",
+   "updated": "2026-11-18",
+   "in_synthesis": false,
+   "used_in": [
+    "2026-12_baseline_report.html"
+   ]
+  },
+  {
+   "source_id": "S-007",
+   "tier": 2,
+   "publisher": "Mordor Intelligence",
+   "title": "https://mordorintelligence.com/industry-reports/uae-cybersecurity-market",
+   "url": "https://mordorintelligence.com/industry-reports/uae-cybersecurity-market",
+   "lang": "en",
+   "verify_status": "verified",
+   "updated": "2026-11-18",
+   "in_synthesis": false,
+   "used_in": [
+    "2026-12_baseline_report.html"
+   ]
+  },
+  {
+   "source_id": "S-008",
+   "tier": 2,
+   "publisher": "Grand View Research",
+   "title": "https://www.grandviewresearch.com/industry-analysis/ai-in-cybersecurity-market-report",
+   "url": "https://www.grandviewresearch.com/industry-analysis/ai-in-cybersecurity-market-report",
+   "lang": "en",
+   "verify_status": "verified",
+   "updated": "2026-11-18",
+   "in_synthesis": false,
+   "used_in": [
+    "2026-12_baseline_report.html"
+   ]
+  },
+  {
+   "source_id": "S-009",
+   "tier": 1,
+   "publisher": "Core42",
+   "title": "https://core42.ai",
+   "url": "https://core42.ai",
+   "lang": "en",
+   "verify_status": "verified",
+   "updated": "2026-11-18",
+   "in_synthesis": false,
+   "used_in": [
+    "2026-12_baseline_report.html"
+   ]
+  },
+  {
+   "source_id": "S-010",
+   "tier": 1,
+   "publisher": "G42",
+   "title": "https://g42.ai",
+   "url": "https://g42.ai",
+   "lang": "en",
+   "verify_status": "verified",
+   "updated": "2026-11-18",
+   "in_synthesis": false,
+   "used_in": [
+    "2026-12_baseline_report.html"
+   ]
+  },
+  {
+   "source_id": "S-011",
+   "tier": 1,
+   "publisher": "CPX",
+   "title": "https://cpx.net",
+   "url": "https://cpx.net",
+   "lang": "en",
+   "verify_status": "verified",
+   "updated": "2026-11-18",
+   "in_synthesis": false,
+   "used_in": [
+    "2026-12_baseline_report.html"
+   ]
+  },
+  {
+   "source_id": "S-012",
+   "tier": 1,
+   "publisher": "e&",
+   "title": "https://eand.com",
+   "url": "https://eand.com",
+   "lang": "en",
+   "verify_status": "verified",
+   "updated": "2026-11-18",
+   "in_synthesis": false,
+   "used_in": [
+    "2026-12_baseline_report.html"
+   ]
+  },
+  {
+   "source_id": "S-013",
+   "tier": 4,
+   "publisher": "Khaleej Times",
+   "title": "https://khaleejtimes.com/uae/uae-faces-200000-daily-cyberattacks",
+   "url": "https://khaleejtimes.com/uae/uae-faces-200000-daily-cyberattacks",
+   "lang": "en",
+   "verify_status": "media_unverified",
+   "updated": "2026-11-18",
+   "in_synthesis": false,
+   "used_in": [
+    "2026-12_baseline_report.html"
+   ]
+  },
+  {
+   "source_id": "S-014",
+   "tier": 2,
+   "publisher": "Gartner",
+   "title": "https://gartner.com/en/newsroom/press-releases/2025-04-08-gartner-forecasts-spending-on-information-security-in-mena-to-grow-14-percent-in-2025",
+   "url": "https://gartner.com/en/newsroom/press-releases/2025-04-08-gartner-forecasts-spending-on-information-security-in-mena-to-grow-14-percent-in-2025",
+   "lang": "en",
+   "verify_status": "verified",
+   "updated": "2026-11-18",
+   "in_synthesis": false,
+   "used_in": [
+    "2026-12_baseline_report.html"
+   ]
+  },
+  {
+   "source_id": "S-015",
+   "tier": 2,
+   "publisher": "Global Market Insights",
+   "title": "https://gminsights.com/industry-analysis/cybersecurity-market",
+   "url": "https://gminsights.com/industry-analysis/cybersecurity-market",
+   "lang": "en",
+   "verify_status": "verified",
+   "updated": "2026-11-18",
+   "in_synthesis": false,
+   "used_in": [
+    "2026-12_baseline_report.html"
+   ]
+  },
+  {
+   "source_id": "S-016",
+   "tier": 1,
+   "publisher": "Hub71",
+   "title": "https://hub71.com",
+   "url": "https://hub71.com",
+   "lang": "en",
+   "verify_status": "verified",
+   "updated": "2026-11-18",
+   "in_synthesis": false,
+   "used_in": [
+    "2026-12_baseline_report.html"
+   ]
+  },
+  {
+   "source_id": "S-017",
+   "tier": 1,
+   "publisher": "Dubai Electronic Security Center (DESC)",
+   "title": "https://desc.gov.ae",
+   "url": "https://desc.gov.ae",
+   "lang": "en",
+   "verify_status": "verified",
+   "updated": "2026-11-18",
+   "in_synthesis": false,
+   "used_in": [
+    "2026-12_baseline_report.html"
+   ]
+  },
+  {
+   "source_id": "S-018",
+   "tier": 2,
+   "publisher": "Chambers and Partners",
+   "title": "https://practiceguides.chambers.com/",
+   "url": "https://practiceguides.chambers.com/",
+   "lang": "en",
+   "verify_status": "verified",
+   "updated": "2026-11-18",
+   "in_synthesis": false,
+   "used_in": [
+    "2026-12_baseline_report.html"
+   ]
+  },
+  {
+   "source_id": "S-019",
+   "tier": 1,
+   "publisher": "Government of Dubai Media Office",
+   "title": "https://mediaoffice.ae/en/news/2023/january/04-01/mohammed-bin-rashid-launches-dubai-economic-agenda-d33",
+   "url": "https://mediaoffice.ae/en/news/2023/january/04-01/mohammed-bin-rashid-launches-dubai-economic-agenda-d33",
+   "lang": "en",
+   "verify_status": "verified",
+   "updated": "2026-11-18",
+   "in_synthesis": false,
+   "used_in": [
+    "2026-12_baseline_report.html"
+   ]
+  },
+  {
+   "source_id": "S-020",
+   "tier": 1,
+   "publisher": "Microsoft",
+   "title": "https://learn.microsoft.com/en-us/security-copilot",
+   "url": "https://learn.microsoft.com/en-us/security-copilot",
+   "lang": "en",
+   "verify_status": "verified",
+   "updated": "2026-11-18",
+   "in_synthesis": false,
+   "used_in": [
+    "2026-12_baseline_report.html"
+   ]
+  },
+  {
+   "source_id": "S-021",
+   "tier": 2,
+   "publisher": "SANS GIAC",
+   "title": "https://giac.org",
+   "url": "https://giac.org",
+   "lang": "en",
+   "verify_status": "verified",
+   "updated": "2026-11-18",
+   "in_synthesis": false,
+   "used_in": [
+    "2026-12_baseline_report.html"
+   ]
+  },
+  {
+   "source_id": "S-022",
+   "tier": 2,
+   "publisher": "(ISC)²",
+   "title": "https://isc2.org/new-ai-certification",
+   "url": "https://isc2.org/new-ai-certification",
+   "lang": "en",
+   "verify_status": "verified",
+   "updated": "2026-11-18",
+   "in_synthesis": false,
+   "used_in": [
+    "2026-12_baseline_report.html"
+   ]
+  },
+  {
+   "source_id": "S-023",
+   "tier": 2,
+   "publisher": "Black Hat MEA",
+   "title": "https://www.blackhatmea.com/about-us/key-information",
+   "url": "https://www.blackhatmea.com/about-us/key-information",
+   "lang": "en",
+   "verify_status": "verified",
+   "updated": "2026-11-18",
+   "in_synthesis": false,
+   "used_in": [
+    "2026-12_baseline_report.html"
+   ]
+  },
+  {
+   "source_id": "S-024",
+   "tier": 1,
+   "publisher": "UAE MoHRE (ILOE)",
+   "title": "https://www.iloe.ae/pdf/Involuntary-Loss-of-Employment-Brochure-ILOE-V2.pdf",
+   "url": "https://www.iloe.ae/pdf/Involuntary-Loss-of-Employment-Brochure-ILOE-V2.pdf",
+   "lang": "en",
+   "verify_status": "verified",
+   "updated": "2026-11-18",
+   "in_synthesis": false,
+   "used_in": [
+    "2026-12_baseline_report.html"
+   ]
+  },
+  {
+   "source_id": "S-025",
+   "tier": 1,
+   "publisher": "CPX",
+   "title": "https://www.cpx.net",
+   "url": "https://www.cpx.net",
+   "lang": "en",
+   "verify_status": "verified",
+   "updated": "2026-11-18",
+   "in_synthesis": false,
+   "used_in": [
+    "2026-12_baseline_report.html"
+   ]
+  },
+  {
+   "source_id": "S-026",
+   "tier": 1,
+   "publisher": "UAE Government AI",
+   "title": "https://ai.gov.ae/strategy",
+   "url": "https://ai.gov.ae/strategy",
+   "lang": "en",
+   "verify_status": "verified",
+   "updated": "2026-11-18",
+   "in_synthesis": false,
+   "used_in": [
+    "2026-12_baseline_report.html"
+   ]
+  },
+  {
+   "source_id": "S-027",
+   "tier": 2,
+   "publisher": "Cybersecurity Database",
+   "title": "https://cybersecuritydatabase.org/en/documents/ae-national-cybersecurity-strategy-2025-2031",
+   "url": "https://cybersecuritydatabase.org/en/documents/ae-national-cybersecurity-strategy-2025-2031",
+   "lang": "en",
+   "verify_status": "verified",
+   "updated": "2026-11-18",
+   "in_synthesis": false,
+   "used_in": [
+    "2026-12_baseline_report.html"
+   ]
+  },
+  {
+   "source_id": "S-028",
+   "tier": 2,
+   "publisher": "MASTC Group",
+   "title": "https://mastcgroup.com/desc-isr-v3-1-compliance-guide-iso-27001-mapping-requirements",
+   "url": "https://mastcgroup.com/desc-isr-v3-1-compliance-guide-iso-27001-mapping-requirements",
+   "lang": "en",
+   "verify_status": "verified",
+   "updated": "2026-11-18",
+   "in_synthesis": false,
+   "used_in": [
+    "2026-12_baseline_report.html"
+   ]
+  },
+  {
+   "source_id": "S-029",
+   "tier": 1,
+   "publisher": "Dubai Electronic Security Center (DESC)",
+   "title": "https://desc.gov.ae/dubai-electronic-security-center-unveils-saraab-and-new-cybersecurity-initiatives-at-gisec-global-2026",
+   "url": "https://desc.gov.ae/dubai-electronic-security-center-unveils-saraab-and-new-cybersecurity-initiatives-at-gisec-global-2026",
+   "lang": "en",
+   "verify_status": "verified",
+   "updated": "2026-11-18",
+   "in_synthesis": false,
+   "used_in": [
+    "2026-12_baseline_report.html"
+   ]
+  },
+  {
+   "source_id": "S-030",
+   "tier": 1,
+   "publisher": "Telecommunications and Digital Government Regulatory Authority",
+   "title": "https://tdra.gov.ae/en/aecert/initiatives",
+   "url": "https://tdra.gov.ae/en/aecert/initiatives",
+   "lang": "en",
+   "verify_status": "verified",
+   "updated": "2026-11-18",
+   "in_synthesis": false,
+   "used_in": [
+    "2026-12_baseline_report.html"
+   ]
+  },
+  {
+   "source_id": "S-031",
+   "tier": 2,
+   "publisher": "SANS Institute",
+   "title": "https://sans.org/community",
+   "url": "https://sans.org/community",
+   "lang": "en",
+   "verify_status": "verified",
+   "updated": "2026-11-18",
+   "in_synthesis": false,
+   "used_in": [
+    "2026-12_baseline_report.html"
+   ]
+  },
+  {
+   "source_id": "S-032",
+   "tier": 2,
+   "publisher": "OWASP GenAI Security",
+   "title": "https://genai.owasp.org/llm-top-10",
+   "url": "https://genai.owasp.org/llm-top-10",
+   "lang": "en",
+   "verify_status": "verified",
+   "updated": "2026-11-18",
+   "in_synthesis": false,
+   "used_in": [
+    "2026-12_baseline_report.html"
+   ]
+  },
+  {
+   "source_id": "S-033",
+   "tier": 1,
+   "publisher": "MITRE ATLAS",
+   "title": "https://atlas.mitre.org",
+   "url": "https://atlas.mitre.org",
+   "lang": "en",
+   "verify_status": "verified",
+   "updated": "2026-11-18",
+   "in_synthesis": false,
+   "used_in": [
+    "2026-12_baseline_report.html"
+   ]
+  },
+  {
+   "source_id": "S-034",
+   "tier": 2,
+   "publisher": "NIST",
+   "title": "https://www.nist.gov/itl/ai-risk-management-framework",
+   "url": "https://www.nist.gov/itl/ai-risk-management-framework",
+   "lang": "en",
+   "verify_status": "unverifiable",
+   "updated": "2026-11-18",
+   "in_synthesis": false,
+   "used_in": [
+    "2026-12_baseline_report.html"
+   ]
+  },
+  {
+   "source_id": "S-035",
+   "tier": 2,
+   "publisher": "ISACA",
+   "title": "https://isaca.org",
+   "url": "https://isaca.org",
+   "lang": "en",
+   "verify_status": "verified",
+   "updated": "2026-11-18",
+   "in_synthesis": false,
+   "used_in": [
+    "2026-12_baseline_report.html"
+   ]
+  },
+  {
+   "source_id": "S-036",
+   "tier": 4,
+   "publisher": "The National",
+   "title": "https://thenationalnews.com/news/uae/2024/09/13/uae-ranked-as-role-model-for-cybersecurity-in-global-report",
+   "url": "https://thenationalnews.com/news/uae/2024/09/13/uae-ranked-as-role-model-for-cybersecurity-in-global-report",
+   "lang": "en",
+   "verify_status": "media_unverified",
+   "updated": "2026-11-18",
+   "in_synthesis": false,
+   "used_in": [
+    "2026-12_baseline_report.html"
+   ]
+  },
+  {
+   "source_id": "S-037",
+   "tier": 2,
+   "publisher": "GITEX GLOBAL",
+   "title": "https://gitexglobal.com",
+   "url": "https://gitexglobal.com",
+   "lang": "en",
+   "verify_status": "verified",
+   "updated": "2026-11-18",
+   "in_synthesis": false,
+   "used_in": [
+    "2026-12_baseline_report.html"
+   ]
+  },
+  {
+   "source_id": "S-038",
+   "tier": 2,
+   "publisher": "GISEC",
+   "title": "https://gisec.ae",
+   "url": "https://gisec.ae",
+   "lang": "en",
+   "verify_status": "verified",
+   "updated": "2026-11-18",
+   "in_synthesis": false,
+   "used_in": [
+    "2026-12_baseline_report.html"
+   ]
+  },
+  {
+   "source_id": "S-039",
+   "tier": 1,
+   "publisher": "Moro Hub (Digital Dubai)",
+   "title": "https://morohub.ae",
+   "url": "https://morohub.ae",
+   "lang": "en",
+   "verify_status": "verified",
+   "updated": "2026-11-18",
+   "in_synthesis": false,
+   "used_in": [
+    "2026-12_baseline_report.html"
+   ]
+  },
+  {
+   "source_id": "S-040",
+   "tier": 1,
+   "publisher": "DIFC (Dubai International Financial Centre)",
+   "title": "https://difc.ae",
+   "url": "https://difc.ae",
+   "lang": "en",
+   "verify_status": "verified",
+   "updated": "2026-11-18",
+   "in_synthesis": false,
+   "used_in": [
+    "2026-12_baseline_report.html"
+   ]
+  },
+  {
+   "source_id": "S-041",
+   "tier": 1,
+   "publisher": "ADGM (Abu Dhabi Global Market)",
+   "title": "https://adgm.com",
+   "url": "https://adgm.com",
+   "lang": "en",
+   "verify_status": "verified",
+   "updated": "2026-11-18",
+   "in_synthesis": false,
+   "used_in": [
+    "2026-12_baseline_report.html"
+   ]
+  }
+ ]
+}

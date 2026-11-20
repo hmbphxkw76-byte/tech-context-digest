@@ -29,6 +29,10 @@
                  消除「机构光环效应」（tier 1 机构的一切产出被默认当一手事实）。
                  取值合法性 + 文档级不得高于机构 tier 允许上限，均 [W]（不阻断）；
                  含 document_tier 条目占比仅 [W] 提示，缺失不阻断。
+  R9 中文来源  仓库级来源语言政策（engine/docs/source-language-policy.md）：默认仅英文；
+                 仅中国宏观经济数据业务线（{{CHINA_MACRO}}=true）允许中文官方来源，
+                 且限机构 / 主机白名单（institution_tiers.json lang 段）。违规新报告 [E] /
+                 历史 [W]。R5 负责语言规则分级，R9 负责政策裁决（含 URL 主机判定）。
 
 gate-period 前置：周期早于 `--gate-period` 的报告为历史报告，R1–R6 的 [E] 前置
 降级为 [W]（不追溯阻断历史）；R7 结构性冲突（重复 source_id / 同机构不同分级）不降级。
@@ -108,6 +112,25 @@ def is_self_reference(url: str) -> bool:
     """URL 是否指向本仓库自身内容（内部指针）。"""
     return bool(SELF_LINK_RE.match(normalize_url(url)))
 INSTITUTION_MASTER_PATH = Path(__file__).resolve().parent / "institution_tiers.json"
+
+# ---------------------------------------------------------------- R9 中文来源校验
+
+# 政策单一事实源：engine/docs/source-language-policy.md；机器可读白名单在
+# institution_tiers.json 的 lang 段（zh_macro_whitelist / zh_macro_hosts / zh_hosts）。
+# 下列默认值仅在主数据缺失 lang 段时兜底，不得替代主数据。
+DEFAULT_ZH_MACRO_WHITELIST = ("中国人民银行", "中国商务部", "中国国家统计局（官方微信号）", "中国政府网")
+DEFAULT_ZH_MACRO_HOSTS = ("pbc.gov.cn", "mofcom.gov.cn", "stats.gov.cn", "gov.cn")
+DEFAULT_ZH_HOSTS = (
+    "gov.cn", "mofcom.gov.cn", "pbc.gov.cn", "stats.gov.cn", "customs.gov.cn",
+    "npc.gov.cn", "moe.gov.cn", "mfa.gov.cn", "xinhuanet.com", "news.cn",
+    "chinanews.com", "cnr.cn", "people.com.cn", "sina.com.cn", "163.com",
+    "qq.com", "sohu.com", "baidu.com", "csdn.net", "36kr.com", "tmtpost.com",
+    "cnblogs.com", "cngold.org", "chinatoday.com.cn", "mp.weixin.qq.com",
+    "zhihu.com", "thepaper.cn", "jiemian.com", "yicai.com", "cls.cn",
+    "eastmoney.com",
+)
+# 中文主机的明确英文段（按英文内容处理，不算中文来源）
+ENGLISH_PATH_RE = re.compile(r"/(?:eng|en|english)(?:/|$)", re.IGNORECASE)
 
 HREF_RE = re.compile(r'href="(https?://[^"]+)"', re.I)
 # 带单位/量级的关键数字（金额、百分比、面积、利率 bp、成交笔数等）
@@ -318,6 +341,11 @@ LANGUAGE_RULES = {
         "severity": "W",
         "label": "英文或中文（不限定来源语言）",
     },
+    "zh_macro_reference": {
+        "allowed": {"en", "zh"},
+        "severity": "E",
+        "label": "英文优先；中国宏观数据可用中文官方来源作参考（须标需核实原文）",
+    },
 }
 
 # token -> 规则键（精确 token 优先）
@@ -331,6 +359,8 @@ LANGUAGE_RULE_TOKENS = {
     "allow_en_zh": "en_or_zh",
     "中英": "en_or_zh",
     "英文或中文": "en_or_zh",
+    "zh_macro_reference": "zh_macro_reference",
+    "zh_macro": "zh_macro_reference",
 }
 
 _LANG_ALIAS = {
@@ -363,6 +393,11 @@ def parse_language_rule(rule: str):
         spec = dict(LANGUAGE_RULES[key])
         spec["tokens"] = [key]
         return spec
+    # 中国宏观例外：英文优先 + 中文官方来源作参考（政策 source-language-policy.md）
+    if "中国宏观" in s and "中文" in s:
+        spec = dict(LANGUAGE_RULES["zh_macro_reference"])
+        spec["tokens"] = ["zh_macro_reference"]
+        return spec
     low = s.lower()
     # 「仅英文…」优先（可能含『严禁中文来源』的否定式表述）
     if "仅英文" in s or "英文" in s and "中文" not in s or low in ("en", "english"):
@@ -387,9 +422,13 @@ def check_language(sources, rule: str) -> list[tuple[str, str]]:
         if not lang:
             continue
         if lang not in spec["allowed"]:
-            out.append((spec["severity"],
+            # 政策（source-language-policy.md）：官方权威资料允许非英语（须标注原文语言），
+            # 故非中文语言不合规仅 [W]；中文违规维持规则 severity（official_en=E）。
+            lvl = "W" if lang != "zh" else spec["severity"]
+            suffix = "（非中文官方来源，仅告警）" if lang != "zh" else ""
+            out.append((lvl,
                         f"R5 语言规则：{s.get('source_id')} lang={lang} 与规则"
-                        f"「{rule}」不符（允许：{'/'.join(sorted(spec['allowed']))}）"))
+                        f"「{rule}」不符（允许：{'/'.join(sorted(spec['allowed']))}）{suffix}"))
     return out
 
 
@@ -457,6 +496,100 @@ def parse_config_tier_map(config_text: str) -> dict[str, int]:
             if seg:
                 out[seg] = tier
     return out
+
+
+def is_english_path(url: str) -> bool:
+    """URL 路径含明确英文段（/en/ /eng/ /english/）→ 按英文内容处理。"""
+    try:
+        path = urlparse(str(url or "")).path
+    except ValueError:
+        return False
+    return bool(ENGLISH_PATH_RE.search(path))
+
+
+def _host_of(url: str) -> str:
+    try:
+        return (urlparse(str(url or "")).netloc or "").lower()
+    except ValueError:
+        return ""
+
+
+def _master_lang_index(master: dict) -> dict[str, str]:
+    """机构归一名 -> lang（供有效语言判定）。"""
+    out: dict[str, str] = {}
+    for inst in (master or {}).get("institutions", []):
+        lang = normalize_lang(inst.get("lang"))
+        if not lang:
+            continue
+        for n in [inst.get("name", ""), *inst.get("aliases", [])]:
+            key = _norm_name(n)
+            if key:
+                out[key] = lang
+    return out
+
+
+def effective_lang(source: dict, master: dict | None = None,
+                   zh_hosts: tuple[str, ...] = DEFAULT_ZH_HOSTS) -> str:
+    """来源有效语言（中文主机权威）：URL 中文主机（英文段除外）→ s.lang → 机构主数据 lang。
+
+    中文主机判定优先于登记 `lang` 字段：登记曾把中文源误标 `en`（如新浪财经 / 百度百家号），
+    仅凭 `lang` 会漏判；主机是内容语言的地面真相。中文主机的明确英文段（/en/ /eng/）按英文处理。
+    """
+    url = str(source.get("url", ""))
+    host = _host_of(url)
+    host_lang = ""
+    if host and any(h and (host == h or host.endswith("." + h)) for h in zh_hosts):
+        host_lang = "en" if is_english_path(url) else "zh"
+    if host_lang == "zh":
+        return "zh"
+    lang = normalize_lang(source.get("lang"))
+    if lang:
+        return lang
+    if host_lang:
+        return host_lang
+    master = master or {}
+    inst = master_lookup(master, str(source.get("publisher", "")))
+    if inst is not None:
+        lang = normalize_lang(inst.get("lang"))
+        if lang:
+            return lang
+    return ""
+
+
+def check_chinese_sources(registry: dict, master: dict | None = None,
+                          ctx: dict | None = None) -> list[tuple[str, str]]:
+    """R9 中文来源校验 -> [(level, msg)]。
+
+    政策（engine/docs/source-language-policy.md）：默认仅英文；仅中国宏观经济数据
+    业务线（ctx['zh_macro']=true）允许中文官方来源，且限白名单机构 / 主机。
+    违规新报告 [E]，历史报告 [W]（与 R1–R6 gate-period 降级同口径）。
+    """
+    ctx = ctx or {}
+    historical = bool(ctx.get("historical"))
+    zh_macro = bool(ctx.get("zh_macro"))
+    master = master or {}
+    lang_policy = master.get("lang", {}) if isinstance(master.get("lang"), dict) else {}
+    whitelist = {_norm_name(w) for w in (lang_policy.get("zh_macro_whitelist")
+                                         or DEFAULT_ZH_MACRO_WHITELIST)}
+    macro_hosts = set(lang_policy.get("zh_macro_hosts") or DEFAULT_ZH_MACRO_HOSTS)
+    zh_hosts = tuple(lang_policy.get("zh_hosts") or DEFAULT_ZH_HOSTS)
+    issues: list[tuple[str, str]] = []
+    for s in registry.get("sources", []) if isinstance(registry, dict) else []:
+        sid = str(s.get("source_id", "")).strip() or "<无 source_id>"
+        if effective_lang(s, master, zh_hosts) != "zh":
+            continue
+        publisher = str(s.get("publisher", "")).strip()
+        host = _host_of(s.get("url", ""))
+        allowed = zh_macro and (_norm_name(publisher) in whitelist
+                                or any(host == h or host.endswith("." + h) for h in macro_hosts))
+        if allowed:
+            continue
+        lvl = "W" if historical else "E"
+        reason = ("非中国宏观例外业务线" if not zh_macro
+                  else "机构 / 主机不在中文来源白名单")
+        issues.append((lvl, f"R9 中文来源：{sid}（{publisher or host}）为中文来源，"
+                            f"{reason}（政策：engine/docs/source-language-policy.md）"))
+    return issues
 
 
 def check_institution_consistency(registry: dict, master: dict, config_text: str = "",
@@ -1034,6 +1167,12 @@ def check_report(text: str, registry: dict, ctx: dict | None = None) -> list[tup
         for lvl, msg in check_language(sources, rule):
             issues.append((level("R5", lvl), msg))
 
+    # R9 中文来源校验（仓库级政策；需机构主数据）
+    master = ctx.get("master")
+    if master is not None:
+        for lvl, msg in check_chinese_sources(registry, master, ctx):
+            issues.append((level("R9", lvl), msg))
+
     # R6 死链：明确 4xx/5xx = 真阻断；网络异常/超时/反爬 = 可疑告警（环境相关）
     dead = ctx.get("dead_urls") or set()
     unreachable = ctx.get("unreachable_urls") or set()
@@ -1087,6 +1226,12 @@ def _ctx_for(business_rel: str) -> dict:
     m = re.search(r"\{\{SOURCE_LANGUAGE_RULE\}\}\s*=\s*(.+)", text)
     if m:
         ctx["language_rule"] = m.group(1).strip()
+        spec = parse_language_rule(ctx["language_rule"])
+        if spec and "zh_macro_reference" in spec.get("tokens", []):
+            ctx["zh_macro"] = True
+    m = re.search(r"\{\{CHINA_MACRO\}\}\s*=\s*(.+)", text)
+    if m and m.group(1).strip().lower() in ("true", "yes", "是", "1"):
+        ctx["zh_macro"] = True
     m = re.search(r"\{\{SOURCE_STRATEGY\}\}\s*=\s*(.+)", text)
     if m:
         ctx["source_strategy"] = parse_source_strategy(m.group(1))
@@ -1152,6 +1297,7 @@ def run(only_file: str | None, gate_period: str | None = None,
         reg_path = _registry_path_for(business_rel, registry_override)
         registry = load_registry(reg_path)
         ctx = _ctx_for(business_rel) if business_rel else {"config_text": ""}
+        ctx["master"] = master
         ctx["historical"] = _is_historical(rel, gate_period)
         det = detect_report(Path(rel).name)
         ctx["r6_strict"] = bool(det and det[1]) and _period_key(det[1]) >= _period_key(R6_STRICT_PERIOD)
@@ -1170,7 +1316,6 @@ def run(only_file: str | None, gate_period: str | None = None,
 
         issues = check_report(text, registry, ctx)
         issues += check_institution_consistency(registry, master, ctx.get("config_text", ""), ctx)
-        ctx["master"] = master
         issues += check_registry_fields(registry, ctx)
 
         for level, msg in issues:
@@ -1287,6 +1432,35 @@ def _self_test() -> int:
                            {"source_strategy": "synthesis_only"})
     if not any(lvl == "E" and "R1" in msg for lvl, msg in syn_url):
         print("[FAIL] synthesis_only 含外部 URL 仍应触发 R1"); ok = False
+
+    # R9 中文来源校验：非例外线 -> E；例外线白名单 -> 通过；例外线非白名单 -> E；历史降级 W
+    zh_master = {"schema_version": "1.0", "institutions": [
+        {"name": "中国人民银行", "tier": 1, "lang": "zh"},
+        {"name": "36氪", "tier": 4, "lang": "zh"}],
+        "lang": {"zh_macro_whitelist": ["中国人民银行"], "zh_macro_hosts": ["pbc.gov.cn"],
+                 "zh_hosts": ["pbc.gov.cn", "36kr.com"]}}
+    zh_reg = {"schema_version": "1.0", "sources": [
+        {"source_id": "Z1", "tier": 4, "publisher": "36氪", "url": "https://36kr.com/p/1"}]}
+    if not any(lvl == "E" and "R9" in msg for lvl, msg in
+               check_chinese_sources(zh_reg, zh_master, {"zh_macro": False})):
+        print("[FAIL] 非例外线中文来源应触发 R9 / E")
+        ok = False
+    if not any(lvl == "E" and "R9" in msg for lvl, msg in
+               check_chinese_sources(zh_reg, zh_master, {"zh_macro": True})):
+        print("[FAIL] 例外线非白名单中文来源应触发 R9 / E")
+        ok = False
+    wl_reg = {"schema_version": "1.0", "sources": [
+        {"source_id": "Z2", "tier": 1, "publisher": "中国人民银行", "url": "https://www.pbc.gov.cn/"}]}
+    if any("R9" in msg for _, msg in check_chinese_sources(wl_reg, zh_master, {"zh_macro": True})):
+        print("[FAIL] 例外线白名单中文来源不应触发 R9")
+        ok = False
+    if not any(lvl == "W" and "R9" in msg for lvl, msg in
+               check_chinese_sources(zh_reg, zh_master, {"zh_macro": False, "historical": True})):
+        print("[FAIL] 历史报告 R9 应降级为 W")
+        ok = False
+    if parse_language_rule("英文优先；中国宏观数据可用中文官方来源作参考")["tokens"] != ["zh_macro_reference"]:
+        print("[FAIL] 中国宏观例外语言规则应解析为 zh_macro_reference")
+        ok = False
 
     print("[self-test] " + ("通过" if ok else "失败"))
     return 0 if ok else 1

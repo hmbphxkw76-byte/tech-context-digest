@@ -18,7 +18,8 @@
 {{BASELINE_REPORT_PATH}} = reports/2026-11-13_weekly.html（首期周报，结构与结论锚；本业务线以首期周报为结构锚，机制建立走周报首期，未单独出九节基线文档）
 {{REPO_RAW_URL_BASE}}    = https://github.com/hmbphxkw76-byte/tech-context-digest/blob/main/content/economy/trends
 {{FRESHNESS_PRIORITY}}   = 最新官方页 > 上期值 > 预测值
-{{SOURCE_LANGUAGE_RULE}} = 官方一手以英文为准；中文媒体仅作线索，数值须回官方页核验
+{{SOURCE_LANGUAGE_RULE}} = 英文优先；中国宏观数据可用中文官方来源作参考（须标需核实原文）
+{{CHINA_MACRO}}          = true
 ```
 
 ## 二、受众定位
@@ -42,7 +43,9 @@
 | ① 官方一手 | IMF（WEO）、世界银行、OECD、BLS、BEA、美国财政部、中国国家统计局、中国人民银行、ECB、欧盟统计局、英国 ONS、日本内阁府、韩国 BOK、新加坡 MAS、澳大利亚 ABS、新西兰 Stats NZ / RBNZ、CBUAE、GASTAT、越南 GSO、马来西亚 DOSM / BNM、卡塔尔 PSA / QCB | 唯一可直接采信层，标「已核验」 |
 | ② 行业机构 | IMF Blog、OECD Economic Outlook、各国央行研究简报与会议纪要 | 可采信；PDF 记录发布日期；预测分歧并列 |
 | ③ 挂牌门户 / 数据库 | FRED、e-Stat、各国官方统计数据库 | 仅作数据快照，须注日期与版本 |
-| ④ 媒体转述 | Reuters、Bloomberg、中文财经媒体 | 只作线索；数值标「需核实原文」并回官方页校验 |
+| ④ 媒体转述 | Reuters、Bloomberg 等主流英文媒体 | 只作线索；数值标「需核实原文」并回官方页校验 |
+
+**来源语言政策**：本业务线为中国宏观数据例外线（`{{CHINA_MACRO}} = true`），英文优先；中文官方来源仅限白名单机构（中国人民银行 / 中国商务部 / 中国国家统计局 / 中国政府网），作参考并标「需核实原文」；其他中文来源一律禁止（政策：`engine/docs/source-language-policy.md`，门禁 `source_check` R9）。
 
 ## 五、触发器（`事件 → 受影响板块`）
 

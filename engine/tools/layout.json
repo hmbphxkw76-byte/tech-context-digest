@@ -1,15 +1,20 @@
 {
-  "version": "4.2",
-  "updated": "2026-11-19",
-  "classification_version": "2026-11-19.1",
+  "version": "5.0",
+  "updated": "2026-11-20",
+  "classification_version": "2026-11-20.1",
   "changelog": [
+    {
+      "version": "2026-11-20.1",
+      "date": "2026-11-20",
+      "summary": "科技主题新增 subcategory 维度（category→subcategory→region）：AI 相关归并为 ai-security / ai-application 两大类；Weekly Roundup 拆分为 AI 安全周报与 AI 应用周报两条业务线；汇总页主题筛选改为按一级主题（经济/科技/教育/国际/政治/社会）。"
+    },
     {
       "version": "2026-11-19.1",
       "date": "2026-11-19",
       "summary": "首次登记分类体系版本号；新增跨主题互斥性检查（先 [W] 不阻断）与变更影响评估（--impact）。"
     }
   ],
-  "comment": "仓库目录结构单一事实源（tech-context-digest 三层架构：content/ 内容层、engine/ 引擎层、data/ 资产层）。六主题：economy / tech / education / international / political / society。维度顺序由 layout.json 各主题自行声明：economy 为 region→category（地区优先），其余五主题为 category→region（细分优先）。region 为可选维度（optional_dimensions 声明）：六个主题均声明 [\"region\"]，业务线可省略 region 段，直接以 category 段落位（如 content/economy/trends、content/tech/weekly-roundup、content/education/education-system）；省略时剩余段按声明顺序剔除 region 后逐位映射。业务线默认位于 content/<theme>/<维度段...>/，以 prompts/business-config.md 为锚点。",
+  "comment": "仓库目录结构单一事实源（tech-context-digest 三层架构：content/ 内容层、engine/ 引擎层、data/ 资产层）。六主题：economy / tech / education / international / political / society。维度顺序由 layout.json 各主题自行声明：economy 为 region→category（地区优先），tech 为 category→subcategory→region（AI 安全 / AI 应用两大类 → 业务线 → 地区），其余四主题为 category→region（细分优先）。region 为可选维度（optional_dimensions 声明）：六个主题均声明 [\"region\"]，业务线可省略 region 段，直接以 category（+subcategory）段落位（如 content/economy/trends、content/tech/ai-application/weekly-roundup、content/education/education-system）；省略时剩余段按声明顺序剔除 region 后逐位映射。业务线默认位于 content/<theme>/<维度段...>/，以 prompts/business-config.md 为锚点；theme 下允许存在不含业务配置的分组目录（如 content/tech/ai-security），其层级深度须小于该主题维度数。",
   "root_reserved": [
     "content",
     "engine",
@@ -30,7 +35,12 @@
   "regional_segment": "",
   "themes": {
     "economy": { "name": "经济", "dimensions": ["region", "category"], "optional_dimensions": ["region"] },
-    "tech": { "name": "科技", "dimensions": ["category", "region"], "optional_dimensions": ["region"] },
+    "tech": {
+      "name": "科技",
+      "dimensions": ["category", "subcategory", "region"],
+      "optional_dimensions": ["region"],
+      "category_names": { "ai-security": "AI安全", "ai-application": "AI应用" }
+    },
     "education": { "name": "教育", "dimensions": ["category", "region"], "optional_dimensions": ["region"] },
     "international": { "name": "国际", "dimensions": ["category", "region"], "optional_dimensions": ["region"] },
     "political": { "name": "政治", "dimensions": ["category", "region"], "optional_dimensions": ["region"] },

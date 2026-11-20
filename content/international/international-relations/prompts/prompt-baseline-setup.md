@@ -17,7 +17,7 @@
 {{REGISTRY_PATH}}         = data/processed/international/international-relations/international_relations_ledger.md
 {{REGISTRY_FORMAT}}       = md-ledger
 {{SOURCE_REGISTRY_PATH}}  = data/processed/international/international-relations/source_registry.json
-{{SOURCE_LANGUAGE_RULE}}  = 官方一手以英文为准；非英语官方文件须标注原文语言并附官方 URL
+{{SOURCE_LANGUAGE_RULE}} = 仅英文（严禁中文来源）
 {{REPORT_VERSION}}        = v1.0（首期基线固定）
 ```
 

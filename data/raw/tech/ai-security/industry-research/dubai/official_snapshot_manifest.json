@@ -1,0 +1,174 @@
+{
+ "schema_version": "1.0",
+ "business_line": "content/tech/ai-security/industry-research/dubai",
+ "capture_period": "2026-12",
+ "kind": "official_source_excerpt",
+ "note": "本目录为官方一手（tier 1）来源的**已核验摘录**快照，非页面全文；全文须回原 URL 取。status=snapshot 表示已落摘录；status=pending_fetch 表示来源已登记但尚未抓取，不得据此认为已采信。无时间戳，按来源编号与采集期确定性可重放。",
+ "counts": {
+  "tier1_total": 20,
+  "snapshot": 7,
+  "pending_fetch": 13
+ },
+ "sources": [
+  {
+   "source_id": "S-002",
+   "tier": 1,
+   "publisher": "Dubai Electronic Security Center (DESC)",
+   "url": "https://desc.gov.ae/hamdan-bin-mohammed-launches-second-cycle-of-dubai-cyber-security-strategy",
+   "snapshot": "desc_dubai_cyber_security_strategy_cycle2_2026_excerpt.md",
+   "status": "snapshot"
+  },
+  {
+   "source_id": "S-004",
+   "tier": 1,
+   "publisher": "OpenAI",
+   "url": "https://openai.com/index/introducing-stargate-uae",
+   "snapshot": "openai_stargate_uae_2025_excerpt.md",
+   "status": "snapshot"
+  },
+  {
+   "source_id": "S-005",
+   "tier": 1,
+   "publisher": "Microsoft",
+   "url": "https://blogs.microsoft.com/blog/2024/04/15/microsoft-and-g42-partner",
+   "snapshot": "microsoft_g42_partner_2024-04-15_excerpt.md",
+   "status": "snapshot"
+  },
+  {
+   "source_id": "S-009",
+   "tier": 1,
+   "publisher": "Core42",
+   "url": "https://core42.ai",
+   "snapshot": null,
+   "status": "pending_fetch"
+  },
+  {
+   "source_id": "S-010",
+   "tier": 1,
+   "publisher": "G42",
+   "url": "https://g42.ai",
+   "snapshot": null,
+   "status": "pending_fetch"
+  },
+  {
+   "source_id": "S-011",
+   "tier": 1,
+   "publisher": "CPX",
+   "url": "https://cpx.net",
+   "snapshot": null,
+   "status": "pending_fetch"
+  },
+  {
+   "source_id": "S-012",
+   "tier": 1,
+   "publisher": "e&",
+   "url": "https://eand.com",
+   "snapshot": null,
+   "status": "pending_fetch"
+  },
+  {
+   "source_id": "S-016",
+   "tier": 1,
+   "publisher": "Hub71",
+   "url": "https://hub71.com",
+   "snapshot": "hub71_faqs_2026_excerpt.md",
+   "status": "snapshot"
+  },
+  {
+   "source_id": "S-017",
+   "tier": 1,
+   "publisher": "Dubai Electronic Security Center (DESC)",
+   "url": "https://desc.gov.ae",
+   "snapshot": null,
+   "status": "pending_fetch"
+  },
+  {
+   "source_id": "S-019",
+   "tier": 1,
+   "publisher": "Government of Dubai Media Office",
+   "url": "https://mediaoffice.ae/en/news/2023/january/04-01/mohammed-bin-rashid-launches-dubai-economic-agenda-d33",
+   "snapshot": null,
+   "status": "pending_fetch"
+  },
+  {
+   "source_id": "S-020",
+   "tier": 1,
+   "publisher": "Microsoft",
+   "url": "https://learn.microsoft.com/en-us/security-copilot",
+   "snapshot": null,
+   "status": "pending_fetch"
+  },
+  {
+   "source_id": "S-024",
+   "tier": 1,
+   "publisher": "UAE MoHRE (ILOE)",
+   "url": "https://www.iloe.ae/pdf/Involuntary-Loss-of-Employment-Brochure-ILOE-V2.pdf",
+   "snapshot": "mohre_iloe_brochure_2026_excerpt.md",
+   "status": "snapshot"
+  },
+  {
+   "source_id": "S-025",
+   "tier": 1,
+   "publisher": "CPX",
+   "url": "https://www.cpx.net",
+   "snapshot": null,
+   "status": "pending_fetch"
+  },
+  {
+   "source_id": "S-026",
+   "tier": 1,
+   "publisher": "UAE Government AI",
+   "url": "https://ai.gov.ae/strategy",
+   "snapshot": null,
+   "status": "pending_fetch"
+  },
+  {
+   "source_id": "S-029",
+   "tier": 1,
+   "publisher": "Dubai Electronic Security Center (DESC)",
+   "url": "https://desc.gov.ae/dubai-electronic-security-center-unveils-saraab-and-new-cybersecurity-initiatives-at-gisec-global-2026",
+   "snapshot": "desc_saraab_gisec_global_2026-09_excerpt.md",
+   "status": "snapshot"
+  },
+  {
+   "source_id": "S-030",
+   "tier": 1,
+   "publisher": "Telecommunications and Digital Government Regulatory Authority",
+   "url": "https://tdra.gov.ae/en/aecert/initiatives",
+   "snapshot": "tdra_aecert_initiatives_2026_excerpt.md",
+   "status": "snapshot"
+  },
+  {
+   "source_id": "S-033",
+   "tier": 1,
+   "publisher": "MITRE ATLAS",
+   "url": "https://atlas.mitre.org",
+   "snapshot": null,
+   "status": "pending_fetch"
+  },
+  {
+   "source_id": "S-039",
+   "tier": 1,
+   "publisher": "Moro Hub (Digital Dubai)",
+   "url": "https://morohub.ae",
+   "snapshot": null,
+   "status": "pending_fetch"
+  },
+  {
+   "source_id": "S-040",
+   "tier": 1,
+   "publisher": "DIFC (Dubai International Financial Centre)",
+   "url": "https://difc.ae",
+   "snapshot": null,
+   "status": "pending_fetch"
+  },
+  {
+   "source_id": "S-041",
+   "tier": 1,
+   "publisher": "ADGM (Abu Dhabi Global Market)",
+   "url": "https://adgm.com",
+   "snapshot": null,
+   "status": "pending_fetch"
+  }
+ ]
+}

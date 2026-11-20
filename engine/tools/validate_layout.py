@@ -4,6 +4,8 @@
 - 一级根目录合规：无未注册的业务 / 公共目录（白名单之外）
 - 主题注册完整：themes / root_reserved / regions / naming 字段齐全
 - 业务线层级：每条业务线深度与主题维度数一致（region 为可选维度时可省略该段）
+- 分组目录：theme 下允许不含 business-config 的分组目录（如 content/tech/ai-security），
+  其层级深度须小于主题维度数；深度 / 地域白名单规则只适用于业务线本身
 - 命名规范：全部目录段符合 kebab-case（layout.naming.pattern）
 - 地域白名单：region 维度段命中 layout.regions
 - 维度声明：维度序列自洽（无重复、无未登记维度名）；先后顺序由 layout.json 按主题声明（economy 为 region→category，tech 等主题为 category→region）；optional_dimensions 必须是已声明维度
@@ -241,6 +243,12 @@ def check_theme(theme: str, layout) -> None:
         dims_segments = segments
         if dims_segments and dims_segments[0] == layout.regional_segment:
             dims_segments = dims_segments[1:]
+        # 分组目录：不含 prompts/business-config.md，仅作业务线祖先（如 content/tech/ai-security）。
+        # 其层级深度须小于主题维度数；地域白名单与业务线深度规则只适用于业务线本身。
+        if not (d / "prompts" / "business-config.md").exists():
+            if len(dims_segments) >= len(dims):
+                err(f"{theme}/{rel}: 分组目录层级深度 {len(dims_segments)} 不小于主题 {theme} 维度数 {len(dims)}")
+            continue
         if len(dims_segments) == len(dims):
             if region_idx is not None and layout.regions and dims_segments[region_idx] not in layout.regions:
                 err(f"{theme}/{rel}: 地域段「{dims_segments[region_idx]}」未在 layout.regions 白名单注册")

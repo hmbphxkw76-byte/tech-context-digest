@@ -9,8 +9,6 @@
     "4": "媒体转述（须标『需核实原文』）"
   },
   "sources": [
-    { "source_id": "S-001", "tier": 1, "publisher": "中国国家统计局", "title": "国家统计局公式サイト", "url": "https://www.stats.gov.cn/", "lang": "zh", "verify_status": "verified", "updated": "2026-11-18", "in_synthesis": false, "used_in": ["2026-11_baseline_report.html"] },
-    { "source_id": "S-002", "tier": 1, "publisher": "中国国家统计局", "title": "2023 年国民经济和社会发展统计公报", "url": "https://www.stats.gov.cn/sj/zxfb/202402/t20240228_1947915.html", "lang": "zh", "verify_status": "verified", "updated": "2026-11-18", "in_synthesis": false, "used_in": ["2026-11_baseline_report.html"] },
     { "source_id": "S-003", "tier": 1, "publisher": "日本総務省統計局", "title": "人口推計", "url": "https://www.stat.go.jp/data/jinsui/", "lang": "ja", "verify_status": "verified", "updated": "2026-11-18", "in_synthesis": false, "used_in": ["2026-11_baseline_report.html"] },
     { "source_id": "S-004", "tier": 1, "publisher": "韓国 行政安全部", "title": "居民登记人口统计分析", "url": "https://www.mois.go.kr/", "lang": "ko", "verify_status": "verified", "updated": "2026-11-18", "in_synthesis": false, "used_in": ["2026-11_baseline_report.html"] },
     { "source_id": "S-005", "tier": 1, "publisher": "韓国 統計庁 KOSIS", "title": "国家统计门户", "url": "https://kosis.kr/", "lang": "ko", "verify_status": "verified", "updated": "2026-11-18", "in_synthesis": false, "used_in": ["2026-11_baseline_report.html"] },

@@ -147,18 +147,18 @@ class TestBuildTasks(unittest.TestCase):
         # security 月度为核验型轻运行（提示词含 report-output: none），不派月度任务
         tasks = build_tasks("2026-11", _common.iter_business_dirs())
         outs = {t["output"] for t in tasks}
-        self.assertNotIn("content/tech/security/dubai/reports/2026-11_monthly.html", outs)
+        self.assertNotIn("content/tech/ai-security/security/dubai/reports/2026-11_monthly.html", outs)
         # 其季度任务仍应正常派发
         q = build_tasks("2026-Q4", _common.iter_business_dirs())
-        self.assertTrue(any(t["project"] == "content/tech/security/dubai" for t in q))
+        self.assertTrue(any(t["project"] == "content/tech/ai-security/security/dubai" for t in q))
 
     def test_no_task_before_baseline(self):
         # competitive-intelligence 基线 2026-12，不应派 2026-11 月度任务
         tasks = build_tasks("2026-11", _common.iter_business_dirs())
-        self.assertFalse(any(t["project"] == "content/tech/competitive-intelligence/dubai" for t in tasks))
+        self.assertFalse(any(t["project"] == "content/tech/ai-security/competitive-intelligence/dubai" for t in tasks))
         # 其 2026-12 月度任务应派发
         dec = build_tasks("2026-12", _common.iter_business_dirs())
-        self.assertTrue(any(t["project"] == "content/tech/competitive-intelligence/dubai" for t in dec))
+        self.assertTrue(any(t["project"] == "content/tech/ai-security/competitive-intelligence/dubai" for t in dec))
 
     def test_weekly_period_dispatches_weekly_only(self):
         # 周周期只为具备 weekly 提示词的業務线派发（S3 最小集工具侧）
@@ -167,8 +167,9 @@ class TestBuildTasks(unittest.TestCase):
         self.assertTrue(all(t["cycle"] == "weekly" for t in tasks))
         proj = {t["project"] for t in tasks}
         self.assertIn("content/economy/trends", proj)
-        self.assertIn("content/tech/weekly-roundup", proj)
-        self.assertFalse(any("security" in p for p in proj))
+        self.assertIn("content/tech/ai-security/weekly-roundup", proj)
+        self.assertIn("content/tech/ai-application/weekly-roundup", proj)
+        self.assertFalse(any(p.endswith("/security/dubai") for p in proj))
 
     def test_blindspot_summary_lists_open(self):
         # S2 闭环：未消号项与责任周期进入任务清单（只读台账）
@@ -410,9 +411,13 @@ class TestComplianceCheck(unittest.TestCase):
         self.assertEqual(rule["sections"], self.rules["types"]["competitive-intelligence"]["cycles"]["baseline"]["sections"])
 
     def test_business_override_takes_precedence(self):
-        rule, inherited = cycle_rule(self.rules, "trend-weekly", "weekly", "content/tech/weekly-roundup")
+        rule, inherited = cycle_rule(self.rules, "trend-weekly", "weekly",
+                                     "content/tech/ai-security/weekly-roundup")
         self.assertFalse(inherited)
-        self.assertEqual(rule["sections"], 10)
+        self.assertEqual(rule["sections"], 7)
+        rule_app, _ = cycle_rule(self.rules, "trend-weekly", "weekly",
+                                 "content/tech/ai-application/weekly-roundup")
+        self.assertEqual(rule_app["sections"], 8)
         # 未指定业务线时回落类型规则（8 节）
         rule2, _ = cycle_rule(self.rules, "trend-weekly", "weekly")
         self.assertEqual(rule2["sections"], 8)
@@ -674,7 +679,7 @@ class TestCanonicalReportStyle(unittest.TestCase):
 
     def test_md2html_output_uses_canonical(self):
         from md2html import convert
-        md = _common.ROOT / "content/tech/security/dubai/sources/2026-11_baseline_report.md"
+        md = _common.ROOT / "content/tech/ai-security/security/dubai/sources/2026-11_baseline_report.md"
         html = convert(md)
         self.assertIn("--navy:#16324f", html)
         self.assertIn('<header class="report-head">', html)
@@ -684,7 +689,7 @@ class TestCanonicalReportStyle(unittest.TestCase):
     def test_md2html_output_has_feedback_entry(self):
         """T-06：md2html 生成的报告页脚统一含反馈入口（无 JS 依赖）。"""
         from md2html import convert
-        md = _common.ROOT / "content/tech/security/dubai/sources/2026-11_baseline_report.md"
+        md = _common.ROOT / "content/tech/ai-security/security/dubai/sources/2026-11_baseline_report.md"
         html = convert(md)
         self.assertIn('class="report-foot"', html)
         self.assertIn("反馈 / 纠错", html)
@@ -853,10 +858,12 @@ class TestLayout(unittest.TestCase):
         self.assertEqual(set(self.layout.regions), {"dubai"})
 
     def test_business_depth(self):
-        for theme in ("economy", "tech", "education", "international", "political", "society"):
+        for theme in ("economy", "education", "international", "political", "society"):
             self.assertEqual(_common.business_depth(theme), 3)
+        # tech 声明 category→subcategory→region（3 维）
+        self.assertEqual(_common.business_depth("tech"), 4)
 
-    def test_discovers_eleven_business_lines(self):
+    def test_discovers_business_lines(self):
         rels = {b.rel for b in _common.iter_business_dirs()}
         self.assertEqual(
             rels,
@@ -864,10 +871,11 @@ class TestLayout(unittest.TestCase):
                 "content/economy/dubai/apartment",
                 "content/economy/trends",
                 "content/economy/insight",
-                "content/tech/security/dubai",
-                "content/tech/weekly-roundup",
-                "content/tech/industry-research/dubai",
-                "content/tech/competitive-intelligence/dubai",
+                "content/tech/ai-security/security/dubai",
+                "content/tech/ai-security/weekly-roundup",
+                "content/tech/ai-security/industry-research/dubai",
+                "content/tech/ai-security/competitive-intelligence/dubai",
+                "content/tech/ai-application/weekly-roundup",
                 "content/education/education-system",
                 "content/international/international-relations",
                 "content/political/political-system",
@@ -897,18 +905,21 @@ class TestLayout(unittest.TestCase):
         self.assertEqual(by_rel["content/economy/trends"].property_type, "trends")
         self.assertEqual(by_rel["content/economy/insight"].region, "")
         self.assertEqual(by_rel["content/economy/insight"].property_type, "insight")
-        self.assertEqual(by_rel["content/tech/security/dubai"].region, "dubai")
-        self.assertEqual(by_rel["content/tech/security/dubai"].property_type, "security")
-        self.assertEqual(by_rel["content/tech/weekly-roundup"].region, "")
-        self.assertEqual(by_rel["content/tech/weekly-roundup"].property_type, "weekly-roundup")
+        self.assertEqual(by_rel["content/tech/ai-security/security/dubai"].region, "dubai")
+        self.assertEqual(by_rel["content/tech/ai-security/security/dubai"].property_type, "security")
+        self.assertEqual(by_rel["content/tech/ai-security/weekly-roundup"].region, "")
+        self.assertEqual(by_rel["content/tech/ai-security/weekly-roundup"].property_type, "weekly-roundup")
+        self.assertEqual(by_rel["content/tech/ai-application/weekly-roundup"].region, "")
+        self.assertEqual(by_rel["content/tech/ai-application/weekly-roundup"].property_type, "weekly-roundup")
 
     def test_optional_region_resolution(self):
         """region 为可选维度：缺省时 category 直接落位，存在时按声明顺序映射。"""
         by_rel = {b.rel: b for b in _common.iter_business_dirs()}
         self.assertEqual(by_rel["content/economy/trends"].category, "trends")
-        self.assertEqual(by_rel["content/tech/weekly-roundup"].category, "weekly-roundup")
-        self.assertEqual(by_rel["content/tech/security/dubai"].category, "security")
-        self.assertEqual(by_rel["content/tech/security/dubai"].region, "dubai")
+        self.assertEqual(by_rel["content/tech/ai-security/weekly-roundup"].category, "ai-security")
+        self.assertEqual(by_rel["content/tech/ai-application/weekly-roundup"].category, "ai-application")
+        self.assertEqual(by_rel["content/tech/ai-security/security/dubai"].category, "ai-security")
+        self.assertEqual(by_rel["content/tech/ai-security/security/dubai"].region, "dubai")
 
     def test_business_path_exists(self):
         for b in _common.iter_business_dirs():

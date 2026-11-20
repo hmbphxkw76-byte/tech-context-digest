@@ -208,18 +208,18 @@ class TestTechDataLayerThin(unittest.TestCase):
     """P1-14：两条 tech 业务线数据层补薄——台账 + 量化数据 + 官方来源快照落 raw。"""
 
     LINES = {
-        "content/tech/competitive-intelligence/dubai": {
-            "processed": "data/processed/tech/competitive-intelligence/dubai",
+        "content/tech/ai-security/competitive-intelligence/dubai": {
+            "processed": "data/processed/tech/ai-security/competitive-intelligence/dubai",
             "registry": "ai_cyber_competition_registry.md",
             "quant": ["quant_model_layer_share.csv",
                       "quant_enterprise_ai_deploy_spend.csv"],
-            "raw": "data/raw/tech/competitive-intelligence/dubai",
+            "raw": "data/raw/tech/ai-security/competitive-intelligence/dubai",
         },
-        "content/tech/industry-research/dubai": {
-            "processed": "data/processed/tech/industry-research/dubai",
+        "content/tech/ai-security/industry-research/dubai": {
+            "processed": "data/processed/tech/ai-security/industry-research/dubai",
             "registry": "ai_cybersecurity_indicator_registry.md",
             "quant": ["quant_ai_cyber_market_size.csv"],
-            "raw": "data/raw/tech/industry-research/dubai",
+            "raw": "data/raw/tech/ai-security/industry-research/dubai",
         },
     }
 
@@ -282,7 +282,7 @@ class TestDeadCodeCleanup(unittest.TestCase):
 
     def test_legacy_sources_kept(self):
         """存档目录有文档依据，不得当作规范外结构删除。"""
-        self.assertTrue((ROOT / "content/tech/weekly-roundup/sources/legacy").is_dir())
+        self.assertTrue((ROOT / "content/tech/ai-security/weekly-roundup/sources/legacy").is_dir())
 
     def test_registry_generator_kept(self):
         """v1 是 tracked xlsx 的生产者（v2 以其输出为输入），删除破坏可重放性。"""
@@ -291,11 +291,11 @@ class TestDeadCodeCleanup(unittest.TestCase):
 
     def test_docs_no_longer_claim_reports_legacy_exists(self):
         claims = {
-            "content/tech/weekly-roundup/README.md":
+            "content/tech/ai-security/weekly-roundup/README.md":
                 "历史报告与 md 源稿存于 `reports/legacy/`",
-            "content/tech/weekly-roundup/operations-guide.md":
+            "content/tech/ai-security/weekly-roundup/operations-guide.md":
                 "| 历史报告迁移 | `reports/legacy/{ai-security,ai-agent}/` |",
-            "data/processed/tech/weekly-roundup/ai_trend_ledger.md":
+            "data/processed/tech/ai-security/weekly-roundup/ai_security_trend_ledger.md":
                 "历史版本见 `reports/legacy/{ai-security,ai-agent}/`",
         }
         for rel, stale in claims.items():

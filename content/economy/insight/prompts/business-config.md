@@ -21,7 +21,7 @@
 {{READING_TIME}}         = 2026-11-15（本期读数时点）
 {{REPORT_VERSION}}       = v1.0（仅核心事实修正时升级）
 {{FRESHNESS_PRIORITY}}   = 最新官方页 > 上期值 > 预测值
-{{SOURCE_LANGUAGE_RULE}} = 仅英文（决策卡引用事实卡片与来源登记，均英文来源）
+{{SOURCE_LANGUAGE_RULE}} = 仅英文（本业务线为综合层，无外部来源）
 {{SOURCE_STRATEGY}}       = synthesis_only（无外部来源的综合层；不新采数据，只收敛仓库内已文档化事实，引用走事实卡片 / 来源登记指针）
 {{REPO_RAW_URL_BASE}}    = https://github.com/hmbphxkw76-byte/tech-context-digest/blob/main/content/economy/insight
 ```

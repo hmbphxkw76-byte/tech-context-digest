@@ -20,7 +20,7 @@
 {{OUTPUT_PATH}}          = reports/{{YYYY-Qn}}_quarterly.html
 {{READING_TIME}}         = 本期读数时点
 {{REPORT_VERSION}}       = 仅核心事实修正时升级
-{{SOURCE_LANGUAGE_RULE}} = 仅英文
+{{SOURCE_LANGUAGE_RULE}} = 仅英文（本业务线为综合层，无外部来源）
 ```
 
 ## 三、执行步骤

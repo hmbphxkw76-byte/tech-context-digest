@@ -372,7 +372,7 @@ python engine/tools/update_planner.py --project content/economy/dubai/apartment 
 - 任务状态：期望输出（如 `reports/2026-12_monthly.html`）已存在 → done，否则 pending；
   `--pending-only` 只留 pending。参数错误退出码 2。
 - **条件节拍**：提示词正文含 `<!-- report-output: none -->` 时，该周期不产出报告文件，规划器不派任务
-  （用于「核验型轻运行 / 无触发不启动新报告」的业务，如 `content/tech/security/dubai` 的月度核验）。
+  （用于「核验型轻运行 / 无触发不启动新报告」的业务，如 `content/tech/ai-security/security/dubai` 的月度核验）。
   判定见 `_common.prompt_produces_report()`。
 
 ### automation_status.py — 自动化状态与活跃度

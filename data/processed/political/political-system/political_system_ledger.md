@@ -52,7 +52,6 @@
 | 4 | 德国联邦议院 | P0 | https://www.bundestag.de/en | 已核验（入口） |
 | 5 | 英国议会 | P0 | https://www.parliament.uk/ | 已核验（入口） |
 | 6 | 美国国会 | P0 | https://www.congress.gov/ | 已核验（入口） |
-| 7 | 中国全国人大 | P0 | http://www.npc.gov.cn/ | 未核验（未抓取） |
 | 8 | V-Dem Institute / Dataset | P1 | https://www.v-dem.net/data/the-v-dem-dataset/ | 已核验 |
 | 9 | Transparency International · CPI | P1 | https://www.transparency.org/en/cpi | 已核验 |
 | 10 | UN E-Government Survey | P2 | https://publicadministration.un.org/egovkb/en-us/ | 已核验 |

@@ -8,10 +8,13 @@ engine/（引擎层：跨主题复用的模板 / 提示词 / 工具 / 质量 / �
 data/（资产层：raw / processed / assets）。
 
 业务线默认位于 content/<theme>/<维度段...>/，维度顺序由 layout.json 各主题自行声明：
-economy 为 region→category（地区优先），tech / education / international / political /
-society 为 category→region（细分优先）。region 为可选维度（theme 以 optional_dimensions
-声明）：业务线可省略 region 段，直接以 category 段落位（如 content/economy/trends、
-content/tech/weekly-roundup）；省略时剩余段按声明顺序剔除 region 后逐位映射。
+economy 为 region→category（地区优先），tech 为 category→subcategory→region（AI 安全 /
+AI 应用两大类 → 业务线 → 地区），education / international / political / society 为
+category→region（细分优先）。region 为可选维度（theme 以 optional_dimensions
+声明）：业务线可省略 region 段，直接以 category（+subcategory）段落位（如
+content/economy/trends、content/tech/ai-application/weekly-roundup）；省略时剩余段按声明
+顺序剔除 region 后逐位映射。theme 下允许存在不含业务配置的分组目录（如
+content/tech/ai-security），其层级深度须小于该主题维度数。
 无 region 维度的主题可按声明维度建。
 
 硬性规则：维度先后按主题声明，不得在未改 layout.json 的情况下倒置；新增主题须在
@@ -61,6 +64,8 @@ class Layout:
     regional_segment: str = ""
     theme_segments: dict[str, str] = field(default_factory=dict)
     optional_dimensions: dict[str, tuple[str, ...]] = field(default_factory=dict)
+    # theme -> {category 段: 中文名}（分组目录展示名，如 tech 的 ai-security → AI安全）
+    category_names: dict[str, dict[str, str]] = field(default_factory=dict)
     # 分类体系版本号（YYYY-MM-DD.<n>）与变更留痕；缺省空串 / 空元组表示未登记
     classification_version: str = ""
     classification_changelog: tuple[dict, ...] = ()
@@ -107,6 +112,10 @@ def load_layout() -> Layout:
         name: tuple(spec.get("optional_dimensions", ()))
         for name, spec in data.get("themes", {}).items()
     }
+    category_names = {
+        name: {str(k): str(v) for k, v in spec.get("category_names", {}).items()}
+        for name, spec in data.get("themes", {}).items()
+    }
     naming = data.get("naming", {})
     return Layout(
         root_reserved=frozenset(data.get("root_reserved", ())),
@@ -118,6 +127,7 @@ def load_layout() -> Layout:
         regional_segment=default_segment,
         theme_segments=theme_segments,
         optional_dimensions=optional_dimensions,
+        category_names=category_names,
         classification_version=str(data.get("classification_version", "")),
         classification_changelog=tuple(data.get("changelog", ())),
     )
@@ -199,7 +209,7 @@ def prompt_produces_report(prompt_path: Path) -> bool:
     """提示词是否产出报告文件。
 
     含 `<!-- report-output: none -->` 的提示词为条件节拍 / 核验型轻运行，
-    不产出报告文件（如 content/tech/security/dubai 的月度核验提示词）。
+    不产出报告文件（如 content/tech/ai-security/security/dubai 的月度核验提示词）。
     读取失败时按「产出」处理（不改变既有行为）。
     """
     try:

@@ -18,7 +18,7 @@
 {{SOURCE_REGISTRY_PATH}} = data/processed/economy/dubai/apartment/source_registry.json
 {{BASELINE_REPORT_PATH}} = reports/2026-11_baseline_report.html
 {{FRESHNESS_PRIORITY}}   = 最新官方页 > 上期值 > 预测值（本项目时效优先级）
-{{SOURCE_LANGUAGE_RULE}} = 仅英文（全部取自英文网站，严禁中文来源）
+{{SOURCE_LANGUAGE_RULE}} = 仅英文（严禁中文来源）
 {{REPO_RAW_URL_BASE}}    = https://github.com/hmbphxkw76-byte/tech-context-digest/blob/main/content/economy/dubai/apartment
 ```
 

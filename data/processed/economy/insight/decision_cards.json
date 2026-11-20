@@ -31,7 +31,7 @@
     },
     {
       "card_id": "DC-AI-SEC-01",
-      "line": "content/tech/security/dubai",
+      "line": "content/tech/ai-security/security/dubai",
       "conclusion": "AI 网安就业为卖方市场，AI 安全是结构性增量主线；人才供给是最紧约束。",
       "evidence_strength": "中",
       "trigger": "87% 企业招聘困难；平均填补周期 3–6 个月；AI 为最缺技能 41%",
@@ -45,7 +45,7 @@
     },
     {
       "card_id": "DC-AI-IND-01",
-      "line": "content/tech/industry-research/dubai",
+      "line": "content/tech/ai-security/industry-research/dubai",
       "conclusion": "AI 网安行业由主权 AI 基建 + 强制合规 + 威胁国家化三重驱动，交付以托管安全服务与主权云安全为主。",
       "evidence_strength": "中",
       "trigger": "ISR v3.1 强制合规（13 控制域）；Stargate UAE 首批 200MW 上线",
@@ -58,7 +58,7 @@
     },
     {
       "card_id": "DC-AI-CI-01",
-      "line": "content/tech/competitive-intelligence/dubai",
+      "line": "content/tech/ai-security/competitive-intelligence/dubai",
       "conclusion": "模型层高度集中（Anthropic + OpenAI 合计 86% 企业 LLM API 支出），通过 API 与产品能力向本地交付层传导。",
       "evidence_strength": "中",
       "trigger": "Menlo 2026-11 份额估算；企业 AI 部署支出 5.4x",
@@ -71,7 +71,7 @@
     },
     {
       "card_id": "DC-AI-TRD-01",
-      "line": "content/tech/weekly-roundup",
+      "line": "content/tech/ai-security/weekly-roundup",
       "conclusion": "AI 安全攻击面持续扩张（投毒 ASR 78%、沉睡特工、Agent 工具链投毒），红队与 Agent 安全为技术主线。",
       "evidence_strength": "强",
       "trigger": "微软投毒研究（90 条样本 → 78% ASR）；OWASP Agentic Top 10 发布",
