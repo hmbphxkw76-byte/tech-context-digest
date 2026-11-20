@@ -65,3 +65,28 @@
 
 - T-05 两处配套修正：`engine/vocabulary/prompts/education/prompt-skeleton.md` 去掉被 VD-03 误判的占位直角引号；`engine/tests/test_goal_alignment.py::test_empty_theme_detected` 改为合成用例（六主题现已全非空）。**核对结论**：均为达成验收所必需，未削弱检测逻辑。
 - T-04 修改 10 份历史报告 → `publish_fingerprint` 漂移属**预期**（内容变更），不构成「新问题」。
+
+## 6. 第三波（T-08 / T-09 / T-10）验证
+
+### 6.1 双向追溯
+
+| 方案条目 | 实施工件 | 验收证据 | 判定 |
+|---|---|---|---|
+| T-08 | `task/document-tier-b8f2d6a9` @ `09340df` | `test_source_check` 95 OK；`--only source_check` 0 `[E]`；抽样含 `document_tier` | 已闭环 |
+| T-09 | `task/uncertainty-confidence-c9a3e7b0` @ `940ab6c` | `test_decision_hub` 22 OK；规范 §2.4/§2.5；dubai 报告含 `confidence`；`--only decision_hub` 0 `[E]` | 已闭环 |
+| T-10 | `task/impact-tiering-d0b4f8c1` @ `7c6788b` | 规范 §七；5 条 business-config `impact_tier`；`test_info_density` 24 OK；`--only info_density` 0 `[E]` | 已闭环 |
+
+### 6.2 不引入新问题 · 回归结果
+
+| # | 回归项 | 结果 |
+|---|---|---|
+| R-REG-1 | 统一门禁 | 0 `[E]` / 8 `[W]`（新增 `[W]` 为可选字段覆盖率 / 历史项，已登记） |
+| R-REG-2 | 单元测试 | `Ran 789 tests … OK (skipped=1)` |
+| R-REG-3 | 指标体检 | measured 38；不达标仅 I-08；IGI-08 = 0.9946 |
+| R-REG-5 | 链接 | `check_links` 通过 |
+| R-REG-7 | 结构 / 页面 | `validate_layout` 通过；`page_build_check` 22/0E0W；`build_hub --check` 通过 |
+| R-REG-9 | 文档一致性 | naming / prompt_consistency / model_contract 0 警告 |
+
+### 6.3 执行方式说明
+
+第三波首派被中断，改用**续做**：新 Agent 进入原 worktree，先审查未提交的 partial 改动（T-08 核心代码 / T-09 近完整 / T-10 仅规范），再补全、验证、提交。合并冲突仅 `information-layering-spec.md` 版本记录一处，已合并为单行。

@@ -322,6 +322,19 @@
 
 **整合后回归（实测）**：`optimization_gate` 0 `[E]` / 6 `[W]`；`unittest discover` 763 OK（skipped=1）；`metric_registry` 38 项实测、不达标仅 I-08；`validate_layout` / `page_build_check`（22 通过 0E0W）/ `build_hub --check` / `check_links` 全通过。
 
+### 4.10 并发执行记录（2026-11-19 第三波）
+
+| 任务 | 分支 | 提交 | 状态 |
+|---|---|---|---|
+| T-08 | `task/document-tier-b8f2d6a9` | `09340df` | 已合并（`document_tier` / `statement_type` + 13 用例；修复 partial 中 A-01 行首误删） |
+| T-09 | `task/uncertainty-confidence-c9a3e7b0` | `940ab6c` | 已合并（四级判定规则 + `confidence` + 22 用例；dubai 报告 2 张决策卡含 confidence） |
+| T-10 | `task/impact-tiering-d0b4f8c1` | `7c6788b` | 已合并（§七 影响分级 + 5 条 business-config `impact_tier` + ID-09 + 7 用例） |
+
+> 第三波首派被中断，改用**续做**：新 Agent 进入原 worktree 审查 partial 改动后补全（T-08 核心代码、T-09 近完整、T-10 仅规范）。
+> 冲突：`information-layering-spec.md` 版本记录（T-09 / T-10 各加 v1.1 行）→ 合并为一行。
+
+**整合后回归（实测）**：`optimization_gate` 0 `[E]` / 8 `[W]`（新增 `[W]` 均为可选字段覆盖率 / 历史项，已登记）；`unittest discover` 789 OK（skipped=1）；`metric_registry` 38 项实测、不达标仅 I-08、IGI-08 = 0.9946；`validate_layout` / `page_build_check`（22 通过 0E0W）/ `build_hub --check` / `check_links` 全通过。
+
 ---
 
 ## 5. 验证对齐清单（确保对齐优化方案的验证清单）
@@ -362,9 +375,9 @@
 | T-05 | `terms.md` × 2（提交 `b601c80`） | `--only vocab_drift` 0 `[W]`；词条 113 条、check 0 警告 | **已闭环**（2026-11-19） |
 | T-06 | `build_hub.py` / 模板（提交 `861108b`） | `build_hub --check` 通过；反馈入口存在；消费指标草案 `probe` 入库 | **已闭环**（2026-11-19） |
 | T-07 | `validate_layout.py` / `layout.json`（提交 `99ca0f4`） | `test_tools` 120 OK；`validate_layout` 通过；`classification_version` 存在 | **已闭环**（2026-11-19） |
-| T-08 | `source_check.py` / registry | 单测；`document_tier` 校验 | 待执行 |
-| T-09 | 字典 / `decision_hub_check.py` | 单测；置信度字段 | 待执行 |
-| T-10 | 规范 / 模板 | 规范条款 + 模板字段 | 待执行 |
+| T-08 | `source_check.py` / registry（提交 `09340df`） | `test_source_check` 95 OK；`--only source_check` 0 `[E]`；抽样含 `document_tier` | **已闭环**（2026-11-19） |
+| T-09 | 字典 / `decision_hub_check.py`（提交 `940ab6c`） | `test_decision_hub` 22 OK；规范 §2.4/§2.5；dubai 报告含 `confidence`；`--only decision_hub` 0 `[E]` | **已闭环**（2026-11-19） |
+| T-10 | 规范 / 模板（提交 `7c6788b`） | 规范 §七 分级矩阵；5 条 business-config `impact_tier`；`test_info_density` 24 OK；`--only info_density` 0 `[E]` | **已闭环**（2026-11-19） |
 
 **B. 对齐判定规则**：
 - **全覆盖**：方案每条都有对应工件与证据；
