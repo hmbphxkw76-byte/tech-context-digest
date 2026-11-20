@@ -55,3 +55,12 @@
 - **#5 利率结构（B07 / B12）**：CBUAE 官方站可达，Base Rate 机制与 EIBOR 官方入口（Regulations PDF、Daily Liquidity Indicators xlsx）已核验；页面 JS 渲染，**静态抓取未取得 3M/6M/1Y 与 Base Rate 现值** → 维持 `open`，登记为解除路径。[Source: https://www.centralbank.ae/en/our-operations/monetary-policy-and-domestic-markets/, 2026]
 - **交叉印证（非官方）**：聚合站点录得 CBUAE 基准利率 2026-09-16 由 3.65% 升至 3.90%，与盲区 B07 描述方向一致；非官方一手，不满足消号条件。[Source: https://tradingeconomics.com/united-arab-emirates/interest-rate, 2026]
 - **结论**：本轮**无新增消号**；B01 / B02 / B03 / B15 与 B07 / B12 责任周期不变（2027-03 / 2026-12）。
+
+## 取数留痕（2026-11-20，E3 浏览器渲染取数）
+
+> 手段：妙手浏览器渲染（CBUAE / DLD 官方站为 JS 渲染页，静态抓取为空）+ 官方文件直取 + PDF 逐页文本提取。
+
+- **#7 利率期限结构（B12）→ 命中并消号**：CBUAE 官方 EIBOR Rates 页含日度期限结构表（O/N、1W、1M、3M、6M、1Y），页面标注「Last updated: Thursday 19 November 2026 12:15:20 PM」；已从 DOM 结构化抽取 2026-11 月 14 个定盘日（11-02 … 11-19），入库 `data/processed/economy/dubai/apartment/eibor_2026.xlsx`（新增 `November 2026` 工作表）。官方来源已在 `source_registry.json`（S-007 / S-028 / S-077）。[Source: https://centralbank.ae/en/forex-eibor/eibor-rates/, 2026]
+- **#3 空置 / #4 竣工（B01 / B03）→ 路径排除**：DLD 官方《Dubai Real Estate Market — Annual Data Review 2025》（54 页 / 13.2 MB PDF）正文已逐页提取，内容为交易量 / 价格 / 租金 / 投资者结构；`vacant` 仅指「vacant land（空地）」交易类别，**不含全市空置率序列**，亦**不含竣工量 / 新增供应** → 该解除路径排除。[Source: https://dubailand.gov.ae/en/open-data/research/dubai-real-estate-market-annual-data-review-2025/, 2026]
+- **#5 利率结构（B07）→ 部分命中**：CBUAE 官方明确 Base Rate 定义（anchored to Fed IORB）与机制，但**未公布现值数值**（仅 2020 年机制通知 Notice 3082/2020）；Daily Liquidity Indicators（2026-11-19 官方 xlsx，7 张表）无 Base Rate 字段 → 维持 `open`。[Source: https://www.centralbank.ae/en/our-operations/monetary-policy-and-domestic-markets/, 2026]
+- **结论**：**新增消号 1 项（B12）**，I-08 由 0/15 → **1/15 = 0.0667**；未消号盲区数 15 → **14**。
