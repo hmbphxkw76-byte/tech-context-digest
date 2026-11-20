@@ -38,6 +38,10 @@
     {"metric_id": "I-08", "name": "盲区消号率", "formula": "closed 盲区数 / 盲区总数", "threshold": ">=0.6", "severity": "P1", "detected_by": "TOOL", "owner": "audit+quality", "aliases": ["BS-04"]},
     {"metric_id": "I-09", "name": "版本读数时点标注率", "formula": "核验/收敛型报告含「读数时点」的报告数 / 核验/收敛型报告总数", "threshold": ">=1.0", "severity": "P1", "detected_by": "TOOL", "owner": "quality", "aliases": ["DC-05"]},
 
+    {"metric_id": "CF-01", "name": "决策卡被引用次数", "formula": "登记册 decision_cards.json 的 card_id 在报告正文出现的次数合计", "threshold": ">=1", "severity": "P2", "detected_by": "TOOL", "owner": "quality", "aliases": [], "note": "接线（2026-11-20，计数型）：编号取自 data/processed/**/decision_cards.json（决策卡单一事实源），引用 = 该编号在任一报告正文中出现（登记册自身不计入）；无登记册编号时标 probe。计数型指标，阈值 >=1 表示「决策卡已被报告复用」，不用于评判质量。"},
+    {"metric_id": "CF-02", "name": "纠错条目数", "formula": "消费端反馈台账中 kind=纠错 的条目数", "threshold": ">=1", "severity": "P2", "detected_by": "TOOL", "owner": "quality", "aliases": [], "note": "接线（2026-11-20，计数型）：台账 engine/audit/records/consumer-feedback.json（工具 engine/tools/consumer_feedback.py）。消费闭环未启动时为 0，如实呈现、不标 probe（计数型无分母）；阈值 >=1 表示「反馈入口已产生至少一条登记」。"},
+    {"metric_id": "CF-03", "name": "读者回访参与率", "formula": "有回访记录的报告数 / 报告总数", "threshold": ">=0.05", "severity": "P2", "detected_by": "TOOL", "owner": "quality", "aliases": [], "note": "接线（2026-11-20）：回访记录取自消费端反馈台账 kind=回访 的报告去重数；当前 0/20 = 0.0000，如实呈现消费闭环尚未启动，不伪造。"},
+
     {"metric_id": "IGI-01", "name": "主题覆盖率", "formula": "有业务线（business-config）的主题数 / layout.json 注册主题数", "threshold": ">=0.5", "severity": "P0", "detected_by": "TOOL", "owner": "goal-alignment", "aliases": []},
     {"metric_id": "IGI-02", "name": "业务线覆盖率", "formula": "有 ≥1 份正式报告的业务线数 / 已声明业务线数", "threshold": ">=0.8", "severity": "P0", "detected_by": "TOOL", "owner": "goal-alignment", "aliases": []},
     {"metric_id": "IGI-03", "name": "时效健康度", "formula": "最新报告期次距当前 ≤1 个节拍周期的业务线占比", "threshold": ">=0.8", "severity": "P1", "detected_by": "TOOL", "owner": "goal-alignment", "aliases": []},
@@ -47,14 +51,5 @@
     {"metric_id": "IGI-07", "name": "摘要合规率", "formula": "无 ID-04 越级（无推断/假设等级标记）的报告数 / 有决策摘要的报告数", "threshold": ">=1.0", "severity": "P0", "detected_by": "TOOL", "owner": "goal-alignment", "aliases": []},
     {"metric_id": "IGI-08", "name": "信息差指数", "formula": "1 − Σ w_i·(1 − IGI-i)，权重 0.25/0.15/0.15/0.15/0.10/0.10/0.10", "threshold": ">=0.8", "severity": "P0", "detected_by": "TOOL", "owner": "goal-alignment", "aliases": []}
   ],
-  "consumer_metrics_draft": {
-    "status": "probe",
-    "wired": false,
-    "note": "消费侧指标草案（T-06，2026-11-19）：仅登记口径，未接线测量、未改既有阈值，不进入 metric_coverage 的 38 项实测集合；反馈入口为静态链接 + data-feedback 占位（report_style.feedback_link），待读者回访流程接线。",
-    "metrics": [
-      {"metric_id": "CF-01", "name": "决策卡被引用次数", "formula": "决策卡编号（DC-…）在后续报告 / 台账 / 事实卡片中被引用的次数", "unit": "次", "status": "probe", "wired": false, "owner": "quality", "note": "草案：需先定义引用口径（正文 [DC-…] / 台账指针），再接线统计。"},
-      {"metric_id": "CF-02", "name": "纠错条目数", "formula": "经反馈入口提交并登记的纠错条目数", "unit": "条", "status": "probe", "wired": false, "owner": "quality", "note": "草案：依赖读者反馈闭环（issue 登记），未接线。"},
-      {"metric_id": "CF-03", "name": "读者回访参与率", "formula": "有回访记录的报告数 / 报告总数", "unit": "%", "status": "probe", "wired": false, "owner": "quality", "note": "草案：回访流程待设计，未接线。"}
-    ]
-  }
+  "consumer_metrics_note": "消费侧指标 CF-01…CF-03 已于 2026-11-20 由 T-06 草案转为正式指标并接线，见上方 metrics 数组。消费端反馈台账：engine/audit/records/consumer-feedback.json（工具 engine/tools/consumer_feedback.py）；报告 / hub 页脚入口：engine/tools/report_style.py::feedback_link。"
 }

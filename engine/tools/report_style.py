@@ -424,6 +424,15 @@ def feedback_link(label: str = "反馈 / 纠错") -> str:
             f'href="{FEEDBACK_URL}" target="_blank" rel="noopener">{label}</a>')
 
 
+def report_foot() -> str:
+    """返回 canonical 报告页脚（``.report-foot``，置于 ``</main>`` 之后）。
+
+    单一事实源：监控通用规范 §5 要求每份报告页脚含「反馈 / 纠错」入口。
+    由 ``restyle_reports.py --add-footer`` 与生成器共用，避免各处手写。
+    """
+    return f'<footer class="report-foot"><p>{feedback_link()}</p></footer>'
+
+
 def style_block() -> str:
     """返回 <style> 块（供报告内联，满足自包含要求）。"""
     return f"<style>\n{CANONICAL_CSS}\n</style>"

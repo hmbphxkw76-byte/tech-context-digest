@@ -690,6 +690,42 @@ class TestCanonicalReportStyle(unittest.TestCase):
         self.assertIn("反馈 / 纠错", html)
         self.assertIn('data-feedback="consumer-feedback-v1"', html)
 
+    def test_all_reports_have_canonical_footer(self):
+        """监控通用规范 §5：每份报告页脚（.report-foot）含「反馈 / 纠错」入口。"""
+        for t in collect_topics():
+            for r in t.reports:
+                text = (_common.ROOT / r.path).read_text(encoding="utf-8", errors="replace")
+                self.assertIn('class="report-foot"', text, f"{r.path} 应含 canonical 页脚")
+                self.assertIn('data-feedback="consumer-feedback-v1"', text,
+                              f"{r.path} 页脚应含反馈入口")
+
+
+class TestReportFooterMigration(unittest.TestCase):
+    """restyle_reports.ensure_footer / --add-footer：报告页脚迁移幂等且单一事实源。"""
+
+    def test_insert_after_main(self):
+        from restyle_reports import ensure_footer
+        src = "<main class=\"wrap\"><p>x</p></main>\n</body>"
+        out = ensure_footer(src)
+        self.assertIn('class="report-foot"', out)
+        self.assertLess(out.index("</main>"), out.index('class="report-foot"'))
+
+    def test_fallback_to_body(self):
+        from restyle_reports import ensure_footer
+        out = ensure_footer("<p>x</p></body>")
+        self.assertLess(out.index('class="report-foot"'), out.index("</body>"))
+
+    def test_idempotent(self):
+        from restyle_reports import ensure_footer
+        once = ensure_footer("<main></main></body>")
+        self.assertEqual(ensure_footer(once), once)
+
+    def test_footer_is_single_source(self):
+        """报告页脚由 report_style.report_foot() 提供，md2html 不手写第二份。"""
+        import md2html
+        from report_style import report_foot
+        self.assertIn(report_foot(), md2html.FOOTER)
+
 
 class TestPageBuildCheck(unittest.TestCase):
     """PAGE-BUILD-SPEC 门禁校验器。"""

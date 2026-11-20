@@ -161,7 +161,7 @@ def igi_03_freshness(today: date | None = None) -> tuple[float, dict]:
 
 
 def igi_04_source_coverage() -> tuple[float, dict]:
-    from source_check import extract_urls, load_registry, normalize_url
+    from source_check import extract_urls, is_self_reference, load_registry, normalize_url
 
     matched = total = 0
     detail = {}
@@ -176,6 +176,9 @@ def igi_04_source_coverage() -> tuple[float, dict]:
             text = (ROOT / ref.rel).read_text(encoding="utf-8", errors="replace")
             urls = {normalize_url(u) for u in extract_urls(text)}
             urls.discard("")
+            # 本仓库自引用（报告页脚 / hub 页脚的「反馈 / 纠错」入口、内部指针）
+            # 不是外部来源，不计入分母（与 source_check R6 排除自引用同口径）。
+            urls = {u for u in urls if not is_self_reference(u)}
             if not urls:
                 continue
             hit = len(urls & known)

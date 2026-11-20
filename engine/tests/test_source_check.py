@@ -405,6 +405,18 @@ class TestR6DeadLink(unittest.TestCase):
                                            {"dead_urls": {url}, "r6_strict": True})
         self.assertFalse(any("R1" in msg or "R6" in msg for _lvl, msg in issues))
 
+    def test_empty_registry_self_reference_only_is_not_r1_error(self):
+        """空登记报告仅含自引用（报告页脚反馈入口）时，R1 不得报 E。
+
+        反馈入口为静态链接（report_style.feedback_link），是 UI 元素而非外部来源；
+        综合层（synthesis_only）在此情形下应完全静默。
+        """
+        url = ("https://github.com/hmbphxkw76-byte/tech-context-digest/issues/new"
+               "?title=%E5%8F%8D%E9%A6%88%20/%20%E7%BA%A0%E9%94%99")
+        issues = source_check.check_report(f'<a href="{url}">反馈 / 纠错</a>', {},
+                                           {"source_strategy": "synthesis_only"})
+        self.assertFalse(any("R1" in msg for _lvl, msg in issues))
+
 
 class TestBusinessRelFor(unittest.TestCase):
     def test_derives_business_line_from_report_path(self):

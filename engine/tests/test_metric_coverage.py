@@ -2,7 +2,7 @@
 """指标实测覆盖测试（METRIC-COVERAGE v1.0，批次 B）。
 
 锁定：
-- `metric_coverage.measure()` 覆盖字典全部 38 项，且 TOOL 指标全部为 measured / probe；
+- `metric_coverage.measure()` 覆盖字典全部 41 项，且 TOOL 指标全部为 measured / probe；
 - 覆盖率报告把未接线项显式列为 gap（不静默跳过）；
 - `metric_registry audit --coverage` 输出覆盖与缺口；
 - 2026-11-19 口径：R-03 排除来源/链接段落；L-03 升级为报告 ↔ business-config ↔
@@ -522,6 +522,43 @@ class TestN6MechanicalProxies(unittest.TestCase):
         value, detail = mc.a03_combined({"x.html": "<p>P01 1</p>"})
         self.assertIn("回退代理", detail)
         self.assertAlmostEqual(value, 1.0, places=4)
+
+
+class TestConsumerMetricsCoverage(unittest.TestCase):
+    """CF-01…CF-03 消费侧接线（2026-11-20）。"""
+
+    def test_cf01_counts_registry_card_references(self):
+        value, detail = mc.cf01_card_references(mc._reports_text())
+        self.assertIsNotNone(value)
+        self.assertGreater(value, 0.0)
+        self.assertIn("登记册决策卡", detail)
+
+    def test_cf01_probe_without_registry(self):
+        with mock.patch.object(mc, "_decision_card_ids", return_value=set()):
+            value, detail = mc.cf01_card_references({})
+        self.assertIsNone(value)
+        self.assertIn("probe", detail)
+
+    def test_cf02_honest_zero(self):
+        value, detail = mc.cf02_corrections()
+        self.assertEqual(value, 0.0)
+        self.assertIn("如实呈现", detail)
+
+    def test_cf03_zero_when_no_revisit(self):
+        reports = mc._reports_text()
+        value, detail = mc.cf03_revisit_rate(reports)
+        self.assertEqual(value, 0.0)
+        self.assertIn(f"0/{len(reports)}", detail)
+
+    def test_cf03_probe_without_reports(self):
+        value, detail = mc.cf03_revisit_rate({})
+        self.assertIsNone(value)
+        self.assertIn("probe", detail)
+
+    def test_cf_metrics_in_measure(self):
+        meas = mc.measure()
+        for mid in ("CF-01", "CF-02", "CF-03"):
+            self.assertEqual(meas[mid]["status"], "measured")
 
 
 if __name__ == "__main__":
