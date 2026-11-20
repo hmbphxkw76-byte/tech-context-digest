@@ -268,7 +268,19 @@
       "evidence": {
         "report": "content/tech/security/dubai/reports/2026-11_baseline_report.html",
         "business_line": "content/tech/security/dubai",
-        "plans": [],
+        "plans": [
+          {
+            "slug": "uncertainty-confidence",
+            "plan": "engine/audit/records/tasks/uncertainty-confidence/plan.json",
+            "tasks": "engine/audit/records/tasks/uncertainty-confidence/tasks.json",
+            "risks": "engine/audit/records/tasks/uncertainty-confidence/risks.json",
+            "reports": [
+              "content/tech/security/dubai/reports/2026-11_baseline_report.html"
+            ],
+            "task_count": 1,
+            "risk_count": 1
+          }
+        ],
         "gate": {
           "entry": "engine/tools/optimization_gate.py",
           "probe": true

@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 """决策交付门禁（DECISION-DELIVERY-SPEC v1.0）单元测试。
 
-覆盖 decision_hub_check：DC-01 决策卡字段、DC-02 行动协议、DC-03 场景切片、DC-04 ex-ante、DC-08 证据强度一致性。
+覆盖 decision_hub_check：DC-01 决策卡字段、DC-02 行动协议、DC-03 场景切片、DC-04 ex-ante、DC-08 证据强度一致性、DC-09 置信度字段。
 运行：python -m unittest discover -s engine/tests -v
 """
 from __future__ import annotations
@@ -85,6 +85,50 @@ class TestDecisionHub(unittest.TestCase):
             self.skipTest("decision-hub 报告不存在")
         errors, warnings, lines = m.run(str(p.relative_to(ROOT)), "2026-12")
         self.assertEqual(errors, 0, lines)
+
+
+class TestConfidenceField(unittest.TestCase):
+    """DC-09：决策卡 confidence 字段（数值 [0,1] 或 Kent 词表），恒为 [W]。"""
+
+    @staticmethod
+    def _card(conf=None):
+        conf_html = "" if conf is None else f'<div><span class="k">置信度：</span>{conf}</div>'
+        return ('<div class="decision-card">'
+                '<div class="dc-head"><span class="dc-title">DC-X-01 · x</span>'
+                '<span class="ev-mid">证据强度：中</span></div>'
+                '<div class="dc-grid">'
+                '<div><span class="k">结论：</span>c</div>'
+                '<div><span class="k">反向证据：</span>r</div>'
+                f'{conf_html}'
+                '</div></div>')
+
+    def test_missing_confidence_warns(self):
+        rules = {r for r, _ in m.check_text(self._card(), "content/economy/insight")}
+        self.assertIn("DC-09", rules)
+
+    def test_numeric_confidence_ok(self):
+        rules = {r for r, _ in m.check_text(self._card("0.55（中）"), "content/economy/insight")}
+        self.assertNotIn("DC-09", rules)
+
+    def test_kent_word_confidence_ok(self):
+        for word in ("高", "中高", "中", "中低", "低"):
+            rules = {r for r, _ in m.check_text(self._card(word), "content/economy/insight")}
+            self.assertNotIn("DC-09", rules, word)
+
+    def test_approx_numeric_confidence_ok(self):
+        rules = {r for r, _ in m.check_text(self._card("约 0.55"), "content/economy/insight")}
+        self.assertNotIn("DC-09", rules)
+
+    def test_invalid_confidence_warns(self):
+        for bad in ("约 70%", "1.5", "2", "-0.2", "很高"):
+            rules = {r for r, _ in m.check_text(self._card(bad), "content/economy/insight")}
+            self.assertIn("DC-09", rules, bad)
+
+    def test_dc09_nonblocking_even_for_new_report(self):
+        self.assertEqual(m._level("DC-09", True), "W")
+        self.assertEqual(m._level("DC-09", False), "W")
+        self.assertEqual(m._level("DC-01", True), "E")
+        self.assertEqual(m._level("DC-01", False), "W")
 
 
 class TestEvidenceStrengthConsistency(unittest.TestCase):

@@ -6,8 +6,9 @@
     DC-03 场景切片：投资决策 / 就业决策 / 政策制定
     DC-04 ex-ante 标注：信号灯 / 阈值处含「预校准（ex-ante）」
     DC-08 证据强度一致性：决策卡「证据强度」与支撑事实卡 level 推导结果一致，且与台账一致
+    DC-09 置信度字段：决策卡含「置信度」（数值 [0,1] 或 Kent 词表）
 
-新报告缺项 = [E]；历史报告 = [W]。退出码 0/1/2。
+新报告缺项 = [E]；历史报告 = [W]。DC-09 恒为 [W]（不阻断，待全部新报告回填后升级）。退出码 0/1/2。
 
 用法：
     python engine/tools/decision_hub_check.py
@@ -39,6 +40,13 @@ _CARD_KEYS = ("结论", "证据强度", "触发条件", "反向证据", "信息�
 # dc-head 或报告其他章节，故不做卡片级强制）
 _CARD_LEVEL_KEYS = ("结论", "证据强度", "反向证据")
 _CARD_FIELD_RE = re.compile(r'<span class="k">([^<]+)：</span>(.*?)</div>', re.DOTALL)
+# DC-09 置信度：数值 [0,1] 或 Kent 词表（高 / 中高 / 中 / 中低 / 低）
+_CONF_WORDS = ("高", "中高", "中", "中低", "低")
+_CONF_NUM_RE = re.compile(r"-?\d+(?:\.\d+)?")
+# 词表：允许「约 / 大约 / 大概 / 接近」限定词，词后接非中文字符（括号 / 破折号 / 结束）
+_CONF_WORD_RE = re.compile(r"^(?:约|大约|大概|接近)?(高|中高|中|中低|低)(?:$|[^\u4e00-\u9fff])")
+# 恒为 [W] 的规则（不阻断；新报告升级 [E] 需先回填全部新报告）
+_NONBLOCKING_RULES = frozenset({"DC-09"})
 _CARD_HEAD_RE = re.compile(
     r'<span class="dc-title">([^<]+)</span><span class="ev-\w+">证据强度：(\S+?)</span>')
 _FC_REF_RE = re.compile(r"\[FC-[A-Z]+-\d+\]")
@@ -84,6 +92,28 @@ def _blocks(text: str, start_re: re.Pattern) -> list[str]:
             for i, m in enumerate(ms)]
 
 
+def _conf_valid(value: str) -> bool:
+    """置信度取值合法：数值 [0,1]（可保留两位小数），或 Kent 词表词（可数值 + 词并列）。
+
+    取字段中**首个数值**判定区间（避免说明文字中的年份 / 口径数字干扰）；
+    无数值时按 Kent 词表判定。超出 [0,1]（如 1.5、70%、-0.2）判非法。
+    """
+    v = _TAG_RE.sub("", value or "").strip()
+    if not v:
+        return False
+    m = _CONF_NUM_RE.search(v)
+    if m:
+        return 0.0 <= float(m.group()) <= 1.0
+    return bool(_CONF_WORD_RE.match(v))
+
+
+def _level(rule: str, is_new: bool) -> str:
+    """规则级别：DC-09 恒为 [W]；其余新报告 [E]、历史报告 [W]。"""
+    if rule in _NONBLOCKING_RULES:
+        return "W"
+    return "E" if is_new else "W"
+
+
 def check_text(text: str, business_line: str = "") -> list[tuple[str, str]]:
     out: list[tuple[str, str]] = []
     text = _strip_noise(text)
@@ -102,6 +132,18 @@ def check_text(text: str, business_line: str = "") -> list[tuple[str, str]]:
             if bad:
                 out.append(("DC-01", f"第 {'、'.join(map(str, bad))} 张决策卡缺卡片级字段"
                                     f"（{'、'.join(_CARD_LEVEL_KEYS)}）"))
+
+    # DC-09 置信度字段（逐卡校验；恒为 [W]，不阻断）
+    cards = _blocks(text, _CARD_RE)
+    if cards:
+        conf_bad = []
+        for i, c in enumerate(cards):
+            fields = {k: v for k, v in _CARD_FIELD_RE.findall(c)}
+            if not _conf_valid(fields.get("置信度", "")):
+                conf_bad.append(i + 1)
+        if conf_bad:
+            out.append(("DC-09", f"第 {'、'.join(map(str, conf_bad))} 张决策卡缺置信度字段或取值非法"
+                                f"（confidence ∈ [0,1] 或 Kent 词表：{'/'.join(_CONF_WORDS)}）"))
 
     # DC-02 行动协议（含「可执行启示 / 行动 / 行动项」的报告）
     if any(k in text for k in ("可执行启示", "行动项", "行动协议", "立即行动", "持续观察")):
@@ -258,7 +300,7 @@ def run(only_file: str | None, gate: str) -> tuple[int, int, list[str]]:
             continue
         is_new = bool(period) and _period_key(period) >= _period_key(gate)
         for rule, msg in findings:
-            level = "E" if is_new else "W"
+            level = _level(rule, is_new)
             if level == "E":
                 errors += 1
             else:
