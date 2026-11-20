@@ -1,0 +1,14 @@
+[
+  {
+    "description": "指纹重采掩盖真实内容漂移",
+    "id": "R-1",
+    "mitigation": "先核验 git diff origin/main -- content/ 为空（已核验）",
+    "owner": ""
+  },
+  {
+    "description": "audit.yml 变更引入 CI 行为变化",
+    "id": "R-2",
+    "mitigation": "照抄 html-sync 既有步骤，不新增逻辑",
+    "owner": ""
+  }
+]
