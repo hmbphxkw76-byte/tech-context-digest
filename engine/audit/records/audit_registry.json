@@ -2100,6 +2100,162 @@
           "audit_id": ""
         }
       }
+    },
+    "content/tech/ai-security/competitive-intelligence/dubai/reports/2026-12_baseline_report.html": {
+      "title": "迪拜（阿联酋）AI 网安竞争格局 · 首期基线报告 · 2026-12",
+      "kind": "business",
+      "category": "report",
+      "business_line": "content/tech/ai-security/competitive-intelligence/dubai",
+      "status": "in-review",
+      "stages": {
+        "draft": true,
+        "initial": true,
+        "second": false,
+        "final": false
+      },
+      "mark": true,
+      "first_seen_at": "2026-11-20",
+      "evidence": {
+        "report": "content/tech/ai-security/competitive-intelligence/dubai/reports/2026-12_baseline_report.html",
+        "business_line": "content/tech/ai-security/competitive-intelligence/dubai",
+        "plans": [],
+        "gate": {
+          "entry": "engine/tools/optimization_gate.py",
+          "probe": true
+        },
+        "audit": {
+          "review": "engine/audit/records/reviews/content-tech-ai-security-competitive-intelligence-dubai-reports-2026-12-baseline-report-html.json",
+          "status": "in-review",
+          "stages": {
+            "draft": true,
+            "initial": true,
+            "second": false,
+            "final": false
+          },
+          "mark_level": "pre",
+          "audit_id": "AUD-2026-11-20-001"
+        }
+      },
+      "audit_id": "AUD-2026-11-20-001",
+      "mark_level": "pre",
+      "audited_at": "2026-11-20T12:36:03+00:00"
+    },
+    "content/tech/ai-security/competitive-intelligence/dubai/reports/2026-12_monthly.html": {
+      "title": "迪拜（阿联酋）AI 网安竞争格局 · 月度更新报告 · 2026-12",
+      "kind": "business",
+      "category": "report",
+      "business_line": "content/tech/ai-security/competitive-intelligence/dubai",
+      "status": "in-review",
+      "stages": {
+        "draft": true,
+        "initial": true,
+        "second": false,
+        "final": false
+      },
+      "mark": true,
+      "first_seen_at": "2026-11-20",
+      "evidence": {
+        "report": "content/tech/ai-security/competitive-intelligence/dubai/reports/2026-12_monthly.html",
+        "business_line": "content/tech/ai-security/competitive-intelligence/dubai",
+        "plans": [],
+        "gate": {
+          "entry": "engine/tools/optimization_gate.py",
+          "probe": true
+        },
+        "audit": {
+          "review": "engine/audit/records/reviews/content-tech-ai-security-competitive-intelligence-dubai-reports-2026-12-monthly-html.json",
+          "status": "in-review",
+          "stages": {
+            "draft": true,
+            "initial": true,
+            "second": false,
+            "final": false
+          },
+          "mark_level": "pre",
+          "audit_id": "AUD-2026-11-20-002"
+        }
+      },
+      "audit_id": "AUD-2026-11-20-002",
+      "mark_level": "pre",
+      "audited_at": "2026-11-20T12:36:03+00:00"
+    },
+    "content/tech/ai-security/industry-research/dubai/reports/2026-12_baseline_report.html": {
+      "title": "迪拜（阿联酋）AI 网安行业 · 首期基线报告 · 2026-12",
+      "kind": "business",
+      "category": "report",
+      "business_line": "content/tech/ai-security/industry-research/dubai",
+      "status": "in-review",
+      "stages": {
+        "draft": true,
+        "initial": true,
+        "second": false,
+        "final": false
+      },
+      "mark": true,
+      "first_seen_at": "2026-11-20",
+      "evidence": {
+        "report": "content/tech/ai-security/industry-research/dubai/reports/2026-12_baseline_report.html",
+        "business_line": "content/tech/ai-security/industry-research/dubai",
+        "plans": [],
+        "gate": {
+          "entry": "engine/tools/optimization_gate.py",
+          "probe": true
+        },
+        "audit": {
+          "review": "engine/audit/records/reviews/content-tech-ai-security-industry-research-dubai-reports-2026-12-baseline-report-html.json",
+          "status": "in-review",
+          "stages": {
+            "draft": true,
+            "initial": true,
+            "second": false,
+            "final": false
+          },
+          "mark_level": "pre",
+          "audit_id": "AUD-2026-11-20-003"
+        }
+      },
+      "audit_id": "AUD-2026-11-20-003",
+      "mark_level": "pre",
+      "audited_at": "2026-11-20T12:36:03+00:00"
+    },
+    "content/tech/ai-security/security/dubai/reports/2026-11_baseline_report.html": {
+      "title": "迪拜（阿联酋）AI 网安就业 · 首期基线报告 · 2026-11",
+      "kind": "business",
+      "category": "report",
+      "business_line": "content/tech/ai-security/security/dubai",
+      "status": "in-review",
+      "stages": {
+        "draft": true,
+        "initial": true,
+        "second": false,
+        "final": false
+      },
+      "mark": true,
+      "first_seen_at": "2026-11-20",
+      "evidence": {
+        "report": "content/tech/ai-security/security/dubai/reports/2026-11_baseline_report.html",
+        "business_line": "content/tech/ai-security/security/dubai",
+        "plans": [],
+        "gate": {
+          "entry": "engine/tools/optimization_gate.py",
+          "probe": true
+        },
+        "audit": {
+          "review": "engine/audit/records/reviews/content-tech-ai-security-security-dubai-reports-2026-11-baseline-report-html.json",
+          "status": "in-review",
+          "stages": {
+            "draft": true,
+            "initial": true,
+            "second": false,
+            "final": false
+          },
+          "mark_level": "pre",
+          "audit_id": "AUD-2026-11-20-004"
+        }
+      },
+      "audit_id": "AUD-2026-11-20-004",
+      "mark_level": "pre",
+      "audited_at": "2026-11-20T12:36:03+00:00"
     }
   }
 }
