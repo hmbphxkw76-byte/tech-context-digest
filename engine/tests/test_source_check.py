@@ -451,31 +451,34 @@ class TestR8RegistryFields(unittest.TestCase):
     def test_valid_entry_has_no_findings(self):
         reg = _reg({"source_id": "S1", "tier": 1, "verify_status": "verified",
                     "updated": "2026-11-18",
-                    "evidence": {"method": "manual", "snapshot_date": "2026-11-18"}})
+                    "evidence": {"method": "manual", "snapshot_date": "2026-11-18"},
+                    "document_tier": "official_release", "statement_type": "fact"})
         self.assertEqual(source_check.check_registry_fields(reg), [])
 
     def test_unverifiable_is_allowed(self):
         reg = _reg({"source_id": "S1", "tier": 2, "verify_status": "unverifiable",
                     "updated": "2026-11-18",
-                    "evidence": {"method": "web_fetch", "snapshot_date": "2026-11-18"}})
+                    "evidence": {"method": "web_fetch", "snapshot_date": "2026-11-18"},
+                    "document_tier": "industry_report", "statement_type": "restatement"})
         self.assertEqual(source_check.check_registry_fields(reg), [])
 
     def test_illegal_status_and_missing_updated_warn(self):
         reg = _reg({"source_id": "S1", "tier": 1, "verify_status": "待核实"})
         issues = source_check.check_registry_fields(reg)
         self.assertTrue(all(lvl == "W" for lvl, _ in issues))
-        # verify_status 非法 + updated 缺失 + evidence 覆盖汇总（缺失不阻断）
-        self.assertEqual(len(issues), 3)
+        # verify_status 非法 + updated 缺失 + evidence 覆盖汇总 + document_tier 覆盖汇总（缺失不阻断）
+        self.assertEqual(len(issues), 4)
         self.assertTrue(any("verify_status" in msg for _, msg in issues))
         self.assertTrue(any("updated" in msg for _, msg in issues))
         self.assertTrue(any("evidence 覆盖" in msg for _, msg in issues))
+        self.assertTrue(any("document_tier 覆盖" in msg for _, msg in issues))
 
     def test_malformed_updated_warns(self):
         reg = _reg({"source_id": "S1", "tier": 1, "verify_status": "verified",
                     "updated": "2026/11/18"})
         issues = source_check.check_registry_fields(reg)
-        # updated 非法 + evidence 覆盖汇总
-        self.assertEqual(len(issues), 2)
+        # updated 非法 + evidence 覆盖汇总 + document_tier 覆盖汇总
+        self.assertEqual(len(issues), 3)
         self.assertTrue(any("updated" in msg for _, msg in issues))
 
     def test_repo_registries_are_clean(self):
@@ -491,7 +494,7 @@ class TestR8RegistryFields(unittest.TestCase):
             found = True
             reg = json.loads(Path(f).read_text(encoding="utf-8"))
             issues = [msg for _, msg in source_check.check_registry_fields(reg)
-                       if "evidence 覆盖" not in msg]
+                       if "evidence 覆盖" not in msg and "document_tier 覆盖" not in msg]
             self.assertEqual(issues, [], f)
         self.assertTrue(found, "未找到任何 source_registry.json")
 
@@ -503,7 +506,8 @@ class TestEvidenceField(unittest.TestCase):
         reg = _reg({"source_id": "S1", "tier": 1, "verify_status": "verified",
                     "updated": "2026-11-18",
                     "evidence": {"method": "web_fetch", "snapshot_date": "2026-11-18",
-                                "archive_hash": "a" * 64, "note": "已抓取正文"}})
+                                "archive_hash": "a" * 64, "note": "已抓取正文"},
+                    "document_tier": "primary_data", "statement_type": "fact"})
         issues = source_check.check_registry_fields(reg)
         self.assertEqual(issues, [])
 
@@ -545,9 +549,13 @@ class TestEvidenceField(unittest.TestCase):
         )
         issues = source_check.check_registry_fields(reg)
         self.assertTrue(all(lvl == "W" for lvl, _ in issues))
-        self.assertEqual(len(issues), 1)
-        self.assertIn("1/2", issues[0][1])
-        self.assertIn("不阻断", issues[0][1])
+        # evidence 覆盖汇总 + document_tier 覆盖汇总（均缺失不阻断）
+        self.assertEqual(len(issues), 2)
+        ev_msgs = [msg for _, msg in issues if "evidence 覆盖" in msg]
+        self.assertEqual(len(ev_msgs), 1)
+        self.assertIn("1/2", ev_msgs[0])
+        self.assertIn("不阻断", ev_msgs[0])
+        self.assertTrue(any("document_tier 覆盖" in msg for _, msg in issues))
 
     def test_coverage_stats(self):
         reg = _reg(
@@ -719,6 +727,108 @@ class TestProbeExemptions(unittest.TestCase):
             ["https://dead.example/a"], opener=Opener(),
             exemptions={source_check.normalize_url("https://gisec.ae"): {}})
         self.assertEqual(dead, {source_check.normalize_url("https://dead.example/a")})
+
+
+class TestDocumentTier(unittest.TestCase):
+    """T-08：document_tier / statement_type 可选字段——取值合法性 / 机构上限一致性 / 覆盖率。"""
+
+    MASTER = {"institutions": [
+        {"name": "IMF", "tier": 1, "aliases": []},
+        {"name": "Gartner", "tier": 2, "aliases": []},
+        {"name": "Portal", "tier": 3, "aliases": []},
+        {"name": "News", "tier": 4, "aliases": []},
+    ]}
+
+    def _entry(self, **kw):
+        base = {"source_id": "S1", "tier": 1, "verify_status": "verified",
+                "updated": "2026-11-18",
+                "evidence": {"method": "manual", "snapshot_date": "2026-11-18"}}
+        base.update(kw)
+        return base
+
+    def test_valid_fields_have_no_finding(self):
+        reg = _reg(self._entry(publisher="Gartner", document_tier="industry_report",
+                               statement_type="restatement"))
+        self.assertEqual(source_check.check_registry_fields(reg, {"master": self.MASTER}), [])
+
+    def test_illegal_document_tier_warns_only(self):
+        reg = _reg(self._entry(document_tier="一手数据"))
+        issues = source_check.check_registry_fields(reg, {"master": self.MASTER})
+        self.assertTrue(all(lvl == "W" for lvl, _ in issues))
+        self.assertTrue(any("document_tier" in msg and "非法" in msg for _, msg in issues))
+
+    def test_illegal_statement_type_warns_only(self):
+        reg = _reg(self._entry(statement_type="事实"))
+        issues = source_check.check_registry_fields(reg, {"master": self.MASTER})
+        self.assertTrue(all(lvl == "W" for lvl, _ in issues))
+        self.assertTrue(any("statement_type" in msg and "非法" in msg for _, msg in issues))
+
+    def test_document_tier_above_tier4_ceiling_warns(self):
+        """tier 4 媒体转述机构上限 media：不得标 primary_data / official_release / industry_report。"""
+        for dt in ("primary_data", "official_release", "industry_report", "opinion"):
+            reg = _reg(self._entry(publisher="News", tier=4, document_tier=dt))
+            issues = source_check.check_registry_fields(reg, {"master": self.MASTER})
+            self.assertTrue(any("高于机构 tier=4" in msg for _, msg in issues), dt)
+
+    def test_document_tier_at_tier4_ceiling_passes(self):
+        reg = _reg(self._entry(publisher="News", tier=4, document_tier="media"))
+        issues = source_check.check_registry_fields(reg, {"master": self.MASTER})
+        self.assertFalse(any("高于机构 tier" in msg for _, msg in issues))
+
+    def test_document_tier_above_tier3_ceiling_warns(self):
+        """tier 3 挂牌门户上限 media/opinion。"""
+        for dt in ("primary_data", "official_release", "industry_report"):
+            reg = _reg(self._entry(publisher="Portal", tier=3, document_tier=dt))
+            issues = source_check.check_registry_fields(reg, {"master": self.MASTER})
+            self.assertTrue(any("高于机构 tier=3" in msg for _, msg in issues), dt)
+
+    def test_tier3_ceiling_media_and_opinion_pass(self):
+        for dt in ("media", "opinion"):
+            reg = _reg(self._entry(publisher="Portal", tier=3, document_tier=dt))
+            issues = source_check.check_registry_fields(reg, {"master": self.MASTER})
+            self.assertFalse(any("高于机构 tier" in msg for _, msg in issues), dt)
+
+    def test_tier1_tier2_have_no_ceiling(self):
+        for pub, tier in (("IMF", 1), ("Gartner", 2)):
+            for dt in source_check.DOCUMENT_TIER_VALUES:
+                reg = _reg(self._entry(publisher=pub, tier=tier, document_tier=dt))
+                issues = source_check.check_registry_fields(reg, {"master": self.MASTER})
+                self.assertFalse(any("高于机构 tier" in msg for _, msg in issues), (pub, dt))
+
+    def test_no_master_skips_consistency(self):
+        """未传 master 时跳过一致性校验（无先验可比，不误报）。"""
+        reg = _reg(self._entry(publisher="News", tier=4, document_tier="primary_data"))
+        issues = source_check.check_registry_fields(reg)
+        self.assertFalse(any("高于机构 tier" in msg for _, msg in issues))
+
+    def test_unknown_publisher_skips_consistency(self):
+        reg = _reg(self._entry(publisher="未录入机构", tier=4, document_tier="primary_data"))
+        issues = source_check.check_registry_fields(reg, {"master": self.MASTER})
+        self.assertFalse(any("高于机构 tier" in msg for _, msg in issues))
+
+    def test_coverage_stats(self):
+        reg = _reg(self._entry(document_tier="media"), self._entry(source_id="S2"))
+        cov = source_check.document_tier_coverage(reg)
+        self.assertEqual(cov, {"total": 2, "with_document_tier": 1,
+                               "missing": 1, "ratio": 0.5})
+        self.assertEqual(source_check.document_tier_coverage(_reg())["ratio"], 1.0)
+
+    def test_missing_document_tier_is_aggregate_warning(self):
+        reg = _reg(self._entry(), self._entry(source_id="S2"))
+        issues = source_check.check_registry_fields(reg)
+        self.assertTrue(all(lvl == "W" for lvl, _ in issues))
+        dt_msgs = [msg for _, msg in issues if "document_tier 覆盖" in msg]
+        self.assertEqual(len(dt_msgs), 1)
+        self.assertIn("0/2", dt_msgs[0])
+        self.assertIn("不阻断", dt_msgs[0])
+
+    def test_sample_registry_has_three_document_tier_entries(self):
+        """T-08 验收：抽样登记至少 3 条含 document_tier（示例补登记）。"""
+        import json
+        reg = json.loads((ROOT / "data" / "processed" / "tech" / "security" / "dubai"
+                          / "source_registry.json").read_text(encoding="utf-8"))
+        cov = source_check.document_tier_coverage(reg)
+        self.assertGreaterEqual(cov["with_document_tier"], 3)
 
 
 if __name__ == "__main__":

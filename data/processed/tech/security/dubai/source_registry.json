@@ -37,6 +37,8 @@
     "snapshot_date": "2026-11-18",
     "note": "T-01 字段示例：登记信息人工核对（未抓取正文，故无 archive_hash）"
    },
+   "document_tier": "official_release",
+   "statement_type": "forecast",
    "in_synthesis": false,
    "used_in": [
     "2026-11_baseline_report.html"
@@ -56,6 +58,8 @@
     "snapshot_date": "2026-11-18",
     "note": "T-01 字段示例：登记信息人工核对（未抓取正文，故无 archive_hash）"
    },
+   "document_tier": "industry_report",
+   "statement_type": "restatement",
    "in_synthesis": false,
    "used_in": [
     "2026-11_baseline_report.html"
@@ -75,6 +79,8 @@
     "snapshot_date": "2026-11-18",
     "note": "T-01 字段示例：登记信息人工核对（未抓取正文，故无 archive_hash）"
    },
+   "document_tier": "media",
+   "statement_type": "opinion",
    "in_synthesis": false,
    "used_in": [
     "2026-11_baseline_report.html"
