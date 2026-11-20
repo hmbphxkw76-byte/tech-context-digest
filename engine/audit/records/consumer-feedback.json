@@ -1,0 +1,16 @@
+{
+  "description": "消费端反馈台账：经报告 / hub 页脚「反馈 / 纠错」入口提交的纠错与回访条目。",
+  "kinds": [
+    "纠错",
+    "回访"
+  ],
+  "ledger": "consumer-feedback",
+  "records": [],
+  "schema_version": "1.0",
+  "spec": "CONSUMER-FEEDBACK-LEDGER v1.0",
+  "statuses": [
+    "open",
+    "resolved",
+    "wontfix"
+  ]
+}

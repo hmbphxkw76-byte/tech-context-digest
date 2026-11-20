@@ -984,17 +984,17 @@ def check_report(text: str, registry: dict, ctx: dict | None = None) -> list[tup
             return "W"
         return base
 
-    # R1 登记覆盖
+    # R1 登记覆盖（自引用 = 本仓库内部指针，不是外部来源，不计入）
     strategy = ctx.get("source_strategy", "")
+    external_urls = [u for u in urls if not is_self_reference(u)]
     if not sources:
-        if urls:
+        if external_urls:
             issues.append((level("R1", "E"), "R1 登记覆盖：来源登记为空，但报告含外部 URL（须先登记来源）"))
         elif strategy != SYNTHESIS_STRATEGY:
             # 综合层（synthesis_only）按设计不新采外部来源，空登记 + 无外部 URL 属预期，不告警
             issues.append(("W", "R1 登记覆盖：来源登记为空，无法校验外部 URL"))
-    elif urls:
-        unmatched = [u for u in urls
-                      if normalize_url(u) not in idx and not is_self_reference(u)]
+    elif external_urls:
+        unmatched = [u for u in external_urls if normalize_url(u) not in idx]
         if unmatched:
             issues.append((level("R1", "E"), f"R1 登记覆盖：{len(unmatched)} 个外部 URL 未在来源登记中"
                                             f"（示例：{unmatched[0]}）"))

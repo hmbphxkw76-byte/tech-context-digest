@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 """指标实测覆盖（METRIC-COVERAGE v1.0）。
 
-把 `metrics-dictionary.json` 的 38 项指标从「注册了公式与阈值、但多数从未被计算」
+把 `metrics-dictionary.json` 的 41 项指标从「注册了公式与阈值、但多数从未被计算」
 推进到「工具可测子集产出实测值」，并输出覆盖率与缺口清单（批次 B）。
 
 口径：
@@ -23,6 +23,8 @@ L-03（阈值三处一致代理）/ R-03（跨业务线重复段落代理）；R
 2026-11-19 N-6 接线：A-02 / A-04 / L-01 / L-02 / L-04 / L-05 / R-05 由 LLM 兜底
 转为 TOOL 机械代理（公式见字典与本模块函数 docstring）；均为代理口径，不得当作
 语义达标。
+2026-11-20 CF 类接线：CF-01（决策卡被引用次数）/ CF-02（纠错条目数）/
+CF-03（读者回访参与率）由 T-06 草案转为正式指标，消费侧口径见各函数 docstring。
 
 用法：
     python engine/tools/metric_coverage.py                 # 覆盖率报告
@@ -1097,6 +1099,62 @@ def i09_reading_time(reports: dict[str, str]) -> tuple[float, str]:
     return _ratio(ok, len(period)), f"{ok}/{len(period)} 份周期报告含读数时点"
 
 
+# ---------------------------------------------------------------- CF 类（消费侧）
+
+def _decision_card_ids() -> set[str]:
+    """登记册 `data/processed/**/decision_cards.json` 的 card_id 集合。"""
+    ids: set[str] = set()
+    base = ROOT / "data" / "processed"
+    if not base.exists():
+        return ids
+    for p in sorted(base.rglob("decision_cards.json")):
+        try:
+            data = json.loads(p.read_text(encoding="utf-8"))
+        except (OSError, json.JSONDecodeError):
+            continue
+        for card in data.get("cards", []) or []:
+            cid = str(card.get("card_id", "")).strip()
+            if cid:
+                ids.add(cid)
+    return ids
+
+
+def cf01_card_references(reports: dict[str, str]) -> tuple[float | None, str]:
+    """CF-01 决策卡被引用次数（计数型）。
+
+    口径：编号取自 `decision_cards.json`（决策卡单一事实源），引用 = 该编号在任一
+    报告正文中出现（登记册自身不计入）。无登记册编号时标 probe，不伪造。
+    """
+    ids = _decision_card_ids()
+    if not ids:
+        return None, "probe：无决策卡登记册（decision_cards.json）"
+    total = sum(t.count(cid) for cid in ids for t in reports.values())
+    return float(total), f"登记册决策卡 {len(ids)} 张，被报告引用 {total} 次"
+
+
+def _consumer_feedback_stats() -> dict:
+    import consumer_feedback
+    return consumer_feedback.stats(consumer_feedback.load())
+
+
+def cf02_corrections() -> tuple[float, str]:
+    """CF-02 纠错条目数（计数型）：台账中 kind=纠错 的条目数。
+
+    消费闭环未启动时为 0，如实呈现（不标 probe：分母不适用于计数型指标）。
+    """
+    n = int(_consumer_feedback_stats().get("correction_count", 0))
+    return float(n), f"已登记纠错 {n} 条（消费闭环未启动时为 0，如实呈现）"
+
+
+def cf03_revisit_rate(reports: dict[str, str]) -> tuple[float | None, str]:
+    """CF-03 读者回访参与率：有回访记录的报告数 / 报告总数。"""
+    total = len(reports)
+    if not total:
+        return None, "probe：无报告"
+    n = int(_consumer_feedback_stats().get("revisit_report_count", 0))
+    return _ratio(n, total), f"{n}/{total} 份报告有回访记录"
+
+
 def igi_all() -> dict[str, float]:
     import info_gap_metrics
     return dict(info_gap_metrics.compute()["values"])
@@ -1142,6 +1200,9 @@ def measure() -> dict[str, dict]:
         "I-07": i07_ex_ante(reports),
         "I-08": i08_blind_spot(),
         "I-09": i09_reading_time(reports),
+        "CF-01": cf01_card_references(reports),
+        "CF-02": cf02_corrections(),
+        "CF-03": cf03_revisit_rate(reports),
     }
     for mid, (v, d) in computed.items():
         # 分母为 0 等不可判情形：显式标 probe，不静默给 0

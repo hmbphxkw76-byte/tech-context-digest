@@ -28,6 +28,13 @@
       "slug": "branch-naming",
       "task": "branch-naming"
     },
+    "task/consumer-feedback-e6163815": {
+      "note": "source=env:CATPAW_CONVERSATION_ID",
+      "session": "e6163815401e48a6bf47cff5775add04",
+      "session_short": "e6163815",
+      "slug": "consumer-feedback",
+      "task": "consumer-feedback"
+    },
     "task/debt-closeout-2-da51f1bb": {
       "note": "source=env:CATPAW_CONVERSATION_ID",
       "session": "da51f1bb41f941a2ae07e88a470beb10",

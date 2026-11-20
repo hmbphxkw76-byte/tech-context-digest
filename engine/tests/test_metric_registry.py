@@ -95,25 +95,40 @@ class TestAliasUniqueness(unittest.TestCase):
         self.assertEqual(mr.check_dictionary(mr.load_dictionary()), [])
 
 
-class TestConsumerMetricsDraft(unittest.TestCase):
-    """消费侧指标草案（T-06）：只登记 probe 口径，不改既有阈值、不进入实测集合。"""
+class TestConsumerMetrics(unittest.TestCase):
+    """消费侧指标（CF-01…CF-03）：2026-11-20 由 T-06 草案转正接线，进入实测集合。"""
 
-    def test_draft_is_probe_and_unwired(self):
-        d = mr.load_dictionary()
-        draft = d["consumer_metrics_draft"]
-        self.assertEqual(draft["status"], "probe")
-        self.assertFalse(draft["wired"])
-        self.assertTrue(draft["metrics"])
-        for m in draft["metrics"]:
-            self.assertEqual(m["status"], "probe")
-            self.assertFalse(m["wired"])
-            self.assertNotIn("threshold", m)
+    CF_IDS = ("CF-01", "CF-02", "CF-03")
 
-    def test_draft_not_in_measured_metrics(self):
+    def test_cf_metrics_are_formal_and_wired(self):
         d = mr.load_dictionary()
         ids = set(mr.metric_ids(d))
-        draft_ids = {m["metric_id"] for m in d["consumer_metrics_draft"]["metrics"]}
-        self.assertEqual(ids & draft_ids, set())
+        for mid in self.CF_IDS:
+            self.assertIn(mid, ids)
+            m = mr.get_metric(d, mid)
+            self.assertEqual(m["detected_by"], "TOOL")
+            self.assertIn("threshold", m)
+            op, val = mr.parse_threshold(m["threshold"])
+            self.assertIn(op, (">=", "<=", ">", "<", "="))
+            self.assertGreaterEqual(val, 0.0)
+
+    def test_cf_metrics_are_measured(self):
+        import metric_coverage
+        meas = metric_coverage.measure()
+        for mid in self.CF_IDS:
+            self.assertEqual(meas[mid]["status"], "measured", f"{mid} 未接线")
+
+    def test_cf02_cf03_honest_zero_not_probe(self):
+        """消费闭环未启动时 CF-02 / CF-03 如实报 0，不标 probe、不伪造。"""
+        import consumer_feedback
+        ledger = consumer_feedback.new_ledger()
+        self.assertEqual(consumer_feedback.stats(ledger)["correction_count"], 0)
+        self.assertEqual(consumer_feedback.stats(ledger)["revisit_report_count"], 0)
+
+    def test_draft_block_removed(self):
+        d = mr.load_dictionary()
+        self.assertNotIn("consumer_metrics_draft", d)
+        self.assertIn("consumer_metrics_note", d)
 
     def test_existing_dictionary_still_valid(self):
         self.assertEqual(mr.check_dictionary(mr.load_dictionary()), [])

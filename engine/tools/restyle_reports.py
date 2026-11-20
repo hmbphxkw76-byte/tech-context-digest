@@ -6,9 +6,11 @@
 - `--fix-colors`：把旧令牌色 #1f3d63 替换为 canonical #16324f（用于图表 JS 内联色）；
 - `--fix-tables`：表格规范化——补 `class="fixed"`，并把每个 `<th>` 的列宽归一为
   百分比（同表之和 100%），满足 monitoring-common-spec §3 与 lint_reports 的列宽检查。
+- `--add-footer`：在 `</main>` 之后补 canonical 报告页脚（``.report-foot``，含
+  「反馈 / 纠错」入口，监控通用规范 §5）；幂等，已含则跳过。
 
 用法：
-  python engine/tools/restyle_reports.py --files <报告.html> [--rename-chart] [--fix-colors] [--fix-tables] [--dry]
+  python engine/tools/restyle_reports.py --files <报告.html> [--rename-chart] [--fix-colors] [--fix-tables] [--add-footer] [--dry]
 """
 from __future__ import annotations
 
@@ -21,7 +23,7 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 
-from report_style import style_block  # noqa: E402
+from report_style import report_foot, style_block  # noqa: E402
 
 STYLE_RE = re.compile(r"<style>.*?</style>", re.DOTALL)
 # 旧令牌色 → canonical 主色（含大小写；覆盖内联 SVG / 图例 / 图表 JS）
@@ -107,8 +109,27 @@ def normalize_tables(text: str) -> str:
     return TABLE_RE.sub(repl, text)
 
 
+def ensure_footer(text: str) -> str:
+    """在 ``</main>`` 之后插入 canonical 报告页脚（监控通用规范 §5）。
+
+    已含 ``report-foot`` 则原样返回（幂等）；无 ``</main>`` 时回退到 ``</body>`` 之前。
+    """
+    if "report-foot" in text:
+        return text
+    foot = report_foot()
+    idx = text.rfind("</main>")
+    if idx != -1:
+        end = idx + len("</main>")
+        return text[:end] + "\n" + foot + text[end:]
+    idx = text.rfind("</body>")
+    if idx != -1:
+        return text[:idx] + foot + "\n" + text[idx:]
+    return text + "\n" + foot
+
+
 def restyle(path: Path, rename_chart: bool = False, fix_colors: bool = False,
-            fix_tables: bool = False, dry: bool = False, replace_css: bool = True) -> bool:
+            fix_tables: bool = False, dry: bool = False, replace_css: bool = True,
+            add_footer: bool = False) -> bool:
     text = path.read_text(encoding="utf-8")
     new = STYLE_RE.sub(style_block(), text, count=1) if replace_css else text
     if rename_chart:
@@ -117,8 +138,10 @@ def restyle(path: Path, rename_chart: bool = False, fix_colors: bool = False,
         new = OLD_NAVY.sub(lambda m: COLOR_MAP[m.group(0).lower()], new)
     if fix_tables:
         new = normalize_tables(new)
+    if add_footer:
+        new = ensure_footer(new)
     if new == text:
-        print(f"[SKIP] {path} 已是 canonical" if replace_css else f"[SKIP] {path} 表格已规范")
+        print(f"[SKIP] {path} 已是 canonical" if replace_css else f"[SKIP] {path} 无需改动")
         return False
     if not dry:
         path.write_text(new, encoding="utf-8")
@@ -132,11 +155,14 @@ def main() -> int:
     ap.add_argument("--rename-chart", action="store_true")
     ap.add_argument("--fix-colors", action="store_true")
     ap.add_argument("--fix-tables", action="store_true", help="补 class=fixed 并将列宽归一为 %（同表之和 100%）")
+    ap.add_argument("--add-footer", action="store_true",
+                    help="在 </main> 之后补 canonical 报告页脚（含反馈 / 纠错入口）")
     ap.add_argument("--dry", action="store_true", help="只报告不写入")
     args = ap.parse_args()
-    # 仅 --fix-tables 时不动 <style> 块（避免引入与表格修复无关的样式变更）；
+    # 仅 --fix-tables / --add-footer 时不动 <style> 块（避免引入与该修复无关的样式变更）；
     # 与 --rename-chart / --fix-colors 联用时仍走完整迁移。
     only_tables = args.fix_tables and not args.rename_chart and not args.fix_colors
+    skip_css = only_tables or args.add_footer
     changed = 0
     for f in args.files:
         p = Path(f)
@@ -144,7 +170,7 @@ def main() -> int:
             print(f"[ERROR] 不存在：{p}")
             return 1
         if restyle(p, args.rename_chart, args.fix_colors, args.fix_tables, args.dry,
-                   replace_css=not only_tables):
+                   replace_css=not skip_css, add_footer=args.add_footer):
             changed += 1
     print(f"完成：改动 {changed} 份" + ("（dry-run）" if args.dry else ""))
     return 0

@@ -23,7 +23,7 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 
 from _common import iter_business_dirs  # noqa: E402
-from report_style import feedback_link, style_block  # noqa: E402
+from report_style import report_foot, style_block  # noqa: E402
 
 TEMPLATE = """<!DOCTYPE html>
 <html lang="zh-CN">
@@ -49,14 +49,9 @@ __FOOTER__
 </html>
 """
 
-# 消费端反馈入口（T-06）：报告页脚统一静态链接 + data-feedback 占位，无 JS / 外部服务依赖。
-FOOTER = (
-    '<footer class="report-foot">\n'
-    '  <div class="wrap">\n'
-    f'    <p>{feedback_link()} <span class="feedback-note">（消费侧指标 probe，未接线）</span></p>\n'
-    '  </div>\n'
-    '</footer>\n'
-)
+# 消费端反馈入口：报告页脚由 report_style.report_foot() 单一事实源提供
+# （静态链接 + data-feedback 属性，无 JS / 外部服务依赖）。
+FOOTER = report_foot() + "\n"
 
 H1_RE = re.compile(r"<h1\b[^>]*>.*?</h1>\s*", re.DOTALL)
 H2_RE = re.compile(r"<h2\b[^>]*>.*?</h2>", re.DOTALL)
