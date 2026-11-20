@@ -1,0 +1,26 @@
+[
+  {
+    "description": "基线删除后周期报告失去对比锚",
+    "id": "R-1",
+    "mitigation": "以 git HEAD 版本作为上期/基线参考重新生成",
+    "owner": ""
+  },
+  {
+    "description": "重生成内容与既有事实冲突",
+    "id": "R-2",
+    "mitigation": "继承各线已修正事实清单防回退",
+    "owner": ""
+  },
+  {
+    "description": "门禁 [E] 阻断",
+    "id": "R-3",
+    "mitigation": "逐项修复后重跑统一门禁",
+    "owner": ""
+  },
+  {
+    "description": "并行生成一致性",
+    "id": "R-4",
+    "mitigation": "统一 canonical 样式与类型模板",
+    "owner": ""
+  }
+]

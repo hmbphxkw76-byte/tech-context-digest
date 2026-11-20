@@ -249,6 +249,11 @@ footer,.footer{font-size:11.4px;color:var(--ink3);text-align:center;margin-top:2
 .idx-link:hover{color:var(--navy2);border-bottom:1px solid var(--blue)}
 .idx-link .ext{font-size:10px;color:var(--blue);margin-left:2px;font-weight:400}
 
+/* ── 消费端反馈入口（T-06）：静态链接 + data 属性占位，无外部依赖 ── */
+.feedback-link{color:var(--navy2);text-decoration:none;border-bottom:1px dotted #9db9da;font-weight:600}
+.feedback-link:hover{color:var(--navy);border-bottom:1px solid var(--blue)}
+.report-foot{border-top:1px solid var(--line);padding:16px 0 34px}
+
 /* ── 报告特有组件（apartment 基线 / 季度） ── */
 .tldr{background:linear-gradient(180deg,#fff,#f8fafe);border-left:5px solid var(--navy2)}
 .verdict{font-size:17px;font-weight:700;color:var(--blue);margin:0 0 12px}
@@ -392,7 +397,7 @@ details.registry[open]{padding-bottom:18px}
     <h1>全球 · 政治制度与治理 · 首期基线报告（2026-11）</h1>
     <p class="sub">九节固化锚 · 基线固定（后续事件触发解读的对比锚）</p>
     <p class="meta">
-      <b>数据截止</b>：2026-11（基线期）｜<b>报告版本</b>：v1.0（首期基线固定）｜<b>本期读数时点</b>：2026-11<br>
+      <b>数据截止</b>：2026-11（基线期）｜<b>报告版本</b>：v1.0（首期基线固定）｜<b>本期读数时点</b>：2026-11-20<br>
       <b>来源语言</b>：官方一手以英文为准；非英语官方法律与选举文件标注原文语言并附官方 URL｜<b>覆盖</b>：全球多国对照（非单一地区业务线）
     </p>
     <p>
@@ -402,7 +407,7 @@ details.registry[open]{padding-bottom:18px}
 </header>
 <nav class="report-nav" aria-label="报告导航">
   <div class="wrap">
-    <div class="nav-url"><span class="nav-url-label">报告 URL：</span><a href="https://github.com/hmbphxkw76-byte/tech-context-digest/blob/main/content/political/political-system/reports/2026-11_baseline_report.html">github.com/hmbphxkw76-byte/tech-context-digest · content/political/political-system/reports/2026-11_baseline_report.html</a></div>
+    <div class="nav-url"><span class="nav-url-label">报告 URL：</span><a href="https://github.com/hmbphxkw76-byte/tech-context-digest/blob/main/content/political/political-system/reports/2026-11_baseline_report.html" target="_blank" rel="noopener">github.com/hmbphxkw76-byte/tech-context-digest · content/political/political-system/reports/2026-11_baseline_report.html</a></div>
     <div class="nav-tabs">
       <a href="#s1">一、执行摘要</a>
       <a href="#s2">二、政策台账与监测机制</a>
@@ -443,7 +448,7 @@ details.registry[open]{padding-bottom:18px}
   <p><b>一句话定位</b>：政治制度与治理监测以官方法律文本、选举公告与治理统计为唯一采信层，基线锁定制度框架与测量口径，事件解读与年度台账在基线之上滚动。</p>
   <p class="small muted">来源与时点：数据截止 2026-11；分级见第八节、URL 见第九节。</p>
 </div>
-<div class="note">解读说明：文本依据为官方法律文本 / 选举公告 / 官方统计与方法文件，逐条附 URL（第九节）；时效以 2026-11 读数时点为准；摘要仅含已核验与部分核验，推断与假设下沉证据层。阈值与信号规则为「预校准（ex-ante）」，首次中期回测 2027-06。</div>
+<div class="note">解读说明：文本依据为官方法律文本 / 选举公告 / 官方统计与方法文件，逐条附 URL（第九节）；时效以 2026-11-20 读数时点为准；摘要仅含已核验与部分核验，推断与假设下沉证据层。阈值与信号规则为「预校准（ex-ante）」，首次中期回测 2027-06。</div>
 
 <h2 class="sec" id="s2">二、政策台账与监测机制</h2>
 
@@ -473,21 +478,21 @@ details.registry[open]{padding-bottom:18px}
 <div class="tblwrap"><table class="fixed">
 <thead><tr><th style="width:8%">优先级</th><th style="width:22%">渠道</th><th style="width:34%">官方 URL</th><th style="width:18%">更新机制</th><th style="width:18%">本期核验</th></tr></thead>
 <tbody>
-<tr><td>P0</td><td>日本衆議院</td><td><a href="https://www.shugiin.go.jp/">https://www.shugiin.go.jp/</a></td><td>议席 / 法案 / 选举</td><td>已核验（入口）</td></tr>
-<tr><td>P0</td><td>日本参議院</td><td><a href="https://www.sangiin.go.jp/">https://www.sangiin.go.jp/</a></td><td>议席 / 法案</td><td>已核验（入口）</td></tr>
-<tr><td>P0</td><td>総務省選挙部</td><td><a href="https://www.soumu.go.jp/senkyo/">https://www.soumu.go.jp/senkyo/</a></td><td>选举公告 / 结果</td><td>已核验（入口）</td></tr>
-<tr><td>P0</td><td>德国联邦议院</td><td><a href="https://www.bundestag.de/en">https://www.bundestag.de/en</a></td><td>议席 / 立法 / 宪法</td><td>已核验（入口）</td></tr>
-<tr><td>P0</td><td>英国议会</td><td><a href="https://www.parliament.uk/">https://www.parliament.uk/</a></td><td>议席 / 立法</td><td>已核验（入口）</td></tr>
-<tr><td>P0</td><td>美国国会</td><td><a href="https://www.congress.gov/">https://www.congress.gov/</a></td><td>议席 / 立法</td><td>已核验（入口）</td></tr>
-<tr><td>P0</td><td>中国全国人民代表大会</td><td><a href="http://www.npc.gov.cn/">http://www.npc.gov.cn/</a></td><td>法律 / 代表名单</td><td>未核验（未抓取）</td></tr>
-<tr><td>P1</td><td>V-Dem Institute</td><td><a href="https://www.v-dem.net/">https://www.v-dem.net/</a></td><td>年度数据集 / 报告</td><td>已核验</td></tr>
-<tr><td>P1</td><td>Transparency International</td><td><a href="https://www.transparency.org/en/cpi">https://www.transparency.org/en/cpi</a></td><td>年度 CPI</td><td>已核验</td></tr>
-<tr><td>P2</td><td>UN E-Government Survey</td><td><a href="https://publicadministration.un.org/egovkb/en-us/">https://publicadministration.un.org/egovkb/en-us/</a></td><td>两年一度</td><td>已核验</td></tr>
-<tr><td>P2</td><td>OECD Government at a Glance</td><td><a href="https://www.oecd.org/en/publications/government-at-a-glance.html">https://www.oecd.org/en/publications/government-at-a-glance.html</a></td><td>两年一度</td><td>未核验（入口）</td></tr>
-<tr><td>P2</td><td>World Bank WGI</td><td><a href="https://www.worldbank.org/en/publication/worldwide-governance-indicators">https://www.worldbank.org/en/publication/worldwide-governance-indicators</a></td><td>年度</td><td>未核验（入口）</td></tr>
-<tr><td>P4</td><td>International IDEA</td><td><a href="https://www.idea.int/">https://www.idea.int/</a></td><td>民主状况报告</td><td>未核验</td></tr>
-<tr><td>P4</td><td>IPU 各国议会联盟</td><td><a href="https://www.ipu.org/">https://www.ipu.org/</a></td><td>议席 / 选举观察</td><td>未核验</td></tr>
-<tr><td>线索</td><td>Freedom House</td><td><a href="https://freedomhouse.org/">https://freedomhouse.org/</a></td><td>年度自由报告</td><td>仅作线索，须回官方核验</td></tr>
+<tr><td>P0</td><td>日本衆議院</td><td><a href="https://www.shugiin.go.jp/" target="_blank" rel="noopener">https://www.shugiin.go.jp/</a></td><td>议席 / 法案 / 选举</td><td>已核验（入口）</td></tr>
+<tr><td>P0</td><td>日本参議院</td><td><a href="https://www.sangiin.go.jp/" target="_blank" rel="noopener">https://www.sangiin.go.jp/</a></td><td>议席 / 法案</td><td>已核验（入口）</td></tr>
+<tr><td>P0</td><td>総務省選挙部</td><td><a href="https://www.soumu.go.jp/senkyo/" target="_blank" rel="noopener">https://www.soumu.go.jp/senkyo/</a></td><td>选举公告 / 结果</td><td>已核验（入口）</td></tr>
+<tr><td>P0</td><td>德国联邦议院</td><td><a href="https://www.bundestag.de/en" target="_blank" rel="noopener">https://www.bundestag.de/en</a></td><td>议席 / 立法 / 宪法</td><td>已核验（入口）</td></tr>
+<tr><td>P0</td><td>英国议会</td><td><a href="https://www.parliament.uk/" target="_blank" rel="noopener">https://www.parliament.uk/</a></td><td>议席 / 立法</td><td>已核验（入口）</td></tr>
+<tr><td>P0</td><td>美国国会</td><td><a href="https://www.congress.gov/" target="_blank" rel="noopener">https://www.congress.gov/</a></td><td>议席 / 立法</td><td>已核验（入口）</td></tr>
+<tr><td>P0</td><td>中国全国人民代表大会</td><td><a href="http://www.npc.gov.cn/" target="_blank" rel="noopener">http://www.npc.gov.cn/</a></td><td>法律 / 代表名单</td><td>未核验（未抓取）</td></tr>
+<tr><td>P1</td><td>V-Dem Institute</td><td><a href="https://www.v-dem.net/" target="_blank" rel="noopener">https://www.v-dem.net/</a></td><td>年度数据集 / 报告</td><td>已核验</td></tr>
+<tr><td>P1</td><td>Transparency International</td><td><a href="https://www.transparency.org/en/cpi" target="_blank" rel="noopener">https://www.transparency.org/en/cpi</a></td><td>年度 CPI</td><td>已核验</td></tr>
+<tr><td>P2</td><td>UN E-Government Survey</td><td><a href="https://publicadministration.un.org/egovkb/en-us/" target="_blank" rel="noopener">https://publicadministration.un.org/egovkb/en-us/</a></td><td>两年一度</td><td>已核验</td></tr>
+<tr><td>P2</td><td>OECD Government at a Glance</td><td><a href="https://www.oecd.org/en/publications/government-at-a-glance.html" target="_blank" rel="noopener">https://www.oecd.org/en/publications/government-at-a-glance.html</a></td><td>两年一度</td><td>未核验（入口）</td></tr>
+<tr><td>P2</td><td>World Bank WGI</td><td><a href="https://www.worldbank.org/en/publication/worldwide-governance-indicators" target="_blank" rel="noopener">https://www.worldbank.org/en/publication/worldwide-governance-indicators</a></td><td>年度</td><td>未核验（入口）</td></tr>
+<tr><td>P4</td><td>International IDEA</td><td><a href="https://www.idea.int/" target="_blank" rel="noopener">https://www.idea.int/</a></td><td>民主状况报告</td><td>未核验</td></tr>
+<tr><td>P4</td><td>IPU 各国议会联盟</td><td><a href="https://www.ipu.org/" target="_blank" rel="noopener">https://www.ipu.org/</a></td><td>议席 / 选举观察</td><td>未核验</td></tr>
+<tr><td>线索</td><td>Freedom House</td><td><a href="https://freedomhouse.org/" target="_blank" rel="noopener">https://freedomhouse.org/</a></td><td>年度自由报告</td><td>仅作线索，须回官方核验</td></tr>
 </tbody>
 </table></div>
 <div class="note">渠道分级按 business-config 第四节：P0 官方法律 / 选举公告 / 议会记录为唯一可直接采信层；P1 官方 PDF / 统计年鉴；P2 国际治理数据库（须注提取日期与版本）；P3 英文媒体（只作线索）；P4 智库与行业机构（交叉验证方向）；P5 官方法律数据库 / 宪法文本（最终裁决制度与程序口径）。</div>
@@ -587,38 +592,38 @@ details.registry[open]{padding-bottom:18px}
 <h3>4.1 日本国会与议院制度</h3>
 <p><b>条款摘编</b>：日本国会由众议院（衆議院）与参议院（参議院）两院构成；众议院议员 465 名（小选举区 289、比例代表 176），任期 4 年；参议院议员 248 名，任期 6 年、每 3 年改选半数。1947-05-03《日本国宪法》施行，确立国会为最高权力机关与唯一立法机关。<span class="lvl lvl-verified">已核验</span></p>
 <p><b>解读</b>：K02（议会构成与席位）与 K07（政府组建与不信任案）的条款基准；参议院 2022 年定额改正后固定为 248 名，引用时须注明年份。</p>
-<p><b>官方答问 / 配套</b>：衆議院 / 参議院官方站。<span class="src-inline">来源：<a href="https://www.shugiin.go.jp/">https://www.shugiin.go.jp/</a>；<a href="https://www.sangiin.go.jp/">https://www.sangiin.go.jp/</a></span></p>
+<p><b>官方答问 / 配套</b>：衆議院 / 参議院官方站。<span class="src-inline">来源：<a href="https://www.shugiin.go.jp/" target="_blank" rel="noopener">https://www.shugiin.go.jp/</a>；<a href="https://www.sangiin.go.jp/" target="_blank" rel="noopener">https://www.sangiin.go.jp/</a></span></p>
 
 <h3>4.2 日本众议院选举制度（小选举区比例代表并立制）</h3>
 <p><b>条款摘编</b>：1994 年政治改革四法后，众议院选举采小选举区比例代表并立制：选民同时投小选举区（单记）与比例代表（政党）两票，两票分别计票、互不折算；小选举区 289 席、比例代表 176 席（11 个比例区）。<span class="lvl lvl-verified">已核验</span></p>
 <p><b>解读</b>：并立制下小选举区与比例代表各自独立分配，易产生「一票之差」与双重候选（重複立候補）现象；K01 选举监测须分别记录小选举区与比例区得票结构，不与得票率混算。</p>
 <p><b>歧义并列</b>：「并立制」与「比例并立·重复落选许可」等配套规则须逐条核对総務省選挙部文本；本基线不展开 2025 年后定额调整讨论（事件触发后解读）。</p>
-<p><b>官方答问 / 配套</b>：総務省選挙部选举制度页。<span class="src-inline">来源：<a href="https://www.soumu.go.jp/senkyo/">https://www.soumu.go.jp/senkyo/</a></span></p>
+<p><b>官方答问 / 配套</b>：総務省選挙部选举制度页。<span class="src-inline">来源：<a href="https://www.soumu.go.jp/senkyo/" target="_blank" rel="noopener">https://www.soumu.go.jp/senkyo/</a></span></p>
 
 <h3>4.3 德国联邦议院与 Grundgesetz</h3>
 <p><b>条款摘编</b>：德国《基本法》（Grundgesetz）1949-05-23 生效，确立联邦制、法治国、社会国与防卫性民主；联邦议院（Bundestag）为基本 598 席的议会，采个人化比例代表制（两票制），具体议席可因超额议席与平衡议席高于基本定额。<span class="lvl lvl-partial">部分核验</span></p>
 <p><b>解读</b>：K02 / K03 监测须区分「基本定额」与「实际议席」；修宪受基本法第 79 条约束（联邦制与核心原则不得修改）。</p>
-<p><b>官方答问 / 配套</b>：联邦议院宪法与选举页。<span class="src-inline">来源：<a href="https://www.bundestag.de/en">https://www.bundestag.de/en</a></span></p>
+<p><b>官方答问 / 配套</b>：联邦议院宪法与选举页。<span class="src-inline">来源：<a href="https://www.bundestag.de/en" target="_blank" rel="noopener">https://www.bundestag.de/en</a></span></p>
 
 <h3>4.4 英国议会与美国国会</h3>
 <p><b>条款摘编</b>：英国下院 650 个选区，采单一小选区多数制（FPTP），获最多票者当选；美国众议院 435 席（按人口分配）、参议院 100 席（每州 2 席），均为单一小选区多数制 / 全州多数制。<span class="lvl lvl-verified">已核验</span></p>
 <p><b>解读</b>：FPTP 下「得票率 ≠ 席次率」为常态，K02 须并列得票率与席次率；议席定额变动（如选区重划）属 K02 黄灯触发条件。</p>
-<p><b>官方答问 / 配套</b>：英国议会 / 美国国会。<span class="src-inline">来源：<a href="https://www.parliament.uk/">https://www.parliament.uk/</a>；<a href="https://www.congress.gov/">https://www.congress.gov/</a></span></p>
+<p><b>官方答问 / 配套</b>：英国议会 / 美国国会。<span class="src-inline">来源：<a href="https://www.parliament.uk/" target="_blank" rel="noopener">https://www.parliament.uk/</a>；<a href="https://www.congress.gov/" target="_blank" rel="noopener">https://www.congress.gov/</a></span></p>
 
 <h3>4.5 V-Dem 民主测量框架</h3>
 <p><b>条款摘编</b>：V-Dem Dataset v16（2026-03 发布）含 531 项指标与 251 项指数，核心为五项高级民主指数（选举、自由、平等、参与、审议）；以「政体类型（Regimes of the World）」与年度编码为基础，覆盖 179+ 国家 / 地区。<span class="lvl lvl-verified">已核验</span></p>
 <p><b>解读</b>：跨国对照以「选举民主 / 自由民主 / 选举威权 / 封闭威权」四类并列，不设单一排名；引用须注明数据集版本（v16）与提取日期（K01 / K02）。</p>
-<p><b>官方答问 / 配套</b>：V-Dem 数据集与参考文档。<span class="src-inline">来源：<a href="https://www.v-dem.net/data/the-v-dem-dataset/">https://www.v-dem.net/data/the-v-dem-dataset/</a></span></p>
+<p><b>官方答问 / 配套</b>：V-Dem 数据集与参考文档。<span class="src-inline">来源：<a href="https://www.v-dem.net/data/the-v-dem-dataset/" target="_blank" rel="noopener">https://www.v-dem.net/data/the-v-dem-dataset/</a></span></p>
 
 <h3>4.6 透明国际清廉指数（CPI）</h3>
 <p><b>条款摘编</b>：CPI 为透明国际发布的公共部门腐败感知评分，0–100 分、覆盖约 180 个经济体，基于 13 个独立数据源与专家 / 商业调查；2025 年 CPI 丹麦以 90 分重回榜首。<span class="lvl lvl-verified">已核验</span></p>
 <p><b>解读</b>：K05（廉政与透明度）须将「感知类指数」与「司法案件数」并列；CPI 口径为感知，不构成腐败案件统计，两者冲突时并列不合并。</p>
-<p><b>官方答问 / 配套</b>：CPI 首页与方法文件。<span class="src-inline">来源：<a href="https://www.transparency.org/en/cpi">https://www.transparency.org/en/cpi</a></span></p>
+<p><b>官方答问 / 配套</b>：CPI 首页与方法文件。<span class="src-inline">来源：<a href="https://www.transparency.org/en/cpi" target="_blank" rel="noopener">https://www.transparency.org/en/cpi</a></span></p>
 
 <h3>4.7 UN E-Government Survey 与数字治理</h3>
 <p><b>条款摘编</b>：UN E-Government Survey 2024（第 13 版）覆盖 193 个成员国，EGDI 全球均值显著改善，数字政府落后人口比例由 2022 年 45.0% 降至 2024 年 22.4%；新增数字政府模型框架与 AI 附录。<span class="lvl lvl-verified">已核验</span></p>
 <p><b>解读</b>：K08（数字治理与数据制度）监测以 EGDI / OSI / LOSI 三级指标为锚；数字治理立法讨论与跨境数据限制分列，不并入同一结论。</p>
-<p><b>官方答问 / 配套</b>：UN E-Government Survey 知识库与数据中心。<span class="src-inline">来源：<a href="https://publicadministration.un.org/egovkb/en-us/">https://publicadministration.un.org/egovkb/en-us/</a></span></p>
+<p><b>官方答问 / 配套</b>：UN E-Government Survey 知识库与数据中心。<span class="src-inline">来源：<a href="https://publicadministration.un.org/egovkb/en-us/" target="_blank" rel="noopener">https://publicadministration.un.org/egovkb/en-us/</a></span></p>
 
 <h2 class="sec" id="s5">五、影响对象矩阵</h2>
 <p>矩阵按「制度 / 机制 × 受影响主体 × 影响方向」展开，逐格附条款依据与指标指针；本期为基线，影响量级待事件触发后回填。</p>
@@ -729,7 +734,7 @@ details.registry[open]{padding-bottom:18px}
 <p>来源按 business-config 第四节四层分级与 P0–P5 获取优先级执行（指针，不复制正文）：<b>官方一手</b>（官方法律文本 / 选举公告 / 议会记录 / 官方统计）为唯一可直接采信层；<b>行业机构</b>（V-Dem / International IDEA / IPU）；<b>挂牌门户 / 数据库</b>（V-Dem Dataset、OECD 治理指标、World Bank WGI、UN E-Government Survey，须注提取日期与版本）；<b>媒体转述</b>（须标「需核实原文」，不得与官方一手同等处理）。Freedom House / 商业评级机构仅作线索。</p>
 <h3>8.2 文本时效与版本治理</h3>
 <ul class="tight">
-  <li><b>读数时点</b>：2026-11；法律与选举状态以官方页面为准，动态状态须回溯状态页。</li>
+  <li><b>读数时点</b>：2026-11-20；法律与选举状态以官方页面为准，动态状态须回溯状态页。</li>
   <li><b>版本治理</b>：本报告 v1.0（首期基线固定）；核验 / 收敛型运行不升级版本号，只标注「本期读数时点」。</li>
   <li><b>基线属性</b>：本报告为后续事件解读与年度台账的对比锚；基线永不重跑，结构变更只影响后续新基线。</li>
 </ul>

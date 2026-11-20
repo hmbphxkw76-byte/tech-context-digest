@@ -5,7 +5,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>AI 趋势周报（安全 × Agent 生态）· 2026-11-20</title>
 <style>
-<style>
 :root{
   --radius-sm:8px; --radius:12px; --radius-lg:16px; --radius-pill:999px;
   --shadow:0 1px 3px rgba(20,40,70,.06); --shadow-md:0 4px 14px rgba(20,40,70,.09);
@@ -250,6 +249,11 @@ footer,.footer{font-size:11.4px;color:var(--ink3);text-align:center;margin-top:2
 .idx-link:hover{color:var(--navy2);border-bottom:1px solid var(--blue)}
 .idx-link .ext{font-size:10px;color:var(--blue);margin-left:2px;font-weight:400}
 
+/* ── 消费端反馈入口（T-06）：静态链接 + data 属性占位，无外部依赖 ── */
+.feedback-link{color:var(--navy2);text-decoration:none;border-bottom:1px dotted #9db9da;font-weight:600}
+.feedback-link:hover{color:var(--navy);border-bottom:1px solid var(--blue)}
+.report-foot{border-top:1px solid var(--line);padding:16px 0 34px}
+
 /* ── 报告特有组件（apartment 基线 / 季度） ── */
 .tldr{background:linear-gradient(180deg,#fff,#f8fafe);border-left:5px solid var(--navy2)}
 .verdict{font-size:17px;font-weight:700;color:var(--blue);margin:0 0 12px}
@@ -381,7 +385,6 @@ details.registry[open]{padding-bottom:18px}
   body{font-size:12px}
 }
 
-</style>
 </style>
 </head>
 <body>
@@ -587,7 +590,7 @@ details.registry[open]{padding-bottom:18px}
   <li><b>反向证据</b>：36kr 对 Anthropic 报告的质疑（线索）；基准自报与审计结果存在差异；SWE-bench Pro 撤回推荐。</li>
   <li><b>口径冲突</b>：Grand View Research 与 Gartner 口径不同；基准成绩跨版本不可横比。</li>
   <li><b>基准自报</b>：Fable 5.2 编码基准为官方自报；Meta Muse Ember 为媒体转述（需核实原文）。</li>
-  <li><b>研究局限</b>：读数时点 2026-11-13；样本为公开来源；官方发布滞后时使用最近已发布值并注明。</li>
+  <li><b>研究局限</b>：读数时点 2026-11-20（沿用 2026-11-13 读数）；样本为公开来源；官方发布滞后时使用最近已发布值并注明。</li>
 </ul>
 
 <h2 class="sec" id="s9">九、可执行启示</h2>
@@ -698,7 +701,6 @@ details.registry[open]{padding-bottom:18px}
 <div class="disc">
   <strong>口径与边界声明：</strong>本周报为行业趋势周报型第二期（数据截止 2026-11-20），只采公开来源；官方一手以英文为准，中文媒体仅作线索。事实与推断分离；可执行启示只给「条件 → 判读 → 框架性含义 → 风险提示」，不给买卖价位与仓位建议。信号与阈值均为「预校准（ex-ante）」，首次中期回测 2027-06。
 </div>
-<footer>tech-context-digest · AI 趋势周报（安全 × Agent 生态）· 10 节 · 数据截止 2026-11-20</footer>
 </main>
 <footer class="report-foot"><p><a class="feedback-link" data-feedback="consumer-feedback-v1" href="https://github.com/hmbphxkw76-byte/tech-context-digest/issues/new?title=%E5%8F%8D%E9%A6%88%20/%20%E7%BA%A0%E9%94%99" target="_blank" rel="noopener">反馈 / 纠错</a></p></footer>
 

@@ -249,6 +249,11 @@ footer,.footer{font-size:11.4px;color:var(--ink3);text-align:center;margin-top:2
 .idx-link:hover{color:var(--navy2);border-bottom:1px solid var(--blue)}
 .idx-link .ext{font-size:10px;color:var(--blue);margin-left:2px;font-weight:400}
 
+/* ── 消费端反馈入口（T-06）：静态链接 + data 属性占位，无外部依赖 ── */
+.feedback-link{color:var(--navy2);text-decoration:none;border-bottom:1px dotted #9db9da;font-weight:600}
+.feedback-link:hover{color:var(--navy);border-bottom:1px solid var(--blue)}
+.report-foot{border-top:1px solid var(--line);padding:16px 0 34px}
+
 /* ── 报告特有组件（apartment 基线 / 季度） ── */
 .tldr{background:linear-gradient(180deg,#fff,#f8fafe);border-left:5px solid var(--navy2)}
 .verdict{font-size:17px;font-weight:700;color:var(--blue);margin:0 0 12px}
@@ -385,17 +390,18 @@ details.registry[open]{padding-bottom:18px}
 <body>
 <div class="audit-mark" data-audit-id="AUD-2026-11-19-008" data-mark-level="full" style="background:#16324f;color:#fff;font:600 13px/1.6 system-ui,-apple-system,'Segoe UI',sans-serif;padding:8px 16px;text-align:center;letter-spacing:.02em"><span class="audit-badge">已审计</span><span class="audit-meta">终审通过 · 2026-11-19 · 审查链 4/4 · AUD-2026-11-19-008</span></div>
 
+<a class="skip-link" href="#main-content">跳到主要内容</a>
 <header class="report-head">
   <div class="wrap">
     <h1>全球 · 国际关系与外交 · 首期基线报告（2026-11）</h1>
 <p class="sub">九节固化锚 · 政策法规解读型 · 预校准（ex-ante）</p>
-    <p class="meta"><b>数据截止</b>：2026-11（基线期）｜<b>报告版本</b>：v1.0（首期基线固定）｜<b>本期读数时点</b>：2026-11<br>
+    <p class="meta"><b>数据截止</b>：2026-11（基线期）｜<b>报告版本</b>：v1.0（首期基线固定）｜<b>本期读数时点</b>：2026-11-20<br>
     <b>来源语言</b>：官方一手以英文为准；非英语官方文件标注原文语言并附官方 URL</p>
   </div>
 </header>
 <nav class="report-nav" aria-label="报告导航">
   <div class="wrap">
-    <div class="nav-url"><span class="nav-url-label">报告 URL</span>：<a href="https://github.com/hmbphxkw76-byte/tech-context-digest/blob/main/content/international/international-relations/reports/2026-11_baseline_report.html">https://github.com/hmbphxkw76-byte/tech-context-digest/blob/main/content/international/international-relations/reports/2026-11_baseline_report.html</a></div>
+    <div class="nav-url"><span class="nav-url-label">报告 URL</span>：<a href="https://github.com/hmbphxkw76-byte/tech-context-digest/blob/main/content/international/international-relations/reports/2026-11_baseline_report.html" target="_blank" rel="noopener">https://github.com/hmbphxkw76-byte/tech-context-digest/blob/main/content/international/international-relations/reports/2026-11_baseline_report.html</a></div>
     <div class="nav-tabs">
 <a href="#s1">一、执行摘要</a>
 <a href="#s2">二、政策台账与监测机制</a>
@@ -410,7 +416,7 @@ details.registry[open]{padding-bottom:18px}
   </div>
 </nav>
 
-<main class="wrap">
+<main class="wrap" id="main-content">
 <div class="delta-strip">
   <div class="d add"><div class="n">全量</div><div class="l">本期新增（基线首期 = 全部基线项）</div></div>
   <div class="d fix"><div class="n">0 条</div><div class="l">修正（已修正事实清单见第八节）</div></div>
@@ -470,22 +476,22 @@ details.registry[open]{padding-bottom:18px}
 <div class="tblwrap"><table class="fixed">
 <thead><tr><th style="width:8%">优先级</th><th style="width:20%">渠道</th><th style="width:34%">官方 URL</th><th style="width:20%">更新机制</th><th style="width:18%">本期核验</th></tr></thead>
 <tbody>
-<tr><td>P0</td><td>UN Treaty Collection</td><td><a href="https://treaties.un.org/">https://treaties.un.org/</a></td><td>保管国通知 / 状态页</td><td>已核验（首页抓取）</td></tr>
-<tr><td>P0</td><td>联合国宪章与公约页</td><td><a href="https://www.un.org/en/about-us/un-charter">https://www.un.org/en/about-us/un-charter</a></td><td>静态 + 修正案</td><td>已核验</td></tr>
-<tr><td>P0</td><td>UNFCCC（巴黎协定）</td><td><a href="https://unfccc.int/process-and-meetings/the-paris-agreement">https://unfccc.int/process-and-meetings/the-paris-agreement</a></td><td>批准状态页</td><td>已核验</td></tr>
-<tr><td>P0</td><td>UNODA（NPT）</td><td><a href="https://www.un.org/disarmament/wmd/nuclear/npt/">https://www.un.org/disarmament/wmd/nuclear/npt/</a></td><td>审议大会周期</td><td>已核验</td></tr>
-<tr><td>P0</td><td>中国外交部</td><td><a href="https://www.mfa.gov.cn/eng/">https://www.mfa.gov.cn/eng/</a></td><td>声明 / 例行记者会</td><td>已核验（入口）</td></tr>
-<tr><td>P0</td><td>美国 OFAC</td><td><a href="https://ofac.treasury.gov/">https://ofac.treasury.gov/</a></td><td>Recent Actions / 清单</td><td>已核验（入口）</td></tr>
-<tr><td>P0</td><td>美国国务院</td><td><a href="https://www.state.gov/">https://www.state.gov/</a></td><td>声明 / 简报</td><td>未核验（未抓取）</td></tr>
-<tr><td>P0</td><td>英国 FCDO</td><td><a href="https://www.gov.uk/government/organisations/foreign-commonwealth-development-office">https://www.gov.uk/government/organisations/foreign-commonwealth-development-office</a></td><td>声明 / 指南</td><td>未核验</td></tr>
-<tr><td>P0</td><td>日本外务省</td><td><a href="https://www.mofa.go.jp/">https://www.mofa.go.jp/</a></td><td>声明 / 演説</td><td>未核验</td></tr>
-<tr><td>P0</td><td>韩国外交部</td><td><a href="https://www.mofa.go.kr/eng/index.do">https://www.mofa.go.kr/eng/index.do</a></td><td>声明 / 记者会</td><td>未核验</td></tr>
-<tr><td>P0</td><td>欧盟 EEAS</td><td><a href="https://www.eeas.europa.eu/">https://www.eeas.europa.eu/</a></td><td>声明 / 制裁</td><td>未核验（入口临时不可用）</td></tr>
-<tr><td>P1</td><td>UN Digital Library</td><td><a href="https://digitallibrary.un.org/">https://digitallibrary.un.org/</a></td><td>决议 / 文件</td><td>未核验</td></tr>
-<tr><td>P1</td><td>国际法院 ICJ</td><td><a href="https://www.icj-cij.org/en">https://www.icj-cij.org/en</a></td><td>判决 / 命令</td><td>未核验（反爬）</td></tr>
-<tr><td>P1</td><td>国际刑事法院 ICC</td><td><a href="https://www.icc-cpi.int/about/the-court">https://www.icc-cpi.int/about/the-court</a></td><td>裁决 / 状态</td><td>未核验（反爬）</td></tr>
-<tr><td>P2</td><td>WTO 法律文本</td><td><a href="https://www.wto.org/english/docs_e/legal_e/legal_e.htm">https://www.wto.org/english/docs_e/legal_e/legal_e.htm</a></td><td>协定 / 争端</td><td>未核验</td></tr>
-<tr><td>P2</td><td>ICRC</td><td><a href="https://www.icrc.org/">https://www.icrc.org/</a></td><td>条约与习惯法</td><td>未核验</td></tr>
+<tr><td>P0</td><td>UN Treaty Collection</td><td><a href="https://treaties.un.org/" target="_blank" rel="noopener">https://treaties.un.org/</a></td><td>保管国通知 / 状态页</td><td>已核验（首页抓取）</td></tr>
+<tr><td>P0</td><td>联合国宪章与公约页</td><td><a href="https://www.un.org/en/about-us/un-charter" target="_blank" rel="noopener">https://www.un.org/en/about-us/un-charter</a></td><td>静态 + 修正案</td><td>已核验</td></tr>
+<tr><td>P0</td><td>UNFCCC（巴黎协定）</td><td><a href="https://unfccc.int/process-and-meetings/the-paris-agreement" target="_blank" rel="noopener">https://unfccc.int/process-and-meetings/the-paris-agreement</a></td><td>批准状态页</td><td>已核验</td></tr>
+<tr><td>P0</td><td>UNODA（NPT）</td><td><a href="https://www.un.org/disarmament/wmd/nuclear/npt/" target="_blank" rel="noopener">https://www.un.org/disarmament/wmd/nuclear/npt/</a></td><td>审议大会周期</td><td>已核验</td></tr>
+<tr><td>P0</td><td>中国外交部</td><td><a href="https://www.mfa.gov.cn/eng/" target="_blank" rel="noopener">https://www.mfa.gov.cn/eng/</a></td><td>声明 / 例行记者会</td><td>已核验（入口）</td></tr>
+<tr><td>P0</td><td>美国 OFAC</td><td><a href="https://ofac.treasury.gov/" target="_blank" rel="noopener">https://ofac.treasury.gov/</a></td><td>Recent Actions / 清单</td><td>已核验（入口）</td></tr>
+<tr><td>P0</td><td>美国国务院</td><td><a href="https://www.state.gov/" target="_blank" rel="noopener">https://www.state.gov/</a></td><td>声明 / 简报</td><td>未核验（未抓取）</td></tr>
+<tr><td>P0</td><td>英国 FCDO</td><td><a href="https://www.gov.uk/government/organisations/foreign-commonwealth-development-office" target="_blank" rel="noopener">https://www.gov.uk/government/organisations/foreign-commonwealth-development-office</a></td><td>声明 / 指南</td><td>未核验</td></tr>
+<tr><td>P0</td><td>日本外务省</td><td><a href="https://www.mofa.go.jp/" target="_blank" rel="noopener">https://www.mofa.go.jp/</a></td><td>声明 / 演説</td><td>未核验</td></tr>
+<tr><td>P0</td><td>韩国外交部</td><td><a href="https://www.mofa.go.kr/eng/index.do" target="_blank" rel="noopener">https://www.mofa.go.kr/eng/index.do</a></td><td>声明 / 记者会</td><td>未核验</td></tr>
+<tr><td>P0</td><td>欧盟 EEAS</td><td><a href="https://www.eeas.europa.eu/" target="_blank" rel="noopener">https://www.eeas.europa.eu/</a></td><td>声明 / 制裁</td><td>未核验（入口临时不可用）</td></tr>
+<tr><td>P1</td><td>UN Digital Library</td><td><a href="https://digitallibrary.un.org/" target="_blank" rel="noopener">https://digitallibrary.un.org/</a></td><td>决议 / 文件</td><td>未核验</td></tr>
+<tr><td>P1</td><td>国际法院 ICJ</td><td><a href="https://www.icj-cij.org/en" target="_blank" rel="noopener">https://www.icj-cij.org/en</a></td><td>判决 / 命令</td><td>未核验（反爬）</td></tr>
+<tr><td>P1</td><td>国际刑事法院 ICC</td><td><a href="https://www.icc-cpi.int/about/the-court" target="_blank" rel="noopener">https://www.icc-cpi.int/about/the-court</a></td><td>裁决 / 状态</td><td>未核验（反爬）</td></tr>
+<tr><td>P2</td><td>WTO 法律文本</td><td><a href="https://www.wto.org/english/docs_e/legal_e/legal_e.htm" target="_blank" rel="noopener">https://www.wto.org/english/docs_e/legal_e/legal_e.htm</a></td><td>协定 / 争端</td><td>未核验</td></tr>
+<tr><td>P2</td><td>ICRC</td><td><a href="https://www.icrc.org/" target="_blank" rel="noopener">https://www.icrc.org/</a></td><td>条约与习惯法</td><td>未核验</td></tr>
 <tr><td>P4</td><td>ICG / Chatham House / IISS / CFR</td><td>各机构官网</td><td>分析报告</td><td>本基线未引用</td></tr>
 </tbody>
 </table></div>
@@ -559,16 +565,16 @@ details.registry[open]{padding-bottom:18px}
 <div class="tblwrap"><table class="fixed">
 <thead><tr><th style="width:15%">机制</th><th style="width:22%">法律基础</th><th style="width:27%">官方入口</th><th style="width:36%">监测要点</th></tr></thead>
 <tbody>
-<tr><td>联合国</td><td>《联合国宪章》</td><td><a href="https://www.un.org/en/about-us/un-charter">un.org/en/about-us/un-charter</a></td><td>六大主要机关；第 7 章强制行动、第 8 章区域安排</td></tr>
-<tr><td>国际法院 ICJ</td><td>ICJ 规约（宪章附件）</td><td><a href="https://www.icj-cij.org/en">icj-cij.org</a></td><td>案件、咨询意见、判决执行（本期未核验）</td></tr>
-<tr><td>国际刑事法院 ICC</td><td>《罗马规约》</td><td><a href="https://www.icc-cpi.int/about/the-court">icc-cpi.int</a></td><td>缔约国、管辖与调查（本期未核验）</td></tr>
-<tr><td>国际海洋法法庭 ITLOS</td><td>UNCLOS 附件六</td><td><a href="https://www.itlos.org/">itlos.org</a></td><td>深海采矿争端专属管辖（本期未核验）</td></tr>
-<tr><td>WTO</td><td>Marrakesh 协定 / WTO 协定</td><td><a href="https://www.wto.org/english/docs_e/legal_e/legal_e.htm">wto.org 法律文本</a></td><td>争端解决、上诉机构（本期未核验）</td></tr>
-<tr><td>气候机制</td><td>UNFCCC / 巴黎协定</td><td><a href="https://unfccc.int/process-and-meetings/the-paris-agreement">unfccc.int</a></td><td>NDC 五年周期、全球盘点</td></tr>
-<tr><td>东盟</td><td>《东盟宪章》</td><td><a href="https://asean.org/asean-charter/">asean.org</a></td><td>三大共同体、峰会与声明</td></tr>
-<tr><td>非盟</td><td>《非盟组织法》</td><td><a href="https://au.int/en/constitutive-act">au.int</a></td><td>和平安全架构（本期未核验）</td></tr>
-<tr><td>阿盟</td><td>阿盟宪章</td><td><a href="https://www.leagueofarabstates.net/">leagueofarabstates.net</a></td><td>成员国声明（本期未核验）</td></tr>
-<tr><td>人道法</td><td>日内瓦四公约</td><td><a href="https://www.icrc.org/">icrc.org</a></td><td>普遍批准、共同第 1 条（本期未核验）</td></tr>
+<tr><td>联合国</td><td>《联合国宪章》</td><td><a href="https://www.un.org/en/about-us/un-charter" target="_blank" rel="noopener">un.org/en/about-us/un-charter</a></td><td>六大主要机关；第 7 章强制行动、第 8 章区域安排</td></tr>
+<tr><td>国际法院 ICJ</td><td>ICJ 规约（宪章附件）</td><td><a href="https://www.icj-cij.org/en" target="_blank" rel="noopener">icj-cij.org</a></td><td>案件、咨询意见、判决执行（本期未核验）</td></tr>
+<tr><td>国际刑事法院 ICC</td><td>《罗马规约》</td><td><a href="https://www.icc-cpi.int/about/the-court" target="_blank" rel="noopener">icc-cpi.int</a></td><td>缔约国、管辖与调查（本期未核验）</td></tr>
+<tr><td>国际海洋法法庭 ITLOS</td><td>UNCLOS 附件六</td><td><a href="https://www.itlos.org/" target="_blank" rel="noopener">itlos.org</a></td><td>深海采矿争端专属管辖（本期未核验）</td></tr>
+<tr><td>WTO</td><td>Marrakesh 协定 / WTO 协定</td><td><a href="https://www.wto.org/english/docs_e/legal_e/legal_e.htm" target="_blank" rel="noopener">wto.org 法律文本</a></td><td>争端解决、上诉机构（本期未核验）</td></tr>
+<tr><td>气候机制</td><td>UNFCCC / 巴黎协定</td><td><a href="https://unfccc.int/process-and-meetings/the-paris-agreement" target="_blank" rel="noopener">unfccc.int</a></td><td>NDC 五年周期、全球盘点</td></tr>
+<tr><td>东盟</td><td>《东盟宪章》</td><td><a href="https://asean.org/asean-charter/" target="_blank" rel="noopener">asean.org</a></td><td>三大共同体、峰会与声明</td></tr>
+<tr><td>非盟</td><td>《非盟组织法》</td><td><a href="https://au.int/en/constitutive-act" target="_blank" rel="noopener">au.int</a></td><td>和平安全架构（本期未核验）</td></tr>
+<tr><td>阿盟</td><td>阿盟宪章</td><td><a href="https://www.leagueofarabstates.net/" target="_blank" rel="noopener">leagueofarabstates.net</a></td><td>成员国声明（本期未核验）</td></tr>
+<tr><td>人道法</td><td>日内瓦四公约</td><td><a href="https://www.icrc.org/" target="_blank" rel="noopener">icrc.org</a></td><td>普遍批准、共同第 1 条（本期未核验）</td></tr>
 </tbody>
 </table></div>
 
@@ -600,49 +606,49 @@ details.registry[open]{padding-bottom:18px}
 
 <p><b>条款摘编</b>：第 2(4) 条禁止使用武力或威胁使用武力；第 2(7) 条不干涉内政原则；第 51 条单独或集体自卫之固有权利；第 7 章（第 39–51 条）安全理事会对和平之威胁、破坏及侵略行为之行动；第 8 章（第 52–54 条）区域办法。宪章于 1945-06-26 签署、1945-10-24 生效，1963 / 1965 / 1973 三次修正；ICJ 规约构成宪章组成部分。<span class="lvl lvl-verified">已核验</span></p>
 <p><b>解读</b>：监测上以「第 7 章强制行动」与「第 8 章区域安排」区分强制力层级；决议类信号须记录决议号、表决情况与执行条款，文本依据回溯至 UN Digital Library 或官方公报。</p>
-<p><b>官方答问 / 配套</b>：宪章全文、修正案页、ICJ 规约页。<span class="src-inline">来源：<a href="https://www.un.org/en/about-us/un-charter">https://www.un.org/en/about-us/un-charter</a>；<a href="https://www.un.org/en/about-us/un-charter/full-text">https://www.un.org/en/about-us/un-charter/full-text</a></span></p>
+<p><b>官方答问 / 配套</b>：宪章全文、修正案页、ICJ 规约页。<span class="src-inline">来源：<a href="https://www.un.org/en/about-us/un-charter" target="_blank" rel="noopener">https://www.un.org/en/about-us/un-charter</a>；<a href="https://www.un.org/en/about-us/un-charter/full-text" target="_blank" rel="noopener">https://www.un.org/en/about-us/un-charter/full-text</a></span></p>
 
 <h3>4.2 《维也纳外交关系公约》</h3>
 
 <p><b>条款摘编</b>：第 2 条（外交关系及常设使馆之建立以协议为之）；第 22 条（使馆馆舍不得侵犯）；第 29 条（外交代表人身不得侵犯）；第 31 条（刑事管辖豁免及民事 / 行政管辖豁免之例外）；第 45 条（断交或使馆撤退时对馆舍、财产与档案之保护）。1961-04-18 通过并开放签署，1964-04-24 依第 51 条生效。<span class="lvl lvl-verified">已核验</span></p>
 <p><b>解读</b>：本公约是 K01（外交关系级别变动）与 K05（使领馆变动）的条款基准；「不受欢迎的人」（第 9 条）与豁免放弃（第 32 条）须逐条核对官方表述。</p>
-<p><b>官方答问 / 配套</b>：两任择议定书（取得国籍、强制解决争端）；实时缔约方数与保留声明以 UN Treaty Collection 状态页为准（本期未核验）。<span class="src-inline">来源：<a href="https://www.un.org/zh/documents/treaty/UNCITRAL-1961">https://www.un.org/zh/documents/treaty/UNCITRAL-1961</a>；状态页 <a href="https://treaties.un.org/pages/ViewDetails.aspx?src=TREATY&amp;mtdsg_no=III-3&amp;chapter=3&amp;clang=_en">treaties.un.org III-3</a></span></p>
+<p><b>官方答问 / 配套</b>：两任择议定书（取得国籍、强制解决争端）；实时缔约方数与保留声明以 UN Treaty Collection 状态页为准（本期未核验）。<span class="src-inline">来源：<a href="https://www.un.org/zh/documents/treaty/UNCITRAL-1961" target="_blank" rel="noopener">https://www.un.org/zh/documents/treaty/UNCITRAL-1961</a>；状态页 <a href="https://treaties.un.org/pages/ViewDetails.aspx?src=TREATY&amp;mtdsg_no=III-3&amp;chapter=3&amp;clang=_en" target="_blank" rel="noopener">treaties.un.org III-3</a></span></p>
 
 <h3>4.3 《维也纳领事关系公约》</h3>
 
 <p><b>条款摘编</b>：第 2 条（领事关系以协议建立；<b>断绝外交关系不当然断绝领事关系</b>）；第 5 条（领事职务）；第 36 条（与派遣国国民通讯及会见之自由，含拘禁情形通知与探视）；第 27 条（断绝领事关系时对馆舍与档案之保护）。1963-04-24 通过，1967-03-19 依第 77 条生效。<span class="lvl lvl-verified">已核验</span></p>
 <p><b>解读</b>：第 36 条领事通知与探视是公民服务与合规要点；K05 使领馆变动须区分「临时关闭 / 撤馆 / 大规模闭馆」并评估对公民服务的影响。</p>
-<p><b>官方答问 / 配套</b>：实时缔约方数与保留声明以 UN Treaty Collection 状态页为准（本期未核验）。<span class="src-inline">来源：<a href="https://www.un.org/zh/node/182171">https://www.un.org/zh/node/182171</a>；状态页 <a href="https://treaties.un.org/pages/ViewDetails.aspx?src=TREATY&amp;mtdsg_no=III-4&amp;chapter=3&amp;clang=_en">treaties.un.org III-4</a></span></p>
+<p><b>官方答问 / 配套</b>：实时缔约方数与保留声明以 UN Treaty Collection 状态页为准（本期未核验）。<span class="src-inline">来源：<a href="https://www.un.org/zh/node/182171" target="_blank" rel="noopener">https://www.un.org/zh/node/182171</a>；状态页 <a href="https://treaties.un.org/pages/ViewDetails.aspx?src=TREATY&amp;mtdsg_no=III-4&amp;chapter=3&amp;clang=_en" target="_blank" rel="noopener">treaties.un.org III-4</a></span></p>
 
 <h3>4.4 《联合国海洋法公约》与 BBNJ 协定</h3>
 
 <p><b>条款摘编</b>：UNCLOS 1982-12-10 于牙买加蒙特哥贝开放签署，1994-11-16 依第 308 条生效；含 320 条与 9 个附件，确立领海、专属经济区（200 海里）、大陆架与公海制度；争端可提交国际海洋法法庭、国际法院或仲裁。<span class="lvl lvl-verified">已核验</span></p>
 <p><b>解读</b>：海洋权益主张与争端解决程序启动属 K03 / K08 监测对象；BBNJ 协定（国家管辖范围以外区域海洋生物多样性养护与可持续利用）2023-06-19 通过，2025-09-19 生效条件满足，2026-01-17 生效，为基线期内新增机制。<span class="lvl lvl-verified">已核验</span></p>
-<p><b>官方答问 / 配套</b>：UNCLOS 概览与全文；BBNJ 生效公告见 UN Treaty Collection 首页。<span class="src-inline">来源：<a href="https://www.un.org/depts/los/convention_agreements/convention_overview_convention.htm">https://www.un.org/depts/los/convention_agreements/convention_overview_convention.htm</a>；<a href="https://treaties.un.org/">https://treaties.un.org/</a></span></p>
+<p><b>官方答问 / 配套</b>：UNCLOS 概览与全文；BBNJ 生效公告见 UN Treaty Collection 首页。<span class="src-inline">来源：<a href="https://www.un.org/depts/los/convention_agreements/convention_overview_convention.htm" target="_blank" rel="noopener">https://www.un.org/depts/los/convention_agreements/convention_overview_convention.htm</a>；<a href="https://treaties.un.org/" target="_blank" rel="noopener">https://treaties.un.org/</a></span></p>
 
 <h3>4.5 《不扩散核武器条约》（NPT）</h3>
 
 <p><b>条款摘编</b>：NPT 1968 年开放签署、1970 年生效；1995-05-11 依第 10 条第 2 款无限期延长；191 个缔约国（含五个核武器国家）。三大支柱：防止核扩散、推动核裁军、促进和平利用核能；IAEA 负责保障监督。<span class="lvl lvl-verified">已核验</span></p>
 <p><b>解读</b>：NPT 审议大会每五年一次，是机制运行基线的年度锚；2026 年第十一次审议大会于 2026-04-27 至 05-22 在纽约举行，其结果文件与共识情况须逐条核对（本期未跟踪，待事件解读）。<span class="lvl lvl-verified">已核验</span></p>
-<p><b>官方答问 / 配套</b>：UNODA 条约页与 2026 审议大会页。<span class="src-inline">来源：<a href="https://www.un.org/disarmament/wmd/nuclear/npt/">https://www.un.org/disarmament/wmd/nuclear/npt/</a></span></p>
+<p><b>官方答问 / 配套</b>：UNODA 条约页与 2026 审议大会页。<span class="src-inline">来源：<a href="https://www.un.org/disarmament/wmd/nuclear/npt/" target="_blank" rel="noopener">https://www.un.org/disarmament/wmd/nuclear/npt/</a></span></p>
 
 <h3>4.6 《巴黎协定》</h3>
 
 <p><b>条款摘编</b>：2015-12-12 在 COP21 由 195 个方通过；2016-11-04 生效；截至 2026-01-27 共 194 个缔约方。核心目标为将全球平均气温升幅控制在远低于 2°C 并努力限制在 1.5°C；建立 NDC（国家自主贡献）五年周期与全球盘点。<span class="lvl lvl-verified">已核验</span></p>
 <p><b>解读</b>：气候外交与贸易、制裁工具交叉（如碳边境调节机制），属 K02 / K03 的交叉监测对象；缔约方批准状态以 UNFCCC 状态页与 UN Treaty Collection 为准。<span class="lvl lvl-partial">部分核验</span></p>
-<p><b>官方答问 / 配套</b>：UNFCCC 巴黎协定页、批准状态页。<span class="src-inline">来源：<a href="https://unfccc.int/process-and-meetings/the-paris-agreement">https://unfccc.int/process-and-meetings/the-paris-agreement</a>；<a href="https://unfccc.int/process/the-paris-agreement/status-of-ratification">https://unfccc.int/process/the-paris-agreement/status-of-ratification</a></span></p>
+<p><b>官方答问 / 配套</b>：UNFCCC 巴黎协定页、批准状态页。<span class="src-inline">来源：<a href="https://unfccc.int/process-and-meetings/the-paris-agreement" target="_blank" rel="noopener">https://unfccc.int/process-and-meetings/the-paris-agreement</a>；<a href="https://unfccc.int/process/the-paris-agreement/status-of-ratification" target="_blank" rel="noopener">https://unfccc.int/process/the-paris-agreement/status-of-ratification</a></span></p>
 
 <h3>4.7 《东盟宪章》（区域机制示例）</h3>
 
 <p><b>条款摘编</b>：《东盟宪章》2008-12-15 生效，对在 10 个成员国间构成有法律约束力的协定；东盟现设政治安全、经济、社会文化三大共同体。东盟 1967-08-08 成立，东帝汶于 2025-10-26 加入，成员国增至 11 个。<span class="lvl lvl-verified">已核验</span></p>
 <p><b>解读</b>：区域机制的法律化程度与成员口径需分开登记（成员数与宪章批准数口径不同）；本基线仅作区域机制示例，不展开区域内事件。<span class="lvl lvl-partial">部分核验</span></p>
-<p><b>官方答问 / 配套</b>：东盟宪章页。<span class="src-inline">来源：<a href="https://asean.org/asean-charter/">https://asean.org/asean-charter/</a></span></p>
+<p><b>官方答问 / 配套</b>：东盟宪章页。<span class="src-inline">来源：<a href="https://asean.org/asean-charter/" target="_blank" rel="noopener">https://asean.org/asean-charter/</a></span></p>
 
 <h3>4.8 日内瓦四公约（1949）与《罗马规约》（1998）</h3>
 
 <p><b>条款摘编</b>：日内瓦四公约 1949-08-12 通过，普遍批准（具体国数本期未核验）；共同第 1 条规定各缔约国承诺在一切情况下尊重并保证公约被尊重。《罗马规约》1998-07-17 通过、2002-07-01 生效，收录于《联合国条约汇编》第 2187 卷；缔约国数与管辖现状本期未核验。<span class="lvl lvl-partial">部分核验</span></p>
 <p><b>解读</b>：人道法与国际刑事司法属 K07 / K08 的条款基础；因 ICC 与 ICJ 官网本期反爬，相关实时状态登记为未核验（U-03 / U-04），待人工原文回溯后回填。</p>
-<p><b>官方答问 / 配套</b>：ICRC 日内瓦四公约出版物；ICC 官网。<span class="src-inline">来源：<a href="https://www.icrc.org/en/doc/assets/files/publications/icrc-002-0173.pdf">ICRC 日内瓦四公约</a>；<a href="https://www.icc-cpi.int/about/the-court">https://www.icc-cpi.int/about/the-court</a></span></p>
+<p><b>官方答问 / 配套</b>：ICRC 日内瓦四公约出版物；ICC 官网。<span class="src-inline">来源：<a href="https://www.icrc.org/en/doc/assets/files/publications/icrc-002-0173.pdf" target="_blank" rel="noopener">ICRC 日内瓦四公约</a>；<a href="https://www.icc-cpi.int/about/the-court" target="_blank" rel="noopener">https://www.icc-cpi.int/about/the-court</a></span></p>
 
 <h2 class="sec" id="s5">五、影响对象矩阵</h2>
 
@@ -751,7 +757,7 @@ details.registry[open]{padding-bottom:18px}
 <h3>8.2 文本时效与版本治理</h3>
 
 <ul class="tight">
-<li><b>读数时点</b>：2026-11；条约与机制状态以官方页面为准，动态状态须回溯状态页。</li>
+<li><b>读数时点</b>：2026-11-20；条约与机制状态以官方页面为准，动态状态须回溯状态页。</li>
 <li><b>版本治理</b>：本报告 v1.0（首期基线固定）；核验 / 收敛型运行不升级版本号，只标注「本期读数时点」。</li>
 <li><b>基线属性</b>：本报告为后续事件解读与年度台账的对比锚；基线永不重跑，结构变更只影响后续新基线。</li>
 </ul>
@@ -784,36 +790,36 @@ details.registry[open]{padding-bottom:18px}
 <div class="refs">
 <h3>官方一手（P0 / P1）</h3>
 <ol>
-<li>联合国宪章 — <a href="https://www.un.org/en/about-us/un-charter">https://www.un.org/en/about-us/un-charter</a> [Source: 完整URL, 2026]</li>
-<li>联合国宪章全文 — <a href="https://www.un.org/en/about-us/un-charter/full-text">https://www.un.org/en/about-us/un-charter/full-text</a> [Source: 完整URL, 2026]</li>
-<li>维也纳外交关系公约（UN 条约页） — <a href="https://www.un.org/zh/documents/treaty/UNCITRAL-1961">https://www.un.org/zh/documents/treaty/UNCITRAL-1961</a> [Source: 完整URL, 2026]</li>
-<li>维也纳领事关系公约（UN 条约页） — <a href="https://www.un.org/zh/node/182171">https://www.un.org/zh/node/182171</a> [Source: 完整URL, 2026]</li>
-<li>UN Treaty Collection — <a href="https://treaties.un.org/">https://treaties.un.org/</a> [Source: 完整URL, 2026]</li>
-<li>UN Treaty Collection 状态页（外交，III-3） — <a href="https://treaties.un.org/pages/ViewDetails.aspx?src=TREATY&amp;mtdsg_no=III-3&amp;chapter=3&amp;clang=_en">https://treaties.un.org/pages/ViewDetails.aspx?src=TREATY&amp;mtdsg_no=III-3&amp;chapter=3&amp;clang=_en</a> [Source: 完整URL, 2026]</li>
-<li>UN Treaty Collection 状态页（领事，III-4） — <a href="https://treaties.un.org/pages/ViewDetails.aspx?src=TREATY&amp;mtdsg_no=III-4&amp;chapter=3&amp;clang=_en">https://treaties.un.org/pages/ViewDetails.aspx?src=TREATY&amp;mtdsg_no=III-4&amp;chapter=3&amp;clang=_en</a> [Source: 完整URL, 2026]</li>
-<li>UNCLOS 概览 — <a href="https://www.un.org/depts/los/convention_agreements/convention_overview_convention.htm">https://www.un.org/depts/los/convention_agreements/convention_overview_convention.htm</a> [Source: 完整URL, 2026]</li>
-<li>NPT（UNODA） — <a href="https://www.un.org/disarmament/wmd/nuclear/npt/">https://www.un.org/disarmament/wmd/nuclear/npt/</a> [Source: 完整URL, 2026]</li>
-<li>巴黎协定（UNFCCC） — <a href="https://unfccc.int/process-and-meetings/the-paris-agreement">https://unfccc.int/process-and-meetings/the-paris-agreement</a> [Source: 完整URL, 2026]</li>
-<li>巴黎协定批准状态 — <a href="https://unfccc.int/process/the-paris-agreement/status-of-ratification">https://unfccc.int/process/the-paris-agreement/status-of-ratification</a> [Source: 完整URL, 2026]</li>
-<li>东盟宪章 — <a href="https://asean.org/asean-charter/">https://asean.org/asean-charter/</a> [Source: 完整URL, 2026]</li>
-<li>中国外交部 — <a href="https://www.mfa.gov.cn/eng/">https://www.mfa.gov.cn/eng/</a> [Source: 完整URL, 2026]</li>
-<li>美国 OFAC — <a href="https://ofac.treasury.gov/">https://ofac.treasury.gov/</a> [Source: 完整URL, 2026]</li>
-<li>UN Digital Library — <a href="https://digitallibrary.un.org/">https://digitallibrary.un.org/</a> [Source: 完整URL, 2026]</li>
-<li>UN News — <a href="https://news.un.org/en/">https://news.un.org/en/</a> [Source: 完整URL, 2026]</</ol>
+<li>联合国宪章 — <a href="https://www.un.org/en/about-us/un-charter" target="_blank" rel="noopener">https://www.un.org/en/about-us/un-charter</a> [Source: 完整URL, 2026]</li>
+<li>联合国宪章全文 — <a href="https://www.un.org/en/about-us/un-charter/full-text" target="_blank" rel="noopener">https://www.un.org/en/about-us/un-charter/full-text</a> [Source: 完整URL, 2026]</li>
+<li>维也纳外交关系公约（UN 条约页） — <a href="https://www.un.org/zh/documents/treaty/UNCITRAL-1961" target="_blank" rel="noopener">https://www.un.org/zh/documents/treaty/UNCITRAL-1961</a> [Source: 完整URL, 2026]</li>
+<li>维也纳领事关系公约（UN 条约页） — <a href="https://www.un.org/zh/node/182171" target="_blank" rel="noopener">https://www.un.org/zh/node/182171</a> [Source: 完整URL, 2026]</li>
+<li>UN Treaty Collection — <a href="https://treaties.un.org/" target="_blank" rel="noopener">https://treaties.un.org/</a> [Source: 完整URL, 2026]</li>
+<li>UN Treaty Collection 状态页（外交，III-3） — <a href="https://treaties.un.org/pages/ViewDetails.aspx?src=TREATY&amp;mtdsg_no=III-3&amp;chapter=3&amp;clang=_en" target="_blank" rel="noopener">https://treaties.un.org/pages/ViewDetails.aspx?src=TREATY&amp;mtdsg_no=III-3&amp;chapter=3&amp;clang=_en</a> [Source: 完整URL, 2026]</li>
+<li>UN Treaty Collection 状态页（领事，III-4） — <a href="https://treaties.un.org/pages/ViewDetails.aspx?src=TREATY&amp;mtdsg_no=III-4&amp;chapter=3&amp;clang=_en" target="_blank" rel="noopener">https://treaties.un.org/pages/ViewDetails.aspx?src=TREATY&amp;mtdsg_no=III-4&amp;chapter=3&amp;clang=_en</a> [Source: 完整URL, 2026]</li>
+<li>UNCLOS 概览 — <a href="https://www.un.org/depts/los/convention_agreements/convention_overview_convention.htm" target="_blank" rel="noopener">https://www.un.org/depts/los/convention_agreements/convention_overview_convention.htm</a> [Source: 完整URL, 2026]</li>
+<li>NPT（UNODA） — <a href="https://www.un.org/disarmament/wmd/nuclear/npt/" target="_blank" rel="noopener">https://www.un.org/disarmament/wmd/nuclear/npt/</a> [Source: 完整URL, 2026]</li>
+<li>巴黎协定（UNFCCC） — <a href="https://unfccc.int/process-and-meetings/the-paris-agreement" target="_blank" rel="noopener">https://unfccc.int/process-and-meetings/the-paris-agreement</a> [Source: 完整URL, 2026]</li>
+<li>巴黎协定批准状态 — <a href="https://unfccc.int/process/the-paris-agreement/status-of-ratification" target="_blank" rel="noopener">https://unfccc.int/process/the-paris-agreement/status-of-ratification</a> [Source: 完整URL, 2026]</li>
+<li>东盟宪章 — <a href="https://asean.org/asean-charter/" target="_blank" rel="noopener">https://asean.org/asean-charter/</a> [Source: 完整URL, 2026]</li>
+<li>中国外交部 — <a href="https://www.mfa.gov.cn/eng/" target="_blank" rel="noopener">https://www.mfa.gov.cn/eng/</a> [Source: 完整URL, 2026]</li>
+<li>美国 OFAC — <a href="https://ofac.treasury.gov/" target="_blank" rel="noopener">https://ofac.treasury.gov/</a> [Source: 完整URL, 2026]</li>
+<li>UN Digital Library — <a href="https://digitallibrary.un.org/" target="_blank" rel="noopener">https://digitallibrary.un.org/</a> [Source: 完整URL, 2026]</li>
+<li>UN News — <a href="https://news.un.org/en/" target="_blank" rel="noopener">https://news.un.org/en/</a> [Source: 完整URL, 2026]</</ol>
 <h3>国际组织 / 机制入口（P1 / P2）</h3>
 <ol start="17">
-<li>国际法院 ICJ — <a href="https://www.icj-cij.org/en">https://www.icj-cij.org/en</a> [Source: 完整URL, 2026]</li>
-<li>国际刑事法院 ICC — <a href="https://www.icc-cpi.int/about/the-court">https://www.icc-cpi.int/about/the-court</a> [Source: 完整URL, 2026]</li>
-<li>国际海洋法法庭 ITLOS — <a href="https://www.itlos.org/">https://www.itlos.org/</a> [Source: 完整URL, 2026]</li>
-<li>WTO 法律文本 — <a href="https://www.wto.org/english/docs_e/legal_e/legal_e.htm">https://www.wto.org/english/docs_e/legal_e/legal_e.htm</a> [Source: 完整URL, 2026]</li>
-<li>ICRC — <a href="https://www.icrc.org/">https://www.icrc.org/</a> [Source: 完整URL, 2026]</li>
-<li>欧盟 EEAS — <a href="https://www.eeas.europa.eu/">https://www.eeas.europa.eu/</a> [Source: 完整URL, 2026]</li>
-<li>美国国务院 — <a href="https://www.state.gov/">https://www.state.gov/</a> [Source: 完整URL, 2026]</li>
-<li>英国 FCDO — <a href="https://www.gov.uk/government/organisations/foreign-commonwealth-development-office">https://www.gov.uk/government/organisations/foreign-commonwealth-development-office</a> [Source: 完整URL, 2026]</li>
-<li>日本外务省 — <a href="https://www.mofa.go.jp/">https://www.mofa.go.jp/</a> [Source: 完整URL, 2026]</li>
-<li>韩国外交部 — <a href="https://www.mofa.go.kr/eng/index.do">https://www.mofa.go.kr/eng/index.do</a> [Source: 完整URL, 2026]</li>
-<li>非盟组织法 — <a href="https://au.int/en/constitutive-act">https://au.int/en/constitutive-act</a> [Source: 完整URL, 2026]</li>
-<li>阿盟 — <a href="https://www.leagueofarabstates.net/">https://www.leagueofarabstates.net/</a> [Source: 完整URL, 2026]</li>
+<li>国际法院 ICJ — <a href="https://www.icj-cij.org/en" target="_blank" rel="noopener">https://www.icj-cij.org/en</a> [Source: 完整URL, 2026]</li>
+<li>国际刑事法院 ICC — <a href="https://www.icc-cpi.int/about/the-court" target="_blank" rel="noopener">https://www.icc-cpi.int/about/the-court</a> [Source: 完整URL, 2026]</li>
+<li>国际海洋法法庭 ITLOS — <a href="https://www.itlos.org/" target="_blank" rel="noopener">https://www.itlos.org/</a> [Source: 完整URL, 2026]</li>
+<li>WTO 法律文本 — <a href="https://www.wto.org/english/docs_e/legal_e/legal_e.htm" target="_blank" rel="noopener">https://www.wto.org/english/docs_e/legal_e/legal_e.htm</a> [Source: 完整URL, 2026]</li>
+<li>ICRC — <a href="https://www.icrc.org/" target="_blank" rel="noopener">https://www.icrc.org/</a> [Source: 完整URL, 2026]</li>
+<li>欧盟 EEAS — <a href="https://www.eeas.europa.eu/" target="_blank" rel="noopener">https://www.eeas.europa.eu/</a> [Source: 完整URL, 2026]</li>
+<li>美国国务院 — <a href="https://www.state.gov/" target="_blank" rel="noopener">https://www.state.gov/</a> [Source: 完整URL, 2026]</li>
+<li>英国 FCDO — <a href="https://www.gov.uk/government/organisations/foreign-commonwealth-development-office" target="_blank" rel="noopener">https://www.gov.uk/government/organisations/foreign-commonwealth-development-office</a> [Source: 完整URL, 2026]</li>
+<li>日本外务省 — <a href="https://www.mofa.go.jp/" target="_blank" rel="noopener">https://www.mofa.go.jp/</a> [Source: 完整URL, 2026]</li>
+<li>韩国外交部 — <a href="https://www.mofa.go.kr/eng/index.do" target="_blank" rel="noopener">https://www.mofa.go.kr/eng/index.do</a> [Source: 完整URL, 2026]</li>
+<li>非盟组织法 — <a href="https://au.int/en/constitutive-act" target="_blank" rel="noopener">https://au.int/en/constitutive-act</a> [Source: 完整URL, 2026]</li>
+<li>阿盟 — <a href="https://www.leagueofarabstates.net/" target="_blank" rel="noopener">https://www.leagueofarabstates.net/</a> [Source: 完整URL, 2026]</li>
 </ol>
 </div>
 
