@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 """信息密度与分层交付门禁（INFORMATION-LAYERING-SPEC v1.0）单元测试。
 
-覆盖 info_density_check：ID-01–ID-08、DC-05 判定，周期比较，共享事实域规则。
+覆盖 info_density_check：ID-01–ID-09、DC-05 判定，周期比较，共享事实域规则。
 运行：python -m unittest discover -s engine/tests -v
 """
 from __future__ import annotations
@@ -164,6 +164,57 @@ class TestId02RollingGate(unittest.TestCase):
             errors, warnings, lines = m.run(None, "2026-12")
         self.assertEqual(errors, 0, lines)
         self.assertEqual(warnings, 1, lines)
+
+
+HIGH_IMPACT_BL = "content/economy/dubai/apartment"
+
+
+def _high_impact_report(with_disclosures: bool) -> str:
+    """高影响业务线报告样本：基础分层齐全，可选强制披露块。"""
+    text = ("<h2 class='sec'>一、决策摘要</h2>"
+            "<p><span class='lvl lvl-verified'>已核验</span></p>"
+            "<p>本期新增 1 / 修正 0 / 无变化 1 / 假设核验进度 1/2。</p>"
+            "<p>场景切片：投资决策。指标指针：K01。</p>")
+    if with_disclosures:
+        text += ("<div class='disc'>影响披露（高影响业务线强制）："
+                 "置信区间：50–55 亿（假设乘积，区间）；"
+                 "时效声明：读数时点 2026-11-15；"
+                 "免责：不构成投资建议 / 法律建议；"
+                 "非专业建议：请咨询持牌专业人士。</div>")
+    return text
+
+
+class TestImpactTierDisclosure(unittest.TestCase):
+    """T-10 / ID-09：高影响业务线强制披露四要素（[W]，不阻断）。"""
+
+    def test_high_impact_field_declared(self):
+        self.assertEqual(m._impact_tier_for(HIGH_IMPACT_BL), "high")
+
+    def test_unset_business_line_defaults_low(self):
+        self.assertEqual(m._impact_tier_for(""), "")
+        self.assertEqual(m._impact_tier_for("content/economy/trends"), "")
+
+    def test_missing_disclosures_flagged(self):
+        rules = {r for r, _ in m.check_text(_high_impact_report(False), HIGH_IMPACT_BL)}
+        self.assertIn("ID-09", rules)
+
+    def test_with_disclosures_passes(self):
+        rules = {r for r, _ in m.check_text(_high_impact_report(True), HIGH_IMPACT_BL)}
+        self.assertNotIn("ID-09", rules)
+
+    def test_non_high_impact_not_flagged(self):
+        rules = {r for r, _ in m.check_text(_high_impact_report(False), "content/economy/trends")}
+        self.assertNotIn("ID-09", rules)
+
+    def test_partial_disclosure_still_flagged(self):
+        text = _high_impact_report(False) + "<p>免责：不构成投资建议。</p>"
+        rules = {r for r, _ in m.check_text(text, HIGH_IMPACT_BL)}
+        self.assertIn("ID-09", rules)
+
+    def test_id09_warn_only(self):
+        self.assertIn("ID-09", m._WARN_ONLY)
+        self.assertEqual(m._level_for("ID-09", True), "W")
+        self.assertEqual(m._level_for("ID-09", False), "W")
 
 
 if __name__ == "__main__":
