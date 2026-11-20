@@ -25,6 +25,8 @@
 
 **本期新增信息**：新增方案 1 份 ｜ 修正 2 条（IGI-02/IGI-03 由不达标转达标；I-04 由 0.40 转 1.00）｜ 无变化 4 条（门禁 0E、单测全绿、IGI-08 达标、盲区 0/15）｜ 假设核验进度 **6/8**（见 §7）。
 
+**2026-11-20 更新（§4.11）**：遗留项收口后指标数 38 → **41**（新增 CF-01/02/03），IGI-08 0.9945 → **0.9969**；不达标项由 1（I-08）变为 3（I-08 + CF-02/CF-03，后两项为消费闭环未启动的诚实读数）；指纹漂移 15 → **0**。
+
 **v2.0 补充（2026-11-19 信息理论视角评估）**：
 
 - **[已核验] 结构层已成熟，缺口集中在「时间维度 + 度量真实性 + 消费端」**：实测 0 `[E]` / 7 `[W]`、38 项指标全实测、仅 I-08 不达标（盲区 0/15，阻塞 → 2027-03）、IGI-08 = 0.9945。
@@ -41,8 +43,8 @@
 | 统一门禁 | `python engine/tools/optimization_gate.py --probe` | **exit 2；0 `[E]` / 7 `[W]`** | 已核验 |
 | 单测 | `python -m unittest discover -s engine/tests -p "test_*.py"` | **684 通过 / 1 跳过 / 0 失败** | 已核验 |
 | 静态检查 | `python engine/tools/static_check.py ruff\|mypy` | ruff **69/69**、mypy **26/26**，**新增 0** | 已核验 |
-| 指标体检 | `python engine/tools/metric_registry.py audit --coverage` | 38 项；**实测 38 / LLM 0 / 不达标 1（I-08）** | 已核验 |
-| 信息差指数 | 同上 | **IGI-08 = 0.9945**（≥0.80） | 已核验 |
+| 指标体检 | `python engine/tools/metric_registry.py audit --coverage` | 41 项；**实测 41 / LLM 0 / 不达标 3（I-08、CF-02、CF-03）** | 已核验（2026-11-20 见 §4.11） |
+| 信息差指数 | 同上 | **IGI-08 = 0.9969**（≥0.80） | 已核验（2026-11-20 见 §4.11） |
 | 语义 diff | `python engine/tools/semantic_diff.py scan` | 20 份报告；**有上期可比 5**；发现 0 项 | 已核验 |
 | 审计登记 | `python engine/audit/scripts/audit_tool.py status` | 登记 45 条；失效 0；**正式报告 20/20** | 已核验 |
 | 结构 / 页面 | `validate` / `validate_layout` / `page_build_check` / `compliance_check` / `lint_reports` | 全部通过（lint 20/20） | 已核验 |
@@ -335,6 +337,32 @@
 
 **整合后回归（实测）**：`optimization_gate` 0 `[E]` / 8 `[W]`（新增 `[W]` 均为可选字段覆盖率 / 历史项，已登记）；`unittest discover` 789 OK（skipped=1）；`metric_registry` 38 项实测、不达标仅 I-08、IGI-08 = 0.9946；`validate_layout` / `page_build_check`（22 通过 0E0W）/ `build_hub --check` / `check_links` 全通过。
 
+### 4.11 遗留项收口执行记录（2026-11-20）
+
+> 输入：台账 §十三 / §十四登记的 3 项「非本次方案范围，需另行立项」遗留项。本节记录一次性收口。
+
+| 任务 | 分支 | 提交 / PR | 状态 |
+|---|---|---|---|
+| 指纹根治 | `task/fingerprint-emit-e6163815` | `2204fb9` / PR #98 | 已合并 |
+| 消费侧收口（T-06） | `task/consumer-feedback-e6163815` | PR #99 | 已合并 |
+
+**① 既有指纹漂移（15 份 CHANGED）→ 机制性根治**
+- 根因定位：`audit.yml` 的 `audit_tool run --strict` + `accept` 注入「已审计」标识改动报告字节（`c44174e` 改 13 份），但该工作流无 `publish_fingerprint --emit`；`html-sync.yml` 有 → 结构性缺口。
+- 处置：`.github/workflows/audit.yml` 在 `submit-pr` 前新增「发布指纹采集」步骤（照抄 html-sync 模式）；`--emit` 重采 20 份，`--check` **漂移 0**。
+
+**② 消费侧 CF-01…CF-03 未接线（T-06 只落草案）→ 闭合**
+- 报告页脚：新增 `report_style.report_foot()` 单一事实源 + `restyle_reports.py --add-footer`（幂等），**20/20 报告**补齐 `.report-foot`（闭合 T-06 自身验收与[监控通用规范](../templates/monitoring-common-spec.md) §5）；`md2html.py` 删手写副本改用它。
+- 反馈台账：`engine/audit/records/consumer-feedback.json` + `engine/tools/consumer_feedback.py`（register / list / stats / check，确定性可重放）。
+- 接线：`metric_coverage` 新增 CF-01（决策卡被引用次数 = 44）/ CF-02（纠错条目数 = 0）/ CF-03（读者回访参与率 = 0/20）；字典草案转正，**41 项全实测**。
+- 附带修复：R1 与 IGI-04 排除本仓库自引用（反馈入口为 UI 元素而非外部来源）→ IGI-04 **0.9458 → 0.9946**，IGI-08 0.9946 → **0.9969**。
+- **CF-02 / CF-03 读数说明**：消费闭环未启动，**如实报 0**（不伪造、不标 probe），字典 `note` 已注明为真实信号。
+
+**③ I-08 盲区消号率 0/15 → 有界复查，无新增消号**
+- E2 定向取数（详见[盲区台账](blind-spot-ledger.md)「定向取数留痕（E2）」）：官方站可达性较 2026-11-19 改善，命中 DLD 官方《Dubai Real Estate Market — Annual Data Review 2025》与 CBUAE 官方 Base Rate / EIBOR 入口，但**均未取得官方一手数值 + 双源** → 不消号，责任周期维持 2027-03。
+- 结论：**I-08 维持 0.0000**（诚实呈现取数阻塞，不虚报）。
+
+**整合后回归（实测）**：`optimization_gate` **0 `[E]` / 7 `[W]`**；`unittest discover` **813 OK（skipped=1）**；ruff / mypy **新增 0**（69 / 26 baseline）；`page_build_check` 22 通过 0E0W；`lint_reports` 20/20；`validate` / `validate_layout` / `build_hub --check` / `check_links` 全通过；`publish_fingerprint --check` 漂移 0。
+
 ---
 
 ## 5. 验证对齐清单（确保对齐优化方案的验证清单）
@@ -362,6 +390,8 @@
 
 **验证对齐结论**：**15 项已达成 / 1 项未达成（V-9 I-08，阻塞 → 2027-03）**；V-14 因 I-08 记「部分」。原未达成项（V-9 除外）均由 N 类动作收口。
 
+**2026-11-20 更新（§4.11 遗留项收口）**：V-16（指纹漂移）由「`--emit` 一致」升级为**机制性根治**（`audit.yml` 加采集步骤，根因消除）；V-14 不达标项由 1（I-08）变为 3（新增 CF-02 / CF-03，消费闭环未启动的诚实读数）；**V-9（I-08）仍未达成**，E2 有界复查无新增消号，责任周期维持 2027-03。
+
 ### 5.1 验证对齐协议（双向追溯 + 不引入新问题）
 
 **A. 双向追溯矩阵**（方案条目 ↔ 实施工件 ↔ 验收证据）：
@@ -378,6 +408,8 @@
 | T-08 | `source_check.py` / registry（提交 `09340df`） | `test_source_check` 95 OK；`--only source_check` 0 `[E]`；抽样含 `document_tier` | **已闭环**（2026-11-19） |
 | T-09 | 字典 / `decision_hub_check.py`（提交 `940ab6c`） | `test_decision_hub` 22 OK；规范 §2.4/§2.5；dubai 报告含 `confidence`；`--only decision_hub` 0 `[E]` | **已闭环**（2026-11-19） |
 | T-10 | 规范 / 模板（提交 `7c6788b`） | 规范 §七 分级矩阵；5 条 business-config `impact_tier`；`test_info_density` 24 OK；`--only info_density` 0 `[E]` | **已闭环**（2026-11-19） |
+| 指纹根治 | `audit.yml` + 指纹库（提交 `2204fb9` / PR #98） | `publish_fingerprint --check` 漂移 0；单测 813 OK；门禁 0 `[E]` | **已闭环**（2026-11-20） |
+| T-06 收口 | `report_style` / `restyle_reports` / `consumer_feedback.py` / 字典 / 20 报告（PR #99） | 20/20 报告含 `.report-foot`；CF-01/02/03 measured；`test_consumer_feedback` + `TestConsumerMetricsCoverage` + `TestReportFooterMigration` OK；`build_hub --check` / `page_build_check` 通过 | **已闭环**（2026-11-20） |
 
 **B. 对齐判定规则**：
 - **全覆盖**：方案每条都有对应工件与证据；
@@ -455,3 +487,4 @@
 | v1.0 | 2026-11-19 | 初始版本 | 整合目标对齐 / 信息质量 / 缺口 / 台账；双视角（软件工程 + 信息理论）闭环；16 项验证对齐清单；N 类新增项；闭环机制 |
 | v1.1 | 2026-11-19 | 验证对齐收口 | N-1…N-8 全部闭环；§1 基线刷新（0E/7W、684 单测、不达标 1、IGI-08 0.9945、登记 20/20）；§4.5 / §5 / §6 状态更新；唯一未闭环 V-9（I-08 阻塞 2027-03）。合并 PR #93（`47ed028`）；CI 审计回填 PR #94（`1b80992`，20/20 `audited` 4/4） |
 | v2.0 | 2026-11-19 | 信息理论补充 + 并发执行 | 实测基线刷新；新增 §4.6（T-01…T-10）/ §4.7（并发设计）/ §5.1（验证对齐协议）；执行提示词目录 `implementation-prompts-2026-11-19/` |
+| v2.1 | 2026-11-20 | 遗留项收口 | 新增 §4.11（指纹根治 / T-06 消费侧接线 / I-08 有界复查）；§0 / §1 / §5 / §5.1 同步刷新；指标 38 → 41，IGI-08 = 0.9969 |

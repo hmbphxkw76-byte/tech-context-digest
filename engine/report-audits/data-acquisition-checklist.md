@@ -5,7 +5,7 @@
 > **使用方式**：逐项登记 → 取数 → 双源 → 入库 → 消号。状态取值：`pending` / `in_progress` / `done` / `blocked`。
 > **来源分级**：① 官方一手 > ② 行业机构 > ③ 挂牌门户 > ④ 媒体转述（须标「需核实原文」）。
 > **优先级**：P0 = Phase 1 必须上线；P1 = Phase 2；P2 = Phase 3。
-> **最后更新**：2026-11-19（E1/F1 定向取数留痕）
+> **最后更新**：2026-11-20（E2 复查：官方站可达性改善，命中 DLD 官方年报与 CBUAE 官方利率入口；仍无新增消号）
 
 | # | 维度 | 核心指标 | 权威来源 | 频率 | 优先级 | 口径说明 | 获取方式 | 状态 |
 |---|---|---|---|---|---|---|---|---|
@@ -45,3 +45,13 @@
 - **#3 空置**：ValuStrat 官方报告列表命中（《Dubai Real Estate Review Q3 2026》，2026-10-21），正文被浏览器验证拦截；REIDIN 被 Cloudflare 拦截 → 维持 `blocked`。[Source: https://www.valustrat.com/, 2026]
 - **#4 竣工**：WAM 通讯稿转述 DLD 2025 竣工数据（124 个项目 / AED27.5bn，2026-02-24）；DLD 官方页与 DM 竣工证书序列未取得，且非双源 → 维持 `blocked`。[Source: https://www.chinadaily.com.cn/a/202602/24/WS699d6545a310d6866eb3a085.html, 2026]
 - **结论**：P0 四项均未取得「官方一手数值 + 双源」，按「不虚报消号」维持 `blocked`；对应盲区 B01 / B02 / B03 / B15 责任周期维持 2027-03。
+
+## 取数留痕（2026-11-20，E2 复查）
+
+> 官方站可达性较 2026-11-19 改善（CBUAE / DLD / Digital Dubai 可达）；原则不变：不放宽来源级别、不虚报消号。
+
+- **#1 就业 / #2 收入**：Digital Dubai 新闻室仅见 LFS 2026 启动公告（2026-09-17），**结果未发布** → 维持 `blocked`。[Source: https://www.digitaldubai.ae/newsroom/news, 2026]
+- **#3 空置 / #4 竣工**：命中 DLD 官方《Dubai Real Estate Market — Annual Data Review 2025》（2026-10-12）及历年《Real Estate Sector Performance》年报列表；列表为 JS 渲染，**正文直链与数值未取得** → 维持 `blocked`，登记为解除路径。[Source: https://dubailand.gov.ae/en/open-data/research/, 2026]
+- **#5 利率结构（B07 / B12）**：CBUAE 官方站可达，Base Rate 机制与 EIBOR 官方入口（Regulations PDF、Daily Liquidity Indicators xlsx）已核验；页面 JS 渲染，**静态抓取未取得 3M/6M/1Y 与 Base Rate 现值** → 维持 `open`，登记为解除路径。[Source: https://www.centralbank.ae/en/our-operations/monetary-policy-and-domestic-markets/, 2026]
+- **交叉印证（非官方）**：聚合站点录得 CBUAE 基准利率 2026-09-16 由 3.65% 升至 3.90%，与盲区 B07 描述方向一致；非官方一手，不满足消号条件。[Source: https://tradingeconomics.com/united-arab-emirates/interest-rate, 2026]
+- **结论**：本轮**无新增消号**；B01 / B02 / B03 / B15 与 B07 / B12 责任周期不变（2027-03 / 2026-12）。

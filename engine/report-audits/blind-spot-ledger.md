@@ -8,7 +8,7 @@
 > **优先级**：**P0 = 就业、收入、空置、竣工四类**（优先补充）；其余 P1 / P2。
 > **目标**：盲区数 15 → ≤6（KPI-5，Phase 3 末）；P0 四类先行消号。
 > **校验**：`python engine/tools/blind_spot_check.py`（字段 / 状态 / 责任周期 / P0 四类）。
-> **最后更新**：2026-11-19（E1/F1 定向取数留痕，见「阻塞与取数记录」）
+> **最后更新**：2026-11-20（E2 定向取数复查：无新增消号，新登记 DLD 官方年报与 CBUAE 官方入口两条解除路径，见「阻塞与取数记录」）
 
 | ID | 项目 | 优先级 | 影响 | 发现日期 | 责任周期 | 消号条件 | 状态 | 关联 KPI |
 |---|---|---|---|---|---|---|---|---|
@@ -62,6 +62,20 @@
 
 **处置说明**：P0 类别不得降级（`blind_spot_check` BS-04 要求四类恒为 P0），故不以「转 P1」方式处理；改为**更新责任周期 + 登记阻塞**。解除阻塞需官方发布或可核验的机构一手页（见[数据采集清单](data-acquisition-checklist.md)）。
 
+### 定向取数留痕（E2，2026-11-20 复核）
+
+> 目标：对 P0 四类与责任周期 2026-12 的 P1 项（B07 / B12）做一轮有界复查，确认是否有官方一手来源已发布。原则不变：不放宽来源级别、不虚报消号。
+> 检索环境：web 搜索 + 页面抓取（CBUAE / DLD / Digital Dubai 官方站本轮**可达**，与 2026-11-19 相比有改善）。
+
+| 关联盲区 | 查询 / 命中 | 来源 / URL | 处置 |
+|---|---|---|---|
+| B01 / B03（空置 / 竣工） | **命中（官方）**：DLD 官方研究列表列出《Dubai Real Estate Market — Annual Data Review 2025》（2026-10-12），另有历年《Real Estate Sector Performance》年报 | [Source: https://dubailand.gov.ae/en/open-data/research/, 2026]（列表为 JS 渲染，正文直链未取得） | **新线索**：该年报为 DLD 官方一手，可能含空置 / 竣工官方口径；本轮未取得正文数值（页面 JS 渲染 + 直链未解析）→ 消号条件①/②未满足，维持 open |
+| B07 / B12（利率 / 期限结构） | **命中（官方入口）**：CBUAE 官方站可达——Monetary Policy 页明确 Base Rate 为「prevailing official monetary policy rate」，并给出 EIBOR Regulations PDF 与 Daily Liquidity Indicators（2026-11-19 xlsx）；FOREX & EIBOR 页存在 | [Source: https://www.centralbank.ae/en/our-operations/monetary-policy-and-domestic-markets/, 2026]；[Source: https://www.centralbank.ae/en/forex-eibor/, 2026] | **部分进展**：官方入口与机制表述已核验，但页面为 JS 渲染，静态抓取**未取得利率数值**（3M/6M/1Y 与 Base Rate 现值）→ 消号条件①未满足，维持 open |
+| B07（交叉印证，非官方） | Trading Economics 录得 CBUAE 基准利率：2025-10-29 3.90% → 2025-12-10 3.65% → **2026-09-16 3.90%** | [Source: https://tradingeconomics.com/united-arab-emirates/interest-rate, 2026] | 与盲区描述「2026-09 加息 3.65%→3.90%」方向一致，仅作**方向印证**；聚合站点非官方一手，不满足消号条件 |
+| B02 / B15（就业 / 收入） | Digital Dubai 新闻室仅见 LFS 2026 启动公告（**2026-09-17**，非首轮记录的 10-28），**结果仍未发布** | [Source: https://www.digitaldubai.ae/newsroom/news, 2026] | 维持 blocked；责任周期不变 |
+
+**E2 结论**：本轮**无新增消号**——P0 四类与 B07 / B12 均未取得「官方一手数值 + 双源」。但官方可达性较 2026-11-19 明显改善，且定位到两条具体解除路径（DLD 官方年报正文、CBUAE EIBOR / Base Rate 数据直取），已登记为上表。责任周期维持 2027-03。
+
 ## 变更记录
 
 | 日期 | 变更 | 说明 |
@@ -70,3 +84,4 @@
 | 2026-11-15 | 优先级 + 收入项 | 新增「优先级」列；P0 四类（就业 / 收入 / 空置 / 竣工）；新增 B15 收入 / 薪资序列；接入 `blind_spot_check.py` 校验 |
 | 2026-11-19 | P0 四类阻塞登记 | 取数尝试未获官方一手来源（检索未命中）；按「不虚报消号」不消号，责任周期 2026-12 → 2027-03；新增「阻塞与取数记录」节 |
 | 2026-11-19 | E1/F1 定向取数留痕 | 复核命中：DDSE 官方 LFS 2026 启动公告（结果未发布）、ValuStrat 官方季报入口（正文拦截）、WAM 转述 DLD 2025 竣工数据；四类均不满足消号条件，维持 open / in_progress 与责任周期 2027-03；新增「定向取数留痕」表 |
+| 2026-11-20 | E2 定向取数复查 | 官方站可达性改善：命中 DLD 官方《Dubai Real Estate Market — Annual Data Review 2025》（2026-10-12）与 CBUAE 官方 Base Rate / EIBOR 入口（页面 JS 渲染，未取得数值）；LFS 2026 结果仍未发布。**无新增消号**，责任周期维持 2027-03；新增「定向取数留痕（E2）」表 |
