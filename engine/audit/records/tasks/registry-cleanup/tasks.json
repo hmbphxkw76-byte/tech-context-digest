@@ -1,0 +1,10 @@
+[
+  {
+    "acceptance": "",
+    "depends_on": [],
+    "id": "T-1",
+    "phase": "",
+    "status": "pending",
+    "title": "移除无对应分支的历史登记"
+  }
+]
