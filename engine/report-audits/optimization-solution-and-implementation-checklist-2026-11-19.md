@@ -1,7 +1,8 @@
-# 优化解决方案与实施清单（OPTIMIZATION-SOLUTION-AND-IMPLEMENTATION-CHECKLIST v1.0）
+# 优化解决方案与实施清单（OPTIMIZATION-SOLUTION-AND-IMPLEMENTATION-CHECKLIST v2.0）
 
-> **状态**：现行方案（2026-11-19 产出；整合既有方案 + 双视角闭环 + 验证对齐）
-> **定位**：`tech-context-digest` 当前阶段的**收口文档**——把「目标对齐方案 v1.2」「信息质量方案 v1.2」「缺口对齐清单」「技术债务台账」整合为一份可验收、可勾选、可闭环的权威清单。
+> **状态**：现行方案（2026-11-19 产出；v2.0 = 整合既有方案 + 双视角闭环 + 验证对齐 + 信息理论补充维度 + 并发执行设计）
+> **定位**：`tech-context-digest` 当前阶段的**收口文档**——把「目标对齐方案 v1.2」「信息质量方案 v1.2」「缺口对齐清单」「技术债务台账」「信息理论补充维度」整合为一份可验收、可勾选、可并发执行、可验证对齐的权威清单。
+> **执行提示词**：见 [implementation-prompts-2026-11-19/](implementation-prompts-2026-11-19/)（每任务单元一份自包含 prompt，可直接投喂 Agent）。
 > **判级口径**：沿用[信息分层规范](../templates/information-layering-spec.md)——`已核验`（命令/文件实测）、`部分核验`（抽样）、`推断`（机制分析）、`假设`（未验证）。
 > **单一事实源纪律**：本文件只做**整合与指针**；指标定义归 `engine/tools/metrics-dictionary.json`，门禁规则归 `engine/docs/report-pipeline-system.md`，盲区口径归[决策交付规范](../templates/decision-delivery-spec.md)，本文件不复述其正文。
 > **读者**：决策者读第 0 节；执行者读第 4–6 节。
@@ -23,6 +24,13 @@
 - 门禁必须保持「历史不追溯、新报告必阻断、且不随时间失效」的滚动口径。
 
 **本期新增信息**：新增方案 1 份 ｜ 修正 2 条（IGI-02/IGI-03 由不达标转达标；I-04 由 0.40 转 1.00）｜ 无变化 4 条（门禁 0E、单测全绿、IGI-08 达标、盲区 0/15）｜ 假设核验进度 **6/8**（见 §7）。
+
+**v2.0 补充（2026-11-19 信息理论视角评估）**：
+
+- **[已核验] 结构层已成熟，缺口集中在「时间维度 + 度量真实性 + 消费端」**：实测 0 `[E]` / 7 `[W]`、38 项指标全实测、仅 I-08 不达标（盲区 0/15，阻塞 → 2027-03）、IGI-08 = 0.9945。
+- **[已核验] 新增 10 个补充实施项（T-01…T-10，见 §4.6）**：来源核验证据字段 / 代理指标抽样校准 / finding→规则回写 / 研究内核历史收口 / 词库空库 / 消费端反馈 / 分类版本号 / 文档级信源分级 / 不确定性置信度 / 信息影响分级。
+- **[已核验] 验证对齐协议升级（§5.1）**：双向追溯矩阵 + 「不引入新问题」回归清单（10 项）+ 抽样复核，替代单一自查表。
+- **[已核验] 并发执行设计（§4.7）**：worktree 隔离 + `task/<slug>-<session8>` 分支 + 独立性分组 + 合并顺序 + 完成前证据索引。
 
 ---
 
@@ -248,6 +256,85 @@
 | N-7 | 门禁确定性 E1 排查 | `optimization_gate` / records 写入 | 单跑 vs 并行各 3 次一致 | **已定位**（无 records 竞态；差异为 hub 重生成时点） |
 | N-8 | `publish_fingerprint --emit` | `publish_fingerprints.json` | 指纹漂移 0 | **已闭环**（20/20 一致） |
 
+### 4.6 信息理论补充实施项（v2.0 新增）
+
+> 来源：2026-11-19 信息理论视角评估中「信息质量改进方案 v1.2 未覆盖」的维度。判级同第二节。
+> **执行性质**：`工具侧`（可立即执行）/ `内容侧`（需研究或撰写）/ `阻塞`（外部依赖）。
+> 既有 P0/P1 项（盲区消号、逐期序列、摘要密度、工程噪声）见 §4.4，本表不重复。
+
+| ID | 动作 | 涉及文件 | 验收标准 | 门禁映射 | 优先级 | 执行性质 |
+|---|---|---|---|---|---|---|
+| **T-01** | 来源核验证据字段 + 内容指纹 | `source_check.py`（R8 扩展）、各线 `source_registry.json`、`metrics-dictionary.json` | 每条来源含 `evidence`（存档哈希 / 快照日 / 核验方式）；关键来源内容指纹变更可探测；单测覆盖 | `source_check` R8 | P1 | 工具侧 |
+| **T-02** | 代理指标抽样校准 | 在 `engine/tools/` 下新增 `proxy_calibration.py`；`metrics-dictionary.json` | 每季度 ≥200 断言人工核验；输出代理 precision / recall 与口径版本；「代理达标 ≠ 真值达标」说明入库 | `metric_audit` | P0 | 工具侧 |
+| **T-03** | finding→规则回写台账 | `engine/audit/`（新 schema + 工具）、`review-workflow.md` | 每个 L3 / 质量 finding 映射预防规则；规则命中次数可跟踪；重复 finding 自动提示 | `audit_tool` | P1 | 工具/流程 |
+| **T-04** | 研究内核历史警告收口 | 10 份历史周报 | 周期定位 / 传导量化 / 政策入模 / 盲区列示四项补齐；`research_kernel` 0 `[W]` | `research_kernel` | P1 | 内容侧 |
+| **T-05** | 词库空库补录 | `engine/vocabulary/data/{education,international}/terms.md` | VD-02 清零；词条 + 别名合规 | `vocab_drift` | P2 | 内容侧 |
+| **T-06** | 消费端反馈机制 | `build_hub.py` / 报告模板、设计文档 | 报告页脚反馈入口；读者回访流程；消费侧指标纳入 IGI | `hub` | P2 | 设计 + 工具 |
+| **T-07** | 分类版本号 + 互斥性校验 | `engine/tools/validate_layout.py` / `layout.json` | 分类体系带版本号；跨主题归属唯一性检查；变更影响评估留痕 | `validate_layout` | P2 | 工具侧 |
+| **T-08** | 文档级 / 陈述级信源分级 | `source_check.py`、各线 `source_registry.json` | `document_tier` / `statement_type` 字段与校验；机构 tier 仅作先验 | `source_check` | P1 | 工具侧 |
+| **T-09** | 不确定性置信度字段 | `metrics-dictionary.json`、`decision_hub_check.py`、报告模板 | 关键推断带区间 / 置信度；决策卡含置信度；四级标签配操作性判定规则 | `decision_hub` | P1 | 工具 + 内容 |
+| **T-10** | 信息影响分级与披露 | `information-layering-spec.md` / 报告模板 | 高影响主题（就业 / 签证 / 投资）强制置信区间与披露强度 | `info_density` | P2 | 文档 + 内容 |
+
+### 4.7 并发执行设计（多 Agent / 多会话）
+
+**隔离方式**：每个任务单元在独立 git worktree 中执行，分支 `task/<slug>-<session8>`（`session8` = 会话标识 8 位）；禁止直推 `main`；经 `python engine/tools/repo_sync.py run --gate` 提交，CI 走 PR。
+
+**独立性分组**（同组文件交集最小，可并行）：
+
+| 组 | 任务单元 | 文件交集 | 可并行 |
+|---|---|---|---|
+| G1 | T-01 → T-08 | 均涉 `source_check.py` + registry schema | ❌ 串行（同一工具，T-08 排队） |
+| G2 | T-02 / T-07 | `metrics-dictionary.json`（只加备注）/ `validate_layout.py` | ✅ |
+| G3 | T-03 / T-06 | `engine/audit/` / `build_hub.py` | ✅ |
+| G4 | T-04 / T-05 / T-09 / T-10 | 内容 / 词库 / 模板（不同业务线） | ✅ |
+
+**合并顺序**：G1 → G2 → G3 → G4。每组合并前跑 `--only` 相关门禁 + 单测；合并后跑全量门禁。
+
+**冲突规避**：
+- 同一工具文件（`source_check.py`）只允许一个任务单元修改，另一个排队；
+- `metrics-dictionary.json` 只允许「新增字段 / 备注」，不得改既有阈值；
+- 内容侧任务按业务线目录隔离，禁止跨线改文件。
+
+**完成前证据索引**（每个任务单元必须产出）：
+1. 变更文件清单 + 关键 diff 摘要；
+2. 验证命令与输出（单测 / 门禁 `--only`）；
+3. 对齐声明：本任务对应方案条目 ID + 验收标准逐条映射；
+4. 回归声明：未引入新问题的证据（见 §5.1）。
+
+### 4.8 并发执行记录（2026-11-19 第一波）
+
+| 任务 | 分支 | 提交 | 状态 |
+|---|---|---|---|
+| T-01 | `task/source-evidence-a1e5c9f2` | `7d43984` | 已合并 |
+| T-02 | `task/proxy-calibration-b2f6d0a3` | `c6508ec` | 已合并（消解 `metrics-dictionary.json` 冲突：保留 T-01 `note` + T-02 `calibration`） |
+| T-03 | `task/finding-rule-c3a7e1b4` | `356ec38` | 已合并 |
+
+**整合后回归（实测）**：`optimization_gate` 0 `[E]` / 8 `[W]`；`unittest discover` 748 OK（skipped=1）；`metric_registry` 38 项实测、不达标仅 I-08、IGI-08 = 0.9945；`check_links` 通过；`publish_fingerprint` 漂移经 `git diff origin/main` 为空确认为**既有问题**（CI 提交 `c44174e` 改报告未重采指纹），非本次引入。
+
+### 4.9 并发执行记录（2026-11-19 第二波）
+
+| 任务 | 分支 | 提交 | 状态 |
+|---|---|---|---|
+| T-04 | `task/research-kernel-d4b8f2c5` | `8806632` | 已合并（实测 **10 份报告**，非摘要所述 2 份；`research_kernel` 0 `[W]`） |
+| T-05 | `task/vocab-empty-e5c9a3d6` | `b601c80` | 已合并（education 45 + international 68 = 113 条；`vocab_drift` 0 `[W]`） |
+| T-06 | `task/consumer-feedback-f6d0b4e7` | `861108b` | 已合并（`build_hub --check` 通过；消费指标草案入库，标 `probe`） |
+| T-07 | `task/classification-version-a7e1c5f8` | `99ca0f4` | 已合并（`classification_version=2026-11-19.1`；互斥检查先 `[W]`） |
+
+**整合后回归（实测）**：`optimization_gate` 0 `[E]` / 6 `[W]`；`unittest discover` 763 OK（skipped=1）；`metric_registry` 38 项实测、不达标仅 I-08；`validate_layout` / `page_build_check`（22 通过 0E0W）/ `build_hub --check` / `check_links` 全通过。
+
+### 4.10 并发执行记录（2026-11-19 第三波）
+
+| 任务 | 分支 | 提交 | 状态 |
+|---|---|---|---|
+| T-08 | `task/document-tier-b8f2d6a9` | `09340df` | 已合并（`document_tier` / `statement_type` + 13 用例；修复 partial 中 A-01 行首误删） |
+| T-09 | `task/uncertainty-confidence-c9a3e7b0` | `940ab6c` | 已合并（四级判定规则 + `confidence` + 22 用例；dubai 报告 2 张决策卡含 confidence） |
+| T-10 | `task/impact-tiering-d0b4f8c1` | `7c6788b` | 已合并（§七 影响分级 + 5 条 business-config `impact_tier` + ID-09 + 7 用例） |
+
+> 第三波首派被中断，改用**续做**：新 Agent 进入原 worktree 审查 partial 改动后补全（T-08 核心代码、T-09 近完整、T-10 仅规范）。
+> 冲突：`information-layering-spec.md` 版本记录（T-09 / T-10 各加 v1.1 行）→ 合并为一行。
+
+**整合后回归（实测）**：`optimization_gate` 0 `[E]` / 8 `[W]`（新增 `[W]` 均为可选字段覆盖率 / 历史项，已登记）；`unittest discover` 789 OK（skipped=1）；`metric_registry` 38 项实测、不达标仅 I-08、IGI-08 = 0.9946；`validate_layout` / `page_build_check`（22 通过 0E0W）/ `build_hub --check` / `check_links` 全通过。
+
 ---
 
 ## 5. 验证对齐清单（确保对齐优化方案的验证清单）
@@ -274,6 +361,48 @@
 | V-16 | 指纹漂移 | 0 | **0** | **已达成** | N-8 `--emit` |
 
 **验证对齐结论**：**15 项已达成 / 1 项未达成（V-9 I-08，阻塞 → 2027-03）**；V-14 因 I-08 记「部分」。原未达成项（V-9 除外）均由 N 类动作收口。
+
+### 5.1 验证对齐协议（双向追溯 + 不引入新问题）
+
+**A. 双向追溯矩阵**（方案条目 ↔ 实施工件 ↔ 验收证据）：
+
+| 方案条目 | 实施工件（文件 / 提交） | 验收证据（命令 / 值） | 对齐判定 |
+|---|---|---|---|
+| T-01 | `source_check.py` / registry（提交 `7d43984`） | `--only source_check` 0 `[E]`；`test_source_check` 82 OK；抽样 3 条含 `evidence` | **已闭环**（2026-11-19） |
+| T-02 | `proxy_calibration.py` / 字典（提交 `c6508ec`） | `test_proxy_calibration` 29 OK；IGI-05 试跑 precision 0.802 / recall 0.9875（合成真值演示） | **已闭环**（2026-11-19） |
+| T-03 | `engine/audit/` schema + 工具（提交 `356ec38`） | `test_finding_rule` 18 OK；14 项 finding 映射率 100%；`match` 命中 13 条 | **已闭环**（2026-11-19） |
+| T-04 | 10 份历史报告（提交 `8806632`） | `--only research_kernel` 0 `[W]`；`page_build_check` / `compliance_check` 通过 | **已闭环**（2026-11-19） |
+| T-05 | `terms.md` × 2（提交 `b601c80`） | `--only vocab_drift` 0 `[W]`；词条 113 条、check 0 警告 | **已闭环**（2026-11-19） |
+| T-06 | `build_hub.py` / 模板（提交 `861108b`） | `build_hub --check` 通过；反馈入口存在；消费指标草案 `probe` 入库 | **已闭环**（2026-11-19） |
+| T-07 | `validate_layout.py` / `layout.json`（提交 `99ca0f4`） | `test_tools` 120 OK；`validate_layout` 通过；`classification_version` 存在 | **已闭环**（2026-11-19） |
+| T-08 | `source_check.py` / registry（提交 `09340df`） | `test_source_check` 95 OK；`--only source_check` 0 `[E]`；抽样含 `document_tier` | **已闭环**（2026-11-19） |
+| T-09 | 字典 / `decision_hub_check.py`（提交 `940ab6c`） | `test_decision_hub` 22 OK；规范 §2.4/§2.5；dubai 报告含 `confidence`；`--only decision_hub` 0 `[E]` | **已闭环**（2026-11-19） |
+| T-10 | 规范 / 模板（提交 `7c6788b`） | 规范 §七 分级矩阵；5 条 business-config `impact_tier`；`test_info_density` 24 OK；`--only info_density` 0 `[E]` | **已闭环**（2026-11-19） |
+
+**B. 对齐判定规则**：
+- **全覆盖**：方案每条都有对应工件与证据；
+- **无越界**：工件不修改方案外文件（`git diff --name-only` 核对）；
+- **验收达标**：证据值满足方案验收标准；
+- **判级**：`已核验`（命令实测）/ `部分核验`（抽样）。
+
+**C. 「不引入新问题」回归清单**（任一项失败即回滚）：
+
+| # | 回归项 | 命令 | 通过判据 |
+|---|---|---|---|
+| R-REG-1 | 统一门禁 | `python engine/tools/optimization_gate.py` | 0 `[E]`；新增 `[W]` 已登记 |
+| R-REG-2 | 单元测试 | `python -m unittest discover -s engine/tests -p "test_*.py"` | 全绿；数量 ≥ 684 |
+| R-REG-3 | 指标体检 | `python engine/tools/metric_registry.py audit --coverage` | measured = 38；不达标 ≤ 1（仅 I-08） |
+| R-REG-4 | 审计登记 | `python engine/audit/scripts/audit_tool.py status` | 登记报告率 100% |
+| R-REG-5 | 链接 / 死链 | `python engine/tools/check_links.py`；`source_check --probe` | 死链 0 |
+| R-REG-6 | 发布指纹 | `python engine/tools/publish_fingerprint.py --check` | 漂移 0 |
+| R-REG-7 | 结构 / 页面 | `validate.py` / `validate_layout.py` / `page_build_check.py` | 0E |
+| R-REG-8 | 信息差指数 | `metric_registry.py audit` | IGI-08 ≥ 0.9945（不退化） |
+| R-REG-9 | 文档一致性 | `prompt_consistency` / `naming` / `model_contract` | 无新增警告 |
+| R-REG-10 | 可回滚 | 分支 / 补丁 | 每个任务单元可独立回滚 |
+
+**D. 抽样复核**：每个任务单元抽 ≥3 个样本，由非执行方（另一 Agent / 人工）按验收标准复核，一致率 ≥ 95%。
+
+**E. 验证报告**：执行后产出 `verification-report-<date>.md`，含追溯矩阵填充、回归结果、抽样结论、遗留项。
 
 ---
 
@@ -324,4 +453,5 @@
 | 版本 | 日期 | 变更 | 说明 |
 |---|---|---|---|
 | v1.0 | 2026-11-19 | 初始版本 | 整合目标对齐 / 信息质量 / 缺口 / 台账；双视角（软件工程 + 信息理论）闭环；16 项验证对齐清单；N 类新增项；闭环机制 |
-| v1.1 | 2026-11-19 | 验证对齐收口 | N-1…N-8 全部闭环；§1 基线刷新（0E/7W、684 单测、不达标 1、IGI-08 0.9945、登记 20/20）；§4.5 / §5 / §6 状态更新；唯一未闭环 V-9（I-08 阻塞 2027-03） |
+| v1.1 | 2026-11-19 | 验证对齐收口 | N-1…N-8 全部闭环；§1 基线刷新（0E/7W、684 单测、不达标 1、IGI-08 0.9945、登记 20/20）；§4.5 / §5 / §6 状态更新；唯一未闭环 V-9（I-08 阻塞 2027-03）。合并 PR #93（`47ed028`）；CI 审计回填 PR #94（`1b80992`，20/20 `audited` 4/4） |
+| v2.0 | 2026-11-19 | 信息理论补充 + 并发执行 | 实测基线刷新；新增 §4.6（T-01…T-10）/ §4.7（并发设计）/ §5.1（验证对齐协议）；执行提示词目录 `implementation-prompts-2026-11-19/` |

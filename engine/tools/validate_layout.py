@@ -7,12 +7,15 @@
 - 命名规范：全部目录段符合 kebab-case（layout.naming.pattern）
 - 地域白名单：region 维度段命中 layout.regions
 - 维度声明：维度序列自洽（无重复、无未登记维度名）；先后顺序由 layout.json 按主题声明（economy 为 region→category，tech 等主题为 category→region）；optional_dimensions 必须是已声明维度
+- 分类版本：classification_version 存在且格式为 YYYY-MM-DD.<n>；changelog 条目字段齐全、版本唯一、覆盖当前版本号
+- 跨主题互斥性：不同主题的业务线归一化后重合度 > 0.9 判疑似重复分类（先 [W] 不阻断）
 
-退出码：0 = 通过；1 = 存在错误；2 = 仅警告（含已注册未创建的主题）。
+退出码：0 = 通过；1 = 存在错误；2 = 仅警告（含已注册未创建的主题、跨主题疑似重复）。
 
 用法：
     python engine/tools/validate_layout.py
     python engine/tools/validate_layout.py --check   # 与缺省行为一致（显式声明）
+    python engine/tools/validate_layout.py --impact  # 追加输出分类变更受影响报告清单
 """
 from __future__ import annotations
 
@@ -26,6 +29,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parent))
 from _common import (  # noqa: E402
     ROOT,
     iter_business_dirs,
+    iter_business_reports,
     load_layout,
     resolve_segments,
 )
@@ -33,6 +37,13 @@ from _common import (  # noqa: E402
 ERRORS: list[str] = []
 WARNINGS: list[str] = []
 INFOS: list[str] = []
+
+# 分类体系版本号格式：YYYY-MM-DD.<n>（n 为单调递增序号）
+CLASSIFICATION_VERSION_RE = re.compile(r"^\d{4}-\d{2}-\d{2}\.\d+$")
+# changelog 条目必备字段
+CHANGELOG_FIELDS = ("version", "date", "summary")
+# 跨主题互斥性：归一化重合度阈值（> 0.9 判疑似，先 [W] 不阻断）
+CROSS_THEME_OVERLAP_THRESHOLD = 0.9
 
 
 def err(msg: str) -> None:
@@ -71,6 +82,95 @@ def check_dimension_priority(layout) -> None:
         for d in layout.optional_dims(theme):
             if d not in dims:
                 err(f"主题 {theme} 的 optional_dimensions 含未声明维度：{d}")
+
+
+def check_classification_version(layout) -> None:
+    """分类体系版本号存在性 + 格式校验，changelog 留痕一致性。"""
+    version = str(getattr(layout, "classification_version", "") or "")
+    if not version:
+        err("layout.json 缺少 classification_version（分类体系版本号，格式 YYYY-MM-DD.<n>）")
+        return
+    if not CLASSIFICATION_VERSION_RE.match(version):
+        err(f"classification_version 格式非法：{version!r}（期望 YYYY-MM-DD.<n>）")
+
+    changelog = getattr(layout, "classification_changelog", ()) or ()
+    if not changelog:
+        err("layout.json 缺少 classification changelog（分类变更留痕）")
+        return
+    versions: list[str] = []
+    for i, entry in enumerate(changelog):
+        if not isinstance(entry, dict):
+            err(f"classification changelog[{i}] 不是对象")
+            continue
+        missing = [k for k in CHANGELOG_FIELDS if k not in entry]
+        if missing:
+            err(f"classification changelog[{i}] 缺字段：{missing}")
+            continue
+        ev = str(entry.get("version", ""))
+        if not CLASSIFICATION_VERSION_RE.match(ev):
+            err(f"classification changelog[{i}].version 格式非法：{ev!r}（期望 YYYY-MM-DD.<n>）")
+        ed = str(entry.get("date", ""))
+        if not re.fullmatch(r"\d{4}-\d{2}-\d{2}", ed):
+            err(f"classification changelog[{i}].date 格式非法：{ed!r}（期望 YYYY-MM-DD）")
+        if not str(entry.get("summary", "")).strip():
+            err(f"classification changelog[{i}].summary 为空")
+        versions.append(ev)
+    if len(set(versions)) != len(versions):
+        err("classification changelog 存在重复版本号")
+    if version not in versions:
+        err(f"classification_version {version} 未出现在 changelog 中（变更未留痕）")
+
+
+def normalize_classification_tokens(text: str) -> frozenset[str]:
+    """归一化分类签名：小写、按非字母数字切词、去空。"""
+    return frozenset(t for t in re.split(r"[^a-z0-9]+", (text or "").lower()) if t)
+
+
+def classification_overlap(a: str, b: str) -> float:
+    """两个分类签名的归一化重合度（词级 Jaccard，0..1）。"""
+    ta, tb = normalize_classification_tokens(a), normalize_classification_tokens(b)
+    if not ta or not tb:
+        return 0.0
+    return len(ta & tb) / len(ta | tb)
+
+
+def _business_signature(layout, business) -> str:
+    """业务线的跨主题分类签名：剔除 region 维度段，保留 category / 细分段。"""
+    dims = layout.dimensions(business.theme)
+    d = business.dim_map
+    return " ".join(d[dim] for dim in dims if dim != "region" and dim in d)
+
+
+def _cross_theme_warnings(entries: list[tuple[str, str, str]],
+                          threshold: float = CROSS_THEME_OVERLAP_THRESHOLD) -> list[str]:
+    """跨主题互斥性检查（纯函数，供单测）。
+
+    entries: [(theme, rel, signature), ...]；不同主题且归一化重合度 > threshold
+    判疑似重复分类。返回告警文本（先 [W]，不阻断）。
+    """
+    out: list[str] = []
+    for i in range(len(entries)):
+        theme_a, rel_a, sig_a = entries[i]
+        for j in range(i + 1, len(entries)):
+            theme_b, rel_b, sig_b = entries[j]
+            if theme_a == theme_b:
+                continue
+            score = classification_overlap(sig_a, sig_b)
+            if score > threshold:
+                out.append(
+                    f"跨主题疑似重复分类（重合度 {score:.2f}）：{rel_a} ↔ {rel_b}"
+                )
+    return out
+
+
+def check_cross_theme_exclusive(layout, threshold: float = CROSS_THEME_OVERLAP_THRESHOLD) -> None:
+    """跨主题互斥性：任一同质内容块应归属唯一主题；命中多个主题即告警（先 [W]）。"""
+    entries = [
+        (b.theme, b.rel, _business_signature(layout, b))
+        for b in iter_business_dirs()
+    ]
+    for msg in _cross_theme_warnings(entries, threshold=threshold):
+        warn(msg)
 
 
 def check_layout_integrity(layout) -> None:
@@ -175,10 +275,36 @@ def check_business_depth(layout) -> None:
             err(f"{b.rel}: 地域段「{region}」未在 layout.regions 白名单注册")
 
 
+def impact_lines(layout) -> list[str]:
+    """分类变更影响评估：各业务线受影响报告清单（确定性排序，无时间戳）。
+
+    分类体系变更（classification_version 递增）时，用于圈定需重跑 /
+    复核的报告范围；当前版本下的全部正式报告均计入。
+    """
+    version = str(getattr(layout, "classification_version", "") or "")
+    changelog = getattr(layout, "classification_changelog", ()) or ()
+    latest = ""
+    if changelog and isinstance(changelog[0], dict):
+        latest = str(changelog[0].get("summary", "")).strip()
+    out = [f"[IMPACT] classification_version={version or '未登记'}"
+           + (f"（最新变更：{latest}）" if latest else "")]
+    total = 0
+    for b in iter_business_dirs():
+        reports = iter_business_reports(b)
+        total += len(reports)
+        out.append(f"[IMPACT] 业务线 {b.rel}：{len(reports)} 份报告")
+        for r in reports:
+            out.append(f"[IMPACT]   - {r.rel}")
+    out.append(f"[IMPACT] 合计：{total} 份报告受影响")
+    return out
+
+
 def main() -> int:
     ap = argparse.ArgumentParser(description="目录结构校验（layout.json 单一事实源）")
     ap.add_argument("--check", action="store_true", help="与缺省行为一致（显式声明）")
-    ap.parse_args()
+    ap.add_argument("--impact", action="store_true",
+                    help="追加输出分类变更影响评估（各业务线受影响报告清单）")
+    args = ap.parse_args()
 
     try:
         layout = load_layout()
@@ -187,10 +313,12 @@ def main() -> int:
         return 1
 
     check_layout_integrity(layout)
+    check_classification_version(layout)
     check_root(layout)
     for theme in sorted(layout.themes):
         check_theme(theme, layout)
     check_business_depth(layout)
+    check_cross_theme_exclusive(layout)
 
     for i in INFOS:
         print(f"[INFO] {i}")
@@ -198,6 +326,10 @@ def main() -> int:
         print(f"[WARN] {w}")
     for err in ERRORS:
         print(f"[ERROR] {err}")
+
+    if args.impact:
+        for line in impact_lines(layout):
+            print(line)
 
     if ERRORS:
         print(f"目录结构校验失败：{len(ERRORS)} 项错误，{len(WARNINGS)} 项警告")

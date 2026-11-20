@@ -75,6 +75,7 @@
 - **信息等级**：四级标注与摘要引用约束见 `engine/templates/information-layering-spec.md` 第二 / 四节；market-sizing 数值按同规范标「假设乘积」并区间化。
 - **新增信息模块**：四要素模板见 `engine/templates/information-layering-spec.md` 第四节。
 - **指针引用**：决策卡以 `DC-<研究线>-<序号>` 引用；事实以 `[FC-…]` 引用。
+- **影响分级**：`impact_tier = high`（投资 / 就业均为 主场景；强制披露矩阵见 `engine/templates/information-layering-spec.md` §七）。
 
 ---
 

@@ -20,7 +20,15 @@
                 （登记豁免的官方 URL 单次 404 归不可达，见 probe-exemptions.json）
   R7 机构分级   机构级分级主数据与来源登记 / 业务配置的一致性（分级校验）
   R8 登记字段   来源登记条目 verify_status 取值合法（verified / media_unverified / unverifiable）
-                 且含 updated（YYYY-MM-DD）；缺失 / 非法仅 [W]（数据卫生，不阻断）
+                 且含 updated（YYYY-MM-DD）；缺失 / 非法仅 [W]（数据卫生，不阻断）。
+                 T-01 扩展：可选 evidence 字段（method / snapshot_date / archive_hash / note）
+                 让登记可自证；含 evidence 条目占比仅 [W] 提示，缺失不阻断。
+                 内容指纹：对 tier∈{1,2} 且 in_synthesis=true 的来源正文算 sha256，
+                 提供 --fingerprint 输出与上次快照比对（变更检测）。
+                 T-08 扩展：可选 document_tier（文档级）/ statement_type（陈述级）字段，
+                 消除「机构光环效应」（tier 1 机构的一切产出被默认当一手事实）。
+                 取值合法性 + 文档级不得高于机构 tier 允许上限，均 [W]（不阻断）；
+                 含 document_tier 条目占比仅 [W] 提示，缺失不阻断。
 
 gate-period 前置：周期早于 `--gate-period` 的报告为历史报告，R1–R6 的 [E] 前置
 降级为 [W]（不追溯阻断历史）；R7 结构性冲突（重复 source_id / 同机构不同分级）不降级。
@@ -38,10 +46,14 @@ P1-8），集中清理完成前死链只告警不阻断；到期后自动转 [E]
     python engine/tools/source_check.py --probe             # 自动探测外部 URL 可达性（R6）
     python engine/tools/source_check.py --coverage          # 输出来源登记覆盖率
     python engine/tools/source_check.py --self-test         # 内置合成用例自检
+    python engine/tools/source_check.py --fingerprint --registry <登记> --snapshot-dir <快照目录>
+    python engine/tools/source_check.py --fingerprint --registry <登记> --snapshot-dir <目录> \
+        --fingerprint-store <指纹库> --fingerprint-emit
 """
 from __future__ import annotations
 
 import argparse
+import hashlib
 import json
 import re
 import sys
@@ -61,6 +73,27 @@ REGISTRY_SCHEMA = "1.1"
 # R8 登记字段：verify_status 合法取值（「无法核实」自 P1-6 起纳入，不再只能降级表达）
 VERIFY_STATUS_VALUES = ("verified", "media_unverified", "unverifiable")
 UPDATED_RE = re.compile(r"^\d{4}-\d{2}-\d{2}$")
+
+# R8 evidence 可选字段（T-01）：让来源登记可自证（核验方式 / 快照日 / 存档哈希 / 备注）。
+# 字段定义归 metrics-dictionary.json 备注（单一事实源），本模块只做校验。
+EVIDENCE_METHODS = ("web_fetch", "manual", "pdf")
+EVIDENCE_KEYS = ("method", "snapshot_date", "archive_hash", "note")
+ARCHIVE_HASH_RE = re.compile(r"^[0-9a-f]{64}$")
+
+# T-08 文档级 / 陈述级信源分级（可选字段）：在机构级 tier 之外刻画「这一份产出」
+# 的可信度，消除机构光环效应。字段定义归 metrics-dictionary.json 备注（单一事实源），
+# 本模块只做校验。缺失仅汇总 [W]（数据卫生，不阻断）。
+DOCUMENT_TIER_VALUES = ("primary_data", "official_release", "industry_report", "media", "opinion")
+STATEMENT_TYPE_VALUES = ("fact", "restatement", "forecast", "opinion")
+# 文档级相对机构 tier 的上限（机构 tier 越低越权威）：tier 4 媒体转述机构不得标
+# primary_data；tier 3 挂牌门户不得标 primary_data / official_release。
+# 机构 tier 1 / 2 不设上限（官方 / 行业机构可产出一手数据与官方发布）。
+DOCUMENT_TIER_CEILING = {3: {"media", "opinion"}, 4: {"media"}}
+DOCUMENT_TIER_RANK = {v: i for i, v in enumerate(DOCUMENT_TIER_VALUES)}
+
+# 内容指纹快照文件后缀（--fingerprint --snapshot-dir 读取 <source_id>.txt/.md）
+SNAPSHOT_SUFFIXES = (".txt", ".md")
+FINGERPRINT_STORE_SCHEMA = "1.0"
 
 # R6 死链阻断的生效周期：链接腐烂修复属内容维护（见目标对齐方案 P1-8），
 # 集中清理完成前死链只告警不阻断；到期后自动转 [E]（滚动基线下不失效）。
@@ -485,12 +518,103 @@ def check_institution_consistency(registry: dict, master: dict, config_text: str
     return issues
 
 
+def evidence_coverage(registry: dict) -> dict:
+    """evidence 字段覆盖统计 -> {total, with_evidence, missing, ratio}。
+
+    含 evidence 视为「有核验证据」：evidence 为对象且 method / snapshot_date /
+    archive_hash / note 至少一项非空。空登记 ratio=1.0（不产生告警）。
+    """
+    sources = registry.get("sources", []) if isinstance(registry, dict) else []
+    total = len(sources)
+    with_evidence = 0
+    for s in sources:
+        ev = s.get("evidence")
+        if isinstance(ev, dict) and any(ev.get(k) for k in EVIDENCE_KEYS):
+            with_evidence += 1
+    return {"total": total, "with_evidence": with_evidence,
+            "missing": total - with_evidence,
+            "ratio": (with_evidence / total) if total else 1.0}
+
+
+def _evidence_field_issues(s: dict, sid: str) -> list[str]:
+    """单条 evidence 字段合法性问题（文本列表，由 check_registry_fields 组装为 [W]）。"""
+    ev = s.get("evidence")
+    if ev is None:
+        return []
+    if not isinstance(ev, dict):
+        return [f"R8 登记字段：{sid} 的 evidence 须为对象（{' / '.join(EVIDENCE_KEYS)}）"]
+    out: list[str] = []
+    method = ev.get("method")
+    if method is not None and method not in EVIDENCE_METHODS:
+        out.append(f"R8 登记字段：{sid} evidence.method「{method}」非法"
+                   f"（须为 {' / '.join(EVIDENCE_METHODS)}）")
+    snap = ev.get("snapshot_date")
+    if snap is not None and not UPDATED_RE.match(str(snap).strip()):
+        out.append(f"R8 登记字段：{sid} evidence.snapshot_date「{snap}」非法（须 YYYY-MM-DD）")
+    h = ev.get("archive_hash")
+    if h is not None and not ARCHIVE_HASH_RE.match(str(h).strip().lower()):
+        out.append(f"R8 登记字段：{sid} evidence.archive_hash「{h}」非法（须 64 位小写 sha256）")
+    return out
+
+
+def document_tier_coverage(registry: dict) -> dict:
+    """document_tier 字段覆盖统计 -> {total, with_document_tier, missing, ratio}。
+
+    含 document_tier 视为「已做文档级分级」：值为 DOCUMENT_TIER_VALUES 之一。
+    空登记 ratio=1.0（不产生告警）。
+    """
+    sources = registry.get("sources", []) if isinstance(registry, dict) else []
+    total = len(sources)
+    with_dt = sum(1 for s in sources if s.get("document_tier") in DOCUMENT_TIER_VALUES)
+    return {"total": total, "with_document_tier": with_dt,
+            "missing": total - with_dt,
+            "ratio": (with_dt / total) if total else 1.0}
+
+
+def _document_tier_field_issues(s: dict, sid: str,
+                                master: dict | None = None) -> list[str]:
+    """单条 document_tier / statement_type 字段合法性问题（文本列表）。
+
+    校验三类（均 [W]，不阻断）：
+      ① document_tier 取值 ∈ DOCUMENT_TIER_VALUES；
+      ② statement_type 取值 ∈ STATEMENT_TYPE_VALUES；
+      ③ 一致性：document_tier 不得高于机构 tier 允许上限（如 tier 4 不得标
+         primary_data）。机构未录入主数据时跳过 ③（无先验可比，不误报）。
+    """
+    out: list[str] = []
+    dt = s.get("document_tier")
+    if dt is not None and dt not in DOCUMENT_TIER_VALUES:
+        out.append(f"R8 登记字段：{sid} document_tier「{dt}」非法"
+                   f"（须为 {' / '.join(DOCUMENT_TIER_VALUES)}）")
+    st = s.get("statement_type")
+    if st is not None and st not in STATEMENT_TYPE_VALUES:
+        out.append(f"R8 登记字段：{sid} statement_type「{st}」非法"
+                   f"（须为 {' / '.join(STATEMENT_TYPE_VALUES)}）")
+    if dt in DOCUMENT_TIER_VALUES and master is not None:
+        inst = master_lookup(master, str(s.get("publisher", "")))
+        if inst is not None:
+            inst_tier = int(inst.get("tier"))
+            ceiling = DOCUMENT_TIER_CEILING.get(inst_tier)
+            if ceiling is not None and dt not in ceiling:
+                out.append(
+                    f"R8 登记字段：{sid} document_tier「{dt}」高于机构 tier={inst_tier}"
+                    f"（{inst.get('name')}）允许上限 "
+                    f"{' / '.join(sorted(ceiling, key=lambda v: DOCUMENT_TIER_RANK[v]))}。")
+    return out
+
+
 def check_registry_fields(registry: dict, ctx: dict | None = None) -> list[tuple[str, str]]:
     """R8 登记字段完备 -> [(level, msg)]（仅 [W]，数据卫生不阻断）。
 
     verify_status ∈ verified / media_unverified / unverifiable；updated 为 YYYY-MM-DD。
     缺失 / 非法只告警，不追溯阻断（与 R1–R6 的 gate-period 降级口径一致）。
+    T-01：evidence 为可选字段，逐条校验合法性并统计覆盖率；缺失仅汇总 [W] 提示，
+    不阻断（数据卫生）。
+    T-08：document_tier / statement_type 为可选字段，逐条校验取值合法性 +
+    文档级 ≤ 机构 tier 上限的一致性，并统计 document_tier 覆盖率；缺失仅汇总 [W]。
     """
+    ctx = ctx or {}
+    master = ctx.get("master")
     issues: list[tuple[str, str]] = []
     sources = registry.get("sources", []) if isinstance(registry, dict) else []
     for s in sources:
@@ -501,7 +625,147 @@ def check_registry_fields(registry: dict, ctx: dict | None = None) -> list[tuple
                                  f"（须为 {' / '.join(VERIFY_STATUS_VALUES)}）"))
         if not UPDATED_RE.match(str(s.get("updated", "")).strip()):
             issues.append(("W", f"R8 登记字段：{sid} 缺 updated（YYYY-MM-DD）"))
+        issues.extend(("W", m) for m in _evidence_field_issues(s, sid))
+        issues.extend(("W", m) for m in _document_tier_field_issues(s, sid, master))
+    cov = evidence_coverage(registry)
+    if cov["total"] and cov["missing"]:
+        issues.append(("W", f"R8 登记字段：evidence 覆盖 {cov['with_evidence']}/{cov['total']}"
+                             f"（{cov['ratio']:.1%}），{cov['missing']} 条缺核验证据"
+                             f"（数据卫生，不阻断）"))
+    dt_cov = document_tier_coverage(registry)
+    if dt_cov["total"] and dt_cov["missing"]:
+        issues.append(("W", f"R8 登记字段：document_tier 覆盖 "
+                             f"{dt_cov['with_document_tier']}/{dt_cov['total']}"
+                             f"（{dt_cov['ratio']:.1%}），{dt_cov['missing']} 条缺文档级分级"
+                             f"（数据卫生，不阻断）"))
     return issues
+
+
+# ---------------------------------------------------------------- 内容指纹（T-01）
+
+def content_fingerprint(text: str) -> str:
+    """正文 sha256（十六进制；CRLF 归一为 LF，跨平台确定性）。
+
+    与 publish_fingerprint.fingerprint_file 同口径：工作区 CRLF / CI LF 不得影响指纹。
+    """
+    return hashlib.sha256(str(text).replace("\r\n", "\n").encode("utf-8")).hexdigest()
+
+
+def fingerprint_eligible(registry: dict) -> list[dict]:
+    """需内容指纹的来源：tier ∈ {1,2} 且 in_synthesis=true（关键合成来源）。"""
+    out: list[dict] = []
+    for s in registry.get("sources", []) if isinstance(registry, dict) else []:
+        if s.get("in_synthesis") and s.get("tier") in (1, 2):
+            out.append(s)
+    return out
+
+
+def collect_fingerprints(registry: dict, snapshots: dict[str, str]) -> dict[str, str]:
+    """{source_id: sha256}，仅含正文可用的合格来源（确定性排序）。"""
+    out: dict[str, str] = {}
+    for s in fingerprint_eligible(registry):
+        sid = str(s.get("source_id", "")).strip()
+        body = snapshots.get(sid)
+        if sid and body is not None:
+            out[sid] = content_fingerprint(body)
+    return dict(sorted(out.items()))
+
+
+def compare_fingerprints(prev: dict[str, str], current: dict[str, str]) -> dict:
+    """指纹漂移 -> {new, changed, removed}（与 publish_fingerprint.diff 同口径）。"""
+    new = sorted(set(current) - set(prev))
+    removed = sorted(set(prev) - set(current))
+    changed = sorted(k for k in set(prev) & set(current) if prev[k] != current[k])
+    return {"new": new, "changed": changed, "removed": removed}
+
+
+def load_snapshots(dir_path: Path) -> dict[str, str]:
+    """读取快照目录中的 <source_id>.txt/.md 正文 -> {source_id: text}（确定性排序）。"""
+    out: dict[str, str] = {}
+    if not Path(dir_path).is_dir():
+        return out
+    for p in sorted(Path(dir_path).iterdir()):
+        if p.is_file() and p.suffix.lower() in SNAPSHOT_SUFFIXES:
+            out[p.stem] = p.read_text(encoding="utf-8", errors="replace")
+    return out
+
+
+def load_fingerprint_store(path: Path) -> dict[str, str]:
+    """读取指纹库 -> {source_id: sha256}；缺失 / 非法返回空（不改变检测行为）。"""
+    p = Path(path)
+    if not p.exists():
+        return {}
+    try:
+        data = json.loads(p.read_text(encoding="utf-8"))
+    except (OSError, json.JSONDecodeError):
+        return {}
+    fps = data.get("fingerprints", {})
+    return fps if isinstance(fps, dict) else {}
+
+
+def build_fingerprint_store(fingerprints: dict[str, str]) -> dict:
+    return {
+        "schema_version": FINGERPRINT_STORE_SCHEMA,
+        "comment": "关键来源正文内容指纹（sha256，确定性无时间戳）。由 source_check.py "
+                   "--fingerprint --fingerprint-emit 生成；tier∈{1,2} 且 in_synthesis=true。",
+        "fingerprints": dict(sorted(fingerprints.items())),
+    }
+
+
+def emit_fingerprint_store(path: Path, fingerprints: dict[str, str]) -> None:
+    p = Path(path)
+    p.parent.mkdir(parents=True, exist_ok=True)
+    p.write_text(json.dumps(build_fingerprint_store(fingerprints), ensure_ascii=False, indent=2) + "\n",
+                 encoding="utf-8")
+
+
+def fingerprint_mode(registry_path: str, snapshot_dir: str | None,
+                     store_path: str | None = None, emit: bool = False) -> tuple[int, list[str]]:
+    """内容指纹模式：输出合格来源指纹，并与指纹库比对（变更检测）。
+
+    退出码：0 无漂移；2 存在新增 / 变更 / 移除（不阻断，提示 --fingerprint-emit）；
+    1 用法错误（缺 registry / snapshot-dir）。
+    """
+    lines: list[str] = []
+    if not registry_path:
+        return 1, ["[ERROR] --fingerprint 需同时给出 --registry <来源登记路径>"]
+    if not snapshot_dir:
+        return 1, ["[ERROR] --fingerprint 需同时给出 --snapshot-dir <快照目录>"]
+    registry = load_registry(ROOT / registry_path)
+    snapshots = load_snapshots(ROOT / snapshot_dir)
+    eligible = fingerprint_eligible(registry)
+    current = collect_fingerprints(registry, snapshots)
+    for s in eligible:
+        sid = str(s.get("source_id", "")).strip()
+        if sid in current:
+            lines.append(f"[FP] {sid} tier={s.get('tier')} {current[sid]}")
+        else:
+            lines.append(f"[FP] {sid} tier={s.get('tier')} <无正文快照>")
+    drift: dict = {"new": [], "changed": [], "removed": []}
+    if store_path:
+        store = load_fingerprint_store(ROOT / store_path)
+        drift = compare_fingerprints(store, current)
+        lines.append(f"[FP] 合格 {len(eligible)} 条；已登记 {len(store)} 条；"
+                     f"新增 {len(drift['new'])} / 变更 {len(drift['changed'])} / "
+                     f"移除 {len(drift['removed'])}")
+        for sid in drift["new"]:
+            lines.append(f"[NEW] {sid}")
+        for sid in drift["changed"]:
+            lines.append(f"[CHANGED] {sid}: {store[sid][:12]} -> {current[sid][:12]}")
+        for sid in drift["removed"]:
+            lines.append(f"[REMOVED] {sid}")
+    else:
+        lines.append(f"[FP] 合格 {len(eligible)} 条；有正文快照 {len(current)} 条")
+    if emit:
+        if not store_path:
+            return 1, lines + ["[ERROR] --fingerprint-emit 需同时给出 --fingerprint-store <路径>"]
+        emit_fingerprint_store(ROOT / store_path, current)
+        lines.append(f"[EMIT] 内容指纹已写入 {store_path}：{len(current)} 条（已更新基线）")
+        return 0, lines
+    if drift["new"] or drift["changed"] or drift["removed"]:
+        lines.append("存在内容指纹漂移：请核对正文快照后运行 --fingerprint-emit")
+        return 2, lines
+    return 0, lines
 
 
 # ---------------------------------------------------------------- 覆盖率度量
@@ -906,6 +1170,7 @@ def run(only_file: str | None, gate_period: str | None = None,
 
         issues = check_report(text, registry, ctx)
         issues += check_institution_consistency(registry, master, ctx.get("config_text", ""), ctx)
+        ctx["master"] = master
         issues += check_registry_fields(registry, ctx)
 
         for level, msg in issues:
@@ -1040,12 +1305,28 @@ def main() -> int:
                     help="网络不可达仅告警（CI 口径）；默认严格模式将超时/反爬也计为死链")
     ap.add_argument("--coverage", action="store_true", help="输出来源登记覆盖率")
     ap.add_argument("--emit", help="把链接可达率探测汇总落盘为审计记录（仓库相对路径 JSON）")
+    ap.add_argument("--fingerprint", action="store_true",
+                    help="内容指纹模式：对 tier∈{1,2} 且 in_synthesis=true 的来源输出正文 sha256")
+    ap.add_argument("--snapshot-dir", help="来源正文快照目录（<source_id>.txt/.md，仓库相对路径）")
+    ap.add_argument("--fingerprint-store", help="内容指纹库路径（仓库相对或绝对）；给出时做变更检测")
+    ap.add_argument("--fingerprint-emit", action="store_true",
+                    help="把当前内容指纹写入 --fingerprint-store")
     ap.add_argument("--quiet", action="store_true", help="仅输出汇总")
     ap.add_argument("--self-test", action="store_true", help="内置合成用例自检")
     args = ap.parse_args()
 
     if args.self_test:
         return _self_test()
+
+    if args.fingerprint:
+        code, fp_lines = fingerprint_mode(args.registry, args.snapshot_dir,
+                                         store_path=args.fingerprint_store,
+                                         emit=args.fingerprint_emit)
+        for line in fp_lines:
+            print(line)
+        if code == 2:
+            return 2
+        return code
 
     if args.gate_period and not valid_period(args.gate_period):
         print(f"[ERROR] --gate-period 无法解析：{args.gate_period}（支持 auto / YYYY-MM / YYYY-Qn / YYYY）")

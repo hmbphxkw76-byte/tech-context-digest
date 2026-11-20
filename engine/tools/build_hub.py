@@ -15,6 +15,9 @@ reader.html 直接复用 index.html 的设计令牌与公共组件（筛选栏 /
 页脚 / 回顶），在其上追加阅读器专属布局（头部 / 侧栏 / iframe / 移动端抽屉），
 响应式断点与主页一致（960px / 560px）。
 
+消费端反馈入口（T-06）：两页页脚统一输出「反馈 / 纠错」静态链接
+（report_style.feedback_link，data-feedback 占位，不引入外部服务；消费侧指标 probe 未接线）。
+
 --check 模式（ci.yml 使用）：重新计算内容与现有文件比对；
 - 文件存在且一致 -> 退出码 0
 - 文件存在但过期 -> 退出码 1（阻断合并）
@@ -45,6 +48,7 @@ from _common import (  # noqa: E402
     prev_period,
     report_title,
 )
+from report_style import feedback_link  # noqa: E402
 
 CYCLE_LABEL = {"monthly": "月度", "quarterly": "季度", "annual": "年度", "baseline": "基线", "weekly": "周报"}
 
@@ -181,6 +185,8 @@ a:hover{text-decoration:underline}
 /* ── 页脚 / 回到顶部 ── */
 .footer{text-align:center;color:var(--ink3);font-size:11.5px;padding:26px 20px 36px;
   line-height:1.9;border-top:1px solid var(--line)}
+.feedback-link{color:var(--navy2);text-decoration:none;border-bottom:1px dotted #9db9da;font-weight:600}
+.feedback-link:hover{color:var(--navy);border-bottom:1px solid var(--blue)}
 .totop{position:fixed;right:22px;bottom:22px;width:40px;height:40px;border-radius:50%;
   background:var(--navy);color:#fff;border:0;font-size:17px;cursor:pointer;
   box-shadow:0 4px 14px rgba(15,35,56,.3);opacity:0;pointer-events:none;
@@ -878,6 +884,7 @@ def render_hub(topics: list[Topic]) -> str:
         '<footer class="footer">',
         "<p>由 <code>engine/tools/build_hub.py</code> 自动生成 · "
         "报告源文件见各业务线 <code>reports/</code> 目录</p>",
+        f"<p>{feedback_link()}</p>",
         "</footer>",
         '<button class="totop" id="totop" aria-label="回到顶部">↑</button>',
         f"<script>{_SCRIPT}</script>",
@@ -999,6 +1006,7 @@ def render_reader(topics: list[Topic]) -> str:
         '<footer class="footer">',
         "<p>由 <code>engine/tools/build_hub.py</code> 自动生成 · "
         "报告源文件见各业务线 <code>reports/</code> 目录</p>",
+        f"<p>{feedback_link()}</p>",
         "</footer>",
         '<button class="totop" id="totop" aria-label="回到顶部">↑</button>',
         f"<script>{_READER_SCRIPT}</script>",

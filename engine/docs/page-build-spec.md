@@ -54,6 +54,11 @@
   <h2 class="sec" id="s1">一、...</h2>
   ...
 </main>
+<footer class="report-foot">   <!-- 统一含「反馈 / 纠错」静态入口（T-06，无 JS 依赖） -->
+  <div class="wrap">
+    <p><a class="feedback-link" data-feedback="consumer-feedback-v1" href="..." target="_blank" rel="noopener">反馈 / 纠错</a></p>
+  </div>
+</footer>
 ```
 
 **结构约束**：
@@ -114,6 +119,7 @@
 | 本期更新 | `.tag-updated` | hub | 环比高亮徽标（hover 显示环比基期） |
 | 基期 | `.base-note` | hub | 全局环比基期标注 |
 | 回顶 | `.totop` | hub / 报告 | 滚动超过阈值出现 |
+| 反馈入口 | `.feedback-link` + `data-feedback` | hub / 报告 | 静态链接（仓库 issue 追踪器）+ data 占位；无外部服务 / 无 JS 依赖（T-06） |
 | 跳转 | `.skip-link` | **全部** | 键盘可跳到主内容 |
 
 ---

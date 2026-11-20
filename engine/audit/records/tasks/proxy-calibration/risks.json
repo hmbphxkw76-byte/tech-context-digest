@@ -1,0 +1,8 @@
+[
+  {
+    "description": "校准工具误判",
+    "id": "R-1",
+    "mitigation": "分层抽样 + 单测",
+    "owner": ""
+  }
+]

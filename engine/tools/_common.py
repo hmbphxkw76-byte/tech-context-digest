@@ -16,6 +16,9 @@ content/tech/weekly-roundup）；省略时剩余段按声明顺序剔除 region 
 
 硬性规则：维度先后按主题声明，不得在未改 layout.json 的情况下倒置；新增主题须在
 layout.json 的 themes 中显式声明 dimensions。
+
+分类体系版本号：layout.json 的 classification_version（YYYY-MM-DD.<n>）+ changelog
+留痕分类变更；跨主题互斥性检查见 validate_layout.py（重合度 > 0.9 判疑似，先 [W]）。
 """
 from __future__ import annotations
 
@@ -58,6 +61,9 @@ class Layout:
     regional_segment: str = ""
     theme_segments: dict[str, str] = field(default_factory=dict)
     optional_dimensions: dict[str, tuple[str, ...]] = field(default_factory=dict)
+    # 分类体系版本号（YYYY-MM-DD.<n>）与变更留痕；缺省空串 / 空元组表示未登记
+    classification_version: str = ""
+    classification_changelog: tuple[dict, ...] = ()
 
     def dimensions(self, theme: str) -> tuple[str, ...]:
         """主题的维度序列（如 ("region", "category")）。"""
@@ -112,6 +118,8 @@ def load_layout() -> Layout:
         regional_segment=default_segment,
         theme_segments=theme_segments,
         optional_dimensions=optional_dimensions,
+        classification_version=str(data.get("classification_version", "")),
+        classification_changelog=tuple(data.get("changelog", ())),
     )
 
 

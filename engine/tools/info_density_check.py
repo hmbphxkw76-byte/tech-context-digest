@@ -9,6 +9,8 @@
     ID-06 指针引用：关键指标以编号 + 指针引用
     ID-07 事实卡片：共享域报告使用 [FC-…] 指针
     ID-08 场景切片：业务配置声明场景；报告含对应切片或指针
+    ID-09 影响分级披露：高影响业务线（impact_tier: high）报告含置信区间 /
+        时效（读数时点）/ 免责 / 非专业建议四要素
     DC-05 版本治理：核验 / 收敛型报告含「读数时点」
 
 退出码：0 通过；1 存在 [E]；2 仅 [W]。
@@ -23,6 +25,7 @@ from __future__ import annotations
 import argparse
 import re
 import sys
+from functools import lru_cache
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
@@ -47,6 +50,16 @@ _COMMENT_RE = re.compile(r"<!--.*?-->", re.DOTALL)
 _STYLE_RE = re.compile(r"<(style|script)\b[^>]*>.*?</\1>", re.DOTALL | re.IGNORECASE)
 # 摘要内的口径/局限提示块不是结论，其「预校准（ex-ante）」等等级标记不应判为摘要越级
 _NOTE_RE = re.compile(r'<div class="(?:note|disc|disclaimer)"[^>]*>.*?</div>', re.DOTALL | re.IGNORECASE)
+
+# 高影响业务线强制披露四要素（INFORMATION-LAYERING-SPEC v1.1 §七，ID-09）
+# 字段名固定 impact_tier，取值 high / medium / low；分级由 business-config 声明。
+_IMPACT_TIER_RE = re.compile(r"impact_tier\s*[:：=]\s*(high|medium|low)")
+_IMPACT_ELEMENTS = (
+    ("置信区间", ("置信区间", "区间")),
+    ("时效声明", ("读数时点", "时效声明")),
+    ("免责", ("免责", "不构成投资建议", "不构成法律建议")),
+    ("非专业建议", ("非专业建议", "持牌专业人士")),
+)
 
 # 共享事实域（这些业务线的报告必须使用事实卡片指针）
 SHARED_FACT_DOMAINS = ("security", "industry-research", "competitive-intelligence")
@@ -102,6 +115,28 @@ def _has_summary(text: str) -> bool:
 
 def _boilerplate_copied(text: str) -> bool:
     return all(t in text for t in _BOILERPLATE_TIERS)
+
+
+@lru_cache(maxsize=None)
+def _impact_tier_for(business_line: str) -> str:
+    """业务线影响分级（business-config 声明 `impact_tier`；未声明按 low）。
+
+    只读 business-config，不解析报告正文；读取失败按未声明处理（不改变既有行为）。
+    """
+    if not business_line:
+        return ""
+    cfg = ROOT / business_line / "prompts" / "business-config.md"
+    try:
+        text = cfg.read_text(encoding="utf-8", errors="replace")
+    except OSError:
+        return ""
+    m = _IMPACT_TIER_RE.search(text)
+    return m.group(1) if m else ""
+
+
+def _missing_impact_disclosures(plain: str) -> list[str]:
+    """高影响强制披露四要素缺失项（置信区间 / 时效 / 免责 / 非专业建议）。"""
+    return [label for label, keys in _IMPACT_ELEMENTS if not any(k in plain for k in keys)]
 
 
 def check_text(text: str, business_line: str = "") -> list[tuple[str, str]]:
@@ -167,6 +202,13 @@ def check_text(text: str, business_line: str = "") -> list[tuple[str, str]]:
     if not any(k in plain for k in ("场景切片", "投资决策", "就业决策", "政策制定")):
         out.append(("ID-08", "未发现场景切片（投资决策 / 就业决策 / 政策制定）声明或切片"))
 
+    # ID-09 影响分级披露（高影响业务线强制四要素；存量补齐，[W] 不阻断）
+    if _impact_tier_for(business_line) == "high":
+        missing = _missing_impact_disclosures(plain)
+        if missing:
+            out.append(("ID-09", f"高影响业务线（impact_tier: high）缺强制披露要素："
+                                f"{'、'.join(missing)}（应为置信区间 / 时效 / 免责 / 非专业建议）"))
+
     # DC-05 版本治理
     if ("核验" in plain and "收敛" in plain) and "读数时点" not in plain:
         out.append(("DC-05", "核验 / 收敛型报告未标注「读数时点」"))
@@ -200,7 +242,7 @@ def _period_of(name: str) -> str:
 # P1-4（2026-11-19）：ID-02 移出 WARN_ONLY，改为滚动 gate-period——新报告
 # （period ≥ gate-period）判 [E]，历史报告判 [W]。ID-06 保持 [W]：指针引用为
 # 结构性软要求，存量报告补齐成本高且不影响结论可靠性，继续只告警不阻断。
-_WARN_ONLY = {"ID-06"}
+_WARN_ONLY = {"ID-06", "ID-09"}
 
 
 def _level_for(rule: str, is_new: bool) -> str:

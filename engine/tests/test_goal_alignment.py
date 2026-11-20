@@ -313,8 +313,20 @@ class TestVocabDrift(unittest.TestCase):
         self.assertEqual([r for r, _ in vocab_drift.check_sync_blocks()], [])
 
     def test_empty_theme_detected(self):
-        findings = dict(vocab_drift.check_theme_terms())
-        self.assertIn("VD-02", findings)
+        """合成用例：空词库主题必须可检出 VD-02；当前仓库六主题均非空。"""
+        import tempfile
+        from pathlib import Path as P
+        with tempfile.TemporaryDirectory() as d:
+            (P(d) / "empty").mkdir()
+            (P(d) / "empty" / "terms.md").write_text("", encoding="utf-8")
+            orig_dir, orig_layout = vocab_drift.TERMS_DIR, vocab_drift.load_layout
+            vocab_drift.TERMS_DIR = P(d)
+            vocab_drift.load_layout = lambda: type("L", (), {"themes": {"empty": ("空主题", ())}})()
+            try:
+                findings = dict(vocab_drift.check_theme_terms())
+            finally:
+                vocab_drift.TERMS_DIR, vocab_drift.load_layout = orig_dir, orig_layout
+            self.assertIn("VD-02", findings)
 
     def test_canonical_form_drift_detected(self):
         """P1-11 补录后仓库 VD-03 清零；检测逻辑用合成用例验证仍可检出。"""
