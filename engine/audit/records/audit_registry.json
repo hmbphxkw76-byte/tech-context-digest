@@ -1893,6 +1893,42 @@
           "audit_id": ""
         }
       }
+    },
+    "engine/report-audits/verification-report-2026-11-20.md": {
+      "title": "验证报告（VERIFICATION-REPORT v1.0）",
+      "kind": "audit",
+      "category": "audit-doc",
+      "business_line": "engine/report-audits",
+      "status": "draft",
+      "stages": {
+        "draft": false,
+        "initial": false,
+        "second": false,
+        "final": false
+      },
+      "mark": false,
+      "first_seen_at": "2026-11-20",
+      "evidence": {
+        "report": "engine/report-audits/verification-report-2026-11-20.md",
+        "business_line": "engine/report-audits",
+        "plans": [],
+        "gate": {
+          "entry": "engine/tools/optimization_gate.py",
+          "probe": true
+        },
+        "audit": {
+          "review": "",
+          "status": "draft",
+          "stages": {
+            "draft": false,
+            "initial": false,
+            "second": false,
+            "final": false
+          },
+          "mark_level": "none",
+          "audit_id": ""
+        }
+      }
     }
   }
 }
