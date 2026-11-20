@@ -244,6 +244,7 @@
 - **决策卡与行动协议**：决策卡字段与行动项五要素见 `engine/templates/decision-delivery-spec.md` 第一 / 三节。
 - **阈值校准**：首次中期回测 **2027-06**（提前于原计划 2027-12）；校准前标注口径见 `engine/templates/decision-delivery-spec.md` 第六节。
 - **场景切片**：主场景 **投资决策**；次场景 **政策制定**。
+- **影响分级**：`impact_tier = high`（高影响，强制披露矩阵见 `engine/templates/information-layering-spec.md` §七）。
 - **版本治理**：核验 / 收敛型运行不升级版本号，标注「**本期读数时点**」；仅核心事实修正才升级版本号。
 - **盲区**：P0 四类（就业 / 收入 / 空置 / 竣工）优先消号，台账 `engine/report-audits/blind-spot-ledger.md`。
 

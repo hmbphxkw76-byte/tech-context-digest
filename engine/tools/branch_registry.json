@@ -105,6 +105,13 @@
       "slug": "goal-alignment-p0",
       "task": "goal-alignment-p0"
     },
+    "task/impact-tiering-d0b4f8c1": {
+      "note": "source=env:TECH_CTX_SESSION_ID",
+      "session": "d0b4f8c1",
+      "session_short": "d0b4f8c1",
+      "slug": "impact-tiering",
+      "task": "impact-tiering"
+    },
     "task/info-quality-plan-79ac0e87": {
       "note": "source=env:CATPAW_CONVERSATION_ID",
       "session": "79ac0e87e519415a916d64fdc92a890c",
