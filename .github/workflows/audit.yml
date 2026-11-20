@@ -76,6 +76,12 @@ jobs:
       - name: 刷新完成前证据索引（audit_tool index）
         run: python engine/audit/scripts/audit_tool.py index
 
+      # 发布留痕：审计环节会注入「已审计」标识（改动报告字节），必须同步重采发布指纹，
+      # 否则指纹库漂移（历史缺口：c44174e 改报告未重采指纹，导致 15 份 CHANGED）。
+      # 与 html-sync.yml 同一步骤、同一采集入口，不新增第二套逻辑。
+      - name: 发布指纹采集
+        run: python engine/tools/publish_fingerprint.py --emit
+
       # 提交并开 PR（自动合并）；pull_request 事件下只跑审计、不再嵌套开 PR。
       - name: 提交并开 PR（自动合并）
         if: success() && github.event_name != 'pull_request'
