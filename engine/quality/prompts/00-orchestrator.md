@@ -24,6 +24,7 @@
 | 结果 schema | `engine/quality/manifest.schema.json` |
 | 周期复跑 | `engine/quality/ops-guide.md` |
 | 目录 / 维度单一事实源 | `engine/tools/layout.json` |
+| 来源语言与来源类型政策 | `engine/docs/source-language-policy.md` |
 | 类型 / 周期骨架 | `engine/templates/template-registry.md` + `compliance-rules.json` |
 | 渲染 / 交付规范 | `engine/templates/monitoring-common-spec.md` |
 | 页面规范 | `engine/docs/page-build-spec.md` |
@@ -34,6 +35,7 @@
 - 层内：`业务提示词 ＞ 类型模板 ＞ 通用基座 ＞ 通用规范`
 - 跨对象：`官方一手 > 行业机构 > 挂牌门户 > 媒体转述`；`登记册 / 词汇库 > 报告正文`；`business-config > 报告正文`
 - 无法裁决：并列呈现 + 标「口径待核实」+ 入待复核清单，**不擅改**。
+- **来源语言**：默认仅英文；仅中国宏观经济数据业务线可用中文官方来源作参考（英文优先 + 白名单 + 标「需核实原文」）。判定见 `engine/docs/source-language-policy.md`，机器门禁 `source_check` R9。
 
 ---
 

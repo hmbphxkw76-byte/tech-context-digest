@@ -16,7 +16,7 @@
 {{OUTPUT_PATH}}           = reports/{{YYYY-MM}}_baseline_report.md
 {{REGISTRY_PATH}}         = data/（TODO：竞品档案库文件名）
 {{REGISTRY_FORMAT}}       = md-table（TODO：按业务配置）
-{{SOURCE_LANGUAGE_RULE}}  = （TODO：来源语言规则）
+{{SOURCE_LANGUAGE_RULE}}  = 仅英文（默认；中国宏观例外见 engine/docs/source-language-policy.md）
 {{REPORT_VERSION}}        = v1.0（首期基线固定）
 ```
 

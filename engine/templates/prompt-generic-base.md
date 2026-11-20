@@ -63,7 +63,7 @@ tech-context-digest/
 {{OUTPUT_REGISTRY}}      = 新版台账落盘路径（仅年度复盘必填）
 {{REPORT_VERSION}}       = 本期版本号
 {{FRESHNESS_PRIORITY}}   = 时效优先级（业务配置固定值，默认：最新官方页 > 上期值 > 预测值）
-{{SOURCE_LANGUAGE_RULE}} = 来源语言规则（业务配置固定值，如：仅英文 / 仅日文官方+英文权威）
+{{SOURCE_LANGUAGE_RULE}} = 来源语言规则（业务配置固定值，默认「仅英文」；中国宏观数据例外见 source-language-policy.md）
 {{SOURCE_REGISTRY_PATH}} = 来源登记载体路径（接入来源登记的业务线必填，默认 data/source_registry.json）
 {{SOURCE_STRATEGY}}     = 来源策略（可选，默认留空；无外部来源的综合层填 synthesis_only：不新采外部数据，仅收敛仓库内已文档化事实）
 ```
@@ -102,6 +102,7 @@ tech-context-digest/
 | ④ 媒体转述 | 通讯社、媒体转载 | 只用于发现线索；数值标「需核实原文」，须回官方页校验 |
 
 - 冲突时按业务配置的优先级链裁决；无法裁决时并列呈现并标注。
+- **来源语言与来源类型（仓库级政策）**：见[来源语言与来源类型政策](../docs/source-language-policy.md)（SOURCE-LANGUAGE-POLICY v1.0）。默认**仅英文**；仅中国宏观经济数据业务线可用中文官方来源作参考（英文优先、须标「需核实原文」、限白名单机构 / 主机）；来源类型限英文来源、官方权威一手资料、主流投资 / 顾问机构、主流新闻媒体。`source_check` R9 为机器门禁，违规 `[E]` 阻断。
 - `{{SOURCE_LANGUAGE_RULE}}` 强制执行；不符合语言规则的来源一律排除。
 - `{{SOURCE_STRATEGY}} = synthesis_only` 为**无外部来源的综合层**专用：报告不出现外部 URL，来源追溯经事实卡片 `[FC-…]` / 各研究线来源登记指针完成。`source_check` R1 据此区分「按设计无外部来源」与「登记缺失」；一旦报告引入外部 URL，仍须先登记来源。
 
@@ -207,5 +208,6 @@ tech-context-digest/
 | v1.1 | 2026-11-13 | 类型分类架构 | 标题改类型中立；引入类型注册表与类型模板分目录（market-monitoring / employment-research）；1.2 接入步骤同步 |
 | v1.2 | 2026-11-15 | 来源登记变量 | 变量框架补登 `{{SOURCE_REGISTRY_PATH}}`（接入来源登记的业务线必填）；明确业务层可追加专属变量、不得改写框架变量语义 |
 | v1.3 | 2026-11-15 | 信息分层与决策交付 | 新增第十节「报告头共享模块（boilerplate 上移）」、第十一节「信息分层与决策交付强制项」；质量自检追加强制项；版本记录顺延为第十二节 |
+| v1.4 | 2026-11-20 | 来源语言政策 | `{{SOURCE_LANGUAGE_RULE}}` 默认值改为「仅英文」；第四节引入仓库级来源语言与来源类型政策（source-language-policy.md），明确中国宏观例外与来源类型白名单 |
 
 **结束通用基座。**

@@ -583,7 +583,7 @@ class TestEvidenceField(unittest.TestCase):
     def test_sample_registry_has_three_evidence_entries(self):
         """T-01 验收：抽样登记至少 3 条含 evidence（示例补登记）。"""
         import json
-        reg = json.loads((ROOT / "data" / "processed" / "tech" / "security" / "dubai"
+        reg = json.loads((ROOT / "data" / "processed" / "tech" / "ai-security" / "security" / "dubai"
                           / "source_registry.json").read_text(encoding="utf-8"))
         cov = source_check.evidence_coverage(reg)
         self.assertGreaterEqual(cov["with_evidence"], 3)
@@ -837,10 +837,87 @@ class TestDocumentTier(unittest.TestCase):
     def test_sample_registry_has_three_document_tier_entries(self):
         """T-08 验收：抽样登记至少 3 条含 document_tier（示例补登记）。"""
         import json
-        reg = json.loads((ROOT / "data" / "processed" / "tech" / "security" / "dubai"
+        reg = json.loads((ROOT / "data" / "processed" / "tech" / "ai-security" / "security" / "dubai"
                           / "source_registry.json").read_text(encoding="utf-8"))
         cov = source_check.document_tier_coverage(reg)
         self.assertGreaterEqual(cov["with_document_tier"], 3)
+
+
+class TestR9ChineseSource(unittest.TestCase):
+    """R9 中文来源校验：政策 engine/docs/source-language-policy.md 的机器门禁。"""
+
+    MASTER = {
+        "schema_version": "1.0",
+        "institutions": [
+            {"name": "中国人民银行", "tier": 1, "lang": "zh", "aliases": []},
+            {"name": "36氪", "tier": 4, "lang": "zh", "aliases": []},
+            {"name": "IMF", "tier": 1, "lang": "en", "aliases": []},
+        ],
+        "lang": {
+            "zh_macro_whitelist": ["中国人民银行"],
+            "zh_macro_hosts": ["pbc.gov.cn"],
+            "zh_hosts": ["pbc.gov.cn", "36kr.com", "mfa.gov.cn", "sina.com.cn"],
+        },
+    }
+
+    def test_non_macro_line_zh_is_error(self):
+        reg = _reg({"source_id": "Z1", "tier": 4, "publisher": "36氪", "url": "https://36kr.com/p/1"})
+        issues = source_check.check_chinese_sources(reg, self.MASTER, {"zh_macro": False})
+        self.assertTrue(any(lvl == "E" and "R9" in msg for lvl, msg in issues))
+
+    def test_macro_line_whitelist_passes(self):
+        reg = _reg({"source_id": "Z2", "tier": 1, "publisher": "中国人民银行",
+                    "url": "https://www.pbc.gov.cn/"})
+        self.assertEqual(source_check.check_chinese_sources(reg, self.MASTER, {"zh_macro": True}), [])
+
+    def test_macro_line_non_whitelist_is_error(self):
+        reg = _reg({"source_id": "Z1", "tier": 4, "publisher": "36氪", "url": "https://36kr.com/p/1"})
+        issues = source_check.check_chinese_sources(reg, self.MASTER, {"zh_macro": True})
+        self.assertTrue(any(lvl == "E" and "R9" in msg for lvl, msg in issues))
+
+    def test_host_english_path_is_not_chinese(self):
+        reg = _reg({"source_id": "Z3", "tier": 1, "publisher": "中国外交部",
+                    "url": "https://www.mfa.gov.cn/eng/"})
+        self.assertEqual(source_check.check_chinese_sources(reg, self.MASTER, {"zh_macro": False}), [])
+
+    def test_declared_lang_en_but_chinese_host_is_flagged(self):
+        """登记 lang 误标 en 不得漏判（中文主机权威）。"""
+        reg = _reg({"source_id": "Z4", "tier": 4, "publisher": "新浪财经",
+                    "url": "https://finance.sina.com.cn/x", "lang": "en"})
+        issues = source_check.check_chinese_sources(reg, self.MASTER, {"zh_macro": False})
+        self.assertTrue(any(lvl == "E" and "R9" in msg for lvl, msg in issues))
+
+    def test_historical_downgrades_to_warn(self):
+        reg = _reg({"source_id": "Z1", "tier": 4, "publisher": "36氪", "url": "https://36kr.com/p/1"})
+        issues = source_check.check_chinese_sources(reg, self.MASTER,
+                                                    {"zh_macro": False, "historical": True})
+        self.assertTrue(any(lvl == "W" and "R9" in msg for lvl, msg in issues))
+        self.assertFalse(any(lvl == "E" for lvl, _ in issues))
+
+    def test_zh_macro_reference_rule_parses(self):
+        spec = source_check.parse_language_rule("英文优先；中国宏观数据可用中文官方来源作参考")
+        self.assertEqual(spec["tokens"], ["zh_macro_reference"])
+        self.assertEqual(spec["allowed"], {"en", "zh"})
+
+    def test_ctx_for_macro_line(self):
+        ctx = source_check._ctx_for("content/economy/trends")
+        self.assertTrue(ctx.get("zh_macro"))
+
+    def test_repo_registries_have_no_zh_violations(self):
+        """全仓来源登记无 R9 违规（回归锚）。"""
+        import glob
+        import json
+        master = source_check.load_institution_master()
+        found = False
+        for f in glob.glob(str(ROOT / "data" / "processed" / "**" / "source_registry.json"),
+                           recursive=True):
+            found = True
+            data = json.loads(Path(f).read_text(encoding="utf-8"))
+            biz = data.get("business_line", "")
+            ctx = source_check._ctx_for(biz) if biz else {}
+            issues = source_check.check_chinese_sources(data, master, ctx)
+            self.assertEqual(issues, [], f)
+        self.assertTrue(found)
 
 
 if __name__ == "__main__":

@@ -19,7 +19,7 @@
 {{SOURCE_REGISTRY_PATH}} = data/processed/society/social-structure/source_registry.json
 {{BASELINE_REPORT_PATH}} = reports/{{YYYY-MM}}_baseline_report.html（待首期基线运行后回写）
 {{FRESHNESS_PRIORITY}}   = 官方统计 / 调查微观数据 > 官方政策文本 > 国际组织报告 > 媒体转述
-{{SOURCE_LANGUAGE_RULE}} = 官方一手以英文为准；非英语官方统计须标注原文语言并附官方 URL
+{{SOURCE_LANGUAGE_RULE}} = 仅英文（严禁中文来源）
 {{REPO_RAW_URL_BASE}}    = https://github.com/hmbphxkw76-byte/tech-context-digest/blob/main/content/society/social-structure
 ```
 

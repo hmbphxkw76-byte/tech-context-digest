@@ -164,20 +164,6 @@
    ]
   },
   {
-   "source_id": "S-012",
-   "tier": 1,
-   "publisher": "中国教育部",
-   "title": "中华人民共和国义务教育法",
-   "url": "http://www.moe.gov.cn/jyb_sjzl/sjzl_zcfg/zcfg_jyfl/202110/t20211029_575949.html",
-   "lang": "zh",
-   "verify_status": "verified",
-   "updated": "2026-11-19",
-   "in_synthesis": false,
-   "used_in": [
-    "reports/2026-12_baseline_report.html"
-   ]
-  },
-  {
    "source_id": "S-013",
    "tier": 1,
    "publisher": "日本文部科学省",
@@ -367,34 +353,6 @@
    "url": "https://www.oecd.org/en/about/programmes/ceri.html",
    "lang": "en",
    "verify_status": "verified",
-   "updated": "2026-11-19",
-   "in_synthesis": false,
-   "used_in": [
-    "reports/2026-12_baseline_report.html"
-   ]
-  },
-  {
-   "source_id": "S-027",
-   "tier": 4,
-   "publisher": "上海师范大学 UNTec",
-   "title": "EAG 2025 报道",
-   "url": "https://untec.shnu.edu.cn/c3/88/c26039a836488/page.htm",
-   "lang": "zh",
-   "verify_status": "media_unverified",
-   "updated": "2026-11-19",
-   "in_synthesis": false,
-   "used_in": [
-    "reports/2026-12_baseline_report.html"
-   ]
-  },
-  {
-   "source_id": "S-028",
-   "tier": 4,
-   "publisher": "百度百家号",
-   "title": "PISA 2022 结果报道",
-   "url": "https://baijiahao.baidu.com/s?id=1784450028616525013",
-   "lang": "zh",
-   "verify_status": "media_unverified",
    "updated": "2026-11-19",
    "in_synthesis": false,
    "used_in": [
