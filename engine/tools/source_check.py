@@ -25,6 +25,10 @@
                  让登记可自证；含 evidence 条目占比仅 [W] 提示，缺失不阻断。
                  内容指纹：对 tier∈{1,2} 且 in_synthesis=true 的来源正文算 sha256，
                  提供 --fingerprint 输出与上次快照比对（变更检测）。
+                 T-08 扩展：可选 document_tier（文档级）/ statement_type（陈述级）字段，
+                 消除「机构光环效应」（tier 1 机构的一切产出被默认当一手事实）。
+                 取值合法性 + 文档级不得高于机构 tier 允许上限，均 [W]（不阻断）；
+                 含 document_tier 条目占比仅 [W] 提示，缺失不阻断。
 
 gate-period 前置：周期早于 `--gate-period` 的报告为历史报告，R1–R6 的 [E] 前置
 降级为 [W]（不追溯阻断历史）；R7 结构性冲突（重复 source_id / 同机构不同分级）不降级。
@@ -75,6 +79,17 @@ UPDATED_RE = re.compile(r"^\d{4}-\d{2}-\d{2}$")
 EVIDENCE_METHODS = ("web_fetch", "manual", "pdf")
 EVIDENCE_KEYS = ("method", "snapshot_date", "archive_hash", "note")
 ARCHIVE_HASH_RE = re.compile(r"^[0-9a-f]{64}$")
+
+# T-08 文档级 / 陈述级信源分级（可选字段）：在机构级 tier 之外刻画「这一份产出」
+# 的可信度，消除机构光环效应。字段定义归 metrics-dictionary.json 备注（单一事实源），
+# 本模块只做校验。缺失仅汇总 [W]（数据卫生，不阻断）。
+DOCUMENT_TIER_VALUES = ("primary_data", "official_release", "industry_report", "media", "opinion")
+STATEMENT_TYPE_VALUES = ("fact", "restatement", "forecast", "opinion")
+# 文档级相对机构 tier 的上限（机构 tier 越低越权威）：tier 4 媒体转述机构不得标
+# primary_data；tier 3 挂牌门户不得标 primary_data / official_release。
+# 机构 tier 1 / 2 不设上限（官方 / 行业机构可产出一手数据与官方发布）。
+DOCUMENT_TIER_CEILING = {3: {"media", "opinion"}, 4: {"media"}}
+DOCUMENT_TIER_RANK = {v: i for i, v in enumerate(DOCUMENT_TIER_VALUES)}
 
 # 内容指纹快照文件后缀（--fingerprint --snapshot-dir 读取 <source_id>.txt/.md）
 SNAPSHOT_SUFFIXES = (".txt", ".md")
@@ -542,6 +557,52 @@ def _evidence_field_issues(s: dict, sid: str) -> list[str]:
     return out
 
 
+def document_tier_coverage(registry: dict) -> dict:
+    """document_tier 字段覆盖统计 -> {total, with_document_tier, missing, ratio}。
+
+    含 document_tier 视为「已做文档级分级」：值为 DOCUMENT_TIER_VALUES 之一。
+    空登记 ratio=1.0（不产生告警）。
+    """
+    sources = registry.get("sources", []) if isinstance(registry, dict) else []
+    total = len(sources)
+    with_dt = sum(1 for s in sources if s.get("document_tier") in DOCUMENT_TIER_VALUES)
+    return {"total": total, "with_document_tier": with_dt,
+            "missing": total - with_dt,
+            "ratio": (with_dt / total) if total else 1.0}
+
+
+def _document_tier_field_issues(s: dict, sid: str,
+                                master: dict | None = None) -> list[str]:
+    """单条 document_tier / statement_type 字段合法性问题（文本列表）。
+
+    校验三类（均 [W]，不阻断）：
+      ① document_tier 取值 ∈ DOCUMENT_TIER_VALUES；
+      ② statement_type 取值 ∈ STATEMENT_TYPE_VALUES；
+      ③ 一致性：document_tier 不得高于机构 tier 允许上限（如 tier 4 不得标
+         primary_data）。机构未录入主数据时跳过 ③（无先验可比，不误报）。
+    """
+    out: list[str] = []
+    dt = s.get("document_tier")
+    if dt is not None and dt not in DOCUMENT_TIER_VALUES:
+        out.append(f"R8 登记字段：{sid} document_tier「{dt}」非法"
+                   f"（须为 {' / '.join(DOCUMENT_TIER_VALUES)}）")
+    st = s.get("statement_type")
+    if st is not None and st not in STATEMENT_TYPE_VALUES:
+        out.append(f"R8 登记字段：{sid} statement_type「{st}」非法"
+                   f"（须为 {' / '.join(STATEMENT_TYPE_VALUES)}）")
+    if dt in DOCUMENT_TIER_VALUES and master is not None:
+        inst = master_lookup(master, str(s.get("publisher", "")))
+        if inst is not None:
+            inst_tier = int(inst.get("tier"))
+            ceiling = DOCUMENT_TIER_CEILING.get(inst_tier)
+            if ceiling is not None and dt not in ceiling:
+                out.append(
+                    f"R8 登记字段：{sid} document_tier「{dt}」高于机构 tier={inst_tier}"
+                    f"（{inst.get('name')}）允许上限 "
+                    f"{' / '.join(sorted(ceiling, key=lambda v: DOCUMENT_TIER_RANK[v]))}。")
+    return out
+
+
 def check_registry_fields(registry: dict, ctx: dict | None = None) -> list[tuple[str, str]]:
     """R8 登记字段完备 -> [(level, msg)]（仅 [W]，数据卫生不阻断）。
 
@@ -549,7 +610,11 @@ def check_registry_fields(registry: dict, ctx: dict | None = None) -> list[tuple
     缺失 / 非法只告警，不追溯阻断（与 R1–R6 的 gate-period 降级口径一致）。
     T-01：evidence 为可选字段，逐条校验合法性并统计覆盖率；缺失仅汇总 [W] 提示，
     不阻断（数据卫生）。
+    T-08：document_tier / statement_type 为可选字段，逐条校验取值合法性 +
+    文档级 ≤ 机构 tier 上限的一致性，并统计 document_tier 覆盖率；缺失仅汇总 [W]。
     """
+    ctx = ctx or {}
+    master = ctx.get("master")
     issues: list[tuple[str, str]] = []
     sources = registry.get("sources", []) if isinstance(registry, dict) else []
     for s in sources:
@@ -561,10 +626,17 @@ def check_registry_fields(registry: dict, ctx: dict | None = None) -> list[tuple
         if not UPDATED_RE.match(str(s.get("updated", "")).strip()):
             issues.append(("W", f"R8 登记字段：{sid} 缺 updated（YYYY-MM-DD）"))
         issues.extend(("W", m) for m in _evidence_field_issues(s, sid))
+        issues.extend(("W", m) for m in _document_tier_field_issues(s, sid, master))
     cov = evidence_coverage(registry)
     if cov["total"] and cov["missing"]:
         issues.append(("W", f"R8 登记字段：evidence 覆盖 {cov['with_evidence']}/{cov['total']}"
                              f"（{cov['ratio']:.1%}），{cov['missing']} 条缺核验证据"
+                             f"（数据卫生，不阻断）"))
+    dt_cov = document_tier_coverage(registry)
+    if dt_cov["total"] and dt_cov["missing"]:
+        issues.append(("W", f"R8 登记字段：document_tier 覆盖 "
+                             f"{dt_cov['with_document_tier']}/{dt_cov['total']}"
+                             f"（{dt_cov['ratio']:.1%}），{dt_cov['missing']} 条缺文档级分级"
                              f"（数据卫生，不阻断）"))
     return issues
 
@@ -1098,6 +1170,7 @@ def run(only_file: str | None, gate_period: str | None = None,
 
         issues = check_report(text, registry, ctx)
         issues += check_institution_consistency(registry, master, ctx.get("config_text", ""), ctx)
+        ctx["master"] = master
         issues += check_registry_fields(registry, ctx)
 
         for level, msg in issues:

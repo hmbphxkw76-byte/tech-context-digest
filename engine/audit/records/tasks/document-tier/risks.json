@@ -1,0 +1,8 @@
+[
+  {
+    "description": "与 T-01 evidence 字段冲突",
+    "id": "R-1",
+    "mitigation": "复用 R8 框架扩展",
+    "owner": ""
+  }
+]
