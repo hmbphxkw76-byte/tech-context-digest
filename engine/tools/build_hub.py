@@ -1,13 +1,16 @@
 """汇总页生成（CI: ci.yml --check 校验 / html-sync、scheduled-maintenance 重新生成）。
 
-生成 index.html（报告枢纽：居中标题「宏观资讯报告」+ 地区/区域、主题、报告、
+生成 index.html（报告枢纽：居中标题「宏观资讯报告」+ 主题 / 业务线 / 报告 /
 报告类型四项统计，下方为筛选栏与报告列表）与 reader.html（在线阅读器：navy 渐变
 头部 + sticky 筛选栏 + 侧栏报告列表 + iframe 阅读区，?report=<路径> 直达）。
 
-主题与报告全部由文件系统自动发现（iter_business_dirs + reports/*.html）；
-主题元数据（地区 / 主题名 / 报告类型）取自各业务线 prompts/business-config.md，
-类型名称解析自 engine/templates/template-registry.md 第二节。新增业务线或报告
-后重新生成即可，统计与列表自动更新，无需改动本文件。
+筛选栏「主题」chips 为**一级主题**（经济 / 科技 / 教育 / 国际 / 政治 / 社会）；
+正文按一级主题分组，声明了 subcategory 维度的主题（tech）再按 category
+（AI安全 / AI应用）分组。主题与报告全部由文件系统自动发现（iter_business_dirs +
+reports/*.html）；主题元数据（主题 / 分组 / 业务线名 / 报告类型）取自各业务线
+prompts/business-config.md 与 layout.json（category_names），类型名称解析自
+engine/templates/template-registry.md 第二节。新增业务线或报告后重新生成即可，
+统计与列表自动更新，无需改动本文件。
 
 视觉设计沿用仓库 canonical 设计令牌（与 content/economy/dubai/apartment 报告及 md2html 对齐）：
 navy 渐变 Hero、sticky 筛选栏、chips 标签栏、卡片网格、页脚与回顶按钮。
@@ -44,6 +47,7 @@ from _common import (  # noqa: E402
     TEMPLATE_DIR,
     iter_business_dirs,
     iter_business_reports,
+    load_layout,
     period_months,
     prev_period,
     report_title,
@@ -135,12 +139,15 @@ a:hover{text-decoration:underline}
   text-align:center;white-space:nowrap;overflow:hidden}
 .filterbar .count{font-size:12px;color:var(--ink3);margin-left:auto;white-space:nowrap}
 
-/* ── 主区：地区 → 主题 → 报告 ── */
+/* ── 主区：主题 → 分组 → 业务线 → 报告 ── */
 .main{max-width:1240px;margin:0 auto;padding:8px 24px 50px}
-.region{margin-bottom:12px}
-.region-head{display:flex;align-items:baseline;gap:10px;margin:26px 0 4px}
-.region-head h2{font-size:20px;color:var(--navy)}
-.region-head .rcount{font-size:11.5px;color:var(--ink3)}
+.theme{margin-bottom:12px}
+.theme-head{display:flex;align-items:baseline;gap:10px;margin:26px 0 4px}
+.theme-head h2{font-size:20px;color:var(--navy)}
+.theme-head .rcount{font-size:11.5px;color:var(--ink3)}
+.group{margin:0 0 4px}
+.group-head{margin:14px 0 2px}
+.group-head h3{font-size:14.5px;color:var(--navy2);letter-spacing:.3px}
 .topic{margin:18px 0 6px;scroll-margin-top:64px}
 .topic-head{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap;
   border-left:4px solid var(--navy2);padding:2px 0 2px 12px;margin:0 0 12px}
@@ -233,18 +240,18 @@ _SCRIPT = """\
   noResult.style.display = 'none';
   document.querySelector('.main').appendChild(noResult);
 
-  var state = { q: '', topic: 'all', type: 'all' };
+  var state = { q: '', theme: 'all', type: 'all' };
 
   function applyFilter() {
     var visibleReports = 0;
     var visibleTopics = 0;
     document.querySelectorAll('.topic').forEach(function (topicEl) {
-      var okTopic = state.topic === 'all' || topicEl.dataset.topic === state.topic;
+      var okTheme = state.theme === 'all' || topicEl.dataset.theme === state.theme;
       var okType = state.type === 'all' || topicEl.dataset.type === state.type;
       var shownInTopic = 0;
       topicEl.querySelectorAll('.rcard').forEach(function (card) {
         var okQ = !state.q || card.dataset.search.indexOf(state.q) >= 0;
-        var show = okTopic && okType && okQ;
+        var show = okTheme && okType && okQ;
         card.style.display = show ? '' : 'none';
         if (show) { shownInTopic++; visibleReports++; }
       });
@@ -254,15 +261,20 @@ _SCRIPT = """\
       var tc = topicEl.querySelector('.js-topic-count');
       if (tc) tc.textContent = shownInTopic + ' 份报告';
     });
-    document.querySelectorAll('.region').forEach(function (reg) {
-      var shownInRegion = Array.prototype.filter.call(
-        reg.querySelectorAll('.topic'), function (t) { return t.style.display !== 'none'; }).length;
-      reg.style.display = shownInRegion ? '' : 'none';
-      var rc = reg.querySelector('.js-region-count');
-      if (rc) rc.textContent = shownInRegion + ' 个主题';
+    document.querySelectorAll('.group').forEach(function (g) {
+      var shown = Array.prototype.filter.call(
+        g.querySelectorAll('.topic'), function (t) { return t.style.display !== 'none'; }).length;
+      g.style.display = shown ? '' : 'none';
+    });
+    document.querySelectorAll('.theme').forEach(function (th) {
+      var shown = Array.prototype.filter.call(
+        th.querySelectorAll('.topic'), function (t) { return t.style.display !== 'none'; }).length;
+      th.style.display = shown ? '' : 'none';
+      var rc = th.querySelector('.js-theme-count');
+      if (rc) rc.textContent = shown + ' 个业务线';
     });
     // 仅在筛选 / 搜索时自动展开「更多」（初始加载保持折叠）
-    if (state.q || state.topic !== 'all' || state.type !== 'all') {
+    if (state.q || state.theme !== 'all' || state.type !== 'all') {
       document.querySelectorAll('.more').forEach(function (d) {
         var hasMatch = Array.prototype.filter.call(
           d.querySelectorAll('.rcard'), function (c) { return c.style.display !== 'none'; }).length > 0;
@@ -270,7 +282,7 @@ _SCRIPT = """\
       });
     }
     noResult.style.display = visibleReports ? 'none' : '';
-    countEl.textContent = '共 ' + visibleTopics + ' 个主题 · ' + visibleReports + ' 份报告';
+    countEl.textContent = '共 ' + visibleTopics + ' 个业务线 · ' + visibleReports + ' 份报告';
   }
 
   var t;
@@ -297,7 +309,7 @@ _SCRIPT = """\
       applyFilter();
     });
   }
-  bindChips('chips-topic', 'topic');
+  bindChips('chips-topic', 'theme');
   bindChips('chips-type', 'type');
 
   var totop = document.getElementById('totop');
@@ -349,9 +361,12 @@ body{display:flex;flex-direction:column;height:100vh;overflow:hidden}
   justify-content:space-between;gap:8px}
 .sidebar-head .count{font-weight:400;color:var(--ink3)}
 .sidebar-nav{padding:2px 12px 0}
-.sidebar-nav .region{margin-bottom:4px}
-.sidebar-nav .region-head{margin:12px 0 2px}
-.sidebar-nav .region-head h2{font-size:14px}
+.sidebar-nav .theme{margin-bottom:4px}
+.sidebar-nav .theme-head{margin:12px 0 2px}
+.sidebar-nav .theme-head h2{font-size:14px}
+.sidebar-nav .group{margin:0}
+.sidebar-nav .group-head{margin:8px 0 0}
+.sidebar-nav .group-head h3{font-size:12.5px;color:var(--navy2)}
 .sidebar-nav .topic{margin:6px 0 2px;scroll-margin-top:0}
 .sidebar-nav .topic-head{border-left-width:3px;padding:1px 0 1px 9px;margin:0 0 5px}
 .sidebar-nav .topic-head h3{font-size:13px}
@@ -416,18 +431,18 @@ _READER_SCRIPT = """\
   noResult.style.display = 'none';
   nav.appendChild(noResult);
 
-  var state = { q: '', topic: 'all', type: 'all' };
+  var state = { q: '', theme: 'all', type: 'all' };
 
   function applyFilter() {
     var visibleReports = 0;
     var visibleTopics = 0;
     nav.querySelectorAll('.topic').forEach(function (topicEl) {
-      var okTopic = state.topic === 'all' || topicEl.dataset.topic === state.topic;
+      var okTheme = state.theme === 'all' || topicEl.dataset.theme === state.theme;
       var okType = state.type === 'all' || topicEl.dataset.type === state.type;
       var shownInTopic = 0;
       topicEl.querySelectorAll('.rcard').forEach(function (card) {
         var okQ = !state.q || card.dataset.search.indexOf(state.q) >= 0;
-        var show = okTopic && okType && okQ;
+        var show = okTheme && okType && okQ;
         card.style.display = show ? '' : 'none';
         if (show) { shownInTopic++; visibleReports++; }
       });
@@ -437,15 +452,20 @@ _READER_SCRIPT = """\
       var tc = topicEl.querySelector('.js-topic-count');
       if (tc) tc.textContent = shownInTopic + ' 份报告';
     });
-    nav.querySelectorAll('.region').forEach(function (reg) {
-      var shownInRegion = Array.prototype.filter.call(
-        reg.querySelectorAll('.topic'), function (t) { return t.style.display !== 'none'; }).length;
-      reg.style.display = shownInRegion ? '' : 'none';
-      var rc = reg.querySelector('.js-region-count');
-      if (rc) rc.textContent = shownInRegion + ' 个主题';
+    nav.querySelectorAll('.group').forEach(function (g) {
+      var shown = Array.prototype.filter.call(
+        g.querySelectorAll('.topic'), function (t) { return t.style.display !== 'none'; }).length;
+      g.style.display = shown ? '' : 'none';
+    });
+    nav.querySelectorAll('.theme').forEach(function (th) {
+      var shown = Array.prototype.filter.call(
+        th.querySelectorAll('.topic'), function (t) { return t.style.display !== 'none'; }).length;
+      th.style.display = shown ? '' : 'none';
+      var rc = th.querySelector('.js-theme-count');
+      if (rc) rc.textContent = shown + ' 个业务线';
     });
     // 仅在筛选 / 搜索时自动展开「更多」（初始加载保持折叠）
-    if (state.q || state.topic !== 'all' || state.type !== 'all') {
+    if (state.q || state.theme !== 'all' || state.type !== 'all') {
       nav.querySelectorAll('.more').forEach(function (d) {
         var hasMatch = Array.prototype.filter.call(
           d.querySelectorAll('.rcard'), function (c) { return c.style.display !== 'none'; }).length > 0;
@@ -453,7 +473,7 @@ _READER_SCRIPT = """\
       });
     }
     noResult.style.display = visibleReports ? 'none' : '';
-    countEl.textContent = '共 ' + visibleTopics + ' 个主题 · ' + visibleReports + ' 份报告';
+    countEl.textContent = '共 ' + visibleTopics + ' 个业务线 · ' + visibleReports + ' 份报告';
     if (sidebarCountEl) sidebarCountEl.textContent = visibleReports + ' 份报告';
   }
 
@@ -481,7 +501,7 @@ _READER_SCRIPT = """\
       applyFilter();
     });
   }
-  bindChips('reader-chips-topic', 'topic');
+  bindChips('reader-chips-topic', 'theme');
   bindChips('reader-chips-type', 'type');
 
   function closeDrawer() {
@@ -575,6 +595,8 @@ class Topic:
     type_id: str
     type_name: str
     reports: list[ReportEntry] = field(default_factory=list)
+    theme: str = ""
+    category: str = ""
 
 
 @dataclass
@@ -700,20 +722,46 @@ def collect_topics() -> list[Topic]:
             text = (ROOT / ref.rel).read_text(encoding="utf-8", errors="replace")
             reports.append(ReportEntry(ref.cycle, ref.period, ref.rel, report_title(text)))
         reports.sort(key=lambda e: e.period, reverse=True)
-        topics.append(Topic(b.rel, region, name, type_id, type_name, reports))
+        topics.append(Topic(b.rel, region, name, type_id, type_name, reports,
+                            theme=b.theme, category=b.category))
     return topics
 
 
-def group_by_region(topics: list[Topic]) -> list[tuple[str, list[Topic]]]:
-    """按地区分组，保留业务线出现顺序。"""
-    regions: list[tuple[str, list[Topic]]] = []
+def group_by_theme(topics: list[Topic]) -> list[tuple[str, list[Topic]]]:
+    """按一级主题分组（layout.json 声明顺序），保留业务线出现顺序。"""
+    layout = load_layout()
+    index: dict[str, int] = {}
+    groups: list[tuple[str, list[Topic]]] = []
+    for t in topics:
+        if t.theme not in index:
+            index[t.theme] = len(groups)
+            groups.append((t.theme, []))
+        groups[index[t.theme]][1].append(t)
+    order = {name: i for i, name in enumerate(layout.themes)}
+    groups.sort(key=lambda g: order.get(g[0], len(order)))
+    return groups
+
+
+def theme_has_grouping(theme: str) -> bool:
+    """主题是否以 category 作分组层（声明了 subcategory 维度，如 tech）。"""
+    return "subcategory" in load_layout().dimensions(theme)
+
+
+def category_label(theme: str, category: str) -> str:
+    """分组展示名：layout.json 的 category_names 优先，缺省回退 category 段。"""
+    return load_layout().category_names.get(theme, {}).get(category, category)
+
+
+def group_by_category(topics: list[Topic]) -> list[tuple[str, list[Topic]]]:
+    """主题内按 category 分组，保留业务线出现顺序。"""
+    groups: list[tuple[str, list[Topic]]] = []
     index: dict[str, int] = {}
     for t in topics:
-        if t.region not in index:
-            index[t.region] = len(regions)
-            regions.append((t.region, []))
-        regions[index[t.region]][1].append(t)
-    return regions
+        if t.category not in index:
+            index[t.category] = len(groups)
+            groups.append((t.category, []))
+        groups[index[t.category]][1].append(t)
+    return groups
 
 
 def _esc(text: str) -> str:
@@ -789,11 +837,62 @@ def _render_cycle_group(group: CycleGroup, topic: Topic, reader: bool) -> list[s
     return parts
 
 
+def _render_topic(t: Topic, reader: bool) -> list[str]:
+    """单条业务线区块：头部 + 周期分组。"""
+    parts = [
+        f'<section class="topic" id="topic-{_esc(t.rel.replace("/", "-"))}" '
+        f'data-topic="{_esc(t.rel)}" data-theme="{_esc(t.theme)}" '
+        f'data-category="{_esc(t.category)}" data-type="{_esc(t.type_id)}">'
+    ]
+    groups = [g for g in group_topic_reports(t) if g.direct or g.more]
+    n_show = sum(len(g.direct) + len(g.more) for g in groups)
+    parts.append(
+        f'<div class="topic-head"><h3>{_esc(t.name)}</h3>'
+        f'<span class="badge">{_esc(t.type_name)}</span>'
+        f'<span class="count js-topic-count">{n_show} 份报告</span></div>'
+    )
+    if groups:
+        for g in groups:
+            parts.extend(_render_cycle_group(g, t, reader=reader))
+    else:
+        parts.append('<div class="noresult">该业务线暂无已产出报告。</div>')
+    parts.append("</section>")
+    return parts
+
+
+def _render_theme(theme_id: str, theme_name: str, theme_topics: list[Topic],
+                 reader: bool) -> list[str]:
+    """一级主题区块：主题头 +（可选）category 分组 + 业务线。"""
+    parts = [
+        f'<section class="theme" data-theme="{_esc(theme_id)}">',
+        f'<div class="theme-head"><h2>{_esc(theme_name)}</h2>'
+        f'<span class="rcount js-theme-count">{len(theme_topics)} 个业务线</span></div>',
+    ]
+    if theme_has_grouping(theme_id):
+        cat_order = list(load_layout().category_names.get(theme_id, {}))
+        cat_groups = group_by_category(theme_topics)
+        cat_groups.sort(key=lambda c: cat_order.index(c[0]) if c[0] in cat_order else len(cat_order))
+        for cat, cat_topics in cat_groups:
+            parts.append(f'<section class="group" data-category="{_esc(cat)}">')
+            parts.append(
+                f'<div class="group-head"><h3>{_esc(category_label(theme_id, cat))}</h3></div>'
+            )
+            for t in cat_topics:
+                parts.extend(_render_topic(t, reader))
+            parts.append("</section>")
+    else:
+        for t in theme_topics:
+            parts.extend(_render_topic(t, reader))
+    parts.append("</section>")
+    return parts
+
+
 def render_hub(topics: list[Topic]) -> str:
-    regions = group_by_region(topics)
+    theme_groups = group_by_theme(topics)
+    layout = load_layout()
     n_topics = len(topics)
     n_reports = displayed_report_count(topics)
-    n_regions = len(regions)
+    n_themes = len(theme_groups)
     n_types = len({t.type_id for t in topics if t.type_id})
     base = global_base_period(topics)
     base_note = (
@@ -813,8 +912,8 @@ def render_hub(topics: list[Topic]) -> str:
         '<section class="hero">',
         "<h1>宏观资讯报告</h1>",
         '<div class="stats">',
-        f'<div class="stat"><b>{n_regions}</b>区域</div>',
-        f'<div class="stat"><b>{n_topics}</b>主题</div>',
+        f'<div class="stat"><b>{n_themes}</b>主题</div>',
+        f'<div class="stat"><b>{n_topics}</b>业务线</div>',
         f'<div class="stat"><b>{n_reports}</b>报告</div>',
         f'<div class="stat"><b>{n_types}</b>类型</div>',
         "</div>",
@@ -823,11 +922,13 @@ def render_hub(topics: list[Topic]) -> str:
         '<input id="hub-search" type="search" placeholder="搜索主题 / 报告标题…" aria-label="搜索主题或报告">',
         '<div class="chips" id="chips-topic" role="group" aria-label="主题筛选">',
         '<span class="chips-label">主题</span>',
-        '<button class="chip on" data-topic="all" aria-pressed="true">全部主题</button>',
+        '<button class="chip on" data-theme="all" aria-pressed="true">全部主题</button>',
     ]
-    for t in topics:
+    for theme_id, _theme_topics in theme_groups:
+        theme_name = layout.themes.get(theme_id, (theme_id,))[0]
         parts.append(
-            f'<button class="chip" data-topic="{_esc(t.rel)}" aria-pressed="false">{_esc(t.name)}</button>'
+            f'<button class="chip" data-theme="{_esc(theme_id)}" aria-pressed="false">'
+            f'{_esc(theme_name)}</button>'
         )
     parts += [
         "</div>",
@@ -851,33 +952,9 @@ def render_hub(topics: list[Topic]) -> str:
     if not topics:
         parts.append("<p>暂无已产出报告。</p>")
 
-    for region_name, region_topics in regions:
-        parts.append(f'<section class="region" data-region="{_esc(region_name)}">')
-        parts.append(
-            f'<div class="region-head"><h2>{_esc(region_name)}</h2>'
-            f'<span class="rcount js-region-count">{len(region_topics)} 个主题</span></div>'
-        )
-        for t in region_topics:
-            parts.append(
-                f'<section class="topic" id="topic-{_esc(t.rel.replace("/", "-"))}" '
-                f'data-topic="{_esc(t.rel)}" data-type="{_esc(t.type_id)}">'
-            )
-            groups = [g for g in group_topic_reports(t) if g.direct or g.more]
-            n_show = sum(len(g.direct) + len(g.more) for g in groups)
-            parts.append(
-                f'<div class="topic-head"><h3>{_esc(t.name)}</h3>'
-                f'<span class="badge">{_esc(t.type_name)}</span>'
-                f'<span class="count js-topic-count">{n_show} 份报告</span></div>'
-            )
-            if groups:
-                for g in groups:
-                    parts.extend(_render_cycle_group(g, t, reader=False))
-            else:
-                parts.append(
-                    '<div class="noresult">该主题暂无已产出报告。</div>'
-                )
-            parts.append("</section>")
-        parts.append("</section>")
+    for theme_id, theme_topics in theme_groups:
+        theme_name = layout.themes.get(theme_id, (theme_id,))[0]
+        parts.extend(_render_theme(theme_id, theme_name, theme_topics, reader=False))
 
     parts += [
         "</main>",
@@ -896,10 +973,11 @@ def render_hub(topics: list[Topic]) -> str:
 def render_reader(topics: list[Topic]) -> str:
     """在线阅读器：与 index.html 同一设计系统（_navy 渐变头部 + sticky 筛选栏 +
     侧栏报告列表 + iframe 阅读区），复用主页公共组件与交互逻辑。"""
-    regions = group_by_region(topics)
+    theme_groups = group_by_theme(topics)
+    layout = load_layout()
     n_topics = len(topics)
     n_reports = displayed_report_count(topics)
-    n_regions = len(regions)
+    n_themes = len(theme_groups)
     n_types = len({t.type_id for t in topics if t.type_id})
     all_types = list(parse_type_names().items())
     base = global_base_period(topics)
@@ -920,7 +998,7 @@ def render_reader(topics: list[Topic]) -> str:
         '<a class="brand-link" href="index.html">宏观资讯报告</a>',
         '<span class="brand-sep">·</span><span class="brand-sub">阅读器</span>',
         "</div>",
-        f'<div class="reader-head-stats">{n_regions} 区域 · {n_topics} 主题 · '
+        f'<div class="reader-head-stats">{n_themes} 主题 · {n_topics} 业务线 · '
         f"{n_reports} 报告 · {n_types} 类型</div>",
         '<button class="menu-btn" id="menuBtn" aria-label="打开报告列表" '
         'aria-expanded="false" aria-controls="sidebar">☰</button>',
@@ -931,12 +1009,13 @@ def render_reader(topics: list[Topic]) -> str:
         'aria-label="搜索主题或报告">',
         '<div class="chips" id="reader-chips-topic" role="group" aria-label="主题筛选">',
         '<span class="chips-label">主题</span>',
-        '<button class="chip on" data-topic="all" aria-pressed="true">全部主题</button>',
+        '<button class="chip on" data-theme="all" aria-pressed="true">全部主题</button>',
     ]
-    for t in topics:
+    for theme_id, _theme_topics in theme_groups:
+        theme_name = layout.themes.get(theme_id, (theme_id,))[0]
         parts.append(
-            f'<button class="chip" data-topic="{_esc(t.rel)}" '
-            f'aria-pressed="false">{_esc(t.name)}</button>'
+            f'<button class="chip" data-theme="{_esc(theme_id)}" '
+            f'aria-pressed="false">{_esc(theme_name)}</button>'
         )
     parts += [
         "</div>",
@@ -964,31 +1043,9 @@ def render_reader(topics: list[Topic]) -> str:
     if not topics:
         parts.append('<div class="noresult">暂无已产出报告。</div>')
 
-    for region_name, region_topics in regions:
-        parts.append(f'<section class="region" data-region="{_esc(region_name)}">')
-        parts.append(
-            f'<div class="region-head"><h2>{_esc(region_name)}</h2>'
-            f'<span class="rcount js-region-count">{len(region_topics)} 个主题</span></div>'
-        )
-        for t in region_topics:
-            parts.append(
-                f'<section class="topic" data-topic="{_esc(t.rel)}" '
-                f'data-type="{_esc(t.type_id)}">'
-            )
-            groups = [g for g in group_topic_reports(t) if g.direct or g.more]
-            n_show = sum(len(g.direct) + len(g.more) for g in groups)
-            parts.append(
-                f'<div class="topic-head"><h3>{_esc(t.name)}</h3>'
-                f'<span class="badge">{_esc(t.type_name)}</span>'
-                f'<span class="count js-topic-count">{n_show} 份报告</span></div>'
-            )
-            if groups:
-                for g in groups:
-                    parts.extend(_render_cycle_group(g, t, reader=True))
-            else:
-                parts.append('<div class="noresult">该主题暂无已产出报告。</div>')
-            parts.append("</section>")
-        parts.append("</section>")
+    for theme_id, theme_topics in theme_groups:
+        theme_name = layout.themes.get(theme_id, (theme_id,))[0]
+        parts.extend(_render_theme(theme_id, theme_name, theme_topics, reader=True))
 
     parts += [
         "</nav>",
@@ -1067,8 +1124,10 @@ def main() -> int:
     except OSError as e:
         print(f"[ERROR] 写入汇总页失败: {e}")
         return 1
-    n_topics = len(collect_topics())
-    print(f"汇总页已生成：index.html / reader.html（{n_topics} 个主题）")
+    topics = collect_topics()
+    n_topics = len(topics)
+    n_themes = len(group_by_theme(topics))
+    print(f"汇总页已生成：index.html / reader.html（{n_themes} 个主题 · {n_topics} 条业务线）")
     return 0
 
 

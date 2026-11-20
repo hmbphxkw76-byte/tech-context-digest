@@ -1,6 +1,6 @@
 {
-  "version": "v1.2",
-  "updated": "2026-11-16",
+  "version": "v1.3",
+  "updated": "2026-11-20",
   "comment": "报告模板合规校验规则（CI: compliance_check.py）。section_titles 为类型模板骨架的模块名参考（业务提示词可细化措辞，不得增删节、调整顺序）；校验口径：h2 节数缺失=错误（阻断）、超额=警告（业务固化锚需人工确认）。quarterly 第 11 节页脚为 footer 元素（可选 h2），故 h2 期望值为 10。weekly 命名日期 = 数据截止日。",
   "common": {
     "require_title": true,
@@ -8,11 +8,19 @@
     "nav_required_cycles": ["monthly", "quarterly", "annual", "weekly"]
   },
   "business_overrides": {
-    "content/tech/weekly-roundup": {
+    "content/tech/ai-security/weekly-roundup": {
       "weekly": {
-        "sections": 10,
+        "sections": 7,
         "nav": true,
-        "section_titles": ["一、本周要点 Top5", "二、AI 安全与红队", "三、大模型与 Agent 技术演进", "四、AI 编码与开发工具", "五、AI 应用与商业化", "六、基准与评估可信度", "七、数据看板表格", "八、风险与不确定性", "九、可执行启示", "参考来源"],
+        "section_titles": ["一、本周要点 Top5", "二、AI 安全与红队", "三、基准与评估可信度", "四、数据看板表格", "五、风险与不确定性", "六、可执行启示", "参考来源"],
+        "template": "prompt-weekly-monitor-template.md"
+      }
+    },
+    "content/tech/ai-application/weekly-roundup": {
+      "weekly": {
+        "sections": 8,
+        "nav": true,
+        "section_titles": ["一、本周要点 Top5", "二、大模型与 Agent 技术演进", "三、AI 编码与开发工具", "四、AI 应用与商业化", "五、数据看板表格", "六、风险与不确定性", "七、可执行启示", "参考来源"],
         "template": "prompt-weekly-monitor-template.md"
       }
     }

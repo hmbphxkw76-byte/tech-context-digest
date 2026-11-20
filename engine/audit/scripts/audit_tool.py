@@ -959,7 +959,8 @@ def cmd_sample(args) -> int:
     reps = [r for r in collect_reports() if r["path"] in reg["reports"]]
     # 分层：高风险（新业务线/审计类）100%，其余按比例
     high = [r for r in reps if r["kind"] == "audit" or reg["reports"][r["path"]]["business_line"] in
-            ("content/tech/competitive-intelligence/dubai", "content/tech/industry-research/dubai")]
+            ("content/tech/ai-security/competitive-intelligence/dubai",
+             "content/tech/ai-security/industry-research/dubai")]
     rest = [r for r in reps if r not in high]
     rng = random.Random(args.seed)
     k = max(1, round(len(rest) * args.ratio))

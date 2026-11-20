@@ -2,6 +2,14 @@
 
 本文件记录仓库的结构与规范级变更（报告内容变更见各业务线 `reports/`）。
 
+## 3.4.0 — 2026-11-20：科技主题 AI 安全 / AI 应用归并与汇总页主题维度改版
+
+- **结构**：`content/tech/` 下四个业务线物理归并为两个分组目录——`ai-security/`（security / competitive-intelligence / industry-research / weekly-roundup）与 `ai-application/`（weekly-roundup）；`data/processed/`、`data/raw/` 同步迁移。
+- **layout.json v5.0**：`tech` 维度改为 `["category", "subcategory", "region"]`（region 可选），新增 `category_names`（ai-security → AI安全、ai-application → AI应用）；`classification_version` 2026-11-20.1。`validate_layout.check_theme` 支持不含业务配置的分组目录（深度须小于主题维度数）。
+- **周报拆分**：原合并线 `content/tech/weekly-roundup` 拆分为 `ai-security/weekly-roundup`（AI 安全趋势周报，7 节）与 `ai-application/weekly-roundup`（AI 应用趋势周报，8 节）；原合并周报（2026-11-13 / 2026-11-20）移入 `sources/legacy/`；台账与来源登记同步拆分。
+- **汇总页**：`build_hub.py` 的「主题」chips 改为一级主题（经济 / 科技 / 教育 / 国际 / 政治 / 社会），正文按一级主题分组、科技下按 AI安全 / AI应用 分组；Hero 统计改为 主题 / 业务线 / 报告 / 类型；`index.html` / `reader.html` / `INDEX.md` 重新生成。
+- **同步**：`AGENTS.md`、`README.md`、`content/README.md`、`structure-and-naming-spec.md`、`report-classification.md`、`template-registry.md`、`compliance-rules.json`、`sync.json`、`check_links.py`、`audit_tool.py` 等路径与规则同步；unittest 822 通过，`optimization_gate --probe` 0 错误。
+
 ## 3.3.0 — 2026-11-18：engine/sources 迁移至业务线 sources
 
 - **结构**：删除引擎层 `engine/sources/`；5 份 md 源稿按业务归属迁至 `content/economy/trends/sources/` 与 `content/tech/weekly-roundup/sources/`（含 `legacy/` 历史存档）。

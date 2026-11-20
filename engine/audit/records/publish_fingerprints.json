@@ -9,18 +9,16 @@
     "content/economy/dubai/apartment/reports/2026_annual.html": "b3b90040cdb25acddabf5b48541ab31855117badfd56155779d559374c667e75",
     "content/economy/dubai/apartment/reports/2027-01_monthly.html": "d323be522cadf5f9e1c9c841b4a11872eb4be7510e2fa01d72907faba48a6b6b",
     "content/economy/insight/reports/2026-12_baseline_report.html": "6ff739e721e274663de3109f58615109df0aeb13a0b65c31c80d0592720d1b5d",
-    "content/economy/trends/reports/2026-11-13_weekly.html": "0de3fe47d03cef97108a9fa1bee75b6f30d46c9d223a4e3a50695f015b8e3e45",
-    "content/economy/trends/reports/2026-11-20_weekly.html": "a2bbeb714b45966dcdfa99dd11fedc795ee728f0fa33a14baa70dbb82eccbd01",
-    "content/economy/trends/reports/2026-11-27_weekly.html": "3dec6e984a0aecb13e00d1c863a0b93ec8766079367f6578772620dfa6684464",
-    "content/education/education-system/reports/2026-12_baseline_report.html": "26012979caec056e94bd817e4d5d9a8c5022d537e416bb5d0dca6476a467559c",
+    "content/economy/trends/reports/2026-11-13_weekly.html": "18d0c33ea751c501e00e17a00373effaf05fe2ea6d11df4fdcf07fea19f5ea8b",
+    "content/economy/trends/reports/2026-11-20_weekly.html": "66dc7911f5b6ebfc588e4996b49660481de22dbcef1143ec11604a00889744bc",
+    "content/economy/trends/reports/2026-11-27_weekly.html": "3816bbb9e8e98d0a3d6e848295415b1e47b4fda5ab773640e8b1a6dab804e046",
+    "content/education/education-system/reports/2026-12_baseline_report.html": "bb37576816d4803edf802b4e68af3215b7af73078dda8364ba7c7d480c8b2d8e",
     "content/international/international-relations/reports/2026-11_baseline_report.html": "225023ac769ba2ca9cd0eb14804964f4e550e2a042594e40c040e2c517214ada",
-    "content/political/political-system/reports/2026-11_baseline_report.html": "6e448896cd5c1638b2bc3bbc1d25f8935630b4c50a3fc446d1607194e294cdcd",
-    "content/society/social-structure/reports/2026-11_baseline_report.html": "c58b6be09261d08528f2e12a09da6fa48d59fdd9c8aa31765b219140cf95ad8d",
-    "content/tech/competitive-intelligence/dubai/reports/2026-12_baseline_report.html": "59c650417c02d40e43e58f5d785a7636383900661b33e31bdcdacfea26f1e68e",
-    "content/tech/competitive-intelligence/dubai/reports/2026-12_monthly.html": "4a4d4fe5a617e9abe8a59b42982fd6ce2397426c81cfb7df56c92761893f94b8",
-    "content/tech/industry-research/dubai/reports/2026-12_baseline_report.html": "12881c25f7c887765b96e8a4b2de59e4dafb27e1961149781bfab626c6c97e75",
-    "content/tech/security/dubai/reports/2026-11_baseline_report.html": "3b05bba364b580876bdb8ee2119d3bf189689133a51d22286b83d35391048434",
-    "content/tech/weekly-roundup/reports/2026-11-13_weekly.html": "d719e31feef64db387a510acf6ab53d3bf618588be95156eebdfc0c8c7df4be2",
-    "content/tech/weekly-roundup/reports/2026-11-20_weekly.html": "45b3d2d6bf0bc5d636ceaa5836658855f9f98167d03ec3500ccf8a3cc985dd8a"
+    "content/political/political-system/reports/2026-11_baseline_report.html": "a9c5c426d6e2fce5f07409881e334fcc87917a4d354301e2340c265bbe79d002",
+    "content/society/social-structure/reports/2026-11_baseline_report.html": "088ed17303425f2b36472bf89a254d64966b19f4bb17c8ce9f630fd9b1c9ee0e",
+    "content/tech/ai-security/competitive-intelligence/dubai/reports/2026-12_baseline_report.html": "6d945a222f68d4e8f8e0e83d0cb841ed3323ad05462c68925b9edcc597a0000d",
+    "content/tech/ai-security/competitive-intelligence/dubai/reports/2026-12_monthly.html": "ecc45cf3f69c6794b6acb939a29de52728ecf86762f5575cbfab7c6d489b4d71",
+    "content/tech/ai-security/industry-research/dubai/reports/2026-12_baseline_report.html": "46760a261f0b89249ac9d5062df5745a7369c1a8b29e78d0c97fd4ef9a049d1e",
+    "content/tech/ai-security/security/dubai/reports/2026-11_baseline_report.html": "06076655117157e1272638b8d15c6b4236fa58ea80c3ba9c5f395326ff8293c0"
   }
 }

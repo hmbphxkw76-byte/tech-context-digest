@@ -80,3 +80,12 @@
 [2026-11-18T20:19:11] [sync] economy -> ../../content/economy/dubai/apartment/prompts/business-config.md：区块替换成功：新增 6 / 修改 0 / 删除 0，共 55 条（v1.5）；备份 sync-backups/economy.business-config.md.20261118_201911.bak
 [2026-11-18T20:19:11] [sync] tech -> ../../content/tech/weekly-roundup/prompts/business-config.md：区块替换成功：新增 1 / 修改 0 / 删除 0，共 120 条（v1.4）；备份 sync-backups/tech.business-config.md.20261118_201911.bak
 [2026-11-18T20:19:11] [sync] tech -> ../../content/tech/security/dubai/prompts/business-config.md：无变更（词汇库与提示词区间一致）
+[2026-11-20T15:48:13] [sync] tech -> ../../content/tech/ai-application/weekly-roundup/prompts/business-config.md：区块替换成功：新增 71 / 修改 0 / 删除 0，共 71 条（v1.4）；备份 sync-backups/tech.business-config.md.20261120_154813.bak
+[2026-11-20T15:48:13] [sync] tech -> ../../content/tech/ai-security/weekly-roundup/prompts/business-config.md：区块替换成功：新增 49 / 修改 0 / 删除 0，共 49 条（v1.4）；备份 sync-backups/tech.business-config.md.20261120_154813.bak
+[2026-11-20T15:48:13] [sync] tech -> ../../content/tech/ai-security/security/dubai/prompts/business-config.md：区块替换成功：新增 153 / 修改 0 / 删除 0，共 153 条（v1.4）；备份 sync-backups/tech.business-config.md.20261120_154813.bak
+[2026-11-20T15:48:13] [sync] economy -> ../../content/economy/trends/prompts/business-config.md：无变更（词汇库与提示词区间一致）
+[2026-11-20T15:48:13] [sync] economy -> ../../content/economy/dubai/apartment/prompts/business-config.md：无变更（词汇库与提示词区间一致）
+[2026-11-20T15:48:13] [sync] education -> ../../content/education/education-system/prompts/business-config.md：区块替换成功：新增 45 / 修改 0 / 删除 0，共 45 条（v1.1）；备份 sync-backups/education.business-config.md.20261120_154813.bak
+[2026-11-20T15:48:13] [sync] international -> ../../content/international/international-relations/prompts/business-config.md：区块替换成功：新增 68 / 修改 0 / 删除 0，共 68 条（v1.1）；备份 sync-backups/international.business-config.md.20261120_154813.bak
+[2026-11-20T15:48:13] [sync] political -> ../../content/political/political-system/prompts/business-config.md：区块替换成功：新增 10 / 修改 0 / 删除 0，共 10 条（v1.1）；备份 sync-backups/political.business-config.md.20261120_154813.bak
+[2026-11-20T15:48:13] [sync] society -> ../../content/society/social-structure/prompts/business-config.md：区块替换成功：新增 10 / 修改 0 / 删除 0，共 10 条（v1.1）；备份 sync-backups/society.business-config.md.20261120_154813.bak

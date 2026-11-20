@@ -61,12 +61,15 @@ a:hover{text-decoration:underline}
   text-align:center;white-space:nowrap;overflow:hidden}
 .filterbar .count{font-size:12px;color:var(--ink3);margin-left:auto;white-space:nowrap}
 
-/* ── 主区：地区 → 主题 → 报告 ── */
+/* ── 主区：主题 → 分组 → 业务线 → 报告 ── */
 .main{max-width:1240px;margin:0 auto;padding:8px 24px 50px}
-.region{margin-bottom:12px}
-.region-head{display:flex;align-items:baseline;gap:10px;margin:26px 0 4px}
-.region-head h2{font-size:20px;color:var(--navy)}
-.region-head .rcount{font-size:11.5px;color:var(--ink3)}
+.theme{margin-bottom:12px}
+.theme-head{display:flex;align-items:baseline;gap:10px;margin:26px 0 4px}
+.theme-head h2{font-size:20px;color:var(--navy)}
+.theme-head .rcount{font-size:11.5px;color:var(--ink3)}
+.group{margin:0 0 4px}
+.group-head{margin:14px 0 2px}
+.group-head h3{font-size:14.5px;color:var(--navy2);letter-spacing:.3px}
 .topic{margin:18px 0 6px;scroll-margin-top:64px}
 .topic-head{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap;
   border-left:4px solid var(--navy2);padding:2px 0 2px 12px;margin:0 0 12px}
@@ -178,9 +181,12 @@ body{display:flex;flex-direction:column;height:100vh;overflow:hidden}
   justify-content:space-between;gap:8px}
 .sidebar-head .count{font-weight:400;color:var(--ink3)}
 .sidebar-nav{padding:2px 12px 0}
-.sidebar-nav .region{margin-bottom:4px}
-.sidebar-nav .region-head{margin:12px 0 2px}
-.sidebar-nav .region-head h2{font-size:14px}
+.sidebar-nav .theme{margin-bottom:4px}
+.sidebar-nav .theme-head{margin:12px 0 2px}
+.sidebar-nav .theme-head h2{font-size:14px}
+.sidebar-nav .group{margin:0}
+.sidebar-nav .group-head{margin:8px 0 0}
+.sidebar-nav .group-head h3{font-size:12.5px;color:var(--navy2)}
 .sidebar-nav .topic{margin:6px 0 2px;scroll-margin-top:0}
 .sidebar-nav .topic-head{border-left-width:3px;padding:1px 0 1px 9px;margin:0 0 5px}
 .sidebar-nav .topic-head h3{font-size:13px}
@@ -235,7 +241,7 @@ body{display:flex;flex-direction:column;height:100vh;overflow:hidden}
 <a class="brand-link" href="index.html">宏观资讯报告</a>
 <span class="brand-sep">·</span><span class="brand-sub">阅读器</span>
 </div>
-<div class="reader-head-stats">6 区域 · 11 主题 · 20 报告 · 7 类型</div>
+<div class="reader-head-stats">6 主题 · 12 业务线 · 18 报告 · 7 类型</div>
 <button class="menu-btn" id="menuBtn" aria-label="打开报告列表" aria-expanded="false" aria-controls="sidebar">☰</button>
 </div>
 </header>
@@ -243,18 +249,13 @@ body{display:flex;flex-direction:column;height:100vh;overflow:hidden}
 <input id="reader-search" type="search" placeholder="搜索主题 / 报告标题…" aria-label="搜索主题或报告">
 <div class="chips" id="reader-chips-topic" role="group" aria-label="主题筛选">
 <span class="chips-label">主题</span>
-<button class="chip on" data-topic="all" aria-pressed="true">全部主题</button>
-<button class="chip" data-topic="content/economy/dubai/apartment" aria-pressed="false">公寓住宅市场</button>
-<button class="chip" data-topic="content/economy/insight" aria-pressed="false">决策仪表盘</button>
-<button class="chip" data-topic="content/economy/trends" aria-pressed="false">全球宏观经济趋势（主要经济体视角）</button>
-<button class="chip" data-topic="content/education/education-system" aria-pressed="false">教育体系与政策</button>
-<button class="chip" data-topic="content/international/international-relations" aria-pressed="false">国际关系与外交</button>
-<button class="chip" data-topic="content/political/political-system" aria-pressed="false">政治制度与治理</button>
-<button class="chip" data-topic="content/society/social-structure" aria-pressed="false">社会结构与分层</button>
-<button class="chip" data-topic="content/tech/competitive-intelligence/dubai" aria-pressed="false">AI 网安竞争格局</button>
-<button class="chip" data-topic="content/tech/industry-research/dubai" aria-pressed="false">AI 网安行业</button>
-<button class="chip" data-topic="content/tech/security/dubai" aria-pressed="false">AI 网络安全</button>
-<button class="chip" data-topic="content/tech/weekly-roundup" aria-pressed="false">Weekly Roundup</button>
+<button class="chip on" data-theme="all" aria-pressed="true">全部主题</button>
+<button class="chip" data-theme="economy" aria-pressed="false">经济</button>
+<button class="chip" data-theme="tech" aria-pressed="false">科技</button>
+<button class="chip" data-theme="education" aria-pressed="false">教育</button>
+<button class="chip" data-theme="international" aria-pressed="false">国际</button>
+<button class="chip" data-theme="political" aria-pressed="false">政治</button>
+<button class="chip" data-theme="society" aria-pressed="false">社会</button>
 </div>
 <div class="chips chips-type" id="reader-chips-type" role="group" aria-label="类型筛选">
 <button class="chip on" data-type="all" aria-pressed="true">全部类型</button>
@@ -280,9 +281,9 @@ body{display:flex;flex-direction:column;height:100vh;overflow:hidden}
 <aside class="sidebar" id="sidebar" aria-label="报告列表">
 <div class="sidebar-head"><span>报告列表</span><span class="count" id="sidebar-count"></span></div>
 <nav class="sidebar-nav" id="sidebar-nav">
-<section class="region" data-region="迪拜（阿联酋）">
-<div class="region-head"><h2>迪拜（阿联酋）</h2><span class="rcount js-region-count">4 个主题</span></div>
-<section class="topic" data-topic="content/economy/dubai/apartment" data-type="market-monitoring">
+<section class="theme" data-theme="economy">
+<div class="theme-head"><h2>经济</h2><span class="rcount js-theme-count">3 个业务线</span></div>
+<section class="topic" id="topic-content-economy-dubai-apartment" data-topic="content/economy/dubai/apartment" data-theme="economy" data-category="apartment" data-type="market-monitoring">
 <div class="topic-head"><h3>公寓住宅市场</h3><span class="badge">市场指标监测型</span><span class="count js-topic-count">6 份报告</span></div>
 <div class="cycle">
 <div class="cycle-head"><span class="cycle-name">月度</span><span class="cycle-flag">本期更新</span></div>
@@ -311,43 +312,7 @@ body{display:flex;flex-direction:column;height:100vh;overflow:hidden}
 </div>
 </div>
 </section>
-<section class="topic" data-topic="content/tech/competitive-intelligence/dubai" data-type="competitive-intelligence">
-<div class="topic-head"><h3>AI 网安竞争格局</h3><span class="badge">竞争情报监测型</span><span class="count js-topic-count">2 份报告</span></div>
-<div class="cycle">
-<div class="cycle-head"><span class="cycle-name">月度</span><span class="cycle-flag">本期更新</span></div>
-<div class="reports">
-<article class="rcard" data-path="content/tech/competitive-intelligence/dubai/reports/2026-12_monthly.html" data-region="迪拜（阿联酋）" data-type="competitive-intelligence" data-search="迪拜（阿联酋） ai 网安竞争格局 竞争情报监测型 content/tech/competitive-intelligence/dubai 月度 2026-12 迪拜（阿联酋）ai 网安竞争格局 · 月度更新报告 · 2026-12 content/tech/competitive-intelligence/dubai/reports/2026-12_monthly.html"><div class="row1"><span class="tag" title="该周期首期报告，无环比基期">首期</span><span class="tag tag-type" title="竞争情报监测型">竞争情报</span><span class="tag">月度</span><span class="period">2026-12</span></div><h4><a href="?report=content/tech/competitive-intelligence/dubai/reports/2026-12_monthly.html" title="迪拜（阿联酋）AI 网安竞争格局 · 月度更新报告 · 2026-12">迪拜（阿联酋）AI 网安竞争格局 · 月度更新报告 · 2026-12</a></h4><div class="path">content/tech/competitive-intelligence/dubai/reports/2026-12_monthly.html</div></article>
-</div>
-</div>
-<div class="cycle">
-<div class="cycle-head"><span class="cycle-name">基线</span></div>
-<div class="reports">
-<article class="rcard" data-path="content/tech/competitive-intelligence/dubai/reports/2026-12_baseline_report.html" data-region="迪拜（阿联酋）" data-type="competitive-intelligence" data-search="迪拜（阿联酋） ai 网安竞争格局 竞争情报监测型 content/tech/competitive-intelligence/dubai 基线 2026-12 迪拜（阿联酋）ai 网安竞争格局 · 首期基线报告 · 2026-12 content/tech/competitive-intelligence/dubai/reports/2026-12_baseline_report.html"><div class="row1"><span class="tag tag-type" title="竞争情报监测型">竞争情报</span><span class="tag">基线</span><span class="period">2026-12</span></div><h4><a href="?report=content/tech/competitive-intelligence/dubai/reports/2026-12_baseline_report.html" title="迪拜（阿联酋）AI 网安竞争格局 · 首期基线报告 · 2026-12">迪拜（阿联酋）AI 网安竞争格局 · 首期基线报告 · 2026-12</a></h4><div class="path">content/tech/competitive-intelligence/dubai/reports/2026-12_baseline_report.html</div></article>
-</div>
-</div>
-</section>
-<section class="topic" data-topic="content/tech/industry-research/dubai" data-type="industry-research">
-<div class="topic-head"><h3>AI 网安行业</h3><span class="badge">行业深度研究型</span><span class="count js-topic-count">1 份报告</span></div>
-<div class="cycle">
-<div class="cycle-head"><span class="cycle-name">基线</span></div>
-<div class="reports">
-<article class="rcard" data-path="content/tech/industry-research/dubai/reports/2026-12_baseline_report.html" data-region="迪拜（阿联酋）" data-type="industry-research" data-search="迪拜（阿联酋） ai 网安行业 行业深度研究型 content/tech/industry-research/dubai 基线 2026-12 迪拜（阿联酋）ai 网安行业 · 首期基线报告 · 2026-12 content/tech/industry-research/dubai/reports/2026-12_baseline_report.html"><div class="row1"><span class="tag tag-type" title="行业深度研究型">行业研究</span><span class="tag">基线</span><span class="period">2026-12</span></div><h4><a href="?report=content/tech/industry-research/dubai/reports/2026-12_baseline_report.html" title="迪拜（阿联酋）AI 网安行业 · 首期基线报告 · 2026-12">迪拜（阿联酋）AI 网安行业 · 首期基线报告 · 2026-12</a></h4><div class="path">content/tech/industry-research/dubai/reports/2026-12_baseline_report.html</div></article>
-</div>
-</div>
-</section>
-<section class="topic" data-topic="content/tech/security/dubai" data-type="employment-research">
-<div class="topic-head"><h3>AI 网络安全</h3><span class="badge">职业就业调研型</span><span class="count js-topic-count">1 份报告</span></div>
-<div class="cycle">
-<div class="cycle-head"><span class="cycle-name">基线</span></div>
-<div class="reports">
-<article class="rcard" data-path="content/tech/security/dubai/reports/2026-11_baseline_report.html" data-region="迪拜（阿联酋）" data-type="employment-research" data-search="迪拜（阿联酋） ai 网络安全 职业就业调研型 content/tech/security/dubai 基线 2026-11 迪拜（阿联酋）ai 网安就业 · 首期基线报告 · 2026-11 content/tech/security/dubai/reports/2026-11_baseline_report.html"><div class="row1"><span class="tag tag-type" title="职业就业调研型">职业就业</span><span class="tag">基线</span><span class="period">2026-11</span></div><h4><a href="?report=content/tech/security/dubai/reports/2026-11_baseline_report.html" title="迪拜（阿联酋）AI 网安就业 · 首期基线报告 · 2026-11">迪拜（阿联酋）AI 网安就业 · 首期基线报告 · 2026-11</a></h4><div class="path">content/tech/security/dubai/reports/2026-11_baseline_report.html</div></article>
-</div>
-</div>
-</section>
-</section>
-<section class="region" data-region="跨研究线（全球 / 迪拜）">
-<div class="region-head"><h2>跨研究线（全球 / 迪拜）</h2><span class="rcount js-region-count">1 个主题</span></div>
-<section class="topic" data-topic="content/economy/insight" data-type="decision-dashboard">
+<section class="topic" id="topic-content-economy-insight" data-topic="content/economy/insight" data-theme="economy" data-category="insight" data-type="decision-dashboard">
 <div class="topic-head"><h3>决策仪表盘</h3><span class="badge">决策仪表盘型</span><span class="count js-topic-count">1 份报告</span></div>
 <div class="cycle">
 <div class="cycle-head"><span class="cycle-name">基线</span></div>
@@ -356,10 +321,7 @@ body{display:flex;flex-direction:column;height:100vh;overflow:hidden}
 </div>
 </div>
 </section>
-</section>
-<section class="region" data-region="全球">
-<div class="region-head"><h2>全球</h2><span class="rcount js-region-count">2 个主题</span></div>
-<section class="topic" data-topic="content/economy/trends" data-type="trend-weekly">
+<section class="topic" id="topic-content-economy-trends" data-topic="content/economy/trends" data-theme="economy" data-category="trends" data-type="trend-weekly">
 <div class="topic-head"><h3>全球宏观经济趋势（主要经济体视角）</h3><span class="badge">行业趋势周报型</span><span class="count js-topic-count">3 份报告</span></div>
 <div class="cycle">
 <div class="cycle-head"><span class="cycle-name">周报</span></div>
@@ -370,20 +332,60 @@ body{display:flex;flex-direction:column;height:100vh;overflow:hidden}
 </div>
 </div>
 </section>
-<section class="topic" data-topic="content/tech/weekly-roundup" data-type="trend-weekly">
-<div class="topic-head"><h3>Weekly Roundup</h3><span class="badge">行业趋势周报型</span><span class="count js-topic-count">2 份报告</span></div>
+</section>
+<section class="theme" data-theme="tech">
+<div class="theme-head"><h2>科技</h2><span class="rcount js-theme-count">5 个业务线</span></div>
+<section class="group" data-category="ai-security">
+<div class="group-head"><h3>AI安全</h3></div>
+<section class="topic" id="topic-content-tech-ai-security-competitive-intelligence-dubai" data-topic="content/tech/ai-security/competitive-intelligence/dubai" data-theme="tech" data-category="ai-security" data-type="competitive-intelligence">
+<div class="topic-head"><h3>AI 网安竞争格局</h3><span class="badge">竞争情报监测型</span><span class="count js-topic-count">2 份报告</span></div>
 <div class="cycle">
-<div class="cycle-head"><span class="cycle-name">周报</span></div>
+<div class="cycle-head"><span class="cycle-name">月度</span><span class="cycle-flag">本期更新</span></div>
 <div class="reports">
-<article class="rcard" data-path="content/tech/weekly-roundup/reports/2026-11-20_weekly.html" data-region="全球" data-type="trend-weekly" data-search="全球 weekly roundup 行业趋势周报型 content/tech/weekly-roundup 周报 2026-11-20 ai 趋势周报（安全 × agent 生态）· 2026-11-20 content/tech/weekly-roundup/reports/2026-11-20_weekly.html"><div class="row1"><span class="tag tag-type" title="行业趋势周报型">行业趋势</span><span class="tag">周报</span><span class="period">2026-11-20</span></div><h4><a href="?report=content/tech/weekly-roundup/reports/2026-11-20_weekly.html" title="AI 趋势周报（安全 × Agent 生态）· 2026-11-20">AI 趋势周报（安全 × Agent 生态）· 2026-11-20</a></h4><div class="path">content/tech/weekly-roundup/reports/2026-11-20_weekly.html</div></article>
-<article class="rcard" data-path="content/tech/weekly-roundup/reports/2026-11-13_weekly.html" data-region="全球" data-type="trend-weekly" data-search="全球 weekly roundup 行业趋势周报型 content/tech/weekly-roundup 周报 2026-11-13 ai 趋势周报（安全 × agent 生态）· 2026-11-13 content/tech/weekly-roundup/reports/2026-11-13_weekly.html"><div class="row1"><span class="tag tag-type" title="行业趋势周报型">行业趋势</span><span class="tag">周报</span><span class="period">2026-11-13</span></div><h4><a href="?report=content/tech/weekly-roundup/reports/2026-11-13_weekly.html" title="AI 趋势周报（安全 × Agent 生态）· 2026-11-13">AI 趋势周报（安全 × Agent 生态）· 2026-11-13</a></h4><div class="path">content/tech/weekly-roundup/reports/2026-11-13_weekly.html</div></article>
+<article class="rcard" data-path="content/tech/ai-security/competitive-intelligence/dubai/reports/2026-12_monthly.html" data-region="迪拜（阿联酋）" data-type="competitive-intelligence" data-search="迪拜（阿联酋） ai 网安竞争格局 竞争情报监测型 content/tech/ai-security/competitive-intelligence/dubai 月度 2026-12 迪拜（阿联酋）ai 网安竞争格局 · 月度更新报告 · 2026-12 content/tech/ai-security/competitive-intelligence/dubai/reports/2026-12_monthly.html"><div class="row1"><span class="tag" title="该周期首期报告，无环比基期">首期</span><span class="tag tag-type" title="竞争情报监测型">竞争情报</span><span class="tag">月度</span><span class="period">2026-12</span></div><h4><a href="?report=content/tech/ai-security/competitive-intelligence/dubai/reports/2026-12_monthly.html" title="迪拜（阿联酋）AI 网安竞争格局 · 月度更新报告 · 2026-12">迪拜（阿联酋）AI 网安竞争格局 · 月度更新报告 · 2026-12</a></h4><div class="path">content/tech/ai-security/competitive-intelligence/dubai/reports/2026-12_monthly.html</div></article>
+</div>
+</div>
+<div class="cycle">
+<div class="cycle-head"><span class="cycle-name">基线</span></div>
+<div class="reports">
+<article class="rcard" data-path="content/tech/ai-security/competitive-intelligence/dubai/reports/2026-12_baseline_report.html" data-region="迪拜（阿联酋）" data-type="competitive-intelligence" data-search="迪拜（阿联酋） ai 网安竞争格局 竞争情报监测型 content/tech/ai-security/competitive-intelligence/dubai 基线 2026-12 迪拜（阿联酋）ai 网安竞争格局 · 首期基线报告 · 2026-12 content/tech/ai-security/competitive-intelligence/dubai/reports/2026-12_baseline_report.html"><div class="row1"><span class="tag tag-type" title="竞争情报监测型">竞争情报</span><span class="tag">基线</span><span class="period">2026-12</span></div><h4><a href="?report=content/tech/ai-security/competitive-intelligence/dubai/reports/2026-12_baseline_report.html" title="迪拜（阿联酋）AI 网安竞争格局 · 首期基线报告 · 2026-12">迪拜（阿联酋）AI 网安竞争格局 · 首期基线报告 · 2026-12</a></h4><div class="path">content/tech/ai-security/competitive-intelligence/dubai/reports/2026-12_baseline_report.html</div></article>
 </div>
 </div>
 </section>
+<section class="topic" id="topic-content-tech-ai-security-industry-research-dubai" data-topic="content/tech/ai-security/industry-research/dubai" data-theme="tech" data-category="ai-security" data-type="industry-research">
+<div class="topic-head"><h3>AI 网安行业</h3><span class="badge">行业深度研究型</span><span class="count js-topic-count">1 份报告</span></div>
+<div class="cycle">
+<div class="cycle-head"><span class="cycle-name">基线</span></div>
+<div class="reports">
+<article class="rcard" data-path="content/tech/ai-security/industry-research/dubai/reports/2026-12_baseline_report.html" data-region="迪拜（阿联酋）" data-type="industry-research" data-search="迪拜（阿联酋） ai 网安行业 行业深度研究型 content/tech/ai-security/industry-research/dubai 基线 2026-12 迪拜（阿联酋）ai 网安行业 · 首期基线报告 · 2026-12 content/tech/ai-security/industry-research/dubai/reports/2026-12_baseline_report.html"><div class="row1"><span class="tag tag-type" title="行业深度研究型">行业研究</span><span class="tag">基线</span><span class="period">2026-12</span></div><h4><a href="?report=content/tech/ai-security/industry-research/dubai/reports/2026-12_baseline_report.html" title="迪拜（阿联酋）AI 网安行业 · 首期基线报告 · 2026-12">迪拜（阿联酋）AI 网安行业 · 首期基线报告 · 2026-12</a></h4><div class="path">content/tech/ai-security/industry-research/dubai/reports/2026-12_baseline_report.html</div></article>
+</div>
+</div>
 </section>
-<section class="region" data-region="全球（多国对照，非单一地区业务线）">
-<div class="region-head"><h2>全球（多国对照，非单一地区业务线）</h2><span class="rcount js-region-count">2 个主题</span></div>
-<section class="topic" data-topic="content/education/education-system" data-type="policy-analysis">
+<section class="topic" id="topic-content-tech-ai-security-security-dubai" data-topic="content/tech/ai-security/security/dubai" data-theme="tech" data-category="ai-security" data-type="employment-research">
+<div class="topic-head"><h3>AI 网络安全</h3><span class="badge">职业就业调研型</span><span class="count js-topic-count">1 份报告</span></div>
+<div class="cycle">
+<div class="cycle-head"><span class="cycle-name">基线</span></div>
+<div class="reports">
+<article class="rcard" data-path="content/tech/ai-security/security/dubai/reports/2026-11_baseline_report.html" data-region="迪拜（阿联酋）" data-type="employment-research" data-search="迪拜（阿联酋） ai 网络安全 职业就业调研型 content/tech/ai-security/security/dubai 基线 2026-11 迪拜（阿联酋）ai 网安就业 · 首期基线报告 · 2026-11 content/tech/ai-security/security/dubai/reports/2026-11_baseline_report.html"><div class="row1"><span class="tag tag-type" title="职业就业调研型">职业就业</span><span class="tag">基线</span><span class="period">2026-11</span></div><h4><a href="?report=content/tech/ai-security/security/dubai/reports/2026-11_baseline_report.html" title="迪拜（阿联酋）AI 网安就业 · 首期基线报告 · 2026-11">迪拜（阿联酋）AI 网安就业 · 首期基线报告 · 2026-11</a></h4><div class="path">content/tech/ai-security/security/dubai/reports/2026-11_baseline_report.html</div></article>
+</div>
+</div>
+</section>
+<section class="topic" id="topic-content-tech-ai-security-weekly-roundup" data-topic="content/tech/ai-security/weekly-roundup" data-theme="tech" data-category="ai-security" data-type="trend-weekly">
+<div class="topic-head"><h3>AI 安全趋势周报</h3><span class="badge">行业趋势周报型</span><span class="count js-topic-count">0 份报告</span></div>
+<div class="noresult">该业务线暂无已产出报告。</div>
+</section>
+</section>
+<section class="group" data-category="ai-application">
+<div class="group-head"><h3>AI应用</h3></div>
+<section class="topic" id="topic-content-tech-ai-application-weekly-roundup" data-topic="content/tech/ai-application/weekly-roundup" data-theme="tech" data-category="ai-application" data-type="trend-weekly">
+<div class="topic-head"><h3>AI 应用趋势周报</h3><span class="badge">行业趋势周报型</span><span class="count js-topic-count">0 份报告</span></div>
+<div class="noresult">该业务线暂无已产出报告。</div>
+</section>
+</section>
+</section>
+<section class="theme" data-theme="education">
+<div class="theme-head"><h2>教育</h2><span class="rcount js-theme-count">1 个业务线</span></div>
+<section class="topic" id="topic-content-education-education-system" data-topic="content/education/education-system" data-theme="education" data-category="education-system" data-type="policy-analysis">
 <div class="topic-head"><h3>教育体系与政策</h3><span class="badge">政策法规解读型</span><span class="count js-topic-count">1 份报告</span></div>
 <div class="cycle">
 <div class="cycle-head"><span class="cycle-name">基线</span></div>
@@ -392,19 +394,10 @@ body{display:flex;flex-direction:column;height:100vh;overflow:hidden}
 </div>
 </div>
 </section>
-<section class="topic" data-topic="content/society/social-structure" data-type="policy-analysis">
-<div class="topic-head"><h3>社会结构与分层</h3><span class="badge">政策法规解读型</span><span class="count js-topic-count">1 份报告</span></div>
-<div class="cycle">
-<div class="cycle-head"><span class="cycle-name">基线</span></div>
-<div class="reports">
-<article class="rcard" data-path="content/society/social-structure/reports/2026-11_baseline_report.html" data-region="全球（多国对照，非单一地区业务线）" data-type="policy-analysis" data-search="全球（多国对照，非单一地区业务线） 社会结构与分层 政策法规解读型 content/society/social-structure 基线 2026-11 全球 · 社会结构与分层 · 首期基线报告（2026-11） content/society/social-structure/reports/2026-11_baseline_report.html"><div class="row1"><span class="tag tag-type" title="政策法规解读型">政策法规</span><span class="tag">基线</span><span class="period">2026-11</span></div><h4><a href="?report=content/society/social-structure/reports/2026-11_baseline_report.html" title="全球 · 社会结构与分层 · 首期基线报告（2026-11）">全球 · 社会结构与分层 · 首期基线报告（2026-11）</a></h4><div class="path">content/society/social-structure/reports/2026-11_baseline_report.html</div></article>
-</div>
-</div>
 </section>
-</section>
-<section class="region" data-region="全球（多国 / 多机制对照，非单一地区业务线）">
-<div class="region-head"><h2>全球（多国 / 多机制对照，非单一地区业务线）</h2><span class="rcount js-region-count">1 个主题</span></div>
-<section class="topic" data-topic="content/international/international-relations" data-type="policy-analysis">
+<section class="theme" data-theme="international">
+<div class="theme-head"><h2>国际</h2><span class="rcount js-theme-count">1 个业务线</span></div>
+<section class="topic" id="topic-content-international-international-relations" data-topic="content/international/international-relations" data-theme="international" data-category="international-relations" data-type="policy-analysis">
 <div class="topic-head"><h3>国际关系与外交</h3><span class="badge">政策法规解读型</span><span class="count js-topic-count">1 份报告</span></div>
 <div class="cycle">
 <div class="cycle-head"><span class="cycle-name">基线</span></div>
@@ -414,14 +407,26 @@ body{display:flex;flex-direction:column;height:100vh;overflow:hidden}
 </div>
 </section>
 </section>
-<section class="region" data-region="全球（多国 / 多体制对照，非单一地区业务线）">
-<div class="region-head"><h2>全球（多国 / 多体制对照，非单一地区业务线）</h2><span class="rcount js-region-count">1 个主题</span></div>
-<section class="topic" data-topic="content/political/political-system" data-type="policy-analysis">
+<section class="theme" data-theme="political">
+<div class="theme-head"><h2>政治</h2><span class="rcount js-theme-count">1 个业务线</span></div>
+<section class="topic" id="topic-content-political-political-system" data-topic="content/political/political-system" data-theme="political" data-category="political-system" data-type="policy-analysis">
 <div class="topic-head"><h3>政治制度与治理</h3><span class="badge">政策法规解读型</span><span class="count js-topic-count">1 份报告</span></div>
 <div class="cycle">
 <div class="cycle-head"><span class="cycle-name">基线</span></div>
 <div class="reports">
 <article class="rcard" data-path="content/political/political-system/reports/2026-11_baseline_report.html" data-region="全球（多国 / 多体制对照，非单一地区业务线）" data-type="policy-analysis" data-search="全球（多国 / 多体制对照，非单一地区业务线） 政治制度与治理 政策法规解读型 content/political/political-system 基线 2026-11 全球 · 政治制度与治理 · 首期基线报告（2026-11） content/political/political-system/reports/2026-11_baseline_report.html"><div class="row1"><span class="tag tag-type" title="政策法规解读型">政策法规</span><span class="tag">基线</span><span class="period">2026-11</span></div><h4><a href="?report=content/political/political-system/reports/2026-11_baseline_report.html" title="全球 · 政治制度与治理 · 首期基线报告（2026-11）">全球 · 政治制度与治理 · 首期基线报告（2026-11）</a></h4><div class="path">content/political/political-system/reports/2026-11_baseline_report.html</div></article>
+</div>
+</div>
+</section>
+</section>
+<section class="theme" data-theme="society">
+<div class="theme-head"><h2>社会</h2><span class="rcount js-theme-count">1 个业务线</span></div>
+<section class="topic" id="topic-content-society-social-structure" data-topic="content/society/social-structure" data-theme="society" data-category="social-structure" data-type="policy-analysis">
+<div class="topic-head"><h3>社会结构与分层</h3><span class="badge">政策法规解读型</span><span class="count js-topic-count">1 份报告</span></div>
+<div class="cycle">
+<div class="cycle-head"><span class="cycle-name">基线</span></div>
+<div class="reports">
+<article class="rcard" data-path="content/society/social-structure/reports/2026-11_baseline_report.html" data-region="全球（多国对照，非单一地区业务线）" data-type="policy-analysis" data-search="全球（多国对照，非单一地区业务线） 社会结构与分层 政策法规解读型 content/society/social-structure 基线 2026-11 全球 · 社会结构与分层 · 首期基线报告（2026-11） content/society/social-structure/reports/2026-11_baseline_report.html"><div class="row1"><span class="tag tag-type" title="政策法规解读型">政策法规</span><span class="tag">基线</span><span class="period">2026-11</span></div><h4><a href="?report=content/society/social-structure/reports/2026-11_baseline_report.html" title="全球 · 社会结构与分层 · 首期基线报告（2026-11）">全球 · 社会结构与分层 · 首期基线报告（2026-11）</a></h4><div class="path">content/society/social-structure/reports/2026-11_baseline_report.html</div></article>
 </div>
 </div>
 </section>
@@ -460,18 +465,18 @@ body{display:flex;flex-direction:column;height:100vh;overflow:hidden}
   noResult.style.display = 'none';
   nav.appendChild(noResult);
 
-  var state = { q: '', topic: 'all', type: 'all' };
+  var state = { q: '', theme: 'all', type: 'all' };
 
   function applyFilter() {
     var visibleReports = 0;
     var visibleTopics = 0;
     nav.querySelectorAll('.topic').forEach(function (topicEl) {
-      var okTopic = state.topic === 'all' || topicEl.dataset.topic === state.topic;
+      var okTheme = state.theme === 'all' || topicEl.dataset.theme === state.theme;
       var okType = state.type === 'all' || topicEl.dataset.type === state.type;
       var shownInTopic = 0;
       topicEl.querySelectorAll('.rcard').forEach(function (card) {
         var okQ = !state.q || card.dataset.search.indexOf(state.q) >= 0;
-        var show = okTopic && okType && okQ;
+        var show = okTheme && okType && okQ;
         card.style.display = show ? '' : 'none';
         if (show) { shownInTopic++; visibleReports++; }
       });
@@ -481,15 +486,20 @@ body{display:flex;flex-direction:column;height:100vh;overflow:hidden}
       var tc = topicEl.querySelector('.js-topic-count');
       if (tc) tc.textContent = shownInTopic + ' 份报告';
     });
-    nav.querySelectorAll('.region').forEach(function (reg) {
-      var shownInRegion = Array.prototype.filter.call(
-        reg.querySelectorAll('.topic'), function (t) { return t.style.display !== 'none'; }).length;
-      reg.style.display = shownInRegion ? '' : 'none';
-      var rc = reg.querySelector('.js-region-count');
-      if (rc) rc.textContent = shownInRegion + ' 个主题';
+    nav.querySelectorAll('.group').forEach(function (g) {
+      var shown = Array.prototype.filter.call(
+        g.querySelectorAll('.topic'), function (t) { return t.style.display !== 'none'; }).length;
+      g.style.display = shown ? '' : 'none';
+    });
+    nav.querySelectorAll('.theme').forEach(function (th) {
+      var shown = Array.prototype.filter.call(
+        th.querySelectorAll('.topic'), function (t) { return t.style.display !== 'none'; }).length;
+      th.style.display = shown ? '' : 'none';
+      var rc = th.querySelector('.js-theme-count');
+      if (rc) rc.textContent = shown + ' 个业务线';
     });
     // 仅在筛选 / 搜索时自动展开「更多」（初始加载保持折叠）
-    if (state.q || state.topic !== 'all' || state.type !== 'all') {
+    if (state.q || state.theme !== 'all' || state.type !== 'all') {
       nav.querySelectorAll('.more').forEach(function (d) {
         var hasMatch = Array.prototype.filter.call(
           d.querySelectorAll('.rcard'), function (c) { return c.style.display !== 'none'; }).length > 0;
@@ -497,7 +507,7 @@ body{display:flex;flex-direction:column;height:100vh;overflow:hidden}
       });
     }
     noResult.style.display = visibleReports ? 'none' : '';
-    countEl.textContent = '共 ' + visibleTopics + ' 个主题 · ' + visibleReports + ' 份报告';
+    countEl.textContent = '共 ' + visibleTopics + ' 个业务线 · ' + visibleReports + ' 份报告';
     if (sidebarCountEl) sidebarCountEl.textContent = visibleReports + ' 份报告';
   }
 
@@ -525,7 +535,7 @@ body{display:flex;flex-direction:column;height:100vh;overflow:hidden}
       applyFilter();
     });
   }
-  bindChips('reader-chips-topic', 'topic');
+  bindChips('reader-chips-topic', 'theme');
   bindChips('reader-chips-type', 'type');
 
   function closeDrawer() {
