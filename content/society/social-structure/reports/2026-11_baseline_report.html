@@ -249,6 +249,11 @@ footer,.footer{font-size:11.4px;color:var(--ink3);text-align:center;margin-top:2
 .idx-link:hover{color:var(--navy2);border-bottom:1px solid var(--blue)}
 .idx-link .ext{font-size:10px;color:var(--blue);margin-left:2px;font-weight:400}
 
+/* ── 消费端反馈入口（T-06）：静态链接 + data 属性占位，无外部依赖 ── */
+.feedback-link{color:var(--navy2);text-decoration:none;border-bottom:1px dotted #9db9da;font-weight:600}
+.feedback-link:hover{color:var(--navy);border-bottom:1px solid var(--blue)}
+.report-foot{border-top:1px solid var(--line);padding:16px 0 34px}
+
 /* ── 报告特有组件（apartment 基线 / 季度） ── */
 .tldr{background:linear-gradient(180deg,#fff,#f8fafe);border-left:5px solid var(--navy2)}
 .verdict{font-size:17px;font-weight:700;color:var(--blue);margin:0 0 12px}
@@ -392,7 +397,7 @@ details.registry[open]{padding-bottom:18px}
     <h1>全球 · 社会结构与分层 · 首期基线报告（2026-11）</h1>
     <p class="sub">九节固化锚 · 基线固定（后续事件触发解读的对比锚）</p>
     <p class="meta">
-      <b>数据截止</b>：2026-11（基线期）｜<b>报告版本</b>：v1.0（首期基线固定）｜<b>本期读数时点</b>：2026-11<br>
+      <b>数据截止</b>：2026-11（基线期）｜<b>报告版本</b>：v1.0（首期基线固定）｜<b>本期读数时点</b>：2026-11-20<br>
       <b>来源语言</b>：官方一手以英文为准；非英语官方统计须标注原文语言并附官方 URL｜<b>覆盖</b>：全球多国对照（非单一地区业务线）
     </p>
     <p>
@@ -402,7 +407,7 @@ details.registry[open]{padding-bottom:18px}
 </header>
 <nav class="report-nav" aria-label="报告导航">
   <div class="wrap">
-    <div class="nav-url"><span class="nav-url-label">报告 URL：</span><a href="https://github.com/hmbphxkw76-byte/tech-context-digest/blob/main/content/society/social-structure/reports/2026-11_baseline_report.html">github.com/hmbphxkw76-byte/tech-context-digest · content/society/social-structure/reports/2026-11_baseline_report.html</a></div>
+    <div class="nav-url"><span class="nav-url-label">报告 URL：</span><a href="https://github.com/hmbphxkw76-byte/tech-context-digest/blob/main/content/society/social-structure/reports/2026-11_baseline_report.html" target="_blank" rel="noopener">github.com/hmbphxkw76-byte/tech-context-digest · content/society/social-structure/reports/2026-11_baseline_report.html</a></div>
     <div class="nav-tabs">
       <a href="#s1">一、执行摘要</a>
       <a href="#s2">二、政策台账与监测机制</a>
@@ -443,7 +448,7 @@ details.registry[open]{padding-bottom:18px}
   <p><b>一句话定位</b>：社会结构与分层监测以官方统计与调查微观数据为唯一采信层，基线锁定人口、家庭、分配、就业、社保与城镇化口径，事件解读与年度台账在基线之上滚动。</p>
   <p class="small muted">来源与时点：数据截止 2026-11；分级见第八节、URL 见第九节。</p>
 </div>
-<div class="note">解读说明：文本依据为官方统计 / 调查微观数据 / 方法文件，逐条附 URL（第九节）；时效以 2026-11 读数时点为准；摘要仅含已核验与部分核验，推断与假设下沉证据层。阈值与信号规则为「预校准（ex-ante）」，首次中期回测 2027-06。</div>
+<div class="note">解读说明：文本依据为官方统计 / 调查微观数据 / 方法文件，逐条附 URL（第九节）；时效以 2026-11-20 读数时点为准；摘要仅含已核验与部分核验，推断与假设下沉证据层。阈值与信号规则为「预校准（ex-ante）」，首次中期回测 2027-06。</div>
 
 <h2 class="sec" id="s2">二、政策台账与监测机制</h2>
 
@@ -473,19 +478,19 @@ details.registry[open]{padding-bottom:18px}
 <div class="tblwrap"><table class="fixed">
 <thead><tr><th style="width:8%">优先级</th><th style="width:22%">渠道</th><th style="width:34%">官方 URL</th><th style="width:18%">更新机制</th><th style="width:18%">本期核验</th></tr></thead>
 <tbody>
-<tr><td>P0</td><td>中国国家统计局</td><td><a href="https://www.stats.gov.cn/">https://www.stats.gov.cn/</a></td><td>年度统计公报 / 普查</td><td>已核验（入口）</td></tr>
-<tr><td>P0</td><td>日本総務省統計局</td><td><a href="https://www.stat.go.jp/">https://www.stat.go.jp/</a></td><td>人口推計 / 普查 / 家計調査</td><td>已核验（入口）</td></tr>
-<tr><td>P0</td><td>韓国 統計庁 KOSIS</td><td><a href="https://kosis.kr/">https://kosis.kr/</a></td><td>人口 / 家计 / 就业</td><td>已核验（入口）</td></tr>
-<tr><td>P0</td><td>韓国 行政安全部</td><td><a href="https://www.mois.go.kr/">https://www.mois.go.kr/</a></td><td>居民登记人口</td><td>已核验（入口）</td></tr>
-<tr><td>P1</td><td>UN World Population Prospects</td><td><a href="https://population.un.org/wpp/">https://population.un.org/wpp/</a></td><td>4 年一度</td><td>已核验</td></tr>
-<tr><td>P1</td><td>UN World Urbanization Prospects</td><td><a href="https://population.un.org/wup/">https://population.un.org/wup/</a></td><td>年度 / 不定期</td><td>已核验</td></tr>
-<tr><td>P2</td><td>OECD Data（不平等 / 社会）</td><td><a href="https://data.oecd.org/">https://data.oecd.org/</a></td><td>年度</td><td>已核验（入口）</td></tr>
-<tr><td>P2</td><td>World Bank WDI</td><td><a href="https://data.worldbank.org/">https://data.worldbank.org/</a></td><td>年度</td><td>未核验（入口）</td></tr>
-<tr><td>P2</td><td>ILOSTAT</td><td><a href="https://ilostat.ilo.org/">https://ilostat.ilo.org/</a></td><td>年度</td><td>已核验（入口）</td></tr>
-<tr><td>P2</td><td>UN Data</td><td><a href="http://data.un.org/">http://data.un.org/</a></td><td>年度</td><td>未核验</td></tr>
-<tr><td>P4</td><td>UN DESA</td><td><a href="https://www.un.org/en/desa/">https://www.un.org/en/desa/</a></td><td>世界社会报告</td><td>未核验</td></tr>
-<tr><td>P4</td><td>WHO</td><td><a href="https://www.who.int/">https://www.who.int/</a></td><td>卫生统计</td><td>未核验</td></tr>
-<tr><td>P4</td><td>UN-Habitat</td><td><a href="https://unhabitat.org/">https://unhabitat.org/</a></td><td>城市报告</td><td>未核验</td></tr>
+<tr><td>P0</td><td>中国国家统计局</td><td><a href="https://www.stats.gov.cn/" target="_blank" rel="noopener">https://www.stats.gov.cn/</a></td><td>年度统计公报 / 普查</td><td>已核验（入口）</td></tr>
+<tr><td>P0</td><td>日本総務省統計局</td><td><a href="https://www.stat.go.jp/" target="_blank" rel="noopener">https://www.stat.go.jp/</a></td><td>人口推計 / 普查 / 家計調査</td><td>已核验（入口）</td></tr>
+<tr><td>P0</td><td>韓国 統計庁 KOSIS</td><td><a href="https://kosis.kr/" target="_blank" rel="noopener">https://kosis.kr/</a></td><td>人口 / 家计 / 就业</td><td>已核验（入口）</td></tr>
+<tr><td>P0</td><td>韓国 行政安全部</td><td><a href="https://www.mois.go.kr/" target="_blank" rel="noopener">https://www.mois.go.kr/</a></td><td>居民登记人口</td><td>已核验（入口）</td></tr>
+<tr><td>P1</td><td>UN World Population Prospects</td><td><a href="https://population.un.org/wpp/" target="_blank" rel="noopener">https://population.un.org/wpp/</a></td><td>4 年一度</td><td>已核验</td></tr>
+<tr><td>P1</td><td>UN World Urbanization Prospects</td><td><a href="https://population.un.org/wup/" target="_blank" rel="noopener">https://population.un.org/wup/</a></td><td>年度 / 不定期</td><td>已核验</td></tr>
+<tr><td>P2</td><td>OECD Data（不平等 / 社会）</td><td><a href="https://data.oecd.org/" target="_blank" rel="noopener">https://data.oecd.org/</a></td><td>年度</td><td>已核验（入口）</td></tr>
+<tr><td>P2</td><td>World Bank WDI</td><td><a href="https://data.worldbank.org/" target="_blank" rel="noopener">https://data.worldbank.org/</a></td><td>年度</td><td>未核验（入口）</td></tr>
+<tr><td>P2</td><td>ILOSTAT</td><td><a href="https://ilostat.ilo.org/" target="_blank" rel="noopener">https://ilostat.ilo.org/</a></td><td>年度</td><td>已核验（入口）</td></tr>
+<tr><td>P2</td><td>UN Data</td><td><a href="http://data.un.org/" target="_blank" rel="noopener">http://data.un.org/</a></td><td>年度</td><td>未核验</td></tr>
+<tr><td>P4</td><td>UN DESA</td><td><a href="https://www.un.org/en/desa/" target="_blank" rel="noopener">https://www.un.org/en/desa/</a></td><td>世界社会报告</td><td>未核验</td></tr>
+<tr><td>P4</td><td>WHO</td><td><a href="https://www.who.int/" target="_blank" rel="noopener">https://www.who.int/</a></td><td>卫生统计</td><td>未核验</td></tr>
+<tr><td>P4</td><td>UN-Habitat</td><td><a href="https://unhabitat.org/" target="_blank" rel="noopener">https://unhabitat.org/</a></td><td>城市报告</td><td>未核验</td></tr>
 </tbody>
 </table></div>
 <div class="note">渠道分级按 business-config 第四节：P0 官方统计数据库 / 原始调查文件为唯一可直接采信层；P1 官方统计年鉴 / 报告 PDF（记录版本、发布日期、表号）；P2 国际组织统计门户（须注提取日期）；P3 英文媒体（只作线索）；P4 行业机构与智库（交叉验证方向）；P5 官方调查问卷 / 方法文件（最终裁决口径与可比性）。</div>
@@ -583,33 +588,33 @@ details.registry[open]{padding-bottom:18px}
 <h3>4.1 老龄人口（中国 / 日本 / 韩国）</h3>
 <p><b>数据摘编</b>：中国 2024 年末 65 周岁及以上人口 22023 万人、占 15.6%，60 周岁及以上 31031 万人、占 22.0%，65+ 老年抚养比 22.8%，人均预期寿命 79.0 岁；日本 65 岁及以上人口约 3625 万人、占总人口约 29.3%；韩国 2025 年居民登记 65 岁及以上 1084 万人、占 21.21%。<span class="lvl lvl-partial">部分核验</span></p>
 <p><b>解读</b>：K04（老龄化率）三国均处 14–21% 黄灯区间上沿或更高；日本已接近 28% 硬红线区间，韩国 2025 年跨过 20% 超高龄社会门槛。监测须并列「65+ 占比」与「总抚养比」，并注明口径（常住 / 居民登记 / 户籍人口）。</p>
-<p><b>官方答问 / 配套</b>：中国国家统计局 / 国家卫健委老龄公报；総務省統計局人口推計；韓国行政安全部居民登记统计。<span class="src-inline">来源：<a href="https://www.stats.gov.cn/">https://www.stats.gov.cn/</a>；<a href="https://www.stat.go.jp/data/jinsui/">https://www.stat.go.jp/data/jinsui/</a>；<a href="https://www.mois.go.kr/">https://www.mois.go.kr/</a></span></p>
+<p><b>官方答问 / 配套</b>：中国国家统计局 / 国家卫健委老龄公报；総務省統計局人口推計；韓国行政安全部居民登记统计。<span class="src-inline">来源：<a href="https://www.stats.gov.cn/" target="_blank" rel="noopener">https://www.stats.gov.cn/</a>；<a href="https://www.stat.go.jp/data/jinsui/" target="_blank" rel="noopener">https://www.stat.go.jp/data/jinsui/</a>；<a href="https://www.mois.go.kr/" target="_blank" rel="noopener">https://www.mois.go.kr/</a></span></p>
 
 <h3>4.2 家庭户结构（以韩国单人家庭为例）</h3>
 <p><b>数据摘编</b>：韩国 2025 年居民登记家庭总数约 2430 万户，其中单人家庭 1027 万户、占 42.27%；70 岁以上单人家庭占单人家庭总数 21.60%。<span class="lvl lvl-partial">部分核验</span></p>
 <p><b>解读</b>：K02（家庭户数与结构）监测须区分「家庭户总数」「户均规模」与「单人家庭占比」；单人家庭增长与老龄化、都市化叠加，影响住房、护理与社区服务需求。</p>
 <p><b>歧义并列</b>：居民登记口径 ≠ 常住口径；单人家庭占比上升不等于家庭功能消失，须与代际同住率并列。</p>
-<p><b>官方答问 / 配套</b>：韓国行政安全部《居民登记人口统计分析》；KOSIS 家庭统计。<span class="src-inline">来源：<a href="https://www.mois.go.kr/">https://www.mois.go.kr/</a>；<a href="https://kosis.kr/">https://kosis.kr/</a></span></p>
+<p><b>官方答问 / 配套</b>：韓国行政安全部《居民登记人口统计分析》；KOSIS 家庭统计。<span class="src-inline">来源：<a href="https://www.mois.go.kr/" target="_blank" rel="noopener">https://www.mois.go.kr/</a>；<a href="https://kosis.kr/" target="_blank" rel="noopener">https://kosis.kr/</a></span></p>
 
 <h3>4.3 收入不平等（基尼系数口径）</h3>
 <p><b>条款摘编</b>：OECD 以家庭可支配收入（扣除所得税与社保缴费后）计算基尼系数，取值 0–1；口径含工资、自雇与资本收入及公共现金转移。<span class="lvl lvl-verified">已核验</span></p>
 <p><b>解读</b>：K03（收入不平等）须并列税前 / 可支配收入口径；基尼系数与收入五等分比、帕尔玛比值不可互换。跨国对照注明年份与收入定义。</p>
-<p><b>官方答问 / 配套</b>：OECD Income Distribution Database。<span class="src-inline">来源：<a href="https://data.oecd.org/inequality/income-inequality.htm">https://data.oecd.org/inequality/income-inequality.htm</a></span></p>
+<p><b>官方答问 / 配套</b>：OECD Income Distribution Database。<span class="src-inline">来源：<a href="https://data.oecd.org/inequality/income-inequality.htm" target="_blank" rel="noopener">https://data.oecd.org/inequality/income-inequality.htm</a></span></p>
 
 <h3>4.4 就业与劳动参与</h3>
 <p><b>条款摘编</b>：ILO 口径将劳动力分为就业与失业（积极求职），劳动参与率为经济活动人口占工作年龄人口比例；各国自报口径与 ILO 口径分列。<span class="lvl lvl-verified">已核验</span></p>
 <p><b>解读</b>：K07（失业率 / 劳动参与）须并列 ILO 与自报口径；失业率下降但参与率下降时，须以「就业率」复核，避免把退出劳动力误读为就业改善。</p>
-<p><b>官方答问 / 配套</b>：ILOSTAT 方法文件。<span class="src-inline">来源：<a href="https://ilostat.ilo.org/">https://ilostat.ilo.org/</a></span></p>
+<p><b>官方答问 / 配套</b>：ILOSTAT 方法文件。<span class="src-inline">来源：<a href="https://ilostat.ilo.org/" target="_blank" rel="noopener">https://ilostat.ilo.org/</a></span></p>
 
 <h3>4.5 城镇化与城市结构</h3>
 <p><b>数据摘编</b>：UN World Urbanization Prospects 2025 显示 2025 年全球城市人口约占 45%，巨型城市（1000 万+）33 个，预计 2050 年增至 37 个；城市人口定义基于各国城乡划分。<span class="lvl lvl-verified">已核验</span></p>
 <p><b>解读</b>：K05（城镇化率）须注明城乡定义（行政划分 / 功能都市区）；城镇化率不等于城市生活质量，须与基础设施、住房与公共服务指标并列。</p>
-<p><b>官方答问 / 配套</b>：UN World Urbanization Prospects。<span class="src-inline">来源：<a href="https://population.un.org/wup/">https://population.un.org/wup/</a></span></p>
+<p><b>官方答问 / 配套</b>：UN World Urbanization Prospects。<span class="src-inline">来源：<a href="https://population.un.org/wup/" target="_blank" rel="noopener">https://population.un.org/wup/</a></span></p>
 
 <h3>4.6 世界人口基线（UN WPP 2024）</h3>
 <p><b>数据摘编</b>：UN WPP 2024 估计 2024 年世界人口约 82 亿，预计 2080 年代中期达峰（约 103 亿），2100 年回落至约 102 亿；截至 2024 年已有 63 个国家 / 地区人口达峰（含中国、德国、日本、俄罗斯），该组总人口预计未来 30 年下降 14%。<span class="lvl lvl-verified">已核验</span></p>
 <p><b>解读</b>：K01（人口自然增长）与 RL-01（人口结构）的基线锚；人口达峰国家组与仍增长地区分列，不做全球单一趋势外推。</p>
-<p><b>官方答问 / 配套</b>：UN WPP 2024 数据门户与新闻稿。<span class="src-inline">来源：<a href="https://population.un.org/wpp/">https://population.un.org/wpp/</a>；<a href="https://www.un.org/sustainabledevelopment/blog/2024/07/press-release-wpp2024/">https://www.un.org/sustainabledevelopment/blog/2024/07/press-release-wpp2024/</a></span></p>
+<p><b>官方答问 / 配套</b>：UN WPP 2024 数据门户与新闻稿。<span class="src-inline">来源：<a href="https://population.un.org/wpp/" target="_blank" rel="noopener">https://population.un.org/wpp/</a>；<a href="https://www.un.org/sustainabledevelopment/blog/2024/07/press-release-wpp2024/" target="_blank" rel="noopener">https://www.un.org/sustainabledevelopment/blog/2024/07/press-release-wpp2024/</a></span></p>
 
 <h2 class="sec" id="s5">五、影响对象矩阵</h2>
 <p>矩阵按「结构指标 × 受影响主体 × 影响方向」展开，逐格附口径依据与指标指针；本期为基线，影响量级待事件触发后回填。</p>
@@ -718,7 +723,7 @@ details.registry[open]{padding-bottom:18px}
 <p>来源按 business-config 第四节四层分级与 P0–P5 获取优先级执行（指针，不复制正文）：<b>官方一手</b>（各国统计局 / 官方统计数据库 / 原始调查文件）为唯一可直接采信层；<b>行业机构</b>（官方调查机构、Pew Research 仅作线索）；<b>挂牌门户 / 数据库</b>（World Bank WDI、UN Data、OECD Data、各国微观数据门户，须注提取日期）；<b>媒体转述</b>（须标「需核实原文」，不得与官方一手同等处理）。</p>
 <h3>8.2 文本时效与版本治理</h3>
 <ul class="tight">
-  <li><b>读数时点</b>：2026-11；统计门户快照须注提取日期与表号。</li>
+  <li><b>读数时点</b>：2026-11-20；统计门户快照须注提取日期与表号。</li>
   <li><b>版本治理</b>：本报告 v1.0（首期基线固定）；核验 / 收敛型运行不升级版本号，只标注「本期读数时点」。</li>
   <li><b>基线属性</b>：本报告为后续事件解读与年度台账的对比锚；基线永不重跑，结构变更只影响后续新基线。</li>
 </ul>

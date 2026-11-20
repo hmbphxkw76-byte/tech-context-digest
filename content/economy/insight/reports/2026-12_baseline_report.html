@@ -249,6 +249,11 @@ footer,.footer{font-size:11.4px;color:var(--ink3);text-align:center;margin-top:2
 .idx-link:hover{color:var(--navy2);border-bottom:1px solid var(--blue)}
 .idx-link .ext{font-size:10px;color:var(--blue);margin-left:2px;font-weight:400}
 
+/* ── 消费端反馈入口（T-06）：静态链接 + data 属性占位，无外部依赖 ── */
+.feedback-link{color:var(--navy2);text-decoration:none;border-bottom:1px dotted #9db9da;font-weight:600}
+.feedback-link:hover{color:var(--navy);border-bottom:1px solid var(--blue)}
+.report-foot{border-top:1px solid var(--line);padding:16px 0 34px}
+
 /* ── 报告特有组件（apartment 基线 / 季度） ── */
 .tldr{background:linear-gradient(180deg,#fff,#f8fafe);border-left:5px solid var(--navy2)}
 .verdict{font-size:17px;font-weight:700;color:var(--blue);margin:0 0 12px}
@@ -392,7 +397,7 @@ details.registry[open]{padding-bottom:18px}
   <h1>跨研究线决策仪表盘 · 基线报告</h1>
   <p class="sub">收敛各研究线核心判断为标准化决策卡 · 暴露缺失事实与冲突读数 · 按阈值触发补缺 / 专题</p>
   <p class="meta">
-    <b>报告版本</b> v1.0（基线）｜ <b>本期读数时点</b> 2026-11-15 ｜ <b>节拍</b> 季（事件触发可插刷）<br>
+    <b>报告版本</b> v1.0（基线）｜ <b>本期读数时点</b> 2026-11-20 ｜ <b>节拍</b> 季（事件触发可插刷）<br>
     <b>来源策略</b> synthesis_only（无外部来源的综合层：不出现外部 URL，来源追溯走 [FC-…] 事实卡片与仓库内指针）<br>
     <b>决策卡</b> 6 张（跨 6 条研究线）｜ <b>盲区</b> 15 项（P0 四类：就业 / 收入 / 空置 / 竣工）｜ <b>阈值状态</b> 预校准（ex-ante）
   </p>
@@ -431,14 +436,14 @@ details.registry[open]{padding-bottom:18px}
   <li><b>AI 安全攻击面持续扩张，红队与 Agent 安全为技术主线。</b>（DC-AI-TRD-01，证据强度 强，可直接决策）<span class="lvl lvl-verified">已核验</span></li>
   <li><b>迪拜公寓市场处于「高位钝化 → 供给延迟型再平衡」，融资成本逼近硬红线是当前最主要边际约束。</b>（DC-ECO-APT-01，证据强度 中，需补充就业 / 收入 / 空置 / 竣工四类 P0 信息才可决策）<span class="lvl lvl-partial">部分核验</span></li>
   <li><b>全球宏观处于「过热—滞胀过渡带」，主要央行集体转鹰、再通胀固化。</b>（DC-ECO-TRD-01，证据强度 中，需补充 PMI / 薪资增速 / 期限利差信息才可决策）<span class="lvl lvl-partial">部分核验</span></li>
-  <li><b>信息充分度分布：可直接决策 2 张 / 需补充 4 张；盲区 15 项，P0 四类（就业 / 收入 / 空置 / 竣工）责任周期均 2026-12。</b>（盲区台账，读数时点 2026-11-15）<span class="lvl lvl-partial">部分核验</span></li>
+  <li><b>信息充分度分布：可直接决策 2 张 / 需补充 4 张；盲区 15 项，P0 四类（就业 / 收入 / 空置 / 竣工）责任周期均 2026-12。</b>（盲区台账，读数时点 2026-11-20）<span class="lvl lvl-partial">部分核验</span></li>
 </ol>
 
 <div class="note">口径提示：本节仅引用「已核验 + 部分核验」等级信息；market-sizing 类数值（如行业规模 8.2 亿 vs 34 亿美元）为多口径并列，不进入决策摘要点值。阈值校准首次中期回测 2027-06，当前信号灯一律为<span class="lvl lvl-assumption">预校准（ex-ante）</span>。</div>
 
 <h2 class="sec" id="s2">决策卡总表</h2>
 
-<p>决策卡台账单一事实源：<code>data/processed/economy/insight/decision_cards.json</code>（读数时点 2026-11-15）。证据强度：强 = 关键事实全部已核验且双源；中 = 主体已核验、个别部分核验；弱 = 含推断 / 假设支撑。</p>
+<p>决策卡台账单一事实源：<code>data/processed/economy/insight/decision_cards.json</code>（读数时点 2026-11-20）。证据强度：强 = 关键事实全部已核验且双源；中 = 主体已核验、个别部分核验；弱 = 含推断 / 假设支撑。</p>
 
 <div class="tblwrap">
 <table class="fixed">
@@ -507,9 +512,9 @@ details.registry[open]{padding-bottom:18px}
 </div>
 
 <div class="chart-box">
-  <h4>决策卡证据强度分布 <span class="unit">单位：张；来源：decision_cards.json（读数时点 2026-11-15）</span></h4>
+  <h4>决策卡证据强度分布 <span class="unit">单位：张；来源：decision_cards.json（读数时点 2026-11-20）</span></h4>
   <div class="chart-eh" id="chart-evidence"></div>
-  <p class="chart-note">口径与限制：统计对象为决策卡台账 6 张卡的 evidence_strength 字段（强 / 中 / 弱），非指标值；数据取自 data/processed/economy/insight/decision_cards.json，读数时点 2026-11-15。证据强度为定性分级，不可相加或加权。</p>
+  <p class="chart-note">口径与限制：统计对象为决策卡台账 6 张卡的 evidence_strength 字段（强 / 中 / 弱），非指标值；数据取自 data/processed/economy/insight/decision_cards.json，读数时点 2026-11-20。证据强度为定性分级，不可相加或加权。</p>
 </div>
 
 <h2 class="sec" id="s3">证据强度与反向证据</h2>
@@ -738,7 +743,7 @@ details.registry[open]{padding-bottom:18px}
 
 <h2 class="sec" id="s7">场景切片</h2>
 
-<p>切片单一事实源：<code>data/processed/economy/insight/scenario_slices.md</code>（读数时点 2026-11-15）。每类场景只输出该场景所需信息，跨切片共享事实走 <span class="fact-ref">[FC-…]</span> 与台账指针。</p>
+<p>切片单一事实源：<code>data/processed/economy/insight/scenario_slices.md</code>（读数时点 2026-11-20）。每类场景只输出该场景所需信息，跨切片共享事实走 <span class="fact-ref">[FC-…]</span> 与台账指针。</p>
 
 <div class="slice">
   <div class="slice-head">场景一：投资决策（主场景）｜决策问题：值不值得进 / 投 / 持</div>
@@ -849,7 +854,7 @@ details.registry[open]{padding-bottom:18px}
 
 <h3>仓库内指针（单一事实源）</h3>
 <ul class="tight">
-  <li>决策卡台账：<code>data/processed/economy/insight/decision_cards.json</code>（schema_version 1.0，读数时点 2026-11-15）</li>
+  <li>决策卡台账：<code>data/processed/economy/insight/decision_cards.json</code>（schema_version 1.0，读数时点 2026-11-20）</li>
   <li>场景切片：<code>data/processed/economy/insight/scenario_slices.md</code></li>
   <li>盲区台账：<code>engine/report-audits/blind-spot-ledger.md</code>（最后更新 2026-11-16）</li>
   <li>事实卡片库：<code>engine/fact_cards/security_fact_cards.json</code>、<code>industry_research_fact_cards.json</code>、<code>competitive_intelligence_fact_cards.json</code></li>
@@ -862,7 +867,7 @@ details.registry[open]{padding-bottom:18px}
 
 <h3>读数时点与版本治理</h3>
 <ul class="tight">
-  <li><b>本期读数时点：</b>2026-11-15；<b>报告版本：</b>v1.0（基线首期，仅核心事实修正时升级）。</li>
+  <li><b>本期读数时点：</b>2026-11-20；<b>报告版本：</b>v1.0（基线首期，仅核心事实修正时升级）。</li>
   <li><b>新增信息统计模块：</b>本期新增 6 条 / 修正 0 条 / 无变化 0 条 / 假设核验进度 0/15（详见 s1 决策摘要）。</li>
   <li><b>来源策略：</b>synthesis_only——本报告不出现外部 URL，来源追溯经 <span class="fact-ref">[FC-…]</span> 事实卡片与仓库内指针完成。</li>
   <li><b>口径声明（本报告专属）：</b>决策卡字段以 <code>decision_cards.json</code> 为唯一事实源；场景切片以 <code>scenario_slices.md</code> 为唯一事实源；盲区状态以 <code>blind-spot-ledger.md</code> 为唯一事实源。</li>
@@ -875,7 +880,7 @@ details.registry[open]{padding-bottom:18px}
 <footer class="report-foot"><p><a class="feedback-link" data-feedback="consumer-feedback-v1" href="https://github.com/hmbphxkw76-byte/tech-context-digest/issues/new?title=%E5%8F%8D%E9%A6%88%20/%20%E7%BA%A0%E9%94%99" target="_blank" rel="noopener">反馈 / 纠错</a></p></footer>
 
 <footer>
-  <p>跨研究线决策仪表盘 · 基线报告 · 报告版本 v1.0 · 本期读数时点 2026-11-15 ｜ 业务线 content/economy/insight ｜ 类型 decision-dashboard / baseline</p>
+  <p>跨研究线决策仪表盘 · 基线报告 · 报告版本 v1.0 · 本期读数时点 2026-11-20 ｜ 业务线 content/economy/insight ｜ 类型 decision-dashboard / baseline</p>
   <p>来源策略 synthesis_only（无外部 URL）｜ 决策卡台账 decision_cards.json ｜ 场景切片 scenario_slices.md ｜ 盲区台账 blind-spot-ledger.md</p>
 </footer>
 
