@@ -28,7 +28,7 @@
     "depends_on": [],
     "id": "T-4",
     "phase": "",
-    "status": "pending",
+    "status": "done",
     "title": "全量单测 + optimization_gate 复跑 + 提交与 PR"
   }
 ]
