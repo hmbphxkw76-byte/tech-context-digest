@@ -41,7 +41,7 @@ from _common import ROOT  # noqa: E402
 
 BASE_BRANCH = "main"
 MAIN_REF = f"refs/heads/{BASE_BRANCH}"
-LOCK_PATH = ROOT / ".git" / "catpaw-sync.lock"
+LOCK_PATH = Path(os.environ.get("CATPAW_SYNC_LOCK") or (ROOT / ".git" / "catpaw-sync.lock"))
 LOCK_TTL_SEC = 600
 GATE_SCRIPT = "engine/tools/optimization_gate.py"
 GATE_PERIOD = "auto"            # 内容门禁（研究内核/信息分层/事实卡片/决策交付）；滚动基线 = 当前自然月

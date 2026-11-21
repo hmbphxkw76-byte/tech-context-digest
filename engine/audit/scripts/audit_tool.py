@@ -16,6 +16,8 @@
   accept                    项目级合规率汇总
   l3-status                 L3 SLA 超期检测（每两周覆盖全部正式报告；有超期返回 2 告警）
   igi-snapshot [--period P]  按 gate-period 落盘 IGI 八度实测值（趋势基线，同周期覆盖幂等）
+  verify-ledger             核验台账哈希链校验（seq / prev_hash / hash 重算）
+  verify-review [--period P]  来源定期复核（按 tier 重核周期，到期 / 临期告警）
 
 退出码：0 通过；1 存在不合规；2 用法错误。
 """
@@ -853,6 +855,42 @@ def cmd_l3_status(_args) -> int:
     return 0
 
 
+def cmd_verify_ledger(_args) -> int:
+    """核验台账哈希链校验（复用 verification_ledger，不另写一套）。"""
+    from verification_ledger import verify as ledger_verify
+    ok, problems, stats = ledger_verify()
+    print(f"核验台账：{stats['records']} 条记录，覆盖 {stats['business_lines']} 条业务线")
+    for m in problems:
+        print(f"[E] {m}")
+    if not ok:
+        print(f"[E] 核验台账链校验失败：{len(problems)} 处问题（断裂 / 篡改）")
+        return 1
+    print("核验台账链校验通过")
+    return 0
+
+
+def cmd_verify_review(args) -> int:
+    """来源定期复核：按 tier 重核周期扫描登记，到期 / 临期告警（不阻断）。"""
+    from verification_review import emit as review_emit
+    from verification_review import review as run_review
+    period = getattr(args, "period", None) or "auto"
+    emit = getattr(args, "emit", None)
+    rep = run_review(period)
+    if emit:
+        review_emit(rep, emit)
+    c = rep["counts"]
+    print(f"来源定期复核（{rep['as_of']}）：到期 {c['overdue']}，临期 {c['due_soon']}，"
+          f"正常 {c['ok']}，缺基准日 {c['unknown']}")
+    for it in rep["items"]:
+        if it["state"] in ("overdue", "due_soon"):
+            print(f"[{it['state']}] {it['business_line']} {it['source_id']} "
+                  f"（{it['publisher']}，tier={it['tier']}，基准 {it['base_date']}，"
+                  f"{it['days']} 天 / 周期 {it['limit_days']} 天）")
+    if c["overdue"] or c["due_soon"]:
+        return 2
+    return 0
+
+
 def cmd_run(args) -> int:
     """确定性执行四环节（CI 用）。
 
@@ -1040,6 +1078,10 @@ def main() -> int:
     p = sub.add_parser("igi-snapshot", help="按 gate-period 落盘 IGI 八度实测值（趋势基线）")
     p.add_argument("--period", default=None,
                    help="gate-period（默认 auto = 当前自然月 + 1；显式周期可固定口径复现）")
+    sub.add_parser("verify-ledger", help="核验台账哈希链校验（INFORMATION-VERIFICATION-SPEC）")
+    p = sub.add_parser("verify-review", help="来源定期复核（按 tier 重核周期，到期 / 临期告警）")
+    p.add_argument("--period", default=None, help="复核周期锚（默认 auto = 当前自然月）")
+    p.add_argument("--emit", default=None, help="输出 JSON 路径（缺省不落盘）")
     p = sub.add_parser("run"); p.add_argument("--dry-run", action="store_true"); p.add_argument("--strict", action="store_true")
     p.add_argument("--no-gate", action="store_true",
                    help="严格模式下不内部重跑统一门禁（由调用方统一执行，避免重复）")
@@ -1051,6 +1093,7 @@ def main() -> int:
         "review": cmd_review, "mark": cmd_mark, "unmark": cmd_unmark, "status": cmd_status,
         "sample": cmd_sample, "accept": cmd_accept, "run": cmd_run,
         "l3-status": cmd_l3_status, "igi-snapshot": cmd_igi_snapshot,
+        "verify-ledger": cmd_verify_ledger, "verify-review": cmd_verify_review,
     }[args.cmd](args)
 
 

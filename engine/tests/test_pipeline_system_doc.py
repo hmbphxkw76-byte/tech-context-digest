@@ -22,7 +22,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[2]
 DOC = ROOT / "engine" / "docs" / "report-pipeline-system.md"
 
-# 现行（非历史时点）文件：门禁数量口径必须为 30 项（周期校验接入后）。
+# 现行（非历史时点）文件：门禁数量口径必须为 31 项（核验台账接入后）。
 # 历史时点报告（report-audits/*-2026-11-15/16.md）与 engine/quality/** 的
 # 「21 项量化指标」为另一套口径，不在扫描范围。
 GATE_COUNT_FILES = [
@@ -81,8 +81,8 @@ class TestPipelineSystemDoc(unittest.TestCase):
     def test_gate_count_matches_code(self):
         mod = _load_gate_module()
         names = [c[0] for c in mod.CHECKS]
-        self.assertEqual(len(names), 30, "门禁清单数量变化须同步体系文档")
-        self.assertIn("30 项", self.text)
+        self.assertEqual(len(names), 31, "门禁清单数量变化须同步体系文档")
+        self.assertIn("31 项", self.text)
         for name in names:
             self.assertIn(name, self.text, f"文档门禁清单缺 {name}")
 
@@ -108,7 +108,7 @@ class TestPipelineSystemDoc(unittest.TestCase):
 
 
 class TestGateCountConsistency(unittest.TestCase):
-    """P-07 / M6：现行文档/代码不得残留陈述性「21 项 / 21 门禁」门禁口径（现为 30 项）。
+    """P-07 / M6：现行文档/代码不得残留陈述性「21 项 / 21 门禁」门禁口径（现为 31 项）。
 
     合法表述显式放行：历史基线（「基线 21 项」）与更正记录（「由 21 项更正为 23 项」）。
     扫描范围沿用 GATE_COUNT_FILES（已排除历史时点报告与 engine/quality/**）。
@@ -151,10 +151,10 @@ class TestGateCountConsistency(unittest.TestCase):
 
     def test_gate_count_declarations_are_30(self):
         mod = _load_gate_module()
-        self.assertEqual(len(mod.CHECKS), 30)
+        self.assertEqual(len(mod.CHECKS), 31)
         for f in GATE_COUNT_DECLARING:
             text = f.read_text(encoding="utf-8")
-            self.assertIn("30 项", text, f"{f.relative_to(ROOT)} 未声明 30 项门禁")
+            self.assertIn("31 项", text, f"{f.relative_to(ROOT)} 未声明 31 项门禁")
 
 
 class TestGatePeriodWiring(unittest.TestCase):

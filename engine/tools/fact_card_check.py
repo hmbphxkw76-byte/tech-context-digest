@@ -26,6 +26,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parent))
 from _common import ROOT, detect_report, iter_business_dirs  # noqa: E402
 from gate_period import AUTO  # noqa: E402
 from gate_period import resolve as resolve_period
+from verification_vocab import normalize_card_status  # noqa: E402
 
 DEFAULT_GATE = AUTO
 CARD_DIR = ROOT / "engine" / "fact_cards"
@@ -73,8 +74,9 @@ def load_cards() -> tuple[dict[str, dict], list[str]]:
                 continue
             if c["tier"] not in VALID_TIERS:
                 errors.append(f"{cid}：tier 非法 {c['tier']}")
-            if c["verify_status"] not in VALID_VERIFY:
-                errors.append(f"{cid}：verify_status 非法 {c['verify_status']}")
+            if normalize_card_status(c["verify_status"]) is None:
+                errors.append(f"{cid}：verify_status 非法 {c['verify_status']}"
+                              f"（须为 {' / '.join(sorted(VALID_VERIFY))} 或其英文同义）")
             if c["level"] not in VALID_LEVEL:
                 errors.append(f"{cid}：level 非法 {c['level']}")
             if not str(c["source"]).strip():
