@@ -1,0 +1,58 @@
+[
+  {
+    "acceptance": "",
+    "depends_on": [],
+    "id": "T-1",
+    "phase": "",
+    "status": "pending",
+    "title": "新建 dubai 业务线骨架（business-config + 基线/月度提示词）"
+  },
+  {
+    "acceptance": "",
+    "depends_on": [],
+    "id": "T-2",
+    "phase": "",
+    "status": "pending",
+    "title": "采集英文官方来源并登记台账 / source_registry"
+  },
+  {
+    "acceptance": "",
+    "depends_on": [],
+    "id": "T-3",
+    "phase": "",
+    "status": "pending",
+    "title": "生成首期基线报告（md + canonical HTML）"
+  },
+  {
+    "acceptance": "",
+    "depends_on": [],
+    "id": "T-4",
+    "phase": "",
+    "status": "pending",
+    "title": "更新类型注册表 / 机构分级主数据 / layout.json / 测试断言"
+  },
+  {
+    "acceptance": "",
+    "depends_on": [],
+    "id": "T-5",
+    "phase": "",
+    "status": "pending",
+    "title": "重新生成 hub（index.html / reader.html）"
+  },
+  {
+    "acceptance": "",
+    "depends_on": [],
+    "id": "T-6",
+    "phase": "",
+    "status": "pending",
+    "title": "跑全量门禁与测试"
+  },
+  {
+    "acceptance": "",
+    "depends_on": [],
+    "id": "T-7",
+    "phase": "",
+    "status": "pending",
+    "title": "提交并开 PR"
+  }
+]

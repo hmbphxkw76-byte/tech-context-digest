@@ -872,6 +872,7 @@ class TestLayout(unittest.TestCase):
                 "content/education/education-system",
                 "content/education/study-abroad",
                 "content/international/immigration",
+                "content/international/immigration/dubai",
                 "content/international/international-relations",
                 "content/political/political-system",
                 "content/society/social-structure",

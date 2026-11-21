@@ -1,0 +1,26 @@
+[
+  {
+    "description": "u.ae 与 ICP 对房地产/企业家年限口径冲突",
+    "id": "R-1",
+    "mitigation": "并列呈现并列入未核验清单 U-01",
+    "owner": ""
+  },
+  {
+    "description": "部分官方页抓取失败（WAM 公告）",
+    "id": "R-2",
+    "mitigation": "标未核验，不直引，列入 U-02",
+    "owner": ""
+  },
+  {
+    "description": "新增业务线破坏既有测试断言",
+    "id": "R-3",
+    "mitigation": "同步更新 test_tools 集合断言与类型注册表",
+    "owner": ""
+  },
+  {
+    "description": "并发会话共享工作区互相影响",
+    "id": "R-4",
+    "mitigation": "仅提交本任务路径，走 PR 串行合并",
+    "owner": ""
+  }
+]
