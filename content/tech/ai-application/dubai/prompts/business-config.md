@@ -49,7 +49,7 @@
 ## 四、来源优先级（通用基座第四节的实例化，冲突时报双份并标注）
 
 ① 阿联酋/迪拜政府官方（u.ae、dub.ai、digitaldubai.ae、difc.ae、dic.ae、dmcc.ae、adgm.com、mediaoffice.ae、WAM 英文、各自由区官网）
-＞ ② 国际权威组织 / 平台经济数据（LinkedIn Economic Graph、IMARC、Michael Page、Hays、Cooper Fitch、Charterhouse、Robert Half）
+＞ ② 国际权威组织 / 平台经济数据（LinkedIn Economic Graph、IMARC、Michael Page、Hays、Cooper Fitch、Charterhouse）
 ＞ ③ 头部薪酬指南与招聘平台抽样（Michael Page、Hays、Cooper Fitch、Charterhouse、Robert Half；LinkedIn、Bayt、GulfTalent、Naukrigulf、foundit Gulf——仅作市场信号，不与官方 / 行业机构同等采信）
 ＞ ④ 英文行业/主流媒体（Khaleej Times、The National、Gulf News、Zawya、Reuters、Arab News——只用于发现线索，数值须回官方/原始页校验）
 

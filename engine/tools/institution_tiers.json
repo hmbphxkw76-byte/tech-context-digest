@@ -1375,6 +1375,246 @@
       "tier": 1,
       "aliases": [],
       "lang": "en"
+    },
+    {
+      "name": "ADGM",
+      "tier": 1,
+      "aliases": [],
+      "lang": "en"
+    },
+    {
+      "name": "Amazon Web Services",
+      "tier": 1,
+      "aliases": [],
+      "lang": "en"
+    },
+    {
+      "name": "Business.gov.nl",
+      "tier": 1,
+      "aliases": [],
+      "lang": "en"
+    },
+    {
+      "name": "China Daily",
+      "tier": 4,
+      "aliases": [],
+      "lang": "en"
+    },
+    {
+      "name": "Crunchbase",
+      "tier": 2,
+      "aliases": [],
+      "lang": "en"
+    },
+    {
+      "name": "DASCA",
+      "tier": 2,
+      "aliases": [],
+      "lang": "en"
+    },
+    {
+      "name": "DETE (Ireland)",
+      "tier": 1,
+      "aliases": [],
+      "lang": "en"
+    },
+    {
+      "name": "DIFC",
+      "tier": 1,
+      "aliases": [],
+      "lang": "en"
+    },
+    {
+      "name": "DMCC",
+      "tier": 1,
+      "aliases": [],
+      "lang": "en"
+    },
+    {
+      "name": "Databricks",
+      "tier": 1,
+      "aliases": [],
+      "lang": "en"
+    },
+    {
+      "name": "Department of Enterprise, Trade and Employment (Ireland)",
+      "tier": 1,
+      "aliases": [],
+      "lang": "en"
+    },
+    {
+      "name": "Department of Home Affairs (Australia)",
+      "tier": 1,
+      "aliases": [],
+      "lang": "en"
+    },
+    {
+      "name": "Dubai AI (Digital Dubai)",
+      "tier": 1,
+      "aliases": [],
+      "lang": "en"
+    },
+    {
+      "name": "Dubai Internet City",
+      "tier": 1,
+      "aliases": [],
+      "lang": "en"
+    },
+    {
+      "name": "Dubai Media Office",
+      "tier": 1,
+      "aliases": [],
+      "lang": "en"
+    },
+    {
+      "name": "ESDC / IRCC (Canada)",
+      "tier": 1,
+      "aliases": [],
+      "lang": "en"
+    },
+    {
+      "name": "European Union",
+      "tier": 1,
+      "aliases": [],
+      "lang": "en"
+    },
+    {
+      "name": "Germany – Gesetze im Internet",
+      "tier": 1,
+      "aliases": [],
+      "lang": "de"
+    },
+    {
+      "name": "Google Cloud",
+      "tier": 1,
+      "aliases": [],
+      "lang": "en"
+    },
+    {
+      "name": "Government of the Netherlands",
+      "tier": 1,
+      "aliases": [],
+      "lang": "en"
+    },
+    {
+      "name": "Hays",
+      "tier": 3,
+      "aliases": [],
+      "lang": "en"
+    },
+    {
+      "name": "IDC",
+      "tier": 2,
+      "aliases": [],
+      "lang": "en"
+    },
+    {
+      "name": "ILOE",
+      "tier": 1,
+      "aliases": [],
+      "lang": "en"
+    },
+    {
+      "name": "IMARC Group",
+      "tier": 2,
+      "aliases": [],
+      "lang": "en"
+    },
+    {
+      "name": "IND (Netherlands)",
+      "tier": 1,
+      "aliases": [],
+      "lang": "en"
+    },
+    {
+      "name": "IRCC (Canada)",
+      "tier": 1,
+      "aliases": [],
+      "lang": "en"
+    },
+    {
+      "name": "ISC2",
+      "tier": 2,
+      "aliases": [],
+      "lang": "en"
+    },
+    {
+      "name": "ISO",
+      "tier": 1,
+      "aliases": [],
+      "lang": "en"
+    },
+    {
+      "name": "Immigration New Zealand",
+      "tier": 1,
+      "aliases": [],
+      "lang": "en"
+    },
+    {
+      "name": "MOM (Singapore)",
+      "tier": 1,
+      "aliases": [],
+      "lang": "en"
+    },
+    {
+      "name": "Make it in Germany",
+      "tier": 1,
+      "aliases": [],
+      "lang": "en"
+    },
+    {
+      "name": "Make it in Germany (Federal Government)",
+      "tier": 1,
+      "aliases": [],
+      "lang": "en"
+    },
+    {
+      "name": "Michael Page",
+      "tier": 3,
+      "aliases": [],
+      "lang": "en"
+    },
+    {
+      "name": "Moro Hub",
+      "tier": 1,
+      "aliases": [],
+      "lang": "en"
+    },
+    {
+      "name": "PMI",
+      "tier": 2,
+      "aliases": [],
+      "lang": "en"
+    },
+    {
+      "name": "PitchBook",
+      "tier": 2,
+      "aliases": [],
+      "lang": "en"
+    },
+    {
+      "name": "Robert Half",
+      "tier": 3,
+      "aliases": [],
+      "lang": "en"
+    },
+    {
+      "name": "Service-Public.fr (France)",
+      "tier": 1,
+      "aliases": [],
+      "lang": "en"
+    },
+    {
+      "name": "The Business Research Company",
+      "tier": 2,
+      "aliases": [],
+      "lang": "en"
+    },
+    {
+      "name": "USCIS",
+      "tier": 1,
+      "aliases": [],
+      "lang": "en"
     }
   ],
   "lang": {
