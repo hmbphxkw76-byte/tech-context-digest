@@ -2346,6 +2346,57 @@
       "audit_id": "AUD-2026-11-21-011",
       "mark_level": "pre",
       "audited_at": "2026-11-21T13:03:56+00:00"
+    },
+    "content/international/immigration/dubai/reports/2026-11_baseline_report.html": {
+      "title": "迪拜长期居留签证（黄金签证 / 绿卡签证）· 首期基线报告（2026-11）",
+      "kind": "business",
+      "category": "report",
+      "business_line": "content/international/immigration/dubai",
+      "status": "in-review",
+      "stages": {
+        "draft": true,
+        "initial": true,
+        "second": false,
+        "final": false
+      },
+      "mark": true,
+      "first_seen_at": "2026-11-21",
+      "evidence": {
+        "report": "content/international/immigration/dubai/reports/2026-11_baseline_report.html",
+        "business_line": "content/international/immigration/dubai",
+        "plans": [
+          {
+            "slug": "immigration-dubai-visa",
+            "plan": "engine/audit/records/tasks/immigration-dubai-visa/plan.json",
+            "tasks": "engine/audit/records/tasks/immigration-dubai-visa/tasks.json",
+            "risks": "engine/audit/records/tasks/immigration-dubai-visa/risks.json",
+            "reports": [
+              "content/international/immigration/dubai/reports/2026-11_baseline_report.html"
+            ],
+            "task_count": 7,
+            "risk_count": 4
+          }
+        ],
+        "gate": {
+          "entry": "engine/tools/optimization_gate.py",
+          "probe": true
+        },
+        "audit": {
+          "review": "engine/audit/records/reviews/content-international-immigration-dubai-reports-2026-11-baseline-report-html.json",
+          "status": "in-review",
+          "stages": {
+            "draft": true,
+            "initial": true,
+            "second": false,
+            "final": false
+          },
+          "mark_level": "pre",
+          "audit_id": "AUD-2026-11-21-012"
+        }
+      },
+      "audit_id": "AUD-2026-11-21-012",
+      "mark_level": "pre",
+      "audited_at": "2026-11-21T14:58:59+00:00"
     }
   }
 }
