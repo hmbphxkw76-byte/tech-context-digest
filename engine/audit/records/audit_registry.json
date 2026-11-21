@@ -2295,6 +2295,57 @@
       "audit_id": "AUD-2026-11-21-010",
       "mark_level": "pre",
       "audited_at": "2026-11-21T10:05:19+00:00"
+    },
+    "content/education/study-abroad/reports/2026-11_baseline_report.html": {
+      "title": "14 国留学信息与决策 · 首期基线报告",
+      "kind": "business",
+      "category": "report",
+      "business_line": "content/education/study-abroad",
+      "status": "in-review",
+      "stages": {
+        "draft": true,
+        "initial": true,
+        "second": false,
+        "final": false
+      },
+      "mark": true,
+      "first_seen_at": "2026-11-21",
+      "evidence": {
+        "report": "content/education/study-abroad/reports/2026-11_baseline_report.html",
+        "business_line": "content/education/study-abroad",
+        "plans": [
+          {
+            "slug": "study-abroad",
+            "plan": "engine/audit/records/tasks/study-abroad/plan.json",
+            "tasks": "engine/audit/records/tasks/study-abroad/tasks.json",
+            "risks": "engine/audit/records/tasks/study-abroad/risks.json",
+            "reports": [
+              "content/education/study-abroad/reports/2026-11_baseline_report.html"
+            ],
+            "task_count": 5,
+            "risk_count": 1
+          }
+        ],
+        "gate": {
+          "entry": "engine/tools/optimization_gate.py",
+          "probe": true
+        },
+        "audit": {
+          "review": "engine/audit/records/reviews/content-education-study-abroad-reports-2026-11-baseline-report-html.json",
+          "status": "in-review",
+          "stages": {
+            "draft": true,
+            "initial": true,
+            "second": false,
+            "final": false
+          },
+          "mark_level": "pre",
+          "audit_id": "AUD-2026-11-21-011"
+        }
+      },
+      "audit_id": "AUD-2026-11-21-011",
+      "mark_level": "pre",
+      "audited_at": "2026-11-21T13:03:56+00:00"
     }
   }
 }
