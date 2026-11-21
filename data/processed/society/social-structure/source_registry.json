@@ -23,6 +23,7 @@
     { "source_id": "S-014", "tier": 2, "publisher": "国立社会保障・人口問題研究所", "title": "人口統計資料集", "url": "https://www.ipss.go.jp/", "lang": "ja", "verify_status": "unverifiable", "updated": "2026-11-18", "in_synthesis": false, "used_in": ["2026-11_baseline_report.html"] },
     { "source_id": "S-015", "tier": 1, "publisher": "UN DESA", "title": "Department of Economic and Social Affairs", "url": "https://www.un.org/en/desa/", "lang": "en", "verify_status": "unverifiable", "updated": "2026-11-18", "in_synthesis": false, "used_in": ["2026-11_baseline_report.html"] },
     { "source_id": "S-016", "tier": 1, "publisher": "WHO", "title": "World Health Organization", "url": "https://www.who.int/", "lang": "en", "verify_status": "unverifiable", "updated": "2026-11-18", "in_synthesis": false, "used_in": ["2026-11_baseline_report.html"] },
-    { "source_id": "S-017", "tier": 1, "publisher": "UN-Habitat", "title": "UN-Habitat", "url": "https://unhabitat.org/", "lang": "en", "verify_status": "unverifiable", "updated": "2026-11-18", "in_synthesis": false, "used_in": ["2026-11_baseline_report.html"] }
+    { "source_id": "S-017", "tier": 1, "publisher": "UN-Habitat", "title": "UN-Habitat", "url": "https://unhabitat.org/", "lang": "en", "verify_status": "unverifiable", "updated": "2026-11-18", "in_synthesis": false, "used_in": ["2026-11_baseline_report.html"] },
+    { "source_id": "S-018", "tier": 1, "publisher": "日本総務省統計局", "title": "総務省統計局 公式サイト", "url": "https://www.stat.go.jp/", "lang": "ja", "verify_status": "verified", "updated": "2026-11-20", "in_synthesis": false, "used_in": ["2026-11_baseline_report.html"] }
   ]
 }

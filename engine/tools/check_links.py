@@ -124,6 +124,10 @@ ALLOWED_BROKEN = {
     "data/processed/tech/weekly-roundup",
     "data/raw/tech/competitive-intelligence/dubai",
     "data/raw/tech/industry-research/dubai",
+    # 已删除的未来周期月报（落款晚于产出当月、数据窗口越界，2026-11-21 清理）：
+    # 仅在历史审计记录中引用，不得作为活跃链接
+    "content/economy/dubai/apartment/reports/2026-12_monthly.html",
+    "content/economy/dubai/apartment/reports/2027-01_monthly.html",
 }
 ALLOWED_TOKENS = {
     "./business-config.md",  # 泛用模板占位：实例化时替换为业务线 business-config.md

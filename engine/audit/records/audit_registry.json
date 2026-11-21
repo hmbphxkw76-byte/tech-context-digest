@@ -1028,89 +1028,6 @@
         }
       }
     },
-    "content/economy/insight/reports/2026-12_baseline_report.html": {
-      "title": "跨研究线决策仪表盘 · 基线报告（2026-12）｜决策仪表盘",
-      "kind": "business",
-      "category": "report",
-      "business_line": "content/economy/insight",
-      "status": "audited",
-      "stages": {
-        "draft": true,
-        "initial": true,
-        "second": true,
-        "final": true
-      },
-      "mark": true,
-      "first_seen_at": "2026-11-17",
-      "evidence": {
-        "report": "content/economy/insight/reports/2026-12_baseline_report.html",
-        "business_line": "content/economy/insight",
-        "plans": [
-          {
-            "slug": "reports-full-rebuild",
-            "plan": "engine/audit/records/tasks/reports-full-rebuild/plan.json",
-            "tasks": "engine/audit/records/tasks/reports-full-rebuild/tasks.json",
-            "risks": "engine/audit/records/tasks/reports-full-rebuild/risks.json",
-            "reports": [
-              "content/economy/dubai/apartment/reports/2026-11_baseline_report.html",
-              "content/economy/dubai/apartment/reports/2026-11_monthly.html",
-              "content/economy/dubai/apartment/reports/2026-12_monthly.html",
-              "content/economy/dubai/apartment/reports/2026-Q3_quarterly.html",
-              "content/economy/dubai/apartment/reports/2026_annual.html",
-              "content/economy/dubai/apartment/reports/2027-01_monthly.html",
-              "content/economy/insight/reports/2026-12_baseline_report.html",
-              "content/economy/trends/reports/2026-11-13_weekly.html",
-              "content/economy/trends/reports/2026-11-20_weekly.html",
-              "content/economy/trends/reports/2026-11-27_weekly.html",
-              "content/education/education-system/reports/2026-12_baseline_report.html",
-              "content/international/international-relations/reports/2026-11_baseline_report.html",
-              "content/political/political-system/reports/2026-11_baseline_report.html",
-              "content/society/social-structure/reports/2026-11_baseline_report.html",
-              "content/tech/competitive-intelligence/dubai/reports/2026-12_baseline_report.html",
-              "content/tech/competitive-intelligence/dubai/reports/2026-12_monthly.html",
-              "content/tech/industry-research/dubai/reports/2026-12_baseline_report.html",
-              "content/tech/security/dubai/reports/2026-11_baseline_report.html",
-              "content/tech/weekly-roundup/reports/2026-11-13_weekly.html",
-              "content/tech/weekly-roundup/reports/2026-11-20_weekly.html"
-            ],
-            "task_count": 6,
-            "risk_count": 4
-          },
-          {
-            "slug": "restructure-content-dirs",
-            "plan": "engine/audit/records/tasks/restructure-content-dirs/plan.json",
-            "tasks": "engine/audit/records/tasks/restructure-content-dirs/tasks.json",
-            "risks": "engine/audit/records/tasks/restructure-content-dirs/risks.json",
-            "reports": [
-              "content/economy/insight/reports/2026-12_baseline_report.html",
-              "content/economy/trends/reports/2026-11-13_weekly.html",
-              "content/tech/weekly-roundup/reports/2026-11-13_weekly.html"
-            ],
-            "task_count": 4,
-            "risk_count": 3
-          }
-        ],
-        "gate": {
-          "entry": "engine/tools/optimization_gate.py",
-          "probe": true
-        },
-        "audit": {
-          "review": "engine/audit/records/reviews/content-economy-insight-reports-2026-12-baseline-report-html.json",
-          "status": "audited",
-          "stages": {
-            "draft": true,
-            "initial": true,
-            "second": true,
-            "final": true
-          },
-          "mark_level": "full",
-          "audit_id": "AUD-2026-11-18-001"
-        }
-      },
-      "audit_id": "AUD-2026-11-18-001",
-      "mark_level": "full",
-      "audited_at": "2026-11-19T13:30:26+00:00"
-    },
     "content/economy/trends/reports/2026-11-13_weekly.html": {
       "title": "全球宏观经济趋势周报（2026-11-13）｜经济趋势周报",
       "kind": "business",
@@ -1423,76 +1340,6 @@
         }
       }
     },
-    "content/economy/dubai/apartment/reports/2026-12_monthly.html": {
-      "title": "迪拜公寓住宅市场月度简报 2026-12",
-      "kind": "business",
-      "category": "report",
-      "business_line": "content/economy/dubai/apartment",
-      "status": "audited",
-      "stages": {
-        "draft": true,
-        "initial": true,
-        "second": true,
-        "final": true
-      },
-      "mark": true,
-      "first_seen_at": "2026-11-19",
-      "evidence": {
-        "report": "content/economy/dubai/apartment/reports/2026-12_monthly.html",
-        "business_line": "content/economy/dubai/apartment",
-        "plans": [
-          {
-            "slug": "reports-full-rebuild",
-            "plan": "engine/audit/records/tasks/reports-full-rebuild/plan.json",
-            "tasks": "engine/audit/records/tasks/reports-full-rebuild/tasks.json",
-            "risks": "engine/audit/records/tasks/reports-full-rebuild/risks.json",
-            "reports": [
-              "content/economy/dubai/apartment/reports/2026-11_baseline_report.html",
-              "content/economy/dubai/apartment/reports/2026-11_monthly.html",
-              "content/economy/dubai/apartment/reports/2026-12_monthly.html",
-              "content/economy/dubai/apartment/reports/2026-Q3_quarterly.html",
-              "content/economy/dubai/apartment/reports/2026_annual.html",
-              "content/economy/dubai/apartment/reports/2027-01_monthly.html",
-              "content/economy/insight/reports/2026-12_baseline_report.html",
-              "content/economy/trends/reports/2026-11-13_weekly.html",
-              "content/economy/trends/reports/2026-11-20_weekly.html",
-              "content/economy/trends/reports/2026-11-27_weekly.html",
-              "content/education/education-system/reports/2026-12_baseline_report.html",
-              "content/international/international-relations/reports/2026-11_baseline_report.html",
-              "content/political/political-system/reports/2026-11_baseline_report.html",
-              "content/society/social-structure/reports/2026-11_baseline_report.html",
-              "content/tech/competitive-intelligence/dubai/reports/2026-12_baseline_report.html",
-              "content/tech/competitive-intelligence/dubai/reports/2026-12_monthly.html",
-              "content/tech/industry-research/dubai/reports/2026-12_baseline_report.html",
-              "content/tech/security/dubai/reports/2026-11_baseline_report.html",
-              "content/tech/weekly-roundup/reports/2026-11-13_weekly.html",
-              "content/tech/weekly-roundup/reports/2026-11-20_weekly.html"
-            ],
-            "task_count": 6,
-            "risk_count": 4
-          }
-        ],
-        "gate": {
-          "entry": "engine/tools/optimization_gate.py",
-          "probe": true
-        },
-        "audit": {
-          "review": "engine/audit/records/reviews/content-economy-dubai-apartment-reports-2026-12-monthly-html.json",
-          "status": "audited",
-          "stages": {
-            "draft": true,
-            "initial": true,
-            "second": true,
-            "final": true
-          },
-          "mark_level": "full",
-          "audit_id": "AUD-2026-11-19-001"
-        }
-      },
-      "audit_id": "AUD-2026-11-19-001",
-      "mark_level": "full",
-      "audited_at": "2026-11-19T13:30:26+00:00"
-    },
     "content/economy/trends/reports/2026-11-20_weekly.html": {
       "title": "全球宏观经济趋势周报（2026-11-20）｜经济趋势周报",
       "kind": "business",
@@ -1599,76 +1446,6 @@
         }
       }
     },
-    "content/economy/dubai/apartment/reports/2027-01_monthly.html": {
-      "title": "迪拜公寓住宅市场月度简报 2027-01",
-      "kind": "business",
-      "category": "report",
-      "business_line": "content/economy/dubai/apartment",
-      "status": "audited",
-      "stages": {
-        "draft": true,
-        "initial": true,
-        "second": true,
-        "final": true
-      },
-      "mark": true,
-      "first_seen_at": "2026-11-19",
-      "evidence": {
-        "report": "content/economy/dubai/apartment/reports/2027-01_monthly.html",
-        "business_line": "content/economy/dubai/apartment",
-        "plans": [
-          {
-            "slug": "reports-full-rebuild",
-            "plan": "engine/audit/records/tasks/reports-full-rebuild/plan.json",
-            "tasks": "engine/audit/records/tasks/reports-full-rebuild/tasks.json",
-            "risks": "engine/audit/records/tasks/reports-full-rebuild/risks.json",
-            "reports": [
-              "content/economy/dubai/apartment/reports/2026-11_baseline_report.html",
-              "content/economy/dubai/apartment/reports/2026-11_monthly.html",
-              "content/economy/dubai/apartment/reports/2026-12_monthly.html",
-              "content/economy/dubai/apartment/reports/2026-Q3_quarterly.html",
-              "content/economy/dubai/apartment/reports/2026_annual.html",
-              "content/economy/dubai/apartment/reports/2027-01_monthly.html",
-              "content/economy/insight/reports/2026-12_baseline_report.html",
-              "content/economy/trends/reports/2026-11-13_weekly.html",
-              "content/economy/trends/reports/2026-11-20_weekly.html",
-              "content/economy/trends/reports/2026-11-27_weekly.html",
-              "content/education/education-system/reports/2026-12_baseline_report.html",
-              "content/international/international-relations/reports/2026-11_baseline_report.html",
-              "content/political/political-system/reports/2026-11_baseline_report.html",
-              "content/society/social-structure/reports/2026-11_baseline_report.html",
-              "content/tech/competitive-intelligence/dubai/reports/2026-12_baseline_report.html",
-              "content/tech/competitive-intelligence/dubai/reports/2026-12_monthly.html",
-              "content/tech/industry-research/dubai/reports/2026-12_baseline_report.html",
-              "content/tech/security/dubai/reports/2026-11_baseline_report.html",
-              "content/tech/weekly-roundup/reports/2026-11-13_weekly.html",
-              "content/tech/weekly-roundup/reports/2026-11-20_weekly.html"
-            ],
-            "task_count": 6,
-            "risk_count": 4
-          }
-        ],
-        "gate": {
-          "entry": "engine/tools/optimization_gate.py",
-          "probe": true
-        },
-        "audit": {
-          "review": "engine/audit/records/reviews/content-economy-dubai-apartment-reports-2027-01-monthly-html.json",
-          "status": "audited",
-          "stages": {
-            "draft": true,
-            "initial": true,
-            "second": true,
-            "final": true
-          },
-          "mark_level": "full",
-          "audit_id": "AUD-2026-11-19-005"
-        }
-      },
-      "audit_id": "AUD-2026-11-19-005",
-      "mark_level": "full",
-      "audited_at": "2026-11-19T13:30:26+00:00"
-    },
     "content/economy/trends/reports/2026-11-27_weekly.html": {
       "title": "全球宏观经济趋势周报（2026-11-27）｜经济趋势周报",
       "kind": "business",
@@ -1736,76 +1513,6 @@
         }
       },
       "audit_id": "AUD-2026-11-19-006",
-      "mark_level": "full",
-      "audited_at": "2026-11-19T13:30:26+00:00"
-    },
-    "content/education/education-system/reports/2026-12_baseline_report.html": {
-      "title": "全球 教育体系与政策 · 首期基线报告 · 2026-12",
-      "kind": "business",
-      "category": "report",
-      "business_line": "content/education/education-system",
-      "status": "audited",
-      "stages": {
-        "draft": true,
-        "initial": true,
-        "second": true,
-        "final": true
-      },
-      "mark": true,
-      "first_seen_at": "2026-11-19",
-      "evidence": {
-        "report": "content/education/education-system/reports/2026-12_baseline_report.html",
-        "business_line": "content/education/education-system",
-        "plans": [
-          {
-            "slug": "reports-full-rebuild",
-            "plan": "engine/audit/records/tasks/reports-full-rebuild/plan.json",
-            "tasks": "engine/audit/records/tasks/reports-full-rebuild/tasks.json",
-            "risks": "engine/audit/records/tasks/reports-full-rebuild/risks.json",
-            "reports": [
-              "content/economy/dubai/apartment/reports/2026-11_baseline_report.html",
-              "content/economy/dubai/apartment/reports/2026-11_monthly.html",
-              "content/economy/dubai/apartment/reports/2026-12_monthly.html",
-              "content/economy/dubai/apartment/reports/2026-Q3_quarterly.html",
-              "content/economy/dubai/apartment/reports/2026_annual.html",
-              "content/economy/dubai/apartment/reports/2027-01_monthly.html",
-              "content/economy/insight/reports/2026-12_baseline_report.html",
-              "content/economy/trends/reports/2026-11-13_weekly.html",
-              "content/economy/trends/reports/2026-11-20_weekly.html",
-              "content/economy/trends/reports/2026-11-27_weekly.html",
-              "content/education/education-system/reports/2026-12_baseline_report.html",
-              "content/international/international-relations/reports/2026-11_baseline_report.html",
-              "content/political/political-system/reports/2026-11_baseline_report.html",
-              "content/society/social-structure/reports/2026-11_baseline_report.html",
-              "content/tech/competitive-intelligence/dubai/reports/2026-12_baseline_report.html",
-              "content/tech/competitive-intelligence/dubai/reports/2026-12_monthly.html",
-              "content/tech/industry-research/dubai/reports/2026-12_baseline_report.html",
-              "content/tech/security/dubai/reports/2026-11_baseline_report.html",
-              "content/tech/weekly-roundup/reports/2026-11-13_weekly.html",
-              "content/tech/weekly-roundup/reports/2026-11-20_weekly.html"
-            ],
-            "task_count": 6,
-            "risk_count": 4
-          }
-        ],
-        "gate": {
-          "entry": "engine/tools/optimization_gate.py",
-          "probe": true
-        },
-        "audit": {
-          "review": "engine/audit/records/reviews/content-education-education-system-reports-2026-12-baseline-report-html.json",
-          "status": "audited",
-          "stages": {
-            "draft": true,
-            "initial": true,
-            "second": true,
-            "final": true
-          },
-          "mark_level": "full",
-          "audit_id": "AUD-2026-11-19-007"
-        }
-      },
-      "audit_id": "AUD-2026-11-19-007",
       "mark_level": "full",
       "audited_at": "2026-11-19T13:30:26+00:00"
     },
@@ -2127,123 +1834,6 @@
         }
       }
     },
-    "content/tech/ai-security/competitive-intelligence/dubai/reports/2026-12_baseline_report.html": {
-      "title": "迪拜（阿联酋）AI 网安竞争格局 · 首期基线报告 · 2026-12",
-      "kind": "business",
-      "category": "report",
-      "business_line": "content/tech/ai-security/competitive-intelligence/dubai",
-      "status": "in-review",
-      "stages": {
-        "draft": true,
-        "initial": true,
-        "second": false,
-        "final": false
-      },
-      "mark": true,
-      "first_seen_at": "2026-11-20",
-      "evidence": {
-        "report": "content/tech/ai-security/competitive-intelligence/dubai/reports/2026-12_baseline_report.html",
-        "business_line": "content/tech/ai-security/competitive-intelligence/dubai",
-        "plans": [],
-        "gate": {
-          "entry": "engine/tools/optimization_gate.py",
-          "probe": true
-        },
-        "audit": {
-          "review": "engine/audit/records/reviews/content-tech-ai-security-competitive-intelligence-dubai-reports-2026-12-baseline-report-html.json",
-          "status": "in-review",
-          "stages": {
-            "draft": true,
-            "initial": true,
-            "second": false,
-            "final": false
-          },
-          "mark_level": "pre",
-          "audit_id": "AUD-2026-11-20-001"
-        }
-      },
-      "audit_id": "AUD-2026-11-20-001",
-      "mark_level": "pre",
-      "audited_at": "2026-11-20T12:36:03+00:00"
-    },
-    "content/tech/ai-security/competitive-intelligence/dubai/reports/2026-12_monthly.html": {
-      "title": "迪拜（阿联酋）AI 网安竞争格局 · 月度更新报告 · 2026-12",
-      "kind": "business",
-      "category": "report",
-      "business_line": "content/tech/ai-security/competitive-intelligence/dubai",
-      "status": "in-review",
-      "stages": {
-        "draft": true,
-        "initial": true,
-        "second": false,
-        "final": false
-      },
-      "mark": true,
-      "first_seen_at": "2026-11-20",
-      "evidence": {
-        "report": "content/tech/ai-security/competitive-intelligence/dubai/reports/2026-12_monthly.html",
-        "business_line": "content/tech/ai-security/competitive-intelligence/dubai",
-        "plans": [],
-        "gate": {
-          "entry": "engine/tools/optimization_gate.py",
-          "probe": true
-        },
-        "audit": {
-          "review": "engine/audit/records/reviews/content-tech-ai-security-competitive-intelligence-dubai-reports-2026-12-monthly-html.json",
-          "status": "in-review",
-          "stages": {
-            "draft": true,
-            "initial": true,
-            "second": false,
-            "final": false
-          },
-          "mark_level": "pre",
-          "audit_id": "AUD-2026-11-20-002"
-        }
-      },
-      "audit_id": "AUD-2026-11-20-002",
-      "mark_level": "pre",
-      "audited_at": "2026-11-20T12:36:03+00:00"
-    },
-    "content/tech/ai-security/industry-research/dubai/reports/2026-12_baseline_report.html": {
-      "title": "迪拜（阿联酋）AI 网安行业 · 首期基线报告 · 2026-12",
-      "kind": "business",
-      "category": "report",
-      "business_line": "content/tech/ai-security/industry-research/dubai",
-      "status": "in-review",
-      "stages": {
-        "draft": true,
-        "initial": true,
-        "second": false,
-        "final": false
-      },
-      "mark": true,
-      "first_seen_at": "2026-11-20",
-      "evidence": {
-        "report": "content/tech/ai-security/industry-research/dubai/reports/2026-12_baseline_report.html",
-        "business_line": "content/tech/ai-security/industry-research/dubai",
-        "plans": [],
-        "gate": {
-          "entry": "engine/tools/optimization_gate.py",
-          "probe": true
-        },
-        "audit": {
-          "review": "engine/audit/records/reviews/content-tech-ai-security-industry-research-dubai-reports-2026-12-baseline-report-html.json",
-          "status": "in-review",
-          "stages": {
-            "draft": true,
-            "initial": true,
-            "second": false,
-            "final": false
-          },
-          "mark_level": "pre",
-          "audit_id": "AUD-2026-11-20-003"
-        }
-      },
-      "audit_id": "AUD-2026-11-20-003",
-      "mark_level": "pre",
-      "audited_at": "2026-11-20T12:36:03+00:00"
-    },
     "content/tech/ai-security/security/dubai/reports/2026-11_baseline_report.html": {
       "title": "迪拜（阿联酋）AI 网安就业 · 首期基线报告 · 2026-11",
       "kind": "business",
@@ -2296,6 +1886,246 @@
       "audit_id": "AUD-2026-11-20-004",
       "mark_level": "pre",
       "audited_at": "2026-11-20T12:36:03+00:00"
+    },
+    "content/economy/insight/reports/2026-11_baseline_report.html": {
+      "title": "跨研究线决策仪表盘 · 基线报告（2026-11）｜决策仪表盘",
+      "kind": "business",
+      "category": "report",
+      "business_line": "content/economy/insight",
+      "status": "draft",
+      "stages": {
+        "draft": false,
+        "initial": false,
+        "second": false,
+        "final": false
+      },
+      "mark": false,
+      "first_seen_at": "2026-11-21",
+      "evidence": {
+        "report": "content/economy/insight/reports/2026-11_baseline_report.html",
+        "business_line": "content/economy/insight",
+        "plans": [
+          {
+            "slug": "report-period-current-month",
+            "plan": "engine/audit/records/tasks/report-period-current-month/plan.json",
+            "tasks": "engine/audit/records/tasks/report-period-current-month/tasks.json",
+            "risks": "engine/audit/records/tasks/report-period-current-month/risks.json",
+            "reports": [
+              "content/economy/insight/reports/2026-11_baseline_report.html",
+              "content/education/education-system/reports/2026-11_baseline_report.html",
+              "content/tech/ai-security/competitive-intelligence/dubai/reports/2026-11_monthly.html",
+              "content/tech/ai-security/industry-research/dubai/reports/2026-11_baseline_report.html"
+            ],
+            "task_count": 5,
+            "risk_count": 3
+          }
+        ],
+        "gate": {
+          "entry": "engine/tools/optimization_gate.py",
+          "probe": true
+        },
+        "audit": {
+          "review": "",
+          "status": "draft",
+          "stages": {
+            "draft": false,
+            "initial": false,
+            "second": false,
+            "final": false
+          },
+          "mark_level": "none",
+          "audit_id": ""
+        }
+      }
+    },
+    "content/education/education-system/reports/2026-11_baseline_report.html": {
+      "title": "全球 教育体系与政策 · 首期基线报告 · 2026-11",
+      "kind": "business",
+      "category": "report",
+      "business_line": "content/education/education-system",
+      "status": "draft",
+      "stages": {
+        "draft": false,
+        "initial": false,
+        "second": false,
+        "final": false
+      },
+      "mark": false,
+      "first_seen_at": "2026-11-21",
+      "evidence": {
+        "report": "content/education/education-system/reports/2026-11_baseline_report.html",
+        "business_line": "content/education/education-system",
+        "plans": [
+          {
+            "slug": "report-period-current-month",
+            "plan": "engine/audit/records/tasks/report-period-current-month/plan.json",
+            "tasks": "engine/audit/records/tasks/report-period-current-month/tasks.json",
+            "risks": "engine/audit/records/tasks/report-period-current-month/risks.json",
+            "reports": [
+              "content/economy/insight/reports/2026-11_baseline_report.html",
+              "content/education/education-system/reports/2026-11_baseline_report.html",
+              "content/tech/ai-security/competitive-intelligence/dubai/reports/2026-11_monthly.html",
+              "content/tech/ai-security/industry-research/dubai/reports/2026-11_baseline_report.html"
+            ],
+            "task_count": 5,
+            "risk_count": 3
+          }
+        ],
+        "gate": {
+          "entry": "engine/tools/optimization_gate.py",
+          "probe": true
+        },
+        "audit": {
+          "review": "",
+          "status": "draft",
+          "stages": {
+            "draft": false,
+            "initial": false,
+            "second": false,
+            "final": false
+          },
+          "mark_level": "none",
+          "audit_id": ""
+        }
+      }
+    },
+    "content/tech/ai-security/competitive-intelligence/dubai/reports/2026-11_baseline_report.html": {
+      "title": "迪拜（阿联酋）AI 网安竞争格局 · 首期基线报告 · 2026-11",
+      "kind": "business",
+      "category": "report",
+      "business_line": "content/tech/ai-security/competitive-intelligence/dubai",
+      "status": "draft",
+      "stages": {
+        "draft": false,
+        "initial": false,
+        "second": false,
+        "final": false
+      },
+      "mark": false,
+      "first_seen_at": "2026-11-21",
+      "evidence": {
+        "report": "content/tech/ai-security/competitive-intelligence/dubai/reports/2026-11_baseline_report.html",
+        "business_line": "content/tech/ai-security/competitive-intelligence/dubai",
+        "plans": [],
+        "gate": {
+          "entry": "engine/tools/optimization_gate.py",
+          "probe": true
+        },
+        "audit": {
+          "review": "",
+          "status": "draft",
+          "stages": {
+            "draft": false,
+            "initial": false,
+            "second": false,
+            "final": false
+          },
+          "mark_level": "none",
+          "audit_id": ""
+        }
+      }
+    },
+    "content/tech/ai-security/competitive-intelligence/dubai/reports/2026-11_monthly.html": {
+      "title": "迪拜（阿联酋）AI 网安竞争格局 · 月度更新报告 · 2026-11",
+      "kind": "business",
+      "category": "report",
+      "business_line": "content/tech/ai-security/competitive-intelligence/dubai",
+      "status": "draft",
+      "stages": {
+        "draft": false,
+        "initial": false,
+        "second": false,
+        "final": false
+      },
+      "mark": false,
+      "first_seen_at": "2026-11-21",
+      "evidence": {
+        "report": "content/tech/ai-security/competitive-intelligence/dubai/reports/2026-11_monthly.html",
+        "business_line": "content/tech/ai-security/competitive-intelligence/dubai",
+        "plans": [
+          {
+            "slug": "report-period-current-month",
+            "plan": "engine/audit/records/tasks/report-period-current-month/plan.json",
+            "tasks": "engine/audit/records/tasks/report-period-current-month/tasks.json",
+            "risks": "engine/audit/records/tasks/report-period-current-month/risks.json",
+            "reports": [
+              "content/economy/insight/reports/2026-11_baseline_report.html",
+              "content/education/education-system/reports/2026-11_baseline_report.html",
+              "content/tech/ai-security/competitive-intelligence/dubai/reports/2026-11_monthly.html",
+              "content/tech/ai-security/industry-research/dubai/reports/2026-11_baseline_report.html"
+            ],
+            "task_count": 5,
+            "risk_count": 3
+          }
+        ],
+        "gate": {
+          "entry": "engine/tools/optimization_gate.py",
+          "probe": true
+        },
+        "audit": {
+          "review": "",
+          "status": "draft",
+          "stages": {
+            "draft": false,
+            "initial": false,
+            "second": false,
+            "final": false
+          },
+          "mark_level": "none",
+          "audit_id": ""
+        }
+      }
+    },
+    "content/tech/ai-security/industry-research/dubai/reports/2026-11_baseline_report.html": {
+      "title": "迪拜（阿联酋）AI 网安行业 · 首期基线报告 · 2026-11",
+      "kind": "business",
+      "category": "report",
+      "business_line": "content/tech/ai-security/industry-research/dubai",
+      "status": "draft",
+      "stages": {
+        "draft": false,
+        "initial": false,
+        "second": false,
+        "final": false
+      },
+      "mark": false,
+      "first_seen_at": "2026-11-21",
+      "evidence": {
+        "report": "content/tech/ai-security/industry-research/dubai/reports/2026-11_baseline_report.html",
+        "business_line": "content/tech/ai-security/industry-research/dubai",
+        "plans": [
+          {
+            "slug": "report-period-current-month",
+            "plan": "engine/audit/records/tasks/report-period-current-month/plan.json",
+            "tasks": "engine/audit/records/tasks/report-period-current-month/tasks.json",
+            "risks": "engine/audit/records/tasks/report-period-current-month/risks.json",
+            "reports": [
+              "content/economy/insight/reports/2026-11_baseline_report.html",
+              "content/education/education-system/reports/2026-11_baseline_report.html",
+              "content/tech/ai-security/competitive-intelligence/dubai/reports/2026-11_monthly.html",
+              "content/tech/ai-security/industry-research/dubai/reports/2026-11_baseline_report.html"
+            ],
+            "task_count": 5,
+            "risk_count": 3
+          }
+        ],
+        "gate": {
+          "entry": "engine/tools/optimization_gate.py",
+          "probe": true
+        },
+        "audit": {
+          "review": "",
+          "status": "draft",
+          "stages": {
+            "draft": false,
+            "initial": false,
+            "second": false,
+            "final": false
+          },
+          "mark_level": "none",
+          "audit_id": ""
+        }
+      }
     }
   }
 }

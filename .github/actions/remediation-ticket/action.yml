@@ -7,11 +7,11 @@ inputs:
   gate-period:
     description: 内容门禁周期下限（与 optimization_gate 一致）
     required: false
-    default: "2026-12"
+    default: "auto"
   source-gate-period:
     description: 来源登记门禁周期下限（与 optimization_gate 一致）
     required: false
-    default: "2027-01"
+    default: "auto"
   activity-threshold:
     description: 活跃度阈值（天），距上次自动化记录超过该值即触发
     required: false

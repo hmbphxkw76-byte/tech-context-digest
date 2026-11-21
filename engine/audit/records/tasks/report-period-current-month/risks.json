@@ -1,0 +1,20 @@
+[
+  {
+    "description": "存量报告落款越月",
+    "id": "R-1",
+    "mitigation": "逐份重标并校验链接",
+    "owner": ""
+  },
+  {
+    "description": "门禁数量变更引发文档漂移",
+    "id": "R-2",
+    "mitigation": "同步 29→30 项声明",
+    "owner": ""
+  },
+  {
+    "description": "并行会话共用工作区",
+    "id": "R-3",
+    "mitigation": "改用 git worktree 隔离提交",
+    "owner": ""
+  }
+]

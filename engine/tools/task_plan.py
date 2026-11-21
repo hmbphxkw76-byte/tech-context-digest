@@ -161,7 +161,7 @@ def render_start_md(slug: str, plan: dict, tasks: list[dict], risks: list[dict])
         "",
         "## 复用入口（不得另写一套校验）",
         "",
-        f"- 统一门禁：`python {REUSE['gate']} --gate-period 2026-12 --source-gate-period 2027-01 --probe`",
+        f"- 统一门禁：`python {REUSE['gate']} --gate-period auto --source-gate-period auto --probe`",
         f"- 提交网关：`python {REUSE['commit']} run --message ... --paths ... --gate`",
         f"- 端到端编排：`python {REUSE['orchestrator']} validate`",
         f"- 一键闭环：`python {REUSE['local_mainline']} run --slug {slug} --title ...`",

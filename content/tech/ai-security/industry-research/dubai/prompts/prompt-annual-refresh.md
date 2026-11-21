@@ -13,7 +13,7 @@
 {{CURRENT_DATE}}         = 本次执行日期，格式 YYYY-MM-DD（运行填写）
 {{YEAR}}                 = 刷新年份（4 位）
 {{PREVIOUS_REPORT_PATH}} = 上一年度刷新版路径（首年刷新时为空，仅锚定基线）
-{{BASELINE_REPORT_PATH}} = reports/2026-12_baseline_report.html
+{{BASELINE_REPORT_PATH}} = reports/2026-11_baseline_report.html
 {{REGISTRY_PATH}}        = data/processed/tech/ai-security/industry-research/dubai/ai_cybersecurity_indicator_registry.md
 {{REGISTRY_FORMAT}}      = md-table
 {{OUTPUT_PATH}}          = reports/{{YEAR}}_annual.html（md 源稿存 sources/ 同名存档）

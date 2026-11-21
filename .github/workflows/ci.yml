@@ -87,7 +87,7 @@ jobs:
       - name: 优化流程一致性门禁（统一入口 · 含 probe）
         run: |
           set +e
-          python engine/tools/optimization_gate.py --gate-period 2026-12 --source-gate-period 2027-01 --probe
+          python engine/tools/optimization_gate.py --gate-period auto --source-gate-period auto --probe
           code=$?
           if [ "$code" -eq 1 ]; then
             echo "::error::统一门禁失败：存在错误项（见上方输出）"

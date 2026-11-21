@@ -44,8 +44,8 @@ MAIN_REF = f"refs/heads/{BASE_BRANCH}"
 LOCK_PATH = ROOT / ".git" / "catpaw-sync.lock"
 LOCK_TTL_SEC = 600
 GATE_SCRIPT = "engine/tools/optimization_gate.py"
-GATE_PERIOD = "2026-12"          # 内容门禁（研究内核/信息分层/事实卡片/决策交付）
-SOURCE_GATE_PERIOD = "2027-01"   # 来源登记门禁（source_check）
+GATE_PERIOD = "auto"            # 内容门禁（研究内核/信息分层/事实卡片/决策交付）；滚动基线 = 当前自然月
+SOURCE_GATE_PERIOD = "auto"     # 来源登记门禁（source_check）
 
 # 任务计划四件套（与 task_plan.ARTIFACT_NAMES 同口径）：工件即门禁输入。
 TASK_ARTIFACTS = ("plan.json", "tasks.json", "risks.json", "task-start.md")

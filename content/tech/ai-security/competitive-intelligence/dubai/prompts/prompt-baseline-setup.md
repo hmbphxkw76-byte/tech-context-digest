@@ -1,7 +1,7 @@
 # 迪拜（阿联酋） · AI 网安竞争格局 · 首期基线报告提示词（竞争情报监测型）
 
 > **用途**：执行「迪拜（阿联酋） AI 网安竞争格局 竞争情报持续监测机制」的**机制建立**任务：产出首期竞争格局基线报告与配套竞品档案库。可直接复制，替换顶部变量后提交给 AI 执行。
-> **产出**：中文九节基线报告（canonical 富样式自包含 HTML），落盘 `reports/2026-12_baseline_report.html` + 竞品档案库（`data/processed/tech/ai-security/competitive-intelligence/dubai/ai_cyber_competition_registry.md`，md-table）；md 源稿为可选存档，不参与 `md2html.py` 自动转换。
+> **产出**：中文九节基线报告（canonical 富样式自包含 HTML），落盘 `reports/2026-11_baseline_report.html` + 竞品档案库（`data/processed/tech/ai-security/competitive-intelligence/dubai/ai_cyber_competition_registry.md`，md-table）；md 源稿为可选存档，不参与 `md2html.py` 自动转换。
 >
 > **继承声明（四层体系）**：本文件 = [通用基座](../../../../../../engine/templates/prompt-generic-base.md) × [监测报告通用规范](../../../../../../engine/templates/monitoring-common-spec.md) × [基线报告类型模板（竞争情报监测型）](../../../../../../engine/templates/competitive-intelligence/prompt-baseline-setup-template.md) × [业务专属配置](./business-config.md)。质量规则见通用基座与通用规范；基线差异与九节骨架见基线类型模板；业务变量、监测竞品清单、触发器、来源优先级见业务配置；冲突时以本文件为准。
 
@@ -14,10 +14,10 @@
 ```
 {{REGION}}               = 迪拜（阿联酋）
 {{TOPIC}}                = AI 网安竞争格局
-{{BASELINE_DATE}}        = 2026-12（首期基线报告落款周期）
+{{BASELINE_DATE}}        = 2026-11（首期基线报告落款周期）
 {{REGISTRY_PATH}}        = data/processed/tech/ai-security/competitive-intelligence/dubai/ai_cyber_competition_registry.md
 {{REGISTRY_FORMAT}}      = md-table
-{{BASELINE_REPORT_PATH}} = reports/2026-12_baseline_report.html
+{{BASELINE_REPORT_PATH}} = reports/2026-11_baseline_report.html
 {{FRESHNESS_PRIORITY}}   = 最新官方 / 一手发布 > 上期值 > 第三方研究 > 媒体转述
 {{SOURCE_LANGUAGE_RULE}} = 仅英文（严禁中文来源）
 {{REPO_RAW_URL_BASE}}    = https://github.com/hmbphxkw76-byte/tech-context-digest/blob/main/content/tech/ai-security/competitive-intelligence/dubai
@@ -27,7 +27,7 @@
 
 ```
 {{CURRENT_DATE}}         = 本次执行日期，格式 YYYY-MM-DD
-{{OUTPUT_PATH}}          = reports/2026-12_baseline_report.html
+{{OUTPUT_PATH}}          = reports/2026-11_baseline_report.html
 {{REPORT_VERSION}}       = v1.0（首期基线固定）
 ```
 
@@ -70,7 +70,7 @@
 
 ## 四、九节固化锚（结构骨架）
 
-九节固定骨架见[基线类型模板第三节](../../../../../../engine/templates/competitive-intelligence/prompt-baseline-setup-template.md)。本业务线节标题固化锚**逐字取自已产出基线报告** `reports/2026-12_baseline_report.html` 的 h2 标题，后续报告逐字继承：
+九节固定骨架见[基线类型模板第三节](../../../../../../engine/templates/competitive-intelligence/prompt-baseline-setup-template.md)。本业务线节标题固化锚**逐字取自已产出基线报告** `reports/2026-11_baseline_report.html` 的 h2 标题，后续报告逐字继承：
 
 | 节 | 固化锚标题（逐字） |
 |---|---|

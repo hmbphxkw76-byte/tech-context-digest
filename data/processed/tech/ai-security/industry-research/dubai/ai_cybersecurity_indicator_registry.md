@@ -2,7 +2,7 @@
 
 > **格式**：md-table ｜ **用途**：存放本业务线 14 项监测指标的活值，供提示词（基线 / 年度刷新）运行前读取、运行后回写。
 > **维护规则**：单元格内数值后附 `[来源, 年份]` 与来源编号 `[S-…]`；未核实项留空并注明「待核实」；prompt 模板内严禁填写活值。
-> **初始值**：首轮运行前从基线报告 `content/tech/ai-security/industry-research/dubai/reports/2026-12_baseline_report.html` 提取填入（2026-12 基线期）。
+> **初始值**：首轮运行前从基线报告 `content/tech/ai-security/industry-research/dubai/reports/2026-11_baseline_report.html` 提取填入（2026-11 基线期）。
 > **来源登记**：`data/processed/tech/ai-security/industry-research/dubai/source_registry.json`（S-001–S-041，共 41 条）。
 > **官方来源快照**：`data/raw/tech/ai-security/industry-research/dubai/`（含 `official_snapshot_manifest.json`）。
 > **量化台账**：`quant_ai_cyber_market_size.csv`（同目录）。

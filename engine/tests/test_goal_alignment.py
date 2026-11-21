@@ -2,7 +2,7 @@
 """目标对齐 P0 增量测试（IGI 度量 / 滚动 gate-period / 语义门禁 / 词库漂移）。
 
 锁定：
-- `gate_period.resolve` 的滚动基线语义（auto = 当前自然月 + 1；显式周期原样；非法回落）；
+- `gate_period.resolve` 的滚动基线语义（auto = 当前自然月；显式周期原样；非法回落）；
 - `info_gap_metrics.compute` 产出 IGI-01..08 且合成口径自洽；
 - `info_density_check` ID-04 只对**结论性**推断/假设判定（提示块与 CSS 注释不误报）；
 - `decision_hub_check` 剥离注释后判定（CSS 注释里的「决策卡」不再蒙混过关）；
@@ -45,20 +45,20 @@ prompt_consistency = _load("prompt_consistency", "engine/tools/prompt_consistenc
 
 
 class TestGatePeriod(unittest.TestCase):
-    def test_auto_is_next_month(self):
-        self.assertEqual(gate_period.resolve("auto", today=date(2026, 11, 18)), "2026-12")
-        self.assertEqual(gate_period.resolve("auto", today=date(2026, 12, 31)), "2027-01")
+    def test_auto_is_current_month(self):
+        self.assertEqual(gate_period.resolve("auto", today=date(2026, 11, 18)), "2026-11")
+        self.assertEqual(gate_period.resolve("auto", today=date(2026, 12, 31)), "2026-12")
 
     def test_explicit_period_passthrough(self):
         for p in ("2026-12", "2026-Q3", "2026", "2026-11-13"):
             self.assertEqual(gate_period.resolve(p, today=date(2026, 11, 18)), p)
 
     def test_invalid_falls_back_to_rolling(self):
-        """非法周期不得让门禁静默失效——回落滚动基线。"""
-        self.assertEqual(gate_period.resolve("not-a-period", today=date(2026, 11, 18)), "2026-12")
+        """非法周期不得让门禁静默失效——回落滚动基线（当前自然月）。"""
+        self.assertEqual(gate_period.resolve("not-a-period", today=date(2026, 11, 18)), "2026-11")
 
     def test_none_is_auto(self):
-        self.assertEqual(gate_period.resolve(None, today=date(2026, 11, 18)), "2026-12")
+        self.assertEqual(gate_period.resolve(None, today=date(2026, 11, 18)), "2026-11")
 
 
 class TestInfoGapMetrics(unittest.TestCase):

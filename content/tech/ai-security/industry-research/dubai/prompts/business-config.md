@@ -12,11 +12,11 @@
 {{REGION}}               = 迪拜（阿联酋）
 {{TOPIC}}                = AI 网安行业
 {{REPORT_TYPE}}          = industry-research
-{{BASELINE_DATE}}        = 2026-12（首份基线报告完稿日期）
+{{BASELINE_DATE}}        = 2026-11（首份基线报告完稿日期）
 {{REGISTRY_PATH}}        = data/processed/tech/ai-security/industry-research/dubai/ai_cybersecurity_indicator_registry.md（运行期创建，基线可缺）
 {{REGISTRY_FORMAT}}      = md-table
 {{SOURCE_REGISTRY_PATH}} = data/processed/tech/ai-security/industry-research/dubai/source_registry.json
-{{BASELINE_REPORT_PATH}} = reports/2026-12_baseline_report.html
+{{BASELINE_REPORT_PATH}} = reports/2026-11_baseline_report.html
 {{FRESHNESS_PRIORITY}}   = 近 12 个月内数据优先；超过 24 个月须标注年份并谨慎使用
 {{SOURCE_LANGUAGE_RULE}} = 仅英文（严禁中文来源）
 {{REPO_RAW_URL_BASE}}    = https://github.com/hmbphxkw76-byte/tech-context-digest/blob/main/content/tech/ai-security/industry-research/dubai
@@ -110,4 +110,4 @@
 
 | 版本 | 日期 | 变更 | 说明 |
 |---|---|---|---|
-| v1.0 | 2026-12 | 初始版本 | 建立 `content/tech/ai-security/industry-research/dubai` 业务线；四层继承体系指向 `engine/templates/industry-research/`（行业深度研究型）；定义 {{REGION}} / {{TOPIC}}、来源优先级、触发器、指标追踪表、已修正事实清单与九节固化锚 |
+| v1.0 | 2026-11 | 初始版本 | 建立 `content/tech/ai-security/industry-research/dubai` 业务线；四层继承体系指向 `engine/templates/industry-research/`（行业深度研究型）；定义 {{REGION}} / {{TOPIC}}、来源优先级、触发器、指标追踪表、已修正事实清单与九节固化锚 |

@@ -80,7 +80,7 @@
 
 ### 2.3 基于信息的决策 —— 支撑度 **3 / 5**
 
-**强项（已核验）**：`content/economy/insight` 决策仪表盘结构完整度为全仓最高——6 张决策卡 + 信息充分度分布、34 条 FC 指针、反向证据与冲突读数并列、触发条件带阈值距离（`content/economy/insight/reports/2026-12_baseline_report.html`）。
+**强项（已核验）**：`content/economy/insight` 决策仪表盘结构完整度为全仓最高——6 张决策卡 + 信息充分度分布、34 条 FC 指针、反向证据与冲突读数并列、触发条件带阈值距离（`content/economy/insight/reports/2026-11_baseline_report.html`）。
 
 **短板**：
 
@@ -267,8 +267,8 @@
 |---|---|---|---|---|
 | P1-1 | 摘要越级修正（5 处） | `content/tech/industry-research/dubai/reports/2026-12_baseline_report.html:432`、`content/tech/competitive-intelligence/dubai/reports/2026-12_baseline_report.html:434`、`content/economy/dubai/apartment/reports/{2026-11_monthly,2026-Q3_quarterly,2026_annual}.html` | 摘要节内零「推断/假设」；推断内容下沉并以指针引用；ID-04 全绿 | `info_density` ID-04 |
 | P1-2 | 证据强度一致性 + DC-08 门禁 | `data/processed/economy/insight/decision_cards.json`、`engine/fact_cards/*.json`、`decision_hub_check.py` | 决策卡 `evidence_strength` 由支撑卡 `level` 唯一推导；DC-08 校验跨载体一致 | `decision_hub` DC-08（新增） |
-| P1-3 | 「假设乘积」标注治理 | `content/economy/dubai/apartment/reports/2026_annual.html:780,793`、`content/economy/insight/reports/2026-12_baseline_report.html` | 自算测算全部标「假设乘积 + 区间」；ID-04 扩展匹配 | `info_density` ID-04 |
-| P1-4 | 行动项阈值数值化 | `content/economy/insight/reports/2026-12_baseline_report.html` 等 | 阈值字段为数值/区间；DC-02 校验阈值可解析 | `decision_hub` DC-02 |
+| P1-3 | 「假设乘积」标注治理 | `content/economy/dubai/apartment/reports/2026_annual.html:780,793`、`content/economy/insight/reports/2026-11_baseline_report.html` | 自算测算全部标「假设乘积 + 区间」；ID-04 扩展匹配 | `info_density` ID-04 |
+| P1-4 | 行动项阈值数值化 | `content/economy/insight/reports/2026-11_baseline_report.html` 等 | 阈值字段为数值/区间；DC-02 校验阈值可解析 | `decision_hub` DC-02 |
 | P1-5 | trends 决策卡补全或显式豁免 | `content/economy/trends/reports/2026-11-13_weekly.html` | 有二选一的明确处置，门禁判定一致 | `decision_hub` DC-01 |
 | P1-6 | 来源登记字段扩展 | 7 个 `data/processed/**/source_registry.json`、`source_check.py` | `verify_status` 增加 `unverifiable`（无法核实）；新增 `updated` 字段；存量数据补字段 | `source_check` R1/R7 |
 | P1-7 | R4 关键数字逐点指针 | `source_check.py`（R4 重写） | 含数字块级断言附近窗口内须有来源标记；抽样误报率 < 5%（**已落地**：`li`/`p` 块级判定 + 来源标记 / 豁免口径；合成合规样本误报 0/16，非合规样本召回 2/2；现有 10 份正式报告 0 命中） | `source_check` R4 |

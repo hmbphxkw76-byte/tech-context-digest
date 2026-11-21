@@ -98,7 +98,7 @@ node --check 校验报告内联 JS（或由 Agent 完成语法检查）
 |---|---|---|
 | `{{CURRENT_DATE}}` | 本次执行日期 | `2026-12-05` |
 | `{{PREVIOUS_REPORT_PATH}}` | `reports/` 中最近一期月度简报 | `reports/2026-11_monthly.html` |
-| `{{OUTPUT_PATH}}` | `reports/{{YYYY-MM}}_monthly.html`，月份＝数据所属月 | `reports/2026-12_monthly.html` |
+| `{{OUTPUT_PATH}}` | `reports/{{YYYY-MM}}_monthly.html`，月份＝执行月（当前自然月） | `reports/2026-12_monthly.html` |
 | `{{REPORT_VERSION}}` | `v` + 执行日期 | `v2026.12.05` |
 
 固定值（不填，读自业务配置第一节）：`{{REGISTRY_PATH}}`、`{{BASELINE_REPORT_PATH}}`、`{{REPO_RAW_URL_BASE}}` 等。
@@ -116,7 +116,7 @@ node --check 校验报告内联 JS（或由 Agent 完成语法检查）
 
 ### 2.4 时间范围与数据范围规则
 
-- **报告月份 = 数据所属月**（非执行月）。文件名 `2026-12_monthly.html` 覆盖 2026 年 12 月发布窗口内可取得的最新数据。
+- **报告月份 = 执行月（当前自然月）**。文件名 `2026-12_monthly.html` 在 2026 年 12 月执行产出，覆盖该发布窗口内可取得的最新数据；不得落款到未来周期（门禁 `period_check`）。
 - T+1 判定：本期与上期发布窗口同日或仅隔 1 日 → 报告明确标注「T+1 刷新」，价值在核验、口径澄清与阈值距离，不制造变化。
 - 时效取舍：最新官方页 ＞ 上期值 ＞ 预测值；同一指标多版本并存以官方最新发布为准。
 
@@ -193,7 +193,7 @@ python engine/tools/build_index.py && python engine/tools/build_hub.py
 | `{{NEXT_YEAR}}` | 台账新版生效年份 | `2027` |
 | `{{DATA_CUTOFF}}` | 数据截止日；未发布写最近已发布周期 | `2026-12-31` |
 | `{{OUTPUT_REGISTRY}}` | `data/processed/economy/dubai/apartment/dubai_apartment_indicator_registry_{{NEXT_YEAR}}-01.xlsx` | `data/processed/economy/dubai/apartment/dubai_apartment_indicator_registry_2027-01.xlsx` |
-| `{{PREVIOUS_REPORT_PATH}}` | 最近一期月度或季度报告 | `reports/2026-12_monthly.html` |
+| `{{PREVIOUS_REPORT_PATH}}` | 最近一期月度或季度报告 | `reports/2026-11_monthly.html` |
 | `{{OUTPUT_PATH}}` | `reports/{{YEAR}}_annual.html` | `reports/2026_annual.html` |
 | `{{REPORT_VERSION}}` | `v` + 执行日期 | `v2027.01.15` |
 

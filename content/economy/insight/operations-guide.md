@@ -20,11 +20,11 @@
 ## 三、校验清单
 
 ```bash
-python engine/tools/info_density_check.py --file content/economy/insight/reports/2026-12_baseline_report.html
+python engine/tools/info_density_check.py --file content/economy/insight/reports/2026-11_baseline_report.html
 python engine/tools/fact_card_check.py
-python engine/tools/decision_hub_check.py --file content/economy/insight/reports/2026-12_baseline_report.html
+python engine/tools/decision_hub_check.py --file content/economy/insight/reports/2026-11_baseline_report.html
 python engine/tools/blind_spot_check.py
-python engine/tools/compliance_check.py --file content/economy/insight/reports/2026-12_baseline_report.html
+python engine/tools/compliance_check.py --file content/economy/insight/reports/2026-11_baseline_report.html
 python engine/tools/page_build_check.py
 ```
 

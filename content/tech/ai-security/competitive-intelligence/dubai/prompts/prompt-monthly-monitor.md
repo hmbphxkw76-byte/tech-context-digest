@@ -16,7 +16,7 @@
 {{TOPIC}}                = AI 网安竞争格局
 {{REGISTRY_PATH}}        = data/processed/tech/ai-security/competitive-intelligence/dubai/ai_cyber_competition_registry.md
 {{REGISTRY_FORMAT}}      = md-table
-{{BASELINE_REPORT_PATH}} = reports/2026-12_baseline_report.html
+{{BASELINE_REPORT_PATH}} = reports/2026-11_baseline_report.html
 {{FRESHNESS_PRIORITY}}   = 最新官方 / 一手发布 > 上期值 > 第三方研究 > 媒体转述
 {{SOURCE_LANGUAGE_RULE}} = 仅英文（严禁中文来源）
 {{REPO_RAW_URL_BASE}}    = https://github.com/hmbphxkw76-byte/tech-context-digest/blob/main/content/tech/ai-security/competitive-intelligence/dubai
@@ -31,7 +31,7 @@
 {{REPORT_VERSION}}       = 本次版本号，格式 vYYYY.MM.DD
 ```
 
-**任务目标**：以公开来源为依据、以上一期报告与首期基线为对比锚，完成「采集 → 核验 → 矩阵刷新 → 影响提示」闭环；九节结构与基线逐字一致（逐字继承 `reports/2026-12_baseline_report.html` 的九节固化锚）；继承已修正事实清单；无触发器命中且无新动作时降级为核验轻运行（登记册标注「截至 {{CURRENT_DATE}} 无更新」），不得虚构变化。
+**任务目标**：以公开来源为依据、以上一期报告与首期基线为对比锚，完成「采集 → 核验 → 矩阵刷新 → 影响提示」闭环；九节结构与基线逐字一致（逐字继承 `reports/2026-11_baseline_report.html` 的九节固化锚）；继承已修正事实清单；无触发器命中且无新动作时降级为核验轻运行（登记册标注「截至 {{CURRENT_DATE}} 无更新」），不得虚构变化。
 
 ---
 
@@ -44,7 +44,7 @@
 
 ## 二、九节固化锚（逐字继承）
 
-九节结构与[基线提示词](./prompt-baseline-setup.md)逐字一致，节标题逐字继承 `reports/2026-12_baseline_report.html` 的 h2 固化锚：一、执行摘要 ｜ 二、监测机制设计 ｜ 三、竞争格局总览 ｜ 四、竞品档案首建 ｜ 五、动态矩阵与信号规则 ｜ 六、来源与核验治理 ｜ 七、风险与盲区 ｜ 八、交付物与后续运行方式 ｜ 九、参考来源清单。
+九节结构与[基线提示词](./prompt-baseline-setup.md)逐字一致，节标题逐字继承 `reports/2026-11_baseline_report.html` 的 h2 固化锚：一、执行摘要 ｜ 二、监测机制设计 ｜ 三、竞争格局总览 ｜ 四、竞品档案首建 ｜ 五、动态矩阵与信号规则 ｜ 六、来源与核验治理 ｜ 七、风险与盲区 ｜ 八、交付物与后续运行方式 ｜ 九、参考来源清单。
 
 ## 三、更新协议与追踪表回写
 

@@ -10,10 +10,12 @@
 
 本模块把 gate-period 变为**可滚动**：
 
-    resolve("2026-12") -> "2026-12"     # 显式周期：原样返回（CI 可固定口径复现）
-    resolve("auto")     -> "2026-12"     # 滚动：当前自然月 + 1（下一周期）
+    resolve("2026-11") -> "2026-11"     # 显式周期：原样返回（CI 可固定口径复现）
+    resolve("auto")     -> "2026-11"     # 滚动：当前自然月（报告落款周期 = 产出当月）
 
-`auto` 为默认值：新报告永远被强制、历史报告永远只警告，且不随时间失效。
+`auto` 为默认值：报告周期恒等于产出当天的自然月，新报告永远被强制、历史报告永远只警告，
+且不随时间失效。**不得**解析为「当前自然月 + 1」——那会让报告落款落到未来周期，
+产生仓库内不存在的未来数据窗口（见 period_check.py 门禁）。
 """
 from __future__ import annotations
 
@@ -31,22 +33,21 @@ def is_auto(period: str | None) -> bool:
 
 
 def resolve(period: str | None, today: date | None = None) -> str:
-    """-> 可比较的周期标识（显式周期原样返回；`auto` 解析为「当前自然月 + 1」）。
+    """-> 可比较的周期标识（显式周期原样返回；`auto` 解析为「当前自然月」）。
 
     解析失败（非法周期）时同样回落到滚动值，保证门禁永不因配置漂移而静默失效。
+    报告落款周期 = 产出当天的自然月（2026-11-21 产出 -> 2026-11），
+    禁止落款到未来周期。
     """
     raw = str(period or "").strip()
     if raw and not is_auto(raw) and _PERIOD_RE.match(raw):
         return raw
     d = today or date.today()
-    y, m = d.year, d.month + 1
-    if m > 12:
-        y, m = y + 1, 1
-    return f"{y}-{m:02d}"
+    return f"{d.year}-{d.month:02d}"
 
 
 def describe(period: str | None) -> str:
-    """人类可读描述（用于 `--list` / 日志）：`auto -> 2026-12`。"""
+    """人类可读描述（用于 `--list` / 日志）：`auto -> 2026-11`（当前自然月）。"""
     raw = str(period or "").strip()
     if is_auto(raw):
         return f"{AUTO} -> {resolve(raw)}"

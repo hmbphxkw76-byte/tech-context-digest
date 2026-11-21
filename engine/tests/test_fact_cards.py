@@ -13,6 +13,7 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "tools"))
 
 import fact_card_check as m  # noqa: E402
+from gate_period import resolve as resolve_period  # noqa: E402
 
 
 class TestFactCards(unittest.TestCase):
@@ -36,7 +37,7 @@ class TestFactCards(unittest.TestCase):
             self.assertIsInstance(c["indicators"], list, cid)
 
     def test_run_has_no_errors(self):
-        errors, warnings, lines, stats = m.run("2026-12")
+        errors, warnings, lines, stats = m.run(resolve_period("auto"))
         self.assertEqual(errors, 0, lines)
         self.assertGreaterEqual(stats["cards"], 20)
 
@@ -45,10 +46,11 @@ class TestFactCards(unittest.TestCase):
         cards, _ = m.load_cards()
         tokens = m.shared_fact_tokens(cards)
         refs = {rel: m.FC_RE.findall(text) for rel, text, _, _ in m.iter_report_refs()}
+        current = resolve_period("auto")
         checked = 0
         for rel, found in refs.items():
             bline = rel.split("/reports/")[0]
-            if m._in_shared(bline, tokens) and "2026-12" in rel:
+            if m._in_shared(bline, tokens) and current in rel:
                 self.assertTrue(found, f"{rel} 未引用事实卡片")
                 checked += 1
         self.assertGreaterEqual(checked, 4, "应覆盖多个共享事实域新报告")

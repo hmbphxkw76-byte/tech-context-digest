@@ -17,7 +17,7 @@ gate-period 分两级（显式、可分别覆盖，避免单一 flag 语义含�
   - 来源登记门禁（source_check）用 --source-gate-period。
 两级都遵循「历史报告 [W] 不追溯 / 新报告 [E] 阻断」。
 
-默认值 `auto`（滚动基线，见 gate_period.py）：解析为「当前自然月 + 1」，
+默认值 `auto`（滚动基线，见 gate_period.py）：解析为「当前自然月」，
 使新报告判定**不随时间失效**——写死的常量会让「新报告」在若干月后自动变成
 「历史」而降级放行。显式传 YYYY-MM / YYYY-Qn / YYYY 可固定口径复现。
 
@@ -51,6 +51,7 @@ CHECKS: list[tuple[str, list[str], bool]] = [
     ("lint", [sys.executable, f"{TOOLS}/lint_reports.py"], True),
     ("compliance", [sys.executable, f"{TOOLS}/compliance_check.py", "--check"], True),
     ("classify", [sys.executable, f"{TOOLS}/classify_reports.py", "--check", "--unknown-warn"], True),
+    ("period_check", [sys.executable, f"{TOOLS}/period_check.py"], True),
     ("region_topics", [sys.executable, f"{TOOLS}/ensure_region_topics.py", "--check"], True),
     ("links", [sys.executable, f"{TOOLS}/check_links.py"], False),
     ("hub", [sys.executable, f"{TOOLS}/build_hub.py", "--check"], False),
@@ -83,7 +84,7 @@ CHECKS: list[tuple[str, list[str], bool]] = [
     ("model_contract", [sys.executable, f"{TOOLS}/model_contract_check.py"], True),
 ]
 
-# 两级 gate-period 默认值（见模块 docstring）：auto = 滚动基线（当前月 + 1）
+# 两级 gate-period 默认值（见模块 docstring）：auto = 滚动基线（当前自然月）
 DEFAULT_GATE_PERIOD = AUTO
 DEFAULT_SOURCE_GATE_PERIOD = AUTO
 

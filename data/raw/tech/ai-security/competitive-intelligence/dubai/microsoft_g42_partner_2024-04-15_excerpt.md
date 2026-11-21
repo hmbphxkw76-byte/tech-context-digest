@@ -3,10 +3,10 @@
 - **来源编号**：S-009
 - **来源层级**：tier 1（官方一手）
 - **原文 URL**：https://blogs.microsoft.com/blog/2024/04/15/microsoft-and-g42-partner
-- **采集期**：2026-12（基线期）
+- **采集期**：2026-11（基线期）
 - **核验状态**：已核验
 - **对应台账**：`data/processed/tech/ai-security/competitive-intelligence/dubai/ai_cyber_competition_registry.md`
-- **对应报告**：`content/tech/ai-security/competitive-intelligence/dubai/reports/2026-12_baseline_report.html`
+- **对应报告**：`content/tech/ai-security/competitive-intelligence/dubai/reports/2026-11_baseline_report.html`
 
 ## 已核验摘录
 

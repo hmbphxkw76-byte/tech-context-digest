@@ -95,7 +95,7 @@
 | D02 | `content/economy/dubai/apartment/reports/2026-Q3_quarterly.html` | R2 ×3 | closed |
 | D03 | `content/economy/dubai/apartment/reports/2026_annual.html` | R2 ×5 | closed |
 | D04 | `content/economy/real-estate/dubai/market-sizing/reports/2026-12_baseline_report.html` | R1 ×1（登记为空） | closed |
-| D05 | `content/economy/insight/reports/2026-12_baseline_report.html` | R1 ×1（登记为空） | closed（规则误报，`SOURCE_STRATEGY=synthesis_only` 豁免） |
+| D05 | `content/economy/insight/reports/2026-11_baseline_report.html` | R1 ×1（登记为空） | closed（规则误报，`SOURCE_STRATEGY=synthesis_only` 豁免） |
 | D06 | `content/economy/trends/reports/2026-11-13_weekly.html` | R2 ×4 | closed |
 | D07 | `content/tech/competitive-intelligence/dubai/reports/2026-12_baseline_report.html` | R2 ×2 | closed |
 | D08 | `content/tech/industry-research/dubai/reports/2026-12_baseline_report.html` | R1 ×1 + R7 ×1 | closed |

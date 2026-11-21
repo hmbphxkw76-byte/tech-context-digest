@@ -11,9 +11,9 @@
 {{REGION}}               = 迪拜（阿联酋）
 {{TOPIC}}                = AI 网安行业
 {{CURRENT_DATE}}         = 本次执行日期，格式 YYYY-MM-DD（运行填写）
-{{BASELINE_DATE}}        = 2026-12（首份基线报告完稿日期）
+{{BASELINE_DATE}}        = 2026-11（首份基线报告完稿日期）
 {{OUTPUT_PATH}}          = reports/{{YYYY-MM}}_baseline_report.html（主交付物）；md 源稿存 sources/{{YYYY-MM}}_baseline_report.md（同名存档，不参与 md2html.py 自动转换）
-{{BASELINE_REPORT_PATH}} = reports/2026-12_baseline_report.html
+{{BASELINE_REPORT_PATH}} = reports/2026-11_baseline_report.html
 {{REGISTRY_PATH}}        = data/processed/tech/ai-security/industry-research/dubai/ai_cybersecurity_indicator_registry.md
 {{REGISTRY_FORMAT}}      = md-table
 {{FRESHNESS_PRIORITY}}   = 近 12 个月内数据优先；超过 24 个月须标注年份并谨慎使用

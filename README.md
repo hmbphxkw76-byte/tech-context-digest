@@ -30,7 +30,7 @@ python engine/tools/check_links.py
 python engine/tools/page_build_check.py
 
 # 统一优化门禁（P0/P1/P2 全部确定性检查）
-python engine/tools/optimization_gate.py --gate-period 2026-12 --source-gate-period 2027-01 --probe
+python engine/tools/optimization_gate.py --gate-period auto --source-gate-period auto --probe
 
 # 单元测试
 python -m unittest discover -s engine/tests -v
