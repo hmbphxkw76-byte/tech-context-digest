@@ -1,8 +1,13 @@
 {
   "version": "5.0",
   "updated": "2026-11-21",
-  "classification_version": "2026-11-21.1",
+  "classification_version": "2026-11-21.2",
   "changelog": [
+    {
+      "version": "2026-11-21.2",
+      "date": "2026-11-21",
+      "summary": "ai-application 目录对齐 ai-security：删除 ai-application/trends，新建 competitive-intelligence/dubai、dubai、industry-research/dubai 三条月度业务线（竞争情报监测型 / 职业就业调研型 / 行业深度研究型），与 ai-security 三类同构；首页「AI应用」分组与「AI安全」并列展示。"
+    },
     {
       "version": "2026-11-21.1",
       "date": "2026-11-21",
@@ -19,7 +24,7 @@
       "summary": "首次登记分类体系版本号；新增跨主题互斥性检查（先 [W] 不阻断）与变更影响评估（--impact）。"
     }
   ],
-  "comment": "仓库目录结构单一事实源（tech-context-digest 三层架构：content/ 内容层、engine/ 引擎层、data/ 资产层）。六主题：economy / tech / education / international / political / society。维度顺序由 layout.json 各主题自行声明：economy 为 region→category（地区优先），tech 为 category→subcategory→region（AI 安全 / AI 应用两大类 → 业务线 → 地区），其余四主题为 category→region（细分优先）。region 为可选维度（optional_dimensions 声明）：六个主题均声明 [\"region\"]，业务线可省略 region 段，直接以 category（+subcategory）段落位（如 content/economy/trends、content/tech/ai-application/trends、content/education/education-system）；省略时剩余段按声明顺序剔除 region 后逐位映射。业务线默认位于 content/<theme>/<维度段...>/，以 prompts/business-config.md 为锚点；theme 下允许存在不含业务配置的分组目录（如 content/tech/ai-security），其层级深度须小于该主题维度数。",
+  "comment": "仓库目录结构单一事实源（tech-context-digest 三层架构：content/ 内容层、engine/ 引擎层、data/ 资产层）。六主题：economy / tech / education / international / political / society。维度顺序由 layout.json 各主题自行声明：economy 为 region→category（地区优先），tech 为 category→subcategory→region（AI 安全 / AI 应用两大类 → 业务线 → 地区），其余四主题为 category→region（细分优先）。region 为可选维度（optional_dimensions 声明）：六个主题均声明 [\"region\"]，业务线可省略 region 段，直接以 category（+subcategory）段落位（如 content/economy/trends、content/tech/ai-application/dubai、content/education/education-system）；省略时剩余段按声明顺序剔除 region 后逐位映射。业务线默认位于 content/<theme>/<维度段...>/，以 prompts/business-config.md 为锚点；theme 下允许存在不含业务配置的分组目录（如 content/tech/ai-security），其层级深度须小于该主题维度数。",
   "root_reserved": [
     "content",
     "engine",

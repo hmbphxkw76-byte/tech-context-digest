@@ -1,0 +1,922 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>迪拜（阿联酋）AI 应用就业 · 首期基线报告 · 2026-11</title>
+<style>
+:root{
+  --radius-sm:8px; --radius:12px; --radius-lg:16px; --radius-pill:999px;
+  --shadow:0 1px 3px rgba(20,40,70,.06); --shadow-md:0 4px 14px rgba(20,40,70,.09);
+  --shadow-lg:0 10px 30px rgba(15,35,56,.2);
+  --font-sans:"Microsoft YaHei","PingFang SC","Segoe UI",Arial,sans-serif;
+  --font-mono:"SFMono-Regular",Consolas,"Liberation Mono",monospace;
+  --focus-ring:0 0 0 3px rgba(63,111,176,.35);
+  --transition:.15s ease;
+  --bg:#f4f6f9; --card:#ffffff; --card2:#fbfcfe; --soft:#f5f8fb;
+  --ink:#15202b; --ink2:#465667; --ink3:#657180;
+  --line:#e1e7ee; --line2:#eef2f6;
+  --navy:#16324f; --navy2:#2f5597; --blue:#3f6fb0; --blue-l:#eaf1fa;
+  --red:#a83224; --red-d:#822116; --red-l:#fbece8; --red-bg:#fbece8; --red-line:#f0d4cf;
+  --pre:#b8541c; --pre-l:#fdf1e4; --pre-bg:#fdf1e4; --pre-line:#f2ddc9;
+  --green:#1c7444; --green-l:#eaf5ef; --green-bg:#eaf5ef; --green-line:#d3ead9;
+  --amber:#956612; --amber-l:#fdf4e2; --amber-bg:#fdf4e2; --amber-line:#f0e3c2;
+  --gray:#646f7b; --gray-l:#eff2f4; --gray-bg:#eff2f4; --gray-line:#e6eaee;
+  /* 别名：兼容既有报告组件的命名习惯 */
+  --surface:#ffffff; --surface2:#fbfcfe;
+  --navy-2:#2f5597; --muted:#657180; --bg-soft:#f5f8fb; --bg-card:#fbfcfe;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  *,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}
+}
+body{font-family:var(--font-sans);background:var(--bg);color:var(--ink);line-height:1.76;font-size:14.5px}
+.wrap{max-width:1160px;margin:0 auto;padding:0 24px 64px}
+a{color:var(--navy2);text-decoration:none}
+a:hover{text-decoration:underline}
+a:focus-visible,button:focus-visible{outline:none;box-shadow:var(--focus-ring)}
+.skip-link{position:absolute;left:12px;top:-48px;z-index:100;background:var(--navy);color:#fff;padding:8px 16px;border-radius:0 0 8px 8px;font-size:12.5px;transition:top var(--transition)}
+.skip-link:focus{top:0;color:#fff;text-decoration:none}
+
+/* ── 页头：report-head（生成器基础版） ── */
+header.report-head{
+  background:linear-gradient(128deg,#0f2338 0%,var(--navy) 52%,var(--navy2) 100%);
+  color:#fff;padding:40px 0 30px;
+}
+header.report-head .wrap{padding:0 24px}
+header.report-head h1{margin:0 0 8px;font-size:27px;font-weight:700;letter-spacing:.4px;line-height:1.35}
+header.report-head .eyebrow{font-size:11.5px;letter-spacing:2.4px;color:rgba(255,255,255,.62);text-transform:uppercase}
+header.report-head .sub{font-size:14px;color:rgba(255,255,255,.82);margin:2px 0}
+header.report-head .meta{font-size:12.3px;color:rgba(255,255,255,.75);margin-top:14px;line-height:1.9}
+header.report-head .meta b{color:#fff}
+header.report-head .nav-url{font-size:11.5px;color:rgba(255,255,255,.78);margin-top:10px;word-break:break-all}
+header.report-head .nav-url a{color:#cfe0ee;text-decoration:none;border-bottom:1px dashed #cfe0ee}
+header.report-head .tag{display:inline-block;background:rgba(255,255,255,.11);border:1px solid rgba(255,255,255,.2);border-radius:14px;padding:2px 11px;margin:5px 6px 0 0;font-size:11.5px}
+
+/* ── 页头：hero（jp-life-work 风格：navy 标题带 + 浅色 meta 面板） ── */
+.hero{margin-bottom:20px}
+.hero .wrap{padding:0 24px}
+.hero-band{background:linear-gradient(128deg,#0f2338 0%,var(--navy) 52%,var(--navy2) 100%);color:#fff;
+  padding:14px 0 12px;border-radius:0 0 14px 14px}
+.hero-top{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap}
+.hero-band .eyebrow,.hero-band .kicker,.hero-band .hero-kicker{font-size:10.5px;letter-spacing:2px;color:rgba(255,255,255,.62);text-transform:uppercase;margin:0}
+.hero-band h1{font-size:21px;font-weight:700;letter-spacing:.3px;margin:5px 0 0;line-height:1.3}
+.hero-band .tags{display:flex;flex-wrap:wrap;gap:6px}
+.hero-band .tag{display:inline-block;background:rgba(255,255,255,.11);border:1px solid rgba(255,255,255,.2);
+  border-radius:14px;padding:1px 10px;font-size:11px}
+.hero-panel{display:flex;flex-wrap:wrap;align-items:center;gap:8px 16px;
+  background:var(--card);border:1px solid var(--line);border-radius:12px;
+  padding:8px 12px;margin-top:8px;box-shadow:var(--shadow)}
+.meta-grid{flex:1 1 0;min-width:0;column-count:2;column-gap:20px;
+  font-size:11.4px;line-height:1.45;color:var(--ink2)}
+.meta-grid .meta-item{break-inside:avoid;margin:0 0 2px;min-width:0;overflow-wrap:anywhere}
+.meta-grid .meta-item b{color:var(--navy)}
+.meta-grid p,.meta-grid dl,.meta-grid .hero-meta,.meta-grid .hero-abstract p{
+  margin:0 0 4px;break-inside:avoid}
+.meta-grid dl{display:block}
+.meta-grid dt{display:block;font-weight:700;color:var(--navy);margin-top:2px}
+.meta-grid dd{display:block;margin:0 0 4px}
+.meta-grid .tag-row{margin:2px 0 4px}
+.hero-panel .audit-badge{margin:0;flex:0 0 300px;font-size:12px;padding:6px 12px}
+.audit-badge{display:inline-flex;align-items:center;gap:10px;flex-wrap:wrap;
+  background:var(--green-l);border:1px solid var(--green);border-radius:10px;
+  padding:8px 14px;font-size:12.5px;color:var(--green)}
+.audit-badge .audit-seal{font-weight:700;white-space:nowrap}
+.audit-badge .audit-meta{color:var(--ink2)}
+@media (max-width:900px){
+  .hero-panel{flex-direction:column;align-items:stretch}
+  .hero-panel .audit-badge{flex:1 1 auto}
+  .meta-grid{column-count:1}
+}
+
+/* ── 顶部固定导航 ── */
+nav.report-nav{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.96);border-bottom:1px solid var(--line);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);margin-bottom:26px}
+nav.report-nav .wrap{display:flex;flex-wrap:wrap;gap:6px 14px;align-items:center;padding-top:10px;padding-bottom:10px}
+/* apartment monthly/quarterly/baseline 的 .nav-tabs 是 nav 直接子元素（无 .wrap） */
+nav.report-nav > .nav-tabs{max-width:1160px;margin:0 auto;padding:10px 24px}
+.nav-url{display:flex;align-items:baseline;gap:8px;flex-wrap:wrap;font-size:11.5px;line-height:1.6;color:var(--ink3);padding-bottom:6px;margin-bottom:6px;border-bottom:1px dashed var(--line);width:100%}
+.nav-url-label{font-weight:700;color:var(--ink2);white-space:nowrap}
+.nav-url a{color:var(--blue);text-decoration:none;word-break:break-all}
+.nav-url a:hover{text-decoration:underline}
+.nav-tabs{display:flex;flex-wrap:wrap;gap:6px}
+.nav-tabs a{color:var(--navy);text-decoration:none;font-size:12.5px;padding:4px 10px;border-radius:14px;border:1px solid var(--line);background:var(--bg-soft);white-space:nowrap;transition:background var(--transition),color var(--transition)}
+.nav-tabs a:hover{background:var(--blue-l);border-color:#b9cfe2;text-decoration:none}
+.nav-tabs a.active{background:var(--blue-l);color:var(--blue);font-weight:700}
+
+/* ── 章节与排版 ── */
+main{padding-top:0}
+h2.sec{font-size:19px;color:var(--navy);margin:38px 0 14px;padding-bottom:8px;border-bottom:2px solid var(--navy);scroll-margin-top:100px;font-weight:700}
+h2.sec .en{font-size:10.8px;color:var(--ink3);font-weight:400;margin-left:10px;letter-spacing:1.1px}
+h3{font-size:15.5px;color:var(--navy);margin:22px 0 8px;font-weight:700;scroll-margin-top:100px}
+h4{font-size:14px;color:var(--navy);margin:16px 0 6px;font-weight:700}
+p{margin:8px 0}
+ul,ol{margin:8px 0;padding-left:22px}
+li{margin:5px 0}
+ul.tight,ol.tight{margin:7px 0}
+ul.tight li,ol.tight li{margin-bottom:6px}
+b,strong{font-weight:650;color:var(--ink)}
+blockquote{border-left:4px solid var(--line);margin:12px 0;padding:2px 0 2px 14px;color:var(--ink2)}
+code{background:var(--bg-soft);padding:2px 5px;border-radius:4px;font-family:var(--font-mono);font-size:.92em}
+pre{background:var(--bg-soft);border:1px solid var(--line);border-radius:var(--radius-sm);padding:12px 14px;overflow-x:auto;margin:12px 0}
+pre code{background:none;padding:0}
+img{max-width:100%}
+.lead{color:var(--ink2);font-size:13.8px;margin:6px 0 14px}
+.muted{color:var(--ink3)}
+.small{font-size:11.7px;color:var(--ink3)}
+hr{border:0;border-top:1px solid var(--line);margin:26px 0 0}
+.hr{height:1px;background:var(--line);margin:26px 0 0}
+b.red,color.red{color:var(--red)} b.pre{color:var(--pre)} b.green{color:var(--green)}
+b.amber{color:var(--amber)} b.navy{color:var(--navy)}
+
+/* ── 表格 ── */
+table{width:100%;border-collapse:collapse;font-size:13px;background:var(--card);margin:12px 0}
+th,td{border:1px solid var(--line);padding:8px 10px;text-align:left;vertical-align:top;line-height:1.62}
+thead th{background:var(--navy);color:#fff;font-weight:600;white-space:nowrap}
+tbody th{background:var(--blue-l);color:var(--navy);font-weight:600}
+tbody tr:nth-child(even) td{background:var(--bg-soft)}
+tbody tr:hover td{background:var(--blue-l)}
+table.fixed{table-layout:fixed}
+.num{text-align:right;font-variant-numeric:tabular-nums}
+.tblwrap{overflow-x:auto;border-radius:var(--radius-sm);border:1px solid var(--line);margin:12px 0}
+.tblwrap table{margin:0;border:0}
+
+/* ── 来源：表头弹层 / 行内链接 / 来源清单 ── */
+.src-head{position:relative;cursor:help;border-bottom:1px dotted var(--blue);white-space:nowrap}
+.src-head .src-pop{position:absolute;left:0;top:100%;z-index:60;display:none;background:var(--navy);color:#fff;font-size:12px;font-weight:400;padding:9px 12px;border-radius:8px;box-shadow:var(--shadow-lg);max-width:min(560px,86vw);white-space:normal;line-height:1.65;border:1px solid rgba(255,255,255,.14)}
+.src-pop .pop-title{font-weight:600;display:block;margin-bottom:4px;color:#fff}
+.src-pop .pop-url{display:block;margin-top:6px;word-break:break-all;color:var(--blue-l)}
+.src-pop .pop-url a{color:#a9c8ee}
+.src-head:hover .src-pop,.src-head:focus .src-pop,.src-head:focus-within .src-pop{display:block}
+.src-inline{color:var(--ink3);font-size:12px;word-break:break-all}
+.src-inline a{color:var(--blue);text-decoration:none;border-bottom:1px dotted var(--blue)}
+.src-inline a:hover{background:#eaf3fa}
+.src{font-size:11.1px;color:var(--ink3);word-break:break-word;line-height:1.58}
+.src a{color:#5b7bb4;text-decoration:none}
+.src a:hover{text-decoration:underline}
+.refs{font-size:12.5px;color:var(--ink3)}
+.refs ol{padding-left:20px}
+.refs a{color:var(--navy);text-decoration:none;border-bottom:1px dashed var(--navy);word-break:break-all}
+.refs a:hover{background:#e8f0f8}
+
+/* ── 卡片 / 结论框 ── */
+.card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:18px 20px;box-shadow:var(--shadow);margin:14px 0}
+.card.tight{padding:14px 16px}
+.leadbox{border-left:4px solid var(--navy2);background:linear-gradient(125deg,#f5f9fd,#edf3fa);border-color:#cfdded}
+.leadbox h3:first-child{margin-top:0}
+
+/* ── KPI 卡（trends .kpi / apartment .kcard） ── */
+.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(168px,1fr));gap:12px;margin:14px 0}
+.kpi{background:var(--card);border:1px solid var(--line);border-left:4px solid var(--navy);border-radius:var(--radius-sm);padding:12px 14px;box-shadow:var(--shadow)}
+.kpi.red{border-left-color:var(--red)} .kpi.green{border-left-color:var(--green)}
+.kpi.amber{border-left-color:var(--amber)} .kpi.blue{border-left-color:var(--blue)}
+.kpi .v{font-size:22px;font-weight:700;color:var(--navy);line-height:1.2}
+.kpi.red .v{color:var(--red)} .kpi.green .v{color:var(--green)}
+.kpi.amber .v{color:var(--amber)} .kpi.blue .v{color:var(--blue)}
+.kpi .l{font-size:12px;color:var(--ink3);margin-top:4px}
+.kpi .s{font-size:11px;color:#8a98a6;margin-top:2px}
+.kcards{display:grid;grid-template-columns:repeat(auto-fit,minmax(232px,1fr));gap:11px;margin:14px 0}
+.kcard{background:var(--card);border:1px solid var(--line);border-left:4px solid var(--navy2);border-radius:10px;padding:13px 15px;box-shadow:var(--shadow)}
+.kcard.warn,.kcard.pre{border-left-color:var(--pre);background:linear-gradient(180deg,var(--pre-bg),#fff 62%)}
+.kcard.bad,.kcard.red{border-left-color:var(--red);background:linear-gradient(180deg,var(--red-bg),#fff 62%)}
+.kcard.good{border-left-color:var(--green);background:linear-gradient(180deg,var(--green-bg),#fff 62%)}
+.kcard .lab,.kcard .t{font-size:12.4px;color:var(--ink2)}
+.kcard .val,.kcard .v{font-size:22px;font-weight:700;color:var(--navy);margin:3px 0 2px;line-height:1.25}
+.kcard.warn .val,.kcard.pre .val{color:var(--pre)}
+.kcard.bad .val,.kcard.red .val{color:var(--red)}
+.kcard.good .val{color:var(--green)}
+.kcard .note,.kcard .s{font-size:11.5px;color:var(--ink3);line-height:1.6;margin-top:4px;word-break:break-word}
+
+/* ── 数据条 / 信号灯 ── */
+.stat-strip{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin:12px 0}
+.stat{background:var(--card);border:1px solid var(--line);border-radius:9px;padding:11px 13px;text-align:center}
+.stat .lab,.stat .l{font-size:11.4px;color:var(--ink3);margin-top:2px}
+.stat .n{font-size:23px;font-weight:700;line-height:1.2}
+.stat.hard .n{color:var(--red)} .stat.pre .n{color:var(--pre)} .stat.yel .n{color:var(--amber)}
+.stat.grn .n{color:var(--green)} .stat.gry .n{color:var(--gray)}
+.lamp{display:inline-block;min-width:9px;width:9px;height:9px;border-radius:50%;margin-right:4px;vertical-align:0}
+.lamp.r{background:var(--red)} .lamp.p{background:var(--pre)} .lamp.y{background:var(--amber)}
+.lamp.g{background:var(--green)} .lamp.k{background:var(--gray)}
+
+/* ── 标签 / 标注 ── */
+.tag{display:inline-block;font-size:11px;padding:1px 7px;border-radius:10px;background:var(--blue-l);color:var(--navy);border:1px solid var(--line);margin-right:4px}
+.tag.red{background:var(--red-l);color:var(--red);border-color:var(--red-line)}
+.tag.green{background:var(--green-l);color:var(--green);border-color:var(--green-line)}
+.tag.amber{background:var(--amber-l);color:var(--amber);border-color:var(--amber-line)}
+.pill{display:inline-block;border-radius:3px;padding:0 7px;font-size:11.3px;white-space:nowrap;line-height:1.72}
+.pill.r{background:var(--red-l);color:var(--red)} .pill.p{background:var(--pre-l);color:var(--pre)}
+.pill.y{background:var(--amber-l);color:var(--amber)} .pill.g{background:var(--green-l);color:var(--green)}
+.pill.k{background:var(--gray-l);color:var(--gray)} .pill.b{background:var(--blue-l);color:var(--navy2)}
+.pill.act{background:#e8eef6;color:#2b4a70}
+.callout{border-left:4px solid var(--amber);background:var(--amber-l);padding:12px 16px;border-radius:0 6px 6px 0;margin:14px 0;font-size:13.5px}
+.callout.red{border-left-color:var(--red);background:var(--red-l)}
+.callout.green{border-left-color:var(--green);background:var(--green-l)}
+.note{border:1px solid var(--line);border-left:4px solid var(--navy2);background:var(--card2);border-radius:var(--radius-sm);padding:12px 15px;margin:14px 0;font-size:13.5px}
+.note.gap{border-left-color:var(--gray);background:var(--gray-l)}
+.note.check{border-left-color:var(--green);background:var(--green-l)}
+.note.correct{border-left-color:var(--red);background:var(--red-l)}
+.note.preline{border-left-color:var(--pre);background:var(--pre-l)}
+.term{font-size:12.5px;color:var(--ink3);background:var(--bg-soft);border:1px solid var(--line);border-radius:6px;padding:8px 12px;margin:14px 0}
+.term b{color:var(--navy)}
+
+/* ── 图表（trends .chart 卡片 / apartment .chart-box + .chart-eh 容器） ── */
+.chart{margin:18px 0;padding:16px;background:var(--card);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow)}
+.chart h4{margin:0 0 4px;font-size:14.5px;color:var(--navy)}
+.chart .unit{font-size:12px;color:var(--ink3);font-weight:400}
+.chart-note{font-size:11.5px;color:var(--ink3);margin:0 0 12px;line-height:1.7}
+.chart svg{display:block;max-width:100%;height:auto;margin:6px auto 0}
+.chart-box{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:14px 14px 6px;box-shadow:var(--shadow);margin:16px 0}
+.chart-eh{width:100%;height:352px;margin:6px 0}
+.legend{display:flex;flex-wrap:wrap;gap:14px;font-size:12px;color:var(--ink2);margin:6px 0 12px}
+.legend span{display:inline-flex;align-items:center;gap:5px}
+.legend i{display:inline-block;width:11px;height:11px;border-radius:2px}
+
+/* ── 时间线 ── */
+.timeline{margin:16px 0;padding-left:8px}
+.tl-item{display:flex;gap:14px;margin:0 0 14px}
+.tl-date{flex:0 0 78px;font-size:12.5px;font-weight:700;color:var(--navy);text-align:right;padding-top:2px}
+.tl-body{flex:1;border-left:2px solid var(--line);padding:0 0 0 14px;position:relative}
+.tl-body::before{content:"";position:absolute;left:-6px;top:6px;width:10px;height:10px;border-radius:50%;background:var(--navy);border:2px solid #fff;box-shadow:0 0 0 1px var(--navy)}
+.tl-body.red::before{background:var(--red);box-shadow:0 0 0 1px var(--red)}
+.tl-body.green::before{background:var(--green);box-shadow:0 0 0 1px var(--green)}
+.tl-body.amber::before{background:var(--amber);box-shadow:0 0 0 1px var(--amber)}
+.tl-body .t{font-weight:600;color:var(--ink)}
+.tl-body .d{font-size:13px;color:var(--ink3);margin-top:2px}
+
+/* ── 风险条 / 风险框 ── */
+.rl-track{position:relative;height:12px;background:var(--gray-line);border-radius:999px;margin:14px 0 6px;overflow:hidden}
+.rl-fill{position:absolute;left:0;top:0;bottom:0;background:var(--green);border-radius:999px}
+.rl-marker{position:absolute;top:-3px;bottom:-3px;width:2px;background:var(--red);left:50%}
+.risk{background:linear-gradient(125deg,#fdf3f1,var(--red-l));border:1px solid #eec8c1;border-left:5px solid var(--red);border-radius:10px;padding:16px 18px;margin:14px 0}
+.risk h4{font-size:14.4px;color:var(--red);margin-bottom:8px}
+.risk .kpis{display:flex;flex-wrap:wrap;gap:22px;margin:10px 0 12px}
+.risk .kpis>div{min-width:150px}
+.risk .kpis .n{font-size:22px;font-weight:700;color:var(--red);line-height:1.25}
+.risk .kpis .l{font-size:11.4px;color:var(--ink2)}
+.redbox{background:linear-gradient(135deg,#fff8f6,var(--red-l));border:1px solid #eec8c1;border-left:5px solid var(--red);border-radius:10px;padding:15px 18px;margin:14px 0}
+.redbox h4{color:var(--red-d);margin-top:0}
+.prebox{background:linear-gradient(135deg,#fffaf4,var(--pre-l));border:1px solid #efd3b6;border-left:5px solid var(--pre);border-radius:10px;padding:15px 18px;margin:14px 0}
+.prebox h4{color:var(--pre);margin-top:0}
+.preline{border-left:4px solid var(--pre);background:var(--pre-l);padding:10px 14px;border-radius:0 6px 6px 0;margin:10px 0;font-size:13px}
+
+/* ── 目录 / 流程 / 分层（年度） ── */
+.toc{display:flex;flex-wrap:wrap;gap:7px;margin:0 0 6px}
+.toc a{font-size:12.3px;color:var(--navy2);background:var(--blue-l);border-radius:15px;padding:3px 12px;text-decoration:none}
+.toc a:hover{background:#dae6f5}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.flow{display:flex;align-items:stretch;gap:7px;flex-wrap:wrap;margin:12px 0}
+.node{flex:1;min-width:150px;background:var(--blue-l);border:1px solid #cfddf3;border-radius:8px;padding:11px 12px}
+.node b{display:block;color:var(--navy);font-size:12.8px;margin-bottom:3px}
+.node span{font-size:11.4px;color:var(--ink2);line-height:1.55;display:block}
+.arrow{display:flex;align-items:center;color:var(--blue);font-size:18px;font-weight:700}
+.tiers{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:12px 0}
+.tier{border:1px solid var(--line);border-radius:10px;padding:14px 15px;background:var(--card)}
+.tier.t1{border-top:4px solid var(--red)} .tier.t2{border-top:4px solid var(--pre)} .tier.t3{border-top:4px solid var(--amber)}
+.tier h4{margin:0 0 6px} .tier p{font-size:12.2px;color:var(--ink2);margin:0}
+
+/* ── 标注 / 页脚 / 索引链接 ── */
+.disc{margin-top:34px;padding:16px 18px;background:var(--bg-soft);border:1px solid var(--line);border-radius:var(--radius);font-size:13px;color:var(--ink3)}
+.disc strong{color:var(--ink)}
+footer,.footer{font-size:11.4px;color:var(--ink3);text-align:center;margin-top:22px;line-height:1.8}
+.idx-link{color:var(--navy);text-decoration:none;border-bottom:1px dotted #9db9da;font-weight:600}
+.idx-link:hover{color:var(--navy2);border-bottom:1px solid var(--blue)}
+.idx-link .ext{font-size:10px;color:var(--blue);margin-left:2px;font-weight:400}
+
+/* ── 消费端反馈入口（T-06）：静态链接 + data 属性占位，无外部依赖 ── */
+.feedback-link{color:var(--navy2);text-decoration:none;border-bottom:1px dotted #9db9da;font-weight:600}
+.feedback-link:hover{color:var(--navy);border-bottom:1px solid var(--blue)}
+.report-foot{border-top:1px solid var(--line);padding:16px 0 34px}
+
+/* ── 报告特有组件（apartment 基线 / 季度） ── */
+.tldr{background:linear-gradient(180deg,#fff,#f8fafe);border-left:5px solid var(--navy2)}
+.verdict{font-size:17px;font-weight:700;color:var(--blue);margin:0 0 12px}
+.kpi-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin:16px 0}
+.tbl-wrap{overflow-x:auto;border:1px solid var(--line);border-radius:8px;margin:12px 0}
+.src-pop .src-pop-title{display:block;font-size:11px;color:var(--ink3);margin-bottom:4px;border-bottom:1px solid var(--line);padding-bottom:4px}
+.t-red{background:var(--red-l);color:var(--red)} .t-green{background:var(--green-l);color:var(--green)}
+.t-amber{background:var(--amber-l);color:var(--amber)} .t-grey{background:var(--gray-l);color:var(--ink3)}
+.t-blue{background:var(--blue-l);color:var(--blue)}
+.toggle{display:inline-flex;border:1px solid var(--line);border-radius:6px;overflow:hidden;margin-bottom:8px}
+.toggle button{border:0;background:#fff;color:var(--ink2);padding:5px 14px;font-size:12px;cursor:pointer;font-family:inherit}
+.toggle button.on{background:var(--navy2);color:#fff}
+.hide{display:none}
+.two-col{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.layer{display:grid;grid-template-columns:110px 1fr;gap:0;border:1px solid var(--line);border-radius:8px;overflow:hidden;margin-bottom:10px;background:#fff}
+.layer .lb{background:var(--navy2);color:#fff;padding:14px 12px;font-weight:700;font-size:13px;display:flex;align-items:center;justify-content:center;text-align:center}
+.layer .lb.q{background:#4472C4} .layer .lb.y{background:var(--navy2)}
+.layer .ct{padding:12px 16px;font-size:12.5px;color:var(--ink2)}
+.layer .ct b{color:var(--ink)}
+.note-box{background:var(--amber-l);border:1px solid var(--amber-line);border-radius:8px;padding:12px 16px;color:#6b4e0a;font-size:12.5px;margin:12px 0}
+.risk-box{background:var(--red-l);border:1px solid var(--red-line);border-radius:8px;padding:12px 16px;color:#8c2f24;font-size:12.5px;margin:12px 0}
+.ok-box{background:var(--green-l);border:1px solid var(--green-line);border-radius:8px;padding:12px 16px;color:#155c39;font-size:12.5px;margin:12px 0}
+.sig-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-top:12px}
+.sig{display:flex;gap:12px;align-items:flex-start;border:1px solid var(--line);border-radius:8px;padding:11px 13px;background:#fff}
+.sig .dot{width:10px;height:10px;border-radius:50%;margin-top:6px;flex:0 0 10px}
+.sig .dot.r{background:var(--red)} .sig .dot.g{background:var(--green)}
+.sig .dot.a{background:var(--amber)} .sig .dot.k{background:var(--gray)}
+.sig b{font-size:13px;color:var(--ink)} .sig p{margin:2px 0 0;font-size:11.5px}
+b.dr{color:var(--red-d)}
+.metric-link{color:var(--navy);text-decoration:none;border-bottom:1px dotted #9db4cf;font-weight:600}
+.metric-link:hover{color:var(--navy2);border-bottom-color:var(--navy2);background:var(--blue-l)}
+.metric-link::after{content:" ↗";font-size:10px;color:#7d96b3;font-weight:400}
+.rl-banner{background:linear-gradient(125deg,#5c1512,#7a1f19 60%,#8a2b20);color:#fff;border-radius:12px;padding:16px 20px;margin:16px 0;border:1px solid #4d100d;box-shadow:0 2px 8px rgba(110,27,22,.18)}
+.rl-banner h3{color:#fff;margin:0 0 6px;font-size:16px}
+.rl-banner p{font-size:12.8px;color:rgba(255,255,255,.88);margin-bottom:6px}
+.rl-banner .rl-kpis{display:flex;flex-wrap:wrap;gap:10px;margin:10px 0 4px}
+.rl-banner .rl-kpis div{background:rgba(255,255,255,.10);border:1px solid rgba(255,255,255,.18);border-radius:8px;padding:8px 12px;min-width:156px}
+.rl-banner .n{font-size:20px;font-weight:700;line-height:1.3}
+.rl-banner .l{font-size:11.4px;color:rgba(255,255,255,.78)}
+.rl-card{border:2px solid var(--red-d);background:linear-gradient(180deg,#fff,#fdf6f4);border-radius:12px;padding:18px 20px;margin:16px 0;box-shadow:0 2px 8px rgba(110,27,22,.08)}
+.rl-card h3{color:var(--red-d);margin-top:0}
+.rl-table th{background:var(--red-d)}
+.rl-table tbody tr:nth-child(even) td{background:#fdf7f5}
+.rl-table tbody tr:hover td{background:var(--red-l)}
+.rl-table td:first-child{border-left:3px solid var(--red-d)}
+.rl-rule{background:#fdf6f4;border-left:4px solid var(--red-d);padding:10px 14px;border-radius:0 7px 7px 0;font-size:12.8px;margin:10px 0}
+.rl-mark{display:inline-block;background:var(--red-d);color:#fff;border-radius:3px;padding:0 6px;font-size:11px;font-weight:700;letter-spacing:.5px}
+details.registry{margin:12px 0;background:var(--card);border:1px solid var(--line);border-radius:10px;padding:12px 16px}
+details.registry summary{cursor:pointer;font-weight:700;color:var(--navy);font-size:14px}
+details.registry[open]{padding-bottom:18px}
+.mini{background:#fff;border:1px solid var(--line);border-radius:9px;padding:12px 14px}
+.mini h4{margin-top:0}
+
+/* ── 信息等级标签（四级，信息分层规范） ── */
+.lvl{display:inline-block;font-size:11px;line-height:1.5;padding:1px 7px;border-radius:9px;
+  border:1px solid transparent;white-space:nowrap;font-weight:600;vertical-align:1px}
+.lvl-verified{background:var(--green-l);color:var(--green);border-color:var(--green-line,#d3ead9)}
+.lvl-partial{background:var(--amber-l);color:var(--amber);border-color:var(--amber-line,#f0e3c2)}
+.lvl-inferred{background:var(--blue-l);color:var(--navy2);border-color:#cdddf0}
+.lvl-assumption{background:var(--gray-l);color:var(--gray);border-color:var(--gray-line,#e6eaee)}
+
+/* ── 新增信息统计条（本期新增/修正/无变化/假设核验进度） ── */
+.delta-strip{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:14px 0}
+.delta-strip .d{background:var(--card);border:1px solid var(--line);border-radius:10px;
+  padding:12px 14px;box-shadow:var(--shadow)}
+.delta-strip .d .n{font-size:22px;font-weight:700;color:var(--navy);line-height:1.25}
+.delta-strip .d .l{font-size:11.6px;color:var(--ink3);margin-top:2px}
+.delta-strip .d.add .n{color:var(--green)}
+.delta-strip .d.fix .n{color:var(--amber)}
+.delta-strip .d.same .n{color:var(--ink3)}
+.delta-strip .d.hyp .n{color:var(--navy2)}
+
+/* ── 行动协议卡（触发条件+阈值+责任角色+时限+验证指标） ── */
+.action-card{background:var(--card);border:1px solid var(--line);border-left:4px solid var(--navy2);
+  border-radius:10px;padding:14px 16px;margin:12px 0;box-shadow:var(--shadow)}
+.action-card.immediate{border-left-color:var(--red)}
+.action-card.watch{border-left-color:var(--amber)}
+.action-card.archive{border-left-color:var(--gray)}
+.action-card .a-head{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:6px}
+.action-card .a-title{font-weight:700;color:var(--navy);font-size:14.5px}
+.action-card .a-meta{font-size:12.3px;color:var(--ink2);line-height:1.7}
+.action-card .a-meta b{color:var(--navy)}
+.prio{display:inline-block;font-size:11px;padding:1px 8px;border-radius:9px;font-weight:700}
+.prio.immediate{background:var(--red-l);color:var(--red)}
+.prio.watch{background:var(--amber-l);color:var(--amber)}
+.prio.archive{background:var(--gray-l);color:var(--gray)}
+
+/* ── 决策卡（结论/证据强度/触发条件/反向证据/信息充分度） ── */
+.decision-card{background:var(--card);border:1px solid var(--line);border-radius:12px;
+  padding:16px 18px;margin:14px 0;box-shadow:var(--shadow)}
+.decision-card .dc-head{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap;margin-bottom:8px}
+.decision-card .dc-title{font-weight:700;color:var(--navy);font-size:15px}
+.decision-card .dc-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px 18px;font-size:12.8px;line-height:1.7}
+.decision-card .dc-grid .k{color:var(--ink3);font-weight:600}
+.suff{display:inline-block;font-size:11px;padding:1px 8px;border-radius:9px;font-weight:700}
+.suff.ok{background:var(--green-l);color:var(--green)}
+.suff.need{background:var(--amber-l);color:var(--amber)}
+.ev-strong{color:var(--green);font-weight:700}
+.ev-mid{color:var(--amber);font-weight:700}
+.ev-weak{color:var(--red);font-weight:700}
+
+/* ── 场景切片 / 事实卡片指针 ── */
+.slice{border:1px dashed var(--navy2);border-radius:10px;padding:12px 16px;margin:12px 0;background:var(--blue-l)}
+.slice .slice-head{font-weight:700;color:var(--navy);margin-bottom:4px}
+.fact-ref{font-family:var(--font-mono);font-size:11.5px;color:var(--navy2);
+  background:var(--blue-l);border:1px solid #cdddf0;border-radius:5px;padding:0 5px;white-space:nowrap}
+
+/* ── 响应式 / 打印 ── */
+@media (max-width:720px){
+  body{font-size:14px}
+  .wrap{padding:0 14px 48px}
+  header.report-head{padding:26px 0 22px}
+  header.report-head h1{font-size:21px}
+  .hero-band{padding:12px 0 10px}
+  .hero-band h1{font-size:19px}
+  nav.report-nav .nav-url{display:none}
+  table{display:block;overflow-x:auto;white-space:nowrap}
+  th,td{padding:7px 8px;font-size:12.5px}
+  .chart-eh{height:300px}
+  .grid2,.tiers{grid-template-columns:1fr}
+  .kpi-grid{grid-template-columns:repeat(2,1fr)}
+  .two-col,.sig-grid{grid-template-columns:1fr}
+  .stat-strip{grid-template-columns:repeat(2,1fr)}
+  .delta-strip{grid-template-columns:repeat(2,1fr)}
+  .decision-card .dc-grid{grid-template-columns:1fr}
+  .tl-date{flex-basis:64px;font-size:11.5px}
+}
+@media print{
+  nav.report-nav,.skip-link{display:none}
+  .card,.chart,.kpi,.kcard,.chart-box{box-shadow:none}
+  body{font-size:12px}
+}
+
+</style>
+</head>
+<body>
+
+<a class="skip-link" href="#main-content">跳到主要内容</a>
+<header class="hero">
+  <div class="hero-band">
+    <div class="wrap">
+      <div class="hero-top">
+        <p class="eyebrow">就业研究型 · 基线报告</p>
+        <div class="tags"><span class="tag">2026-11</span><span class="tag">就业研究</span><span class="tag">九节固化锚</span><span class="tag">预校准（ex-ante）</span><span class="tag">公开信息边界</span></div>
+      </div>
+      <h1>迪拜（阿联酋）AI 应用就业 · 首期基线报告</h1>
+    </div>
+  </div>
+  <div class="wrap">
+    <div class="hero-panel">
+      <div class="meta-grid"><p class="sub">覆盖 8 个模块 · 九节固化锚 · 基线固定（后续周期对比锚）</p>
+<p class="meta">
+<b>数据截止</b>：2026-11（基线期）｜<b>报告版本</b>：v1.0（首期基线固定）｜<b>本期读数时点</b>：2026-11-21<br>
+<b>来源语言</b>：仅英文（官方与权威英文页优先；中文源仅作线索，须标「需核实原文」）｜<b>汇率</b>：1 USD = 3.6725 AED（钉住）
+</p>
+<p>
+</p></div>
+    </div>
+  </div>
+</header>
+
+<div class="wrap">
+  <div class="disc impact-disc">
+    <strong>影响披露（高影响业务线强制）：</strong>
+    <ul>
+      <li><b>置信区间：</b>关键数值以区间 + 假设编号表述（见正文 KPI 与「假设乘积」标注），禁止确定点值。</li>
+      <li><b>时效声明：</b>读数时点见报告头 meta；官方发布滞后 / 数据频率见来源登记。</li>
+      <li><b>免责：</b>本报告为信息整理，不构成投资建议 / 法律建议，亦不作为就业、签证或置业决定依据。</li>
+      <li><b>非专业建议：</b>重大决策请咨询持牌专业人士。</li>
+    </ul>
+  </div>
+</div>
+
+
+<nav class="report-nav" aria-label="报告导航">
+  <div class="wrap">
+    <div class="nav-tabs">
+      <a href="#s1">一、核心结论（摘要）</a>
+      <a href="#s2">二、行业与政策发展趋势</a>
+      <a href="#s3">三、人才供需与薪酬（核心模块）</a>
+      <a href="#s4">四、企业类型细分</a>
+      <a href="#s5">五、岗位技能要求</a>
+      <a href="#s6">六、行业认可的职业资质与证书</a>
+      <a href="#s7">七、就业落地路径建议（结论章）</a>
+      <a href="#s8">八、数据可靠性与局限说明</a>
+      <a href="#s9">九、参考来源清单</a>
+    </div>
+  </div>
+</nav>
+<main class="wrap" id="main-content">
+
+<div class="delta-strip">
+  <div class="d add"><div class="n">全量</div><div class="l">本期新增（基线首期 = 全部基线项）</div></div>
+  <div class="d fix"><div class="n">0 条</div><div class="l">修正（已修正事实清单见第八节）</div></div>
+  <div class="d same"><div class="n">0 条</div><div class="l">无变化（无上期报告）</div></div>
+  <div class="d hyp"><div class="n">0/5</div><div class="l">假设核验进度（已登记 5 条假设）</div></div>
+</div>
+<p class="small muted">基线首期：新增 = 全部基线项；「已修正事实清单」为空，产生修正后逐条补记。</p>
+
+<h2 class="sec" id="s1">一、核心结论（摘要）</h2>
+<div class="card leadbox">
+  <h3>核心判断</h3>
+  <ol class="tight">
+    <li><b>政策强驱动</b>：Dubai Universal Blueprint for AI 目标每年为迪拜经济贡献 <b>AED 100 bn</b>、生产力提升 <b>50%</b>；举措含 Dubai Center for AI（DCAI）、Dubai AI Campus、Dubai AI Seal、Chief AI Officers。<span class="lvl lvl-verified">已核验</span></li>
+    <li><b>市场高速扩张（单源口径）</b>：UAE AI 市场 2025 年 <b>USD 705.7 M</b> → 2034 年 <b>USD 4,387.3 M</b>，CAGR <b>21.84%</b>；软件占比 48.7%，迪拜占全国 <b>45.6%</b>。<span class="lvl lvl-verified">已核验</span></li>
+    <li><b>需求结构性爆发</b>：LinkedIn UAE 2026——AI Engineering 岗位需求同比 <b>+232.4%</b>，占岗位发布 <b>4.1%</b>；AI 工程人才集中度 <b>+27.0%</b>；AI 素养人才 <b>+113.7%</b>。<span class="lvl lvl-verified">已核验</span></li>
+    <li><b>供给仍紧、招聘未复原</b>：UAE 招聘率 2026-04 同比 <b>-40%</b>（低点），2026-08 收窄至 <b>-18%</b>；AI 工程人才仅占劳动力 <b>0.75%</b>。<span class="lvl lvl-partial">部分核验</span></li>
+    <li><b>岗位与技能迁移</b>：Michael Page UAE 2027 最热岗位前五为 Agentic AI Engineer、Applied AI Engineer、Data Scientist、AI / ML Platform Engineer、AI Product Manager；最缺技能为 Agentic AI &amp; Multi-Agent Systems、Applied Data Science &amp; ML。<span class="lvl lvl-verified">已核验</span></li>
+    <li><b>薪酬口径未核实</b>：Michael Page / Hays / Cooper Fitch / Charterhouse 的 AI/Data 分表均 gated，本基线薪酬区间一律标「待核实」，仅给相邻抽样量级参照。<span class="lvl lvl-partial">部分核验</span></li>
+  </ol>
+  <p><b>行业一句话定位</b>：迪拜 AI 应用就业市场由「政策强驱动 + 主权 AI 基建 + 平台经济场景」塑造，AI 工程与 Agentic AI 技能需求结构性跑赢通用软件需求，而本地人才供给与薪酬透明度使供给与价格信号均为最紧约束。</p>
+  <p class="small muted">来源与时点：数据截止 2026-11；分级见第八节、URL 见第九节。</p>
+</div>
+
+<div class="preline">阈值与信号规则为「预校准（ex-ante）」；首次中期回测 2027-06。</div>
+
+<h2 class="sec" id="s2">二、行业与政策发展趋势</h2>
+<h3>政策与战略时间线</h3>
+<div class="timeline">
+  <div class="tl-item"><div class="tl-date">2017</div><div class="tl-body"><div class="t">UAE AI 战略 2031 + 全球首个 AI 国务部长</div><div class="d">联邦层面设立 AI 战略与主管部门，为迪拜 AI 应用提供顶层框架。<span class="src-inline">[Source: https://u.ae/en/about-the-uae/digital-uae/digital-technology/artificial-intelligence/artificial-intelligence-in-government-policies, 2026]</span></div></div></div>
+  <div class="tl-item"><div class="tl-date">2023</div><div class="tl-body"><div class="t">Digital Dubai 法定化（2023 年第 22 号法律）</div><div class="d">Digital Dubai 整合迪拜数据与统计机构、数字政府机构，统筹数字转型与 AI 应用。<span class="src-inline">[Source: https://www.digitaldubai.ae/about-us, 2026]</span></div></div></div>
+  <div class="tl-item"><div class="tl-date">2024</div><div class="tl-body green"><div class="t">Dubai Universal Blueprint for AI</div><div class="d">目标每年贡献 AED 100 bn、生产力提升 50%；四大支柱；举措含 DCAI、Dubai AI Campus、Dubai AI Week、Global Prompt Engineering Championship、Dubai AI Seal、Chief AI Officers。<span class="src-inline">[Source: https://dub.ai/, 2026]</span></div></div></div>
+  <div class="tl-item"><div class="tl-date">2025</div><div class="tl-body"><div class="t">Dubai AI Week 2025 + Global Prompt Engineering Championship</div><div class="d">官方主导的 AI 应用与提示词工程活动周期化，为人才与雇主提供对接入口。<span class="src-inline">[Source: https://dub.ai/, 2026]</span></div></div></div>
+  <div class="tl-item"><div class="tl-date">2026</div><div class="tl-body amber"><div class="t">DIFC Innovation Hub：2,000+ AI / 创新 / 科技企业</div><div class="d">DIFC 官方称该区容纳 2,000+ AI、创新与科技公司，为区域最大创新社区之一。<span class="src-inline">[Source: https://www.difc.ae/ecosystem/innovation-hub, 2026]</span></div></div></div>
+  <div class="tl-item"><div class="tl-date">2026-08</div><div class="tl-body"><div class="t">LinkedIn《UAE Workforce Readiness Report 2026》</div><div class="d">AI 工程岗需求 +232.4%、占岗位发布 4.1%；招聘率仍低于 2025（-18%）。<span class="src-inline">[Source: https://linkedin-workforcereadiness.com/, 2026]</span></div></div></div>
+</div>
+
+<h3>市场规模（单源口径，多口径待补）</h3>
+<div class="tblwrap"><table class="fixed">
+<thead><tr><th style="width:26%">指标 / 口径</th><th style="width:36%">读数</th><th style="width:20%">机构</th><th style="width:18%">核验状态</th></tr></thead>
+<tbody>
+<tr><td>UAE AI 市场规模（全国）</td><td>2025 年 USD 705.7 M → 2026 年 USD 859.8 M → 2034 年 USD 4,387.3 M，CAGR 21.84%<span class="src-inline">[Source: https://www.imarcgroup.com/uae-artificial-intelligence-market, 2026]</span></td><td>IMARC</td><td>已核验</td></tr>
+<tr><td>迪拜占 UAE AI 市场份额</td><td>45.6%（2025）<span class="src-inline">[Source: https://www.imarcgroup.com/uae-artificial-intelligence-market, 2026]</span></td><td>IMARC</td><td>已核验</td></tr>
+<tr><td>UAE AI 软件占比</td><td>48.7%（2025）；Narrow/Weak AI 占 78.6%<span class="src-inline">[Source: https://www.imarcgroup.com/uae-artificial-intelligence-market, 2026]</span></td><td>IMARC</td><td>已核验</td></tr>
+</tbody>
+</table></div>
+<div class="note">口径警示：本报告仅取得 <b>IMARC 单一来源</b> 的阿联酋 AI 市场规模，尚无第二独立来源交叉；按来源语言与分级规则，该数值虽双指标自洽但仍是单源，引用时须标注「单源」。<b>不可与 AI 安全市场的 Gartner / Mordor / GMI 口径混用</b>（统计域不同）。</div>
+
+<h3>需求驱动因素</h3>
+<ul class="tight">
+  <li><b>政策与治理</b>：Dubai Universal Blueprint for AI 把「AI 治理与立法枢纽」列为四大支柱之一，Dubai AI Seal 对可信 AI 企业分类认证，直接放大 AI 治理 / 合规岗位需求。<span class="src-inline">[Source: https://dub.ai/, 2026]</span></li>
+  <li><b>主权 AI 基建</b>：Stargate UAE（阿布扎比 5GW 园区 / 1GW 算力，首批 200MW 计划 2026 上线）与 G42 生态（23,000+ 员工）构成区域 AI 基建核心，带动模型工程、数据工程与 MLOps 需求。<span class="fact-ref">[FC-SEC-010]</span></li>
+  <li><b>平台经济场景</b>：Careem / Talabat / noon 等本地平台在配送、支付、推荐等场景规模化使用 AI；<b>具体 AI 岗位释放数据未获英文官方来源，待核实</b>。</li>
+  <li><b>自由区承载</b>：DIFC Innovation Hub（2,000+ AI / 创新 / 科技企业）与 Dubai AI Campus（MENA 最大 AI 公司集群）为应用落地提供空间与雇主密度。<span class="src-inline">[Source: https://www.difc.ae/ecosystem/innovation-hub, 2026；https://dub.ai/, 2026]</span></li>
+</ul>
+
+<div class="chart-box">
+  <h4>图 1 UAE AI 市场规模（亿美元，IMARC 口径）</h4>
+  <p class="chart-note">单位：亿美元；来源：IMARC（2026，单源）。2025 / 2026 / 2030 / 2034 为报告披露读数；2030 为 1,894.5 M、2034 为 4,387.3 M。图示仅为单源量级，不可与其他口径相加。</p>
+  <div class="chart-eh" id="chart-market"></div>
+</div>
+
+<h3>研究内核：周期定位与传导量化</h3>
+<p><b>周期定位</b>：迪拜 / 海湾 AI 应用处于「政策驱动的早期应用落地阶段」——政策强制（Dubai Universal Blueprint for AI）+ 主权 AI 基建 + 平台经济场景三重驱动（推断，依据见第一节）。</p>
+<p><b>传导量化（预校准 ex-ante）</b>：<span class="lvl lvl-assumption">假设</span> 政策发布 → AI 应用采购的传导时滞取 2–4 个季度、主权基建 → 应用人才需求的时滞取 4–8 个季度（分析性估计，推断，依据见第一节，非官方统计）；本报告未给出经验弹性系数，弹性待 2027-06 首次中期回测校准。</p>
+
+<h2 class="sec" id="s3">三、人才供需与薪酬（核心模块）</h2>
+<h3>人才缺口与需求信号</h3>
+<ul class="tight">
+  <li><b>需求侧</b>：LinkedIn UAE 2026——AI Engineering 岗位需求同比 <b>+232.4%</b>，占 UAE 岗位发布 <b>4.1%</b>；最快增长职业 10 席中 4 席 AI 专属（AI Engineer、Head of AI、AI Consultant、Manager of AI）。<span class="src-inline">[Source: https://linkedin-workforcereadiness.com/, 2026]</span></li>
+  <li><b>供给侧</b>：AI 工程人才占 UAE 劳动力仅 <b>0.75%</b>（同比 +27.0%）；AI 素养人才同比 <b>+113.7%</b>；国际申请占比 <b>37.6%</b>（2026-08，高于 2026-02 的 35.6%）。<span class="src-inline">[Source: https://linkedin-workforcereadiness.com/, 2026]</span></li>
+  <li><b>周期错位</b>：UAE 招聘率 2026-04 同比 -40%（低点），2026-08 收窄至 -18%；即 AI 需求高增与整体招聘未复原并存，说明 AI 应用人才是<b>结构性紧缺</b>而非总量繁荣。<span class="lvl lvl-partial">部分核验</span> <span class="src-inline">[Source: https://linkedin-workforcereadiness.com/, 2026]</span></li>
+  <li><b>全球技能缺口参照</b>：ISC2 2025 显示 AI 为最急需技能（41%），云安全次之（36%）。<span class="fact-ref">[FC-SEC-004]</span></li>
+</ul>
+
+<h3>薪酬口径与锚点（本基线不填未核实活值）</h3>
+<div class="tblwrap"><table class="fixed">
+<thead><tr><th style="width:22%">来源</th><th style="width:40%">口径</th><th style="width:18%">最新版次</th><th style="width:20%">可获取性</th></tr></thead>
+<tbody>
+<tr><td>Michael Page UAE</td><td>月薪含基本 + 房补 + 交通 + 其他津贴，不含奖金与佣金<span class="src-inline">[Source: https://www.michaelpage.ae/salary-guide, 2026]</span></td><td>2027</td><td>AI/Data 分表 gated</td></tr>
+<tr><td>Charterhouse UAE</td><td>gross monthly fixed compensation，不含教育 / 休假旅行 / 保险等福利<span class="src-inline">[Source: https://www.charterhouseme.ae/salary-levels-2026, 2026]</span></td><td>2026</td><td>IT &amp; Technology 分表 PDF（需下载）</td></tr>
+<tr><td>Hays GCC</td><td>覆盖近 400 个岗位的年度基准</td><td>2026</td><td>gated（表单下载）</td></tr>
+<tr><td>Cooper Fitch UAE</td><td>Gulf Employment Index + 薪酬指南</td><td>2026</td><td>gated（表单下载）</td></tr>
+</tbody>
+</table></div>
+<div class="note correct">薪酬纪律：上述指南口径互不相同，<b>不可直接比较或合并</b>；本基线未取得可公开引用的 AI 应用岗 AED 区间，故第 3 节薪资表标注「待核实」，待月度运行抓取分表后回写登记册。</div>
+
+<h3>相邻岗位抽样（AI 安全岗，非 AI 应用岗，仅作量级参照）</h3>
+<div class="tblwrap"><table class="fixed">
+<thead><tr><th style="width:28%">级别（经验）</th><th style="width:24%">月薪 AED</th><th style="width:24%">房补 AED/月</th><th style="width:24%">来源</th></tr></thead>
+<tbody>
+<tr><td>中级（3–5 年）</td><td>35,000–55,000</td><td>8,000–10,000</td><td>hiredeveloper.ae（抽样）</td></tr>
+<tr><td>资深（5–8 年）</td><td>55,000–75,000</td><td>10,000–13,000</td><td>hiredeveloper.ae（抽样）</td></tr>
+<tr><td>负责人（8+ 年）</td><td>80,000–140,000</td><td>13,000–18,000</td><td>hiredeveloper.ae（抽样）</td></tr>
+</tbody>
+</table></div>
+<p class="small muted">该表为 <b>AI 安全岗</b> 招聘机构抽样（2026-06），非 AI 应用岗，且非官方薪酬指南；仅用于指示「AI 专项岗 + 房补」的量级，<b>不得当作 AI 应用岗薪资基准</b>。<span class="src-inline">[Source: https://hiredeveloper.ae/employer-blog/how-to-hire-ai-security-engineers-dubai-after-meta-breach-7-steps, 2026]</span></p>
+
+<h3>净薪与总包模型</h3>
+<ul class="tight">
+  <li><b>净薪</b>：阿联酋个税 0%、外籍社保 0%；唯一强制性薪资扣减为 ILOE 失业险（基本 ≤1.6 万 AED 者每月 AED 5、&gt;1.6 万者每月 AED 10，另加 5% VAT）。<span class="fact-ref">[FC-SEC-008]</span></li>
+  <li><b>总包</b>：总包 = 基本工资 + 房补 + 交通 + 教育 + 年度机票 + 奖金；房补区间参考相邻抽样 8,000–18,000 AED/月（<span class="lvl lvl-assumption">假设</span>，待薪酬指南分表核实）。</li>
+  <li><b>黄金签证</b>：10 年长期居留、免担保、可担保家属；u.ae 页面列出「priority scientific and engineering fields」等类别，<span class="lvl lvl-partial">部分核验</span>（基本工资阈值以 ICP 最终口径为准，<span class="lvl lvl-assumption">假设</span>）。<span class="src-inline">[Source: https://u.ae/en/information-and-services/visa-and-emirates-id/residence-visas/golden-visa, 2026]</span></li>
+</ul>
+
+<div class="chart-box">
+  <h4>图 2 LinkedIn UAE 招聘率同比（2026 年 1–8 月，%）</h4>
+  <p class="chart-note">单位：同比 %；来源：LinkedIn《UAE Workforce Readiness Report 2026》。2026-04 低点 -40%，2026-08 收窄至 -18%。阈值与信号规则为「预校准（ex-ante）」。</p>
+  <div class="chart-eh" id="chart-hiring"></div>
+</div>
+
+<h3>监测指标追踪表（14 项）</h3>
+<p class="small muted">活值维护于 <code>data/processed/tech/ai-application/dubai/ai_application_employment_indicator_registry.md</code>；基线首建值与本表一致。</p>
+<div class="tblwrap"><table class="fixed">
+<thead><tr><th style="width:6%">#</th><th style="width:34%">监测指标</th><th style="width:24%">口径 / 单位</th><th style="width:36%">优先数据源（英文）</th></tr></thead>
+<tbody>
+<tr><td>1</td><td>UAE AI 市场规模 &amp; CAGR</td><td>亿美元 / %</td><td>imarcgroup.com</td></tr>
+<tr><td>2</td><td>迪拜占 UAE AI 市场份额</td><td>%</td><td>imarcgroup.com</td></tr>
+<tr><td>3</td><td>LinkedIn UAE 招聘率（同比）</td><td>%</td><td>linkedin-workforcereadiness.com</td></tr>
+<tr><td>4</td><td>AI 工程岗需求增速 &amp; 岗位占比</td><td>% / %</td><td>linkedin-workforcereadiness.com</td></tr>
+<tr><td>5</td><td>AI 工程人才集中度 &amp; AI 素养人才增速</td><td>% / %</td><td>linkedin-workforcereadiness.com</td></tr>
+<tr><td>6</td><td>阿联酋最快增长职业（AI 相关）</td><td>排名 / 计数</td><td>linkedin-workforcereadiness.com</td></tr>
+<tr><td>7</td><td>国际申请占比</td><td>%</td><td>linkedin-workforcereadiness.com</td></tr>
+<tr><td>8</td><td>Michael Page AI/Data 最热岗位</td><td>排名</td><td>michaelpage.ae</td></tr>
+<tr><td>9</td><td>Michael Page AI/Data 最缺技能</td><td>排名</td><td>michaelpage.ae</td></tr>
+<tr><td>10</td><td>薪酬指南最新版次（AI/Data 分表）</td><td>年版</td><td>michaelpage.ae / charterhouseme.ae / hays.ae / cooperfitch.ae</td></tr>
+<tr><td>11</td><td>AI 应用岗薪资抽样</td><td>AED/月</td><td>待核实（公开指南 gated；相邻抽样 hiredeveloper.ae）</td></tr>
+<tr><td>12</td><td>ILOE 费率 &amp; 黄金签证门槛</td><td>AED/月 / AED</td><td>iloe.ae / u.ae / icp.gov.ae</td></tr>
+<tr><td>13</td><td>迪拜 AI 园区 / 自由区企业数</td><td>家</td><td>dub.ai / difc.ae</td></tr>
+<tr><td>14</td><td>代表性 AI 应用雇主动态</td><td>—</td><td>各公司官网 / WAM</td></tr>
+</tbody>
+</table></div>
+
+<h2 class="sec" id="s4">四、企业类型细分</h2>
+<h3>雇主分类总览</h3>
+<div class="tblwrap"><table class="fixed">
+<thead><tr><th style="width:15%">雇主类型</th><th style="width:24%">代表机构</th><th style="width:12%">酋长国</th><th style="width:22%">AI 应用相关度</th><th style="width:15%">招聘信号</th><th style="width:12%">来源</th></tr></thead>
+<tbody>
+<tr><td>政府与数字机构</td><td>Dubai Center for AI（DCAI）、Digital Dubai、Dubai AI Seal</td><td>迪拜</td><td>高（政策 + 治理 + 首席 AI 官）</td><td>治理 / 数据 / 解决方案</td><td>dub.ai；digitaldubai.ae</td></tr>
+<tr><td>主权科技</td><td>G42 / Core42、e&amp; / Help AG</td><td>阿布扎比 + 迪拜</td><td>极高（主权云 + AI 工厂 + 数据）</td><td>持续招募外国专家</td><td>g42.ai；core42.ai；eand.com</td></tr>
+<tr><td>自由区 AI 集群</td><td>DIFC Innovation Hub、Dubai AI Campus、Dubai Internet City</td><td>迪拜</td><td>高（2,000+ AI / 创新 / 科技企业）</td><td>AI 初创与托管团队</td><td>difc.ae；dub.ai；dic.ae</td></tr>
+<tr><td>全球厂商区域总部</td><td>Microsoft、Google、Oracle、NVIDIA、Meta（DIC / JLT / DIFC）</td><td>迪拜为主</td><td>中高（区域工程 / 解决方案岗）</td><td>区域销售 / 工程岗</td><td>各厂商区域官网</td></tr>
+<tr><td>咨询与系统集成</td><td>四大、Accenture、本地 AI 集成商</td><td>迪拜为主</td><td>高（AI 落地与治理咨询）</td><td>认证顾问持续需求</td><td>各咨询官网</td></tr>
+<tr><td>本地平台经济</td><td>Careem、Talabat、noon</td><td>迪拜</td><td>中高（推荐 / 调度 / 风控 AI）</td><td>待核实</td><td>各公司官网</td></tr>
+</tbody>
+</table></div>
+<div class="note gap">核实纪律：全球厂商区域总部与本地平台经济两类的「AI 应用岗位释放数量」在本次基线<b>未获英文官方来源</b>，已标注「待核实」；不得由中文源或二手摘要补值。</div>
+
+<h3>重点雇主核实（2025–2026）</h3>
+<ul class="tight">
+  <li><b>G42</b>（阿布扎比）：AI 控股集团，旗下 Core42、CPX、Khazna、M42；23,000+ 员工、30 国。<span class="fact-ref">[FC-SEC-010]</span><span class="fact-ref">[FC-SEC-011]</span></li>
+  <li><b>Core42</b>（G42 子公司）：主权公有云与 AI 工厂载体，映射 200+ 阿联酋控制项。<span class="fact-ref">[FC-SEC-010]</span></li>
+  <li><b>e&amp; enterprise / Help AG</b>（迪拜 HQ + 阿布扎比）：MSSP 与托管安全，兼承载数据 / AI 解决方案。</li>
+  <li><b>DIFC Innovation Hub</b>：官方称 2,000+ AI、创新与科技公司，为区域最大创新社区之一。<span class="src-inline">[Source: https://www.difc.ae/ecosystem/innovation-hub, 2026]</span></li>
+  <li><b>Dubai AI Campus</b>：Dubai Universal Blueprint for AI 的集群计划，官方定位为 MENA 最大 AI 公司集群。<span class="src-inline">[Source: https://dub.ai/, 2026]</span></li>
+  <li><b>Dubai Center for Artificial Intelligence（DCAI）</b>：官方举措，目标使迪拜及其政府成为 AI 实施全球领导者。<span class="src-inline">[Source: https://dub.ai/, 2026]</span></li>
+  <li><b>Digital Dubai AI Lab</b>：与 IBM 合作，为政府与私营部门提供 AI 实施工具与 go-to-market 支持。<span class="src-inline">[Source: https://www.digitaldubai.ae/initiatives/ai-lab, 2026]</span></li>
+</ul>
+
+<h3>2025–2026 生态更新</h3>
+<ul class="tight">
+  <li><b>Dubai AI Week 2025</b>：官方周期活动，配套 Global Prompt Engineering Championship（2,500 名全球 AI 领导者论坛）。<span class="src-inline">[Source: https://dub.ai/, 2026]</span></li>
+  <li><b>Dubai AI Seal</b>：对可信 AI 企业分类与认证，为 AI 治理岗位与合规采购提供抓手。<span class="src-inline">[Source: https://dub.ai/, 2026]</span></li>
+  <li><b>Chief AI Officers</b>：政府实体内设首席 AI 官，标志 AI 应用进入常态化组织岗位。<span class="src-inline">[Source: https://dub.ai/, 2026]</span></li>
+</ul>
+
+<h2 class="sec" id="s5">五、岗位技能要求</h2>
+<p class="small muted">依据 Michael Page UAE 2027（AI, Data &amp; Analytics）与 LinkedIn《UAE Workforce Readiness Report 2026》的公开岗位/技能信号（2026-11）；在招岗位抽样为方向性信号，样本量与逐条 URL 待月度运行补全。</p>
+<h3>分岗位要求</h3>
+<div class="tblwrap"><table class="fixed">
+<thead><tr><th style="width:16%">岗位</th><th style="width:14%">典型经验</th><th style="width:36%">核心技能</th><th style="width:18%">常见证书 / 加分</th><th style="width:16%">信号来源</th></tr></thead>
+<tbody>
+<tr><td>AI / ML 工程师（Agentic / Applied）</td><td>3–7+ 年</td><td>LLM 应用、RAG、Agent 编排、Prompt 工程、Python、云（Azure / AWS）、评测</td><td>云厂商 AI 认证；NIST AI RMF 知识</td><td>michaelpage.ae</td></tr>
+<tr><td>数据工程师</td><td>2–6 年</td><td>Spark / Databricks、dbt、Airflow、SQL、数据建模、湖仓</td><td>Databricks / Google Cloud / AWS 数据认证</td><td>michaelpage.ae</td></tr>
+<tr><td>数据科学家 / 应用数据科学家</td><td>3–8 年</td><td>统计 / 实验设计、Python、SQL、ML、可视化、业务解读</td><td>云 / 数据科学认证；领域知识</td><td>michaelpage.ae</td></tr>
+<tr><td>AI 产品经理</td><td>4–8 年</td><td>AI 产品路线、提示 / 评测、数据闭环、跨团队交付</td><td>PMP / PMI-PBA；云 AI 认证</td><td>michaelpage.ae</td></tr>
+<tr><td>MLOps / AI 平台工程师</td><td>3–8 年</td><td>K8s、MLflow、CI/CD、模型监控、特征平台、成本治理</td><td>云认证（AZ-500 / GCP / AWS）；K8s 认证</td><td>michaelpage.ae</td></tr>
+<tr><td>AI 解决方案架构师</td><td>7–10+ 年</td><td>云架构、数据架构、AI 治理、方案设计、客户共创</td><td>云架构认证；TOGAF</td><td>michaelpage.ae</td></tr>
+<tr><td>提示词 / AI 运营</td><td>1–4 年</td><td>Prompt 工程、评测、内容 / 知识库运营、轻量自动化</td><td>Prompt 工程竞赛 / 培训</td><td>dub.ai；michaelpage.ae</td></tr>
+<tr><td>AI 治理 / 合规</td><td>5–10 年</td><td>NIST AI RMF、EU AI Act、UAE PDPL、模型风险、审计</td><td>ISO 42001、CISA / CRISC</td><td>dub.ai</td></tr>
+</tbody>
+</table></div>
+
+<h3>专项技能深度（雇主明确点名）</h3>
+<ul class="tight">
+  <li><b>框架与风险</b>：Agentic AI &amp; Multi-Agent Systems、Applied Data Science &amp; Machine Learning、AI-Assisted Software Development、Production AI Engineering、AI Platform Engineering（Michael Page UAE 2027 最缺技能前五）。<span class="src-inline">[Source: https://www.michaelpage.ae/salary-guide/uae/ai-data-and-analytics, 2026]</span></li>
+  <li><b>治理框架</b>：NIST AI RMF（GOVERN / MAP / MEASURE / MANAGE）、EU AI Act、UAE PDPL、Dubai AI Seal 分类认证。<span class="src-inline">[Source: https://dub.ai/, 2026]</span></li>
+  <li><b>关键观察</b>：公开信号显示「软件 + 数据 + AI 融合」成为主流，纯单一技能岗减少；AI 专项证书尚未成为硬性门槛（与 AI 安全线一致）。<span class="fact-ref">[FC-SEC-012]</span></li>
+</ul>
+
+<h3>工具栈与语言</h3>
+<ul class="tight">
+  <li><b>云与数据</b>：Microsoft Azure 在区域占主导，AWS / Google Cloud 次之；Databricks、Snowflake、dbt、Airflow、Spark 为数据栈主流。</li>
+  <li><b>AI 工程</b>：Python、LangChain / LlamaIndex、向量库、MLflow、Docker / Kubernetes、CI/CD。</li>
+  <li><b>语言</b>：英语为工作语言；阿拉伯语对政府关联岗 / 客户咨询是加分项，仅个别岗硬性要求。</li>
+</ul>
+
+<h2 class="sec" id="s6">六、行业认可的职业资质与证书</h2>
+<h3>核心证书总览</h3>
+<div class="tblwrap"><table class="fixed">
+<thead><tr><th style="width:20%">证书</th><th style="width:16%">发证方</th><th style="width:10%">层级</th><th style="width:34%">对 AI 应用岗的价值</th><th style="width:20%">来源</th></tr></thead>
+<tbody>
+<tr><td>云 AI / 数据认证（Professional Data Engineer、Azure AI Engineer、AWS ML Specialty）</td><td>Google / Microsoft / AWS</td><td>中 / 高</td><td>数据工程与 AI 工程岗常见加分</td><td>cloud.google.com；microsoft.com；aws.amazon.com</td></tr>
+<tr><td>Databricks Certified（Data Engineer / ML Practitioner）</td><td>Databricks</td><td>中</td><td>数据 / ML 工程实操凭证</td><td>databricks.com</td></tr>
+<tr><td>AI / 数据科学认证（Data Scientist / ML）</td><td>DASCA 等</td><td>中</td><td>数据科学岗基础凭证</td><td>dasca.org</td></tr>
+<tr><td>CISSP / CCSP / CISM / CISA / CRISC</td><td>ISC2 / ISACA</td><td>中 / 高</td><td>AI 治理 / 风险 / 安全交叉岗</td><td>isc2.org；isaca.org</td></tr>
+<tr><td>ISO 42001（AI 管理体系）主任实施 / 审核</td><td>BSI / BV / PECB 等</td><td>中 / 高</td><td>AI 治理与合规采购门槛（待核实本地认可度）</td><td>iso.org</td></tr>
+<tr><td>PMI-PBA / PMP</td><td>PMI</td><td>中</td><td>AI 产品经理交付方法论</td><td>pmi.org</td></tr>
+</tbody>
+</table></div>
+<p class="small muted">费用与前置条件：本基线未取得可公开引用的英文官方费用页，<b>一律标「待核实」</b>；证书路线图与本地考点（Pearson VUE / PSI）将在月度运行核实后回写。</p>
+
+<h3>证书路线图（按时间线）</h3>
+<div class="tblwrap"><table class="fixed">
+<thead><tr><th style="width:18%">阶段</th><th style="width:34%">证书（具体）</th><th style="width:14%">备考时长</th><th style="width:34%">理由</th></tr></thead>
+<tbody>
+<tr><td>0–6 月（基础 + 云数据）</td><td>云数据工程认证（Google / Azure / AWS）；Databricks 基础</td><td>4–10 周</td><td>进入数据工程 / AI 工程硬门槛</td></tr>
+<tr><td>6–18 月（AI 工程 + 产品）</td><td>云 AI 工程师认证；PMI-PBA 或云架构认证</td><td>6–12 周</td><td>AI 应用交付与产品路线</td></tr>
+<tr><td>18–36 月（治理 / 专精）</td><td>ISO 42001 LI / LA；CISA / CRISC；NIST AI RMF 培训</td><td>按证而定</td><td>AI 治理、审计与风险轨道</td></tr>
+<tr><td>管理轨</td><td>Head of AI / Chief AI Officer 组织岗</td><td>—</td><td>对接 Dubai 政府首席 AI 官机制</td></tr>
+</tbody>
+</table></div>
+
+<h3>本地考试与培训可用性</h3>
+<div class="tblwrap"><table class="fixed">
+<thead><tr><th style="width:34%">考试 / 课程</th><th style="width:44%">阿联酋可用性</th><th style="width:22%">来源</th></tr></thead>
+<tbody>
+<tr><td>云厂商（Microsoft / Google / AWS）</td><td>Pearson VUE / PSI 考点与远程监考（待核实具体网点）</td><td>pearsonvue.com</td></tr>
+<tr><td>Databricks / DASCA</td><td>远程监考（待核实本地网点）</td><td>databricks.com；dasca.org</td></tr>
+<tr><td>ISO 42001（PECB 等）</td><td>授权培训机构 + 远程考试（待核实）</td><td>iso.org</td></tr>
+</tbody>
+</table></div>
+<div class="note">监管内嵌证书要求：Dubai AI Seal 与 Chief AI Officers 机制为本地治理抓手；TDRA / aeCERT 不对私企个人设强制证书（沿用 AI 安全线口径，待本线独立核实）。</div>
+
+<h2 class="sec" id="s7">七、就业落地路径建议（结论章）</h2>
+<h3>签证路径</h3>
+<ul class="tight">
+  <li><b>黄金签证（10 年，自担保）</b>：u.ae 列出「specialists in priority scientific and engineering fields」「exceptional talent or rare specialisations（含 executives、PhD holders）」等类别；AI / 大数据 / 软件工程属优先领域（<span class="lvl lvl-partial">部分核验</span>，基本工资阈值以 ICP 最终口径为准）。<span class="fact-ref">[FC-SEC-007]</span> <span class="src-inline">[Source: https://u.ae/en/information-and-services/visa-and-emirates-id/residence-visas/golden-visa, 2026]</span></li>
+  <li><b>标准就业签证</b>：雇主担保，MoHRE 工作许可 → GDRFA 入境许可 → Emirates ID + 劳工卡；雇主依法承担招聘 / 签证成本。<span class="lvl lvl-partial">部分核验</span></li>
+  <li><b>自由区通道</b>：DIFC 政府服务办公室一站式办理就业 / 居留许可；ADGM 豁免联邦劳动法（适用本地雇佣条例）。<span class="src-inline">[Source: https://www.difc.ae/business/services, 2026]</span></li>
+  <li><b>ILOE</b>：唯一强制性薪资扣减，按月 AED 5 / 10（+5% VAT）。<span class="fact-ref">[FC-SEC-008]</span></li>
+</ul>
+
+<h3>求职渠道与 Networking</h3>
+<div class="tblwrap"><table class="fixed">
+<thead><tr><th style="width:18%">机构</th><th style="width:62%">阿联酋 AI / 数据业务</th><th style="width:20%">置信度</th></tr></thead>
+<tbody>
+<tr><td>Michael Page</td><td>AI, Data &amp; Analytics 专设板块，列 Agentic AI / Applied AI / AI PM 等岗位</td><td>高</td></tr>
+<tr><td>Hays</td><td>Technology 板块覆盖数据 / AI 岗；GCC 薪酬指南近 400 岗</td><td>高</td></tr>
+<tr><td>Cooper Fitch</td><td>Technology / IT 招聘 + Gulf Employment Index</td><td>高</td></tr>
+<tr><td>Charterhouse</td><td>IT &amp; Technology 分表 + 招聘</td><td>高</td></tr>
+<tr><td>Robert Half</td><td>UAE 技术业务（数据 / 开发）</td><td>中</td></tr>
+</tbody>
+</table></div>
+<p class="small muted">渠道排序建议：① LinkedIn 直接触达 + 雇主官网（国际申请占比 37.6%）；② Michael Page / Hays / Cooper Fitch / Charterhouse 专项岗；③ Bayt / GulfTalent / Naukrigulf 作为次要信息流。<b>切勿向中介付费</b>——阿联酋劳动法禁止向求职者收费。</p>
+
+<h3>分背景切入路径（建议 / 推断）</h3>
+<ol class="tight">
+  <li><b>转行进入</b>：先以云数据工程认证（Google / Azure / AWS）建立基础认可，再以数据工程或 AI 工程（RAG / Agent）切入；AI 差异化用 Prompt 工程与评测项目。（来源：Michael Page 岗位技能信号，口径见第五节）</li>
+  <li><b>应届毕业生</b>：优先自由区 AI 集群（DIFC Innovation Hub / Dubai AI Campus）与平台经济初级岗，积累 Databricks / 数据栈实操；同步补云数据认证。（来源：雇主分类，口径见第四节）</li>
+  <li><b>在职提升</b>：以云架构 / 数据架构 + AI 治理（NIST AI RMF / ISO 42001）建立硬门槛，转向 AI 解决方案架构或 Head of AI 轨道。（来源：Michael Page 岗位信号 + dub.ai 治理举措）</li>
+  <li><b>海外赴任</b>：LinkedIn 资料 Location 设为迪拜并开启招聘者可见；Networking 节奏锁定 GITEX / Expand North Star / Dubai AI Week。（来源：LinkedIn 报告 + dub.ai）</li>
+</ol>
+
+<h3>行动协议</h3>
+<div class="action-card immediate">
+  <div class="a-head"><span class="prio immediate">立即行动</span><span class="a-title">A1 锁定「AI 应用三证」</span></div>
+  <div class="a-meta"><b>触发条件：</b>确定赴迪拜求职时间窗（建议 6 个月内启动）。<br><b>阈值：</b>3 项认证（云数据工程认证任一 + 云 AI 工程师认证 + Databricks / 数据科学认证任一）。<br><b>责任角色：</b>求职者本人（证书）+ 雇主（工作许可）。<br><b>时限：</b>0–6 个月完成云数据证，6–18 个月完成 AI 工程证。<br><b>验证指标：</b>证书编号可查、Pearson VUE / PSI 考点记录、LinkedIn 技能栏同步。</div>
+</div>
+<div class="action-card watch">
+  <div class="a-head"><span class="prio watch">持续观察</span><span class="a-title">A2 跟踪薪酬分表与签证规则变化</span></div>
+  <div class="a-meta"><b>触发条件：</b>任一头部薪酬指南发布新年版，或 ICP / MOHRE 发布黄金签证通函。<br><b>阈值：</b>基本月薪门槛变动 ≥5% 或职业类别调整。<br><b>责任角色：</b>研究者（本报告维护方）。<br><b>时限：</b>每月复核一次。<br><b>验证指标：</b>官方页面版本日期、指南年版更新记录。</div>
+</div>
+<div class="action-card archive">
+  <div class="a-head"><span class="prio archive">仅记录存档</span><span class="a-title">A3 记录 AI 应用岗薪资抽样</span></div>
+  <div class="a-meta"><b>触发条件：</b>公开薪酬指南 AI/Data 分表可获取，或招聘平台出现 ≥3 条独立 AI 应用岗薪资样本。<br><b>阈值：</b>样本 ≥3 条独立岗位。<br><b>责任角色：</b>研究者。<br><b>时限：</b>随月度报告滚动记录。<br><b>验证指标：</b>岗位样本 URL 与快照日期、口径标注（是否含房补）。</div>
+</div>
+
+<h3>场景切片</h3>
+<div class="slice">
+  <p class="slice-head">场景切片 · 就业决策</p>
+  <p>以「数据工程 + AI 工程（RAG / Agent）」双技能切入，先拿云数据工程认证 + 云 AI 工程师认证建立硬门槛，再用 Databricks / Prompt 工程项目做差异化；目标基本月薪以黄金签证门槛为锚（<span class="lvl lvl-assumption">假设</span>，待 ICP 口径）。本报告只给框架性路径建议，不承诺就业结果、不保证薪资水平。（来源：业务配置场景切片；证书口径见第六节）</p>
+</div>
+<div class="slice">
+  <p class="slice-head">场景切片 · 投资决策</p>
+  <p>关注 Dubai Universal Blueprint for AI（每年 AED 100 bn、生产力 +50%）与主权 AI 基建（Stargate UAE、G42 / Core42）带来的应用人才需求乘数；估值与标的筛选需补充非公开财务信息。本报告只给「条件 → 判读 → 框架性含义 → 风险提示」，不给买卖价位、杠杆与仓位建议。（来源：业务配置场景切片；政策口径见第二节）</p>
+</div>
+<div class="slice">
+  <p class="slice-head">场景切片 · 政策制定</p>
+  <p>政策乘数显著：Dubai AI Seal 与 Chief AI Officers 机制把 AI 治理 / 审计 / 认证需求制度化；建议以 dub.ai 与 DIFC 官方名单为合规基线，跟踪 Dubai AI Week / GITEX 发布节奏与资质更新。</p>
+</div>
+<div class="preline">阈值与信号规则为「预校准（ex-ante）」；首次中期回测 2027-06，校准完成前不将信号灯作为确定结论。</div>
+
+<h3>决策卡</h3>
+<div class="decision-card">
+  <div class="dc-head"><span class="dc-title">DC-1 AI 应用人才结构性紧缺</span><span class="suff ok">可直接决策</span></div>
+  <div class="dc-grid">
+    <div><span class="k">结论：</span>迪拜 AI 应用人才供给是结构性紧约束，AI 工程与 Agentic AI 岗需求高增而本地人才占比仅 0.75%（部分核验）。</div>
+    <div><span class="k">证据强度：</span><span class="ev-strong">强</span>（LinkedIn 单源但指标自洽，政策与雇主信号同向）。</div>
+    <div><span class="k">置信度：</span>0.65（中高）——LinkedIn 指标自洽 + 政策同向；但缺第二独立人才数据源。</div>
+    <div><span class="k">触发条件：</span>LinkedIn 新年版报告 / 薪酬指南新年版 / Dubai AI Blueprint 新举措发布。</div>
+    <div><span class="k">反向证据：</span>UAE 整体招聘率仍低于 2025（2026-08 同比 -18%）；AI 工程岗占岗位发布仅 4.1%。</div>
+    <div><span class="k">信息充分度：</span>方向可直接决策；岗位数量与薪酬点值需按口径补充。</div>
+  </div>
+</div>
+<div class="decision-card">
+  <div class="dc-head"><span class="dc-title">DC-2 技能与证书溢价</span><span class="suff need">需补充信息</span></div>
+  <div class="dc-grid">
+    <div><span class="k">结论：</span>Agentic AI / RAG / MLOps / 数据工程为最热技能；AI 专项证书尚未成为硬性门槛（部分核验）。</div>
+    <div><span class="k">证据强度：</span><span class="ev-mid">中</span>（Michael Page 岗位技能信号 + 抽样，但缺逐条在招岗位复核）。</div>
+    <div><span class="k">置信度：</span>0.55（中）——多源方向一致，但样本量与逐条 URL 未复核。</div>
+    <div><span class="k">触发条件：</span>任一头部雇主将 AI 专项证写入硬性门槛，或 Dubai AI Seal 公布认证企业名单。</div>
+    <div><span class="k">反向证据：</span>公开信号显示「软件 + 数据 + AI 融合」为主，单一证书溢价证据不足。</div>
+    <div><span class="k">信息充分度：</span>需补在招岗位抽样与官方认证名单后才可决策。</div>
+  </div>
+</div>
+
+<h2 class="sec" id="s8">八、数据可靠性与局限说明</h2>
+<h3>来源分级（指针）</h3>
+<p>来源按「官方一手 → 行业机构 / 平台数据（英文研究报告 / 数据页）→ 挂牌门户（仅作卖方预期）→ 媒体转述（须标需核实原文）」分级；本业务线仅采信英文来源，中文源仅作线索。完整清单与分级见第九节。</p>
+<h3>核验状态统计</h3>
+<ul class="tight">
+  <li><b>已核验</b>：Dubai Universal Blueprint for AI 目标与举措、UAE AI 市场规模（IMARC 单源）、LinkedIn UAE 招聘率 / AI 工程岗需求 / 人才集中度、Michael Page AI/Data 岗位与技能信号、DIFC Innovation Hub 2,000+ 企业。</li>
+  <li><b>部分核验</b>：黄金签证门槛（u.ae 页面未列基本工资阈值）、薪酬指南版次（分表 gated）、ILOE 费率（经事实卡片 [FC-SEC-008] 继承）。</li>
+  <li><b>推断</b>：趋势方向、政策传导时滞、AI 技能溢价幅度。</li>
+  <li><b>假设</b>：已登记 5 条（含薪酬房补区间、黄金签证基本工资阈值、政策传导时滞、AI 应用岗较通用软件岗溢价、自由区企业 AI 岗位转化率），基线期未核验。（来源：本报告第八节假设登记）</li>
+</ul>
+<h3>冲突数据与口径裁决</h3>
+<ul class="tight">
+  <li><b>薪酬口径差异</b>：Michael Page（含房补 / 交通 / 津贴、不含奖金）与 Charterhouse（gross monthly fixed、不含福利）口径不同，<b>不可直接比较</b>，保留双份引用。</li>
+  <li><b>市场规模口径</b>：IMARC 为 UAE 全国 AI 市场（含软件 48.7%）；与 AI 安全市场的 Gartner / Mordor / GMI 口径统计域不同，不可混用。</li>
+  <li><b>需求增速 vs 总量</b>：LinkedIn「+232.4%」为同比增速，占岗位发布 4.1% 为份额，二者不可互相替代。</li>
+</ul>
+<h3>已修正事实清单（防回退锚）</h3>
+<ul class="tight">
+  <li>不得将 LinkedIn「AI Engineering job demand +232.4%」误读为「AI 应用岗位总量」。<span class="src-inline">[Source: https://linkedin-workforcereadiness.com/, 2026]</span></li>
+  <li>不得将「UAE AI 市场规模」与「迪拜 AI 市场规模」混用（全国 USD 705.7 M vs 迪拜占 45.6%）。<span class="src-inline">[Source: https://www.imarcgroup.com/uae-artificial-intelligence-market, 2026]</span></li>
+  <li>不得直接比较 Michael Page 与 Charterhouse 薪酬区间（口径不同）。<span class="src-inline">[Source: https://www.michaelpage.ae/salary-guide, 2026；https://www.charterhouseme.ae/salary-levels-2026, 2026]</span></li>
+  <li>不得称「AI 应用岗薪资已核实」——公开分表 gated，本基线一律标「待核实」。<span class="src-inline">[Source: https://www.michaelpage.ae/salary-guide/uae/ai-data-and-analytics, 2026]</span></li>
+  <li>不得将 Dubai AI Campus 与 Dubai Silicon Oasis 混为一谈。<span class="src-inline">[Source: https://dub.ai/, 2026]</span></li>
+</ul>
+<h3>未核验 / 待复核项</h3>
+<ul class="tight">
+  <li>AI 应用各岗位 AED/月薪酬区间（Michael Page / Hays / Cooper Fitch / Charterhouse 分表 gated）。</li>
+  <li>MOHRE 职业分类与黄金签证基本工资阈值（u.ae 页面未列 30,000 AED，需 ICP 最终确认）。</li>
+  <li>Careem / Talabat / noon 与全球厂商区域总部的 AI 应用岗位释放数量（未获英文官方来源）。</li>
+  <li>云厂商 / Databricks / DASCA / ISO 42001 证书费用与阿联酋考点（待核实官方费用页）。</li>
+  <li>UAE AI 市场规模的 second source（当前仅 IMARC 单源）。</li>
+</ul>
+<h3>版本治理</h3>
+<ul class="tight">
+  <li>基线 v1.0 固定；核验 / 收敛型运行不升级版本号，统一标注「本期读数时点」；仅核心事实修正才升级版本号。</li>
+  <li>本报告为基线首期，无上期报告；「已修正事实清单」为空，产生修正后逐条补记。</li>
+</ul>
+
+<h2 class="sec" id="s9">九、参考来源清单</h2>
+<p class="small muted">按来源分级分组，完整 URL，逐点可回溯；媒体转述标「需核实原文」。</p>
+<div class="refs">
+<h4>官方一手</h4>
+<ol>
+<li>Dubai Universal Blueprint for Artificial Intelligence — <a href="https://dub.ai/" target="_blank" rel="noopener">dub.ai</a></li>
+<li>Digital Dubai · AI Lab — <a href="https://www.digitaldubai.ae/initiatives/ai-lab" target="_blank" rel="noopener">digitaldubai.ae/initiatives/ai-lab</a></li>
+<li>Digital Dubai · About（2023 年第 22 号法律）— <a href="https://www.digitaldubai.ae/about-us" target="_blank" rel="noopener">digitaldubai.ae/about-us</a></li>
+<li>DIFC Innovation Hub（2,000+ AI / 创新 / 科技企业）— <a href="https://www.difc.ae/ecosystem/innovation-hub" target="_blank" rel="noopener">difc.ae/ecosystem/innovation-hub</a></li>
+<li>DIFC · Government Services / Visa — <a href="https://www.difc.ae/business/services" target="_blank" rel="noopener">difc.ae/business/services</a></li>
+<li>UAE Government · Golden visa — <a href="https://u.ae/en/information-and-services/visa-and-emirates-id/residence-visas/golden-visa" target="_blank" rel="noopener">u.ae</a></li>
+<li>UAE Government · Artificial intelligence in government policies — <a href="https://u.ae/en/about-the-uae/digital-uae/digital-technology/artificial-intelligence/artificial-intelligence-in-government-policies" target="_blank" rel="noopener">u.ae</a></li>
+<li>ILOE 失业险 — <a href="https://iloe.ae/pdf/Involuntary-Loss-of-Employment-Brochure-ILOE-V2.pdf" target="_blank" rel="noopener">iloe.ae</a></li>
+<li>Dubai Internet City — <a href="https://dic.ae/" target="_blank" rel="noopener">dic.ae</a></li>
+</ol>
+<h4>行业机构 / 第三方研究</h4>
+<ol>
+<li>LinkedIn · UAE Workforce Readiness Report 2026 — <a href="https://linkedin-workforcereadiness.com/" target="_blank" rel="noopener">linkedin-workforcereadiness.com</a>（PDF：<a href="https://linkedin-workforcereadiness.com/reports/LinkedIn_UAE_WorkforceReadiness_Report_2026.pdf" target="_blank" rel="noopener">LinkedIn_UAE_WorkforceReadiness_Report_2026.pdf</a>）</li>
+<li>IMARC · UAE Artificial Intelligence Market — <a href="https://www.imarcgroup.com/uae-artificial-intelligence-market" target="_blank" rel="noopener">imarcgroup.com</a></li>
+<li>Michael Page · UAE Salary Guide 2027 — <a href="https://www.michaelpage.ae/salary-guide" target="_blank" rel="noopener">michaelpage.ae/salary-guide</a></li>
+<li>Michael Page · AI, Data and Analytics 2027 — <a href="https://www.michaelpage.ae/salary-guide/uae/ai-data-and-analytics" target="_blank" rel="noopener">michaelpage.ae/salary-guide/uae/ai-data-and-analytics</a></li>
+<li>Michael Page · Technology 2027 — <a href="https://www.michaelpage.ae/salary-guide/uae/technology" target="_blank" rel="noopener">michaelpage.ae/salary-guide/uae/technology</a></li>
+<li>Charterhouse · UAE Salary Guide 2026 — <a href="https://www.charterhouseme.ae/salary-levels-2026" target="_blank" rel="noopener">charterhouseme.ae/salary-levels-2026</a></li>
+<li>Hays · GCC Salary Guide 2026 — <a href="https://www.hays.ae/salary-guide" target="_blank" rel="noopener">hays.ae/salary-guide</a></li>
+<li>Cooper Fitch · 2026 Salary Guide UAE — <a href="https://cooperfitch.ae/salary-guides/2026-salary-guide-uae/" target="_blank" rel="noopener">cooperfitch.ae</a></li>
+<li>Robert Half UAE — <a href="https://www.roberthalf.ae/salary-guide" target="_blank" rel="noopener">roberthalf.ae/salary-guide</a></li>
+<li>G42 — <a href="https://g42.ai" target="_blank" rel="noopener">g42.ai</a></li>
+<li>Core42 — <a href="https://core42.ai" target="_blank" rel="noopener">core42.ai</a></li>
+<li>e&amp; — <a href="https://eand.com" target="_blank" rel="noopener">eand.com</a></li>
+</ol>
+<h4>招聘抽样（非官方薪酬指南）</h4>
+<ol>
+<li>HireDeveloper · 迪拜 AI 安全岗薪资（相邻抽样，2026-06）— <a href="https://hiredeveloper.ae/employer-blog/how-to-hire-ai-security-engineers-dubai-after-meta-breach-7-steps" target="_blank" rel="noopener">hiredeveloper.ae</a></li>
+</ol>
+<h4>认证主体（费用与考点待核实）</h4>
+<ol>
+<li>ISC2 — <a href="https://isc2.org" target="_blank" rel="noopener">isc2.org</a></li>
+<li>ISACA — <a href="https://isaca.org" target="_blank" rel="noopener">isaca.org</a></li>
+<li>Google Cloud Certification — <a href="https://cloud.google.com/certification" target="_blank" rel="noopener">cloud.google.com/certification</a></li>
+<li>Microsoft Certification — <a href="https://microsoft.com/learn" target="_blank" rel="noopener">microsoft.com/learn</a></li>
+<li>AWS Certification — <a href="https://aws.amazon.com/certification" target="_blank" rel="noopener">aws.amazon.com/certification</a></li>
+<li>Databricks Academy — <a href="https://databricks.com/learn/training" target="_blank" rel="noopener">databricks.com/learn/training</a></li>
+<li>DASCA — <a href="https://dasca.org" target="_blank" rel="noopener">dasca.org</a></li>
+<li>ISO — <a href="https://iso.org" target="_blank" rel="noopener">iso.org</a></li>
+<li>PMI — <a href="https://pmi.org" target="_blank" rel="noopener">pmi.org</a></li>
+</ol>
+</div>
+
+<div class="disc">
+  <strong>口径与边界声明：</strong>本报告为就业研究型基线（首期），只采集公开合法英文信息；事实与推断分离，威胁 / 机会提示标「判断 / 推断」；薪酬与市场规模多口径并列不合并；不给买卖价位、杠杆与仓位建议，不承诺就业结果、不保证薪资水平。数据截止 2026-11，报告版本 v1.0，本期读数时点 2026-11-21。阈值与信号规则为「预校准（ex-ante）」，首次中期回测 2027-06。
+</div>
+</main>
+<footer class="report-foot"><p><a class="feedback-link" data-feedback="consumer-feedback-v1" href="https://github.com/hmbphxkw76-byte/tech-context-digest/issues/new?title=%E5%8F%8D%E9%A6%88%20/%20%E7%BA%A0%E9%94%99" target="_blank" rel="noopener">反馈 / 纠错</a></p></footer>
+
+<script src="https://cdn.jsdelivr.net/npm/echarts@5/dist/echarts.min.js"></script>
+<script>
+(function(){
+  function initCharts(){
+    if (typeof echarts === 'undefined') { return; }
+    var c1 = document.getElementById('chart-market');
+    if (c1) {
+      echarts.init(c1).setOption({
+        title: { text: 'UAE AI 市场规模（亿美元，IMARC 口径）', subtext: '来源：IMARC（2026，单源）；不可与其他口径相加', left: 'center', textStyle: { fontSize: 13, color: '#16324f' } },
+        tooltip: { trigger: 'axis', valueFormatter: function(v){ return v + ' 亿美元'; } },
+        grid: { left: 56, right: 24, top: 56, bottom: 30 },
+        xAxis: { type: 'category', data: ['2025', '2026', '2030', '2034'] },
+        yAxis: { type: 'value', axisLabel: { formatter: '{value}' } },
+        series: [{ type: 'bar', data: [7.057, 8.598, 18.945, 43.873], itemStyle: { color: '#16324f' }, label: { show: true, position: 'top', formatter: '{c}' } }]
+      });
+    }
+    var c2 = document.getElementById('chart-hiring');
+    if (c2) {
+      echarts.init(c2).setOption({
+        title: { text: 'LinkedIn UAE 招聘率同比（2026 年 1–8 月，%）', subtext: '来源：LinkedIn UAE Workforce Readiness Report 2026', left: 'center', textStyle: { fontSize: 13, color: '#16324f' } },
+        tooltip: { trigger: 'axis', valueFormatter: function(v){ return v + ' %'; } },
+        grid: { left: 56, right: 24, top: 64, bottom: 30 },
+        xAxis: { type: 'category', data: ['1月', '2月', '3月', '4月', '5月', '6月', '7月', '8月'] },
+        yAxis: { type: 'value', axisLabel: { formatter: '{value}' } },
+        series: [{ type: 'line', data: [3.0, 0.1, -7.0, -40.0, -24.0, -21.0, -22.0, -18.0], itemStyle: { color: '#2f5597' }, areaStyle: { color: '#eaf1fa' }, label: { show: true, position: 'bottom', formatter: '{c}' } }]
+      });
+    }
+  }
+  if (document.readyState === 'loading') { document.addEventListener('DOMContentLoaded', initCharts); } else { initCharts(); }
+})();
+</script>
+</body>
+</html>

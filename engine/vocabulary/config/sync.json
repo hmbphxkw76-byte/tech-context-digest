@@ -13,15 +13,43 @@
       "topic": "tech",
       "targets": [
         {
-          "path": "../../content/tech/ai-application/trends/prompts/business-config.md",
+          "path": "../../content/tech/ai-application/competitive-intelligence/dubai/prompts/business-config.md",
           "format": "digest",
           "section_title": "## 词汇速览 · 科技（词汇库自动同步）",
           "insert_before": "## 版本记录",
           "categories_include": [
             "模型与厂商",
             "Agent 技术与框架",
-            "编码工具与 IDE",
             "应用与产品",
+            "概念与评估",
+            "基准与评估"
+          ],
+          "tags_include": []
+        },
+        {
+          "path": "../../content/tech/ai-application/dubai/prompts/business-config.md",
+          "format": "digest",
+          "section_title": "## 词汇速览 · 科技（词汇库自动同步）",
+          "insert_before": "## 十、版本记录",
+          "categories_include": [
+            "模型与厂商",
+            "Agent 技术与框架",
+            "应用与产品",
+            "认证与岗位",
+            "组织与岗位"
+          ],
+          "tags_include": []
+        },
+        {
+          "path": "../../content/tech/ai-application/industry-research/dubai/prompts/business-config.md",
+          "format": "digest",
+          "section_title": "## 词汇速览 · 科技（词汇库自动同步）",
+          "insert_before": "## 版本记录",
+          "categories_include": [
+            "模型与厂商",
+            "Agent 技术与框架",
+            "应用与产品",
+            "工具与平台",
             "概念与评估"
           ],
           "tags_include": []

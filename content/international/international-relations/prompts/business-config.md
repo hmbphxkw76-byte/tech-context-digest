@@ -196,8 +196,14 @@
 <!-- VOCAB-SYNC:BEGIN topic=international do-not-edit -->
 ## 词汇速览（词汇库自动同步）
 
-> 由 `engine/vocabulary/script/sync_vocab.py` 自动维护：词汇库 international v1.0，共 0 条（同步于 2026-11-18T18:26:46）。标记区间内请勿手工编辑；词条变更走词汇库导入流程（engine/vocabulary/README.md 第三节），同步机制见第九节。
+> 由 `engine/vocabulary/script/sync_vocab.py` 自动维护：词汇库 international v1.1，共 68 条（同步于 2026-11-21T16:53:17）。标记区间内请勿手工编辑；词条变更走词汇库导入流程（engine/vocabulary/README.md 第三节），同步机制见第九节。
 
+- **国际关系与外交**（12）：外交关系级别（外交关系、Diplomatic Relations Level）；外交承认（Diplomatic Recognition）；建交（建立外交关系、Establishment of Diplomatic Relations）；断交（断绝外交关系、Severance of Diplomatic Relations）；代办级（外交关系代办级、Charge d'Affaires Level）；大使级（大使级外交关系、Ambassadorial Level）；制裁（Sanctions）；单边制裁（Unilateral Sanctions）；二级制裁（Secondary Sanctions、次级制裁）；领事职务（Consular Functions）；领事通知与探视（领事通知、Consular Notification and Access）；使领馆（使领馆与外交机构、Diplomatic and Consular Missions）
+- **国际组织与机制**（15）：联合国（UN、United Nations）；安全理事会（安理会、UN Security Council）；联合国大会（联大、UN General Assembly）；国际法院（ICJ、International Court of Justice）；国际刑事法院（ICC、International Criminal Court）；国际海洋法法庭（ITLOS、International Tribunal for the Law of the Sea）；联合国气候变化框架公约（UNFCCC、United Nations Framework Convention on Climate Change）；国际原子能机构（IAEA、International Atomic Energy Agency）；红十字国际委员会（ICRC、International Committee of the Red Cross）；非洲联盟（非盟、AU、African Union）；阿拉伯国家联盟（阿盟、League of Arab States）；欧盟对外行动署（EEAS、European External Action Service）；国际组织成员（Member of International Organization）；观察员（Observer）；对话伙伴（Dialogue Partner）
+- **国际法与条约**（26）：条约（Treaty）；条约签署（签署条约、Signature of Treaty）；条约批准（批准、Ratification）；条约生效（生效、Entry into Force）；保留条款（保留、Treaty Reservation）；联合国宪章（UN Charter）；维也纳外交关系公约（Vienna Convention on Diplomatic Relations）；维也纳领事关系公约（Vienna Convention on Consular Relations）；联合国海洋法公约（UNCLOS、United Nations Convention on the Law of the Sea、海洋法公约）；不扩散核武器条约（NPT、Nuclear Non-Proliferation Treaty）；巴黎协定（Paris Agreement）；日内瓦四公约（Geneva Conventions）；罗马规约（Rome Statute）；BBNJ 协定（国家管辖范围以外区域海洋生物多样性养护与可持续利用协定、BBNJ Agreement）；东盟宪章（ASEAN Charter）；人道法（国际人道法、International Humanitarian Law）；专属经济区（EEZ、Exclusive Economic Zone）；大陆架（Continental Shelf）；公海（High Seas）；领海（Territorial Sea）；不干涉内政（Non-Interference in Internal Affairs）；集体自卫权（单独或集体自卫、Collective Self-Defense）；区域办法（Regional Arrangements）；禁止使用武力（Prohibition of the Use of Force）；核裁军（Nuclear Disarmament）；和平利用核能（Peaceful Use of Nuclear Energy）
+- **地区热点与冲突**（5）：停火（Ceasefire）；和平协议（Peace Agreement）；终战宣言（Declaration of War Termination）；全面冲突（Full-Scale Conflict）；局部摩擦（Localized Friction）
+- **国际合作与全球治理**（5）：峰会（Summit）；联合公报（Joint Communiqué）；行动计划（Action Plan）；全球盘点（Global Stocktake）；国家自主贡献（NDC、Nationally Determined Contribution）
+- **国际经贸规则**（5）：出口管制（Export Control）；投资限制（Investment Restrictions）；制裁合规（Sanctions Compliance）；争端解决机制（Dispute Settlement Mechanism）；碳边境调节机制（CBAM、Carbon Border Adjustment Mechanism）
 <!-- VOCAB-SYNC:END -->
 
 ## 十四、版本记录

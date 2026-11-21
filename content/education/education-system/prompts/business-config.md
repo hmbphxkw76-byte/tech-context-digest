@@ -202,8 +202,15 @@
 <!-- VOCAB-SYNC:BEGIN topic=education do-not-edit -->
 ## 词汇速览（词汇库自动同步）
 
-> 由 `engine/vocabulary/script/sync_vocab.py` 自动维护：词汇库 education v1.0，共 0 条（同步于 2026-11-18T18:26:46）。标记区间内请勿手工编辑；词条变更走词汇库导入流程（engine/vocabulary/README.md 第三节），同步机制见第九节。
+> 由 `engine/vocabulary/script/sync_vocab.py` 自动维护：词汇库 education v1.1，共 45 条（同步于 2026-11-21T16:53:17）。标记区间内请勿手工编辑；词条变更走词汇库导入流程（engine/vocabulary/README.md 第三节），同步机制见第九节。
 
+- **教育体系与制度**（6）：学历（Education Level Attained）；学位（Degree Awarded）；高等教育（Higher Education）；义务教育年限（Compulsory Education Duration）；学制（School System）；6-3-3 学制（6-3-3 School System）
+- **院校与机构**（8）：国际教育成就评价协会（IEA（教育测评）、International Association for the Evaluation of Educational Achievement）；MEXT（文部科学省、日本文部科学省、Ministry of Education, Culture, Sports, Science and Technology）；DfE（英国教育部、Department for Education）；OfS（英国学生事务办公室、Office for Students）；NCES（美国国家教育统计中心、National Center for Education Statistics）；KMK（德国各州文教部长联席会议、Standing Conference of the Ministers of Education and Cultural Affairs）；Eurydice（欧洲教育信息网络、EU Eurydice）；CERI（OECD 教育研究与创新中心、Centre for Educational Research and Innovation）
+- **专业与课程**（1）：课程（Curriculum）
+- **教育政策与法规**（3）：义务教育（Compulsory Education、九年义务教育）；义务教育法（中华人民共和国义务教育法、Compulsory Education Law）；教育政策（Education Policy）
+- **教育评价与认证**（19）：毛入学率（GER、Gross Enrolment Ratio）；高等教育毛入学率（Higher Education GER）；净入学率（NER、Net Enrolment Rate）；入园率（Early Childhood Enrolment Rate）；毕业率（Graduation Rate）；辍学率（Dropout Rate）；师生比（Pupil-Teacher Ratio、Student-Teacher Ratio）；教育支出占 GDP 比（Education Expenditure as Share of GDP）；教育支出（Education Expenditure）；教育统计（Educational Statistics）；ISCED 2011（ISCED、国际教育标准分类 2011、International Standard Classification of Education 2011）；PISA（Programme for International Student Assessment、国际学生评估项目）；TIMSS（Trends in International Mathematics and Science Study、国际数学与科学趋势研究）；PIRLS（Progress in International Reading Literacy Study、国际阅读素养进展研究）；ICILS（International Computer and Information Literacy Study）；学历互认（学历资格互认、Recognition of Education Level）；学位互认（Recognition of Degree）；认证（Accreditation）；质量保障（Quality Assurance）
+- **国际教育**（7）：UNESCO（联合国教科文组织、United Nations Educational, Scientific and Cultural Organization）；UNESCO UIS（联合国教科文组织统计研究所、UNESCO Institute for Statistics）；OECD（经济合作与发展组织、Organisation for Economic Co-operation and Development）；Education at a Glance（EAG、OECD 教育概览）；全球高等教育学历资格认可公约（UNESCO Global Convention on the Recognition of Qualifications concerning Higher Education、全球公约）；里斯本区域公约（里斯本公约、Lisbon Recognition Convention）；国际学生流动（International Student Mobility）
+- **终身学习**（1）：终身学习（Lifelong Learning）
 <!-- VOCAB-SYNC:END -->
 
 ## 十四、版本记录

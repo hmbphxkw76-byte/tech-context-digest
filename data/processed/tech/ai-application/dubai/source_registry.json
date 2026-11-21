@@ -1,0 +1,685 @@
+{
+  "schema_version": "1.1",
+  "business_line": "content/tech/ai-application/dubai",
+  "path_rule": "business-config {{SOURCE_REGISTRY_PATH}} = data/source_registry.json",
+  "tier_legend": {
+    "1": "官方一手（政府 / 央行 / 统计机构 / 多边机构 / 官方发布）",
+    "2": "行业机构（研究 / 数据 / 咨询）",
+    "3": "挂牌门户（仅作卖方预期）",
+    "4": "媒体转述（须标『需核实原文』）"
+  },
+  "sources": [
+    {
+      "source_id": "S-001",
+      "tier": 1,
+      "publisher": "Dubai AI (Digital Dubai)",
+      "title": "https://dub.ai",
+      "url": "https://dub.ai",
+      "lang": "en",
+      "verify_status": "verified",
+      "updated": "2026-11-21",
+      "in_synthesis": true,
+      "used_in": [
+        "reports/2026-11_baseline_report.html"
+      ],
+      "document_tier": "official_release",
+      "statement_type": "fact",
+      "evidence": {
+        "method": "manual",
+        "note": "基线首建登记：来源清单取自报告第九节，分级按机构主数据 / 既有登记映射；未抓取正文，故无 archive_hash",
+        "snapshot_date": "2026-11-21"
+      }
+    },
+    {
+      "source_id": "S-002",
+      "tier": 1,
+      "publisher": "Digital Dubai",
+      "title": "https://www.digitaldubai.ae/initiatives/ai-lab",
+      "url": "https://www.digitaldubai.ae/initiatives/ai-lab",
+      "lang": "en",
+      "verify_status": "verified",
+      "updated": "2026-11-21",
+      "in_synthesis": true,
+      "used_in": [
+        "reports/2026-11_baseline_report.html"
+      ],
+      "document_tier": "official_release",
+      "statement_type": "fact",
+      "evidence": {
+        "method": "manual",
+        "note": "基线首建登记：来源清单取自报告第九节，分级按机构主数据 / 既有登记映射；未抓取正文，故无 archive_hash",
+        "snapshot_date": "2026-11-21"
+      }
+    },
+    {
+      "source_id": "S-003",
+      "tier": 1,
+      "publisher": "Digital Dubai",
+      "title": "https://www.digitaldubai.ae/about-us",
+      "url": "https://www.digitaldubai.ae/about-us",
+      "lang": "en",
+      "verify_status": "verified",
+      "updated": "2026-11-21",
+      "in_synthesis": true,
+      "used_in": [
+        "reports/2026-11_baseline_report.html"
+      ],
+      "document_tier": "official_release",
+      "statement_type": "fact",
+      "evidence": {
+        "method": "manual",
+        "note": "基线首建登记：来源清单取自报告第九节，分级按机构主数据 / 既有登记映射；未抓取正文，故无 archive_hash",
+        "snapshot_date": "2026-11-21"
+      }
+    },
+    {
+      "source_id": "S-004",
+      "tier": 1,
+      "publisher": "DIFC",
+      "title": "https://www.difc.ae/ecosystem/innovation-hub",
+      "url": "https://www.difc.ae/ecosystem/innovation-hub",
+      "lang": "en",
+      "verify_status": "verified",
+      "updated": "2026-11-21",
+      "in_synthesis": true,
+      "used_in": [
+        "reports/2026-11_baseline_report.html"
+      ],
+      "document_tier": "official_release",
+      "statement_type": "fact",
+      "evidence": {
+        "method": "manual",
+        "note": "基线首建登记：来源清单取自报告第九节，分级按机构主数据 / 既有登记映射；未抓取正文，故无 archive_hash",
+        "snapshot_date": "2026-11-21"
+      }
+    },
+    {
+      "source_id": "S-005",
+      "tier": 1,
+      "publisher": "DIFC",
+      "title": "https://www.difc.ae/business/services",
+      "url": "https://www.difc.ae/business/services",
+      "lang": "en",
+      "verify_status": "verified",
+      "updated": "2026-11-21",
+      "in_synthesis": true,
+      "used_in": [
+        "reports/2026-11_baseline_report.html"
+      ],
+      "document_tier": "official_release",
+      "statement_type": "fact",
+      "evidence": {
+        "method": "manual",
+        "note": "基线首建登记：来源清单取自报告第九节，分级按机构主数据 / 既有登记映射；未抓取正文，故无 archive_hash",
+        "snapshot_date": "2026-11-21"
+      }
+    },
+    {
+      "source_id": "S-006",
+      "tier": 1,
+      "publisher": "UAE Government",
+      "title": "https://u.ae/en/information-and-services/visa-and-emirates-id/residence-visas/golden-visa",
+      "url": "https://u.ae/en/information-and-services/visa-and-emirates-id/residence-visas/golden-visa",
+      "lang": "en",
+      "verify_status": "verified",
+      "updated": "2026-11-21",
+      "in_synthesis": true,
+      "used_in": [
+        "reports/2026-11_baseline_report.html"
+      ],
+      "document_tier": "official_release",
+      "statement_type": "fact",
+      "evidence": {
+        "method": "manual",
+        "note": "基线首建登记：来源清单取自报告第九节，分级按机构主数据 / 既有登记映射；未抓取正文，故无 archive_hash",
+        "snapshot_date": "2026-11-21"
+      }
+    },
+    {
+      "source_id": "S-007",
+      "tier": 1,
+      "publisher": "UAE Government",
+      "title": "https://u.ae/en/about-the-uae/digital-uae/digital-technology/artificial-intelligence/artificial-intelligence-in-government-policies",
+      "url": "https://u.ae/en/about-the-uae/digital-uae/digital-technology/artificial-intelligence/artificial-intelligence-in-government-policies",
+      "lang": "en",
+      "verify_status": "verified",
+      "updated": "2026-11-21",
+      "in_synthesis": true,
+      "used_in": [
+        "reports/2026-11_baseline_report.html"
+      ],
+      "document_tier": "official_release",
+      "statement_type": "fact",
+      "evidence": {
+        "method": "manual",
+        "note": "基线首建登记：来源清单取自报告第九节，分级按机构主数据 / 既有登记映射；未抓取正文，故无 archive_hash",
+        "snapshot_date": "2026-11-21"
+      }
+    },
+    {
+      "source_id": "S-008",
+      "tier": 1,
+      "publisher": "ILOE",
+      "title": "https://iloe.ae/pdf/Involuntary-Loss-of-Employment-Brochure-ILOE-V2.pdf",
+      "url": "https://iloe.ae/pdf/Involuntary-Loss-of-Employment-Brochure-ILOE-V2.pdf",
+      "lang": "en",
+      "verify_status": "verified",
+      "updated": "2026-11-21",
+      "in_synthesis": true,
+      "used_in": [
+        "reports/2026-11_baseline_report.html"
+      ],
+      "document_tier": "official_release",
+      "statement_type": "fact",
+      "evidence": {
+        "method": "manual",
+        "note": "基线首建登记：来源清单取自报告第九节，分级按机构主数据 / 既有登记映射；未抓取正文，故无 archive_hash",
+        "snapshot_date": "2026-11-21"
+      }
+    },
+    {
+      "source_id": "S-009",
+      "tier": 1,
+      "publisher": "Dubai Internet City",
+      "title": "https://dic.ae",
+      "url": "https://dic.ae",
+      "lang": "en",
+      "verify_status": "verified",
+      "updated": "2026-11-21",
+      "in_synthesis": true,
+      "used_in": [
+        "reports/2026-11_baseline_report.html"
+      ],
+      "document_tier": "official_release",
+      "statement_type": "fact",
+      "evidence": {
+        "method": "manual",
+        "note": "基线首建登记：来源清单取自报告第九节，分级按机构主数据 / 既有登记映射；未抓取正文，故无 archive_hash",
+        "snapshot_date": "2026-11-21"
+      }
+    },
+    {
+      "source_id": "S-010",
+      "tier": 3,
+      "publisher": "LinkedIn",
+      "title": "https://linkedin-workforcereadiness.com",
+      "url": "https://linkedin-workforcereadiness.com",
+      "lang": "en",
+      "verify_status": "verified",
+      "updated": "2026-11-21",
+      "in_synthesis": false,
+      "used_in": [
+        "reports/2026-11_baseline_report.html"
+      ],
+      "document_tier": "media",
+      "statement_type": "restatement",
+      "evidence": {
+        "method": "manual",
+        "note": "基线首建登记：来源清单取自报告第九节，分级按机构主数据 / 既有登记映射；未抓取正文，故无 archive_hash",
+        "snapshot_date": "2026-11-21"
+      }
+    },
+    {
+      "source_id": "S-011",
+      "tier": 3,
+      "publisher": "LinkedIn",
+      "title": "https://linkedin-workforcereadiness.com/reports/LinkedIn_UAE_WorkforceReadiness_Report_2026.pdf",
+      "url": "https://linkedin-workforcereadiness.com/reports/LinkedIn_UAE_WorkforceReadiness_Report_2026.pdf",
+      "lang": "en",
+      "verify_status": "verified",
+      "updated": "2026-11-21",
+      "in_synthesis": false,
+      "used_in": [
+        "reports/2026-11_baseline_report.html"
+      ],
+      "document_tier": "media",
+      "statement_type": "restatement",
+      "evidence": {
+        "method": "manual",
+        "note": "基线首建登记：来源清单取自报告第九节，分级按机构主数据 / 既有登记映射；未抓取正文，故无 archive_hash",
+        "snapshot_date": "2026-11-21"
+      }
+    },
+    {
+      "source_id": "S-012",
+      "tier": 2,
+      "publisher": "IMARC Group",
+      "title": "https://www.imarcgroup.com/uae-artificial-intelligence-market",
+      "url": "https://www.imarcgroup.com/uae-artificial-intelligence-market",
+      "lang": "en",
+      "verify_status": "verified",
+      "updated": "2026-11-21",
+      "in_synthesis": true,
+      "used_in": [
+        "reports/2026-11_baseline_report.html"
+      ],
+      "document_tier": "industry_report",
+      "statement_type": "fact",
+      "evidence": {
+        "method": "manual",
+        "note": "基线首建登记：来源清单取自报告第九节，分级按机构主数据 / 既有登记映射；未抓取正文，故无 archive_hash",
+        "snapshot_date": "2026-11-21"
+      }
+    },
+    {
+      "source_id": "S-013",
+      "tier": 3,
+      "publisher": "Michael Page",
+      "title": "https://www.michaelpage.ae/salary-guide",
+      "url": "https://www.michaelpage.ae/salary-guide",
+      "lang": "en",
+      "verify_status": "verified",
+      "updated": "2026-11-21",
+      "in_synthesis": false,
+      "used_in": [
+        "reports/2026-11_baseline_report.html"
+      ],
+      "document_tier": "media",
+      "statement_type": "restatement",
+      "evidence": {
+        "method": "manual",
+        "note": "基线首建登记：来源清单取自报告第九节，分级按机构主数据 / 既有登记映射；未抓取正文，故无 archive_hash",
+        "snapshot_date": "2026-11-21"
+      }
+    },
+    {
+      "source_id": "S-014",
+      "tier": 3,
+      "publisher": "Michael Page",
+      "title": "https://www.michaelpage.ae/salary-guide/uae/ai-data-and-analytics",
+      "url": "https://www.michaelpage.ae/salary-guide/uae/ai-data-and-analytics",
+      "lang": "en",
+      "verify_status": "verified",
+      "updated": "2026-11-21",
+      "in_synthesis": false,
+      "used_in": [
+        "reports/2026-11_baseline_report.html"
+      ],
+      "document_tier": "media",
+      "statement_type": "restatement",
+      "evidence": {
+        "method": "manual",
+        "note": "基线首建登记：来源清单取自报告第九节，分级按机构主数据 / 既有登记映射；未抓取正文，故无 archive_hash",
+        "snapshot_date": "2026-11-21"
+      }
+    },
+    {
+      "source_id": "S-015",
+      "tier": 3,
+      "publisher": "Michael Page",
+      "title": "https://www.michaelpage.ae/salary-guide/uae/technology",
+      "url": "https://www.michaelpage.ae/salary-guide/uae/technology",
+      "lang": "en",
+      "verify_status": "verified",
+      "updated": "2026-11-21",
+      "in_synthesis": false,
+      "used_in": [
+        "reports/2026-11_baseline_report.html"
+      ],
+      "document_tier": "media",
+      "statement_type": "restatement",
+      "evidence": {
+        "method": "manual",
+        "note": "基线首建登记：来源清单取自报告第九节，分级按机构主数据 / 既有登记映射；未抓取正文，故无 archive_hash",
+        "snapshot_date": "2026-11-21"
+      }
+    },
+    {
+      "source_id": "S-016",
+      "tier": 3,
+      "publisher": "Charterhouse ME",
+      "title": "https://www.charterhouseme.ae/salary-levels-2026",
+      "url": "https://www.charterhouseme.ae/salary-levels-2026",
+      "lang": "en",
+      "verify_status": "verified",
+      "updated": "2026-11-21",
+      "in_synthesis": false,
+      "used_in": [
+        "reports/2026-11_baseline_report.html"
+      ],
+      "document_tier": "media",
+      "statement_type": "restatement",
+      "evidence": {
+        "method": "manual",
+        "note": "基线首建登记：来源清单取自报告第九节，分级按机构主数据 / 既有登记映射；未抓取正文，故无 archive_hash",
+        "snapshot_date": "2026-11-21"
+      }
+    },
+    {
+      "source_id": "S-017",
+      "tier": 3,
+      "publisher": "Hays",
+      "title": "https://www.hays.ae/salary-guide",
+      "url": "https://www.hays.ae/salary-guide",
+      "lang": "en",
+      "verify_status": "verified",
+      "updated": "2026-11-21",
+      "in_synthesis": false,
+      "used_in": [
+        "reports/2026-11_baseline_report.html"
+      ],
+      "document_tier": "media",
+      "statement_type": "restatement",
+      "evidence": {
+        "method": "manual",
+        "note": "基线首建登记：来源清单取自报告第九节，分级按机构主数据 / 既有登记映射；未抓取正文，故无 archive_hash",
+        "snapshot_date": "2026-11-21"
+      }
+    },
+    {
+      "source_id": "S-018",
+      "tier": 3,
+      "publisher": "Cooper Fitch",
+      "title": "https://cooperfitch.ae/salary-guides/2026-salary-guide-uae",
+      "url": "https://cooperfitch.ae/salary-guides/2026-salary-guide-uae",
+      "lang": "en",
+      "verify_status": "verified",
+      "updated": "2026-11-21",
+      "in_synthesis": false,
+      "used_in": [
+        "reports/2026-11_baseline_report.html"
+      ],
+      "document_tier": "media",
+      "statement_type": "restatement",
+      "evidence": {
+        "method": "manual",
+        "note": "基线首建登记：来源清单取自报告第九节，分级按机构主数据 / 既有登记映射；未抓取正文，故无 archive_hash",
+        "snapshot_date": "2026-11-21"
+      }
+    },
+    {
+      "source_id": "S-019",
+      "tier": 3,
+      "publisher": "Robert Half",
+      "title": "https://www.roberthalf.ae/salary-guide",
+      "url": "https://www.roberthalf.ae/salary-guide",
+      "lang": "en",
+      "verify_status": "verified",
+      "updated": "2026-11-21",
+      "in_synthesis": false,
+      "used_in": [
+        "reports/2026-11_baseline_report.html"
+      ],
+      "document_tier": "media",
+      "statement_type": "restatement",
+      "evidence": {
+        "method": "manual",
+        "note": "基线首建登记：来源清单取自报告第九节，分级按机构主数据 / 既有登记映射；未抓取正文，故无 archive_hash",
+        "snapshot_date": "2026-11-21"
+      }
+    },
+    {
+      "source_id": "S-020",
+      "tier": 1,
+      "publisher": "G42",
+      "title": "https://g42.ai",
+      "url": "https://g42.ai",
+      "lang": "en",
+      "verify_status": "verified",
+      "updated": "2026-11-21",
+      "in_synthesis": true,
+      "used_in": [
+        "reports/2026-11_baseline_report.html"
+      ],
+      "document_tier": "official_release",
+      "statement_type": "fact",
+      "evidence": {
+        "method": "manual",
+        "note": "基线首建登记：来源清单取自报告第九节，分级按机构主数据 / 既有登记映射；未抓取正文，故无 archive_hash",
+        "snapshot_date": "2026-11-21"
+      }
+    },
+    {
+      "source_id": "S-021",
+      "tier": 1,
+      "publisher": "Core42",
+      "title": "https://core42.ai",
+      "url": "https://core42.ai",
+      "lang": "en",
+      "verify_status": "verified",
+      "updated": "2026-11-21",
+      "in_synthesis": true,
+      "used_in": [
+        "reports/2026-11_baseline_report.html"
+      ],
+      "document_tier": "official_release",
+      "statement_type": "fact",
+      "evidence": {
+        "method": "manual",
+        "note": "基线首建登记：来源清单取自报告第九节，分级按机构主数据 / 既有登记映射；未抓取正文，故无 archive_hash",
+        "snapshot_date": "2026-11-21"
+      }
+    },
+    {
+      "source_id": "S-022",
+      "tier": 1,
+      "publisher": "e&",
+      "title": "https://eand.com",
+      "url": "https://eand.com",
+      "lang": "en",
+      "verify_status": "verified",
+      "updated": "2026-11-21",
+      "in_synthesis": true,
+      "used_in": [
+        "reports/2026-11_baseline_report.html"
+      ],
+      "document_tier": "official_release",
+      "statement_type": "fact",
+      "evidence": {
+        "method": "manual",
+        "note": "基线首建登记：来源清单取自报告第九节，分级按机构主数据 / 既有登记映射；未抓取正文，故无 archive_hash",
+        "snapshot_date": "2026-11-21"
+      }
+    },
+    {
+      "source_id": "S-023",
+      "tier": 2,
+      "publisher": "HireDeveloper",
+      "title": "https://hiredeveloper.ae/employer-blog/how-to-hire-ai-security-engineers-dubai-after-meta-breach-7-steps",
+      "url": "https://hiredeveloper.ae/employer-blog/how-to-hire-ai-security-engineers-dubai-after-meta-breach-7-steps",
+      "lang": "en",
+      "verify_status": "verified",
+      "updated": "2026-11-21",
+      "in_synthesis": true,
+      "used_in": [
+        "reports/2026-11_baseline_report.html"
+      ],
+      "document_tier": "industry_report",
+      "statement_type": "fact",
+      "evidence": {
+        "method": "manual",
+        "note": "基线首建登记：来源清单取自报告第九节，分级按机构主数据 / 既有登记映射；未抓取正文，故无 archive_hash",
+        "snapshot_date": "2026-11-21"
+      }
+    },
+    {
+      "source_id": "S-024",
+      "tier": 2,
+      "publisher": "ISC2",
+      "title": "https://isc2.org",
+      "url": "https://isc2.org",
+      "lang": "en",
+      "verify_status": "verified",
+      "updated": "2026-11-21",
+      "in_synthesis": true,
+      "used_in": [
+        "reports/2026-11_baseline_report.html"
+      ],
+      "document_tier": "industry_report",
+      "statement_type": "fact",
+      "evidence": {
+        "method": "manual",
+        "note": "基线首建登记：来源清单取自报告第九节，分级按机构主数据 / 既有登记映射；未抓取正文，故无 archive_hash",
+        "snapshot_date": "2026-11-21"
+      }
+    },
+    {
+      "source_id": "S-025",
+      "tier": 2,
+      "publisher": "ISACA",
+      "title": "https://isaca.org",
+      "url": "https://isaca.org",
+      "lang": "en",
+      "verify_status": "verified",
+      "updated": "2026-11-21",
+      "in_synthesis": true,
+      "used_in": [
+        "reports/2026-11_baseline_report.html"
+      ],
+      "document_tier": "industry_report",
+      "statement_type": "fact",
+      "evidence": {
+        "method": "manual",
+        "note": "基线首建登记：来源清单取自报告第九节，分级按机构主数据 / 既有登记映射；未抓取正文，故无 archive_hash",
+        "snapshot_date": "2026-11-21"
+      }
+    },
+    {
+      "source_id": "S-026",
+      "tier": 1,
+      "publisher": "Google Cloud",
+      "title": "https://cloud.google.com/certification",
+      "url": "https://cloud.google.com/certification",
+      "lang": "en",
+      "verify_status": "verified",
+      "updated": "2026-11-21",
+      "in_synthesis": true,
+      "used_in": [
+        "reports/2026-11_baseline_report.html"
+      ],
+      "document_tier": "official_release",
+      "statement_type": "fact",
+      "evidence": {
+        "method": "manual",
+        "note": "基线首建登记：来源清单取自报告第九节，分级按机构主数据 / 既有登记映射；未抓取正文，故无 archive_hash",
+        "snapshot_date": "2026-11-21"
+      }
+    },
+    {
+      "source_id": "S-027",
+      "tier": 1,
+      "publisher": "Microsoft",
+      "title": "https://microsoft.com/learn",
+      "url": "https://microsoft.com/learn",
+      "lang": "en",
+      "verify_status": "verified",
+      "updated": "2026-11-21",
+      "in_synthesis": true,
+      "used_in": [
+        "reports/2026-11_baseline_report.html"
+      ],
+      "document_tier": "official_release",
+      "statement_type": "fact",
+      "evidence": {
+        "method": "manual",
+        "note": "基线首建登记：来源清单取自报告第九节，分级按机构主数据 / 既有登记映射；未抓取正文，故无 archive_hash",
+        "snapshot_date": "2026-11-21"
+      }
+    },
+    {
+      "source_id": "S-028",
+      "tier": 1,
+      "publisher": "Amazon Web Services",
+      "title": "https://aws.amazon.com/certification",
+      "url": "https://aws.amazon.com/certification",
+      "lang": "en",
+      "verify_status": "verified",
+      "updated": "2026-11-21",
+      "in_synthesis": true,
+      "used_in": [
+        "reports/2026-11_baseline_report.html"
+      ],
+      "document_tier": "official_release",
+      "statement_type": "fact",
+      "evidence": {
+        "method": "manual",
+        "note": "基线首建登记：来源清单取自报告第九节，分级按机构主数据 / 既有登记映射；未抓取正文，故无 archive_hash",
+        "snapshot_date": "2026-11-21"
+      }
+    },
+    {
+      "source_id": "S-029",
+      "tier": 1,
+      "publisher": "Databricks",
+      "title": "https://databricks.com/learn/training",
+      "url": "https://databricks.com/learn/training",
+      "lang": "en",
+      "verify_status": "verified",
+      "updated": "2026-11-21",
+      "in_synthesis": true,
+      "used_in": [
+        "reports/2026-11_baseline_report.html"
+      ],
+      "document_tier": "official_release",
+      "statement_type": "fact",
+      "evidence": {
+        "method": "manual",
+        "note": "基线首建登记：来源清单取自报告第九节，分级按机构主数据 / 既有登记映射；未抓取正文，故无 archive_hash",
+        "snapshot_date": "2026-11-21"
+      }
+    },
+    {
+      "source_id": "S-030",
+      "tier": 2,
+      "publisher": "DASCA",
+      "title": "https://dasca.org",
+      "url": "https://dasca.org",
+      "lang": "en",
+      "verify_status": "verified",
+      "updated": "2026-11-21",
+      "in_synthesis": true,
+      "used_in": [
+        "reports/2026-11_baseline_report.html"
+      ],
+      "document_tier": "industry_report",
+      "statement_type": "fact",
+      "evidence": {
+        "method": "manual",
+        "note": "基线首建登记：来源清单取自报告第九节，分级按机构主数据 / 既有登记映射；未抓取正文，故无 archive_hash",
+        "snapshot_date": "2026-11-21"
+      }
+    },
+    {
+      "source_id": "S-031",
+      "tier": 1,
+      "publisher": "ISO",
+      "title": "https://iso.org",
+      "url": "https://iso.org",
+      "lang": "en",
+      "verify_status": "verified",
+      "updated": "2026-11-21",
+      "in_synthesis": true,
+      "used_in": [
+        "reports/2026-11_baseline_report.html"
+      ],
+      "document_tier": "official_release",
+      "statement_type": "fact",
+      "evidence": {
+        "method": "manual",
+        "note": "基线首建登记：来源清单取自报告第九节，分级按机构主数据 / 既有登记映射；未抓取正文，故无 archive_hash",
+        "snapshot_date": "2026-11-21"
+      }
+    },
+    {
+      "source_id": "S-032",
+      "tier": 2,
+      "publisher": "PMI",
+      "title": "https://pmi.org",
+      "url": "https://pmi.org",
+      "lang": "en",
+      "verify_status": "verified",
+      "updated": "2026-11-21",
+      "in_synthesis": true,
+      "used_in": [
+        "reports/2026-11_baseline_report.html"
+      ],
+      "document_tier": "industry_report",
+      "statement_type": "fact",
+      "evidence": {
+        "method": "manual",
+        "note": "基线首建登记：来源清单取自报告第九节，分级按机构主数据 / 既有登记映射；未抓取正文，故无 archive_hash",
+        "snapshot_date": "2026-11-21"
+      }
+    }
+  ]
+}

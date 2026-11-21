@@ -39,9 +39,9 @@ class TestDoubleValidation(unittest.TestCase):
         self.assertEqual(sig["property_hits"], ["content/economy/dubai/apartment"])
         self.assertEqual(sig["owner"], "content/economy/dubai/apartment")
 
-    def test_trends_property_ambiguous(self):
-        """trends 同时命中经济趋势与 AI 应用趋势两条线 -> 候选不唯一，需人工。"""
-        sig = cr.owner_signals("trends_2026-11-13_weekly.html")
+    def test_property_ambiguous(self):
+        """competitive-intelligence 同时命中 AI 安全 / AI 应用两条线 -> 候选不唯一，需人工。"""
+        sig = cr.owner_signals("competitive-intelligence_2026-11_monthly.html")
         self.assertEqual(len(sig["property_hits"]), 2)
         self.assertIsNone(sig["owner"])
 

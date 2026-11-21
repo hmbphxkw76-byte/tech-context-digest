@@ -1,0 +1,643 @@
+{
+  "schema_version": "1.1",
+  "business_line": "content/tech/ai-application/competitive-intelligence/dubai",
+  "path_rule": "business-config {{SOURCE_REGISTRY_PATH}} = data/source_registry.json",
+  "tier_legend": {
+    "1": "官方一手（政府 / 央行 / 统计机构 / 多边机构 / 官方发布）",
+    "2": "行业机构（研究 / 数据 / 咨询）",
+    "3": "挂牌门户（仅作卖方预期）",
+    "4": "媒体转述（须标『需核实原文』）"
+  },
+  "sources": [
+    {
+      "source_id": "S-001",
+      "tier": 2,
+      "publisher": "Gartner",
+      "title": "https://gartner.com/en/newsroom/press-releases/2025-04-08-gartner-forecasts-spending-on-information-security-in-mena-to-grow-14-percent-in-2025",
+      "url": "https://gartner.com/en/newsroom/press-releases/2025-04-08-gartner-forecasts-spending-on-information-security-in-mena-to-grow-14-percent-in-2025",
+      "lang": "en",
+      "verify_status": "verified",
+      "updated": "2026-11-21",
+      "in_synthesis": true,
+      "used_in": [
+        "reports/2026-11_baseline_report.html"
+      ],
+      "document_tier": "industry_report",
+      "statement_type": "fact",
+      "evidence": {
+        "method": "manual",
+        "note": "基线首建登记：来源清单取自报告第九节，分级按机构主数据 / 既有登记映射；未抓取正文，故无 archive_hash",
+        "snapshot_date": "2026-11-21"
+      }
+    },
+    {
+      "source_id": "S-002",
+      "tier": 1,
+      "publisher": "G42",
+      "title": "https://g42.ai",
+      "url": "https://g42.ai",
+      "lang": "en",
+      "verify_status": "verified",
+      "updated": "2026-11-21",
+      "in_synthesis": true,
+      "used_in": [
+        "reports/2026-11_baseline_report.html"
+      ],
+      "document_tier": "official_release",
+      "statement_type": "fact",
+      "evidence": {
+        "method": "manual",
+        "note": "基线首建登记：来源清单取自报告第九节，分级按机构主数据 / 既有登记映射；未抓取正文，故无 archive_hash",
+        "snapshot_date": "2026-11-21"
+      }
+    },
+    {
+      "source_id": "S-003",
+      "tier": 1,
+      "publisher": "Core42",
+      "title": "https://www.core42.ai",
+      "url": "https://www.core42.ai",
+      "lang": "en",
+      "verify_status": "verified",
+      "updated": "2026-11-21",
+      "in_synthesis": true,
+      "used_in": [
+        "reports/2026-11_baseline_report.html"
+      ],
+      "document_tier": "official_release",
+      "statement_type": "fact",
+      "evidence": {
+        "method": "manual",
+        "note": "基线首建登记：来源清单取自报告第九节，分级按机构主数据 / 既有登记映射；未抓取正文，故无 archive_hash",
+        "snapshot_date": "2026-11-21"
+      }
+    },
+    {
+      "source_id": "S-004",
+      "tier": 1,
+      "publisher": "CPX",
+      "title": "https://cpx.net",
+      "url": "https://cpx.net",
+      "lang": "en",
+      "verify_status": "verified",
+      "updated": "2026-11-21",
+      "in_synthesis": true,
+      "used_in": [
+        "reports/2026-11_baseline_report.html"
+      ],
+      "document_tier": "official_release",
+      "statement_type": "fact",
+      "evidence": {
+        "method": "manual",
+        "note": "基线首建登记：来源清单取自报告第九节，分级按机构主数据 / 既有登记映射；未抓取正文，故无 archive_hash",
+        "snapshot_date": "2026-11-21"
+      }
+    },
+    {
+      "source_id": "S-005",
+      "tier": 1,
+      "publisher": "Microsoft",
+      "title": "https://blogs.microsoft.com/blog/2024/04/15/microsoft-and-g42-partner",
+      "url": "https://blogs.microsoft.com/blog/2024/04/15/microsoft-and-g42-partner",
+      "lang": "en",
+      "verify_status": "verified",
+      "updated": "2026-11-21",
+      "in_synthesis": true,
+      "used_in": [
+        "reports/2026-11_baseline_report.html"
+      ],
+      "document_tier": "official_release",
+      "statement_type": "fact",
+      "evidence": {
+        "method": "manual",
+        "note": "基线首建登记：来源清单取自报告第九节，分级按机构主数据 / 既有登记映射；未抓取正文，故无 archive_hash",
+        "snapshot_date": "2026-11-21"
+      }
+    },
+    {
+      "source_id": "S-006",
+      "tier": 1,
+      "publisher": "Microsoft",
+      "title": "https://news.microsoft.com/en-xm/2024/03/07/first-abu-dhabi-bank-unlocks-new-business-excellence-opportunities-with-core42-supported-by-microsoft",
+      "url": "https://news.microsoft.com/en-xm/2024/03/07/first-abu-dhabi-bank-unlocks-new-business-excellence-opportunities-with-core42-supported-by-microsoft",
+      "lang": "en",
+      "verify_status": "verified",
+      "updated": "2026-11-21",
+      "in_synthesis": true,
+      "used_in": [
+        "reports/2026-11_baseline_report.html"
+      ],
+      "document_tier": "official_release",
+      "statement_type": "fact",
+      "evidence": {
+        "method": "manual",
+        "note": "基线首建登记：来源清单取自报告第九节，分级按机构主数据 / 既有登记映射；未抓取正文，故无 archive_hash",
+        "snapshot_date": "2026-11-21"
+      }
+    },
+    {
+      "source_id": "S-007",
+      "tier": 1,
+      "publisher": "Digital Dubai",
+      "title": "https://www.digitaldubai.ae/initiatives/ai-lab",
+      "url": "https://www.digitaldubai.ae/initiatives/ai-lab",
+      "lang": "en",
+      "verify_status": "verified",
+      "updated": "2026-11-21",
+      "in_synthesis": true,
+      "used_in": [
+        "reports/2026-11_baseline_report.html"
+      ],
+      "document_tier": "official_release",
+      "statement_type": "fact",
+      "evidence": {
+        "method": "manual",
+        "note": "基线首建登记：来源清单取自报告第九节，分级按机构主数据 / 既有登记映射；未抓取正文，故无 archive_hash",
+        "snapshot_date": "2026-11-21"
+      }
+    },
+    {
+      "source_id": "S-008",
+      "tier": 1,
+      "publisher": "Digital Dubai",
+      "title": "https://www.digitaldubai.ae/initiatives/startup-support",
+      "url": "https://www.digitaldubai.ae/initiatives/startup-support",
+      "lang": "en",
+      "verify_status": "verified",
+      "updated": "2026-11-21",
+      "in_synthesis": true,
+      "used_in": [
+        "reports/2026-11_baseline_report.html"
+      ],
+      "document_tier": "official_release",
+      "statement_type": "fact",
+      "evidence": {
+        "method": "manual",
+        "note": "基线首建登记：来源清单取自报告第九节，分级按机构主数据 / 既有登记映射；未抓取正文，故无 archive_hash",
+        "snapshot_date": "2026-11-21"
+      }
+    },
+    {
+      "source_id": "S-009",
+      "tier": 1,
+      "publisher": "Hub71",
+      "title": "https://hub71.com",
+      "url": "https://hub71.com",
+      "lang": "en",
+      "verify_status": "verified",
+      "updated": "2026-11-21",
+      "in_synthesis": true,
+      "used_in": [
+        "reports/2026-11_baseline_report.html"
+      ],
+      "document_tier": "official_release",
+      "statement_type": "fact",
+      "evidence": {
+        "method": "manual",
+        "note": "基线首建登记：来源清单取自报告第九节，分级按机构主数据 / 既有登记映射；未抓取正文，故无 archive_hash",
+        "snapshot_date": "2026-11-21"
+      }
+    },
+    {
+      "source_id": "S-010",
+      "tier": 1,
+      "publisher": "DIFC",
+      "title": "https://www.difc.ae",
+      "url": "https://www.difc.ae",
+      "lang": "en",
+      "verify_status": "verified",
+      "updated": "2026-11-21",
+      "in_synthesis": true,
+      "used_in": [
+        "reports/2026-11_baseline_report.html"
+      ],
+      "document_tier": "official_release",
+      "statement_type": "fact",
+      "evidence": {
+        "method": "manual",
+        "note": "基线首建登记：来源清单取自报告第九节，分级按机构主数据 / 既有登记映射；未抓取正文，故无 archive_hash",
+        "snapshot_date": "2026-11-21"
+      }
+    },
+    {
+      "source_id": "S-011",
+      "tier": 1,
+      "publisher": "DMCC",
+      "title": "https://www.dmcc.ae",
+      "url": "https://www.dmcc.ae",
+      "lang": "en",
+      "verify_status": "verified",
+      "updated": "2026-11-21",
+      "in_synthesis": true,
+      "used_in": [
+        "reports/2026-11_baseline_report.html"
+      ],
+      "document_tier": "official_release",
+      "statement_type": "fact",
+      "evidence": {
+        "method": "manual",
+        "note": "基线首建登记：来源清单取自报告第九节，分级按机构主数据 / 既有登记映射；未抓取正文，故无 archive_hash",
+        "snapshot_date": "2026-11-21"
+      }
+    },
+    {
+      "source_id": "S-012",
+      "tier": 1,
+      "publisher": "ADGM",
+      "title": "https://www.adgm.com",
+      "url": "https://www.adgm.com",
+      "lang": "en",
+      "verify_status": "verified",
+      "updated": "2026-11-21",
+      "in_synthesis": true,
+      "used_in": [
+        "reports/2026-11_baseline_report.html"
+      ],
+      "document_tier": "official_release",
+      "statement_type": "fact",
+      "evidence": {
+        "method": "manual",
+        "note": "基线首建登记：来源清单取自报告第九节，分级按机构主数据 / 既有登记映射；未抓取正文，故无 archive_hash",
+        "snapshot_date": "2026-11-21"
+      }
+    },
+    {
+      "source_id": "S-013",
+      "tier": 1,
+      "publisher": "Anthropic",
+      "title": "https://www.anthropic.com/claude-fable-and-mythos-5-2",
+      "url": "https://www.anthropic.com/claude-fable-and-mythos-5-2",
+      "lang": "en",
+      "verify_status": "verified",
+      "updated": "2026-11-21",
+      "in_synthesis": true,
+      "used_in": [
+        "reports/2026-11_baseline_report.html"
+      ],
+      "document_tier": "official_release",
+      "statement_type": "fact",
+      "evidence": {
+        "method": "manual",
+        "note": "基线首建登记：来源清单取自报告第九节，分级按机构主数据 / 既有登记映射；未抓取正文，故无 archive_hash",
+        "snapshot_date": "2026-11-21"
+      }
+    },
+    {
+      "source_id": "S-014",
+      "tier": 1,
+      "publisher": "Anthropic",
+      "title": "https://www.anthropic.com/news/roadshow-launch",
+      "url": "https://www.anthropic.com/news/roadshow-launch",
+      "lang": "en",
+      "verify_status": "verified",
+      "updated": "2026-11-21",
+      "in_synthesis": true,
+      "used_in": [
+        "reports/2026-11_baseline_report.html"
+      ],
+      "document_tier": "official_release",
+      "statement_type": "fact",
+      "evidence": {
+        "method": "manual",
+        "note": "基线首建登记：来源清单取自报告第九节，分级按机构主数据 / 既有登记映射；未抓取正文，故无 archive_hash",
+        "snapshot_date": "2026-11-21"
+      }
+    },
+    {
+      "source_id": "S-015",
+      "tier": 2,
+      "publisher": "GITEX Global",
+      "title": "https://gitexglobal.com",
+      "url": "https://gitexglobal.com",
+      "lang": "en",
+      "verify_status": "verified",
+      "updated": "2026-11-21",
+      "in_synthesis": true,
+      "used_in": [
+        "reports/2026-11_baseline_report.html"
+      ],
+      "document_tier": "industry_report",
+      "statement_type": "fact",
+      "evidence": {
+        "method": "manual",
+        "note": "基线首建登记：来源清单取自报告第九节，分级按机构主数据 / 既有登记映射；未抓取正文，故无 archive_hash",
+        "snapshot_date": "2026-11-21"
+      }
+    },
+    {
+      "source_id": "S-016",
+      "tier": 1,
+      "publisher": "UAE Government AI",
+      "title": "https://ai.gov.ae",
+      "url": "https://ai.gov.ae",
+      "lang": "en",
+      "verify_status": "verified",
+      "updated": "2026-11-21",
+      "in_synthesis": true,
+      "used_in": [
+        "reports/2026-11_baseline_report.html"
+      ],
+      "document_tier": "official_release",
+      "statement_type": "fact",
+      "evidence": {
+        "method": "manual",
+        "note": "基线首建登记：来源清单取自报告第九节，分级按机构主数据 / 既有登记映射；未抓取正文，故无 archive_hash",
+        "snapshot_date": "2026-11-21"
+      }
+    },
+    {
+      "source_id": "S-017",
+      "tier": 1,
+      "publisher": "Amazon Web Services",
+      "title": "https://aws.amazon.com",
+      "url": "https://aws.amazon.com",
+      "lang": "en",
+      "verify_status": "verified",
+      "updated": "2026-11-21",
+      "in_synthesis": true,
+      "used_in": [
+        "reports/2026-11_baseline_report.html"
+      ],
+      "document_tier": "official_release",
+      "statement_type": "fact",
+      "evidence": {
+        "method": "manual",
+        "note": "基线首建登记：来源清单取自报告第九节，分级按机构主数据 / 既有登记映射；未抓取正文，故无 archive_hash",
+        "snapshot_date": "2026-11-21"
+      }
+    },
+    {
+      "source_id": "S-018",
+      "tier": 1,
+      "publisher": "Google Cloud",
+      "title": "https://cloud.google.com",
+      "url": "https://cloud.google.com",
+      "lang": "en",
+      "verify_status": "verified",
+      "updated": "2026-11-21",
+      "in_synthesis": true,
+      "used_in": [
+        "reports/2026-11_baseline_report.html"
+      ],
+      "document_tier": "official_release",
+      "statement_type": "fact",
+      "evidence": {
+        "method": "manual",
+        "note": "基线首建登记：来源清单取自报告第九节，分级按机构主数据 / 既有登记映射；未抓取正文，故无 archive_hash",
+        "snapshot_date": "2026-11-21"
+      }
+    },
+    {
+      "source_id": "S-019",
+      "tier": 2,
+      "publisher": "Menlo Ventures",
+      "title": "https://menlovc.com/perspective/2026-the-state-of-enterprise-ai",
+      "url": "https://menlovc.com/perspective/2026-the-state-of-enterprise-ai",
+      "lang": "en",
+      "verify_status": "verified",
+      "updated": "2026-11-21",
+      "in_synthesis": true,
+      "used_in": [
+        "reports/2026-11_baseline_report.html"
+      ],
+      "document_tier": "industry_report",
+      "statement_type": "fact",
+      "evidence": {
+        "method": "manual",
+        "note": "基线首建登记：来源清单取自报告第九节，分级按机构主数据 / 既有登记映射；未抓取正文，故无 archive_hash",
+        "snapshot_date": "2026-11-21"
+      }
+    },
+    {
+      "source_id": "S-020",
+      "tier": 2,
+      "publisher": "Mordor Intelligence",
+      "title": "https://mordorintelligence.com/industry-reports/uae-cybersecurity-market",
+      "url": "https://mordorintelligence.com/industry-reports/uae-cybersecurity-market",
+      "lang": "en",
+      "verify_status": "verified",
+      "updated": "2026-11-21",
+      "in_synthesis": true,
+      "used_in": [
+        "reports/2026-11_baseline_report.html"
+      ],
+      "document_tier": "industry_report",
+      "statement_type": "fact",
+      "evidence": {
+        "method": "manual",
+        "note": "基线首建登记：来源清单取自报告第九节，分级按机构主数据 / 既有登记映射；未抓取正文，故无 archive_hash",
+        "snapshot_date": "2026-11-21"
+      }
+    },
+    {
+      "source_id": "S-021",
+      "tier": 2,
+      "publisher": "Grand View Research",
+      "title": "https://www.grandviewresearch.com/industry-analysis/ai-in-cybersecurity-market-report",
+      "url": "https://www.grandviewresearch.com/industry-analysis/ai-in-cybersecurity-market-report",
+      "lang": "en",
+      "verify_status": "verified",
+      "updated": "2026-11-21",
+      "in_synthesis": true,
+      "used_in": [
+        "reports/2026-11_baseline_report.html"
+      ],
+      "document_tier": "industry_report",
+      "statement_type": "fact",
+      "evidence": {
+        "method": "manual",
+        "note": "基线首建登记：来源清单取自报告第九节，分级按机构主数据 / 既有登记映射；未抓取正文，故无 archive_hash",
+        "snapshot_date": "2026-11-21"
+      }
+    },
+    {
+      "source_id": "S-022",
+      "tier": 2,
+      "publisher": "IDC",
+      "title": "https://www.idc.com",
+      "url": "https://www.idc.com",
+      "lang": "en",
+      "verify_status": "verified",
+      "updated": "2026-11-21",
+      "in_synthesis": true,
+      "used_in": [
+        "reports/2026-11_baseline_report.html"
+      ],
+      "document_tier": "industry_report",
+      "statement_type": "fact",
+      "evidence": {
+        "method": "manual",
+        "note": "基线首建登记：来源清单取自报告第九节，分级按机构主数据 / 既有登记映射；未抓取正文，故无 archive_hash",
+        "snapshot_date": "2026-11-21"
+      }
+    },
+    {
+      "source_id": "S-023",
+      "tier": 2,
+      "publisher": "PitchBook",
+      "title": "https://pitchbook.com",
+      "url": "https://pitchbook.com",
+      "lang": "en",
+      "verify_status": "verified",
+      "updated": "2026-11-21",
+      "in_synthesis": true,
+      "used_in": [
+        "reports/2026-11_baseline_report.html"
+      ],
+      "document_tier": "industry_report",
+      "statement_type": "fact",
+      "evidence": {
+        "method": "manual",
+        "note": "基线首建登记：来源清单取自报告第九节，分级按机构主数据 / 既有登记映射；未抓取正文，故无 archive_hash",
+        "snapshot_date": "2026-11-21"
+      }
+    },
+    {
+      "source_id": "S-024",
+      "tier": 2,
+      "publisher": "Crunchbase",
+      "title": "https://www.crunchbase.com",
+      "url": "https://www.crunchbase.com",
+      "lang": "en",
+      "verify_status": "verified",
+      "updated": "2026-11-21",
+      "in_synthesis": true,
+      "used_in": [
+        "reports/2026-11_baseline_report.html"
+      ],
+      "document_tier": "industry_report",
+      "statement_type": "fact",
+      "evidence": {
+        "method": "manual",
+        "note": "基线首建登记：来源清单取自报告第九节，分级按机构主数据 / 既有登记映射；未抓取正文，故无 archive_hash",
+        "snapshot_date": "2026-11-21"
+      }
+    },
+    {
+      "source_id": "S-025",
+      "tier": 4,
+      "publisher": "Khaleej Times",
+      "title": "https://khaleejtimes.com",
+      "url": "https://khaleejtimes.com",
+      "lang": "en",
+      "verify_status": "media_unverified",
+      "updated": "2026-11-21",
+      "in_synthesis": false,
+      "used_in": [
+        "reports/2026-11_baseline_report.html"
+      ],
+      "document_tier": "media",
+      "statement_type": "restatement",
+      "evidence": {
+        "method": "manual",
+        "note": "基线首建登记：来源清单取自报告第九节，分级按机构主数据 / 既有登记映射；未抓取正文，故无 archive_hash",
+        "snapshot_date": "2026-11-21"
+      }
+    },
+    {
+      "source_id": "S-026",
+      "tier": 4,
+      "publisher": "The National",
+      "title": "https://thenationalnews.com",
+      "url": "https://thenationalnews.com",
+      "lang": "en",
+      "verify_status": "media_unverified",
+      "updated": "2026-11-21",
+      "in_synthesis": false,
+      "used_in": [
+        "reports/2026-11_baseline_report.html"
+      ],
+      "document_tier": "media",
+      "statement_type": "restatement",
+      "evidence": {
+        "method": "manual",
+        "note": "基线首建登记：来源清单取自报告第九节，分级按机构主数据 / 既有登记映射；未抓取正文，故无 archive_hash",
+        "snapshot_date": "2026-11-21"
+      }
+    },
+    {
+      "source_id": "S-027",
+      "tier": 4,
+      "publisher": "Gulf News",
+      "title": "https://gulfnews.com",
+      "url": "https://gulfnews.com",
+      "lang": "en",
+      "verify_status": "media_unverified",
+      "updated": "2026-11-21",
+      "in_synthesis": false,
+      "used_in": [
+        "reports/2026-11_baseline_report.html"
+      ],
+      "document_tier": "media",
+      "statement_type": "restatement",
+      "evidence": {
+        "method": "manual",
+        "note": "基线首建登记：来源清单取自报告第九节，分级按机构主数据 / 既有登记映射；未抓取正文，故无 archive_hash",
+        "snapshot_date": "2026-11-21"
+      }
+    },
+    {
+      "source_id": "S-028",
+      "tier": 4,
+      "publisher": "Telecom Review",
+      "title": "https://telecomreview.com",
+      "url": "https://telecomreview.com",
+      "lang": "en",
+      "verify_status": "media_unverified",
+      "updated": "2026-11-21",
+      "in_synthesis": false,
+      "used_in": [
+        "reports/2026-11_baseline_report.html"
+      ],
+      "document_tier": "media",
+      "statement_type": "restatement",
+      "evidence": {
+        "method": "manual",
+        "note": "基线首建登记：来源清单取自报告第九节，分级按机构主数据 / 既有登记映射；未抓取正文，故无 archive_hash",
+        "snapshot_date": "2026-11-21"
+      }
+    },
+    {
+      "source_id": "S-029",
+      "tier": 4,
+      "publisher": "Zawya",
+      "title": "https://zawya.com",
+      "url": "https://zawya.com",
+      "lang": "en",
+      "verify_status": "media_unverified",
+      "updated": "2026-11-21",
+      "in_synthesis": false,
+      "used_in": [
+        "reports/2026-11_baseline_report.html"
+      ],
+      "document_tier": "media",
+      "statement_type": "restatement",
+      "evidence": {
+        "method": "manual",
+        "note": "基线首建登记：来源清单取自报告第九节，分级按机构主数据 / 既有登记映射；未抓取正文，故无 archive_hash",
+        "snapshot_date": "2026-11-21"
+      }
+    },
+    {
+      "source_id": "S-030",
+      "tier": 4,
+      "publisher": "Brief News",
+      "title": "https://brief.news",
+      "url": "https://brief.news",
+      "lang": "en",
+      "verify_status": "media_unverified",
+      "updated": "2026-11-21",
+      "in_synthesis": false,
+      "used_in": [
+        "reports/2026-11_baseline_report.html"
+      ],
+      "document_tier": "media",
+      "statement_type": "restatement",
+      "evidence": {
+        "method": "manual",
+        "note": "基线首建登记：来源清单取自报告第九节，分级按机构主数据 / 既有登记映射；未抓取正文，故无 archive_hash",
+        "snapshot_date": "2026-11-21"
+      }
+    }
+  ]
+}

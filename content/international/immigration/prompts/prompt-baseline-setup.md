@@ -6,7 +6,7 @@
 > **框架说明（贯穿全程）**：[政策法规解读型基线模板](../../../../engine/templates/policy-analysis/prompt-baseline-setup-template.md)。
 > **交付格式**：纯 HTML 交付（canonical 富样式自包含 HTML）；md 源稿仅存档于 `sources/`。
 
-> **九节固化锚**：本报告结构 = [基线模板](<../../../../engine/templates/policy-analysis/prompt-baseline-setup-template.md>) 九节骨架逐字继承（节标题为本业务线固化锚，不得增删节、调整顺序）。字数 8000–15000。
+> **九节固化锚**：本报告结构 = [基线模板](../../../../engine/templates/policy-analysis/prompt-baseline-setup-template.md) 九节骨架逐字继承（节标题为本业务线固化锚，不得增删节、调整顺序）。字数 8000–15000。
 
 > **🔒 第三节节标题固化锚（业务实例）**
 > **一、执行摘要**｜**二、政策台账与监测机制**｜**三、高技能移民框架总览**｜**四、重点国家政策逐条解读**｜**五、影响对象矩阵**｜**六、合规应对建议（建议章）**｜**七、生效时间线**｜**八、数据治理与局限**｜**九、参考来源清单**
@@ -75,7 +75,7 @@
 
 按基线模板生成 `sources/2026-11_baseline_report.md`（含 canonical HTML 结构，用于生成 `reports/2026-11_baseline_report.html`）。要求：
 
-- **九节结构逐字继承**：按 [基线模板](<../../../../engine/templates/policy-analysis/prompt-baseline-setup-template.md>) 与上方「九节固化锚」，九节全模块（不得只写摘要 + 来源）；第一节决策摘要 ≤1 屏。
+- **九节结构逐字继承**：按 [基线模板](../../../../engine/templates/policy-analysis/prompt-baseline-setup-template.md) 与上方「九节固化锚」，九节全模块（不得只写摘要 + 来源）；第一节决策摘要 ≤1 屏。
 - **第一节**：`结论先行`（核心判断 3–6 条）+ 一句话定位 + 场景切片（主：赴外就业 / 定居决策；次：政策研究 / 比较）。
 - **第三节**：九国框架总览（层级地图 + 国别对比矩阵 + 术语口径区分）。
 - **第四节**：逐国逐通道解读（条款摘编 / 解读 / 官方答问），每国附 2024–2026 变化与来源。

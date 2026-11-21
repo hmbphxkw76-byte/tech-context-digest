@@ -86,11 +86,11 @@ engine/prompts/                    # 泛用版业务提示词（每类型一目�
 |---|---|---|---|---|---|
 | market-monitoring | 市场指标监测型 | prompt-baseline-setup-template.md | monthly / quarterly / annual（三份独立） | 月 / 季 / 年三周期 | content/economy/dubai/apartment |
 | trend-weekly | 行业趋势周报型 | prompt-baseline-setup-template.md | prompt-weekly-monitor-template.md | 周报主节拍（数据截止日命名）+ 事件触发板块升级 | content/economy/trends |
-| employment-research | 职业就业调研型 | prompt-baseline-setup-template.md | prompt-update-template.md（一份覆盖三档节拍） | 基线 + 月度主更新 + 事件触发 | content/tech/ai-security/dubai |
-| competitive-intelligence | 竞争情报监测型 | prompt-baseline-setup-template.md | prompt-monthly-update-template.md（覆盖两档） | 月度主更新（动态矩阵刷新）+ 事件触发升级 | content/tech/ai-security/competitive-intelligence/dubai；content/tech/ai-application/trends |
+| employment-research | 职业就业调研型 | prompt-baseline-setup-template.md | prompt-update-template.md（一份覆盖三档节拍） | 基线 + 月度主更新 + 事件触发 | content/tech/ai-security/dubai；content/tech/ai-application/dubai |
+| competitive-intelligence | 竞争情报监测型 | prompt-baseline-setup-template.md | prompt-monthly-update-template.md（覆盖两档） | 月度主更新（动态矩阵刷新）+ 事件触发升级 | content/tech/ai-security/competitive-intelligence/dubai；content/tech/ai-application/competitive-intelligence/dubai |
 | sentiment-monitoring | 舆情传播监测型 | prompt-baseline-setup-template.md | prompt-monthly-update-template.md（覆盖两档） | 月度舆情月报 + 事件触发预警升级 | 暂无 |
 | consumer-research | 消费者·用户调研型 | prompt-baseline-setup-template.md | prompt-study-template.md（项目制） | 项目制专题调研 + 年度满意度复测 | 暂无 |
-| industry-research | 行业深度研究型 | prompt-baseline-setup-template.md | prompt-annual-refresh-template.md | 一次性深度全景 + 年度刷新（重大事件可插刷） | content/tech/ai-security/industry-research/dubai |
+| industry-research | 行业深度研究型 | prompt-baseline-setup-template.md | prompt-annual-refresh-template.md | 一次性深度全景 + 年度刷新（重大事件可插刷） | content/tech/ai-security/industry-research/dubai；content/tech/ai-application/industry-research/dubai |
 | market-sizing | 市场规模测算与预测型 | prompt-baseline-setup-template.md | prompt-annual-refresh-template.md | 一次性测算建模 + 年度假设刷新与回测（失效信号可插刷） | 暂无 |
 | investment-research | 投资分析与尽调型 | prompt-baseline-setup-template.md | prompt-target-update-template.md | 首次覆盖 + 定期复核 + 事件触发结论修订 | 暂无 |
 | policy-analysis | 政策法规解读型 | prompt-baseline-setup-template.md | prompt-monthly-monitor-template.md（月度）；prompt-policy-review-template.md（事件 / 年度） | 月度主更新 + 事件触发单份解读 + 年度台账复盘 | content/education/education-system；content/international/international-relations；content/international/immigration；content/political/political-system；content/society/social-structure |
@@ -144,3 +144,4 @@ engine/prompts/                    # 泛用版业务提示词（每类型一目�
 | v1.14 | 2026-11-18 | 四主题业务线接入 | policy-analysis 类型下新增四条业务线：`content/education/education-system`、`content/international/international-relations`、`content/political/political-system`、`content/society/social-structure`（P1-9 四主题接入就绪化；region 可选，业务线以 category 段落位） |
 | v1.15 | 2026-11-21 | 科技主题月度化 | trend-weekly 仅保留 `content/economy/trends`（tech 两条周报线停用）；employment-research 接入业务线更新为 `content/tech/ai-security/dubai`；competitive-intelligence 新增 `content/tech/ai-application/trends` |
 | v1.16 | 2026-11-21 | policy-analysis 月度节拍扩展 | 新增 `prompt-monthly-monitor-template.md`（类型模板）与 `engine/prompts/policy-analysis/prompt-monthly-monitor.md`（泛用版）；compliance-rules.json 登记 monthly 骨架；`_common.py` TYPE_CADENCE 注册 monthly；首条接入业务线 `content/international/immigration` |
+| v1.17 | 2026-11-21 | ai-application 对齐 ai-security | ai-application 删除 `trends`，新建 `competitive-intelligence/dubai`、`dubai`、`industry-research/dubai` 三条月度业务线；employment-research / competitive-intelligence / industry-research 三个类型的「已接入业务线」列同步登记 |

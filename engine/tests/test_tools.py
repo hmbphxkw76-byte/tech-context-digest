@@ -866,8 +866,11 @@ class TestLayout(unittest.TestCase):
                 "content/tech/ai-security/dubai",
                 "content/tech/ai-security/industry-research/dubai",
                 "content/tech/ai-security/competitive-intelligence/dubai",
-                "content/tech/ai-application/trends",
+                "content/tech/ai-application/dubai",
+                "content/tech/ai-application/industry-research/dubai",
+                "content/tech/ai-application/competitive-intelligence/dubai",
                 "content/education/education-system",
+                "content/international/immigration",
                 "content/international/international-relations",
                 "content/political/political-system",
                 "content/society/social-structure",
@@ -898,15 +901,15 @@ class TestLayout(unittest.TestCase):
         self.assertEqual(by_rel["content/economy/insight"].property_type, "insight")
         self.assertEqual(by_rel["content/tech/ai-security/dubai"].region, "")
         self.assertEqual(by_rel["content/tech/ai-security/dubai"].property_type, "dubai")
-        self.assertEqual(by_rel["content/tech/ai-application/trends"].region, "")
-        self.assertEqual(by_rel["content/tech/ai-application/trends"].property_type, "trends")
+        self.assertEqual(by_rel["content/tech/ai-application/dubai"].region, "")
+        self.assertEqual(by_rel["content/tech/ai-application/dubai"].property_type, "dubai")
 
     def test_optional_region_resolution(self):
         """region 为可选维度：缺省时 category 直接落位，存在时按声明顺序映射。"""
         by_rel = {b.rel: b for b in _common.iter_business_dirs()}
         self.assertEqual(by_rel["content/economy/trends"].category, "trends")
         self.assertEqual(by_rel["content/tech/ai-security/dubai"].category, "ai-security")
-        self.assertEqual(by_rel["content/tech/ai-application/trends"].category, "ai-application")
+        self.assertEqual(by_rel["content/tech/ai-application/dubai"].category, "ai-application")
 
     def test_business_path_exists(self):
         for b in _common.iter_business_dirs():

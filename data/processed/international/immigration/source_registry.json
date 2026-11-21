@@ -22,7 +22,7 @@
       "used_in": ["reports/2026-11_baseline_report.html"],
       "document_tier": "official_release",
       "statement_type": "fact",
-      "evidence": {"method": "subagent_fetch", "note": "子代理实际打开官方页核验", "snapshot_date": "2026-11-21"}
+      "evidence": {"method": "web_fetch", "note": "子代理实际打开官方页核验", "snapshot_date": "2026-11-21"}
     },
     {
       "source_id": "S-002",
@@ -31,13 +31,13 @@
       "title": "Straight to Residence Visa",
       "url": "https://www.immigration.govt.nz/visas/straight-to-residence-visa",
       "lang": "en",
-      "verify_status": "snippet",
+      "verify_status": "media_unverified",
       "updated": "2026-11-21",
       "in_synthesis": false,
       "used_in": ["reports/2026-11_baseline_report.html"],
       "document_tier": "official_release",
       "statement_type": "fact",
-      "evidence": {"method": "subagent_search", "note": "仅搜索结果摘要，未打开原文", "snapshot_date": "2026-11-21"}
+      "evidence": {"method": "manual", "note": "仅搜索结果摘要，未打开原文", "snapshot_date": "2026-11-21"}
     },
     {
       "source_id": "S-003",
@@ -46,13 +46,13 @@
       "title": "Work to Residence Visa",
       "url": "https://www.immigration.govt.nz/visas/work-to-residence-visa",
       "lang": "en",
-      "verify_status": "snippet",
+      "verify_status": "media_unverified",
       "updated": "2026-11-21",
       "in_synthesis": false,
       "used_in": ["reports/2026-11_baseline_report.html"],
       "document_tier": "official_release",
       "statement_type": "fact",
-      "evidence": {"method": "subagent_search", "note": "仅搜索结果摘要，未打开原文", "snapshot_date": "2026-11-21"}
+      "evidence": {"method": "manual", "note": "仅搜索结果摘要，未打开原文", "snapshot_date": "2026-11-21"}
     },
     {
       "source_id": "S-004",
@@ -67,7 +67,7 @@
       "used_in": ["reports/2026-11_baseline_report.html"],
       "document_tier": "official_release",
       "statement_type": "fact",
-      "evidence": {"method": "subagent_fetch", "note": "子代理实际打开官方页核验（含工资页）", "snapshot_date": "2026-11-21"}
+      "evidence": {"method": "web_fetch", "note": "子代理实际打开官方页核验（含工资页）", "snapshot_date": "2026-11-21"}
     },
     {
       "source_id": "S-005",
@@ -82,7 +82,7 @@
       "used_in": ["reports/2026-11_baseline_report.html"],
       "document_tier": "official_release",
       "statement_type": "fact",
-      "evidence": {"method": "subagent_fetch", "note": "子代理实际打开官方页核验", "snapshot_date": "2026-11-21"}
+      "evidence": {"method": "web_fetch", "note": "子代理实际打开官方页核验", "snapshot_date": "2026-11-21"}
     },
     {
       "source_id": "S-006",
@@ -97,7 +97,7 @@
       "used_in": ["reports/2026-11_baseline_report.html"],
       "document_tier": "official_release",
       "statement_type": "fact",
-      "evidence": {"method": "subagent_fetch", "note": "子代理实际打开官方页核验", "snapshot_date": "2026-11-21"}
+      "evidence": {"method": "web_fetch", "note": "子代理实际打开官方页核验", "snapshot_date": "2026-11-21"}
     },
     {
       "source_id": "S-007",
@@ -112,7 +112,7 @@
       "used_in": ["reports/2026-11_baseline_report.html"],
       "document_tier": "official_release",
       "statement_type": "fact",
-      "evidence": {"method": "subagent_fetch", "note": "子代理实际打开官方页核验", "snapshot_date": "2026-11-21"}
+      "evidence": {"method": "web_fetch", "note": "子代理实际打开官方页核验", "snapshot_date": "2026-11-21"}
     },
     {
       "source_id": "S-008",
@@ -127,7 +127,7 @@
       "used_in": ["reports/2026-11_baseline_report.html"],
       "document_tier": "official_release",
       "statement_type": "fact",
-      "evidence": {"method": "subagent_fetch", "note": "子代理实际打开官方页核验", "snapshot_date": "2026-11-21"}
+      "evidence": {"method": "web_fetch", "note": "子代理实际打开官方页核验", "snapshot_date": "2026-11-21"}
     },
     {
       "source_id": "S-009",
@@ -142,7 +142,7 @@
       "used_in": ["reports/2026-11_baseline_report.html"],
       "document_tier": "official_release",
       "statement_type": "fact",
-      "evidence": {"method": "subagent_fetch", "note": "子代理实际打开官方页核验", "snapshot_date": "2026-11-21"}
+      "evidence": {"method": "web_fetch", "note": "子代理实际打开官方页核验", "snapshot_date": "2026-11-21"}
     },
     {
       "source_id": "S-010",
@@ -157,7 +157,7 @@
       "used_in": ["reports/2026-11_baseline_report.html"],
       "document_tier": "official_release",
       "statement_type": "fact",
-      "evidence": {"method": "subagent_fetch", "note": "子代理实际打开官方页核验", "snapshot_date": "2026-11-21"}
+      "evidence": {"method": "web_fetch", "note": "子代理实际打开官方页核验", "snapshot_date": "2026-11-21"}
     },
     {
       "source_id": "S-011",
@@ -166,13 +166,13 @@
       "title": "National Innovation Visa (subclass 858)",
       "url": "https://immi.homeaffairs.gov.au/visas/getting-a-visa/visa-listing/national-innovation-visa-858",
       "lang": "en",
-      "verify_status": "snippet",
+      "verify_status": "media_unverified",
       "updated": "2026-11-21",
       "in_synthesis": false,
       "used_in": ["reports/2026-11_baseline_report.html"],
       "document_tier": "official_release",
       "statement_type": "fact",
-      "evidence": {"method": "subagent_search", "note": "immi 子域被 Akamai 拦截，仅摘要", "snapshot_date": "2026-11-21"}
+      "evidence": {"method": "manual", "note": "immi 子域被 Akamai 拦截，仅摘要", "snapshot_date": "2026-11-21"}
     },
     {
       "source_id": "S-012",
@@ -181,13 +181,13 @@
       "title": "Employer Nomination Scheme (subclass 186) – TRT stream",
       "url": "https://immi.homeaffairs.gov.au/visas/getting-a-visa/visa-listing/employer-nomination-scheme-186/temporary-residence-transition-stream",
       "lang": "en",
-      "verify_status": "snippet",
+      "verify_status": "media_unverified",
       "updated": "2026-11-21",
       "in_synthesis": false,
       "used_in": ["reports/2026-11_baseline_report.html"],
       "document_tier": "official_release",
       "statement_type": "fact",
-      "evidence": {"method": "subagent_search", "note": "immi 子域被 Akamai 拦截，仅摘要", "snapshot_date": "2026-11-21"}
+      "evidence": {"method": "manual", "note": "immi 子域被 Akamai 拦截，仅摘要", "snapshot_date": "2026-11-21"}
     },
     {
       "source_id": "S-013",
@@ -196,13 +196,13 @@
       "title": "Skills in Demand Visa (subclass 482) – Core Skills stream",
       "url": "https://immi.homeaffairs.gov.au/visas/getting-a-visa/visa-listing/skills-in-demand-visa-subclass-482/core-skills-stream",
       "lang": "en",
-      "verify_status": "snippet",
+      "verify_status": "media_unverified",
       "updated": "2026-11-21",
       "in_synthesis": false,
       "used_in": ["reports/2026-11_baseline_report.html"],
       "document_tier": "official_release",
       "statement_type": "fact",
-      "evidence": {"method": "subagent_search", "note": "immi 子域被 Akamai 拦截，仅摘要", "snapshot_date": "2026-11-21"}
+      "evidence": {"method": "manual", "note": "immi 子域被 Akamai 拦截，仅摘要", "snapshot_date": "2026-11-21"}
     },
     {
       "source_id": "S-014",
@@ -211,13 +211,13 @@
       "title": "Skilled Independent (subclass 189) – points table",
       "url": "https://immi.homeaffairs.gov.au/visas/getting-a-visa/visa-listing/skilled-independent-189/points-table",
       "lang": "en",
-      "verify_status": "snippet",
+      "verify_status": "media_unverified",
       "updated": "2026-11-21",
       "in_synthesis": false,
       "used_in": ["reports/2026-11_baseline_report.html"],
       "document_tier": "official_release",
       "statement_type": "fact",
-      "evidence": {"method": "subagent_search", "note": "immi 子域被 Akamai 拦截，仅摘要", "snapshot_date": "2026-11-21"}
+      "evidence": {"method": "manual", "note": "immi 子域被 Akamai 拦截，仅摘要", "snapshot_date": "2026-11-21"}
     },
     {
       "source_id": "S-015",
@@ -232,7 +232,7 @@
       "used_in": ["reports/2026-11_baseline_report.html"],
       "document_tier": "official_release",
       "statement_type": "fact",
-      "evidence": {"method": "subagent_fetch", "note": "子代理实际打开官方页核验", "snapshot_date": "2026-11-21"}
+      "evidence": {"method": "web_fetch", "note": "子代理实际打开官方页核验", "snapshot_date": "2026-11-21"}
     },
     {
       "source_id": "S-016",
@@ -247,7 +247,7 @@
       "used_in": ["reports/2026-11_baseline_report.html"],
       "document_tier": "official_release",
       "statement_type": "fact",
-      "evidence": {"method": "subagent_fetch", "note": "子代理实际打开官方页核验", "snapshot_date": "2026-11-21"}
+      "evidence": {"method": "web_fetch", "note": "子代理实际打开官方页核验", "snapshot_date": "2026-11-21"}
     },
     {
       "source_id": "S-017",
@@ -262,7 +262,7 @@
       "used_in": ["reports/2026-11_baseline_report.html"],
       "document_tier": "official_release",
       "statement_type": "fact",
-      "evidence": {"method": "subagent_fetch", "note": "子代理实际打开官方页核验", "snapshot_date": "2026-11-21"}
+      "evidence": {"method": "web_fetch", "note": "子代理实际打开官方页核验", "snapshot_date": "2026-11-21"}
     },
     {
       "source_id": "S-018",
@@ -277,7 +277,7 @@
       "used_in": ["reports/2026-11_baseline_report.html"],
       "document_tier": "official_release",
       "statement_type": "fact",
-      "evidence": {"method": "subagent_fetch", "note": "子代理实际打开官方入口核验", "snapshot_date": "2026-11-21"}
+      "evidence": {"method": "web_fetch", "note": "子代理实际打开官方入口核验", "snapshot_date": "2026-11-21"}
     },
     {
       "source_id": "S-019",
@@ -292,7 +292,7 @@
       "used_in": ["reports/2026-11_baseline_report.html"],
       "document_tier": "official_release",
       "statement_type": "fact",
-      "evidence": {"method": "subagent_fetch", "note": "子代理实际打开官方页核验", "snapshot_date": "2026-11-21"}
+      "evidence": {"method": "web_fetch", "note": "子代理实际打开官方页核验", "snapshot_date": "2026-11-21"}
     },
     {
       "source_id": "S-020",
@@ -301,13 +301,13 @@
       "title": "Global Talent Stream",
       "url": "https://www.canada.ca/en/employment-social-development/services/foreign-workers/global-talent.html",
       "lang": "en",
-      "verify_status": "snippet",
+      "verify_status": "media_unverified",
       "updated": "2026-11-21",
       "in_synthesis": false,
       "used_in": ["reports/2026-11_baseline_report.html"],
       "document_tier": "official_release",
       "statement_type": "fact",
-      "evidence": {"method": "subagent_search", "note": "仅搜索结果摘要，未打开原文", "snapshot_date": "2026-11-21"}
+      "evidence": {"method": "manual", "note": "仅搜索结果摘要，未打开原文", "snapshot_date": "2026-11-21"}
     },
     {
       "source_id": "S-021",
@@ -322,7 +322,7 @@
       "used_in": ["reports/2026-11_baseline_report.html"],
       "document_tier": "official_release",
       "statement_type": "fact",
-      "evidence": {"method": "subagent_fetch", "note": "子代理实际打开官方页核验", "snapshot_date": "2026-11-21"}
+      "evidence": {"method": "web_fetch", "note": "子代理实际打开官方页核验", "snapshot_date": "2026-11-21"}
     },
     {
       "source_id": "S-022",
@@ -337,7 +337,7 @@
       "used_in": ["reports/2026-11_baseline_report.html"],
       "document_tier": "official_release",
       "statement_type": "fact",
-      "evidence": {"method": "subagent_fetch", "note": "子代理实际打开官方页核验（页面状态 Closed）", "snapshot_date": "2026-11-21"}
+      "evidence": {"method": "web_fetch", "note": "子代理实际打开官方页核验（页面状态 Closed）", "snapshot_date": "2026-11-21"}
     },
     {
       "source_id": "S-023",
@@ -346,13 +346,13 @@
       "title": "Start-up Visa",
       "url": "https://www.canada.ca/en/immigration-refugees-citizenship/services/immigrate-canada/start-visa.html",
       "lang": "en",
-      "verify_status": "snippet",
+      "verify_status": "media_unverified",
       "updated": "2026-11-21",
       "in_synthesis": false,
       "used_in": ["reports/2026-11_baseline_report.html"],
       "document_tier": "official_release",
       "statement_type": "fact",
-      "evidence": {"method": "subagent_search", "note": "仅搜索结果摘要，未打开原文", "snapshot_date": "2026-11-21"}
+      "evidence": {"method": "manual", "note": "仅搜索结果摘要，未打开原文", "snapshot_date": "2026-11-21"}
     },
     {
       "source_id": "S-024",
@@ -367,7 +367,7 @@
       "used_in": ["reports/2026-11_baseline_report.html"],
       "document_tier": "official_release",
       "statement_type": "fact",
-      "evidence": {"method": "subagent_fetch", "note": "子代理实际打开官方页核验", "snapshot_date": "2026-11-21"}
+      "evidence": {"method": "web_fetch", "note": "子代理实际打开官方页核验", "snapshot_date": "2026-11-21"}
     },
     {
       "source_id": "S-025",
@@ -382,7 +382,7 @@
       "used_in": ["reports/2026-11_baseline_report.html"],
       "document_tier": "official_release",
       "statement_type": "fact",
-      "evidence": {"method": "subagent_fetch", "note": "子代理实际打开官方政策手册核验", "snapshot_date": "2026-11-21"}
+      "evidence": {"method": "web_fetch", "note": "子代理实际打开官方政策手册核验", "snapshot_date": "2026-11-21"}
     },
     {
       "source_id": "S-026",
@@ -397,7 +397,7 @@
       "used_in": ["reports/2026-11_baseline_report.html"],
       "document_tier": "official_release",
       "statement_type": "fact",
-      "evidence": {"method": "subagent_fetch", "note": "子代理实际打开官方页核验", "snapshot_date": "2026-11-21"}
+      "evidence": {"method": "web_fetch", "note": "子代理实际打开官方页核验", "snapshot_date": "2026-11-21"}
     },
     {
       "source_id": "S-027",
@@ -406,13 +406,13 @@
       "title": "Employment-Based Immigration: Second Preference EB-2",
       "url": "https://www.uscis.gov/working-in-the-united-states/employment-based-immigration-second-preference-eb-2",
       "lang": "en",
-      "verify_status": "snippet",
+      "verify_status": "media_unverified",
       "updated": "2026-11-21",
       "in_synthesis": false,
       "used_in": ["reports/2026-11_baseline_report.html"],
       "document_tier": "official_release",
       "statement_type": "fact",
-      "evidence": {"method": "subagent_search", "note": "仅搜索结果摘要，未打开原文", "snapshot_date": "2026-11-21"}
+      "evidence": {"method": "manual", "note": "仅搜索结果摘要，未打开原文", "snapshot_date": "2026-11-21"}
     },
     {
       "source_id": "S-028",
@@ -427,7 +427,7 @@
       "used_in": ["reports/2026-11_baseline_report.html"],
       "document_tier": "official_release",
       "statement_type": "fact",
-      "evidence": {"method": "subagent_fetch", "note": "子代理实际打开官方页核验", "snapshot_date": "2026-11-21"}
+      "evidence": {"method": "web_fetch", "note": "子代理实际打开官方页核验", "snapshot_date": "2026-11-21"}
     },
     {
       "source_id": "S-029",
@@ -442,7 +442,7 @@
       "used_in": ["reports/2026-11_baseline_report.html"],
       "document_tier": "official_release",
       "statement_type": "fact",
-      "evidence": {"method": "subagent_fetch", "note": "子代理实际打开官方页核验", "snapshot_date": "2026-11-21"}
+      "evidence": {"method": "web_fetch", "note": "子代理实际打开官方页核验", "snapshot_date": "2026-11-21"}
     },
     {
       "source_id": "S-030",
@@ -457,7 +457,7 @@
       "used_in": ["reports/2026-11_baseline_report.html"],
       "document_tier": "official_release",
       "statement_type": "fact",
-      "evidence": {"method": "subagent_fetch", "note": "子代理实际打开官方页核验", "snapshot_date": "2026-11-21"}
+      "evidence": {"method": "web_fetch", "note": "子代理实际打开官方页核验", "snapshot_date": "2026-11-21"}
     },
     {
       "source_id": "S-031",
@@ -466,13 +466,13 @@
       "title": "E-3 Treaty Trader / Investor Visa",
       "url": "https://travel.state.gov/content/travel/en/us-visas/employment/treaty-trader-investor-visa-e.html",
       "lang": "en",
-      "verify_status": "snippet",
+      "verify_status": "media_unverified",
       "updated": "2026-11-21",
       "in_synthesis": false,
       "used_in": ["reports/2026-11_baseline_report.html"],
       "document_tier": "official_release",
       "statement_type": "fact",
-      "evidence": {"method": "subagent_search", "note": "travel.state.gov 被 Cloudflare 拦截，仅摘要", "snapshot_date": "2026-11-21"}
+      "evidence": {"method": "manual", "note": "travel.state.gov 被 Cloudflare 拦截，仅摘要", "snapshot_date": "2026-11-21"}
     },
     {
       "source_id": "S-032",
@@ -481,13 +481,13 @@
       "title": "Policy Manual Volume 3 Part G (International Entrepreneur Parole)",
       "url": "https://www.uscis.gov/policy-manual/volume-3-part-g",
       "lang": "en",
-      "verify_status": "snippet",
+      "verify_status": "media_unverified",
       "updated": "2026-11-21",
       "in_synthesis": false,
       "used_in": ["reports/2026-11_baseline_report.html"],
       "document_tier": "official_release",
       "statement_type": "fact",
-      "evidence": {"method": "subagent_search", "note": "仅搜索结果摘要，未打开原文", "snapshot_date": "2026-11-21"}
+      "evidence": {"method": "manual", "note": "仅搜索结果摘要，未打开原文", "snapshot_date": "2026-11-21"}
     },
     {
       "source_id": "S-033",
@@ -502,7 +502,7 @@
       "used_in": ["reports/2026-11_baseline_report.html"],
       "document_tier": "official_release",
       "statement_type": "fact",
-      "evidence": {"method": "subagent_fetch", "note": "子代理实际打开官方页核验（页脚更新 2026-11-03）", "snapshot_date": "2026-11-21"}
+      "evidence": {"method": "web_fetch", "note": "子代理实际打开官方页核验（页脚更新 2026-11-03）", "snapshot_date": "2026-11-21"}
     },
     {
       "source_id": "S-034",
@@ -517,7 +517,7 @@
       "used_in": ["reports/2026-11_baseline_report.html"],
       "document_tier": "official_release",
       "statement_type": "fact",
-      "evidence": {"method": "subagent_fetch", "note": "子代理实际打开官方页核验", "snapshot_date": "2026-11-21"}
+      "evidence": {"method": "web_fetch", "note": "子代理实际打开官方页核验", "snapshot_date": "2026-11-21"}
     },
     {
       "source_id": "S-035",
@@ -532,7 +532,7 @@
       "used_in": ["reports/2026-11_baseline_report.html"],
       "document_tier": "official_release",
       "statement_type": "fact",
-      "evidence": {"method": "subagent_fetch", "note": "子代理实际打开官方页核验", "snapshot_date": "2026-11-21"}
+      "evidence": {"method": "web_fetch", "note": "子代理实际打开官方页核验", "snapshot_date": "2026-11-21"}
     },
     {
       "source_id": "S-036",
@@ -547,7 +547,7 @@
       "used_in": ["reports/2026-11_baseline_report.html"],
       "document_tier": "official_release",
       "statement_type": "fact",
-      "evidence": {"method": "subagent_fetch", "note": "子代理实际打开官方页核验", "snapshot_date": "2026-11-21"}
+      "evidence": {"method": "web_fetch", "note": "子代理实际打开官方页核验", "snapshot_date": "2026-11-21"}
     },
     {
       "source_id": "S-037",
@@ -562,7 +562,7 @@
       "used_in": ["reports/2026-11_baseline_report.html"],
       "document_tier": "official_release",
       "statement_type": "fact",
-      "evidence": {"method": "subagent_fetch", "note": "子代理实际打开官方页核验", "snapshot_date": "2026-11-21"}
+      "evidence": {"method": "web_fetch", "note": "子代理实际打开官方页核验", "snapshot_date": "2026-11-21"}
     },
     {
       "source_id": "S-038",
@@ -577,7 +577,7 @@
       "used_in": ["reports/2026-11_baseline_report.html"],
       "document_tier": "official_release",
       "statement_type": "fact",
-      "evidence": {"method": "subagent_fetch", "note": "仅核验一般规则；2025/2026 数值页被机器人防护拦截", "snapshot_date": "2026-11-21"}
+      "evidence": {"method": "web_fetch", "note": "仅核验一般规则；2025/2026 数值页被机器人防护拦截", "snapshot_date": "2026-11-21"}
     },
     {
       "source_id": "S-039",
@@ -592,7 +592,7 @@
       "used_in": ["reports/2026-11_baseline_report.html"],
       "document_tier": "official_release",
       "statement_type": "fact",
-      "evidence": {"method": "subagent_fetch", "note": "官方法规数据库（德语）", "snapshot_date": "2026-11-21"}
+      "evidence": {"method": "web_fetch", "note": "官方法规数据库（德语）", "snapshot_date": "2026-11-21"}
     },
     {
       "source_id": "S-040",
@@ -607,7 +607,7 @@
       "used_in": ["reports/2026-11_baseline_report.html"],
       "document_tier": "official_release",
       "statement_type": "fact",
-      "evidence": {"method": "subagent_fetch", "note": "官方法规数据库（德语）", "snapshot_date": "2026-11-21"}
+      "evidence": {"method": "web_fetch", "note": "官方法规数据库（德语）", "snapshot_date": "2026-11-21"}
     },
     {
       "source_id": "S-041",
@@ -622,7 +622,7 @@
       "used_in": ["reports/2026-11_baseline_report.html"],
       "document_tier": "official_release",
       "statement_type": "fact",
-      "evidence": {"method": "subagent_fetch", "note": "官方法规数据库（德语）", "snapshot_date": "2026-11-21"}
+      "evidence": {"method": "web_fetch", "note": "官方法规数据库（德语）", "snapshot_date": "2026-11-21"}
     },
     {
       "source_id": "S-042",
@@ -637,7 +637,7 @@
       "used_in": ["reports/2026-11_baseline_report.html"],
       "document_tier": "official_release",
       "statement_type": "fact",
-      "evidence": {"method": "subagent_fetch", "note": "官方法规数据库（德语）", "snapshot_date": "2026-11-21"}
+      "evidence": {"method": "web_fetch", "note": "官方法规数据库（德语）", "snapshot_date": "2026-11-21"}
     },
     {
       "source_id": "S-043",
@@ -646,13 +646,13 @@
       "title": "Opportunity Card (Chancenkarte)",
       "url": "https://www.make-it-in-germany.com/en/visa-recognition/opportunity-card",
       "lang": "en",
-      "verify_status": "snippet",
+      "verify_status": "media_unverified",
       "updated": "2026-11-21",
       "in_synthesis": false,
       "used_in": ["reports/2026-11_baseline_report.html"],
       "document_tier": "official_release",
       "statement_type": "fact",
-      "evidence": {"method": "subagent_search", "note": "页面被机器人防护拦截，仅摘要", "snapshot_date": "2026-11-21"}
+      "evidence": {"method": "manual", "note": "页面被机器人防护拦截，仅摘要", "snapshot_date": "2026-11-21"}
     },
     {
       "source_id": "S-044",
@@ -667,7 +667,7 @@
       "used_in": ["reports/2026-11_baseline_report.html"],
       "document_tier": "official_release",
       "statement_type": "fact",
-      "evidence": {"method": "subagent_fetch", "note": "子代理实际打开官方页核验（Vérifié le 01 juin 2026）", "snapshot_date": "2026-11-21"}
+      "evidence": {"method": "web_fetch", "note": "子代理实际打开官方页核验（Vérifié le 01 juin 2026）", "snapshot_date": "2026-11-21"}
     },
     {
       "source_id": "S-045",
@@ -676,13 +676,13 @@
       "title": "Talent Famille (F35792)",
       "url": "https://www.service-public.fr/particuliers/vosdroits/F35792",
       "lang": "fr",
-      "verify_status": "snippet",
+      "verify_status": "media_unverified",
       "updated": "2026-11-21",
       "in_synthesis": false,
       "used_in": ["reports/2026-11_baseline_report.html"],
       "document_tier": "official_release",
       "statement_type": "fact",
-      "evidence": {"method": "subagent_search", "note": "仅搜索结果摘要，未打开原文", "snapshot_date": "2026-11-21"}
+      "evidence": {"method": "manual", "note": "仅搜索结果摘要，未打开原文", "snapshot_date": "2026-11-21"}
     },
     {
       "source_id": "S-046",
@@ -697,7 +697,7 @@
       "used_in": ["reports/2026-11_baseline_report.html"],
       "document_tier": "official_release",
       "statement_type": "fact",
-      "evidence": {"method": "subagent_fetch", "note": "子代理实际打开官方入口核验", "snapshot_date": "2026-11-21"}
+      "evidence": {"method": "web_fetch", "note": "子代理实际打开官方入口核验", "snapshot_date": "2026-11-21"}
     },
     {
       "source_id": "S-047",
@@ -712,7 +712,7 @@
       "used_in": ["reports/2026-11_baseline_report.html"],
       "document_tier": "official_release",
       "statement_type": "fact",
-      "evidence": {"method": "subagent_fetch", "note": "子代理实际打开官方入口核验", "snapshot_date": "2026-11-21"}
+      "evidence": {"method": "web_fetch", "note": "子代理实际打开官方入口核验", "snapshot_date": "2026-11-21"}
     },
     {
       "source_id": "S-048",
@@ -727,7 +727,7 @@
       "used_in": ["reports/2026-11_baseline_report.html"],
       "document_tier": "official_release",
       "statement_type": "fact",
-      "evidence": {"method": "subagent_fetch", "note": "子代理实际打开官方入口核验", "snapshot_date": "2026-11-21"}
+      "evidence": {"method": "web_fetch", "note": "子代理实际打开官方入口核验", "snapshot_date": "2026-11-21"}
     },
     {
       "source_id": "S-049",
@@ -742,7 +742,7 @@
       "used_in": ["reports/2026-11_baseline_report.html"],
       "document_tier": "official_release",
       "statement_type": "fact",
-      "evidence": {"method": "subagent_fetch", "note": "子代理实际打开官方入口核验", "snapshot_date": "2026-11-21"}
+      "evidence": {"method": "web_fetch", "note": "子代理实际打开官方入口核验", "snapshot_date": "2026-11-21"}
     },
     {
       "source_id": "S-050",
@@ -757,7 +757,7 @@
       "used_in": ["reports/2026-11_baseline_report.html"],
       "document_tier": "official_release",
       "statement_type": "fact",
-      "evidence": {"method": "subagent_fetch", "note": "子代理实际打开官方入口核验", "snapshot_date": "2026-11-21"}
+      "evidence": {"method": "web_fetch", "note": "子代理实际打开官方入口核验", "snapshot_date": "2026-11-21"}
     },
     {
       "source_id": "S-051",
@@ -766,13 +766,13 @@
       "title": "EU 官方入口",
       "url": "https://europa.eu/",
       "lang": "en",
-      "verify_status": "snippet",
+      "verify_status": "media_unverified",
       "updated": "2026-11-21",
       "in_synthesis": false,
       "used_in": ["reports/2026-11_baseline_report.html"],
       "document_tier": "official_release",
       "statement_type": "fact",
-      "evidence": {"method": "subagent_search", "note": "仅搜索结果摘要，未打开原文", "snapshot_date": "2026-11-21"}
+      "evidence": {"method": "manual", "note": "仅搜索结果摘要，未打开原文", "snapshot_date": "2026-11-21"}
     }
   ]
 }
