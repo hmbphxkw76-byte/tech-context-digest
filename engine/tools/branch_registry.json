@@ -1,13 +1,5 @@
 {
-  "branches": {
-    "task/hero-style-restyle-b324fd3a": {
-      "note": "source=env:CATPAW_CONVERSATION_ID",
-      "session": "b324fd3a3881445286a5eff96ce9b8f0",
-      "session_short": "b324fd3a",
-      "slug": "hero-style-restyle",
-      "task": "hero-style-restyle"
-    }
-  },
+  "branches": {},
   "schema": 1,
   "spec": "BRANCH-NAMING-SPEC v1.0"
 }
