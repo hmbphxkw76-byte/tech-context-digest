@@ -113,6 +113,14 @@
           "insert_before": "## 十四、版本记录",
           "categories_include": [],
           "tags_include": []
+        },
+        {
+          "path": "../../content/education/study-abroad/prompts/business-config.md",
+          "format": "digest",
+          "section_title": "## 词汇速览（词汇库自动同步）",
+          "insert_before": "## 十、版本记录",
+          "categories_include": [],
+          "tags_include": []
         }
       ]
     },

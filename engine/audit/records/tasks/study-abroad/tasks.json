@@ -1,0 +1,42 @@
+[
+  {
+    "acceptance": "",
+    "depends_on": [],
+    "id": "T-1",
+    "phase": "",
+    "status": "done",
+    "title": "建立业务线骨架与 business-config / 基线 / 月度提示词"
+  },
+  {
+    "acceptance": "",
+    "depends_on": [],
+    "id": "T-2",
+    "phase": "",
+    "status": "done",
+    "title": "采集留学目的地政策与数据（仅英文来源）并建台账 / 来源登记"
+  },
+  {
+    "acceptance": "",
+    "depends_on": [],
+    "id": "T-3",
+    "phase": "",
+    "status": "done",
+    "title": "生成 2026-11 基线报告（canonical 自包含 HTML）"
+  },
+  {
+    "acceptance": "",
+    "depends_on": [],
+    "id": "T-4",
+    "phase": "",
+    "status": "done",
+    "title": "注册类型实例与词汇同步（template-registry / sync.json）"
+  },
+  {
+    "acceptance": "",
+    "depends_on": [],
+    "id": "T-5",
+    "phase": "",
+    "status": "done",
+    "title": "重建 hub / 指纹并跑通统一门禁"
+  }
+]
