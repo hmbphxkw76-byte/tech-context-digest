@@ -2127,6 +2127,174 @@
       "audit_id": "AUD-2026-11-21-006",
       "mark_level": "pre",
       "audited_at": "2026-11-21T04:34:32+00:00"
+    },
+    "content/international/immigration/reports/2026-11_baseline_report.html": {
+      "title": "九国 · 高技能移民政策 · 首期基线报告（2026-11）",
+      "kind": "business",
+      "category": "report",
+      "business_line": "content/international/immigration",
+      "status": "in-review",
+      "stages": {
+        "draft": true,
+        "initial": true,
+        "second": false,
+        "final": false
+      },
+      "mark": true,
+      "first_seen_at": "2026-11-21",
+      "evidence": {
+        "report": "content/international/immigration/reports/2026-11_baseline_report.html",
+        "business_line": "content/international/immigration",
+        "plans": [
+          {
+            "slug": "immigration-baseline",
+            "plan": "engine/audit/records/tasks/immigration-baseline/plan.json",
+            "tasks": "engine/audit/records/tasks/immigration-baseline/tasks.json",
+            "risks": "engine/audit/records/tasks/immigration-baseline/risks.json",
+            "reports": [
+              "content/international/immigration/reports/2026-11_baseline_report.html"
+            ],
+            "task_count": 5,
+            "risk_count": 2
+          }
+        ],
+        "gate": {
+          "entry": "engine/tools/optimization_gate.py",
+          "probe": true
+        },
+        "audit": {
+          "review": "engine/audit/records/reviews/content-international-immigration-reports-2026-11-baseline-report-html.json",
+          "status": "in-review",
+          "stages": {
+            "draft": true,
+            "initial": true,
+            "second": false,
+            "final": false
+          },
+          "mark_level": "pre",
+          "audit_id": "AUD-2026-11-21-007"
+        }
+      },
+      "audit_id": "AUD-2026-11-21-007",
+      "mark_level": "pre",
+      "audited_at": "2026-11-21T10:05:19+00:00"
+    },
+    "content/tech/ai-application/competitive-intelligence/dubai/reports/2026-11_baseline_report.html": {
+      "title": "迪拜（阿联酋）AI 应用竞争格局 · 首期基线报告 · 2026-11",
+      "kind": "business",
+      "category": "report",
+      "business_line": "content/tech/ai-application/competitive-intelligence/dubai",
+      "status": "in-review",
+      "stages": {
+        "draft": true,
+        "initial": true,
+        "second": false,
+        "final": false
+      },
+      "mark": true,
+      "first_seen_at": "2026-11-21",
+      "evidence": {
+        "report": "content/tech/ai-application/competitive-intelligence/dubai/reports/2026-11_baseline_report.html",
+        "business_line": "content/tech/ai-application/competitive-intelligence/dubai",
+        "plans": [],
+        "gate": {
+          "entry": "engine/tools/optimization_gate.py",
+          "probe": true
+        },
+        "audit": {
+          "review": "engine/audit/records/reviews/content-tech-ai-application-competitive-intelligence-dubai-reports-2026-11-baseline-report-html.json",
+          "status": "in-review",
+          "stages": {
+            "draft": true,
+            "initial": true,
+            "second": false,
+            "final": false
+          },
+          "mark_level": "pre",
+          "audit_id": "AUD-2026-11-21-008"
+        }
+      },
+      "audit_id": "AUD-2026-11-21-008",
+      "mark_level": "pre",
+      "audited_at": "2026-11-21T10:05:19+00:00"
+    },
+    "content/tech/ai-application/dubai/reports/2026-11_baseline_report.html": {
+      "title": "迪拜（阿联酋）AI 应用就业 · 首期基线报告 · 2026-11",
+      "kind": "business",
+      "category": "report",
+      "business_line": "content/tech/ai-application/dubai",
+      "status": "in-review",
+      "stages": {
+        "draft": true,
+        "initial": true,
+        "second": false,
+        "final": false
+      },
+      "mark": true,
+      "first_seen_at": "2026-11-21",
+      "evidence": {
+        "report": "content/tech/ai-application/dubai/reports/2026-11_baseline_report.html",
+        "business_line": "content/tech/ai-application/dubai",
+        "plans": [],
+        "gate": {
+          "entry": "engine/tools/optimization_gate.py",
+          "probe": true
+        },
+        "audit": {
+          "review": "engine/audit/records/reviews/content-tech-ai-application-dubai-reports-2026-11-baseline-report-html.json",
+          "status": "in-review",
+          "stages": {
+            "draft": true,
+            "initial": true,
+            "second": false,
+            "final": false
+          },
+          "mark_level": "pre",
+          "audit_id": "AUD-2026-11-21-009"
+        }
+      },
+      "audit_id": "AUD-2026-11-21-009",
+      "mark_level": "pre",
+      "audited_at": "2026-11-21T10:05:19+00:00"
+    },
+    "content/tech/ai-application/industry-research/dubai/reports/2026-11_baseline_report.html": {
+      "title": "迪拜（阿联酋）AI 应用行业 · 首期基线报告 · 2026-11",
+      "kind": "business",
+      "category": "report",
+      "business_line": "content/tech/ai-application/industry-research/dubai",
+      "status": "in-review",
+      "stages": {
+        "draft": true,
+        "initial": true,
+        "second": false,
+        "final": false
+      },
+      "mark": true,
+      "first_seen_at": "2026-11-21",
+      "evidence": {
+        "report": "content/tech/ai-application/industry-research/dubai/reports/2026-11_baseline_report.html",
+        "business_line": "content/tech/ai-application/industry-research/dubai",
+        "plans": [],
+        "gate": {
+          "entry": "engine/tools/optimization_gate.py",
+          "probe": true
+        },
+        "audit": {
+          "review": "engine/audit/records/reviews/content-tech-ai-application-industry-research-dubai-reports-2026-11-baseline-report-html.json",
+          "status": "in-review",
+          "stages": {
+            "draft": true,
+            "initial": true,
+            "second": false,
+            "final": false
+          },
+          "mark_level": "pre",
+          "audit_id": "AUD-2026-11-21-010"
+        }
+      },
+      "audit_id": "AUD-2026-11-21-010",
+      "mark_level": "pre",
+      "audited_at": "2026-11-21T10:05:19+00:00"
     }
   }
 }
