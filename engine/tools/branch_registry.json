@@ -48,6 +48,13 @@
       "session_short": "b64f8dc1",
       "slug": "tech-monthly-restructure",
       "task": "tech-monthly-restructure"
+    },
+    "task/warnings-cleanup-b76ddf44": {
+      "note": "source=env:CATPAW_CONVERSATION_ID",
+      "session": "b76ddf4411584ff187a2ae9268aa96a3",
+      "session_short": "b76ddf44",
+      "slug": "warnings-cleanup",
+      "task": "warnings-cleanup"
     }
   },
   "schema": 1,
