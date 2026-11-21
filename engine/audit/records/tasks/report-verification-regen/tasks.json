@@ -1,0 +1,50 @@
+[
+  {
+    "acceptance": "",
+    "depends_on": [],
+    "id": "T-1",
+    "phase": "",
+    "status": "pending",
+    "title": "建立 22 份报告的全量核验台账（引用来源 / 核验状态 / 未登记 URL）"
+  },
+  {
+    "acceptance": "",
+    "depends_on": [],
+    "id": "T-2",
+    "phase": "",
+    "status": "pending",
+    "title": "补登记未登记外部来源（逐条 web_fetch 复核 tier/lang/verify_status）"
+  },
+  {
+    "acceptance": "",
+    "depends_on": [],
+    "id": "T-3",
+    "phase": "",
+    "status": "pending",
+    "title": "修正报告信息等级越标与不可核验内容（更新或文件级删除）"
+  },
+  {
+    "acceptance": "",
+    "depends_on": [],
+    "id": "T-4",
+    "phase": "",
+    "status": "pending",
+    "title": "再生成 hub / INDEX / reader 与发布指纹"
+  },
+  {
+    "acceptance": "",
+    "depends_on": [],
+    "id": "T-5",
+    "phase": "",
+    "status": "pending",
+    "title": "全量门禁 + 核验台账链校验"
+  },
+  {
+    "acceptance": "",
+    "depends_on": [],
+    "id": "T-6",
+    "phase": "",
+    "status": "pending",
+    "title": "repo_sync 提交并开 PR"
+  }
+]

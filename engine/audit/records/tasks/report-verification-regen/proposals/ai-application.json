@@ -1,0 +1,233 @@
+{
+  "business_line": "content/tech/ai-application",
+  "entries": [
+    {
+      "business_line": "content/tech/ai-application/competitive-intelligence/dubai",
+      "publisher": "Microsoft",
+      "title": "First Abu Dhabi Bank unlocks new business excellence opportunities with Core42, supported by Microsoft",
+      "url": "https://news.microsoft.com/en-xm/2024/03/07/first-abu-dhabi-bank-unlocks-new-business-excellence-opportunities-with-core42-supported-by-microsoft/",
+      "lang": "en",
+      "tier": 4,
+      "verify_status": "media_unverified",
+      "document_tier": "media",
+      "statement_type": "restatement",
+      "evidence": {
+        "method": "web_fetch",
+        "snapshot_date": "2026-11-22",
+        "note": "Microsoft News Center（中东与非洲新闻室）2024-03-06/07 新闻稿：FAB 与 Core42 合作，基于 Microsoft Azure 主权云并设生成式 AI 卓越中心；web_fetch 成功。来源性质为厂商新闻稿 / 媒体转述，按媒体定级（tier 4 + media_unverified + media），引用须标「需核实原文」。"
+      },
+      "used_in": [
+        "reports/2026-11_baseline_report.html"
+      ]
+    },
+    {
+      "business_line": "content/tech/ai-application/industry-research/dubai",
+      "publisher": "Microsoft",
+      "title": "First Abu Dhabi Bank unlocks new business excellence opportunities with Core42, supported by Microsoft",
+      "url": "https://news.microsoft.com/en-xm/2024/03/07/first-abu-dhabi-bank-unlocks-new-business-excellence-opportunities-with-core42-supported-by-microsoft/",
+      "lang": "en",
+      "tier": 4,
+      "verify_status": "media_unverified",
+      "document_tier": "media",
+      "statement_type": "restatement",
+      "evidence": {
+        "method": "web_fetch",
+        "snapshot_date": "2026-11-22",
+        "note": "Microsoft News Center（中东与非洲新闻室）2024-03-06/07 新闻稿：FAB 与 Core42 合作，基于 Microsoft Azure 主权云并设生成式 AI 卓越中心；web_fetch 成功。来源性质为厂商新闻稿 / 媒体转述，按媒体定级（tier 4 + media_unverified + media），引用须标「需核实原文」。"
+      },
+      "used_in": [
+        "reports/2026-11_baseline_report.html"
+      ]
+    },
+    {
+      "business_line": "content/tech/ai-application/competitive-intelligence/dubai",
+      "publisher": "Core42",
+      "title": "Core42 | Sovereign AI Infrastructure",
+      "url": "https://www.core42.ai/",
+      "lang": "en",
+      "tier": 1,
+      "verify_status": "verified",
+      "document_tier": "official_release",
+      "statement_type": "fact",
+      "evidence": {
+        "method": "web_fetch",
+        "snapshot_date": "2026-11-22",
+        "note": "Core42 官网首页：主权 AI 云 / 主权公有云 / 交付服务与 Compass 模型接入；web_fetch 成功（页面标题 Core42 | Sovereign AI Infrastructure）。"
+      },
+      "used_in": [
+        "reports/2026-11_baseline_report.html"
+      ]
+    },
+    {
+      "business_line": "content/tech/ai-application/industry-research/dubai",
+      "publisher": "Core42",
+      "title": "Core42 | Sovereign AI Infrastructure",
+      "url": "https://www.core42.ai/",
+      "lang": "en",
+      "tier": 1,
+      "verify_status": "verified",
+      "document_tier": "official_release",
+      "statement_type": "fact",
+      "evidence": {
+        "method": "web_fetch",
+        "snapshot_date": "2026-11-22",
+        "note": "Core42 官网首页：主权 AI 云 / 主权公有云 / 交付服务与 Compass 模型接入；web_fetch 成功（页面标题 Core42 | Sovereign AI Infrastructure）。"
+      },
+      "used_in": [
+        "reports/2026-11_baseline_report.html"
+      ]
+    },
+    {
+      "business_line": "content/tech/ai-application/dubai",
+      "publisher": "Cooper Fitch",
+      "title": "2026 Salary Guide UAE - Cooper Fitch",
+      "url": "https://cooperfitch.ae/salary-guides/2026-salary-guide-uae/",
+      "lang": "en",
+      "tier": 3,
+      "verify_status": "verified",
+      "document_tier": "media",
+      "statement_type": "restatement",
+      "evidence": {
+        "method": "web_fetch",
+        "snapshot_date": "2026-11-22",
+        "note": "Cooper Fitch《2026 Salary Guide UAE》下载页（表单门槛，未公开具体薪酬数值）；web_fetch 成功，仅确认发布方与指南版本（2026 版），具体薪酬区间待取 PDF 后补证。"
+      },
+      "used_in": [
+        "reports/2026-11_baseline_report.html"
+      ]
+    },
+    {
+      "business_line": "content/tech/ai-application/dubai",
+      "publisher": "Dubai Internet City",
+      "title": "Dubai's Tech and Innovation Hub | Dubai Internet City",
+      "url": "https://dic.ae/",
+      "lang": "en",
+      "tier": 1,
+      "verify_status": "verified",
+      "document_tier": "official_release",
+      "statement_type": "fact",
+      "evidence": {
+        "method": "web_fetch",
+        "snapshot_date": "2026-11-22",
+        "note": "Dubai Internet City 官网：区域科技枢纽定位、自由区承载与 in5 / D/Quarters 等供给，及 15 年 AED 1,000 亿 GDP 贡献（与 Accenture 合作研究）；web_fetch 成功。"
+      },
+      "used_in": [
+        "reports/2026-11_baseline_report.html"
+      ]
+    },
+    {
+      "business_line": "content/tech/ai-application/dubai",
+      "publisher": "Dubai AI (Digital Dubai)",
+      "title": "Dubai Universal Blue Print for AI - dub.ai",
+      "url": "https://dub.ai/",
+      "lang": "en",
+      "tier": 1,
+      "verify_status": "verified",
+      "document_tier": "official_release",
+      "statement_type": "fact",
+      "evidence": {
+        "method": "web_fetch",
+        "snapshot_date": "2026-11-22",
+        "note": "Dubai Universal Blueprint for AI 官方页：服务 D33 目标（每年贡献 AED 1,000 亿、生产力提升 50%）、四大支柱，举措含 DCAI / Dubai AI Campus / Dubai AI Week / AI Seal / Chief AI Officers；web_fetch 成功。"
+      },
+      "used_in": [
+        "reports/2026-11_baseline_report.html"
+      ]
+    },
+    {
+      "business_line": "content/tech/ai-application/industry-research/dubai",
+      "publisher": "Dubai AI (Digital Dubai)",
+      "title": "Dubai Universal Blue Print for AI - dub.ai",
+      "url": "https://dub.ai/",
+      "lang": "en",
+      "tier": 1,
+      "verify_status": "verified",
+      "document_tier": "official_release",
+      "statement_type": "fact",
+      "evidence": {
+        "method": "web_fetch",
+        "snapshot_date": "2026-11-22",
+        "note": "Dubai Universal Blueprint for AI 官方页：服务 D33 目标（每年贡献 AED 1,000 亿、生产力提升 50%）、四大支柱，举措含 DCAI / Dubai AI Campus / Dubai AI Week / AI Seal / Chief AI Officers；web_fetch 成功。"
+      },
+      "used_in": [
+        "reports/2026-11_baseline_report.html"
+      ]
+    },
+    {
+      "business_line": "content/tech/ai-application/dubai",
+      "publisher": "LinkedIn",
+      "title": "UAE Workforce Readiness Report 2026 | LinkedIn",
+      "url": "https://linkedin-workforcereadiness.com/",
+      "lang": "en",
+      "tier": 3,
+      "verify_status": "verified",
+      "document_tier": "media",
+      "statement_type": "restatement",
+      "evidence": {
+        "method": "web_fetch",
+        "snapshot_date": "2026-11-22",
+        "note": "LinkedIn《UAE Workforce Readiness Report 2026》落地页：AI 工程岗需求同比 +232.4%、占 UAE 岗位发布 4.1%、AI 工程人才集中度 0.75%（+27.0%）、AI 素养人才 +113.7%、国际申请占比 37.6%；web_fetch 成功，与报告引用数值一致。"
+      },
+      "used_in": [
+        "reports/2026-11_baseline_report.html"
+      ]
+    },
+    {
+      "business_line": "content/tech/ai-application/industry-research/dubai",
+      "publisher": "Amazon Web Services",
+      "title": "AWS Global Infrastructure — Regions & Availability Zones",
+      "url": "https://aws.amazon.com/about-aws/global-infrastructure/regions_az/",
+      "lang": "en",
+      "tier": 1,
+      "verify_status": "unverifiable",
+      "document_tier": "official_release",
+      "statement_type": "fact",
+      "evidence": {
+        "method": "web_fetch",
+        "snapshot_date": "2026-11-22",
+        "note": "AWS 全球基础设施（区域与可用区）页；web_fetch 两次失败（返回「未找到任何 URL 内容」），未取到正文，标题由 URL 路径推断，待人工复核。"
+      },
+      "used_in": [
+        "reports/2026-11_baseline_report.html"
+      ]
+    },
+    {
+      "business_line": "content/tech/ai-application/industry-research/dubai",
+      "publisher": "Global Market Insights",
+      "title": "Global Market Insights (GMI)",
+      "url": "https://www.gminsights.com/",
+      "lang": "en",
+      "tier": 2,
+      "verify_status": "media_unverified",
+      "document_tier": "industry_report",
+      "statement_type": "fact",
+      "evidence": {
+        "method": "web_fetch",
+        "snapshot_date": "2026-11-22",
+        "note": "Global Market Insights 官网首页；web_fetch 命中 Cloudflare 人机验证，未取到正文。报告引用其 UAE AI 市场口径（标注「待核实」），按行业研究 / 咨询数据商定级（tier 2 + media_unverified + industry_report）。"
+      },
+      "used_in": [
+        "reports/2026-11_baseline_report.html"
+      ]
+    },
+    {
+      "business_line": "content/tech/ai-application/industry-research/dubai",
+      "publisher": "Mordor Intelligence",
+      "title": "Market Research Company - Mordor Intelligence™",
+      "url": "https://www.mordorintelligence.com/",
+      "lang": "en",
+      "tier": 2,
+      "verify_status": "media_unverified",
+      "document_tier": "industry_report",
+      "statement_type": "fact",
+      "evidence": {
+        "method": "web_fetch",
+        "snapshot_date": "2026-11-22",
+        "note": "Mordor Intelligence 官网首页（33,906 份报告 / 100+ 行业段、12,500+ 客户）；web_fetch 成功。报告引用其 UAE AI 口径（标注「待核实」），按行业研究 / 咨询数据商定级（tier 2 + media_unverified + industry_report）。"
+      },
+      "used_in": [
+        "reports/2026-11_baseline_report.html"
+      ]
+    }
+  ]
+}

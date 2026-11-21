@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "updated": "2026-11-21",
+  "updated": "2026-11-22",
   "comment": "机构级分级主数据（单一事实源）：机构 → 来源分级 tier（1 官方一手 / 2 行业机构 / 3 挂牌门户 / 4 媒体转述）+ 来源语言 lang。source_check R7 校验分级一致性；R9 中文来源校验以 lang / zh_macro_whitelist / zh_hosts 为准。新增机构须先登记本表。",
   "tiers": {
     "1": "官方一手",
@@ -1619,24 +1619,189 @@
     {
       "name": "The Official Portal of the UAE Government (u.ae)",
       "tier": 1,
-      "aliases": ["u.ae"],
+      "aliases": [
+        "u.ae"
+      ],
       "lang": "en"
     },
     {
       "name": "Federal Authority for Identity, Citizenship, Customs & Port Security (ICP)",
       "tier": 1,
-      "aliases": ["ICP", "icp.gov.ae"],
+      "aliases": [
+        "ICP",
+        "icp.gov.ae"
+      ],
       "lang": "en"
     },
     {
       "name": "General Directorate of Identity and Foreigners Affairs - Dubai (GDRFA Dubai)",
       "tier": 1,
-      "aliases": ["GDRFA Dubai", "GDRFA", "gdrfad.gov.ae"],
+      "aliases": [
+        "GDRFA Dubai",
+        "GDRFA",
+        "gdrfad.gov.ae"
+      ],
       "lang": "en"
     },
     {
       "name": "Arab News",
       "tier": 4,
+      "aliases": [],
+      "lang": "en"
+    },
+    {
+      "name": "HK-dir (Norwegian Directorate for Higher Education and Skills)",
+      "tier": 1,
+      "aliases": [],
+      "lang": "en"
+    },
+    {
+      "name": "Nuffic IDW",
+      "tier": 1,
+      "aliases": [],
+      "lang": "en"
+    },
+    {
+      "name": "Studielink (Foundation Studielink)",
+      "tier": 1,
+      "aliases": [],
+      "lang": "en"
+    },
+    {
+      "name": "SIRI (Danish Agency for International Recruitment and Integration)",
+      "tier": 1,
+      "aliases": [],
+      "lang": "en"
+    },
+    {
+      "name": "Swedish Institute (SI)",
+      "tier": 1,
+      "aliases": [],
+      "lang": "en"
+    },
+    {
+      "name": "Study in Norway / HK-dir",
+      "tier": 1,
+      "aliases": [],
+      "lang": "en"
+    },
+    {
+      "name": "Study in Sweden / Swedish Institute",
+      "tier": 1,
+      "aliases": [],
+      "lang": "en"
+    },
+    {
+      "name": "SUSI (Student Universal Support Ireland)",
+      "tier": 1,
+      "aliases": [],
+      "lang": "en"
+    },
+    {
+      "name": "Campus France",
+      "tier": 1,
+      "aliases": [],
+      "lang": "en"
+    },
+    {
+      "name": "Immigration, Refugees and Citizenship Canada (IRCC)",
+      "tier": 1,
+      "aliases": [],
+      "lang": "en"
+    },
+    {
+      "name": "Hong Kong Census and Statistics Department (C&SD)",
+      "tier": 1,
+      "aliases": [],
+      "lang": "en"
+    },
+    {
+      "name": "Education Ireland",
+      "tier": 1,
+      "aliases": [],
+      "lang": "en"
+    },
+    {
+      "name": "Swedish Migration Agency (Migrationsverket)",
+      "tier": 1,
+      "aliases": [],
+      "lang": "en"
+    },
+    {
+      "name": "Ministry of Higher Education Malaysia (MOHE)",
+      "tier": 1,
+      "aliases": [],
+      "lang": "en"
+    },
+    {
+      "name": "Malaysian Qualifications Agency (MQA)",
+      "tier": 1,
+      "aliases": [],
+      "lang": "en"
+    },
+    {
+      "name": "NOKUT (Norwegian Agency for Quality Assurance in Education)",
+      "tier": 1,
+      "aliases": [],
+      "lang": "en"
+    },
+    {
+      "name": "New Zealand Qualifications Authority (NZQA)",
+      "tier": 1,
+      "aliases": [],
+      "lang": "en"
+    },
+    {
+      "name": "Quality and Qualifications Ireland (QQI)",
+      "tier": 1,
+      "aliases": [],
+      "lang": "en"
+    },
+    {
+      "name": "Study Australia (Australian Trade and Investment Commission, Austrade)",
+      "tier": 1,
+      "aliases": [],
+      "lang": "en"
+    },
+    {
+      "name": "Study in Denmark (Danish Ministry of Higher Education and Science)",
+      "tier": 1,
+      "aliases": [],
+      "lang": "en"
+    },
+    {
+      "name": "Study in Finland (Finnish National Agency for Education, EDUFI)",
+      "tier": 1,
+      "aliases": [],
+      "lang": "en"
+    },
+    {
+      "name": "Study in Finland (EDUFI)",
+      "tier": 1,
+      "aliases": [],
+      "lang": "en"
+    },
+    {
+      "name": "Study in Holland / Nuffic",
+      "tier": 1,
+      "aliases": [],
+      "lang": "en"
+    },
+    {
+      "name": "Study in NL / Nuffic",
+      "tier": 1,
+      "aliases": [],
+      "lang": "en"
+    },
+    {
+      "name": "UDI (Norwegian Directorate of Immigration)",
+      "tier": 1,
+      "aliases": [],
+      "lang": "en"
+    },
+    {
+      "name": "University Admissions (Swedish Council for Higher Education)",
+      "tier": 1,
       "aliases": [],
       "lang": "en"
     }
