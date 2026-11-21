@@ -58,7 +58,7 @@
 
 ① **官方一手**：联合国（Digital Library / Treaty Collection / UN News / 各机构发布）、各国外交部与政府（中国外交部、美国务院、英国 FCDO、日本外务省、韩国外交部、欧盟 EEAS）、东盟 / 非盟 / 阿盟等区域组织官方站
 ＞ ② **行业机构**：国际危机组织（ICG）、Chatham House、IISS、CFR（仅作分析线索，不替代官方）
-＞ ③ **挂牌门户 / 数据库**：UN Treaty Collection、UN Digital Library、World Bank WDI、各国官方统计
+＞ ③ **挂牌门户 / 数据库**：UN Treaty Collection、World Bank WDI、各国官方统计
 ＞ ④ **媒体转述**：Reuters、Bloomberg、AP、各国主流媒体（须标「需核实原文」）
 
 **机构获取优先级 P0–P5**：

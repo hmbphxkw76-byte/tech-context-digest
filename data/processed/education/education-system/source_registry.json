@@ -1,363 +1,538 @@
 {
- "schema_version": "1.1",
- "business_line": "content/education/education-system",
- "path_rule": "business-config {{SOURCE_REGISTRY_PATH}} = data/processed/education/education-system/source_registry.json",
- "tier_legend": {
-  "1": "官方一手（政府 / 央行 / 统计机构 / 多边机构 / 官方发布）",
-  "2": "行业机构（研究 / 数据 / 咨询）",
-  "3": "挂牌门户（仅作线索）",
-  "4": "媒体转述（须标『需核实原文』）"
- },
- "sources": [
-  {
-   "source_id": "S-001",
-   "tier": 1,
-   "publisher": "UNESCO",
-   "title": "UNESCO Higher education",
-   "url": "https://www.unesco.org/en/higher-education",
-   "lang": "en",
-   "verify_status": "verified",
-   "updated": "2026-11-19",
-   "in_synthesis": false,
-   "used_in": [
-    "reports/2026-11_baseline_report.html"
-   ]
+  "schema_version": "1.1",
+  "business_line": "content/education/education-system",
+  "path_rule": "business-config {{SOURCE_REGISTRY_PATH}} = data/processed/education/education-system/source_registry.json",
+  "tier_legend": {
+    "1": "官方一手（政府 / 央行 / 统计机构 / 多边机构 / 官方发布）",
+    "2": "行业机构（研究 / 数据 / 咨询）",
+    "3": "挂牌门户（仅作线索）",
+    "4": "媒体转述（须标『需核实原文』）"
   },
-  {
-   "source_id": "S-002",
-   "tier": 1,
-   "publisher": "UNESCO",
-   "title": "UNESCO 全球公约里程碑（20 批准 / 2023 生效）",
-   "url": "https://www.unesco.org/en/articles/milestone-global-convention-higher-education-will-enter-force-early-2023",
-   "lang": "en",
-   "verify_status": "verified",
-   "updated": "2026-11-19",
-   "in_synthesis": false,
-   "used_in": [
-    "reports/2026-11_baseline_report.html"
-   ]
-  },
-  {
-   "source_id": "S-003",
-   "tier": 1,
-   "publisher": "UNESCO",
-   "title": "UNESCO Legal Affairs（公约批准 / 生效）",
-   "url": "https://www.unesco.org/en/legal-affairs",
-   "lang": "en",
-   "verify_status": "verified",
-   "updated": "2026-11-19",
-   "in_synthesis": false,
-   "used_in": [
-    "reports/2026-11_baseline_report.html"
-   ]
-  },
-  {
-   "source_id": "S-004",
-   "tier": 1,
-   "publisher": "UNESCO UIS",
-   "title": "ISCED 2011 分类门户",
-   "url": "https://isced.uis.unesco.org/",
-   "lang": "en",
-   "verify_status": "verified",
-   "updated": "2026-11-19",
-   "in_synthesis": false,
-   "used_in": [
-    "reports/2026-11_baseline_report.html"
-   ]
-  },
-  {
-   "source_id": "S-005",
-   "tier": 1,
-   "publisher": "UNESCO UIS",
-   "title": "UNESCO UIS · ISCED 主题页",
-   "url": "https://uis.unesco.org/en/topic/international-standard-classification-of-education-isced",
-   "lang": "en",
-   "verify_status": "verified",
-   "updated": "2026-11-19",
-   "in_synthesis": false,
-   "used_in": [
-    "reports/2026-11_baseline_report.html"
-   ]
-  },
-  {
-   "source_id": "S-006",
-   "tier": 1,
-   "publisher": "UNESCO UIS",
-   "title": "UNESCO UIS 统计门户",
-   "url": "http://uis.unesco.org/",
-   "lang": "en",
-   "verify_status": "verified",
-   "updated": "2026-11-19",
-   "in_synthesis": false,
-   "used_in": [
-    "reports/2026-11_baseline_report.html"
-   ]
-  },
-  {
-   "source_id": "S-007",
-   "tier": 1,
-   "publisher": "OECD",
-   "title": "OECD PISA",
-   "url": "https://www.pisa.oecd.org/",
-   "lang": "en",
-   "verify_status": "verified",
-   "updated": "2026-11-19",
-   "in_synthesis": false,
-   "used_in": [
-    "reports/2026-11_baseline_report.html"
-   ]
-  },
-  {
-   "source_id": "S-008",
-   "tier": 1,
-   "publisher": "OECD",
-   "title": "OECD PISA 项目页",
-   "url": "https://www.oecd.org/en/about/programmes/pisa.html",
-   "lang": "en",
-   "verify_status": "verified",
-   "updated": "2026-11-19",
-   "in_synthesis": false,
-   "used_in": [
-    "reports/2026-11_baseline_report.html"
-   ]
-  },
-  {
-   "source_id": "S-009",
-   "tier": 1,
-   "publisher": "OECD",
-   "title": "Education at a Glance 2025",
-   "url": "https://www.oecd.org/en/publications/education-at-a-glance-2025_1c0d9c79-en.html",
-   "lang": "en",
-   "verify_status": "verified",
-   "updated": "2026-11-19",
-   "in_synthesis": false,
-   "used_in": [
-    "reports/2026-11_baseline_report.html"
-   ]
-  },
-  {
-   "source_id": "S-010",
-   "tier": 1,
-   "publisher": "OECD",
-   "title": "OECD Education GPS",
-   "url": "https://gpseducation.oecd.org/",
-   "lang": "en",
-   "verify_status": "verified",
-   "updated": "2026-11-19",
-   "in_synthesis": false,
-   "used_in": [
-    "reports/2026-11_baseline_report.html"
-   ]
-  },
-  {
-   "source_id": "S-011",
-   "tier": 1,
-   "publisher": "OECD",
-   "title": "OECD Data",
-   "url": "https://data.oecd.org/",
-   "lang": "en",
-   "verify_status": "verified",
-   "updated": "2026-11-19",
-   "in_synthesis": false,
-   "used_in": [
-    "reports/2026-11_baseline_report.html"
-   ]
-  },
-  {
-   "source_id": "S-013",
-   "tier": 1,
-   "publisher": "日本文部科学省",
-   "title": "MEXT 教育制度概览（英文）",
-   "url": "https://www.mext.go.jp/en/policy/education/overview/index.htm",
-   "lang": "en",
-   "verify_status": "verified",
-   "updated": "2026-11-19",
-   "in_synthesis": false,
-   "used_in": [
-    "reports/2026-11_baseline_report.html"
-   ]
-  },
-  {
-   "source_id": "S-014",
-   "tier": 1,
-   "publisher": "韩国教育部",
-   "title": "韩国教育部英文首页",
-   "url": "https://english.moe.go.kr/main.do?s=english",
-   "lang": "en",
-   "verify_status": "verified",
-   "updated": "2026-11-19",
-   "in_synthesis": false,
-   "used_in": [
-    "reports/2026-11_baseline_report.html"
-   ]
-  },
-  {
-   "source_id": "S-015",
-   "tier": 1,
-   "publisher": "UK Department for Education",
-   "title": "UK DfE",
-   "url": "https://www.gov.uk/government/organisations/department-for-education",
-   "lang": "en",
-   "verify_status": "verified",
-   "updated": "2026-11-19",
-   "in_synthesis": false,
-   "used_in": [
-    "reports/2026-11_baseline_report.html"
-   ]
-  },
-  {
-   "source_id": "S-016",
-   "tier": 1,
-   "publisher": "Office for Students",
-   "title": "Office for Students",
-   "url": "https://www.officeforstudents.org.uk/",
-   "lang": "en",
-   "verify_status": "verified",
-   "updated": "2026-11-19",
-   "in_synthesis": false,
-   "used_in": [
-    "reports/2026-11_baseline_report.html"
-   ]
-  },
-  {
-   "source_id": "S-017",
-   "tier": 1,
-   "publisher": "U.S. Department of Education",
-   "title": "U.S. Department of Education",
-   "url": "https://www.ed.gov/",
-   "lang": "en",
-   "verify_status": "verified",
-   "updated": "2026-11-19",
-   "in_synthesis": false,
-   "used_in": [
-    "reports/2026-11_baseline_report.html"
-   ]
-  },
-  {
-   "source_id": "S-018",
-   "tier": 1,
-   "publisher": "NCES",
-   "title": "National Center for Education Statistics",
-   "url": "https://nces.ed.gov/",
-   "lang": "en",
-   "verify_status": "verified",
-   "updated": "2026-11-19",
-   "in_synthesis": false,
-   "used_in": [
-    "reports/2026-11_baseline_report.html"
-   ]
-  },
-  {
-   "source_id": "S-019",
-   "tier": 1,
-   "publisher": "KMK",
-   "title": "德国 KMK",
-   "url": "https://www.kmk.org/",
-   "lang": "en",
-   "verify_status": "verified",
-   "updated": "2026-11-19",
-   "in_synthesis": false,
-   "used_in": [
-    "reports/2026-11_baseline_report.html"
-   ]
-  },
-  {
-   "source_id": "S-020",
-   "tier": 1,
-   "publisher": "EU Eurydice",
-   "title": "EU Eurydice 欧洲教育信息网络",
-   "url": "https://eurydice.eacea.ec.europa.eu/",
-   "lang": "en",
-   "verify_status": "verified",
-   "updated": "2026-11-19",
-   "in_synthesis": false,
-   "used_in": [
-    "reports/2026-11_baseline_report.html"
-   ]
-  },
-  {
-   "source_id": "S-021",
-   "tier": 1,
-   "publisher": "World Bank",
-   "title": "World Bank EdStats",
-   "url": "https://datatopics.worldbank.org/education/",
-   "lang": "en",
-   "verify_status": "verified",
-   "updated": "2026-11-19",
-   "in_synthesis": false,
-   "used_in": [
-    "reports/2026-11_baseline_report.html"
-   ]
-  },
-  {
-   "source_id": "S-022",
-   "tier": 1,
-   "publisher": "Eurostat",
-   "title": "Eurostat",
-   "url": "https://ec.europa.eu/eurostat",
-   "lang": "en",
-   "verify_status": "verified",
-   "updated": "2026-11-19",
-   "in_synthesis": false,
-   "used_in": [
-    "reports/2026-11_baseline_report.html"
-   ]
-  },
-  {
-   "source_id": "S-023",
-   "tier": 1,
-   "publisher": "日本总务省统计局",
-   "title": "日本 e-Stat（英文）",
-   "url": "https://www.e-stat.go.jp/en",
-   "lang": "en",
-   "verify_status": "verified",
-   "updated": "2026-11-19",
-   "in_synthesis": false,
-   "used_in": [
-    "reports/2026-11_baseline_report.html"
-   ]
-  },
-  {
-   "source_id": "S-024",
-   "tier": 2,
-   "publisher": "IEA",
-   "title": "IEA 测评",
-   "url": "https://www.iea.nl/",
-   "lang": "en",
-   "verify_status": "verified",
-   "updated": "2026-11-19",
-   "in_synthesis": false,
-   "used_in": [
-    "reports/2026-11_baseline_report.html"
-   ]
-  },
-  {
-   "source_id": "S-025",
-   "tier": 2,
-   "publisher": "TIMSS & PIRLS (Boston College)",
-   "title": "TIMSS / PIRLS",
-   "url": "https://timssandpirls.bc.edu/",
-   "lang": "en",
-   "verify_status": "verified",
-   "updated": "2026-11-19",
-   "in_synthesis": false,
-   "used_in": [
-    "reports/2026-11_baseline_report.html"
-   ]
-  },
-  {
-   "source_id": "S-026",
-   "tier": 2,
-   "publisher": "OECD",
-   "title": "OECD CERI",
-   "url": "https://www.oecd.org/en/about/programmes/ceri.html",
-   "lang": "en",
-   "verify_status": "verified",
-   "updated": "2026-11-19",
-   "in_synthesis": false,
-   "used_in": [
-    "reports/2026-11_baseline_report.html"
-   ]
-  }
- ]
+  "sources": [
+    {
+      "source_id": "S-001",
+      "tier": 1,
+      "publisher": "UNESCO",
+      "title": "UNESCO Higher education",
+      "url": "https://www.unesco.org/en/higher-education",
+      "lang": "en",
+      "verify_status": "verified",
+      "updated": "2026-11-19",
+      "in_synthesis": false,
+      "used_in": [
+        "reports/2026-11_baseline_report.html"
+      ],
+      "document_tier": "official_release",
+      "statement_type": "fact",
+      "evidence": {
+        "method": "manual",
+        "note": "T-01 登记核验回填：登记信息人工核对（未抓取正文，故无 archive_hash）",
+        "snapshot_date": "2026-11-19"
+      }
+    },
+    {
+      "source_id": "S-002",
+      "tier": 1,
+      "publisher": "UNESCO",
+      "title": "UNESCO 全球公约里程碑（20 批准 / 2023 生效）",
+      "url": "https://www.unesco.org/en/articles/milestone-global-convention-higher-education-will-enter-force-early-2023",
+      "lang": "en",
+      "verify_status": "verified",
+      "updated": "2026-11-19",
+      "in_synthesis": false,
+      "used_in": [
+        "reports/2026-11_baseline_report.html"
+      ],
+      "document_tier": "official_release",
+      "statement_type": "fact",
+      "evidence": {
+        "method": "manual",
+        "note": "T-01 登记核验回填：登记信息人工核对（未抓取正文，故无 archive_hash）",
+        "snapshot_date": "2026-11-19"
+      }
+    },
+    {
+      "source_id": "S-003",
+      "tier": 1,
+      "publisher": "UNESCO",
+      "title": "UNESCO Legal Affairs（公约批准 / 生效）",
+      "url": "https://www.unesco.org/en/legal-affairs",
+      "lang": "en",
+      "verify_status": "verified",
+      "updated": "2026-11-19",
+      "in_synthesis": false,
+      "used_in": [
+        "reports/2026-11_baseline_report.html"
+      ],
+      "document_tier": "official_release",
+      "statement_type": "fact",
+      "evidence": {
+        "method": "manual",
+        "note": "T-01 登记核验回填：登记信息人工核对（未抓取正文，故无 archive_hash）",
+        "snapshot_date": "2026-11-19"
+      }
+    },
+    {
+      "source_id": "S-004",
+      "tier": 1,
+      "publisher": "UNESCO UIS",
+      "title": "ISCED 2011 分类门户",
+      "url": "https://isced.uis.unesco.org/",
+      "lang": "en",
+      "verify_status": "verified",
+      "updated": "2026-11-19",
+      "in_synthesis": false,
+      "used_in": [
+        "reports/2026-11_baseline_report.html"
+      ],
+      "document_tier": "official_release",
+      "statement_type": "fact",
+      "evidence": {
+        "method": "manual",
+        "note": "T-01 登记核验回填：登记信息人工核对（未抓取正文，故无 archive_hash）",
+        "snapshot_date": "2026-11-19"
+      }
+    },
+    {
+      "source_id": "S-005",
+      "tier": 1,
+      "publisher": "UNESCO UIS",
+      "title": "UNESCO UIS · ISCED 主题页",
+      "url": "https://uis.unesco.org/en/topic/international-standard-classification-of-education-isced",
+      "lang": "en",
+      "verify_status": "verified",
+      "updated": "2026-11-19",
+      "in_synthesis": false,
+      "used_in": [
+        "reports/2026-11_baseline_report.html"
+      ],
+      "document_tier": "official_release",
+      "statement_type": "fact",
+      "evidence": {
+        "method": "manual",
+        "note": "T-01 登记核验回填：登记信息人工核对（未抓取正文，故无 archive_hash）",
+        "snapshot_date": "2026-11-19"
+      }
+    },
+    {
+      "source_id": "S-006",
+      "tier": 1,
+      "publisher": "UNESCO UIS",
+      "title": "UNESCO UIS 统计门户",
+      "url": "http://uis.unesco.org/",
+      "lang": "en",
+      "verify_status": "verified",
+      "updated": "2026-11-19",
+      "in_synthesis": false,
+      "used_in": [
+        "reports/2026-11_baseline_report.html"
+      ],
+      "document_tier": "official_release",
+      "statement_type": "fact",
+      "evidence": {
+        "method": "manual",
+        "note": "T-01 登记核验回填：登记信息人工核对（未抓取正文，故无 archive_hash）",
+        "snapshot_date": "2026-11-19"
+      }
+    },
+    {
+      "source_id": "S-007",
+      "tier": 1,
+      "publisher": "OECD",
+      "title": "OECD PISA",
+      "url": "https://www.pisa.oecd.org/",
+      "lang": "en",
+      "verify_status": "verified",
+      "updated": "2026-11-19",
+      "in_synthesis": false,
+      "used_in": [
+        "reports/2026-11_baseline_report.html"
+      ],
+      "document_tier": "official_release",
+      "statement_type": "fact",
+      "evidence": {
+        "method": "manual",
+        "note": "T-01 登记核验回填：登记信息人工核对（未抓取正文，故无 archive_hash）",
+        "snapshot_date": "2026-11-19"
+      }
+    },
+    {
+      "source_id": "S-008",
+      "tier": 1,
+      "publisher": "OECD",
+      "title": "OECD PISA 项目页",
+      "url": "https://www.oecd.org/en/about/programmes/pisa.html",
+      "lang": "en",
+      "verify_status": "verified",
+      "updated": "2026-11-19",
+      "in_synthesis": false,
+      "used_in": [
+        "reports/2026-11_baseline_report.html"
+      ],
+      "document_tier": "official_release",
+      "statement_type": "fact",
+      "evidence": {
+        "method": "manual",
+        "note": "T-01 登记核验回填：登记信息人工核对（未抓取正文，故无 archive_hash）",
+        "snapshot_date": "2026-11-19"
+      }
+    },
+    {
+      "source_id": "S-009",
+      "tier": 1,
+      "publisher": "OECD",
+      "title": "Education at a Glance 2025",
+      "url": "https://www.oecd.org/en/publications/education-at-a-glance-2025_1c0d9c79-en.html",
+      "lang": "en",
+      "verify_status": "verified",
+      "updated": "2026-11-19",
+      "in_synthesis": false,
+      "used_in": [
+        "reports/2026-11_baseline_report.html"
+      ],
+      "document_tier": "official_release",
+      "statement_type": "fact",
+      "evidence": {
+        "method": "manual",
+        "note": "T-01 登记核验回填：登记信息人工核对（未抓取正文，故无 archive_hash）",
+        "snapshot_date": "2026-11-19"
+      }
+    },
+    {
+      "source_id": "S-010",
+      "tier": 1,
+      "publisher": "OECD",
+      "title": "OECD Education GPS",
+      "url": "https://gpseducation.oecd.org/",
+      "lang": "en",
+      "verify_status": "verified",
+      "updated": "2026-11-19",
+      "in_synthesis": false,
+      "used_in": [
+        "reports/2026-11_baseline_report.html"
+      ],
+      "document_tier": "official_release",
+      "statement_type": "fact",
+      "evidence": {
+        "method": "manual",
+        "note": "T-01 登记核验回填：登记信息人工核对（未抓取正文，故无 archive_hash）",
+        "snapshot_date": "2026-11-19"
+      }
+    },
+    {
+      "source_id": "S-011",
+      "tier": 1,
+      "publisher": "OECD",
+      "title": "OECD Data",
+      "url": "https://data.oecd.org/",
+      "lang": "en",
+      "verify_status": "verified",
+      "updated": "2026-11-19",
+      "in_synthesis": false,
+      "used_in": [
+        "reports/2026-11_baseline_report.html"
+      ],
+      "document_tier": "official_release",
+      "statement_type": "fact",
+      "evidence": {
+        "method": "manual",
+        "note": "T-01 登记核验回填：登记信息人工核对（未抓取正文，故无 archive_hash）",
+        "snapshot_date": "2026-11-19"
+      }
+    },
+    {
+      "source_id": "S-013",
+      "tier": 1,
+      "publisher": "日本文部科学省",
+      "title": "MEXT 教育制度概览（英文）",
+      "url": "https://www.mext.go.jp/en/policy/education/overview/index.htm",
+      "lang": "en",
+      "verify_status": "verified",
+      "updated": "2026-11-19",
+      "in_synthesis": false,
+      "used_in": [
+        "reports/2026-11_baseline_report.html"
+      ],
+      "document_tier": "official_release",
+      "statement_type": "fact",
+      "evidence": {
+        "method": "manual",
+        "note": "T-01 登记核验回填：登记信息人工核对（未抓取正文，故无 archive_hash）",
+        "snapshot_date": "2026-11-19"
+      }
+    },
+    {
+      "source_id": "S-014",
+      "tier": 1,
+      "publisher": "韩国教育部",
+      "title": "韩国教育部英文首页",
+      "url": "https://english.moe.go.kr/main.do?s=english",
+      "lang": "en",
+      "verify_status": "verified",
+      "updated": "2026-11-19",
+      "in_synthesis": false,
+      "used_in": [
+        "reports/2026-11_baseline_report.html"
+      ],
+      "document_tier": "official_release",
+      "statement_type": "fact",
+      "evidence": {
+        "method": "manual",
+        "note": "T-01 登记核验回填：登记信息人工核对（未抓取正文，故无 archive_hash）",
+        "snapshot_date": "2026-11-19"
+      }
+    },
+    {
+      "source_id": "S-015",
+      "tier": 1,
+      "publisher": "UK Department for Education",
+      "title": "UK DfE",
+      "url": "https://www.gov.uk/government/organisations/department-for-education",
+      "lang": "en",
+      "verify_status": "verified",
+      "updated": "2026-11-19",
+      "in_synthesis": false,
+      "used_in": [
+        "reports/2026-11_baseline_report.html"
+      ],
+      "document_tier": "official_release",
+      "statement_type": "fact",
+      "evidence": {
+        "method": "manual",
+        "note": "T-01 登记核验回填：登记信息人工核对（未抓取正文，故无 archive_hash）",
+        "snapshot_date": "2026-11-19"
+      }
+    },
+    {
+      "source_id": "S-016",
+      "tier": 1,
+      "publisher": "Office for Students",
+      "title": "Office for Students",
+      "url": "https://www.officeforstudents.org.uk/",
+      "lang": "en",
+      "verify_status": "verified",
+      "updated": "2026-11-19",
+      "in_synthesis": false,
+      "used_in": [
+        "reports/2026-11_baseline_report.html"
+      ],
+      "document_tier": "official_release",
+      "statement_type": "fact",
+      "evidence": {
+        "method": "manual",
+        "note": "T-01 登记核验回填：登记信息人工核对（未抓取正文，故无 archive_hash）",
+        "snapshot_date": "2026-11-19"
+      }
+    },
+    {
+      "source_id": "S-017",
+      "tier": 1,
+      "publisher": "U.S. Department of Education",
+      "title": "U.S. Department of Education",
+      "url": "https://www.ed.gov/",
+      "lang": "en",
+      "verify_status": "verified",
+      "updated": "2026-11-19",
+      "in_synthesis": false,
+      "used_in": [
+        "reports/2026-11_baseline_report.html"
+      ],
+      "document_tier": "official_release",
+      "statement_type": "fact",
+      "evidence": {
+        "method": "manual",
+        "note": "T-01 登记核验回填：登记信息人工核对（未抓取正文，故无 archive_hash）",
+        "snapshot_date": "2026-11-19"
+      }
+    },
+    {
+      "source_id": "S-018",
+      "tier": 1,
+      "publisher": "NCES",
+      "title": "National Center for Education Statistics",
+      "url": "https://nces.ed.gov/",
+      "lang": "en",
+      "verify_status": "verified",
+      "updated": "2026-11-19",
+      "in_synthesis": false,
+      "used_in": [
+        "reports/2026-11_baseline_report.html"
+      ],
+      "document_tier": "official_release",
+      "statement_type": "fact",
+      "evidence": {
+        "method": "manual",
+        "note": "T-01 登记核验回填：登记信息人工核对（未抓取正文，故无 archive_hash）",
+        "snapshot_date": "2026-11-19"
+      }
+    },
+    {
+      "source_id": "S-019",
+      "tier": 1,
+      "publisher": "KMK",
+      "title": "德国 KMK",
+      "url": "https://www.kmk.org/",
+      "lang": "en",
+      "verify_status": "verified",
+      "updated": "2026-11-19",
+      "in_synthesis": false,
+      "used_in": [
+        "reports/2026-11_baseline_report.html"
+      ],
+      "document_tier": "official_release",
+      "statement_type": "fact",
+      "evidence": {
+        "method": "manual",
+        "note": "T-01 登记核验回填：登记信息人工核对（未抓取正文，故无 archive_hash）",
+        "snapshot_date": "2026-11-19"
+      }
+    },
+    {
+      "source_id": "S-020",
+      "tier": 1,
+      "publisher": "EU Eurydice",
+      "title": "EU Eurydice 欧洲教育信息网络",
+      "url": "https://eurydice.eacea.ec.europa.eu/",
+      "lang": "en",
+      "verify_status": "verified",
+      "updated": "2026-11-19",
+      "in_synthesis": false,
+      "used_in": [
+        "reports/2026-11_baseline_report.html"
+      ],
+      "document_tier": "official_release",
+      "statement_type": "fact",
+      "evidence": {
+        "method": "manual",
+        "note": "T-01 登记核验回填：登记信息人工核对（未抓取正文，故无 archive_hash）",
+        "snapshot_date": "2026-11-19"
+      }
+    },
+    {
+      "source_id": "S-021",
+      "tier": 1,
+      "publisher": "World Bank",
+      "title": "World Bank EdStats",
+      "url": "https://datatopics.worldbank.org/education/",
+      "lang": "en",
+      "verify_status": "verified",
+      "updated": "2026-11-19",
+      "in_synthesis": false,
+      "used_in": [
+        "reports/2026-11_baseline_report.html"
+      ],
+      "document_tier": "official_release",
+      "statement_type": "fact",
+      "evidence": {
+        "method": "manual",
+        "note": "T-01 登记核验回填：登记信息人工核对（未抓取正文，故无 archive_hash）",
+        "snapshot_date": "2026-11-19"
+      }
+    },
+    {
+      "source_id": "S-022",
+      "tier": 1,
+      "publisher": "Eurostat",
+      "title": "Eurostat",
+      "url": "https://ec.europa.eu/eurostat",
+      "lang": "en",
+      "verify_status": "verified",
+      "updated": "2026-11-19",
+      "in_synthesis": false,
+      "used_in": [
+        "reports/2026-11_baseline_report.html"
+      ],
+      "document_tier": "official_release",
+      "statement_type": "fact",
+      "evidence": {
+        "method": "manual",
+        "note": "T-01 登记核验回填：登记信息人工核对（未抓取正文，故无 archive_hash）",
+        "snapshot_date": "2026-11-19"
+      }
+    },
+    {
+      "source_id": "S-023",
+      "tier": 1,
+      "publisher": "日本总务省统计局",
+      "title": "日本 e-Stat（英文）",
+      "url": "https://www.e-stat.go.jp/en",
+      "lang": "en",
+      "verify_status": "verified",
+      "updated": "2026-11-19",
+      "in_synthesis": false,
+      "used_in": [
+        "reports/2026-11_baseline_report.html"
+      ],
+      "document_tier": "official_release",
+      "statement_type": "fact",
+      "evidence": {
+        "method": "manual",
+        "note": "T-01 登记核验回填：登记信息人工核对（未抓取正文，故无 archive_hash）",
+        "snapshot_date": "2026-11-19"
+      }
+    },
+    {
+      "source_id": "S-024",
+      "tier": 2,
+      "publisher": "IEA",
+      "title": "IEA 测评",
+      "url": "https://www.iea.nl/",
+      "lang": "en",
+      "verify_status": "verified",
+      "updated": "2026-11-19",
+      "in_synthesis": false,
+      "used_in": [
+        "reports/2026-11_baseline_report.html"
+      ],
+      "document_tier": "industry_report",
+      "statement_type": "fact",
+      "evidence": {
+        "method": "manual",
+        "note": "T-01 登记核验回填：登记信息人工核对（未抓取正文，故无 archive_hash）",
+        "snapshot_date": "2026-11-19"
+      }
+    },
+    {
+      "source_id": "S-025",
+      "tier": 2,
+      "publisher": "TIMSS & PIRLS (Boston College)",
+      "title": "TIMSS / PIRLS",
+      "url": "https://timssandpirls.bc.edu/",
+      "lang": "en",
+      "verify_status": "verified",
+      "updated": "2026-11-19",
+      "in_synthesis": false,
+      "used_in": [
+        "reports/2026-11_baseline_report.html"
+      ],
+      "document_tier": "industry_report",
+      "statement_type": "fact",
+      "evidence": {
+        "method": "manual",
+        "note": "T-01 登记核验回填：登记信息人工核对（未抓取正文，故无 archive_hash）",
+        "snapshot_date": "2026-11-19"
+      }
+    },
+    {
+      "source_id": "S-026",
+      "tier": 1,
+      "publisher": "OECD",
+      "title": "OECD CERI",
+      "url": "https://www.oecd.org/en/about/programmes/ceri.html",
+      "lang": "en",
+      "verify_status": "verified",
+      "updated": "2026-11-19",
+      "in_synthesis": false,
+      "used_in": [
+        "reports/2026-11_baseline_report.html"
+      ],
+      "document_tier": "official_release",
+      "statement_type": "fact",
+      "evidence": {
+        "method": "manual",
+        "note": "T-01 登记核验回填：登记信息人工核对（未抓取正文，故无 archive_hash）",
+        "snapshot_date": "2026-11-19"
+      }
+    }
+  ]
 }

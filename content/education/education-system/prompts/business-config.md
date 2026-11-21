@@ -56,9 +56,9 @@
 
 ## 四、来源优先级（通用基座第四节的实例化，冲突时报双份并标注）
 
-① **官方一手**：UNESCO UIS、OECD（Education at a Glance / Data）、各国教育部与主管机关（中国教育部、日本 MEXT、韩国教育部、英国 DfE / OfS、美国 ED / NCES、德国 KMK）、EU Eurydice、ISCED 分类文件
+① **官方一手**：UNESCO UIS、OECD（Education at a Glance / Data）、各国教育部与主管机关（中国教育部、日本 MEXT、韩国教育部、英国 DfE / OfS、美国 ED / NCES、德国 KMK）、EU Eurydice、Eurostat、ISCED 分类文件
 ＞ ② **行业机构**：IEA（PISA / TIMSS / PIRLS）测评报告、OECD 教育研究与创新中心（CERI）
-＞ ③ **挂牌门户 / 数据库**：UIS.stat、OECD Data、World Bank EdStats、e-Stat、Eurostat
+＞ ③ **挂牌门户 / 数据库**：UIS.stat、OECD Data、World Bank EdStats、e-Stat
 ＞ ④ **媒体转述**：Reuters、Bloomberg、各国教育专业媒体（须标「需核实原文」，不得与官方一手同等处理）
 
 > **商业排名（QS / THE / ARWU 等）不列入采信层级**，仅可作线索，且必须回官方页核验后再使用。

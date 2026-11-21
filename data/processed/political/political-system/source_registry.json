@@ -9,22 +9,362 @@
     "4": "媒体转述（须标『需核实原文』）"
   },
   "sources": [
-    { "source_id": "S-001", "tier": 1, "publisher": "日本衆議院", "title": "日本衆議院公式サイト", "url": "https://www.shugiin.go.jp/", "lang": "ja", "verify_status": "verified", "updated": "2026-11-18", "in_synthesis": false, "used_in": ["2026-11_baseline_report.html"] },
-    { "source_id": "S-002", "tier": 1, "publisher": "日本参議院", "title": "日本参議院公式サイト", "url": "https://www.sangiin.go.jp/", "lang": "ja", "verify_status": "verified", "updated": "2026-11-18", "in_synthesis": false, "used_in": ["2026-11_baseline_report.html"] },
-    { "source_id": "S-003", "tier": 1, "publisher": "総務省選挙部", "title": "選挙制度・選挙公告", "url": "https://www.soumu.go.jp/senkyo/", "lang": "ja", "verify_status": "verified", "updated": "2026-11-18", "in_synthesis": false, "used_in": ["2026-11_baseline_report.html"] },
-    { "source_id": "S-004", "tier": 1, "publisher": "German Bundestag", "title": "Bundestag（英文）", "url": "https://www.bundestag.de/en", "lang": "en", "verify_status": "verified", "updated": "2026-11-18", "in_synthesis": false, "used_in": ["2026-11_baseline_report.html"] },
-    { "source_id": "S-005", "tier": 1, "publisher": "UK Parliament", "title": "UK Parliament", "url": "https://www.parliament.uk/", "lang": "en", "verify_status": "verified", "updated": "2026-11-18", "in_synthesis": false, "used_in": ["2026-11_baseline_report.html"] },
-    { "source_id": "S-006", "tier": 1, "publisher": "U.S. Congress", "title": "Congress.gov", "url": "https://www.congress.gov/", "lang": "en", "verify_status": "verified", "updated": "2026-11-18", "in_synthesis": false, "used_in": ["2026-11_baseline_report.html"] },
-    { "source_id": "S-008", "tier": 2, "publisher": "V-Dem Institute", "title": "The V-Dem Dataset", "url": "https://www.v-dem.net/data/the-v-dem-dataset/", "lang": "en", "verify_status": "verified", "updated": "2026-11-18", "in_synthesis": false, "used_in": ["2026-11_baseline_report.html"] },
-    { "source_id": "S-009", "tier": 2, "publisher": "Transparency International", "title": "Corruption Perceptions Index (CPI)", "url": "https://www.transparency.org/en/cpi", "lang": "en", "verify_status": "verified", "updated": "2026-11-18", "in_synthesis": false, "used_in": ["2026-11_baseline_report.html"] },
-    { "source_id": "S-010", "tier": 3, "publisher": "UN DESA", "title": "UN E-Government Survey 知识库", "url": "https://publicadministration.un.org/egovkb/en-us/", "lang": "en", "verify_status": "verified", "updated": "2026-11-18", "in_synthesis": false, "used_in": ["2026-11_baseline_report.html"] },
-    { "source_id": "S-011", "tier": 3, "publisher": "OECD", "title": "Government at a Glance", "url": "https://www.oecd.org/en/publications/government-at-a-glance.html", "lang": "en", "verify_status": "unverifiable", "updated": "2026-11-18", "in_synthesis": false, "used_in": ["2026-11_baseline_report.html"] },
-    { "source_id": "S-012", "tier": 3, "publisher": "World Bank", "title": "Worldwide Governance Indicators", "url": "https://www.worldbank.org/en/publication/worldwide-governance-indicators", "lang": "en", "verify_status": "unverifiable", "updated": "2026-11-18", "in_synthesis": false, "used_in": ["2026-11_baseline_report.html"] },
-    { "source_id": "S-013", "tier": 1, "publisher": "UN OHCHR", "title": "Office of the High Commissioner for Human Rights", "url": "https://www.ohchr.org/", "lang": "en", "verify_status": "verified", "updated": "2026-11-18", "in_synthesis": false, "used_in": ["2026-11_baseline_report.html"] },
-    { "source_id": "S-014", "tier": 2, "publisher": "International IDEA", "title": "Global State of Democracy", "url": "https://www.idea.int/", "lang": "en", "verify_status": "unverifiable", "updated": "2026-11-18", "in_synthesis": false, "used_in": ["2026-11_baseline_report.html"] },
-    { "source_id": "S-015", "tier": 1, "publisher": "Inter-Parliamentary Union", "title": "IPU", "url": "https://www.ipu.org/", "lang": "en", "verify_status": "unverifiable", "updated": "2026-11-18", "in_synthesis": false, "used_in": ["2026-11_baseline_report.html"] },
-    { "source_id": "S-016", "tier": 2, "publisher": "Freedom House", "title": "Freedom in the World（仅作线索）", "url": "https://freedomhouse.org/", "lang": "en", "verify_status": "unverifiable", "updated": "2026-11-18", "in_synthesis": false, "used_in": ["2026-11_baseline_report.html"] },
-    { "source_id": "S-017", "tier": 2, "publisher": "V-Dem Institute", "title": "V-Dem Institute 公式サイト", "url": "https://www.v-dem.net/", "lang": "en", "verify_status": "verified", "updated": "2026-11-20", "in_synthesis": false, "used_in": ["2026-11_baseline_report.html"] },
-    { "source_id": "S-018", "tier": 3, "publisher": "UN DESA", "title": "UN E-Government Survey 数据中心", "url": "https://publicadministration.un.org/egovkb/en-us/data-center", "lang": "en", "verify_status": "verified", "updated": "2026-11-20", "in_synthesis": false, "used_in": ["2026-11_baseline_report.html"] }
+    {
+      "source_id": "S-001",
+      "tier": 1,
+      "publisher": "日本衆議院",
+      "title": "日本衆議院公式サイト",
+      "url": "https://www.shugiin.go.jp/",
+      "lang": "ja",
+      "verify_status": "verified",
+      "updated": "2026-11-18",
+      "in_synthesis": false,
+      "used_in": [
+        "2026-11_baseline_report.html"
+      ],
+      "document_tier": "official_release",
+      "statement_type": "fact",
+      "evidence": {
+        "method": "manual",
+        "note": "T-01 登记核验回填：登记信息人工核对（未抓取正文，故无 archive_hash）",
+        "snapshot_date": "2026-11-18"
+      }
+    },
+    {
+      "source_id": "S-002",
+      "tier": 1,
+      "publisher": "日本参議院",
+      "title": "日本参議院公式サイト",
+      "url": "https://www.sangiin.go.jp/",
+      "lang": "ja",
+      "verify_status": "verified",
+      "updated": "2026-11-18",
+      "in_synthesis": false,
+      "used_in": [
+        "2026-11_baseline_report.html"
+      ],
+      "document_tier": "official_release",
+      "statement_type": "fact",
+      "evidence": {
+        "method": "manual",
+        "note": "T-01 登记核验回填：登记信息人工核对（未抓取正文，故无 archive_hash）",
+        "snapshot_date": "2026-11-18"
+      }
+    },
+    {
+      "source_id": "S-003",
+      "tier": 1,
+      "publisher": "総務省選挙部",
+      "title": "選挙制度・選挙公告",
+      "url": "https://www.soumu.go.jp/senkyo/",
+      "lang": "ja",
+      "verify_status": "verified",
+      "updated": "2026-11-18",
+      "in_synthesis": false,
+      "used_in": [
+        "2026-11_baseline_report.html"
+      ],
+      "document_tier": "official_release",
+      "statement_type": "fact",
+      "evidence": {
+        "method": "manual",
+        "note": "T-01 登记核验回填：登记信息人工核对（未抓取正文，故无 archive_hash）",
+        "snapshot_date": "2026-11-18"
+      }
+    },
+    {
+      "source_id": "S-004",
+      "tier": 1,
+      "publisher": "German Bundestag",
+      "title": "Bundestag（英文）",
+      "url": "https://www.bundestag.de/en",
+      "lang": "en",
+      "verify_status": "verified",
+      "updated": "2026-11-18",
+      "in_synthesis": false,
+      "used_in": [
+        "2026-11_baseline_report.html"
+      ],
+      "document_tier": "official_release",
+      "statement_type": "fact",
+      "evidence": {
+        "method": "manual",
+        "note": "T-01 登记核验回填：登记信息人工核对（未抓取正文，故无 archive_hash）",
+        "snapshot_date": "2026-11-18"
+      }
+    },
+    {
+      "source_id": "S-005",
+      "tier": 1,
+      "publisher": "UK Parliament",
+      "title": "UK Parliament",
+      "url": "https://www.parliament.uk/",
+      "lang": "en",
+      "verify_status": "verified",
+      "updated": "2026-11-18",
+      "in_synthesis": false,
+      "used_in": [
+        "2026-11_baseline_report.html"
+      ],
+      "document_tier": "official_release",
+      "statement_type": "fact",
+      "evidence": {
+        "method": "manual",
+        "note": "T-01 登记核验回填：登记信息人工核对（未抓取正文，故无 archive_hash）",
+        "snapshot_date": "2026-11-18"
+      }
+    },
+    {
+      "source_id": "S-006",
+      "tier": 1,
+      "publisher": "U.S. Congress",
+      "title": "Congress.gov",
+      "url": "https://www.congress.gov/",
+      "lang": "en",
+      "verify_status": "verified",
+      "updated": "2026-11-18",
+      "in_synthesis": false,
+      "used_in": [
+        "2026-11_baseline_report.html"
+      ],
+      "document_tier": "official_release",
+      "statement_type": "fact",
+      "evidence": {
+        "method": "manual",
+        "note": "T-01 登记核验回填：登记信息人工核对（未抓取正文，故无 archive_hash）",
+        "snapshot_date": "2026-11-18"
+      }
+    },
+    {
+      "source_id": "S-008",
+      "tier": 2,
+      "publisher": "V-Dem Institute",
+      "title": "The V-Dem Dataset",
+      "url": "https://www.v-dem.net/data/the-v-dem-dataset/",
+      "lang": "en",
+      "verify_status": "verified",
+      "updated": "2026-11-18",
+      "in_synthesis": false,
+      "used_in": [
+        "2026-11_baseline_report.html"
+      ],
+      "document_tier": "industry_report",
+      "statement_type": "fact",
+      "evidence": {
+        "method": "manual",
+        "note": "T-01 登记核验回填：登记信息人工核对（未抓取正文，故无 archive_hash）",
+        "snapshot_date": "2026-11-18"
+      }
+    },
+    {
+      "source_id": "S-009",
+      "tier": 2,
+      "publisher": "Transparency International",
+      "title": "Corruption Perceptions Index (CPI)",
+      "url": "https://www.transparency.org/en/cpi",
+      "lang": "en",
+      "verify_status": "verified",
+      "updated": "2026-11-18",
+      "in_synthesis": false,
+      "used_in": [
+        "2026-11_baseline_report.html"
+      ],
+      "document_tier": "industry_report",
+      "statement_type": "fact",
+      "evidence": {
+        "method": "manual",
+        "note": "T-01 登记核验回填：登记信息人工核对（未抓取正文，故无 archive_hash）",
+        "snapshot_date": "2026-11-18"
+      }
+    },
+    {
+      "source_id": "S-010",
+      "tier": 1,
+      "publisher": "UN DESA",
+      "title": "UN E-Government Survey 知识库",
+      "url": "https://publicadministration.un.org/egovkb/en-us/",
+      "lang": "en",
+      "verify_status": "verified",
+      "updated": "2026-11-18",
+      "in_synthesis": false,
+      "used_in": [
+        "2026-11_baseline_report.html"
+      ],
+      "document_tier": "official_release",
+      "statement_type": "fact",
+      "evidence": {
+        "method": "manual",
+        "note": "T-01 登记核验回填：登记信息人工核对（未抓取正文，故无 archive_hash）",
+        "snapshot_date": "2026-11-18"
+      }
+    },
+    {
+      "source_id": "S-011",
+      "tier": 1,
+      "publisher": "OECD",
+      "title": "Government at a Glance",
+      "url": "https://www.oecd.org/en/publications/government-at-a-glance.html",
+      "lang": "en",
+      "verify_status": "unverifiable",
+      "updated": "2026-11-18",
+      "in_synthesis": false,
+      "used_in": [
+        "2026-11_baseline_report.html"
+      ],
+      "document_tier": "official_release",
+      "statement_type": "fact",
+      "evidence": {
+        "method": "manual",
+        "note": "T-01 登记核验回填：登记信息人工核对（未抓取正文，故无 archive_hash）",
+        "snapshot_date": "2026-11-18"
+      }
+    },
+    {
+      "source_id": "S-012",
+      "tier": 1,
+      "publisher": "World Bank",
+      "title": "Worldwide Governance Indicators",
+      "url": "https://www.worldbank.org/en/publication/worldwide-governance-indicators",
+      "lang": "en",
+      "verify_status": "unverifiable",
+      "updated": "2026-11-18",
+      "in_synthesis": false,
+      "used_in": [
+        "2026-11_baseline_report.html"
+      ],
+      "document_tier": "official_release",
+      "statement_type": "fact",
+      "evidence": {
+        "method": "manual",
+        "note": "T-01 登记核验回填：登记信息人工核对（未抓取正文，故无 archive_hash）",
+        "snapshot_date": "2026-11-18"
+      }
+    },
+    {
+      "source_id": "S-013",
+      "tier": 1,
+      "publisher": "UN OHCHR",
+      "title": "Office of the High Commissioner for Human Rights",
+      "url": "https://www.ohchr.org/",
+      "lang": "en",
+      "verify_status": "verified",
+      "updated": "2026-11-18",
+      "in_synthesis": false,
+      "used_in": [
+        "2026-11_baseline_report.html"
+      ],
+      "document_tier": "official_release",
+      "statement_type": "fact",
+      "evidence": {
+        "method": "manual",
+        "note": "T-01 登记核验回填：登记信息人工核对（未抓取正文，故无 archive_hash）",
+        "snapshot_date": "2026-11-18"
+      }
+    },
+    {
+      "source_id": "S-014",
+      "tier": 2,
+      "publisher": "International IDEA",
+      "title": "Global State of Democracy",
+      "url": "https://www.idea.int/",
+      "lang": "en",
+      "verify_status": "unverifiable",
+      "updated": "2026-11-18",
+      "in_synthesis": false,
+      "used_in": [
+        "2026-11_baseline_report.html"
+      ],
+      "document_tier": "industry_report",
+      "statement_type": "fact",
+      "evidence": {
+        "method": "manual",
+        "note": "T-01 登记核验回填：登记信息人工核对（未抓取正文，故无 archive_hash）",
+        "snapshot_date": "2026-11-18"
+      }
+    },
+    {
+      "source_id": "S-015",
+      "tier": 1,
+      "publisher": "Inter-Parliamentary Union",
+      "title": "IPU",
+      "url": "https://www.ipu.org/",
+      "lang": "en",
+      "verify_status": "unverifiable",
+      "updated": "2026-11-18",
+      "in_synthesis": false,
+      "used_in": [
+        "2026-11_baseline_report.html"
+      ],
+      "document_tier": "official_release",
+      "statement_type": "fact",
+      "evidence": {
+        "method": "manual",
+        "note": "T-01 登记核验回填：登记信息人工核对（未抓取正文，故无 archive_hash）",
+        "snapshot_date": "2026-11-18"
+      }
+    },
+    {
+      "source_id": "S-016",
+      "tier": 2,
+      "publisher": "Freedom House",
+      "title": "Freedom in the World（仅作线索）",
+      "url": "https://freedomhouse.org/",
+      "lang": "en",
+      "verify_status": "unverifiable",
+      "updated": "2026-11-18",
+      "in_synthesis": false,
+      "used_in": [
+        "2026-11_baseline_report.html"
+      ],
+      "document_tier": "industry_report",
+      "statement_type": "fact",
+      "evidence": {
+        "method": "manual",
+        "note": "T-01 登记核验回填：登记信息人工核对（未抓取正文，故无 archive_hash）",
+        "snapshot_date": "2026-11-18"
+      }
+    },
+    {
+      "source_id": "S-017",
+      "tier": 2,
+      "publisher": "V-Dem Institute",
+      "title": "V-Dem Institute 公式サイト",
+      "url": "https://www.v-dem.net/",
+      "lang": "en",
+      "verify_status": "verified",
+      "updated": "2026-11-20",
+      "in_synthesis": false,
+      "used_in": [
+        "2026-11_baseline_report.html"
+      ],
+      "document_tier": "industry_report",
+      "statement_type": "fact",
+      "evidence": {
+        "method": "manual",
+        "note": "T-01 登记核验回填：登记信息人工核对（未抓取正文，故无 archive_hash）",
+        "snapshot_date": "2026-11-20"
+      }
+    },
+    {
+      "source_id": "S-018",
+      "tier": 1,
+      "publisher": "UN DESA",
+      "title": "UN E-Government Survey 数据中心",
+      "url": "https://publicadministration.un.org/egovkb/en-us/data-center",
+      "lang": "en",
+      "verify_status": "verified",
+      "updated": "2026-11-20",
+      "in_synthesis": false,
+      "used_in": [
+        "2026-11_baseline_report.html"
+      ],
+      "document_tier": "official_release",
+      "statement_type": "fact",
+      "evidence": {
+        "method": "manual",
+        "note": "T-01 登记核验回填：登记信息人工核对（未抓取正文，故无 archive_hash）",
+        "snapshot_date": "2026-11-20"
+      }
+    }
   ]
 }

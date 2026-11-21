@@ -1,419 +1,622 @@
 {
- "schema_version": "1.1",
- "business_line": "content/international/international-relations",
- "path_rule": "business-config {{SOURCE_REGISTRY_PATH}} = data/processed/international/international-relations/source_registry.json",
- "tier_legend": {
-  "1": "官方一手（政府 / 央行 / 统计机构 / 多边机构 / 官方发布）",
-  "2": "行业机构（研究 / 数据 / 咨询）",
-  "3": "挂牌门户（仅作线索）",
-  "4": "媒体转述（须标『需核实原文』）"
- },
- "sources": [
-  {
-   "source_id": "S-001",
-   "tier": 1,
-   "publisher": "UN Treaty Collection",
-   "title": "UN Treaty Collection",
-   "url": "https://treaties.un.org/",
-   "lang": "en",
-   "verify_status": "verified",
-   "updated": "2026-11-19",
-   "in_synthesis": false,
-   "used_in": [
-    "reports/2026-11_baseline_report.html"
-   ]
+  "schema_version": "1.1",
+  "business_line": "content/international/international-relations",
+  "path_rule": "business-config {{SOURCE_REGISTRY_PATH}} = data/processed/international/international-relations/source_registry.json",
+  "tier_legend": {
+    "1": "官方一手（政府 / 央行 / 统计机构 / 多边机构 / 官方发布）",
+    "2": "行业机构（研究 / 数据 / 咨询）",
+    "3": "挂牌门户（仅作线索）",
+    "4": "媒体转述（须标『需核实原文』）"
   },
-  {
-   "source_id": "S-002",
-   "tier": 1,
-   "publisher": "UN",
-   "title": "联合国宪章",
-   "url": "https://www.un.org/en/about-us/un-charter",
-   "lang": "en",
-   "verify_status": "verified",
-   "updated": "2026-11-19",
-   "in_synthesis": false,
-   "used_in": [
-    "reports/2026-11_baseline_report.html"
-   ]
-  },
-  {
-   "source_id": "S-003",
-   "tier": 1,
-   "publisher": "UNFCCC",
-   "title": "巴黎协定",
-   "url": "https://unfccc.int/process-and-meetings/the-paris-agreement",
-   "lang": "en",
-   "verify_status": "verified",
-   "updated": "2026-11-19",
-   "in_synthesis": false,
-   "used_in": [
-    "reports/2026-11_baseline_report.html"
-   ]
-  },
-  {
-   "source_id": "S-004",
-   "tier": 1,
-   "publisher": "UNODA",
-   "title": "不扩散核武器条约（NPT）",
-   "url": "https://www.un.org/disarmament/wmd/nuclear/npt/",
-   "lang": "en",
-   "verify_status": "verified",
-   "updated": "2026-11-19",
-   "in_synthesis": false,
-   "used_in": [
-    "reports/2026-11_baseline_report.html"
-   ]
-  },
-  {
-   "source_id": "S-005",
-   "tier": 1,
-   "publisher": "中国外交部",
-   "title": "中国外交部（英文）",
-   "url": "https://www.mfa.gov.cn/eng/",
-   "lang": "en",
-   "verify_status": "verified",
-   "updated": "2026-11-19",
-   "in_synthesis": false,
-   "used_in": [
-    "reports/2026-11_baseline_report.html"
-   ]
-  },
-  {
-   "source_id": "S-006",
-   "tier": 1,
-   "publisher": "U.S. Department of the Treasury",
-   "title": "OFAC",
-   "url": "https://ofac.treasury.gov/",
-   "lang": "en",
-   "verify_status": "verified",
-   "updated": "2026-11-19",
-   "in_synthesis": false,
-   "used_in": [
-    "reports/2026-11_baseline_report.html"
-   ]
-  },
-  {
-   "source_id": "S-007",
-   "tier": 1,
-   "publisher": "U.S. Department of State",
-   "title": "U.S. Department of State",
-   "url": "https://www.state.gov/",
-   "lang": "en",
-   "verify_status": "verified",
-   "updated": "2026-11-19",
-   "in_synthesis": false,
-   "used_in": [
-    "reports/2026-11_baseline_report.html"
-   ]
-  },
-  {
-   "source_id": "S-008",
-   "tier": 1,
-   "publisher": "UK FCDO",
-   "title": "UK FCDO",
-   "url": "https://www.gov.uk/government/organisations/foreign-commonwealth-development-office",
-   "lang": "en",
-   "verify_status": "verified",
-   "updated": "2026-11-19",
-   "in_synthesis": false,
-   "used_in": [
-    "reports/2026-11_baseline_report.html"
-   ]
-  },
-  {
-   "source_id": "S-009",
-   "tier": 1,
-   "publisher": "日本外务省",
-   "title": "日本外务省",
-   "url": "https://www.mofa.go.jp/",
-   "lang": "en",
-   "verify_status": "verified",
-   "updated": "2026-11-19",
-   "in_synthesis": false,
-   "used_in": [
-    "reports/2026-11_baseline_report.html"
-   ]
-  },
-  {
-   "source_id": "S-010",
-   "tier": 1,
-   "publisher": "韩国外交部",
-   "title": "韩国外交部（英文）",
-   "url": "https://www.mofa.go.kr/eng/index.do",
-   "lang": "en",
-   "verify_status": "verified",
-   "updated": "2026-11-19",
-   "in_synthesis": false,
-   "used_in": [
-    "reports/2026-11_baseline_report.html"
-   ]
-  },
-  {
-   "source_id": "S-011",
-   "tier": 1,
-   "publisher": "EU EEAS",
-   "title": "EU EEAS",
-   "url": "https://www.eeas.europa.eu/",
-   "lang": "en",
-   "verify_status": "verified",
-   "updated": "2026-11-19",
-   "in_synthesis": false,
-   "used_in": [
-    "reports/2026-11_baseline_report.html"
-   ]
-  },
-  {
-   "source_id": "S-012",
-   "tier": 1,
-   "publisher": "UN Digital Library",
-   "title": "UN Digital Library",
-   "url": "https://digitallibrary.un.org/",
-   "lang": "en",
-   "verify_status": "verified",
-   "updated": "2026-11-19",
-   "in_synthesis": false,
-   "used_in": [
-    "reports/2026-11_baseline_report.html"
-   ]
-  },
-  {
-   "source_id": "S-013",
-   "tier": 1,
-   "publisher": "ICJ",
-   "title": "国际法院 ICJ",
-   "url": "https://www.icj-cij.org/en",
-   "lang": "en",
-   "verify_status": "verified",
-   "updated": "2026-11-19",
-   "in_synthesis": false,
-   "used_in": [
-    "reports/2026-11_baseline_report.html"
-   ]
-  },
-  {
-   "source_id": "S-014",
-   "tier": 1,
-   "publisher": "ICC",
-   "title": "国际刑事法院 ICC",
-   "url": "https://www.icc-cpi.int/about/the-court",
-   "lang": "en",
-   "verify_status": "verified",
-   "updated": "2026-11-19",
-   "in_synthesis": false,
-   "used_in": [
-    "reports/2026-11_baseline_report.html"
-   ]
-  },
-  {
-   "source_id": "S-015",
-   "tier": 1,
-   "publisher": "WTO",
-   "title": "WTO 法律文本",
-   "url": "https://www.wto.org/english/docs_e/legal_e/legal_e.htm",
-   "lang": "en",
-   "verify_status": "verified",
-   "updated": "2026-11-19",
-   "in_synthesis": false,
-   "used_in": [
-    "reports/2026-11_baseline_report.html"
-   ]
-  },
-  {
-   "source_id": "S-016",
-   "tier": 1,
-   "publisher": "ICRC",
-   "title": "ICRC",
-   "url": "https://www.icrc.org/",
-   "lang": "en",
-   "verify_status": "verified",
-   "updated": "2026-11-19",
-   "in_synthesis": false,
-   "used_in": [
-    "reports/2026-11_baseline_report.html"
-   ]
-  },
-  {
-   "source_id": "S-017",
-   "tier": 1,
-   "publisher": "ITLOS",
-   "title": "国际海洋法法庭 ITLOS",
-   "url": "https://www.itlos.org/",
-   "lang": "en",
-   "verify_status": "verified",
-   "updated": "2026-11-19",
-   "in_synthesis": false,
-   "used_in": [
-    "reports/2026-11_baseline_report.html"
-   ]
-  },
-  {
-   "source_id": "S-018",
-   "tier": 1,
-   "publisher": "ASEAN",
-   "title": "东盟宪章",
-   "url": "https://asean.org/asean-charter/",
-   "lang": "en",
-   "verify_status": "verified",
-   "updated": "2026-11-19",
-   "in_synthesis": false,
-   "used_in": [
-    "reports/2026-11_baseline_report.html"
-   ]
-  },
-  {
-   "source_id": "S-019",
-   "tier": 1,
-   "publisher": "AU",
-   "title": "非盟组织法",
-   "url": "https://au.int/en/constitutive-act",
-   "lang": "en",
-   "verify_status": "verified",
-   "updated": "2026-11-19",
-   "in_synthesis": false,
-   "used_in": [
-    "reports/2026-11_baseline_report.html"
-   ]
-  },
-  {
-   "source_id": "S-020",
-   "tier": 1,
-   "publisher": "League of Arab States",
-   "title": "阿盟",
-   "url": "https://www.leagueofarabstates.net/",
-   "lang": "en",
-   "verify_status": "verified",
-   "updated": "2026-11-19",
-   "in_synthesis": false,
-   "used_in": [
-    "reports/2026-11_baseline_report.html"
-   ]
-  },
-  {
-   "source_id": "S-021",
-   "tier": 1,
-   "publisher": "UN",
-   "title": "联合国宪章全文",
-   "url": "https://www.un.org/en/about-us/un-charter/full-text",
-   "lang": "en",
-   "verify_status": "verified",
-   "updated": "2026-11-19",
-   "in_synthesis": false,
-   "used_in": [
-    "reports/2026-11_baseline_report.html"
-   ]
-  },
-  {
-   "source_id": "S-022",
-   "tier": 1,
-   "publisher": "UN",
-   "title": "维也纳外交关系公约（UN 条约页）",
-   "url": "https://www.un.org/zh/documents/treaty/UNCITRAL-1961",
-   "lang": "en",
-   "verify_status": "verified",
-   "updated": "2026-11-19",
-   "in_synthesis": false,
-   "used_in": [
-    "reports/2026-11_baseline_report.html"
-   ]
-  },
-  {
-   "source_id": "S-023",
-   "tier": 1,
-   "publisher": "UN Treaty Collection",
-   "title": "UN Treaty Collection 状态页（外交，III-3）",
-   "url": "https://treaties.un.org/pages/ViewDetails.aspx?src=TREATY&amp;mtdsg_no=III-3&amp;chapter=3&amp;clang=_en",
-   "lang": "en",
-   "verify_status": "verified",
-   "updated": "2026-11-19",
-   "in_synthesis": false,
-   "used_in": [
-    "reports/2026-11_baseline_report.html"
-   ]
-  },
-  {
-   "source_id": "S-024",
-   "tier": 1,
-   "publisher": "UN",
-   "title": "维也纳领事关系公约（UN 条约页）",
-   "url": "https://www.un.org/zh/node/182171",
-   "lang": "en",
-   "verify_status": "verified",
-   "updated": "2026-11-19",
-   "in_synthesis": false,
-   "used_in": [
-    "reports/2026-11_baseline_report.html"
-   ]
-  },
-  {
-   "source_id": "S-025",
-   "tier": 1,
-   "publisher": "UN Treaty Collection",
-   "title": "UN Treaty Collection 状态页（领事，III-4）",
-   "url": "https://treaties.un.org/pages/ViewDetails.aspx?src=TREATY&amp;mtdsg_no=III-4&amp;chapter=3&amp;clang=_en",
-   "lang": "en",
-   "verify_status": "verified",
-   "updated": "2026-11-19",
-   "in_synthesis": false,
-   "used_in": [
-    "reports/2026-11_baseline_report.html"
-   ]
-  },
-  {
-   "source_id": "S-026",
-   "tier": 1,
-   "publisher": "UN DOALOS",
-   "title": "UNCLOS 概览",
-   "url": "https://www.un.org/depts/los/convention_agreements/convention_overview_convention.htm",
-   "lang": "en",
-   "verify_status": "verified",
-   "updated": "2026-11-19",
-   "in_synthesis": false,
-   "used_in": [
-    "reports/2026-11_baseline_report.html"
-   ]
-  },
-  {
-   "source_id": "S-027",
-   "tier": 1,
-   "publisher": "UNFCCC",
-   "title": "巴黎协定批准状态",
-   "url": "https://unfccc.int/process/the-paris-agreement/status-of-ratification",
-   "lang": "en",
-   "verify_status": "verified",
-   "updated": "2026-11-19",
-   "in_synthesis": false,
-   "used_in": [
-    "reports/2026-11_baseline_report.html"
-   ]
-  },
-  {
-   "source_id": "S-028",
-   "tier": 1,
-   "publisher": "ICRC",
-   "title": "日内瓦四公约（ICRC 出版物）",
-   "url": "https://www.icrc.org/en/doc/assets/files/publications/icrc-002-0173.pdf",
-   "lang": "en",
-   "verify_status": "verified",
-   "updated": "2026-11-19",
-   "in_synthesis": false,
-   "used_in": [
-    "reports/2026-11_baseline_report.html"
-   ]
-  },
-  {
-   "source_id": "S-029",
-   "tier": 1,
-   "publisher": "UN News",
-   "title": "UN News",
-   "url": "https://news.un.org/en/",
-   "lang": "en",
-   "verify_status": "verified",
-   "updated": "2026-11-19",
-   "in_synthesis": false,
-   "used_in": [
-    "reports/2026-11_baseline_report.html"
-   ]
-  }
- ]
+  "sources": [
+    {
+      "source_id": "S-001",
+      "tier": 1,
+      "publisher": "UN Treaty Collection",
+      "title": "UN Treaty Collection",
+      "url": "https://treaties.un.org/",
+      "lang": "en",
+      "verify_status": "verified",
+      "updated": "2026-11-19",
+      "in_synthesis": false,
+      "used_in": [
+        "reports/2026-11_baseline_report.html"
+      ],
+      "document_tier": "official_release",
+      "statement_type": "fact",
+      "evidence": {
+        "method": "manual",
+        "note": "T-01 登记核验回填：登记信息人工核对（未抓取正文，故无 archive_hash）",
+        "snapshot_date": "2026-11-19"
+      }
+    },
+    {
+      "source_id": "S-002",
+      "tier": 1,
+      "publisher": "UN",
+      "title": "联合国宪章",
+      "url": "https://www.un.org/en/about-us/un-charter",
+      "lang": "en",
+      "verify_status": "verified",
+      "updated": "2026-11-19",
+      "in_synthesis": false,
+      "used_in": [
+        "reports/2026-11_baseline_report.html"
+      ],
+      "document_tier": "official_release",
+      "statement_type": "fact",
+      "evidence": {
+        "method": "manual",
+        "note": "T-01 登记核验回填：登记信息人工核对（未抓取正文，故无 archive_hash）",
+        "snapshot_date": "2026-11-19"
+      }
+    },
+    {
+      "source_id": "S-003",
+      "tier": 1,
+      "publisher": "UNFCCC",
+      "title": "巴黎协定",
+      "url": "https://unfccc.int/process-and-meetings/the-paris-agreement",
+      "lang": "en",
+      "verify_status": "verified",
+      "updated": "2026-11-19",
+      "in_synthesis": false,
+      "used_in": [
+        "reports/2026-11_baseline_report.html"
+      ],
+      "document_tier": "official_release",
+      "statement_type": "fact",
+      "evidence": {
+        "method": "manual",
+        "note": "T-01 登记核验回填：登记信息人工核对（未抓取正文，故无 archive_hash）",
+        "snapshot_date": "2026-11-19"
+      }
+    },
+    {
+      "source_id": "S-004",
+      "tier": 1,
+      "publisher": "UNODA",
+      "title": "不扩散核武器条约（NPT）",
+      "url": "https://www.un.org/disarmament/wmd/nuclear/npt/",
+      "lang": "en",
+      "verify_status": "verified",
+      "updated": "2026-11-19",
+      "in_synthesis": false,
+      "used_in": [
+        "reports/2026-11_baseline_report.html"
+      ],
+      "document_tier": "official_release",
+      "statement_type": "fact",
+      "evidence": {
+        "method": "manual",
+        "note": "T-01 登记核验回填：登记信息人工核对（未抓取正文，故无 archive_hash）",
+        "snapshot_date": "2026-11-19"
+      }
+    },
+    {
+      "source_id": "S-005",
+      "tier": 1,
+      "publisher": "中国外交部",
+      "title": "中国外交部（英文）",
+      "url": "https://www.mfa.gov.cn/eng/",
+      "lang": "en",
+      "verify_status": "verified",
+      "updated": "2026-11-19",
+      "in_synthesis": false,
+      "used_in": [
+        "reports/2026-11_baseline_report.html"
+      ],
+      "document_tier": "official_release",
+      "statement_type": "fact",
+      "evidence": {
+        "method": "manual",
+        "note": "T-01 登记核验回填：登记信息人工核对（未抓取正文，故无 archive_hash）",
+        "snapshot_date": "2026-11-19"
+      }
+    },
+    {
+      "source_id": "S-006",
+      "tier": 1,
+      "publisher": "U.S. Department of the Treasury",
+      "title": "OFAC",
+      "url": "https://ofac.treasury.gov/",
+      "lang": "en",
+      "verify_status": "verified",
+      "updated": "2026-11-19",
+      "in_synthesis": false,
+      "used_in": [
+        "reports/2026-11_baseline_report.html"
+      ],
+      "document_tier": "official_release",
+      "statement_type": "fact",
+      "evidence": {
+        "method": "manual",
+        "note": "T-01 登记核验回填：登记信息人工核对（未抓取正文，故无 archive_hash）",
+        "snapshot_date": "2026-11-19"
+      }
+    },
+    {
+      "source_id": "S-007",
+      "tier": 1,
+      "publisher": "U.S. Department of State",
+      "title": "U.S. Department of State",
+      "url": "https://www.state.gov/",
+      "lang": "en",
+      "verify_status": "verified",
+      "updated": "2026-11-19",
+      "in_synthesis": false,
+      "used_in": [
+        "reports/2026-11_baseline_report.html"
+      ],
+      "document_tier": "official_release",
+      "statement_type": "fact",
+      "evidence": {
+        "method": "manual",
+        "note": "T-01 登记核验回填：登记信息人工核对（未抓取正文，故无 archive_hash）",
+        "snapshot_date": "2026-11-19"
+      }
+    },
+    {
+      "source_id": "S-008",
+      "tier": 1,
+      "publisher": "UK FCDO",
+      "title": "UK FCDO",
+      "url": "https://www.gov.uk/government/organisations/foreign-commonwealth-development-office",
+      "lang": "en",
+      "verify_status": "verified",
+      "updated": "2026-11-19",
+      "in_synthesis": false,
+      "used_in": [
+        "reports/2026-11_baseline_report.html"
+      ],
+      "document_tier": "official_release",
+      "statement_type": "fact",
+      "evidence": {
+        "method": "manual",
+        "note": "T-01 登记核验回填：登记信息人工核对（未抓取正文，故无 archive_hash）",
+        "snapshot_date": "2026-11-19"
+      }
+    },
+    {
+      "source_id": "S-009",
+      "tier": 1,
+      "publisher": "日本外务省",
+      "title": "日本外务省",
+      "url": "https://www.mofa.go.jp/",
+      "lang": "en",
+      "verify_status": "verified",
+      "updated": "2026-11-19",
+      "in_synthesis": false,
+      "used_in": [
+        "reports/2026-11_baseline_report.html"
+      ],
+      "document_tier": "official_release",
+      "statement_type": "fact",
+      "evidence": {
+        "method": "manual",
+        "note": "T-01 登记核验回填：登记信息人工核对（未抓取正文，故无 archive_hash）",
+        "snapshot_date": "2026-11-19"
+      }
+    },
+    {
+      "source_id": "S-010",
+      "tier": 1,
+      "publisher": "韩国外交部",
+      "title": "韩国外交部（英文）",
+      "url": "https://www.mofa.go.kr/eng/index.do",
+      "lang": "en",
+      "verify_status": "verified",
+      "updated": "2026-11-19",
+      "in_synthesis": false,
+      "used_in": [
+        "reports/2026-11_baseline_report.html"
+      ],
+      "document_tier": "official_release",
+      "statement_type": "fact",
+      "evidence": {
+        "method": "manual",
+        "note": "T-01 登记核验回填：登记信息人工核对（未抓取正文，故无 archive_hash）",
+        "snapshot_date": "2026-11-19"
+      }
+    },
+    {
+      "source_id": "S-011",
+      "tier": 1,
+      "publisher": "EU EEAS",
+      "title": "EU EEAS",
+      "url": "https://www.eeas.europa.eu/",
+      "lang": "en",
+      "verify_status": "verified",
+      "updated": "2026-11-19",
+      "in_synthesis": false,
+      "used_in": [
+        "reports/2026-11_baseline_report.html"
+      ],
+      "document_tier": "official_release",
+      "statement_type": "fact",
+      "evidence": {
+        "method": "manual",
+        "note": "T-01 登记核验回填：登记信息人工核对（未抓取正文，故无 archive_hash）",
+        "snapshot_date": "2026-11-19"
+      }
+    },
+    {
+      "source_id": "S-012",
+      "tier": 1,
+      "publisher": "UN Digital Library",
+      "title": "UN Digital Library",
+      "url": "https://digitallibrary.un.org/",
+      "lang": "en",
+      "verify_status": "verified",
+      "updated": "2026-11-19",
+      "in_synthesis": false,
+      "used_in": [
+        "reports/2026-11_baseline_report.html"
+      ],
+      "document_tier": "official_release",
+      "statement_type": "fact",
+      "evidence": {
+        "method": "manual",
+        "note": "T-01 登记核验回填：登记信息人工核对（未抓取正文，故无 archive_hash）",
+        "snapshot_date": "2026-11-19"
+      }
+    },
+    {
+      "source_id": "S-013",
+      "tier": 1,
+      "publisher": "ICJ",
+      "title": "国际法院 ICJ",
+      "url": "https://www.icj-cij.org/en",
+      "lang": "en",
+      "verify_status": "verified",
+      "updated": "2026-11-19",
+      "in_synthesis": false,
+      "used_in": [
+        "reports/2026-11_baseline_report.html"
+      ],
+      "document_tier": "official_release",
+      "statement_type": "fact",
+      "evidence": {
+        "method": "manual",
+        "note": "T-01 登记核验回填：登记信息人工核对（未抓取正文，故无 archive_hash）",
+        "snapshot_date": "2026-11-19"
+      }
+    },
+    {
+      "source_id": "S-014",
+      "tier": 1,
+      "publisher": "ICC",
+      "title": "国际刑事法院 ICC",
+      "url": "https://www.icc-cpi.int/about/the-court",
+      "lang": "en",
+      "verify_status": "verified",
+      "updated": "2026-11-19",
+      "in_synthesis": false,
+      "used_in": [
+        "reports/2026-11_baseline_report.html"
+      ],
+      "document_tier": "official_release",
+      "statement_type": "fact",
+      "evidence": {
+        "method": "manual",
+        "note": "T-01 登记核验回填：登记信息人工核对（未抓取正文，故无 archive_hash）",
+        "snapshot_date": "2026-11-19"
+      }
+    },
+    {
+      "source_id": "S-015",
+      "tier": 1,
+      "publisher": "WTO",
+      "title": "WTO 法律文本",
+      "url": "https://www.wto.org/english/docs_e/legal_e/legal_e.htm",
+      "lang": "en",
+      "verify_status": "verified",
+      "updated": "2026-11-19",
+      "in_synthesis": false,
+      "used_in": [
+        "reports/2026-11_baseline_report.html"
+      ],
+      "document_tier": "official_release",
+      "statement_type": "fact",
+      "evidence": {
+        "method": "manual",
+        "note": "T-01 登记核验回填：登记信息人工核对（未抓取正文，故无 archive_hash）",
+        "snapshot_date": "2026-11-19"
+      }
+    },
+    {
+      "source_id": "S-016",
+      "tier": 1,
+      "publisher": "ICRC",
+      "title": "ICRC",
+      "url": "https://www.icrc.org/",
+      "lang": "en",
+      "verify_status": "verified",
+      "updated": "2026-11-19",
+      "in_synthesis": false,
+      "used_in": [
+        "reports/2026-11_baseline_report.html"
+      ],
+      "document_tier": "official_release",
+      "statement_type": "fact",
+      "evidence": {
+        "method": "manual",
+        "note": "T-01 登记核验回填：登记信息人工核对（未抓取正文，故无 archive_hash）",
+        "snapshot_date": "2026-11-19"
+      }
+    },
+    {
+      "source_id": "S-017",
+      "tier": 1,
+      "publisher": "ITLOS",
+      "title": "国际海洋法法庭 ITLOS",
+      "url": "https://www.itlos.org/",
+      "lang": "en",
+      "verify_status": "verified",
+      "updated": "2026-11-19",
+      "in_synthesis": false,
+      "used_in": [
+        "reports/2026-11_baseline_report.html"
+      ],
+      "document_tier": "official_release",
+      "statement_type": "fact",
+      "evidence": {
+        "method": "manual",
+        "note": "T-01 登记核验回填：登记信息人工核对（未抓取正文，故无 archive_hash）",
+        "snapshot_date": "2026-11-19"
+      }
+    },
+    {
+      "source_id": "S-018",
+      "tier": 1,
+      "publisher": "ASEAN",
+      "title": "东盟宪章",
+      "url": "https://asean.org/asean-charter/",
+      "lang": "en",
+      "verify_status": "verified",
+      "updated": "2026-11-19",
+      "in_synthesis": false,
+      "used_in": [
+        "reports/2026-11_baseline_report.html"
+      ],
+      "document_tier": "official_release",
+      "statement_type": "fact",
+      "evidence": {
+        "method": "manual",
+        "note": "T-01 登记核验回填：登记信息人工核对（未抓取正文，故无 archive_hash）",
+        "snapshot_date": "2026-11-19"
+      }
+    },
+    {
+      "source_id": "S-019",
+      "tier": 1,
+      "publisher": "AU",
+      "title": "非盟组织法",
+      "url": "https://au.int/en/constitutive-act",
+      "lang": "en",
+      "verify_status": "verified",
+      "updated": "2026-11-19",
+      "in_synthesis": false,
+      "used_in": [
+        "reports/2026-11_baseline_report.html"
+      ],
+      "document_tier": "official_release",
+      "statement_type": "fact",
+      "evidence": {
+        "method": "manual",
+        "note": "T-01 登记核验回填：登记信息人工核对（未抓取正文，故无 archive_hash）",
+        "snapshot_date": "2026-11-19"
+      }
+    },
+    {
+      "source_id": "S-020",
+      "tier": 1,
+      "publisher": "League of Arab States",
+      "title": "阿盟",
+      "url": "https://www.leagueofarabstates.net/",
+      "lang": "en",
+      "verify_status": "verified",
+      "updated": "2026-11-19",
+      "in_synthesis": false,
+      "used_in": [
+        "reports/2026-11_baseline_report.html"
+      ],
+      "document_tier": "official_release",
+      "statement_type": "fact",
+      "evidence": {
+        "method": "manual",
+        "note": "T-01 登记核验回填：登记信息人工核对（未抓取正文，故无 archive_hash）",
+        "snapshot_date": "2026-11-19"
+      }
+    },
+    {
+      "source_id": "S-021",
+      "tier": 1,
+      "publisher": "UN",
+      "title": "联合国宪章全文",
+      "url": "https://www.un.org/en/about-us/un-charter/full-text",
+      "lang": "en",
+      "verify_status": "verified",
+      "updated": "2026-11-19",
+      "in_synthesis": false,
+      "used_in": [
+        "reports/2026-11_baseline_report.html"
+      ],
+      "document_tier": "official_release",
+      "statement_type": "fact",
+      "evidence": {
+        "method": "manual",
+        "note": "T-01 登记核验回填：登记信息人工核对（未抓取正文，故无 archive_hash）",
+        "snapshot_date": "2026-11-19"
+      }
+    },
+    {
+      "source_id": "S-022",
+      "tier": 1,
+      "publisher": "UN",
+      "title": "维也纳外交关系公约（UN 条约页）",
+      "url": "https://www.un.org/zh/documents/treaty/UNCITRAL-1961",
+      "lang": "en",
+      "verify_status": "verified",
+      "updated": "2026-11-19",
+      "in_synthesis": false,
+      "used_in": [
+        "reports/2026-11_baseline_report.html"
+      ],
+      "document_tier": "official_release",
+      "statement_type": "fact",
+      "evidence": {
+        "method": "manual",
+        "note": "T-01 登记核验回填：登记信息人工核对（未抓取正文，故无 archive_hash）",
+        "snapshot_date": "2026-11-19"
+      }
+    },
+    {
+      "source_id": "S-023",
+      "tier": 1,
+      "publisher": "UN Treaty Collection",
+      "title": "UN Treaty Collection 状态页（外交，III-3）",
+      "url": "https://treaties.un.org/pages/ViewDetails.aspx?src=TREATY&amp;mtdsg_no=III-3&amp;chapter=3&amp;clang=_en",
+      "lang": "en",
+      "verify_status": "verified",
+      "updated": "2026-11-19",
+      "in_synthesis": false,
+      "used_in": [
+        "reports/2026-11_baseline_report.html"
+      ],
+      "document_tier": "official_release",
+      "statement_type": "fact",
+      "evidence": {
+        "method": "manual",
+        "note": "T-01 登记核验回填：登记信息人工核对（未抓取正文，故无 archive_hash）",
+        "snapshot_date": "2026-11-19"
+      }
+    },
+    {
+      "source_id": "S-024",
+      "tier": 1,
+      "publisher": "UN",
+      "title": "维也纳领事关系公约（UN 条约页）",
+      "url": "https://www.un.org/zh/node/182171",
+      "lang": "en",
+      "verify_status": "verified",
+      "updated": "2026-11-19",
+      "in_synthesis": false,
+      "used_in": [
+        "reports/2026-11_baseline_report.html"
+      ],
+      "document_tier": "official_release",
+      "statement_type": "fact",
+      "evidence": {
+        "method": "manual",
+        "note": "T-01 登记核验回填：登记信息人工核对（未抓取正文，故无 archive_hash）",
+        "snapshot_date": "2026-11-19"
+      }
+    },
+    {
+      "source_id": "S-025",
+      "tier": 1,
+      "publisher": "UN Treaty Collection",
+      "title": "UN Treaty Collection 状态页（领事，III-4）",
+      "url": "https://treaties.un.org/pages/ViewDetails.aspx?src=TREATY&amp;mtdsg_no=III-4&amp;chapter=3&amp;clang=_en",
+      "lang": "en",
+      "verify_status": "verified",
+      "updated": "2026-11-19",
+      "in_synthesis": false,
+      "used_in": [
+        "reports/2026-11_baseline_report.html"
+      ],
+      "document_tier": "official_release",
+      "statement_type": "fact",
+      "evidence": {
+        "method": "manual",
+        "note": "T-01 登记核验回填：登记信息人工核对（未抓取正文，故无 archive_hash）",
+        "snapshot_date": "2026-11-19"
+      }
+    },
+    {
+      "source_id": "S-026",
+      "tier": 1,
+      "publisher": "UN DOALOS",
+      "title": "UNCLOS 概览",
+      "url": "https://www.un.org/depts/los/convention_agreements/convention_overview_convention.htm",
+      "lang": "en",
+      "verify_status": "verified",
+      "updated": "2026-11-19",
+      "in_synthesis": false,
+      "used_in": [
+        "reports/2026-11_baseline_report.html"
+      ],
+      "document_tier": "official_release",
+      "statement_type": "fact",
+      "evidence": {
+        "method": "manual",
+        "note": "T-01 登记核验回填：登记信息人工核对（未抓取正文，故无 archive_hash）",
+        "snapshot_date": "2026-11-19"
+      }
+    },
+    {
+      "source_id": "S-027",
+      "tier": 1,
+      "publisher": "UNFCCC",
+      "title": "巴黎协定批准状态",
+      "url": "https://unfccc.int/process/the-paris-agreement/status-of-ratification",
+      "lang": "en",
+      "verify_status": "verified",
+      "updated": "2026-11-19",
+      "in_synthesis": false,
+      "used_in": [
+        "reports/2026-11_baseline_report.html"
+      ],
+      "document_tier": "official_release",
+      "statement_type": "fact",
+      "evidence": {
+        "method": "manual",
+        "note": "T-01 登记核验回填：登记信息人工核对（未抓取正文，故无 archive_hash）",
+        "snapshot_date": "2026-11-19"
+      }
+    },
+    {
+      "source_id": "S-028",
+      "tier": 1,
+      "publisher": "ICRC",
+      "title": "日内瓦四公约（ICRC 出版物）",
+      "url": "https://www.icrc.org/en/doc/assets/files/publications/icrc-002-0173.pdf",
+      "lang": "en",
+      "verify_status": "verified",
+      "updated": "2026-11-19",
+      "in_synthesis": false,
+      "used_in": [
+        "reports/2026-11_baseline_report.html"
+      ],
+      "document_tier": "official_release",
+      "statement_type": "fact",
+      "evidence": {
+        "method": "manual",
+        "note": "T-01 登记核验回填：登记信息人工核对（未抓取正文，故无 archive_hash）",
+        "snapshot_date": "2026-11-19"
+      }
+    },
+    {
+      "source_id": "S-029",
+      "tier": 1,
+      "publisher": "UN News",
+      "title": "UN News",
+      "url": "https://news.un.org/en/",
+      "lang": "en",
+      "verify_status": "verified",
+      "updated": "2026-11-19",
+      "in_synthesis": false,
+      "used_in": [
+        "reports/2026-11_baseline_report.html"
+      ],
+      "document_tier": "official_release",
+      "statement_type": "fact",
+      "evidence": {
+        "method": "manual",
+        "note": "T-01 登记核验回填：登记信息人工核对（未抓取正文，故无 archive_hash）",
+        "snapshot_date": "2026-11-19"
+      }
+    }
+  ]
 }
