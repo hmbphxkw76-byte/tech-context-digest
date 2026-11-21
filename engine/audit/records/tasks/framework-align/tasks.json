@@ -4,7 +4,7 @@
     "depends_on": [],
     "id": "T-1",
     "phase": "",
-    "status": "pending",
+    "status": "done",
     "title": "决策卡补齐置信度（DC-09，15 份）"
   },
   {
@@ -12,7 +12,7 @@
     "depends_on": [],
     "id": "T-2",
     "phase": "",
-    "status": "pending",
+    "status": "done",
     "title": "高影响报告补齐强制披露块（ID-09，9 份）"
   },
   {
@@ -20,7 +20,7 @@
     "depends_on": [],
     "id": "T-3",
     "phase": "",
-    "status": "pending",
+    "status": "done",
     "title": "修复监测渲染规范告警（MON-02/03，4 份）"
   },
   {
@@ -28,7 +28,7 @@
     "depends_on": [],
     "id": "T-4",
     "phase": "",
-    "status": "pending",
+    "status": "done",
     "title": "补录机构分级主数据（R7，54 家）"
   },
   {
@@ -36,7 +36,7 @@
     "depends_on": [],
     "id": "T-5",
     "phase": "",
-    "status": "pending",
+    "status": "done",
     "title": "来源登记补 document_tier/evidence/statement_type（R8，10 线）"
   },
   {
@@ -44,7 +44,7 @@
     "depends_on": [],
     "id": "T-6",
     "phase": "",
-    "status": "pending",
+    "status": "done",
     "title": "补 ai-application/trends 数据目录并刷新 hub/INDEX/指纹"
   },
   {
@@ -52,7 +52,7 @@
     "depends_on": [],
     "id": "T-7",
     "phase": "",
-    "status": "pending",
+    "status": "done",
     "title": "全量回归（门禁 0[E]/单测/页面/指纹）并提交"
   }
 ]

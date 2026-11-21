@@ -32,13 +32,13 @@
 
 ## 任务清单（7 项，详见 tasks.json）
 
-- [pending] T-1 决策卡补齐置信度（DC-09，15 份）
-- [pending] T-2 高影响报告补齐强制披露块（ID-09，9 份）
-- [pending] T-3 修复监测渲染规范告警（MON-02/03，4 份）
-- [pending] T-4 补录机构分级主数据（R7，54 家）
-- [pending] T-5 来源登记补 document_tier/evidence/statement_type（R8，10 线）
-- [pending] T-6 补 ai-application/trends 数据目录并刷新 hub/INDEX/指纹
-- [pending] T-7 全量回归（门禁 0[E]/单测/页面/指纹）并提交
+- [done] T-1 决策卡补齐置信度（DC-09，15 份）
+- [done] T-2 高影响报告补齐强制披露块（ID-09，9 份）
+- [done] T-3 修复监测渲染规范告警（MON-02/03，4 份）
+- [done] T-4 补录机构分级主数据（R7，54 家）
+- [done] T-5 来源登记补 document_tier/evidence/statement_type（R8，10 线）
+- [done] T-6 补 ai-application/trends 数据目录并刷新 hub/INDEX/指纹
+- [done] T-7 全量回归（门禁 0[E]/单测/页面/指纹）并提交
 
 ## 风险登记（2 项，详见 risks.json）
 
