@@ -1,0 +1,20 @@
+[
+  {
+    "description": "补登记来源元数据推断误差",
+    "id": "R-1",
+    "mitigation": "逐条 web_fetch 复核并记录 evidence",
+    "owner": ""
+  },
+  {
+    "description": "报告改写引入口径漂移",
+    "id": "R-2",
+    "mitigation": "只改核验标注与来源，不改数值",
+    "owner": ""
+  },
+  {
+    "description": "删除报告导致 hub/索引悬挂",
+    "id": "R-3",
+    "mitigation": "同步重建 hub/INDEX/指纹",
+    "owner": ""
+  }
+]

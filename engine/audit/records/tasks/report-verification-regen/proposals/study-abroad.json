@@ -1,0 +1,725 @@
+{
+  "business_line": "content/education/study-abroad",
+  "entries": [
+    {
+      "publisher": "HK-dir (Norwegian Directorate for Higher Education and Skills)",
+      "title": "Recognition of foreign education — working in Norway",
+      "url": "https://hkdir.no/en/foreign-education",
+      "lang": "en",
+      "tier": 1,
+      "verify_status": "verified",
+      "document_tier": "official_release",
+      "statement_type": "fact",
+      "evidence": {
+        "method": "web_fetch",
+        "snapshot_date": "2026-11-22",
+        "note": "HK-dir 官方页面：外国学历在挪威的认定与信息服务（ENIC-NARIC、监管职业、GSU 入学资格），2023-01-01 起承接 NOKUT 相关职责。"
+      },
+      "used_in": [
+        "reports/2026-11_baseline_report.html"
+      ]
+    },
+    {
+      "publisher": "Nuffic IDW",
+      "title": "To work in the Netherlands with a foreign diploma",
+      "url": "https://idw.nl/en/to-work/",
+      "lang": "en",
+      "tier": 1,
+      "verify_status": "verified",
+      "document_tier": "official_release",
+      "statement_type": "fact",
+      "evidence": {
+        "method": "web_fetch",
+        "snapshot_date": "2026-11-22",
+        "note": "Nuffic IDW 官方页面：持外国文凭在荷兰工作的学历评估（credential evaluation）流程、所需材料与费用（€148.83/次）。"
+      },
+      "used_in": [
+        "reports/2026-11_baseline_report.html"
+      ]
+    },
+    {
+      "publisher": "Studielink (Foundation Studielink)",
+      "title": "Studielink application deadlines — make sure you are on time",
+      "url": "https://info.studielink.nl/en/how-to-use-studielink/make-sure-you-are-on-time",
+      "lang": "en",
+      "tier": 1,
+      "verify_status": "verified",
+      "document_tier": "official_release",
+      "statement_type": "fact",
+      "evidence": {
+        "method": "web_fetch",
+        "snapshot_date": "2026-11-22",
+        "note": "荷兰国家入学平台 Studielink 官方说明：numerus fixus 项目截止 1 月 15 日 23:59、无 numerus fixus 本科截止 5 月 1 日 23:59，及逾期后果。"
+      },
+      "used_in": [
+        "reports/2026-11_baseline_report.html"
+      ]
+    },
+    {
+      "publisher": "SIRI (Danish Agency for International Recruitment and Integration)",
+      "title": "Residence permit for higher education programmes in Denmark",
+      "url": "https://nyidanmark.dk/en-GB/You-want-to-apply/Study/Higher-education",
+      "lang": "en",
+      "tier": 1,
+      "verify_status": "verified",
+      "document_tier": "official_release",
+      "statement_type": "fact",
+      "evidence": {
+        "method": "web_fetch",
+        "snapshot_date": "2026-11-22",
+        "note": "SIRI 官方页面：丹麦高校学习居留许可条件、自给标准（2026 年 DKK 7,426/月，上限 DKK 89,112）、打工与毕业后求职许可规则。"
+      },
+      "used_in": [
+        "reports/2026-11_baseline_report.html"
+      ]
+    },
+    {
+      "publisher": "Swedish Institute (SI)",
+      "title": "SI Scholarship for Global Professionals",
+      "url": "https://si.se/en/apply/scholarships/swedish-institute-scholarships-for-global-professionals/",
+      "lang": "en",
+      "tier": 1,
+      "verify_status": "verified",
+      "document_tier": "official_release",
+      "statement_type": "fact",
+      "evidence": {
+        "method": "web_fetch",
+        "snapshot_date": "2026-11-22",
+        "note": "瑞典学院官方奖学金页面：面向 34 国硕士生的全额资助（学费全免 + 每月 SEK 12,000 + 旅行补助 SEK 15,000）及 2027 申请时间线。"
+      },
+      "used_in": [
+        "reports/2026-11_baseline_report.html"
+      ]
+    },
+    {
+      "publisher": "Study in Norway / HK-dir",
+      "title": "Scholarships for degree students in Norway",
+      "url": "https://studyinnorway.no/scholarships-degree-students",
+      "lang": "en",
+      "tier": 1,
+      "verify_status": "verified",
+      "document_tier": "official_release",
+      "statement_type": "fact",
+      "evidence": {
+        "method": "web_fetch",
+        "snapshot_date": "2026-11-22",
+        "note": "Study in Norway 官方页面：挪威政府不向学位生提供个人奖学金，仅列 Erasmus Mundus 联合硕士（挪威机构参与 16 个）与 Erasmus+ 硕士贷款等方案。"
+      },
+      "used_in": [
+        "reports/2026-11_baseline_report.html"
+      ]
+    },
+    {
+      "publisher": "Study in Sweden / Swedish Institute",
+      "title": "Residence permits and visas for Sweden",
+      "url": "https://studyinsweden.se/moving-to-sweden/permits-visas/",
+      "lang": "en",
+      "tier": 1,
+      "verify_status": "verified",
+      "document_tier": "official_release",
+      "statement_type": "fact",
+      "evidence": {
+        "method": "web_fetch",
+        "snapshot_date": "2026-11-22",
+        "note": "Study in Sweden 官方页面：停留超 3 个月须申请居留许可、抵达后人口登记与 personnummer、毕业后可延长 12 个月求职等流程。"
+      },
+      "used_in": [
+        "reports/2026-11_baseline_report.html"
+      ]
+    },
+    {
+      "publisher": "Study in Sweden / Swedish Institute",
+      "title": "Degree programmes in Sweden",
+      "url": "https://studyinsweden.se/plan-your-studies/degree-programmes/",
+      "lang": "en",
+      "tier": 1,
+      "verify_status": "verified",
+      "document_tier": "official_release",
+      "statement_type": "fact",
+      "evidence": {
+        "method": "web_fetch",
+        "snapshot_date": "2026-11-22",
+        "note": "Study in Sweden 官方页面：英语授课学士/硕士/博士项目概览（100+ 学士、1,000+ 硕士，60/120 ECTS）及学制说明。"
+      },
+      "used_in": [
+        "reports/2026-11_baseline_report.html"
+      ]
+    },
+    {
+      "publisher": "Study in Sweden / Swedish Institute",
+      "title": "How to apply to study in Sweden",
+      "url": "https://studyinsweden.se/plan-your-studies/how-to-apply/",
+      "lang": "en",
+      "tier": 1,
+      "verify_status": "verified",
+      "document_tier": "official_release",
+      "statement_type": "fact",
+      "evidence": {
+        "method": "web_fetch",
+        "snapshot_date": "2026-11-22",
+        "note": "Study in Sweden 官方页面：申请流程、入学要求、Universityadmissions 统一申请（硕士至多 4 个志愿）与 SEK 900 申请费。"
+      },
+      "used_in": [
+        "reports/2026-11_baseline_report.html"
+      ]
+    },
+    {
+      "publisher": "Study in Sweden / Swedish Institute",
+      "title": "Universities in Sweden",
+      "url": "https://studyinsweden.se/universities/",
+      "lang": "en",
+      "tier": 1,
+      "verify_status": "verified",
+      "document_tier": "official_release",
+      "statement_type": "fact",
+      "evidence": {
+        "method": "web_fetch",
+        "snapshot_date": "2026-11-22",
+        "note": "Study in Sweden 官方页面：瑞典 39 所高校名单与院校概览（含 KTH、隆德、乌普萨拉等）。"
+      },
+      "used_in": [
+        "reports/2026-11_baseline_report.html"
+      ]
+    },
+    {
+      "publisher": "SUSI (Student Universal Support Ireland)",
+      "title": "SUSI — Ireland's national student grant awarding authority",
+      "url": "https://susi.ie/",
+      "lang": "en",
+      "tier": 1,
+      "verify_status": "verified",
+      "document_tier": "official_release",
+      "statement_type": "fact",
+      "evidence": {
+        "method": "web_fetch",
+        "snapshot_date": "2026-11-22",
+        "note": "SUSI 官方门户：爱尔兰继续与高等教育国家助学金评审机构，含资格标准、申请流程与申请追踪。"
+      },
+      "used_in": [
+        "reports/2026-11_baseline_report.html"
+      ]
+    },
+    {
+      "publisher": "Campus France",
+      "title": "French higher education system",
+      "url": "https://www.campusfrance.org/en/French-higher-education",
+      "lang": "en",
+      "tier": 1,
+      "verify_status": "verified",
+      "document_tier": "official_release",
+      "statement_type": "fact",
+      "evidence": {
+        "method": "web_fetch",
+        "snapshot_date": "2026-11-22",
+        "note": "Campus France 官方页面：法国高等教育体系、院校类型、LMD 学位与 ECTS 概览。"
+      },
+      "used_in": [
+        "reports/2026-11_baseline_report.html"
+      ]
+    },
+    {
+      "publisher": "Campus France",
+      "title": "How to apply in a French higher education institution",
+      "url": "https://www.campusfrance.org/en/application-higher-education-france",
+      "lang": "en",
+      "tier": 1,
+      "verify_status": "verified",
+      "document_tier": "official_release",
+      "statement_type": "fact",
+      "evidence": {
+        "method": "web_fetch",
+        "snapshot_date": "2026-11-22",
+        "note": "Campus France 官方页面：按国籍/居住地的申请通道（Parcoursup、DAP、Mon Master、Études en France、CampusArt）与 2027-2028 时间表。"
+      },
+      "used_in": [
+        "reports/2026-11_baseline_report.html"
+      ]
+    },
+    {
+      "publisher": "Campus France",
+      "title": "France Excellence Eiffel Scholarship — implementation",
+      "url": "https://www.campusfrance.org/en/france-excellence-eiffel-scholarship-implementation",
+      "lang": "en",
+      "tier": 1,
+      "verify_status": "verified",
+      "document_tier": "official_release",
+      "statement_type": "fact",
+      "evidence": {
+        "method": "web_fetch",
+        "snapshot_date": "2026-11-22",
+        "note": "Campus France 官方页面：Eiffel 奖学金实施规则，硕士每月 €1,200、博士 €2,000（2026-01 起），含学费豁免、差旅与住房。"
+      },
+      "used_in": [
+        "reports/2026-11_baseline_report.html"
+      ]
+    },
+    {
+      "publisher": "Campus France",
+      "title": "Preparing your budget as a student in France",
+      "url": "https://www.campusfrance.org/en/preparing-budget-student-France",
+      "lang": "en",
+      "tier": 1,
+      "verify_status": "verified",
+      "document_tier": "official_release",
+      "statement_type": "fact",
+      "evidence": {
+        "method": "web_fetch",
+        "snapshot_date": "2026-11-22",
+        "note": "Campus France 官方页面：法国生活预算参考（食品约 €300/月、巴黎学生交通年票 €374.4、医疗与娱乐分项）。"
+      },
+      "used_in": [
+        "reports/2026-11_baseline_report.html"
+      ]
+    },
+    {
+      "publisher": "Immigration, Refugees and Citizenship Canada (IRCC)",
+      "title": "New International Student Program regulations take effect",
+      "url": "https://www.canada.ca/en/immigration-refugees-citizenship/news/2024/11/new-international-student-program-regulations-take-effect.html",
+      "lang": "en",
+      "tier": 1,
+      "verify_status": "verified",
+      "document_tier": "official_release",
+      "statement_type": "fact",
+      "evidence": {
+        "method": "web_fetch",
+        "snapshot_date": "2026-11-22",
+        "note": "IRCC 2024-11-15 新闻稿：国际学生校外工作上限调整为 24 小时/周、转学须重新申请学习许可、DLI 合规报告义务。"
+      },
+      "used_in": [
+        "reports/2026-11_baseline_report.html"
+      ]
+    },
+    {
+      "publisher": "Hong Kong Census and Statistics Department (C&SD)",
+      "title": "C&SD statistical product index (FA100238)",
+      "url": "https://www.censtatd.gov.hk/en/EIndexbySubject.html?scode=370&pcode=FA100238",
+      "lang": "en",
+      "tier": 1,
+      "verify_status": "unverifiable",
+      "document_tier": "official_release",
+      "statement_type": "fact",
+      "evidence": {
+        "method": "web_fetch",
+        "snapshot_date": "2026-11-22",
+        "note": "官方统计产品页（C&SD），但页面由 JavaScript 动态渲染，web_fetch 两次仅取得空壳（标题 Statistical Product、表格字段为占位符），未取得任何统计内容，无法确认，待人工复核。"
+      },
+      "used_in": [
+        "reports/2026-11_baseline_report.html"
+      ]
+    },
+    {
+      "publisher": "Education Ireland",
+      "title": "Undergraduate tuition fees in Ireland",
+      "url": "https://www.educationinireland.com/en/plan-your-study-abroad/undergraduate-tuition-fees",
+      "lang": "en",
+      "tier": 1,
+      "verify_status": "verified",
+      "document_tier": "official_release",
+      "statement_type": "fact",
+      "evidence": {
+        "method": "web_fetch",
+        "snapshot_date": "2026-11-22",
+        "note": "Education Ireland 官方页面：2025/26 本科非欧盟学费区间（商科 €10,300–29,000、工程/理科 €14,500–28,500、医学 €50,135–62,500 等）。"
+      },
+      "used_in": [
+        "reports/2026-11_baseline_report.html"
+      ]
+    },
+    {
+      "publisher": "Swedish Migration Agency (Migrationsverket)",
+      "title": "Residence permit for higher education studies in Sweden",
+      "url": "https://www.migrationsverket.se/en/you-want-to-apply/study/higher-education.html",
+      "lang": "en",
+      "tier": 1,
+      "verify_status": "verified",
+      "document_tier": "official_release",
+      "statement_type": "fact",
+      "evidence": {
+        "method": "web_fetch",
+        "snapshot_date": "2026-11-22",
+        "note": "Migrationsverket 官方页面：瑞典高等教育学习居留许可条件、自给标准（2026 年 SEK 10,656/月）与申请材料。"
+      },
+      "used_in": [
+        "reports/2026-11_baseline_report.html"
+      ]
+    },
+    {
+      "publisher": "Ministry of Higher Education Malaysia (MOHE)",
+      "title": "Ministry of Higher Education Malaysia (MOHE) official portal",
+      "url": "https://www.mohe.gov.my/",
+      "lang": "en",
+      "tier": 1,
+      "verify_status": "verified",
+      "document_tier": "official_release",
+      "statement_type": "fact",
+      "evidence": {
+        "method": "web_fetch",
+        "snapshot_date": "2026-11-22",
+        "note": "马来西亚高等教育部官方门户：含学生入学、奖学金（MyBrain、MIS）、高教统计与院校数量等板块（默认马来语，提供英语版）。"
+      },
+      "used_in": [
+        "reports/2026-11_baseline_report.html"
+      ]
+    },
+    {
+      "publisher": "Malaysian Qualifications Agency (MQA)",
+      "title": "Malaysian Qualifications Agency (MQA) official portal",
+      "url": "https://www.mqa.gov.my/",
+      "lang": "en",
+      "tier": 1,
+      "verify_status": "unverifiable",
+      "document_tier": "official_release",
+      "statement_type": "fact",
+      "evidence": {
+        "method": "web_fetch",
+        "snapshot_date": "2026-11-22",
+        "note": "官方门户（标题 The Official Portal Of MQA），但页面使用 frameset，web_fetch 两次仅返回 frameset 占位文本，未取得正文，无法确认，待人工复核。"
+      },
+      "used_in": [
+        "reports/2026-11_baseline_report.html"
+      ]
+    },
+    {
+      "publisher": "NOKUT (Norwegian Agency for Quality Assurance in Education)",
+      "title": "Higher education institutions in Norway",
+      "url": "https://www.nokut.no/en/higher-education/higher-education-institutions/",
+      "lang": "en",
+      "tier": 1,
+      "verify_status": "verified",
+      "document_tier": "official_release",
+      "statement_type": "fact",
+      "evidence": {
+        "method": "web_fetch",
+        "snapshot_date": "2026-11-22",
+        "note": "NOKUT 官方页面：挪威四类高校（大学、专业大学、大学学院/应用科学大学等）分类与认证权限说明及院校名单。"
+      },
+      "used_in": [
+        "reports/2026-11_baseline_report.html"
+      ]
+    },
+    {
+      "publisher": "SIRI (Danish Agency for International Recruitment and Integration)",
+      "title": "New rules for third-country students in Denmark (October 2026)",
+      "url": "https://www.nyidanmark.dk/en-GB/News-Front-Page/2026/09/SIRI---Nye-regler-for-studerende",
+      "lang": "en",
+      "tier": 1,
+      "verify_status": "verified",
+      "document_tier": "official_release",
+      "statement_type": "fact",
+      "evidence": {
+        "method": "web_fetch",
+        "snapshot_date": "2026-11-22",
+        "note": "SIRI 2026-09-30 公告：2026-10-01 起第三国学生求职居留由 3 年缩至 1 年、随行家庭居留受限，博士不受影响。"
+      },
+      "used_in": [
+        "reports/2026-11_baseline_report.html"
+      ]
+    },
+    {
+      "publisher": "New Zealand Qualifications Authority (NZQA)",
+      "title": "NZQA — New Zealand Qualifications Authority",
+      "url": "https://www.nzqa.govt.nz/",
+      "lang": "en",
+      "tier": 1,
+      "verify_status": "verified",
+      "document_tier": "official_release",
+      "statement_type": "fact",
+      "evidence": {
+        "method": "web_fetch",
+        "snapshot_date": "2026-11-22",
+        "note": "NZQA 官方门户：新西兰学历与资格框架（NZQCF）主管机构，含 NCEA 评估与资格查询。"
+      },
+      "used_in": [
+        "reports/2026-11_baseline_report.html"
+      ]
+    },
+    {
+      "publisher": "Quality and Qualifications Ireland (QQI)",
+      "title": "Quality and Qualifications Ireland (QQI)",
+      "url": "https://www.qqi.ie/",
+      "lang": "en",
+      "tier": 1,
+      "verify_status": "verified",
+      "document_tier": "official_release",
+      "statement_type": "fact",
+      "evidence": {
+        "method": "web_fetch",
+        "snapshot_date": "2026-11-22",
+        "note": "QQI 官方门户：爱尔兰国家资格框架（NFQ）与教育质量保障国家机构，含 TrustEd Ireland 与学历核验。"
+      },
+      "used_in": [
+        "reports/2026-11_baseline_report.html"
+      ]
+    },
+    {
+      "publisher": "Study Australia (Australian Trade and Investment Commission, Austrade)",
+      "title": "Study Australia — official portal",
+      "url": "https://www.studyaustralia.gov.au/en",
+      "lang": "en",
+      "tier": 1,
+      "verify_status": "verified",
+      "document_tier": "official_release",
+      "statement_type": "fact",
+      "evidence": {
+        "method": "web_fetch",
+        "snapshot_date": "2026-11-22",
+        "note": "澳大利亚政府官方留学门户（Austrade）：课程搜索、签证、生活成本与院校名单。"
+      },
+      "used_in": [
+        "reports/2026-11_baseline_report.html"
+      ]
+    },
+    {
+      "publisher": "Study in Denmark (Danish Ministry of Higher Education and Science)",
+      "title": "Bank account and cost of living in Denmark",
+      "url": "https://www.studyindenmark.dk/live-in-denmark/bank-budget",
+      "lang": "en",
+      "tier": 1,
+      "verify_status": "verified",
+      "document_tier": "official_release",
+      "statement_type": "fact",
+      "evidence": {
+        "method": "web_fetch",
+        "snapshot_date": "2026-11-22",
+        "note": "Study in Denmark 官方页面：丹麦生活预算（月租 3,000–6,500 DKK、食品 2,000–3,500 DKK 等）与银行开户、Nemkonto。"
+      },
+      "used_in": [
+        "reports/2026-11_baseline_report.html"
+      ]
+    },
+    {
+      "publisher": "Study in Denmark (Danish Ministry of Higher Education and Science)",
+      "title": "How to apply to study in Denmark",
+      "url": "https://www.studyindenmark.dk/study-options/how-to-apply",
+      "lang": "en",
+      "tier": 1,
+      "verify_status": "verified",
+      "document_tier": "official_release",
+      "statement_type": "fact",
+      "evidence": {
+        "method": "web_fetch",
+        "snapshot_date": "2026-11-22",
+        "note": "Study in Denmark 官方页面：Optagelse.dk 统一申请、入学要求、配额 1/2 与申请截止（3 月 15 日 / 7 月 5 日）。"
+      },
+      "used_in": [
+        "reports/2026-11_baseline_report.html"
+      ]
+    },
+    {
+      "publisher": "Study in Denmark (Danish Ministry of Higher Education and Science)",
+      "title": "Language requirements for study in Denmark",
+      "url": "https://www.studyindenmark.dk/study-options/how-to-apply/language-requirements",
+      "lang": "en",
+      "tier": 1,
+      "verify_status": "verified",
+      "document_tier": "official_release",
+      "statement_type": "fact",
+      "evidence": {
+        "method": "web_fetch",
+        "snapshot_date": "2026-11-22",
+        "note": "Study in Denmark 官方页面：英语授课项目英语要求（对标丹麦 English B/A，IELTS/TOEFL 分数区间）与丹麦语授课语言要求。"
+      },
+      "used_in": [
+        "reports/2026-11_baseline_report.html"
+      ]
+    },
+    {
+      "publisher": "Study in Denmark (Danish Ministry of Higher Education and Science)",
+      "title": "Scholarships for studying in Denmark",
+      "url": "https://www.studyindenmark.dk/study-options/scholarships",
+      "lang": "en",
+      "tier": 1,
+      "verify_status": "verified",
+      "document_tier": "official_release",
+      "statement_type": "fact",
+      "evidence": {
+        "method": "web_fetch",
+        "snapshot_date": "2026-11-22",
+        "note": "Study in Denmark 官方页面：Nordplus、Erasmus、Erasmus Mundus、Fulbright 及丹麦政府非欧盟奖学金与 SU 说明。"
+      },
+      "used_in": [
+        "reports/2026-11_baseline_report.html"
+      ]
+    },
+    {
+      "publisher": "Study in Denmark (Danish Ministry of Higher Education and Science)",
+      "title": "What can I study in Denmark",
+      "url": "https://www.studyindenmark.dk/study-options/what-can-i-study",
+      "lang": "en",
+      "tier": 1,
+      "verify_status": "verified",
+      "document_tier": "official_release",
+      "statement_type": "fact",
+      "evidence": {
+        "method": "web_fetch",
+        "snapshot_date": "2026-11-22",
+        "note": "Study in Denmark 官方页面：丹麦五类高教机构与 AP/专业学士/学士/硕士/博士学制（ECTS）概览。"
+      },
+      "used_in": [
+        "reports/2026-11_baseline_report.html"
+      ]
+    },
+    {
+      "publisher": "Study in Finland (Finnish National Agency for Education, EDUFI)",
+      "title": "Student residence permit in Finland",
+      "url": "https://www.studyinfinland.fi/admissions/student-residence-permit",
+      "lang": "en",
+      "tier": 1,
+      "verify_status": "verified",
+      "document_tier": "official_release",
+      "statement_type": "fact",
+      "evidence": {
+        "method": "web_fetch",
+        "snapshot_date": "2026-11-22",
+        "note": "Study in Finland 官方页面：非欧盟学生经 Migri 申请学习居留许可、资金与保险要求及毕业后 2 年求职许可。"
+      },
+      "used_in": [
+        "reports/2026-11_baseline_report.html"
+      ]
+    },
+    {
+      "publisher": "Study in Finland (EDUFI)",
+      "title": "Bachelor's and master's scholarships in Finland",
+      "url": "https://www.studyinfinland.fi/funding-your-studies/bachelors-and-masters-scholarships",
+      "lang": "en",
+      "tier": 1,
+      "verify_status": "verified",
+      "document_tier": "official_release",
+      "statement_type": "fact",
+      "evidence": {
+        "method": "web_fetch",
+        "snapshot_date": "2026-11-22",
+        "note": "Study in Finland 官方页面：芬兰无政府奖学金项目，奖学金由高校自行提供，通常仅覆盖学费。"
+      },
+      "used_in": [
+        "reports/2026-11_baseline_report.html"
+      ]
+    },
+    {
+      "publisher": "Study in Finland (EDUFI)",
+      "title": "Opportunities after graduation in Finland",
+      "url": "https://www.studyinfinland.fi/life-in-finland/opportunities-after-graduation",
+      "lang": "en",
+      "tier": 1,
+      "verify_status": "verified",
+      "document_tier": "official_release",
+      "statement_type": "fact",
+      "evidence": {
+        "method": "web_fetch",
+        "snapshot_date": "2026-11-22",
+        "note": "Study in Finland 官方页面：毕业后可申请 2 年求职/创业许可及就业建议。"
+      },
+      "used_in": [
+        "reports/2026-11_baseline_report.html"
+      ]
+    },
+    {
+      "publisher": "Study in Finland (EDUFI)",
+      "title": "Universities in Finland",
+      "url": "https://www.studyinfinland.fi/universities",
+      "lang": "en",
+      "tier": 1,
+      "verify_status": "verified",
+      "document_tier": "official_release",
+      "statement_type": "fact",
+      "evidence": {
+        "method": "web_fetch",
+        "snapshot_date": "2026-11-22",
+        "note": "Study in Finland 官方页面：芬兰 13 所大学与 22 所应用科学大学（UAS）及 600+ 英语授课项目概览。"
+      },
+      "used_in": [
+        "reports/2026-11_baseline_report.html"
+      ]
+    },
+    {
+      "publisher": "Study in Holland / Nuffic",
+      "title": "Daily student expenses and cost of living in the Netherlands",
+      "url": "https://www.studyinholland.nl/finances/daily-student-expenses-and-cost-of-living-in-the-netherlands",
+      "lang": "en",
+      "tier": 1,
+      "verify_status": "verified",
+      "document_tier": "official_release",
+      "statement_type": "fact",
+      "evidence": {
+        "method": "web_fetch",
+        "snapshot_date": "2026-11-22",
+        "note": "Study in Holland（Nuffic）官方页面：荷兰学生月均 €1,000–1,500 生活预算与住房、食品、交通分项（来源 Nibud 2024）。"
+      },
+      "used_in": [
+        "reports/2026-11_baseline_report.html"
+      ]
+    },
+    {
+      "publisher": "Study in NL / Nuffic",
+      "title": "NL Scholarship",
+      "url": "https://www.studyinnl.org/finances/nl-scholarship",
+      "lang": "en",
+      "tier": 1,
+      "verify_status": "unverifiable",
+      "document_tier": "official_release",
+      "statement_type": "fact",
+      "evidence": {
+        "method": "web_fetch",
+        "snapshot_date": "2026-11-22",
+        "note": "Nuffic 官方页面，但 web_fetch 两次仅返回空壳（无标题、无正文），未取得 NL Scholarship 具体内容，无法确认，待人工复核。"
+      },
+      "used_in": [
+        "reports/2026-11_baseline_report.html"
+      ]
+    },
+    {
+      "publisher": "UDI (Norwegian Directorate of Immigration)",
+      "title": "Study permit (Norway)",
+      "url": "https://www.udi.no/en/want-to-apply/studies/",
+      "lang": "en",
+      "tier": 1,
+      "verify_status": "verified",
+      "document_tier": "official_release",
+      "statement_type": "fact",
+      "evidence": {
+        "method": "web_fetch",
+        "snapshot_date": "2026-11-22",
+        "note": "UDI 官方页面：非欧盟公民在挪威学习的居留许可（study permit）申请条件与适用院校类型。"
+      },
+      "used_in": [
+        "reports/2026-11_baseline_report.html"
+      ]
+    },
+    {
+      "publisher": "UDI (Norwegian Directorate of Immigration)",
+      "title": "Job seeker residence permit (Norway)",
+      "url": "https://www.udi.no/en/want-to-apply/work-immigration/job-seekers/",
+      "lang": "en",
+      "tier": 1,
+      "verify_status": "verified",
+      "document_tier": "official_release",
+      "statement_type": "fact",
+      "evidence": {
+        "method": "web_fetch",
+        "snapshot_date": "2026-11-22",
+        "note": "UDI 官方页面：毕业生/研究人员求职居留许可条件（自费要求 NOK 28,448/月、最长 1 年）。"
+      },
+      "used_in": [
+        "reports/2026-11_baseline_report.html"
+      ]
+    },
+    {
+      "publisher": "University Admissions (Swedish Council for Higher Education)",
+      "title": "English language requirements (Sweden)",
+      "url": "https://www.universityadmissions.se/en/entry-requirements/english-language-requirements/",
+      "lang": "en",
+      "tier": 1,
+      "verify_status": "verified",
+      "document_tier": "official_release",
+      "statement_type": "fact",
+      "evidence": {
+        "method": "web_fetch",
+        "snapshot_date": "2026-11-22",
+        "note": "University Admissions 官方页面：瑞典高校英语要求（对标 English 6/Level 2）及 IELTS/TOEFL/PTE/Cambridge 等分数标准。"
+      },
+      "used_in": [
+        "reports/2026-11_baseline_report.html"
+      ]
+    }
+  ]
+}
