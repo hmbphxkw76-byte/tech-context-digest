@@ -84,9 +84,9 @@ engine/prompts/                    # 泛用版业务提示词（每类型一目�
 | 类型 ID | 类型名称 | 基线模板 | 周期模板 | 节拍设计 | 已接入业务线 |
 |---|---|---|---|---|---|
 | market-monitoring | 市场指标监测型 | prompt-baseline-setup-template.md | monthly / quarterly / annual（三份独立） | 月 / 季 / 年三周期 | content/economy/dubai/apartment |
-| trend-weekly | 行业趋势周报型 | prompt-baseline-setup-template.md | prompt-weekly-monitor-template.md | 周报主节拍（数据截止日命名）+ 事件触发板块升级 | content/tech/ai-security/weekly-roundup；content/tech/ai-application/weekly-roundup；content/economy/trends |
-| employment-research | 职业就业调研型 | prompt-baseline-setup-template.md | prompt-update-template.md（一份覆盖三档节拍） | 季度主节拍 + 事件触发；月度核验轻运行；年度复盘 | content/tech/ai-security/security/dubai |
-| competitive-intelligence | 竞争情报监测型 | prompt-baseline-setup-template.md | prompt-monthly-update-template.md（覆盖两档） | 月度主更新（动态矩阵刷新）+ 事件触发升级 | content/tech/ai-security/competitive-intelligence/dubai |
+| trend-weekly | 行业趋势周报型 | prompt-baseline-setup-template.md | prompt-weekly-monitor-template.md | 周报主节拍（数据截止日命名）+ 事件触发板块升级 | content/economy/trends |
+| employment-research | 职业就业调研型 | prompt-baseline-setup-template.md | prompt-update-template.md（一份覆盖三档节拍） | 基线 + 月度主更新 + 事件触发 | content/tech/ai-security/dubai |
+| competitive-intelligence | 竞争情报监测型 | prompt-baseline-setup-template.md | prompt-monthly-update-template.md（覆盖两档） | 月度主更新（动态矩阵刷新）+ 事件触发升级 | content/tech/ai-security/competitive-intelligence/dubai；content/tech/ai-application/trends |
 | sentiment-monitoring | 舆情传播监测型 | prompt-baseline-setup-template.md | prompt-monthly-update-template.md（覆盖两档） | 月度舆情月报 + 事件触发预警升级 | 暂无 |
 | consumer-research | 消费者·用户调研型 | prompt-baseline-setup-template.md | prompt-study-template.md（项目制） | 项目制专题调研 + 年度满意度复测 | 暂无 |
 | industry-research | 行业深度研究型 | prompt-baseline-setup-template.md | prompt-annual-refresh-template.md | 一次性深度全景 + 年度刷新（重大事件可插刷） | content/tech/ai-security/industry-research/dubai |
@@ -141,3 +141,4 @@ engine/prompts/                    # 泛用版业务提示词（每类型一目�
 | v1.12 | 2026-11-16 | 计数更正 | 泛用版业务提示词实际 24 份（11 目录：2+3+3+2×8）；第一节当前描述由「23 份」更正为「24 份」，v1.5 历史行的「23 份」为初版计数口径，保留不改 |
 | v1.13 | 2026-11-16 | 同步纪律恢复 | 恢复泛用版「母版定义 + 修改周期提示词须同步类型模板与 engine/prompts/ 泛用版两处」维护纪律（该表述为全仓唯一，此前目录树修正时被精简掉） |
 | v1.14 | 2026-11-18 | 四主题业务线接入 | policy-analysis 类型下新增四条业务线：`content/education/education-system`、`content/international/international-relations`、`content/political/political-system`、`content/society/social-structure`（P1-9 四主题接入就绪化；region 可选，业务线以 category 段落位） |
+| v1.15 | 2026-11-21 | 科技主题月度化 | trend-weekly 仅保留 `content/economy/trends`（tech 两条周报线停用）；employment-research 接入业务线更新为 `content/tech/ai-security/dubai`；competitive-intelligence 新增 `content/tech/ai-application/trends` |

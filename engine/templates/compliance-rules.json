@@ -7,24 +7,7 @@
     "anchor_check": true,
     "nav_required_cycles": ["monthly", "quarterly", "annual", "weekly"]
   },
-  "business_overrides": {
-    "content/tech/ai-security/weekly-roundup": {
-      "weekly": {
-        "sections": 7,
-        "nav": true,
-        "section_titles": ["一、本周要点 Top5", "二、AI 安全与红队", "三、基准与评估可信度", "四、数据看板表格", "五、风险与不确定性", "六、可执行启示", "参考来源"],
-        "template": "prompt-weekly-monitor-template.md"
-      }
-    },
-    "content/tech/ai-application/weekly-roundup": {
-      "weekly": {
-        "sections": 8,
-        "nav": true,
-        "section_titles": ["一、本周要点 Top5", "二、大模型与 Agent 技术演进", "三、AI 编码与开发工具", "四、AI 应用与商业化", "五、数据看板表格", "六、风险与不确定性", "七、可执行启示", "参考来源"],
-        "template": "prompt-weekly-monitor-template.md"
-      }
-    }
-  },
+  "business_overrides": {},
   "types": {
     "market-monitoring": {
       "name": "市场指标监测型",

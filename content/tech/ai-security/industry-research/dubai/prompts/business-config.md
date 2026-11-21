@@ -22,7 +22,7 @@
 {{REPO_RAW_URL_BASE}}    = https://github.com/hmbphxkw76-byte/tech-context-digest/blob/main/content/tech/ai-security/industry-research/dubai
 ```
 
-**类型与周期**：`industry-research`（行业深度研究型），周期 `baseline`（九节固定骨架）与 `annual`（年度刷新，结构逐字继承基线）。模板入口：`engine/templates/industry-research/prompt-baseline-setup-template.md`。
+**类型与周期**：`industry-research`（行业深度研究型），周期 `baseline`（九节固定骨架）与 `monthly`（月度刷新，结构逐字继承基线）。模板入口：`engine/templates/industry-research/prompt-baseline-setup-template.md`。
 
 **输出格式**：canonical 富样式自包含 HTML 为主交付物，落盘 `reports/{{周期}}.html`；md 源稿存 `sources/` 同名存档，不参与 `md2html.py` 自动转换（防止覆盖手工渲染）。
 
@@ -44,7 +44,7 @@
 ＞ ② 国际权威组织与分析机构（ISC2、ISACA、Gartner、IDC、SANS/GIAC、MITRE、OWASP、NIST、Mordor Intelligence、Global Market Insights）
 ＞ ③ 头部薪酬指南与招聘平台抽样（Hays、Michael Page、Cooper Fitch、Charterhouse；LinkedIn、Bayt、GulfTalent、foundit Gulf——仅作市场信号）
 ＞ ④ 英文行业/主流媒体（Khaleej Times、The National、Gulf News、Zawya、Reuters——只用于发现线索，数值须回官方/原始页校验）
-＞ ⑤ 同源已核实资产：`content/tech/ai-security/security/dubai/` 业务线的基线报告、md 源稿与指标登记册，以及 `content/tech/weekly-roundup/reports/2026-11-13_weekly.html`（全球趋势转引，须标注「经周报转引」）。
+＞ ⑤ 同源已核实资产：`content/tech/ai-security/dubai/` 业务线的基线报告、md 源稿与指标登记册。
 
 ## 五、重大事件触发器（事件 → 受影响模块）
 
@@ -71,7 +71,7 @@
 | 8 | OWASP LLM Top 10 / MITRE ATLAS 版本 | 版本/计数 | genai.owasp.org / atlas.mitre.org |
 | 9 | DESC ISR v3.1 / ISR 审核员计划 | 版本/控制域 | desc.gov.ae |
 
-> 首份基线运行后回写登记册；基线期先引用 `data/processed/tech/ai-security/security/dubai/ai_cybersecurity_indicator_registry.md` 的已核实活值，不新造数值。
+> 首份基线运行后回写登记册；基线期先引用 `data/processed/tech/ai-security/dubai/ai_cybersecurity_indicator_registry.md` 的已核实活值，不新造数值。
 
 ## 七、已修正事实清单（基线锚，防回退；无来源不得追加）
 
@@ -111,3 +111,4 @@
 | 版本 | 日期 | 变更 | 说明 |
 |---|---|---|---|
 | v1.0 | 2026-11 | 初始版本 | 建立 `content/tech/ai-security/industry-research/dubai` 业务线；四层继承体系指向 `engine/templates/industry-research/`（行业深度研究型）；定义 {{REGION}} / {{TOPIC}}、来源优先级、触发器、指标追踪表、已修正事实清单与九节固化锚 |
+| v1.1 | 2026-11-21 | 月度化 | tech 全线月度化：周期由 baseline + annual 收敛为 baseline + monthly；同源资产路径跟随 ai-security/dubai 迁位更新 |

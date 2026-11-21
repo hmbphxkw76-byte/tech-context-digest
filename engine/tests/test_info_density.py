@@ -92,7 +92,7 @@ class TestInfoDensity(unittest.TestCase):
         text = ("<h2 class='sec'>一、决策摘要</h2><p>已核验</p>"
                 "<p>本期新增 1 / 修正 0 / 无变化 1 / 假设核验进度 1/2。</p>"
                 "<p>场景切片：投资决策。</p>")
-        rules = {r for r, _ in m.check_text(text, "content/tech/security/dubai")}
+        rules = {r for r, _ in m.check_text(text, "content/tech/ai-security/dubai")}
         self.assertIn("ID-07", rules)
         rules2 = {r for r, _ in m.check_text(text, "content/economy/dubai/apartment")}
         self.assertNotIn("ID-07", rules2)

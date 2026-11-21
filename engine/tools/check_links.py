@@ -87,9 +87,8 @@ ALLOWED_PREFIXES = {
     "data/processed/economy/trends",
     "data/processed/tech/ai-security/competitive-intelligence/dubai",
     "data/processed/tech/ai-security/industry-research/dubai",
-    "data/processed/tech/ai-security/security/dubai",
-    "data/processed/tech/ai-security/weekly-roundup",
-    "data/processed/tech/ai-application/weekly-roundup",
+    "data/processed/tech/ai-security/dubai",
+    "data/processed/tech/ai-application/trends",
     "data/sync-backups",
 }
 
@@ -109,19 +108,26 @@ ALLOWED_BROKEN = {
     "content/society/.gitkeep",
     # 概念性默认路径（模板占位；实际登记按业务线落 data/processed/）
     "data/source_registry.json",
-    # 已合并 / 已拆分 / 已迁移的历史业务线（仅在历史审计记录中引用，不得作为活跃链接）：
-    # trends/ai-security、trends/ai-agent → content/tech/weekly-roundup → 拆分为 ai-security / ai-application；
-    # content/tech/{security,competitive-intelligence,industry-research}/dubai → content/tech/ai-security/...。
+    # 已合并 / 已拆分 / 已迁移 / 已停用的历史业务线（仅在历史审计记录中引用，不得作为活跃链接）：
+    # trends/ai-security、trends/ai-agent → content/tech/weekly-roundup → 拆分为 ai-security / ai-application（已停用）；
+    # content/tech/{security,competitive-intelligence,industry-research}/dubai → content/tech/ai-security/...；
+    # content/tech/ai-security/security/dubai → content/tech/ai-security/dubai。
     "trends/ai-security",
     "trends/ai-agent",
     "content/tech/weekly-roundup",
     "content/tech/security/dubai",
     "content/tech/competitive-intelligence/dubai",
     "content/tech/industry-research/dubai",
+    "content/tech/ai-security/weekly-roundup",
+    "content/tech/ai-application/weekly-roundup",
+    "content/tech/ai-security/security/dubai",
     "data/processed/tech/security/dubai",
     "data/processed/tech/competitive-intelligence/dubai",
     "data/processed/tech/industry-research/dubai",
     "data/processed/tech/weekly-roundup",
+    "data/processed/tech/ai-security/security/dubai",
+    "data/processed/tech/ai-security/weekly-roundup",
+    "data/processed/tech/ai-application/weekly-roundup",
     "data/raw/tech/competitive-intelligence/dubai",
     "data/raw/tech/industry-research/dubai",
     # 已删除的未来周期月报（落款晚于产出当月、数据窗口越界，2026-11-21 清理）：

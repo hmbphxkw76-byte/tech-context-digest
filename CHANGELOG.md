@@ -2,6 +2,13 @@
 
 本文件记录仓库的结构与规范级变更（报告内容变更见各业务线 `reports/`）。
 
+## 3.5.0 — 2026-11-21：科技主题全线月度化与 ai-security/dubai 归位
+
+- **结构**：删除 `content/tech/ai-security/weekly-roundup/` 与 `content/tech/ai-application/weekly-roundup/`（含 `data/processed/` 台账与来源登记）；`content/tech/ai-security/security/dubai/` 归位为 `content/tech/ai-security/dubai/`（含 `data/processed/`）；新建 `content/tech/ai-application/trends/`（竞争情报监测型，月度）。
+- **节拍**：tech 全线月度化，无季 / 年。`ai-security/dubai`（employment-research）由「季度主更 + 月度核验 + 年度复盘」收敛为「基线 + 月度主更新」，季 / 年提示词停用；`industry-research/dubai` 由「baseline + annual」收敛为「baseline + monthly」。
+- **layout.json**：`classification_version` 2026-11-21.1；comment 示例路径更新为 `content/tech/ai-application/trends`。
+- **同步**：`template-registry.md`、`compliance-rules.json`、`report-classification.md`、`AGENTS.md`、`README.md`、`content/README.md`、`structure-and-naming-spec.md`、`architecture-and-pipeline-design.md`、`sync.json`、`check_links.py`、`vocabulary/README.md`、`tools/README.md` 与测试同步；hub / INDEX.md / 发布指纹 / 词汇区块重新生成。
+
 ## 3.4.0 — 2026-11-20：科技主题 AI 安全 / AI 应用归并与汇总页主题维度改版
 
 - **结构**：`content/tech/` 下四个业务线物理归并为两个分组目录——`ai-security/`（security / competitive-intelligence / industry-research / weekly-roundup）与 `ai-application/`（weekly-roundup）；`data/processed/`、`data/raw/` 同步迁移。

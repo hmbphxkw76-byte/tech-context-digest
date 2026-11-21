@@ -40,7 +40,7 @@
 ＞ ② 国际权威组织与分析机构（ISC2、ISACA、Gartner、IDC、SANS/GIAC、MITRE、OWASP、NIST、Mordor Intelligence、Global Market Insights）
 ＞ ③ 头部薪酬指南与招聘平台抽样（Hays、Michael Page、Cooper Fitch、Charterhouse；LinkedIn、Bayt、GulfTalent、foundit Gulf——仅作市场信号）
 ＞ ④ 英文行业/主流媒体（Khaleej Times、The National、Gulf News、Zawya、Reuters——只用于发现线索，数值须回官方/原始页校验）
-＞ ⑤ 同源已核实资产：`content/tech/ai-security/security/dubai/` 业务线的基线报告、md 源稿与指标登记册，以及 `content/tech/weekly-roundup/reports/2026-11-13_weekly.html`（全球趋势转引，须标注「经周报转引」）。
+＞ ⑤ 同源已核实资产：`content/tech/ai-security/dubai/` 业务线的基线报告、md 源稿与指标登记册。
 
 - 每格活值附 `[来源, 年份]`；冲突时报双份并标注；`{{SOURCE_LANGUAGE_RULE}}` 强制执行，不符合者一律排除。
 
@@ -61,7 +61,7 @@
 | 8 | 八、数据治理与局限 |
 | 9 | 九、参考来源清单 |
 
-- 追踪表：研究维度 × 优先来源实例化自[业务配置](./business-config.md)第六节（9 项监测指标，活值维护于 `{{REGISTRY_PATH}}`，格式 `{{REGISTRY_FORMAT}}`）；基线期先引用 `data/processed/tech/ai-security/security/dubai/ai_cybersecurity_indicator_registry.md` 的已核实活值，不新造数值。
+- 追踪表：研究维度 × 优先来源实例化自[业务配置](./business-config.md)第六节（9 项监测指标，活值维护于 `{{REGISTRY_PATH}}`，格式 `{{REGISTRY_FORMAT}}`）；基线期先引用 `data/processed/tech/ai-security/dubai/ai_cybersecurity_indicator_registry.md` 的已核实活值，不新造数值。
 
 ## 十、渲染与交付
 

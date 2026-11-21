@@ -583,7 +583,7 @@ class TestEvidenceField(unittest.TestCase):
     def test_sample_registry_has_three_evidence_entries(self):
         """T-01 验收：抽样登记至少 3 条含 evidence（示例补登记）。"""
         import json
-        reg = json.loads((ROOT / "data" / "processed" / "tech" / "ai-security" / "security" / "dubai"
+        reg = json.loads((ROOT / "data" / "processed" / "tech" / "ai-security" / "dubai"
                           / "source_registry.json").read_text(encoding="utf-8"))
         cov = source_check.evidence_coverage(reg)
         self.assertGreaterEqual(cov["with_evidence"], 3)
@@ -837,7 +837,7 @@ class TestDocumentTier(unittest.TestCase):
     def test_sample_registry_has_three_document_tier_entries(self):
         """T-08 验收：抽样登记至少 3 条含 document_tier（示例补登记）。"""
         import json
-        reg = json.loads((ROOT / "data" / "processed" / "tech" / "ai-security" / "security" / "dubai"
+        reg = json.loads((ROOT / "data" / "processed" / "tech" / "ai-security" / "dubai"
                           / "source_registry.json").read_text(encoding="utf-8"))
         cov = source_check.document_tier_coverage(reg)
         self.assertGreaterEqual(cov["with_document_tier"], 3)
