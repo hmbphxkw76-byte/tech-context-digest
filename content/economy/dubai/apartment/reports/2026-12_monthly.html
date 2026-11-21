@@ -40,22 +40,56 @@ a:focus-visible,button:focus-visible{outline:none;box-shadow:var(--focus-ring)}
 .skip-link{position:absolute;left:12px;top:-48px;z-index:100;background:var(--navy);color:#fff;padding:8px 16px;border-radius:0 0 8px 8px;font-size:12.5px;transition:top var(--transition)}
 .skip-link:focus{top:0;color:#fff;text-decoration:none}
 
-/* ── 页头（trends report-head 结构；.hero 为 apartment 同义类） ── */
-header.report-head,header.hero{
+/* ── 页头：report-head（生成器基础版） ── */
+header.report-head{
   background:linear-gradient(128deg,#0f2338 0%,var(--navy) 52%,var(--navy2) 100%);
   color:#fff;padding:40px 0 30px;
 }
-/* trends 的 .report-head 内含 .wrap；apartment 的 .hero 无 .wrap，用内联 padding 约束到 1160px */
 header.report-head .wrap{padding:0 24px}
-header.hero{padding-left:max(24px,calc(50% - 580px));padding-right:max(24px,calc(50% - 580px))}
-header.report-head h1,header.hero h1{margin:0 0 8px;font-size:27px;font-weight:700;letter-spacing:.4px;line-height:1.35}
-header .eyebrow{font-size:11.5px;letter-spacing:2.4px;color:rgba(255,255,255,.62);text-transform:uppercase}
-header .sub{font-size:14px;color:rgba(255,255,255,.82);margin:2px 0}
-header .meta{font-size:12.3px;color:rgba(255,255,255,.75);margin-top:14px;line-height:1.9}
-header .meta b{color:#fff}
-header .nav-url{font-size:11.5px;color:rgba(255,255,255,.78);margin-top:10px;word-break:break-all}
-header .nav-url a{color:#cfe0ee;text-decoration:none;border-bottom:1px dashed #cfe0ee}
-header .tag{display:inline-block;background:rgba(255,255,255,.11);border:1px solid rgba(255,255,255,.2);border-radius:14px;padding:2px 11px;margin:5px 6px 0 0;font-size:11.5px}
+header.report-head h1{margin:0 0 8px;font-size:27px;font-weight:700;letter-spacing:.4px;line-height:1.35}
+header.report-head .eyebrow{font-size:11.5px;letter-spacing:2.4px;color:rgba(255,255,255,.62);text-transform:uppercase}
+header.report-head .sub{font-size:14px;color:rgba(255,255,255,.82);margin:2px 0}
+header.report-head .meta{font-size:12.3px;color:rgba(255,255,255,.75);margin-top:14px;line-height:1.9}
+header.report-head .meta b{color:#fff}
+header.report-head .nav-url{font-size:11.5px;color:rgba(255,255,255,.78);margin-top:10px;word-break:break-all}
+header.report-head .nav-url a{color:#cfe0ee;text-decoration:none;border-bottom:1px dashed #cfe0ee}
+header.report-head .tag{display:inline-block;background:rgba(255,255,255,.11);border:1px solid rgba(255,255,255,.2);border-radius:14px;padding:2px 11px;margin:5px 6px 0 0;font-size:11.5px}
+
+/* ── 页头：hero（jp-life-work 风格：navy 标题带 + 浅色 meta 面板） ── */
+.hero{margin-bottom:20px}
+.hero .wrap{padding:0 24px}
+.hero-band{background:linear-gradient(128deg,#0f2338 0%,var(--navy) 52%,var(--navy2) 100%);color:#fff;
+  padding:14px 0 12px;border-radius:0 0 14px 14px}
+.hero-top{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap}
+.hero-band .eyebrow,.hero-band .kicker,.hero-band .hero-kicker{font-size:10.5px;letter-spacing:2px;color:rgba(255,255,255,.62);text-transform:uppercase;margin:0}
+.hero-band h1{font-size:21px;font-weight:700;letter-spacing:.3px;margin:5px 0 0;line-height:1.3}
+.hero-band .tags{display:flex;flex-wrap:wrap;gap:6px}
+.hero-band .tag{display:inline-block;background:rgba(255,255,255,.11);border:1px solid rgba(255,255,255,.2);
+  border-radius:14px;padding:1px 10px;font-size:11px}
+.hero-panel{display:flex;flex-wrap:wrap;align-items:center;gap:8px 16px;
+  background:var(--card);border:1px solid var(--line);border-radius:12px;
+  padding:8px 12px;margin-top:8px;box-shadow:var(--shadow)}
+.meta-grid{flex:1 1 0;min-width:0;column-count:2;column-gap:20px;
+  font-size:11.4px;line-height:1.45;color:var(--ink2)}
+.meta-grid .meta-item{break-inside:avoid;margin:0 0 2px;min-width:0;overflow-wrap:anywhere}
+.meta-grid .meta-item b{color:var(--navy)}
+.meta-grid p,.meta-grid dl,.meta-grid .hero-meta,.meta-grid .hero-abstract p{
+  margin:0 0 4px;break-inside:avoid}
+.meta-grid dl{display:block}
+.meta-grid dt{display:block;font-weight:700;color:var(--navy);margin-top:2px}
+.meta-grid dd{display:block;margin:0 0 4px}
+.meta-grid .tag-row{margin:2px 0 4px}
+.hero-panel .audit-badge{margin:0;flex:0 0 300px;font-size:12px;padding:6px 12px}
+.audit-badge{display:inline-flex;align-items:center;gap:10px;flex-wrap:wrap;
+  background:var(--green-l);border:1px solid var(--green);border-radius:10px;
+  padding:8px 14px;font-size:12.5px;color:var(--green)}
+.audit-badge .audit-seal{font-weight:700;white-space:nowrap}
+.audit-badge .audit-meta{color:var(--ink2)}
+@media (max-width:900px){
+  .hero-panel{flex-direction:column;align-items:stretch}
+  .hero-panel .audit-badge{flex:1 1 auto}
+  .meta-grid{column-count:1}
+}
 
 /* ── 顶部固定导航 ── */
 nav.report-nav{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.96);border-bottom:1px solid var(--line);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);margin-bottom:26px}
@@ -365,8 +399,10 @@ details.registry[open]{padding-bottom:18px}
 @media (max-width:720px){
   body{font-size:14px}
   .wrap{padding:0 14px 48px}
-  header.report-head,header.hero{padding:26px 0 22px}
-  header.report-head h1,header.hero h1{font-size:21px}
+  header.report-head{padding:26px 0 22px}
+  header.report-head h1{font-size:21px}
+  .hero-band{padding:12px 0 10px}
+  .hero-band h1{font-size:19px}
   nav.report-nav .nav-url{display:none}
   table{display:block;overflow-x:auto;white-space:nowrap}
   th,td{padding:7px 8px;font-size:12.5px}
@@ -388,22 +424,30 @@ details.registry[open]{padding-bottom:18px}
 </style>
 </head>
 <body>
-<div class="audit-mark" data-audit-id="AUD-2026-11-19-001" data-mark-level="full" style="background:#16324f;color:#fff;font:600 13px/1.6 system-ui,-apple-system,'Segoe UI',sans-serif;padding:8px 16px;text-align:center;letter-spacing:.02em"><span class="audit-badge">已审计</span><span class="audit-meta">终审通过 · 2026-11-19 · 审查链 4/4 · AUD-2026-11-19-001</span></div>
-
 <a class="skip-link" href="#main-content">跳到主要内容</a>
 <header class="hero">
+  <div class="hero-band">
+    <div class="wrap">
+      <div class="hero-top">
+        <p class="kicker">市场监测 · 月度简报 · 2026-12</p>
+        <div class="tags"><span class="tag">2026-12</span><span class="tag">市场监测</span></div>
+      </div>
+      <h1>迪拜公寓住宅市场月度简报（2026-12）</h1>
+    </div>
+  </div>
   <div class="wrap">
-    <p class="kicker">市场监测 · 月度简报 · 2026-12</p>
-    <h1>迪拜公寓住宅市场月度简报（2026-12）</h1>
-    <p class="lede">覆盖 2026-11-16～2026-12-15 已发布数据；第二期月度，对比上期 2026-11 月度简报。滚动基线：本期更新 2026-12；环比基期 2026-11。</p>
-    <dl class="meta">
-      <div><dt>业务线</dt><dd>economy / dubai / apartment</dd></div>
-      <div><dt>监测周期</dt><dd>2026-11-16～2026-12-15</dd></div>
-      <div><dt>读数时点</dt><dd>2026-11-20（registry v2.0.2，读数沿用）</dd></div>
-      <div><dt>上一期</dt><dd>reports/2026-11_monthly.html</dd></div>
-      <div><dt>编制</dt><dd>2026-12 月度循环</dd></div>
-      <div><dt>来源语言</dt><dd>仅英文</dd></div>
-    </dl>
+    <div class="hero-panel">
+      <div class="meta-grid"><p class="lede">覆盖 2026-11-16～2026-12-15 已发布数据；第二期月度，对比上期 2026-11 月度简报。滚动基线：本期更新 2026-12；环比基期 2026-11。</p>
+<dl class="meta">
+<dt>业务线</dt><dd>economy / dubai / apartment</dd>
+<dt>监测周期</dt><dd>2026-11-16～2026-12-15</dd>
+<dt>读数时点</dt><dd>2026-11-20（registry v2.0.2，读数沿用）</dd>
+<dt>上一期</dt><dd>reports/2026-11_monthly.html</dd>
+<dt>编制</dt><dd>2026-12 月度循环</dd>
+<dt>来源语言</dt><dd>仅英文</dd>
+</dl></div>
+      <div class="audit-badge" role="status" aria-label="已审计报告"><span class="audit-seal">✓ 已审计</span><span class="audit-meta">终审通过 · 2026-11-19 · 审查链 4/4 · AUD-2026-11-19-001</span></div>
+    </div>
   </div>
 </header>
 <nav class="report-nav" aria-label="报告导航">

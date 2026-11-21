@@ -23,6 +23,19 @@
         "business_line": "content/economy/dubai/apartment",
         "plans": [
           {
+            "slug": "hero-style-restyle",
+            "plan": "engine/audit/records/tasks/hero-style-restyle/plan.json",
+            "tasks": "engine/audit/records/tasks/hero-style-restyle/tasks.json",
+            "risks": "engine/audit/records/tasks/hero-style-restyle/risks.json",
+            "reports": [
+              "content/economy/dubai/apartment/reports/2026-11_baseline_report.html",
+              "content/economy/trends/reports/2026-11-13_weekly.html",
+              "content/tech/ai-security/security/dubai/reports/2026-11_baseline_report.html"
+            ],
+            "task_count": 4,
+            "risk_count": 2
+          },
+          {
             "slug": "regen-all-reports",
             "plan": "engine/audit/records/tasks/regen-all-reports/plan.json",
             "tasks": "engine/audit/records/tasks/regen-all-reports/tasks.json",
@@ -1116,6 +1129,19 @@
         "report": "content/economy/trends/reports/2026-11-13_weekly.html",
         "business_line": "content/economy/trends",
         "plans": [
+          {
+            "slug": "hero-style-restyle",
+            "plan": "engine/audit/records/tasks/hero-style-restyle/plan.json",
+            "tasks": "engine/audit/records/tasks/hero-style-restyle/tasks.json",
+            "risks": "engine/audit/records/tasks/hero-style-restyle/risks.json",
+            "reports": [
+              "content/economy/dubai/apartment/reports/2026-11_baseline_report.html",
+              "content/economy/trends/reports/2026-11-13_weekly.html",
+              "content/tech/ai-security/security/dubai/reports/2026-11_baseline_report.html"
+            ],
+            "task_count": 4,
+            "risk_count": 2
+          },
           {
             "slug": "reports-full-rebuild",
             "plan": "engine/audit/records/tasks/reports-full-rebuild/plan.json",

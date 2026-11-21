@@ -1,0 +1,14 @@
+[
+  {
+    "description": "幂等复跑误改已迁移报告",
+    "id": "R-1",
+    "mitigation": "缓解=先 --dry 预览再实跑，git diff 复核",
+    "owner": ""
+  },
+  {
+    "description": "受管分支缺计划工件被门禁拒绝",
+    "id": "R-2",
+    "mitigation": "缓解=先补四件套再提交",
+    "owner": ""
+  }
+]
