@@ -327,7 +327,7 @@ TYPE_CADENCE: dict[str, tuple[str, ...]] = {
     "industry-research": ("baseline", "annual"),
     "market-sizing": ("baseline", "annual"),
     "investment-research": ("baseline", "target_update", "quarterly", "annual"),
-    "policy-analysis": ("baseline", "review"),
+    "policy-analysis": ("baseline", "monthly", "review"),
     "feasibility-study": ("baseline", "study"),
     "flash-commentary": ("baseline", "flash_note"),
     "whitepaper": ("baseline", "topic_study"),

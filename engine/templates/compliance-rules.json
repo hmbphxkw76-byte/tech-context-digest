@@ -1,6 +1,6 @@
 {
-  "version": "v1.3",
-  "updated": "2026-11-20",
+  "version": "v1.4",
+  "updated": "2026-11-21",
   "comment": "报告模板合规校验规则（CI: compliance_check.py）。section_titles 为类型模板骨架的模块名参考（业务提示词可细化措辞，不得增删节、调整顺序）；校验口径：h2 节数缺失=错误（阻断）、超额=警告（业务固化锚需人工确认）。quarterly 第 11 节页脚为 footer 元素（可选 h2），故 h2 期望值为 10。weekly 命名日期 = 数据截止日。",
   "common": {
     "require_title": true,
@@ -110,12 +110,13 @@
       "name": "政策法规解读型",
       "template_dir": "engine/templates/policy-analysis/",
       "section_titles": ["执行摘要", "政策台账与监测机制", "监管框架总览", "重点政策逐条解读", "影响对象矩阵", "合规应对建议（建议章）", "生效时间线", "数据治理与局限", "参考来源清单"],
-      "cycles": {
-        "baseline": { "sections": 9, "nav": false, "template": "prompt-baseline-setup-template.md" },
-        "review": { "sections": 9, "nav": false, "template": "prompt-policy-review-template.md" }
-      }
-    },
-    "feasibility-study": {
+"cycles": {
+"baseline": { "sections": 9, "nav": false, "template": "prompt-baseline-setup-template.md" },
+"monthly": { "sections": 9, "nav": true, "template": "prompt-monthly-monitor-template.md" },
+"review": { "sections": 9, "nav": false, "template": "prompt-policy-review-template.md" }
+}
+},
+"feasibility-study": {
       "name": "可行性与市场进入型",
       "template_dir": "engine/templates/feasibility-study/",
       "section_titles": ["执行摘要", "项目范围与评估框架", "市场可行性", "技术与运营可行性", "财务测算", "法规与合规路径", "风险与缓解", "结论与实施路线图", "参考来源清单"],

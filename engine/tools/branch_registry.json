@@ -1,5 +1,12 @@
 {
   "branches": {
+    "task/ai-application-align-83a95d59": {
+      "note": "source=env:CATPAW_CONVERSATION_ID",
+      "session": "83a95d59d87b48ad96286e00930bf2e4",
+      "session_short": "83a95d59",
+      "slug": "ai-application-align",
+      "task": "ai-application-align"
+    },
     "task/cleanup-structure-b76ddf44": {
       "note": "source=env:CATPAW_CONVERSATION_ID",
       "session": "b76ddf4411584ff187a2ae9268aa96a3",
@@ -20,6 +27,13 @@
       "session_short": "b76ddf44",
       "slug": "framework-align",
       "task": "framework-align"
+    },
+    "task/immigration-baseline-c5a88c1e": {
+      "note": "source=env:CATPAW_CONVERSATION_ID",
+      "session": "c5a88c1e4ebe4538b05ce6659b54532e",
+      "session_short": "c5a88c1e",
+      "slug": "immigration-baseline",
+      "task": "immigration-baseline"
     },
     "task/report-period-current-month-5856e15f": {
       "note": "source=env:CATPAW_CONVERSATION_ID",
