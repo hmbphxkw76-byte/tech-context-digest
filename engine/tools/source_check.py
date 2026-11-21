@@ -71,6 +71,8 @@ sys.path.insert(0, str(Path(__file__).resolve().parent))
 from _common import ROOT, detect_report, iter_business_dirs, iter_business_reports, processed_data_dir  # noqa: E402
 from gate_period import is_auto  # noqa: E402
 from gate_period import resolve as resolve_period
+from source_normalize import normalize_publisher  # noqa: E402
+from verification_vocab import normalize_source_status  # noqa: E402
 
 REGISTRY_SCHEMA = "1.1"
 
@@ -622,17 +624,18 @@ def check_institution_consistency(registry: dict, master: dict, config_text: str
     # M1 / M2 / M4
     by_norm: dict[str, set[int]] = {}
     for s in sources:
-        pub = str(s.get("publisher", "")).strip()
+        pub_raw = str(s.get("publisher", "")).strip()
+        pub = normalize_publisher(pub_raw) or pub_raw
         if not pub:
             continue
         inst = master_lookup(master, pub)
         if inst is None:
-            issues.append(("W", f"R7 机构分级：机构「{pub}」未录入机构级分级主数据（请补录）"))
+            issues.append(("W", f"R7 机构分级：机构「{pub_raw}」未录入机构级分级主数据（请补录）"))
             continue
         tier = s.get("tier")
         if tier is not None and int(tier) != int(inst.get("tier")):
             lvl = "W" if historical else "E"
-            issues.append((lvl, f"R7 机构分级：机构「{pub}」登记 tier={tier} 与主数据 "
+            issues.append((lvl, f"R7 机构分级：机构「{pub_raw}」登记 tier={tier} 与主数据 "
                                 f"tier={inst.get('tier')}（{inst.get('name')}）不一致"))
         by_norm.setdefault(_norm_name(inst.get("name", pub)), set()).add(int(tier))
     for name, tiers in by_norm.items():
@@ -753,9 +756,14 @@ def check_registry_fields(registry: dict, ctx: dict | None = None) -> list[tuple
     for s in sources:
         sid = str(s.get("source_id", "")).strip() or "<无 source_id>"
         vs = s.get("verify_status")
-        if vs not in VERIFY_STATUS_VALUES:
+        vs_norm = normalize_source_status(vs)
+        if vs_norm is None:
             issues.append(("W", f"R8 登记字段：{sid} 的 verify_status「{vs}」非法"
-                                 f"（须为 {' / '.join(VERIFY_STATUS_VALUES)}）"))
+                                 f"（须为 {' / '.join(VERIFY_STATUS_VALUES)} 或其中文同义）"))
+        elif vs not in VERIFY_STATUS_VALUES:
+            issues.append(("W", f"R8 登记字段：{sid} 的 verify_status「{vs}」非 canonical"
+                                 f"（建议英文 {' / '.join(VERIFY_STATUS_VALUES)}，已归一为 "
+                                 f"{vs_norm}；词表见 verification_vocab.py）"))
         if not UPDATED_RE.match(str(s.get("updated", "")).strip()):
             issues.append(("W", f"R8 登记字段：{sid} 缺 updated（YYYY-MM-DD）"))
         issues.extend(("W", m) for m in _evidence_field_issues(s, sid))

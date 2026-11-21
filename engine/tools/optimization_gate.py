@@ -57,6 +57,8 @@ CHECKS: list[tuple[str, list[str], bool]] = [
     ("hub", [sys.executable, f"{TOOLS}/build_hub.py", "--check"], False),
     ("page_build", [sys.executable, f"{TOOLS}/page_build_check.py"], True),
     ("source_check", [sys.executable, f"{TOOLS}/source_check.py", "--gate-period", "__SOURCE_GATE__"], True),
+    # 核验台账哈希链（INFORMATION-VERIFICATION-SPEC v1.0）：seq 连续 / prev_hash 链接 / hash 重算
+    ("verification_ledger", [sys.executable, f"{TOOLS}/verification_ledger.py", "verify"], True),
     ("metric_registry", [sys.executable, f"{TOOLS}/metric_registry.py", "check"], False),
     ("metric_audit", [sys.executable, f"{TOOLS}/metric_registry.py", "audit", "--coverage"], True),
     ("release_calendar", [sys.executable, f"{TOOLS}/release_calendar.py", "--check"], True),

@@ -125,6 +125,48 @@ jobs:
           fi
           exit 0
 
+      # 核验台账回填（INFORMATION-VERIFICATION-SPEC v1.0）：首次从现有 source_registry
+      # 生成 append-only 核验事件；台账已非空时幂等跳过（不重复回填）。
+      - name: 核验台账回填（幂等）
+        run: |
+          set +e
+          python engine/tools/verification_ledger.py backfill --actor ci-backfill
+          code=$?
+          if [ "$code" -ne 0 ]; then
+            echo "::error::核验台账回填失败（退出码 $code）"
+            exit 1
+          fi
+          exit 0
+
+      # 核验台账哈希链校验：seq 连续 / prev_hash 链接 / hash 重算；
+      # 链断裂 = 核验留痕被篡改，阻断提交。
+      - name: 核验台账哈希链校验
+        run: |
+          set +e
+          python engine/tools/verification_ledger.py verify
+          code=$?
+          if [ "$code" -ne 0 ]; then
+            echo "::error::核验台账链校验失败（退出码 $code：链断裂 / 篡改）"
+            exit 1
+          fi
+          exit 0
+
+      # 来源定期复核（INFORMATION-VERIFICATION-SPEC v1.0）：按机构 tier 重核周期扫描
+      # 全部登记，到期 / 临期只告警不阻断；结果落盘 pending_verification.json。
+      - name: 来源定期复核（到期 / 临期告警）
+        run: |
+          set +e
+          python engine/audit/scripts/audit_tool.py verify-review --period auto \
+            --emit engine/audit/records/pending_verification.json
+          code=$?
+          if [ "$code" -eq 2 ]; then
+            echo "::warning::来源定期复核存在到期 / 临期来源（见上方输出，不阻断提交）"
+          elif [ "$code" -ne 0 ]; then
+            echo "::error::来源定期复核执行失败（退出码 $code）"
+            exit 1
+          fi
+          exit 0
+
       # A-05 链接可达率探测（11-19 方案 P1-5 C 轨道）：定期 --probe 并落审计记录，
       # 供 A-05 指标与 E 类死链台账对账；结果不计入门禁阻断（网络不可达仅告警）。
       - name: A-05 链接可达率探测（定期落盘）
@@ -246,7 +288,7 @@ jobs:
             由定时维护工作流自动生成（结构补全 / 归档 / 索引 / 汇总页 / 发布日历 / 发布指纹 / 性能基线）。
             合并方式：必需检查通过后自动合并（合并队列）。
           commit-message: "chore: 定时维护（结构/校验/归档/索引/性能）"
-          add-paths: "automation-status.json index.html reader.html INDEX.md perf-status.json engine/report-audits engine/audit/records/publish_fingerprints.json engine/audit/records/audit_registry.json engine/audit/records/igi_history.json engine/audit/records/link-probe.json"
+          add-paths: "automation-status.json index.html reader.html INDEX.md perf-status.json engine/report-audits engine/audit/records/publish_fingerprints.json engine/audit/records/audit_registry.json engine/audit/records/igi_history.json engine/audit/records/link-probe.json engine/audit/records/verification_ledger.jsonl engine/audit/records/pending_verification.json"
           token: ${{ secrets.CI_PR_TOKEN }}
 
       - name: 提交失败状态（仅失败时，开 PR 记录，不自动合并）

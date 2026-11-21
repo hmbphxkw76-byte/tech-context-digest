@@ -68,6 +68,16 @@ Single-context: one `GLOSSARY.md` + `engine/docs/adr/` at the repo root. See `en
 - **阈值校准 / 版本治理**：首次中期回测 2027-06；校准前标「预校准（ex-ante）」；核验型运行不升级版本号。
 - **门禁**：`info_density_check.py` / `fact_card_check.py` / `decision_hub_check.py` / `blind_spot_check.py` 纳入 `optimization_gate.py` 统一入口；新报告缺项 = [E]，历史 = [W]。
 
+## 信息核验机制（硬性约束，适用于任何 Agent 平台）
+
+来源核验在 R1–R9 之上，必须遵循 **`engine/docs/information-verification-spec.md`（INFORMATION-VERIFICATION-SPEC v1.0）**：
+
+- **词表单一事实源**：`engine/tools/verification_vocab.py`；数据层英文枚举（verified / media_unverified / unverifiable）↔ 卡片 / 报告中文等级（已核验 / 部分核验 / 未核验）双向映射，跨层信息等级不得高于核验状态上限。
+- **核验台账哈希链**：`engine/tools/verification_ledger.py`（append-only，落 `engine/audit/records/verification_ledger.jsonl`）；接入统一门禁 `optimization_gate.py` 的 `verification_ledger` 项，链断裂 = [E]。
+- **来源定期复核**：`engine/tools/verification_review.py`（按机构 tier 重核周期，落 `engine/audit/records/pending_verification.json`），接入 `scheduled-maintenance.yml`，到期 / 临期告警不阻断。
+- **来源归一化**：`engine/tools/source_normalize.py`（URL / 机构名 / 主机 / 日期），供登记去重、复核与 `source_check` R7 匹配复用。
+- **复用入口（不得另写一套）**：统一门禁 `optimization_gate.py`；审计子命令 `audit_tool.py verify-ledger` / `verify-review`。
+
 ## 报告周期与展示窗口（硬性约束，适用于任何 Agent 平台）
 
 月 / 季 / 年 / 周报的保留、展示与环比高亮统一遵循 **`engine/docs/report-cycle-windows.md`（REPORT-CYCLE-WINDOWS-SPEC v1.0）**：
@@ -80,7 +90,7 @@ Single-context: one `GLOSSARY.md` + `engine/docs/adr/` at the repo root. See `en
 
 ## 优化流程门禁（硬性约束，适用于任何 Agent 平台）
 
-P0/P1/P2 优化清单的全部确定性检查收敛为**单一入口** `engine/tools/optimization_gate.py`（30 项），后续所有阶段必须复用，不得另写一套：
+P0/P1/P2 优化清单的全部确定性检查收敛为**单一入口** `engine/tools/optimization_gate.py`（31 项），后续所有阶段必须复用，不得另写一套：
 
 - **本地提交**：`python engine/tools/repo_sync.py run --message ... --paths ... --gate`（统一门禁 [E] 直接拒绝提交）。
 - **CI / 自动提交**：`ci.yml` / `html-sync.yml` / `content-update.yml` / `scheduled-maintenance.yml` 一律只调用该入口（`--probe`），不得分项重复扫描。
