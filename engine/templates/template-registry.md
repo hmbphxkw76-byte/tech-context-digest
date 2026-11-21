@@ -86,7 +86,7 @@ engine/prompts/                    # 泛用版业务提示词（每类型一目�
 |---|---|---|---|---|---|
 | market-monitoring | 市场指标监测型 | prompt-baseline-setup-template.md | monthly / quarterly / annual（三份独立） | 月 / 季 / 年三周期 | content/economy/dubai/apartment |
 | trend-weekly | 行业趋势周报型 | prompt-baseline-setup-template.md | prompt-weekly-monitor-template.md | 周报主节拍（数据截止日命名）+ 事件触发板块升级 | content/economy/trends |
-| employment-research | 职业就业调研型 | prompt-baseline-setup-template.md | prompt-update-template.md（一份覆盖三档节拍） | 基线 + 月度主更新 + 事件触发 | content/tech/ai-security/dubai；content/tech/ai-application/dubai |
+| employment-research | 职业就业调研型 | prompt-baseline-setup-template.md | prompt-update-template.md（一份覆盖三档节拍） | 基线 + 月度主更新 + 事件触发 | content/tech/ai-security/dubai；content/tech/ai-application/dubai；content/education/study-abroad |
 | competitive-intelligence | 竞争情报监测型 | prompt-baseline-setup-template.md | prompt-monthly-update-template.md（覆盖两档） | 月度主更新（动态矩阵刷新）+ 事件触发升级 | content/tech/ai-security/competitive-intelligence/dubai；content/tech/ai-application/competitive-intelligence/dubai |
 | sentiment-monitoring | 舆情传播监测型 | prompt-baseline-setup-template.md | prompt-monthly-update-template.md（覆盖两档） | 月度舆情月报 + 事件触发预警升级 | 暂无 |
 | consumer-research | 消费者·用户调研型 | prompt-baseline-setup-template.md | prompt-study-template.md（项目制） | 项目制专题调研 + 年度满意度复测 | 暂无 |

@@ -870,6 +870,7 @@ class TestLayout(unittest.TestCase):
                 "content/tech/ai-application/industry-research/dubai",
                 "content/tech/ai-application/competitive-intelligence/dubai",
                 "content/education/education-system",
+                "content/education/study-abroad",
                 "content/international/immigration",
                 "content/international/international-relations",
                 "content/political/political-system",

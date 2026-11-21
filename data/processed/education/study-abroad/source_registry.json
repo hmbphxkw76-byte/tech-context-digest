@@ -1,0 +1,580 @@
+{
+  "schema_version": "1.1",
+  "business_line": "content/education/study-abroad",
+  "path_rule": "business-config {{SOURCE_REGISTRY_PATH}} = data/processed/education/study-abroad/source_registry.json",
+  "tier_legend": {
+    "1": "官方一手（政府 / 教育部 / 移民局 / 官方留学门户 / 大学官网 / 多边机构 / 官方发布）",
+    "2": "行业机构（研究 / 数据 / 咨询 / 认证评估机构）",
+    "3": "挂牌门户（仅作线索）",
+    "4": "媒体转述（须标『需核实原文』）"
+  },
+  "sources": [
+    {
+      "source_id": "S-001",
+      "tier": 1,
+      "publisher": "Campus France",
+      "title": "French degrees — LMD equivalences",
+      "url": "https://www.campusfrance.org/en/French-degrees-LMD-equivalences",
+      "lang": "en",
+      "verify_status": "verified",
+      "updated": "2026-11-21",
+      "in_synthesis": true,
+      "used_in": [
+        "reports/2026-11_baseline_report.html"
+      ],
+      "document_tier": "official_release",
+      "statement_type": "fact",
+      "evidence": {
+        "method": "web_fetch",
+        "snapshot_date": "2026-11-21",
+        "note": "子代理实际访问并引用"
+      }
+    },
+    {
+      "source_id": "S-002",
+      "tier": 1,
+      "publisher": "Campus France",
+      "title": "What is involved in a Doctorate in France",
+      "url": "https://www.campusfrance.org/en/what-involved-Doctorate-France",
+      "lang": "en",
+      "verify_status": "verified",
+      "updated": "2026-11-21",
+      "in_synthesis": true,
+      "used_in": [
+        "reports/2026-11_baseline_report.html"
+      ],
+      "document_tier": "official_release",
+      "statement_type": "fact",
+      "evidence": {
+        "method": "web_fetch",
+        "snapshot_date": "2026-11-21",
+        "note": "子代理实际访问并引用"
+      }
+    },
+    {
+      "source_id": "S-003",
+      "tier": 1,
+      "publisher": "Campus France",
+      "title": "Tuition fees in France",
+      "url": "https://www.campusfrance.org/en/tuition-fees-France",
+      "lang": "en",
+      "verify_status": "verified",
+      "updated": "2026-11-21",
+      "in_synthesis": true,
+      "used_in": [
+        "reports/2026-11_baseline_report.html"
+      ],
+      "document_tier": "official_release",
+      "statement_type": "fact",
+      "evidence": {
+        "method": "web_fetch",
+        "snapshot_date": "2026-11-21",
+        "note": "子代理实际访问并引用"
+      }
+    },
+    {
+      "source_id": "S-004",
+      "tier": 1,
+      "publisher": "Campus France",
+      "title": "Student long-stay visa (VLS-TS étudiant)",
+      "url": "https://www.campusfrance.org/en/student-long-stay-visa",
+      "lang": "en",
+      "verify_status": "verified",
+      "updated": "2026-11-21",
+      "in_synthesis": true,
+      "used_in": [
+        "reports/2026-11_baseline_report.html"
+      ],
+      "document_tier": "official_release",
+      "statement_type": "fact",
+      "evidence": {
+        "method": "web_fetch",
+        "snapshot_date": "2026-11-21",
+        "note": "子代理实际访问并引用"
+      }
+    },
+    {
+      "source_id": "S-005",
+      "tier": 1,
+      "publisher": "Campus France",
+      "title": "Job seeker / business creator residence permit",
+      "url": "https://www.campusfrance.org/en/job-seeker-business-creator-residence-permit",
+      "lang": "en",
+      "verify_status": "verified",
+      "updated": "2026-11-21",
+      "in_synthesis": true,
+      "used_in": [
+        "reports/2026-11_baseline_report.html"
+      ],
+      "document_tier": "official_release",
+      "statement_type": "fact",
+      "evidence": {
+        "method": "web_fetch",
+        "snapshot_date": "2026-11-21",
+        "note": "子代理实际访问并引用"
+      }
+    },
+    {
+      "source_id": "S-006",
+      "tier": 1,
+      "publisher": "CTI — Commission des Titres d'Ingénieur",
+      "title": "CTI 官方门户（工程师衔认证与监管）",
+      "url": "https://www.cti-commission.fr/en/",
+      "lang": "en",
+      "verify_status": "verified",
+      "updated": "2026-11-21",
+      "in_synthesis": true,
+      "used_in": [
+        "reports/2026-11_baseline_report.html"
+      ],
+      "document_tier": "official_release",
+      "statement_type": "fact",
+      "evidence": {
+        "method": "web_fetch",
+        "snapshot_date": "2026-11-21",
+        "note": "子代理实际访问并引用"
+      }
+    },
+    {
+      "source_id": "S-007",
+      "tier": 1,
+      "publisher": "Study in Holland / Nuffic",
+      "title": "Master's degrees in the Netherlands",
+      "url": "https://www.studyinholland.nl/dutch-education/masters",
+      "lang": "en",
+      "verify_status": "verified",
+      "updated": "2026-11-21",
+      "in_synthesis": true,
+      "used_in": [
+        "reports/2026-11_baseline_report.html"
+      ],
+      "document_tier": "official_release",
+      "statement_type": "fact",
+      "evidence": {
+        "method": "web_fetch",
+        "snapshot_date": "2026-11-21",
+        "note": "子代理实际访问并引用"
+      }
+    },
+    {
+      "source_id": "S-008",
+      "tier": 1,
+      "publisher": "Study in Holland / Nuffic",
+      "title": "PhD in the Netherlands",
+      "url": "https://www.studyinholland.nl/dutch-education/phd",
+      "lang": "en",
+      "verify_status": "verified",
+      "updated": "2026-11-21",
+      "in_synthesis": true,
+      "used_in": [
+        "reports/2026-11_baseline_report.html"
+      ],
+      "document_tier": "official_release",
+      "statement_type": "fact",
+      "evidence": {
+        "method": "web_fetch",
+        "snapshot_date": "2026-11-21",
+        "note": "子代理实际访问并引用"
+      }
+    },
+    {
+      "source_id": "S-009",
+      "tier": 1,
+      "publisher": "Study in Holland / Nuffic",
+      "title": "Tuition fees in the Netherlands",
+      "url": "https://www.studyinholland.nl/finances/tuition-fees",
+      "lang": "en",
+      "verify_status": "verified",
+      "updated": "2026-11-21",
+      "in_synthesis": true,
+      "used_in": [
+        "reports/2026-11_baseline_report.html"
+      ],
+      "document_tier": "official_release",
+      "statement_type": "fact",
+      "evidence": {
+        "method": "web_fetch",
+        "snapshot_date": "2026-11-21",
+        "note": "子代理实际访问并引用"
+      }
+    },
+    {
+      "source_id": "S-010",
+      "tier": 1,
+      "publisher": "IND — Dutch Immigration and Naturalisation Service",
+      "title": "Student residence permit (university / HBO)",
+      "url": "https://ind.nl/en/residence-permits/study/student-residence-permit-for-university-or-higher-professional-education",
+      "lang": "en",
+      "verify_status": "verified",
+      "updated": "2026-11-21",
+      "in_synthesis": true,
+      "used_in": [
+        "reports/2026-11_baseline_report.html"
+      ],
+      "document_tier": "official_release",
+      "statement_type": "fact",
+      "evidence": {
+        "method": "web_fetch",
+        "snapshot_date": "2026-11-21",
+        "note": "子代理实际访问并引用"
+      }
+    },
+    {
+      "source_id": "S-011",
+      "tier": 1,
+      "publisher": "IND — Dutch Immigration and Naturalisation Service",
+      "title": "Residence permit for orientation year (zoekjaar)",
+      "url": "https://ind.nl/en/residence-permits/work/residence-permit-for-orientation-year",
+      "lang": "en",
+      "verify_status": "verified",
+      "updated": "2026-11-21",
+      "in_synthesis": true,
+      "used_in": [
+        "reports/2026-11_baseline_report.html"
+      ],
+      "document_tier": "official_release",
+      "statement_type": "fact",
+      "evidence": {
+        "method": "web_fetch",
+        "snapshot_date": "2026-11-21",
+        "note": "子代理实际访问并引用"
+      }
+    },
+    {
+      "source_id": "S-012",
+      "tier": 1,
+      "publisher": "Study in Finland",
+      "title": "Fees and costs / admissions / residence permit",
+      "url": "https://www.studyinfinland.fi/admissions/fees-and-costs",
+      "lang": "en",
+      "verify_status": "verified",
+      "updated": "2026-11-21",
+      "in_synthesis": true,
+      "used_in": [
+        "reports/2026-11_baseline_report.html"
+      ],
+      "document_tier": "official_release",
+      "statement_type": "fact",
+      "evidence": {
+        "method": "web_fetch",
+        "snapshot_date": "2026-11-21",
+        "note": "子代理实际访问并引用"
+      }
+    },
+    {
+      "source_id": "S-013",
+      "tier": 1,
+      "publisher": "Study in Denmark / SIRI",
+      "title": "Tuition fees and scholarships / how to apply",
+      "url": "https://www.studyindenmark.dk/study-options/tuition-fees-and-scholarships",
+      "lang": "en",
+      "verify_status": "verified",
+      "updated": "2026-11-21",
+      "in_synthesis": true,
+      "used_in": [
+        "reports/2026-11_baseline_report.html"
+      ],
+      "document_tier": "official_release",
+      "statement_type": "fact",
+      "evidence": {
+        "method": "web_fetch",
+        "snapshot_date": "2026-11-21",
+        "note": "子代理实际访问并引用"
+      }
+    },
+    {
+      "source_id": "S-014",
+      "tier": 1,
+      "publisher": "Study in Norway / NOKUT / UDI / HK-dir",
+      "title": "Cost and requirements / institutions / foreign education",
+      "url": "https://studyinnorway.no/cost_and_requirements",
+      "lang": "en",
+      "verify_status": "verified",
+      "updated": "2026-11-21",
+      "in_synthesis": true,
+      "used_in": [
+        "reports/2026-11_baseline_report.html"
+      ],
+      "document_tier": "official_release",
+      "statement_type": "fact",
+      "evidence": {
+        "method": "web_fetch",
+        "snapshot_date": "2026-11-21",
+        "note": "子代理实际访问并引用"
+      }
+    },
+    {
+      "source_id": "S-015",
+      "tier": 1,
+      "publisher": "Study in Sweden / Universityadmissions / Migrationsverket",
+      "title": "Degree programmes / fees and costs / permits and visas",
+      "url": "https://studyinsweden.se/plan-your-studies/fees-costs/",
+      "lang": "en",
+      "verify_status": "verified",
+      "updated": "2026-11-21",
+      "in_synthesis": true,
+      "used_in": [
+        "reports/2026-11_baseline_report.html"
+      ],
+      "document_tier": "official_release",
+      "statement_type": "fact",
+      "evidence": {
+        "method": "web_fetch",
+        "snapshot_date": "2026-11-21",
+        "note": "子代理实际访问并引用"
+      }
+    },
+    {
+      "source_id": "S-016",
+      "tier": 1,
+      "publisher": "Education Ireland / QQI",
+      "title": "Undergraduate / postgraduate tuition fees",
+      "url": "https://www.educationinireland.com/en/plan-your-study-abroad/postgraduate-tuition-fees",
+      "lang": "en",
+      "verify_status": "verified",
+      "updated": "2026-11-21",
+      "in_synthesis": true,
+      "used_in": [
+        "reports/2026-11_baseline_report.html"
+      ],
+      "document_tier": "official_release",
+      "statement_type": "fact",
+      "evidence": {
+        "method": "web_fetch",
+        "snapshot_date": "2026-11-21",
+        "note": "子代理实际访问并引用"
+      }
+    },
+    {
+      "source_id": "S-017",
+      "tier": 1,
+      "publisher": "Immigration New Zealand",
+      "title": "Full Fee Paying Student Visa factsheet",
+      "url": "https://www.immigration.govt.nz/new-zealand-visas/apply-for-a-visa/visa-factsheet/full-fee-paying-student-visa",
+      "lang": "en",
+      "verify_status": "verified",
+      "updated": "2026-11-21",
+      "in_synthesis": true,
+      "used_in": [
+        "reports/2026-11_baseline_report.html"
+      ],
+      "document_tier": "official_release",
+      "statement_type": "fact",
+      "evidence": {
+        "method": "web_fetch",
+        "snapshot_date": "2026-11-21",
+        "note": "子代理实际访问并引用"
+      }
+    },
+    {
+      "source_id": "S-018",
+      "tier": 1,
+      "publisher": "Immigration, Refugees and Citizenship Canada (IRCC)",
+      "title": "International students — Deputy Minister transition binder 2024",
+      "url": "https://www.canada.ca/en/immigration-refugees-citizenship/corporate/transparency/transition-binders/deputy-minister-2024/international-students.html",
+      "lang": "en",
+      "verify_status": "verified",
+      "updated": "2026-11-21",
+      "in_synthesis": true,
+      "used_in": [
+        "reports/2026-11_baseline_report.html"
+      ],
+      "document_tier": "official_release",
+      "statement_type": "fact",
+      "evidence": {
+        "method": "web_fetch",
+        "snapshot_date": "2026-11-21",
+        "note": "子代理实际访问并引用"
+      }
+    },
+    {
+      "source_id": "S-019",
+      "tier": 1,
+      "publisher": "HK University Grants Committee (UGC)",
+      "title": "UGC 新闻稿：研究型研究生学额与 HKPFS 扩充",
+      "url": "https://www.ugc.edu.hk/eng/ugc/about/press_speech_other/press/2026/pr20260916.html",
+      "lang": "en",
+      "verify_status": "verified",
+      "updated": "2026-11-21",
+      "in_synthesis": true,
+      "used_in": [
+        "reports/2026-11_baseline_report.html"
+      ],
+      "document_tier": "official_release",
+      "statement_type": "fact",
+      "evidence": {
+        "method": "web_fetch",
+        "snapshot_date": "2026-11-21",
+        "note": "子代理实际访问并引用"
+      }
+    },
+    {
+      "source_id": "S-020",
+      "tier": 1,
+      "publisher": "Singapore MOE",
+      "title": "Education Statistics Digest / Tuition Grant scheme",
+      "url": "https://www.moe.gov.sg/about-us/publications/education-statistics-digest",
+      "lang": "en",
+      "verify_status": "media_unverified",
+      "updated": "2026-11-21",
+      "in_synthesis": true,
+      "used_in": [
+        "reports/2026-11_baseline_report.html"
+      ],
+      "document_tier": "official_release",
+      "statement_type": "fact",
+      "evidence": {
+        "method": "web_fetch",
+        "snapshot_date": "2026-11-21",
+        "note": "官方统计载体；PDF 未能提取数值"
+      }
+    },
+    {
+      "source_id": "S-021",
+      "tier": 1,
+      "publisher": "IIE Open Doors",
+      "title": "Open Doors — International student data",
+      "url": "https://opendoorsdata.org/",
+      "lang": "en",
+      "verify_status": "media_unverified",
+      "updated": "2026-11-21",
+      "in_synthesis": true,
+      "used_in": [
+        "reports/2026-11_baseline_report.html"
+      ],
+      "document_tier": "industry_report",
+      "statement_type": "fact",
+      "evidence": {
+        "method": "web_fetch",
+        "snapshot_date": "2026-11-21",
+        "note": "官方页面动态渲染，数值待核实"
+      }
+    },
+    {
+      "source_id": "S-022",
+      "tier": 1,
+      "publisher": "UNESCO UIS",
+      "title": "ISCED 2011 classification portal",
+      "url": "https://isced.uis.unesco.org/",
+      "lang": "en",
+      "verify_status": "verified",
+      "updated": "2026-11-21",
+      "in_synthesis": true,
+      "used_in": [
+        "reports/2026-11_baseline_report.html"
+      ],
+      "document_tier": "official_release",
+      "statement_type": "fact",
+      "evidence": {
+        "method": "web_fetch",
+        "snapshot_date": "2026-11-21",
+        "note": "子代理实际访问并引用"
+      }
+    },
+    {
+      "source_id": "S-023",
+      "tier": 1,
+      "publisher": "US ICE — SEVP / SEVIS",
+      "title": "US ICE — SEVP / SEVIS",
+      "url": "https://www.ice.gov/sevis",
+      "lang": "en",
+      "verify_status": "verified",
+      "updated": "2026-11-21",
+      "in_synthesis": true,
+      "used_in": [
+        "reports/2026-11_baseline_report.html"
+      ],
+      "document_tier": "official_release",
+      "statement_type": "fact",
+      "evidence": {
+        "method": "web_fetch",
+        "snapshot_date": "2026-11-21",
+        "note": "子代理实际访问并引用"
+      }
+    },
+    {
+      "source_id": "S-024",
+      "tier": 1,
+      "publisher": "Singapore MOE — Tuition Grant scheme",
+      "title": "Singapore MOE — Tuition Grant scheme",
+      "url": "https://www.moe.gov.sg/financial-matters/tuition-grant-scheme/application-process",
+      "lang": "en",
+      "verify_status": "verified",
+      "updated": "2026-11-21",
+      "in_synthesis": true,
+      "used_in": [
+        "reports/2026-11_baseline_report.html"
+      ],
+      "document_tier": "official_release",
+      "statement_type": "fact",
+      "evidence": {
+        "method": "web_fetch",
+        "snapshot_date": "2026-11-21",
+        "note": "子代理实际访问并引用"
+      }
+    },
+    {
+      "source_id": "S-025",
+      "tier": 1,
+      "publisher": "EMGS — Education Malaysia Global Services",
+      "title": "EMGS — Education Malaysia Global Services",
+      "url": "https://educationmalaysia.gov.my/",
+      "lang": "en",
+      "verify_status": "verified",
+      "updated": "2026-11-21",
+      "in_synthesis": true,
+      "used_in": [
+        "reports/2026-11_baseline_report.html"
+      ],
+      "document_tier": "official_release",
+      "statement_type": "fact",
+      "evidence": {
+        "method": "web_fetch",
+        "snapshot_date": "2026-11-21",
+        "note": "子代理实际访问并引用"
+      }
+    },
+    {
+      "source_id": "S-026",
+      "tier": 1,
+      "publisher": "Study in Norway — master entry requirements",
+      "title": "Study in Norway — master entry requirements",
+      "url": "https://studyinnorway.no/node/35",
+      "lang": "en",
+      "verify_status": "verified",
+      "updated": "2026-11-21",
+      "in_synthesis": true,
+      "used_in": [
+        "reports/2026-11_baseline_report.html"
+      ],
+      "document_tier": "official_release",
+      "statement_type": "fact",
+      "evidence": {
+        "method": "web_fetch",
+        "snapshot_date": "2026-11-21",
+        "note": "子代理实际访问并引用"
+      }
+    },
+    {
+      "source_id": "S-027",
+      "tier": 1,
+      "publisher": "Study in Finland — admissions",
+      "title": "Study in Finland — admissions",
+      "url": "https://www.studyinfinland.fi/admissions/bachelors-and-masters-admissions",
+      "lang": "en",
+      "verify_status": "verified",
+      "updated": "2026-11-21",
+      "in_synthesis": true,
+      "used_in": [
+        "reports/2026-11_baseline_report.html"
+      ],
+      "document_tier": "official_release",
+      "statement_type": "fact",
+      "evidence": {
+        "method": "web_fetch",
+        "snapshot_date": "2026-11-21",
+        "note": "子代理实际访问并引用"
+      }
+    }
+  ]
+}

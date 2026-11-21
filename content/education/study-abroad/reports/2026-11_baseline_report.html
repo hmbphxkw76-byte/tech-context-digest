@@ -1,0 +1,1523 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>14 国留学信息与决策 · 首期基线报告</title>
+<style>
+:root{
+  --radius-sm:8px; --radius:12px; --radius-lg:16px; --radius-pill:999px;
+  --shadow:0 1px 3px rgba(20,40,70,.06); --shadow-md:0 4px 14px rgba(20,40,70,.09);
+  --shadow-lg:0 10px 30px rgba(15,35,56,.2);
+  --font-sans:"Microsoft YaHei","PingFang SC","Segoe UI",Arial,sans-serif;
+  --font-mono:"SFMono-Regular",Consolas,"Liberation Mono",monospace;
+  --focus-ring:0 0 0 3px rgba(63,111,176,.35);
+  --transition:.15s ease;
+  --bg:#f4f6f9; --card:#ffffff; --card2:#fbfcfe; --soft:#f5f8fb;
+  --ink:#15202b; --ink2:#465667; --ink3:#657180;
+  --line:#e1e7ee; --line2:#eef2f6;
+  --navy:#16324f; --navy2:#2f5597; --blue:#3f6fb0; --blue-l:#eaf1fa;
+  --red:#a83224; --red-d:#822116; --red-l:#fbece8; --red-bg:#fbece8; --red-line:#f0d4cf;
+  --pre:#b8541c; --pre-l:#fdf1e4; --pre-bg:#fdf1e4; --pre-line:#f2ddc9;
+  --green:#1c7444; --green-l:#eaf5ef; --green-bg:#eaf5ef; --green-line:#d3ead9;
+  --amber:#956612; --amber-l:#fdf4e2; --amber-bg:#fdf4e2; --amber-line:#f0e3c2;
+  --gray:#646f7b; --gray-l:#eff2f4; --gray-bg:#eff2f4; --gray-line:#e6eaee;
+  /* 别名：兼容既有报告组件的命名习惯 */
+  --surface:#ffffff; --surface2:#fbfcfe;
+  --navy-2:#2f5597; --muted:#657180; --bg-soft:#f5f8fb; --bg-card:#fbfcfe;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  *,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}
+}
+body{font-family:var(--font-sans);background:var(--bg);color:var(--ink);line-height:1.76;font-size:14.5px}
+.wrap{max-width:1160px;margin:0 auto;padding:0 24px 64px}
+a{color:var(--navy2);text-decoration:none}
+a:hover{text-decoration:underline}
+a:focus-visible,button:focus-visible{outline:none;box-shadow:var(--focus-ring)}
+.skip-link{position:absolute;left:12px;top:-48px;z-index:100;background:var(--navy);color:#fff;padding:8px 16px;border-radius:0 0 8px 8px;font-size:12.5px;transition:top var(--transition)}
+.skip-link:focus{top:0;color:#fff;text-decoration:none}
+
+/* ── 页头：report-head（生成器基础版） ── */
+header.report-head{
+  background:linear-gradient(128deg,#0f2338 0%,var(--navy) 52%,var(--navy2) 100%);
+  color:#fff;padding:40px 0 30px;
+}
+header.report-head .wrap{padding:0 24px}
+header.report-head h1{margin:0 0 8px;font-size:27px;font-weight:700;letter-spacing:.4px;line-height:1.35}
+header.report-head .eyebrow{font-size:11.5px;letter-spacing:2.4px;color:rgba(255,255,255,.62);text-transform:uppercase}
+header.report-head .sub{font-size:14px;color:rgba(255,255,255,.82);margin:2px 0}
+header.report-head .meta{font-size:12.3px;color:rgba(255,255,255,.75);margin-top:14px;line-height:1.9}
+header.report-head .meta b{color:#fff}
+header.report-head .nav-url{font-size:11.5px;color:rgba(255,255,255,.78);margin-top:10px;word-break:break-all}
+header.report-head .nav-url a{color:#cfe0ee;text-decoration:none;border-bottom:1px dashed #cfe0ee}
+header.report-head .tag{display:inline-block;background:rgba(255,255,255,.11);border:1px solid rgba(255,255,255,.2);border-radius:14px;padding:2px 11px;margin:5px 6px 0 0;font-size:11.5px}
+
+/* ── 页头：hero（jp-life-work 风格：navy 标题带 + 浅色 meta 面板） ── */
+.hero{margin-bottom:20px}
+.hero .wrap{padding:0 24px}
+.hero-band{background:linear-gradient(128deg,#0f2338 0%,var(--navy) 52%,var(--navy2) 100%);color:#fff;
+  padding:14px 0 12px;border-radius:0 0 14px 14px}
+.hero-top{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap}
+.hero-band .eyebrow,.hero-band .kicker,.hero-band .hero-kicker{font-size:10.5px;letter-spacing:2px;color:rgba(255,255,255,.62);text-transform:uppercase;margin:0}
+.hero-band h1{font-size:21px;font-weight:700;letter-spacing:.3px;margin:5px 0 0;line-height:1.3}
+.hero-band .tags{display:flex;flex-wrap:wrap;gap:6px}
+.hero-band .tag{display:inline-block;background:rgba(255,255,255,.11);border:1px solid rgba(255,255,255,.2);
+  border-radius:14px;padding:1px 10px;font-size:11px}
+.hero-panel{display:flex;flex-wrap:wrap;align-items:center;gap:8px 16px;
+  background:var(--card);border:1px solid var(--line);border-radius:12px;
+  padding:8px 12px;margin-top:8px;box-shadow:var(--shadow)}
+.meta-grid{flex:1 1 0;min-width:0;column-count:2;column-gap:20px;
+  font-size:11.4px;line-height:1.45;color:var(--ink2)}
+.meta-grid .meta-item{break-inside:avoid;margin:0 0 2px;min-width:0;overflow-wrap:anywhere}
+.meta-grid .meta-item b{color:var(--navy)}
+.meta-grid p,.meta-grid dl,.meta-grid .hero-meta,.meta-grid .hero-abstract p{
+  margin:0 0 4px;break-inside:avoid}
+.meta-grid dl{display:block}
+.meta-grid dt{display:block;font-weight:700;color:var(--navy);margin-top:2px}
+.meta-grid dd{display:block;margin:0 0 4px}
+.meta-grid .tag-row{margin:2px 0 4px}
+.hero-panel .audit-badge{margin:0;flex:0 0 300px;font-size:12px;padding:6px 12px}
+.audit-badge{display:inline-flex;align-items:center;gap:10px;flex-wrap:wrap;
+  background:var(--green-l);border:1px solid var(--green);border-radius:10px;
+  padding:8px 14px;font-size:12.5px;color:var(--green)}
+.audit-badge .audit-seal{font-weight:700;white-space:nowrap}
+.audit-badge .audit-meta{color:var(--ink2)}
+@media (max-width:900px){
+  .hero-panel{flex-direction:column;align-items:stretch}
+  .hero-panel .audit-badge{flex:1 1 auto}
+  .meta-grid{column-count:1}
+}
+
+/* ── 顶部固定导航 ── */
+nav.report-nav{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.96);border-bottom:1px solid var(--line);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);margin-bottom:26px}
+nav.report-nav .wrap{display:flex;flex-wrap:wrap;gap:6px 14px;align-items:center;padding-top:10px;padding-bottom:10px}
+/* apartment monthly/quarterly/baseline 的 .nav-tabs 是 nav 直接子元素（无 .wrap） */
+nav.report-nav > .nav-tabs{max-width:1160px;margin:0 auto;padding:10px 24px}
+.nav-url{display:flex;align-items:baseline;gap:8px;flex-wrap:wrap;font-size:11.5px;line-height:1.6;color:var(--ink3);padding-bottom:6px;margin-bottom:6px;border-bottom:1px dashed var(--line);width:100%}
+.nav-url-label{font-weight:700;color:var(--ink2);white-space:nowrap}
+.nav-url a{color:var(--blue);text-decoration:none;word-break:break-all}
+.nav-url a:hover{text-decoration:underline}
+.nav-tabs{display:flex;flex-wrap:wrap;gap:6px}
+.nav-tabs a{color:var(--navy);text-decoration:none;font-size:12.5px;padding:4px 10px;border-radius:14px;border:1px solid var(--line);background:var(--bg-soft);white-space:nowrap;transition:background var(--transition),color var(--transition)}
+.nav-tabs a:hover{background:var(--blue-l);border-color:#b9cfe2;text-decoration:none}
+.nav-tabs a.active{background:var(--blue-l);color:var(--blue);font-weight:700}
+
+/* ── 章节与排版 ── */
+main{padding-top:0}
+h2.sec{font-size:19px;color:var(--navy);margin:38px 0 14px;padding-bottom:8px;border-bottom:2px solid var(--navy);scroll-margin-top:100px;font-weight:700}
+h2.sec .en{font-size:10.8px;color:var(--ink3);font-weight:400;margin-left:10px;letter-spacing:1.1px}
+h3{font-size:15.5px;color:var(--navy);margin:22px 0 8px;font-weight:700;scroll-margin-top:100px}
+h4{font-size:14px;color:var(--navy);margin:16px 0 6px;font-weight:700}
+p{margin:8px 0}
+ul,ol{margin:8px 0;padding-left:22px}
+li{margin:5px 0}
+ul.tight,ol.tight{margin:7px 0}
+ul.tight li,ol.tight li{margin-bottom:6px}
+b,strong{font-weight:650;color:var(--ink)}
+blockquote{border-left:4px solid var(--line);margin:12px 0;padding:2px 0 2px 14px;color:var(--ink2)}
+code{background:var(--bg-soft);padding:2px 5px;border-radius:4px;font-family:var(--font-mono);font-size:.92em}
+pre{background:var(--bg-soft);border:1px solid var(--line);border-radius:var(--radius-sm);padding:12px 14px;overflow-x:auto;margin:12px 0}
+pre code{background:none;padding:0}
+img{max-width:100%}
+.lead{color:var(--ink2);font-size:13.8px;margin:6px 0 14px}
+.muted{color:var(--ink3)}
+.small{font-size:11.7px;color:var(--ink3)}
+hr{border:0;border-top:1px solid var(--line);margin:26px 0 0}
+.hr{height:1px;background:var(--line);margin:26px 0 0}
+b.red,color.red{color:var(--red)} b.pre{color:var(--pre)} b.green{color:var(--green)}
+b.amber{color:var(--amber)} b.navy{color:var(--navy)}
+
+/* ── 表格 ── */
+table{width:100%;border-collapse:collapse;font-size:13px;background:var(--card);margin:12px 0}
+th,td{border:1px solid var(--line);padding:8px 10px;text-align:left;vertical-align:top;line-height:1.62}
+thead th{background:var(--navy);color:#fff;font-weight:600;white-space:nowrap}
+tbody th{background:var(--blue-l);color:var(--navy);font-weight:600}
+tbody tr:nth-child(even) td{background:var(--bg-soft)}
+tbody tr:hover td{background:var(--blue-l)}
+table.fixed{table-layout:fixed}
+.num{text-align:right;font-variant-numeric:tabular-nums}
+.tblwrap{overflow-x:auto;border-radius:var(--radius-sm);border:1px solid var(--line);margin:12px 0}
+.tblwrap table{margin:0;border:0}
+
+/* ── 来源：表头弹层 / 行内链接 / 来源清单 ── */
+.src-head{position:relative;cursor:help;border-bottom:1px dotted var(--blue);white-space:nowrap}
+.src-head .src-pop{position:absolute;left:0;top:100%;z-index:60;display:none;background:var(--navy);color:#fff;font-size:12px;font-weight:400;padding:9px 12px;border-radius:8px;box-shadow:var(--shadow-lg);max-width:min(560px,86vw);white-space:normal;line-height:1.65;border:1px solid rgba(255,255,255,.14)}
+.src-pop .pop-title{font-weight:600;display:block;margin-bottom:4px;color:#fff}
+.src-pop .pop-url{display:block;margin-top:6px;word-break:break-all;color:var(--blue-l)}
+.src-pop .pop-url a{color:#a9c8ee}
+.src-head:hover .src-pop,.src-head:focus .src-pop,.src-head:focus-within .src-pop{display:block}
+.src-inline{color:var(--ink3);font-size:12px;word-break:break-all}
+.src-inline a{color:var(--blue);text-decoration:none;border-bottom:1px dotted var(--blue)}
+.src-inline a:hover{background:#eaf3fa}
+.src{font-size:11.1px;color:var(--ink3);word-break:break-word;line-height:1.58}
+.src a{color:#5b7bb4;text-decoration:none}
+.src a:hover{text-decoration:underline}
+.refs{font-size:12.5px;color:var(--ink3)}
+.refs ol{padding-left:20px}
+.refs a{color:var(--navy);text-decoration:none;border-bottom:1px dashed var(--navy);word-break:break-all}
+.refs a:hover{background:#e8f0f8}
+
+/* ── 卡片 / 结论框 ── */
+.card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:18px 20px;box-shadow:var(--shadow);margin:14px 0}
+.card.tight{padding:14px 16px}
+.leadbox{border-left:4px solid var(--navy2);background:linear-gradient(125deg,#f5f9fd,#edf3fa);border-color:#cfdded}
+.leadbox h3:first-child{margin-top:0}
+
+/* ── KPI 卡（trends .kpi / apartment .kcard） ── */
+.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(168px,1fr));gap:12px;margin:14px 0}
+.kpi{background:var(--card);border:1px solid var(--line);border-left:4px solid var(--navy);border-radius:var(--radius-sm);padding:12px 14px;box-shadow:var(--shadow)}
+.kpi.red{border-left-color:var(--red)} .kpi.green{border-left-color:var(--green)}
+.kpi.amber{border-left-color:var(--amber)} .kpi.blue{border-left-color:var(--blue)}
+.kpi .v{font-size:22px;font-weight:700;color:var(--navy);line-height:1.2}
+.kpi.red .v{color:var(--red)} .kpi.green .v{color:var(--green)}
+.kpi.amber .v{color:var(--amber)} .kpi.blue .v{color:var(--blue)}
+.kpi .l{font-size:12px;color:var(--ink3);margin-top:4px}
+.kpi .s{font-size:11px;color:#8a98a6;margin-top:2px}
+.kcards{display:grid;grid-template-columns:repeat(auto-fit,minmax(232px,1fr));gap:11px;margin:14px 0}
+.kcard{background:var(--card);border:1px solid var(--line);border-left:4px solid var(--navy2);border-radius:10px;padding:13px 15px;box-shadow:var(--shadow)}
+.kcard.warn,.kcard.pre{border-left-color:var(--pre);background:linear-gradient(180deg,var(--pre-bg),#fff 62%)}
+.kcard.bad,.kcard.red{border-left-color:var(--red);background:linear-gradient(180deg,var(--red-bg),#fff 62%)}
+.kcard.good{border-left-color:var(--green);background:linear-gradient(180deg,var(--green-bg),#fff 62%)}
+.kcard .lab,.kcard .t{font-size:12.4px;color:var(--ink2)}
+.kcard .val,.kcard .v{font-size:22px;font-weight:700;color:var(--navy);margin:3px 0 2px;line-height:1.25}
+.kcard.warn .val,.kcard.pre .val{color:var(--pre)}
+.kcard.bad .val,.kcard.red .val{color:var(--red)}
+.kcard.good .val{color:var(--green)}
+.kcard .note,.kcard .s{font-size:11.5px;color:var(--ink3);line-height:1.6;margin-top:4px;word-break:break-word}
+
+/* ── 数据条 / 信号灯 ── */
+.stat-strip{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin:12px 0}
+.stat{background:var(--card);border:1px solid var(--line);border-radius:9px;padding:11px 13px;text-align:center}
+.stat .lab,.stat .l{font-size:11.4px;color:var(--ink3);margin-top:2px}
+.stat .n{font-size:23px;font-weight:700;line-height:1.2}
+.stat.hard .n{color:var(--red)} .stat.pre .n{color:var(--pre)} .stat.yel .n{color:var(--amber)}
+.stat.grn .n{color:var(--green)} .stat.gry .n{color:var(--gray)}
+.lamp{display:inline-block;min-width:9px;width:9px;height:9px;border-radius:50%;margin-right:4px;vertical-align:0}
+.lamp.r{background:var(--red)} .lamp.p{background:var(--pre)} .lamp.y{background:var(--amber)}
+.lamp.g{background:var(--green)} .lamp.k{background:var(--gray)}
+
+/* ── 标签 / 标注 ── */
+.tag{display:inline-block;font-size:11px;padding:1px 7px;border-radius:10px;background:var(--blue-l);color:var(--navy);border:1px solid var(--line);margin-right:4px}
+.tag.red{background:var(--red-l);color:var(--red);border-color:var(--red-line)}
+.tag.green{background:var(--green-l);color:var(--green);border-color:var(--green-line)}
+.tag.amber{background:var(--amber-l);color:var(--amber);border-color:var(--amber-line)}
+.pill{display:inline-block;border-radius:3px;padding:0 7px;font-size:11.3px;white-space:nowrap;line-height:1.72}
+.pill.r{background:var(--red-l);color:var(--red)} .pill.p{background:var(--pre-l);color:var(--pre)}
+.pill.y{background:var(--amber-l);color:var(--amber)} .pill.g{background:var(--green-l);color:var(--green)}
+.pill.k{background:var(--gray-l);color:var(--gray)} .pill.b{background:var(--blue-l);color:var(--navy2)}
+.pill.act{background:#e8eef6;color:#2b4a70}
+.callout{border-left:4px solid var(--amber);background:var(--amber-l);padding:12px 16px;border-radius:0 6px 6px 0;margin:14px 0;font-size:13.5px}
+.callout.red{border-left-color:var(--red);background:var(--red-l)}
+.callout.green{border-left-color:var(--green);background:var(--green-l)}
+.note{border:1px solid var(--line);border-left:4px solid var(--navy2);background:var(--card2);border-radius:var(--radius-sm);padding:12px 15px;margin:14px 0;font-size:13.5px}
+.note.gap{border-left-color:var(--gray);background:var(--gray-l)}
+.note.check{border-left-color:var(--green);background:var(--green-l)}
+.note.correct{border-left-color:var(--red);background:var(--red-l)}
+.note.preline{border-left-color:var(--pre);background:var(--pre-l)}
+.term{font-size:12.5px;color:var(--ink3);background:var(--bg-soft);border:1px solid var(--line);border-radius:6px;padding:8px 12px;margin:14px 0}
+.term b{color:var(--navy)}
+
+/* ── 图表（trends .chart 卡片 / apartment .chart-box + .chart-eh 容器） ── */
+.chart{margin:18px 0;padding:16px;background:var(--card);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow)}
+.chart h4{margin:0 0 4px;font-size:14.5px;color:var(--navy)}
+.chart .unit{font-size:12px;color:var(--ink3);font-weight:400}
+.chart-note{font-size:11.5px;color:var(--ink3);margin:0 0 12px;line-height:1.7}
+.chart svg{display:block;max-width:100%;height:auto;margin:6px auto 0}
+.chart-box{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:14px 14px 6px;box-shadow:var(--shadow);margin:16px 0}
+.chart-eh{width:100%;height:352px;margin:6px 0}
+.legend{display:flex;flex-wrap:wrap;gap:14px;font-size:12px;color:var(--ink2);margin:6px 0 12px}
+.legend span{display:inline-flex;align-items:center;gap:5px}
+.legend i{display:inline-block;width:11px;height:11px;border-radius:2px}
+
+/* ── 时间线 ── */
+.timeline{margin:16px 0;padding-left:8px}
+.tl-item{display:flex;gap:14px;margin:0 0 14px}
+.tl-date{flex:0 0 78px;font-size:12.5px;font-weight:700;color:var(--navy);text-align:right;padding-top:2px}
+.tl-body{flex:1;border-left:2px solid var(--line);padding:0 0 0 14px;position:relative}
+.tl-body::before{content:"";position:absolute;left:-6px;top:6px;width:10px;height:10px;border-radius:50%;background:var(--navy);border:2px solid #fff;box-shadow:0 0 0 1px var(--navy)}
+.tl-body.red::before{background:var(--red);box-shadow:0 0 0 1px var(--red)}
+.tl-body.green::before{background:var(--green);box-shadow:0 0 0 1px var(--green)}
+.tl-body.amber::before{background:var(--amber);box-shadow:0 0 0 1px var(--amber)}
+.tl-body .t{font-weight:600;color:var(--ink)}
+.tl-body .d{font-size:13px;color:var(--ink3);margin-top:2px}
+
+/* ── 风险条 / 风险框 ── */
+.rl-track{position:relative;height:12px;background:var(--gray-line);border-radius:999px;margin:14px 0 6px;overflow:hidden}
+.rl-fill{position:absolute;left:0;top:0;bottom:0;background:var(--green);border-radius:999px}
+.rl-marker{position:absolute;top:-3px;bottom:-3px;width:2px;background:var(--red);left:50%}
+.risk{background:linear-gradient(125deg,#fdf3f1,var(--red-l));border:1px solid #eec8c1;border-left:5px solid var(--red);border-radius:10px;padding:16px 18px;margin:14px 0}
+.risk h4{font-size:14.4px;color:var(--red);margin-bottom:8px}
+.risk .kpis{display:flex;flex-wrap:wrap;gap:22px;margin:10px 0 12px}
+.risk .kpis>div{min-width:150px}
+.risk .kpis .n{font-size:22px;font-weight:700;color:var(--red);line-height:1.25}
+.risk .kpis .l{font-size:11.4px;color:var(--ink2)}
+.redbox{background:linear-gradient(135deg,#fff8f6,var(--red-l));border:1px solid #eec8c1;border-left:5px solid var(--red);border-radius:10px;padding:15px 18px;margin:14px 0}
+.redbox h4{color:var(--red-d);margin-top:0}
+.prebox{background:linear-gradient(135deg,#fffaf4,var(--pre-l));border:1px solid #efd3b6;border-left:5px solid var(--pre);border-radius:10px;padding:15px 18px;margin:14px 0}
+.prebox h4{color:var(--pre);margin-top:0}
+.preline{border-left:4px solid var(--pre);background:var(--pre-l);padding:10px 14px;border-radius:0 6px 6px 0;margin:10px 0;font-size:13px}
+
+/* ── 目录 / 流程 / 分层（年度） ── */
+.toc{display:flex;flex-wrap:wrap;gap:7px;margin:0 0 6px}
+.toc a{font-size:12.3px;color:var(--navy2);background:var(--blue-l);border-radius:15px;padding:3px 12px;text-decoration:none}
+.toc a:hover{background:#dae6f5}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.flow{display:flex;align-items:stretch;gap:7px;flex-wrap:wrap;margin:12px 0}
+.node{flex:1;min-width:150px;background:var(--blue-l);border:1px solid #cfddf3;border-radius:8px;padding:11px 12px}
+.node b{display:block;color:var(--navy);font-size:12.8px;margin-bottom:3px}
+.node span{font-size:11.4px;color:var(--ink2);line-height:1.55;display:block}
+.arrow{display:flex;align-items:center;color:var(--blue);font-size:18px;font-weight:700}
+.tiers{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:12px 0}
+.tier{border:1px solid var(--line);border-radius:10px;padding:14px 15px;background:var(--card)}
+.tier.t1{border-top:4px solid var(--red)} .tier.t2{border-top:4px solid var(--pre)} .tier.t3{border-top:4px solid var(--amber)}
+.tier h4{margin:0 0 6px} .tier p{font-size:12.2px;color:var(--ink2);margin:0}
+
+/* ── 标注 / 页脚 / 索引链接 ── */
+.disc{margin-top:34px;padding:16px 18px;background:var(--bg-soft);border:1px solid var(--line);border-radius:var(--radius);font-size:13px;color:var(--ink3)}
+.disc strong{color:var(--ink)}
+footer,.footer{font-size:11.4px;color:var(--ink3);text-align:center;margin-top:22px;line-height:1.8}
+.idx-link{color:var(--navy);text-decoration:none;border-bottom:1px dotted #9db9da;font-weight:600}
+.idx-link:hover{color:var(--navy2);border-bottom:1px solid var(--blue)}
+.idx-link .ext{font-size:10px;color:var(--blue);margin-left:2px;font-weight:400}
+
+/* ── 消费端反馈入口（T-06）：静态链接 + data 属性占位，无外部依赖 ── */
+.feedback-link{color:var(--navy2);text-decoration:none;border-bottom:1px dotted #9db9da;font-weight:600}
+.feedback-link:hover{color:var(--navy);border-bottom:1px solid var(--blue)}
+.report-foot{border-top:1px solid var(--line);padding:16px 0 34px}
+
+/* ── 报告特有组件（apartment 基线 / 季度） ── */
+.tldr{background:linear-gradient(180deg,#fff,#f8fafe);border-left:5px solid var(--navy2)}
+.verdict{font-size:17px;font-weight:700;color:var(--blue);margin:0 0 12px}
+.kpi-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin:16px 0}
+.tbl-wrap{overflow-x:auto;border:1px solid var(--line);border-radius:8px;margin:12px 0}
+.src-pop .src-pop-title{display:block;font-size:11px;color:var(--ink3);margin-bottom:4px;border-bottom:1px solid var(--line);padding-bottom:4px}
+.t-red{background:var(--red-l);color:var(--red)} .t-green{background:var(--green-l);color:var(--green)}
+.t-amber{background:var(--amber-l);color:var(--amber)} .t-grey{background:var(--gray-l);color:var(--ink3)}
+.t-blue{background:var(--blue-l);color:var(--blue)}
+.toggle{display:inline-flex;border:1px solid var(--line);border-radius:6px;overflow:hidden;margin-bottom:8px}
+.toggle button{border:0;background:#fff;color:var(--ink2);padding:5px 14px;font-size:12px;cursor:pointer;font-family:inherit}
+.toggle button.on{background:var(--navy2);color:#fff}
+.hide{display:none}
+.two-col{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.layer{display:grid;grid-template-columns:110px 1fr;gap:0;border:1px solid var(--line);border-radius:8px;overflow:hidden;margin-bottom:10px;background:#fff}
+.layer .lb{background:var(--navy2);color:#fff;padding:14px 12px;font-weight:700;font-size:13px;display:flex;align-items:center;justify-content:center;text-align:center}
+.layer .lb.q{background:#4472C4} .layer .lb.y{background:var(--navy2)}
+.layer .ct{padding:12px 16px;font-size:12.5px;color:var(--ink2)}
+.layer .ct b{color:var(--ink)}
+.note-box{background:var(--amber-l);border:1px solid var(--amber-line);border-radius:8px;padding:12px 16px;color:#6b4e0a;font-size:12.5px;margin:12px 0}
+.risk-box{background:var(--red-l);border:1px solid var(--red-line);border-radius:8px;padding:12px 16px;color:#8c2f24;font-size:12.5px;margin:12px 0}
+.ok-box{background:var(--green-l);border:1px solid var(--green-line);border-radius:8px;padding:12px 16px;color:#155c39;font-size:12.5px;margin:12px 0}
+.sig-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-top:12px}
+.sig{display:flex;gap:12px;align-items:flex-start;border:1px solid var(--line);border-radius:8px;padding:11px 13px;background:#fff}
+.sig .dot{width:10px;height:10px;border-radius:50%;margin-top:6px;flex:0 0 10px}
+.sig .dot.r{background:var(--red)} .sig .dot.g{background:var(--green)}
+.sig .dot.a{background:var(--amber)} .sig .dot.k{background:var(--gray)}
+.sig b{font-size:13px;color:var(--ink)} .sig p{margin:2px 0 0;font-size:11.5px}
+b.dr{color:var(--red-d)}
+.metric-link{color:var(--navy);text-decoration:none;border-bottom:1px dotted #9db4cf;font-weight:600}
+.metric-link:hover{color:var(--navy2);border-bottom-color:var(--navy2);background:var(--blue-l)}
+.metric-link::after{content:" ↗";font-size:10px;color:#7d96b3;font-weight:400}
+.rl-banner{background:linear-gradient(125deg,#5c1512,#7a1f19 60%,#8a2b20);color:#fff;border-radius:12px;padding:16px 20px;margin:16px 0;border:1px solid #4d100d;box-shadow:0 2px 8px rgba(110,27,22,.18)}
+.rl-banner h3{color:#fff;margin:0 0 6px;font-size:16px}
+.rl-banner p{font-size:12.8px;color:rgba(255,255,255,.88);margin-bottom:6px}
+.rl-banner .rl-kpis{display:flex;flex-wrap:wrap;gap:10px;margin:10px 0 4px}
+.rl-banner .rl-kpis div{background:rgba(255,255,255,.10);border:1px solid rgba(255,255,255,.18);border-radius:8px;padding:8px 12px;min-width:156px}
+.rl-banner .n{font-size:20px;font-weight:700;line-height:1.3}
+.rl-banner .l{font-size:11.4px;color:rgba(255,255,255,.78)}
+.rl-card{border:2px solid var(--red-d);background:linear-gradient(180deg,#fff,#fdf6f4);border-radius:12px;padding:18px 20px;margin:16px 0;box-shadow:0 2px 8px rgba(110,27,22,.08)}
+.rl-card h3{color:var(--red-d);margin-top:0}
+.rl-table th{background:var(--red-d)}
+.rl-table tbody tr:nth-child(even) td{background:#fdf7f5}
+.rl-table tbody tr:hover td{background:var(--red-l)}
+.rl-table td:first-child{border-left:3px solid var(--red-d)}
+.rl-rule{background:#fdf6f4;border-left:4px solid var(--red-d);padding:10px 14px;border-radius:0 7px 7px 0;font-size:12.8px;margin:10px 0}
+.rl-mark{display:inline-block;background:var(--red-d);color:#fff;border-radius:3px;padding:0 6px;font-size:11px;font-weight:700;letter-spacing:.5px}
+details.registry{margin:12px 0;background:var(--card);border:1px solid var(--line);border-radius:10px;padding:12px 16px}
+details.registry summary{cursor:pointer;font-weight:700;color:var(--navy);font-size:14px}
+details.registry[open]{padding-bottom:18px}
+.mini{background:#fff;border:1px solid var(--line);border-radius:9px;padding:12px 14px}
+.mini h4{margin-top:0}
+
+/* ── 信息等级标签（四级，信息分层规范） ── */
+.lvl{display:inline-block;font-size:11px;line-height:1.5;padding:1px 7px;border-radius:9px;
+  border:1px solid transparent;white-space:nowrap;font-weight:600;vertical-align:1px}
+.lvl-verified{background:var(--green-l);color:var(--green);border-color:var(--green-line,#d3ead9)}
+.lvl-partial{background:var(--amber-l);color:var(--amber);border-color:var(--amber-line,#f0e3c2)}
+.lvl-inferred{background:var(--blue-l);color:var(--navy2);border-color:#cdddf0}
+.lvl-assumption{background:var(--gray-l);color:var(--gray);border-color:var(--gray-line,#e6eaee)}
+
+/* ── 新增信息统计条（本期新增/修正/无变化/假设核验进度） ── */
+.delta-strip{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:14px 0}
+.delta-strip .d{background:var(--card);border:1px solid var(--line);border-radius:10px;
+  padding:12px 14px;box-shadow:var(--shadow)}
+.delta-strip .d .n{font-size:22px;font-weight:700;color:var(--navy);line-height:1.25}
+.delta-strip .d .l{font-size:11.6px;color:var(--ink3);margin-top:2px}
+.delta-strip .d.add .n{color:var(--green)}
+.delta-strip .d.fix .n{color:var(--amber)}
+.delta-strip .d.same .n{color:var(--ink3)}
+.delta-strip .d.hyp .n{color:var(--navy2)}
+
+/* ── 行动协议卡（触发条件+阈值+责任角色+时限+验证指标） ── */
+.action-card{background:var(--card);border:1px solid var(--line);border-left:4px solid var(--navy2);
+  border-radius:10px;padding:14px 16px;margin:12px 0;box-shadow:var(--shadow)}
+.action-card.immediate{border-left-color:var(--red)}
+.action-card.watch{border-left-color:var(--amber)}
+.action-card.archive{border-left-color:var(--gray)}
+.action-card .a-head{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:6px}
+.action-card .a-title{font-weight:700;color:var(--navy);font-size:14.5px}
+.action-card .a-meta{font-size:12.3px;color:var(--ink2);line-height:1.7}
+.action-card .a-meta b{color:var(--navy)}
+.prio{display:inline-block;font-size:11px;padding:1px 8px;border-radius:9px;font-weight:700}
+.prio.immediate{background:var(--red-l);color:var(--red)}
+.prio.watch{background:var(--amber-l);color:var(--amber)}
+.prio.archive{background:var(--gray-l);color:var(--gray)}
+
+/* ── 决策卡（结论/证据强度/触发条件/反向证据/信息充分度） ── */
+.decision-card{background:var(--card);border:1px solid var(--line);border-radius:12px;
+  padding:16px 18px;margin:14px 0;box-shadow:var(--shadow)}
+.decision-card .dc-head{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap;margin-bottom:8px}
+.decision-card .dc-title{font-weight:700;color:var(--navy);font-size:15px}
+.decision-card .dc-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px 18px;font-size:12.8px;line-height:1.7}
+.decision-card .dc-grid .k{color:var(--ink3);font-weight:600}
+.suff{display:inline-block;font-size:11px;padding:1px 8px;border-radius:9px;font-weight:700}
+.suff.ok{background:var(--green-l);color:var(--green)}
+.suff.need{background:var(--amber-l);color:var(--amber)}
+.ev-strong{color:var(--green);font-weight:700}
+.ev-mid{color:var(--amber);font-weight:700}
+.ev-weak{color:var(--red);font-weight:700}
+
+/* ── 场景切片 / 事实卡片指针 ── */
+.slice{border:1px dashed var(--navy2);border-radius:10px;padding:12px 16px;margin:12px 0;background:var(--blue-l)}
+.slice .slice-head{font-weight:700;color:var(--navy);margin-bottom:4px}
+.fact-ref{font-family:var(--font-mono);font-size:11.5px;color:var(--navy2);
+  background:var(--blue-l);border:1px solid #cdddf0;border-radius:5px;padding:0 5px;white-space:nowrap}
+
+/* ── 响应式 / 打印 ── */
+@media (max-width:720px){
+  body{font-size:14px}
+  .wrap{padding:0 14px 48px}
+  header.report-head{padding:26px 0 22px}
+  header.report-head h1{font-size:21px}
+  .hero-band{padding:12px 0 10px}
+  .hero-band h1{font-size:19px}
+  nav.report-nav .nav-url{display:none}
+  table{display:block;overflow-x:auto;white-space:nowrap}
+  th,td{padding:7px 8px;font-size:12.5px}
+  .chart-eh{height:300px}
+  .grid2,.tiers{grid-template-columns:1fr}
+  .kpi-grid{grid-template-columns:repeat(2,1fr)}
+  .two-col,.sig-grid{grid-template-columns:1fr}
+  .stat-strip{grid-template-columns:repeat(2,1fr)}
+  .delta-strip{grid-template-columns:repeat(2,1fr)}
+  .decision-card .dc-grid{grid-template-columns:1fr}
+  .tl-date{flex-basis:64px;font-size:11.5px}
+}
+@media print{
+  nav.report-nav,.skip-link{display:none}
+  .card,.chart,.kpi,.kcard,.chart-box{box-shadow:none}
+  body{font-size:12px}
+}
+
+</style>
+</head>
+<body>
+<header class="report-head">
+  <div class="wrap">
+    <h1>14 国留学信息与决策 · 首期基线报告</h1>
+
+  </div>
+</header>
+<nav class="report-nav" aria-label="报告导航">
+  <div class="wrap">
+    <div class="nav-tabs">
+<a href="#s1">1. 核心结论（摘要）</a>
+<a href="#s2">2. 全球留学市场与政策趋势</a>
+<a href="#s3">3. 目的地供需、费用与奖学金（核心模块）</a>
+<a href="#s4">4. 院校与项目类型细分</a>
+<a href="#s5">5. 申请要求与能力画像</a>
+<a href="#s6">6. 学历认证与职业资质</a>
+<a href="#s7">7. 留学落地路径建议（结论章）</a>
+<a href="#s8">8. 数据可靠性与局限说明</a>
+<a href="#s9">9. 参考来源清单</a>
+    </div>
+  </div>
+</nav>
+
+<main class="wrap">
+<p><strong>报告版本</strong>：v1.0 ｜ <strong>数据基准</strong>：2026-11-21 ｜ <strong>覆盖</strong>：14 国 × 学位层级（29 个组合） ｜ <strong>来源规则</strong>：仅英文官方来源（各国教育部 / 移民局 / 官方留学门户 / 大学官网 / 多边机构）</p>
+<blockquote>
+<p>本报告为 v1.0 首期基线，是后续所有周期更新的对比锚。结构为九节固化锚，顺序与编号不得调整。信息等级标注：<strong>已核验</strong> / 部分核验 / 推断 / 假设。</p>
+</blockquote>
+<h2 class="sec" id="s1">1. 核心结论（摘要）</h2>
+<p><strong>本期新增信息统计</strong>：本期新增 <strong>29</strong> 个「国家 × 学位层级」组合的框架与基线读数；修正 <strong>0</strong>；无变化 <strong>0</strong>；假设核验进度 <strong>0/14</strong>（ex-ante 预校准，首次中期回测窗口 2027-06）。</p>
+<div class="slice">
+  <p class="slice-head">场景切片 · 升学决策 / 就业决策</p>
+  <p>主场景为升学决策（选校 / 选赛道 / 成本测算）；关联场景为就业决策（毕业后工作 / 居留衔接）；次场景为研究参考（国别框架对照）。（来源：business-config 第九节，指针）</p>
+</div>
+
+<ul>
+<li>北欧四国对非欧盟英文授课硕士普遍收费，博士多以带薪职位存在，成本结构与英美不同（部分核验）。</li>
+<li>法国公立体系对欧盟 / 非欧盟差异收费；工程师学院（CTI 认证）为独立赛道（已核验）。</li>
+<li>荷兰、瑞典、丹麦的毕业后通道是「留学 → 工作」衔接的关键变量（已核验）。</li>
+<li>美 / 加 / 澳 / 新 / 马的学费汇总区间在英文官方页面普遍缺失，须逐校核验（部分核验）。</li>
+<li>香港研究型研究生学额与 HKPFS 扩招；加拿大 2024 新规收紧非学位通道（已核验）。</li>
+<li>盲区：非英语国家英文官方页与 ISCED 版本对照待补齐。</li>
+</ul>
+<h2 class="sec" id="s2">2. 全球留学市场与政策趋势</h2>
+<p><strong>覆盖矩阵（14 国 × 学位层级）</strong>：</p>
+<table class="fixed">
+<thead>
+<tr>
+<th style="width:20%">目的地</th>
+<th style="width:20%">本科</th>
+<th style="width:20%">硕士</th>
+<th style="width:20%">博士</th>
+<th style="width:20%">工程师学院</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>美国</td>
+<td>—</td>
+<td>✓</td>
+<td>✓</td>
+<td>—</td>
+</tr>
+<tr>
+<td>新加坡</td>
+<td>—</td>
+<td>✓</td>
+<td>✓</td>
+<td>—</td>
+</tr>
+<tr>
+<td>马来西亚</td>
+<td>✓</td>
+<td>✓</td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr>
+<td>香港</td>
+<td>—</td>
+<td>✓</td>
+<td>✓</td>
+<td>—</td>
+</tr>
+<tr>
+<td>新西兰</td>
+<td>—</td>
+<td>✓</td>
+<td>✓</td>
+<td>—</td>
+</tr>
+<tr>
+<td>澳大利亚</td>
+<td>—</td>
+<td>✓</td>
+<td>✓</td>
+<td>—</td>
+</tr>
+<tr>
+<td>加拿大</td>
+<td>—</td>
+<td>✓</td>
+<td>✓</td>
+<td>—</td>
+</tr>
+<tr>
+<td>芬兰</td>
+<td>—</td>
+<td>✓</td>
+<td>✓</td>
+<td>—</td>
+</tr>
+<tr>
+<td>爱尔兰</td>
+<td>—</td>
+<td>✓</td>
+<td>✓</td>
+<td>—</td>
+</tr>
+<tr>
+<td>荷兰</td>
+<td>—</td>
+<td>✓</td>
+<td>✓</td>
+<td>—</td>
+</tr>
+<tr>
+<td>丹麦</td>
+<td>—</td>
+<td>✓</td>
+<td>✓</td>
+<td>—</td>
+</tr>
+<tr>
+<td>挪威</td>
+<td>—</td>
+<td>✓</td>
+<td>✓</td>
+<td>—</td>
+</tr>
+<tr>
+<td>瑞典</td>
+<td>—</td>
+<td>✓</td>
+<td>✓</td>
+<td>—</td>
+</tr>
+<tr>
+<td>法国</td>
+<td>—</td>
+<td>✓</td>
+<td>✓</td>
+<td>✓</td>
+</tr>
+</tbody>
+</table>
+<p><strong>2.1 国际学生流动</strong></p>
+<ul>
+<li>美国：IIE《Open Doors》为行业基准口径（在读存量 + OPT），美国国务院 ECA 支持；政府学生记录口径为 SEVP / SEVIS，两者不可混用。<a href="https://opendoorsdata.org/">来源</a></li>
+<li>美国 SEVP 最新《SEVIS by the Numbers》使用日历年 2024 数据；DHS 于 2026-07-17 发布 final rule，为 F 学术学生、J 交流访问者等设立固定居留期及延期程序。<a href="https://www.ice.gov/sevis">来源</a></li>
+<li>加拿大：2023-12-31 在加国际学生超 930,000 人；2019→2023 学习许可签发量 +123%；2023 生源印度 40%、中国 10%、菲律宾 5%。<a href="https://www.canada.ca/en/immigration-refugees-citizenship/corporate/transparency/transition-binders/deputy-minister-2024/international-students.html">来源</a></li>
+<li>香港：UGC 资助研究型研究生学额由 7,200 增至 2030/31 学年的 9,600（约 +30%）；香港博士研究生奖学金计划由 400 名增至 2029/30 学年的 550 名。<a href="https://www.ugc.edu.hk/eng/ugc/about/press_speech_other/press/2026/pr20260916.html">来源</a></li>
+</ul>
+<p><strong>2.2 目的国政策动向（近期）</strong></p>
+<table class="fixed">
+<thead>
+<tr>
+<th style="width:33%">目的地</th>
+<th style="width:33%">政策动向</th>
+<th style="width:34%">来源</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>美国</td>
+<td>DHS final rule（2026-07-17）设固定居留期；两份 Broadcast Message 因法院禁令被中止，不应援引</td>
+<td>https://www.ice.gov/sevis</td>
+</tr>
+<tr>
+<td>加拿大</td>
+<td>2024 新规：校外工作上限固定每周 24 小时；转学须先获批新学习许可；DLI 合规报告与 LOA 核验</td>
+<td>https://www.canada.ca/en/immigration-refugees-citizenship/news/2024/11/new-international-student-program-regulations-take-effect.html</td>
+</tr>
+<tr>
+<td>香港</td>
+<td>研究型研究生学额与 HKPFS 扩招；北部都会区大学城列为国际高教枢纽</td>
+<td>https://www.ugc.edu.hk/eng/ugc/about/press_speech_other/press/2026/pr20260916.html</td>
+</tr>
+<tr>
+<td>丹麦</td>
+<td>2026-10-01 起毕业后求职居留许可期限调整（部分情形由最长 3 年改为 6 个月或 1 年）；随行配偶/伴侣一般不再获居留许可</td>
+<td>https://www.nyidanmark.dk/en-GB/News-Front-Page/2026/09/SIRI---Nye-regler-for-studerende</td>
+</tr>
+<tr>
+<td>法国</td>
+<td>非欧盟差异化收费（硕士 €3,950/年）；Eiffel 奖学金 2026-01 起提高额度</td>
+<td>https://www.campusfrance.org/en/tuition-fees-France</td>
+</tr>
+</tbody>
+</table>
+<p><strong>2.3 趋势判断（推断）</strong></p>
+<ul>
+<li>目的国政策整体呈「扩招高端研究型学额 + 收紧非学位/语言通道」的分化：香港扩研究型学额、加拿大设申请上限，方向相反但均指向结构优化。</li>
+<li>北欧对非欧盟收费已成常态，但博士岗位化（带薪）使「读博成本」与「读硕成本」不可同口径比较。</li>
+</ul>
+<p><strong>2.4 研究内核口径</strong></p>
+<ul>
+<li><strong>周期定位</strong>：本报告为基线期（2026-11），后续进入月度更新期；基线为对比锚。</li>
+<li><strong>传导量化</strong>：目的国政策变动对国际学生流动的<strong>弹性</strong>与<strong>时滞</strong>因签证审理周期而滞后，通常滞后 1–2 个申请周期（推断，待回测校准）。</li>
+<li><strong>政策入模</strong>：将签证 / 学费政策变动纳入成本与路径测算，政策乘数按 1.0–1.5 假设区间处理（ex-ante 预校准）。</li>
+</ul>
+<h2 class="sec" id="s3">3. 目的地供需、费用与奖学金（核心模块）</h2>
+<p><strong>关键读数（择要，活值维护于台账）</strong>：</p>
+<table class="fixed">
+<thead>
+<tr>
+<th style="width:33%">指标</th>
+<th style="width:33%">读数</th>
+<th style="width:34%">来源</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>美国国际学生总数（2025/26 学年，IIE Open Doors 口径）</td>
+<td>待核实（官方页面动态渲染，本次未直接核验）</td>
+<td>opendoorsdata.org</td>
+</tr>
+<tr>
+<td>加拿大在加国际学生（2023-12-31）</td>
+<td>930,000+</td>
+<td>canada.ca（IRCC）</td>
+</tr>
+<tr>
+<td>香港 UGC 研究型研究生学额目标</td>
+<td>7,200 → 9,600（2030/31 学年）</td>
+<td>ugc.edu.hk</td>
+</tr>
+<tr>
+<td>法国公立大学非欧盟硕士学费</td>
+<td>€3,950/年</td>
+<td>campusfrance.org</td>
+</tr>
+<tr>
+<td>荷兰非欧盟硕士学费区间</td>
+<td>€12,000–30,000/年</td>
+<td>studyinholland.nl</td>
+</tr>
+<tr>
+<td>瑞典非欧盟硕士学费区间</td>
+<td>SEK 80,000–320,000/学年</td>
+<td>studyinsweden.se</td>
+</tr>
+<tr>
+<td>爱尔兰非欧盟硕士学费区间</td>
+<td>€11,000–40,000/年</td>
+<td>educationinireland.com</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>指标指针：K01–K14（活值维护于台账 <code>data/processed/education/study-abroad/study_abroad_ledger.md</code>）。</p>
+</blockquote>
+<p><strong>3.1 费用矩阵（学费，国际/非欧盟生，官方口径）</strong></p>
+<table class="fixed">
+<thead>
+<tr>
+<th style="width:25%">目的地</th>
+<th style="width:25%">层级</th>
+<th style="width:25%">学费区间（本币/年）</th>
+<th style="width:25%">来源</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>美国</td>
+<td>硕士/博士</td>
+<td>待核实（公立/私立差异大，官方无汇总区间）</td>
+<td>—</td>
+</tr>
+<tr>
+<td>新加坡</td>
+<td>硕士/博士</td>
+<td>待核实（Tuition Grant 可减免，须服务义务）</td>
+<td>moe.gov.sg</td>
+</tr>
+<tr>
+<td>马来西亚</td>
+<td>本科/硕士</td>
+<td>待核实（官方门户未提供汇总区间）</td>
+<td>—</td>
+</tr>
+<tr>
+<td>香港</td>
+<td>硕士/博士</td>
+<td>待核实</td>
+<td>—</td>
+</tr>
+<tr>
+<td>新西兰</td>
+<td>硕士/博士</td>
+<td>待核实（官方页动态渲染）</td>
+<td>—</td>
+</tr>
+<tr>
+<td>澳大利亚</td>
+<td>硕士/博士</td>
+<td>待核实（官方门户只提供课程级查询）</td>
+<td>—</td>
+</tr>
+<tr>
+<td>加拿大</td>
+<td>硕士/博士</td>
+<td>待核实</td>
+<td>—</td>
+</tr>
+<tr>
+<td>芬兰</td>
+<td>硕士</td>
+<td>€9,000–20,000；博士免学费</td>
+<td>studyinfinland.fi</td>
+</tr>
+<tr>
+<td>爱尔兰</td>
+<td>硕士</td>
+<td>€11,000–40,000</td>
+<td>educationinireland.com</td>
+</tr>
+<tr>
+<td>荷兰</td>
+<td>硕士</td>
+<td>€12,000–30,000（平均）</td>
+<td>studyinholland.nl</td>
+</tr>
+<tr>
+<td>丹麦</td>
+<td>硕士</td>
+<td>DKK 45,000–120,000（约 €6,000–16,000）</td>
+<td>studyindenmark.dk</td>
+</tr>
+<tr>
+<td>挪威</td>
+<td>硕士</td>
+<td>因校而异（官方未给统一区间）</td>
+<td>studyinnorway.no</td>
+</tr>
+<tr>
+<td>瑞典</td>
+<td>硕士</td>
+<td>SEK 80,000–320,000</td>
+<td>studyinsweden.se</td>
+</tr>
+<tr>
+<td>法国</td>
+<td>硕士（公立）</td>
+<td>非欧盟 €3,950；工程师 €630（部分 €2,620）</td>
+<td>campusfrance.org</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>口径提示：以上为<strong>国际/非欧盟生</strong>口径；欧盟/欧洲经济区/瑞士学生在法、荷、丹、挪、瑞等国适用更低或免学费档，不可混用。</p>
+</blockquote>
+<p><strong>3.2 生活成本（官方口径）</strong></p>
+<table class="fixed">
+<thead>
+<tr>
+<th style="width:33%">目的地</th>
+<th style="width:33%">月度基准</th>
+<th style="width:34%">来源</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>芬兰</td>
+<td>Migri 最低 €800/月（€9,600/年）；官方建议 €900–1,200</td>
+<td>studyinfinland.fi</td>
+</tr>
+<tr>
+<td>丹麦</td>
+<td>SIRI 自给标准 DKK 7,426/月（2026）</td>
+<td>nyidanmark.dk</td>
+</tr>
+<tr>
+<td>挪威</td>
+<td>NOK 15,488/月（NOK 170,368/年，2026–27）</td>
+<td>studyinnorway.no</td>
+</tr>
+<tr>
+<td>瑞典</td>
+<td>SEK 10,656/月（Migrationsverket 2026 自给要求）</td>
+<td>studyinsweden.se</td>
+</tr>
+<tr>
+<td>荷兰</td>
+<td>€1,000–1,500/月（房租 €450–1,000）</td>
+<td>studyinholland.nl</td>
+</tr>
+<tr>
+<td>法国</td>
+<td>食品约 €300/月；巴黎交通年票 €374.4</td>
+<td>campusfrance.org</td>
+</tr>
+<tr>
+<td>新西兰</td>
+<td>待核实</td>
+<td>—</td>
+</tr>
+</tbody>
+</table>
+<p><strong>3.3 主要奖学金</strong></p>
+<table class="fixed">
+<thead>
+<tr>
+<th style="width:25%">目的地</th>
+<th style="width:25%">项目</th>
+<th style="width:25%">额度</th>
+<th style="width:25%">来源</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>法国</td>
+<td>Eiffel 奖学金</td>
+<td>硕士 €1,200/月、博士 €2,000/月（2026-01 起），豁免公立机构学费</td>
+<td>campusfrance.org</td>
+</tr>
+<tr>
+<td>荷兰</td>
+<td>NL Scholarship（Holland Scholarship）</td>
+<td>€5,000（非 EEA、第一学年）</td>
+<td>studyinnl.org</td>
+</tr>
+<tr>
+<td>丹麦</td>
+<td>丹麦政府奖学金</td>
+<td>全额/部分学费减免 + 生活补助（非欧盟优秀生）</td>
+<td>studyindenmark.dk</td>
+</tr>
+<tr>
+<td>瑞典</td>
+<td>SI Scholarship for Global Professionals</td>
+<td>全额学费 + SEK 12,000/月 + SEK 15,000 旅行（中国不在 34 国名单）</td>
+<td>si.se</td>
+</tr>
+<tr>
+<td>挪威</td>
+<td>Erasmus Mundus 等</td>
+<td>无面向所有国际生的个人奖学金</td>
+<td>studyinnorway.no</td>
+</tr>
+<tr>
+<td>芬兰</td>
+<td>校设学费减免</td>
+<td>无政府奖学金项目</td>
+<td>studyinfinland.fi</td>
+</tr>
+<tr>
+<td>香港</td>
+<td>HKPFS</td>
+<td>学额扩至 550 名（2029/30）</td>
+<td>ugc.edu.hk</td>
+</tr>
+</tbody>
+</table>
+<p><strong>3.4 分目的地要点</strong></p>
+<ul>
+<li><strong>美国</strong>：成本结构为「公立/私立 × 地区」二维差异，官方无汇总区间；须逐校核验。博士普遍提供资助（assistantship / fellowship），具体因校而异。[待核实]</li>
+<li><strong>新加坡</strong>：Tuition Grant 面向国际生，须持 Student's Pass（ICA），需 2 名保证人；获资助者通常附带服务义务。<a href="https://www.moe.gov.sg/financial-matters/tuition-grant-scheme/application-process">来源</a></li>
+<li><strong>马来西亚</strong>：EMGS 官方 FAQ 口径为「学费取决于课程与院校，请使用费用计算器估算」，无汇总区间。<a href="https://educationmalaysia.gov.my/">来源</a></li>
+<li><strong>香港</strong>：研究型研究生学额与 HKPFS 扩招是近期主线；授课型硕士（MPP）自费为主。<a href="https://www.ugc.edu.hk/eng/ugc/about/press_speech_other/press/2026/pr20260916.html">来源</a></li>
+<li><strong>法国</strong>：公立大学欧盟硕士 €255/年、工程师 €630/年、博士 €397/年；非欧盟硕士 €3,950/年（本科 €2,902/年），博士不适用差异化收费。<a href="https://www.campusfrance.org/en/tuition-fees-France">来源</a></li>
+</ul>
+<h2 class="sec" id="s4">4. 院校与项目类型细分</h2>
+<table class="fixed">
+<thead>
+<tr>
+<th style="width:33%">目的地</th>
+<th style="width:33%">院校类型与数量</th>
+<th style="width:34%">来源</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>美国</td>
+<td>综合大学 / 理工 / 文理学院 / 社区学院（社区学院对应副学士，不在本报告层级）</td>
+<td>待核实</td>
+</tr>
+<tr>
+<td>新加坡</td>
+<td>公立大学 / 理工 / 私立机构（MOE ESD 分层统计）</td>
+<td>moe.gov.sg</td>
+</tr>
+<tr>
+<td>马来西亚</td>
+<td>公立大学 / 私立大学 / 大学学院 / 外国分校（EMGS 管理国际生）</td>
+<td>educationmalaysia.gov.my</td>
+</tr>
+<tr>
+<td>香港</td>
+<td>UGC 资助院校（8 所）+ 自资院校</td>
+<td>ugc.edu.hk</td>
+</tr>
+<tr>
+<td>新西兰</td>
+<td>8 所国立大学 + 理工 / ITP（NZQA 质量框架）</td>
+<td>studyinnewzealand.govt.nz</td>
+</tr>
+<tr>
+<td>澳大利亚</td>
+<td>综合大学 / 理工；AQF 框架 + ESOS Act 2000</td>
+<td>studyaustralia.gov.au</td>
+</tr>
+<tr>
+<td>加拿大</td>
+<td>大学 / 学院（DLI 体系；学院 42%、大学 38% 为国际生就读分布）</td>
+<td>canada.ca</td>
+</tr>
+<tr>
+<td>芬兰</td>
+<td>13 所大学 + 22 所应用科学大学（UAS）；600+ 英文授课本科/硕士项目</td>
+<td>studyinfinland.fi</td>
+</tr>
+<tr>
+<td>爱尔兰</td>
+<td>大学 / 理工学院；NFQ 框架（QQI 维护）</td>
+<td>educationinireland.com</td>
+</tr>
+<tr>
+<td>荷兰</td>
+<td>17 所研究型大学 + 36 所应用科学大学（Studielink 官方名录）</td>
+<td>studielink.nl</td>
+</tr>
+<tr>
+<td>丹麦</td>
+<td>5 类：大学、大学学院、商学院、艺术高校、海事教育培训学校</td>
+<td>studyindenmark.dk</td>
+</tr>
+<tr>
+<td>挪威</td>
+<td>大学 11、专业大学 9、大学学院 14、认证项目大学学院 12</td>
+<td>nokut.no</td>
+</tr>
+<tr>
+<td>瑞典</td>
+<td>39 所大学（含理工、医科、艺术、体育等专门院校）</td>
+<td>studyinsweden.se</td>
+</tr>
+<tr>
+<td>法国</td>
+<td>3,500+ 高校：78 所大学、267 所博士学院、227 所可授工程师衔学校、220 所商管学院、45 所公立艺术、22 所建筑</td>
+<td>campusfrance.org</td>
+</tr>
+</tbody>
+</table>
+<p><strong>法国工程师学院（独立轨道）</strong>：Diplôme d'Ingénieur 由 CTI（Commission des Titres d'Ingénieur，1934 年依法设立的独立质量机构）认证与监管，只有获 CTI 认证院校可颁授工程师衔。<a href="https://www.cti-commission.fr/en/">来源</a></p>
+<h2 class="sec" id="s5">5. 申请要求与能力画像</h2>
+<p><strong>5.1 学制与学位结构（ISCED 2011 对照）</strong></p>
+<table class="fixed">
+<thead>
+<tr>
+<th style="width:20%">目的地</th>
+<th style="width:20%">本科</th>
+<th style="width:20%">硕士</th>
+<th style="width:20%">博士</th>
+<th style="width:20%">来源</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>美国</td>
+<td>4 年</td>
+<td>1–2 年</td>
+<td>5–6 年（含课程）</td>
+<td>待核实</td>
+</tr>
+<tr>
+<td>加拿大</td>
+<td>3–4 年</td>
+<td>1–2 年</td>
+<td>4–6 年</td>
+<td>待核实</td>
+</tr>
+<tr>
+<td>香港</td>
+<td>4 年</td>
+<td>1–2 年</td>
+<td>3–4 年</td>
+<td>待核实</td>
+</tr>
+<tr>
+<td>新加坡</td>
+<td>3–4 年</td>
+<td>1–2 年</td>
+<td>3–5 年</td>
+<td>待核实</td>
+</tr>
+<tr>
+<td>新西兰</td>
+<td>3 年</td>
+<td>1–2 年</td>
+<td>3–4 年</td>
+<td>待核实</td>
+</tr>
+<tr>
+<td>澳大利亚</td>
+<td>3 年</td>
+<td>1–2 年</td>
+<td>3–4 年</td>
+<td>待核实</td>
+</tr>
+<tr>
+<td>芬兰</td>
+<td>3 年（大学）/ 3.5–4.5 年（UAS）</td>
+<td>2 年（120 ECTS）；UAS 1–1.5 年</td>
+<td>约 4 年</td>
+<td>studyinfinland.fi</td>
+</tr>
+<tr>
+<td>爱尔兰</td>
+<td>3–4 年</td>
+<td>1–2 年</td>
+<td>3–4 年</td>
+<td>educationinireland.com</td>
+</tr>
+<tr>
+<td>荷兰</td>
+<td>3–4 年</td>
+<td>研究型 1–3 年（60–180 ECTS）；HBO 1–4 年</td>
+<td>≥4 年（雇佣合同）</td>
+<td>studyinholland.nl</td>
+</tr>
+<tr>
+<td>丹麦</td>
+<td>3 年（180 ECTS）</td>
+<td>2 年（120 ECTS；2021 起增设 1 年 60 ECTS）</td>
+<td>3 年（180 ECTS）</td>
+<td>studyindenmark.dk</td>
+</tr>
+<tr>
+<td>挪威</td>
+<td>3 年（180 ECTS）</td>
+<td>2 年</td>
+<td>以职位形式</td>
+<td>studyinnorway.no</td>
+</tr>
+<tr>
+<td>瑞典</td>
+<td>3 年（180 ECTS）</td>
+<td>1 年（60 ECTS）或 2 年（120 ECTS）</td>
+<td>第三周期</td>
+<td>studyinsweden.se</td>
+</tr>
+<tr>
+<td>法国</td>
+<td>Licence 180 ECTS</td>
+<td>Master +120 ECTS（累计 300）</td>
+<td>Doctorat 自本科 16 学期 / 480 ECTS；3–6 年</td>
+<td>campusfrance.org</td>
+</tr>
+</tbody>
+</table>
+<p><strong>5.2 申请轮次与截止日期</strong></p>
+<table class="fixed">
+<thead>
+<tr>
+<th style="width:33%">目的地</th>
+<th style="width:33%">关键轮次</th>
+<th style="width:34%">来源</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>法国</td>
+<td>Etudes en France（75 国含中国强制程序）；Mon Master 2027-02 开放、2–3 月提交、6 月主录取；DAP 10-01 至 12-15；Parcoursup 12 月至次年 7 月</td>
+<td>campusfrance.org</td>
+</tr>
+<tr>
+<td>荷兰</td>
+<td>Studielink；numerus fixus 截止 1 月 15 日 23:59；非 fixus 截止 5 月 1 日</td>
+<td>studielink.nl</td>
+</tr>
+<tr>
+<td>丹麦</td>
+<td>本科走 Optagelse.dk：国际生/配额 2 截止 3 月 15 日 12:00；硕士直接申请院校</td>
+<td>studyindenmark.dk</td>
+</tr>
+<tr>
+<td>瑞典</td>
+<td>秋季主轮 1 月中旬截止；春季 8 月中旬；每轮最多 4 个志愿</td>
+<td>studyinsweden.se</td>
+</tr>
+<tr>
+<td>芬兰</td>
+<td>多数英文本科/硕士走 1 月联合申请（秋季入学）；2027 春季第一次联合申请 2027-01-07 至 01-21</td>
+<td>studyinfinland.fi</td>
+</tr>
+<tr>
+<td>挪威</td>
+<td>未找到统一英文官方截止日期（官方指向各校/UCAS）</td>
+<td>studyinnorway.no</td>
+</tr>
+</tbody>
+</table>
+<p><strong>5.3 语言要求</strong></p>
+<table class="fixed">
+<thead>
+<tr>
+<th style="width:33%">目的地</th>
+<th style="width:33%">要求</th>
+<th style="width:34%">来源</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>丹麦</td>
+<td>English B = IELTS 6.5 / TOEFL iBT 79–93；English A = IELTS 7.0 / 94–101</td>
+<td>studyindenmark.dk</td>
+</tr>
+<tr>
+<td>瑞典</td>
+<td>English 6 = IELTS 6.5（单项≥5.5）/ TOEFL 90（写作 20）；English 7 = IELTS 7.0</td>
+<td>universityadmissions.se</td>
+</tr>
+<tr>
+<td>荷兰</td>
+<td>以英语授课为主；IND 对「指定海外院校」路径要求 IELTS 6.0 或等效</td>
+<td>ind.nl</td>
+</tr>
+<tr>
+<td>法国</td>
+<td>英语授课不强制法语；法语授课须 DELF/DALF/TCF/TEF，建议 B1/B2</td>
+<td>campusfrance.org</td>
+</tr>
+<tr>
+<td>芬兰</td>
+<td>接受 IELTS/TOEFL/PTE/Cambridge，分数因校因项目而异</td>
+<td>studyinfinland.fi</td>
+</tr>
+</tbody>
+</table>
+<p><strong>5.4 入学门槛</strong></p>
+<ul>
+<li>荷兰硕士须认可学士学位 + 课程匹配 + 英语成绩；博士须认可硕士学位且选拔严格。<a href="https://www.studyinholland.nl/dutch-education/phd">来源</a></li>
+<li>挪威硕士须有与挪威学士（180 ECTS）相当学位、至少 1.5 年相关专业学习；基本门槛为 GSU。<a href="https://studyinnorway.no/node/35">来源</a></li>
+<li>芬兰硕士需学士学位；UAS 硕士另需 2 年相关工作经验。<a href="https://www.studyinfinland.fi/admissions/bachelors-and-masters-admissions">来源</a></li>
+<li>法国博士须硕士文凭、导师接收及资金（理工科强制 funding）。<a href="https://www.campusfrance.org/en/what-involved-Doctorate-France">来源</a></li>
+</ul>
+<h2 class="sec" id="s6">6. 学历认证与职业资质</h2>
+<table class="fixed">
+<thead>
+<tr>
+<th style="width:33%">目的地</th>
+<th style="width:33%">认证 / 质量保证机构</th>
+<th style="width:34%">来源</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>美国</td>
+<td>无全国统一认证机构，为地区性认证（待核实）</td>
+<td>—</td>
+</tr>
+<tr>
+<td>加拿大</td>
+<td>待核实</td>
+<td>—</td>
+</tr>
+<tr>
+<td>香港</td>
+<td>UGC 院校资历架构（HKQF）</td>
+<td>ugc.edu.hk</td>
+</tr>
+<tr>
+<td>新加坡</td>
+<td>MOE 注册与 CASE Trust</td>
+<td>moe.gov.sg</td>
+</tr>
+<tr>
+<td>新西兰</td>
+<td>NZQA（New Zealand Qualifications Authority）</td>
+<td>nzqa.govt.nz</td>
+</tr>
+<tr>
+<td>澳大利亚</td>
+<td>TEQSA（官方页面本次未核验）</td>
+<td>teqsa.gov.au</td>
+</tr>
+<tr>
+<td>马来西亚</td>
+<td>MQA（Malaysian Qualifications Agency）</td>
+<td>mqa.gov.my</td>
+</tr>
+<tr>
+<td>芬兰</td>
+<td>FINEEC（质量监控）</td>
+<td>studyinfinland.fi</td>
+</tr>
+<tr>
+<td>爱尔兰</td>
+<td>QQI（Quality and Qualifications Ireland，维护 NFQ）</td>
+<td>qqi.ie</td>
+</tr>
+<tr>
+<td>荷兰</td>
+<td>Nuffic（国际学历认证 IDW，€148.83/次）</td>
+<td>idw.nl</td>
+</tr>
+<tr>
+<td>丹麦</td>
+<td>丹麦高等教育与科学局（ufsn.dk）</td>
+<td>studyindenmark.dk</td>
+</tr>
+<tr>
+<td>挪威</td>
+<td>HK-dir（2023-01-01 起接管 NOKUT 外国教育认证）</td>
+<td>hkdir.no</td>
+</tr>
+<tr>
+<td>瑞典</td>
+<td>UHR（英文页面本次未核验）</td>
+<td>uhr.se</td>
+</tr>
+<tr>
+<td>法国</td>
+<td>ENIC-NARIC France（France Éducation international，对等证明 €120/次）</td>
+<td>campusfrance.org</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>认证口径区分：<strong>学历认证</strong>（credibility/对等）与<strong>专业认证</strong>（执业资格）不同；留学后回国认证（如中国教育部留学服务中心）不在本报告仅英文来源范围内，须单独核验。</p>
+</blockquote>
+<h2 class="sec" id="s7">7. 留学落地路径建议（结论章）</h2>
+<blockquote>
+<p>本章为建议与推断，事实与推断分离；不承诺录取结果、不保证签证结果、不构成升学 / 留学 / 认证个案意见。</p>
+</blockquote>
+<p><strong>7.1 学签与毕业后通道</strong></p>
+<table class="fixed">
+<thead>
+<tr>
+<th style="width:25%">目的地</th>
+<th style="width:25%">学签类型</th>
+<th style="width:25%">毕业后工作 / 居留</th>
+<th style="width:25%">来源</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>美国</td>
+<td>F-1 学术学生（SEVIS）</td>
+<td>OPT（STEM 可延至 36 个月）→ H-1B（待核实）</td>
+<td>ice.gov</td>
+</tr>
+<tr>
+<td>加拿大</td>
+<td>学习许可（study permit）</td>
+<td>PGWP 最长 3 年 → 省提名 / 联邦快速通道</td>
+<td>canada.ca</td>
+</tr>
+<tr>
+<td>香港</td>
+<td>学生签证 / 进入许可</td>
+<td>IANG（待核实）</td>
+<td>—</td>
+</tr>
+<tr>
+<td>新加坡</td>
+<td>Student's Pass（ICA）</td>
+<td>待核实</td>
+<td>ica.gov.sg</td>
+</tr>
+<tr>
+<td>新西兰</td>
+<td>Full Fee Paying Student Visa（NZD $850 起，最长 4 年；学期内每周 25 小时）</td>
+<td>Post-study work visa（待核实）</td>
+<td>immigration.govt.nz</td>
+</tr>
+<tr>
+<td>澳大利亚</td>
+<td>Student Visa（待核实）</td>
+<td>待核实</td>
+<td>—</td>
+</tr>
+<tr>
+<td>芬兰</td>
+<td>Migri 学生居留许可；博士走科研居留许可（最长 2 年）</td>
+<td>2 年求职/创业许可；连续居留满 4 年可申永居</td>
+<td>studyinfinland.fi</td>
+</tr>
+<tr>
+<td>爱尔兰</td>
+<td>待核实</td>
+<td>Third Level Graduate Scheme（待核实）</td>
+<td>—</td>
+</tr>
+<tr>
+<td>荷兰</td>
+<td>学生居留（€254，决定期 60 天，最长 5 年；学期中每周≤16 小时）</td>
+<td>Orientation year（zoekjaar，毕业后 3 年内可申请，自由工作）</td>
+<td>ind.nl</td>
+</tr>
+<tr>
+<td>丹麦</td>
+<td>SIRI 学生居留许可（DKK 3,060，处理 2 个月，资金 DKK 7,426/月）</td>
+<td>求职居留许可（2026-10-01 前申请最长 3 年；之后 6 个月或 1 年；博士仍 3 年）</td>
+<td>nyidanmark.dk</td>
+</tr>
+<tr>
+<td>挪威</td>
+<td>UDI 学习居留许可</td>
+<td>求职居留许可最长 1 年（不计入永居年限）</td>
+<td>udi.no</td>
+</tr>
+<tr>
+<td>瑞典</td>
+<td>Migrationsverket 高等教育居留许可（须先缴第一期学费）</td>
+<td>毕业后延长 12 个月求职/创业</td>
+<td>studyinsweden.se</td>
+</tr>
+<tr>
+<td>法国</td>
+<td>VLS-TS「étudiant」（4 个月–1 年；每年工作上限 964 小时；资金 €877.50/月）</td>
+<td>求职/新企业创建临时居留 12 个月不可续；获文凭后 4 年内可申请</td>
+<td>campusfrance.org</td>
+</tr>
+</tbody>
+</table>
+<p><strong>7.2 决策卡</strong></p>
+<div class="decision-card">
+  <div class="dc-head"><span class="dc-title">DC-1 北欧成本结构</span><span class="suff ok">方向可决策</span></div>
+  <div class="dc-grid">
+    <div><span class="k">结论：</span>北欧四国对非欧盟英文授课硕士普遍收费，博士多以带薪职位存在，成本结构与英美不同（部分核验）。</div>
+    <div><span class="k">证据强度：</span><span class="ev-mid">中</span>（官方留学门户）。</div>
+    <div><span class="k">置信度：</span>0.6（中）</div>
+    <div><span class="k">触发条件：</span>选定北欧目的地。</div>
+    <div><span class="k">反向证据：</span>挪威 / 丹麦部分院校仍免学费或设全额减免。</div>
+    <div><span class="k">信息充分度：</span>方向可决策；逐校费用待补。</div>
+  </div>
+</div>
+
+<div class="decision-card">
+  <div class="dc-head"><span class="dc-title">DC-2 法国双赛道</span><span class="suff ok">可决策</span></div>
+  <div class="dc-grid">
+    <div><span class="k">结论：</span>法国公立体系对欧盟 / 非欧盟差异收费，工程师学院（CTI 认证）为独立赛道，性价比须按赛道分别评估（已核验）。</div>
+    <div><span class="k">证据强度：</span><span class="ev-strong">强</span>（Campus France / CTI）。</div>
+    <div><span class="k">置信度：</span>0.8（高）</div>
+    <div><span class="k">触发条件：</span>考虑法国工程师学院。</div>
+    <div><span class="k">反向证据：</span>非欧盟差异化收费提高公立硕士成本。</div>
+    <div><span class="k">信息充分度：</span>可决策；逐校费用待补。</div>
+  </div>
+</div>
+
+<div class="decision-card">
+  <div class="dc-head"><span class="dc-title">DC-3 毕业后通道</span><span class="suff ok">可决策</span></div>
+  <div class="dc-grid">
+    <div><span class="k">结论：</span>荷兰、瑞典、丹麦的毕业后通道是「留学 → 工作」衔接的关键变量（已核验）。</div>
+    <div><span class="k">证据强度：</span><span class="ev-strong">强</span>（IND / Study in Sweden / SIRI）。</div>
+    <div><span class="k">置信度：</span>0.75（中高）</div>
+    <div><span class="k">触发条件：</span>关注毕业后留存。</div>
+    <div><span class="k">反向证据：</span>部分国家时限缩短（丹麦 2026-10 起）。</div>
+    <div><span class="k">信息充分度：</span>可决策；多国时限待逐国核验。</div>
+  </div>
+</div>
+
+<div class="decision-card">
+  <div class="dc-head"><span class="dc-title">DC-4 成本数据缺口</span><span class="suff need">需补充信息</span></div>
+  <div class="dc-grid">
+    <div><span class="k">结论：</span>美 / 加 / 澳 / 新 / 马的学费与生活成本汇总区间在英文官方页面普遍缺失，须逐校核验（部分核验）。</div>
+    <div><span class="k">证据强度：</span><span class="ev-mid">中</span>（官方门户未提供汇总）。</div>
+    <div><span class="k">置信度：</span>0.5（中）</div>
+    <div><span class="k">触发条件：</span>进行成本测算。</div>
+    <div><span class="k">反向证据：</span>各校官网可查课程级费用。</div>
+    <div><span class="k">信息充分度：</span>需补充信息；逐校核验可行。</div>
+  </div>
+</div>
+
+<p><strong>7.3 行动协议</strong></p>
+<div class="action-card immediate">
+  <div class="a-head"><span class="prio immediate">立即行动</span><span class="a-title">A1 逐校核验费用与语言门槛</span></div>
+  <div class="a-meta"><b>触发条件：</b>进入选校阶段。<br><b>阈值：</b>每国 ≥3 所院校课程级费用与语言门槛登记。<br><b>责任角色：</b>本业务线研究者。<br><b>时限：</b>2027-01 前。<br><b>验证指标：</b>台账指标 2 / 5 回写来源登记册。</div>
+</div>
+
+<div class="action-card watch">
+  <div class="a-head"><span class="prio watch">持续观察</span><span class="a-title">A2 跟踪毕业后通道时限</span></div>
+  <div class="a-meta"><b>触发条件：</b>目的地移民局政策更新。<br><b>阈值：</b>荷兰 / 瑞典 / 丹麦通道时限变更 ≥1 项。<br><b>责任角色：</b>本业务线研究者。<br><b>时限：</b>每月复核。<br><b>验证指标：</b>台账指标 7 更新并附官方 URL。</div>
+</div>
+
+<div class="action-card archive">
+  <div class="a-head"><span class="prio archive">仅记录存档</span><span class="a-title">A3 记录国别框架口径差异</span></div>
+  <div class="a-meta"><b>触发条件：</b>各国学制 / 认证口径调整。<br><b>阈值：</b>ISCED 对照或认证机构名单变更 ≥1 项。<br><b>责任角色：</b>本业务线研究者。<br><b>时限：</b>事件触发即记录。<br><b>验证指标：</b>台账指标 8 / 11 更新。</div>
+</div>
+
+<h2 class="sec" id="s8">8. 数据可靠性与局限说明</h2>
+<p><strong>8.1 核验状态</strong></p>
+<ul>
+<li><strong>已核验</strong>：法国（Campus France / CTI）、荷兰（Study in Holland / IND）、北欧四国（官方留学门户 / 移民局）、爱尔兰（Education Ireland / QQI）、新西兰签证口径、加拿大 IRCC 数值、香港 UGC 政策、美国 SEVP 政策。</li>
+<li><strong>部分核验</strong>：美国 Open Doors 数值（官方页面动态渲染，本次未直接核验）；澳大利亚 TEQSA、新西兰学费、马来西亚 MQA 页面（官方页面访问被拦截或动态渲染）。</li>
+<li><strong>未找到英文官方来源</strong>：美国/加拿大/澳大利亚/新西兰/马来西亚的学费汇总区间；多国签证处理时长；多国统一 GPA 门槛。</li>
+</ul>
+<p><strong>8.2 局限</strong></p>
+<ul>
+<li>本报告为<strong>框架基线</strong>：建立覆盖矩阵、指标口径与来源分层，逐国深度读数（尤其费用与签证处理时长）留待分期更新补齐。</li>
+<li>来源语言规则导致部分目的国的中文官方材料（如中国教育部认证名单）未纳入，须单独授权后核验。</li>
+<li>数值口径因「本地生 / 国际生」「授课型 / 研究型」「EU / 非 EU」而异，跨表比较前须先对齐口径。</li>
+<li>阈值为 ex-ante 预校准，首次中期回测窗口 2027-06。</li>
+</ul>
+<p><strong>8.3 待复核清单</strong></p>
+<ol>
+<li>美国 Open Doors 2026 各项数值（官方页面动态渲染）。</li>
+<li>澳大利亚、新西兰、马来西亚、加拿大、美国学费汇总区间（需可访问的官方镜像或课程级逐校核验）。</li>
+<li>多国签证处理时长（官方页面交互式/动态渲染）。</li>
+<li>非英语国家英文官方页的 ISCED 版本对照。</li>
+</ol>
+<h2 class="sec" id="s9">9. 参考来源清单</h2>
+<p><strong>多边 / 统计</strong>
+- IIE Open Doors：https://opendoorsdata.org/
+- UNESCO ISCED 2011：https://isced.uis.unesco.org/
+- 美国 SEVP / SEVIS：https://www.ice.gov/sevis
+- 加拿大 IRCC：https://www.canada.ca/en/immigration-refugees-citizenship/corporate/transparency/transition-binders/deputy-minister-2024/international-students.html
+- 加拿大 2024 新规：https://www.canada.ca/en/immigration-refugees-citizenship/news/2024/11/new-international-student-program-regulations-take-effect.html
+- 香港 UGC：https://www.ugc.edu.hk/eng/ugc/about/press_speech_other/press/2026/pr20260916.html
+- 香港 Censtatd：https://www.censtatd.gov.hk/en/EIndexbySubject.html?scode=370&amp;pcode=FA100238</p>
+<p><strong>法国</strong>
+- Campus France 学历对等：https://www.campusfrance.org/en/French-degrees-LMD-equivalences
+- Campus France 博士：https://www.campusfrance.org/en/what-involved-Doctorate-France
+- Campus France 学费：https://www.campusfrance.org/en/tuition-fees-France
+- Campus France 预算：https://www.campusfrance.org/en/preparing-budget-student-France
+- Campus France 申请：https://www.campusfrance.org/en/application-higher-education-france
+- Campus France 高等教育：https://www.campusfrance.org/en/French-higher-education
+- Campus France 学签：https://www.campusfrance.org/en/student-long-stay-visa
+- Campus France 毕业生居留：https://www.campusfrance.org/en/job-seeker-business-creator-residence-permit
+- Campus France Eiffel：https://www.campusfrance.org/en/france-excellence-eiffel-scholarship-implementation
+- CTI：https://www.cti-commission.fr/en/</p>
+<p><strong>荷兰</strong>
+- Study in Holland 硕士：https://www.studyinholland.nl/dutch-education/masters
+- Study in Holland 博士：https://www.studyinholland.nl/dutch-education/phd
+- Study in Holland 学费：https://www.studyinholland.nl/finances/tuition-fees
+- Study in Holland 生活成本：https://www.studyinholland.nl/finances/daily-student-expenses-and-cost-of-living-in-the-netherlands
+- Studielink：https://info.studielink.nl/en/how-to-use-studielink/make-sure-you-are-on-time
+- IND 学生居留：https://ind.nl/en/residence-permits/study/student-residence-permit-for-university-or-higher-professional-education
+- IND Orientation year：https://ind.nl/en/residence-permits/work/residence-permit-for-orientation-year
+- Nuffic IDW：https://idw.nl/en/to-work/
+- NL Scholarship：https://www.studyinnl.org/finances/nl-scholarship</p>
+<p><strong>芬兰</strong>
+- Study in Finland 院校：https://www.studyinfinland.fi/universities
+- 费用：https://www.studyinfinland.fi/admissions/fees-and-costs
+- 申请：https://www.studyinfinland.fi/admissions/bachelors-and-masters-admissions
+- 居留许可：https://www.studyinfinland.fi/admissions/student-residence-permit
+- 毕业后：https://www.studyinfinland.fi/life-in-finland/opportunities-after-graduation
+- 奖学金：https://www.studyinfinland.fi/funding-your-studies/bachelors-and-masters-scholarships</p>
+<p><strong>丹麦</strong>
+- Study in Denmark 学制：https://www.studyindenmark.dk/study-options/what-can-i-study
+- 学费：https://www.studyindenmark.dk/study-options/tuition-fees-and-scholarships
+- 预算：https://www.studyindenmark.dk/live-in-denmark/bank-budget
+- 申请：https://www.studyindenmark.dk/study-options/how-to-apply
+- 语言：https://www.studyindenmark.dk/study-options/how-to-apply/language-requirements
+- 奖学金：https://www.studyindenmark.dk/study-options/scholarships
+- SIRI / 移民：https://nyidanmark.dk/en-GB/You-want-to-apply/Study/Higher-education
+- 2026 新规：https://www.nyidanmark.dk/en-GB/News-Front-Page/2026/09/SIRI---Nye-regler-for-studerende</p>
+<p><strong>挪威</strong>
+- Study in Norway 要求与费用：https://studyinnorway.no/cost_and_requirements
+- 硕士入学：https://studyinnorway.no/node/35
+- 奖学金：https://studyinnorway.no/scholarships-degree-students
+- NOKUT 院校：https://www.nokut.no/en/higher-education/higher-education-institutions/
+- HK-dir：https://hkdir.no/en/foreign-education
+- UDI 学习：https://www.udi.no/en/want-to-apply/studies/
+- UDI 求职：https://www.udi.no/en/want-to-apply/work-immigration/job-seekers/</p>
+<p><strong>瑞典</strong>
+- Study in Sweden 学位：https://studyinsweden.se/plan-your-studies/degree-programmes/
+- 费用：https://studyinsweden.se/plan-your-studies/fees-costs/
+- 申请：https://studyinsweden.se/plan-your-studies/how-to-apply/
+- 居留：https://studyinsweden.se/moving-to-sweden/permits-visas/
+- 院校：https://studyinsweden.se/universities/
+- Universityadmissions 英语要求：https://www.universityadmissions.se/en/entry-requirements/english-language-requirements/
+- Migrationsverket：https://www.migrationsverket.se/en/you-want-to-apply/study/higher-education.html
+- SI Scholarship：https://si.se/en/apply/scholarships/swedish-institute-scholarships-for-global-professionals/</p>
+<p><strong>爱尔兰</strong>
+- Education Ireland 本科费用：https://www.educationinireland.com/en/plan-your-study-abroad/undergraduate-tuition-fees
+- 硕士费用：https://www.educationinireland.com/en/plan-your-study-abroad/postgraduate-tuition-fees
+- QQI：https://www.qqi.ie/
+- SUSI：https://susi.ie/</p>
+<p><strong>澳新马</strong>
+- Study Australia：https://www.studyaustralia.gov.au/en
+- 新西兰签证：https://www.immigration.govt.nz/new-zealand-visas/apply-for-a-visa/visa-factsheet/full-fee-paying-student-visa
+- NZQA：https://www.nzqa.govt.nz/
+- EMGS：https://educationmalaysia.gov.my/
+- MQA：https://www.mqa.gov.my/
+- MOHE：https://www.mohe.gov.my/</p>
+<p><strong>新加坡 / 香港（补充）</strong>
+- 新加坡 MOE 统计：https://www.moe.gov.sg/about-us/publications/education-statistics-digest
+- 新加坡 Tuition Grant：https://www.moe.gov.sg/financial-matters/tuition-grant-scheme/application-process</p>
+<hr />
+<p><em>本报告为 v1.0 首期基线，数据基准 2026-11-21，来源要求见项目提示词（仅英文官方来源）。</em></p>
+</main>
+<footer class="report-foot"><p><a class="feedback-link" data-feedback="consumer-feedback-v1" href="https://github.com/hmbphxkw76-byte/tech-context-digest/issues/new?title=%E5%8F%8D%E9%A6%88%20/%20%E7%BA%A0%E9%94%99" target="_blank" rel="noopener">反馈 / 纠错</a></p></footer>
+
+</body>
+</html>
