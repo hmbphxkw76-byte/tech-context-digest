@@ -5,6 +5,14 @@
     "id": "T-1",
     "phase": "",
     "status": "pending",
-    "title": "移除无对应分支的历史登记"
+    "title": "移除 task/verification-mechanism-fae8d6d4 残留登记"
+  },
+  {
+    "acceptance": "",
+    "depends_on": [],
+    "id": "T-2",
+    "phase": "",
+    "status": "pending",
+    "title": "校验登记册与现存分支一致"
   }
 ]
