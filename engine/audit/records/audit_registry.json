@@ -1892,14 +1892,14 @@
       "kind": "business",
       "category": "report",
       "business_line": "content/economy/insight",
-      "status": "draft",
+      "status": "in-review",
       "stages": {
-        "draft": false,
-        "initial": false,
+        "draft": true,
+        "initial": true,
         "second": false,
         "final": false
       },
-      "mark": false,
+      "mark": true,
       "first_seen_at": "2026-11-21",
       "evidence": {
         "report": "content/economy/insight/reports/2026-11_baseline_report.html",
@@ -1925,32 +1925,35 @@
           "probe": true
         },
         "audit": {
-          "review": "",
-          "status": "draft",
+          "review": "engine/audit/records/reviews/content-economy-insight-reports-2026-11-baseline-report-html.json",
+          "status": "in-review",
           "stages": {
-            "draft": false,
-            "initial": false,
+            "draft": true,
+            "initial": true,
             "second": false,
             "final": false
           },
-          "mark_level": "none",
-          "audit_id": ""
+          "mark_level": "pre",
+          "audit_id": "AUD-2026-11-21-001"
         }
-      }
+      },
+      "audit_id": "AUD-2026-11-21-001",
+      "mark_level": "pre",
+      "audited_at": "2026-11-21T03:33:00+00:00"
     },
     "content/education/education-system/reports/2026-11_baseline_report.html": {
       "title": "全球 教育体系与政策 · 首期基线报告 · 2026-11",
       "kind": "business",
       "category": "report",
       "business_line": "content/education/education-system",
-      "status": "draft",
+      "status": "in-review",
       "stages": {
-        "draft": false,
-        "initial": false,
+        "draft": true,
+        "initial": true,
         "second": false,
         "final": false
       },
-      "mark": false,
+      "mark": true,
       "first_seen_at": "2026-11-21",
       "evidence": {
         "report": "content/education/education-system/reports/2026-11_baseline_report.html",
@@ -1976,32 +1979,35 @@
           "probe": true
         },
         "audit": {
-          "review": "",
-          "status": "draft",
+          "review": "engine/audit/records/reviews/content-education-education-system-reports-2026-11-baseline-report-html.json",
+          "status": "in-review",
           "stages": {
-            "draft": false,
-            "initial": false,
+            "draft": true,
+            "initial": true,
             "second": false,
             "final": false
           },
-          "mark_level": "none",
-          "audit_id": ""
+          "mark_level": "pre",
+          "audit_id": "AUD-2026-11-21-002"
         }
-      }
+      },
+      "audit_id": "AUD-2026-11-21-002",
+      "mark_level": "pre",
+      "audited_at": "2026-11-21T03:33:00+00:00"
     },
     "content/tech/ai-security/competitive-intelligence/dubai/reports/2026-11_baseline_report.html": {
       "title": "迪拜（阿联酋）AI 网安竞争格局 · 首期基线报告 · 2026-11",
       "kind": "business",
       "category": "report",
       "business_line": "content/tech/ai-security/competitive-intelligence/dubai",
-      "status": "draft",
+      "status": "in-review",
       "stages": {
-        "draft": false,
-        "initial": false,
+        "draft": true,
+        "initial": true,
         "second": false,
         "final": false
       },
-      "mark": false,
+      "mark": true,
       "first_seen_at": "2026-11-21",
       "evidence": {
         "report": "content/tech/ai-security/competitive-intelligence/dubai/reports/2026-11_baseline_report.html",
@@ -2012,32 +2018,35 @@
           "probe": true
         },
         "audit": {
-          "review": "",
-          "status": "draft",
+          "review": "engine/audit/records/reviews/content-tech-ai-security-competitive-intelligence-dubai-reports-2026-11-baseline-report-html.json",
+          "status": "in-review",
           "stages": {
-            "draft": false,
-            "initial": false,
+            "draft": true,
+            "initial": true,
             "second": false,
             "final": false
           },
-          "mark_level": "none",
-          "audit_id": ""
+          "mark_level": "pre",
+          "audit_id": "AUD-2026-11-21-003"
         }
-      }
+      },
+      "audit_id": "AUD-2026-11-21-003",
+      "mark_level": "pre",
+      "audited_at": "2026-11-21T03:33:00+00:00"
     },
     "content/tech/ai-security/competitive-intelligence/dubai/reports/2026-11_monthly.html": {
       "title": "迪拜（阿联酋）AI 网安竞争格局 · 月度更新报告 · 2026-11",
       "kind": "business",
       "category": "report",
       "business_line": "content/tech/ai-security/competitive-intelligence/dubai",
-      "status": "draft",
+      "status": "in-review",
       "stages": {
-        "draft": false,
-        "initial": false,
+        "draft": true,
+        "initial": true,
         "second": false,
         "final": false
       },
-      "mark": false,
+      "mark": true,
       "first_seen_at": "2026-11-21",
       "evidence": {
         "report": "content/tech/ai-security/competitive-intelligence/dubai/reports/2026-11_monthly.html",
@@ -2063,32 +2072,35 @@
           "probe": true
         },
         "audit": {
-          "review": "",
-          "status": "draft",
+          "review": "engine/audit/records/reviews/content-tech-ai-security-competitive-intelligence-dubai-reports-2026-11-monthly-html.json",
+          "status": "in-review",
           "stages": {
-            "draft": false,
-            "initial": false,
+            "draft": true,
+            "initial": true,
             "second": false,
             "final": false
           },
-          "mark_level": "none",
-          "audit_id": ""
+          "mark_level": "pre",
+          "audit_id": "AUD-2026-11-21-004"
         }
-      }
+      },
+      "audit_id": "AUD-2026-11-21-004",
+      "mark_level": "pre",
+      "audited_at": "2026-11-21T03:33:00+00:00"
     },
     "content/tech/ai-security/industry-research/dubai/reports/2026-11_baseline_report.html": {
       "title": "迪拜（阿联酋）AI 网安行业 · 首期基线报告 · 2026-11",
       "kind": "business",
       "category": "report",
       "business_line": "content/tech/ai-security/industry-research/dubai",
-      "status": "draft",
+      "status": "in-review",
       "stages": {
-        "draft": false,
-        "initial": false,
+        "draft": true,
+        "initial": true,
         "second": false,
         "final": false
       },
-      "mark": false,
+      "mark": true,
       "first_seen_at": "2026-11-21",
       "evidence": {
         "report": "content/tech/ai-security/industry-research/dubai/reports/2026-11_baseline_report.html",
@@ -2114,18 +2126,21 @@
           "probe": true
         },
         "audit": {
-          "review": "",
-          "status": "draft",
+          "review": "engine/audit/records/reviews/content-tech-ai-security-industry-research-dubai-reports-2026-11-baseline-report-html.json",
+          "status": "in-review",
           "stages": {
-            "draft": false,
-            "initial": false,
+            "draft": true,
+            "initial": true,
             "second": false,
             "final": false
           },
-          "mark_level": "none",
-          "audit_id": ""
+          "mark_level": "pre",
+          "audit_id": "AUD-2026-11-21-005"
         }
-      }
+      },
+      "audit_id": "AUD-2026-11-21-005",
+      "mark_level": "pre",
+      "audited_at": "2026-11-21T03:33:00+00:00"
     }
   }
 }
