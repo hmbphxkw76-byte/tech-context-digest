@@ -1834,59 +1834,6 @@
         }
       }
     },
-    "content/tech/ai-security/security/dubai/reports/2026-11_baseline_report.html": {
-      "title": "迪拜（阿联酋）AI 网安就业 · 首期基线报告 · 2026-11",
-      "kind": "business",
-      "category": "report",
-      "business_line": "content/tech/ai-security/security/dubai",
-      "status": "in-review",
-      "stages": {
-        "draft": true,
-        "initial": true,
-        "second": false,
-        "final": false
-      },
-      "mark": true,
-      "first_seen_at": "2026-11-20",
-      "evidence": {
-        "report": "content/tech/ai-security/security/dubai/reports/2026-11_baseline_report.html",
-        "business_line": "content/tech/ai-security/security/dubai",
-        "plans": [
-          {
-            "slug": "hero-style-restyle",
-            "plan": "engine/audit/records/tasks/hero-style-restyle/plan.json",
-            "tasks": "engine/audit/records/tasks/hero-style-restyle/tasks.json",
-            "risks": "engine/audit/records/tasks/hero-style-restyle/risks.json",
-            "reports": [
-              "content/economy/dubai/apartment/reports/2026-11_baseline_report.html",
-              "content/economy/trends/reports/2026-11-13_weekly.html",
-              "content/tech/ai-security/security/dubai/reports/2026-11_baseline_report.html"
-            ],
-            "task_count": 4,
-            "risk_count": 2
-          }
-        ],
-        "gate": {
-          "entry": "engine/tools/optimization_gate.py",
-          "probe": true
-        },
-        "audit": {
-          "review": "engine/audit/records/reviews/content-tech-ai-security-security-dubai-reports-2026-11-baseline-report-html.json",
-          "status": "in-review",
-          "stages": {
-            "draft": true,
-            "initial": true,
-            "second": false,
-            "final": false
-          },
-          "mark_level": "pre",
-          "audit_id": "AUD-2026-11-20-004"
-        }
-      },
-      "audit_id": "AUD-2026-11-20-004",
-      "mark_level": "pre",
-      "audited_at": "2026-11-20T12:36:03+00:00"
-    },
     "content/economy/insight/reports/2026-11_baseline_report.html": {
       "title": "跨研究线决策仪表盘 · 基线报告（2026-11）｜决策仪表盘",
       "kind": "business",

@@ -90,8 +90,8 @@ content/
     <category>/              # region 缺省：insight（决策仪表盘）、trends（全球经济趋势周报）
     <region>/<category>/     # region=dubai：apartment（原 real-estate 板块）
   tech/
-    <category>/              # region 缺省：weekly-roundup（AI 行业趋势周报）
-    <category>/<region>/     # 如 security 与 dubai 的组合
+    <category>/              # region 缺省：trends（AI 应用竞争格局，月度）
+    <category>/<region>/     # 如 competitive-intelligence 与 dubai 的组合
   education/  international/  political/  society/     # 空占位（.gitkeep）
 ```
 

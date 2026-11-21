@@ -1,0 +1,1672 @@
+{
+ "schema_version": "1.1",
+  "business_line": "content/tech/ai-security/dubai",
+ "path_rule": "business-config {{SOURCE_REGISTRY_PATH}} = data/source_registry.json",
+ "tier_legend": {
+  "1": "官方一手（政府 / 央行 / 统计机构 / 多边机构原始发布）",
+  "2": "行业机构（英文研究报告 / 数据页）",
+  "3": "挂牌门户（仅作卖方预期）",
+  "4": "媒体转述（须标『需核实原文』）"
+ },
+ "sources": [
+  {
+   "source_id": "S-001",
+   "tier": 4,
+   "publisher": "Khaleej Times",
+   "title": "https://khaleejtimes.com/uae/over-70-of-cyber-threats-targeting-uae-are-state-sponsored-authority-says",
+   "url": "https://khaleejtimes.com/uae/over-70-of-cyber-threats-targeting-uae-are-state-sponsored-authority-says",
+   "lang": "en",
+   "verify_status": "media_unverified",
+   "updated": "2026-11-18",
+   "in_synthesis": false,
+   "used_in": [
+    "2026-11_baseline_report.html"
+   ]
+  },
+  {
+   "source_id": "S-002",
+   "tier": 2,
+   "publisher": "Gartner",
+   "title": "https://gartner.com/en/newsroom/press-releases/2025-04-08-gartner-forecasts-spending-on-information-security-in-mena-to-grow-14-percent-in-2025",
+   "url": "https://gartner.com/en/newsroom/press-releases/2025-04-08-gartner-forecasts-spending-on-information-security-in-mena-to-grow-14-percent-in-2025",
+   "lang": "en",
+   "verify_status": "verified",
+   "updated": "2026-11-18",
+   "evidence": {
+    "method": "manual",
+    "snapshot_date": "2026-11-18",
+    "note": "T-01 字段示例：登记信息人工核对（未抓取正文，故无 archive_hash）"
+   },
+   "document_tier": "official_release",
+   "statement_type": "forecast",
+   "in_synthesis": false,
+   "used_in": [
+    "2026-11_baseline_report.html"
+   ]
+  },
+  {
+   "source_id": "S-003",
+   "tier": 2,
+   "publisher": "Mordor Intelligence",
+   "title": "https://mordorintelligence.com/industry-reports/uae-cybersecurity-market",
+   "url": "https://mordorintelligence.com/industry-reports/uae-cybersecurity-market",
+   "lang": "en",
+   "verify_status": "verified",
+   "updated": "2026-11-18",
+   "evidence": {
+    "method": "manual",
+    "snapshot_date": "2026-11-18",
+    "note": "T-01 字段示例：登记信息人工核对（未抓取正文，故无 archive_hash）"
+   },
+   "document_tier": "industry_report",
+   "statement_type": "restatement",
+   "in_synthesis": false,
+   "used_in": [
+    "2026-11_baseline_report.html"
+   ]
+  },
+  {
+   "source_id": "S-004",
+   "tier": 2,
+   "publisher": "RFSons HR",
+   "title": "https://rfsonshr.com/technology-recruitment-uae/cybersecurity-talent-acquisition",
+   "url": "https://rfsonshr.com/technology-recruitment-uae/cybersecurity-talent-acquisition",
+   "lang": "en",
+   "verify_status": "verified",
+   "updated": "2026-11-18",
+   "evidence": {
+    "method": "manual",
+    "snapshot_date": "2026-11-18",
+    "note": "T-01 字段示例：登记信息人工核对（未抓取正文，故无 archive_hash）"
+   },
+   "document_tier": "media",
+   "statement_type": "opinion",
+   "in_synthesis": false,
+   "used_in": [
+    "2026-11_baseline_report.html"
+   ]
+  },
+  {
+   "source_id": "S-005",
+   "tier": 2,
+   "publisher": "HireDeveloper",
+   "title": "https://hiredeveloper.ae/employer-blog/how-to-hire-ai-security-engineers-dubai-after-meta-breach-7-steps",
+   "url": "https://hiredeveloper.ae/employer-blog/how-to-hire-ai-security-engineers-dubai-after-meta-breach-7-steps",
+   "lang": "en",
+   "verify_status": "verified",
+   "updated": "2026-11-18",
+   "in_synthesis": false,
+   "used_in": [
+    "2026-11_baseline_report.html"
+   ]
+  },
+  {
+   "source_id": "S-006",
+   "tier": 3,
+   "publisher": "Charterhouse ME",
+   "title": "https://charterhouseme.ae",
+   "url": "https://charterhouseme.ae",
+   "lang": "en",
+   "verify_status": "verified",
+   "updated": "2026-11-18",
+   "in_synthesis": false,
+   "used_in": [
+    "2026-11_baseline_report.html"
+   ]
+  },
+  {
+   "source_id": "S-007",
+   "tier": 3,
+   "publisher": "Cooper Fitch",
+   "title": "https://cooperfitch.ae",
+   "url": "https://cooperfitch.ae",
+   "lang": "en",
+   "verify_status": "verified",
+   "updated": "2026-11-18",
+   "in_synthesis": false,
+   "used_in": [
+    "2026-11_baseline_report.html"
+   ]
+  },
+  {
+   "source_id": "S-008",
+   "tier": 2,
+   "publisher": "RFSons HR",
+   "title": "https://rfsonshr.com/?p=25253",
+   "url": "https://rfsonshr.com/?p=25253",
+   "lang": "en",
+   "verify_status": "verified",
+   "updated": "2026-11-18",
+   "in_synthesis": false,
+   "used_in": [
+    "2026-11_baseline_report.html"
+   ]
+  },
+  {
+   "source_id": "S-009",
+   "tier": 1,
+   "publisher": "UAE Government",
+   "title": "https://u.ae/en/information-and-services/finance-and-investment/taxation/other-taxes",
+   "url": "https://u.ae/en/information-and-services/finance-and-investment/taxation/other-taxes",
+   "lang": "en",
+   "verify_status": "verified",
+   "updated": "2026-11-18",
+   "in_synthesis": false,
+   "used_in": [
+    "2026-11_baseline_report.html"
+   ]
+  },
+  {
+   "source_id": "S-010",
+   "tier": 1,
+   "publisher": "UAE MoHRE (ILOE)",
+   "title": "https://iloe.ae/pdf/Involuntary-Loss-of-Employment-Brochure-ILOE-V2.pdf",
+   "url": "https://iloe.ae/pdf/Involuntary-Loss-of-Employment-Brochure-ILOE-V2.pdf",
+   "lang": "en",
+   "verify_status": "verified",
+   "updated": "2026-11-18",
+   "in_synthesis": false,
+   "used_in": [
+    "2026-11_baseline_report.html"
+   ]
+  },
+  {
+   "source_id": "S-011",
+   "tier": 2,
+   "publisher": "Multiplier",
+   "title": "https://usemultiplier.com/united-arab-emirates/employee-benefits-and-compensation",
+   "url": "https://usemultiplier.com/united-arab-emirates/employee-benefits-and-compensation",
+   "lang": "en",
+   "verify_status": "verified",
+   "updated": "2026-11-18",
+   "in_synthesis": false,
+   "used_in": [
+    "2026-11_baseline_report.html"
+   ]
+  },
+  {
+   "source_id": "S-012",
+   "tier": 3,
+   "publisher": "WAQOV",
+   "title": "https://waqov.com/blog/top-10-most-in-demand-skills-in-uae-job-market-2025",
+   "url": "https://waqov.com/blog/top-10-most-in-demand-skills-in-uae-job-market-2025",
+   "lang": "en",
+   "verify_status": "verified",
+   "updated": "2026-11-18",
+   "in_synthesis": false,
+   "used_in": [
+    "2026-11_baseline_report.html"
+   ]
+  },
+  {
+   "source_id": "S-013",
+   "tier": 2,
+   "publisher": "SANS GIAC",
+   "title": "https://giac.org",
+   "url": "https://giac.org",
+   "lang": "en",
+   "verify_status": "verified",
+   "updated": "2026-11-18",
+   "in_synthesis": false,
+   "used_in": [
+    "2026-11_baseline_report.html"
+   ]
+  },
+  {
+   "source_id": "S-014",
+   "tier": 2,
+   "publisher": "(ISC)²",
+   "title": "https://isc2.org/new-ai-certification",
+   "url": "https://isc2.org/new-ai-certification",
+   "lang": "en",
+   "verify_status": "verified",
+   "updated": "2026-11-18",
+   "in_synthesis": false,
+   "used_in": [
+    "2026-11_baseline_report.html"
+   ]
+  },
+  {
+   "source_id": "S-015",
+   "tier": 1,
+   "publisher": "UAE Government",
+   "title": "https://u.ae/en/information-and-services/visa-and-emirates-id/residence-visas/golden-visa",
+   "url": "https://u.ae/en/information-and-services/visa-and-emirates-id/residence-visas/golden-visa",
+   "lang": "en",
+   "verify_status": "verified",
+   "updated": "2026-11-18",
+   "in_synthesis": false,
+   "used_in": [
+    "2026-11_baseline_report.html"
+   ]
+  },
+  {
+   "source_id": "S-016",
+   "tier": 1,
+   "publisher": "Abu Dhabi Government Media Office",
+   "title": "https://added.gov.ae",
+   "url": "https://added.gov.ae",
+   "lang": "en",
+   "verify_status": "verified",
+   "updated": "2026-11-18",
+   "in_synthesis": false,
+   "used_in": [
+    "2026-11_baseline_report.html"
+   ]
+  },
+  {
+   "source_id": "S-017",
+   "tier": 1,
+   "publisher": "UAE Government AI",
+   "title": "https://ai.gov.ae/strategy",
+   "url": "https://ai.gov.ae/strategy",
+   "lang": "en",
+   "verify_status": "verified",
+   "updated": "2026-11-18",
+   "in_synthesis": false,
+   "used_in": [
+    "2026-11_baseline_report.html"
+   ]
+  },
+  {
+   "source_id": "S-018",
+   "tier": 2,
+   "publisher": "Cybersecurity Database",
+   "title": "https://cybersecuritydatabase.org/en/documents/ae-national-cybersecurity-strategy-2025-2031",
+   "url": "https://cybersecuritydatabase.org/en/documents/ae-national-cybersecurity-strategy-2025-2031",
+   "lang": "en",
+   "verify_status": "verified",
+   "updated": "2026-11-18",
+   "in_synthesis": false,
+   "used_in": [
+    "2026-11_baseline_report.html"
+   ]
+  },
+  {
+   "source_id": "S-019",
+   "tier": 4,
+   "publisher": "SearchInform",
+   "title": "https://searchinform.com/blog/2025/9/24",
+   "url": "https://searchinform.com/blog/2025/9/24",
+   "lang": "en",
+   "verify_status": "media_unverified",
+   "updated": "2026-11-18",
+   "in_synthesis": false,
+   "used_in": [
+    "2026-11_baseline_report.html"
+   ]
+  },
+  {
+   "source_id": "S-020",
+   "tier": 1,
+   "publisher": "Dubai Electronic Security Center (DESC)",
+   "title": "https://desc.gov.ae/hamdan-bin-mohammed-launches-second-cycle-of-dubai-cyber-security-strategy",
+   "url": "https://desc.gov.ae/hamdan-bin-mohammed-launches-second-cycle-of-dubai-cyber-security-strategy",
+   "lang": "en",
+   "verify_status": "verified",
+   "updated": "2026-11-18",
+   "in_synthesis": false,
+   "used_in": [
+    "2026-11_baseline_report.html"
+   ]
+  },
+  {
+   "source_id": "S-021",
+   "tier": 2,
+   "publisher": "MASTC Group",
+   "title": "https://mastcgroup.com/desc-isr-v3-1-compliance-guide-iso-27001-mapping-requirements",
+   "url": "https://mastcgroup.com/desc-isr-v3-1-compliance-guide-iso-27001-mapping-requirements",
+   "lang": "en",
+   "verify_status": "verified",
+   "updated": "2026-11-18",
+   "in_synthesis": false,
+   "used_in": [
+    "2026-11_baseline_report.html"
+   ]
+  },
+  {
+   "source_id": "S-022",
+   "tier": 4,
+   "publisher": "Gulf Time",
+   "title": "https://gulftime.ae/dubai-electronic-security-centre-unveils-dubai-ai-security-policy",
+   "url": "https://gulftime.ae/dubai-electronic-security-centre-unveils-dubai-ai-security-policy",
+   "lang": "en",
+   "verify_status": "media_unverified",
+   "updated": "2026-11-18",
+   "in_synthesis": false,
+   "used_in": [
+    "2026-11_baseline_report.html"
+   ]
+  },
+  {
+   "source_id": "S-023",
+   "tier": 4,
+   "publisher": "Telecom Review",
+   "title": "https://telecomreview.com/articles/exclusive-interviews/9074-cybersecurity-that-transcends-boundaries",
+   "url": "https://telecomreview.com/articles/exclusive-interviews/9074-cybersecurity-that-transcends-boundaries",
+   "lang": "en",
+   "verify_status": "media_unverified",
+   "updated": "2026-11-18",
+   "in_synthesis": false,
+   "used_in": [
+    "2026-11_baseline_report.html"
+   ]
+  },
+  {
+   "source_id": "S-024",
+   "tier": 4,
+   "publisher": "The National",
+   "title": "https://thenationalnews.com/news/uae/2024/09/13/uae-ranked-as-role-model-for-cybersecurity-in-global-report",
+   "url": "https://thenationalnews.com/news/uae/2024/09/13/uae-ranked-as-role-model-for-cybersecurity-in-global-report",
+   "lang": "en",
+   "verify_status": "media_unverified",
+   "updated": "2026-11-18",
+   "in_synthesis": false,
+   "used_in": [
+    "2026-11_baseline_report.html"
+   ]
+  },
+  {
+   "source_id": "S-025",
+   "tier": 2,
+   "publisher": "Global Market Insights",
+   "title": "https://gminsights.com/industry-analysis/cybersecurity-market",
+   "url": "https://gminsights.com/industry-analysis/cybersecurity-market",
+   "lang": "en",
+   "verify_status": "verified",
+   "updated": "2026-11-18",
+   "in_synthesis": false,
+   "used_in": [
+    "2026-11_baseline_report.html"
+   ]
+  },
+  {
+   "source_id": "S-026",
+   "tier": 4,
+   "publisher": "Khaleej Times",
+   "title": "https://khaleejtimes.com/uae/uae-faces-200000-daily-cyberattacks",
+   "url": "https://khaleejtimes.com/uae/uae-faces-200000-daily-cyberattacks",
+   "lang": "en",
+   "verify_status": "media_unverified",
+   "updated": "2026-11-18",
+   "in_synthesis": false,
+   "used_in": [
+    "2026-11_baseline_report.html"
+   ]
+  },
+  {
+   "source_id": "S-027",
+   "tier": 1,
+   "publisher": "OpenAI",
+   "title": "https://openai.com/index/introducing-stargate-uae",
+   "url": "https://openai.com/index/introducing-stargate-uae",
+   "lang": "en",
+   "verify_status": "verified",
+   "updated": "2026-11-18",
+   "in_synthesis": false,
+   "used_in": [
+    "2026-11_baseline_report.html"
+   ]
+  },
+  {
+   "source_id": "S-028",
+   "tier": 2,
+   "publisher": "Colo Price",
+   "title": "https://coloprice.com",
+   "url": "https://coloprice.com",
+   "lang": "en",
+   "verify_status": "verified",
+   "updated": "2026-11-18",
+   "in_synthesis": false,
+   "used_in": [
+    "2026-11_baseline_report.html"
+   ]
+  },
+  {
+   "source_id": "S-029",
+   "tier": 1,
+   "publisher": "Microsoft",
+   "title": "https://blogs.microsoft.com/blog/2024/04/15/microsoft-and-g42-partner",
+   "url": "https://blogs.microsoft.com/blog/2024/04/15/microsoft-and-g42-partner",
+   "lang": "en",
+   "verify_status": "verified",
+   "updated": "2026-11-18",
+   "in_synthesis": false,
+   "used_in": [
+    "2026-11_baseline_report.html"
+   ]
+  },
+  {
+   "source_id": "S-030",
+   "tier": 1,
+   "publisher": "Government of Dubai Media Office",
+   "title": "https://mediaoffice.ae/en/news/2023/january/04-01/mohammed-bin-rashid-launches-dubai-economic-agenda-d33",
+   "url": "https://mediaoffice.ae/en/news/2023/january/04-01/mohammed-bin-rashid-launches-dubai-economic-agenda-d33",
+   "lang": "en",
+   "verify_status": "verified",
+   "updated": "2026-11-18",
+   "in_synthesis": false,
+   "used_in": [
+    "2026-11_baseline_report.html"
+   ]
+  },
+  {
+   "source_id": "S-031",
+   "tier": 2,
+   "publisher": "GITEX GLOBAL",
+   "title": "https://gitexglobal.com/News/gitex-global-2025-closes-a-landmark-45th-edition",
+   "url": "https://gitexglobal.com/News/gitex-global-2025-closes-a-landmark-45th-edition",
+   "lang": "en",
+   "verify_status": "verified",
+   "updated": "2026-11-18",
+   "in_synthesis": false,
+   "used_in": [
+    "2026-11_baseline_report.html"
+   ]
+  },
+  {
+   "source_id": "S-032",
+   "tier": 4,
+   "publisher": "Business Wire",
+   "title": "https://businesswire.com/news/home/20250506057310/en/Resecurity-to-Exhibit-at-GISEC-Global-2025",
+   "url": "https://businesswire.com/news/home/20250506057310/en/Resecurity-to-Exhibit-at-GISEC-Global-2025",
+   "lang": "en",
+   "verify_status": "media_unverified",
+   "updated": "2026-11-18",
+   "in_synthesis": false,
+   "used_in": [
+    "2026-11_baseline_report.html"
+   ]
+  },
+  {
+   "source_id": "S-033",
+   "tier": 1,
+   "publisher": "Dubai Electronic Security Center (DESC)",
+   "title": "https://desc.gov.ae",
+   "url": "https://desc.gov.ae",
+   "lang": "en",
+   "verify_status": "verified",
+   "updated": "2026-11-18",
+   "in_synthesis": false,
+   "used_in": [
+    "2026-11_baseline_report.html"
+   ]
+  },
+  {
+   "source_id": "S-034",
+   "tier": 1,
+   "publisher": "G42",
+   "title": "https://g42.ai",
+   "url": "https://g42.ai",
+   "lang": "en",
+   "verify_status": "verified",
+   "updated": "2026-11-18",
+   "in_synthesis": false,
+   "used_in": [
+    "2026-11_baseline_report.html"
+   ]
+  },
+  {
+   "source_id": "S-035",
+   "tier": 1,
+   "publisher": "ADGM (Abu Dhabi Global Market)",
+   "title": "https://adgm.com",
+   "url": "https://adgm.com",
+   "lang": "en",
+   "verify_status": "verified",
+   "updated": "2026-11-18",
+   "in_synthesis": false,
+   "used_in": [
+    "2026-11_baseline_report.html"
+   ]
+  },
+  {
+   "source_id": "S-036",
+   "tier": 1,
+   "publisher": "Hub71",
+   "title": "https://hub71.com",
+   "url": "https://hub71.com",
+   "lang": "en",
+   "verify_status": "verified",
+   "updated": "2026-11-18",
+   "in_synthesis": false,
+   "used_in": [
+    "2026-11_baseline_report.html"
+   ]
+  },
+  {
+   "source_id": "S-037",
+   "tier": 3,
+   "publisher": "Dubai Practical",
+   "title": "https://dubaipractical.com",
+   "url": "https://dubaipractical.com",
+   "lang": "en",
+   "verify_status": "verified",
+   "updated": "2026-11-18",
+   "in_synthesis": false,
+   "used_in": [
+    "2026-11_baseline_report.html"
+   ]
+  },
+  {
+   "source_id": "S-038",
+   "tier": 3,
+   "publisher": "Felix Happich",
+   "title": "https://felixhappich.com",
+   "url": "https://felixhappich.com",
+   "lang": "en",
+   "verify_status": "verified",
+   "updated": "2026-11-18",
+   "in_synthesis": false,
+   "used_in": [
+    "2026-11_baseline_report.html"
+   ]
+  },
+  {
+   "source_id": "S-039",
+   "tier": 3,
+   "publisher": "Expatsi",
+   "title": "https://expatsi.com",
+   "url": "https://expatsi.com",
+   "lang": "en",
+   "verify_status": "verified",
+   "updated": "2026-11-18",
+   "in_synthesis": false,
+   "used_in": [
+    "2026-11_baseline_report.html"
+   ]
+  },
+  {
+   "source_id": "S-040",
+   "tier": 2,
+   "publisher": "(ISC)²",
+   "title": "https://isc2.org/Insights/2025/12/ISC2-Publishes-2025-Cybersecurity-Workforce-Study",
+   "url": "https://isc2.org/Insights/2025/12/ISC2-Publishes-2025-Cybersecurity-Workforce-Study",
+   "lang": "en",
+   "verify_status": "verified",
+   "updated": "2026-11-18",
+   "in_synthesis": false,
+   "used_in": [
+    "2026-11_baseline_report.html"
+   ]
+  },
+  {
+   "source_id": "S-041",
+   "tier": 3,
+   "publisher": "Cooper Fitch",
+   "title": "https://cooperfitch.ae/wp-content/uploads/2024/12/Salary-Guide-UAE-2025-Cooper-Fitch.pdf",
+   "url": "https://cooperfitch.ae/wp-content/uploads/2024/12/Salary-Guide-UAE-2025-Cooper-Fitch.pdf",
+   "lang": "en",
+   "verify_status": "verified",
+   "updated": "2026-11-18",
+   "in_synthesis": false,
+   "used_in": [
+    "2026-11_baseline_report.html"
+   ]
+  },
+  {
+   "source_id": "S-042",
+   "tier": 2,
+   "publisher": "HireDeveloper",
+   "title": "https://hiredeveloper.ae",
+   "url": "https://hiredeveloper.ae",
+   "lang": "en",
+   "verify_status": "verified",
+   "updated": "2026-11-18",
+   "in_synthesis": false,
+   "used_in": [
+    "2026-11_baseline_report.html"
+   ]
+  },
+  {
+   "source_id": "S-043",
+   "tier": 3,
+   "publisher": "Angel in Dubai",
+   "title": "https://angelindubai.com/post/ai-cybersecurity-certifications-dubai-courses-2026",
+   "url": "https://angelindubai.com/post/ai-cybersecurity-certifications-dubai-courses-2026",
+   "lang": "en",
+   "verify_status": "verified",
+   "updated": "2026-11-18",
+   "in_synthesis": false,
+   "used_in": [
+    "2026-11_baseline_report.html"
+   ]
+  },
+  {
+   "source_id": "S-044",
+   "tier": 3,
+   "publisher": "Relocate2UAE",
+   "title": "https://relocate2uae.com/faqs",
+   "url": "https://relocate2uae.com/faqs",
+   "lang": "en",
+   "verify_status": "verified",
+   "updated": "2026-11-18",
+   "in_synthesis": false,
+   "used_in": [
+    "2026-11_baseline_report.html"
+   ]
+  },
+  {
+   "source_id": "S-045",
+   "tier": 3,
+   "publisher": "Numbeo",
+   "title": "https://numbeo.com/cost-of-living/compare_cities.jsp?country1=United+Arab+Emirates&amp;city1=Dubai&amp;country2=United+Arab+Emirates&amp;city2=Abu+Dhabi",
+   "url": "https://numbeo.com/cost-of-living/compare_cities.jsp?country1=United+Arab+Emirates&amp;city1=Dubai&amp;country2=United+Arab+Emirates&amp;city2=Abu+Dhabi",
+   "lang": "en",
+   "verify_status": "verified",
+   "updated": "2026-11-18",
+   "in_synthesis": false,
+   "used_in": [
+    "2026-11_baseline_report.html"
+   ]
+  },
+  {
+   "source_id": "S-046",
+   "tier": 1,
+   "publisher": "UAE Ministry of Finance",
+   "title": "https://mof.gov.ae",
+   "url": "https://mof.gov.ae",
+   "lang": "en",
+   "verify_status": "verified",
+   "updated": "2026-11-18",
+   "in_synthesis": false,
+   "used_in": [
+    "2026-11_baseline_report.html"
+   ]
+  },
+  {
+   "source_id": "S-047",
+   "tier": 1,
+   "publisher": "UAE Supreme Council",
+   "title": "https://uaesupremecouncil.org/en/",
+   "url": "https://uaesupremecouncil.org/en/",
+   "lang": "en",
+   "verify_status": "verified",
+   "updated": "2026-11-18",
+   "in_synthesis": false,
+   "used_in": [
+    "2026-11_baseline_report.html"
+   ]
+  },
+  {
+   "source_id": "S-048",
+   "tier": 2,
+   "publisher": "RemoFirst",
+   "title": "https://remofirst.com/country-guide/united-arab-emirates",
+   "url": "https://remofirst.com/country-guide/united-arab-emirates",
+   "lang": "en",
+   "verify_status": "verified",
+   "updated": "2026-11-18",
+   "in_synthesis": false,
+   "used_in": [
+    "2026-11_baseline_report.html"
+   ]
+  },
+  {
+   "source_id": "S-049",
+   "tier": 2,
+   "publisher": "WhichPayroll",
+   "title": "https://whichpayroll.com",
+   "url": "https://whichpayroll.com",
+   "lang": "en",
+   "verify_status": "verified",
+   "updated": "2026-11-18",
+   "in_synthesis": false,
+   "used_in": [
+    "2026-11_baseline_report.html"
+   ]
+  },
+  {
+   "source_id": "S-050",
+   "tier": 3,
+   "publisher": "Mirabello Consultancy",
+   "title": "https://mirabelloconsultancy.com",
+   "url": "https://mirabelloconsultancy.com",
+   "lang": "en",
+   "verify_status": "verified",
+   "updated": "2026-11-18",
+   "in_synthesis": false,
+   "used_in": [
+    "2026-11_baseline_report.html"
+   ]
+  },
+  {
+   "source_id": "S-051",
+   "tier": 3,
+   "publisher": "East Property",
+   "title": "https://eastproperty.com",
+   "url": "https://eastproperty.com",
+   "lang": "en",
+   "verify_status": "verified",
+   "updated": "2026-11-18",
+   "in_synthesis": false,
+   "used_in": [
+    "2026-11_baseline_report.html"
+   ]
+  },
+  {
+   "source_id": "S-052",
+   "tier": 2,
+   "publisher": "Multiplier",
+   "title": "https://usemultiplier.com",
+   "url": "https://usemultiplier.com",
+   "lang": "en",
+   "verify_status": "verified",
+   "updated": "2026-11-18",
+   "in_synthesis": false,
+   "used_in": [
+    "2026-11_baseline_report.html"
+   ]
+  },
+  {
+   "source_id": "S-053",
+   "tier": 4,
+   "publisher": "The National",
+   "title": "https://thenationalnews.com/business/money/2025/02/26/uae-jobs-salary-guide",
+   "url": "https://thenationalnews.com/business/money/2025/02/26/uae-jobs-salary-guide",
+   "lang": "en",
+   "verify_status": "media_unverified",
+   "updated": "2026-11-18",
+   "in_synthesis": false,
+   "used_in": [
+    "2026-11_baseline_report.html"
+   ]
+  },
+  {
+   "source_id": "S-054",
+   "tier": 1,
+   "publisher": "UAE Government",
+   "title": "https://u.ae/en/information-and-services/jobs/employment-in-the-private-sector/emiratis-employment-in-private-sector",
+   "url": "https://u.ae/en/information-and-services/jobs/employment-in-the-private-sector/emiratis-employment-in-private-sector",
+   "lang": "en",
+   "verify_status": "verified",
+   "updated": "2026-11-18",
+   "in_synthesis": false,
+   "used_in": [
+    "2026-11_baseline_report.html"
+   ]
+  },
+  {
+   "source_id": "S-055",
+   "tier": 4,
+   "publisher": "Gulf News",
+   "title": "https://gulfnews.com/uae/uae-firms-face-dh108000-fine",
+   "url": "https://gulfnews.com/uae/uae-firms-face-dh108000-fine",
+   "lang": "en",
+   "verify_status": "media_unverified",
+   "updated": "2026-11-18",
+   "in_synthesis": false,
+   "used_in": [
+    "2026-11_baseline_report.html"
+   ]
+  },
+  {
+   "source_id": "S-056",
+   "tier": 1,
+   "publisher": "Dubai Electronic Security Center (DESC)",
+   "title": "https://desc.gov.ae/dubai-electronic-security-center-unveils-saraab-and-new-cybersecurity-initiatives-at-gisec-global-2026",
+   "url": "https://desc.gov.ae/dubai-electronic-security-center-unveils-saraab-and-new-cybersecurity-initiatives-at-gisec-global-2026",
+   "lang": "en",
+   "verify_status": "verified",
+   "updated": "2026-11-18",
+   "in_synthesis": false,
+   "used_in": [
+    "2026-11_baseline_report.html"
+   ]
+  },
+  {
+   "source_id": "S-057",
+   "tier": 4,
+   "publisher": "Zawya",
+   "title": "https://zawya.com",
+   "url": "https://zawya.com",
+   "lang": "en",
+   "verify_status": "media_unverified",
+   "updated": "2026-11-18",
+   "in_synthesis": false,
+   "used_in": [
+    "2026-11_baseline_report.html"
+   ]
+  },
+  {
+   "source_id": "S-058",
+   "tier": 4,
+   "publisher": "Gulf News",
+   "title": "https://gulfnews.com/uae/crime/ai-and-smart-data-ends-crime",
+   "url": "https://gulfnews.com/uae/crime/ai-and-smart-data-ends-crime",
+   "lang": "en",
+   "verify_status": "media_unverified",
+   "updated": "2026-11-18",
+   "in_synthesis": false,
+   "used_in": [
+    "2026-11_baseline_report.html"
+   ]
+  },
+  {
+   "source_id": "S-059",
+   "tier": 4,
+   "publisher": "Brief News",
+   "title": "https://brief.news",
+   "url": "https://brief.news",
+   "lang": "en",
+   "verify_status": "media_unverified",
+   "updated": "2026-11-18",
+   "in_synthesis": false,
+   "used_in": [
+    "2026-11_baseline_report.html"
+   ]
+  },
+  {
+   "source_id": "S-060",
+   "tier": 1,
+   "publisher": "LumiTech",
+   "title": "https://lumitech.co",
+   "url": "https://lumitech.co",
+   "lang": "en",
+   "verify_status": "verified",
+   "updated": "2026-11-18",
+   "in_synthesis": false,
+   "used_in": [
+    "2026-11_baseline_report.html"
+   ]
+  },
+  {
+   "source_id": "S-061",
+   "tier": 1,
+   "publisher": "Core42",
+   "title": "https://core42.ai",
+   "url": "https://core42.ai",
+   "lang": "en",
+   "verify_status": "verified",
+   "updated": "2026-11-18",
+   "in_synthesis": false,
+   "used_in": [
+    "2026-11_baseline_report.html"
+   ]
+  },
+  {
+   "source_id": "S-062",
+   "tier": 4,
+   "publisher": "GEC Newswire",
+   "title": "https://gecnewswire.com",
+   "url": "https://gecnewswire.com",
+   "lang": "en",
+   "verify_status": "media_unverified",
+   "updated": "2026-11-18",
+   "in_synthesis": false,
+   "used_in": [
+    "2026-11_baseline_report.html"
+   ]
+  },
+  {
+   "source_id": "S-063",
+   "tier": 1,
+   "publisher": "CPX",
+   "title": "https://cpx.net",
+   "url": "https://cpx.net",
+   "lang": "en",
+   "verify_status": "verified",
+   "updated": "2026-11-18",
+   "in_synthesis": false,
+   "used_in": [
+    "2026-11_baseline_report.html"
+   ]
+  },
+  {
+   "source_id": "S-064",
+   "tier": 2,
+   "publisher": "Incorp Arabia",
+   "title": "https://incarabia.com",
+   "url": "https://incarabia.com",
+   "lang": "en",
+   "verify_status": "verified",
+   "updated": "2026-11-18",
+   "in_synthesis": false,
+   "used_in": [
+    "2026-11_baseline_report.html"
+   ]
+  },
+  {
+   "source_id": "S-065",
+   "tier": 4,
+   "publisher": "The Arabian Post",
+   "title": "https://thearabianpost.com",
+   "url": "https://thearabianpost.com",
+   "lang": "en",
+   "verify_status": "media_unverified",
+   "updated": "2026-11-18",
+   "in_synthesis": false,
+   "used_in": [
+    "2026-11_baseline_report.html"
+   ]
+  },
+  {
+   "source_id": "S-066",
+   "tier": 1,
+   "publisher": "e&",
+   "title": "https://eand.com/en/news/13-jan-26-eand-enterprise-and-sergas-team-up.html",
+   "url": "https://eand.com/en/news/13-jan-26-eand-enterprise-and-sergas-team-up.html",
+   "lang": "en",
+   "verify_status": "verified",
+   "updated": "2026-11-18",
+   "in_synthesis": false,
+   "used_in": [
+    "2026-11_baseline_report.html"
+   ]
+  },
+  {
+   "source_id": "S-067",
+   "tier": 2,
+   "publisher": "GISEC",
+   "title": "https://gisec.ae",
+   "url": "https://gisec.ae",
+   "lang": "en",
+   "verify_status": "verified",
+   "updated": "2026-11-18",
+   "in_synthesis": false,
+   "used_in": [
+    "2026-11_baseline_report.html"
+   ]
+  },
+  {
+   "source_id": "S-068",
+   "tier": 2,
+   "publisher": "GITEX GLOBAL",
+   "title": "https://gitexglobal.com",
+   "url": "https://gitexglobal.com",
+   "lang": "en",
+   "verify_status": "verified",
+   "updated": "2026-11-18",
+   "in_synthesis": false,
+   "used_in": [
+    "2026-11_baseline_report.html"
+   ]
+  },
+  {
+   "source_id": "S-069",
+   "tier": 2,
+   "publisher": "Chambers and Partners",
+   "title": "https://practiceguides.chambers.com/",
+   "url": "https://practiceguides.chambers.com/",
+   "lang": "en",
+   "verify_status": "verified",
+   "updated": "2026-11-18",
+   "in_synthesis": false,
+   "used_in": [
+    "2026-11_baseline_report.html"
+   ]
+  },
+  {
+   "source_id": "S-070",
+   "tier": 1,
+   "publisher": "International Telecommunication Union (ITU)",
+   "title": "https://itu.int",
+   "url": "https://itu.int",
+   "lang": "en",
+   "verify_status": "verified",
+   "updated": "2026-11-18",
+   "in_synthesis": false,
+   "used_in": [
+    "2026-11_baseline_report.html"
+   ]
+  },
+  {
+   "source_id": "S-071",
+   "tier": 2,
+   "publisher": "HZ Legal",
+   "title": "https://hzlegal.ae",
+   "url": "https://hzlegal.ae",
+   "lang": "en",
+   "verify_status": "verified",
+   "updated": "2026-11-18",
+   "in_synthesis": false,
+   "used_in": [
+    "2026-11_baseline_report.html"
+   ]
+  },
+  {
+   "source_id": "S-072",
+   "tier": 2,
+   "publisher": "OWASP GenAI Security",
+   "title": "https://genai.owasp.org/llm-top-10",
+   "url": "https://genai.owasp.org/llm-top-10",
+   "lang": "en",
+   "verify_status": "verified",
+   "updated": "2026-11-18",
+   "in_synthesis": false,
+   "used_in": [
+    "2026-11_baseline_report.html"
+   ]
+  },
+  {
+   "source_id": "S-073",
+   "tier": 2,
+   "publisher": "NIST",
+   "title": "https://www.nist.gov/itl/ai-risk-management-framework",
+   "url": "https://www.nist.gov/itl/ai-risk-management-framework",
+   "lang": "en",
+   "verify_status": "unverifiable",
+   "updated": "2026-11-18",
+   "in_synthesis": false,
+   "used_in": [
+    "2026-11_baseline_report.html"
+   ]
+  },
+  {
+   "source_id": "S-074",
+   "tier": 3,
+   "publisher": "LinkedIn",
+   "title": "https://www.cpx.net/",
+   "url": "https://www.cpx.net/",
+   "lang": "en",
+   "verify_status": "verified",
+   "updated": "2026-11-18",
+   "in_synthesis": false,
+   "used_in": [
+    "2026-11_baseline_report.html"
+   ]
+  },
+  {
+   "source_id": "S-075",
+   "tier": 3,
+   "publisher": "JobsX Dubai",
+   "title": "https://jobxdubai.com/jobs/3240-director-ai-security",
+   "url": "https://jobxdubai.com/jobs/3240-director-ai-security",
+   "lang": "en",
+   "verify_status": "verified",
+   "updated": "2026-11-18",
+   "in_synthesis": false,
+   "used_in": [
+    "2026-11_baseline_report.html"
+   ]
+  },
+  {
+   "source_id": "S-076",
+   "tier": 2,
+   "publisher": "GRIT Services",
+   "title": "https://gritservices.ae/microsoft-copilot-security",
+   "url": "https://gritservices.ae/microsoft-copilot-security",
+   "lang": "en",
+   "verify_status": "verified",
+   "updated": "2026-11-18",
+   "in_synthesis": false,
+   "used_in": [
+    "2026-11_baseline_report.html"
+   ]
+  },
+  {
+   "source_id": "S-077",
+   "tier": 1,
+   "publisher": "Microsoft",
+   "title": "https://learn.microsoft.com/en-us/security-copilot",
+   "url": "https://learn.microsoft.com/en-us/security-copilot",
+   "lang": "en",
+   "verify_status": "verified",
+   "updated": "2026-11-18",
+   "in_synthesis": false,
+   "used_in": [
+    "2026-11_baseline_report.html"
+   ]
+  },
+  {
+   "source_id": "S-078",
+   "tier": 1,
+   "publisher": "MITRE ATLAS",
+   "title": "https://atlas.mitre.org",
+   "url": "https://atlas.mitre.org",
+   "lang": "en",
+   "verify_status": "verified",
+   "updated": "2026-11-18",
+   "in_synthesis": false,
+   "used_in": [
+    "2026-11_baseline_report.html"
+   ]
+  },
+  {
+   "source_id": "S-079",
+   "tier": 2,
+   "publisher": "Speakeasy",
+   "title": "https://speakeasy.com/resources/mitre-atlas",
+   "url": "https://speakeasy.com/resources/mitre-atlas",
+   "lang": "en",
+   "verify_status": "verified",
+   "updated": "2026-11-18",
+   "in_synthesis": false,
+   "used_in": [
+    "2026-11_baseline_report.html"
+   ]
+  },
+  {
+   "source_id": "S-080",
+   "tier": 2,
+   "publisher": "CyberDefenders",
+   "title": "https://cyberdefenders.org",
+   "url": "https://cyberdefenders.org",
+   "lang": "en",
+   "verify_status": "verified",
+   "updated": "2026-11-18",
+   "in_synthesis": false,
+   "used_in": [
+    "2026-11_baseline_report.html"
+   ]
+  },
+  {
+   "source_id": "S-081",
+   "tier": 3,
+   "publisher": "Quid Pro Quo",
+   "title": "https://quidproquo.cc",
+   "url": "https://quidproquo.cc",
+   "lang": "en",
+   "verify_status": "verified",
+   "updated": "2026-11-18",
+   "in_synthesis": false,
+   "used_in": [
+    "2026-11_baseline_report.html"
+   ]
+  },
+  {
+   "source_id": "S-082",
+   "tier": 3,
+   "publisher": "CertiGuard",
+   "title": "https://certiguard.io",
+   "url": "https://certiguard.io",
+   "lang": "en",
+   "verify_status": "verified",
+   "updated": "2026-11-18",
+   "in_synthesis": false,
+   "used_in": [
+    "2026-11_baseline_report.html"
+   ]
+  },
+  {
+   "source_id": "S-083",
+   "tier": 3,
+   "publisher": "CertCrush",
+   "title": "https://certcrush.app",
+   "url": "https://certcrush.app",
+   "lang": "en",
+   "verify_status": "verified",
+   "updated": "2026-11-18",
+   "in_synthesis": false,
+   "used_in": [
+    "2026-11_baseline_report.html"
+   ]
+  },
+  {
+   "source_id": "S-084",
+   "tier": 3,
+   "publisher": "Best AI Certifications",
+   "title": "https://bestaicertifications.com",
+   "url": "https://bestaicertifications.com",
+   "lang": "en",
+   "verify_status": "verified",
+   "updated": "2026-11-18",
+   "in_synthesis": false,
+   "used_in": [
+    "2026-11_baseline_report.html"
+   ]
+  },
+  {
+   "source_id": "S-085",
+   "tier": 4,
+   "publisher": "Product Coalition (Medium)",
+   "title": "https://medium.productcoalition.com",
+   "url": "https://medium.productcoalition.com",
+   "lang": "en",
+   "verify_status": "media_unverified",
+   "updated": "2026-11-18",
+   "in_synthesis": false,
+   "used_in": [
+    "2026-11_baseline_report.html"
+   ]
+  },
+  {
+   "source_id": "S-086",
+   "tier": 2,
+   "publisher": "Cloud Security Alliance (CSA)",
+   "title": "https://cloudsecurityalliance.org",
+   "url": "https://cloudsecurityalliance.org",
+   "lang": "en",
+   "verify_status": "verified",
+   "updated": "2026-11-18",
+   "in_synthesis": false,
+   "used_in": [
+    "2026-11_baseline_report.html"
+   ]
+  },
+  {
+   "source_id": "S-087",
+   "tier": 2,
+   "publisher": "MASTC Group",
+   "title": "https://mastcgroup.com/desc-isr-v3-1-compliance-guide",
+   "url": "https://mastcgroup.com/desc-isr-v3-1-compliance-guide",
+   "lang": "en",
+   "verify_status": "verified",
+   "updated": "2026-11-18",
+   "in_synthesis": false,
+   "used_in": [
+    "2026-11_baseline_report.html"
+   ]
+  },
+  {
+   "source_id": "S-088",
+   "tier": 2,
+   "publisher": "QualySec",
+   "title": "https://qualysec.com/dubai-information-security-regulation",
+   "url": "https://qualysec.com/dubai-information-security-regulation",
+   "lang": "en",
+   "verify_status": "verified",
+   "updated": "2026-11-18",
+   "in_synthesis": false,
+   "used_in": [
+    "2026-11_baseline_report.html"
+   ]
+  },
+  {
+   "source_id": "S-089",
+   "tier": 1,
+   "publisher": "Telecommunications and Digital Government Regulatory Authority",
+   "title": "https://tdra.gov.ae/en/aecert/initiatives",
+   "url": "https://tdra.gov.ae/en/aecert/initiatives",
+   "lang": "en",
+   "verify_status": "verified",
+   "updated": "2026-11-18",
+   "in_synthesis": false,
+   "used_in": [
+    "2026-11_baseline_report.html"
+   ]
+  },
+  {
+   "source_id": "S-090",
+   "tier": 1,
+   "publisher": "UAE Government",
+   "title": "https://u.ae/en/information-and-services/jobs/employment-in-the-private-sector/job-offers-and-work-permits-and-contracts/expatriates-employment-in-private-sector",
+   "url": "https://u.ae/en/information-and-services/jobs/employment-in-the-private-sector/job-offers-and-work-permits-and-contracts/expatriates-employment-in-private-sector",
+   "lang": "en",
+   "verify_status": "verified",
+   "updated": "2026-11-18",
+   "in_synthesis": false,
+   "used_in": [
+    "2026-11_baseline_report.html"
+   ]
+  },
+  {
+   "source_id": "S-091",
+   "tier": 2,
+   "publisher": "Labeeb",
+   "title": "https://labeeb.ae",
+   "url": "https://labeeb.ae",
+   "lang": "en",
+   "verify_status": "verified",
+   "updated": "2026-11-18",
+   "in_synthesis": false,
+   "used_in": [
+    "2026-11_baseline_report.html"
+   ]
+  },
+  {
+   "source_id": "S-092",
+   "tier": 1,
+   "publisher": "UAE Government",
+   "title": "https://u.ae/en/information-and-services/visa-and-emirates-id/residence-visas/golden-visa",
+   "url": "https://u.ae/en/information-and-services/visa-and-emirates-id/residence-visas/golden-visa",
+   "lang": "en",
+   "verify_status": "verified",
+   "updated": "2026-11-18",
+   "in_synthesis": false,
+   "used_in": [
+    "2026-11_baseline_report.html"
+   ]
+  },
+  {
+   "source_id": "S-093",
+   "tier": 1,
+   "publisher": "UAE Ministry of Foreign Affairs",
+   "title": "https://mofa.gov.ae",
+   "url": "https://mofa.gov.ae",
+   "lang": "en",
+   "verify_status": "verified",
+   "updated": "2026-11-18",
+   "in_synthesis": false,
+   "used_in": [
+    "2026-11_baseline_report.html"
+   ]
+  },
+  {
+   "source_id": "S-094",
+   "tier": 2,
+   "publisher": "Takween Advisory",
+   "title": "https://takweenadvisory.ae",
+   "url": "https://takweenadvisory.ae",
+   "lang": "en",
+   "verify_status": "verified",
+   "updated": "2026-11-18",
+   "in_synthesis": false,
+   "used_in": [
+    "2026-11_baseline_report.html"
+   ]
+  },
+  {
+   "source_id": "S-095",
+   "tier": 3,
+   "publisher": "VisaHQ",
+   "title": "https://visahq.news",
+   "url": "https://visahq.news",
+   "lang": "en",
+   "verify_status": "verified",
+   "updated": "2026-11-18",
+   "in_synthesis": false,
+   "used_in": [
+    "2026-11_baseline_report.html"
+   ]
+  },
+  {
+   "source_id": "S-096",
+   "tier": 1,
+   "publisher": "DIFC (Dubai International Financial Centre)",
+   "title": "https://difc.ae/business/services",
+   "url": "https://difc.ae/business/services",
+   "lang": "en",
+   "verify_status": "verified",
+   "updated": "2026-11-18",
+   "in_synthesis": false,
+   "used_in": [
+    "2026-11_baseline_report.html"
+   ]
+  },
+  {
+   "source_id": "S-097",
+   "tier": 1,
+   "publisher": "ADGM (Abu Dhabi Global Market)",
+   "title": "https://adgm.com/.../visas-and-government-services/overview",
+   "url": "https://adgm.com/.../visas-and-government-services/overview",
+   "lang": "en",
+   "verify_status": "verified",
+   "updated": "2026-11-18",
+   "in_synthesis": false,
+   "used_in": [
+    "2026-11_baseline_report.html"
+   ]
+  },
+  {
+   "source_id": "S-098",
+   "tier": 2,
+   "publisher": "OWASP",
+   "title": "https://owasp.org/www-chapter-dubai",
+   "url": "https://owasp.org/www-chapter-dubai",
+   "lang": "en",
+   "verify_status": "verified",
+   "updated": "2026-11-18",
+   "in_synthesis": false,
+   "used_in": [
+    "2026-11_baseline_report.html"
+   ]
+  },
+  {
+   "source_id": "S-099",
+   "tier": 2,
+   "publisher": "ISACA",
+   "title": "https://engage.isaca.org/uaechapter/events",
+   "url": "https://engage.isaca.org/uaechapter/events",
+   "lang": "en",
+   "verify_status": "verified",
+   "updated": "2026-11-18",
+   "in_synthesis": false,
+   "used_in": [
+    "2026-11_baseline_report.html"
+   ]
+  },
+  {
+   "source_id": "S-100",
+   "tier": 2,
+   "publisher": "Black Hat MEA",
+   "title": "https://blackhatmea.com",
+   "url": "https://blackhatmea.com",
+   "lang": "en",
+   "verify_status": "verified",
+   "updated": "2026-11-18",
+   "in_synthesis": false,
+   "used_in": [
+    "2026-11_baseline_report.html"
+   ]
+  },
+  {
+   "source_id": "S-101",
+   "tier": 1,
+   "publisher": "Hub71",
+   "title": "https://hub71.com/faqs",
+   "url": "https://hub71.com/faqs",
+   "lang": "en",
+   "verify_status": "verified",
+   "updated": "2026-11-18",
+   "in_synthesis": false,
+   "used_in": [
+    "2026-11_baseline_report.html"
+   ]
+  },
+  {
+   "source_id": "S-102",
+   "tier": 3,
+   "publisher": "MakeMyCV",
+   "title": "https://makemycv.ae",
+   "url": "https://makemycv.ae",
+   "lang": "en",
+   "verify_status": "verified",
+   "updated": "2026-11-18",
+   "in_synthesis": false,
+   "used_in": [
+    "2026-11_baseline_report.html"
+   ]
+  },
+  {
+   "source_id": "S-103",
+   "tier": 3,
+   "publisher": "Reaphr",
+   "title": "https://reaphr.com",
+   "url": "https://reaphr.com",
+   "lang": "en",
+   "verify_status": "verified",
+   "updated": "2026-11-18",
+   "in_synthesis": false,
+   "used_in": [
+    "2026-11_baseline_report.html"
+   ]
+  },
+  {
+   "source_id": "S-104",
+   "tier": 3,
+   "publisher": "CV Pro Maker",
+   "title": "https://cvpromaker.com",
+   "url": "https://cvpromaker.com",
+   "lang": "en",
+   "verify_status": "verified",
+   "updated": "2026-11-18",
+   "in_synthesis": false,
+   "used_in": [
+    "2026-11_baseline_report.html"
+   ]
+  },
+  {
+   "source_id": "S-105",
+   "tier": 4,
+   "publisher": "UAE Inform",
+   "title": "https://uaeinform.com",
+   "url": "https://uaeinform.com",
+   "lang": "en",
+   "verify_status": "media_unverified",
+   "updated": "2026-11-18",
+   "in_synthesis": false,
+   "used_in": [
+    "2026-11_baseline_report.html"
+   ]
+  },
+  {
+   "source_id": "S-106",
+   "tier": 3,
+   "publisher": "DXB Start",
+   "title": "https://dxbstart.com",
+   "url": "https://dxbstart.com",
+   "lang": "en",
+   "verify_status": "verified",
+   "updated": "2026-11-18",
+   "in_synthesis": false,
+   "used_in": [
+    "2026-11_baseline_report.html"
+   ]
+  },
+  {
+   "source_id": "S-107",
+   "tier": 2,
+   "publisher": "EGSH",
+   "title": "https://egsh.ae",
+   "url": "https://egsh.ae",
+   "lang": "en",
+   "verify_status": "verified",
+   "updated": "2026-11-18",
+   "in_synthesis": false,
+   "used_in": [
+    "2026-11_baseline_report.html"
+   ]
+  },
+  {
+   "source_id": "S-108",
+   "tier": 3,
+   "publisher": "Visa Simplified",
+   "title": "https://visasimplified.com",
+   "url": "https://visasimplified.com",
+   "lang": "en",
+   "verify_status": "verified",
+   "updated": "2026-11-18",
+   "in_synthesis": false,
+   "used_in": [
+    "2026-11_baseline_report.html"
+   ]
+  },
+  {
+   "source_id": "S-109",
+   "tier": 2,
+   "publisher": "Dynamic Logics",
+   "title": "https://dynamiclogics.ae",
+   "url": "https://dynamiclogics.ae",
+   "lang": "en",
+   "verify_status": "verified",
+   "updated": "2026-11-18",
+   "in_synthesis": false,
+   "used_in": [
+    "2026-11_baseline_report.html"
+   ]
+  },
+  {
+   "source_id": "S-110",
+   "tier": 3,
+   "publisher": "Worldwide Relocation Services",
+   "title": "https://worldwide-rs.com",
+   "url": "https://worldwide-rs.com",
+   "lang": "en",
+   "verify_status": "verified",
+   "updated": "2026-11-18",
+   "in_synthesis": false,
+   "used_in": [
+    "2026-11_baseline_report.html"
+   ]
+  },
+  {
+   "source_id": "S-111",
+   "tier": 1,
+   "publisher": "UAE MoHRE (ILOE)",
+   "title": "https://iloe.ae",
+   "url": "https://iloe.ae",
+   "lang": "en",
+   "verify_status": "verified",
+   "updated": "2026-11-18",
+   "in_synthesis": false,
+   "used_in": [
+    "2026-11_baseline_report.html"
+   ]
+  },
+  {
+   "source_id": "S-112",
+   "tier": 3,
+   "publisher": "UAE Signal",
+   "title": "https://uaesignal.com",
+   "url": "https://uaesignal.com",
+   "lang": "en",
+   "verify_status": "verified",
+   "updated": "2026-11-18",
+   "in_synthesis": false,
+   "used_in": [
+    "2026-11_baseline_report.html"
+   ]
+  },
+  {
+   "source_id": "S-113",
+   "tier": 3,
+   "publisher": "DXB Talk",
+   "title": "https://dxbtalk.com",
+   "url": "https://dxbtalk.com",
+   "lang": "en",
+   "verify_status": "verified",
+   "updated": "2026-11-18",
+   "in_synthesis": false,
+   "used_in": [
+    "2026-11_baseline_report.html"
+   ]
+  },
+  {
+   "source_id": "S-114",
+   "tier": 1,
+   "publisher": "UAE MoHRE (ILOE)",
+   "title": "https://iloe.ae/pdf/Involuntary-Loss-of-Employment-Brochure-ILOE-V2.pdf]。",
+   "url": "https://iloe.ae/pdf/Involuntary-Loss-of-Employment-Brochure-ILOE-V2.pdf]。",
+   "lang": "en",
+   "verify_status": "verified",
+   "updated": "2026-11-18",
+   "in_synthesis": false,
+   "used_in": [
+    "2026-11_baseline_report.html"
+   ]
+  },
+  {
+   "source_id": "S-115",
+   "tier": 3,
+   "publisher": "JobsX Dubai",
+   "title": "https://jobxdubai.com/jobs/3240-director-ai-security]。",
+   "url": "https://jobxdubai.com/jobs/3240-director-ai-security]。",
+   "lang": "en",
+   "verify_status": "verified",
+   "updated": "2026-11-18",
+   "in_synthesis": false,
+   "used_in": [
+    "2026-11_baseline_report.html"
+   ]
+  },
+  {
+   "source_id": "S-116",
+   "tier": 1,
+   "publisher": "Microsoft",
+   "title": "https://learn.microsoft.com/en-us/security-copilot]。",
+   "url": "https://learn.microsoft.com/en-us/security-copilot]。",
+   "lang": "en",
+   "verify_status": "verified",
+   "updated": "2026-11-18",
+   "in_synthesis": false,
+   "used_in": [
+    "2026-11_baseline_report.html"
+   ]
+  },
+  {
+   "source_id": "S-117",
+   "tier": 2,
+   "publisher": "ISACA",
+   "title": "https://engage.isaca.org/uaechapter/events]。",
+   "url": "https://engage.isaca.org/uaechapter/events]。",
+   "lang": "en",
+   "verify_status": "verified",
+   "updated": "2026-11-18",
+   "in_synthesis": false,
+   "used_in": [
+    "2026-11_baseline_report.html"
+   ]
+  }
+ ]
+}

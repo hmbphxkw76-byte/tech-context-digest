@@ -306,7 +306,7 @@
 | 类别 | 反例 | 正确 |
 |---|---|---|
 | 目录 | `Content/`、`currentAffairs/`、`regional_data/` | `content/`、`economy/`、`data/processed/<theme>/<维度段...>/` |
-| 目录 | `content/<theme>/regional/<region>/<category>/`（已撤销的 regional 分组段） | `content/economy/dubai/apartment/`（region→category）或 `content/tech/ai-security/security/dubai/`（category→subcategory→region）；区域缺省业务线为 `content/economy/trends/`、`content/tech/ai-application/weekly-roundup/` |
+| 目录 | `content/<theme>/regional/<region>/<category>/`（已撤销的 regional 分组段） | `content/economy/dubai/apartment/`（region→category）或 `content/tech/ai-security/competitive-intelligence/dubai/`（category→subcategory→region）；区域缺省业务线为 `content/economy/trends/`、`content/tech/ai-application/trends/` |
 | 目录 | `engine/tools/{subdir}/common.py`（过深且职责模糊） | `engine/tools/_common.py` |
 | 文件 | `Report_Final.md` | `report-final.md` 或报告规范名 |
 | 文件 | `2026-11_monthly.html` 放入 `reports/archived/` | `reports/archives/` |

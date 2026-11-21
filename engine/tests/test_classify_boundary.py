@@ -34,10 +34,16 @@ class TestDoubleValidation(unittest.TestCase):
         self.assertIsNone(sig["owner"])
 
     def test_unique_property_hit_assigns(self):
-        """trends 细分唯一命中经济趋势业务线（region 缺省）-> 自动归位。"""
+        """apartment 细分唯一命中经济公寓业务线 -> 自动归位。"""
+        sig = cr.owner_signals("apartment_2026-11_monthly.html")
+        self.assertEqual(sig["property_hits"], ["content/economy/dubai/apartment"])
+        self.assertEqual(sig["owner"], "content/economy/dubai/apartment")
+
+    def test_trends_property_ambiguous(self):
+        """trends 同时命中经济趋势与 AI 应用趋势两条线 -> 候选不唯一，需人工。"""
         sig = cr.owner_signals("trends_2026-11-13_weekly.html")
-        self.assertEqual(sig["property_hits"], ["content/economy/trends"])
-        self.assertEqual(sig["owner"], "content/economy/trends")
+        self.assertEqual(len(sig["property_hits"]), 2)
+        self.assertIsNone(sig["owner"])
 
     def test_region_mismatch_is_unknown(self):
         """地区线索与候选业务线 region 不一致 -> 需人工。"""
@@ -63,8 +69,10 @@ class TestDoubleValidation(unittest.TestCase):
         self.assertIsNone(sig["owner"])
 
     def test_owner_of_matches_signals(self):
-        self.assertIsNotNone(cr.owner_of("dubai_security_2026-11_monthly.html"))
-        self.assertIsNone(cr.owner_of("dubai_security_2026-11_weekly.html"))
+        self.assertIsNotNone(cr.owner_of("apartment_2026-11_monthly.html"))
+        self.assertIsNone(cr.owner_of("apartment_2026-11_weekly.html"))
+        # ai-security/dubai 归位后 region 缺省，含地区词的名称被 region 一致性排除
+        self.assertIsNone(cr.owner_of("dubai_security_2026-11_monthly.html"))
 
 
 class TestStraysScope(unittest.TestCase):

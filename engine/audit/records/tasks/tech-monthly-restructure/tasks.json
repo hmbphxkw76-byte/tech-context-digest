@@ -1,0 +1,50 @@
+[
+  {
+    "acceptance": "",
+    "depends_on": [],
+    "id": "T-1",
+    "phase": "",
+    "status": "pending",
+    "title": "删除 tech 下两处 weekly-roundup（content + data/processed）"
+  },
+  {
+    "acceptance": "",
+    "depends_on": [],
+    "id": "T-2",
+    "phase": "",
+    "status": "pending",
+    "title": "迁移 ai-security/security/dubai → ai-security/dubai（content + data/processed）"
+  },
+  {
+    "acceptance": "",
+    "depends_on": [],
+    "id": "T-3",
+    "phase": "",
+    "status": "pending",
+    "title": "新建 ai-application/trends 月度业务线（competitive-intelligence）"
+  },
+  {
+    "acceptance": "",
+    "depends_on": [],
+    "id": "T-4",
+    "phase": "",
+    "status": "pending",
+    "title": "现有 tech 线节拍改月度（business-config + 周期提示词模板）"
+  },
+  {
+    "acceptance": "",
+    "depends_on": [],
+    "id": "T-5",
+    "phase": "",
+    "status": "pending",
+    "title": "同步引用与生成物（template-registry / layout.json / 文档 / build_hub）"
+  },
+  {
+    "acceptance": "",
+    "depends_on": [],
+    "id": "T-6",
+    "phase": "",
+    "status": "pending",
+    "title": "定向门禁校验与提交"
+  }
+]

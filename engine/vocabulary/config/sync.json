@@ -13,10 +13,10 @@
       "topic": "tech",
       "targets": [
         {
-          "path": "../../content/tech/ai-application/weekly-roundup/prompts/business-config.md",
+          "path": "../../content/tech/ai-application/trends/prompts/business-config.md",
           "format": "digest",
           "section_title": "## 词汇速览 · 科技（词汇库自动同步）",
-          "insert_before": "## 八、版本记录",
+          "insert_before": "## 版本记录",
           "categories_include": [
             "模型与厂商",
             "Agent 技术与框架",
@@ -27,23 +27,7 @@
           "tags_include": []
         },
         {
-          "path": "../../content/tech/ai-security/weekly-roundup/prompts/business-config.md",
-          "format": "digest",
-          "section_title": "## 词汇速览（词汇库自动同步）",
-          "insert_before": "## 八、版本记录",
-          "categories_include": [
-            "攻击技术",
-            "防御与检测",
-            "工具与平台",
-            "框架与标准",
-            "认证与资质",
-            "组织与岗位",
-            "基准与评估"
-          ],
-          "tags_include": []
-        },
-        {
-          "path": "../../content/tech/ai-security/security/dubai/prompts/business-config.md",
+          "path": "../../content/tech/ai-security/dubai/prompts/business-config.md",
           "format": "digest",
           "section_title": "## 词汇速览（词汇库自动同步）",
           "insert_before": "## 十、版本记录",

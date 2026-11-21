@@ -2,7 +2,7 @@
 
 经济 · 科技 · 教育 · 国际 · 政治 · 社会 研究报告仓库。以三层架构（内容 / 引擎 / 资产）组织可复用、可校验、可自动发布的研究报告体系。
 
-- **内容层 `content/`**：六主题（`economy` / `tech` / `education` / `international` / `political` / `society`），业务线位于 `content/<theme>/<维度段...>/`；维度顺序按主题声明（`economy` 为 `<region>/<category>`，`tech` 为 `<category>/<subcategory>/<region>`，其余主题为 `<category>/<region>`）。`region` 为可选维度（`layout.json` 各主题以 `optional_dimensions` 声明），省略时直接以 category（+subcategory）段落位（如 `content/economy/trends`、`content/tech/ai-application/weekly-roundup`）。`tech` 下以 `ai-security` / `ai-application` 两个分组目录归并 AI 安全 / AI 应用业务线。
+- **内容层 `content/`**：六主题（`economy` / `tech` / `education` / `international` / `political` / `society`），业务线位于 `content/<theme>/<维度段...>/`；维度顺序按主题声明（`economy` 为 `<region>/<category>`，`tech` 为 `<category>/<subcategory>/<region>`，其余主题为 `<category>/<region>`）。`region` 为可选维度（`layout.json` 各主题以 `optional_dimensions` 声明），省略时直接以 category（+subcategory）段落位（如 `content/economy/trends`、`content/tech/ai-application/trends`）。`tech` 下以 `ai-security` / `ai-application` 两个分组目录归并 AI 安全 / AI 应用业务线。
 - **引擎层 `engine/`**：跨主题复用的模板、泛用提示词、工具、词库、质量规则、审计与测试。
 - **资产层 `data/`**：`raw/` 原始抓取、`processed/<theme>/<维度段...>/` 清洗后数据、`assets/` 图片图表。
 
@@ -13,7 +13,7 @@
 | 主题 | 说明 | 业务线（维度序） |
 |---|---|---|
 | `economy` | 经济 | insight（区域缺省）、trends（区域缺省）、dubai · apartment |
-| `tech` | 科技 | **AI安全**：dubai · security、dubai · competitive-intelligence、dubai · industry-research、weekly-roundup（区域缺省）；**AI应用**：weekly-roundup（区域缺省） |
+| `tech` | 科技 | **AI安全**：dubai、dubai · competitive-intelligence、dubai · industry-research；**AI应用**：trends（区域缺省） |
 | `education` | 教育 | （已注册，待扩展） |
 | `international` | 国际 | （已注册，待扩展） |
 | `political` | 政治 | （已注册，待扩展） |

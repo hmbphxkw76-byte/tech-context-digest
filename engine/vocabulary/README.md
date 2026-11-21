@@ -260,9 +260,8 @@ python engine/vocabulary/script/vocab_tool.py topic-add --topic financial-market
 
 | 词汇库主题 | 目标提示词 | 接入日期 |
 |---|---|---|
-| tech（AI 应用 5 分类） | `content/tech/ai-application/weekly-roundup/prompts/business-config.md`「词汇速览 · 科技」区块（插于第八节版本记录之前） | 2026-11-20 |
-| tech（AI 安全 7 分类） | `content/tech/ai-security/weekly-roundup/prompts/business-config.md`「词汇速览」区块（插于第八节版本记录之前） | 2026-11-20 |
-| tech（网络类 6 分类，153 条） | `content/tech/ai-security/security/dubai/prompts/business-config.md`「词汇速览」区块（插于第十节版本记录之前） | 2026-11-18 |
+| tech（AI 应用 5 分类） | `content/tech/ai-application/trends/prompts/business-config.md`「词汇速览 · 科技」区块 | 2026-11-21 |
+| tech（网络类 6 分类，153 条） | `content/tech/ai-security/dubai/prompts/business-config.md`「词汇速览」区块（插于第十节版本记录之前） | 2026-11-18 |
 | economy（宏观经济 3 分类，48 条） | `content/economy/trends/prompts/business-config.md`「词汇速览」区块（插于第八节版本记录之前） | 2026-11-18 |
 | economy（金融 6 分类，49 条） | `content/economy/dubai/apartment/prompts/business-config.md`「词汇速览」区块（插于第十四节版本记录之前） | 2026-11-18 |
 

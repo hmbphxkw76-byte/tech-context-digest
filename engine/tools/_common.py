@@ -12,7 +12,7 @@ economy 为 region→category（地区优先），tech 为 category→subcategor
 AI 应用两大类 → 业务线 → 地区），education / international / political / society 为
 category→region（细分优先）。region 为可选维度（theme 以 optional_dimensions
 声明）：业务线可省略 region 段，直接以 category（+subcategory）段落位（如
-content/economy/trends、content/tech/ai-application/weekly-roundup）；省略时剩余段按声明
+content/economy/trends、content/tech/ai-application/trends）；省略时剩余段按声明
 顺序剔除 region 后逐位映射。theme 下允许存在不含业务配置的分组目录（如
 content/tech/ai-security），其层级深度须小于该主题维度数。
 无 region 维度的主题可按声明维度建。
