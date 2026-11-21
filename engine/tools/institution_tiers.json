@@ -1615,6 +1615,30 @@
       "tier": 1,
       "aliases": [],
       "lang": "en"
+    },
+    {
+      "name": "The Official Portal of the UAE Government (u.ae)",
+      "tier": 1,
+      "aliases": ["u.ae"],
+      "lang": "en"
+    },
+    {
+      "name": "Federal Authority for Identity, Citizenship, Customs & Port Security (ICP)",
+      "tier": 1,
+      "aliases": ["ICP", "icp.gov.ae"],
+      "lang": "en"
+    },
+    {
+      "name": "General Directorate of Identity and Foreigners Affairs - Dubai (GDRFA Dubai)",
+      "tier": 1,
+      "aliases": ["GDRFA Dubai", "GDRFA", "gdrfad.gov.ae"],
+      "lang": "en"
+    },
+    {
+      "name": "Arab News",
+      "tier": 4,
+      "aliases": [],
+      "lang": "en"
     }
   ],
   "lang": {

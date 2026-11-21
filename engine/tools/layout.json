@@ -1,8 +1,13 @@
 {
   "version": "5.0",
   "updated": "2026-11-21",
-  "classification_version": "2026-11-21.2",
+  "classification_version": "2026-11-21.3",
   "changelog": [
+    {
+      "version": "2026-11-21.3",
+      "date": "2026-11-21",
+      "summary": "国际主题新增迪拜长期居留签证业务线 content/international/immigration/dubai（category=immigration，region=dubai；政策法规解读型，基线 + 月度）：聚焦黄金签证（Golden Visa / Golden Residence）与绿卡签证（Green Visa / Green Residence），术语口径并列蓝色居留与永久居留，补齐 immigration 主题下地区专项维度。"
+    },
     {
       "version": "2026-11-21.2",
       "date": "2026-11-21",
