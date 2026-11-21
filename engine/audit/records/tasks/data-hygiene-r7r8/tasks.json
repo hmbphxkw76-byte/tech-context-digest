@@ -1,0 +1,42 @@
+[
+  {
+    "acceptance": "",
+    "depends_on": [],
+    "id": "T-1",
+    "phase": "",
+    "status": "done",
+    "title": "补录 57 家缺失机构至 institution_tiers.json"
+  },
+  {
+    "acceptance": "",
+    "depends_on": [],
+    "id": "T-2",
+    "phase": "",
+    "status": "done",
+    "title": "统一登记册分级（9 条偏离项）"
+  },
+  {
+    "acceptance": "",
+    "depends_on": [],
+    "id": "T-3",
+    "phase": "",
+    "status": "done",
+    "title": "修正 business-config 来源优先级引用（Eurostat / UN Digital Library）"
+  },
+  {
+    "acceptance": "",
+    "depends_on": [],
+    "id": "T-4",
+    "phase": "",
+    "status": "done",
+    "title": "R8 回填 document_tier / statement_type / evidence（410 条）"
+  },
+  {
+    "acceptance": "",
+    "depends_on": [],
+    "id": "T-5",
+    "phase": "",
+    "status": "done",
+    "title": "全量回归与提交"
+  }
+]

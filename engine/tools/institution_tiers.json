@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "updated": "2026-11-20",
+  "updated": "2026-11-21",
   "comment": "机构级分级主数据（单一事实源）：机构 → 来源分级 tier（1 官方一手 / 2 行业机构 / 3 挂牌门户 / 4 媒体转述）+ 来源语言 lang。source_check R7 校验分级一致性；R9 中文来源校验以 lang / zh_macro_whitelist / zh_hosts 为准。新增机构须先登记本表。",
   "tiers": {
     "1": "官方一手",
@@ -1031,6 +1031,348 @@
     {
       "name": "新华社英文网",
       "tier": 4,
+      "aliases": [],
+      "lang": "en"
+    },
+    {
+      "name": "ASEAN",
+      "tier": 1,
+      "aliases": [],
+      "lang": "en"
+    },
+    {
+      "name": "AU",
+      "tier": 1,
+      "aliases": [],
+      "lang": "en"
+    },
+    {
+      "name": "EU EEAS",
+      "tier": 1,
+      "aliases": [],
+      "lang": "en"
+    },
+    {
+      "name": "EU Eurydice",
+      "tier": 1,
+      "aliases": [],
+      "lang": "en"
+    },
+    {
+      "name": "Eurostat",
+      "tier": 1,
+      "aliases": [],
+      "lang": "en"
+    },
+    {
+      "name": "Freedom House",
+      "tier": 2,
+      "aliases": [],
+      "lang": "en"
+    },
+    {
+      "name": "German Bundestag",
+      "tier": 1,
+      "aliases": [],
+      "lang": "en"
+    },
+    {
+      "name": "ICC",
+      "tier": 1,
+      "aliases": [],
+      "lang": "en"
+    },
+    {
+      "name": "ICJ",
+      "tier": 1,
+      "aliases": [],
+      "lang": "en"
+    },
+    {
+      "name": "ICRC",
+      "tier": 1,
+      "aliases": [],
+      "lang": "en"
+    },
+    {
+      "name": "IEA",
+      "tier": 2,
+      "aliases": [],
+      "lang": "en"
+    },
+    {
+      "name": "ILO",
+      "tier": 1,
+      "aliases": [],
+      "lang": "en"
+    },
+    {
+      "name": "ITLOS",
+      "tier": 1,
+      "aliases": [],
+      "lang": "en"
+    },
+    {
+      "name": "Inter-Parliamentary Union",
+      "tier": 1,
+      "aliases": [],
+      "lang": "en"
+    },
+    {
+      "name": "International IDEA",
+      "tier": 2,
+      "aliases": [],
+      "lang": "en"
+    },
+    {
+      "name": "KMK",
+      "tier": 1,
+      "aliases": [],
+      "lang": "en"
+    },
+    {
+      "name": "League of Arab States",
+      "tier": 1,
+      "aliases": [],
+      "lang": "en"
+    },
+    {
+      "name": "NCES",
+      "tier": 1,
+      "aliases": [],
+      "lang": "en"
+    },
+    {
+      "name": "OECD",
+      "tier": 1,
+      "aliases": [],
+      "lang": "en"
+    },
+    {
+      "name": "Office for Students",
+      "tier": 1,
+      "aliases": [],
+      "lang": "en"
+    },
+    {
+      "name": "TIMSS & PIRLS (Boston College)",
+      "tier": 2,
+      "aliases": [],
+      "lang": "en"
+    },
+    {
+      "name": "Transparency International",
+      "tier": 2,
+      "aliases": [],
+      "lang": "en"
+    },
+    {
+      "name": "U.S. Congress",
+      "tier": 1,
+      "aliases": [],
+      "lang": "en"
+    },
+    {
+      "name": "U.S. Department of Education",
+      "tier": 1,
+      "aliases": [],
+      "lang": "en"
+    },
+    {
+      "name": "U.S. Department of State",
+      "tier": 1,
+      "aliases": [],
+      "lang": "en"
+    },
+    {
+      "name": "UK Department for Education",
+      "tier": 1,
+      "aliases": [],
+      "lang": "en"
+    },
+    {
+      "name": "UK FCDO",
+      "tier": 1,
+      "aliases": [],
+      "lang": "en"
+    },
+    {
+      "name": "UK Parliament",
+      "tier": 1,
+      "aliases": [],
+      "lang": "en"
+    },
+    {
+      "name": "UN",
+      "tier": 1,
+      "aliases": [],
+      "lang": "en"
+    },
+    {
+      "name": "UN DESA",
+      "tier": 1,
+      "aliases": [],
+      "lang": "en"
+    },
+    {
+      "name": "UN DOALOS",
+      "tier": 1,
+      "aliases": [],
+      "lang": "en"
+    },
+    {
+      "name": "UN Digital Library",
+      "tier": 1,
+      "aliases": [],
+      "lang": "en"
+    },
+    {
+      "name": "UN News",
+      "tier": 1,
+      "aliases": [],
+      "lang": "en"
+    },
+    {
+      "name": "UN OHCHR",
+      "tier": 1,
+      "aliases": [],
+      "lang": "en"
+    },
+    {
+      "name": "UN Treaty Collection",
+      "tier": 1,
+      "aliases": [],
+      "lang": "en"
+    },
+    {
+      "name": "UN-Habitat",
+      "tier": 1,
+      "aliases": [],
+      "lang": "en"
+    },
+    {
+      "name": "UNESCO",
+      "tier": 1,
+      "aliases": [],
+      "lang": "en"
+    },
+    {
+      "name": "UNESCO UIS",
+      "tier": 1,
+      "aliases": [],
+      "lang": "en"
+    },
+    {
+      "name": "UNFCCC",
+      "tier": 1,
+      "aliases": [],
+      "lang": "en"
+    },
+    {
+      "name": "UNODA",
+      "tier": 1,
+      "aliases": [],
+      "lang": "en"
+    },
+    {
+      "name": "V-Dem Institute",
+      "tier": 2,
+      "aliases": [],
+      "lang": "en"
+    },
+    {
+      "name": "WHO",
+      "tier": 1,
+      "aliases": [],
+      "lang": "en"
+    },
+    {
+      "name": "WTO",
+      "tier": 1,
+      "aliases": [],
+      "lang": "en"
+    },
+    {
+      "name": "World Bank",
+      "tier": 1,
+      "aliases": [],
+      "lang": "en"
+    },
+    {
+      "name": "中国外交部",
+      "tier": 1,
+      "aliases": [],
+      "lang": "en"
+    },
+    {
+      "name": "国立社会保障・人口問題研究所",
+      "tier": 2,
+      "aliases": [],
+      "lang": "ja"
+    },
+    {
+      "name": "新华网",
+      "tier": 1,
+      "aliases": [],
+      "lang": "en"
+    },
+    {
+      "name": "日本参議院",
+      "tier": 1,
+      "aliases": [],
+      "lang": "ja"
+    },
+    {
+      "name": "日本外务省",
+      "tier": 1,
+      "aliases": [],
+      "lang": "en"
+    },
+    {
+      "name": "日本文部科学省",
+      "tier": 1,
+      "aliases": [],
+      "lang": "en"
+    },
+    {
+      "name": "日本総務省統計局",
+      "tier": 1,
+      "aliases": [],
+      "lang": "ja"
+    },
+    {
+      "name": "日本衆議院",
+      "tier": 1,
+      "aliases": [],
+      "lang": "ja"
+    },
+    {
+      "name": "総務省選挙部",
+      "tier": 1,
+      "aliases": [],
+      "lang": "ja"
+    },
+    {
+      "name": "韓国 統計庁 KOSIS",
+      "tier": 1,
+      "aliases": [],
+      "lang": "ko"
+    },
+    {
+      "name": "韓国 行政安全部",
+      "tier": 1,
+      "aliases": [],
+      "lang": "ko"
+    },
+    {
+      "name": "韩国外交部",
+      "tier": 1,
+      "aliases": [],
+      "lang": "en"
+    },
+    {
+      "name": "韩国教育部",
+      "tier": 1,
       "aliases": [],
       "lang": "en"
     }

@@ -9,21 +9,341 @@
     "4": "媒体转述（须标『需核实原文』）"
   },
   "sources": [
-    { "source_id": "S-003", "tier": 1, "publisher": "日本総務省統計局", "title": "人口推計", "url": "https://www.stat.go.jp/data/jinsui/", "lang": "ja", "verify_status": "verified", "updated": "2026-11-18", "in_synthesis": false, "used_in": ["2026-11_baseline_report.html"] },
-    { "source_id": "S-004", "tier": 1, "publisher": "韓国 行政安全部", "title": "居民登记人口统计分析", "url": "https://www.mois.go.kr/", "lang": "ko", "verify_status": "verified", "updated": "2026-11-18", "in_synthesis": false, "used_in": ["2026-11_baseline_report.html"] },
-    { "source_id": "S-005", "tier": 1, "publisher": "韓国 統計庁 KOSIS", "title": "国家统计门户", "url": "https://kosis.kr/", "lang": "ko", "verify_status": "verified", "updated": "2026-11-18", "in_synthesis": false, "used_in": ["2026-11_baseline_report.html"] },
-    { "source_id": "S-006", "tier": 1, "publisher": "UN DESA", "title": "World Population Prospects 2024", "url": "https://population.un.org/wpp/", "lang": "en", "verify_status": "verified", "updated": "2026-11-18", "in_synthesis": false, "used_in": ["2026-11_baseline_report.html"] },
-    { "source_id": "S-007", "tier": 1, "publisher": "UN DESA", "title": "WPP 2024 新闻稿", "url": "https://www.un.org/sustainabledevelopment/blog/2024/07/press-release-wpp2024/", "lang": "en", "verify_status": "verified", "updated": "2026-11-18", "in_synthesis": false, "used_in": ["2026-11_baseline_report.html"] },
-    { "source_id": "S-008", "tier": 1, "publisher": "UN DESA", "title": "World Urbanization Prospects 2025", "url": "https://population.un.org/wup/", "lang": "en", "verify_status": "verified", "updated": "2026-11-18", "in_synthesis": false, "used_in": ["2026-11_baseline_report.html"] },
-    { "source_id": "S-009", "tier": 3, "publisher": "OECD", "title": "Income Distribution Database（Gini）", "url": "https://data.oecd.org/inequality/income-inequality.htm", "lang": "en", "verify_status": "verified", "updated": "2026-11-18", "in_synthesis": false, "used_in": ["2026-11_baseline_report.html"] },
-    { "source_id": "S-010", "tier": 3, "publisher": "OECD", "title": "OECD Data", "url": "https://data.oecd.org/", "lang": "en", "verify_status": "verified", "updated": "2026-11-18", "in_synthesis": false, "used_in": ["2026-11_baseline_report.html"] },
-    { "source_id": "S-011", "tier": 1, "publisher": "ILO", "title": "ILOSTAT", "url": "https://ilostat.ilo.org/", "lang": "en", "verify_status": "verified", "updated": "2026-11-18", "in_synthesis": false, "used_in": ["2026-11_baseline_report.html"] },
-    { "source_id": "S-012", "tier": 3, "publisher": "World Bank", "title": "World Development Indicators", "url": "https://data.worldbank.org/", "lang": "en", "verify_status": "unverifiable", "updated": "2026-11-18", "in_synthesis": false, "used_in": ["2026-11_baseline_report.html"] },
-    { "source_id": "S-013", "tier": 3, "publisher": "UN", "title": "UN Data", "url": "http://data.un.org/", "lang": "en", "verify_status": "unverifiable", "updated": "2026-11-18", "in_synthesis": false, "used_in": ["2026-11_baseline_report.html"] },
-    { "source_id": "S-014", "tier": 2, "publisher": "国立社会保障・人口問題研究所", "title": "人口統計資料集", "url": "https://www.ipss.go.jp/", "lang": "ja", "verify_status": "unverifiable", "updated": "2026-11-18", "in_synthesis": false, "used_in": ["2026-11_baseline_report.html"] },
-    { "source_id": "S-015", "tier": 1, "publisher": "UN DESA", "title": "Department of Economic and Social Affairs", "url": "https://www.un.org/en/desa/", "lang": "en", "verify_status": "unverifiable", "updated": "2026-11-18", "in_synthesis": false, "used_in": ["2026-11_baseline_report.html"] },
-    { "source_id": "S-016", "tier": 1, "publisher": "WHO", "title": "World Health Organization", "url": "https://www.who.int/", "lang": "en", "verify_status": "unverifiable", "updated": "2026-11-18", "in_synthesis": false, "used_in": ["2026-11_baseline_report.html"] },
-    { "source_id": "S-017", "tier": 1, "publisher": "UN-Habitat", "title": "UN-Habitat", "url": "https://unhabitat.org/", "lang": "en", "verify_status": "unverifiable", "updated": "2026-11-18", "in_synthesis": false, "used_in": ["2026-11_baseline_report.html"] },
-    { "source_id": "S-018", "tier": 1, "publisher": "日本総務省統計局", "title": "総務省統計局 公式サイト", "url": "https://www.stat.go.jp/", "lang": "ja", "verify_status": "verified", "updated": "2026-11-20", "in_synthesis": false, "used_in": ["2026-11_baseline_report.html"] }
+    {
+      "source_id": "S-003",
+      "tier": 1,
+      "publisher": "日本総務省統計局",
+      "title": "人口推計",
+      "url": "https://www.stat.go.jp/data/jinsui/",
+      "lang": "ja",
+      "verify_status": "verified",
+      "updated": "2026-11-18",
+      "in_synthesis": false,
+      "used_in": [
+        "2026-11_baseline_report.html"
+      ],
+      "document_tier": "official_release",
+      "statement_type": "fact",
+      "evidence": {
+        "method": "manual",
+        "note": "T-01 登记核验回填：登记信息人工核对（未抓取正文，故无 archive_hash）",
+        "snapshot_date": "2026-11-18"
+      }
+    },
+    {
+      "source_id": "S-004",
+      "tier": 1,
+      "publisher": "韓国 行政安全部",
+      "title": "居民登记人口统计分析",
+      "url": "https://www.mois.go.kr/",
+      "lang": "ko",
+      "verify_status": "verified",
+      "updated": "2026-11-18",
+      "in_synthesis": false,
+      "used_in": [
+        "2026-11_baseline_report.html"
+      ],
+      "document_tier": "official_release",
+      "statement_type": "fact",
+      "evidence": {
+        "method": "manual",
+        "note": "T-01 登记核验回填：登记信息人工核对（未抓取正文，故无 archive_hash）",
+        "snapshot_date": "2026-11-18"
+      }
+    },
+    {
+      "source_id": "S-005",
+      "tier": 1,
+      "publisher": "韓国 統計庁 KOSIS",
+      "title": "国家统计门户",
+      "url": "https://kosis.kr/",
+      "lang": "ko",
+      "verify_status": "verified",
+      "updated": "2026-11-18",
+      "in_synthesis": false,
+      "used_in": [
+        "2026-11_baseline_report.html"
+      ],
+      "document_tier": "official_release",
+      "statement_type": "fact",
+      "evidence": {
+        "method": "manual",
+        "note": "T-01 登记核验回填：登记信息人工核对（未抓取正文，故无 archive_hash）",
+        "snapshot_date": "2026-11-18"
+      }
+    },
+    {
+      "source_id": "S-006",
+      "tier": 1,
+      "publisher": "UN DESA",
+      "title": "World Population Prospects 2024",
+      "url": "https://population.un.org/wpp/",
+      "lang": "en",
+      "verify_status": "verified",
+      "updated": "2026-11-18",
+      "in_synthesis": false,
+      "used_in": [
+        "2026-11_baseline_report.html"
+      ],
+      "document_tier": "official_release",
+      "statement_type": "fact",
+      "evidence": {
+        "method": "manual",
+        "note": "T-01 登记核验回填：登记信息人工核对（未抓取正文，故无 archive_hash）",
+        "snapshot_date": "2026-11-18"
+      }
+    },
+    {
+      "source_id": "S-007",
+      "tier": 1,
+      "publisher": "UN DESA",
+      "title": "WPP 2024 新闻稿",
+      "url": "https://www.un.org/sustainabledevelopment/blog/2024/07/press-release-wpp2024/",
+      "lang": "en",
+      "verify_status": "verified",
+      "updated": "2026-11-18",
+      "in_synthesis": false,
+      "used_in": [
+        "2026-11_baseline_report.html"
+      ],
+      "document_tier": "official_release",
+      "statement_type": "fact",
+      "evidence": {
+        "method": "manual",
+        "note": "T-01 登记核验回填：登记信息人工核对（未抓取正文，故无 archive_hash）",
+        "snapshot_date": "2026-11-18"
+      }
+    },
+    {
+      "source_id": "S-008",
+      "tier": 1,
+      "publisher": "UN DESA",
+      "title": "World Urbanization Prospects 2025",
+      "url": "https://population.un.org/wup/",
+      "lang": "en",
+      "verify_status": "verified",
+      "updated": "2026-11-18",
+      "in_synthesis": false,
+      "used_in": [
+        "2026-11_baseline_report.html"
+      ],
+      "document_tier": "official_release",
+      "statement_type": "fact",
+      "evidence": {
+        "method": "manual",
+        "note": "T-01 登记核验回填：登记信息人工核对（未抓取正文，故无 archive_hash）",
+        "snapshot_date": "2026-11-18"
+      }
+    },
+    {
+      "source_id": "S-009",
+      "tier": 1,
+      "publisher": "OECD",
+      "title": "Income Distribution Database（Gini）",
+      "url": "https://data.oecd.org/inequality/income-inequality.htm",
+      "lang": "en",
+      "verify_status": "verified",
+      "updated": "2026-11-18",
+      "in_synthesis": false,
+      "used_in": [
+        "2026-11_baseline_report.html"
+      ],
+      "document_tier": "official_release",
+      "statement_type": "fact",
+      "evidence": {
+        "method": "manual",
+        "note": "T-01 登记核验回填：登记信息人工核对（未抓取正文，故无 archive_hash）",
+        "snapshot_date": "2026-11-18"
+      }
+    },
+    {
+      "source_id": "S-010",
+      "tier": 1,
+      "publisher": "OECD",
+      "title": "OECD Data",
+      "url": "https://data.oecd.org/",
+      "lang": "en",
+      "verify_status": "verified",
+      "updated": "2026-11-18",
+      "in_synthesis": false,
+      "used_in": [
+        "2026-11_baseline_report.html"
+      ],
+      "document_tier": "official_release",
+      "statement_type": "fact",
+      "evidence": {
+        "method": "manual",
+        "note": "T-01 登记核验回填：登记信息人工核对（未抓取正文，故无 archive_hash）",
+        "snapshot_date": "2026-11-18"
+      }
+    },
+    {
+      "source_id": "S-011",
+      "tier": 1,
+      "publisher": "ILO",
+      "title": "ILOSTAT",
+      "url": "https://ilostat.ilo.org/",
+      "lang": "en",
+      "verify_status": "verified",
+      "updated": "2026-11-18",
+      "in_synthesis": false,
+      "used_in": [
+        "2026-11_baseline_report.html"
+      ],
+      "document_tier": "official_release",
+      "statement_type": "fact",
+      "evidence": {
+        "method": "manual",
+        "note": "T-01 登记核验回填：登记信息人工核对（未抓取正文，故无 archive_hash）",
+        "snapshot_date": "2026-11-18"
+      }
+    },
+    {
+      "source_id": "S-012",
+      "tier": 1,
+      "publisher": "World Bank",
+      "title": "World Development Indicators",
+      "url": "https://data.worldbank.org/",
+      "lang": "en",
+      "verify_status": "unverifiable",
+      "updated": "2026-11-18",
+      "in_synthesis": false,
+      "used_in": [
+        "2026-11_baseline_report.html"
+      ],
+      "document_tier": "official_release",
+      "statement_type": "fact",
+      "evidence": {
+        "method": "manual",
+        "note": "T-01 登记核验回填：登记信息人工核对（未抓取正文，故无 archive_hash）",
+        "snapshot_date": "2026-11-18"
+      }
+    },
+    {
+      "source_id": "S-013",
+      "tier": 1,
+      "publisher": "UN",
+      "title": "UN Data",
+      "url": "http://data.un.org/",
+      "lang": "en",
+      "verify_status": "unverifiable",
+      "updated": "2026-11-18",
+      "in_synthesis": false,
+      "used_in": [
+        "2026-11_baseline_report.html"
+      ],
+      "document_tier": "official_release",
+      "statement_type": "fact",
+      "evidence": {
+        "method": "manual",
+        "note": "T-01 登记核验回填：登记信息人工核对（未抓取正文，故无 archive_hash）",
+        "snapshot_date": "2026-11-18"
+      }
+    },
+    {
+      "source_id": "S-014",
+      "tier": 2,
+      "publisher": "国立社会保障・人口問題研究所",
+      "title": "人口統計資料集",
+      "url": "https://www.ipss.go.jp/",
+      "lang": "ja",
+      "verify_status": "unverifiable",
+      "updated": "2026-11-18",
+      "in_synthesis": false,
+      "used_in": [
+        "2026-11_baseline_report.html"
+      ],
+      "document_tier": "industry_report",
+      "statement_type": "fact",
+      "evidence": {
+        "method": "manual",
+        "note": "T-01 登记核验回填：登记信息人工核对（未抓取正文，故无 archive_hash）",
+        "snapshot_date": "2026-11-18"
+      }
+    },
+    {
+      "source_id": "S-015",
+      "tier": 1,
+      "publisher": "UN DESA",
+      "title": "Department of Economic and Social Affairs",
+      "url": "https://www.un.org/en/desa/",
+      "lang": "en",
+      "verify_status": "unverifiable",
+      "updated": "2026-11-18",
+      "in_synthesis": false,
+      "used_in": [
+        "2026-11_baseline_report.html"
+      ],
+      "document_tier": "official_release",
+      "statement_type": "fact",
+      "evidence": {
+        "method": "manual",
+        "note": "T-01 登记核验回填：登记信息人工核对（未抓取正文，故无 archive_hash）",
+        "snapshot_date": "2026-11-18"
+      }
+    },
+    {
+      "source_id": "S-016",
+      "tier": 1,
+      "publisher": "WHO",
+      "title": "World Health Organization",
+      "url": "https://www.who.int/",
+      "lang": "en",
+      "verify_status": "unverifiable",
+      "updated": "2026-11-18",
+      "in_synthesis": false,
+      "used_in": [
+        "2026-11_baseline_report.html"
+      ],
+      "document_tier": "official_release",
+      "statement_type": "fact",
+      "evidence": {
+        "method": "manual",
+        "note": "T-01 登记核验回填：登记信息人工核对（未抓取正文，故无 archive_hash）",
+        "snapshot_date": "2026-11-18"
+      }
+    },
+    {
+      "source_id": "S-017",
+      "tier": 1,
+      "publisher": "UN-Habitat",
+      "title": "UN-Habitat",
+      "url": "https://unhabitat.org/",
+      "lang": "en",
+      "verify_status": "unverifiable",
+      "updated": "2026-11-18",
+      "in_synthesis": false,
+      "used_in": [
+        "2026-11_baseline_report.html"
+      ],
+      "document_tier": "official_release",
+      "statement_type": "fact",
+      "evidence": {
+        "method": "manual",
+        "note": "T-01 登记核验回填：登记信息人工核对（未抓取正文，故无 archive_hash）",
+        "snapshot_date": "2026-11-18"
+      }
+    },
+    {
+      "source_id": "S-018",
+      "tier": 1,
+      "publisher": "日本総務省統計局",
+      "title": "総務省統計局 公式サイト",
+      "url": "https://www.stat.go.jp/",
+      "lang": "ja",
+      "verify_status": "verified",
+      "updated": "2026-11-20",
+      "in_synthesis": false,
+      "used_in": [
+        "2026-11_baseline_report.html"
+      ],
+      "document_tier": "official_release",
+      "statement_type": "fact",
+      "evidence": {
+        "method": "manual",
+        "note": "T-01 登记核验回填：登记信息人工核对（未抓取正文，故无 archive_hash）",
+        "snapshot_date": "2026-11-20"
+      }
+    }
   ]
 }
