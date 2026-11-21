@@ -5,6 +5,8 @@
     FC-02 报告引用可解析：报告内 [FC-…] 引用必须命中卡片库
     FC-03 共享域覆盖：有事实卡片库的业务线（动态派生自卡片库 used_by）的
          新报告须至少引用 1 张卡片（历史报告只警告）
+    FC-04 跨层一致性：卡片 level 不得高于 verify_status 允许上限（调用
+         verification_vocab.is_consistent，恒 [W]，不阻断；词表归一后判定）
 
 退出码：0 通过；1 存在 [E]；2 仅 [W]。
 
@@ -26,7 +28,12 @@ sys.path.insert(0, str(Path(__file__).resolve().parent))
 from _common import ROOT, detect_report, iter_business_dirs  # noqa: E402
 from gate_period import AUTO  # noqa: E402
 from gate_period import resolve as resolve_period
-from verification_vocab import normalize_card_status  # noqa: E402
+from verification_vocab import (  # noqa: E402
+    consistency_issue,
+    is_consistent,
+    normalize_card_status,
+    normalize_info_level,
+)
 
 DEFAULT_GATE = AUTO
 CARD_DIR = ROOT / "engine" / "fact_cards"
@@ -134,7 +141,21 @@ def run(gate: str) -> tuple[int, int, list[str], dict]:
         errors += 1
         lines.append("[E] 事实卡片库：未找到任何卡片")
 
-    stats = {"cards": len(cards), "reports": 0, "refs": 0, "missing_refs": 0}
+    stats = {"cards": len(cards), "reports": 0, "refs": 0, "missing_refs": 0,
+             "inconsistent_cards": 0}
+    # FC-04 卡片信息等级 ≤ 核验状态上限（结构化一致性，恒 [W]）。
+    # 合法性（枚举 / 词形）由 FC-01 负责，此处只在两值均可归一后判定，避免重复告警。
+    for cid in sorted(cards):
+        c = cards[cid]
+        level = normalize_info_level(c["level"])
+        status = normalize_card_status(c["verify_status"])
+        if level is None or status is None:
+            continue
+        if not is_consistent(level, status, "card"):
+            stats["inconsistent_cards"] += 1
+            warnings += 1
+            lines.append(f"[W] 事实卡片库{consistency_issue(level, status, 'card', where=cid)}"
+                         f"（FC-04，不阻断）")
     tokens = shared_fact_tokens(cards)
     for rel, text, period, bline in iter_report_refs():
         stats["reports"] += 1
@@ -172,7 +193,8 @@ def main() -> int:
         print(f"事实卡片门禁失败：{errors} 项错误，{warnings} 项警告")
         return 1
     if warnings:
-        print(f"事实卡片门禁：{warnings} 项历史报告警告（不阻断）")
+        print(f"事实卡片门禁：{warnings} 项警告（不阻断；含 FC-04 越级卡片 "
+              f"{stats['inconsistent_cards']} 张）")
         return 2
     print(f"事实卡片门禁通过：卡片 {stats['cards']} 张，引用 {stats['refs']} 条")
     return 0

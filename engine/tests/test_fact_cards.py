@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 """事实卡片门禁（INFORMATION-LAYERING-SPEC v1.0 第五节）单元测试。
 
-覆盖 fact_card_check：卡片库结构、引用解析、共享域覆盖。
+覆盖 fact_card_check：卡片库结构、引用解析、共享域覆盖、FC-04 跨层一致性。
 运行：python -m unittest discover -s engine/tests -v
 """
 from __future__ import annotations
@@ -54,6 +54,23 @@ class TestFactCards(unittest.TestCase):
                 self.assertTrue(found, f"{rel} 未引用事实卡片")
                 checked += 1
         self.assertGreaterEqual(checked, 4, "应覆盖多个共享事实域新报告")
+
+    def test_fc04_consistency_wiring(self):
+        # FC-04：越级卡片应被计数并产生 [W]，但不得计入 [E]（恒不阻断）。
+        cards, _ = m.load_cards()
+        expected = 0
+        for cid, c in cards.items():
+            level = m.normalize_info_level(c["level"])
+            status = m.normalize_card_status(c["verify_status"])
+            if level is None or status is None:
+                continue
+            if not m.is_consistent(level, status, "card"):
+                expected += 1
+        errors, warnings, lines, stats = m.run(resolve_period("auto"))
+        self.assertEqual(errors, 0, lines)
+        self.assertEqual(stats["inconsistent_cards"], expected)
+        self.assertGreaterEqual(warnings, expected)
+        self.assertTrue(any("FC-04" in ln for ln in lines))
 
     def test_missing_reference_detected(self):
         # 合成：引用不存在的卡片应被 run 判错（直接检查解析逻辑）

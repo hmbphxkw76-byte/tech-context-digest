@@ -21,6 +21,7 @@
     normalize_source_status("已核验")      # -> "verified"
     normalize_source_status("media_unverified")  # -> "media_unverified"
     normalize_card_status("verified")      # -> "已核验"
+    normalize_info_level("已核验")         # -> "已核验事实"（别名归一）
     is_consistent("已核验", "media_unverified")  # -> False（部分核验来源不得标已核验）
 """
 from __future__ import annotations
@@ -31,7 +32,11 @@ SOURCE_STATUSES = ("verified", "media_unverified", "unverifiable")
 # 卡片 / 报告层（中文）
 CARD_STATUSES = ("已核验", "部分核验", "未核验")
 # 信息等级（INFORMATION-LAYERING-SPEC v1.0 第四节）
-INFO_LEVELS = ("已核验", "部分核验", "推断", "假设")
+# canonical 词形以该规范为准：「已核验事实」；「已核验」为报告 inline 标记 / 历史用词别名。
+INFO_LEVELS = ("已核验事实", "部分核验", "推断", "假设")
+
+# 同义别名 → canonical（不另立强度）。
+LEVEL_ALIASES = {"已核验": "已核验事实"}
 
 SOURCE_TO_CARD = {
     "verified": "已核验",
@@ -49,18 +54,18 @@ _SOURCE_ALIASES = {
     "未核实": "unverifiable",
 }
 
-# 信息等级强度（数值越大越强）：假设 < 推断 < 部分核验 < 已核验
+# 信息等级强度（数值越大越强）：假设 < 推断 < 部分核验 < 已核验事实
 _INFO_STRENGTH = {lv: i for i, lv in enumerate(reversed(INFO_LEVELS))}
 
 # 核验状态允许的**最高**信息等级（决策摘要仅允许已核验 + 部分核验）：
-# verified 可标已核验；media_unverified 最高部分核验；unverifiable / 未核验只能作假设。
+# verified 可标已核验事实；media_unverified 最高部分核验；unverifiable / 未核验只能作假设。
 _SOURCE_CEILING = {
-    "verified": "已核验",
+    "verified": "已核验事实",
     "media_unverified": "部分核验",
     "unverifiable": "假设",
 }
 _CARD_CEILING = {
-    "已核验": "已核验",
+    "已核验": "已核验事实",
     "部分核验": "部分核验",
     "未核验": "假设",
 }
@@ -111,8 +116,19 @@ def card_to_source(value) -> str | None:
 
 
 # ── 一致性 ──────────────────────────────────────────────────────────────────
+def normalize_info_level(value) -> str | None:
+    """信息等级归一：返回 canonical 中文信息等级，非法值返回 ``None``。
+
+    ``已核验`` 是 ``已核验事实`` 的别名（报告 inline 标记与历史用词），
+    归一后不产生额外强度；``value`` 已是 INFO_LEVELS 成员时原样返回。
+    """
+    if value in INFO_LEVELS:
+        return value
+    return LEVEL_ALIASES.get(value)
+
+
 def info_level_for(value, kind: str = "source") -> str | None:
-    """核验状态 -> 允许的最高信息等级；无法识别返回 ``None``.
+    """核验状态 -> 允许的最高信息等级；无法识别返回 ``None``。
 
     kind ∈ {"source", "card"}；两者语义相同，仅入参词形不同。
     """
@@ -133,14 +149,15 @@ def is_decision_safe(value, kind: str = "source") -> bool:
 def is_consistent(level: str, status, kind: str = "source") -> bool:
     """报告信息等级是否不高于核验状态允许的上限。
 
-    level  ∈ INFO_LEVELS（已核验 / 部分核验 / 推断 / 假设）；
+    level  ∈ INFO_LEVELS（已核验事实 / 部分核验 / 推断 / 假设；``已核验`` 为别名）；
     status 为核验状态（kind 决定词形）。
     非法 level / 无法识别的 status 一律返回 False（宁可报不一致，不放过）。
     """
     ceiling = info_level_for(status, kind)
-    if ceiling is None or level not in _INFO_STRENGTH:
+    lv = normalize_info_level(level)
+    if ceiling is None or lv is None:
         return False
-    return _INFO_STRENGTH[level] <= _INFO_STRENGTH[ceiling]
+    return _INFO_STRENGTH[lv] <= _INFO_STRENGTH[ceiling]
 
 
 def consistency_issue(level: str, status, kind: str = "source",

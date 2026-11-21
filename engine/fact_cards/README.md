@@ -32,8 +32,12 @@
 ## 校验
 
 ```bash
-python engine/tools/fact_card_check.py            # 校验卡片库结构 + 报告引用可解析
+python engine/tools/fact_card_check.py            # 卡片库结构 + 引用可解析 + 共享域覆盖 + FC-04 一致性
 python engine/tools/fact_card_check.py --json
 ```
 
 退出码 0/1/2（通过 / 有 `[E]` / 仅 `[W]`）。
+
+- FC-01–03：结构 / 引用可解析 / 共享域覆盖（新报告 `[E]`，历史 `[W]`）；
+- FC-04：卡片 `level` 不得高于 `verify_status` 允许上限（`verification_vocab.is_consistent`，
+  恒 `[W]`，不阻断；越级清单见门禁输出）。
