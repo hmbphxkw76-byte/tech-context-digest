@@ -4,7 +4,23 @@
     "depends_on": [],
     "id": "T-1",
     "phase": "",
-    "status": "pending",
-    "title": "移除 branch_registry 中无对应分支的登记条目"
+    "status": "done",
+    "title": "核对本地与远端分支，确认登记册失效条目"
+  },
+  {
+    "acceptance": "",
+    "depends_on": [],
+    "id": "T-2",
+    "phase": "",
+    "status": "done",
+    "title": "经 branch_naming API 注销失效条目并保存登记册"
+  },
+  {
+    "acceptance": "",
+    "depends_on": [],
+    "id": "T-3",
+    "phase": "",
+    "status": "done",
+    "title": "跑通统一门禁并提交"
   }
 ]
