@@ -1,0 +1,42 @@
+[
+  {
+    "acceptance": "",
+    "depends_on": [],
+    "id": "T-1",
+    "phase": "",
+    "status": "pending",
+    "title": "建立业务线骨架与 business-config / 基线 / 月度提示词"
+  },
+  {
+    "acceptance": "",
+    "depends_on": [],
+    "id": "T-2",
+    "phase": "",
+    "status": "pending",
+    "title": "采集 9 国高技能移民政策（仅英文官方来源）并建台账 / 来源登记"
+  },
+  {
+    "acceptance": "",
+    "depends_on": [],
+    "id": "T-3",
+    "phase": "",
+    "status": "pending",
+    "title": "生成 2026-11 基线报告（canonical 自包含 HTML）"
+  },
+  {
+    "acceptance": "",
+    "depends_on": [],
+    "id": "T-4",
+    "phase": "",
+    "status": "pending",
+    "title": "扩展 policy-analysis 月度节拍（类型模板 / 合规规则 / 注册表 / TYPE_CADENCE）"
+  },
+  {
+    "acceptance": "",
+    "depends_on": [],
+    "id": "T-5",
+    "phase": "",
+    "status": "pending",
+    "title": "跑通统一门禁并重建 hub / 指纹"
+  }
+]

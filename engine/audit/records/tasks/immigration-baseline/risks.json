@@ -1,0 +1,14 @@
+[
+  {
+    "description": "部分官方页反爬（immi / make-it-in-germany / travel.state.gov）致数值仅 snippet",
+    "id": "R-1",
+    "mitigation": "降级标注并列入未核验清单 U-01-U-12",
+    "owner": ""
+  },
+  {
+    "description": "并行会话工作区变更混杂",
+    "id": "R-2",
+    "mitigation": "仅按路径暂存本会话产物，不触碰他人分支与工件",
+    "owner": ""
+  }
+]
