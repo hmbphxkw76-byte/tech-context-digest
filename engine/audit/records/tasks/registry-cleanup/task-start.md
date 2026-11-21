@@ -1,4 +1,4 @@
-# 任务启动 · 清理 branch_registry 历史残留条目
+# 任务启动 · 清理 branch_registry 残留登记（已删除分支条目）
 
 - slug：`registry-cleanup`
 - 起点：`main`；分支：`task/registry-cleanup-<session8>`（见 `branch_registry.json`）
@@ -25,18 +25,19 @@
 
 ## 复用入口（不得另写一套校验）
 
-- 统一门禁：`python engine/tools/optimization_gate.py --gate-period 2026-12 --source-gate-period 2027-01 --probe`
+- 统一门禁：`python engine/tools/optimization_gate.py --gate-period auto --source-gate-period auto --probe`
 - 提交网关：`python engine/tools/repo_sync.py run --message ... --paths ... --gate`
 - 端到端编排：`python engine/tools/pipeline_runner.py validate`
 - 一键闭环：`python engine/tools/local_mainline.py run --slug registry-cleanup --title ...`
 
-## 任务清单（1 项，详见 tasks.json）
+## 任务清单（2 项，详见 tasks.json）
 
-- [pending] T-1 移除无对应分支的历史登记
+- [pending] T-1 移除 task/verification-mechanism-fae8d6d4 残留登记
+- [pending] T-2 校验登记册与现存分支一致
 
 ## 风险登记（1 项，详见 risks.json）
 
-- R-1 登记册清空后历史会话映射丢失（缓解：保留 git 历史可查，登记册仅服务在册分支）
+- R-1 误删在册分支登记（缓解：仅删已确认删除的条目）
 
 ## 关联报告
 

@@ -81,5 +81,5 @@
   "slug": "registry-cleanup",
   "source": "main",
   "spec": "MAINLINE-ADOPTION-PHASE1",
-  "title": "清理 branch_registry 历史残留条目"
+  "title": "清理 branch_registry 残留登记（已删除分支条目）"
 }
