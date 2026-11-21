@@ -1,8 +1,8 @@
 [
   {
-    "description": "登记册清空后历史会话映射丢失",
+    "description": "误删仍存在的分支登记",
     "id": "R-1",
-    "mitigation": "缓解=git 历史可查，登记册仅服务在册分支",
+    "mitigation": "仅注销本地与远端均已不存在的分支，注销前逐条核对 branch -a",
     "owner": ""
   }
 ]

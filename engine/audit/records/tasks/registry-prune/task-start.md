@@ -1,4 +1,4 @@
-# 任务启动 · 清理 branch_registry 残留登记（已删除分支）
+# 任务启动 · 清理 branch_registry 残留登记（已删除分支条目）
 
 - slug：`registry-prune`
 - 起点：`main`；分支：`task/registry-prune-<session8>`（见 `branch_registry.json`）
@@ -25,18 +25,20 @@
 
 ## 复用入口（不得另写一套校验）
 
-- 统一门禁：`python engine/tools/optimization_gate.py --gate-period 2026-12 --source-gate-period 2027-01 --probe`
+- 统一门禁：`python engine/tools/optimization_gate.py --gate-period auto --source-gate-period auto --probe`
 - 提交网关：`python engine/tools/repo_sync.py run --message ... --paths ... --gate`
 - 端到端编排：`python engine/tools/pipeline_runner.py validate`
 - 一键闭环：`python engine/tools/local_mainline.py run --slug registry-prune --title ...`
 
-## 任务清单（1 项，详见 tasks.json）
+## 任务清单（3 项，详见 tasks.json）
 
-- [pending] T-1 移除 branch_registry 中无对应分支的登记条目
+- [done] T-1 核对本地与远端分支，确认登记册失效条目
+- [done] T-2 经 branch_naming API 注销失效条目并保存登记册
+- [done] T-3 跑通统一门禁并提交
 
 ## 风险登记（1 项，详见 risks.json）
 
-- R-1 登记册清空后历史会话映射丢失（缓解：缓解=git 历史可查，登记册仅服务在册分支）
+- R-1 误删仍存在的分支登记（缓解：仅注销本地与远端均已不存在的分支，注销前逐条核对 branch -a）
 
 ## 关联报告
 
