@@ -191,7 +191,7 @@ class TestI04FactCard(unittest.TestCase):
 class TestR03DuplicateRate(unittest.TestCase):
     """R-03 跨主题重复率口径（2026-11-19 校准）：排除来源/链接段落。"""
 
-    LINE_A = "content/tech/ai-application/trends"
+    LINE_A = "content/tech/ai-application/dubai"
     LINE_B = "content/economy/trends"
 
     def test_source_link_paragraph_excluded(self):
@@ -297,7 +297,7 @@ class TestA03TruthCandidates(unittest.TestCase):
             "content/economy/dubai/apartment/reports/a.html": "<p>R06 21.4；P01 1,817</p>",
             "content/economy/dubai/apartment/reports/b.html": "<p>R06 20</p>",
             "content/economy/dubai/apartment/reports/c.html": "<p>Z99 5</p>",
-            "content/tech/ai-application/trends/reports/d.html": "<p>R06 999</p>",
+            "content/tech/ai-application/dubai/reports/d.html": "<p>R06 999</p>",
         }
         with self._patched():
             res = mc.a03_truth_candidates(reports)

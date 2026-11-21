@@ -6,7 +6,7 @@
 > **框架说明（贯穿全程）**：[政策法规解读型月度模板](../../../../engine/templates/policy-analysis/prompt-monthly-monitor-template.md)。
 > **交付格式**：纯 HTML 交付（canonical 富样式自包含 HTML）；md 源稿仅存档于 `sources/`。
 
-> **九节固化锚**：本报告结构 = [月度模板](<../../../../engine/templates/policy-analysis/prompt-monthly-monitor-template.md>) 九节骨架逐字继承（节标题为本业务线固化锚，不得增删节、调整顺序）。字数 6000–12000。
+> **九节固化锚**：本报告结构 = [月度模板](../../../../engine/templates/policy-analysis/prompt-monthly-monitor-template.md) 九节骨架逐字继承（节标题为本业务线固化锚，不得增删节、调整顺序）。字数 6000–12000。
 
 > **🔒 第三节节标题固化锚（业务实例）**
 > **一、执行摘要**｜**二、政策台账与监测机制**｜**三、高技能移民框架总览**｜**四、重点国家政策逐条解读**｜**五、影响对象矩阵**｜**六、合规应对建议（建议章）**｜**七、生效时间线**｜**八、数据治理与局限**｜**九、参考来源清单**

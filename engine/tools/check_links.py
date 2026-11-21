@@ -88,7 +88,9 @@ ALLOWED_PREFIXES = {
     "data/processed/tech/ai-security/competitive-intelligence/dubai",
     "data/processed/tech/ai-security/industry-research/dubai",
     "data/processed/tech/ai-security/dubai",
-    "data/processed/tech/ai-application/trends",
+    "data/processed/tech/ai-application/competitive-intelligence/dubai",
+    "data/processed/tech/ai-application/industry-research/dubai",
+    "data/processed/tech/ai-application/dubai",
     "data/sync-backups",
 }
 
@@ -128,6 +130,8 @@ ALLOWED_BROKEN = {
     "data/processed/tech/ai-security/security/dubai",
     "data/processed/tech/ai-security/weekly-roundup",
     "data/processed/tech/ai-application/weekly-roundup",
+    "content/tech/ai-application/trends",
+    "data/processed/tech/ai-application/trends",
     "data/raw/tech/competitive-intelligence/dubai",
     "data/raw/tech/industry-research/dubai",
     # 已删除的未来周期月报（落款晚于产出当月、数据窗口越界，2026-11-21 清理）：
