@@ -61,7 +61,7 @@
 
 `engine/audit/records/tasks/p1-continue/` 四件套已建，`tasks.json` **4 项全为 `pending`**，产物全部未提交：
 
-- 4 份新报告（未跟踪）：`content/economy/dubai/apartment/reports/2027-01_monthly.html`、`content/economy/trends/reports/2026-11-27_weekly.html`、`content/education/education-system/reports/2026-12_baseline_report.html`、`content/international/international-relations/reports/2026-11_baseline_report.html`。
+- 4 份新报告（未跟踪）：`content/economy/dubai/apartment/reports/2027-01_monthly.html`、`content/economy/trends/reports/2026-11-27_weekly.html`、`content/education/education-system/reports/2026-11_baseline_report.html`、`content/international/international-relations/reports/2026-11_baseline_report.html`。
 - 新工具/数据：`engine/tools/indicator_sidecar.py`、`data/processed/economy/dubai/apartment/indicator_latest.json`、`engine/tools/probe-exemptions.json`；`engine/tools/metric_coverage.py` 增 `a03_truth_check` 与 A-05 接线。
 - **未验证对齐**：未走 `repo_sync run --gate`；`publish_fingerprint` 报 1 份 CHANGED（education 基线 `22f0614f → 3491be80`）；4 份报告未登记。
 
@@ -77,10 +77,10 @@
 | `content/tech/weekly-roundup/reports/2026-11-20_weekly.html` | **已提交** |
 | `content/economy/dubai/apartment/reports/2027-01_monthly.html` | 未提交 |
 | `content/economy/trends/reports/2026-11-27_weekly.html` | 未提交 |
-| `content/education/education-system/reports/2026-12_baseline_report.html` | 未提交 |
+| `content/education/education-system/reports/2026-11_baseline_report.html` | 未提交 |
 | `content/international/international-relations/reports/2026-11_baseline_report.html` | 未提交 |
 
-> 另有 3 份登记但停在 `in-review 2/4`：`content/economy/insight/reports/2026-12_baseline_report.html`、`content/economy/trends/reports/2026-11-13_weekly.html`、`content/tech/weekly-roundup/reports/2026-11-13_weekly.html`——**L3 终审瓶颈**。
+> 另有 3 份登记但停在 `in-review 2/4`：`content/economy/insight/reports/2026-11_baseline_report.html`、`content/economy/trends/reports/2026-11-13_weekly.html`、`content/tech/weekly-roundup/reports/2026-11-13_weekly.html`——**L3 终审瓶颈**。
 
 #### C. 度量层：5 项不达标 + 7 项未接线
 
@@ -113,7 +113,7 @@
 
 1. **新报告强制力受限**：gate-period `auto` = 2026-12，故 2026-11 及更早报告即使缺内核项 / 行动项也判 `[W]` 放行；仅当月报告为 `[E]`。
 2. **门禁确定性未定位**（gap-checklist E1）：与 `unittest` **并行**运行时曾出现 1 次 `1 [E] / exit 1`；干净重跑 3 次均 `0 [E] / exit 2`。推断为 records 写入竞态或网络抖动，**未复现定位**。
-3. **指纹漂移未收口**：`content/education/education-system/reports/2026-12_baseline_report.html` 需 `publish_fingerprint.py --emit`。
+3. **指纹漂移未收口**：`content/education/education-system/reports/2026-11_baseline_report.html` 需 `publish_fingerprint.py --emit`。
 4. **历史警告积压**：`monitoring_render` 86 `[W]`、`source_check` 76 `[W]`（含 3 处死链待人工复核）。
 5. **词库空库**：political / society `terms.md` 无词条（VD-02 `[W]`）。
 

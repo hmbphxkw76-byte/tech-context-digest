@@ -13,11 +13,11 @@
 {{TOPIC}}                = 教育体系与政策
 {{REPORT_TYPE}}          = policy-analysis
 {{CADENCE}}              = 事件触发单份解读 + 年度台账复盘
-{{BASELINE_DATE}}        = 待首期基线运行后回写
+{{BASELINE_DATE}}        = 2026-11（首期基线报告落款周期）
 {{REGISTRY_PATH}}        = data/processed/education/education-system/education_policy_ledger.md
 {{REGISTRY_FORMAT}}      = md-ledger
 {{SOURCE_REGISTRY_PATH}} = data/processed/education/education-system/source_registry.json
-{{BASELINE_REPORT_PATH}} = reports/{{YYYY-MM}}_baseline_report.html（待首期基线运行后回写）
+{{BASELINE_REPORT_PATH}} = reports/2026-11_baseline_report.html
 {{FRESHNESS_PRIORITY}}   = 官方原文 > 立法记录 > 国际组织统计快照 > 媒体转述
 {{SOURCE_LANGUAGE_RULE}} = 仅英文（严禁中文来源）
 {{REPO_RAW_URL_BASE}}    = https://github.com/hmbphxkw76-byte/tech-context-digest/blob/main/content/education/education-system

@@ -66,7 +66,7 @@
 ```bash
 python -m py_compile engine/tools/*.py engine/tests/*.py engine/audit/scripts/*.py
 python -m unittest discover -s engine/tests -p "test_*.py"
-python engine/tools/optimization_gate.py --gate-period 2026-12 --source-gate-period 2027-01 --probe
+python engine/tools/optimization_gate.py --gate-period auto --source-gate-period auto --probe
 python engine/tools/optimization_gate.py --only ruff,mypy
 python engine/tools/validate.py && python engine/tools/check_links.py && python engine/tools/page_build_check.py
 python engine/tools/pipeline_runner.py validate

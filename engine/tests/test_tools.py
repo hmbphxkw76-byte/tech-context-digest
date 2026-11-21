@@ -132,16 +132,14 @@ class TestBuildTasks(unittest.TestCase):
         self.assertTrue(t["prompt"].endswith("prompt-monthly-monitor.md"))
 
     def test_pending_when_output_missing(self):
-        # 2026-12 / 2027-01 月度均已产出（第二/三期），应为 done；2027-02 尚未产出，应为 pending
-        for period, name in (("2026-12", "2026-12_monthly.html"),
-                             ("2027-01", "2027-01_monthly.html")):
-            tasks = build_tasks(period, _common.iter_business_dirs())
-            by_out = {t["output"]: t for t in tasks}
-            self.assertEqual(
-                by_out[f"content/economy/dubai/apartment/reports/{name}"]["status"], "done")
-        tasks = build_tasks("2027-02", _common.iter_business_dirs())
+        # 2026-11 月度已产出（done）；2026-12 尚未产出（pending）
+        tasks = build_tasks("2026-11", _common.iter_business_dirs())
         by_out = {t["output"]: t for t in tasks}
-        self.assertEqual(by_out["content/economy/dubai/apartment/reports/2027-02_monthly.html"]["status"], "pending")
+        self.assertEqual(
+            by_out["content/economy/dubai/apartment/reports/2026-11_monthly.html"]["status"], "done")
+        tasks = build_tasks("2026-12", _common.iter_business_dirs())
+        by_out = {t["output"]: t for t in tasks}
+        self.assertEqual(by_out["content/economy/dubai/apartment/reports/2026-12_monthly.html"]["status"], "pending")
 
     def test_conditional_cycle_not_scheduled(self):
         # security 月度为核验型轻运行（提示词含 report-output: none），不派月度任务
@@ -153,12 +151,12 @@ class TestBuildTasks(unittest.TestCase):
         self.assertTrue(any(t["project"] == "content/tech/ai-security/security/dubai" for t in q))
 
     def test_no_task_before_baseline(self):
-        # competitive-intelligence 基线 2026-12，不应派 2026-11 月度任务
-        tasks = build_tasks("2026-11", _common.iter_business_dirs())
+        # competitive-intelligence 基线 2026-11，不应派 2026-10 月度任务
+        tasks = build_tasks("2026-10", _common.iter_business_dirs())
         self.assertFalse(any(t["project"] == "content/tech/ai-security/competitive-intelligence/dubai" for t in tasks))
-        # 其 2026-12 月度任务应派发
-        dec = build_tasks("2026-12", _common.iter_business_dirs())
-        self.assertTrue(any(t["project"] == "content/tech/ai-security/competitive-intelligence/dubai" for t in dec))
+        # 其 2026-11 月度任务应派发（且已产出）
+        nov = build_tasks("2026-11", _common.iter_business_dirs())
+        self.assertTrue(any(t["project"] == "content/tech/ai-security/competitive-intelligence/dubai" for t in nov))
 
     def test_weekly_period_dispatches_weekly_only(self):
         # 周周期只为具备 weekly 提示词的業務线派发（S3 最小集工具侧）
@@ -523,8 +521,8 @@ class TestBuildHubCheck(unittest.TestCase):
         hub = build_outputs()["index.html"]
         self.assertIn("cycle-head", hub)
         # 基期展示口径：仓库内最新月报；「本期更新 · 环比基期」仅在存在上一期报告时标注
-        self.assertIn("最新月报 2027-01", hub)
-        self.assertIn("环比基期 2026-12", hub)
+        self.assertIn("最新月报 2026-11", hub)
+        self.assertNotIn("环比基期 2026-12", hub)
         self.assertNotIn("环比基期 2026-10", hub)
         self.assertIn("该周期首期报告，无环比基期", hub)
 

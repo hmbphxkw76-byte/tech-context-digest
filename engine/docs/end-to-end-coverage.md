@@ -16,7 +16,7 @@
 | 3 | 分阶段落地实施 | 设计基线 §6 的 P1–P4 + [架构开发规范](./architecture-development-standard.md) §三（流程与评审节点） | 阶段出口就地门禁 G0–G5 | `pipeline_runner run` |
 | 4 | 全链路自动化与稳定性保障 | `pipeline_runner` + `pipeline_manifest.json` + `automation_status` / `perf_monitor` / `remediation_ticket` / `workspace_cleanup` | 子进程 wall 超时 / 共享检出锁 / 退出码 0-1-2 / 幂等 | `test_pipeline_runner` / `test_perf_monitor` |
 | 5 | 标准化交付物输出 | 见 §三交付物清单 | 命名规范 + 生成物确定性 | `check_links` / `validate` |
-| 6 | 基础设施保障机制 | `optimization_gate`（29 项单一入口）+ `repo_sync` + `pre-push` + 分支保护 + CI 六工作流 | `[E]` 阻断合并 / 提交 | `test_process_gates` / `test_repo_sync` / `test_workflow_isolation` |
+| 6 | 基础设施保障机制 | `optimization_gate`（30 项单一入口）+ `repo_sync` + `pre-push` + 分支保护 + CI 六工作流 | `[E]` 阻断合并 / 提交 | `test_process_gates` / `test_repo_sync` / `test_workflow_isolation` |
 
 ---
 
@@ -36,7 +36,7 @@
 
 - **闭环 L1**：N8 → N1（异步：心跳 / 任务清单 / 复审）。
 - **闭环 L2**：G6 → N4（同步：`[E]` 阻断，携上下文退回生成）。
-- **统一门禁**：G6 = `*`（全量 29 项，`--probe`），两级 gate-period（内容 2026-12 / 来源 2027-01）。
+- **统一门禁**：G6 = `*`（全量 30 项，`--probe`），两级 gate-period（内容 / 来源均为 `auto` = 当前自然月）。
 
 ---
 
@@ -59,7 +59,7 @@
 | 命令 | 结果 |
 |---|---|
 | `python -m unittest discover -s engine/tests` | 398 通过（1 跳过） |
-| `python engine/tools/optimization_gate.py --gate-period 2026-12 --source-gate-period 2027-01 --probe` | 0 错误 / 1 警告（`source_check` R6 历史死链，宽限期内不追溯） |
+| `python engine/tools/optimization_gate.py --gate-period auto --source-gate-period auto --probe` | 0 错误 / 1 警告（`source_check` R6 历史死链，宽限期内不追溯） |
 | `python engine/tools/pipeline_runner.py run --from N0 --to N8` | `outcome=passed`（G0–G8 全过；G2/G6/G7 仅宽限期警告） |
 | `python engine/tools/pipeline_runner.py validate` | 9 节点 / 9 门禁 / 2 闭环 |
 | `validate_layout` / `validate` / `check_links` / `page_build_check` / `build_hub --check` | 全部 0 |

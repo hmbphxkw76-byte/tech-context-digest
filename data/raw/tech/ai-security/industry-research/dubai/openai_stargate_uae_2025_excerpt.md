@@ -3,10 +3,10 @@
 - **来源编号**：S-004
 - **来源层级**：tier 1（官方一手）
 - **原文 URL**：https://openai.com/index/introducing-stargate-uae
-- **采集期**：2026-12（基线期）
+- **采集期**：2026-11（基线期）
 - **核验状态**：部分核验
 - **对应台账**：`data/processed/tech/ai-security/industry-research/dubai/ai_cybersecurity_indicator_registry.md`
-- **对应报告**：`content/tech/ai-security/industry-research/dubai/reports/2026-12_baseline_report.html`
+- **对应报告**：`content/tech/ai-security/industry-research/dubai/reports/2026-11_baseline_report.html`
 
 ## 已核验摘录
 

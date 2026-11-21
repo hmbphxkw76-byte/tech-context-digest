@@ -130,7 +130,7 @@ jobs:
       - name: A-05 链接可达率探测（定期落盘）
         run: |
           set +e
-          python engine/tools/source_check.py --probe --probe-lenient --gate-period 2027-01 \
+          python engine/tools/source_check.py --probe --probe-lenient --gate-period auto \
             --emit engine/audit/records/link-probe.json
           code=$?
           if [ "$code" -eq 1 ]; then
@@ -142,7 +142,7 @@ jobs:
 
       # IGI 趋势快照（11-19 方案 C 轨道）：按 gate-period 落盘 igi_history.json，
       # 供 audit_tool status 输出八度趋势表（上一「审计登记册 stale 检测」步骤）。
-      # 同周期重跑为覆盖，幂等；period 取滚动 gate-period（当前月 + 1）。
+      # 同周期重跑为覆盖，幂等；period 取滚动 gate-period（当前自然月）。
       - name: IGI 趋势快照（按 gate-period 落盘）
         run: python engine/audit/scripts/audit_tool.py igi-snapshot
 
@@ -150,7 +150,7 @@ jobs:
       - name: 优化流程一致性门禁（统一入口 · 含 probe）
         run: |
           set +e
-          python engine/tools/optimization_gate.py --gate-period 2026-12 --source-gate-period 2027-01 --probe
+          python engine/tools/optimization_gate.py --gate-period auto --source-gate-period auto --probe
           code=$?
           if [ "$code" -eq 1 ]; then
             echo "::error::统一门禁失败：存在错误项（见上方输出）"

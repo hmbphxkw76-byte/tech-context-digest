@@ -1,5 +1,20 @@
 {
-  "branches": {},
+  "branches": {
+    "task/report-period-current-month-5856e15f": {
+      "note": "source=env:CATPAW_CONVERSATION_ID",
+      "session": "5856e15f62094997b2cde88bffaac0be",
+      "session_short": "5856e15f",
+      "slug": "report-period-current-month",
+      "task": "report-period-current-month"
+    },
+    "task/tech-monthly-restructure-b64f8dc1": {
+      "note": "source=env:CATPAW_CONVERSATION_ID",
+      "session": "b64f8dc1787741358883699aee1cc3d9",
+      "session_short": "b64f8dc1",
+      "slug": "tech-monthly-restructure",
+      "task": "tech-monthly-restructure"
+    }
+  },
   "schema": 1,
   "spec": "BRANCH-NAMING-SPEC v1.0"
 }

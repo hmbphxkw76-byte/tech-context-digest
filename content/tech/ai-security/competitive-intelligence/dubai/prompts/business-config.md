@@ -12,11 +12,11 @@
 {{REGION}}               = 迪拜（阿联酋）
 {{TOPIC}}                = AI 网安竞争格局
 {{REPORT_TYPE}}          = competitive-intelligence
-{{BASELINE_DATE}}        = 2026-12（首期基线报告落款周期）
+{{BASELINE_DATE}}        = 2026-11（首期基线报告落款周期）
 {{REGISTRY_PATH}}        = data/processed/tech/ai-security/competitive-intelligence/dubai/ai_cyber_competition_registry.md（运行期创建，基线可缺）
 {{REGISTRY_FORMAT}}      = md-table
 {{SOURCE_REGISTRY_PATH}} = data/processed/tech/ai-security/competitive-intelligence/dubai/source_registry.json
-{{BASELINE_REPORT_PATH}} = reports/2026-12_baseline_report.html
+{{BASELINE_REPORT_PATH}} = reports/2026-11_baseline_report.html
 {{FRESHNESS_PRIORITY}}   = 最新官方 / 一手发布 > 上期值 > 第三方研究 > 媒体转述
 {{SOURCE_LANGUAGE_RULE}} = 仅英文（严禁中文来源）
 {{REPO_RAW_URL_BASE}}    = https://github.com/hmbphxkw76-byte/tech-context-digest/blob/main/content/tech/ai-security/competitive-intelligence/dubai
@@ -26,7 +26,7 @@
 
 | 节拍 | 输出路径 | 定位 | 上期报告 |
 |---|---|---|---|
-| 基线 | `reports/2026-12_baseline_report.html` | 对比锚，常驻顶层；无上期报告 | 无 |
+| 基线 | `reports/2026-11_baseline_report.html` | 对比锚，常驻顶层；无上期报告 | 无 |
 | 月度 | `reports/{{YYYY-MM}}_monthly.html` | 主更新节拍：动态矩阵全量刷新 + 档案卡增量修订 | 最近一期月度报告 + 基线 |
 | 事件触发 | `reports/{{YYYY-MM-DD}}-主题.html`（追加件） | 重大竞品动作（融资 / 并购 / 换帅 / 定价重构 / 新产品线）当期升级 | 最近一期月度报告 + 基线 |
 
@@ -118,7 +118,7 @@
 
 ## 十、基线九节结构固化锚
 
-基线报告 `reports/2026-12_baseline_report.html` 九节结构为该业务线固化锚，后续报告逐字继承：
+基线报告 `reports/2026-11_baseline_report.html` 九节结构为该业务线固化锚，后续报告逐字继承：
 
 1. 执行摘要｜2. 监测机制设计｜3. 竞争格局总览｜4. 竞品档案首建｜5. 动态矩阵与信号规则｜6. 来源与核验治理｜7. 风险与盲区｜8. 交付物与后续运行方式｜9. 参考来源清单
 
@@ -142,4 +142,4 @@
 
 | 版本 | 日期 | 变更 | 说明 |
 |---|---|---|---|
-| v1.0 | 2026-12 | 初始版本 | 建立竞争情报监测型业务配置：四层继承声明指向 engine/templates/competitive-intelligence/；定义 {{REGION}}={{TOPIC}} 固定值、来源优先级实例化、11 家监测玩家分层与入选标准、追踪表、7 类信号触发器、R1–R6 信号规则阈值、九节固化锚 |
+| v1.0 | 2026-11 | 初始版本 | 建立竞争情报监测型业务配置：四层继承声明指向 engine/templates/competitive-intelligence/；定义 {{REGION}}={{TOPIC}} 固定值、来源优先级实例化、11 家监测玩家分层与入选标准、追踪表、7 类信号触发器、R1–R6 信号规则阈值、九节固化锚 |

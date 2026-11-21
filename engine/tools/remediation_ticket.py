@@ -12,7 +12,7 @@
 
 用法：
     python engine/tools/remediation_ticket.py detect --probe \
-        --gate-period 2026-12 --source-gate-period 2027-01 \
+        --gate-period auto --source-gate-period auto \
         --activity-threshold 45 \
         --out .automation-tmp/remediation.json \
         --body-out .automation-tmp/remediation.md

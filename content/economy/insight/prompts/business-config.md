@@ -17,7 +17,7 @@
 {{REGISTRY_FORMAT}}      = json-decision-ledger
 {{DECISION_CARDS_PATH}}  = data/processed/economy/insight/decision_cards.json
 {{SLICES_PATH}}          = data/processed/economy/insight/scenario_slices.md
-{{BASELINE_REPORT_PATH}} = reports/2026-12_baseline_report.html
+{{BASELINE_REPORT_PATH}} = reports/2026-11_baseline_report.html
 {{READING_TIME}}         = 2026-11-15（本期读数时点）
 {{REPORT_VERSION}}       = v1.0（仅核心事实修正时升级）
 {{FRESHNESS_PRIORITY}}   = 最新官方页 > 上期值 > 预测值
@@ -30,7 +30,7 @@
 
 | 周期 | 输出路径 | 版本号 | 上期报告 |
 |---|---|---|---|
-| 基线 | `reports/2026-12_baseline_report.html` | v1.0（首期固定） | 无 |
+| 基线 | `reports/2026-11_baseline_report.html` | v1.0（首期固定） | 无 |
 | 季度 | `reports/{{YYYY-Qn}}_quarterly.html` | 仅核心事实修正时升级 | `reports/` 最近一期 |
 | 事件触发 | 并入当期季度报告 | 不升级 | — |
 

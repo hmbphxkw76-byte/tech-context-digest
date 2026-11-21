@@ -2,7 +2,7 @@
 
 > **格式**：md-table ｜ **用途**：存放 11 项监测玩家的档案活值、多口径份额读数与 R1–R6 信号状态，供提示词运行前读取、运行后回写。
 > **维护规则**：单元格内数值后附 `[来源, 年份]` 与来源编号 `[S-…]`；未核实字段保留「待核实」，不补值、不外推；周期提示词模板内严禁填写活值。
-> **初始值**：首轮运行前从基线报告 `content/tech/ai-security/competitive-intelligence/dubai/reports/2026-12_baseline_report.html` 提取填入（2026-12 基线期）。
+> **初始值**：首轮运行前从基线报告 `content/tech/ai-security/competitive-intelligence/dubai/reports/2026-11_baseline_report.html` 提取填入（2026-11 基线期）。
 > **来源登记**：`data/processed/tech/ai-security/competitive-intelligence/dubai/source_registry.json`（S-001–S-045，共 45 条）。
 > **官方来源快照**：`data/raw/tech/ai-security/competitive-intelligence/dubai/`（含 `official_snapshot_manifest.json`）。
 > **量化台账**：`quant_model_layer_share.csv`、`quant_enterprise_ai_deploy_spend.csv`（同目录）。

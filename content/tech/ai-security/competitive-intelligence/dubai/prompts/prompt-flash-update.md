@@ -16,7 +16,7 @@
 {{TOPIC}}                = AI 网安竞争格局
 {{REGISTRY_PATH}}        = data/processed/tech/ai-security/competitive-intelligence/dubai/ai_cyber_competition_registry.md
 {{REGISTRY_FORMAT}}      = md-table
-{{BASELINE_REPORT_PATH}} = reports/2026-12_baseline_report.html
+{{BASELINE_REPORT_PATH}} = reports/2026-11_baseline_report.html
 {{FRESHNESS_PRIORITY}}   = 最新官方 / 一手发布 > 上期值 > 第三方研究 > 媒体转述
 {{SOURCE_LANGUAGE_RULE}} = 仅英文（严禁中文来源）
 {{REPO_RAW_URL_BASE}}    = https://github.com/hmbphxkw76-byte/tech-context-digest/blob/main/content/tech/ai-security/competitive-intelligence/dubai

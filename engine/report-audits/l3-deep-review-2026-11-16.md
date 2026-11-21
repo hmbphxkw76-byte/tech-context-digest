@@ -50,7 +50,7 @@
 | F2-2 | §4.5 | 「配合 Decree 43/2013」未标「需核实原文」，与 §4.4「不引用法条编号作为事实」矛盾 | 补「需核实原文」标注 |
 | F2-3 | §4.x / §5 | 「R15」为 apartment 台账编号，本业务线未登记 | 注册跨线指针或改称「G05 配套分档」 |
 
-### F3 content/economy/insight/reports/2026-12_baseline_report.html
+### F3 content/economy/insight/reports/2026-11_baseline_report.html
 
 | # | 位置 | 问题 | 建议 |
 |---|---|---|---|
