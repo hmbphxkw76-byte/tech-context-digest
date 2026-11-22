@@ -1,0 +1,8 @@
+[
+  {
+    "description": "模式变更影响本地",
+    "id": "R-1",
+    "mitigation": "缓解=Windows core.filemode=false 无感；Linux 钩子本须可执行",
+    "owner": ""
+  }
+]

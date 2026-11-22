@@ -1,19 +1,5 @@
 {
   "branches": {
-    "task/local-ci-tool-273f7c79": {
-      "note": "source=env:CATPAW_CONVERSATION_ID",
-      "session": "273f7c79cc344e8b80a877c190717fe4",
-      "session_short": "273f7c79",
-      "slug": "local-ci-tool",
-      "task": "local-ci-tool"
-    },
-    "task/verification-closure-8b3dae0b": {
-      "note": "source=env:CATPAW_CONVERSATION_ID",
-      "session": "8b3dae0b4003440988907c94d29ea1ff",
-      "session_short": "8b3dae0b",
-      "slug": "verification-closure",
-      "task": "verification-closure"
-    },
     "task/a03-fc-385f164d": {
       "note": "source=env:CATPAW_CONVERSATION_ID",
       "session": "385f164d8abf470eab87bff9956016d0",
@@ -189,6 +175,13 @@
       "slug": "hero-style-restyle",
       "task": "hero-style-restyle"
     },
+    "task/hook-mode-fix-5d42b26d": {
+      "note": "source=env:CATPAW_CONVERSATION_ID",
+      "session": "5d42b26dd47c4787b8c2715f18d7b405",
+      "session_short": "5d42b26d",
+      "slug": "hook-mode-fix",
+      "task": "hook-mode-fix"
+    },
     "task/immigration-baseline-c5a88c1e": {
       "note": "source=env:CATPAW_CONVERSATION_ID",
       "session": "c5a88c1e4ebe4538b05ce6659b54532e",
@@ -216,6 +209,20 @@
       "session_short": "8185a690",
       "slug": "lint-baseline",
       "task": "lint-baseline"
+    },
+    "task/local-ci-refresh-273f7c79": {
+      "note": "source=env:CATPAW_CONVERSATION_ID",
+      "session": "273f7c79cc344e8b80a877c190717fe4",
+      "session_short": "273f7c79",
+      "slug": "local-ci-refresh",
+      "task": "local-ci-refresh"
+    },
+    "task/local-ci-tool-273f7c79": {
+      "note": "source=env:CATPAW_CONVERSATION_ID",
+      "session": "273f7c79cc344e8b80a877c190717fe4",
+      "session_short": "273f7c79",
+      "slug": "local-ci-tool",
+      "task": "local-ci-tool"
     },
     "task/mainline-adoption-assess-8e70425f": {
       "note": "source=env:CATPAW_CONVERSATION_ID",
@@ -385,6 +392,13 @@
       "slug": "verification-closeout",
       "task": "verification-closeout"
     },
+    "task/verification-closure-8b3dae0b": {
+      "note": "source=env:CATPAW_CONVERSATION_ID",
+      "session": "8b3dae0b4003440988907c94d29ea1ff",
+      "session_short": "8b3dae0b",
+      "slug": "verification-closure",
+      "task": "verification-closure"
+    },
     "task/verification-consistency-273f7c79": {
       "note": "source=env:CATPAW_CONVERSATION_ID",
       "session": "273f7c79cc344e8b80a877c190717fe4",
@@ -433,13 +447,6 @@
       "session_short": "385f164d",
       "slug": "ws-batch",
       "task": "ws-batch"
-    },
-    "task/local-ci-refresh-273f7c79": {
-      "note": "source=env:CATPAW_CONVERSATION_ID",
-      "session": "273f7c79cc344e8b80a877c190717fe4",
-      "session_short": "273f7c79",
-      "slug": "local-ci-refresh",
-      "task": "local-ci-refresh"
     }
   },
   "schema": 1,
