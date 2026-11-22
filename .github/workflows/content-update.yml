@@ -8,12 +8,13 @@ name: 内容更新编排
 #   - 创建 content-update Issue，供本地妙手自动化 / 手动执行
 #   - 执行维护流水线，保证索引与归档同步
 #
-# 触发（方案 C：本地优先 · 远程按需）：
+# 触发（public 仓库 Actions 免费，恢复自动触发）：
+#   - schedule：每月 1 日 03:17 UTC（季度首月 1 / 4 / 7 / 10 月已包含在内）
 #   - workflow_dispatch：手动（可指定 project / period）
 #   - repository_dispatch：外部 / Agent 触发（client_payload: project / period）
-#   定时（schedule）触发已停用；常态改由本地 `local_ci.py` + 本地调度执行。
 on:
-  # 方案 C（本地优先 · 远程按需）：定时触发已停用，改手动 / repository_dispatch。
+  schedule:
+    - cron: "17 3 1 * *"
   workflow_dispatch:
     inputs:
       project:

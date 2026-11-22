@@ -1,0 +1,34 @@
+[
+  {
+    "acceptance": "",
+    "depends_on": [],
+    "id": "T-1",
+    "phase": "",
+    "status": "done",
+    "title": "仓库改 public 并启用服务端分支保护（Require PR + status checks + strict + enforce_admins）+ auto-merge"
+  },
+  {
+    "acceptance": "",
+    "depends_on": [],
+    "id": "T-2",
+    "phase": "",
+    "status": "done",
+    "title": "恢复 CI 自动触发（public 免费额度）+ 启用 secret scanning / push protection / Dependabot"
+  },
+  {
+    "acceptance": "",
+    "depends_on": [],
+    "id": "T-3",
+    "phase": "",
+    "status": "done",
+    "title": "补 LICENSE（MIT）+ 文档适配（AGENTS / protocol v1.7 / reuse / runbook / ci 注释）"
+  },
+  {
+    "acceptance": "",
+    "depends_on": [],
+    "id": "T-4",
+    "phase": "",
+    "status": "pending",
+    "title": "敏感审计 + 单测/门禁复跑 + 提交与 PR"
+  }
+]

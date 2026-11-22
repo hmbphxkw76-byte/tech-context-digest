@@ -1,0 +1,14 @@
+[
+  {
+    "description": "public 暴露面",
+    "id": "R-1",
+    "mitigation": "已审计无凭据/个人信息；启用 secret scanning 与 push protection",
+    "owner": ""
+  },
+  {
+    "description": "计费未恢复致 PR 检查失败",
+    "id": "R-2",
+    "mitigation": "public 仓库 Actions 免费，预期可跑；若仍失败需人工确认",
+    "owner": ""
+  }
+]

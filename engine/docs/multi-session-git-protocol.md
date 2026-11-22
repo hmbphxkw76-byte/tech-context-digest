@@ -1,18 +1,18 @@
-# 多会话 Git 协作协议（MULTI-SESSION-GIT-PROTOCOL v1.6）
+# 多会话 Git 协作协议（MULTI-SESSION-GIT-PROTOCOL v1.7）
 
 > **状态**：现行规范
 > **定位**：当多个 Agent 会话与多个 GitHub Actions 共用同一仓库、同一 `main` 时，约定统一的提交与合并方式，保证**各任务独立提交互不覆盖**。
 > **单一事实源**：本文件 + `engine/tools/repo_sync.py`（统一提交网关）；分支命名另见
 > [branch-naming-and-lifecycle.md](branch-naming-and-lifecycle.md)（BRANCH-NAMING-SPEC v1.0）。
-> **最后更新**：2026-11-17
+> **最后更新**：2026-11-22
 
 ---
 
 ## 一、问题根因
 
-- `main` 是唯一共享可变引用；写入者包括多个 Agent 会话与 4 个 CI 工作流（`audit.yml` / `html-sync.yml` / `content-update.yml` / `scheduled-maintenance.yml`；方案 C 下为按需触发）。
+- `main` 是唯一共享可变引用；写入者包括多个 Agent 会话与 4 个 CI 工作流（`audit.yml` / `html-sync.yml` / `content-update.yml` / `scheduled-maintenance.yml`）。
 - CI 之间用 `concurrency: auto-commit-main` 串行，但**Agent 推送在该并发组之外**。
-- 本地检出在 `fetch` 与 `push` 之间过期 → **non-fast-forward**；无分支保护 / 合并队列兜底。
+- 本地检出在 `fetch` 与 `push` 之间过期 → **non-fast-forward**；仓库为 **public**，服务端分支保护 + 合并队列（auto-merge）兜底。
 
 ---
 
@@ -24,11 +24,12 @@
 | 串行合并 | 经 PR 合并到 `main`（GitHub **merge queue** / auto-merge） | 基于最新 main、一次一个，杜绝覆盖 |
 | 共享检出锁 | `.git/catpaw-sync.lock` 互斥 + 推送前 `fetch --rebase` | 多会话共用工作目录时防并发覆盖 |
 
-> **服务端保护缺口与补偿（v1.6）**：本仓库为 GitHub **private 免费方案**，服务端分支保护不可用
-> （`gh api .../branches/main/protection` → 403）。因此直推 `main` 的**拦截**依赖客户端
-> （pre-push 钩子 + `repo_sync.py` 网关）；**检测**由 CI 补偿——`ci.yml` 的 `history-audit` 作业在
-> push 到 main 时运行 `engine/tools/git_history_audit.py`，扫描 main 首亲历史，将「非合并、无 `(#NN)`、
-> 非 CI 留痕、不在历史白名单」的首亲提交判为疑似直推并失败告警。该机制为事后检测，不替代拦截。
+> **服务端分支保护（v1.7）**：仓库为 **public**，`main` 已启用服务端分支保护
+> （**Require PR** + **Require status checks**（`Python 语法检查` / `单元测试` / `结构与规范校验`）
+> + **strict** + **enforce_admins** + 禁 force-push / 禁删除）与 **auto-merge**——直推 `main` 由
+> **服务端直接拒绝**。客户端 pre-push 钩子 + `repo_sync.py` 网关为第二道拦截；`ci.yml` 的
+> `history-audit` 仍作事后追溯（push 到 main 时运行 `engine/tools/git_history_audit.py`，
+> 将「非合并、无 `(#NN)`、非 CI 留痕、不在历史白名单」的首亲提交判为疑似直推并失败告警）。
 
 ---
 
@@ -105,7 +106,7 @@ refspec**（`<local ref> <local sha> <remote ref> <remote sha>`），而非当�
 
 ## 六、CI 侧约定（CI 也走 PR）
 
-- 4 个自动提交工作流（`audit.yml` / `html-sync.yml` / `content-update.yml` / `scheduled-maintenance.yml`）**不再直推 `main`**，统一复用 `.github/actions/submit-pr`：提交到固定 CI 分支（`ci/audit`、`ci/html-sync`、`ci/content-update`、`ci/scheduled-maintenance`）→ 开 / 复用 PR → 启用 auto-merge。方案 C 下其触发降级为**按需**（`workflow_dispatch` / PR），`push` / `schedule` 自动触发已停用。
+- 4 个自动提交工作流（`audit.yml` / `html-sync.yml` / `content-update.yml` / `scheduled-maintenance.yml`）**不再直推 `main`**，统一复用 `.github/actions/submit-pr`：提交到固定 CI 分支（`ci/audit`、`ci/html-sync`、`ci/content-update`、`ci/scheduled-maintenance`）→ 开 / 复用 PR → 启用 auto-merge。
 - `main` 启用分支保护：**Require a pull request before merging** + **Require status checks**（`Python 语法检查` / `单元测试` / `结构与规范校验`）+ **strict（分支须最新）**；仓库开启 **auto-merge**。由此形成「合并队列」：PR 按顺序、基于最新 main 合并。
 - Agent 侧仍经 `repo_sync`（推送前 `sync`），与 CI 分支互不冲突（分支不同、目标不同）。
 
@@ -139,3 +140,4 @@ GitHub 对由 `github-actions[bot]`（仓库 `GITHUB_TOKEN`）创建的 PR，其
 | v1.4 | 2026-11-16 | 新增远端约束：`guard` 扫描 `git remote -v`，任一远端含 `gitlab` 即阻断推送（本仓库仅允许 GitHub）；单测强制校验 |
 | v1.5 | 2026-11-17 | 分支命名纳入协议：任务分支统一 `task/<slug>-<session8>`（BRANCH-NAMING-SPEC v1.0）；新增 pre-commit 钩子与 `hook-install` / `branch` / `branch-rename` / `branch-audit` 子命令；网关复用命名校验 |
 | v1.6 | 2026-11-18 | 更正「main 启用分支保护」表述：private 免费方案服务端保护不可用；新增 CI 首亲历史直推审计（`git_history_audit.py` + `ci.yml::history-audit`）作为补偿检测 |
+| v1.7 | 2026-11-22 | 仓库转为 **public**，服务端分支保护正式启用（Require PR + status checks + strict + enforce_admins）+ auto-merge；CI 触发恢复自动（public 免费额度）；新增 `LICENSE`（MIT） |

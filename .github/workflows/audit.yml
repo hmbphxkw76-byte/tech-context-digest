@@ -1,12 +1,19 @@
 name: 审计流程（四环节）
 
-# 审计四环节（确定性部分）——方案 C 下改为手动触发（workflow_dispatch / PR）：
+# 报告变更后自动执行审计四环节（确定性部分）：
 #   生成 → 初审（L1+L2）→ 复核（L3 确定性子集）→ 终审（A1–A8 确定性项）→ 注入「已审计」标识
 # 语义深度复核（L3 全量）由 Agent 定期执行（见 engine/audit/prompts/30-second-review.md）。
 #
 # 与 content-update / html-sync / scheduled-maintenance 共用并发组，串行提交避免冲突。
 on:
-  # 方案 C（本地优先 · 远程按需）：push 自动审计已停用；保留 PR 检查与手动触发。
+  push:
+    branches: [main]
+    paths:
+      - "**/reports/*.html"
+      - "**/reports/*.md"
+      - "engine/audit/**"
+      - "engine/report-audits/**"
+      - "requirements.txt"
   pull_request:
     branches: [main]
     paths:
