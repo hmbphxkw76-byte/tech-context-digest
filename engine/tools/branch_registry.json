@@ -280,6 +280,13 @@
       "slug": "pce-gate",
       "task": "pce-gate"
     },
+    "task/perf-threshold-fix-5d42b26d": {
+      "note": "source=env:CATPAW_CONVERSATION_ID",
+      "session": "5d42b26dd47c4787b8c2715f18d7b405",
+      "session_short": "5d42b26d",
+      "slug": "perf-threshold-fix",
+      "task": "perf-threshold-fix"
+    },
     "task/phase0-governance-cleanup-cd95c5fa": {
       "note": "source=env:CATPAW_CONVERSATION_ID",
       "session": "cd95c5fad1b94ba18de3bbc3b62eea99",

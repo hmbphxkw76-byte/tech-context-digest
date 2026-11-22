@@ -31,6 +31,16 @@ from _common import ROOT  # noqa: E402
 PERF_STATUS = ROOT / "perf-status.json"
 CACHE_DIR = ROOT / ".perf-cache"
 
+# 阈值单一事实源：perf-status.json 的 thresholds 与 perf_bench 基线落盘共用，
+# 避免新增阈值（如 P-03 的 audit_strict_p95_ms）时只改一处而漏另一处。
+DEFAULT_THRESHOLDS = {
+    "ci_total_increase_pct": 10.0,
+    "l0_l1_full_p95_ms": 60000.0,
+    "single_report_l1_avg_ms": 2000.0,
+    "audit_strict_p95_ms": 180000.0,
+    "error_rate_max": 0.0,
+}
+
 
 # ---------------------------------------------------------------- 状态文件
 
@@ -69,14 +79,14 @@ def check_thresholds(payload: dict | None = None) -> list[dict]:
         out.append({"level": level, "message": msg})
 
     l0 = scenarios.get("l0_l1_full")
-    if l0 and l0.get("wall_ms", {}).get("p95", 0) > th.get("l0_l1_full_p95_ms", 60000):
+    if l0 and l0.get("wall_ms", {}).get("p95", 0) > th.get("l0_l1_full_p95_ms", DEFAULT_THRESHOLDS["l0_l1_full_p95_ms"]):
         add("P0", f"L0/L1 全量门禁 P95 {l0['wall_ms']['p95']}ms 超阈值 {th.get('l0_l1_full_p95_ms')}ms")
     single = scenarios.get("single_report_l1")
-    if single and single.get("wall_ms", {}).get("avg", 0) > th.get("single_report_l1_avg_ms", 2000):
+    if single and single.get("wall_ms", {}).get("avg", 0) > th.get("single_report_l1_avg_ms", DEFAULT_THRESHOLDS["single_report_l1_avg_ms"]):
         add("P1", f"单报告 L1 平均 {single['wall_ms']['avg']}ms 超阈值 {th.get('single_report_l1_avg_ms')}ms")
     # P-03：strict 审计四环节（audit.yml 关键路径）性能护栏，默认 ≤180000ms。
     strict = scenarios.get("audit_run_strict")
-    if strict and strict.get("wall_ms", {}).get("p95", 0) > th.get("audit_strict_p95_ms", 180000):
+    if strict and strict.get("wall_ms", {}).get("p95", 0) > th.get("audit_strict_p95_ms", DEFAULT_THRESHOLDS["audit_strict_p95_ms"]):
         add("P0", f"strict 审计 P95 {strict['wall_ms']['p95']}ms 超阈值 {th.get('audit_strict_p95_ms')}ms")
     for s in payload.get("scenarios", []):
         if s.get("error_rate", 0) > th.get("error_rate_max", 0):

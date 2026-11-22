@@ -33,6 +33,7 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 
 from _common import ROOT, iter_business_dirs  # noqa: E402
+from perf_monitor import DEFAULT_THRESHOLDS  # noqa: E402
 
 SCHEMA_VERSION = "1.0"
 DEFAULT_OUT = ROOT / "perf-status.json"
@@ -270,12 +271,7 @@ def main() -> int:
         },
         "metrics": ["throughput_per_sec", "wall_ms.avg/p50/p95/max", "error_rate", "cpu_ms.avg"],
         "scenarios": results,
-        "thresholds": {
-            "ci_total_increase_pct": 10.0,
-            "l0_l1_full_p95_ms": 60000.0,
-            "single_report_l1_avg_ms": 2000.0,
-            "error_rate_max": 0.0,
-        },
+        "thresholds": dict(DEFAULT_THRESHOLDS),
     }
 
     out = Path(args.out)
