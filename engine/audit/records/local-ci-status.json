@@ -42,7 +42,7 @@
       "ci": "ci.history-audit",
       "exit_code": 0,
       "status": "pass",
-      "summary": "[OK] GIT-HISTORY-AUDIT v1.0 分支=main 检查=112 合并=110 PR引用=0 CI=0 历史白名单=2 违规=0"
+      "summary": "[OK] GIT-HISTORY-AUDIT v1.0 分支=main 检查=116 合并=114 PR引用=0 CI=0 历史白名单=2 违规=0"
     },
     {
       "id": "hub",
