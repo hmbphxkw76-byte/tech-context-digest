@@ -1,0 +1,8 @@
+[
+  {
+    "description": "提交范围扩大",
+    "id": "R-1",
+    "mitigation": "缓解=仅新增 content/，且 md2html 为确定性生成",
+    "owner": ""
+  }
+]
