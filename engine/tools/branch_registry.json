@@ -13,6 +13,405 @@
       "session_short": "8b3dae0b",
       "slug": "verification-closure",
       "task": "verification-closure"
+    },
+    "task/a03-fc-385f164d": {
+      "note": "source=env:CATPAW_CONVERSATION_ID",
+      "session": "385f164d8abf470eab87bff9956016d0",
+      "session_short": "385f164d",
+      "slug": "a03-fc",
+      "task": "a03-fc"
+    },
+    "task/a03-truth-385f164d": {
+      "note": "source=env:CATPAW_CONVERSATION_ID",
+      "session": "385f164d8abf470eab87bff9956016d0",
+      "session_short": "385f164d",
+      "slug": "a03-truth",
+      "task": "a03-truth"
+    },
+    "task/ai-application-align-83a95d59": {
+      "note": "source=env:CATPAW_CONVERSATION_ID",
+      "session": "83a95d59d87b48ad96286e00930bf2e4",
+      "session_short": "83a95d59",
+      "slug": "ai-application-align",
+      "task": "ai-application-align"
+    },
+    "task/audit-strict-local-273f7c79": {
+      "note": "source=env:CATPAW_CONVERSATION_ID",
+      "session": "273f7c79cc344e8b80a877c190717fe4",
+      "session_short": "273f7c79",
+      "slug": "audit-strict-local",
+      "task": "audit-strict-local"
+    },
+    "task/blindspot-closeout-8185a690": {
+      "note": "source=env:CATPAW_CONVERSATION_ID",
+      "session": "8185a6905e604f2f89e19b5e3757338b",
+      "session_short": "8185a690",
+      "slug": "blindspot-closeout",
+      "task": "blindspot-closeout"
+    },
+    "task/branch-delete-ledger-273f7c79": {
+      "note": "source=env:CATPAW_CONVERSATION_ID",
+      "session": "273f7c79cc344e8b80a877c190717fe4",
+      "session_short": "273f7c79",
+      "slug": "branch-delete-ledger",
+      "task": "branch-delete-ledger"
+    },
+    "task/branch-naming-5f37e90d": {
+      "note": "source=env:CATPAW_CONVERSATION_ID",
+      "session": "5f37e90deb604247988a9207d64048f5",
+      "session_short": "5f37e90d",
+      "slug": "branch-naming",
+      "task": "branch-naming"
+    },
+    "task/cleanup-structure-b76ddf44": {
+      "note": "source=env:CATPAW_CONVERSATION_ID",
+      "session": "b76ddf4411584ff187a2ae9268aa96a3",
+      "session_short": "b76ddf44",
+      "slug": "cleanup-structure",
+      "task": "cleanup-structure"
+    },
+    "task/consumer-feedback-e6163815": {
+      "note": "source=env:CATPAW_CONVERSATION_ID",
+      "session": "e6163815401e48a6bf47cff5775add04",
+      "session_short": "e6163815",
+      "slug": "consumer-feedback",
+      "task": "consumer-feedback"
+    },
+    "task/data-hygiene-r7r8-b76ddf44": {
+      "note": "source=env:CATPAW_CONVERSATION_ID",
+      "session": "b76ddf4411584ff187a2ae9268aa96a3",
+      "session_short": "b76ddf44",
+      "slug": "data-hygiene-r7r8",
+      "task": "data-hygiene-r7r8"
+    },
+    "task/debt-closeout-2-da51f1bb": {
+      "note": "source=env:CATPAW_CONVERSATION_ID",
+      "session": "da51f1bb41f941a2ae07e88a470beb10",
+      "session_short": "da51f1bb",
+      "slug": "debt-closeout-2",
+      "task": "debt-closeout-2"
+    },
+    "task/debt-closeout-da51f1bb": {
+      "note": "source=env:CATPAW_CONVERSATION_ID",
+      "session": "da51f1bb41f941a2ae07e88a470beb10",
+      "session_short": "da51f1bb",
+      "slug": "debt-closeout",
+      "task": "debt-closeout"
+    },
+    "task/doc-ledger-retention-5f37e90d": {
+      "note": "source=env:CATPAW_CONVERSATION_ID",
+      "session": "5f37e90deb604247988a9207d64048f5",
+      "session_short": "5f37e90d",
+      "slug": "doc-ledger-retention",
+      "task": "doc-ledger-retention"
+    },
+    "task/final-self-audit-cd95c5fa": {
+      "note": "source=env:CATPAW_CONVERSATION_ID",
+      "session": "cd95c5fad1b94ba18de3bbc3b62eea99",
+      "session_short": "cd95c5fa",
+      "slug": "final-self-audit",
+      "task": "final-self-audit"
+    },
+    "task/fingerprint-emit-e6163815": {
+      "note": "source=env:CATPAW_CONVERSATION_ID",
+      "session": "e6163815401e48a6bf47cff5775add04",
+      "session_short": "e6163815",
+      "slug": "fingerprint-emit",
+      "task": "fingerprint-emit"
+    },
+    "task/fix-alignment-b30cfd92": {
+      "note": "source=env:CATPAW_CONVERSATION_ID",
+      "session": "b30cfd924f944c0fad06a39803b63ab9",
+      "session_short": "b30cfd92",
+      "slug": "fix-alignment",
+      "task": "fix-alignment"
+    },
+    "task/fix-gate23-replay-4e8d2882": {
+      "note": "source=env:CATPAW_CONVERSATION_ID",
+      "session": "4e8d2882bbbd4d66a1c8f8ed44b2c21a",
+      "session_short": "4e8d2882",
+      "slug": "fix-gate23-replay",
+      "task": "fix-gate23-replay"
+    },
+    "task/fix-matrix-status-cd95c5fa": {
+      "note": "source=env:CATPAW_CONVERSATION_ID",
+      "session": "cd95c5fad1b94ba18de3bbc3b62eea99",
+      "session_short": "cd95c5fa",
+      "slug": "fix-matrix-status",
+      "task": "fix-matrix-status"
+    },
+    "task/fix-vocab-empty-dirs-5231d7e5": {
+      "note": "source=env:CATPAW_CONVERSATION_ID",
+      "session": "5231d7e5e70c440eaf2d9c2b5abef0bc",
+      "session_short": "5231d7e5",
+      "slug": "fix-vocab-empty-dirs",
+      "task": "fix-vocab-empty-dirs"
+    },
+    "task/framework-align-b76ddf44": {
+      "note": "source=env:CATPAW_CONVERSATION_ID",
+      "session": "b76ddf4411584ff187a2ae9268aa96a3",
+      "session_short": "b76ddf44",
+      "slug": "framework-align",
+      "task": "framework-align"
+    },
+    "task/git-history-audit-da51f1bb": {
+      "note": "source=env:CATPAW_CONVERSATION_ID",
+      "session": "da51f1bb41f941a2ae07e88a470beb10",
+      "session_short": "da51f1bb",
+      "slug": "git-history-audit",
+      "task": "git-history-audit"
+    },
+    "task/goal-alignment-batches-67312f84": {
+      "note": "source=env:CATPAW_CONVERSATION_ID",
+      "session": "67312f84befa4b8f888353b19c6abde5",
+      "session_short": "67312f84",
+      "slug": "goal-alignment-batches",
+      "task": "goal-alignment-batches"
+    },
+    "task/goal-alignment-p0-2e6777f5": {
+      "note": "source=env:CATPAW_CONVERSATION_ID",
+      "session": "2e6777f5240e40e59e5b5acf76c2112e",
+      "session_short": "2e6777f5",
+      "slug": "goal-alignment-p0",
+      "task": "goal-alignment-p0"
+    },
+    "task/hero-style-restyle-b324fd3a": {
+      "note": "source=env:CATPAW_CONVERSATION_ID",
+      "session": "b324fd3a3881445286a5eff96ce9b8f0",
+      "session_short": "b324fd3a",
+      "slug": "hero-style-restyle",
+      "task": "hero-style-restyle"
+    },
+    "task/immigration-baseline-c5a88c1e": {
+      "note": "source=env:CATPAW_CONVERSATION_ID",
+      "session": "c5a88c1e4ebe4538b05ce6659b54532e",
+      "session_short": "c5a88c1e",
+      "slug": "immigration-baseline",
+      "task": "immigration-baseline"
+    },
+    "task/impact-tiering-d0b4f8c1": {
+      "note": "source=env:TECH_CTX_SESSION_ID",
+      "session": "d0b4f8c1",
+      "session_short": "d0b4f8c1",
+      "slug": "impact-tiering",
+      "task": "impact-tiering"
+    },
+    "task/info-quality-plan-79ac0e87": {
+      "note": "source=env:CATPAW_CONVERSATION_ID",
+      "session": "79ac0e87e519415a916d64fdc92a890c",
+      "session_short": "79ac0e87",
+      "slug": "info-quality-plan",
+      "task": "info-quality-plan"
+    },
+    "task/lint-baseline-8185a690": {
+      "note": "source=env:CATPAW_CONVERSATION_ID",
+      "session": "8185a6905e604f2f89e19b5e3757338b",
+      "session_short": "8185a690",
+      "slug": "lint-baseline",
+      "task": "lint-baseline"
+    },
+    "task/mainline-adoption-assess-8e70425f": {
+      "note": "source=env:CATPAW_CONVERSATION_ID",
+      "session": "8e70425f74ef40dfbbabc8e45ad4e542",
+      "session_short": "8e70425f",
+      "slug": "mainline-adoption-assess",
+      "task": "mainline-adoption-assess"
+    },
+    "task/merge-ci-audit-04b13d2a": {
+      "note": "source=env:CATPAW_CONVERSATION_ID",
+      "session": "04b13d2a94ac4d4b8bc32b78b349dd59",
+      "session_short": "04b13d2a",
+      "slug": "merge-ci-audit",
+      "task": "merge-ci-audit"
+    },
+    "task/opt-solution-v2-2d780637": {
+      "note": "source=env:CATPAW_CONVERSATION_ID",
+      "session": "2d78063771b143b194272542a6ce7d8a",
+      "session_short": "2d780637",
+      "slug": "opt-solution-v2",
+      "task": "opt-solution-v2"
+    },
+    "task/optimization-solution-944d1dc4": {
+      "note": "source=env:CATPAW_CONVERSATION_ID",
+      "session": "944d1dc438974767ac2bf9d3f7b75d34",
+      "session_short": "944d1dc4",
+      "slug": "optimization-solution",
+      "task": "optimization-solution"
+    },
+    "task/p1-continue-385f164d": {
+      "note": "source=env:CATPAW_CONVERSATION_ID",
+      "session": "385f164d8abf470eab87bff9956016d0",
+      "session_short": "385f164d",
+      "slug": "p1-continue",
+      "task": "p1-continue"
+    },
+    "task/p1-remaining-67312f84": {
+      "note": "source=env:CATPAW_CONVERSATION_ID",
+      "session": "67312f84befa4b8f888353b19c6abde5",
+      "session_short": "67312f84",
+      "slug": "p1-remaining",
+      "task": "p1-remaining"
+    },
+    "task/pce-gate-5231d7e5": {
+      "note": "source=env:CATPAW_CONVERSATION_ID",
+      "session": "5231d7e5e70c440eaf2d9c2b5abef0bc",
+      "session_short": "5231d7e5",
+      "slug": "pce-gate",
+      "task": "pce-gate"
+    },
+    "task/phase0-governance-cleanup-cd95c5fa": {
+      "note": "source=env:CATPAW_CONVERSATION_ID",
+      "session": "cd95c5fad1b94ba18de3bbc3b62eea99",
+      "session_short": "cd95c5fa",
+      "slug": "phase0-governance-cleanup",
+      "task": "phase0-governance-cleanup"
+    },
+    "task/phase1-task-loop-cd95c5fa": {
+      "note": "source=env:CATPAW_CONVERSATION_ID",
+      "session": "cd95c5fad1b94ba18de3bbc3b62eea99",
+      "session_short": "cd95c5fa",
+      "slug": "phase1-task-loop",
+      "task": "phase1-task-loop"
+    },
+    "task/phase2-evidence-index-cd95c5fa": {
+      "note": "source=env:CATPAW_CONVERSATION_ID",
+      "session": "cd95c5fad1b94ba18de3bbc3b62eea99",
+      "session_short": "cd95c5fa",
+      "slug": "phase2-evidence-index",
+      "task": "phase2-evidence-index"
+    },
+    "task/phase3-static-linting-cd95c5fa": {
+      "note": "source=env:CATPAW_CONVERSATION_ID",
+      "session": "cd95c5fad1b94ba18de3bbc3b62eea99",
+      "session_short": "cd95c5fa",
+      "slug": "phase3-static-linting",
+      "task": "phase3-static-linting"
+    },
+    "task/regen-all-reports-04b13d2a": {
+      "note": "source=env:CATPAW_CONVERSATION_ID",
+      "session": "04b13d2a94ac4d4b8bc32b78b349dd59",
+      "session_short": "04b13d2a",
+      "slug": "regen-all-reports",
+      "task": "regen-all-reports"
+    },
+    "task/registry-cleanup-7c969003": {
+      "note": "source=env:CATPAW_CONVERSATION_ID",
+      "session": "7c969003a0f6466fb64429ce244ded55",
+      "session_short": "7c969003",
+      "slug": "registry-cleanup",
+      "task": "registry-cleanup"
+    },
+    "task/report-cycle-windows-1b539487": {
+      "note": "source=env:CATPAW_CONVERSATION_ID",
+      "session": "1b539487144b49cb890a5ea14f40c9e6",
+      "session_short": "1b539487",
+      "slug": "report-cycle-windows",
+      "task": "report-cycle-windows"
+    },
+    "task/report-period-current-month-5856e15f": {
+      "note": "source=env:CATPAW_CONVERSATION_ID",
+      "session": "5856e15f62094997b2cde88bffaac0be",
+      "session_short": "5856e15f",
+      "slug": "report-period-current-month",
+      "task": "report-period-current-month"
+    },
+    "task/reports-full-rebuild-37273175": {
+      "note": "source=env:CATPAW_CONVERSATION_ID",
+      "session": "37273175d78449b8b1a6456f50dba198",
+      "session_short": "37273175",
+      "slug": "reports-full-rebuild",
+      "task": "reports-full-rebuild"
+    },
+    "task/residual-cleanup-273f7c79": {
+      "note": "source=env:CATPAW_CONVERSATION_ID",
+      "session": "273f7c79cc344e8b80a877c190717fe4",
+      "session_short": "273f7c79",
+      "slug": "residual-cleanup",
+      "task": "residual-cleanup"
+    },
+    "task/s3-minimal-set-8185a690": {
+      "note": "source=env:CATPAW_CONVERSATION_ID",
+      "session": "8185a6905e604f2f89e19b5e3757338b",
+      "session_short": "8185a690",
+      "slug": "s3-minimal-set",
+      "task": "s3-minimal-set"
+    },
+    "task/study-abroad-73dd7970": {
+      "note": "source=env:CATPAW_CONVERSATION_ID",
+      "session": "73dd7970290e40de928e4bf6c4b1de12",
+      "session_short": "73dd7970",
+      "slug": "study-abroad",
+      "task": "study-abroad"
+    },
+    "task/tech-monthly-restructure-b64f8dc1": {
+      "note": "source=env:CATPAW_CONVERSATION_ID",
+      "session": "b64f8dc1787741358883699aee1cc3d9",
+      "session_short": "b64f8dc1",
+      "slug": "tech-monthly-restructure",
+      "task": "tech-monthly-restructure"
+    },
+    "task/tech-theme-restructure-62c4074c": {
+      "note": "source=env:CATPAW_CONVERSATION_ID",
+      "session": "62c4074c39de436b9ab6ba31ff8dbbe8",
+      "session_short": "62c4074c",
+      "slug": "tech-theme-restructure",
+      "task": "tech-theme-restructure"
+    },
+    "task/verification-closeout-1024cdca": {
+      "note": "source=env:CATPAW_CONVERSATION_ID",
+      "session": "1024cdcaa67d40c29a4e83a278f0fd52",
+      "session_short": "1024cdca",
+      "slug": "verification-closeout",
+      "task": "verification-closeout"
+    },
+    "task/verification-consistency-273f7c79": {
+      "note": "source=env:CATPAW_CONVERSATION_ID",
+      "session": "273f7c79cc344e8b80a877c190717fe4",
+      "session_short": "273f7c79",
+      "slug": "verification-consistency",
+      "task": "verification-consistency"
+    },
+    "task/verification-mechanism-fae8d6d4": {
+      "note": "source=env:CATPAW_CONVERSATION_ID",
+      "session": "fae8d6d460c5459d905f1423bfff5c52",
+      "session_short": "fae8d6d4",
+      "slug": "verification-mechanism",
+      "task": "verification-mechanism"
+    },
+    "task/verification-prompt-cd95c5fa": {
+      "note": "source=env:CATPAW_CONVERSATION_ID",
+      "session": "cd95c5fad1b94ba18de3bbc3b62eea99",
+      "session_short": "cd95c5fa",
+      "slug": "verification-prompt",
+      "task": "verification-prompt"
+    },
+    "task/vocab-prompt-align-da51f1bb": {
+      "note": "source=env:CATPAW_CONVERSATION_ID",
+      "session": "da51f1bb41f941a2ae07e88a470beb10",
+      "session_short": "da51f1bb",
+      "slug": "vocab-prompt-align",
+      "task": "vocab-prompt-align"
+    },
+    "task/vocab-theme-prompt-library-554d81f6": {
+      "note": "source=env:CATPAW_CONVERSATION_ID",
+      "session": "554d81f6dc5a486984981f00041f2b7b",
+      "session_short": "554d81f6",
+      "slug": "vocab-theme-prompt-library",
+      "task": "vocab-theme-prompt-library"
+    },
+    "task/warnings-cleanup-b76ddf44": {
+      "note": "source=env:CATPAW_CONVERSATION_ID",
+      "session": "b76ddf4411584ff187a2ae9268aa96a3",
+      "session_short": "b76ddf44",
+      "slug": "warnings-cleanup",
+      "task": "warnings-cleanup"
+    },
+    "task/ws-batch-385f164d": {
+      "note": "source=env:CATPAW_CONVERSATION_ID",
+      "session": "385f164d8abf470eab87bff9956016d0",
+      "session_short": "385f164d",
+      "slug": "ws-batch",
+      "task": "ws-batch"
     }
   },
   "schema": 1,

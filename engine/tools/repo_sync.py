@@ -475,6 +475,51 @@ def cmd_branch_rename(old: str, new: str, remote: bool = False) -> tuple[bool, s
     return True, msg
 
 
+def cmd_branch_delete(branch: str, allow_unmerged: bool = False) -> tuple[bool, str]:
+    """删除受管分支（本地 + 远端）；登记册条目按规范保留（历史台账）。
+
+    安全性：仅 task/*；默认要求已合并进 main（--allow-unmerged 显式放行）；
+    不允许删除当前检出分支。登记册不注销（见 BRANCH-NAMING-SPEC §2.4）。
+    """
+    if branch == BASE_BRANCH or branch_naming.is_exempt(branch):
+        return False, f"不得删除系统 / 豁免分支：{branch}"
+    if not branch_naming.is_managed(branch):
+        return False, f"仅支持删除受管分支（task/*）：{branch}"
+    ok, why = branch_naming.validate_managed(branch)
+    if not ok:
+        return False, why
+    try:
+        if branch == current_branch():
+            return False, f"不能删除当前检出分支；请先切换到其它分支：{branch}"
+    except SyncError as e:
+        return False, str(e)
+    local_exists = _git("rev-parse", "--verify", "--quiet", f"refs/heads/{branch}").returncode == 0
+    remote_exists = _git("rev-parse", "--verify", "--quiet", f"refs/remotes/origin/{branch}").returncode == 0
+    if not local_exists and not remote_exists:
+        return False, f"分支不存在（本地与远端均无，可能已删除）：{branch}"
+    if not allow_unmerged:
+        ref = branch if local_exists else f"origin/{branch}"
+        if _git("merge-base", "--is-ancestor", ref, BASE_BRANCH).returncode != 0:
+            return False, (f"分支未合并进 {BASE_BRANCH}：{branch}；确认可删请加 --allow-unmerged")
+    if local_exists:
+        d = _git("branch", "-d", branch)
+        if d.returncode != 0:
+            return False, f"本地删除失败：{d.stderr.strip()}"
+        local_msg = "本地已删除"
+    else:
+        local_msg = "本地不存在"
+    if remote_exists:
+        p = _git("push", "origin", "--delete", branch)
+        if p.returncode != 0:
+            return False, f"{local_msg}；但远端删除失败：{p.stderr.strip()}"
+        remote_msg = "远端已删除"
+    else:
+        remote_msg = "远端不存在"
+    kept = branch_naming.entry_for(branch_naming.load_registry(), branch) is not None
+    return True, (f"{local_msg}；{remote_msg}；登记册条目保留"
+                  + ("（已登记）" if kept else "（未登记，不补登记）"))
+
+
 def cmd_hook_install() -> tuple[bool, str]:
     """安装本克隆的钩子：git config core.hooksPath .githooks。"""
     missing = [h for h in HOOK_FILES if not (HOOKS_DIR / h).exists()]
@@ -526,6 +571,9 @@ def main() -> int:
     p = sub.add_parser("branch-rename", help="改名并同步登记册")
     p.add_argument("old"); p.add_argument("new")
     p.add_argument("--remote", action="store_true", help="连同远端旧分支一起迁移")
+    p = sub.add_parser("branch-delete", help="删除受管分支（本地+远端；登记条目保留）")
+    p.add_argument("branch")
+    p.add_argument("--allow-unmerged", action="store_true", help="未合并进 main 也删除（显式放行）")
     sub.add_parser("hook-install", help="安装 .githooks（core.hooksPath）")
     sub.add_parser("hook-uninstall", help="卸载 .githooks")
     g = sub.add_parser("guard"); g.add_argument("--stage", choices=["push", "commit"], default="push",
@@ -571,6 +619,10 @@ def main() -> int:
         if args.cmd == "branch-rename":
             ok, msg = cmd_branch_rename(args.old, args.new, remote=args.remote)
             print(("[OK] " if ok else "[FAIL] ") + msg); return 0 if ok else 1
+        if args.cmd == "branch-delete":
+            ok, msg = cmd_branch_delete(args.branch, allow_unmerged=args.allow_unmerged)
+            print(("[OK] " if ok else "[FAIL] ") + msg)
+            return 0 if ok else 1
         if args.cmd == "hook-install":
             ok, msg = cmd_hook_install(); print(("[OK] " if ok else "[FAIL] ") + msg); return 0 if ok else 1
         if args.cmd == "hook-uninstall":

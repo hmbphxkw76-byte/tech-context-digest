@@ -474,6 +474,7 @@ python engine/tools/repo_sync.py branch <slug>          # → task/<slug>-<sessi
 python engine/tools/repo_sync.py branches               # 分支 + 登记 + 合规标记
 python engine/tools/repo_sync.py branch-audit           # 违规清单（有违规退出码 1）
 python engine/tools/repo_sync.py branch-rename <旧> <新> [--remote]
+python engine/tools/repo_sync.py branch-delete <branch> [--allow-unmerged]   # 删本地+远端；登记条目保留
 
 # 钩子安装（每个克隆一次）
 python engine/tools/repo_sync.py hook-install

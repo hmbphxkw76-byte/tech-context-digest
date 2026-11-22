@@ -1,0 +1,34 @@
+[
+  {
+    "acceptance": "",
+    "depends_on": [],
+    "id": "T-1",
+    "phase": "",
+    "status": "done",
+    "title": "repo_sync 新增 branch-delete（仅 task/*、需已合并、不删当前分支、登记条目保留）"
+  },
+  {
+    "acceptance": "",
+    "depends_on": [],
+    "id": "T-2",
+    "phase": "",
+    "status": "done",
+    "title": "恢复 branch_registry 历史台账（从 git 历史重建 58 条）"
+  },
+  {
+    "acceptance": "",
+    "depends_on": [],
+    "id": "T-3",
+    "phase": "",
+    "status": "done",
+    "title": "文档同步（BRANCH-NAMING-SPEC §3.4 / tools README / AGENTS 网关清单）+ 单测"
+  },
+  {
+    "acceptance": "",
+    "depends_on": [],
+    "id": "T-4",
+    "phase": "",
+    "status": "done",
+    "title": "门禁/单测复跑 + 提交与 PR"
+  }
+]

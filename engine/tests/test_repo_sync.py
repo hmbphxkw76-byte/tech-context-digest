@@ -244,5 +244,85 @@ class TestTaskPlanGate(unittest.TestCase):
         self.assertNotIn("工件即门禁输入", msg)
 
 
+class TestBranchDelete(unittest.TestCase):
+    """branch-delete：仅受管分支、需已合并、不删当前分支、登记条目保留。"""
+
+    def setUp(self):
+        self._orig_git = rs._git
+        self._orig_cb = rs.current_branch
+
+    def tearDown(self):
+        rs._git = self._orig_git
+        rs.current_branch = self._orig_cb
+
+    @staticmethod
+    def _proc(rc, out="", err=""):
+        return subprocess.CompletedProcess([], rc, out, err)
+
+    def _git_map(self, mapping):
+        def f(*args, **kw):
+            return mapping.get(" ".join(args), self._proc(0, "", ""))
+        return f
+
+    def test_refuses_main(self):
+        ok, msg = rs.cmd_branch_delete("main")
+        self.assertFalse(ok)
+        self.assertIn("不得删除", msg)
+
+    def test_refuses_exempt(self):
+        ok, msg = rs.cmd_branch_delete("ci/audit")
+        self.assertFalse(ok)
+        self.assertIn("不得删除", msg)
+
+    def test_refuses_non_managed(self):
+        ok, msg = rs.cmd_branch_delete("feature-x")
+        self.assertFalse(ok)
+        self.assertIn("仅支持删除受管分支", msg)
+
+    def test_refuses_bad_name(self):
+        ok, msg = rs.cmd_branch_delete("task/Bad-Name")
+        self.assertFalse(ok)
+        self.assertIn("不合规", msg)
+
+    def test_refuses_current_branch(self):
+        rs.current_branch = lambda: "task/x-01234567"
+        rs._git = self._git_map({"merge-base --is-ancestor task/x-01234567 main": self._proc(0)})
+        ok, msg = rs.cmd_branch_delete("task/x-01234567")
+        self.assertFalse(ok)
+        self.assertIn("当前检出分支", msg)
+
+    def test_refuses_missing_branch(self):
+        rs.current_branch = lambda: "main"
+        rs._git = self._git_map({
+            "rev-parse --verify --quiet refs/heads/task/x-01234567": self._proc(1),
+            "rev-parse --verify --quiet refs/remotes/origin/task/x-01234567": self._proc(1),
+        })
+        ok, msg = rs.cmd_branch_delete("task/x-01234567")
+        self.assertFalse(ok)
+        self.assertIn("分支不存在", msg)
+
+    def test_refuses_unmerged(self):
+        rs.current_branch = lambda: "main"
+        rs._git = self._git_map({
+            "merge-base --is-ancestor task/x-01234567 main": self._proc(1),
+        })
+        ok, msg = rs.cmd_branch_delete("task/x-01234567")
+        self.assertFalse(ok)
+        self.assertIn("未合并", msg)
+
+    def test_success_keeps_registry_entry(self):
+        rs.current_branch = lambda: "main"
+        rs._git = self._git_map({
+            "merge-base --is-ancestor task/x-01234567 main": self._proc(0),
+            "rev-parse --verify --quiet refs/heads/task/x-01234567": self._proc(0),
+            "branch -d task/x-01234567": self._proc(0),
+            "rev-parse --verify --quiet refs/remotes/origin/task/x-01234567": self._proc(0),
+            "push origin --delete task/x-01234567": self._proc(0),
+        })
+        ok, msg = rs.cmd_branch_delete("task/x-01234567")
+        self.assertTrue(ok, msg)
+        self.assertIn("登记册条目保留", msg)
+
+
 if __name__ == "__main__":
     unittest.main()
