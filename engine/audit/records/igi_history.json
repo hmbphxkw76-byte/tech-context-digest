@@ -2,6 +2,19 @@
  "schema_version": "1.0",
  "records": [
   {
+   "gate_period": "2026-11",
+   "values": {
+    "IGI-01": 1.0,
+    "IGI-02": 1.0,
+    "IGI-03": 1.0,
+    "IGI-04": 1.0,
+    "IGI-05": 0.9041,
+    "IGI-06": 1.0,
+    "IGI-07": 1.0,
+    "IGI-08": 0.9904
+   }
+  },
+  {
    "gate_period": "2026-12",
    "values": {
     "IGI-01": 1.0,
