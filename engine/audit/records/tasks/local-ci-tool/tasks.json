@@ -28,7 +28,7 @@
     "depends_on": [],
     "id": "T-4",
     "phase": "",
-    "status": "pending",
+    "status": "done",
     "title": "文档同步（tools/README、AGENTS.md）+ 结果落盘 local-ci-status.json + 门禁/单测复跑"
   }
 ]
