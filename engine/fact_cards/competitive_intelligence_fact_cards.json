@@ -30,7 +30,7 @@
       "fact": "模型层高度集中（Anthropic + OpenAI 86%）通过 API 与产品能力向本地交付层传导，约束本地 AI 网安产品的模型选型与成本结构。",
       "source": "综合推断（基于 FC-CI-001）",
       "tier": 2,
-      "verify_status": "未核验",
+      "verify_status": "部分核验",
       "level": "推断",
       "updated": "2026-11-13",
       "indicators": ["CI-格局"],

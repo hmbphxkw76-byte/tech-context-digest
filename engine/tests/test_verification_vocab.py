@@ -21,6 +21,7 @@ from verification_vocab import (  # noqa: E402
     is_consistent,
     is_decision_safe,
     normalize_card_status,
+    normalize_info_level,
     normalize_source_status,
     source_to_card,
 )
@@ -66,21 +67,29 @@ class TestNormalize(unittest.TestCase):
     def test_canonical_sets(self):
         self.assertEqual(set(SOURCE_STATUSES), {"verified", "media_unverified", "unverifiable"})
         self.assertEqual(set(CARD_STATUSES), {"已核验", "部分核验", "未核验"})
-        self.assertEqual(set(INFO_LEVELS), {"已核验", "部分核验", "推断", "假设"})
+        self.assertEqual(set(INFO_LEVELS), {"已核验事实", "部分核验", "推断", "假设"})
 
 
 class TestConsistency(unittest.TestCase):
     """跨层一致性（信息等级 ≤ 核验状态上限）。"""
 
     def test_info_level_ceiling(self):
-        self.assertEqual(info_level_for("verified", "source"), "已核验")
+        self.assertEqual(info_level_for("verified", "source"), "已核验事实")
         self.assertEqual(info_level_for("media_unverified", "source"), "部分核验")
         self.assertEqual(info_level_for("unverifiable", "source"), "假设")
-        self.assertEqual(info_level_for("已核验", "card"), "已核验")
+        self.assertEqual(info_level_for("已核验", "card"), "已核验事实")
         self.assertEqual(info_level_for("未核验", "card"), "假设")
+
+    def test_info_level_alias(self):
+        # 「已核验」是「已核验事实」的别名（报告 inline 标记 / 历史用词），不另立强度。
+        self.assertEqual(normalize_info_level("已核验"), "已核验事实")
+        self.assertEqual(normalize_info_level("已核验事实"), "已核验事实")
+        self.assertEqual(normalize_info_level("部分核验"), "部分核验")
+        self.assertIsNone(normalize_info_level("瞎标"))
 
     def test_consistent_cases(self):
         self.assertTrue(is_consistent("已核验", "verified", "source"))
+        self.assertTrue(is_consistent("已核验事实", "verified", "source"))
         self.assertTrue(is_consistent("部分核验", "media_unverified", "source"))
         self.assertTrue(is_consistent("推断", "media_unverified", "source"))
         self.assertTrue(is_consistent("假设", "unverifiable", "source"))

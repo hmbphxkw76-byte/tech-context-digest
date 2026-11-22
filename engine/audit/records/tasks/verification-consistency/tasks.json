@@ -1,0 +1,50 @@
+[
+  {
+    "acceptance": "",
+    "depends_on": [],
+    "id": "T-1",
+    "phase": "",
+    "status": "done",
+    "title": "词表归一：verification_vocab 以「已核验事实」为 canonical，「已核验」别名归一，同步 ceiling 与单测"
+  },
+  {
+    "acceptance": "",
+    "depends_on": [],
+    "id": "T-2",
+    "phase": "",
+    "status": "done",
+    "title": "fact_card_check 增 FC-04（卡片 level vs verify_status 一致性，恒 [W]），输出越级清单"
+  },
+  {
+    "acceptance": "",
+    "depends_on": [],
+    "id": "T-3",
+    "phase": "",
+    "status": "done",
+    "title": "规范同步：INFORMATION-VERIFICATION-SPEC 非目标条款与 fact_cards/README"
+  },
+  {
+    "acceptance": "",
+    "depends_on": [],
+    "id": "T-4",
+    "phase": "",
+    "status": "done",
+    "title": "全量单测 + optimization_gate 复跑 + 提交与 PR"
+  },
+  {
+    "acceptance": "",
+    "depends_on": [],
+    "id": "T-5",
+    "phase": "",
+    "status": "done",
+    "title": "越级卡片改判：FC-CI-003 / FC-IND-001/002/008 转「部分核验」，FC-04 归零"
+  },
+  {
+    "acceptance": "",
+    "depends_on": [],
+    "id": "T-6",
+    "phase": "",
+    "status": "done",
+    "title": "FC-04 升级恒 [E]（结构性，存量清零后），同步规范与测试"
+  }
+]

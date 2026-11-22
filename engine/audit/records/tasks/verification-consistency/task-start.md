@@ -1,0 +1,50 @@
+# 任务启动 · 核验等级一致性接线（词表归一 + FC-04）
+
+- slug：`verification-consistency`
+- 起点：`main`；分支：`task/verification-consistency-<session8>`（见 `branch_registry.json`）
+- 计划工件目录：`engine/audit/records/` 下的 `tasks/verification-consistency/`
+  - `plan.json`（计划与 N0–N8 映射）
+  - `tasks.json`（任务分解）
+  - `risks.json`（风险登记）
+  - `task-start.md`（本文件）
+
+## 体系映射（主体保留，增量吸收）
+
+| 节点 | 名称 | 说明 |
+|---|---|---|
+| N0 | 需求与配置 | business-config / layout.json 维度注册 |
+| N0.5 | 任务计划（mainline 阶段 2 吸收） | plan.json / tasks.json / risks.json / task-start.md |
+| N1 | 信息采集 | source_registry / 台账 / 发布日历 |
+| N2 | 信息筛选与分级 | 四层分级 + 双源 + 死链 |
+| N3 | 信息分类 | 类型 / 维度 / 归位 |
+| N4 | 内容生成 | 四层提示词继承 + 量化模型 |
+| N5 | 渲染与交付 | canonical 样式 + 自包含 HTML |
+| N6 | 质量校验与审计 | 统一门禁 + 审计四环节 |
+| N7 | 发布 / 索引 / 归档 | hub / INDEX / 指纹 / 归档 |
+| N8 | 运维与监控 | CI 工作流 + 告警 |
+
+## 复用入口（不得另写一套校验）
+
+- 统一门禁：`python engine/tools/optimization_gate.py --gate-period auto --source-gate-period auto --probe`
+- 提交网关：`python engine/tools/repo_sync.py run --message ... --paths ... --gate`
+- 端到端编排：`python engine/tools/pipeline_runner.py validate`
+- 一键闭环：`python engine/tools/local_mainline.py run --slug verification-consistency --title ...`
+
+## 任务清单（6 项，详见 tasks.json）
+
+- [done] T-1 词表归一：verification_vocab 以「已核验事实」为 canonical，「已核验」别名归一，同步 ceiling 与单测
+- [done] T-2 fact_card_check 增 FC-04（卡片 level vs verify_status 一致性）
+- [done] T-3 规范同步：INFORMATION-VERIFICATION-SPEC 非目标条款与 fact_cards/README
+- [done] T-4 全量单测 + optimization_gate 复跑 + 提交与 PR
+- [done] T-5 越级卡片改判：FC-CI-003 / FC-IND-001/002/008 转「部分核验」，FC-04 归零
+- [done] T-6 FC-04 升级恒 [E]（结构性，存量清零后），同步规范与测试
+
+## 风险登记（3 项，详见 risks.json）
+
+- R-1 词形变更波及 info_density / decision_hub / metric 等消费方（缓解：全量单测并 grep 消费方）
+- R-2 4 张「综合推断」卡片越级需内容裁定（已解决：T-5 按裁定 (a) 改判「部分核验」）
+- R-3 报告层 proximity 一致性误报风险（缓解：本次不做，仅做结构化卡片层）
+
+## 关联报告
+
+- 无（手工/工具类任务）

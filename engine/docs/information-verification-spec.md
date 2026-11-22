@@ -18,7 +18,8 @@
 
 **非目标（本期不做）**
 - 不改动存量 `source_registry.json` 的取值（英文枚举仍为数据层 canonical）；
-- 不引入报告层信息等级与来源状态的逐条 proximity 一致性（留待二期）；
+- 不引入报告层信息等级与来源状态的逐条 proximity 一致性（留待二期；
+  卡片层结构性一致性不受此限，已由 `fact_card_check` FC-04 接线）；
 - 不引入分层抽检 / 已审计徽章 / 阶段闸左移（与本仓库结构无耦合，避免过度工程）。
 
 ## 二、核验状态词表（单一事实源）
@@ -27,16 +28,19 @@
 
 | 语义 | 数据层 canonical（英文） | 卡片 / 报告层 canonical（中文） | 允许的最高信息等级 |
 |---|---|---|---|
-| 已核实 | `verified` | `已核验` | 已核验 |
+| 已核实 | `verified` | `已核验` | 已核验事实 |
 | 部分核实 | `media_unverified` | `部分核验` | 部分核验 |
 | 无法核实 | `unverifiable` | `未核验` | 假设 |
 
-- 信息等级：`已核验 / 部分核验 / 推断 / 假设`（INFORMATION-LAYERING-SPEC 第四节）。
-- 决策摘要仅允许 `已核验 / 部分核验`（`is_decision_safe`）。
+- 信息等级：`已核验事实 / 部分核验 / 推断 / 假设`（INFORMATION-LAYERING-SPEC 第四节）。
+  canonical 为「已核验事实」；「已核验」是报告 inline 标记 / 历史用词别名，
+  由 `normalize_info_level` 归一，不另立强度。
+- 决策摘要仅允许 `已核验事实 / 部分核验`（`is_decision_safe`）。
 - 一致性判定：`is_consistent(level, status, kind)` —— 信息等级强度不得高于核验状态上限。
 - 门禁行为：
   - `source_check` R8 接受两套词形，非 canonical 词形给 `[W]`（数据卫生，不阻断）；
-  - `fact_card_check` 接受两套词形，非法即 `[E]`。
+  - `fact_card_check` 接受两套词形，非法即 `[E]`；
+  - `fact_card_check` FC-04 执行卡片 `level ≤ verify_status` 上限（恒 `[E]`，结构性，与 FC-01/02 同档）。
 
 ## 三、核验台账哈希链
 
@@ -82,6 +86,7 @@
 | 机制 | 工具 | 门禁 / CI | 级别 |
 |---|---|---|---|
 | 词表归一 | `verification_vocab.py` | `source_check` R8 / `fact_card_check` | W / E |
+| 跨层一致性 | `verification_vocab.is_consistent` | `fact_card_check` FC-04 | E（结构性） |
 | 核验台账链 | `verification_ledger.py verify` | `optimization_gate` → `verification_ledger` | E（链断裂） |
 | 台账回填 | `verification_ledger.py backfill` | `scheduled-maintenance.yml`（幂等） | E（执行失败） |
 | 来源定期复核 | `verification_review.py` / `audit_tool verify-review` | `scheduled-maintenance.yml` | 告警（2 不阻断） |
