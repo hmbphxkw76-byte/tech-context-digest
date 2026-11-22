@@ -122,7 +122,7 @@ P0/P1/P2 优化清单的全部确定性检查收敛为**单一入口** `engine/t
 多个 Agent 会话与多个 CI 工作流共用同一 `main`，必须遵守 **`engine/docs/multi-session-git-protocol.md`（MULTI-SESSION-GIT-PROTOCOL v1.6）** 与 **`engine/docs/branch-naming-and-lifecycle.md`（BRANCH-NAMING-SPEC v1.0）**：
 
 - **禁止直推 `main`**：任务一律在 `task/<slug>-<session8>` 分支提交，经 PR 合并。
-- **统一网关**：提交/推送使用 `python engine/tools/repo_sync.py`（run / push / pr / branch / branch-rename / branch-audit）。
+- **统一网关**：提交/推送使用 `python engine/tools/repo_sync.py`（run / push / pr / branch / branch-rename / branch-delete / branch-audit）。
 - **分支命名**：受管分支 `task/*` 必须内嵌会话标识；建分支用 `repo_sync.py branch <slug>`；`main` 与 `ci/*` 豁免。
 - **钩子**：`core.hooksPath=.githooks`（安装：`repo_sync.py hook-install`）；pre-push 按 refspec 判定，pre-commit 在违规受管分支上阻断。
 - **CI 也走 PR**：audit.yml / html-sync.yml / content-update.yml / scheduled-maintenance.yml 经 `.github/actions/submit-pr` 开 PR + 自动合并。

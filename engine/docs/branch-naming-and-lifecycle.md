@@ -113,9 +113,12 @@ python engine/tools/repo_sync.py branch-audit    # 受管但命名违规清单�
 ```bash
 python engine/tools/repo_sync.py branch-rename <旧名> <新名>            # 本地改名 + 登记册
 python engine/tools/repo_sync.py branch-rename <旧名> <新名> --remote   # 连同远端一起迁移
+python engine/tools/repo_sync.py branch-delete <分支> [--allow-unmerged]  # 删本地 + 远端；登记条目保留
 ```
 
 新名必须符合 §2.1；旧名未登记时会用当前会话标识补齐。
+`branch-delete` 仅删 `task/*`，默认要求已合并进 `main`；**登记册条目按 §2.4 保留**
+（历史台账），不随分支删除而注销。
 
 ### 3.5 钩子安装（每个克隆一次）
 

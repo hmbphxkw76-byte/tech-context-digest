@@ -1,0 +1,14 @@
+[
+  {
+    "description": "登记册保留策略与既有清理惯例冲突",
+    "id": "R-1",
+    "mitigation": "以 BRANCH-NAMING-SPEC §2.4 为准并说明",
+    "owner": ""
+  },
+  {
+    "description": "branch-delete 为破坏性操作",
+    "id": "R-2",
+    "mitigation": "仅 task/*、需已合并、不删当前分支，逐道拦截",
+    "owner": ""
+  }
+]
