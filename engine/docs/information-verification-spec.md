@@ -40,7 +40,7 @@
 - 门禁行为：
   - `source_check` R8 接受两套词形，非 canonical 词形给 `[W]`（数据卫生，不阻断）；
   - `fact_card_check` 接受两套词形，非法即 `[E]`；
-  - `fact_card_check` FC-04 执行卡片 `level ≤ verify_status` 上限（恒 `[W]`，不阻断）。
+  - `fact_card_check` FC-04 执行卡片 `level ≤ verify_status` 上限（恒 `[E]`，结构性，与 FC-01/02 同档）。
 
 ## 三、核验台账哈希链
 
@@ -86,7 +86,7 @@
 | 机制 | 工具 | 门禁 / CI | 级别 |
 |---|---|---|---|
 | 词表归一 | `verification_vocab.py` | `source_check` R8 / `fact_card_check` | W / E |
-| 跨层一致性 | `verification_vocab.is_consistent` | `fact_card_check` FC-04 | W（恒不阻断） |
+| 跨层一致性 | `verification_vocab.is_consistent` | `fact_card_check` FC-04 | E（结构性） |
 | 核验台账链 | `verification_ledger.py verify` | `optimization_gate` → `verification_ledger` | E（链断裂） |
 | 台账回填 | `verification_ledger.py backfill` | `scheduled-maintenance.yml`（幂等） | E（执行失败） |
 | 来源定期复核 | `verification_review.py` / `audit_tool verify-review` | `scheduled-maintenance.yml` | 告警（2 不阻断） |

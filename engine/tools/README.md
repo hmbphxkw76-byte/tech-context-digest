@@ -40,7 +40,7 @@ python -m unittest discover -s engine/tests -v   # 单元测试（全量）
 | pipeline_audit.py | 审计 | 全流程追加式留痕 `engine/audit/records/pipeline_runs.jsonl` |
 | research_kernel_check.py | 校验 | ci.yml「研究内核质量门禁（M4）」：新报告四项内核项（周期定位/传导量化/政策入模/盲区列示） |
 | info_density_check.py | 校验 | ci.yml「信息密度与分层交付门禁」：分层结构 / 信息等级 / 新增信息模块 / 场景切片（ID-01–ID-08、DC-05） |
-| fact_card_check.py | 校验 | ci.yml「事实卡片门禁（FC）」：卡片库结构 + 报告 `[FC-…]` 引用解析 + 共享域覆盖 + 跨层一致性（FC-04，恒 W） |
+| fact_card_check.py | 校验 | ci.yml「事实卡片门禁（FC）」：卡片库结构 + 报告 `[FC-…]` 引用解析 + 共享域覆盖 + 跨层一致性（FC-04，恒 E） |
 | decision_hub_check.py | 校验 | ci.yml「决策交付门禁（DC）」：决策卡字段 / 行动协议五要素 + 三档优先级 / 场景切片 / ex-ante |
 | blind_spot_check.py | 校验 | ci.yml「盲区台账门禁（BS）」：字段 / 状态 / 责任周期 / P0 四类 |
 | monitoring_render_check.py | 校验 | 监测渲染规范机械项（MON-01–05）：图注齐备 / 口径并列 / 列宽塌缩 / noopener / 原生 title；接入统一门禁 |

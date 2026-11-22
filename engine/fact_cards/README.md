@@ -40,4 +40,4 @@ python engine/tools/fact_card_check.py --json
 
 - FC-01–03：结构 / 引用可解析 / 共享域覆盖（新报告 `[E]`，历史 `[W]`）；
 - FC-04：卡片 `level` 不得高于 `verify_status` 允许上限（`verification_vocab.is_consistent`，
-  恒 `[W]`，不阻断；越级清单见门禁输出）。
+  恒 `[E]`，结构性，与 FC-01/02 同档）。

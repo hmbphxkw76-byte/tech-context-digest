@@ -30,17 +30,19 @@
 - 端到端编排：`python engine/tools/pipeline_runner.py validate`
 - 一键闭环：`python engine/tools/local_mainline.py run --slug verification-consistency --title ...`
 
-## 任务清单（4 项，详见 tasks.json）
+## 任务清单（6 项，详见 tasks.json）
 
-- [pending] T-1 词表归一：verification_vocab 以「已核验事实」为 canonical，「已核验」别名归一，同步 ceiling 与单测
-- [pending] T-2 fact_card_check 增 FC-04（卡片 level vs verify_status 一致性，恒 [W]），输出越级清单
-- [pending] T-3 规范同步：INFORMATION-VERIFICATION-SPEC 非目标条款与 fact_cards/README
-- [pending] T-4 全量单测 + optimization_gate 复跑 + 提交与 PR
+- [done] T-1 词表归一：verification_vocab 以「已核验事实」为 canonical，「已核验」别名归一，同步 ceiling 与单测
+- [done] T-2 fact_card_check 增 FC-04（卡片 level vs verify_status 一致性）
+- [done] T-3 规范同步：INFORMATION-VERIFICATION-SPEC 非目标条款与 fact_cards/README
+- [done] T-4 全量单测 + optimization_gate 复跑 + 提交与 PR
+- [done] T-5 越级卡片改判：FC-CI-003 / FC-IND-001/002/008 转「部分核验」，FC-04 归零
+- [done] T-6 FC-04 升级恒 [E]（结构性，存量清零后），同步规范与测试
 
 ## 风险登记（3 项，详见 risks.json）
 
 - R-1 词形变更波及 info_density / decision_hub / metric 等消费方（缓解：全量单测并 grep 消费方）
-- R-2 4 张「综合推断」卡片越级需内容裁定（缓解：本次不擅改，只出清单入 PR 描述）
+- R-2 4 张「综合推断」卡片越级需内容裁定（已解决：T-5 按裁定 (a) 改判「部分核验」）
 - R-3 报告层 proximity 一致性误报风险（缓解：本次不做，仅做结构化卡片层）
 
 ## 关联报告

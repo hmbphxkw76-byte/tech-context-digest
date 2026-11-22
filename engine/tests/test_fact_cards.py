@@ -56,7 +56,7 @@ class TestFactCards(unittest.TestCase):
         self.assertGreaterEqual(checked, 4, "应覆盖多个共享事实域新报告")
 
     def test_fc04_consistency_wiring(self):
-        # FC-04：越级卡片应被计数并产生 [W]，但不得计入 [E]（恒不阻断）。
+        # FC-04：越级卡片应被计数并产生 [E]（结构性，与 FC-01/02 同档）。
         cards, _ = m.load_cards()
         expected = 0
         for cid, c in cards.items():
@@ -67,11 +67,10 @@ class TestFactCards(unittest.TestCase):
             if not m.is_consistent(level, status, "card"):
                 expected += 1
         errors, warnings, lines, stats = m.run(resolve_period("auto"))
-        self.assertEqual(errors, 0, lines)
         self.assertEqual(stats["inconsistent_cards"], expected)
-        self.assertGreaterEqual(warnings, expected)
+        self.assertGreaterEqual(errors, expected)
         if expected:
-            self.assertTrue(any("FC-04" in ln for ln in lines))
+            self.assertTrue(any("[E]" in ln and "FC-04" in ln for ln in lines))
 
     def test_missing_reference_detected(self):
         # 合成：引用不存在的卡片应被 run 判错（直接检查解析逻辑）

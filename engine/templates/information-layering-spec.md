@@ -182,7 +182,7 @@
 ### 5.4 校验
 
 `fact_card_check.py`：卡片 JSON 结构完整；报告内 `[FC-…]` 引用可解析且卡片存在；新增卡片字段齐全；
-卡片 `level` 与 `verify_status` 跨层一致（FC-04，恒 `[W]`）。
+卡片 `level` 与 `verify_status` 跨层一致（FC-04，恒 `[E]`）。
 
 ---
 
