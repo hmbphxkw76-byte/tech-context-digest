@@ -1,5 +1,13 @@
 {
-  "branches": {},
+  "branches": {
+    "task/verification-closure-8b3dae0b": {
+      "note": "source=env:CATPAW_CONVERSATION_ID",
+      "session": "8b3dae0b4003440988907c94d29ea1ff",
+      "session_short": "8b3dae0b",
+      "slug": "verification-closure",
+      "task": "verification-closure"
+    }
+  },
   "schema": 1,
   "spec": "BRANCH-NAMING-SPEC v1.0"
 }

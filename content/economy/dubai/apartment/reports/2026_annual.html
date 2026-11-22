@@ -830,7 +830,7 @@ details.registry[open]{padding-bottom:18px}
 <tbody>
 <tr><td><strong>投资决策</strong></td><td>金融条件收紧延续（EIBOR ≥4.25%）</td><td>方向性下行成立、水平未确认；供给冲击后移</td><td>3/5</td><td>收入 / 空置 / 竣工</td></tr>
 <tr><td><strong>就业决策</strong></td><td>就业与收入官方序列缺失</td><td>无法给出就业侧判断，仅可给月供敏感性</td><td>2/5</td><td>就业 / 收入</td></tr>
-<tr><td><strong>政策制定</strong></td><td>G01–G04 门槛与 LTV 未核验</td><td>政策变量不可量化，不作门槛测算</td><td>2/5</td><td>政策法条 / 官方英文页</td></tr>
+<tr><td><strong>政策制定</strong></td><td>G01–G04 门槛与 LTV 已核验</td><td>政策变量可量化；仍需跟踪变更</td><td>4/5</td><td>政策变更事件</td></tr>
 </tbody>
 </table>
 </section>
@@ -842,23 +842,23 @@ details.registry[open]{padding-bottom:18px}
 <table class="fixed">
 <thead><tr><th style="width:9%">编号</th><th style="width:20%">政策变量</th><th style="width:16%">现行框架（常见引述）</th><th style="width:15%">官方核验</th><th style="width:40%">对需求 / 供给的机制路径</th></tr></thead>
 <tbody>
-<tr><td>G01</td><td>黄金签证房产门槛</td><td>常见引述 AED 2,000,000</td><td><span class="lvl lvl-assumption">未核验</span></td><td>门槛决定目标客群规模；调整将改变外部需求分母</td></tr>
-<tr><td>G02</td><td>CBUAE 按揭 LTV 上限</td><td>分首套 / 非首套 / 期房</td><td><span class="lvl lvl-assumption">未核验</span></td><td>LTV 直接决定首付门槛与可负担性</td></tr>
-<tr><td>G03</td><td>DLD 过户费与交易成本</td><td>常见引述约 4%</td><td><span class="lvl lvl-assumption">未核验</span></td><td>交易成本影响换手与投资门槛</td></tr>
-<tr><td>G04</td><td>期房资金托管 / Oqood 法条</td><td>托管比例与进度</td><td><span class="lvl lvl-assumption">未核验</span></td><td>影响期房购买意愿与供给结构</td></tr>
+<tr><td>G01</td><td>黄金签证房产门槛</td><td>AED 2,000,000（房地产投资 5 年）</td><td><span class="lvl lvl-verified">已核验</span></td><td>门槛决定目标客群规模；调整将改变外部需求分母</td></tr>
+<tr><td>G02</td><td>CBUAE 按揭 LTV 上限</td><td>国民首套 85% / 外籍 80%；二套 65% / 60%；期房 50%</td><td><span class="lvl lvl-verified">已核验</span></td><td>LTV 直接决定首付门槛与可负担性</td></tr>
+<tr><td>G03</td><td>DLD 过户费与交易成本</td><td>买卖双方各 2%（合计 4%）</td><td><span class="lvl lvl-verified">已核验</span></td><td>交易成本影响换手与投资门槛</td></tr>
+<tr><td>G04</td><td>期房资金托管 / Oqood 法条</td><td>Law No. 8/2007；留存 5% 一年</td><td><span class="lvl lvl-verified">已核验</span></td><td>影响期房购买意愿与供给结构</td></tr>
 <tr><td>G05</td><td>供应侧政策（社区配额 / 可负担住房）</td><td>无稳定公开框架</td><td><span class="lvl lvl-assumption">未核验</span></td><td>影响长期供给结构，与本案弱相关</td></tr>
 </tbody>
 </table>
-<p class="note">G01–G04 为盲区 B05（官方英文条款页 / PDF 哈希存档未取得）；G05 为弱关联。全部为「未核验」，不得作为结论依据。（来源：盲区台账 B05 / engine/report-audits/blind-spot-ledger.md）</p>
+<p class="note">G01–G04 已于 2026-11-22 回一手来源核验（u.ae / CBUAE Rulebook / DLD 官方页）；G05 为弱关联、未核验。G01–G04 可作为政策阈值引用。</p>
 
 <h3>7.2 未核验清单（14 项）</h3>
 <table class="fixed">
 <thead><tr><th style="width:8%">序号</th><th style="width:26%">未核验项</th><th style="width:14%">关联盲区</th><th style="width:14%">关联指标</th><th style="width:38%">可核验陈述（替代处理）</th></tr></thead>
 <tbody>
-<tr><td>1</td><td>黄金签证房产门槛 AED 2,000,000</td><td>B05</td><td>G01</td><td>常见引述值，官方英文条款页未取得；不作为需求测算输入</td></tr>
-<tr><td>2</td><td>CBUAE 按揭 LTV 规则</td><td>B05</td><td>G02</td><td>首套 / 非首套 / 期房分档规则未取得；月供测算按全额传导</td></tr>
-<tr><td>3</td><td>DLD 过户费与交易成本约 4%</td><td>B05</td><td>G03</td><td>媒体与经纪转述，官方费率页未取得</td></tr>
-<tr><td>4</td><td>期房资金托管 / Oqood 法条</td><td>B05</td><td>G04</td><td>托管比例与进度法条未取得</td></tr>
+<tr><td>1</td><td>黄金签证房产门槛 AED 2,000,000</td><td>B05</td><td>G01</td><td>已核验（u.ae 官方页，Updated 28 Jul 2026）；可作为需求测算输入</td></tr>
+<tr><td>2</td><td>CBUAE 按揭 LTV 规则</td><td>B05</td><td>G02</td><td>已核验（CBUAE Rulebook）：公民首套 ≤5m 85%、外籍 80%；二套 65% / 60%；期房 50%</td></tr>
+<tr><td>3</td><td>DLD 过户费与交易成本约 4%</td><td>B05</td><td>G03</td><td>已核验（DLD 官方）：买卖双方各 2%（合计 4%）</td></tr>
+<tr><td>4</td><td>期房资金托管 / Oqood 法条</td><td>B05</td><td>G04</td><td>已核验（DLD FAQ）：Law No. 8/2007，2007-06-28 生效，留存 5% 一年</td></tr>
 <tr><td>5</td><td>官方住宅空置率序列</td><td>B01</td><td>K09</td><td>无官方序列；以 ValuStrat / REIDIN + DLD 单元数据集自建代理替代</td></tr>
 <tr><td>6</td><td>就业 / 失业率数值</td><td>B02</td><td>K13</td><td>2026 劳动力调查结果未发布（M11 未发布）</td></tr>
 <tr><td>7</td><td>官方竣工登记</td><td>B03</td><td>K09</td><td>无官方序列；以 DM 竣工证书 + 机构三口径并列替代</td></tr>
@@ -866,7 +866,7 @@ details.registry[open]{padding-bottom:18px}
 <tr><td>9</td><td>2026-09 加息生效日（3.65%→3.90%）</td><td>B07</td><td>K01</td><td>CBUAE 官方页面核验中</td></tr>
 <tr><td>10</td><td>2026-09 迪拜人口「约 4.8m」</td><td>B08</td><td>K12</td><td>媒体转述，DDSE 官方英文页未取得；不采信</td></tr>
 <tr><td>11</td><td>家庭户数 858,000</td><td>B09</td><td>K12</td><td>媒体转述 DSC，官方英文页未取得</td></tr>
-<tr><td>12</td><td>迪拜 2026H1 GDP 细项（AED473bn 标题）</td><td>B10</td><td>K10</td><td>仅标题口径，细项未取得</td></tr>
+<tr><td>12</td><td>迪拜 2026H1 GDP 细项（AED473bn 标题）</td><td>B10</td><td>K10</td><td>仅标题口径，细项未取得；水平值未获 DSC / DDSE 官方页证实，量级存疑</td></tr>
 <tr><td>13</td><td>利率期限结构（3M / 6M / 1Y 利差）</td><td>B12</td><td>K08</td><td>CBUAE / 定盘日度序列未入库</td></tr>
 <tr><td>14</td><td>信贷结构（按揭余额 / 不良率 / LTV 分布）</td><td>B13</td><td>K08</td><td>CBUAE 货币与信贷统计未入库</td></tr>
 </tbody>

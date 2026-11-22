@@ -1,0 +1,20 @@
+[
+  {
+    "description": "并行会话共用工作区",
+    "id": "R-1",
+    "mitigation": "独立 worktree 隔离，仅提交本任务文件",
+    "owner": ""
+  },
+  {
+    "description": "一手来源不可达/反爬",
+    "id": "R-2",
+    "mitigation": "如实标注 unreachable，不虚报覆盖率",
+    "owner": ""
+  },
+  {
+    "description": "台账 append-only 并发写冲突",
+    "id": "R-3",
+    "mitigation": "由主会话串行追加",
+    "owner": ""
+  }
+]

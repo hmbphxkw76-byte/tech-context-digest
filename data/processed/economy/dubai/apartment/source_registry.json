@@ -1780,6 +1780,102 @@
         "note": "T-01 登记核验回填：登记信息人工核对（未抓取正文，故无 archive_hash）",
         "snapshot_date": "2026-11-18"
       }
+    },
+    {
+      "source_id": "S-082",
+      "tier": 1,
+      "publisher": "UAE Government",
+      "title": "Golden visa — official portal",
+      "url": "https://u.ae/en/information-and-services/visa-and-emirates-id/Types-of-visas/golden-visa",
+      "lang": "en",
+      "verify_status": "verified",
+      "updated": "2026-11-22",
+      "in_synthesis": false,
+      "used_in": [
+        "reports/2026-11_baseline_report.html",
+        "reports/2026-11_monthly.html",
+        "reports/2026-Q3_quarterly.html",
+        "reports/2026_annual.html"
+      ],
+      "document_tier": "official_release",
+      "statement_type": "fact",
+      "evidence": {
+        "method": "web_fetch",
+        "note": "2026-11-22 一手复核：房地产投资 5 年 / 公共投资 10 年；最低资本 AED 2,000,000；页脚 Updated 28 Jul 2026",
+        "snapshot_date": "2026-11-22"
+      }
+    },
+    {
+      "source_id": "S-083",
+      "tier": 1,
+      "publisher": "Dubai Land Department (DLD)",
+      "title": "Property sale registration — fees",
+      "url": "https://dubailand.gov.ae/en/eservices/property-sale-registration/",
+      "lang": "en",
+      "verify_status": "verified",
+      "updated": "2026-11-22",
+      "in_synthesis": false,
+      "used_in": [
+        "reports/2026-11_baseline_report.html",
+        "reports/2026-11_monthly.html",
+        "reports/2026-Q3_quarterly.html",
+        "reports/2026_annual.html"
+      ],
+      "document_tier": "official_release",
+      "statement_type": "fact",
+      "evidence": {
+        "method": "web_fetch",
+        "note": "2026-11-22 一手复核：卖方 2% + 买方 2%（合计 4%）；另加Title Deed AED 250、知识费 AED 10、创新费 AED 10、受托人服务费 AED 4,000+VAT",
+        "snapshot_date": "2026-11-22"
+      }
+    },
+    {
+      "source_id": "S-084",
+      "tier": 1,
+      "publisher": "Dubai Land Department (DLD)",
+      "title": "FAQ — real estate escrow account",
+      "url": "https://dubailand.gov.ae/en/faq/",
+      "lang": "en",
+      "verify_status": "verified",
+      "updated": "2026-11-22",
+      "in_synthesis": false,
+      "used_in": [
+        "reports/2026-11_baseline_report.html",
+        "reports/2026-11_monthly.html",
+        "reports/2026-Q3_quarterly.html",
+        "reports/2026_annual.html"
+      ],
+      "document_tier": "official_release",
+      "statement_type": "fact",
+      "evidence": {
+        "method": "web_fetch",
+        "note": "2026-11-22 一手复核：Law No. 8/2007 on escrow account（2007-06-28 生效）；Art.14 留存 5% 一年；按工程进度放款",
+        "snapshot_date": "2026-11-22"
+      }
+    },
+    {
+      "source_id": "S-085",
+      "tier": 1,
+      "publisher": "Central Bank of the UAE (CBUAE)",
+      "title": "Regulations regarding mortgage loans (Rulebook)",
+      "url": "https://rulebook.centralbank.ae/en/rulebook/regulations-regarding-mortgage-loans",
+      "lang": "en",
+      "verify_status": "verified",
+      "updated": "2026-11-22",
+      "in_synthesis": false,
+      "used_in": [
+        "reports/2026-11_baseline_report.html",
+        "reports/2026-11_monthly.html",
+        "reports/2026-Q3_quarterly.html",
+        "reports/2026_annual.html"
+      ],
+      "document_tier": "official_release",
+      "statement_type": "fact",
+      "evidence": {
+        "method": "web_fetch",
+        "note": "2026-11-22 一手复核：国民首套 ≤AED5m 85% / >5m 75%；外籍首套 80% / 70%；二套及投资房 65%（国民）/ 60%（外籍）；期房一律 50%",
+        "snapshot_date": "2026-11-22"
+      }
     }
   ]
 }
