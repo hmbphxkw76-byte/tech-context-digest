@@ -1170,6 +1170,11 @@ class TestCheckLinks(unittest.TestCase):
         bad = self.cl.ROOT / "content/economy/dubai/apartment/reports/2026-q3_quarterly.html"
         self.assertFalse(self.cl._case_ok(bad))
 
+    def test_meituan_worktree_dir_skipped(self):
+        # `.meituan-catpaw/` 是客户端 worktree 存储（并行会话），非仓库内容，不扫描
+        self.assertIn(".meituan-catpaw", self.cl.SKIP_DIR_MARKERS)
+        self.assertTrue(self.cl.is_frozen(".meituan-catpaw/5833106238/worktrees/x/.github/workflows/ci.yml"))
+
     def test_data_search_lowercase_index_ignored(self):
         # build_hub 生成的 data-search 是小写化搜索索引，非真实引用
         p = self.cl.ROOT / "index.html"
