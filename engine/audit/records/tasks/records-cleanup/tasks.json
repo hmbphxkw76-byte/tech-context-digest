@@ -1,0 +1,26 @@
+[
+  {
+    "acceptance": "",
+    "depends_on": [],
+    "id": "T-1",
+    "phase": "",
+    "status": "pending",
+    "title": "删除 engine/audit/records/tasks 下历史任务四件套（保留本任务）"
+  },
+  {
+    "acceptance": "",
+    "depends_on": [],
+    "id": "T-2",
+    "phase": "",
+    "status": "pending",
+    "title": "删除已合并 task 分支 task/ci-plan-c-273f7c79（本地+远程）"
+  },
+  {
+    "acceptance": "",
+    "depends_on": [],
+    "id": "T-3",
+    "phase": "",
+    "status": "pending",
+    "title": "全量 unittest + 门禁复跑"
+  }
+]

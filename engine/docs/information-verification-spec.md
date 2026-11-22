@@ -14,12 +14,11 @@
 1. 核验状态词表映射（数据层英文枚举 ↔ 卡片 / 报告层中文等级）；
 2. 核验台账哈希链（append-only，防篡改 / 防删减）；
 3. 来源定期复核与到期告警（按机构 tier 重核周期）；
-4. 来源归一化原语（URL / 机构名 / 主机 / 日期）。
+4. 来源归一化原语（URL / 机构名 / 主机 / 日期）；
+5. 报告层信息等级 ↔ 来源核验状态一致性（RV-01..03，见 §二·补）。
 
 **非目标（本期不做）**
 - 不改动存量 `source_registry.json` 的取值（英文枚举仍为数据层 canonical）；
-- 不引入报告层信息等级与来源状态的逐条 proximity 一致性（留待二期；
-  卡片层结构性一致性不受此限，已由 `fact_card_check` FC-04 接线）；
 - 不引入分层抽检 / 已审计徽章 / 阶段闸左移（与本仓库结构无耦合，避免过度工程）。
 
 ## 二、核验状态词表（单一事实源）
@@ -40,7 +39,27 @@
 - 门禁行为：
   - `source_check` R8 接受两套词形，非 canonical 词形给 `[W]`（数据卫生，不阻断）；
   - `fact_card_check` 接受两套词形，非法即 `[E]`；
-  - `fact_card_check` FC-04 执行卡片 `level ≤ verify_status` 上限（恒 `[E]`，结构性，与 FC-01/02 同档）。
+  - `fact_card_check` FC-04 执行卡片 `level ≤ verify_status` 上限（恒 `[E]`，结构性，与 FC-01/02 同档）；
+  - `report_verification_check` 执行报告层一致性 RV-01..03（新报告 `[E]` / 历史报告 `[W]`，
+    两级 gate-period，与内容四门禁同档）。
+
+### 二·补、报告层信息一致性（RV-01..03）
+
+单一事实源：`engine/tools/report_verification_check.py`。来源状态取自各业务线
+`data/processed/**/source_registry.json`（R8 约定），链接按归一化 URL 精确匹配，
+避免机构名缩写导致的模糊误判；陈述单元取非嵌套的 `tr / li / p`（不用通用 `div`，
+否则整表 / 时间线会把多个陈述并成一个单元而漏判）。
+
+| 项 | 规则 | 判定依据 |
+|---|---|---|
+| RV-01 | 决策摘要纯净：`decision-summary` 内不得出现 `lvl-inferred` / `lvl-assumption`，不得链接 `unverifiable` 来源，不得出现「未核验」状态文本 | 决策摘要仅允许已核验 + 部分核验 |
+| RV-02 | 未核验来源呈现：`lvl-verified` / `lvl-partial` 单元若仅链接 `unverifiable` 来源，或 `lvl-verified` 仅链接 `media_unverified` 来源，判不一致 | 信息等级不得高于来源上限（`is_consistent` 同口径） |
+| RV-03 | 来源状态文本一致：单元内显式状态文本（`· 未核验` / `· 部分核验`）与 `lvl-*` 标记冲突时判不一致 | 报告自洽 |
+
+- 单元内同时存在已核验 / 部分核验来源支撑时，不判 RV-02（避免误报）；
+- 接线：统一门禁 `optimization_gate` 的 `report_verification` 项；
+  `pipeline_manifest.json` 的 G2（生成前）与 G4（生成后）就地门禁；
+  `content-update.yml` 在创建生成任务 Issue 前执行统一门禁，构成「生成前核验」。
 
 ## 三、核验台账哈希链
 
@@ -87,6 +106,7 @@
 |---|---|---|---|
 | 词表归一 | `verification_vocab.py` | `source_check` R8 / `fact_card_check` | W / E |
 | 跨层一致性 | `verification_vocab.is_consistent` | `fact_card_check` FC-04 | E（结构性） |
+| 报告层一致性 | `report_verification_check.py` RV-01..03 | `optimization_gate` → `report_verification`；G2 / G4 | E（新）/ W（历史） |
 | 核验台账链 | `verification_ledger.py verify` | `optimization_gate` → `verification_ledger` | E（链断裂） |
 | 台账回填 | `verification_ledger.py backfill` | `scheduled-maintenance.yml`（幂等） | E（执行失败） |
 | 来源定期复核 | `verification_review.py` / `audit_tool verify-review` | `scheduled-maintenance.yml` | 告警（2 不阻断） |

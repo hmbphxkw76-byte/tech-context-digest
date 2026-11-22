@@ -8,13 +8,10 @@ name: 内容更新编排
 #   - 创建 content-update Issue，供本地妙手自动化 / 手动执行
 #   - 执行维护流水线，保证索引与归档同步
 #
-# 触发：
+# 触发（public 仓库 Actions 免费，恢复自动触发）：
 #   - schedule：每月 1 日 03:17 UTC（季度首月 1 / 4 / 7 / 10 月已包含在内）
 #   - workflow_dispatch：手动（可指定 project / period）
 #   - repository_dispatch：外部 / Agent 触发（client_payload: project / period）
-#
-# 去重：原先并列三条 cron（月度 + 季首月 + 1 月）会导致每月 1 日重复触发多次；
-# 月度 cron 已覆盖季首月，故只保留一条（对齐 page-build-governance §2.2 触发定义）。
 on:
   schedule:
     - cron: "17 3 1 * *"
@@ -92,8 +89,10 @@ jobs:
           python engine/tools/build_hub.py
           python engine/tools/release_calendar.py --emit engine/report-audits/release-calendar.json
 
-      # 全链路唯一门禁入口（P1-2 去重）：与 ci.yml 同口径（含 probe）。
-      - name: 优化流程一致性门禁（统一入口 · 含 probe）
+      # 生成前置核验：全链路唯一门禁入口（P1-2 去重），与 ci.yml 同口径（含 probe）。
+      # 在创建本期生成任务 Issue 之前执行——信息核验未过时，不派发生成任务，
+      # 使「报告中不呈现未核验信息」（report_verification）在生成前即被拦截。
+      - name: 生成前置核验：优化流程一致性门禁（统一入口 · 含 probe）
         run: |
           set +e
           python engine/tools/optimization_gate.py --gate-period auto --source-gate-period auto --probe

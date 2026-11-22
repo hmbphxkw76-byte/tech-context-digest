@@ -4,7 +4,7 @@
 本地环境不具备的才远程跑，且结果保持可追溯分享。
 
 **单一入口**：`engine/tools/local_ci.py`（编排层，不新增门禁项；统一门禁仍为
-`optimization_gate` 的 31 项）。
+`optimization_gate` 的 32 项）。
 
 ### 一、本地能跑（14 项 · 只读 · 不依赖外网）
 
@@ -33,6 +33,9 @@
 | `submit-pr` | 自动开 PR / 自动合并，需 GitHub token 与网络 |
 | `webhook-alert` | 外部告警通道，需 webhook 凭据 |
 | `runner-env` | GitHub runner 环境 / secrets / 服务端分支保护 |
+
+> **触发现状（仓库 public）**：public 仓库 Actions 免费，`.github/workflows/` 的 `push` / `schedule`
+> 自动触发**已恢复**；本地 `local_ci.py` 仍作为常态校验与结果分享入口（本地优先）。
 
 ### 三、用法
 

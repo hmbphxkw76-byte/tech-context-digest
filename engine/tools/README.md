@@ -34,7 +34,7 @@ python -m unittest discover -s engine/tests -v   # 单元测试（全量）
 | metric_coverage.py | 校验+度量 | 指标实测覆盖（批次 B）：TOOL 指标实测接线 + LLM/未接线显式标注 + 覆盖率与缺口报告 |
 | release_calendar.py | 采集 | 发布日历结构化采集（P1-2）：解析 release-calendar.md → JSON + 覆盖率 |
 | publish_fingerprint.py | 校验+留痕 | 发布指纹（P2-2）：sha256 登记 / 重复检测 / 漂移比对 |
-| optimization_gate.py | 校验（统一入口） | ci / html-sync / content-update / scheduled-maintenance / `repo_sync run --gate` 复用；31 项门禁单一入口 |
+| optimization_gate.py | 校验（统一入口） | ci / html-sync / content-update / scheduled-maintenance / `repo_sync run --gate` 复用；32 项门禁单一入口 |
 | pipeline_manifest.json | 配置（声明式图） | 报告全流程 N0–N8 / G0–G8 声明式清单（流程图唯一落地载体） |
 | pipeline_runner.py | 编排 | 节点→门禁→路由/退回；复用 `optimization_gate` 单一入口；见 `engine/docs/report-pipeline-implementation-plan.md` |
 | local_ci.py | 编排（本地 CI） | 本地等价 CI（本地优先 · 远程兜底 · 结果分享）：复刻 ci / audit / html-sync / maintenance 的本地可读检查；见 `engine/docs/local-ci-runbook.md` |
@@ -42,6 +42,7 @@ python -m unittest discover -s engine/tests -v   # 单元测试（全量）
 | research_kernel_check.py | 校验 | ci.yml「研究内核质量门禁（M4）」：新报告四项内核项（周期定位/传导量化/政策入模/盲区列示） |
 | info_density_check.py | 校验 | ci.yml「信息密度与分层交付门禁」：分层结构 / 信息等级 / 新增信息模块 / 场景切片（ID-01–ID-08、DC-05） |
 | fact_card_check.py | 校验 | ci.yml「事实卡片门禁（FC）」：卡片库结构 + 报告 `[FC-…]` 引用解析 + 共享域覆盖 + 跨层一致性（FC-04，恒 E） |
+| report_verification_check.py | 校验 | 报告层信息核验（RV-01..03）：决策摘要纯净 + 未核验来源不得呈现为已核验 / 部分核验 + 来源状态文本一致；接入统一门禁与 G2 / G4 |
 | decision_hub_check.py | 校验 | ci.yml「决策交付门禁（DC）」：决策卡字段 / 行动协议五要素 + 三档优先级 / 场景切片 / ex-ante |
 | blind_spot_check.py | 校验 | ci.yml「盲区台账门禁（BS）」：字段 / 状态 / 责任周期 / P0 四类 |
 | monitoring_render_check.py | 校验 | 监测渲染规范机械项（MON-01–05）：图注齐备 / 口径并列 / 列宽塌缩 / noopener / 原生 title；接入统一门禁 |
@@ -140,7 +141,7 @@ python engine/tools/lint_reports.py
 ### optimization_gate.py — 优化流程统一门禁（单一入口）
 
 ```bash
-python engine/tools/optimization_gate.py                      # 全部门禁（31 项）
+python engine/tools/optimization_gate.py                      # 全部门禁（32 项）
 python engine/tools/optimization_gate.py --only source_check,metric_registry
 python engine/tools/optimization_gate.py --gate-period auto --source-gate-period auto --json
 python engine/tools/optimization_gate.py --list

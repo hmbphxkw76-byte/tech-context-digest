@@ -36,7 +36,7 @@
 
 > L1 结果原样记录，不改写；既有历史告警归入 LEGACY，不阻断。
 >
-> **与统一门禁 31 项的关系**：L1-1–L1-7 由统一门禁 `optimization_gate.py` 承载（CI / 提交 / 审计共用同口径）；**L1-8（节拍）与 L1-9（词汇）不在统一门禁 31 项内**——前者由内容更新编排（`content-update.yml`）与 `update_planner.py` 承载，后者由词汇流程（`engine/vocabulary/script/` + 质量评估 `engine/quality/`）承载。此处保留 L1-8/L1-9 作为 L1 完整口径，避免与[体系说明](../docs/report-pipeline-system.md) §3.3 的门禁清单冲突。
+> **与统一门禁 32 项的关系**：L1-1–L1-7 由统一门禁 `optimization_gate.py` 承载（CI / 提交 / 审计共用同口径）；**L1-8（节拍）与 L1-9（词汇）不在统一门禁 32 项内**——前者由内容更新编排（`content-update.yml`）与 `update_planner.py` 承载，后者由词汇流程（`engine/vocabulary/script/` + 质量评估 `engine/quality/`）承载。此处保留 L1-8/L1-9 作为 L1 完整口径，避免与[体系说明](../docs/report-pipeline-system.md) §3.3 的门禁清单冲突。
 
 ---
 

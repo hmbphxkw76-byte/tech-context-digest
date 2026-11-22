@@ -20,7 +20,7 @@ html-sync.yml / scheduled-maintenance.yml 的检查类步骤），一条命令�
 
 退出码：0 全部通过；2 仅警告（无错误）；1 存在错误项；3 用法 / 执行错误。
 
-本工具是**编排层**，不新增门禁项（统一门禁仍为 optimization_gate 的 31 项）。
+本工具是**编排层**，不新增门禁项（统一门禁仍为 optimization_gate 的 32 项）。
 规范见 engine/docs/local-ci-runbook.md。
 """
 from __future__ import annotations

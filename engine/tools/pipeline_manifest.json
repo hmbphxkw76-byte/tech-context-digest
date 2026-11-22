@@ -219,9 +219,10 @@
     {
       "id": "G2",
       "after": "N2",
-      "name": "分级 / 双源 / 死链校验",
+      "name": "分级 / 双源 / 死链 + 报告层核验",
       "checks": [
-        "source_check"
+        "source_check",
+        "report_verification"
       ],
       "probe": true,
       "on_fail": "N2",
@@ -243,11 +244,12 @@
     {
       "id": "G4",
       "after": "N4",
-      "name": "内容四门禁 + 研究内核",
+      "name": "内容四门禁 + 研究内核 + 报告层核验",
       "checks": [
         "research_kernel",
         "info_density",
         "fact_card",
+        "report_verification",
         "decision_hub",
         "blind_spot"
       ],

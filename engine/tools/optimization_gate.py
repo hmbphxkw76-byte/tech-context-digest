@@ -68,6 +68,9 @@ CHECKS: list[tuple[str, list[str], bool]] = [
     ("research_kernel", [sys.executable, f"{TOOLS}/research_kernel_check.py", "--gate-period", "__GATE__"], True),
     ("info_density", [sys.executable, f"{TOOLS}/info_density_check.py", "--gate-period", "__GATE__"], True),
     ("fact_card", [sys.executable, f"{TOOLS}/fact_card_check.py", "--gate-period", "__GATE__"], True),
+    # 报告层信息等级 ↔ 来源核验状态一致性（INFORMATION-VERIFICATION-SPEC v1.0 报告层）：
+    # 未核验来源不得在报告中被呈现为已核验 / 部分核验（RV-01..03）。
+    ("report_verification", [sys.executable, f"{TOOLS}/report_verification_check.py", "--gate-period", "__GATE__"], True),
     ("decision_hub", [sys.executable, f"{TOOLS}/decision_hub_check.py", "--gate-period", "__GATE__"], True),
     ("blind_spot", [sys.executable, f"{TOOLS}/blind_spot_check.py"], True),
     ("vocab_drift", [sys.executable, f"{TOOLS}/vocab_drift_check.py"], True),

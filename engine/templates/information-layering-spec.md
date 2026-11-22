@@ -262,6 +262,8 @@
 | ID-09 影响分级披露 | 高影响业务线（`impact_tier: high`）报告含置信区间 / 时效（读数时点）/ 免责 / 非专业建议四要素 | [W]（存量补齐，不阻断） |
 
 > 门禁周期默认 `auto`（滚动基线 = 当前自然月，与 `research_kernel_check.py` 一致）；历史报告只警告。
+>
+> 报告层信息等级 ↔ 来源核验状态一致性（RV-01..03：决策摘要纯净 / 未核验来源不得呈现为已核验 / 部分核验 / 来源状态文本一致）由 `report_verification_check.py` 承载，见 [INFORMATION-VERIFICATION-SPEC](../docs/information-verification-spec.md) §二·补；新报告 `[E]` / 历史 `[W]`。
 
 ---
 
