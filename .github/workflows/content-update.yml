@@ -89,8 +89,10 @@ jobs:
           python engine/tools/build_hub.py
           python engine/tools/release_calendar.py --emit engine/report-audits/release-calendar.json
 
-      # 全链路唯一门禁入口（P1-2 去重）：与 ci.yml 同口径（含 probe）。
-      - name: 优化流程一致性门禁（统一入口 · 含 probe）
+      # 生成前置核验：全链路唯一门禁入口（P1-2 去重），与 ci.yml 同口径（含 probe）。
+      # 在创建本期生成任务 Issue 之前执行——信息核验未过时，不派发生成任务，
+      # 使「报告中不呈现未核验信息」（report_verification）在生成前即被拦截。
+      - name: 生成前置核验：优化流程一致性门禁（统一入口 · 含 probe）
         run: |
           set +e
           python engine/tools/optimization_gate.py --gate-period auto --source-gate-period auto --probe

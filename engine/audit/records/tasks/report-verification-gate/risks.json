@@ -1,0 +1,14 @@
+[
+  {
+    "description": "新门禁误报历史报告",
+    "id": "R-1",
+    "mitigation": "缓解=两级 gate-period，历史 [W]",
+    "owner": ""
+  },
+  {
+    "description": "文档门禁数量口径漂移",
+    "id": "R-2",
+    "mitigation": "缓解=test_pipeline_system_doc 锁定",
+    "owner": ""
+  }
+]

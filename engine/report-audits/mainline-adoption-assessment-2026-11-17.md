@@ -32,7 +32,7 @@
 | N3 | 信息分类 | G3 分类·归位·断链 | `classify` / `validate_layout` / `check_links` |
 | N4 | 内容生成 | G4 内容四门禁 + 研究内核 | `research_kernel` / `info_density` / `fact_card` / `decision_hub` / `blind_spot` |
 | N5 | 渲染与交付 | G5 页面·合规·性能 | `page_build_check` / `lint` / `compliance` / `perf_monitor` |
-| N6 | 质量校验与审计（兜底） | G6 统一门禁 + 审计 | **统一门禁 31 项**（基线 21 项，Phase 3.1 起 31 项）+ 审计四环节（L1/L2/L3 + A1–A8） |
+| N6 | 质量校验与审计（兜底） | G6 统一门禁 + 审计 | **统一门禁 32 项**（基线 21 项，Phase 3.1 起 32 项）+ 审计四环节（L1/L2/L3 + A1–A8） |
 | N7 | 发布 / 索引 / 归档 | G7 产物确定性 | `build_hub --check` / 发布指纹 / 归档 |
 | N8 | 运维与监控 | G8 运维·告警 | 6 工作流 + 活跃度 + 告警 |
 
@@ -40,7 +40,7 @@
 
 ### 1.3 统一门禁单一入口（`optimization_gate.py`）
 
-- **31 项**（基线 21 项，Phase 3.1 起 31 项）：validate / validate_layout / lint / compliance / classify / period_check / region_topics / links / hub / page_build / source_check / verification_ledger / metric_registry / metric_audit / release_calendar / publish_fingerprint / semantic_diff / perf_monitor / research_kernel / info_density / fact_card / decision_hub / blind_spot / ruff / mypy。
+- **32 项**（基线 21 项，Phase 3.1 起 32 项）：validate / validate_layout / lint / compliance / classify / period_check / region_topics / links / hub / page_build / source_check / verification_ledger / metric_registry / metric_audit / release_calendar / publish_fingerprint / semantic_diff / perf_monitor / research_kernel / info_density / fact_card / report_verification / decision_hub / blind_spot / ruff / mypy。
 - **退出码**：0 通过；1 有 `[E]`（阻断）；2 仅 `[W]`（放行）。`warn_ok` 仅 `links` / `hub` / `metric_registry` 不容忍 exit 2。
 - **复用矩阵**：`repo_sync run --gate`（本地提交）、`ci.yml` / `html-sync.yml` / `content-update.yml` / `scheduled-maintenance.yml`（CI 步骤）、`audit_tool._run_gate()`（审计内部）。
 - **一致性强制**：`engine/tests/test_process_gates.py::TestOptimizationGateReuse` 锁定「四门禁必须在 `CHECKS`、四工作流必须调用统一入口且不得分项重复」。
@@ -143,7 +143,7 @@
 
 **不需要以 mainline 规范为核心做整体融合（替换）。** 三条核心原因：
 
-1. **质量保障会降级**：现有 5 道防线 / 31 项统一门禁 / 审计四环节 / 两级 gate-period 在「内容生产」维度上**强于** mainline 的质量门（单测 + 本地脚本）。以 mainline 为核心替换，等于用简化门禁替换成熟门禁。
+1. **质量保障会降级**：现有 5 道防线 / 32 项统一门禁 / 审计四环节 / 两级 gate-period 在「内容生产」维度上**强于** mainline 的质量门（单测 + 本地脚本）。以 mainline 为核心替换，等于用简化门禁替换成熟门禁。
 2. **40% 阶段与仓库性质不适配**：TDD 不适用于报告内容生成；`tag/changelog/RELEASES.md` 对静态 HTML 交付物无意义。强行套用会制造形式主义工件，反而增加负担。
 3. **落地成本 > 收益，且规范已过载**：现有体系已稳定运行且经 448 单测锁定；再引入 11 阶段 + 三件套会加剧「规范复述漂移」（P-07），与长期可维护性目标冲突。
 
