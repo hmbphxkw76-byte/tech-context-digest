@@ -70,7 +70,8 @@ class TestFactCards(unittest.TestCase):
         self.assertEqual(errors, 0, lines)
         self.assertEqual(stats["inconsistent_cards"], expected)
         self.assertGreaterEqual(warnings, expected)
-        self.assertTrue(any("FC-04" in ln for ln in lines))
+        if expected:
+            self.assertTrue(any("FC-04" in ln for ln in lines))
 
     def test_missing_reference_detected(self):
         # 合成：引用不存在的卡片应被 run 判错（直接检查解析逻辑）
