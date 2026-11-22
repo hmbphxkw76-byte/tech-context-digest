@@ -121,10 +121,28 @@ class TestEvidenceIndex(unittest.TestCase):
         self.assertEqual(before, after)
 
     def test_plans_linked_via_report_reports_field(self):
-        """吸收项 ③：plan.reports 显式关联 → evidence.plans 非空（真实工件驱动，非硬编码）。"""
+        """吸收项 ③：plan.reports 显式关联 → evidence.plans 非空（真实工件驱动，非硬编码）。
+
+        任务工件目录可按需清理，故用临时目录构造真实 plan.json 驱动，
+        不依赖仓库中是否存在某个特定 slug。
+        """
         rel = "engine/report-audits/mainline-adoption-coverage-matrix.md"
         entry = audit_tool.load_registry()["reports"].get(rel, {})
-        ev = audit_tool.build_evidence(rel, entry)
+        # 临时目录落在仓库根内：_rel_or_empty 以 ROOT 为基准做 relative_to。
+        with tempfile.TemporaryDirectory(dir=ROOT) as td:
+            d = Path(td) / "tasks" / "fix-alignment"
+            d.mkdir(parents=True)
+            (d / "plan.json").write_text(
+                json.dumps({"slug": "fix-alignment", "reports": [rel]}), encoding="utf-8")
+            (d / "tasks.json").write_text(
+                json.dumps([{"id": "T-1", "title": "示例任务"}]), encoding="utf-8")
+            (d / "risks.json").write_text(json.dumps([]), encoding="utf-8")
+            old = audit_tool.RECORDS
+            audit_tool.RECORDS = Path(td)
+            try:
+                ev = audit_tool.build_evidence(rel, entry)
+            finally:
+                audit_tool.RECORDS = old
         slugs = [p["slug"] for p in ev["plans"]]
         self.assertIn("fix-alignment", slugs)
         for p in ev["plans"]:

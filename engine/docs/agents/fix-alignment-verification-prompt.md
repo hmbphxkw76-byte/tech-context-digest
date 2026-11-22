@@ -19,7 +19,7 @@
 4. 被验证源码：`engine/tools/task_plan.py`、`engine/tools/repo_sync.py`、`engine/tools/optimization_gate.py`、`engine/audit/scripts/audit_tool.py`、`engine/tools/pipeline_runner.py`、`engine/tools/local_mainline.py`。
 5. 被验证测试：`engine/tests/test_task_plan.py`、`test_audit_tool.py`、`test_repo_sync.py`、`test_process_gates.py`、`test_pipeline_runner.py`、`test_pipeline_system_doc.py`。
 6. CI：`.github/workflows/{ci,audit,scheduled-maintenance,html-sync,content-update}.yml`。
-7. 登记数据：`engine/audit/records/audit_registry.json`、`engine/audit/records/tasks/{fix-alignment,phase2-evidence-index}/`。
+7. 登记数据：`engine/audit/records/audit_registry.json`（任务工件四件套已于 2026-11-23 清空，历史 slug 见 git 历史）。
 
 ### 1. 验证原则
 

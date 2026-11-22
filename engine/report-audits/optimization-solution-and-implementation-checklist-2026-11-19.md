@@ -59,7 +59,7 @@
 
 #### A. 未提交批次（p1-continue）
 
-`engine/audit/records/tasks/p1-continue/` 四件套已建，`tasks.json` **4 项全为 `pending`**，产物全部未提交：
+任务四件套（slug `p1-continue`，工件已于 2026-11-23 清理）已建，`tasks.json` **4 项全为 `pending`**，产物全部未提交：
 
 - 4 份新报告（未跟踪）：`content/economy/dubai/apartment/reports/2027-01_monthly.html`、`content/economy/trends/reports/2026-11-27_weekly.html`、`content/education/education-system/reports/2026-11_baseline_report.html`、`content/international/international-relations/reports/2026-11_baseline_report.html`。
 - 新工具/数据：`engine/tools/indicator_sidecar.py`、`data/processed/economy/dubai/apartment/indicator_latest.json`、`engine/tools/probe-exemptions.json`；`engine/tools/metric_coverage.py` 增 `a03_truth_check` 与 A-05 接线。
