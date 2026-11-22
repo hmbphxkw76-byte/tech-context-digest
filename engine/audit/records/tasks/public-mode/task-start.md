@@ -32,10 +32,10 @@
 
 ## 任务清单（4 项，详见 tasks.json）
 
-- [pending] T-1 仓库改 public 并启用服务端分支保护（Require PR + status checks + strict + enforce_admins）+ auto-merge
-- [pending] T-2 恢复 CI 自动触发（public 免费额度）+ 启用 secret scanning / push protection / Dependabot
-- [pending] T-3 补 LICENSE（MIT）+ 文档适配（AGENTS / protocol v1.7 / reuse / runbook / ci 注释）
-- [pending] T-4 敏感审计 + 单测/门禁复跑 + 提交与 PR
+- [done] T-1 仓库改 public 并启用服务端分支保护（Require PR + status checks + strict + enforce_admins）+ auto-merge
+- [done] T-2 恢复 CI 自动触发（public 免费额度）+ 启用 secret scanning / push protection / Dependabot
+- [done] T-3 补 LICENSE（MIT）+ 文档适配（AGENTS / protocol v1.7 / reuse / runbook / ci 注释）
+- [done] T-4 敏感审计 + 单测/门禁复跑 + 提交与 PR
 
 ## 风险登记（2 项，详见 risks.json）
 
