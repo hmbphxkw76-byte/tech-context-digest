@@ -32,10 +32,10 @@
 
 ## 任务清单（4 项，详见 tasks.json）
 
-- [pending] T-1 新增 local_ci.py（14 项只读检查编排 + JSON/Markdown 输出 + 结果落盘）
-- [pending] T-2 新增 engine/docs/local-ci-runbook.md（分工/用法/分享/维护）
-- [pending] T-3 check_links 跳过 .meituan-catpaw（并行 worktree 非仓库内容）+ 单测
-- [pending] T-4 文档同步（tools/README、AGENTS.md）+ 结果落盘 local-ci-status.json + 门禁/单测复跑
+- [done] T-1 新增 local_ci.py（14 项只读检查编排 + JSON/Markdown 输出 + 结果落盘）
+- [done] T-2 新增 engine/docs/local-ci-runbook.md（分工/用法/分享/维护）
+- [done] T-3 check_links 跳过 .meituan-catpaw（并行 worktree 非仓库内容）+ 单测
+- [done] T-4 文档同步（tools/README、AGENTS.md）+ 结果落盘 local-ci-status.json + 门禁/单测复跑
 
 ## 风险登记（2 项，详见 risks.json）
 
