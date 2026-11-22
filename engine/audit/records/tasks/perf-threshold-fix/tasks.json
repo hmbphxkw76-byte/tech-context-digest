@@ -1,0 +1,18 @@
+[
+  {
+    "acceptance": "",
+    "depends_on": [],
+    "id": "T-1",
+    "phase": "",
+    "status": "pending",
+    "title": "perf_monitor 新增 DEFAULT_THRESHOLDS 单一事实源"
+  },
+  {
+    "acceptance": "",
+    "depends_on": [],
+    "id": "T-2",
+    "phase": "",
+    "status": "pending",
+    "title": "perf_bench 改用 DEFAULT_THRESHOLDS 落盘"
+  }
+]
