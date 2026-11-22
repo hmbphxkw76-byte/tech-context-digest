@@ -8,7 +8,7 @@
 
 排除：外部 URL、锚点（#…）、邮箱、{{…}} 变量、含通配/占位符的 token（`{ } * | < >`）、
 冻结留痕（engine/audit/records/、sync-backups/、topic-backups/、*.log）与冻结文档
-（词汇库 README / CHANGELOG）。
+（词汇库 README / CHANGELOG）；跳过 `.meituan-catpaw/`（客户端 worktree 存储，非仓库内容）。
 
 退出码：0 = 无断链；1 = 存在断链。
 
@@ -28,7 +28,8 @@ sys.path.insert(0, str(Path(__file__).resolve().parent))
 from _common import ROOT, iter_business_dirs, known_roots  # noqa: E402
 
 SCAN_SUFFIXES = {".py", ".md", ".json", ".yml", ".yaml", ".html", ".txt"}
-SKIP_DIR_MARKERS = ("sync-backups", "topic-backups", ".git", "__pycache__")
+# `.meituan-catpaw/` 为客户端 worktree 存储（与 naming_check 同口径），非仓库内容，不扫描。
+SKIP_DIR_MARKERS = ("sync-backups", "topic-backups", ".git", "__pycache__", ".meituan-catpaw")
 
 # 冻结文档：含历史旧路径 / 时点快照的留痕文档（不参与断链判定）
 FROZEN_DOCS = {
