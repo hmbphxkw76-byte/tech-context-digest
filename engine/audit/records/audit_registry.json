@@ -1892,6 +1892,42 @@
       "audit_id": "AUD-2026-11-21-012",
       "mark_level": "pre",
       "audited_at": "2026-11-21T14:58:59+00:00"
+    },
+    "engine/report-audits/verification-closure-2026-11-22.md": {
+      "title": "核验收口报告（VERIFICATION-CLOSURE v1.0）",
+      "kind": "audit",
+      "category": "audit-doc",
+      "business_line": "engine/report-audits",
+      "status": "draft",
+      "stages": {
+        "draft": false,
+        "initial": false,
+        "second": false,
+        "final": false
+      },
+      "mark": false,
+      "first_seen_at": "2026-11-22",
+      "evidence": {
+        "report": "engine/report-audits/verification-closure-2026-11-22.md",
+        "business_line": "engine/report-audits",
+        "plans": [],
+        "gate": {
+          "entry": "engine/tools/optimization_gate.py",
+          "probe": true
+        },
+        "audit": {
+          "review": "",
+          "status": "draft",
+          "stages": {
+            "draft": false,
+            "initial": false,
+            "second": false,
+            "final": false
+          },
+          "mark_level": "none",
+          "audit_id": ""
+        }
+      }
     }
   }
 }
