@@ -1,0 +1,26 @@
+[
+  {
+    "acceptance": "",
+    "depends_on": [],
+    "id": "T-1",
+    "phase": "",
+    "status": "done",
+    "title": "工作流触发降级（push/schedule → workflow_dispatch，保留 pull_request）"
+  },
+  {
+    "acceptance": "",
+    "depends_on": [],
+    "id": "T-2",
+    "phase": "",
+    "status": "done",
+    "title": "文档同步（AGENTS / multi-session-git-protocol / report-process-reuse / local-ci-runbook）"
+  },
+  {
+    "acceptance": "",
+    "depends_on": [],
+    "id": "T-3",
+    "phase": "",
+    "status": "pending",
+    "title": "单测与门禁复跑 + 提交与 PR"
+  }
+]

@@ -10,7 +10,7 @@
 
 ## 一、问题根因
 
-- `main` 是唯一共享可变引用；写入者包括多个 Agent 会话与 4 个 CI 工作流（`audit.yml` / `html-sync.yml` / `content-update.yml` / `scheduled-maintenance.yml`）。
+- `main` 是唯一共享可变引用；写入者包括多个 Agent 会话与 4 个 CI 工作流（`audit.yml` / `html-sync.yml` / `content-update.yml` / `scheduled-maintenance.yml`；方案 C 下为按需触发）。
 - CI 之间用 `concurrency: auto-commit-main` 串行，但**Agent 推送在该并发组之外**。
 - 本地检出在 `fetch` 与 `push` 之间过期 → **non-fast-forward**；无分支保护 / 合并队列兜底。
 
@@ -105,7 +105,7 @@ refspec**（`<local ref> <local sha> <remote ref> <remote sha>`），而非当�
 
 ## 六、CI 侧约定（CI 也走 PR）
 
-- 4 个自动提交工作流（`audit.yml` / `html-sync.yml` / `content-update.yml` / `scheduled-maintenance.yml`）**不再直推 `main`**，统一复用 `.github/actions/submit-pr`：提交到固定 CI 分支（`ci/audit`、`ci/html-sync`、`ci/content-update`、`ci/scheduled-maintenance`）→ 开 / 复用 PR → 启用 auto-merge。
+- 4 个自动提交工作流（`audit.yml` / `html-sync.yml` / `content-update.yml` / `scheduled-maintenance.yml`）**不再直推 `main`**，统一复用 `.github/actions/submit-pr`：提交到固定 CI 分支（`ci/audit`、`ci/html-sync`、`ci/content-update`、`ci/scheduled-maintenance`）→ 开 / 复用 PR → 启用 auto-merge。方案 C 下其触发降级为**按需**（`workflow_dispatch` / PR），`push` / `schedule` 自动触发已停用。
 - `main` 启用分支保护：**Require a pull request before merging** + **Require status checks**（`Python 语法检查` / `单元测试` / `结构与规范校验`）+ **strict（分支须最新）**；仓库开启 **auto-merge**。由此形成「合并队列」：PR 按顺序、基于最新 main 合并。
 - Agent 侧仍经 `repo_sync`（推送前 `sync`），与 CI 分支互不冲突（分支不同、目标不同）。
 

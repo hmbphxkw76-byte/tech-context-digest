@@ -93,7 +93,7 @@ Single-context: one `GLOSSARY.md` + `engine/docs/adr/` at the repo root. See `en
 P0/P1/P2 优化清单的全部确定性检查收敛为**单一入口** `engine/tools/optimization_gate.py`（31 项），后续所有阶段必须复用，不得另写一套：
 
 - **本地提交**：`python engine/tools/repo_sync.py run --message ... --paths ... --gate`（统一门禁 [E] 直接拒绝提交）。
-- **CI / 自动提交**：`ci.yml` / `html-sync.yml` / `content-update.yml` / `scheduled-maintenance.yml` 一律只调用该入口（`--probe`），不得分项重复扫描。
+- **CI / 自动提交**：`ci.yml` / `html-sync.yml` / `content-update.yml` / `scheduled-maintenance.yml` 一律只调用该入口（`--probe`），不得分项重复扫描。**方案 C（本地优先 · 远程按需）**：上述工作流的 `push` / `schedule` 触发已停用，改 `workflow_dispatch`（保留 `pull_request` 检查）；本地用 `engine/tools/local_ci.py`。
 - **审计**：`audit.yml` 四环节 fail-fast；`audit_tool.py verify` 内含 `source_check`。
 - **一致性校验**：`engine/tests/test_process_gates.py::TestOptimizationGateReuse` 强制各阶段复用；阶段 × 复用映射见 `engine/docs/report-process-reuse.md`。
 - **全链路体系**：N0–N8 / G0–G8 / 两级 gate-period / 闭环联动见 `engine/docs/report-pipeline-system.md`；文档与门禁清单数量由 `engine/tests/test_pipeline_system_doc.py` 锁定。
@@ -125,7 +125,7 @@ P0/P1/P2 优化清单的全部确定性检查收敛为**单一入口** `engine/t
 - **统一网关**：提交/推送使用 `python engine/tools/repo_sync.py`（run / push / pr / branch / branch-rename / branch-delete / branch-audit）。
 - **分支命名**：受管分支 `task/*` 必须内嵌会话标识；建分支用 `repo_sync.py branch <slug>`；`main` 与 `ci/*` 豁免。
 - **钩子**：`core.hooksPath=.githooks`（安装：`repo_sync.py hook-install`）；pre-push 按 refspec 判定，pre-commit 在违规受管分支上阻断。
-- **CI 也走 PR**：audit.yml / html-sync.yml / content-update.yml / scheduled-maintenance.yml 经 `.github/actions/submit-pr` 开 PR + 自动合并。
+- **CI 也走 PR**：audit.yml / html-sync.yml / content-update.yml / scheduled-maintenance.yml 经 `.github/actions/submit-pr` 开 PR + 自动合并；方案 C 下为**按需触发**（非 push / schedule 自动）。
 - **直推防护真相**：本仓库为 GitHub private 免费方案，**服务端分支保护不可用**（API 403）；禁止直推 `main` 由客户端 pre-push 钩子 + `repo_sync.py` 网关双重拦截，补偿以 CI **main 首亲历史审计**（`engine/tools/git_history_audit.py`，见 multi-session-git-protocol.md §二）。
 
 ## 工作区清理（硬性约束，适用于任何 Agent 平台）
