@@ -37,6 +37,7 @@ python -m unittest discover -s engine/tests -v   # 单元测试（全量）
 | optimization_gate.py | 校验（统一入口） | ci / html-sync / content-update / scheduled-maintenance / `repo_sync run --gate` 复用；31 项门禁单一入口 |
 | pipeline_manifest.json | 配置（声明式图） | 报告全流程 N0–N8 / G0–G8 声明式清单（流程图唯一落地载体） |
 | pipeline_runner.py | 编排 | 节点→门禁→路由/退回；复用 `optimization_gate` 单一入口；见 `engine/docs/report-pipeline-implementation-plan.md` |
+| local_ci.py | 编排（本地 CI） | 本地等价 CI（本地优先 · 远程兜底 · 结果分享）：复刻 ci / audit / html-sync / maintenance 的本地可读检查；见 `engine/docs/local-ci-runbook.md` |
 | pipeline_audit.py | 审计 | 全流程追加式留痕 `engine/audit/records/pipeline_runs.jsonl` |
 | research_kernel_check.py | 校验 | ci.yml「研究内核质量门禁（M4）」：新报告四项内核项（周期定位/传导量化/政策入模/盲区列示） |
 | info_density_check.py | 校验 | ci.yml「信息密度与分层交付门禁」：分层结构 / 信息等级 / 新增信息模块 / 场景切片（ID-01–ID-08、DC-05） |

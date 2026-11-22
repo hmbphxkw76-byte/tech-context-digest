@@ -98,6 +98,7 @@ P0/P1/P2 优化清单的全部确定性检查收敛为**单一入口** `engine/t
 - **一致性校验**：`engine/tests/test_process_gates.py::TestOptimizationGateReuse` 强制各阶段复用；阶段 × 复用映射见 `engine/docs/report-process-reuse.md`。
 - **全链路体系**：N0–N8 / G0–G8 / 两级 gate-period / 闭环联动见 `engine/docs/report-pipeline-system.md`；文档与门禁清单数量由 `engine/tests/test_pipeline_system_doc.py` 锁定。
 - **端到端编排**：`engine/tools/pipeline_manifest.json` + `engine/tools/pipeline_runner.py` + `engine/tools/pipeline_audit.py`；一致性由 `engine/tests/test_pipeline_runner.py` 锁定。
+- **本地等价 CI**：`engine/tools/local_ci.py`（本地优先 · 远程兜底 · 结果分享；不新增门禁项）；规范见 [local-ci-runbook.md](engine/docs/local-ci-runbook.md)。
 
 ## 任务级闭环（适配 mainline）（硬性约束，适用于任何 Agent 平台）
 

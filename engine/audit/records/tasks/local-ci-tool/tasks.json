@@ -1,0 +1,34 @@
+[
+  {
+    "acceptance": "",
+    "depends_on": [],
+    "id": "T-1",
+    "phase": "",
+    "status": "done",
+    "title": "新增 local_ci.py（14 项只读检查编排 + JSON/Markdown 输出 + 结果落盘）"
+  },
+  {
+    "acceptance": "",
+    "depends_on": [],
+    "id": "T-2",
+    "phase": "",
+    "status": "done",
+    "title": "新增 engine/docs/local-ci-runbook.md（分工/用法/分享/维护）"
+  },
+  {
+    "acceptance": "",
+    "depends_on": [],
+    "id": "T-3",
+    "phase": "",
+    "status": "done",
+    "title": "check_links 跳过 .meituan-catpaw（并行 worktree 非仓库内容）+ 单测"
+  },
+  {
+    "acceptance": "",
+    "depends_on": [],
+    "id": "T-4",
+    "phase": "",
+    "status": "done",
+    "title": "文档同步（tools/README、AGENTS.md）+ 结果落盘 local-ci-status.json + 门禁/单测复跑"
+  }
+]
