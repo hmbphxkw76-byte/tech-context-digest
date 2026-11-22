@@ -32,8 +32,8 @@
 
 ## 任务清单（2 项，详见 tasks.json）
 
-- [pending] T-1 本地等价 CI 14 项执行并落盘 local-ci-status.json
-- [pending] T-2 提交与 PR
+- [done] T-1 本地等价 CI 14 项执行并落盘 local-ci-status.json
+- [done] T-2 提交与 PR
 
 ## 风险登记（1 项，详见 risks.json）
 
