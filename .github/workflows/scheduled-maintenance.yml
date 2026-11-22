@@ -286,7 +286,9 @@ jobs:
             由定时维护工作流自动生成（结构补全 / 归档 / 索引 / 汇总页 / 发布日历 / 发布指纹 / 性能基线）。
             合并方式：必需检查通过后自动合并（合并队列）。
           commit-message: "chore: 定时维护（结构/校验/归档/索引/性能）"
-          add-paths: "automation-status.json index.html reader.html INDEX.md perf-status.json engine/report-audits engine/audit/records/publish_fingerprints.json engine/audit/records/audit_registry.json engine/audit/records/igi_history.json engine/audit/records/link-probe.json engine/audit/records/verification_ledger.jsonl engine/audit/records/pending_verification.json"
+          # content/：维护流水线的 md2html.py 会再生成 reports/*.html，
+          # 必须纳入提交范围，否则残留未暂存改动会让 submit-pr 变基失败。
+          add-paths: "automation-status.json index.html reader.html INDEX.md content perf-status.json engine/report-audits engine/audit/records/publish_fingerprints.json engine/audit/records/audit_registry.json engine/audit/records/igi_history.json engine/audit/records/link-probe.json engine/audit/records/verification_ledger.jsonl engine/audit/records/pending_verification.json"
           token: ${{ secrets.CI_PR_TOKEN }}
 
       - name: 提交失败状态（仅失败时，开 PR 记录，不自动合并）
