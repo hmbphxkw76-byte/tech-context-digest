@@ -2,7 +2,7 @@
   "schema_version": "1.0",
   "comment": "正式发布报告指纹（sha256，确定性无时间戳）。由 publish_fingerprint.py --emit 生成。",
   "fingerprints": {
-    "content/economy/dubai/apartment/reports/2026-11_baseline_report.html": "bc43c637d881b2c8efab56a135a99a753ae9dd9d814e0fd349f3ef615837127f",
+    "content/economy/dubai/apartment/reports/2026-11_baseline_report.html": "45a91d1fb8153121f11622b908a70231b0c2a67893661e9c6c5d148350ff8b69",
     "content/economy/dubai/apartment/reports/2026-11_monthly.html": "bcc56ff6711e92e8057d461461f3ab9716e995ed9f64ba2e5b021a0a1fc3fc26",
     "content/economy/dubai/apartment/reports/2026-Q3_quarterly.html": "4ffa47260692c22936f8f04f50e6bac8d587757a1efa1b2fd5e2093648ccb778",
     "content/economy/dubai/apartment/reports/2026_annual.html": "6b66b7c17dcf86011b3ca671322c4d8c079b33fae76402d77bcf61ec2f96c1e9",
@@ -11,7 +11,7 @@
     "content/economy/trends/reports/2026-11-20_weekly.html": "6c47fb7ce96cbcf248731de3058a28738244fac835776da59b122e7931d09824",
     "content/economy/trends/reports/2026-11-27_weekly.html": "a62074915334e565c546881e603ed130d5f4d588bcb1a5b90cd5bd3e485cf214",
     "content/education/education-system/reports/2026-11_baseline_report.html": "5fe5673a991879dba0a009641de49e342ba5eee9c2840a85d1210d91fc03f70e",
-    "content/education/study-abroad/reports/2026-11_baseline_report.html": "5d9593ef93d3aa533a5cc971e404089e9aad6f08ef56e72da7ea712da49eef06",
+    "content/education/study-abroad/reports/2026-11_baseline_report.html": "09e6994d2f5e88c48ac5cf269c1bb650916e96eed1b52af0fa34c969dc384c3b",
     "content/international/immigration/dubai/reports/2026-11_baseline_report.html": "60b679fb61930d4616fe8cbc041a9aaaeb596bfcc96687736c2af26449704496",
     "content/international/immigration/reports/2026-11_baseline_report.html": "02711a52de777034c273a4193f762ba2b140b19d99dbb94b0e7c4faa408b2a09",
     "content/international/international-relations/reports/2026-11_baseline_report.html": "da95daf105736b63d3664bbf981744afedfc64fe59283985cc1d3dcc0083794f",
