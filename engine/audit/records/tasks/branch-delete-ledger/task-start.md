@@ -32,10 +32,10 @@
 
 ## 任务清单（4 项，详见 tasks.json）
 
-- [pending] T-1 repo_sync 新增 branch-delete（仅 task/*、需已合并、不删当前分支、登记条目保留）
-- [pending] T-2 恢复 branch_registry 历史台账（从 git 历史重建 58 条）
-- [pending] T-3 文档同步（BRANCH-NAMING-SPEC §3.4 / tools README / AGENTS 网关清单）+ 单测
-- [pending] T-4 门禁/单测复跑 + 提交与 PR
+- [done] T-1 repo_sync 新增 branch-delete（仅 task/*、需已合并、不删当前分支、登记条目保留）
+- [done] T-2 恢复 branch_registry 历史台账（从 git 历史重建 58 条）
+- [done] T-3 文档同步（BRANCH-NAMING-SPEC §3.4 / tools README / AGENTS 网关清单）+ 单测
+- [done] T-4 门禁/单测复跑 + 提交与 PR
 
 ## 风险登记（2 项，详见 risks.json）
 
