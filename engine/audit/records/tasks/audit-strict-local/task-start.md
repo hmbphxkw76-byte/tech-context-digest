@@ -32,10 +32,10 @@
 
 ## 任务清单（4 项，详见 tasks.json）
 
-- [pending] T-1 audit_tool run --strict 写入登记并注入审计标识
-- [pending] T-2 audit_tool accept + index 收敛登记与索引
-- [pending] T-3 publish_fingerprint --emit 重采发布指纹
-- [pending] T-4 门禁复跑 + 提交与 PR
+- [done] T-1 audit_tool run --strict 写入登记并注入审计标识
+- [done] T-2 audit_tool accept + index 收敛登记与索引
+- [done] T-3 publish_fingerprint --emit 重采发布指纹
+- [done] T-4 门禁复跑 + 提交与 PR
 
 ## 风险登记（2 项，详见 risks.json）
 
