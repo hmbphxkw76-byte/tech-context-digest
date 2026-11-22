@@ -1,8 +1,0 @@
-[
-  {
-    "description": "空目录占位与既有 .gitkeep 约定一致性",
-    "id": "R-1",
-    "mitigation": "沿用 data/assets/.gitkeep 惯例",
-    "owner": ""
-  }
-]

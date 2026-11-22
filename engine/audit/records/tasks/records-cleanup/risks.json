@@ -1,0 +1,14 @@
+[
+  {
+    "description": "误删在途任务工件",
+    "id": "R-1",
+    "mitigation": "缓解=保留本任务目录，其余均为已合并历史任务",
+    "owner": ""
+  },
+  {
+    "description": "删除已合并分支影响并行会话",
+    "id": "R-2",
+    "mitigation": "缓解=该分支已合并且无 worktree",
+    "owner": ""
+  }
+]

@@ -1,8 +1,0 @@
-[
-  {
-    "description": "结果含滚动计数（history 检查/合并数）",
-    "id": "R-1",
-    "mitigation": "确定性可重放，随 main 推进更新",
-    "owner": ""
-  }
-]

@@ -1,8 +1,0 @@
-[
-  {
-    "description": "schema 与既有审计冲突",
-    "id": "R-1",
-    "mitigation": "只新增不改既有",
-    "owner": ""
-  }
-]
