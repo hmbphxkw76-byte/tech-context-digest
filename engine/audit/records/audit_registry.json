@@ -21,95 +21,7 @@
       "evidence": {
         "report": "content/economy/dubai/apartment/reports/2026-11_baseline_report.html",
         "business_line": "content/economy/dubai/apartment",
-        "plans": [
-          {
-            "slug": "hero-style-restyle",
-            "plan": "engine/audit/records/tasks/hero-style-restyle/plan.json",
-            "tasks": "engine/audit/records/tasks/hero-style-restyle/tasks.json",
-            "risks": "engine/audit/records/tasks/hero-style-restyle/risks.json",
-            "reports": [
-              "content/economy/dubai/apartment/reports/2026-11_baseline_report.html",
-              "content/economy/trends/reports/2026-11-13_weekly.html",
-              "content/tech/ai-security/security/dubai/reports/2026-11_baseline_report.html"
-            ],
-            "task_count": 4,
-            "risk_count": 2
-          },
-          {
-            "slug": "regen-all-reports",
-            "plan": "engine/audit/records/tasks/regen-all-reports/plan.json",
-            "tasks": "engine/audit/records/tasks/regen-all-reports/tasks.json",
-            "risks": "engine/audit/records/tasks/regen-all-reports/risks.json",
-            "reports": [
-              "content/economy/dubai/apartment/reports/2026-11_baseline_report.html",
-              "content/tech/trends/global/reports/2026-11-13_weekly.html"
-            ],
-            "task_count": 4,
-            "risk_count": 2
-          },
-          {
-            "slug": "report-verification-regen",
-            "plan": "engine/audit/records/tasks/report-verification-regen/plan.json",
-            "tasks": "engine/audit/records/tasks/report-verification-regen/tasks.json",
-            "risks": "engine/audit/records/tasks/report-verification-regen/risks.json",
-            "reports": [
-              "content/economy/dubai/apartment/reports/2026-11_baseline_report.html",
-              "content/economy/dubai/apartment/reports/2026-11_monthly.html",
-              "content/economy/dubai/apartment/reports/2026-Q3_quarterly.html",
-              "content/economy/dubai/apartment/reports/2026_annual.html",
-              "content/economy/insight/reports/2026-11_baseline_report.html",
-              "content/economy/trends/reports/2026-11-13_weekly.html",
-              "content/economy/trends/reports/2026-11-20_weekly.html",
-              "content/economy/trends/reports/2026-11-27_weekly.html",
-              "content/education/education-system/reports/2026-11_baseline_report.html",
-              "content/education/study-abroad/reports/2026-11_baseline_report.html",
-              "content/international/immigration/dubai/reports/2026-11_baseline_report.html",
-              "content/international/immigration/reports/2026-11_baseline_report.html",
-              "content/international/international-relations/reports/2026-11_baseline_report.html",
-              "content/political/political-system/reports/2026-11_baseline_report.html",
-              "content/society/social-structure/reports/2026-11_baseline_report.html",
-              "content/tech/ai-application/competitive-intelligence/dubai/reports/2026-11_baseline_report.html",
-              "content/tech/ai-application/dubai/reports/2026-11_baseline_report.html",
-              "content/tech/ai-application/industry-research/dubai/reports/2026-11_baseline_report.html",
-              "content/tech/ai-security/competitive-intelligence/dubai/reports/2026-11_baseline_report.html",
-              "content/tech/ai-security/competitive-intelligence/dubai/reports/2026-11_monthly.html",
-              "content/tech/ai-security/dubai/reports/2026-11_baseline_report.html",
-              "content/tech/ai-security/industry-research/dubai/reports/2026-11_baseline_report.html"
-            ],
-            "task_count": 6,
-            "risk_count": 3
-          },
-          {
-            "slug": "reports-full-rebuild",
-            "plan": "engine/audit/records/tasks/reports-full-rebuild/plan.json",
-            "tasks": "engine/audit/records/tasks/reports-full-rebuild/tasks.json",
-            "risks": "engine/audit/records/tasks/reports-full-rebuild/risks.json",
-            "reports": [
-              "content/economy/dubai/apartment/reports/2026-11_baseline_report.html",
-              "content/economy/dubai/apartment/reports/2026-11_monthly.html",
-              "content/economy/dubai/apartment/reports/2026-12_monthly.html",
-              "content/economy/dubai/apartment/reports/2026-Q3_quarterly.html",
-              "content/economy/dubai/apartment/reports/2026_annual.html",
-              "content/economy/dubai/apartment/reports/2027-01_monthly.html",
-              "content/economy/insight/reports/2026-12_baseline_report.html",
-              "content/economy/trends/reports/2026-11-13_weekly.html",
-              "content/economy/trends/reports/2026-11-20_weekly.html",
-              "content/economy/trends/reports/2026-11-27_weekly.html",
-              "content/education/education-system/reports/2026-12_baseline_report.html",
-              "content/international/international-relations/reports/2026-11_baseline_report.html",
-              "content/political/political-system/reports/2026-11_baseline_report.html",
-              "content/society/social-structure/reports/2026-11_baseline_report.html",
-              "content/tech/competitive-intelligence/dubai/reports/2026-12_baseline_report.html",
-              "content/tech/competitive-intelligence/dubai/reports/2026-12_monthly.html",
-              "content/tech/industry-research/dubai/reports/2026-12_baseline_report.html",
-              "content/tech/security/dubai/reports/2026-11_baseline_report.html",
-              "content/tech/weekly-roundup/reports/2026-11-13_weekly.html",
-              "content/tech/weekly-roundup/reports/2026-11-20_weekly.html"
-            ],
-            "task_count": 6,
-            "risk_count": 4
-          }
-        ],
+        "plans": [],
         "gate": {
           "entry": "engine/tools/optimization_gate.py",
           "probe": true
@@ -148,70 +60,7 @@
       "evidence": {
         "report": "content/economy/dubai/apartment/reports/2026-11_monthly.html",
         "business_line": "content/economy/dubai/apartment",
-        "plans": [
-          {
-            "slug": "report-verification-regen",
-            "plan": "engine/audit/records/tasks/report-verification-regen/plan.json",
-            "tasks": "engine/audit/records/tasks/report-verification-regen/tasks.json",
-            "risks": "engine/audit/records/tasks/report-verification-regen/risks.json",
-            "reports": [
-              "content/economy/dubai/apartment/reports/2026-11_baseline_report.html",
-              "content/economy/dubai/apartment/reports/2026-11_monthly.html",
-              "content/economy/dubai/apartment/reports/2026-Q3_quarterly.html",
-              "content/economy/dubai/apartment/reports/2026_annual.html",
-              "content/economy/insight/reports/2026-11_baseline_report.html",
-              "content/economy/trends/reports/2026-11-13_weekly.html",
-              "content/economy/trends/reports/2026-11-20_weekly.html",
-              "content/economy/trends/reports/2026-11-27_weekly.html",
-              "content/education/education-system/reports/2026-11_baseline_report.html",
-              "content/education/study-abroad/reports/2026-11_baseline_report.html",
-              "content/international/immigration/dubai/reports/2026-11_baseline_report.html",
-              "content/international/immigration/reports/2026-11_baseline_report.html",
-              "content/international/international-relations/reports/2026-11_baseline_report.html",
-              "content/political/political-system/reports/2026-11_baseline_report.html",
-              "content/society/social-structure/reports/2026-11_baseline_report.html",
-              "content/tech/ai-application/competitive-intelligence/dubai/reports/2026-11_baseline_report.html",
-              "content/tech/ai-application/dubai/reports/2026-11_baseline_report.html",
-              "content/tech/ai-application/industry-research/dubai/reports/2026-11_baseline_report.html",
-              "content/tech/ai-security/competitive-intelligence/dubai/reports/2026-11_baseline_report.html",
-              "content/tech/ai-security/competitive-intelligence/dubai/reports/2026-11_monthly.html",
-              "content/tech/ai-security/dubai/reports/2026-11_baseline_report.html",
-              "content/tech/ai-security/industry-research/dubai/reports/2026-11_baseline_report.html"
-            ],
-            "task_count": 6,
-            "risk_count": 3
-          },
-          {
-            "slug": "reports-full-rebuild",
-            "plan": "engine/audit/records/tasks/reports-full-rebuild/plan.json",
-            "tasks": "engine/audit/records/tasks/reports-full-rebuild/tasks.json",
-            "risks": "engine/audit/records/tasks/reports-full-rebuild/risks.json",
-            "reports": [
-              "content/economy/dubai/apartment/reports/2026-11_baseline_report.html",
-              "content/economy/dubai/apartment/reports/2026-11_monthly.html",
-              "content/economy/dubai/apartment/reports/2026-12_monthly.html",
-              "content/economy/dubai/apartment/reports/2026-Q3_quarterly.html",
-              "content/economy/dubai/apartment/reports/2026_annual.html",
-              "content/economy/dubai/apartment/reports/2027-01_monthly.html",
-              "content/economy/insight/reports/2026-12_baseline_report.html",
-              "content/economy/trends/reports/2026-11-13_weekly.html",
-              "content/economy/trends/reports/2026-11-20_weekly.html",
-              "content/economy/trends/reports/2026-11-27_weekly.html",
-              "content/education/education-system/reports/2026-12_baseline_report.html",
-              "content/international/international-relations/reports/2026-11_baseline_report.html",
-              "content/political/political-system/reports/2026-11_baseline_report.html",
-              "content/society/social-structure/reports/2026-11_baseline_report.html",
-              "content/tech/competitive-intelligence/dubai/reports/2026-12_baseline_report.html",
-              "content/tech/competitive-intelligence/dubai/reports/2026-12_monthly.html",
-              "content/tech/industry-research/dubai/reports/2026-12_baseline_report.html",
-              "content/tech/security/dubai/reports/2026-11_baseline_report.html",
-              "content/tech/weekly-roundup/reports/2026-11-13_weekly.html",
-              "content/tech/weekly-roundup/reports/2026-11-20_weekly.html"
-            ],
-            "task_count": 6,
-            "risk_count": 4
-          }
-        ],
+        "plans": [],
         "gate": {
           "entry": "engine/tools/optimization_gate.py",
           "probe": true
@@ -250,70 +99,7 @@
       "evidence": {
         "report": "content/economy/dubai/apartment/reports/2026-Q3_quarterly.html",
         "business_line": "content/economy/dubai/apartment",
-        "plans": [
-          {
-            "slug": "report-verification-regen",
-            "plan": "engine/audit/records/tasks/report-verification-regen/plan.json",
-            "tasks": "engine/audit/records/tasks/report-verification-regen/tasks.json",
-            "risks": "engine/audit/records/tasks/report-verification-regen/risks.json",
-            "reports": [
-              "content/economy/dubai/apartment/reports/2026-11_baseline_report.html",
-              "content/economy/dubai/apartment/reports/2026-11_monthly.html",
-              "content/economy/dubai/apartment/reports/2026-Q3_quarterly.html",
-              "content/economy/dubai/apartment/reports/2026_annual.html",
-              "content/economy/insight/reports/2026-11_baseline_report.html",
-              "content/economy/trends/reports/2026-11-13_weekly.html",
-              "content/economy/trends/reports/2026-11-20_weekly.html",
-              "content/economy/trends/reports/2026-11-27_weekly.html",
-              "content/education/education-system/reports/2026-11_baseline_report.html",
-              "content/education/study-abroad/reports/2026-11_baseline_report.html",
-              "content/international/immigration/dubai/reports/2026-11_baseline_report.html",
-              "content/international/immigration/reports/2026-11_baseline_report.html",
-              "content/international/international-relations/reports/2026-11_baseline_report.html",
-              "content/political/political-system/reports/2026-11_baseline_report.html",
-              "content/society/social-structure/reports/2026-11_baseline_report.html",
-              "content/tech/ai-application/competitive-intelligence/dubai/reports/2026-11_baseline_report.html",
-              "content/tech/ai-application/dubai/reports/2026-11_baseline_report.html",
-              "content/tech/ai-application/industry-research/dubai/reports/2026-11_baseline_report.html",
-              "content/tech/ai-security/competitive-intelligence/dubai/reports/2026-11_baseline_report.html",
-              "content/tech/ai-security/competitive-intelligence/dubai/reports/2026-11_monthly.html",
-              "content/tech/ai-security/dubai/reports/2026-11_baseline_report.html",
-              "content/tech/ai-security/industry-research/dubai/reports/2026-11_baseline_report.html"
-            ],
-            "task_count": 6,
-            "risk_count": 3
-          },
-          {
-            "slug": "reports-full-rebuild",
-            "plan": "engine/audit/records/tasks/reports-full-rebuild/plan.json",
-            "tasks": "engine/audit/records/tasks/reports-full-rebuild/tasks.json",
-            "risks": "engine/audit/records/tasks/reports-full-rebuild/risks.json",
-            "reports": [
-              "content/economy/dubai/apartment/reports/2026-11_baseline_report.html",
-              "content/economy/dubai/apartment/reports/2026-11_monthly.html",
-              "content/economy/dubai/apartment/reports/2026-12_monthly.html",
-              "content/economy/dubai/apartment/reports/2026-Q3_quarterly.html",
-              "content/economy/dubai/apartment/reports/2026_annual.html",
-              "content/economy/dubai/apartment/reports/2027-01_monthly.html",
-              "content/economy/insight/reports/2026-12_baseline_report.html",
-              "content/economy/trends/reports/2026-11-13_weekly.html",
-              "content/economy/trends/reports/2026-11-20_weekly.html",
-              "content/economy/trends/reports/2026-11-27_weekly.html",
-              "content/education/education-system/reports/2026-12_baseline_report.html",
-              "content/international/international-relations/reports/2026-11_baseline_report.html",
-              "content/political/political-system/reports/2026-11_baseline_report.html",
-              "content/society/social-structure/reports/2026-11_baseline_report.html",
-              "content/tech/competitive-intelligence/dubai/reports/2026-12_baseline_report.html",
-              "content/tech/competitive-intelligence/dubai/reports/2026-12_monthly.html",
-              "content/tech/industry-research/dubai/reports/2026-12_baseline_report.html",
-              "content/tech/security/dubai/reports/2026-11_baseline_report.html",
-              "content/tech/weekly-roundup/reports/2026-11-13_weekly.html",
-              "content/tech/weekly-roundup/reports/2026-11-20_weekly.html"
-            ],
-            "task_count": 6,
-            "risk_count": 4
-          }
-        ],
+        "plans": [],
         "gate": {
           "entry": "engine/tools/optimization_gate.py",
           "probe": true
@@ -352,70 +138,7 @@
       "evidence": {
         "report": "content/economy/dubai/apartment/reports/2026_annual.html",
         "business_line": "content/economy/dubai/apartment",
-        "plans": [
-          {
-            "slug": "report-verification-regen",
-            "plan": "engine/audit/records/tasks/report-verification-regen/plan.json",
-            "tasks": "engine/audit/records/tasks/report-verification-regen/tasks.json",
-            "risks": "engine/audit/records/tasks/report-verification-regen/risks.json",
-            "reports": [
-              "content/economy/dubai/apartment/reports/2026-11_baseline_report.html",
-              "content/economy/dubai/apartment/reports/2026-11_monthly.html",
-              "content/economy/dubai/apartment/reports/2026-Q3_quarterly.html",
-              "content/economy/dubai/apartment/reports/2026_annual.html",
-              "content/economy/insight/reports/2026-11_baseline_report.html",
-              "content/economy/trends/reports/2026-11-13_weekly.html",
-              "content/economy/trends/reports/2026-11-20_weekly.html",
-              "content/economy/trends/reports/2026-11-27_weekly.html",
-              "content/education/education-system/reports/2026-11_baseline_report.html",
-              "content/education/study-abroad/reports/2026-11_baseline_report.html",
-              "content/international/immigration/dubai/reports/2026-11_baseline_report.html",
-              "content/international/immigration/reports/2026-11_baseline_report.html",
-              "content/international/international-relations/reports/2026-11_baseline_report.html",
-              "content/political/political-system/reports/2026-11_baseline_report.html",
-              "content/society/social-structure/reports/2026-11_baseline_report.html",
-              "content/tech/ai-application/competitive-intelligence/dubai/reports/2026-11_baseline_report.html",
-              "content/tech/ai-application/dubai/reports/2026-11_baseline_report.html",
-              "content/tech/ai-application/industry-research/dubai/reports/2026-11_baseline_report.html",
-              "content/tech/ai-security/competitive-intelligence/dubai/reports/2026-11_baseline_report.html",
-              "content/tech/ai-security/competitive-intelligence/dubai/reports/2026-11_monthly.html",
-              "content/tech/ai-security/dubai/reports/2026-11_baseline_report.html",
-              "content/tech/ai-security/industry-research/dubai/reports/2026-11_baseline_report.html"
-            ],
-            "task_count": 6,
-            "risk_count": 3
-          },
-          {
-            "slug": "reports-full-rebuild",
-            "plan": "engine/audit/records/tasks/reports-full-rebuild/plan.json",
-            "tasks": "engine/audit/records/tasks/reports-full-rebuild/tasks.json",
-            "risks": "engine/audit/records/tasks/reports-full-rebuild/risks.json",
-            "reports": [
-              "content/economy/dubai/apartment/reports/2026-11_baseline_report.html",
-              "content/economy/dubai/apartment/reports/2026-11_monthly.html",
-              "content/economy/dubai/apartment/reports/2026-12_monthly.html",
-              "content/economy/dubai/apartment/reports/2026-Q3_quarterly.html",
-              "content/economy/dubai/apartment/reports/2026_annual.html",
-              "content/economy/dubai/apartment/reports/2027-01_monthly.html",
-              "content/economy/insight/reports/2026-12_baseline_report.html",
-              "content/economy/trends/reports/2026-11-13_weekly.html",
-              "content/economy/trends/reports/2026-11-20_weekly.html",
-              "content/economy/trends/reports/2026-11-27_weekly.html",
-              "content/education/education-system/reports/2026-12_baseline_report.html",
-              "content/international/international-relations/reports/2026-11_baseline_report.html",
-              "content/political/political-system/reports/2026-11_baseline_report.html",
-              "content/society/social-structure/reports/2026-11_baseline_report.html",
-              "content/tech/competitive-intelligence/dubai/reports/2026-12_baseline_report.html",
-              "content/tech/competitive-intelligence/dubai/reports/2026-12_monthly.html",
-              "content/tech/industry-research/dubai/reports/2026-12_baseline_report.html",
-              "content/tech/security/dubai/reports/2026-11_baseline_report.html",
-              "content/tech/weekly-roundup/reports/2026-11-13_weekly.html",
-              "content/tech/weekly-roundup/reports/2026-11-20_weekly.html"
-            ],
-            "task_count": 6,
-            "risk_count": 4
-          }
-        ],
+        "plans": [],
         "gate": {
           "entry": "engine/tools/optimization_gate.py",
           "probe": true
@@ -1041,18 +764,6 @@
             "risk_count": 0
           },
           {
-            "slug": "fix-gate23-replay",
-            "plan": "engine/audit/records/tasks/fix-gate23-replay/plan.json",
-            "tasks": "engine/audit/records/tasks/fix-gate23-replay/tasks.json",
-            "risks": "engine/audit/records/tasks/fix-gate23-replay/risks.json",
-            "reports": [
-              "engine/report-audits/mainline-adoption-assessment-2026-11-17.md",
-              "engine/report-audits/mainline-adoption-coverage-matrix.md"
-            ],
-            "task_count": 5,
-            "risk_count": 3
-          },
-          {
             "slug": "phase2-evidence-index",
             "plan": "engine/audit/records/tasks/phase2-evidence-index/plan.json",
             "tasks": "engine/audit/records/tasks/phase2-evidence-index/tasks.json",
@@ -1114,18 +825,6 @@
             "risk_count": 0
           },
           {
-            "slug": "fix-gate23-replay",
-            "plan": "engine/audit/records/tasks/fix-gate23-replay/plan.json",
-            "tasks": "engine/audit/records/tasks/fix-gate23-replay/tasks.json",
-            "risks": "engine/audit/records/tasks/fix-gate23-replay/risks.json",
-            "reports": [
-              "engine/report-audits/mainline-adoption-assessment-2026-11-17.md",
-              "engine/report-audits/mainline-adoption-coverage-matrix.md"
-            ],
-            "task_count": 5,
-            "risk_count": 3
-          },
-          {
             "slug": "phase2-evidence-index",
             "plan": "engine/audit/records/tasks/phase2-evidence-index/plan.json",
             "tasks": "engine/audit/records/tasks/phase2-evidence-index/tasks.json",
@@ -1173,96 +872,7 @@
       "evidence": {
         "report": "content/economy/trends/reports/2026-11-13_weekly.html",
         "business_line": "content/economy/trends",
-        "plans": [
-          {
-            "slug": "hero-style-restyle",
-            "plan": "engine/audit/records/tasks/hero-style-restyle/plan.json",
-            "tasks": "engine/audit/records/tasks/hero-style-restyle/tasks.json",
-            "risks": "engine/audit/records/tasks/hero-style-restyle/risks.json",
-            "reports": [
-              "content/economy/dubai/apartment/reports/2026-11_baseline_report.html",
-              "content/economy/trends/reports/2026-11-13_weekly.html",
-              "content/tech/ai-security/security/dubai/reports/2026-11_baseline_report.html"
-            ],
-            "task_count": 4,
-            "risk_count": 2
-          },
-          {
-            "slug": "report-verification-regen",
-            "plan": "engine/audit/records/tasks/report-verification-regen/plan.json",
-            "tasks": "engine/audit/records/tasks/report-verification-regen/tasks.json",
-            "risks": "engine/audit/records/tasks/report-verification-regen/risks.json",
-            "reports": [
-              "content/economy/dubai/apartment/reports/2026-11_baseline_report.html",
-              "content/economy/dubai/apartment/reports/2026-11_monthly.html",
-              "content/economy/dubai/apartment/reports/2026-Q3_quarterly.html",
-              "content/economy/dubai/apartment/reports/2026_annual.html",
-              "content/economy/insight/reports/2026-11_baseline_report.html",
-              "content/economy/trends/reports/2026-11-13_weekly.html",
-              "content/economy/trends/reports/2026-11-20_weekly.html",
-              "content/economy/trends/reports/2026-11-27_weekly.html",
-              "content/education/education-system/reports/2026-11_baseline_report.html",
-              "content/education/study-abroad/reports/2026-11_baseline_report.html",
-              "content/international/immigration/dubai/reports/2026-11_baseline_report.html",
-              "content/international/immigration/reports/2026-11_baseline_report.html",
-              "content/international/international-relations/reports/2026-11_baseline_report.html",
-              "content/political/political-system/reports/2026-11_baseline_report.html",
-              "content/society/social-structure/reports/2026-11_baseline_report.html",
-              "content/tech/ai-application/competitive-intelligence/dubai/reports/2026-11_baseline_report.html",
-              "content/tech/ai-application/dubai/reports/2026-11_baseline_report.html",
-              "content/tech/ai-application/industry-research/dubai/reports/2026-11_baseline_report.html",
-              "content/tech/ai-security/competitive-intelligence/dubai/reports/2026-11_baseline_report.html",
-              "content/tech/ai-security/competitive-intelligence/dubai/reports/2026-11_monthly.html",
-              "content/tech/ai-security/dubai/reports/2026-11_baseline_report.html",
-              "content/tech/ai-security/industry-research/dubai/reports/2026-11_baseline_report.html"
-            ],
-            "task_count": 6,
-            "risk_count": 3
-          },
-          {
-            "slug": "reports-full-rebuild",
-            "plan": "engine/audit/records/tasks/reports-full-rebuild/plan.json",
-            "tasks": "engine/audit/records/tasks/reports-full-rebuild/tasks.json",
-            "risks": "engine/audit/records/tasks/reports-full-rebuild/risks.json",
-            "reports": [
-              "content/economy/dubai/apartment/reports/2026-11_baseline_report.html",
-              "content/economy/dubai/apartment/reports/2026-11_monthly.html",
-              "content/economy/dubai/apartment/reports/2026-12_monthly.html",
-              "content/economy/dubai/apartment/reports/2026-Q3_quarterly.html",
-              "content/economy/dubai/apartment/reports/2026_annual.html",
-              "content/economy/dubai/apartment/reports/2027-01_monthly.html",
-              "content/economy/insight/reports/2026-12_baseline_report.html",
-              "content/economy/trends/reports/2026-11-13_weekly.html",
-              "content/economy/trends/reports/2026-11-20_weekly.html",
-              "content/economy/trends/reports/2026-11-27_weekly.html",
-              "content/education/education-system/reports/2026-12_baseline_report.html",
-              "content/international/international-relations/reports/2026-11_baseline_report.html",
-              "content/political/political-system/reports/2026-11_baseline_report.html",
-              "content/society/social-structure/reports/2026-11_baseline_report.html",
-              "content/tech/competitive-intelligence/dubai/reports/2026-12_baseline_report.html",
-              "content/tech/competitive-intelligence/dubai/reports/2026-12_monthly.html",
-              "content/tech/industry-research/dubai/reports/2026-12_baseline_report.html",
-              "content/tech/security/dubai/reports/2026-11_baseline_report.html",
-              "content/tech/weekly-roundup/reports/2026-11-13_weekly.html",
-              "content/tech/weekly-roundup/reports/2026-11-20_weekly.html"
-            ],
-            "task_count": 6,
-            "risk_count": 4
-          },
-          {
-            "slug": "restructure-content-dirs",
-            "plan": "engine/audit/records/tasks/restructure-content-dirs/plan.json",
-            "tasks": "engine/audit/records/tasks/restructure-content-dirs/tasks.json",
-            "risks": "engine/audit/records/tasks/restructure-content-dirs/risks.json",
-            "reports": [
-              "content/economy/insight/reports/2026-12_baseline_report.html",
-              "content/economy/trends/reports/2026-11-13_weekly.html",
-              "content/tech/weekly-roundup/reports/2026-11-13_weekly.html"
-            ],
-            "task_count": 4,
-            "risk_count": 3
-          }
-        ],
+        "plans": [],
         "gate": {
           "entry": "engine/tools/optimization_gate.py",
           "probe": true
@@ -1301,19 +911,7 @@
       "evidence": {
         "report": "engine/report-audits/goal-alignment-optimization-plan-2026-11-18.md",
         "business_line": "engine/report-audits",
-        "plans": [
-          {
-            "slug": "goal-alignment-p0",
-            "plan": "engine/audit/records/tasks/goal-alignment-p0/plan.json",
-            "tasks": "engine/audit/records/tasks/goal-alignment-p0/tasks.json",
-            "risks": "engine/audit/records/tasks/goal-alignment-p0/risks.json",
-            "reports": [
-              "engine/report-audits/goal-alignment-optimization-plan-2026-11-18.md"
-            ],
-            "task_count": 7,
-            "risk_count": 2
-          }
-        ],
+        "plans": [],
         "gate": {
           "entry": "engine/tools/optimization_gate.py",
           "probe": true
@@ -1433,19 +1031,7 @@
       "evidence": {
         "report": "engine/report-audits/information-quality-improvement-plan-2026-11-19.md",
         "business_line": "engine/report-audits",
-        "plans": [
-          {
-            "slug": "info-quality-plan",
-            "plan": "engine/audit/records/tasks/info-quality-plan/plan.json",
-            "tasks": "engine/audit/records/tasks/info-quality-plan/tasks.json",
-            "risks": "engine/audit/records/tasks/info-quality-plan/risks.json",
-            "reports": [
-              "engine/report-audits/information-quality-improvement-plan-2026-11-19.md"
-            ],
-            "task_count": 6,
-            "risk_count": 2
-          }
-        ],
+        "plans": [],
         "gate": {
           "entry": "engine/tools/optimization_gate.py",
           "probe": true
@@ -1517,70 +1103,7 @@
       "evidence": {
         "report": "content/economy/trends/reports/2026-11-20_weekly.html",
         "business_line": "content/economy/trends",
-        "plans": [
-          {
-            "slug": "report-verification-regen",
-            "plan": "engine/audit/records/tasks/report-verification-regen/plan.json",
-            "tasks": "engine/audit/records/tasks/report-verification-regen/tasks.json",
-            "risks": "engine/audit/records/tasks/report-verification-regen/risks.json",
-            "reports": [
-              "content/economy/dubai/apartment/reports/2026-11_baseline_report.html",
-              "content/economy/dubai/apartment/reports/2026-11_monthly.html",
-              "content/economy/dubai/apartment/reports/2026-Q3_quarterly.html",
-              "content/economy/dubai/apartment/reports/2026_annual.html",
-              "content/economy/insight/reports/2026-11_baseline_report.html",
-              "content/economy/trends/reports/2026-11-13_weekly.html",
-              "content/economy/trends/reports/2026-11-20_weekly.html",
-              "content/economy/trends/reports/2026-11-27_weekly.html",
-              "content/education/education-system/reports/2026-11_baseline_report.html",
-              "content/education/study-abroad/reports/2026-11_baseline_report.html",
-              "content/international/immigration/dubai/reports/2026-11_baseline_report.html",
-              "content/international/immigration/reports/2026-11_baseline_report.html",
-              "content/international/international-relations/reports/2026-11_baseline_report.html",
-              "content/political/political-system/reports/2026-11_baseline_report.html",
-              "content/society/social-structure/reports/2026-11_baseline_report.html",
-              "content/tech/ai-application/competitive-intelligence/dubai/reports/2026-11_baseline_report.html",
-              "content/tech/ai-application/dubai/reports/2026-11_baseline_report.html",
-              "content/tech/ai-application/industry-research/dubai/reports/2026-11_baseline_report.html",
-              "content/tech/ai-security/competitive-intelligence/dubai/reports/2026-11_baseline_report.html",
-              "content/tech/ai-security/competitive-intelligence/dubai/reports/2026-11_monthly.html",
-              "content/tech/ai-security/dubai/reports/2026-11_baseline_report.html",
-              "content/tech/ai-security/industry-research/dubai/reports/2026-11_baseline_report.html"
-            ],
-            "task_count": 6,
-            "risk_count": 3
-          },
-          {
-            "slug": "reports-full-rebuild",
-            "plan": "engine/audit/records/tasks/reports-full-rebuild/plan.json",
-            "tasks": "engine/audit/records/tasks/reports-full-rebuild/tasks.json",
-            "risks": "engine/audit/records/tasks/reports-full-rebuild/risks.json",
-            "reports": [
-              "content/economy/dubai/apartment/reports/2026-11_baseline_report.html",
-              "content/economy/dubai/apartment/reports/2026-11_monthly.html",
-              "content/economy/dubai/apartment/reports/2026-12_monthly.html",
-              "content/economy/dubai/apartment/reports/2026-Q3_quarterly.html",
-              "content/economy/dubai/apartment/reports/2026_annual.html",
-              "content/economy/dubai/apartment/reports/2027-01_monthly.html",
-              "content/economy/insight/reports/2026-12_baseline_report.html",
-              "content/economy/trends/reports/2026-11-13_weekly.html",
-              "content/economy/trends/reports/2026-11-20_weekly.html",
-              "content/economy/trends/reports/2026-11-27_weekly.html",
-              "content/education/education-system/reports/2026-12_baseline_report.html",
-              "content/international/international-relations/reports/2026-11_baseline_report.html",
-              "content/political/political-system/reports/2026-11_baseline_report.html",
-              "content/society/social-structure/reports/2026-11_baseline_report.html",
-              "content/tech/competitive-intelligence/dubai/reports/2026-12_baseline_report.html",
-              "content/tech/competitive-intelligence/dubai/reports/2026-12_monthly.html",
-              "content/tech/industry-research/dubai/reports/2026-12_baseline_report.html",
-              "content/tech/security/dubai/reports/2026-11_baseline_report.html",
-              "content/tech/weekly-roundup/reports/2026-11-13_weekly.html",
-              "content/tech/weekly-roundup/reports/2026-11-20_weekly.html"
-            ],
-            "task_count": 6,
-            "risk_count": 4
-          }
-        ],
+        "plans": [],
         "gate": {
           "entry": "engine/tools/optimization_gate.py",
           "probe": true
@@ -1655,70 +1178,7 @@
       "evidence": {
         "report": "content/economy/trends/reports/2026-11-27_weekly.html",
         "business_line": "content/economy/trends",
-        "plans": [
-          {
-            "slug": "report-verification-regen",
-            "plan": "engine/audit/records/tasks/report-verification-regen/plan.json",
-            "tasks": "engine/audit/records/tasks/report-verification-regen/tasks.json",
-            "risks": "engine/audit/records/tasks/report-verification-regen/risks.json",
-            "reports": [
-              "content/economy/dubai/apartment/reports/2026-11_baseline_report.html",
-              "content/economy/dubai/apartment/reports/2026-11_monthly.html",
-              "content/economy/dubai/apartment/reports/2026-Q3_quarterly.html",
-              "content/economy/dubai/apartment/reports/2026_annual.html",
-              "content/economy/insight/reports/2026-11_baseline_report.html",
-              "content/economy/trends/reports/2026-11-13_weekly.html",
-              "content/economy/trends/reports/2026-11-20_weekly.html",
-              "content/economy/trends/reports/2026-11-27_weekly.html",
-              "content/education/education-system/reports/2026-11_baseline_report.html",
-              "content/education/study-abroad/reports/2026-11_baseline_report.html",
-              "content/international/immigration/dubai/reports/2026-11_baseline_report.html",
-              "content/international/immigration/reports/2026-11_baseline_report.html",
-              "content/international/international-relations/reports/2026-11_baseline_report.html",
-              "content/political/political-system/reports/2026-11_baseline_report.html",
-              "content/society/social-structure/reports/2026-11_baseline_report.html",
-              "content/tech/ai-application/competitive-intelligence/dubai/reports/2026-11_baseline_report.html",
-              "content/tech/ai-application/dubai/reports/2026-11_baseline_report.html",
-              "content/tech/ai-application/industry-research/dubai/reports/2026-11_baseline_report.html",
-              "content/tech/ai-security/competitive-intelligence/dubai/reports/2026-11_baseline_report.html",
-              "content/tech/ai-security/competitive-intelligence/dubai/reports/2026-11_monthly.html",
-              "content/tech/ai-security/dubai/reports/2026-11_baseline_report.html",
-              "content/tech/ai-security/industry-research/dubai/reports/2026-11_baseline_report.html"
-            ],
-            "task_count": 6,
-            "risk_count": 3
-          },
-          {
-            "slug": "reports-full-rebuild",
-            "plan": "engine/audit/records/tasks/reports-full-rebuild/plan.json",
-            "tasks": "engine/audit/records/tasks/reports-full-rebuild/tasks.json",
-            "risks": "engine/audit/records/tasks/reports-full-rebuild/risks.json",
-            "reports": [
-              "content/economy/dubai/apartment/reports/2026-11_baseline_report.html",
-              "content/economy/dubai/apartment/reports/2026-11_monthly.html",
-              "content/economy/dubai/apartment/reports/2026-12_monthly.html",
-              "content/economy/dubai/apartment/reports/2026-Q3_quarterly.html",
-              "content/economy/dubai/apartment/reports/2026_annual.html",
-              "content/economy/dubai/apartment/reports/2027-01_monthly.html",
-              "content/economy/insight/reports/2026-12_baseline_report.html",
-              "content/economy/trends/reports/2026-11-13_weekly.html",
-              "content/economy/trends/reports/2026-11-20_weekly.html",
-              "content/economy/trends/reports/2026-11-27_weekly.html",
-              "content/education/education-system/reports/2026-12_baseline_report.html",
-              "content/international/international-relations/reports/2026-11_baseline_report.html",
-              "content/political/political-system/reports/2026-11_baseline_report.html",
-              "content/society/social-structure/reports/2026-11_baseline_report.html",
-              "content/tech/competitive-intelligence/dubai/reports/2026-12_baseline_report.html",
-              "content/tech/competitive-intelligence/dubai/reports/2026-12_monthly.html",
-              "content/tech/industry-research/dubai/reports/2026-12_baseline_report.html",
-              "content/tech/security/dubai/reports/2026-11_baseline_report.html",
-              "content/tech/weekly-roundup/reports/2026-11-13_weekly.html",
-              "content/tech/weekly-roundup/reports/2026-11-20_weekly.html"
-            ],
-            "task_count": 6,
-            "risk_count": 4
-          }
-        ],
+        "plans": [],
         "gate": {
           "entry": "engine/tools/optimization_gate.py",
           "probe": true
@@ -1757,70 +1217,7 @@
       "evidence": {
         "report": "content/international/international-relations/reports/2026-11_baseline_report.html",
         "business_line": "content/international/international-relations",
-        "plans": [
-          {
-            "slug": "report-verification-regen",
-            "plan": "engine/audit/records/tasks/report-verification-regen/plan.json",
-            "tasks": "engine/audit/records/tasks/report-verification-regen/tasks.json",
-            "risks": "engine/audit/records/tasks/report-verification-regen/risks.json",
-            "reports": [
-              "content/economy/dubai/apartment/reports/2026-11_baseline_report.html",
-              "content/economy/dubai/apartment/reports/2026-11_monthly.html",
-              "content/economy/dubai/apartment/reports/2026-Q3_quarterly.html",
-              "content/economy/dubai/apartment/reports/2026_annual.html",
-              "content/economy/insight/reports/2026-11_baseline_report.html",
-              "content/economy/trends/reports/2026-11-13_weekly.html",
-              "content/economy/trends/reports/2026-11-20_weekly.html",
-              "content/economy/trends/reports/2026-11-27_weekly.html",
-              "content/education/education-system/reports/2026-11_baseline_report.html",
-              "content/education/study-abroad/reports/2026-11_baseline_report.html",
-              "content/international/immigration/dubai/reports/2026-11_baseline_report.html",
-              "content/international/immigration/reports/2026-11_baseline_report.html",
-              "content/international/international-relations/reports/2026-11_baseline_report.html",
-              "content/political/political-system/reports/2026-11_baseline_report.html",
-              "content/society/social-structure/reports/2026-11_baseline_report.html",
-              "content/tech/ai-application/competitive-intelligence/dubai/reports/2026-11_baseline_report.html",
-              "content/tech/ai-application/dubai/reports/2026-11_baseline_report.html",
-              "content/tech/ai-application/industry-research/dubai/reports/2026-11_baseline_report.html",
-              "content/tech/ai-security/competitive-intelligence/dubai/reports/2026-11_baseline_report.html",
-              "content/tech/ai-security/competitive-intelligence/dubai/reports/2026-11_monthly.html",
-              "content/tech/ai-security/dubai/reports/2026-11_baseline_report.html",
-              "content/tech/ai-security/industry-research/dubai/reports/2026-11_baseline_report.html"
-            ],
-            "task_count": 6,
-            "risk_count": 3
-          },
-          {
-            "slug": "reports-full-rebuild",
-            "plan": "engine/audit/records/tasks/reports-full-rebuild/plan.json",
-            "tasks": "engine/audit/records/tasks/reports-full-rebuild/tasks.json",
-            "risks": "engine/audit/records/tasks/reports-full-rebuild/risks.json",
-            "reports": [
-              "content/economy/dubai/apartment/reports/2026-11_baseline_report.html",
-              "content/economy/dubai/apartment/reports/2026-11_monthly.html",
-              "content/economy/dubai/apartment/reports/2026-12_monthly.html",
-              "content/economy/dubai/apartment/reports/2026-Q3_quarterly.html",
-              "content/economy/dubai/apartment/reports/2026_annual.html",
-              "content/economy/dubai/apartment/reports/2027-01_monthly.html",
-              "content/economy/insight/reports/2026-12_baseline_report.html",
-              "content/economy/trends/reports/2026-11-13_weekly.html",
-              "content/economy/trends/reports/2026-11-20_weekly.html",
-              "content/economy/trends/reports/2026-11-27_weekly.html",
-              "content/education/education-system/reports/2026-12_baseline_report.html",
-              "content/international/international-relations/reports/2026-11_baseline_report.html",
-              "content/political/political-system/reports/2026-11_baseline_report.html",
-              "content/society/social-structure/reports/2026-11_baseline_report.html",
-              "content/tech/competitive-intelligence/dubai/reports/2026-12_baseline_report.html",
-              "content/tech/competitive-intelligence/dubai/reports/2026-12_monthly.html",
-              "content/tech/industry-research/dubai/reports/2026-12_baseline_report.html",
-              "content/tech/security/dubai/reports/2026-11_baseline_report.html",
-              "content/tech/weekly-roundup/reports/2026-11-13_weekly.html",
-              "content/tech/weekly-roundup/reports/2026-11-20_weekly.html"
-            ],
-            "task_count": 6,
-            "risk_count": 4
-          }
-        ],
+        "plans": [],
         "gate": {
           "entry": "engine/tools/optimization_gate.py",
           "probe": true
@@ -1895,70 +1292,7 @@
       "evidence": {
         "report": "content/political/political-system/reports/2026-11_baseline_report.html",
         "business_line": "content/political/political-system",
-        "plans": [
-          {
-            "slug": "report-verification-regen",
-            "plan": "engine/audit/records/tasks/report-verification-regen/plan.json",
-            "tasks": "engine/audit/records/tasks/report-verification-regen/tasks.json",
-            "risks": "engine/audit/records/tasks/report-verification-regen/risks.json",
-            "reports": [
-              "content/economy/dubai/apartment/reports/2026-11_baseline_report.html",
-              "content/economy/dubai/apartment/reports/2026-11_monthly.html",
-              "content/economy/dubai/apartment/reports/2026-Q3_quarterly.html",
-              "content/economy/dubai/apartment/reports/2026_annual.html",
-              "content/economy/insight/reports/2026-11_baseline_report.html",
-              "content/economy/trends/reports/2026-11-13_weekly.html",
-              "content/economy/trends/reports/2026-11-20_weekly.html",
-              "content/economy/trends/reports/2026-11-27_weekly.html",
-              "content/education/education-system/reports/2026-11_baseline_report.html",
-              "content/education/study-abroad/reports/2026-11_baseline_report.html",
-              "content/international/immigration/dubai/reports/2026-11_baseline_report.html",
-              "content/international/immigration/reports/2026-11_baseline_report.html",
-              "content/international/international-relations/reports/2026-11_baseline_report.html",
-              "content/political/political-system/reports/2026-11_baseline_report.html",
-              "content/society/social-structure/reports/2026-11_baseline_report.html",
-              "content/tech/ai-application/competitive-intelligence/dubai/reports/2026-11_baseline_report.html",
-              "content/tech/ai-application/dubai/reports/2026-11_baseline_report.html",
-              "content/tech/ai-application/industry-research/dubai/reports/2026-11_baseline_report.html",
-              "content/tech/ai-security/competitive-intelligence/dubai/reports/2026-11_baseline_report.html",
-              "content/tech/ai-security/competitive-intelligence/dubai/reports/2026-11_monthly.html",
-              "content/tech/ai-security/dubai/reports/2026-11_baseline_report.html",
-              "content/tech/ai-security/industry-research/dubai/reports/2026-11_baseline_report.html"
-            ],
-            "task_count": 6,
-            "risk_count": 3
-          },
-          {
-            "slug": "reports-full-rebuild",
-            "plan": "engine/audit/records/tasks/reports-full-rebuild/plan.json",
-            "tasks": "engine/audit/records/tasks/reports-full-rebuild/tasks.json",
-            "risks": "engine/audit/records/tasks/reports-full-rebuild/risks.json",
-            "reports": [
-              "content/economy/dubai/apartment/reports/2026-11_baseline_report.html",
-              "content/economy/dubai/apartment/reports/2026-11_monthly.html",
-              "content/economy/dubai/apartment/reports/2026-12_monthly.html",
-              "content/economy/dubai/apartment/reports/2026-Q3_quarterly.html",
-              "content/economy/dubai/apartment/reports/2026_annual.html",
-              "content/economy/dubai/apartment/reports/2027-01_monthly.html",
-              "content/economy/insight/reports/2026-12_baseline_report.html",
-              "content/economy/trends/reports/2026-11-13_weekly.html",
-              "content/economy/trends/reports/2026-11-20_weekly.html",
-              "content/economy/trends/reports/2026-11-27_weekly.html",
-              "content/education/education-system/reports/2026-12_baseline_report.html",
-              "content/international/international-relations/reports/2026-11_baseline_report.html",
-              "content/political/political-system/reports/2026-11_baseline_report.html",
-              "content/society/social-structure/reports/2026-11_baseline_report.html",
-              "content/tech/competitive-intelligence/dubai/reports/2026-12_baseline_report.html",
-              "content/tech/competitive-intelligence/dubai/reports/2026-12_monthly.html",
-              "content/tech/industry-research/dubai/reports/2026-12_baseline_report.html",
-              "content/tech/security/dubai/reports/2026-11_baseline_report.html",
-              "content/tech/weekly-roundup/reports/2026-11-13_weekly.html",
-              "content/tech/weekly-roundup/reports/2026-11-20_weekly.html"
-            ],
-            "task_count": 6,
-            "risk_count": 4
-          }
-        ],
+        "plans": [],
         "gate": {
           "entry": "engine/tools/optimization_gate.py",
           "probe": true
@@ -1997,70 +1331,7 @@
       "evidence": {
         "report": "content/society/social-structure/reports/2026-11_baseline_report.html",
         "business_line": "content/society/social-structure",
-        "plans": [
-          {
-            "slug": "report-verification-regen",
-            "plan": "engine/audit/records/tasks/report-verification-regen/plan.json",
-            "tasks": "engine/audit/records/tasks/report-verification-regen/tasks.json",
-            "risks": "engine/audit/records/tasks/report-verification-regen/risks.json",
-            "reports": [
-              "content/economy/dubai/apartment/reports/2026-11_baseline_report.html",
-              "content/economy/dubai/apartment/reports/2026-11_monthly.html",
-              "content/economy/dubai/apartment/reports/2026-Q3_quarterly.html",
-              "content/economy/dubai/apartment/reports/2026_annual.html",
-              "content/economy/insight/reports/2026-11_baseline_report.html",
-              "content/economy/trends/reports/2026-11-13_weekly.html",
-              "content/economy/trends/reports/2026-11-20_weekly.html",
-              "content/economy/trends/reports/2026-11-27_weekly.html",
-              "content/education/education-system/reports/2026-11_baseline_report.html",
-              "content/education/study-abroad/reports/2026-11_baseline_report.html",
-              "content/international/immigration/dubai/reports/2026-11_baseline_report.html",
-              "content/international/immigration/reports/2026-11_baseline_report.html",
-              "content/international/international-relations/reports/2026-11_baseline_report.html",
-              "content/political/political-system/reports/2026-11_baseline_report.html",
-              "content/society/social-structure/reports/2026-11_baseline_report.html",
-              "content/tech/ai-application/competitive-intelligence/dubai/reports/2026-11_baseline_report.html",
-              "content/tech/ai-application/dubai/reports/2026-11_baseline_report.html",
-              "content/tech/ai-application/industry-research/dubai/reports/2026-11_baseline_report.html",
-              "content/tech/ai-security/competitive-intelligence/dubai/reports/2026-11_baseline_report.html",
-              "content/tech/ai-security/competitive-intelligence/dubai/reports/2026-11_monthly.html",
-              "content/tech/ai-security/dubai/reports/2026-11_baseline_report.html",
-              "content/tech/ai-security/industry-research/dubai/reports/2026-11_baseline_report.html"
-            ],
-            "task_count": 6,
-            "risk_count": 3
-          },
-          {
-            "slug": "reports-full-rebuild",
-            "plan": "engine/audit/records/tasks/reports-full-rebuild/plan.json",
-            "tasks": "engine/audit/records/tasks/reports-full-rebuild/tasks.json",
-            "risks": "engine/audit/records/tasks/reports-full-rebuild/risks.json",
-            "reports": [
-              "content/economy/dubai/apartment/reports/2026-11_baseline_report.html",
-              "content/economy/dubai/apartment/reports/2026-11_monthly.html",
-              "content/economy/dubai/apartment/reports/2026-12_monthly.html",
-              "content/economy/dubai/apartment/reports/2026-Q3_quarterly.html",
-              "content/economy/dubai/apartment/reports/2026_annual.html",
-              "content/economy/dubai/apartment/reports/2027-01_monthly.html",
-              "content/economy/insight/reports/2026-12_baseline_report.html",
-              "content/economy/trends/reports/2026-11-13_weekly.html",
-              "content/economy/trends/reports/2026-11-20_weekly.html",
-              "content/economy/trends/reports/2026-11-27_weekly.html",
-              "content/education/education-system/reports/2026-12_baseline_report.html",
-              "content/international/international-relations/reports/2026-11_baseline_report.html",
-              "content/political/political-system/reports/2026-11_baseline_report.html",
-              "content/society/social-structure/reports/2026-11_baseline_report.html",
-              "content/tech/competitive-intelligence/dubai/reports/2026-12_baseline_report.html",
-              "content/tech/competitive-intelligence/dubai/reports/2026-12_monthly.html",
-              "content/tech/industry-research/dubai/reports/2026-12_baseline_report.html",
-              "content/tech/security/dubai/reports/2026-11_baseline_report.html",
-              "content/tech/weekly-roundup/reports/2026-11-13_weekly.html",
-              "content/tech/weekly-roundup/reports/2026-11-20_weekly.html"
-            ],
-            "task_count": 6,
-            "risk_count": 4
-          }
-        ],
+        "plans": [],
         "gate": {
           "entry": "engine/tools/optimization_gate.py",
           "probe": true
@@ -2171,54 +1442,7 @@
       "evidence": {
         "report": "content/economy/insight/reports/2026-11_baseline_report.html",
         "business_line": "content/economy/insight",
-        "plans": [
-          {
-            "slug": "report-period-current-month",
-            "plan": "engine/audit/records/tasks/report-period-current-month/plan.json",
-            "tasks": "engine/audit/records/tasks/report-period-current-month/tasks.json",
-            "risks": "engine/audit/records/tasks/report-period-current-month/risks.json",
-            "reports": [
-              "content/economy/insight/reports/2026-11_baseline_report.html",
-              "content/education/education-system/reports/2026-11_baseline_report.html",
-              "content/tech/ai-security/competitive-intelligence/dubai/reports/2026-11_monthly.html",
-              "content/tech/ai-security/industry-research/dubai/reports/2026-11_baseline_report.html"
-            ],
-            "task_count": 5,
-            "risk_count": 3
-          },
-          {
-            "slug": "report-verification-regen",
-            "plan": "engine/audit/records/tasks/report-verification-regen/plan.json",
-            "tasks": "engine/audit/records/tasks/report-verification-regen/tasks.json",
-            "risks": "engine/audit/records/tasks/report-verification-regen/risks.json",
-            "reports": [
-              "content/economy/dubai/apartment/reports/2026-11_baseline_report.html",
-              "content/economy/dubai/apartment/reports/2026-11_monthly.html",
-              "content/economy/dubai/apartment/reports/2026-Q3_quarterly.html",
-              "content/economy/dubai/apartment/reports/2026_annual.html",
-              "content/economy/insight/reports/2026-11_baseline_report.html",
-              "content/economy/trends/reports/2026-11-13_weekly.html",
-              "content/economy/trends/reports/2026-11-20_weekly.html",
-              "content/economy/trends/reports/2026-11-27_weekly.html",
-              "content/education/education-system/reports/2026-11_baseline_report.html",
-              "content/education/study-abroad/reports/2026-11_baseline_report.html",
-              "content/international/immigration/dubai/reports/2026-11_baseline_report.html",
-              "content/international/immigration/reports/2026-11_baseline_report.html",
-              "content/international/international-relations/reports/2026-11_baseline_report.html",
-              "content/political/political-system/reports/2026-11_baseline_report.html",
-              "content/society/social-structure/reports/2026-11_baseline_report.html",
-              "content/tech/ai-application/competitive-intelligence/dubai/reports/2026-11_baseline_report.html",
-              "content/tech/ai-application/dubai/reports/2026-11_baseline_report.html",
-              "content/tech/ai-application/industry-research/dubai/reports/2026-11_baseline_report.html",
-              "content/tech/ai-security/competitive-intelligence/dubai/reports/2026-11_baseline_report.html",
-              "content/tech/ai-security/competitive-intelligence/dubai/reports/2026-11_monthly.html",
-              "content/tech/ai-security/dubai/reports/2026-11_baseline_report.html",
-              "content/tech/ai-security/industry-research/dubai/reports/2026-11_baseline_report.html"
-            ],
-            "task_count": 6,
-            "risk_count": 3
-          }
-        ],
+        "plans": [],
         "gate": {
           "entry": "engine/tools/optimization_gate.py",
           "probe": true
@@ -2257,54 +1481,7 @@
       "evidence": {
         "report": "content/education/education-system/reports/2026-11_baseline_report.html",
         "business_line": "content/education/education-system",
-        "plans": [
-          {
-            "slug": "report-period-current-month",
-            "plan": "engine/audit/records/tasks/report-period-current-month/plan.json",
-            "tasks": "engine/audit/records/tasks/report-period-current-month/tasks.json",
-            "risks": "engine/audit/records/tasks/report-period-current-month/risks.json",
-            "reports": [
-              "content/economy/insight/reports/2026-11_baseline_report.html",
-              "content/education/education-system/reports/2026-11_baseline_report.html",
-              "content/tech/ai-security/competitive-intelligence/dubai/reports/2026-11_monthly.html",
-              "content/tech/ai-security/industry-research/dubai/reports/2026-11_baseline_report.html"
-            ],
-            "task_count": 5,
-            "risk_count": 3
-          },
-          {
-            "slug": "report-verification-regen",
-            "plan": "engine/audit/records/tasks/report-verification-regen/plan.json",
-            "tasks": "engine/audit/records/tasks/report-verification-regen/tasks.json",
-            "risks": "engine/audit/records/tasks/report-verification-regen/risks.json",
-            "reports": [
-              "content/economy/dubai/apartment/reports/2026-11_baseline_report.html",
-              "content/economy/dubai/apartment/reports/2026-11_monthly.html",
-              "content/economy/dubai/apartment/reports/2026-Q3_quarterly.html",
-              "content/economy/dubai/apartment/reports/2026_annual.html",
-              "content/economy/insight/reports/2026-11_baseline_report.html",
-              "content/economy/trends/reports/2026-11-13_weekly.html",
-              "content/economy/trends/reports/2026-11-20_weekly.html",
-              "content/economy/trends/reports/2026-11-27_weekly.html",
-              "content/education/education-system/reports/2026-11_baseline_report.html",
-              "content/education/study-abroad/reports/2026-11_baseline_report.html",
-              "content/international/immigration/dubai/reports/2026-11_baseline_report.html",
-              "content/international/immigration/reports/2026-11_baseline_report.html",
-              "content/international/international-relations/reports/2026-11_baseline_report.html",
-              "content/political/political-system/reports/2026-11_baseline_report.html",
-              "content/society/social-structure/reports/2026-11_baseline_report.html",
-              "content/tech/ai-application/competitive-intelligence/dubai/reports/2026-11_baseline_report.html",
-              "content/tech/ai-application/dubai/reports/2026-11_baseline_report.html",
-              "content/tech/ai-application/industry-research/dubai/reports/2026-11_baseline_report.html",
-              "content/tech/ai-security/competitive-intelligence/dubai/reports/2026-11_baseline_report.html",
-              "content/tech/ai-security/competitive-intelligence/dubai/reports/2026-11_monthly.html",
-              "content/tech/ai-security/dubai/reports/2026-11_baseline_report.html",
-              "content/tech/ai-security/industry-research/dubai/reports/2026-11_baseline_report.html"
-            ],
-            "task_count": 6,
-            "risk_count": 3
-          }
-        ],
+        "plans": [],
         "gate": {
           "entry": "engine/tools/optimization_gate.py",
           "probe": true
@@ -2343,40 +1520,7 @@
       "evidence": {
         "report": "content/tech/ai-security/competitive-intelligence/dubai/reports/2026-11_baseline_report.html",
         "business_line": "content/tech/ai-security/competitive-intelligence/dubai",
-        "plans": [
-          {
-            "slug": "report-verification-regen",
-            "plan": "engine/audit/records/tasks/report-verification-regen/plan.json",
-            "tasks": "engine/audit/records/tasks/report-verification-regen/tasks.json",
-            "risks": "engine/audit/records/tasks/report-verification-regen/risks.json",
-            "reports": [
-              "content/economy/dubai/apartment/reports/2026-11_baseline_report.html",
-              "content/economy/dubai/apartment/reports/2026-11_monthly.html",
-              "content/economy/dubai/apartment/reports/2026-Q3_quarterly.html",
-              "content/economy/dubai/apartment/reports/2026_annual.html",
-              "content/economy/insight/reports/2026-11_baseline_report.html",
-              "content/economy/trends/reports/2026-11-13_weekly.html",
-              "content/economy/trends/reports/2026-11-20_weekly.html",
-              "content/economy/trends/reports/2026-11-27_weekly.html",
-              "content/education/education-system/reports/2026-11_baseline_report.html",
-              "content/education/study-abroad/reports/2026-11_baseline_report.html",
-              "content/international/immigration/dubai/reports/2026-11_baseline_report.html",
-              "content/international/immigration/reports/2026-11_baseline_report.html",
-              "content/international/international-relations/reports/2026-11_baseline_report.html",
-              "content/political/political-system/reports/2026-11_baseline_report.html",
-              "content/society/social-structure/reports/2026-11_baseline_report.html",
-              "content/tech/ai-application/competitive-intelligence/dubai/reports/2026-11_baseline_report.html",
-              "content/tech/ai-application/dubai/reports/2026-11_baseline_report.html",
-              "content/tech/ai-application/industry-research/dubai/reports/2026-11_baseline_report.html",
-              "content/tech/ai-security/competitive-intelligence/dubai/reports/2026-11_baseline_report.html",
-              "content/tech/ai-security/competitive-intelligence/dubai/reports/2026-11_monthly.html",
-              "content/tech/ai-security/dubai/reports/2026-11_baseline_report.html",
-              "content/tech/ai-security/industry-research/dubai/reports/2026-11_baseline_report.html"
-            ],
-            "task_count": 6,
-            "risk_count": 3
-          }
-        ],
+        "plans": [],
         "gate": {
           "entry": "engine/tools/optimization_gate.py",
           "probe": true
@@ -2415,54 +1559,7 @@
       "evidence": {
         "report": "content/tech/ai-security/competitive-intelligence/dubai/reports/2026-11_monthly.html",
         "business_line": "content/tech/ai-security/competitive-intelligence/dubai",
-        "plans": [
-          {
-            "slug": "report-period-current-month",
-            "plan": "engine/audit/records/tasks/report-period-current-month/plan.json",
-            "tasks": "engine/audit/records/tasks/report-period-current-month/tasks.json",
-            "risks": "engine/audit/records/tasks/report-period-current-month/risks.json",
-            "reports": [
-              "content/economy/insight/reports/2026-11_baseline_report.html",
-              "content/education/education-system/reports/2026-11_baseline_report.html",
-              "content/tech/ai-security/competitive-intelligence/dubai/reports/2026-11_monthly.html",
-              "content/tech/ai-security/industry-research/dubai/reports/2026-11_baseline_report.html"
-            ],
-            "task_count": 5,
-            "risk_count": 3
-          },
-          {
-            "slug": "report-verification-regen",
-            "plan": "engine/audit/records/tasks/report-verification-regen/plan.json",
-            "tasks": "engine/audit/records/tasks/report-verification-regen/tasks.json",
-            "risks": "engine/audit/records/tasks/report-verification-regen/risks.json",
-            "reports": [
-              "content/economy/dubai/apartment/reports/2026-11_baseline_report.html",
-              "content/economy/dubai/apartment/reports/2026-11_monthly.html",
-              "content/economy/dubai/apartment/reports/2026-Q3_quarterly.html",
-              "content/economy/dubai/apartment/reports/2026_annual.html",
-              "content/economy/insight/reports/2026-11_baseline_report.html",
-              "content/economy/trends/reports/2026-11-13_weekly.html",
-              "content/economy/trends/reports/2026-11-20_weekly.html",
-              "content/economy/trends/reports/2026-11-27_weekly.html",
-              "content/education/education-system/reports/2026-11_baseline_report.html",
-              "content/education/study-abroad/reports/2026-11_baseline_report.html",
-              "content/international/immigration/dubai/reports/2026-11_baseline_report.html",
-              "content/international/immigration/reports/2026-11_baseline_report.html",
-              "content/international/international-relations/reports/2026-11_baseline_report.html",
-              "content/political/political-system/reports/2026-11_baseline_report.html",
-              "content/society/social-structure/reports/2026-11_baseline_report.html",
-              "content/tech/ai-application/competitive-intelligence/dubai/reports/2026-11_baseline_report.html",
-              "content/tech/ai-application/dubai/reports/2026-11_baseline_report.html",
-              "content/tech/ai-application/industry-research/dubai/reports/2026-11_baseline_report.html",
-              "content/tech/ai-security/competitive-intelligence/dubai/reports/2026-11_baseline_report.html",
-              "content/tech/ai-security/competitive-intelligence/dubai/reports/2026-11_monthly.html",
-              "content/tech/ai-security/dubai/reports/2026-11_baseline_report.html",
-              "content/tech/ai-security/industry-research/dubai/reports/2026-11_baseline_report.html"
-            ],
-            "task_count": 6,
-            "risk_count": 3
-          }
-        ],
+        "plans": [],
         "gate": {
           "entry": "engine/tools/optimization_gate.py",
           "probe": true
@@ -2501,54 +1598,7 @@
       "evidence": {
         "report": "content/tech/ai-security/industry-research/dubai/reports/2026-11_baseline_report.html",
         "business_line": "content/tech/ai-security/industry-research/dubai",
-        "plans": [
-          {
-            "slug": "report-period-current-month",
-            "plan": "engine/audit/records/tasks/report-period-current-month/plan.json",
-            "tasks": "engine/audit/records/tasks/report-period-current-month/tasks.json",
-            "risks": "engine/audit/records/tasks/report-period-current-month/risks.json",
-            "reports": [
-              "content/economy/insight/reports/2026-11_baseline_report.html",
-              "content/education/education-system/reports/2026-11_baseline_report.html",
-              "content/tech/ai-security/competitive-intelligence/dubai/reports/2026-11_monthly.html",
-              "content/tech/ai-security/industry-research/dubai/reports/2026-11_baseline_report.html"
-            ],
-            "task_count": 5,
-            "risk_count": 3
-          },
-          {
-            "slug": "report-verification-regen",
-            "plan": "engine/audit/records/tasks/report-verification-regen/plan.json",
-            "tasks": "engine/audit/records/tasks/report-verification-regen/tasks.json",
-            "risks": "engine/audit/records/tasks/report-verification-regen/risks.json",
-            "reports": [
-              "content/economy/dubai/apartment/reports/2026-11_baseline_report.html",
-              "content/economy/dubai/apartment/reports/2026-11_monthly.html",
-              "content/economy/dubai/apartment/reports/2026-Q3_quarterly.html",
-              "content/economy/dubai/apartment/reports/2026_annual.html",
-              "content/economy/insight/reports/2026-11_baseline_report.html",
-              "content/economy/trends/reports/2026-11-13_weekly.html",
-              "content/economy/trends/reports/2026-11-20_weekly.html",
-              "content/economy/trends/reports/2026-11-27_weekly.html",
-              "content/education/education-system/reports/2026-11_baseline_report.html",
-              "content/education/study-abroad/reports/2026-11_baseline_report.html",
-              "content/international/immigration/dubai/reports/2026-11_baseline_report.html",
-              "content/international/immigration/reports/2026-11_baseline_report.html",
-              "content/international/international-relations/reports/2026-11_baseline_report.html",
-              "content/political/political-system/reports/2026-11_baseline_report.html",
-              "content/society/social-structure/reports/2026-11_baseline_report.html",
-              "content/tech/ai-application/competitive-intelligence/dubai/reports/2026-11_baseline_report.html",
-              "content/tech/ai-application/dubai/reports/2026-11_baseline_report.html",
-              "content/tech/ai-application/industry-research/dubai/reports/2026-11_baseline_report.html",
-              "content/tech/ai-security/competitive-intelligence/dubai/reports/2026-11_baseline_report.html",
-              "content/tech/ai-security/competitive-intelligence/dubai/reports/2026-11_monthly.html",
-              "content/tech/ai-security/dubai/reports/2026-11_baseline_report.html",
-              "content/tech/ai-security/industry-research/dubai/reports/2026-11_baseline_report.html"
-            ],
-            "task_count": 6,
-            "risk_count": 3
-          }
-        ],
+        "plans": [],
         "gate": {
           "entry": "engine/tools/optimization_gate.py",
           "probe": true
@@ -2587,40 +1637,7 @@
       "evidence": {
         "report": "content/tech/ai-security/dubai/reports/2026-11_baseline_report.html",
         "business_line": "content/tech/ai-security/dubai",
-        "plans": [
-          {
-            "slug": "report-verification-regen",
-            "plan": "engine/audit/records/tasks/report-verification-regen/plan.json",
-            "tasks": "engine/audit/records/tasks/report-verification-regen/tasks.json",
-            "risks": "engine/audit/records/tasks/report-verification-regen/risks.json",
-            "reports": [
-              "content/economy/dubai/apartment/reports/2026-11_baseline_report.html",
-              "content/economy/dubai/apartment/reports/2026-11_monthly.html",
-              "content/economy/dubai/apartment/reports/2026-Q3_quarterly.html",
-              "content/economy/dubai/apartment/reports/2026_annual.html",
-              "content/economy/insight/reports/2026-11_baseline_report.html",
-              "content/economy/trends/reports/2026-11-13_weekly.html",
-              "content/economy/trends/reports/2026-11-20_weekly.html",
-              "content/economy/trends/reports/2026-11-27_weekly.html",
-              "content/education/education-system/reports/2026-11_baseline_report.html",
-              "content/education/study-abroad/reports/2026-11_baseline_report.html",
-              "content/international/immigration/dubai/reports/2026-11_baseline_report.html",
-              "content/international/immigration/reports/2026-11_baseline_report.html",
-              "content/international/international-relations/reports/2026-11_baseline_report.html",
-              "content/political/political-system/reports/2026-11_baseline_report.html",
-              "content/society/social-structure/reports/2026-11_baseline_report.html",
-              "content/tech/ai-application/competitive-intelligence/dubai/reports/2026-11_baseline_report.html",
-              "content/tech/ai-application/dubai/reports/2026-11_baseline_report.html",
-              "content/tech/ai-application/industry-research/dubai/reports/2026-11_baseline_report.html",
-              "content/tech/ai-security/competitive-intelligence/dubai/reports/2026-11_baseline_report.html",
-              "content/tech/ai-security/competitive-intelligence/dubai/reports/2026-11_monthly.html",
-              "content/tech/ai-security/dubai/reports/2026-11_baseline_report.html",
-              "content/tech/ai-security/industry-research/dubai/reports/2026-11_baseline_report.html"
-            ],
-            "task_count": 6,
-            "risk_count": 3
-          }
-        ],
+        "plans": [],
         "gate": {
           "entry": "engine/tools/optimization_gate.py",
           "probe": true
@@ -2659,51 +1676,7 @@
       "evidence": {
         "report": "content/international/immigration/reports/2026-11_baseline_report.html",
         "business_line": "content/international/immigration",
-        "plans": [
-          {
-            "slug": "immigration-baseline",
-            "plan": "engine/audit/records/tasks/immigration-baseline/plan.json",
-            "tasks": "engine/audit/records/tasks/immigration-baseline/tasks.json",
-            "risks": "engine/audit/records/tasks/immigration-baseline/risks.json",
-            "reports": [
-              "content/international/immigration/reports/2026-11_baseline_report.html"
-            ],
-            "task_count": 5,
-            "risk_count": 2
-          },
-          {
-            "slug": "report-verification-regen",
-            "plan": "engine/audit/records/tasks/report-verification-regen/plan.json",
-            "tasks": "engine/audit/records/tasks/report-verification-regen/tasks.json",
-            "risks": "engine/audit/records/tasks/report-verification-regen/risks.json",
-            "reports": [
-              "content/economy/dubai/apartment/reports/2026-11_baseline_report.html",
-              "content/economy/dubai/apartment/reports/2026-11_monthly.html",
-              "content/economy/dubai/apartment/reports/2026-Q3_quarterly.html",
-              "content/economy/dubai/apartment/reports/2026_annual.html",
-              "content/economy/insight/reports/2026-11_baseline_report.html",
-              "content/economy/trends/reports/2026-11-13_weekly.html",
-              "content/economy/trends/reports/2026-11-20_weekly.html",
-              "content/economy/trends/reports/2026-11-27_weekly.html",
-              "content/education/education-system/reports/2026-11_baseline_report.html",
-              "content/education/study-abroad/reports/2026-11_baseline_report.html",
-              "content/international/immigration/dubai/reports/2026-11_baseline_report.html",
-              "content/international/immigration/reports/2026-11_baseline_report.html",
-              "content/international/international-relations/reports/2026-11_baseline_report.html",
-              "content/political/political-system/reports/2026-11_baseline_report.html",
-              "content/society/social-structure/reports/2026-11_baseline_report.html",
-              "content/tech/ai-application/competitive-intelligence/dubai/reports/2026-11_baseline_report.html",
-              "content/tech/ai-application/dubai/reports/2026-11_baseline_report.html",
-              "content/tech/ai-application/industry-research/dubai/reports/2026-11_baseline_report.html",
-              "content/tech/ai-security/competitive-intelligence/dubai/reports/2026-11_baseline_report.html",
-              "content/tech/ai-security/competitive-intelligence/dubai/reports/2026-11_monthly.html",
-              "content/tech/ai-security/dubai/reports/2026-11_baseline_report.html",
-              "content/tech/ai-security/industry-research/dubai/reports/2026-11_baseline_report.html"
-            ],
-            "task_count": 6,
-            "risk_count": 3
-          }
-        ],
+        "plans": [],
         "gate": {
           "entry": "engine/tools/optimization_gate.py",
           "probe": true
@@ -2742,40 +1715,7 @@
       "evidence": {
         "report": "content/tech/ai-application/competitive-intelligence/dubai/reports/2026-11_baseline_report.html",
         "business_line": "content/tech/ai-application/competitive-intelligence/dubai",
-        "plans": [
-          {
-            "slug": "report-verification-regen",
-            "plan": "engine/audit/records/tasks/report-verification-regen/plan.json",
-            "tasks": "engine/audit/records/tasks/report-verification-regen/tasks.json",
-            "risks": "engine/audit/records/tasks/report-verification-regen/risks.json",
-            "reports": [
-              "content/economy/dubai/apartment/reports/2026-11_baseline_report.html",
-              "content/economy/dubai/apartment/reports/2026-11_monthly.html",
-              "content/economy/dubai/apartment/reports/2026-Q3_quarterly.html",
-              "content/economy/dubai/apartment/reports/2026_annual.html",
-              "content/economy/insight/reports/2026-11_baseline_report.html",
-              "content/economy/trends/reports/2026-11-13_weekly.html",
-              "content/economy/trends/reports/2026-11-20_weekly.html",
-              "content/economy/trends/reports/2026-11-27_weekly.html",
-              "content/education/education-system/reports/2026-11_baseline_report.html",
-              "content/education/study-abroad/reports/2026-11_baseline_report.html",
-              "content/international/immigration/dubai/reports/2026-11_baseline_report.html",
-              "content/international/immigration/reports/2026-11_baseline_report.html",
-              "content/international/international-relations/reports/2026-11_baseline_report.html",
-              "content/political/political-system/reports/2026-11_baseline_report.html",
-              "content/society/social-structure/reports/2026-11_baseline_report.html",
-              "content/tech/ai-application/competitive-intelligence/dubai/reports/2026-11_baseline_report.html",
-              "content/tech/ai-application/dubai/reports/2026-11_baseline_report.html",
-              "content/tech/ai-application/industry-research/dubai/reports/2026-11_baseline_report.html",
-              "content/tech/ai-security/competitive-intelligence/dubai/reports/2026-11_baseline_report.html",
-              "content/tech/ai-security/competitive-intelligence/dubai/reports/2026-11_monthly.html",
-              "content/tech/ai-security/dubai/reports/2026-11_baseline_report.html",
-              "content/tech/ai-security/industry-research/dubai/reports/2026-11_baseline_report.html"
-            ],
-            "task_count": 6,
-            "risk_count": 3
-          }
-        ],
+        "plans": [],
         "gate": {
           "entry": "engine/tools/optimization_gate.py",
           "probe": true
@@ -2814,40 +1754,7 @@
       "evidence": {
         "report": "content/tech/ai-application/dubai/reports/2026-11_baseline_report.html",
         "business_line": "content/tech/ai-application/dubai",
-        "plans": [
-          {
-            "slug": "report-verification-regen",
-            "plan": "engine/audit/records/tasks/report-verification-regen/plan.json",
-            "tasks": "engine/audit/records/tasks/report-verification-regen/tasks.json",
-            "risks": "engine/audit/records/tasks/report-verification-regen/risks.json",
-            "reports": [
-              "content/economy/dubai/apartment/reports/2026-11_baseline_report.html",
-              "content/economy/dubai/apartment/reports/2026-11_monthly.html",
-              "content/economy/dubai/apartment/reports/2026-Q3_quarterly.html",
-              "content/economy/dubai/apartment/reports/2026_annual.html",
-              "content/economy/insight/reports/2026-11_baseline_report.html",
-              "content/economy/trends/reports/2026-11-13_weekly.html",
-              "content/economy/trends/reports/2026-11-20_weekly.html",
-              "content/economy/trends/reports/2026-11-27_weekly.html",
-              "content/education/education-system/reports/2026-11_baseline_report.html",
-              "content/education/study-abroad/reports/2026-11_baseline_report.html",
-              "content/international/immigration/dubai/reports/2026-11_baseline_report.html",
-              "content/international/immigration/reports/2026-11_baseline_report.html",
-              "content/international/international-relations/reports/2026-11_baseline_report.html",
-              "content/political/political-system/reports/2026-11_baseline_report.html",
-              "content/society/social-structure/reports/2026-11_baseline_report.html",
-              "content/tech/ai-application/competitive-intelligence/dubai/reports/2026-11_baseline_report.html",
-              "content/tech/ai-application/dubai/reports/2026-11_baseline_report.html",
-              "content/tech/ai-application/industry-research/dubai/reports/2026-11_baseline_report.html",
-              "content/tech/ai-security/competitive-intelligence/dubai/reports/2026-11_baseline_report.html",
-              "content/tech/ai-security/competitive-intelligence/dubai/reports/2026-11_monthly.html",
-              "content/tech/ai-security/dubai/reports/2026-11_baseline_report.html",
-              "content/tech/ai-security/industry-research/dubai/reports/2026-11_baseline_report.html"
-            ],
-            "task_count": 6,
-            "risk_count": 3
-          }
-        ],
+        "plans": [],
         "gate": {
           "entry": "engine/tools/optimization_gate.py",
           "probe": true
@@ -2886,40 +1793,7 @@
       "evidence": {
         "report": "content/tech/ai-application/industry-research/dubai/reports/2026-11_baseline_report.html",
         "business_line": "content/tech/ai-application/industry-research/dubai",
-        "plans": [
-          {
-            "slug": "report-verification-regen",
-            "plan": "engine/audit/records/tasks/report-verification-regen/plan.json",
-            "tasks": "engine/audit/records/tasks/report-verification-regen/tasks.json",
-            "risks": "engine/audit/records/tasks/report-verification-regen/risks.json",
-            "reports": [
-              "content/economy/dubai/apartment/reports/2026-11_baseline_report.html",
-              "content/economy/dubai/apartment/reports/2026-11_monthly.html",
-              "content/economy/dubai/apartment/reports/2026-Q3_quarterly.html",
-              "content/economy/dubai/apartment/reports/2026_annual.html",
-              "content/economy/insight/reports/2026-11_baseline_report.html",
-              "content/economy/trends/reports/2026-11-13_weekly.html",
-              "content/economy/trends/reports/2026-11-20_weekly.html",
-              "content/economy/trends/reports/2026-11-27_weekly.html",
-              "content/education/education-system/reports/2026-11_baseline_report.html",
-              "content/education/study-abroad/reports/2026-11_baseline_report.html",
-              "content/international/immigration/dubai/reports/2026-11_baseline_report.html",
-              "content/international/immigration/reports/2026-11_baseline_report.html",
-              "content/international/international-relations/reports/2026-11_baseline_report.html",
-              "content/political/political-system/reports/2026-11_baseline_report.html",
-              "content/society/social-structure/reports/2026-11_baseline_report.html",
-              "content/tech/ai-application/competitive-intelligence/dubai/reports/2026-11_baseline_report.html",
-              "content/tech/ai-application/dubai/reports/2026-11_baseline_report.html",
-              "content/tech/ai-application/industry-research/dubai/reports/2026-11_baseline_report.html",
-              "content/tech/ai-security/competitive-intelligence/dubai/reports/2026-11_baseline_report.html",
-              "content/tech/ai-security/competitive-intelligence/dubai/reports/2026-11_monthly.html",
-              "content/tech/ai-security/dubai/reports/2026-11_baseline_report.html",
-              "content/tech/ai-security/industry-research/dubai/reports/2026-11_baseline_report.html"
-            ],
-            "task_count": 6,
-            "risk_count": 3
-          }
-        ],
+        "plans": [],
         "gate": {
           "entry": "engine/tools/optimization_gate.py",
           "probe": true
@@ -2958,51 +1832,7 @@
       "evidence": {
         "report": "content/education/study-abroad/reports/2026-11_baseline_report.html",
         "business_line": "content/education/study-abroad",
-        "plans": [
-          {
-            "slug": "report-verification-regen",
-            "plan": "engine/audit/records/tasks/report-verification-regen/plan.json",
-            "tasks": "engine/audit/records/tasks/report-verification-regen/tasks.json",
-            "risks": "engine/audit/records/tasks/report-verification-regen/risks.json",
-            "reports": [
-              "content/economy/dubai/apartment/reports/2026-11_baseline_report.html",
-              "content/economy/dubai/apartment/reports/2026-11_monthly.html",
-              "content/economy/dubai/apartment/reports/2026-Q3_quarterly.html",
-              "content/economy/dubai/apartment/reports/2026_annual.html",
-              "content/economy/insight/reports/2026-11_baseline_report.html",
-              "content/economy/trends/reports/2026-11-13_weekly.html",
-              "content/economy/trends/reports/2026-11-20_weekly.html",
-              "content/economy/trends/reports/2026-11-27_weekly.html",
-              "content/education/education-system/reports/2026-11_baseline_report.html",
-              "content/education/study-abroad/reports/2026-11_baseline_report.html",
-              "content/international/immigration/dubai/reports/2026-11_baseline_report.html",
-              "content/international/immigration/reports/2026-11_baseline_report.html",
-              "content/international/international-relations/reports/2026-11_baseline_report.html",
-              "content/political/political-system/reports/2026-11_baseline_report.html",
-              "content/society/social-structure/reports/2026-11_baseline_report.html",
-              "content/tech/ai-application/competitive-intelligence/dubai/reports/2026-11_baseline_report.html",
-              "content/tech/ai-application/dubai/reports/2026-11_baseline_report.html",
-              "content/tech/ai-application/industry-research/dubai/reports/2026-11_baseline_report.html",
-              "content/tech/ai-security/competitive-intelligence/dubai/reports/2026-11_baseline_report.html",
-              "content/tech/ai-security/competitive-intelligence/dubai/reports/2026-11_monthly.html",
-              "content/tech/ai-security/dubai/reports/2026-11_baseline_report.html",
-              "content/tech/ai-security/industry-research/dubai/reports/2026-11_baseline_report.html"
-            ],
-            "task_count": 6,
-            "risk_count": 3
-          },
-          {
-            "slug": "study-abroad",
-            "plan": "engine/audit/records/tasks/study-abroad/plan.json",
-            "tasks": "engine/audit/records/tasks/study-abroad/tasks.json",
-            "risks": "engine/audit/records/tasks/study-abroad/risks.json",
-            "reports": [
-              "content/education/study-abroad/reports/2026-11_baseline_report.html"
-            ],
-            "task_count": 5,
-            "risk_count": 1
-          }
-        ],
+        "plans": [],
         "gate": {
           "entry": "engine/tools/optimization_gate.py",
           "probe": true
@@ -3041,51 +1871,7 @@
       "evidence": {
         "report": "content/international/immigration/dubai/reports/2026-11_baseline_report.html",
         "business_line": "content/international/immigration/dubai",
-        "plans": [
-          {
-            "slug": "immigration-dubai-visa",
-            "plan": "engine/audit/records/tasks/immigration-dubai-visa/plan.json",
-            "tasks": "engine/audit/records/tasks/immigration-dubai-visa/tasks.json",
-            "risks": "engine/audit/records/tasks/immigration-dubai-visa/risks.json",
-            "reports": [
-              "content/international/immigration/dubai/reports/2026-11_baseline_report.html"
-            ],
-            "task_count": 7,
-            "risk_count": 4
-          },
-          {
-            "slug": "report-verification-regen",
-            "plan": "engine/audit/records/tasks/report-verification-regen/plan.json",
-            "tasks": "engine/audit/records/tasks/report-verification-regen/tasks.json",
-            "risks": "engine/audit/records/tasks/report-verification-regen/risks.json",
-            "reports": [
-              "content/economy/dubai/apartment/reports/2026-11_baseline_report.html",
-              "content/economy/dubai/apartment/reports/2026-11_monthly.html",
-              "content/economy/dubai/apartment/reports/2026-Q3_quarterly.html",
-              "content/economy/dubai/apartment/reports/2026_annual.html",
-              "content/economy/insight/reports/2026-11_baseline_report.html",
-              "content/economy/trends/reports/2026-11-13_weekly.html",
-              "content/economy/trends/reports/2026-11-20_weekly.html",
-              "content/economy/trends/reports/2026-11-27_weekly.html",
-              "content/education/education-system/reports/2026-11_baseline_report.html",
-              "content/education/study-abroad/reports/2026-11_baseline_report.html",
-              "content/international/immigration/dubai/reports/2026-11_baseline_report.html",
-              "content/international/immigration/reports/2026-11_baseline_report.html",
-              "content/international/international-relations/reports/2026-11_baseline_report.html",
-              "content/political/political-system/reports/2026-11_baseline_report.html",
-              "content/society/social-structure/reports/2026-11_baseline_report.html",
-              "content/tech/ai-application/competitive-intelligence/dubai/reports/2026-11_baseline_report.html",
-              "content/tech/ai-application/dubai/reports/2026-11_baseline_report.html",
-              "content/tech/ai-application/industry-research/dubai/reports/2026-11_baseline_report.html",
-              "content/tech/ai-security/competitive-intelligence/dubai/reports/2026-11_baseline_report.html",
-              "content/tech/ai-security/competitive-intelligence/dubai/reports/2026-11_monthly.html",
-              "content/tech/ai-security/dubai/reports/2026-11_baseline_report.html",
-              "content/tech/ai-security/industry-research/dubai/reports/2026-11_baseline_report.html"
-            ],
-            "task_count": 6,
-            "risk_count": 3
-          }
-        ],
+        "plans": [],
         "gate": {
           "entry": "engine/tools/optimization_gate.py",
           "probe": true
