@@ -1,7 +1,8 @@
 name: CI 校验
 
 on:
-  # 方案 C（本地优先 · 远程按需）：push 触发已停用，改手动触发；保留 PR 检查作独立校验。
+  push:
+    branches: [main]
   pull_request:
     branches: [main]
   workflow_dispatch:
@@ -127,9 +128,9 @@ jobs:
         if: always()
         uses: ./.github/actions/workspace-cleanup
 
-  # main 首亲历史直推审计（补偿服务端分支保护缺失）：
-  # 本仓库为 GitHub private 免费方案，服务端分支保护不可用（API 403），
-  # 故在 CI 侧检测「非 PR 合并」的直接提交（见 multi-session-git-protocol.md §二）。
+  # main 首亲历史直推审计（事后追溯）：服务端分支保护已启用（public），
+  # 本作业在 push 到 main 时复扫首亲历史，检测「非 PR 合并」的直接提交
+  # （见 multi-session-git-protocol.md §二）。
   history-audit:
     name: main 首亲历史审计
     runs-on: ubuntu-latest

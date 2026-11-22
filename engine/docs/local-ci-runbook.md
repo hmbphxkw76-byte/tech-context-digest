@@ -34,9 +34,8 @@
 | `webhook-alert` | 外部告警通道，需 webhook 凭据 |
 | `runner-env` | GitHub runner 环境 / secrets / 服务端分支保护 |
 
-> **方案 C（本地优先 · 远程按需）已落地**：`.github/workflows/` 的 `push` / `schedule`
-> 触发已停用，改为 `workflow_dispatch`（保留 `ci.yml` / `audit.yml` 的 `pull_request`
-> 检查）。远程 CI 为**按需兜底**，常态校验以本手册本地集为准。
+> **触发现状（仓库 public）**：public 仓库 Actions 免费，`.github/workflows/` 的 `push` / `schedule`
+> 自动触发**已恢复**；本地 `local_ci.py` 仍作为常态校验与结果分享入口（本地优先）。
 
 ### 三、用法
 

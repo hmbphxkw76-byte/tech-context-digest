@@ -1,8 +1,14 @@
 name: HTML 同步
 
 on:
-  # 方案 C（本地优先 · 远程按需）：push 自动重生成已停用，改手动触发。
-  # 本地用 `python engine/tools/build_hub.py --regenerate` 为准。
+  push:
+    branches: [main]
+    paths:
+      - "**/reports/*.md"
+      - "**/reports/*.html"
+      - "engine/tools/md2html.py"
+      - "engine/tools/build_hub.py"
+      - "requirements.txt"
   workflow_dispatch:
 
 permissions:
