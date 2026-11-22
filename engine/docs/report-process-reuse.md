@@ -16,7 +16,7 @@
 | 生成 | 类型模板 + business-config + 两份新规范 | 分层交付 / 信息等级四级 / 新增信息模块 / 事实卡片 / 决策卡 / 行动协议 / 场景切片 / ex-ante | 7 份 business-config + 16+ 份类型模板均声明强制项 |
 | 本地校验 | unittest + 四门禁 + validate / compliance / page_build / research_kernel | ID-01–08、FC、DC-01–04、BS | 398 单测；新报告 0E |
 | CI 门禁 | `ci.yml` → `optimization_gate.py --probe` | 四门禁 + 全部 P0/P1/P2 检查 | 新报告缺项 `[E]` 阻断 |
-| 自动提交 | `html-sync.yml` / `content-update.yml` / `scheduled-maintenance.yml` → 同一统一入口 | 四门禁（与 ci.yml 同规则同口径） | 三阶段均调用统一入口，不得分项重复 |
+| 自动提交 | `html-sync.yml` / `content-update.yml` / `scheduled-maintenance.yml` → 同一统一入口 | 四门禁（与 ci.yml 同规则同口径） | 三阶段均调用统一入口，不得分项重复；方案 C 下按需触发 |
 | 审计 | `audit.yml` 四环节 | 新报告须先过新门禁（前置） | 审计对象 = 已合规报告 |
 | 发布 / 索引 | `build_hub.py` / `build_index.py` → hub / reader | 决策仪表盘作为业务线可发现；决策卡 / 场景切片可导航 | `build_hub --check` 通过 |
 | 监控 / 告警 | `automation_status.py` / `webhook-alert.yml` | 门禁失败 → `automation-failure` | 失败告警链路不变 |

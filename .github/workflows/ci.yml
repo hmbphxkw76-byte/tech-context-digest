@@ -1,10 +1,10 @@
 name: CI 校验
 
 on:
-  push:
-    branches: [main]
+  # 方案 C（本地优先 · 远程按需）：push 触发已停用，改手动触发；保留 PR 检查作独立校验。
   pull_request:
     branches: [main]
+  workflow_dispatch:
 
 permissions:
   contents: read    # actions/checkout 必需；缺失会导致私有仓库 GITHUB_TOKEN 降级为 contents:none，
