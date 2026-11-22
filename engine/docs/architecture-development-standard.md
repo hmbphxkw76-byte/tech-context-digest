@@ -151,11 +151,11 @@ flowchart TD
 |---|---|---|---|
 | **N0 需求与配置** | G0：`validate_layout` / `validate` / 类型登记 | 主题 / 维度 / 类型选型是否合理 | `layout.json` 已注册；维度序正确；business-config 14 节齐全；类型已登记 |
 | **N1 采集** | G1：`source_check` / `release_calendar` / `metric_registry` | 来源优先级、P0 覆盖、口径冲突 | 每个外部 URL 已登记；分级 / 双源合规；台账只增 |
-| **N2 分级** | G2：`source_check --probe` | 死链 / 可疑 URL 人工复核 | 新报告 0 死链；历史报告按宽限期 |
+| **N2 分级** | G2：`source_check --probe` / `report_verification` | 死链 / 可疑 URL 人工复核；未核验信息呈现 | 新报告 0 死链；历史报告按宽限期 |
 | **N3 分类** | G3：`validate_layout` / `classify` / `check_links` | 归位异常确认 | 落位唯一；类型 ∈ 节拍白名单；无断链 |
-| **N4 生成** | G4：`research_kernel` / `info_density` / `fact_card` / `decision_hub` / `blind_spot` | 事实 / 结论 / 假设分级是否准确 | 四门禁 + 内核通过；单一事实源 + 指针；版本治理正确 |
+| **N4 生成** | G4：`research_kernel` / `info_density` / `fact_card` / `report_verification` / `decision_hub` / `blind_spot` | 事实 / 结论 / 假设分级是否准确 | 四门禁 + 内核 + 报告层核验通过；单一事实源 + 指针；版本治理正确 |
 | **N5 渲染** | G5：`page_build` / `lint` / `compliance` / `perf_monitor` | 视觉 / 可读性走查 | 15 页 0E；canonical 令牌；A11y 强制项；体积预算 |
-| **N6 校验审计** | G6：`optimization_gate --probe` + 审计四环节 | L3 语义终审（Agent 写证据） | 31 项 0E；审计标识三态正确 |
+| **N6 校验审计** | G6：`optimization_gate --probe` + 审计四环节 | L3 语义终审（Agent 写证据） | 32 项 0E；审计标识三态正确 |
 | **N7 发布** | G7：`build_hub --check` / `publish_fingerprint` | 发布说明 | hub / INDEX 最新；指纹一致；归档幂等 |
 | **N8 运维** | G8：CI 六工作流 + 告警 | 失败根因复盘 | 失败即 Issue / 工单；活跃度 < 45 天 |
 
