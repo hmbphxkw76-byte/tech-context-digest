@@ -127,6 +127,8 @@
 
 **未达标项**：无。10/10 达标。
 
+> 注：上表 M9 实测引用的任务工件（`fix-alignment` / `phase2-evidence-index` 等）已于 2026-11-23 全部清理，`engine/audit/records/tasks/` 仅存 `.gitkeep`。`audit_tool.py evidence` 的关联机制不变（由真实 `plan.reports` 驱动），M9 结论为清理前状态。
+
 **透明说明**：
 - M2 的「已审计」为**依据既有 2026-11-16 L3 记录的回溯补录**（非本轮重新全文复核），已在 Phase 2 PR 与覆盖矩阵登记；后续按 L3 SLA（每两周）由 Agent 定期复核。
 - M7 的 3 项警告为：来源登记历史死链（宽限期内）+ ruff（88）+ mypy（40），均默认 `[W]` 不阻断。
