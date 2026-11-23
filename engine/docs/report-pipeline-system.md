@@ -113,7 +113,7 @@ flowchart LR
 | 项 | 内容 |
 |---|---|
 | 输入 | 业务需求；类型选型结论（[report-classification](../templates/report-classification.md) 六族十二类） |
-| 核心步骤 | ① 在 `engine/tools/layout.json` 注册主题与维度序列（**维度先后按主题声明**：`economy` 为 `region→category`，其余主题为 `category→region`）；② 建 `{theme}/<维度段...>/`（`prompts/` `reports/`；数据落 `data/processed/<theme>/<维度段...>/`）；③ 撰写 `prompts/business-config.md` 单一事实源；④ 周期提示词头部声明继承 `engine/templates/<类型ID>/`；⑤ 首期跑基线提示词，建立台账与基线锚 |
+| 核心步骤 | ① 在 `engine/tools/layout.json` 注册主题与维度序列（**维度先后按主题声明**：`economy` 为 `region→category`，`tech` 为 `category→subcategory→region`，其余主题为 `category→region`）；② 建 `{theme}/<维度段...>/`（`prompts/` `reports/`；数据落 `data/processed/<theme>/<维度段...>/`）；③ 撰写 `prompts/business-config.md` 单一事实源；④ 周期提示词头部声明继承 `engine/templates/<类型ID>/`；⑤ 首期跑基线提示词，建立台账与基线锚 |
 | 输出标准 | 可被 `_common.iter_business_dirs()` 发现；核心变量齐全；类型引用已注册 |
 | 工具 | `validate_layout.py`（`check_dimension_priority()`）、`validate.py`、`ensure_region_topics.py`、`_common.py`、`test_prompt_inheritance.py` |
 

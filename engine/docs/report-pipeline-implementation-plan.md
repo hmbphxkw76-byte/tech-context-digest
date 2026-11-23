@@ -128,7 +128,7 @@ return passed
 ### N0 需求与配置（业务线接入）
 - **职责边界**：注册主题与维度、建目录、撰写 business-config；**不**做内容加工。
 - **输入**：业务需求；类型选型结论。
-- **核心处理逻辑**：① `layout.json` 注册维度（**维度先后按主题声明**：`economy` 为 `region→category`，其余主题为 `category→region`）；② 建 `{theme}/<维度段...>/{prompts,reports}`（数据落 `data/processed/<theme>/<维度段...>/`）；③ 写 business-config 单一事实源（14 节）；④ 提示词声明继承类型模板；⑤ 首期基线建台账。
+- **核心处理逻辑**：① `layout.json` 注册维度（**维度先后按主题声明**：`economy` 为 `region→category`，`tech` 为 `category→subcategory→region`，其余主题为 `category→region`）；② 建 `{theme}/<维度段...>/{prompts,reports}`（数据落 `data/processed/<theme>/<维度段...>/`）；③ 写 business-config 单一事实源（14 节）；④ 提示词声明继承类型模板；⑤ 首期基线建台账。
 - **输出标准**：可被 `iter_business_dirs()` 发现；核心变量齐全；类型引用已注册。
 - **异常处理**：维度倒置 / 变量缺失 / 类型未注册 → G0 阻断，退回 N0。
 - **分支场景**：新业务线首次接入（全量步骤）；既有业务线变更（跳过期初步骤，仅更新配置）。

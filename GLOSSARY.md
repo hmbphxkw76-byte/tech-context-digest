@@ -21,8 +21,8 @@
 | 术语 | 定义 | 事实源 |
 |---|---|---|
 | 主题（theme） | 六主题：economy / tech / education / international / political / society | [engine/tools/layout.json](engine/tools/layout.json) |
-| 维度（dimension） | 业务线的结构段：category（细分）/ region（地区） | [engine/tools/layout.json](engine/tools/layout.json) |
-| 维度顺序 | 各主题在 layout.json 自行声明；economy 为 region→category，其余五主题为 category→region | [engine/tools/layout.json](engine/tools/layout.json) |
+| 维度（dimension） | 业务线的结构段：category（细分）/ subcategory（子类）/ region（地区） | [engine/tools/layout.json](engine/tools/layout.json) |
+| 维度顺序 | 各主题在 layout.json 自行声明；economy 为 region→category，tech 为 category→subcategory→region，其余四主题为 category→region | [engine/tools/layout.json](engine/tools/layout.json) |
 | 可选维度（optional_dimensions） | region 为可选；缺省时业务线直接以 category 段落位 | [engine/tools/layout.json](engine/tools/layout.json) |
 | 地区段（regional_segment） | 独立地区分组段；当前为空串 | [engine/tools/layout.json](engine/tools/layout.json) |
 | 业务线 | 位于 `content/<theme>/<维度段...>/` 的报告集合，以 `prompts/business-config.md` 为锚点 | [engine/tools/layout.json](engine/tools/layout.json) |
