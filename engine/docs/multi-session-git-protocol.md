@@ -119,6 +119,13 @@ GitHub 对由 `github-actions[bot]`（仓库 `GITHUB_TOKEN`）创建的 PR，其
 
 仓库侧已配置：Settings → Actions → General → **Read and write permissions** + **Allow GitHub Actions to create and approve pull requests**。
 
+**当前凭据状态（2026-11-23 起）**：`CI_PR_TOKEN` 由用户 `gh` 凭据设入，为**用户 OAuth token**（scopes `gist` / `read:org` / `repo` / `workflow`），仅被 `.github/actions/submit-pr` 的 `token` 输入使用（5 处），GitHub 在日志中自动遮蔽。
+
+- **首选改进（最小权限）**：改用 fine-grained PAT（仓库级，仅 `Contents: write` + `Pull requests: write`）。直达创建：<https://github.com/settings/personal-access-tokens/new>（Resource owner = `hmbphxkw76-byte`，Repository access = 仅 `tech-context-digest`）。
+- 设入 / 轮换：`gh secret set CI_PR_TOKEN`（覆盖旧值，旧值即时失效）。GitHub **无 API 可创建/管理 fine-grained PAT**，必须 UI 操作。
+- 风险面：用户 token 作用于用户名下**全部仓库**，属高价值凭据；仓库已启用 secret scanning / push protection，且该 secret 不得进入任何工作流日志或产物。
+- 若不愿存放该凭据，可退回解法 2（关闭账户级「require approval」），代价是削弱账户级安全策略。
+
 ---
 
 ## 七、冲突与回滚

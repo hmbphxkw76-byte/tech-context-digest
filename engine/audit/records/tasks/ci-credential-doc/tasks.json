@@ -1,0 +1,10 @@
+[
+  {
+    "acceptance": "",
+    "depends_on": [],
+    "id": "T-1",
+    "phase": "",
+    "status": "pending",
+    "title": "multi-session-git-protocol §6.1 记录当前凭据类型/作用域/轮换与最小权限改进路径"
+  }
+]
