@@ -86,6 +86,9 @@ jobs:
           python engine/tools/archive_reports.py --audit-docs
           python engine/tools/build_index.py
           python engine/tools/build_hub.py
+          # 词库索引 INDEX.md 由生成器产出（SOP 禁止手工编辑）；与根索引同模式，
+          # 由维护流水线重生成，否则词条数会静默漂移。
+          python engine/vocabulary/script/vocab_tool.py index
           python engine/tools/release_calendar.py --emit engine/report-audits/release-calendar.json
           python engine/tools/publish_fingerprint.py --emit
 
@@ -289,7 +292,7 @@ jobs:
           commit-message: "chore: 定时维护（结构/校验/归档/索引/性能）"
           # content/：维护流水线的 md2html.py 会再生成 reports/*.html，
           # 必须纳入提交范围，否则残留未暂存改动会让 submit-pr 变基失败。
-          add-paths: "automation-status.json index.html reader.html INDEX.md content perf-status.json engine/report-audits engine/audit/records/publish_fingerprints.json engine/audit/records/audit_registry.json engine/audit/records/igi_history.json engine/audit/records/link-probe.json engine/audit/records/verification_ledger.jsonl engine/audit/records/pending_verification.json"
+          add-paths: "automation-status.json index.html reader.html INDEX.md content engine/vocabulary/INDEX.md perf-status.json engine/report-audits engine/audit/records/publish_fingerprints.json engine/audit/records/audit_registry.json engine/audit/records/igi_history.json engine/audit/records/link-probe.json engine/audit/records/verification_ledger.jsonl engine/audit/records/pending_verification.json"
 
       - name: 提交失败状态（仅失败时，开 PR 记录，不自动合并）
         if: failure()
