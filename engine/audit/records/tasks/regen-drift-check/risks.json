@@ -1,0 +1,8 @@
+[
+  {
+    "description": "阻断级致 CI 失败",
+    "id": "R-1",
+    "mitigation": "缓解",
+    "owner": ""
+  }
+]

@@ -4,7 +4,7 @@
 本地环境不具备的才远程跑，且结果保持可追溯分享。
 
 **单一入口**：`engine/tools/local_ci.py`（编排层，不新增门禁项；统一门禁仍为
-`optimization_gate` 的 32 项）。
+`optimization_gate` 的 33 项）。
 
 ### 一、本地能跑（14 项 · 只读 · 不依赖外网）
 
