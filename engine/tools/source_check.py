@@ -61,6 +61,7 @@ import hashlib
 import json
 import re
 import sys
+import unicodedata
 import urllib.error
 import urllib.request
 from pathlib import Path
@@ -451,8 +452,13 @@ def load_institution_master(path: Path | None = None) -> dict:
 
 
 def _norm_name(name: str) -> str:
-    """机构名归一：小写、去空白与常见标点，供主数据比对。"""
-    s = str(name or "").strip().lower()
+    """机构名归一：NFKC、小写、压缩空白、去首尾常见标点，供主数据比对。
+
+    与 `source_normalize.normalize_publisher` 对齐做 NFKC（上标 ²→2、全角→半角），
+    否则先经 `normalize_publisher` 再进 `master_lookup` 会因两套规则不一致而漏配
+    （R7 误报「未录入」，实测 `(ISC)²`）。
+    """
+    s = unicodedata.normalize("NFKC", str(name or "")).strip().lower()
     s = re.sub(r"\s+", " ", s)
     return s.strip(" .,，。()")
 

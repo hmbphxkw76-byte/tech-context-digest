@@ -920,5 +920,33 @@ class TestR9ChineseSource(unittest.TestCase):
         self.assertTrue(found)
 
 
+class TestR7InstitutionNormalization(unittest.TestCase):
+    """R7 机构分级：两套归一化规则须一致，避免漏配误报「未录入」。"""
+
+    MASTER = {
+        "institutions": [
+            {"name": "(ISC)²", "tier": 2, "aliases": [], "lang": "en"},
+            {"name": "ISC2", "tier": 2, "aliases": [], "lang": "en"},
+        ]
+    }
+
+    def test_superscript_name_matches_master(self) -> None:
+        self.assertIsNotNone(source_check.master_lookup(self.MASTER, "(ISC)²"))
+
+    def test_publisher_normalized_then_lookup_still_matches(self) -> None:
+        # 回归：R7 先经 normalize_publisher 再查主数据，不得因 NFKC 差异漏配。
+        pub = source_check.normalize_publisher("(ISC)²")
+        self.assertIsNotNone(source_check.master_lookup(self.MASTER, pub))
+
+    def test_consistency_check_has_no_false_missing(self) -> None:
+        reg = _reg({"source_id": "S-1", "publisher": "(ISC)²", "tier": 2})
+        issues = source_check.check_institution_consistency(reg, self.MASTER)
+        self.assertEqual([i for i in issues if "未录入" in i[1]], [])
+
+    def test_full_width_variant_matches(self) -> None:
+        # NFKC：全角括号与半角应等价。
+        self.assertIsNotNone(source_check.master_lookup(self.MASTER, "（ISC)²"))
+
+
 if __name__ == "__main__":
     unittest.main()
