@@ -1,0 +1,14 @@
+[
+  {
+    "description": "误删有效记录",
+    "id": "R-1",
+    "mitigation": "缓解",
+    "owner": ""
+  },
+  {
+    "description": "审计轨迹断裂",
+    "id": "R-2",
+    "mitigation": "缓解",
+    "owner": ""
+  }
+]

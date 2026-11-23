@@ -1,0 +1,18 @@
+[
+  {
+    "acceptance": "",
+    "depends_on": [],
+    "id": "T-1",
+    "phase": "",
+    "status": "pending",
+    "title": "删除 reviews/ 与 semantic/ 中指向已消失路径的孤儿记录"
+  },
+  {
+    "acceptance": "",
+    "depends_on": [],
+    "id": "T-2",
+    "phase": "",
+    "status": "pending",
+    "title": ".gitignore 忽略 .meituan-catpaw/"
+  }
+]

@@ -45,3 +45,6 @@ engine/vocabulary/data/sync-backups/
 
 # HTML 与 md 同目录存放，随源文件入库；仅忽略临时文件
 *.html.tmp
+
+# 客户端会话 worktree 存储（非仓库内容；check_links / naming_check 同口径跳过）
+.meituan-catpaw/
