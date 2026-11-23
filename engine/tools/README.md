@@ -61,8 +61,27 @@ python -m unittest discover -s engine/tests -v   # 单元测试（全量）
 | threshold_calibration.py | 量化模型 | 方案 4.3：阈值滚动校准 + 状态计数 |
 | classify_reports.py | 校验+修复 | scheduled-maintenance / content-update「报告自动归位」 |
 | ensure_region_topics.py | 校验+修复 | ci.yml / scheduled-maintenance「结构补全」 |
-| validate_layout.py | 校验 | ci.yml / scheduled-maintenance「目录结构校验」 |
-| check_links.py | 校验 | ci.yml / scheduled-maintenance「路径引用可达性校验」 |
+| verification_vocab.py | 校验（词表） | 核验状态词表单一事实源（INFORMATION-VERIFICATION-SPEC v1.1）：英文枚举 ↔ 中文等级双向映射 |
+| verification_ledger.py | 留痕 | 核验台账哈希链（append-only，落 `engine/audit/records/verification_ledger.jsonl`） |
+| verification_review.py | 复核 | 来源定期复核与到期告警（落 `pending_verification.json`） |
+| source_normalize.py | 校验+归一 | 来源归一化（URL / 机构名 / 主机 / 日期），供登记去重与 R7 匹配复用 |
+| vocab_drift_check.py | 校验 | 词库漂移门禁（VOCAB-DRIFT-CHECK v1.0） |
+| period_check.py | 校验 | 报告周期校验（落款 period 不得晚于当前自然月） |
+| gate_period.py | 规范 | 两级 gate-period 解析（滚动基线，单一事实源） |
+| static_check.py | 校验 | ruff / mypy 适配层 → 统一门禁退出码，baseline 只拦新增 |
+| task_plan.py | 任务闭环 | 任务计划工件（plan / tasks / risks / task-start）；`repo_sync --gate` 前置 |
+| local_mainline.py | 编排 | 本地 mainline 一键闭环（薄封装，只编排不重写校验） |
+| indicator_sidecar.py | 生成 | 指标登记册 sidecar（确定性、可重放、无墙钟时间戳） |
+| info_gap_metrics.py | 度量 | 信息差指数（IGI）实测计算 |
+| proxy_calibration.py | 量化模型 | 代理指标抽样校准（PROXY-CALIBRATION v1.0，方案 T-02） |
+| semantic_diff.py | 校验 | 增量语义 diff（T4）：仅对本期相对上期的新增 / 修改块复核 |
+| consumer_feedback.py | 反馈台账 | 消费端反馈台账（CONSUMER-FEEDBACK-LEDGER v1.0） |
+| finding_rule.py | 反馈台账 | finding→规则回写台账（FINDING-RULE-LEDGER v1.0） |
+| remediation_ticket.py | 闭环 | 闭环修正工单（remediation_ticket） |
+| a03_truth_check.py | 核验 | A-03 真值核对与计分 |
+| perf_bench.py | 性能 | 性能基线压测（T6 / T0 基线） |
+| perf_monitor.py | 性能 | 性能监控与结果缓存（T6） |
+| `engine/audit/scripts/audit_tool.py` | 审计 | 审计报告标准化管理（AUDIT-MGMT v1.0）：四环节 / 标识 / 抽检 / L3 状态 |
 | md2html.py | 生成 | html-sync / scheduled-maintenance「HTML 同步」 |
 | report_style.py | 生成 | canonical 报告样式单一事实源（md2html / restyle_reports 共用） |
 | restyle_reports.py | 生成 | 既有报告迁移到 canonical 样式 |

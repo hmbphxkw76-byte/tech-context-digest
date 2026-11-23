@@ -1,0 +1,42 @@
+[
+  {
+    "acceptance": "",
+    "depends_on": [],
+    "id": "T-1",
+    "phase": "",
+    "status": "pending",
+    "title": "修正 architecture-and-pipeline-design §3.2/§3.3 与 layout.json v5.0 对齐"
+  },
+  {
+    "acceptance": "",
+    "depends_on": [],
+    "id": "T-2",
+    "phase": "",
+    "status": "pending",
+    "title": "修正 report-classification 映射表（ai-application 三线）"
+  },
+  {
+    "acceptance": "",
+    "depends_on": [],
+    "id": "T-3",
+    "phase": "",
+    "status": "pending",
+    "title": "修正 report-pipeline-implementation-plan 测试数量口径"
+  },
+  {
+    "acceptance": "",
+    "depends_on": [],
+    "id": "T-4",
+    "phase": "",
+    "status": "pending",
+    "title": "2 份基线报告补 noopener 与列宽（MON-04/MON-03）"
+  },
+  {
+    "acceptance": "",
+    "depends_on": [],
+    "id": "T-5",
+    "phase": "",
+    "status": "pending",
+    "title": "engine/tools/README 工具一览补漏与去重"
+  }
+]

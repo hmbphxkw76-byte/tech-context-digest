@@ -268,7 +268,7 @@ page_build（P01–P15）/ lint（W）/ compliance（节数 / `id="sN"` / 断头
 | T0-2 | 编写 manifest | `pipeline_manifest.json` | `validate` 通过；L1/L2 精确 |
 | T0-3 | 实现 runner | `pipeline_runner.py` | 路由 / 退回单测通过 |
 | T0-4 | 实现审计 | `pipeline_audit.py` + JSONL | 只追加 / 可回放 |
-| T0-5 | 一致性测试 | `test_pipeline_runner.py` | 16 项通过 |
+| T0-5 | 一致性测试 | `test_pipeline_runner.py` | 24 项通过 |
 | T1-1/T1-2 | G0–G5 接入 | runner 门禁调度 | 退回 N0–N5 正确 |
 | T2-1/T2-2 | G6 全量 + 审计；G7 / G8 接入 | G6 = 32 项 + 审计；产物 / 运维守卫 | 退回 N4 / N7；G8 外部 |
 | T3-1/T3-2 | L2 / L1 闭环 | `route` 留痕 + 上下文；manifest loops + 心跳登记 | 断言 rollback=N4 |
