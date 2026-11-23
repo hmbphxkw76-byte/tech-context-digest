@@ -56,6 +56,8 @@ class TestCIUsesPRs(unittest.TestCase):
         for name in FOUR:
             text = (WF / name).read_text(encoding="utf-8")
             self.assertNotIn("CI_PR_TOKEN", text, f"{name} 仍引用 CI_PR_TOKEN")
+            # 合并后清理被门禁的空跑运行（action_required）需 actions: write
+            self.assertIn("actions: write", text, f"{name} 缺少 actions: write")
 
     def test_checkout_workflows_have_contents_permission(self):
         # 声明 permissions 块后，未列出的 scope 一律降为 none：缺 contents 会让

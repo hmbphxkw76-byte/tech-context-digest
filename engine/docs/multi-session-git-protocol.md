@@ -116,6 +116,7 @@ GitHub 官方规则：**当使用 `GITHUB_TOKEN` 的工作流创建 / 更新 PR 
 
 - bot 创建的 CI PR，其 `pull_request` 工作流要么被门禁、要么不触发 → 若把它们设为**必需检查**，`gh pr merge --auto` 会**永久 `BLOCKED`**；
 - 故本仓库**把门禁内移到工作流**（提交前执行，失败即中止 job），并在 `submit-pr` 中**门禁通过后立即 `gh pr merge --merge`**；分支保护**移除必需状态检查**（保留 Require PR + enforce_admins + 评审数 0），使被门禁的 `pull_request` 运行不再阻塞合并。
+- 这些被门禁的空跑运行（`action_required`）由 `submit-pr` 在合并后**自动删除**（限 `head_branch` 为 `ci/*`，需 `actions: write`），避免 Actions 列表累积「待批准」噪音。
 
 **取舍**：服务端不再强制必需检查；质量门由「工作流内门禁 + 本地 `repo_sync run --gate`」保证（与 jp-life-work v1.3 同口径）。
 
