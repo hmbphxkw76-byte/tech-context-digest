@@ -1,8 +1,0 @@
-[
-  {
-    "description": "服务端不再强制必需检查",
-    "id": "R-1",
-    "mitigation": "缓解=门禁内移至工作流+本地 repo_sync --gate（与 jp-life-work 同口径）",
-    "owner": ""
-  }
-]
