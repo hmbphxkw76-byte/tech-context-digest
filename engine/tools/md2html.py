@@ -58,6 +58,7 @@ H2_RE = re.compile(r"<h2\b[^>]*>.*?</h2>", re.DOTALL)
 H3_RE = re.compile(r"<h3\b[^>]*>.*?</h3>", re.DOTALL)
 TABLE_RE = re.compile(r"<table\b.*?</table>", re.DOTALL)
 TH_RE = re.compile(r"<th\b[^>]*>")
+EXT_LINK_RE = re.compile(r"<a\b[^>]*href=[\"']https?://[^>]*>", re.I)
 
 
 def _strip_tags(s: str) -> str:
@@ -91,6 +92,24 @@ def _fix_tables(html: str) -> str:
         return TH_RE.sub(lambda mm: _with_width(mm.group(0), next(it)), tbl)
 
     return TABLE_RE.sub(fix, html)
+
+
+def _fix_links(html: str) -> str:
+    """外链补 target="_blank" rel="noopener"（monitoring-common-spec 第 58 行：全部链接）。
+
+    md 源内的行内 HTML 由 markdown 包原样透传，不会自动带上这两个属性；
+    缺失会触发 MON-04（反向 tabnabbing 防护），且 html-sync 重生成时会回退手工修补。
+    """
+
+    def fix(m: re.Match[str]) -> str:
+        inner = m.group(0)[:-1]  # 去掉结尾的 >
+        if 'target="_blank"' not in inner:
+            inner += ' target="_blank"'
+        if "noopener" not in inner:
+            inner += ' rel="noopener"'
+        return inner + ">"
+
+    return EXT_LINK_RE.sub(fix, html)
 
 
 def _renumber_h2(html: str) -> tuple[str, str]:
@@ -135,6 +154,7 @@ def convert(md_path: Path) -> str:
     body = H1_RE.sub("", body, count=1)
 
     body = _fix_tables(body)
+    body = _fix_links(body)
     body, nav_tabs = _renumber_h2(body)
 
     nav = ""
