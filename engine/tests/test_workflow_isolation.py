@@ -59,6 +59,15 @@ class TestCIUsesPRs(unittest.TestCase):
             # 合并后清理被门禁的空跑运行（action_required）需 actions: write
             self.assertIn("actions: write", text, f"{name} 缺少 actions: write")
 
+    def test_cleanup_step_waits_and_retries(self):
+        # 竞态：合并瞬间新建的 action_required 运行可能要十几秒才能在 gh run list 中可见，
+        # 立即扫描会漏删（2026-11-23 实测漏 2 条）。故清理步骤须先等待、再多轮扫描。
+        text = ACTION.read_text(encoding="utf-8")
+        self.assertIn("清理被门禁的空跑运行", text)
+        self.assertIn("sleep 15", text)
+        self.assertIn("for i in 1 2 3", text)
+        self.assertIn("gh run delete", text)
+
     def test_checkout_workflows_have_contents_permission(self):
         # 声明 permissions 块后，未列出的 scope 一律降为 none：缺 contents 会让
         # actions/checkout 在私有仓库上 fetch 失败（remote: Repository not found）。

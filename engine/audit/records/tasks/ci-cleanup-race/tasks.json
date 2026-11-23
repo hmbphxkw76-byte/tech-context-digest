@@ -1,0 +1,10 @@
+[
+  {
+    "acceptance": "",
+    "depends_on": [],
+    "id": "T-1",
+    "phase": "",
+    "status": "pending",
+    "title": "submit-pr 清理步骤加 sleep+三轮扫描；T-2:补测试断言"
+  }
+]

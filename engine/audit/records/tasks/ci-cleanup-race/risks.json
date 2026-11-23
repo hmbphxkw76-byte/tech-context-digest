@@ -1,0 +1,8 @@
+[
+  {
+    "description": "CI 合并额外耗时最多 45 秒",
+    "id": "R-1",
+    "mitigation": "维护/同步工作流可接受",
+    "owner": ""
+  }
+]
