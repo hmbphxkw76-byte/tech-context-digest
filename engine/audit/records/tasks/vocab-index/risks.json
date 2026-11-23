@@ -1,0 +1,8 @@
+[
+  {
+    "description": "索引时间戳致每次维护都产生提交",
+    "id": "R-1",
+    "mitigation": "缓解",
+    "owner": ""
+  }
+]
