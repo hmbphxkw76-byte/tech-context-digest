@@ -1,6 +1,6 @@
 # 报告合规性审计（历史报告 × 类型模板匹配度）
 
-- **审计时间**：2026-11-22 14:00 UTC
+- **审计时间**：2026-11-23 01:53 UTC
 - **审计范围**：全部业务线 reports/*.html（共 22 份）
 - **匹配度**：22/22（100%）报告与对应类型模板规则完全匹配
 - **规则来源**：[compliance-rules.json](../templates/compliance-rules.json)（已注册类型结构骨架，与 [template-registry.md](../templates/template-registry.md) 登记一致）
