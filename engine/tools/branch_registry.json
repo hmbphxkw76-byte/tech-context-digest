@@ -56,6 +56,13 @@
       "slug": "ci-addpaths-fix",
       "task": "ci-addpaths-fix"
     },
+    "task/ci-auto-merge-mode-5d42b26d": {
+      "note": "source=env:CATPAW_CONVERSATION_ID",
+      "session": "5d42b26dd47c4787b8c2715f18d7b405",
+      "session_short": "5d42b26d",
+      "slug": "ci-auto-merge-mode",
+      "task": "ci-auto-merge-mode"
+    },
     "task/ci-credential-doc-5d42b26d": {
       "note": "source=env:CATPAW_CONVERSATION_ID",
       "session": "5d42b26dd47c4787b8c2715f18d7b405",

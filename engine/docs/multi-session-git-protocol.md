@@ -12,7 +12,7 @@
 
 - `main` 是唯一共享可变引用；写入者包括多个 Agent 会话与 4 个 CI 工作流（`audit.yml` / `html-sync.yml` / `content-update.yml` / `scheduled-maintenance.yml`）。
 - CI 之间用 `concurrency: auto-commit-main` 串行，但**Agent 推送在该并发组之外**。
-- 本地检出在 `fetch` 与 `push` 之间过期 → **non-fast-forward**；仓库为 **public**，服务端分支保护 + 合并队列（auto-merge）兜底。
+- 本地检出在 `fetch` 与 `push` 之间过期 → **non-fast-forward**；仓库为 **public**，服务端分支保护（Require PR）兜底。
 
 ---
 
@@ -21,12 +21,12 @@
 | 层 | 机制 | 作用 |
 |---|---|---|
 | 分支隔离 | 任务在 `task/<slug>-<session8>` 分支提交（会话标识内嵌，见 BRANCH-NAMING-SPEC v1.0）；禁止直推 `main` | 任务之间提交 / 文件互不干扰，且分支可回溯到会话 |
-| 串行合并 | 经 PR 合并到 `main`（GitHub **merge queue** / auto-merge） | 基于最新 main、一次一个，杜绝覆盖 |
+| 串行合并 | 经 PR 合并到 `main`（CI 侧：门禁内移 + 立即合并；Agent 侧：`repo_sync pr`） | 基于最新 main、一次一个，杜绝覆盖 |
 | 共享检出锁 | `.git/catpaw-sync.lock` 互斥 + 推送前 `fetch --rebase` | 多会话共用工作目录时防并发覆盖 |
 
-> **服务端分支保护（v1.7）**：仓库为 **public**，`main` 已启用服务端分支保护
-> （**Require PR** + **Require status checks**（`Python 语法检查` / `单元测试` / `结构与规范校验`）
-> + **strict** + **enforce_admins** + 禁 force-push / 禁删除）与 **auto-merge**——直推 `main` 由
+> **服务端分支保护（v1.8）**：仓库为 **public**，`main` 已启用服务端分支保护
+> （**Require PR** + **enforce_admins** + 评审数 0 + 禁 force-push / 禁删除；
+> **不要求必需状态检查**——质量门已内移至工作流，见 §6.1）——直推 `main` 由
 > **服务端直接拒绝**。客户端 pre-push 钩子 + `repo_sync.py` 网关为第二道拦截；`ci.yml` 的
 > `history-audit` 仍作事后追溯（push 到 main 时运行 `engine/tools/git_history_audit.py`，
 > 将「非合并、无 `(#NN)`、非 CI 留痕、不在历史白名单」的首亲提交判为疑似直推并失败告警）。
@@ -42,7 +42,7 @@ python engine/tools/repo_sync.py branch <slug>      # → task/<slug>-<session8>
 # 2) 统一网关提交（锁 → 优化流程门禁 --gate → sync → commit → push 当前分支）
 python engine/tools/repo_sync.py run --message "feat(x): ..." --paths <files...> --gate
 
-# 3) 开 PR（可选合并队列）
+# 3) 开 PR（Agent 任务；--queue 启用服务端自动合并）
 python engine/tools/repo_sync.py pr --title "..." --body "..." --queue
 
 # 4) 合并后由 CI / 维护流程同步 main；下次任务从最新 main 重新出发
@@ -104,27 +104,22 @@ refspec**（`<local ref> <local sha> <remote ref> <remote sha>`），而非当�
 
 ---
 
-## 六、CI 侧约定（CI 也走 PR）
+## 六、CI 侧约定（CI 也走 PR · 门禁内移自动合并）
 
-- 4 个自动提交工作流（`audit.yml` / `html-sync.yml` / `content-update.yml` / `scheduled-maintenance.yml`）**不再直推 `main`**，统一复用 `.github/actions/submit-pr`：提交到固定 CI 分支（`ci/audit`、`ci/html-sync`、`ci/content-update`、`ci/scheduled-maintenance`）→ 开 / 复用 PR → 启用 auto-merge。
-- `main` 启用分支保护：**Require a pull request before merging** + **Require status checks**（`Python 语法检查` / `单元测试` / `结构与规范校验`）+ **strict（分支须最新）**；仓库开启 **auto-merge**。由此形成「合并队列」：PR 按顺序、基于最新 main 合并。
+- 4 个自动提交工作流（`audit.yml` / `html-sync.yml` / `content-update.yml` / `scheduled-maintenance.yml`）**不直推 `main`**，统一复用 `.github/actions/submit-pr`：提交到固定 CI 分支（`ci/audit`、`ci/html-sync`、`ci/content-update`、`ci/scheduled-maintenance`）→ **先在工作流内跑门禁**（统一入口 `optimization_gate.py`；`audit.yml` 为四环节审计）→ 开 / 复用 PR → **门禁通过即 `gh pr merge --merge` 立即合并**。
+- `main` 分支保护：**Require a pull request before merging** + **enforce_admins** + 评审数 0；**不再要求必需状态检查**（原因见 §6.1）。
 - Agent 侧仍经 `repo_sync`（推送前 `sync`），与 CI 分支互不冲突（分支不同、目标不同）。
 
-### 6.1 bot PR 的审批门与 CI_PR_TOKEN
+### 6.1 为什么移除必需状态检查（对齐 jp-life-work）
 
-GitHub 对由 `github-actions[bot]`（仓库 `GITHUB_TOKEN`）创建的 PR，其 `pull_request` 工作流默认要求**人工批准**（账户级安全策略），会阻塞 auto-merge。两种解法：
+GitHub 官方规则：**当使用 `GITHUB_TOKEN` 的工作流创建 / 更新 PR 时，生成的 `pull_request`（`opened` / `synchronize` / `reopened`）工作流运行一律处于「需要批准」状态**——这是防递归的硬规则，**没有任何设置可关**。因此：
 
-1. **推荐：配置 PAT secret `CI_PR_TOKEN`**（fine-grained token，权限 `contents: write` + `pull-requests: write`）。`submit-pr` 通过工作流输入 `token` 使用该令牌开 PR，PR 作者为真实用户 → 工作流自动运行、自动合并。
-2. 或在账户设置中关闭「Require approval for first-time contributors / outside collaborators」，使 bot PR 免审批；此时 `CI_PR_TOKEN` 留空，回退 `GITHUB_TOKEN`。
+- bot 创建的 CI PR，其 `pull_request` 工作流要么被门禁、要么不触发 → 若把它们设为**必需检查**，`gh pr merge --auto` 会**永久 `BLOCKED`**；
+- 故本仓库**把门禁内移到工作流**（提交前执行，失败即中止 job），并在 `submit-pr` 中**门禁通过后立即 `gh pr merge --merge`**；分支保护**移除必需状态检查**（保留 Require PR + enforce_admins + 评审数 0），使被门禁的 `pull_request` 运行不再阻塞合并。
 
-仓库侧已配置：Settings → Actions → General → **Read and write permissions** + **Allow GitHub Actions to create and approve pull requests**。
+**取舍**：服务端不再强制必需检查；质量门由「工作流内门禁 + 本地 `repo_sync run --gate`」保证（与 jp-life-work v1.3 同口径）。
 
-**当前凭据状态（2026-11-23 起）**：`CI_PR_TOKEN` 由用户 `gh` 凭据设入，为**用户 OAuth token**（scopes `gist` / `read:org` / `repo` / `workflow`），仅被 `.github/actions/submit-pr` 的 `token` 输入使用（5 处），GitHub 在日志中自动遮蔽。
-
-- **首选改进（最小权限）**：改用 fine-grained PAT（仓库级，仅 `Contents: write` + `Pull requests: write`）。直达创建：<https://github.com/settings/personal-access-tokens/new>（Resource owner = `hmbphxkw76-byte`，Repository access = 仅 `tech-context-digest`）。
-- 设入 / 轮换：`gh secret set CI_PR_TOKEN`（覆盖旧值，旧值即时失效）。GitHub **无 API 可创建/管理 fine-grained PAT**，必须 UI 操作。
-- 风险面：用户 token 作用于用户名下**全部仓库**，属高价值凭据；仓库已启用 secret scanning / push protection，且该 secret 不得进入任何工作流日志或产物。
-- 若不愿存放该凭据，可退回解法 2（关闭账户级「require approval」），代价是削弱账户级安全策略。
+**无凭据**：`submit-pr` 的 `token` 输入留空即回退 `GITHUB_TOKEN`。如将来设 PAT / GitHub App 安装令牌，PR 作者变更、`pull_request` 工作流亦可正常触发——属**可选增强**，非必需。
 
 ---
 
@@ -148,3 +143,4 @@ GitHub 对由 `github-actions[bot]`（仓库 `GITHUB_TOKEN`）创建的 PR，其
 | v1.5 | 2026-11-17 | 分支命名纳入协议：任务分支统一 `task/<slug>-<session8>`（BRANCH-NAMING-SPEC v1.0）；新增 pre-commit 钩子与 `hook-install` / `branch` / `branch-rename` / `branch-audit` 子命令；网关复用命名校验 |
 | v1.6 | 2026-11-18 | 更正「main 启用分支保护」表述：private 免费方案服务端保护不可用；新增 CI 首亲历史直推审计（`git_history_audit.py` + `ci.yml::history-audit`）作为补偿检测 |
 | v1.7 | 2026-11-22 | 仓库转为 **public**，服务端分支保护正式启用（Require PR + status checks + strict + enforce_admins）+ auto-merge；CI 触发恢复自动（public 免费额度）；新增 `LICENSE`（MIT） |
+| v1.8 | 2026-11-23 | 对齐 jp-life-work：**门禁内移 + 立即合并**——`submit-pr` 改为建 PR 后 `gh pr merge --merge`（不再 `--auto`）；分支保护**移除必需状态检查**（保留 Require PR + enforce_admins + 评审数 0）；删除 `CI_PR_TOKEN`（无凭据、零审批、零 review） |

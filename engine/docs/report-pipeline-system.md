@@ -378,7 +378,7 @@ flowchart TD
 
 ### 5.4 多会话 Git 协议
 
-`task/<slug>` 分支 + PR（merge queue）+ 共享检出锁（`.git/catpaw-sync.lock`，TTL 600s）+ `repo_sync.py run --gate` + pre-push 按 refspec 阻断直推 `main`；`main` 启用分支保护（必需检查 + strict）。
+`task/<slug>` 分支 + PR（门禁内移 · 立即合并）+ 共享检出锁（`.git/catpaw-sync.lock`，TTL 600s）+ `repo_sync.py run --gate` + pre-push 按 refspec 阻断直推 `main`；`main` 启用分支保护（Require PR + enforce_admins）。
 
 ---
 

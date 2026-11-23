@@ -67,8 +67,8 @@ jobs:
   # 全部收敛于 optimization_gate，各阶段不再分项重复扫描（T6）。
   # --probe：R6 死链真阻断（明确 404/410/451 阻断；反爬/超时仅告警）。
   validate:
-    # job 名必须与 main 分支保护的必需检查「结构与规范校验」一致；
-    # 内容为全链路统一入口 optimization_gate（P1-2 去重后不再分项）。
+    # 全链路统一入口 optimization_gate（P1-2 去重后不再分项）；
+    # 质量门已内移至工作流，分支保护不再要求必需状态检查。
     name: 结构与规范校验
     runs-on: ubuntu-latest
     steps:

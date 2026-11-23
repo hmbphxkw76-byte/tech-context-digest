@@ -1,8 +1,9 @@
-name: 提交并开 PR（自动合并）
+name: 提交并开 PR（门禁内移 · 自动合并）
 description: >
-  将工作区变更提交到固定 CI 分支，开/复用 PR 并启用 auto-merge（合并队列）。
-  用于替代「直推 main」，把 CI 自动提交纳入串行合并。
-
+  将工作区变更提交到固定 CI 分支，开/复用 PR，门禁通过后立即合并入 base。
+  对齐 jp-life-work 模式：bot（GITHUB_TOKEN）创建的 PR 其 pull_request 工作流
+  不会正常触发（需人工批准），故门禁由调用工作流在提交前执行，分支保护不再
+  要求必需状态检查；本动作只负责「建 PR → 立即合并」，实现零审批、零 review、零 PAT。
 inputs:
   branch:
     description: CI 分支名（固定，便于复用同一 PR）
@@ -25,12 +26,12 @@ inputs:
     description: 目标分支
     required: false
     default: "main"
-  enable-auto-merge:
-    description: 是否启用自动合并（合并队列）
+  merge:
+    description: 门禁通过后是否立即合并（默认 true；失败记录类提交设 false）
     required: false
     default: "true"
   token:
-    description: 用于开 PR 的令牌（建议 PAT，可规避 bot PR 审批门）；留空回退 GITHUB_TOKEN
+    description: 开 PR 令牌（留空回退 GITHUB_TOKEN；如设 PAT / GitHub App 令牌则 PR 作者变更）
     required: false
     default: ""
 
@@ -97,7 +98,7 @@ runs:
         echo "::error::CI 分支推送失败"
         exit 1
 
-    - name: 开/复用 PR 并启用自动合并
+    - name: 开/复用 PR 并合并
       if: steps.commit.outputs.NO_CHANGES != 'true'
       shell: bash
       env:
@@ -106,7 +107,7 @@ runs:
         TITLE: ${{ inputs.title }}
         BODY: ${{ inputs.body }}
         BASE: ${{ inputs.base }}
-        AUTO: ${{ inputs.enable-auto-merge }}
+        MERGE: ${{ inputs.merge }}
       run: |
         set +e
         number=$(gh pr list --head "$BRANCH" --state open --json number -q '.[0].number' 2>/dev/null)
@@ -118,7 +119,18 @@ runs:
         else
           echo "复用已有 PR #$number"
         fi
-        if [ "$AUTO" = "true" ]; then
-          gh pr merge "$number" --auto --merge \
-            || echo "::warning::启用自动合并失败（检查 repo auto-merge 与必需检查配置）"
+        if [ "$MERGE" != "true" ]; then
+          echo "merge=false（失败记录类提交），仅开 PR 不合并"
+          exit 0
         fi
+        # 门禁已由调用工作流在提交前执行（失败即中止本 job）；此处门禁通过即立即合并，
+        # 不依赖 pull_request 工作流（bot 创建的 PR 不触发，且分支保护不再要求必需检查）。
+        for i in 1 2 3; do
+          if gh pr merge "$number" --merge; then
+            echo "PR #$number 门禁通过，已合并入 $BASE"
+            exit 0
+          fi
+          sleep 5
+        done
+        echo "::error::合并 PR #$number 失败"
+        exit 1
