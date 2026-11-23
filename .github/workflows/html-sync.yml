@@ -12,6 +12,7 @@ on:
   workflow_dispatch:
 
 permissions:
+  actions: write      # 合并后清理本 CI 分支被门禁的空跑运行（action_required）
   contents: write
   issues: write
   pull-requests: write
