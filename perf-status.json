@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "run": "2026-11-23T02:01:04",
+  "run": "2026-11-23T02:54:04",
   "baseline": true,
   "environment": {
     "concurrency_default": 1,
@@ -27,16 +27,16 @@
       "errors": 0,
       "error_rate": 0.0,
       "wall_ms": {
-        "avg": 4398.05,
-        "p50": 4398.05,
-        "p95": 4408.43,
-        "max": 4409.58,
-        "min": 4386.52
+        "avg": 2224.73,
+        "p50": 2224.73,
+        "p95": 2232.68,
+        "max": 2233.57,
+        "min": 2215.89
       },
       "cpu_ms": {
-        "avg": 3.84
+        "avg": 1.45
       },
-      "throughput_per_sec": 0.227,
+      "throughput_per_sec": 0.449,
       "unit": "全量仓库"
     },
     {
@@ -52,16 +52,16 @@
       "errors": 0,
       "error_rate": 0.0,
       "wall_ms": {
-        "avg": 209.41,
-        "p50": 208.54,
-        "p95": 222.39,
-        "max": 226.71,
-        "min": 199.81
+        "avg": 115.42,
+        "p50": 115.44,
+        "p95": 116.1,
+        "max": 116.25,
+        "min": 114.8
       },
       "cpu_ms": {
-        "avg": 0.89
+        "avg": 0.33
       },
-      "throughput_per_sec": 4.775,
+      "throughput_per_sec": 8.664,
       "unit": "单份报告"
     },
     {
@@ -77,16 +77,16 @@
       "errors": 0,
       "error_rate": 0.0,
       "wall_ms": {
-        "avg": 1201.69,
-        "p50": 1201.69,
-        "p95": 1201.77,
-        "max": 1201.78,
-        "min": 1201.6
+        "avg": 654.21,
+        "p50": 654.21,
+        "p95": 654.56,
+        "max": 654.6,
+        "min": 653.82
       },
       "cpu_ms": {
-        "avg": 0.45
+        "avg": 0.25
       },
-      "throughput_per_sec": 0.832,
+      "throughput_per_sec": 1.529,
       "unit": "全量仓库"
     },
     {
@@ -102,16 +102,16 @@
       "errors": 0,
       "error_rate": 0.0,
       "wall_ms": {
-        "avg": 81.21,
-        "p50": 81.21,
-        "p95": 81.28,
-        "max": 81.29,
-        "min": 81.12
+        "avg": 45.25,
+        "p50": 45.25,
+        "p95": 45.29,
+        "max": 45.29,
+        "min": 45.21
       },
       "cpu_ms": {
-        "avg": 0.42
+        "avg": 0.14
       },
-      "throughput_per_sec": 12.314,
+      "throughput_per_sec": 22.099,
       "unit": "全量仓库"
     },
     {
@@ -128,16 +128,16 @@
       "errors": 0,
       "error_rate": 0.0,
       "wall_ms": {
-        "avg": 156.37,
-        "p50": 156.29,
-        "p95": 157.05,
-        "max": 157.13,
-        "min": 155.69
+        "avg": 85.38,
+        "p50": 84.56,
+        "p95": 87.36,
+        "max": 87.67,
+        "min": 83.9
       },
       "cpu_ms": {
-        "avg": 0.46
+        "avg": 0.21
       },
-      "throughput_per_sec": 70.345,
+      "throughput_per_sec": 128.84,
       "unit": "全量正式报告"
     },
     {
@@ -154,16 +154,16 @@
       "errors": 0,
       "error_rate": 0.0,
       "wall_ms": {
-        "avg": 130830.07,
-        "p50": 131590.14,
-        "p95": 131914.55,
-        "max": 131950.59,
-        "min": 128949.49
+        "avg": 136014.12,
+        "p50": 139774.96,
+        "p95": 139775.89,
+        "max": 139776.0,
+        "min": 128491.4
       },
       "cpu_ms": {
-        "avg": 0.47
+        "avg": 0.3
       },
-      "throughput_per_sec": 0.084,
+      "throughput_per_sec": 0.081,
       "unit": "全量正式报告"
     }
   ],
