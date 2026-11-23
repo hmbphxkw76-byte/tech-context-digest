@@ -43,12 +43,12 @@
 | 类别 | 类型 ID | 注册状态 | 已接入业务线 |
 |---|---|---|---|
 | A1 市场指标监测型 | `market-monitoring` | 已注册 | `content/economy/dubai/apartment` |
-| A2 竞争情报监测型 | `competitive-intelligence` | 已注册 | `content/tech/ai-security/competitive-intelligence/dubai`；`content/tech/ai-application/trends` |
+| A2 竞争情报监测型 | `competitive-intelligence` | 已注册 | `content/tech/ai-security/competitive-intelligence/dubai`；`content/tech/ai-application/competitive-intelligence/dubai` |
 | A3 舆情传播监测型 | `sentiment-monitoring` | 已注册 | 暂无 |
 | A4 行业趋势周报型（扩展） | `trend-weekly` | 已注册 | `content/economy/trends` |
-| B1 职业就业调研型 | `employment-research` | 已注册 | `content/tech/ai-security/dubai` |
+| B1 职业就业调研型 | `employment-research` | 已注册 | `content/tech/ai-security/dubai`；`content/tech/ai-application/dubai` |
 | B2 消费者·用户调研型 | `consumer-research` | 已注册 | 暂无 |
-| C1 行业深度研究型 | `industry-research` | 已注册 | `content/tech/ai-security/industry-research/dubai` |
+| C1 行业深度研究型 | `industry-research` | 已注册 | `content/tech/ai-security/industry-research/dubai`；`content/tech/ai-application/industry-research/dubai` |
 | C2 市场规模测算与预测型 | `market-sizing` | 已注册 | 暂无 |
 | D1 投资分析与尽调型 | `investment-research` | 已注册 | 暂无 |
 | D2 政策法规解读型 | `policy-analysis` | 已注册 | 暂无 |

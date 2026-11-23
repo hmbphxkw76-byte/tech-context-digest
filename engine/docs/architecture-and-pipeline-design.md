@@ -53,30 +53,19 @@ data/      资产层：raw / processed / assets （processed 统一收口于 dat
 
 六主题（`layout.json` 注册）：`economy`、`tech`、`education`、`international`、`political`、`society`。
 
-### 3.2 layout.json v4.2（已落地）
+### 3.2 layout.json — 目录结构单一事实源（v5.0，2026-11-21）
 
-业务线深度为「主题 + 维度段」，维度顺序按主题声明；`region` 为可选维度（`optional_dimensions`），缺省时业务线直接以 category 段落位：
+业务线深度为「主题 + 维度段」，维度顺序按主题声明；`region` 为可选维度（`optional_dimensions`），缺省时业务线直接以 category（+subcategory）段落位。六主题：economy / tech / education / international / political / society。
 
-```json
-{
-  "version": "4.2",
-  "updated": "2026-11-18",
-  "comment": "仓库目录结构单一事实源（content、engine、data 三层）。六主题：economy / tech / education / international / political / society。维度顺序按主题声明（economy 为 region→category，其余为 category→region）。region 为可选维度。",
-  "root_reserved": ["content","engine","data",".github",".gitignore","AGENTS.md","README.md","CHANGELOG.md","requirements.txt","index.html","reader.html","INDEX.md","automation-status.json","perf-status.json"],
-  "content_root": "content",
-  "regional_segment": "",
-  "themes": {
-    "economy": { "name": "经济", "dimensions": ["region", "category"], "optional_dimensions": ["region"] },
-    "tech": { "name": "科技", "dimensions": ["category", "region"], "optional_dimensions": ["region"] },
-    "education": { "name": "教育", "dimensions": ["category", "region"], "optional_dimensions": ["region"] },
-    "international": { "name": "国际", "dimensions": ["category", "region"], "optional_dimensions": ["region"] },
-    "political": { "name": "政治", "dimensions": ["category", "region"], "optional_dimensions": ["region"] },
-    "society": { "name": "社会", "dimensions": ["category", "region"], "optional_dimensions": ["region"] }
-  },
-  "regions": ["dubai"],
-  "naming": { "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$", "max_depth": 6 }
-}
-```
+各主题维度序（**以 `engine/tools/layout.json` 为唯一事实源，本处不复述**）：
+
+| 主题 | dimensions | optional_dimensions |
+|---|---|---|
+| `economy` | `region` → `category` | `region` |
+| `tech` | `category` → `subcategory` → `region` | `region` |
+| `education` / `international` / `political` / `society` | `category` → `region` | `region` |
+
+`regions` 白名单当前为 `dubai`；`naming.pattern` / `max_depth`、`root_reserved`、`report_types` / `cycles` / `vocabulary` / `classification` / `changelog` 等字段详见该文件。
 
 **落地要点**：
 - 原 `content/economy/real-estate/dubai/apartment` 归一化为 `content/economy/dubai/apartment`（`real-estate` 语义由 business-config 的 `{{TOPIC}}` 承载）；样式参照目录相应变为 `content/economy/dubai/apartment/reports/`。
@@ -86,13 +75,22 @@ data/      资产层：raw / processed / assets （processed 统一收口于 dat
 
 ```
 content/
-  economy/
-    <category>/              # region 缺省：insight（决策仪表盘）、trends（全球经济趋势周报）
-    <region>/<category>/     # region=dubai：apartment（原 real-estate 板块）
-  tech/
-    <category>/              # region 缺省：trends（AI 应用竞争格局，月度）
-    <category>/<region>/     # 如 competitive-intelligence 与 dubai 的组合
-  education/  international/  political/  society/     # 空占位（.gitkeep）
+  economy/                        # dimensions: region → category
+    <category>/                   # region 缺省：insight、trends
+    <region>/<category>/          # 例：content/economy/dubai/apartment
+  tech/                           # dimensions: category → subcategory → region
+    ai-security/                  # category
+      <subcategory>/<region>/     # 例：content/tech/ai-security/competitive-intelligence/dubai
+      <region>/                   # 例：content/tech/ai-security/dubai（subcategory 缺省）
+    ai-application/               # 同上
+  education/                      # dimensions: category → region
+    education-system/  study-abroad/
+  international/
+    immigration/  international-relations/
+  political/
+    political-system/
+  society/
+    social-structure/
 ```
 
 每个业务线目录内：`prompts/`（business-config + 周期提示词）、`reports/`（canonical HTML）、`sources/`（可选 md 源稿）、`script/`（可选）。

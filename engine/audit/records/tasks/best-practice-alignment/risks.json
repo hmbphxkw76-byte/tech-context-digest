@@ -1,0 +1,14 @@
+[
+  {
+    "description": "改报告 HTML 致发布指纹漂移",
+    "id": "R-1",
+    "mitigation": "缓解",
+    "owner": ""
+  },
+  {
+    "description": "文档复述漂移复发",
+    "id": "R-2",
+    "mitigation": "缓解",
+    "owner": ""
+  }
+]
