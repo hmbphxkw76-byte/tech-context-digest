@@ -34,7 +34,7 @@ python -m unittest discover -s engine/tests -v   # 单元测试（全量）
 | metric_coverage.py | 校验+度量 | 指标实测覆盖（批次 B）：TOOL 指标实测接线 + LLM/未接线显式标注 + 覆盖率与缺口报告 |
 | release_calendar.py | 采集 | 发布日历结构化采集（P1-2）：解析 release-calendar.md → JSON + 覆盖率 |
 | publish_fingerprint.py | 校验+留痕 | 发布指纹（P2-2）：sha256 登记 / 重复检测 / 漂移比对 |
-| optimization_gate.py | 校验（统一入口） | ci / html-sync / content-update / scheduled-maintenance / `repo_sync run --gate` 复用；32 项门禁单一入口 |
+| optimization_gate.py | 校验（统一入口） | ci / html-sync / content-update / scheduled-maintenance / `repo_sync run --gate` 复用；33 项门禁单一入口 |
 | pipeline_manifest.json | 配置（声明式图） | 报告全流程 N0–N8 / G0–G8 声明式清单（流程图唯一落地载体） |
 | pipeline_runner.py | 编排 | 节点→门禁→路由/退回；复用 `optimization_gate` 单一入口；见 `engine/docs/report-pipeline-implementation-plan.md` |
 | local_ci.py | 编排（本地 CI） | 本地等价 CI（本地优先 · 远程兜底 · 结果分享）：复刻 ci / audit / html-sync / maintenance 的本地可读检查；见 `engine/docs/local-ci-runbook.md` |
@@ -160,7 +160,7 @@ python engine/tools/lint_reports.py
 ### optimization_gate.py — 优化流程统一门禁（单一入口）
 
 ```bash
-python engine/tools/optimization_gate.py                      # 全部门禁（32 项）
+python engine/tools/optimization_gate.py                      # 全部门禁（33 项）
 python engine/tools/optimization_gate.py --only source_check,metric_registry
 python engine/tools/optimization_gate.py --gate-period auto --source-gate-period auto --json
 python engine/tools/optimization_gate.py --list

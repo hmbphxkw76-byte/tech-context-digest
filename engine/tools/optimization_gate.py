@@ -87,6 +87,10 @@ CHECKS: list[tuple[str, list[str], bool]] = [
     ("prompt_consistency", [sys.executable, f"{TOOLS}/prompt_consistency_check.py"], True),
     # 模型契约（MC-01..05，DC-07 / P1-13）：参数区间 / 假设留痕 / 失败上报，默认 [W]。
     ("model_contract", [sys.executable, f"{TOOLS}/model_contract_check.py"], True),
+    # 生成物重生成比对（REGEN-DRIFT-CHECK v1.0）：已提交索引须可由生成器重放得到；
+    # 页面 / 指纹 / 发布日历分别由 hub / fingerprint / calendar_check 覆盖，此处不重复。
+    # 该现象曾致词库索引词条数静默漂移（education 0 vs 45），故定阻断级。
+    ("regen_drift", [sys.executable, f"{TOOLS}/regen_drift_check.py"], False),
 ]
 
 # 两级 gate-period 默认值（见模块 docstring）：auto = 滚动基线（当前自然月）
