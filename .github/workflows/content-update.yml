@@ -188,12 +188,11 @@ jobs:
           title: "chore: 内容更新编排（索引刷新，由 CI 生成）"
           body: |
             由内容更新编排工作流自动生成（INDEX.md / automation-status.json / index.html / reader.html / release-calendar.json）。
-            合并方式：必需检查通过后自动合并（合并队列）。
+            合并方式：工作流内门禁通过后由 CI 立即合并（无人工审批）。
           commit-message: "chore: 内容更新编排（索引刷新）"
           # content/：维护流水线的 md2html.py 会再生成 reports/*.html，
           # 必须纳入提交范围，否则残留未暂存改动会让 submit-pr 变基失败。
           add-paths: "INDEX.md automation-status.json index.html reader.html content engine/report-audits/release-calendar.json"
-          token: ${{ secrets.CI_PR_TOKEN }}
 
       - name: 上报 commit status
         if: always()

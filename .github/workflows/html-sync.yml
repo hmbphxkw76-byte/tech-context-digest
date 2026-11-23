@@ -71,9 +71,8 @@ jobs:
           title: "chore: 自动同步 HTML（由 CI 生成）"
           body: |
             由 HTML 同步工作流自动生成（md2html + build_hub + 发布指纹）。
-            合并方式：必需检查通过后自动合并（合并队列）。
+            合并方式：工作流内门禁通过后由 CI 立即合并（无人工审批）。
           commit-message: "chore: 自动同步 HTML（由 CI 生成）"
-          token: ${{ secrets.CI_PR_TOKEN }}
 
       - name: 失败告警
         if: failure()

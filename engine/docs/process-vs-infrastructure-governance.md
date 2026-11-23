@@ -72,7 +72,7 @@
 **最小可行硬约束**（已在本仓库落地）：
 
 1. **统一门禁**：`optimization_gate.py` 32 项单一入口，`[E]` 阻断合并 / 提交。
-2. **分支保护**：禁止直推 `main`；PR + 必需检查 + strict。
+2. **分支保护**：禁止直推 `main`；Require PR + enforce_admins（质量门已内移至工作流门禁与本地 `repo_sync run --gate`）。
 3. **基础 CI**：语法 → 单测 → 统一门禁，全绿方可合并。
 4. **提交网关**：`repo_sync.py run --gate`，提交前复用统一门禁。
 5. **审计兜底**：`audit.yml` fail-fast + 闭环修正工单。

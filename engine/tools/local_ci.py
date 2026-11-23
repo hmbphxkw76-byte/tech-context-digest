@@ -88,7 +88,7 @@ CHECKS: tuple[Check, ...] = (
 # 本地环境不具备、只能远程跑的环节（不在本地等价集内）。
 REMOTE_ONLY: tuple[tuple[str, str], ...] = (
     ("probe", "链接可达率探测（source_check --probe / 门禁 --probe，依赖外网，不稳定）"),
-    ("submit-pr", "自动开 PR / 自动合并（需 GitHub token 与网络）"),
+    ("submit-pr", "工作流内门禁通过后立即合并（无需额外凭据）"),
     ("webhook-alert", "外部告警通道（需 webhook 凭据）"),
     ("runner-env", "GitHub runner 环境 / secrets / 服务端保护"),
 )

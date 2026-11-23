@@ -108,7 +108,7 @@ content/
 | 层 | 载体 | 说明 |
 |---|---|---|
 | 交付物 | 自包含 HTML（报告 + `index.html` / `reader.html` / `INDEX.md`） | CSS/JS 内联，ECharts 走 CDN 白名单；无服务端渲染 |
-| 发布源 | GitHub `main` 分支（仓库根 + `content/**/reports/`） | 分支保护（必需检查 + strict）；不直推，经 PR 合并 |
+| 发布源 | GitHub `main` 分支（仓库根 + `content/**/reports/`） | 分支保护（Require PR + enforce_admins）；不直推，经 PR 合并 |
 | 构建 | `engine/tools/{md2html,build_hub,build_index,publish_fingerprint,archive_reports}.py` | 本地或 CI 生成，确定性（无时间戳） |
 | 托管 | 静态站点托管（GitHub Pages / 任意静态服务器），入口 `index.html` | 无数据库 / 无运行态进程 / 无外部服务依赖 |
 | CI 编排 | `.github/workflows/{ci,html-sync,content-update,scheduled-maintenance,audit,webhook-alert}.yml` + `.github/actions/{submit-pr,workspace-cleanup,remediation-ticket}` | 提交 → 门禁 → PR → 合并 → 自动发布 |

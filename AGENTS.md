@@ -125,8 +125,8 @@ P0/P1/P2 优化清单的全部确定性检查收敛为**单一入口** `engine/t
 - **统一网关**：提交/推送使用 `python engine/tools/repo_sync.py`（run / push / pr / branch / branch-rename / branch-delete / branch-audit）。
 - **分支命名**：受管分支 `task/*` 必须内嵌会话标识；建分支用 `repo_sync.py branch <slug>`；`main` 与 `ci/*` 豁免。
 - **钩子**：`core.hooksPath=.githooks`（安装：`repo_sync.py hook-install`）；pre-push 按 refspec 判定，pre-commit 在违规受管分支上阻断。
-- **CI 也走 PR**：audit.yml / html-sync.yml / content-update.yml / scheduled-maintenance.yml 经 `.github/actions/submit-pr` 开 PR + 自动合并。
-- **直推防护（服务端 + 客户端双保险）**：仓库为 **public**，`main` 已启用**服务端分支保护**（Require PR + Require status checks（Python 语法检查 / 单元测试 / 结构与规范校验）+ strict + enforce_admins + 禁 force-push / 禁删除）与 **auto-merge**；客户端 pre-push 钩子 + `repo_sync.py` 网关为第二道拦截，并保留 CI **main 首亲历史审计**（`engine/tools/git_history_audit.py`）作事后追溯。
+- **CI 也走 PR**：audit.yml / html-sync.yml / content-update.yml / scheduled-maintenance.yml 经 `.github/actions/submit-pr`——**工作流内先跑门禁**，门禁通过后**立即 `gh pr merge --merge`**（无人工审批、无 review、无凭据）。
+- **直推防护（服务端 + 客户端双保险）**：仓库为 **public**，`main` 已启用**服务端分支保护**（Require PR + enforce_admins + 评审数 0 + 禁 force-push / 禁删除；**不要求必需状态检查**，见 [multi-session-git-protocol.md](engine/docs/multi-session-git-protocol.md) §6.1）；客户端 pre-push 钩子 + `repo_sync.py` 网关为第二道拦截，并保留 CI **main 首亲历史审计**（`engine/tools/git_history_audit.py`）作事后追溯。
 
 ## 工作区清理（硬性约束，适用于任何 Agent 平台）
 

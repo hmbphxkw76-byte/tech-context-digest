@@ -21,8 +21,9 @@ class TestCIUsesPRs(unittest.TestCase):
         text = ACTION.read_text(encoding="utf-8")
         self.assertIn("gh pr create", text)
         self.assertIn("gh pr merge", text)
-        self.assertIn("--auto", text)
         self.assertIn("inputs.token", text)
+        # 无凭据模式：不再用 --auto（bot PR 不触发 pull_request，--auto 会永卡 BLOCKED）
+        self.assertNotIn("--auto", text)
         # 推送前必须刷新 CI 分支远端跟踪引用，避免 --force-with-lease 因 stale info 失败
         self.assertIn("refs/remotes/origin/$BRANCH", text)
 
@@ -42,10 +43,19 @@ class TestCIUsesPRs(unittest.TestCase):
             text = (WF / name).read_text(encoding="utf-8")
             self.assertIn("submit-pr", text, f"{name} 未复用 submit-pr 动作")
 
-    def test_workflows_pass_token(self):
+    def test_composite_action_merges_immediately(self):
+        """无 PAT 模式：门禁通过后 gh pr merge --merge（门禁内移至调用工作流）。"""
+        data = yaml.safe_load(ACTION.read_text(encoding="utf-8"))
+        self.assertEqual(data["inputs"]["merge"]["default"], "true")
+        text = ACTION.read_text(encoding="utf-8")
+        self.assertIn("gh pr merge", text)
+        self.assertIn("--merge", text)
+
+    def test_workflows_do_not_use_user_token(self):
+        """无凭据模式：工作流不得引用用户 token（仅 PAT / GitHub App 才需）。"""
         for name in FOUR:
             text = (WF / name).read_text(encoding="utf-8")
-            self.assertIn("secrets.CI_PR_TOKEN", text, f"{name} 未传入 CI_PR_TOKEN")
+            self.assertNotIn("CI_PR_TOKEN", text, f"{name} 仍引用 CI_PR_TOKEN")
 
     def test_checkout_workflows_have_contents_permission(self):
         # 声明 permissions 块后，未列出的 scope 一律降为 none：缺 contents 会让
