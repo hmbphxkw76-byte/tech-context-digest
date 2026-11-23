@@ -1,0 +1,26 @@
+[
+  {
+    "acceptance": "",
+    "depends_on": [],
+    "id": "T-1",
+    "phase": "",
+    "status": "pending",
+    "title": "CHANGELOG 补 3.6.0/3.7.0 条目"
+  },
+  {
+    "acceptance": "",
+    "depends_on": [],
+    "id": "T-2",
+    "phase": "",
+    "status": "pending",
+    "title": "finding-rules 失效 report 溯源修正"
+  },
+  {
+    "acceptance": "",
+    "depends_on": [],
+    "id": "T-3",
+    "phase": "",
+    "status": "pending",
+    "title": "删除 3 个已删报告的 pre-mark 快照"
+  }
+]
