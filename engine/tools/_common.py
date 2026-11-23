@@ -40,6 +40,10 @@ DATA = ROOT / "data"
 # 目录结构单一事实源（与本文件同目录）
 LAYOUT_PATH = Path(__file__).resolve().parent / "layout.json"
 
+# 站点身份单一事实源：枢纽页（index.html / reader.html）与索引页（INDEX.md）统一引用，
+# 避免品牌名在多处复述导致漂移（历史遗留：hub 曾硬编码旧名「宏观资讯报告」）。
+SITE_BRAND = "Tech Life Research"
+
 # 公共资源统一收拢于 engine/：通用模板层 / 通用提示词层 / 合规审计目录
 TEMPLATE_DIR = ENGINE / "templates"
 PROMPT_DIR = ENGINE / "prompts"

@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>宏观资讯报告 · 阅读器</title>
+<title>Tech Life Research · 阅读器</title>
 <style>:root{
   --radius-sm:8px; --radius:12px; --radius-lg:16px; --radius-pill:999px;
   --shadow:0 1px 3px rgba(20,40,70,.06); --shadow-md:0 4px 14px rgba(20,40,70,.09);
@@ -238,7 +238,7 @@ body{display:flex;flex-direction:column;height:100vh;overflow:hidden}
 <header class="reader-head">
 <div class="reader-head-inner">
 <div class="reader-brand">
-<a class="brand-link" href="index.html">宏观资讯报告</a>
+<a class="brand-link" href="index.html">Tech Life Research</a>
 <span class="brand-sep">·</span><span class="brand-sub">阅读器</span>
 </div>
 <div class="reader-head-stats">6 主题 · 16 业务线 · 22 报告 · 7 类型</div>
@@ -611,7 +611,7 @@ body{display:flex;flex-direction:column;height:100vh;overflow:hidden}
     if (history.replaceState) {
       history.replaceState(null, '', '?report=' + encodeURIComponent(path));
     }
-    if (title) { document.title = title + ' · 宏观资讯报告 · 阅读器'; }
+    if (title) { document.title = title + ' · Tech Life Research · 阅读器'; }
     closeDrawer();
     var active = nav.querySelector('.rcard.active');
     if (active && active.scrollIntoView) { active.scrollIntoView({ block: 'nearest' }); }
