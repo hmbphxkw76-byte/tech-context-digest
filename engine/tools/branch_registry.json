@@ -406,6 +406,13 @@
       "slug": "study-abroad",
       "task": "study-abroad"
     },
+    "task/tasks-empty-ci-cleanup-a6213e92": {
+      "note": "source=env:CATPAW_CONVERSATION_ID",
+      "session": "a6213e92a47e4188b947c16508c377ec",
+      "session_short": "a6213e92",
+      "slug": "tasks-empty-ci-cleanup",
+      "task": "tasks-empty-ci-cleanup"
+    },
     "task/tasks-empty-final-5d42b26d": {
       "note": "source=env:CATPAW_CONVERSATION_ID",
       "session": "5d42b26dd47c4787b8c2715f18d7b405",
