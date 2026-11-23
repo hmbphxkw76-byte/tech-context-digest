@@ -1,0 +1,14 @@
+[
+  {
+    "description": "生成物漂移致 ci --check 失败",
+    "id": "R-1",
+    "mitigation": "缓解",
+    "owner": ""
+  },
+  {
+    "description": "README 复述漂移",
+    "id": "R-2",
+    "mitigation": "缓解",
+    "owner": ""
+  }
+]

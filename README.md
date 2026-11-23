@@ -10,16 +10,12 @@
 
 ## 主题与业务线
 
-| 主题 | 说明 | 业务线（维度序） |
-|---|---|---|
-| `economy` | 经济 | insight（区域缺省）、trends（区域缺省）、dubai · apartment |
-| `tech` | 科技 | **AI安全**：dubai、dubai · competitive-intelligence、dubai · industry-research；**AI应用**：trends（区域缺省） |
-| `education` | 教育 | （已注册，待扩展） |
-| `international` | 国际 | （已注册，待扩展） |
-| `political` | 政治 | （已注册，待扩展） |
-| `society` | 社会 | （已注册，待扩展） |
+六个主题：`economy`（经济）/ `tech`（科技）/ `education`（教育）/ `international`（国际）/ `political`（政治）/ `society`（社会）。
 
-当前 12 条业务线、18 份正式报告、14 个已注册报告类型。
+业务线清单（含维度序）、报告类型与最新一期由枢纽页自动汇总，此处不复述，避免手工维护漂移：
+
+- 枢纽页 [index.html](index.html)：主题 / 业务线 / 报告 / 类型四项统计 + 筛选
+- 全局索引 [INDEX.md](INDEX.md)：自动生成，逐业务线逐报告
 
 ## 快速开始
 

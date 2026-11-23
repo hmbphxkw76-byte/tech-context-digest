@@ -13,7 +13,7 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 
-from _common import ROOT, iter_business_dirs, iter_business_reports, report_title  # noqa: E402
+from _common import ROOT, SITE_BRAND, iter_business_dirs, iter_business_reports, report_title  # noqa: E402
 
 CYCLE_LABEL = {"monthly": "月度", "quarterly": "季度", "annual": "年度", "baseline": "基线", "weekly": "周报"}
 
@@ -37,7 +37,7 @@ def collect_entries():
 
 def render_index(entries, now_iso: str) -> str:
     lines = [
-        "# Tech Life Research 报告索引",
+        f"# {SITE_BRAND} 报告索引",
         "",
         f"> 最近生成：{now_iso}（由 engine/tools/build_index.py 自动维护）",
     ]

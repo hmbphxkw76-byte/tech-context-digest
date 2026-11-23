@@ -1,6 +1,6 @@
 """汇总页生成（CI: ci.yml --check 校验 / html-sync、scheduled-maintenance 重新生成）。
 
-生成 index.html（报告枢纽：居中标题「宏观资讯报告」+ 主题 / 业务线 / 报告 /
+生成 index.html（报告枢纽：居中标题取 _common.SITE_BRAND + 主题 / 业务线 / 报告 /
 报告类型四项统计，下方为筛选栏与报告列表）与 reader.html（在线阅读器：navy 渐变
 头部 + sticky 筛选栏 + 侧栏报告列表 + iframe 阅读区，?report=<路径> 直达）。
 
@@ -44,6 +44,7 @@ from _common import (  # noqa: E402
     CYCLE_WINDOWS,
     HIGHLIGHT_CYCLES,
     ROOT,
+    SITE_BRAND,
     TEMPLATE_DIR,
     iter_business_dirs,
     iter_business_reports,
@@ -533,7 +534,7 @@ _READER_SCRIPT = """\
     if (history.replaceState) {
       history.replaceState(null, '', '?report=' + encodeURIComponent(path));
     }
-    if (title) { document.title = title + ' · 宏观资讯报告 · 阅读器'; }
+    if (title) { document.title = title + ' · __SITE_BRAND__ · 阅读器'; }
     closeDrawer();
     var active = nav.querySelector('.rcard.active');
     if (active && active.scrollIntoView) { active.scrollIntoView({ block: 'nearest' }); }
@@ -768,6 +769,14 @@ def _esc(text: str) -> str:
     return html_mod.escape(text, quote=True)
 
 
+def _reader_script() -> str:
+    """阅读器脚本：注入站点品牌（_common.SITE_BRAND 单一事实源）。
+
+    _READER_SCRIPT 内含 JS 大括号，不能整体作 f-string，故以占位符在渲染期替换。
+    """
+    return _READER_SCRIPT.replace("__SITE_BRAND__", _esc(SITE_BRAND))
+
+
 def _search_text(topic: Topic, report: ReportEntry) -> str:
     return " ".join([
         topic.region, topic.name, topic.type_name, topic.rel,
@@ -906,11 +915,11 @@ def render_hub(topics: list[Topic]) -> str:
     parts = [
         "<!DOCTYPE html>\n<html lang=\"zh-CN\">\n<head>\n<meta charset=\"utf-8\">",
         "<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">",
-        "<title>宏观资讯报告</title>",
+        f"<title>{_esc(SITE_BRAND)}</title>",
         f"<style>{_STYLE}</style>\n</head>\n<body>",
         '<a class="skip-link" href="#main-content">跳到主要内容</a>',
         '<section class="hero">',
-        "<h1>宏观资讯报告</h1>",
+        f"<h1>{_esc(SITE_BRAND)}</h1>",
         '<div class="stats">',
         f'<div class="stat"><b>{n_themes}</b>主题</div>',
         f'<div class="stat"><b>{n_topics}</b>业务线</div>',
@@ -989,13 +998,13 @@ def render_reader(topics: list[Topic]) -> str:
     parts = [
         "<!DOCTYPE html>\n<html lang=\"zh-CN\">\n<head>\n<meta charset=\"utf-8\">",
         "<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">",
-        "<title>宏观资讯报告 · 阅读器</title>",
+        f"<title>{_esc(SITE_BRAND)} · 阅读器</title>",
         f"<style>{_STYLE}{_READER_STYLE}</style>\n</head>\n<body>",
         '<a class="skip-link" href="#main-content">跳到主要内容</a>',
         '<header class="reader-head">',
         '<div class="reader-head-inner">',
         '<div class="reader-brand">',
-        '<a class="brand-link" href="index.html">宏观资讯报告</a>',
+        f'<a class="brand-link" href="index.html">{_esc(SITE_BRAND)}</a>',
         '<span class="brand-sep">·</span><span class="brand-sub">阅读器</span>',
         "</div>",
         f'<div class="reader-head-stats">{n_themes} 主题 · {n_topics} 业务线 · '
@@ -1066,7 +1075,7 @@ def render_reader(topics: list[Topic]) -> str:
         f"<p>{feedback_link()}</p>",
         "</footer>",
         '<button class="totop" id="totop" aria-label="回到顶部">↑</button>',
-        f"<script>{_READER_SCRIPT}</script>",
+        f"<script>{_reader_script()}</script>",
         "</body>\n</html>",
     ]
     return "\n".join(parts)
