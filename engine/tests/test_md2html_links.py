@@ -12,7 +12,7 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "tools"))
 
-from md2html import _fix_links  # noqa: E402
+from md2html import _fix_links, _preserve_audit_mark  # noqa: E402
 
 
 class TestFixLinks(unittest.TestCase):
@@ -47,6 +47,28 @@ class TestFixLinks(unittest.TestCase):
         out = _fix_links('<a class="src" href="https://example.org/x">来源</a>')
         self.assertIn('class="src"', out)
         self.assertIn('target="_blank"', out)
+
+
+class TestPreserveAuditMark(unittest.TestCase):
+    MARK = '<div class="audit-mark" data-audit-id="a1">已审计</div>'
+
+    def test_preserves_existing_mark(self) -> None:
+        old = "<html><body>\n" + self.MARK + "\n</body></html>"
+        new = "<html><body>\n<p>x</p>\n</body></html>"
+        self.assertIn(self.MARK, _preserve_audit_mark(old, new))
+
+    def test_no_mark_in_old(self) -> None:
+        new = "<html><body></body></html>"
+        self.assertEqual(_preserve_audit_mark("<html><body></body></html>", new), new)
+
+    def test_no_old_html(self) -> None:
+        new = "<html><body></body></html>"
+        self.assertEqual(_preserve_audit_mark(None, new), new)
+
+    def test_idempotent_when_already_present(self) -> None:
+        old = "<html><body>\n" + self.MARK + "\n</body></html>"
+        new = "<html><body>\n" + self.MARK + "\n</body></html>"
+        self.assertEqual(_preserve_audit_mark(old, new), new)
 
 
 if __name__ == "__main__":

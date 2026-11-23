@@ -59,6 +59,7 @@ H3_RE = re.compile(r"<h3\b[^>]*>.*?</h3>", re.DOTALL)
 TABLE_RE = re.compile(r"<table\b.*?</table>", re.DOTALL)
 TH_RE = re.compile(r"<th\b[^>]*>")
 EXT_LINK_RE = re.compile(r"<a\b[^>]*href=[\"']https?://[^>]*>", re.I)
+AUDIT_MARK_RE = re.compile(r'<div class="audit-mark".*?</div>', re.DOTALL)
 
 
 def _strip_tags(s: str) -> str:
@@ -110,6 +111,21 @@ def _fix_links(html: str) -> str:
         return inner + ">"
 
     return EXT_LINK_RE.sub(fix, html)
+
+
+def _preserve_audit_mark(old_html: str | None, new_html: str) -> str:
+    """重生成时保留既有审计标识。
+
+    审计状态的事实源是 `engine/audit/records/audit_registry.json`（`audit_tool status` 读它），
+    报告里的 `.audit-mark` 只是展示层覆盖物。若不保留，重生成会造成
+    「登记册=已审计、页面无标识」的展示脱节。
+    """
+    if not old_html:
+        return new_html
+    m = AUDIT_MARK_RE.search(old_html)
+    if not m or AUDIT_MARK_RE.search(new_html):
+        return new_html
+    return new_html.replace("<body>", "<body>\n" + m.group(0) + "\n", 1)
 
 
 def _renumber_h2(html: str) -> tuple[str, str]:
@@ -197,7 +213,8 @@ def main() -> int:
         try:
             html = convert(md)
             out = md.with_suffix(".html")
-            out.write_text(html, encoding="utf-8")
+            old = out.read_text(encoding="utf-8") if out.exists() else None
+            out.write_text(_preserve_audit_mark(old, html), encoding="utf-8")
             print(f"[OK] {md} -> {out.name}")
             ok += 1
         except SystemExit:
