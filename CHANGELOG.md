@@ -2,6 +2,20 @@
 
 本文件记录仓库的结构与规范级变更（报告内容变更见各业务线 `reports/`）。
 
+## 3.7.0 — 2026-11-23：站点上线、品牌口径统一与自动化闭环
+
+- **发布**：启用 GitHub Pages（`main` 根目录，legacy 构建），站点 `https://hmbphxkw76-byte.github.io/tech-context-digest/`；仓库 homepage 同步；CI 合并后站点自动重建。
+- **品牌**：新增 `engine/tools/_common.py::SITE_BRAND` 单一事实源，`build_hub.py`（含 `_reader_script()`）与 `build_index.py` 统一引用；枢纽页标题由旧名改为 `Tech Life Research`；`README.md` 规模口径改为指针（不再硬编码数量）。
+- **自动化**：新增两个妙手定时任务——「tech-context-digest 月度内容更新」（每月 1 日 14:30，`FREQ=MONTHLY`）与「审计 L3 深度复核与终审」（每周一 09:00，对齐 `engine/audit/README.md` §三·五），均经 `repo_sync` 网关 + PR。
+- **数据治理**：删除 `engine/audit/records/reviews/` 29 条、`semantic/` 49 条迁移孤儿记录与 3 个已删报告快照；`.gitignore` 忽略 `.meituan-catpaw/`。
+- **最佳实践对齐**：修正 `architecture-and-pipeline-design.md`（layout.json v5.0 口径）与 `report-classification.md` 漂移；报告外部链接补 `noopener`（MON-04 清零）；`engine/tools/README.md` 补全工具一览；tracker 补齐四个 canonical triage 标签。
+
+## 3.6.0 — 2026-11-21：ai-application 对齐 ai-security 与 immigration/dubai 新增
+
+- **结构**：删除 `content/tech/ai-application/trends/`，新建 `competitive-intelligence/dubai`（竞争情报监测型）、`dubai`（职业就业调研型）、`industry-research/dubai`（行业深度研究型）三条月度业务线，与 `ai-security/` 三类同构；`data/processed/` 同步。
+- **结构**：国际主题新增 `content/international/immigration/dubai`（category=immigration，region=dubai；政策法规解读型，基线 + 月度），聚焦黄金签证（Golden Visa）与绿卡签证（Green Visa）。
+- **layout.json**：`classification_version` 2026-11-21.3；`changelog` 同步上述两条。
+
 ## 3.5.0 — 2026-11-21：科技主题全线月度化与 ai-security/dubai 归位
 
 - **结构**：删除 `content/tech/ai-security/weekly-roundup/` 与 `content/tech/ai-application/weekly-roundup/`（含 `data/processed/` 台账与来源登记）；`content/tech/ai-security/security/dubai/` 归位为 `content/tech/ai-security/dubai/`（含 `data/processed/`）；新建 `content/tech/ai-application/trends/`（竞争情报监测型，月度）。
