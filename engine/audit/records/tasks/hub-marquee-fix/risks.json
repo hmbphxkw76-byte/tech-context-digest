@@ -1,0 +1,8 @@
+[
+  {
+    "description": "多条目行为不变",
+    "id": "R-1",
+    "mitigation": "复制逻辑仅对≥2生效",
+    "owner": ""
+  }
+]

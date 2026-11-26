@@ -522,13 +522,18 @@ a:hover{text-decoration:underline}
         var exp = a.getAttribute('data-expires');
         return !exp || new Date(exp + 'T00:00:00Z').getTime() > now;
       }).slice(0, 3);
-    if (!items.length) { box.style.display = 'none'; return; }
+    if (!items.length) { box.style.display = 'none'; return; }  // 无条目：整行留空
     track.innerHTML = '';
     function put(a) { track.appendChild(a.cloneNode(true)); }
-    items.forEach(put);   // 复制一份实现无缝循环
-    items.forEach(put);
-    view.style.overflow = 'hidden';
-    track.style.setProperty('--hm-dur', (12 * items.length) + 's');  // 约 12s/条
+    if (items.length >= 2) {          // ≥2 条：复制一份实现无缝循环
+      items.forEach(put);
+      items.forEach(put);
+      view.style.overflow = 'hidden';
+      track.style.setProperty('--hm-dur', (12 * items.length) + 's');  // 约 12s/条
+    } else {
+      items.forEach(put);              // 单条：放回唯一条目，静止展示
+      track.style.animation = 'none';
+    }
   })();
 
   applyFilter();
