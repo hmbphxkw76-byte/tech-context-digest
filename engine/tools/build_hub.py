@@ -111,7 +111,7 @@ a:hover{text-decoration:underline}
 
 /* ── Hero：居中标题 + 四项统计 ── */
 .hero{background:linear-gradient(128deg,#0f2338 0%,#16324f 52%,#2f5597 100%);
-  color:#fff;padding:22px 40px 24px;text-align:center}
+  color:#fff;padding:14px 40px 18px;text-align:center}
 .hero .stats{display:flex;flex-wrap:wrap;justify-content:center;gap:14px;margin-top:0}
 .hero .stat{background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.22);
   border-radius:var(--radius);padding:14px 26px;min-width:128px;
@@ -230,18 +230,23 @@ a:hover{text-decoration:underline}
   .filterbar .count{margin-left:0;width:100%}
 }
 
-/* ── 统计行下方：热点事件追踪横滚条（hub → hot-news-monitor）── */
-.hot-strip{display:flex;align-items:center;gap:14px;margin-top:16px}
-.hot-strip-title{font-size:13px;color:#c7d3df;white-space:nowrap}
-.hot-strip-track{display:flex;gap:10px;overflow-x:auto;padding-bottom:4px;
-  scrollbar-width:thin;-webkit-overflow-scrolling:touch}
-.hot-card{flex:0 0 auto;max-width:250px;background:rgba(255,255,255,.08);
+/* ── 统计行下方：热点事件跑马灯（左→右循环，hub → hot-news-monitor）── */
+.hot-marquee{margin-top:12px}
+.hm-view{overflow:hidden;width:100%}
+.hm-track{display:flex;gap:10px;width:max-content;
+  animation:hm-scroll var(--hm-dur,36s) linear infinite}
+.hot-marquee:hover .hm-track{animation-play-state:paused}
+.hot-card{flex:0 0 auto;width:220px;background:rgba(255,255,255,.08);
   border:1px solid rgba(255,255,255,.18);color:#fff;border-radius:9px;
-  padding:8px 12px;text-decoration:none}
+  padding:8px 12px;text-decoration:none;box-sizing:border-box}
 .hot-card:hover{background:rgba(255,255,255,.16);text-decoration:none}
-.hot-card b{display:block;font-size:12.5px;line-height:1.35}
+.hot-card b{display:block;font-size:12.5px;line-height:1.35;white-space:nowrap;
+  overflow:hidden;text-overflow:ellipsis}
 .hot-card span{font-size:11px;color:#c7d3df}
 .hot-strip-empty{font-size:12px;color:#9fb0c1}
+@keyframes hm-scroll{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+@media (prefers-reduced-motion:reduce){.hm-track{animation:none}}
+@media (max-width:560px){.hm-view{overflow-x:auto}}
 """
 
 _SCRIPT = """\
@@ -336,6 +341,26 @@ _SCRIPT = """\
   window.addEventListener('beforeprint', function () {
     document.querySelectorAll('.more').forEach(function (d) { d.open = true; });
   });
+
+  (function () {  // 热点跑马灯：按浏览器时间过滤过期、最多 3 条、左→右循环
+    var box = document.getElementById('hotMarquee');
+    var view = box && box.querySelector('.hm-view');
+    var track = document.getElementById('hmTrack');
+    if (!box || !view || !track) { return; }
+    var now = Date.now();
+    var items = Array.prototype.filter.call(
+      track.querySelectorAll('.hot-card'), function (a) {
+        var exp = a.getAttribute('data-expires');
+        return !exp || new Date(exp + 'T00:00:00Z').getTime() > now;
+      }).slice(0, 3);
+    if (!items.length) { box.style.display = 'none'; return; }
+    track.innerHTML = '';
+    function put(a) { track.appendChild(a.cloneNode(true)); }
+    items.forEach(put);   // 复制一份实现无缝循环
+    items.forEach(put);
+    view.style.overflow = 'hidden';
+    track.style.setProperty('--hm-dur', (12 * items.length) + 's');  // 约 12s/条
+  })();
 
   applyFilter();
 })();
@@ -909,7 +934,7 @@ def _render_theme(theme_id: str, theme_name: str, theme_topics: list[Topic],
     return parts
 
 
-def _hotnews_briefs() -> list[tuple[str, str]]:
+def _hotnews_briefs() -> list[tuple[str, str, str]]:
     """读 hot-news-monitor/config/briefs/index.json（入库、确定性）；缺失返回空。"""
     path = ROOT / "hot-news-monitor" / "config" / "briefs" / "index.json"
     try:
@@ -921,25 +946,28 @@ def _hotnews_briefs() -> list[tuple[str, str]]:
         if b.get("status", "active") != "active":
             continue
         title = str(b.get("title") or b.get("slug") or "")
-        out.append((title, f'hot-news-monitor/dashboard/{b.get("out_name", "")}'))
+        out.append((title, f'hot-news-monitor/dashboard/{b.get("out_name", "")}',
+                    str(b.get("expires_at") or "")))
     return out
 
 
-def _render_hot_strip() -> list[str]:
-    """统计行下方的「热点事件追踪」横滚条：只依赖入库清单（CI --check 确定性）。"""
+def _render_hot_marquee() -> list[str]:
+    """统计行下方「热点事件跑马灯」：左→右循环；过期/限 3 条由前端按浏览器时间处理。"""
     briefs = _hotnews_briefs()
     cards = [
-        f'<a class="hot-card" href="{_esc(h)}" title="{_esc(t)}">'
-        f'<b>{_esc(t)}</b><span>专题报告</span></a>'
-        for t, h in briefs
+        f'<a class="hot-card" href="{_esc(h)}" title="{_esc(t)}"'
+        + (f' data-expires="{_esc(e)}"' if e else '')
+        + f'><b>{_esc(t)}</b><span>专题报告</span></a>'
+        for t, h, e in briefs
     ]
     if not briefs:
-        cards.append('<span class="hot-strip-empty">暂无已登记专题</span>')
+        cards.append('<span class="hot-strip-empty">暂无热点专题</span>')
     return [
-        '<div class="hot-strip" aria-label="热点事件追踪">',
-        '<span class="hot-strip-title">热点事件追踪</span>',
-        '<div class="hot-strip-track">',
+        '<div class="hot-marquee" id="hotMarquee" aria-label="热点事件追踪">',
+        '<div class="hm-view">',
+        '<div class="hm-track" id="hmTrack">',
         *cards,
+        "</div>",
         "</div>",
         "</div>",
     ]
@@ -974,7 +1002,7 @@ def render_hub(topics: list[Topic]) -> str:
         f'<div class="stat"><b>{n_reports}</b>报告</div>',
         f'<div class="stat"><b>{n_types}</b>类型</div>',
         "</div>",
-        *_render_hot_strip(),
+        *_render_hot_marquee(),
         "</section>",
         '<div class="filterbar">',
         '<input id="hub-search" type="search" placeholder="搜索主题 / 报告标题…" aria-label="搜索主题或报告">',

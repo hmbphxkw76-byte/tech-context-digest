@@ -1,0 +1,20 @@
+[
+  {
+    "description": "生成物漂移",
+    "id": "R-1",
+    "mitigation": "过滤逻辑放前端(JS),生成物确定性不受影响",
+    "owner": ""
+  },
+  {
+    "description": "过期条目全灭",
+    "id": "R-2",
+    "mitigation": "整行隐藏,页面保持整洁",
+    "owner": ""
+  },
+  {
+    "description": "动效可访问性",
+    "id": "R-3",
+    "mitigation": "hover暂停+prefers-reduced-motion+无JS降级",
+    "owner": ""
+  }
+]

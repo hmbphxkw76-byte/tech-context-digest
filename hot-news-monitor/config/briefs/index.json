@@ -10,6 +10,7 @@
       "data_file": "nvidia-2026-11-26.json",
       "out_name": "brief-nvidia-2026-11-26.html",
       "legacy_redirect": "/report-nvidia.html",
+      "expires_at": "2026-12-03",
       "status": "active"
     }
   ]
