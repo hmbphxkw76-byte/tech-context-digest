@@ -55,9 +55,10 @@ class Handler(BaseHTTPRequestHandler):
     def do_GET(self) -> None:  # noqa: N802
         path = urlparse(self.path).path
         if path == "/" or path.endswith(".html"):
-            target = (DASHBOARD_DIR / "index.html").resolve()
-            if not str(target).startswith(str(DASHBOARD_DIR.resolve())):
-                self._send(403, b"forbidden", "text/plain; charset=utf-8")
+            name = "index.html" if path == "/" else path.lstrip("/").split("?")[0]
+            target = (DASHBOARD_DIR / name).resolve()
+            if not str(target).startswith(str(DASHBOARD_DIR.resolve())) or not target.is_file():
+                self._send(404, b"not found", "text/plain; charset=utf-8")
                 return
             self._send(200, target.read_bytes(), "text/html; charset=utf-8")
             return

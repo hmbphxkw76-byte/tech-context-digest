@@ -497,9 +497,29 @@ function bindControls(){
       .finally(function(){ setProgress(false,false); });
   });
 }
+function focusEvent(id){
+  var card = document.querySelector('.event-card[data-eid="'+id+'"]');
+  if(!card){  // 深链事件不在当前筛选结果内时，重置筛选后重试一次
+    if(activeTag !== "全部" || keyword){ activeTag = "全部"; keyword = ""; $("searchBox").value = ""; renderAll(state, {keepUI:true}); }
+    card = document.querySelector('.event-card[data-eid="'+id+'"]');
+  }
+  if(!card){ return; }
+  card.scrollIntoView({block:"center"});
+  card.style.boxShadow = "0 0 0 2px var(--accent)";
+  var d = card.querySelector("details.src-panel"); if(d){ d.open = true; }
+}
+function applyDeepLink(){
+  var qm = /[?&]q=([^&]+)/.exec(window.location.search);
+  if(qm){
+    keyword = decodeURIComponent(qm[1].replace(/\+/g, " "));
+    $("searchBox").value = keyword;
+  }
+  var hm = /^#event\/([A-Za-z0-9._-]+)$/.exec(window.location.hash);
+  if(hm && state){ renderAll(state, {keepUI:true}); focusEvent(hm[1]); }
+}
 document.addEventListener("DOMContentLoaded", function(){
   bindControls();
-  fetchState(function(e,s){ tick(e,s); scheduleNext(); });
+  fetchState(function(e,s){ tick(e,s); applyDeepLink(); scheduleNext(); });
 });
 })();
 </script>

@@ -1,0 +1,20 @@
+[
+  {
+    "description": "部分权威站点网络不可达",
+    "id": "R-1",
+    "mitigation": "多通道检索(web_search/web_fetch)+官方一手源优先,核实失败标注待核实",
+    "owner": ""
+  },
+  {
+    "description": "检索结果时效与真实性无法完全保证",
+    "id": "R-2",
+    "mitigation": "每条留原文URL与抓取时间,数值与日期以官方一手源为准",
+    "owner": ""
+  },
+  {
+    "description": "新页面触发既有生成物校验漂移",
+    "id": "R-3",
+    "mitigation": "仅新增独立文件,提交前重放统一门禁",
+    "owner": ""
+  }
+]

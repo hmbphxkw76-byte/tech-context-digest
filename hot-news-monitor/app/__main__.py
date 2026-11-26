@@ -80,6 +80,17 @@ def cmd_sample_verify(args: argparse.Namespace) -> int:
     return 1 if bad else 0
 
 
+def _cmd_report_nvidia(args: argparse.Namespace) -> int:
+    from .brief import main as brief_main
+
+    argv = []
+    if args.source:
+        argv += ["--source", args.source]
+    if args.out:
+        argv += ["--out", args.out]
+    return int(brief_main(argv))
+
+
 def cmd_soak(args: argparse.Namespace) -> int:
     """长跑稳定性测试：连续运行 duration 秒，每 interval 秒刷新一次并核对快照可用。"""
     store = _store()
@@ -135,6 +146,11 @@ def main(argv: list[str] | None = None) -> int:
     p.add_argument("--interval", type=int, default=DEFAULT_INTERVAL)
     p.add_argument("--threshold", type=float, default=DEFAULT_THRESHOLD)
     p.set_defaults(func=cmd_soak)
+
+    p = sub.add_parser("report-nvidia", help="渲染英伟达专题追踪报告页")
+    p.add_argument("--source", default=None, help="数据 JSON（默认 config/nvidia-brief-2026-11-26.json）")
+    p.add_argument("--out", default=None, help="输出路径（默认 dashboard/report-nvidia.html）")
+    p.set_defaults(func=_cmd_report_nvidia)
 
     args = ap.parse_args(argv)
     return int(args.func(args))
