@@ -2,7 +2,7 @@
   "schema_version": "1.0",
   "comment": "正式发布报告指纹（sha256，确定性无时间戳）。由 publish_fingerprint.py --emit 生成。",
   "fingerprints": {
-    "content/economy/dubai/apartment-investment/reports/2026-11_baseline_report.html": "6a5088359afc4ab998c912f823886b2ae936f9c322a08cae4267bb7fcb532bba",
+    "content/economy/dubai/apartment-investment/reports/2026-11_baseline_report.html": "08bef863fbf0dbed36cb2bc3886c52cb975e9d6875bcb64bf59a9547b8da369c",
     "content/economy/dubai/apartment/reports/2026-11_baseline_report.html": "45a91d1fb8153121f11622b908a70231b0c2a67893661e9c6c5d148350ff8b69",
     "content/economy/dubai/apartment/reports/2026-11_monthly.html": "bcc56ff6711e92e8057d461461f3ab9716e995ed9f64ba2e5b021a0a1fc3fc26",
     "content/economy/dubai/apartment/reports/2026-Q3_quarterly.html": "4ffa47260692c22936f8f04f50e6bac8d587757a1efa1b2fd5e2093648ccb778",

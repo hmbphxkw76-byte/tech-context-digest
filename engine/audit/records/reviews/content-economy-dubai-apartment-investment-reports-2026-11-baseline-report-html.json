@@ -1,0 +1,40 @@
+{
+  "report": "content/economy/dubai/apartment-investment/reports/2026-11_baseline_report.html",
+  "reviews": [
+    {
+      "stage": "draft",
+      "reviewer": "ci-bot",
+      "timestamp": "2026-11-26T10:43:36+00:00",
+      "decision": "pass",
+      "findings": [],
+      "evidence": "[strict] L2 10/10；标题 OK；断头锚点 0；门禁错误 0 项；来源可追溯 OK；口径一致 OK；语义终审 无 second 复核记录",
+      "levels": [
+        "L1",
+        "L2"
+      ]
+    },
+    {
+      "stage": "initial",
+      "reviewer": "ci-bot",
+      "timestamp": "2026-11-26T10:43:36+00:00",
+      "decision": "pass",
+      "findings": [],
+      "evidence": "[strict] L2 10/10；标题 OK；断头锚点 0；门禁错误 0 项；来源可追溯 OK；口径一致 OK；语义终审 无 second 复核记录",
+      "levels": [
+        "L1",
+        "L2"
+      ]
+    },
+    {
+      "stage": "final",
+      "reviewer": "ci-bot",
+      "timestamp": "2026-11-26T10:43:36+00:00",
+      "decision": "fix",
+      "findings": [],
+      "evidence": "[strict] L2 10/10；标题 OK；断头锚点 0；门禁错误 0 项；来源可追溯 OK；口径一致 OK；语义终审 无 second 复核记录",
+      "levels": [
+        "L3"
+      ]
+    }
+  ]
+}
