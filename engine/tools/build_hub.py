@@ -32,6 +32,7 @@ from __future__ import annotations
 
 import argparse
 import html as html_mod
+import json
 import re
 import sys
 from dataclasses import dataclass, field
@@ -229,6 +230,22 @@ a:hover{text-decoration:underline}
   .topic-head h3{font-size:15.5px}
   .filterbar .count{margin-left:0;width:100%}
 }
+
+/* ── 热点事件追踪入口桥（hub → hot-news-monitor）── */
+.hotnews-bridge{background:linear-gradient(120deg,#0f2338 0%,#16324f 55%,#23486e 100%);
+  color:#fff;border-radius:14px;margin:18px auto;max-width:1240px;padding:20px 24px;
+  display:flex;gap:20px;align-items:center;flex-wrap:wrap}
+.hb-main{flex:1;min-width:260px}
+.hb-main h2{margin:0;font-size:20px;letter-spacing:.5px}
+.hb-main p{margin:6px 0 0;color:#c7d3df;font-size:13.5px}
+.hb-links{display:flex;gap:10px;flex-wrap:wrap}
+.hb-link{background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.25);color:#fff;
+  border-radius:10px;padding:10px 14px;text-decoration:none;min-width:190px}
+.hb-link:hover{background:rgba(255,255,255,.2)}
+.hb-link b{display:block;font-size:13.5px}
+.hb-link span{font-size:11.5px;color:#c7d3df}
+.hb-go{background:#c8a24a;border-color:#c8a24a;color:#1d2733;font-weight:600;min-width:150px}
+@media (max-width:560px){.hotnews-bridge{margin:12px;padding:16px}}
 """
 
 _SCRIPT = """\
@@ -896,6 +913,47 @@ def _render_theme(theme_id: str, theme_name: str, theme_topics: list[Topic],
     return parts
 
 
+def _hotnews_briefs() -> list[tuple[str, str]]:
+    """读 hot-news-monitor/config/briefs/index.json（入库、确定性）；缺失返回空。"""
+    path = ROOT / "hot-news-monitor" / "config" / "briefs" / "index.json"
+    try:
+        data = json.loads(path.read_text(encoding="utf-8"))
+    except (OSError, json.JSONDecodeError):
+        return []
+    out = []
+    for b in data.get("briefs", ()):
+        if b.get("status", "active") != "active":
+            continue
+        title = str(b.get("title") or b.get("slug") or "")
+        out.append((title, f'hot-news-monitor/dashboard/{b.get("out_name", "")}'))
+    return out
+
+
+def _render_hotnews_block() -> list[str]:
+    """hub 顶部「热点事件追踪」桥：只依赖入库清单（CI --check 确定性）。"""
+    briefs = _hotnews_briefs()
+    links = [
+        f'<a class="hb-link" href="{_esc(h)}"><b>{_esc(t)}</b>'
+        f"<span>专题报告 · 已核验来源</span></a>"
+        for t, h in briefs
+    ]
+    links.insert(0, '<a class="hb-link hb-go" href="http://127.0.0.1:8765/">'
+                   '<b>实时看板</b><span>每 5 分钟刷新 · 本地服务</span></a>')
+    if not briefs:
+        links.append('<a class="hb-link" href="http://127.0.0.1:8765/report">'
+                     '<b>当前热点专题</b><span>自动轮换 · 本地服务</span></a>')
+    return [
+        '<section class="hotnews-bridge" id="hotnews">',
+        '<div class="hb-main"><h2>热点事件追踪</h2>',
+        '<p>英文权威信源 · 抓取 → 聚合 → 交叉验证；每 5 分钟全量刷新，'
+        '当前热点专题在看板内自动轮换。</p></div>',
+        '<div class="hb-links">',
+        *links,
+        "</div>",
+        "</section>",
+    ]
+
+
 def render_hub(topics: list[Topic]) -> str:
     theme_groups = group_by_theme(topics)
     layout = load_layout()
@@ -927,6 +985,7 @@ def render_hub(topics: list[Topic]) -> str:
         f'<div class="stat"><b>{n_types}</b>类型</div>',
         "</div>",
         "</section>",
+        *_render_hotnews_block(),
         '<div class="filterbar">',
         '<input id="hub-search" type="search" placeholder="搜索主题 / 报告标题…" aria-label="搜索主题或报告">',
         '<div class="chips" id="chips-topic" role="group" aria-label="主题筛选">',

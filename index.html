@@ -150,6 +150,22 @@ a:hover{text-decoration:underline}
   .topic-head h3{font-size:15.5px}
   .filterbar .count{margin-left:0;width:100%}
 }
+
+/* ── 热点事件追踪入口桥（hub → hot-news-monitor）── */
+.hotnews-bridge{background:linear-gradient(120deg,#0f2338 0%,#16324f 55%,#23486e 100%);
+  color:#fff;border-radius:14px;margin:18px auto;max-width:1240px;padding:20px 24px;
+  display:flex;gap:20px;align-items:center;flex-wrap:wrap}
+.hb-main{flex:1;min-width:260px}
+.hb-main h2{margin:0;font-size:20px;letter-spacing:.5px}
+.hb-main p{margin:6px 0 0;color:#c7d3df;font-size:13.5px}
+.hb-links{display:flex;gap:10px;flex-wrap:wrap}
+.hb-link{background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.25);color:#fff;
+  border-radius:10px;padding:10px 14px;text-decoration:none;min-width:190px}
+.hb-link:hover{background:rgba(255,255,255,.2)}
+.hb-link b{display:block;font-size:13.5px}
+.hb-link span{font-size:11.5px;color:#c7d3df}
+.hb-go{background:#c8a24a;border-color:#c8a24a;color:#1d2733;font-weight:600;min-width:150px}
+@media (max-width:560px){.hotnews-bridge{margin:12px;padding:16px}}
 </style>
 </head>
 <body>
@@ -161,6 +177,14 @@ a:hover{text-decoration:underline}
 <div class="stat"><b>16</b>业务线</div>
 <div class="stat"><b>22</b>报告</div>
 <div class="stat"><b>7</b>类型</div>
+</div>
+</section>
+<section class="hotnews-bridge" id="hotnews">
+<div class="hb-main"><h2>热点事件追踪</h2>
+<p>英文权威信源 · 抓取 → 聚合 → 交叉验证；每 5 分钟全量刷新，当前热点专题在看板内自动轮换。</p></div>
+<div class="hb-links">
+<a class="hb-link hb-go" href="http://127.0.0.1:8765/"><b>实时看板</b><span>每 5 分钟刷新 · 本地服务</span></a>
+<a class="hb-link" href="hot-news-monitor/dashboard/brief-nvidia-2026-11-26.html"><b>英伟达（Nvidia）高层人事与国家安全争议专题</b><span>专题报告 · 已核验来源</span></a>
 </div>
 </section>
 <div class="filterbar">

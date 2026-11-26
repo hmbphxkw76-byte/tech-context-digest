@@ -77,6 +77,14 @@ def refresh(
         metrics=metrics,
     )
     store.save_state(snapshot)
+    try:  # 快照落盘后重建专题页（含 current 自动轮换）；失败不阻断刷新
+        from .brief import rebuild_all
+
+        written = rebuild_all()
+        brief_note = f"briefs rebuilt: {len(written)}"
+    except Exception as exc:  # noqa: BLE001
+        brief_note = f"brief rebuild failed: {type(exc).__name__}"
+    store.append_fetch_log({"brief": brief_note})
     ok = sum(1 for s in status if s.get("ok"))
     store.append_fetch_log({
         "mode": mode,

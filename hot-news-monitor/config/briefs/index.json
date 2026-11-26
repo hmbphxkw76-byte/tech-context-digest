@@ -1,0 +1,16 @@
+{
+  "version": "2026-11-26",
+  "description": "热点事件专题清单（单一事实源）。每个专题 = 一份人工编译的事件追踪数据（config/briefs/<file>），生成 dashboard/brief-<slug>.html；dashboard/brief-current.html 由调度器按当前快照 Top1 事件自动重建，命中关键词时叠加对应专题的编译层。",
+  "match_scope": "用关键词匹配 Top1 事件的标题与全部关联报道标题（小写包含）。",
+  "briefs": [
+    {
+      "slug": "nvidia-2026-11-26",
+      "title": "英伟达（Nvidia）高层人事与国家安全争议专题",
+      "keywords": ["nvidia", "jensen huang", "huang", "blackwell", "geforce", "cuda"],
+      "data_file": "nvidia-2026-11-26.json",
+      "out_name": "brief-nvidia-2026-11-26.html",
+      "legacy_redirect": "/report-nvidia.html",
+      "status": "active"
+    }
+  ]
+}

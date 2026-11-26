@@ -15,7 +15,7 @@ from pathlib import Path
 from typing import Any
 
 APP_ROOT = Path(__file__).resolve().parents[1]
-BRIEF_PATH = APP_ROOT / "config" / "nvidia-brief-2026-11-26.json"
+BRIEF_PATH = APP_ROOT / "config" / "briefs" / "nvidia-2026-11-26.json"
 OUT_PATH = APP_ROOT / "runtime" / "brief-verify.json"
 
 URL_RE = re.compile(r"^https?://[^\s]+$")

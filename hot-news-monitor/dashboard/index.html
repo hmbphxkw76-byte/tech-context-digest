@@ -163,6 +163,9 @@ footer{border-top:1px solid var(--line);padding:18px 0 30px;color:var(--muted);f
       <button id="sortTime" aria-pressed="false">按更新时间</button>
       <button id="sortTag" aria-pressed="false">按分类标签</button>
     </div>
+    <div class="chips" id="briefChips" role="group" aria-label="热点专题">
+      <a class="chip" href="/report" style="text-decoration:none">当前热点专题</a>
+    </div>
     <div class="chips" id="tagChips" role="group" aria-label="按分类筛选"></div>
     <label class="search"><input id="searchBox" type="search" placeholder="搜索事件标题…" aria-label="搜索事件标题"></label>
     <button class="btn ghost" id="refreshBtn" type="button">立即刷新</button>
@@ -514,6 +517,22 @@ function focusEvent(id){
   card.style.boxShadow = "0 0 0 2px var(--accent)";
   var d = card.querySelector("details.src-panel"); if(d){ d.open = true; }
 }
+function renderBriefChips(){
+  fetch("/api/briefs", {cache:"no-store"})
+    .then(function(r){ return r.json(); })
+    .then(function(m){
+      var box = document.getElementById("briefChips");
+      (m.briefs||[]).forEach(function(b){
+        if((b.status||"active") !== "active"){ return; }
+        var a = document.createElement("a");
+        a.className = "chip"; a.href = "/" + b.out_name;
+        a.textContent = b.title.length>18 ? b.title.slice(0,18)+"…" : b.title;
+        a.title = b.title;
+        box.appendChild(a);
+      });
+    })
+    .catch(function(){});
+}
 function applyDeepLink(){
   var qm = /[?&]q=([^&]+)/.exec(window.location.search);
   if(qm){
@@ -525,6 +544,7 @@ function applyDeepLink(){
 }
 document.addEventListener("DOMContentLoaded", function(){
   bindControls();
+  renderBriefChips();
   fetchState(function(e,s){ tick(e,s); applyDeepLink(); scheduleNext(); });
 });
 })();

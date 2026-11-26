@@ -80,6 +80,16 @@ def cmd_sample_verify(args: argparse.Namespace) -> int:
     return 1 if bad else 0
 
 
+def _cmd_briefs(_args: argparse.Namespace) -> int:
+    from .brief import rebuild_all
+
+    written = rebuild_all()
+    for path in written:
+        print(f"[brief] {path}")
+    print(f"[brief] rebuilt {len(written)} page(s)")
+    return 0
+
+
 def _cmd_verify_brief(args: argparse.Namespace) -> int:
     from .verify_brief import main as vb_main
 
@@ -164,6 +174,9 @@ def main(argv: list[str] | None = None) -> int:
     p.add_argument("--source", default=None, help="数据 JSON（默认 config/nvidia-brief-2026-11-26.json）")
     p.add_argument("--out", default=None, help="输出路径（默认 dashboard/report-nvidia.html）")
     p.set_defaults(func=_cmd_report_nvidia)
+
+    p = sub.add_parser("briefs", help="重建全部热点专题页（含当前热点 current）")
+    p.set_defaults(func=_cmd_briefs)
 
     p = sub.add_parser("verify-brief", help="专题数据机器核验（结构/引用/链接/可达性）")
     p.add_argument("--source", default=None)
