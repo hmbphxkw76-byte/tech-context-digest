@@ -146,7 +146,7 @@ def main(argv: list[str] | None = None) -> int:
     p = sub.add_parser("serve", help="启动调度 + 本地看板服务")
     p.add_argument("--host", default="127.0.0.1")
     p.add_argument("--port", type=int, default=8765)
-    p.add_argument("--interval", type=int, default=DEFAULT_INTERVAL, help="全量刷新周期（秒），默认 300")
+    p.add_argument("--interval", type=int, default=DEFAULT_INTERVAL, help="全量刷新周期（秒），默认 21600（6 小时）")
     p.add_argument("--threshold", type=float, default=DEFAULT_THRESHOLD, help="高优先级热度阈值，默认 50（预校准）")
     p.add_argument("--no-immediate", action="store_true", help="启动时不立即刷新")
     p.add_argument("--demo", action="store_true", help="离线演示：只用合成示例数据（不联网）")

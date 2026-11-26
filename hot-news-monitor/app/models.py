@@ -112,7 +112,7 @@ class Snapshot:
             )
         return cls(
             generated_at=str(data.get("generated_at", "")),
-            interval_seconds=int(data.get("interval_seconds", 300)),
+            interval_seconds=int(data.get("interval_seconds", 21600)),
             mode=str(data.get("mode", "seed")),
             threshold=float(data.get("threshold", 80)),
             events=events,

@@ -366,7 +366,7 @@ def render_current(state: dict[str, Any], manifest: dict[str, Any] | None = None
     matched_note = ("已命中已登记专题，叠加人工编译层。" if editorial else
                     "未命中已登记专题关键词；本页为纯机械聚合视图。新专题可在 config/briefs/ 登记后自动生效。")
     return _shell(f"热点事件专题 · {title}", body_parts, state,
-                  extra_note=f"本页由调度器每次刷新（每 5 分钟）自动重建，标题随当前最热事件轮换。{matched_note}")
+                  extra_note=f"本页由调度器每次刷新（每 6 小时）自动重建，标题随当前最热事件轮换。{matched_note}")
 
 
 def _kw(title: str) -> str:
@@ -383,7 +383,7 @@ def _shell(topic: str, body_parts: list[str], state: dict[str, Any], extra_note:
     note = f'<p class="src-note">{esc(extra_note)}</p>' if extra_note else ""
     body = (
         f'<header class="hero"><div class="wrap"><h1>{esc(topic)}</h1>'
-        f'<div class="sub">当前热点自动轮换 · 每 5 分钟随快照重建</div>'
+        f'<div class="sub">当前热点自动轮换 · 每 6 小时随快照重建</div>'
         f'<div class="meta-pills">{"".join(pills)}</div></div></header>'
         f'<main class="wrap"><a class="skip-link" href="#main">跳到主要内容</a>{"".join(body_parts)}{note}</main>'
         f'<footer>由 hot-news-monitor 自动生成；信源纪律与核验口径与实时看板一致。</footer>'
@@ -416,7 +416,7 @@ def rebuild_all(out_dir: Path | None = None) -> list[Path]:
         cur.write_text(render_current(state, manifest), encoding="utf-8")
     else:
         cur.write_text(_shell("当前热点专题",
-                              ["<p>实时快照尚未就绪，等待首次抓取（每 5 分钟自动刷新）。</p>"],
+                              ["<p>实时快照尚未就绪，等待首次抓取（每 6 小时自动刷新）。</p>"],
                               {"generated_at": "—", "mode": "none"}), encoding="utf-8")
     written.append(cur)
     return written

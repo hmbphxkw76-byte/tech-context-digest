@@ -1,0 +1,34 @@
+[
+  {
+    "acceptance": "",
+    "depends_on": [],
+    "id": "T-1",
+    "phase": "",
+    "status": "pending",
+    "title": "build_hub hero 两栏布局(左品牌/右热点面板)+移除独立桥+响应式"
+  },
+  {
+    "acceptance": "",
+    "depends_on": [],
+    "id": "T-2",
+    "phase": "",
+    "status": "pending",
+    "title": "刷新默认周期 300s→21600s(代码/前端/README/soak 口径)"
+  },
+  {
+    "acceptance": "",
+    "depends_on": [],
+    "id": "T-3",
+    "phase": "",
+    "status": "pending",
+    "title": "单测/静态检查/build_hub --check/浏览器截图"
+  },
+  {
+    "acceptance": "",
+    "depends_on": [],
+    "id": "T-4",
+    "phase": "",
+    "status": "pending",
+    "title": "统一门禁+PR+合并+Pages 复验"
+  }
+]

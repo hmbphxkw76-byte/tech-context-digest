@@ -150,7 +150,7 @@ def build_events(
         series = series_by_id.get(eid, [])
         if not series or series[-1].value != heat:
             series.append(HeatPoint(ts=ts, value=heat))
-        series = series[-72:]  # 保留近 6 小时（5 分钟粒度）
+        series = series[-144:]  # 保留近 144 个采样点（6 小时粒度，约一个月）
         events.append(
             HotEvent(
                 id=eid,

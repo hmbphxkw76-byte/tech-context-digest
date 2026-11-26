@@ -152,20 +152,22 @@ a:hover{text-decoration:underline}
 }
 
 /* ── 热点事件追踪入口桥（hub → hot-news-monitor）── */
-.hotnews-bridge{background:linear-gradient(120deg,#0f2338 0%,#16324f 55%,#23486e 100%);
-  color:#fff;border-radius:14px;margin:18px auto;max-width:1240px;padding:20px 24px;
-  display:flex;gap:20px;align-items:center;flex-wrap:wrap}
-.hb-main{flex:1;min-width:260px}
-.hb-main h2{margin:0;font-size:20px;letter-spacing:.5px}
-.hb-main p{margin:6px 0 0;color:#c7d3df;font-size:13.5px}
-.hb-links{display:flex;gap:10px;flex-wrap:wrap}
+/* ── 头部一体化：左品牌 / 右热点事件面板 ── */
+.hero-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(300px,360px);
+  gap:26px;align-items:center;max-width:1240px;margin:0 auto;text-align:left}
+.brand-col{min-width:0;text-align:center}
+.hero-hot{background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.16);
+  border-radius:12px;padding:16px 18px;color:#fff}
+.hero-hot h2{margin:0;font-size:17px;letter-spacing:.5px}
+.hero-hot p{margin:6px 0 10px;color:#c7d3df;font-size:12.5px}
+.hb-links{display:flex;flex-direction:column;gap:8px}
 .hb-link{background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.25);color:#fff;
-  border-radius:10px;padding:10px 14px;text-decoration:none;min-width:190px}
+  border-radius:9px;padding:8px 12px;text-decoration:none;display:block}
 .hb-link:hover{background:rgba(255,255,255,.2)}
-.hb-link b{display:block;font-size:13.5px}
-.hb-link span{font-size:11.5px;color:#c7d3df}
-.hb-go{background:#c8a24a;border-color:#c8a24a;color:#1d2733;font-weight:600;min-width:150px}
-@media (max-width:560px){.hotnews-bridge{margin:12px;padding:16px}}
+.hb-link b{display:block;font-size:13px}
+.hb-link span{font-size:11px;color:#c7d3df}
+.hb-note{margin-top:8px;font-size:11px;color:#9fb0c1}
+@media (max-width:960px){.hero-grid{grid-template-columns:1fr;gap:14px}.hero-hot{width:100%}}
 
 /* ── 阅读器：头部 ── */
 body{display:flex;flex-direction:column;height:100vh;overflow:hidden}
