@@ -1,8 +1,13 @@
 {
   "version": "5.0",
-  "updated": "2026-11-21",
-  "classification_version": "2026-11-21.3",
+  "updated": "2026-11-26",
+  "classification_version": "2026-11-26.1",
   "changelog": [
+    {
+      "version": "2026-11-26.1",
+      "date": "2026-11-26",
+      "summary": "新增顶层应用目录 hot-news-monitor：热点新闻实时追踪报告系统（英文权威信源白名单 → 抓取/聚合/热度 → 本地 API + 响应式看板），不属六主题报告业务线，注册于 root_reserved 作受控顶层目录。"
+    },
     {
       "version": "2026-11-21.3",
       "date": "2026-11-21",
@@ -44,7 +49,8 @@
     "reader.html",
     "INDEX.md",
     "automation-status.json",
-    "perf-status.json"
+    "perf-status.json",
+    "hot-news-monitor"
   ],
   "content_root": "content",
   "regional_segment": "",

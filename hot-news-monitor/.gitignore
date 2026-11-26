@@ -1,0 +1,5 @@
+# hot-news-monitor 运行时产物（不入库，保证生成物确定性 / 可重放）
+__pycache__/
+*.pyc
+runtime/
+.pytest_cache/
