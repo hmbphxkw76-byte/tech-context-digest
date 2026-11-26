@@ -1,6 +1,6 @@
 # 迪拜（阿联酋）公寓住宅市场 · PRIME 城市评估 × MST 个人对齐专项报告
 
-### 事件触发专项（PRIME 框架更正版 + 量化增强）· 版本 v1.2 · 数据截止 / 本期读数时点 2026-11-26
+### 事件触发专项（PRIME 城市评估 × MST + 决策纪律 v1.3）· 版本 v1.3 · 数据截止 / 本期读数时点 2026-11-26
 
 <div class="delta-strip">
   <div class="d add"><div class="n">18 项</div><div class="l">本期新增（PRIME 八指标评估、MST 自评、量化矩阵、入场 / 退出规则等）</div></div>
@@ -29,6 +29,16 @@
 <p class="small muted">口径：强 / 中 / 弱三档定性分档 + 证据指针；无同口径权威数据不打分、不外推。读数时点 2026-11-26。<span class="lvl lvl-partial">部分核验</span></p>
 <h3 style="margin-top:1em">MST 自评结论（投资者层）</h3>
 <p><b>心态</b>：美元计价资产、正利差窗口成立，但价格端连续负增，需接受「买后浮亏」的常态化；<b>技能</b>：本报告提供 cap rate / 可比销售 / 尽调清单全套工具，可自助执行；<b>工具</b>：registry + 指标台账 + 门禁链齐备。<b>错配判定</b>：若 2.1 任一项自评触红线 → 整体降级为「暂不参与」。</p>
+<h3 style="margin-top:1em">决策状态机（v1.3）</h3>
+<table>
+<thead><tr><th>状态</th><th>定义</th><th>当前判定</th></tr></thead>
+<tbody>
+<tr><td><b>Observe 观察</b></td><td>只跟踪与核验，不动作；最小数据集：I 系读数 / 可比销售 / 净收益率口径 / 供给口径</td><td><b>← 当前</b></td></tr>
+<tr><td>Decide 决策</td><td>单笔决策窗口（≤24h），形成决策日志或回退</td><td>未进入</td></tr>
+<tr><td>Act 执行</td><td>执行 / 放弃并记录理由</td><td>未进入</td></tr>
+</tbody>
+</table>
+<p class="small muted">否决清单 K1–K5、假设边际排序与触发器日历分别见 5.1 / 4.7 / 6.4；规范见 business-config 第十一节。</p>
 </div>
 
 ## 一、投资要点（决策摘要）
@@ -123,6 +133,19 @@
 
 <p><b>周期定位与传导</b>：处于「常态化早期」（价格负增、收益率维持高位）；利率 → 估值弹性为负（±50bp ≈ ∓7%～8%，假设乘积）；供给 → 价格传导存在时滞（规划 → 交付约 2–4 年，[S01][S03]）。政策入模：LTV 与签证门槛作方向性参数（G01 / G02），未量化乘数（待核实）。<span class="lvl lvl-partial">部分核验</span></p>
 
+<h3>3.2 可比销售比对表模板（comps，R 阶段工具化）</h3>
+
+<table>
+<thead><tr><th>字段</th><th>说明</th></tr></thead>
+<tbody>
+<tr><td>社区 / 楼龄 / 面积 / 户型</td><td>可比性锚点（同社区优先）</td></tr>
+<tr><td>成交日期 / 成交价 / 单价</td><td>近 6 个月，DLD 登记口径 [S-053]</td></tr>
+<tr><td>去化天数 / 月租金 / 挂牌来源</td><td>去化与租金交叉验证</td></tr>
+</tbody>
+</table>
+
+<p class="small muted">规则：样本量少于 3 组不得用于出价（否决项 K5）；每次候选标的必须刷新本表并归档。</p>
+
 ## 四、财务分析与估值模型
 
 <p class="small muted">PRIME 维度：M（市场发展潜力）｜执行层：MST（协同）</p>
@@ -195,6 +218,19 @@
 </tbody>
 </table>
 
+<h3>4.7 关键假设边际影响排序（资源分配依据）</h3>
+
+<table>
+<thead><tr><th>排序</th><th>假设</th><th>单位变动</th><th>对估值影响</th><th>核验优先级</th></tr></thead>
+<tbody>
+<tr><td>1</td><td>净收益率</td><td>±0.5pp</td><td>约 ∓7%～8%</td><td>最高（消号）</td></tr>
+<tr><td>2</td><td>租金水平</td><td>±5%</td><td>±5%</td><td>高</td></tr>
+<tr><td>3</td><td>利率传导</td><td>+50bp 且全额传导</td><td>利差收窄约 0.5pp，区间下移</td><td>中（被动跟随）</td></tr>
+</tbody>
+</table>
+
+<p class="small muted">含义：核验资源优先投向净收益率口径（当前单源），其次租金样本；利率项保持被动跟踪。</p>
+
 ## 五、风险清单
 
 <p class="small muted">PRIME 维度：E（环境吸引潜力）｜执行层：MST</p>
@@ -219,6 +255,21 @@
 <li><b>供应过剩论 vs 需求流入</b>：看空方强调 2027–2030 管道 &gt;52.5 万套（[S05]）；看多方强调人口 4.58m（+7.5%）、FDI 48.2 亿美元、游客 6.97m（[S09][M12][M17]）。倾向「供给压力真实、需求弹性未知」。</li>
 <li><b>租金口径分裂</b>：要价口径同质化新签较 1 月 −15.3%（[R09]），登记口径显示稳定轨迹（DLD 新闻 [S-062]）。以登记口径为锚、要价为先行信号。</li>
 </ul></div>
+
+<h3>5.1 否决清单（Kill Criteria，一票否决）</h3>
+
+<table>
+<thead><tr><th>#</th><th>否决项</th><th>判定依据</th><th>触发后动作</th></tr></thead>
+<tbody>
+<tr><td>K1</td><td>净收益率同口径证实低于 5%</td><td>双源核验后的净口径</td><td>估值区间整体下修，冻结收购动作</td></tr>
+<tr><td>K2</td><td>供给计划上修超区间上限</td><td>[S03]/[S05] 同口径复核</td><td>供给压力情景升级为基准</td></tr>
+<tr><td>K3</td><td>汇率机制或签证门槛实质变化</td><td>CBUAE / u.ae 官方页</td><td>重算汇率与需求假设，结论降级</td></tr>
+<tr><td>K4</td><td>MST 自评任一红线</td><td>2.1 自评清单</td><td>整体降级为「暂不参与」</td></tr>
+<tr><td>K5</td><td>可比销售样本不足</td><td>comps 模板字段缺失过半</td><td>暂停出价，仅观察</td></tr>
+</tbody>
+</table>
+
+<p class="small muted">规则：任一否决项触发即终止该笔流程（单一决策否决权），无需多数同意。</p>
 
 ## 六、情景与敏感性
 
@@ -282,6 +333,27 @@
 </table>
 
 <p class="small muted">传承与税务：UAE 无个人所得税，但母国税务居民义务需另行核实（待核实，不作结论）。</p>
+
+<h3>6.4 触发器日历</h3>
+
+<table>
+<thead><tr><th>触发器</th><th>节拍</th><th>监测渠道</th><th>触发动作</th><th>验证指标</th></tr></thead>
+<tbody>
+<tr><td>I01–I08</td><td>月度</td><td>CBUAE / DLD / Ejari 登记册</td><td>灯号变化 → 状态机复判</td><td>registry 追踪表</td></tr>
+<tr><td>G01 / G02 政策</td><td>事件驱动</td><td>u.ae / CBUAE 官方页</td><td>启动 K3 复核</td><td>官方原文归档</td></tr>
+<tr><td>宏观（GDP / 油价 / 汇率）</td><td>季度</td><td>IMF / EIA / CBUAE</td><td>假设表更新</td><td>registry 假设表</td></tr>
+<tr><td>可比销售更新</td><td>每有候选标的</td><td>DLD / 门户</td><td>comps 模板刷新</td><td>比对记录</td></tr>
+</tbody>
+</table>
+
+<h3>6.5 行为护栏</h3>
+
+<ul class="tight">
+<li><b>24 小时冷静期</b>：Decide → Act 之间强制间隔；杠杆相关决策延长至 72 小时。</li>
+<li><b>决策日志</b>：每笔决策记录论点 / 证据 / 反对意见 / 结果 / 复盘日期。</li>
+<li><b>单一决策否决权</b>：K1–K5 任一触发即终止该笔流程。</li>
+<li><b>禁止杠杆博价差</b>：杠杆仅允许服务收租型持有（MST 错配警示的硬性化）。</li>
+</ul>
 
 ## 七、合规与边界
 

@@ -1935,7 +1935,19 @@
       "evidence": {
         "report": "content/economy/dubai/apartment-investment/reports/2026-11_baseline_prime-quant-alignment.html",
         "business_line": "content/economy/dubai/apartment-investment",
-        "plans": [],
+        "plans": [
+          {
+            "slug": "decision-discipline",
+            "plan": "engine/audit/records/tasks/decision-discipline/plan.json",
+            "tasks": "engine/audit/records/tasks/decision-discipline/tasks.json",
+            "risks": "engine/audit/records/tasks/decision-discipline/risks.json",
+            "reports": [
+              "content/economy/dubai/apartment-investment/reports/2026-11_baseline_prime-quant-alignment.html"
+            ],
+            "task_count": 4,
+            "risk_count": 1
+          }
+        ],
         "gate": {
           "entry": "engine/tools/optimization_gate.py",
           "probe": true

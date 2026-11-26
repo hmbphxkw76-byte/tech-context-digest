@@ -126,6 +126,13 @@
       "slug": "debt-closeout",
       "task": "debt-closeout"
     },
+    "task/decision-discipline-7e133265": {
+      "note": "source=env:CATPAW_CONVERSATION_ID",
+      "session": "7e13326517fc4e12bd89194de0ca1bee",
+      "session_short": "7e133265",
+      "slug": "decision-discipline",
+      "task": "decision-discipline"
+    },
     "task/doc-ledger-retention-5f37e90d": {
       "note": "source=env:CATPAW_CONVERSATION_ID",
       "session": "5f37e90deb604247988a9207d64048f5",
