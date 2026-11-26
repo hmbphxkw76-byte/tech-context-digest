@@ -1,0 +1,18 @@
+[
+  {
+    "acceptance": "",
+    "depends_on": [],
+    "id": "T-1",
+    "phase": "",
+    "status": "pending",
+    "title": "marquee JS 仅≥2条复制循环,单条静止,0条隐藏"
+  },
+  {
+    "acceptance": "",
+    "depends_on": [],
+    "id": "T-2",
+    "phase": "",
+    "status": "pending",
+    "title": "build_hub --check+实测截图+门禁+PR"
+  }
+]
