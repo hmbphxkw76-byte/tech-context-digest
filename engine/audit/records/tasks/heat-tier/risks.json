@@ -1,0 +1,14 @@
+[
+  {
+    "description": "影响排序或核验口径",
+    "id": "R-1",
+    "mitigation": "仅改展示层,排序与 verify 仍用数值",
+    "owner": ""
+  },
+  {
+    "description": "旧数据深链锚点失效",
+    "id": "R-2",
+    "mitigation": "不改变事件 id 与 DOM 结构",
+    "owner": ""
+  }
+]
