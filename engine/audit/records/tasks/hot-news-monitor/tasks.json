@@ -1,0 +1,50 @@
+[
+  {
+    "acceptance": "",
+    "depends_on": [],
+    "id": "T-1",
+    "phase": "",
+    "status": "completed",
+    "title": "layout.json 注册顶层目录 hot-news-monitor 并递增分类版本留痕"
+  },
+  {
+    "acceptance": "",
+    "depends_on": [],
+    "id": "T-2",
+    "phase": "",
+    "status": "completed",
+    "title": "实现英文权威信源白名单 + RSS/HTTP 抓取器 + 聚合去重聚类与热度计算 + JSONL 存储"
+  },
+  {
+    "acceptance": "",
+    "depends_on": [],
+    "id": "T-3",
+    "phase": "",
+    "status": "completed",
+    "title": "实现 5 分钟周期调度与本地 API 服务(无感知刷新接口+运行日志)"
+  },
+  {
+    "acceptance": "",
+    "depends_on": [],
+    "id": "T-4",
+    "phase": "",
+    "status": "completed",
+    "title": "实现四大核心模块前端看板(三维排序筛选/三级信息层级/响应式/加载动画)"
+  },
+  {
+    "acceptance": "",
+    "depends_on": [],
+    "id": "T-5",
+    "phase": "",
+    "status": "completed",
+    "title": "实现三项等价验证(30-60分钟长跑+断点恢复/100条抽样准确性/全模块交互流畅性)"
+  },
+  {
+    "acceptance": "",
+    "depends_on": [],
+    "id": "T-6",
+    "phase": "",
+    "status": "completed",
+    "title": "统一门禁 optimization_gate 零 E,提交并创建 PR"
+  }
+]

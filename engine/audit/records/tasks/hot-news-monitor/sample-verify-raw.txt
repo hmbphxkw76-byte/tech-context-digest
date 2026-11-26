@@ -1,0 +1,115 @@
+{
+  "generated_at": "2026-11-26T01:44:05Z",
+  "mode": "live",
+  "total_items": 34,
+  "real_items": 34,
+  "demo_items": 0,
+  "sampled": 34,
+  "passed": 34,
+  "failed": [],
+  "heat_mismatch_events": 0,
+  "tag_mismatch_events": 0,
+  "manual_review_queue": [
+    {
+      "id": "4e85b765ac0b",
+      "title": "China investigates Politburo member and Shanghai party chief Chen Jining",
+      "url": "https://www.npr.org/2026/11/25/nx-s1-6053801/china-investigation-politburo-shanghai-party"
+    },
+    {
+      "id": "c1e6355cdda9",
+      "title": "Republican wants FBI and CIA answers before questioning Nvidia chief",
+      "url": "https://www.npr.org/2026/11/25/nx-s1-6052417/nvidia-jensen-huang-reaction-republicans-congress-investigation"
+    },
+    {
+      "id": "d93784b3d153",
+      "title": "US unveils proposed tariffs on major partners, including EU and China",
+      "url": "https://www.france24.com/en/video/20261125-us-unveils-proposed-tariffs-on-major-partners-including-eu-and-china"
+    },
+    {
+      "id": "a64217797322",
+      "title": "Jensen Huang returns to Nvidia. And, Rep. Gomez resigns amid alleged sexual misc",
+      "url": "https://www.npr.org/2026/11/24/g-s1-155227/up-first-newsletter-nvidia-jensen-huang-trump-ukraine-russia-jimmy-gomez"
+    },
+    {
+      "id": "f49033498549",
+      "title": "Turkey's deadly factory blast: 'Investing in safety costs more than letting peop",
+      "url": "https://www.france24.com/en/europe/20261125-factory-blast-turkey-izmir"
+    },
+    {
+      "id": "7b9b3002934a",
+      "title": "Who really owns the Albanian land Jared Kushner wants to turn into a 5-star reso",
+      "url": "https://www.npr.org/2026/11/24/g-s1-154623/albania-jared-kushner-land-deal-protests"
+    },
+    {
+      "id": "e82871161895",
+      "title": "Army to detonate tons of lead azide after delays. And, Abrego Garcia leaves U.S.",
+      "url": "https://www.npr.org/2026/11/25/g-s1-155493/up-first-newsletter-iowa-detonation-kilmar-abrego-garcia-nvidia-jensen-huang"
+    },
+    {
+      "id": "f9c9455fd6c6",
+      "title": "Israeli lawmakers advance October 7 inquiry opposed by Netanyahu",
+      "url": "https://www.france24.com/en/israeli-lawmakers-advance-october-7-inquiry-opposed-by-netanyahu"
+    },
+    {
+      "id": "5635a7748e02",
+      "title": "Cape Town court shuts down Ramaphosa's Farmgate scandal",
+      "url": "https://www.france24.com/en/cape-town-court-shuts-down-ramaphosa-s-farmgate-scandal"
+    },
+    {
+      "id": "d53d800ed0c6",
+      "title": "Huang's return fails to dispel doubts as Nvidia shares drop",
+      "url": "https://www.france24.com/en/video/20261125-huang-s-return-fails-to-dispel-doubts-as-nvidia-shares-drop"
+    },
+    {
+      "id": "a2035610287f",
+      "title": "PSG's perfect Champions League record ends as Roma snatch 2-2 draw with late pen",
+      "url": "https://www.france24.com/en/sport/20261125-psg-s-perfect-champions-league-record-ends-as-roma-snatch-2-2-draw-with-late-penalty"
+    },
+    {
+      "id": "50e0a2ba3c33",
+      "title": "Moldova launches national preparedness campaign after drone incursions",
+      "url": "https://www.france24.com/en/moldova-launches-national-preparedness-campaign-after-drone-incursions"
+    },
+    {
+      "id": "5b4886940e3c",
+      "title": "Paris takes on masculinist movements",
+      "url": "https://www.france24.com/en/video/20261125-paris-takes-on-masculinist-movements"
+    },
+    {
+      "id": "316b1b2ff5f6",
+      "title": "How American Thanksgiving took root -- and evolved -- in Liberia",
+      "url": "https://www.npr.org/2026/11/25/nx-s1-6048614/thanksgiving-liberia-gratitude-prayer"
+    },
+    {
+      "id": "c06ced3b2ac5",
+      "title": "US unveils proposed tariffs on major partners, including EU and China",
+      "url": "https://www.france24.com/en/us-unveils-proposed-tariffs-on-major-partners-including-eu-and-china"
+    },
+    {
+      "id": "ae6c6c34a2b8",
+      "title": "Did GTA 6 really recreate Charlie Kirk's assassination?",
+      "url": "https://www.france24.com/en/tv-shows/truth-or-fake/20261125-did-gta-6-really-recreate-charlie-kirk-s-assassination"
+    },
+    {
+      "id": "a2acf5847ee5",
+      "title": "Africa Cup title given back to Senegal after sports court rules against Morocco",
+      "url": "https://www.npr.org/2026/11/25/nx-s1-6053783/africa-cup-senegal-morocco"
+    },
+    {
+      "id": "e3f49b0f54d2",
+      "title": "'Free' land and thriving businesses: French village defies rural decline",
+      "url": "https://www.france24.com/en/video/20261125-free-land-and-thriving-businesses-french-village-defies-rural-decline"
+    },
+    {
+      "id": "b0c600767aa6",
+      "title": "At least 31 killed in Cairo fire after fuel truck overturns on busy highway",
+      "url": "https://www.france24.com/en/africa/20261126-at-least-31-killed-in-cairo-fire-after-fuel-truck-overturns-on-busy-highway"
+    },
+    {
+      "id": "b4e3d3e77b9b",
+      "title": "Le Pen party leaks: prefect dismissed, Paris deputy prosecutor placed under inve",
+      "url": "https://www.france24.com/en/le-pen-party-leaks-prefect-dismissed-paris-deputy-prosecutor-placed-under-investigation"
+    }
+  ],
+  "accuracy_note": "机器核验仅覆盖结构 / 来源 / 数值一致性；语义准确性需人工对照原文复核，本脚本输出待复核清单（标题 + 链接），不替代人工判断。"
+}

@@ -1,0 +1,20 @@
+[
+  {
+    "description": "部分权威源网络不可达导致抓取失败",
+    "id": "R-1",
+    "mitigation": "多源冗余+离线种子兜底+可达性降级告警",
+    "owner": ""
+  },
+  {
+    "description": "新增顶层目录触发结构/命名/门禁校验失败",
+    "id": "R-2",
+    "mitigation": "预先在 layout.json 注册并复用统一门禁修复",
+    "owner": ""
+  },
+  {
+    "description": "新增文件导致 hub/指纹/发布日历等生成物漂移",
+    "id": "R-3",
+    "mitigation": "不改动既有生成源,提交前重放校验",
+    "owner": ""
+  }
+]

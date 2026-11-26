@@ -1,0 +1,26 @@
+{
+  "version": "2026-11-26",
+  "policy": "信源白名单单一事实源。仅接受英文权威媒体、国际评级机构、官方公开资料；禁止任何中文媒体。所有条目显式登记，未核验条目 status=unverified，运行期探测结果只写入 runtime/source_probe.json，不回写本文件。",
+  "heat_weights": { "official": 3.0, "rating": 3.0, "media_t1": 2.5, "media": 2.0 },
+  "sources": [
+    { "id": "bbc-world", "name": "BBC News - World", "tier": "media_t1", "type": "rss", "lang": "en", "url": "https://feeds.bbci.co.uk/news/world/rss.xml", "status": "unverified" },
+    { "id": "guardian-world", "name": "The Guardian - World", "tier": "media_t1", "type": "rss", "lang": "en", "url": "https://www.theguardian.com/world/rss", "status": "unverified" },
+    { "id": "nyt-world", "name": "The New York Times - World", "tier": "media_t1", "type": "rss", "lang": "en", "url": "https://rss.nytimes.com/services/xml/rss/nyt/World.xml", "status": "unverified" },
+    { "id": "wapo-world", "name": "The Washington Post - World", "tier": "media_t1", "type": "rss", "lang": "en", "url": "https://feeds.washingtonpost.com/rss/world", "status": "unverified" },
+    { "id": "france24-en", "name": "France 24 - English", "tier": "media", "type": "rss", "lang": "en", "url": "https://www.france24.com/en/rss", "status": "unverified" },
+    { "id": "dw-en", "name": "Deutsche Welle - English", "tier": "media", "type": "rss", "lang": "en", "url": "https://rss.dw.com/rdf/rss-en-world", "status": "unverified" },
+    { "id": "aljazeera-en", "name": "Al Jazeera - English", "tier": "media", "type": "rss", "lang": "en", "url": "https://www.aljazeera.com/xml/rss/all.xml", "status": "unverified" },
+    { "id": "npr-world", "name": "NPR - World", "tier": "media", "type": "rss", "lang": "en", "url": "https://feeds.npr.org/1004/rss.xml", "status": "unverified" },
+    { "id": "cnn-edition", "name": "CNN - International Edition", "tier": "media", "type": "rss", "lang": "en", "url": "http://rss.cnn.com/rss/edition.rss", "status": "unverified" },
+    { "id": "pbs-newshour", "name": "PBS NewsHour", "tier": "media", "type": "atom", "lang": "en", "url": "https://www.pbs.org/newshour/feed/atom", "status": "unverified" },
+    { "id": "whitehouse", "name": "The White House", "tier": "official", "type": "rss", "lang": "en", "url": "https://www.whitehouse.gov/feed/", "status": "unverified" },
+    { "id": "imf-news", "name": "International Monetary Fund - News", "tier": "official", "type": "rss", "lang": "en", "url": "https://www.imf.org/en/news/rss", "status": "unverified" }
+  ],
+  "pending_verification": [
+    { "id": "sp-global-ratings", "name": "S&P Global Ratings", "tier": "rating", "note": "待核实：press release RSS 地址未定，接入前须先核验 URL 与语言（英文）" },
+    { "id": "moodys", "name": "Moody's Ratings", "tier": "rating", "note": "待核实：press release RSS 地址未定" },
+    { "id": "fitch", "name": "Fitch Ratings", "tier": "rating", "note": "待核实：press release RSS 地址未定" },
+    { "id": "worldbank", "name": "The World Bank", "tier": "official", "note": "待核实：新闻 RSS 地址未定" },
+    { "id": "un-news", "name": "UN News", "tier": "official", "note": "待核实：RSS 地址未定" }
+  ]
+}

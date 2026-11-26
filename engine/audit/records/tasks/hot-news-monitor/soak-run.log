@@ -1,0 +1,7 @@
+[soak   1] mode=live events=153 items=258 t+5s
+[soak   2] mode=live events=153 items=258 t+310s
+[soak   3] mode=live events=153 items=258 t+615s
+[soak   4] mode=live events=152 items=258 t+921s
+[soak   5] mode=live events=30 items=34 t+1241s
+[soak   6] mode=live events=30 items=34 t+1561s
+[soak] 完成：ticks=6 errors=0 时长=1861s
