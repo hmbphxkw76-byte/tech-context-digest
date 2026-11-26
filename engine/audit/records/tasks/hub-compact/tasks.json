@@ -1,0 +1,26 @@
+[
+  {
+    "acceptance": "",
+    "depends_on": [],
+    "id": "T-1",
+    "phase": "",
+    "status": "pending",
+    "title": "build_hub hero 重构：删 h1/面板/说明,统计下移热点横滚条"
+  },
+  {
+    "acceptance": "",
+    "depends_on": [],
+    "id": "T-2",
+    "phase": "",
+    "status": "pending",
+    "title": "CSS 紧凑化+响应式,build_hub --check"
+  },
+  {
+    "acceptance": "",
+    "depends_on": [],
+    "id": "T-3",
+    "phase": "",
+    "status": "pending",
+    "title": "浏览器实测截图+门禁+PR"
+  }
+]

@@ -111,9 +111,8 @@ a:hover{text-decoration:underline}
 
 /* ── Hero：居中标题 + 四项统计 ── */
 .hero{background:linear-gradient(128deg,#0f2338 0%,#16324f 52%,#2f5597 100%);
-  color:#fff;padding:30px 40px 36px;text-align:center}
-.hero h1{font-size:45px;font-weight:700;letter-spacing:.5px;line-height:1.3}
-.hero .stats{display:flex;flex-wrap:wrap;justify-content:center;gap:14px;margin-top:28px}
+  color:#fff;padding:22px 40px 24px;text-align:center}
+.hero .stats{display:flex;flex-wrap:wrap;justify-content:center;gap:14px;margin-top:0}
 .hero .stat{background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.22);
   border-radius:var(--radius);padding:14px 26px;min-width:128px;
   font-size:13px;color:rgba(255,255,255,.85)}
@@ -223,31 +222,26 @@ a:hover{text-decoration:underline}
   .totop{right:14px;bottom:14px}
 }
 @media (max-width:560px){
-  .hero{padding:20px 16px 20px}
-  .hero h1{font-size:31.5px}
-  .hero .stats{gap:10px;margin-top:22px}
+  .hero{padding:16px 14px 18px}
+  .hero .stats{gap:10px}
   .hero .stat{min-width:calc(50% - 5px);padding:12px 14px}
+  .hot-strip{flex-direction:column;align-items:flex-start;gap:6px}
   .topic-head h3{font-size:15.5px}
   .filterbar .count{margin-left:0;width:100%}
 }
 
-/* ── 热点事件追踪入口桥（hub → hot-news-monitor）── */
-/* ── 头部一体化：左品牌 / 右热点事件面板 ── */
-.hero-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(300px,360px);
-  gap:26px;align-items:center;max-width:1240px;margin:0 auto;text-align:left}
-.brand-col{min-width:0;text-align:center}
-.hero-hot{background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.16);
-  border-radius:12px;padding:16px 18px;color:#fff}
-.hero-hot h2{margin:0;font-size:17px;letter-spacing:.5px}
-.hero-hot p{margin:6px 0 10px;color:#c7d3df;font-size:12.5px}
-.hb-links{display:flex;flex-direction:column;gap:8px}
-.hb-link{background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.25);color:#fff;
-  border-radius:9px;padding:8px 12px;text-decoration:none;display:block}
-.hb-link:hover{background:rgba(255,255,255,.2)}
-.hb-link b{display:block;font-size:13px}
-.hb-link span{font-size:11px;color:#c7d3df}
-.hb-note{margin-top:8px;font-size:11px;color:#9fb0c1}
-@media (max-width:960px){.hero-grid{grid-template-columns:1fr;gap:14px}.hero-hot{width:100%}}
+/* ── 统计行下方：热点事件追踪横滚条（hub → hot-news-monitor）── */
+.hot-strip{display:flex;align-items:center;gap:14px;margin-top:16px}
+.hot-strip-title{font-size:13px;color:#c7d3df;white-space:nowrap}
+.hot-strip-track{display:flex;gap:10px;overflow-x:auto;padding-bottom:4px;
+  scrollbar-width:thin;-webkit-overflow-scrolling:touch}
+.hot-card{flex:0 0 auto;max-width:250px;background:rgba(255,255,255,.08);
+  border:1px solid rgba(255,255,255,.18);color:#fff;border-radius:9px;
+  padding:8px 12px;text-decoration:none}
+.hot-card:hover{background:rgba(255,255,255,.16);text-decoration:none}
+.hot-card b{display:block;font-size:12.5px;line-height:1.35}
+.hot-card span{font-size:11px;color:#c7d3df}
+.hot-strip-empty{font-size:12px;color:#9fb0c1}
 """
 
 _SCRIPT = """\
@@ -931,25 +925,23 @@ def _hotnews_briefs() -> list[tuple[str, str]]:
     return out
 
 
-def _render_hero_hot_panel() -> list[str]:
-    """hero 右栏「热点事件追踪」面板：只依赖入库清单（CI --check 确定性）。"""
+def _render_hot_strip() -> list[str]:
+    """统计行下方的「热点事件追踪」横滚条：只依赖入库清单（CI --check 确定性）。"""
     briefs = _hotnews_briefs()
-    links = [
-        f'<a class="hb-link" href="{_esc(h)}"><b>{_esc(t)}</b>'
-        f"<span>专题报告 · 已核验来源</span></a>"
+    cards = [
+        f'<a class="hot-card" href="{_esc(h)}" title="{_esc(t)}">'
+        f'<b>{_esc(t)}</b><span>专题报告</span></a>'
         for t, h in briefs
     ]
     if not briefs:
-        links.append('<span class="hb-note">暂无已登记专题（config/briefs/index.json）</span>')
+        cards.append('<span class="hot-strip-empty">暂无已登记专题</span>')
     return [
-        '<aside class="hero-hot" aria-label="热点事件追踪">',
-        '<h2>热点事件追踪</h2>',
-        '<p>英文权威信源 · 抓取 → 聚合 → 交叉验证；每 6 小时全量刷新，当前热点专题自动轮换。</p>',
-        '<div class="hb-links">',
-        *links,
-        '</div>',
-        '<div class="hb-note">实时看板为本地服务：hot-news-monitor 目录下执行 python -m app serve</div>',
-        "</aside>",
+        '<div class="hot-strip" aria-label="热点事件追踪">',
+        '<span class="hot-strip-title">热点事件追踪</span>',
+        '<div class="hot-strip-track">',
+        *cards,
+        "</div>",
+        "</div>",
     ]
 
 
@@ -976,16 +968,13 @@ def render_hub(topics: list[Topic]) -> str:
         f"<style>{_STYLE}</style>\n</head>\n<body>",
         '<a class="skip-link" href="#main-content">跳到主要内容</a>',
         '<section class="hero">',
-        '<div class="wrap hero-grid">',
-        f'<div class="brand-col"><h1>{_esc(SITE_BRAND)}</h1></div>',
-        *_render_hero_hot_panel(),
-        "</div>",
         '<div class="stats">',
         f'<div class="stat"><b>{n_themes}</b>主题</div>',
         f'<div class="stat"><b>{n_topics}</b>业务线</div>',
         f'<div class="stat"><b>{n_reports}</b>报告</div>',
         f'<div class="stat"><b>{n_types}</b>类型</div>',
         "</div>",
+        *_render_hot_strip(),
         "</section>",
         '<div class="filterbar">',
         '<input id="hub-search" type="search" placeholder="搜索主题 / 报告标题…" aria-label="搜索主题或报告">',

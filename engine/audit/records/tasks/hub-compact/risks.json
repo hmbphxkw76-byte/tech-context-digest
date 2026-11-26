@@ -1,0 +1,20 @@
+[
+  {
+    "description": "hub 生成物漂移",
+    "id": "R-1",
+    "mitigation": "--check+regen_drift 双验",
+    "owner": ""
+  },
+  {
+    "description": "横滚条在公开页可用性",
+    "id": "R-2",
+    "mitigation": "overflow-x",
+    "owner": ""
+  },
+  {
+    "description": "删品牌影响其它入口",
+    "id": "R-3",
+    "mitigation": "仅 hub 头部,reader/报告页不动",
+    "owner": ""
+  }
+]
