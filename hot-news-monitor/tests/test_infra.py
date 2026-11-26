@@ -105,6 +105,9 @@ class TestApi(unittest.TestCase):
                 self.assertIn("timeline", detail)
                 health = json.loads(urllib.request.urlopen(base + "/api/health", timeout=10).read())
                 self.assertTrue(health["ok"])
+                report = urllib.request.urlopen(base + "/report", timeout=15).read().decode("utf-8")
+                self.assertIn('lang="zh-CN"', report)
+                self.assertTrue(("热点事件专题" in report) or ("当前热点" in report))
             finally:
                 srv.shutdown()
                 srv.server_close()

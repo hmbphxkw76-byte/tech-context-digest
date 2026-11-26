@@ -1,0 +1,34 @@
+[
+  {
+    "acceptance": "",
+    "depends_on": [],
+    "id": "T-1",
+    "phase": "",
+    "status": "pending",
+    "title": "git rm brief-current.html+.gitignore+server /report 动态渲染"
+  },
+  {
+    "acceptance": "",
+    "depends_on": [],
+    "id": "T-2",
+    "phase": "",
+    "status": "pending",
+    "title": "README/soak 补充 6h 周期下 --interval 覆盖口径"
+  },
+  {
+    "acceptance": "",
+    "depends_on": [],
+    "id": "T-3",
+    "phase": "",
+    "status": "pending",
+    "title": "单测(动态路由)/静态检查/build_hub --check/浏览器实测"
+  },
+  {
+    "acceptance": "",
+    "depends_on": [],
+    "id": "T-4",
+    "phase": "",
+    "status": "pending",
+    "title": "统一门禁+PR+合并+清理"
+  }
+]
