@@ -1,0 +1,14 @@
+[
+  {
+    "description": "多条目行为不变",
+    "id": "R-1",
+    "mitigation": "仅单条分支改用 hm-pass",
+    "owner": ""
+  },
+  {
+    "description": "宽度计算",
+    "id": "R-2",
+    "mitigation": "-100%为卡片宽,100vw 视口宽,兼容各断点",
+    "owner": ""
+  }
+]

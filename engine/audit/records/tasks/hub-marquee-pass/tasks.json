@@ -1,0 +1,18 @@
+[
+  {
+    "acceptance": "",
+    "depends_on": [],
+    "id": "T-1",
+    "phase": "",
+    "status": "pending",
+    "title": "CSS 增 hm-pass keyframes(100vw→-100%),JS 单条启用 12s 掠过"
+  },
+  {
+    "acceptance": "",
+    "depends_on": [],
+    "id": "T-2",
+    "phase": "",
+    "status": "pending",
+    "title": "build_hub --check+实测(transform/时长)+门禁+PR"
+  }
+]
