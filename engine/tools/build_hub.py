@@ -245,7 +245,8 @@ a:hover{text-decoration:underline}
 .hot-card span{font-size:11px;color:#c7d3df}
 .hot-strip-empty{font-size:12px;color:#9fb0c1}
 @keyframes hm-scroll{from{transform:translateX(0)}to{transform:translateX(-50%)}}
-@media (prefers-reduced-motion:reduce){.hm-track{animation:none}}
+@keyframes hm-pass{from{transform:translateX(100vw)}to{transform:translateX(-100%)}}
+@media (prefers-reduced-motion:reduce){.hm-track{animation:none!important}}
 @media (max-width:560px){.hm-view{overflow-x:auto}}
 """
 
@@ -362,8 +363,9 @@ _SCRIPT = """\
       view.style.overflow = 'hidden';
       track.style.setProperty('--hm-dur', (12 * items.length) + 's');  // 约 12s/条
     } else {
-      items.forEach(put);              // 单条：放回唯一条目，静止展示
-      track.style.animation = 'none';
+      items.forEach(put);              // 单条：不复制；单卡自右向左周期性掠过（12s/圈）
+      view.style.overflow = 'hidden';
+      track.style.animation = 'hm-pass 12s linear infinite';
     }
   })();
 
