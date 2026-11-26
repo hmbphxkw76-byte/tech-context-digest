@@ -1884,7 +1884,19 @@
       "evidence": {
         "report": "content/economy/dubai/apartment-investment/reports/2026-11_baseline_report.html",
         "business_line": "content/economy/dubai/apartment-investment",
-        "plans": [],
+        "plans": [
+          {
+            "slug": "hub-chips-investment-line",
+            "plan": "engine/audit/records/tasks/hub-chips-investment-line/plan.json",
+            "tasks": "engine/audit/records/tasks/hub-chips-investment-line/tasks.json",
+            "risks": "engine/audit/records/tasks/hub-chips-investment-line/risks.json",
+            "reports": [
+              "content/economy/dubai/apartment-investment/reports/2026-11_baseline_report.html"
+            ],
+            "task_count": 4,
+            "risk_count": 2
+          }
+        ],
         "gate": {
           "entry": "engine/tools/optimization_gate.py",
           "probe": true
