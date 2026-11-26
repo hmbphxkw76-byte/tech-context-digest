@@ -1,0 +1,20 @@
+[
+  {
+    "description": "hub 生成物漂移",
+    "id": "R-1",
+    "mitigation": "提交前 --check 并依赖 regen_drift 自检",
+    "owner": ""
+  },
+  {
+    "description": "移动端挤压",
+    "id": "R-2",
+    "mitigation": "960/560 断点改为堆叠并实测",
+    "owner": ""
+  },
+  {
+    "description": "周期变更影响 soak/文档口径",
+    "id": "R-3",
+    "mitigation": "全量检索 300/5 分钟表述同步替换",
+    "owner": ""
+  }
+]

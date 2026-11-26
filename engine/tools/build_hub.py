@@ -232,20 +232,22 @@ a:hover{text-decoration:underline}
 }
 
 /* ── 热点事件追踪入口桥（hub → hot-news-monitor）── */
-.hotnews-bridge{background:linear-gradient(120deg,#0f2338 0%,#16324f 55%,#23486e 100%);
-  color:#fff;border-radius:14px;margin:18px auto;max-width:1240px;padding:20px 24px;
-  display:flex;gap:20px;align-items:center;flex-wrap:wrap}
-.hb-main{flex:1;min-width:260px}
-.hb-main h2{margin:0;font-size:20px;letter-spacing:.5px}
-.hb-main p{margin:6px 0 0;color:#c7d3df;font-size:13.5px}
-.hb-links{display:flex;gap:10px;flex-wrap:wrap}
+/* ── 头部一体化：左品牌 / 右热点事件面板 ── */
+.hero-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(300px,360px);
+  gap:26px;align-items:center;max-width:1240px;margin:0 auto;text-align:left}
+.brand-col{min-width:0;text-align:center}
+.hero-hot{background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.16);
+  border-radius:12px;padding:16px 18px;color:#fff}
+.hero-hot h2{margin:0;font-size:17px;letter-spacing:.5px}
+.hero-hot p{margin:6px 0 10px;color:#c7d3df;font-size:12.5px}
+.hb-links{display:flex;flex-direction:column;gap:8px}
 .hb-link{background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.25);color:#fff;
-  border-radius:10px;padding:10px 14px;text-decoration:none;min-width:190px}
+  border-radius:9px;padding:8px 12px;text-decoration:none;display:block}
 .hb-link:hover{background:rgba(255,255,255,.2)}
-.hb-link b{display:block;font-size:13.5px}
-.hb-link span{font-size:11.5px;color:#c7d3df}
-.hb-go{background:#c8a24a;border-color:#c8a24a;color:#1d2733;font-weight:600;min-width:150px}
-@media (max-width:560px){.hotnews-bridge{margin:12px;padding:16px}}
+.hb-link b{display:block;font-size:13px}
+.hb-link span{font-size:11px;color:#c7d3df}
+.hb-note{margin-top:8px;font-size:11px;color:#9fb0c1}
+@media (max-width:960px){.hero-grid{grid-template-columns:1fr;gap:14px}.hero-hot{width:100%}}
 """
 
 _SCRIPT = """\
@@ -929,28 +931,25 @@ def _hotnews_briefs() -> list[tuple[str, str]]:
     return out
 
 
-def _render_hotnews_block() -> list[str]:
-    """hub 顶部「热点事件追踪」桥：只依赖入库清单（CI --check 确定性）。"""
+def _render_hero_hot_panel() -> list[str]:
+    """hero 右栏「热点事件追踪」面板：只依赖入库清单（CI --check 确定性）。"""
     briefs = _hotnews_briefs()
     links = [
         f'<a class="hb-link" href="{_esc(h)}"><b>{_esc(t)}</b>'
         f"<span>专题报告 · 已核验来源</span></a>"
         for t, h in briefs
     ]
-    links.insert(0, '<a class="hb-link hb-go" href="http://127.0.0.1:8765/">'
-                   '<b>实时看板</b><span>每 5 分钟刷新 · 本地服务</span></a>')
     if not briefs:
-        links.append('<a class="hb-link" href="http://127.0.0.1:8765/report">'
-                     '<b>当前热点专题</b><span>自动轮换 · 本地服务</span></a>')
+        links.append('<span class="hb-note">暂无已登记专题（config/briefs/index.json）</span>')
     return [
-        '<section class="hotnews-bridge" id="hotnews">',
-        '<div class="hb-main"><h2>热点事件追踪</h2>',
-        '<p>英文权威信源 · 抓取 → 聚合 → 交叉验证；每 5 分钟全量刷新，'
-        '当前热点专题在看板内自动轮换。</p></div>',
+        '<aside class="hero-hot" aria-label="热点事件追踪">',
+        '<h2>热点事件追踪</h2>',
+        '<p>英文权威信源 · 抓取 → 聚合 → 交叉验证；每 6 小时全量刷新，当前热点专题自动轮换。</p>',
         '<div class="hb-links">',
         *links,
-        "</div>",
-        "</section>",
+        '</div>',
+        '<div class="hb-note">实时看板为本地服务：hot-news-monitor 目录下执行 python -m app serve</div>',
+        "</aside>",
     ]
 
 
@@ -977,7 +976,10 @@ def render_hub(topics: list[Topic]) -> str:
         f"<style>{_STYLE}</style>\n</head>\n<body>",
         '<a class="skip-link" href="#main-content">跳到主要内容</a>',
         '<section class="hero">',
-        f"<h1>{_esc(SITE_BRAND)}</h1>",
+        '<div class="wrap hero-grid">',
+        f'<div class="brand-col"><h1>{_esc(SITE_BRAND)}</h1></div>',
+        *_render_hero_hot_panel(),
+        "</div>",
         '<div class="stats">',
         f'<div class="stat"><b>{n_themes}</b>主题</div>',
         f'<div class="stat"><b>{n_topics}</b>业务线</div>',
@@ -985,7 +987,6 @@ def render_hub(topics: list[Topic]) -> str:
         f'<div class="stat"><b>{n_types}</b>类型</div>',
         "</div>",
         "</section>",
-        *_render_hotnews_block(),
         '<div class="filterbar">',
         '<input id="hub-search" type="search" placeholder="搜索主题 / 报告标题…" aria-label="搜索主题或报告">',
         '<div class="chips" id="chips-topic" role="group" aria-label="主题筛选">',

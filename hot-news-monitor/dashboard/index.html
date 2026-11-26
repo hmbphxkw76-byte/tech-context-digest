@@ -143,7 +143,7 @@ footer{border-top:1px solid var(--line);padding:18px 0 30px;color:var(--muted);f
 <header class="hero">
   <div class="wrap">
     <h1>热点新闻实时追踪</h1>
-    <div class="sub">英文权威信源 · 抓取 → 聚合 → 交叉验证 · 每 5 分钟全量刷新（Tech Life Research）</div>
+    <div class="sub">英文权威信源 · 抓取 → 聚合 → 交叉验证 · 每 6 小时全量刷新（Tech Life Research）</div>
     <div class="status-bar" id="statusBar">
       <span class="status-pill"><span class="dot" id="modeDot"></span><span id="modeText">加载中</span></span>
       <span class="status-pill">快照 <span id="snapshotTime">—</span></span>
@@ -176,7 +176,7 @@ footer{border-top:1px solid var(--line);padding:18px 0 30px;color:var(--muted);f
 
   <section class="sec" id="sec-trend">
     <h2 class="sec">热度趋势走势</h2>
-    <p class="sec-note">Top 5 事件的热度采样曲线（每 5 分钟一个点，随时间指数衰减；虚线为高优先级阈值）。</p>
+    <p class="sec-note">Top 5 事件的热度采样曲线（每 6 小时一个点，随时间指数衰减；虚线为高优先级阈值）。</p>
     <div class="chart-card">
       <svg id="trendChart" class="chart" viewBox="0 0 900 260" preserveAspectRatio="xMidYMid meet" role="img" aria-label="热度趋势折线图"></svg>
       <div class="chart-legend" id="trendLegend"></div>
@@ -215,7 +215,7 @@ footer{border-top:1px solid var(--line);padding:18px 0 30px;color:var(--muted);f
 <script>
 (function(){
 "use strict";
-var REFRESH_MS = 300000;            // 5 分钟固定全量刷新
+var REFRESH_MS = 21600000;            // 6 小时固定全量刷新
 var state = null;                   // 最近一次快照
 var sortMode = "heat";              // heat | time | tag
 var activeTag = "全部";

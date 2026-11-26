@@ -18,7 +18,7 @@ from .store import Store, utc_now_iso
 
 # 阈值为预校准（ex-ante）经验值：media_t1 三源交叉的新事件约达 50+，可通过 --threshold 覆盖
 DEFAULT_THRESHOLD = 50.0
-DEFAULT_INTERVAL = 300
+DEFAULT_INTERVAL = 21600  # 6 小时全量刷新周期（可用 --interval 覆盖）
 
 
 def refresh(

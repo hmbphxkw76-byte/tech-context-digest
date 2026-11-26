@@ -18,7 +18,7 @@ python -m app serve --host 127.0.0.1 --port 8765 --interval 300 --threshold 50
 
 | 命令 | 作用 |
 | --- | --- |
-| `serve` | 调度（默认每 300s 全量刷新）+ 本地 HTTP 服务；加 `--demo` 为离线演示（仅合成示例数据，不联网） |
+| `serve` | 调度（默认每 21600s/6 小时全量刷新）+ 本地 HTTP 服务；加 `--demo` 为离线演示（仅合成示例数据，不联网） |
 | `refresh` | 立即做一次全量刷新并输出摘要 |
 | `probe-sources` | 探测白名单信源可达性，结果落 `runtime/source_probe.json` |
 | `sample-verify --n 100` | 随机抽样机器核验（字段/来源/链接/热度重算） |
@@ -37,7 +37,7 @@ python -m app serve --host 127.0.0.1 --port 8765 --interval 300 --threshold 50
 4. **事件发展时间线**：按时间正序还原单一事件节点，可切换事件。
 
 排序与筛选：按热度降序 / 更新时间倒序 / 分类标签 + 分类 chips 筛选 + 标题搜索。
-自动刷新：每 5 分钟 `GET /api/state`，顶部进度条 + 内容微透明过渡（无感加载），
+自动刷新：每 6 小时 `GET /api/state`，顶部进度条 + 内容微透明过渡（无感加载），
 保留当前筛选、排序与滚动位置，不打断浏览；「立即刷新」走 `POST /api/refresh`。
 
 三级信息层级：L1 热度 ≥ 阈值 → 金色高亮边框 + 「置顶 · 高优先级」标识；
@@ -48,7 +48,7 @@ L2 每事件「背景溯源」折叠面板（覆盖结构与采信强度说明�
 ## 热点事件专题机制
 
 - 专题清单单一事实源：`config/briefs/index.json`；每条专题一份人工编译数据 `config/briefs/<data_file>`。
-- **当前热点自动轮换**：每次快照落盘后（含 5 分钟调度）自动重建 `dashboard/brief-current.html`——标题取当前 Top1 事件；命中清单关键词时叠加该专题的决策摘要/决策卡，否则为纯机械聚合视图。稳定入口 `GET /report`。
+- **当前热点自动轮换**：每次快照落盘后（含 6 小时调度）自动重建 `dashboard/brief-current.html`——标题取当前 Top1 事件；命中清单关键词时叠加该专题的决策摘要/决策卡，否则为纯机械聚合视图。稳定入口 `GET /report`。
 - 旧链接兼容：`/report-nvidia.html` → 302 → `/brief-<slug>.html`（由清单 `legacy_redirect` 驱动）。
 - 前端导航条「热点专题」 chips 由 `GET /api/briefs` 动态渲染，新增专题无需改前端。
 - 仓库首页（hub `index.html`，由 `engine/tools/build_hub.py` 生成）顶部有「热点事件追踪」桥区块，只读入库清单，保证 CI `--check` 确定性。
