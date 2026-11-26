@@ -1923,14 +1923,14 @@
       "kind": "business",
       "category": "report",
       "business_line": "content/economy/dubai/apartment-investment",
-      "status": "draft",
+      "status": "in-review",
       "stages": {
-        "draft": false,
-        "initial": false,
+        "draft": true,
+        "initial": true,
         "second": false,
         "final": false
       },
-      "mark": false,
+      "mark": true,
       "first_seen_at": "2026-11-26",
       "evidence": {
         "report": "content/economy/dubai/apartment-investment/reports/2026-11_baseline_prime-quant-alignment.html",
@@ -1941,18 +1941,21 @@
           "probe": true
         },
         "audit": {
-          "review": "",
-          "status": "draft",
+          "review": "engine/audit/records/reviews/content-economy-dubai-apartment-investment-reports-2026-11-baseline-prime-quant-alignment-html.json",
+          "status": "in-review",
           "stages": {
-            "draft": false,
-            "initial": false,
+            "draft": true,
+            "initial": true,
             "second": false,
             "final": false
           },
-          "mark_level": "none",
-          "audit_id": ""
+          "mark_level": "pre",
+          "audit_id": "AUD-2026-11-26-002"
         }
-      }
+      },
+      "audit_id": "AUD-2026-11-26-002",
+      "mark_level": "pre",
+      "audited_at": "2026-11-26T13:13:56+00:00"
     }
   }
 }
