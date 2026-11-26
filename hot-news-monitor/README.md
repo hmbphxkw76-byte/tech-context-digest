@@ -22,10 +22,14 @@ python -m app serve --host 127.0.0.1 --port 8765 --interval 300 --threshold 50
 | `refresh` | 立即做一次全量刷新并输出摘要 |
 | `probe-sources` | 探测白名单信源可达性，结果落 `runtime/source_probe.json` |
 | `sample-verify --n 100` | 随机抽样机器核验（字段/来源/链接/热度重算） |
-| `soak --duration 1800` | 长跑稳定性测试（默认 30 分钟，含刷新节拍核对） |
+| `soak --duration 1800` | 长跑稳定性测试（默认 30 分钟，含刷新节拍核对；间隔可用 `--interval` 覆盖） |
 | `briefs` | 重建全部热点专题页（清单内每个专题 + 当前热点 current 页） |
 | `report-nvidia` | 渲染指定数据文件的专题页（默认 Nvidia 样板） |
 | `verify-brief [--no-probe]` | 专题数据机器核验（结构/引用闭合/白名单/可达性） |
+
+> 6 小时默认周期下做稳定性验证：`python -m app soak --duration 1800 --interval 300`（soak 的 `--interval` 与
+> serve 默认周期相互独立；serve 仍默认 21600s）。`dashboard/brief-current.html` 不再入库——`/report`
+> 由服务端按当前快照实时渲染，磁盘副本仅在本地调试时生成并被 .gitignore 忽略。
 
 零第三方依赖（仅 Python 标准库）；单元测试：`python -m unittest discover -s tests`。
 

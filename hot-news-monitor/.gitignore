@@ -3,3 +3,6 @@ __pycache__/
 *.pyc
 runtime/
 .pytest_cache/
+
+# current 页为运行态动态产物（/report 服务端实时渲染，磁盘副本仅供本地调试）
+dashboard/brief-current.html

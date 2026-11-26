@@ -55,11 +55,17 @@ class Handler(BaseHTTPRequestHandler):
     def do_GET(self) -> None:  # noqa: N802
         path = urlparse(self.path).path
         if path == "/report":
-            target = (DASHBOARD_DIR / "brief-current.html").resolve()
-            if not str(target).startswith(str(DASHBOARD_DIR.resolve())) or not target.is_file():
-                self._send(404, b"current brief not built yet", "text/plain; charset=utf-8")
-                return
-            self._send(200, target.read_bytes(), "text/html; charset=utf-8")
+            from .brief import load_manifest, render_current
+            snap = self.store.load_state()
+            if snap is None:  # 首次访问且无快照：即时刷新一次
+                try:
+                    snap = refresh(self.store, config=self.config, threshold=self.threshold,
+                                   interval_seconds=self.interval)
+                except Exception:  # noqa: BLE001
+                    self._send(503, b"snapshot unavailable", "text/plain; charset=utf-8")
+                    return
+            body = render_current(snap.to_dict(), load_manifest()).encode("utf-8")
+            self._send(200, body, "text/html; charset=utf-8")
             return
         from .brief import load_manifest
         for b in load_manifest().get("briefs", ()):

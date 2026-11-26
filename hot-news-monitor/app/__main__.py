@@ -164,9 +164,9 @@ def main(argv: list[str] | None = None) -> int:
     p.add_argument("--n", type=int, default=100)
     p.set_defaults(func=cmd_sample_verify)
 
-    p = sub.add_parser("soak", help="长跑稳定性测试（秒）")
+    p = sub.add_parser("soak", help="长跑稳定性测试（默认 30 分钟；间隔默认 6 小时，验证建议显式 --interval 300）")
     p.add_argument("--duration", type=int, default=1800)
-    p.add_argument("--interval", type=int, default=DEFAULT_INTERVAL)
+    p.add_argument("--interval", type=int, default=DEFAULT_INTERVAL, help="每拍间隔（秒），默认 21600；稳定性验证用 300")
     p.add_argument("--threshold", type=float, default=DEFAULT_THRESHOLD)
     p.set_defaults(func=cmd_soak)
 
