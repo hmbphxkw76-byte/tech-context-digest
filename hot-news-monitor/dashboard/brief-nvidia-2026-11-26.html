@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>英伟达（Nvidia）高层人事与国家安全争议专题 · 热点新闻实时追踪</title>
+<style>
+:root{--navy:#16324f;--accent:#c8a24a;--bg:#f4f6f8;--card:#fff;--ink:#1d2733;--muted:#5d6b7a;--line:#dfe5ec;--chip:#eef2f6;--radius:10px}
+*{box-sizing:border-box}
+body{margin:0;font-family:"Segoe UI","PingFang SC","Microsoft YaHei",system-ui,sans-serif;background:var(--bg);color:var(--ink);line-height:1.55;font-size:15px}
+.skip-link{position:absolute;left:-9999px;top:0;background:var(--navy);color:#fff;padding:8px 14px;z-index:99}
+.skip-link:focus{left:0}
+a{color:var(--navy)} :focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+header.hero{background:linear-gradient(135deg,#16324f,#0f2438 70%,#0a1a29);color:#fff;padding:28px 0 22px}
+header.hero h1{margin:0;font-size:24px} header.hero .sub{margin-top:6px;color:#c7d3df;font-size:14px}
+.meta-pills{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
+.pill{background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.22);border-radius:999px;padding:5px 12px;font-size:12.5px}
+.pill.btn{background:var(--accent);border-color:var(--accent);color:#1d2733;font-weight:600;text-decoration:none;display:inline-block}
+.wrap{max-width:1080px;margin:0 auto;padding:0 20px}
+main.wrap{padding:20px 20px 40px}
+section.sec{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);box-shadow:0 1px 3px rgba(16,36,56,.08);margin-bottom:20px;padding:18px 20px}
+h2.sec{font-size:18px;margin:0 0 10px;color:var(--navy)}
+.grid-metrics{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:10px}
+.metric{background:var(--chip);border:1px solid var(--line);border-radius:8px;padding:10px 12px}
+.metric .v{font-size:20px;font-weight:600;color:var(--navy)} .metric .k{font-size:12px;color:var(--muted)}
+table{width:100%;border-collapse:collapse;font-size:13.5px}
+th,td{text-align:left;padding:8px 10px;border-bottom:1px solid var(--line);vertical-align:top}
+thead th{background:var(--chip);color:var(--navy);font-size:12.5px}
+tr:last-child td{border-bottom:0}
+.table-wrap{overflow-x:auto}
+.badge{display:inline-block;font-size:11px;border-radius:5px;padding:1px 7px;border:1px solid var(--line);white-space:nowrap}
+.badge.ok{color:#1e7d4f;border-color:#bcd9c8;background:#f0f8f3}
+.badge.mid{color:#b25e1f;border-color:#e8d3bd;background:#fdf6ee}
+.badge.info{color:#3d5a80;border-color:#c6d3e2;background:#f0f4fa}
+.badge.pending{color:#a33333;border-color:#e3bcbc;background:#fdf1f1}
+.tier{font-size:11px;border-radius:4px;padding:1px 6px;border:1px solid var(--line);color:var(--muted)}
+.tier.official{color:#1e7d4f;border-color:#bcd9c8} .tier.media_t1{color:var(--navy);border-color:#c3ceda}
+.src-note{font-size:12px;color:var(--muted)}
+.ref-no{font-weight:700;color:var(--navy);white-space:nowrap}
+.timeline{position:relative;margin-top:8px;padding-left:22px}
+.timeline::before{content:"";position:absolute;left:6px;top:6px;bottom:6px;width:2px;background:var(--line)}
+.tl-item{position:relative;padding:0 0 14px 10px}
+.tl-item::before{content:"";position:absolute;left:-20px;top:5px;width:10px;height:10px;border-radius:50%;background:var(--navy);border:2px solid #fff;box-shadow:0 0 0 2px var(--line)}
+.tl-item.l1::before{background:var(--accent)}
+.tl-time{font-size:12px;color:var(--muted)} .tl-title{font-size:14px;font-weight:500;margin:2px 0}
+.tl-src{font-size:12px;color:var(--muted)}
+details.fold{border:1px solid var(--line);border-radius:8px;margin-bottom:10px;background:#fafbfd}
+details.fold summary{cursor:pointer;padding:9px 12px;font-size:13.5px;color:var(--navy);list-style-position:inside}
+details.fold[open] summary{border-bottom:1px solid var(--line)}
+details.fold .fold-body{padding:8px 4px 4px}
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:10px}
+.chip{border:1px solid var(--line);background:var(--chip);color:var(--ink);border-radius:999px;padding:4px 11px;font-size:12.5px;cursor:pointer}
+.chip[aria-pressed="true"]{background:var(--navy);border-color:var(--navy);color:#fff}
+.decision-card{display:grid;grid-template-columns:max-content 1fr;gap:6px 14px;font-size:13.5px}
+.decision-card dt{font-weight:600;color:var(--navy);white-space:nowrap}
+.decision-card dd{margin:0}
+.gap-item{font-size:13.5px;margin:0 0 8px}
+.heat-badge{display:inline-block;min-width:26px;text-align:center;border-radius:6px;padding:1px 8px;font-size:12.5px;font-weight:600;border:1px solid var(--line);color:var(--muted);background:#fff}
+.heat-badge.lvl-hot{color:#7a4a12;border-color:#e0c493;background:#faf3e6}
+.heat-badge.lvl-high{color:#fff;border-color:var(--navy);background:var(--navy)}
+.heat-badge.lvl-mid{color:var(--muted);border-color:var(--line);background:var(--chip)}
+footer{border-top:1px solid var(--line);padding:16px 0 28px;color:var(--muted);font-size:12.5px;text-align:center}
+@media (max-width:560px){.wrap{padding:0 12px} section.sec{padding:14px}}
+@media print{.skip-link,.chips,.pill.btn{display:none!important} body{background:#fff} section.sec{box-shadow:none;break-inside:avoid} details.fold{display:block}}
+</style>
+</head>
+<body>
+<header class="hero"><div class="wrap"><h1>英伟达（Nvidia）高层人事与国家安全争议专题</h1><div class="sub">追踪窗口 2026-11-19 ~ 2026-11-26（近 7 天为主，重大节点向前追溯）</div><div class="meta-pills"><span class="pill">数据截至 2026-11-26T03:30:00Z</span><span class="pill">下次复核 2026-11-27T03:30:00Z</span><span class="pill">可重放 python -m app report-nvidia</span><a class="pill btn" href="http://127.0.0.1:8765/?q=Nvidia">在看板中查看 Nvidia 实时热度与事件簇 ↗</a><a class="pill" href="/" style="color:#fff">← 返回实时看板</a></div></div></header><main class="wrap"><a class="skip-link" href="#main">跳到主要内容</a><section class="sec"><h2 class="sec">决策摘要</h2><ul><li>董事会于 11-23 全票通过恢复黄仁勋全部职务并即刻生效，公司同步宣布成立国安与出口管制高级别委员会、招聘首席合规官。[S1][S3]</li><li>11-08 黄仁勋发公开信承认婚外情，独立董事委员会调查启动并延续至复职之后。[S2][S3]</li><li>复职后首个交易日股价收涨 31%，市场以正面定价该结果；但独立调查未结、国会听证安排在即，后续变量仍在。[S3]</li></ul><p class="src-note">仅归纳已核验结论；[S编号] 指向来源清单。</p></section><section class="sec"><h2 class="sec">决策卡</h2><dl class="decision-card"><dt>结论</dt><dd>核心判断：黄仁勋复职已落定且不构成国安风险认定，公司治理与出口管制合规架构获强化；短期不确定性下降，但独立调查与国会程序仍未出清。</dd><dt>证据强度</dt><dd><span class="badge mid">证据强度·中</span> 信息充分度 <span class="badge info">中</span></dd><dt>触发条件</dt><dd>DOJ 是否正式立案或公布调查结论；12-01~03 国会闭门访谈 / 听证结果；继任计划与高管架构调整；Q4 财报指引</dd><dt>反向证据</dt><dd>特朗普「已做过调查且认为清白」与 Vance/DOJ「未立案、未受调查」存在口径差异（CNBC 同篇并列呈现）[S4]；临时 CEO 克雷斯曾在 11-17 公开表示无意恢复黄仁勋职务（背景反向证据）[S3]</dd></dl></section><section class="sec"><h2 class="sec">摘要指标</h2><div class="grid-metrics"><div class="metric"><div class="v">7</div><div class="k">事件节点</div></div><div class="metric"><div class="v">6</div><div class="k">来源条目</div></div><div class="metric"><div class="v">4/6</div><div class="k">已核验</div></div><div class="metric"><div class="v">官方</div><div class="k">最高信源层级</div></div></div><p class="src-note">仅采用英文权威媒体 / 官方公开资料；中文媒体仅作线索从未作为来源；未直接核验的二手线索单独标注「待核实」。</p></section><section class="sec"><h2 class="sec">多信源交叉验证</h2><div class="table-wrap"><table><thead><tr><th>事件</th><th>关键主张</th><th>一致来源</th><th>独立信源 × 层级</th><th>结论强度</th><th>分歧 / 口径差异</th></tr></thead><tbody><tr><td>复职决定</td><td>董事会全票复职；政府高层输入意见；不构成国安风险</td><td>NVIDIA Newsroom、CNBC</td><td>2 家 · 官方、一线媒体</td><td><span class="badge ok">证据强度·强</span></td><td>无</td></tr><tr><td>是否受过调查</td><td>特朗普：已做过调查且认为其清白；Vance/DOJ：未立案、未受调查</td><td>CNBC</td><td>1 家 · 一线媒体</td><td><span class="badge pending">证据强度·弱</span></td><td>总统口径与 DOJ 口径存在表述差异（CNBC 同一篇报道并列呈现）</td></tr><tr><td>独立调查走向</td><td>独立董事委员会调查推进至完成；黄仁勋承诺配合</td><td>NVIDIA Newsroom、CNBC</td><td>2 家 · 官方、一线媒体</td><td><span class="badge ok">证据强度·强</span></td><td>无</td></tr></tbody></table></div></section><section class="sec"><h2 class="sec">事件发展时间线</h2><details class="fold" open><summary>关键节点（4 条）</summary><div class="fold-body"><div class="timeline"><div class="tl-item l1"><div class="tl-time">2026-11-08</div><div class="tl-title">黄仁勋发公开信承认婚外情，董事会启动独立调查 <span class="badge ok">已核验</span> <span class="badge ok">证据强度·强</span></div><div class="tl-src">来源：NVIDIA Newsroom</div></div><div class="tl-item l1"><div class="tl-time">2026-11-11/12</div><div class="tl-title">董事会紧急会议决定 CEO 去留；外界报道其辞任总裁、CEO 及董事（宣布与生效口径存在 11-12/11-13 差异，以官方后续口径为准） <span class="badge mid">部分核验</span> <span class="badge mid">证据强度·中</span></div><div class="tl-src">来源：CNBC</div></div><div class="tl-item l1"><div class="tl-time">2026-11-22</div><div class="tl-title">董事会投票通过恢复黄仁勋全部职务（SEC 8-K 事件日，待核实） <span class="badge pending">待核实</span> <span class="badge pending">证据强度·弱</span></div><div class="tl-src">来源：U.S. SEC EDGAR</div></div><div class="tl-item l1"><div class="tl-time">2026-11-23</div><div class="tl-title">官方公告复职即刻生效；特朗普接受 CNBC 采访承认介入；公司宣布成立国安与出口管制委员会并招聘首席合规官 <span class="badge ok">已核验</span> <span class="badge ok">证据强度·强</span></div><div class="tl-src">来源：NVIDIA Newsroom、CNBC</div></div></div></div></details><details class="fold"><summary>重要进展（3 条）</summary><div class="fold-body"><div class="timeline"><div class="tl-item "><div class="tl-time">2026-11-17</div><div class="tl-title">临时 CEO 科莱特·克雷斯公开表态无意恢复黄仁勋职务（背景节点） <span class="badge ok">已核验</span> <span class="badge mid">证据强度·中</span></div><div class="tl-src">来源：CNBC</div></div><div class="tl-item "><div class="tl-time">2026-11-25</div><div class="tl-title">副总统 Vance 称被告知黄仁勋未受 DOJ 调查；路透社报道称复职前未正式立案 <span class="badge mid">部分核验</span> <span class="badge mid">证据强度·中</span></div><div class="tl-src">来源：CNBC、Reuters</div></div><div class="tl-item "><div class="tl-time">2026-12-01~03</div><div class="tl-title">既定的国会听证安排：众议院闭门访谈（12-01）、法务总监出席（12-02）、参议院银行委员会公开听证（12-03，黄仁勋为唯一证人） <span class="badge ok">已核验</span> <span class="badge mid">证据强度·中</span></div><div class="tl-src">来源：CNBC</div></div></div></div></details><p class="src-note">折叠面板按级别分组；条目附信息等级与证据强度徽标。</p></section><section class="sec"><h2 class="sec">来源清单（含核验与可达性状态）</h2><div class="chips" id="tierFilter"><button type="button" class="chip" data-tier="全部" aria-pressed="true">全部</button><button type="button" class="chip" data-tier="official" aria-pressed="false">官方</button><button type="button" class="chip" data-tier="media_t1" aria-pressed="false">一线媒体</button></div><div class="table-wrap"><table id="sourceTable"><thead><tr><th>编号</th><th>日期</th><th>层级</th><th>标题与说明</th><th>核验</th></tr></thead><tbody><tr id="src-S1" data-tier="official"><td>S1</td><td>2026-11-23</td><td><span class="tier official">官方</span></td><td><a href="https://nvidianews.nvidia.com/news/nvidia-board-reinstates-jensen-huang-as-president-ceo-and-board-director" target="_blank" rel="noopener noreferrer">NVIDIA Board Reinstates Jensen Huang as President, CEO and Board Director</a><br><span class="src-note">官方声明全文已核验（含国安与出口管制委员会、首席合规官招聘、独立调查继续推进）</span></td><td><span class="badge ok">已核验</span></td></tr><tr id="src-S2" data-tier="official"><td>S2</td><td>2026-11-08</td><td><span class="tier official">官方</span></td><td><a href="https://nvidianews.nvidia.com/news/a-message-to-our-company" target="_blank" rel="noopener noreferrer">A Message to Our Company</a><br><span class="src-note">黄仁勋致员工公开信全文已核验</span></td><td><span class="badge ok">已核验</span></td></tr><tr id="src-S3" data-tier="media_t1"><td>S3</td><td>2026-11-23</td><td><span class="tier media_t1">一线媒体</span></td><td><a href="https://www.cnbc.com/2026/11/23/nvidia-jensen-huang-ceo.html" target="_blank" rel="noopener noreferrer">Jensen Huang reinstated as Nvidia CEO. Stock skyrockets 31%</a><br><span class="src-note">正文已核验：含特朗普 CNBC 采访、高管斡旋、国会听证安排（12-01/02/03）</span></td><td><span class="badge ok">已核验</span></td></tr><tr id="src-S4" data-tier="media_t1"><td>S4</td><td>2026-11-25</td><td><span class="tier media_t1">一线媒体</span></td><td><a href="https://www.cnbc.com/2026/11/25/vance-jensen-huang-nvidia-doj-investigation.html" target="_blank" rel="noopener noreferrer">Vance says he was assured Jensen Huang was not under DOJ investigation</a><br><span class="src-note">正文已核验：同时转引路透社报道称 DOJ 在复职前未对黄仁勋正式立案</span></td><td><span class="badge ok">已核验</span></td></tr><tr id="src-S5" data-tier="media_t1"><td>S5</td><td>2026-11-25</td><td><span class="tier media_t1">一线媒体</span></td><td><a href="https://www.reuters.com/business/us-justice-department-did-not-open-probe-into-jensen-huang-before-reinstatement-2026-11-25/" target="_blank" rel="noopener noreferrer">US Justice Department did not open probe into Jensen Huang before reinstatement</a><br><span class="src-note">线索：URL 与结论经 CNBC 报道转引确认存在；原文未能在本环境直接核验，标注待核实</span></td><td><span class="badge mid">部分核验</span></td></tr><tr id="src-S6" data-tier="official"><td>S6</td><td>2026-11-23</td><td><span class="tier official">官方</span></td><td><a href="https://www.sec.gov/Archives/edgar/data/1045810/000104581026000090/nvda-20261122.htm" target="_blank" rel="noopener noreferrer">NVIDIA 8-K (event date 2026-11-22)</a><br><span class="src-note">线索：备案链接经 CNBC 报道引用；SEC 对本环境请求返回反爬提示，正文未能直接核验，标注待核实</span></td><td><span class="badge pending">待核实</span></td></tr></tbody></table></div></section><section class="sec"><h2 class="sec">覆盖缺口</h2><ul><li class="gap-item">【未核验】Reuters 11-25 报道原文 —— 影响：「DOJ 未立案」目前仅有 CNBC 转引，若原文口径有出入需修正交叉结论</li><li class="gap-item">【未核验】SEC 8-K 备案正文 —— 影响：辞任/复职生效时点以官方声明为准，8-K 程序细节待补</li><li class="gap-item">【缺失】Bloomberg / FT / AP 等权威媒体覆盖 —— 影响：交叉验证集中在官方 + CNBC，媒体侧多样性不足</li><li class="gap-item">【缺失】评级机构对英伟达的评级/展望 —— 影响：信用与评级维度暂缺，如后续涉及融资成本需补充</li></ul></section></main><footer>本报告由 hot-news-monitor 专题生成器渲染（数据文件 nvidia-2026-11-26.json）；未直接核验条目已在页面标注「待核实」。信息等级：已核验 / 部分核验 / 推断 / 待核实。</footer>
+<script>
+(function(){
+  var chips = document.querySelectorAll('#tierFilter .chip');
+  chips.forEach(function(c){
+    c.addEventListener('click', function(){
+      var tier = c.getAttribute('data-tier');
+      chips.forEach(function(x){ x.setAttribute('aria-pressed', String(x===c)); });
+      document.querySelectorAll('#sourceTable tbody tr').forEach(function(tr){
+        tr.style.display = (tier==='全部' || tr.getAttribute('data-tier')===tier) ? '' : 'none';
+      });
+    });
+  });
+})();
+</script>
+</body>
+</html>

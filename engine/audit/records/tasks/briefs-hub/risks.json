@@ -1,0 +1,20 @@
+[
+  {
+    "description": "hub 生成物漂移破坏 CI --check",
+    "id": "R-1",
+    "mitigation": "仅读入库确定性数据,提交后跑 html-sync 复核",
+    "owner": ""
+  },
+  {
+    "description": "旧分享链接失效",
+    "id": "R-2",
+    "mitigation": "report-nvidia.html 保留 302 重定向",
+    "owner": ""
+  },
+  {
+    "description": "current 页依赖 runtime/state.json",
+    "id": "R-3",
+    "mitigation": "缺失时回退最近专题并在页面标注",
+    "owner": ""
+  }
+]

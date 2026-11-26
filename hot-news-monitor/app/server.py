@@ -54,6 +54,23 @@ class Handler(BaseHTTPRequestHandler):
     # ---------------------------------------------------------- routes
     def do_GET(self) -> None:  # noqa: N802
         path = urlparse(self.path).path
+        if path == "/report":
+            target = (DASHBOARD_DIR / "brief-current.html").resolve()
+            if not str(target).startswith(str(DASHBOARD_DIR.resolve())) or not target.is_file():
+                self._send(404, b"current brief not built yet", "text/plain; charset=utf-8")
+                return
+            self._send(200, target.read_bytes(), "text/html; charset=utf-8")
+            return
+        from .brief import load_manifest
+        for b in load_manifest().get("briefs", ()):
+            if b.get("legacy_redirect") and path == b["legacy_redirect"]:
+                body = b"moved"
+                self.send_response(302)
+                self.send_header("Location", "/" + str(b.get("out_name")))
+                self.send_header("Content-Length", str(len(body)))
+                self.end_headers()
+                self.wfile.write(body)
+                return
         if path == "/" or path.endswith(".html"):
             name = "index.html" if path == "/" else path.lstrip("/").split("?")[0]
             target = (DASHBOARD_DIR / name).resolve()
@@ -62,14 +79,18 @@ class Handler(BaseHTTPRequestHandler):
                 return
             self._send(200, target.read_bytes(), "text/html; charset=utf-8")
             return
+        if path == "/api/briefs":
+            from .brief import load_manifest
+            self._send(200, _json_bytes(load_manifest()), "application/json; charset=utf-8")
+            return
         if path == "/api/state":
             self._send(200, _json_bytes(self._snapshot()), "application/json; charset=utf-8")
             return
         if path == "/api/health":
             snap = self.store.load_state()
-            body = {"ok": True, "generated_at": snap.generated_at if snap else None,
-                    "mode": snap.mode if snap else "none"}
-            self._send(200, _json_bytes(body), "application/json; charset=utf-8")
+            health_body = {"ok": True, "generated_at": snap.generated_at if snap else None,
+                           "mode": snap.mode if snap else "none"}
+            self._send(200, _json_bytes(health_body), "application/json; charset=utf-8")
             return
         if path.startswith("/api/events/"):
             eid = unquote(path[len("/api/events/"):])
