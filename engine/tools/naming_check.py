@@ -31,7 +31,7 @@ from _common import ROOT  # noqa: E402
 
 KEBAB_RE = re.compile(r"^[a-z0-9]+(?:-[a-z0-9]+)*$")
 SNAKE_RE = re.compile(r"^[a-z0-9]+(?:_[a-z0-9]+)*$")
-REPORT_RE = re.compile(r"^\d{4}(?:-\d{2}(?:-\d{2})?)?(?:-Q[1-4])?_[a-z0-9_]+\.html$")
+REPORT_RE = re.compile(r"^\d{4}(?:-\d{2}(?:-\d{2})?)?(?:-Q[1-4])?_[a-z0-9][a-z0-9_-]*\.html$")
 PROMPT_RE = re.compile(r"^prompt-[a-z0-9-]+\.md$")
 ADR_RE = re.compile(r"^\d{4}-[a-z0-9-]+\.md$")
 AUDIT_REPORT_RE = re.compile(r"^[a-z0-9]+(?:-[a-z0-9]+)*(?:-\d{4}-\d{2}-\d{2})?$")

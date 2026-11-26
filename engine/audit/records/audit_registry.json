@@ -1917,6 +1917,42 @@
       "audit_id": "AUD-2026-11-26-001",
       "mark_level": "pre",
       "audited_at": "2026-11-26T10:43:36+00:00"
+    },
+    "content/economy/dubai/apartment-investment/reports/2026-11_baseline_prime-quant-alignment.html": {
+      "title": "迪拜（阿联酋）公寓住宅市场 · PRIME × MST 个人投资专项报告",
+      "kind": "business",
+      "category": "report",
+      "business_line": "content/economy/dubai/apartment-investment",
+      "status": "draft",
+      "stages": {
+        "draft": false,
+        "initial": false,
+        "second": false,
+        "final": false
+      },
+      "mark": false,
+      "first_seen_at": "2026-11-26",
+      "evidence": {
+        "report": "content/economy/dubai/apartment-investment/reports/2026-11_baseline_prime-quant-alignment.html",
+        "business_line": "content/economy/dubai/apartment-investment",
+        "plans": [],
+        "gate": {
+          "entry": "engine/tools/optimization_gate.py",
+          "probe": true
+        },
+        "audit": {
+          "review": "",
+          "status": "draft",
+          "stages": {
+            "draft": false,
+            "initial": false,
+            "second": false,
+            "final": false
+          },
+          "mark_level": "none",
+          "audit_id": ""
+        }
+      }
     }
   }
 }

@@ -170,7 +170,7 @@ def resolve_segments(layout: Layout, theme: str, segments: tuple[str, ...]) -> d
 MONTHLY_RE = re.compile(r"^(\d{4}-(?:0[1-9]|1[0-2]))_monthly\.(html|md)$")
 QUARTERLY_RE = re.compile(r"^(\d{4}-Q[1-4])_quarterly\.(html|md)$")
 ANNUAL_RE = re.compile(r"^(\d{4})_annual\.(html|md)$")
-BASELINE_RE = re.compile(r"^(\d{4}-(?:0[1-9]|1[0-2]))_baseline(?:_report)?\.(html|md)$")
+BASELINE_RE = re.compile(r"^(\d{4}-(?:0[1-9]|1[0-2]))_baseline(?:_[a-z0-9][a-z0-9-]*)?\.(html|md)$")
 # 周报：period 为数据截止日（ISO 日期），与月/季/年的日历周期不同
 WEEKLY_RE = re.compile(r"^(\d{4}-(?:0[1-9]|1[0-2])-(?:0[1-9]|[12]\d|3[01]))_weekly\.(html|md)$")
 

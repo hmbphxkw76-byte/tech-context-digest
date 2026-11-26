@@ -191,9 +191,11 @@
 ```
 <period>_<cycle>.html
 <period>_<cycle>_report.html        # 仅 baseline 兼容旧写法
+<period>_baseline_<slug>.html        # 框架专项（基线家族，纳入基线组）
 ```
 
 - **canonical**：`YYYY-MM_monthly.html`、`YYYY-Qn_quarterly.html`、`YYYY_annual.html`、`YYYY-MM-DD_weekly.html`、`YYYY-MM_baseline_report.html`。
+- **框架专项件**：`<period>_baseline_<slug>.html`（如 PRIME 对齐件），按基线周期管理，常驻展示不参与归档计数；与 `_common.detect_report()` / `naming_check.REPORT_RE` 同步。
 - `YYYY-MM_baseline.html` 为兼容别名，仅历史文件保留；新文件统一 `_baseline_report.html`（与 `_common.expected_output()` 一致）。
 - **交付物只放 `.html`**；Markdown 源稿放业务线 `sources/`，不得放入 `reports/`。
 - 归档：`reports/archives/` 与 `sources/archives/`（保留策略内）；存档：`reports/legacy/`（不发布不审计）。

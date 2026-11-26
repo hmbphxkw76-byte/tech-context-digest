@@ -1,0 +1,8 @@
+[
+  {
+    "description": "新增报告再次触发 summary 长度与阈值 token 一致性检查",
+    "id": "R-1",
+    "mitigation": "沿用指针措辞与预算控制",
+    "owner": ""
+  }
+]
