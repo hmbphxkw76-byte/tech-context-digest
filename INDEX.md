@@ -1,6 +1,6 @@
 # Tech Life Research 报告索引
 
-> 最近生成：2026-11-26 11:48 UTC（由 engine/tools/build_index.py 自动维护）
+> 最近生成：2026-11-26 13:44 UTC（由 engine/tools/build_index.py 自动维护）
 
 ## content/tech/ai-security/industry-research/dubai
 
@@ -73,7 +73,7 @@
 
 | 类型 | 周期 | 报告 | 标题 | 更新时间 (UTC) |
 |---|---|---|---|---|
-| 基线 | 2026-11 | [2026-11_baseline_report.html](content/education/study-abroad/reports/2026-11_baseline_report.html) | 14 国留学信息与决策 · 首期基线报告 | 2026-11-26 11:47 |
+| 基线 | 2026-11 | [2026-11_baseline_report.html](content/education/study-abroad/reports/2026-11_baseline_report.html) | 14 国留学信息与决策 · 首期基线报告 | 2026-11-26 13:44 |
 
 ## content/education/education-system
 
@@ -99,8 +99,8 @@
 
 | 类型 | 周期 | 报告 | 标题 | 更新时间 (UTC) |
 |---|---|---|---|---|
-| 基线 | 2026-11 | [2026-11_baseline_prime-quant-alignment.html](content/economy/dubai/apartment-investment/reports/2026-11_baseline_prime-quant-alignment.html) | 迪拜（阿联酋）公寓住宅市场 · PRIME 城市评估 × MST 个人对齐专项报告 | 2026-11-26 11:47 |
-| 基线 | 2026-11 | [2026-11_baseline_report.html](content/economy/dubai/apartment-investment/reports/2026-11_baseline_report.html) | 迪拜（阿联酋）公寓住宅市场 · 首期投资覆盖报告 | 2026-11-26 11:47 |
+| 基线 | 2026-11 | [2026-11_baseline_prime-quant-alignment.html](content/economy/dubai/apartment-investment/reports/2026-11_baseline_prime-quant-alignment.html) | 迪拜（阿联酋）公寓住宅市场 · PRIME 城市评估 × MST 个人对齐专项报告 | 2026-11-26 13:44 |
+| 基线 | 2026-11 | [2026-11_baseline_report.html](content/economy/dubai/apartment-investment/reports/2026-11_baseline_report.html) | 迪拜（阿联酋）公寓住宅市场 · 首期投资覆盖报告 | 2026-11-26 13:44 |
 
 ## content/economy/dubai/apartment
 

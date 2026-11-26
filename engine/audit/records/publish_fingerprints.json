@@ -2,8 +2,8 @@
   "schema_version": "1.0",
   "comment": "正式发布报告指纹（sha256，确定性无时间戳）。由 publish_fingerprint.py --emit 生成。",
   "fingerprints": {
-    "content/economy/dubai/apartment-investment/reports/2026-11_baseline_prime-quant-alignment.html": "edb7eaab2d804bfdb1898a67aaa7c5b6ae6746d61f01cee80340a0cb2f692c3d",
-    "content/economy/dubai/apartment-investment/reports/2026-11_baseline_report.html": "08bef863fbf0dbed36cb2bc3886c52cb975e9d6875bcb64bf59a9547b8da369c",
+    "content/economy/dubai/apartment-investment/reports/2026-11_baseline_prime-quant-alignment.html": "4155f70337d6345dcbb87d93eb1251424c2c0463282b74f7d52b0d13b68f1bf3",
+    "content/economy/dubai/apartment-investment/reports/2026-11_baseline_report.html": "68c1d1bd76f3f0ce2b5681773a67770efa9301b7184d6730841ecdfac8f301ad",
     "content/economy/dubai/apartment/reports/2026-11_baseline_report.html": "45a91d1fb8153121f11622b908a70231b0c2a67893661e9c6c5d148350ff8b69",
     "content/economy/dubai/apartment/reports/2026-11_monthly.html": "bcc56ff6711e92e8057d461461f3ab9716e995ed9f64ba2e5b021a0a1fc3fc26",
     "content/economy/dubai/apartment/reports/2026-Q3_quarterly.html": "4ffa47260692c22936f8f04f50e6bac8d587757a1efa1b2fd5e2093648ccb778",
