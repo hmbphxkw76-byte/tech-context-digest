@@ -1,0 +1,26 @@
+[
+  {
+    "acceptance": "",
+    "depends_on": [],
+    "id": "T-1",
+    "phase": "",
+    "status": "pending",
+    "title": "index.html 热度数值替换为级别徽标(热>=50/高>=25/中<25),保留悬停精确值"
+  },
+  {
+    "acceptance": "",
+    "depends_on": [],
+    "id": "T-2",
+    "phase": "",
+    "status": "pending",
+    "title": "补充样式与 README 口径说明,单测/静态检查"
+  },
+  {
+    "acceptance": "",
+    "depends_on": [],
+    "id": "T-3",
+    "phase": "",
+    "status": "pending",
+    "title": "浏览器实测截图+统一门禁+PR"
+  }
+]

@@ -72,8 +72,10 @@ h2.sec{font-size:19px;margin:0 0 4px;color:var(--navy);display:flex;align-items:
 .tag{font-size:12px;border-radius:6px;padding:2px 8px;background:var(--chip);border:1px solid var(--line);color:var(--muted);white-space:nowrap}
 .event-title{font-size:16px;font-weight:600;margin:8px 0 6px;line-height:1.4}
 .event-meta{display:flex;flex-wrap:wrap;gap:12px;font-size:12.5px;color:var(--muted)}
-.heat-num{color:var(--navy);font-weight:600;font-variant-numeric:tabular-nums}
-.heat-num.hot{color:var(--bad)}
+.heat-badge{display:inline-block;min-width:26px;text-align:center;border-radius:6px;padding:1px 8px;font-size:12.5px;font-weight:600;border:1px solid var(--line);color:var(--muted);background:#fff}
+.heat-badge.lvl-hot{color:#7a4a12;border-color:#e0c493;background:#faf3e6}
+.heat-badge.lvl-high{color:#fff;border-color:var(--navy);background:var(--navy)}
+.heat-badge.lvl-mid{color:var(--muted);border-color:var(--line);background:var(--chip)}
 .tier{font-size:11px;border-radius:4px;padding:1px 6px;border:1px solid var(--line);color:var(--muted)}
 .tier.official{color:var(--ok);border-color:#bcd9c8}
 .tier.media_t1{color:var(--navy);border-color:#c3ceda}
@@ -245,7 +247,11 @@ function fmtTime(ts){
   if(isNaN(d.getTime())){ return ts; }
   return d.toLocaleString("zh-CN", {hour12:false});
 }
-function heatClass(h, threshold){ return h >= threshold ? "hot" : ""; }
+function heatTier(h, threshold){
+  if(h >= threshold){ return {label:"热", cls:"lvl-hot"}; }
+  if(h >= 25){ return {label:"高", cls:"lvl-high"}; }
+  return {label:"中", cls:"lvl-mid"};
+}
 function escapeHtml(s){
   return String(s==null?"":s).replace(/[&<>"']/g, function(c){
     return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c];
@@ -328,7 +334,7 @@ function renderEvents(s){
       '<div class="event-head">'
       + (e.level === 1 ? '<span class="badge-pin">置顶 · 高优先级</span>' : '')
       + '<span class="tag">'+escapeHtml(e.tag)+'</span>'
-      + '<span class="heat-num '+heatClass(e.heat, s.threshold)+'">热度 '+e.heat.toFixed(1)+'</span>'
+      + '<span class="heat-badge '+heatTier(e.heat, s.threshold).cls+'" title="热度值 '+e.heat.toFixed(1)+'">'+heatTier(e.heat, s.threshold).label+'</span>'
       + miniSpark(e.heat_series, s.threshold)
       + '</div>'
       + '<h3 class="event-title">'+escapeHtml(e.title)+'</h3>'
