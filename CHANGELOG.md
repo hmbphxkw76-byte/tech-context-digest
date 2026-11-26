@@ -2,6 +2,13 @@
 
 本文件记录仓库的结构与规范级变更（报告内容变更见各业务线 `reports/`）。
 
+## 3.8.0 — 2026-11-26：新增投资分析业务线与汇总页类型 chips 动态化
+
+- **结构**：经济主题新增 `content/economy/dubai/apartment-investment`（category=apartment-investment，region=dubai；投资分析与尽调型，基线 + 季度 / 年度复核 + 事件触发专项），标的为迪拜公寓资产类别（市场级）；`data/processed/economy/dubai/apartment-investment/` 同步建立标的档案与来源登记。
+- **报告**：产出首期基线《迪拜（阿联酋）公寓住宅市场 · 首期投资覆盖报告》（md + HTML，八节固化锚）；结论为「正利差 + 价格回落 + 供给放量 → 选择性持有（有条件结论）」，估值区间 1,430–1,840 AED/sqft（假设乘积，多方法并列）。
+- **hub**：`engine/tools/build_hub.py` 类型 chips 改为仅渲染当前有报告的类型（index.html / reader.html 共用 `visible_types()`）；无报告类型默认不展示，产出首份报告后自动出现；测试 `TestHubTypeChips` 锁定。
+- **同步**：`template-registry.md` investment-research「已接入业务线」登记；`layout.json` changelog；INDEX.md / 汇总页重新生成。
+
 ## 3.7.0 — 2026-11-23：站点上线、品牌口径统一与自动化闭环
 
 - **发布**：启用 GitHub Pages（`main` 根目录，legacy 构建），站点 `https://hmbphxkw76-byte.github.io/tech-context-digest/`；仓库 homepage 同步；CI 合并后站点自动重建。

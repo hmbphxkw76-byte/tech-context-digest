@@ -92,7 +92,7 @@ engine/prompts/                    # 泛用版业务提示词（每类型一目�
 | consumer-research | 消费者·用户调研型 | prompt-baseline-setup-template.md | prompt-study-template.md（项目制） | 项目制专题调研 + 年度满意度复测 | 暂无 |
 | industry-research | 行业深度研究型 | prompt-baseline-setup-template.md | prompt-annual-refresh-template.md | 一次性深度全景 + 年度刷新（重大事件可插刷） | content/tech/ai-security/industry-research/dubai；content/tech/ai-application/industry-research/dubai |
 | market-sizing | 市场规模测算与预测型 | prompt-baseline-setup-template.md | prompt-annual-refresh-template.md | 一次性测算建模 + 年度假设刷新与回测（失效信号可插刷） | 暂无 |
-| investment-research | 投资分析与尽调型 | prompt-baseline-setup-template.md | prompt-target-update-template.md | 首次覆盖 + 定期复核 + 事件触发结论修订 | 暂无 |
+| investment-research | 投资分析与尽调型 | prompt-baseline-setup-template.md | prompt-target-update-template.md | 首次覆盖 + 定期复核 + 事件触发结论修订 | content/economy/dubai/apartment-investment |
 | policy-analysis | 政策法规解读型 | prompt-baseline-setup-template.md | prompt-monthly-monitor-template.md（月度）；prompt-policy-review-template.md（事件 / 年度） | 月度主更新 + 事件触发单份解读 + 年度台账复盘 | content/education/education-system；content/international/international-relations；content/international/immigration；content/international/immigration/dubai；content/political/political-system；content/society/social-structure |
 | feasibility-study | 可行性与市场进入型 | prompt-baseline-setup-template.md | prompt-study-template.md（项目制） | 项目制一次性论证 + 项目复盘 | 暂无 |
 | flash-commentary | 快评·事件点评型 | prompt-baseline-setup-template.md（机制文档） | prompt-flash-note-template.md | 事件触发 72h 快评（基线期为机制建立，不出正文） | 暂无 |
@@ -146,3 +146,4 @@ engine/prompts/                    # 泛用版业务提示词（每类型一目�
 | v1.16 | 2026-11-21 | policy-analysis 月度节拍扩展 | 新增 `prompt-monthly-monitor-template.md`（类型模板）与 `engine/prompts/policy-analysis/prompt-monthly-monitor.md`（泛用版）；compliance-rules.json 登记 monthly 骨架；`_common.py` TYPE_CADENCE 注册 monthly；首条接入业务线 `content/international/immigration` |
 | v1.17 | 2026-11-21 | ai-application 对齐 ai-security | ai-application 删除 `trends`，新建 `competitive-intelligence/dubai`、`dubai`、`industry-research/dubai` 三条月度业务线；employment-research / competitive-intelligence / industry-research 三个类型的「已接入业务线」列同步登记 |
 | v1.18 | 2026-11-21 | 长期居留签证业务线接入 | policy-analysis 类型下新增业务线 `content/international/immigration/dubai`（黄金签证 / 绿卡签证；基线 + 月度 + 事件触发）；机构分级主数据补录 u.ae / ICP / GDRFA / Arab News |
+| v1.19 | 2026-11-26 | 投资分析业务线接入 | investment-research 类型下新增业务线 `content/economy/dubai/apartment-investment`（市场级标的；基线 + 季度 / 年度复核 + 事件触发），「已接入业务线」由「暂无」更新为该线 |

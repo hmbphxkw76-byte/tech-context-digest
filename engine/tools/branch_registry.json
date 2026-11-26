@@ -217,6 +217,13 @@
       "slug": "hook-mode-fix",
       "task": "hook-mode-fix"
     },
+    "task/hub-chips-investment-line-7e133265": {
+      "note": "source=env:CATPAW_CONVERSATION_ID",
+      "session": "7e13326517fc4e12bd89194de0ca1bee",
+      "session_short": "7e133265",
+      "slug": "hub-chips-investment-line",
+      "task": "hub-chips-investment-line"
+    },
     "task/immigration-baseline-c5a88c1e": {
       "note": "source=env:CATPAW_CONVERSATION_ID",
       "session": "c5a88c1e4ebe4538b05ce6659b54532e",

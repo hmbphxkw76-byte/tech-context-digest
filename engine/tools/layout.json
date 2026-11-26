@@ -1,8 +1,13 @@
 {
   "version": "5.0",
   "updated": "2026-11-26",
-  "classification_version": "2026-11-26.1",
+  "classification_version": "2026-11-26.2",
   "changelog": [
+    {
+      "version": "2026-11-26.2",
+      "date": "2026-11-26",
+      "summary": "经济主题新增迪拜公寓投资分析业务线 content/economy/dubai/apartment-investment（category=apartment-investment，region=dubai；投资分析与尽调型）：标的为迪拜公寓资产类别（市场级），节拍为基线 + 季度 / 年度复核 + 事件触发专项；与 apartment 监测线共享来源体系与台账口径。"
+    },
     {
       "version": "2026-11-26.1",
       "date": "2026-11-26",
