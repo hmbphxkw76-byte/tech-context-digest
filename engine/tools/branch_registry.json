@@ -350,6 +350,13 @@
       "slug": "phase3-static-linting",
       "task": "phase3-static-linting"
     },
+    "task/prime-quant-alignment-7e133265": {
+      "note": "source=env:CATPAW_CONVERSATION_ID",
+      "session": "7e13326517fc4e12bd89194de0ca1bee",
+      "session_short": "7e133265",
+      "slug": "prime-quant-alignment",
+      "task": "prime-quant-alignment"
+    },
     "task/records-cleanup-5d42b26d": {
       "note": "source=env:CATPAW_CONVERSATION_ID",
       "session": "5d42b26dd47c4787b8c2715f18d7b405",

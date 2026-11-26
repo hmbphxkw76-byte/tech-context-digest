@@ -3,6 +3,446 @@
   "business_line": "content/economy/dubai/apartment-investment",
   "cycle": "baseline",
   "period": "2026-11",
-  "previous": null,
-  "findings": []
+  "previous": "content/economy/dubai/apartment-investment/reports/2026-11_baseline_prime-quant-alignment.html",
+  "findings": [
+    {
+      "check": "caliber",
+      "severity": "P1",
+      "block_index": 411,
+      "message": "多口径数值并列但未标注口径",
+      "evidence": "收益定位：毛收益率 6.0–6.6%，高于 3M EIBOR 4.36%（利差 +1.6～+2.2pp）；净中位 5.4%。已核验 [R10][R11][M02"
+    },
+    {
+      "check": "caliber",
+      "severity": "P1",
+      "block_index": 412,
+      "message": "多口径数值并列但未标注口径",
+      "evidence": "价格位置：成交中位价 1,659 AED/sqft（2026-10），混合调整指数同比 −5.5%，价格端连续负增。部分核验 [P03][P04][FC-APT"
+    },
+    {
+      "check": "caliber",
+      "severity": "P1",
+      "block_index": 414,
+      "message": "多口径数值并列但未标注口径",
+      "evidence": "需求侧：常住人口 4.58m（+7.5%）、FDI 流入 48.2 亿美元（2025）、国际游客 6.97m（2026 1–8 月）。已核验 [S09][M12"
+    },
+    {
+      "check": "caliber",
+      "severity": "P1",
+      "block_index": 415,
+      "message": "多口径数值并列但未标注口径",
+      "evidence": "主要风险：EIBOR 距硬红线约 10.6bp；降租续约占比 21.4%；交付兑现率 41.3% 低位。部分核验 [M02][R06][S06]"
+    },
+    {
+      "check": "caliber",
+      "severity": "P1",
+      "block_index": 436,
+      "message": "多口径数值并列但未标注口径",
+      "evidence": "成交结构2026Q3 住宅成交 34,500 笔 / 70.8 AED bn；期房成交占比 72.2%（笔数）Savills [P07]；Cavendish M"
+    },
+    {
+      "check": "caliber",
+      "severity": "P1",
+      "block_index": 443,
+      "message": "多口径数值并列但未标注口径",
+      "evidence": "价格均价 1,817 AED/sqft（环比 −4.8%）；PIX 203.7 点（−0.9% MoM / −5.5% YoY，连续 2 月负增）2026Q3 "
+    },
+    {
+      "check": "caliber",
+      "severity": "P1",
+      "block_index": 444,
+      "message": "多口径数值并列但未标注口径",
+      "evidence": "租金新签公寓租金中位 65,000 AED/年；平均租金 77.3 AED/sqft/年；降租续约占比 21.4%（2026Q1 为 4.8%）2026-10 "
+    },
+    {
+      "check": "caliber",
+      "severity": "P1",
+      "block_index": 468,
+      "message": "多口径数值并列但未标注口径",
+      "evidence": "持有成本差（毛 − 净）1.2–1.8pp[I05] 业务配置阈值区间；[R11] 净中位 5.4% 与毛下限 6.0% 差 0.6pp，实际差高于代理下限"
+    },
+    {
+      "check": "caliber",
+      "severity": "P1",
+      "block_index": 474,
+      "message": "多口径数值并列但未标注口径",
+      "evidence": "毛收益率 − 3M EIBOR = +1.6～+2.2pp（[R10] 对 [M02]）；对 CPI 2026F 1.8%（[M14]）实际利差约 +4.2～+"
+    },
+    {
+      "check": "caliber",
+      "severity": "P1",
+      "block_index": 475,
+      "message": "多口径数值并列但未标注口径",
+      "evidence": "AED 钉住美元（1 USD = 3.6725 AED，CBUAE [S-057]），利差性质为美元利率资产对美元负债；对人民币投资者的汇率风险为 USD/CN"
+    },
+    {
+      "check": "caliber",
+      "severity": "P1",
+      "block_index": 493,
+      "message": "多口径数值并列但未标注口径",
+      "evidence": "供应过剩论 vs 需求流入：看空方强调 2027–2030 管道 >52.5 万套（[S05]）；看多方强调人口 4.58m（+7.5%）、FDI 48.2 亿"
+    },
+    {
+      "check": "caliber",
+      "severity": "P1",
+      "block_index": 504,
+      "message": "多口径数值并列但未标注口径",
+      "evidence": "利率（EIBOR）+50bp 且全额传导利差收窄约 0.5pp，估值区间下移（假设乘积，区间）"
+    },
+    {
+      "check": "source_trace",
+      "severity": "P0",
+      "block_index": 411,
+      "message": "变更块含带单位关键数字但无来源标注",
+      "evidence": "收益定位：毛收益率 6.0–6.6%，高于 3M EIBOR 4.36%（利差 +1.6～+2.2pp）；净中位 5.4%。已核验 [R10][R11][M02"
+    },
+    {
+      "check": "source_trace",
+      "severity": "P0",
+      "block_index": 412,
+      "message": "变更块含带单位关键数字但无来源标注",
+      "evidence": "价格位置：成交中位价 1,659 AED/sqft（2026-10），混合调整指数同比 −5.5%，价格端连续负增。部分核验 [P03][P04][FC-APT"
+    },
+    {
+      "check": "source_trace",
+      "severity": "P0",
+      "block_index": 413,
+      "message": "变更块含带单位关键数字但无来源标注",
+      "evidence": "估值区间（假设乘积，收益法 / 可比法）：1,430–1,840 AED/sqft，与现价 1,659–1,817 吻合。[R10][R11][R03]"
+    },
+    {
+      "check": "source_trace",
+      "severity": "P0",
+      "block_index": 414,
+      "message": "变更块含带单位关键数字但无来源标注",
+      "evidence": "需求侧：常住人口 4.58m（+7.5%）、FDI 流入 48.2 亿美元（2025）、国际游客 6.97m（2026 1–8 月）。已核验 [S09][M12"
+    },
+    {
+      "check": "source_trace",
+      "severity": "P0",
+      "block_index": 415,
+      "message": "变更块含带单位关键数字但无来源标注",
+      "evidence": "主要风险：EIBOR 距硬红线约 10.6bp；降租续约占比 21.4%；交付兑现率 41.3% 低位。部分核验 [M02][R06][S06]"
+    },
+    {
+      "check": "source_trace",
+      "severity": "P0",
+      "block_index": 422,
+      "message": "变更块含带单位关键数字但无来源标注",
+      "evidence": "结论：毛收益率 6.0–6.6% 对 EIBOR 4.36% 利差为正，估值区间与现价吻合；信号确认前只给条件化结论，不给方向性看多。"
+    },
+    {
+      "check": "source_trace",
+      "severity": "P0",
+      "block_index": 425,
+      "message": "变更块含带单位关键数字但无来源标注",
+      "evidence": "反向证据：2027–2030 管道 >52.5 万套；同质化新签租金 −15.3%；交付兑现率 41.3%；净收益率口径未核验。"
+    },
+    {
+      "check": "source_trace",
+      "severity": "P0",
+      "block_index": 435,
+      "message": "变更块含带单位关键数字但无来源标注",
+      "evidence": "存量≈977,000 套（2026，ValuStrat 全市住宅口径）[S08]"
+    },
+    {
+      "check": "source_trace",
+      "severity": "P0",
+      "block_index": 436,
+      "message": "变更块含带单位关键数字但无来源标注",
+      "evidence": "成交结构2026Q3 住宅成交 34,500 笔 / 70.8 AED bn；期房成交占比 72.2%（笔数）Savills [P07]；Cavendish M"
+    },
+    {
+      "check": "source_trace",
+      "severity": "P0",
+      "block_index": 437,
+      "message": "变更块含带单位关键数字但无来源标注",
+      "evidence": "新推盘2026 年 1–9 月新推盘 ≈50,000 套Savills [S07]"
+    },
+    {
+      "check": "source_trace",
+      "severity": "P0",
+      "block_index": 438,
+      "message": "变更块含带单位关键数字但无来源标注",
+      "evidence": "价格水平成交均价 1,817 AED/sqft（2026Q3，Savills）；中位价 1,659 AED/sqft（2026-10，DLD 登记）[P01]["
+    },
+    {
+      "check": "source_trace",
+      "severity": "P0",
+      "block_index": 443,
+      "message": "变更块含带单位关键数字但无来源标注",
+      "evidence": "价格均价 1,817 AED/sqft（环比 −4.8%）；PIX 203.7 点（−0.9% MoM / −5.5% YoY，连续 2 月负增）2026Q3 "
+    },
+    {
+      "check": "source_trace",
+      "severity": "P0",
+      "block_index": 444,
+      "message": "变更块含带单位关键数字但无来源标注",
+      "evidence": "租金新签公寓租金中位 65,000 AED/年；平均租金 77.3 AED/sqft/年；降租续约占比 21.4%（2026Q1 为 4.8%）2026-10 "
+    },
+    {
+      "check": "source_trace",
+      "severity": "P0",
+      "block_index": 445,
+      "message": "变更块含带单位关键数字但无来源标注",
+      "evidence": "收益率毛收益率 6.0–6.6%（DRED / Peak Trust / CM）；净收益率中位 5.4%（仅扣物业费）2026Q3 / TTM[R10][R11"
+    },
+    {
+      "check": "source_trace",
+      "severity": "P0",
+      "block_index": 446,
+      "message": "变更块含带单位关键数字但无来源标注",
+      "evidence": "供给9M 交付 40,400 套；2027 计划 60,000–162,500 套；2027–2030 管道 >525,000 套2026 1–9月 / 202"
+    },
+    {
+      "check": "source_trace",
+      "severity": "P0",
+      "block_index": 447,
+      "message": "变更块含带单位关键数字但无来源标注",
+      "evidence": "融资成本3M EIBOR 4.3648%；CBUAE 基准利率 3.900%；Fed 目标区间 3.75–4.00%2026-11-10 / 2026-10-2"
+    },
+    {
+      "check": "source_trace",
+      "severity": "P0",
+      "block_index": 448,
+      "message": "变更块含带单位关键数字但无来源标注",
+      "evidence": "宏观与外需CPI 2026F 1.8% / 2027F 2.5%；实际 GDP 2026F 3.1%；Brent 2026F 96 / 2027F 84 US$"
+    },
+    {
+      "check": "source_trace",
+      "severity": "P0",
+      "block_index": 449,
+      "message": "变更块含带单位关键数字但无来源标注",
+      "evidence": "需求侧人口 4.58m（2025 年末，+7.5%）；FDI 48,243 US$m（2025）；游客 6.97m（2026 1–8 月）；酒店入住率 66%2"
+    },
+    {
+      "check": "source_trace",
+      "severity": "P0",
+      "block_index": 451,
+      "message": "变更块含带单位关键数字但无来源标注",
+      "evidence": "周期定位：基准判断为「常态化早期」——价格端连续负增（[P04]）、成交增速放缓、租金要价走弱，但登记口径收益率维持 6.0–6.6%（[R10]），处于「利差"
+    },
+    {
+      "check": "source_trace",
+      "severity": "P0",
+      "block_index": 455,
+      "message": "变更块含带单位关键数字但无来源标注",
+      "evidence": "[P01] 公寓成交均价1,817AED/sqft2026Q3Savills"
+    },
+    {
+      "check": "source_trace",
+      "severity": "P0",
+      "block_index": 456,
+      "message": "变更块含带单位关键数字但无来源标注",
+      "evidence": "[P03] 公寓成交中位价1,659AED/sqft2026-10PropertyIndex（DLD）"
+    },
+    {
+      "check": "source_trace",
+      "severity": "P0",
+      "block_index": 457,
+      "message": "变更块含带单位关键数字但无来源标注",
+      "evidence": "[R01] 新签公寓租金中位65,000AED/年2026-10Peak Trust（Ejari）"
+    },
+    {
+      "check": "source_trace",
+      "severity": "P0",
+      "block_index": 458,
+      "message": "变更块含带单位关键数字但无来源标注",
+      "evidence": "[R03] 平均租金77.3AED/sqft/年2026-09Cavendish Maxwell"
+    },
+    {
+      "check": "source_trace",
+      "severity": "P0",
+      "block_index": 459,
+      "message": "变更块含带单位关键数字但无来源标注",
+      "evidence": "[R10] 公寓毛收益率6.0 / 6.2 / 6.6%2026Q3 / TTMDRED / Peak Trust / CM"
+    },
+    {
+      "check": "source_trace",
+      "severity": "P0",
+      "block_index": 460,
+      "message": "变更块含带单位关键数字但无来源标注",
+      "evidence": "[R11] 净收益率（仅扣物业费）5.4% 中位2026Q3Peak Trust"
+    },
+    {
+      "check": "source_trace",
+      "severity": "P0",
+      "block_index": 461,
+      "message": "变更块含带单位关键数字但无来源标注",
+      "evidence": "[M01] CBUAE 基准利率3.900%2026-11-10CBUAE"
+    },
+    {
+      "check": "source_trace",
+      "severity": "P0",
+      "block_index": 462,
+      "message": "变更块含带单位关键数字但无来源标注",
+      "evidence": "[M02] 3M EIBOR4.3648%2026-11-10CBUAE"
+    },
+    {
+      "check": "source_trace",
+      "severity": "P0",
+      "block_index": 463,
+      "message": "变更块含带单位关键数字但无来源标注",
+      "evidence": "[M05] Fed 目标区间3.75–4.00%2026-10-28Federal Reserve"
+    },
+    {
+      "check": "source_trace",
+      "severity": "P0",
+      "block_index": 465,
+      "message": "变更块含带单位关键数字但无来源标注",
+      "evidence": "模型：资产价值 = 净营运收入 / 资本化率。分子取 [R03] 平均租金 77.3 AED/sqft/年；净收益率 = 毛收益率 − 持有成本差（物业费 / "
+    },
+    {
+      "check": "source_trace",
+      "severity": "P0",
+      "block_index": 467,
+      "message": "变更块含带单位关键数字但无来源标注",
+      "evidence": "毛收益率6.0–6.6%[R10]（DRED / Peak Trust / CM 并列）"
+    },
+    {
+      "check": "source_trace",
+      "severity": "P0",
+      "block_index": 468,
+      "message": "变更块含带单位关键数字但无来源标注",
+      "evidence": "持有成本差（毛 − 净）1.2–1.8pp[I05] 业务配置阈值区间；[R11] 净中位 5.4% 与毛下限 6.0% 差 0.6pp，实际差高于代理下限"
+    },
+    {
+      "check": "source_trace",
+      "severity": "P0",
+      "block_index": 469,
+      "message": "变更块含带单位关键数字但无来源标注",
+      "evidence": "净收益率（净口径）4.2–5.4%假设（毛减持有成本差；净口径仅扣物业费，不含空置 / 维修 / 中介 / 利息）"
+    },
+    {
+      "check": "source_trace",
+      "severity": "P0",
+      "block_index": 472,
+      "message": "变更块含带单位关键数字但无来源标注",
+      "evidence": "以毛收益率倒数构造价格租金比：1 ÷ 6.6% ≈ 15.2x，1 ÷ 5.4% ≈ 18.5x；乘以 [R03] 平均租金 77.3 AED/sqft/年，得"
+    },
+    {
+      "check": "source_trace",
+      "severity": "P0",
+      "block_index": 474,
+      "message": "变更块含带单位关键数字但无来源标注",
+      "evidence": "毛收益率 − 3M EIBOR = +1.6～+2.2pp（[R10] 对 [M02]）；对 CPI 2026F 1.8%（[M14]）实际利差约 +4.2～+"
+    },
+    {
+      "check": "source_trace",
+      "severity": "P0",
+      "block_index": 475,
+      "message": "变更块含带单位关键数字但无来源标注",
+      "evidence": "AED 钉住美元（1 USD = 3.6725 AED，CBUAE [S-057]），利差性质为美元利率资产对美元负债；对人民币投资者的汇率风险为 USD/CN"
+    },
+    {
+      "check": "source_trace",
+      "severity": "P0",
+      "block_index": 484,
+      "message": "变更块含带单位关键数字但无来源标注",
+      "evidence": "融资成本上行3M EIBOR ≥4.50%（I01 硬红线）月供与可负担性恶化，利差收窄Fed 路径（[M05]）、CBUAE 政策"
+    },
+    {
+      "check": "source_trace",
+      "severity": "P0",
+      "block_index": 485,
+      "message": "变更块含带单位关键数字但无来源标注",
+      "evidence": "租金下行同质化新签租约同比转负（[R09] 已 −15.3%）毛收益率下修，估值承压人口 / 就业流入（[S09]）、旅游（[M17]）"
+    },
+    {
+      "check": "source_trace",
+      "severity": "P0",
+      "block_index": 486,
+      "message": "变更块含带单位关键数字但无来源标注",
+      "evidence": "供给集中兑现2027 计划 60,000–162,500 套（[S03]）空置与去化压力交付兑现率（[S06] 41.3% 低位）"
+    },
+    {
+      "check": "source_trace",
+      "severity": "P0",
+      "block_index": 487,
+      "message": "变更块含带单位关键数字但无来源标注",
+      "evidence": "期房交付与开发商信用交付兑现率 <45% 且计划量创高（I06）资本利得实现推迟DLD / Oqood 托管机制 [S-065]"
+    },
+    {
+      "check": "source_trace",
+      "severity": "P0",
+      "block_index": 488,
+      "message": "变更块含带单位关键数字但无来源标注",
+      "evidence": "房东定价权弱化降租续约占比超过 25%（RL-02，公寓监测线阈值，指针）租金与净收益率下修Ejari 登记结构（[R06]）"
+    },
+    {
+      "check": "source_trace",
+      "severity": "P0",
+      "block_index": 491,
+      "message": "变更块含带单位关键数字但无来源标注",
+      "evidence": "重大未决事项：① 净收益率仅 Peak Trust 单源中位 5.4%，持有成本明细未核验；② 交付兑现率 41.3% 为二手转载单源，需同口径双源；③ 202"
+    },
+    {
+      "check": "source_trace",
+      "severity": "P0",
+      "block_index": 493,
+      "message": "变更块含带单位关键数字但无来源标注",
+      "evidence": "供应过剩论 vs 需求流入：看空方强调 2027–2030 管道 >52.5 万套（[S05]）；看多方强调人口 4.58m（+7.5%）、FDI 48.2 亿"
+    },
+    {
+      "check": "source_trace",
+      "severity": "P0",
+      "block_index": 494,
+      "message": "变更块含带单位关键数字但无来源标注",
+      "evidence": "租金口径分裂：要价口径同质化新签较 1 月 −15.3%（[R09]，fäm / DLD），而登记口径显示租赁市场「稳定轨迹」（DLD 官方新闻 [S-062]"
+    },
+    {
+      "check": "source_trace",
+      "severity": "P0",
+      "block_index": 495,
+      "message": "变更块含带单位关键数字但无来源标注",
+      "evidence": "整体回落 vs 高端韧性：整体均价环比 −4.8%（[P01]），而 Knight Frank 跟踪的 US$10m+ 豪宅市场保持活跃（[S-050]）——结"
+    },
+    {
+      "check": "source_trace",
+      "severity": "P0",
+      "block_index": 498,
+      "message": "变更块含带单位关键数字但无来源标注",
+      "evidence": "乐观租金 +3～+5%；净收益率压缩至 4.0–4.5%（需求强 + 供给消化）1,800–2,030（假设乘积，区间）人口 / 就业持续净流入；EIBOR 下"
+    },
+    {
+      "check": "source_trace",
+      "severity": "P0",
+      "block_index": 499,
+      "message": "变更块含带单位关键数字但无来源标注",
+      "evidence": "基准租金 0～+2%；净收益率 4.2–5.4%1,430–1,840（假设乘积，区间）常态化延续（CBRE 定性）"
+    },
+    {
+      "check": "source_trace",
+      "severity": "P0",
+      "block_index": 500,
+      "message": "变更块含带单位关键数字但无来源标注",
+      "evidence": "悲观租金 −5～−8%；净收益率扩张至 5.6–6.2%（供给冲击 + 利率高企）1,180–1,310（假设乘积，区间）I01 硬红线 + 供给集中兑现"
+    },
+    {
+      "check": "source_trace",
+      "severity": "P0",
+      "block_index": 504,
+      "message": "变更块含带单位关键数字但无来源标注",
+      "evidence": "利率（EIBOR）+50bp 且全额传导利差收窄约 0.5pp，估值区间下移（假设乘积，区间）"
+    },
+    {
+      "check": "source_trace",
+      "severity": "P0",
+      "block_index": 505,
+      "message": "变更块含带单位关键数字但无来源标注",
+      "evidence": "结论变化方向声明：基线结论为「选择性持有（有条件）」；若 I01 触发硬红线且 I08 租金同比转负，结论下调为「减持观望」；若 I03 价格企稳且 I02 毛"
+    },
+    {
+      "check": "source_trace",
+      "severity": "P0",
+      "block_index": 516,
+      "message": "变更块含带单位关键数字但无来源标注",
+      "evidence": "免责与非专业建议：本报告不构成对不特定公众的投资邀约，不构成投资、法律、税务或持牌专业人士意见；读者须咨询持牌专业人士后独立决策。估值为模型输出（假设乘积，区间"
+    }
+  ],
+  "added": 30,
+  "removed": 55,
+  "modified": 86,
+  "changed_blocks": 116,
+  "total_blocks": 547
 }

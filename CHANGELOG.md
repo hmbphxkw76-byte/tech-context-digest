@@ -2,6 +2,13 @@
 
 本文件记录仓库的结构与规范级变更（报告内容变更见各业务线 `reports/`）。
 
+## 3.9.0 — 2026-11-26：PRIME 城市评估专项件与报告命名扩展
+
+- **报告**：新增 `content/economy/dubai/apartment-investment/reports/2026-11_baseline_prime-quant-alignment.html`（md + HTML）——PRIME 四维度八指标（公共服务 / 资源利用 / 市场发展 / 环境吸引潜力）× MST（心态 / 技能 / 工具）个人投资者对齐，含量化工具箱（NOI 简化、价格租金比矩阵、风险调整比值）与入场 / 退出触发规则。
+- **规范**：business-config 升 v1.2（PRIME 定义更正为城市评估模型，MST 作为个人能力叠加层）；标的档案升 v1.2（PRIME 八指标分档 + 量化假设）。
+- **命名**：`_common.detect_report()` 与 `naming_check.REPORT_RE` 支持 `<period>_baseline_<slug>.html` 框架专项（基线家族，纳入基线组展示）；`structure-and-naming-spec.md` 同步。
+- **同步**：INDEX.md / 汇总页重新生成。
+
 ## 3.8.0 — 2026-11-26：新增投资分析业务线与汇总页类型 chips 动态化
 
 - **结构**：经济主题新增 `content/economy/dubai/apartment-investment`（category=apartment-investment，region=dubai；投资分析与尽调型，基线 + 季度 / 年度复核 + 事件触发专项），标的为迪拜公寓资产类别（市场级）；`data/processed/economy/dubai/apartment-investment/` 同步建立标的档案与来源登记。
