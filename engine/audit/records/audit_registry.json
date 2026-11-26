@@ -1866,6 +1866,54 @@
           "audit_id": ""
         }
       }
+    },
+    "content/economy/dubai/apartment-investment/reports/2026-11_baseline_report.html": {
+      "title": "迪拜（阿联酋）公寓住宅市场 · 首期投资覆盖报告",
+      "kind": "business",
+      "category": "report",
+      "business_line": "content/economy/dubai/apartment-investment",
+      "status": "draft",
+      "stages": {
+        "draft": false,
+        "initial": false,
+        "second": false,
+        "final": false
+      },
+      "mark": false,
+      "first_seen_at": "2026-11-26",
+      "evidence": {
+        "report": "content/economy/dubai/apartment-investment/reports/2026-11_baseline_report.html",
+        "business_line": "content/economy/dubai/apartment-investment",
+        "plans": [
+          {
+            "slug": "hub-chips-investment-line",
+            "plan": "engine/audit/records/tasks/hub-chips-investment-line/plan.json",
+            "tasks": "engine/audit/records/tasks/hub-chips-investment-line/tasks.json",
+            "risks": "engine/audit/records/tasks/hub-chips-investment-line/risks.json",
+            "reports": [
+              "content/economy/dubai/apartment-investment/reports/2026-11_baseline_report.html"
+            ],
+            "task_count": 4,
+            "risk_count": 2
+          }
+        ],
+        "gate": {
+          "entry": "engine/tools/optimization_gate.py",
+          "probe": true
+        },
+        "audit": {
+          "review": "",
+          "status": "draft",
+          "stages": {
+            "draft": false,
+            "initial": false,
+            "second": false,
+            "final": false
+          },
+          "mark_level": "none",
+          "audit_id": ""
+        }
+      }
     }
   }
 }

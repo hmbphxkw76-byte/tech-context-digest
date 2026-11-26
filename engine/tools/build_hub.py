@@ -735,6 +735,16 @@ def parse_type_names() -> dict[str, str]:
     return {tid: name.strip() for tid, name in TYPE_ROW_RE.findall(section)}
 
 
+def visible_types(topics: list[Topic]) -> list[tuple[str, str]]:
+    """筛选栏类型 chips 清单：仅当前**有报告**的类型（按注册表顺序）。
+
+    无报告的类型默认不展示（避免空展误导）；一旦产出首份报告即自动出现，
+    无需改代码。reader 与 hub 共用本函数。
+    """
+    active = {t.type_id for t in topics if t.reports and t.type_id}
+    return [(tid, tname) for tid, tname in parse_type_names().items() if tid in active]
+
+
 def parse_business_meta(config_path: Path) -> tuple[str | None, str | None, str | None]:
     """解析 business-config.md 的 {{REGION}} / {{TOPIC}} / 类型模板引用。"""
     if not config_path.exists():
@@ -991,8 +1001,8 @@ def render_hub(topics: list[Topic]) -> str:
         f"最新月报 {_esc(base)}</span>"
     ) if base else ""
 
-    # 类型清单：全部 13 个已注册类型（按注册表顺序）
-    all_types = list(parse_type_names().items())
+    # 类型清单：仅有报告的类型（无报告类型不展示，产出报告后自动出现）
+    all_types = visible_types(topics)
 
     parts = [
         "<!DOCTYPE html>\n<html lang=\"zh-CN\">\n<head>\n<meta charset=\"utf-8\">",
@@ -1070,7 +1080,7 @@ def render_reader(topics: list[Topic]) -> str:
     n_reports = displayed_report_count(topics)
     n_themes = len(theme_groups)
     n_types = len({t.type_id for t in topics if t.type_id})
-    all_types = list(parse_type_names().items())
+    all_types = visible_types(topics)
     base = global_base_period(topics)
     base_note = (
         f'<span class="base-note" title="仓库内最新一期月报；「本期更新 · 环比基期」仅在存在上一期报告时标注">'

@@ -1,0 +1,14 @@
+[
+  {
+    "description": "新增阈值触发 metric_coverage L03 一致性校验",
+    "id": "R-1",
+    "mitigation": "逐条对齐配置与报告措辞",
+    "owner": ""
+  },
+  {
+    "description": "来源 URL 未登记触发 source_check R1",
+    "id": "R-2",
+    "mitigation": "以登记册 URL 为准回改链接",
+    "owner": ""
+  }
+]

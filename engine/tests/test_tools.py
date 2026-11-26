@@ -29,6 +29,8 @@ from build_hub import (  # noqa: E402
     global_base_period,
     group_topic_reports,
     normalize_for_check,
+    parse_type_names,
+    visible_types,
 )
 from compliance_check import check_report, cycle_rule, detect_type, load_rules  # noqa: E402
 from lint_reports import lint_html  # noqa: E402
@@ -549,6 +551,43 @@ class TestBuildHubCheck(unittest.TestCase):
             self.assertIn("//github.com/hmbphxkw76-byte/tech-context-digest/issues/new", text)
 
 
+class TestHubTypeChips(unittest.TestCase):
+    """类型 chips 仅展示当前有报告的类型：无报告默认不展示，产出首份报告后自动出现。"""
+
+    @staticmethod
+    def _topic(tid, with_report):
+        return Topic(
+            rel=f"content/x/{tid}", region="", name=tid, type_id=tid,
+            type_name=tid, reports=[ReportEntry("monthly", "2026-11", "p", "t")] if with_report else [],
+        )
+
+    def test_visible_types_drops_zero_report(self):
+        topics = [self._topic("market-monitoring", True),
+                  self._topic("sentiment-monitoring", False)]
+        tids = [tid for tid, _ in visible_types(topics)]
+        self.assertIn("market-monitoring", tids)
+        self.assertNotIn("sentiment-monitoring", tids)
+
+    def test_visible_types_keeps_registry_order(self):
+        topics = [self._topic("policy-analysis", True),
+                  self._topic("market-monitoring", True)]
+        registry_order = list(parse_type_names().keys())
+        tids = [tid for tid, _ in visible_types(topics)]
+        self.assertEqual(tids, [t for t in registry_order if t in set(tids)])
+
+    def test_hub_and_reader_chips_equal_active_types(self):
+        topics = collect_topics()
+        active = {t.type_id for t in topics if t.reports and t.type_id}
+        self.assertTrue(active, "仓库应存在有报告的业务线")
+        for name in ("index.html", "reader.html"):
+            html = build_outputs()[name]
+            chips = set(re.findall(r'data-type="([^"]+)"', html)) - {"all"}
+            self.assertEqual(chips, active, f"{name} 类型 chips 应与有报告类型完全一致")
+            self.assertNotIn('data-type="whitepaper"', html)
+            self.assertNotIn('data-type="market-sizing"', html)
+            self.assertNotIn('data-type="sentiment-monitoring"', html)
+
+
 class TestReportCycleWindows(unittest.TestCase):
     """报告周期窗口与环比高亮（REPORT-CYCLE-WINDOWS-SPEC v1.0）。"""
 
@@ -861,6 +900,7 @@ class TestLayout(unittest.TestCase):
             rels,
             {
                 "content/economy/dubai/apartment",
+                "content/economy/dubai/apartment-investment",
                 "content/economy/trends",
                 "content/economy/insight",
                 "content/tech/ai-security/dubai",
