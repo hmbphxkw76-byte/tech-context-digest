@@ -1,0 +1,42 @@
+[
+  {
+    "acceptance": "",
+    "depends_on": [],
+    "id": "T-1",
+    "phase": "",
+    "status": "pending",
+    "title": "采集并核验近7天英文权威信源的英伟达相关报道(NVIDIA Newsroom/IR/SEC/主流权威媒体)"
+  },
+  {
+    "acceptance": "",
+    "depends_on": [],
+    "id": "T-2",
+    "phase": "",
+    "status": "pending",
+    "title": "实现专题报告生成器与数据落盘(runtime/nvidia_brief.json)"
+  },
+  {
+    "acceptance": "",
+    "depends_on": [],
+    "id": "T-3",
+    "phase": "",
+    "status": "pending",
+    "title": "前端增加深链(#event/id、?q=预设)并生成 dashboard/report-nvidia.html"
+  },
+  {
+    "acceptance": "",
+    "depends_on": [],
+    "id": "T-4",
+    "phase": "",
+    "status": "pending",
+    "title": "浏览器实测+截图证据+机器核验清单"
+  },
+  {
+    "acceptance": "",
+    "depends_on": [],
+    "id": "T-5",
+    "phase": "",
+    "status": "pending",
+    "title": "统一门禁零E,提交并创建PR"
+  }
+]
