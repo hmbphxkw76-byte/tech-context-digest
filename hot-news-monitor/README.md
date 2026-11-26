@@ -55,7 +55,8 @@ L2 每事件「背景溯源」折叠面板（覆盖结构与采信强度说明�
 - **当前热点自动轮换**：每次快照落盘后（含 6 小时调度）自动重建 `dashboard/brief-current.html`——标题取当前 Top1 事件；命中清单关键词时叠加该专题的决策摘要/决策卡，否则为纯机械聚合视图。稳定入口 `GET /report`。
 - 旧链接兼容：`/report-nvidia.html` → 302 → `/brief-<slug>.html`（由清单 `legacy_redirect` 驱动）。
 - 前端导航条「热点专题」 chips 由 `GET /api/briefs` 动态渲染，新增专题无需改前端。
-- 仓库首页（hub `index.html`，由 `engine/tools/build_hub.py` 生成）顶部有「热点事件追踪」桥区块，只读入库清单，保证 CI `--check` 确定性。
+- 清单条目可带 `expires_at`（UTC 日期）：到期后由**前端按浏览器时间自动隐藏**；仓库首页跑马灯同此规则，且同屏最多 3 条、左→右循环滚动（约 12s/条，hover 暂停，无 JS 降级为横滑）。
+- 仓库首页（hub `index.html`，由 `engine/tools/build_hub.py` 生成）统计行下方有「热点事件跑马灯」，只读入库清单，保证 CI `--check` 确定性。
 
 ## 来源纪律（硬性）
 
