@@ -1,0 +1,63 @@
+{
+  "ok": true,
+  "structure_errors": [],
+  "link_checks": [
+    {
+      "ref": "S1",
+      "host": "nvidianews.nvidia.com",
+      "problems": []
+    },
+    {
+      "ref": "S2",
+      "host": "nvidianews.nvidia.com",
+      "problems": []
+    },
+    {
+      "ref": "S3",
+      "host": "www.cnbc.com",
+      "problems": []
+    },
+    {
+      "ref": "S4",
+      "host": "www.cnbc.com",
+      "problems": []
+    },
+    {
+      "ref": "S5",
+      "host": "www.reuters.com",
+      "problems": []
+    },
+    {
+      "ref": "S6",
+      "host": "www.sec.gov",
+      "problems": []
+    }
+  ],
+  "reachable": {
+    "S1": {
+      "ok": true,
+      "status": 200
+    },
+    "S2": {
+      "ok": true,
+      "status": 200
+    },
+    "S3": {
+      "ok": true,
+      "status": 200
+    },
+    "S4": {
+      "ok": true,
+      "status": 200
+    },
+    "S5": {
+      "ok": false,
+      "status": -1,
+      "note": "URLError"
+    },
+    "S6": {
+      "ok": true,
+      "status": 200
+    }
+  }
+}

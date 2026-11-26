@@ -1,0 +1,20 @@
+[
+  {
+    "description": "Pages 部署属共享状态操作",
+    "id": "R-1",
+    "mitigation": "仅在仓库已 public 前提下启用 root 源,失败则回退本地链接并说明",
+    "owner": ""
+  },
+  {
+    "description": "可达性探测受网络限制",
+    "id": "R-2",
+    "mitigation": "不可达只标注不阻断,报告口径不受影响",
+    "owner": ""
+  },
+  {
+    "description": "数据字段扩展破坏既有渲染",
+    "id": "R-3",
+    "mitigation": "保留旧字段兼容,单测锁定",
+    "owner": ""
+  }
+]

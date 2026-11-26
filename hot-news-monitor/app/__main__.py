@@ -80,6 +80,19 @@ def cmd_sample_verify(args: argparse.Namespace) -> int:
     return 1 if bad else 0
 
 
+def _cmd_verify_brief(args: argparse.Namespace) -> int:
+    from .verify_brief import main as vb_main
+
+    argv = []
+    if args.source:
+        argv += ["--source", args.source]
+    if args.out:
+        argv += ["--out", args.out]
+    if args.no_probe:
+        argv += ["--no-probe"]
+    return int(vb_main(argv))
+
+
 def _cmd_report_nvidia(args: argparse.Namespace) -> int:
     from .brief import main as brief_main
 
@@ -151,6 +164,12 @@ def main(argv: list[str] | None = None) -> int:
     p.add_argument("--source", default=None, help="数据 JSON（默认 config/nvidia-brief-2026-11-26.json）")
     p.add_argument("--out", default=None, help="输出路径（默认 dashboard/report-nvidia.html）")
     p.set_defaults(func=_cmd_report_nvidia)
+
+    p = sub.add_parser("verify-brief", help="专题数据机器核验（结构/引用/链接/可达性）")
+    p.add_argument("--source", default=None)
+    p.add_argument("--out", default=None)
+    p.add_argument("--no-probe", action="store_true")
+    p.set_defaults(func=_cmd_verify_brief)
 
     args = ap.parse_args(argv)
     return int(args.func(args))

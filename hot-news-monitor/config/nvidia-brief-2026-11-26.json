@@ -2,87 +2,119 @@
   "topic": "英伟达（Nvidia）高层人事与国家安全争议专题",
   "window": "2026-11-19 ~ 2026-11-26（近 7 天为主，重大节点向前追溯）",
   "generated_at": "2026-11-26T03:30:00Z",
-  "method": "仅采用英文权威媒体 / 官方公开资料；中文媒体仅作线索从未作为来源；未直接核验的二手线索单独标注。",
+  "next_review": "2026-11-27T03:30:00Z",
+  "replay_cmd": "python -m app report-nvidia",
+  "method": "仅采用英文权威媒体 / 官方公开资料；中文媒体仅作线索从未作为来源；未直接核验的二手线索单独标注「待核实」。",
+  "summary_zh": [
+    "董事会于 11-23 全票通过恢复黄仁勋全部职务并即刻生效，公司同步宣布成立国安与出口管制高级别委员会、招聘首席合规官。[S1][S3]",
+    "11-08 黄仁勋发公开信承认婚外情，独立董事委员会调查启动并延续至复职之后。[S2][S3]",
+    "复职后首个交易日股价收涨 31%，市场以正面定价该结果；但独立调查未结、国会听证安排在即，后续变量仍在。[S3]"
+  ],
+  "decision_card": {
+    "conclusion": "核心判断：黄仁勋复职已落定且不构成国安风险认定，公司治理与出口管制合规架构获强化；短期不确定性下降，但独立调查与国会程序仍未出清。",
+    "evidence_strength": "中",
+    "triggers": ["DOJ 是否正式立案或公布调查结论", "12-01~03 国会闭门访谈 / 听证结果", "继任计划与高管架构调整", "Q4 财报指引"],
+    "counter_evidence": [
+      "特朗普「已做过调查且认为清白」与 Vance/DOJ「未立案、未受调查」存在口径差异（CNBC 同篇并列呈现）[S4]",
+      "临时 CEO 克雷斯曾在 11-17 公开表示无意恢复黄仁勋职务（背景反向证据）[S3]"
+    ],
+    "sufficiency": "中"
+  },
+  "dashboard_links": [
+    {"label": "在看板中查看 Nvidia 实时热度与事件簇", "url": "http://127.0.0.1:8765/?q=Nvidia"}
+  ],
   "sources": [
     {
       "id": "nv-ir-reinstate",
+      "ref": "S1",
       "date": "2026-11-23",
       "title": "NVIDIA Board Reinstates Jensen Huang as President, CEO and Board Director",
       "url": "https://nvidianews.nvidia.com/news/nvidia-board-reinstates-jensen-huang-as-president-ceo-and-board-director",
       "source": "NVIDIA Newsroom",
       "tier": "official",
-      "verified": true,
+      "verification": "verified",
       "key_quote": "The Board of Directors voted unanimously to reinstate Mr. Huang ... the Board is confident that Mr. Huang's reinstatement poses no national security risk.",
       "note": "官方声明全文已核验（含国安与出口管制委员会、首席合规官招聘、独立调查继续推进）"
     },
     {
       "id": "nv-ir-message",
+      "ref": "S2",
       "date": "2026-11-08",
       "title": "A Message to Our Company",
       "url": "https://nvidianews.nvidia.com/news/a-message-to-our-company",
       "source": "NVIDIA Newsroom",
       "tier": "official",
-      "verified": true,
-      "key_quote": "I was unfaithful to my wife. ... NVIDIA's Board of Directors has initiated an independent investigation. I support the investigation and will cooperate fully.",
+      "verification": "verified",
+      "key_quote": "I was unfaithful to my wife. ... NVIDIA's Board of Directors has initiated an independent investigation. I support the investigation and I will cooperate fully.",
       "note": "黄仁勋致员工公开信全文已核验"
     },
     {
       "id": "cnbc-reinstate",
+      "ref": "S3",
       "date": "2026-11-23",
       "title": "Jensen Huang reinstated as Nvidia CEO. Stock skyrockets 31%",
       "url": "https://www.cnbc.com/2026/11/23/nvidia-jensen-huang-ceo.html",
       "source": "CNBC",
       "tier": "media_t1",
-      "verified": true,
+      "verification": "verified",
       "key_quote": "Shares of Nvidia closed up 31% following Huang's reinstatement. The stock had shed nearly 33% from the time Huang admitted to an extramarital affair on Nov. 8.",
       "note": "正文已核验：含特朗普 CNBC 采访、高管斡旋、国会听证安排（12-01/02/03）"
     },
     {
       "id": "cnbc-vance-doj",
+      "ref": "S4",
       "date": "2026-11-25",
       "title": "Vance says he was assured Jensen Huang was not under DOJ investigation",
       "url": "https://www.cnbc.com/2026/11/25/vance-jensen-huang-nvidia-doj-investigation.html",
       "source": "CNBC",
       "tier": "media_t1",
-      "verified": true,
+      "verification": "verified",
       "key_quote": "\"I was told by the Department of Justice and multiple officials in our national security apparatus that he was under no investigation,\" Vance said.",
       "note": "正文已核验：同时转引路透社报道称 DOJ 在复职前未对黄仁勋正式立案"
     },
     {
       "id": "reuters-doj-lead",
+      "ref": "S5",
       "date": "2026-11-25",
       "title": "US Justice Department did not open probe into Jensen Huang before reinstatement",
       "url": "https://www.reuters.com/business/us-justice-department-did-not-open-probe-into-jensen-huang-before-reinstatement-2026-11-25/",
       "source": "Reuters",
       "tier": "media_t1",
-      "verified": false,
+      "verification": "partial",
       "key_quote": "",
       "note": "线索：URL 与结论经 CNBC 报道转引确认存在；原文未能在本环境直接核验，标注待核实"
     },
     {
       "id": "sec-8k-lead",
+      "ref": "S6",
       "date": "2026-11-23",
       "title": "NVIDIA 8-K (event date 2026-11-22)",
       "url": "https://www.sec.gov/Archives/edgar/data/1045810/000104581026000090/nvda-20261122.htm",
       "source": "U.S. SEC EDGAR",
       "tier": "official",
-      "verified": false,
+      "verification": "unverified",
       "key_quote": "",
       "note": "线索：备案链接经 CNBC 报道引用；SEC 对本环境请求返回反爬提示，正文未能直接核验，标注待核实"
     }
   ],
   "timeline": [
-    {"date": "2026-11-08", "title": "黄仁勋发公开信承认婚外情，董事会启动独立调查", "level": 1, "refs": ["nv-ir-message"]},
-    {"date": "2026-11-11/12", "title": "董事会紧急会议决定 CEO 去留；外界报道其辞任总裁、CEO 及董事（宣布与生效口径存在 11-12/11-13 差异，以官方后续口径为准）", "level": 1, "refs": ["cnbc-reinstate"]},
-    {"date": "2026-11-17", "title": "临时 CEO 科莱特·克雷斯公开表态无意恢复黄仁勋职务（背景节点）", "level": 2, "refs": ["cnbc-reinstate"]},
-    {"date": "2026-11-22", "title": "董事会投票通过恢复黄仁勋全部职务（SEC 8-K 事件日，待核实）", "level": 1, "refs": ["sec-8k-lead"]},
-    {"date": "2026-11-23", "title": "官方公告复职即刻生效；特朗普接受 CNBC 采访承认介入；公司宣布成立国安与出口管制委员会并招聘首席合规官", "level": 1, "refs": ["nv-ir-reinstate", "cnbc-reinstate"]},
-    {"date": "2026-11-25", "title": "副总统 Vance 称被告知黄仁勋未受 DOJ 调查；路透社报道称复职前未正式立案", "level": 2, "refs": ["cnbc-vance-doj", "reuters-doj-lead"]},
-    {"date": "2026-12-01~03", "title": "既定的国会听证安排：众议院闭门访谈（12-01）、法务总监出席（12-02）、参议院银行委员会公开听证（12-03，黄仁勋为唯一证人）", "level": 2, "refs": ["cnbc-reinstate"]}
+    {"date": "2026-11-08", "title": "黄仁勋发公开信承认婚外情，董事会启动独立调查", "verification": "verified", "level": 1, "strength": "强", "refs": ["S2"]},
+    {"date": "2026-11-11/12", "title": "董事会紧急会议决定 CEO 去留；外界报道其辞任总裁、CEO 及董事（宣布与生效口径存在 11-12/11-13 差异，以官方后续口径为准）", "verification": "partial", "level": 1, "strength": "中", "refs": ["S3"]},
+    {"date": "2026-11-17", "title": "临时 CEO 科莱特·克雷斯公开表态无意恢复黄仁勋职务（背景节点）", "verification": "verified", "level": 2, "strength": "中", "refs": ["S3"]},
+    {"date": "2026-11-22", "title": "董事会投票通过恢复黄仁勋全部职务（SEC 8-K 事件日，待核实）", "verification": "unverified", "level": 1, "strength": "弱", "refs": ["S6"]},
+    {"date": "2026-11-23", "title": "官方公告复职即刻生效；特朗普接受 CNBC 采访承认介入；公司宣布成立国安与出口管制委员会并招聘首席合规官", "verification": "verified", "level": 1, "strength": "强", "refs": ["S1", "S3"]},
+    {"date": "2026-11-25", "title": "副总统 Vance 称被告知黄仁勋未受 DOJ 调查；路透社报道称复职前未正式立案", "verification": "partial", "level": 2, "strength": "中", "refs": ["S4", "S5"]},
+    {"date": "2026-12-01~03", "title": "既定的国会听证安排：众议院闭门访谈（12-01）、法务总监出席（12-02）、参议院银行委员会公开听证（12-03，黄仁勋为唯一证人）", "verification": "verified", "level": 2, "strength": "中", "refs": ["S3"]}
   ],
   "cross_check": [
-    {"event": "复职决定", "claims": ["董事会全票复职", "政府高层输入意见", "不构成国安风险"], "agreements": ["nv-ir-reinstate", "cnbc-reinstate"], "disagreements": []},
-    {"event": "是否受过调查", "claims": ["特朗普：已做过调查且认为其清白", "Vance/DOJ：未立案、未受调查"], "agreements": ["cnbc-vance-doj"], "disagreements": ["总统口径与 DOJ 口径存在表述差异（CNBC 同一篇报道并列呈现）"]},
-    {"event": "独立调查走向", "claims": ["独立董事委员会调查推进至完成", "黄仁勋承诺配合"], "agreements": ["nv-ir-reinstate", "cnbc-reinstate"], "disagreements": []}
+    {"event": "复职决定", "claims": ["董事会全票复职", "政府高层输入意见", "不构成国安风险"], "agreements": ["S1", "S3"], "disagreements": [], "independent_sources": 2, "tiers": ["official", "media_t1"], "strength": "强"},
+    {"event": "是否受过调查", "claims": ["特朗普：已做过调查且认为其清白", "Vance/DOJ：未立案、未受调查"], "agreements": ["S4"], "disagreements": ["总统口径与 DOJ 口径存在表述差异（CNBC 同一篇报道并列呈现）"], "independent_sources": 1, "tiers": ["media_t1"], "strength": "弱"},
+    {"event": "独立调查走向", "claims": ["独立董事委员会调查推进至完成", "黄仁勋承诺配合"], "agreements": ["S1", "S3"], "disagreements": [], "independent_sources": 2, "tiers": ["official", "media_t1"], "strength": "强"}
+  ],
+  "gaps": [
+    {"item": "Reuters 11-25 报道原文", "status": "未核验", "impact": "「DOJ 未立案」目前仅有 CNBC 转引，若原文口径有出入需修正交叉结论"},
+    {"item": "SEC 8-K 备案正文", "status": "未核验", "impact": "辞任/复职生效时点以官方声明为准，8-K 程序细节待补"},
+    {"item": "Bloomberg / FT / AP 等权威媒体覆盖", "status": "缺失", "impact": "交叉验证集中在官方 + CNBC，媒体侧多样性不足"},
+    {"item": "评级机构对英伟达的评级/展望", "status": "缺失", "impact": "信用与评级维度暂缺，如后续涉及融资成本需补充"}
   ]
 }
